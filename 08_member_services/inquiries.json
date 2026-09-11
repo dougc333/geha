@@ -1,0 +1,102 @@
+[
+  {
+    "inquiry_id": "INQ-9000",
+    "type": "CLAIM_STATUS",
+    "member": "G1005",
+    "ref": "CLM-100005",
+    "verified": true,
+    "source": "Claims (Flow 0)",
+    "status": "RESOLVED",
+    "resolution": "Claim CLM-100005 status: DENIED"
+  },
+  {
+    "inquiry_id": "INQ-9001",
+    "type": "ELIGIBILITY",
+    "member": "G1005",
+    "ref": "G1005",
+    "verified": true,
+    "source": "Membership (Flow 1)",
+    "status": "RESOLVED",
+    "resolution": "Eligibility: ACTIVE"
+  },
+  {
+    "inquiry_id": "INQ-9002",
+    "type": "BENEFITS",
+    "member": "G1000",
+    "ref": "G1000",
+    "verified": true,
+    "source": "Plan Config (Flow 1)",
+    "status": "RESOLVED",
+    "resolution": "Plan cost-sharing provided"
+  },
+  {
+    "inquiry_id": "INQ-9003",
+    "type": "PRIOR_AUTH",
+    "member": "G1000",
+    "ref": "PA-1000",
+    "verified": true,
+    "source": "UM (Flow 3)",
+    "status": "RESOLVED",
+    "resolution": "Auth PA-1000 -> APPROVED"
+  },
+  {
+    "inquiry_id": "INQ-9004",
+    "type": "PREMIUM",
+    "member": "G1005",
+    "ref": "G1005",
+    "verified": true,
+    "source": "Premium Billing (Flow 4)",
+    "status": "RESOLVED",
+    "resolution": "Premium balance provided"
+  },
+  {
+    "inquiry_id": "INQ-9005",
+    "type": "ID_CARD",
+    "member": "G1003",
+    "ref": "G1003",
+    "verified": true,
+    "source": "Membership (Flow 1)",
+    "status": "RESOLVED",
+    "resolution": "Replacement ID card ordered"
+  },
+  {
+    "inquiry_id": "INQ-9006",
+    "type": "CLAIM_STATUS",
+    "member": "G1004",
+    "ref": "CLM-100000",
+    "verified": false,
+    "source": "",
+    "status": "UNRESOLVED",
+    "resolution": "Caller identity could not be verified"
+  },
+  {
+    "inquiry_id": "INQ-9007",
+    "type": "OTHER",
+    "member": "G1001",
+    "ref": "G1001",
+    "verified": true,
+    "source": "",
+    "status": "ESCALATED",
+    "resolution": "Routed to specialist"
+  },
+  {
+    "inquiry_id": "INQ-9008",
+    "type": "CLAIM_STATUS",
+    "member": "G1009",
+    "ref": "CLM-100014",
+    "verified": true,
+    "source": "Claims (Flow 0)",
+    "status": "RESOLVED",
+    "resolution": "Claim CLM-100014 status: PAID"
+  },
+  {
+    "inquiry_id": "INQ-9009",
+    "type": "PRIOR_AUTH",
+    "member": "G1001",
+    "ref": "PA-1002",
+    "verified": true,
+    "source": "UM (Flow 3)",
+    "status": "RESOLVED",
+    "resolution": "Auth PA-1002 -> DENIED"
+  }
+]

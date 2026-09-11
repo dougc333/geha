@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="740" viewBox="0 0 1200 740" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+<defs>
+<marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
+</marker>
+</defs>
+<rect width="1200" height="740" fill="#ffffff"/>
+<text x="600" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">GEHA — 9 Processing-Flow Services (data-flow &amp; dependency)</text>
+<text x="600" y="52" text-anchor="middle" font-size="12" fill="#64748b">edges = real cross-service data reads extracted from the simulate_*.py code</text>
+<rect x="60" y="712" width="14" height="14" rx="3" fill="#1e3a8a"/>
+<text x="79" y="723" font-size="11" fill="#334155">Upstream data providers (01–04)</text>
+<rect x="310" y="712" width="14" height="14" rx="3" fill="#b45309"/>
+<text x="329" y="723" font-size="11" fill="#334155">Core claims adjudication engine</text>
+<rect x="560" y="712" width="14" height="14" rx="3" fill="#065f46"/>
+<text x="579" y="723" font-size="11" fill="#334155">Downstream consumers (05,07,08)</text>
+<rect x="810" y="712" width="14" height="14" rx="3" fill="#6d28d9"/>
+<text x="829" y="723" font-size="11" fill="#334155">Cross-cutting FWA (06)</text>
+<rect x="1060" y="712" width="14" height="14" rx="3" fill="#9f1239"/>
+<text x="1079" y="723" font-size="11" fill="#334155">Audit / compliance (09)</text>
+<path d="M 300 105 L 470 258" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="305" y="173" width="160" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="385" y="184" text-anchor="middle" font-size="10.5" fill="#475569">members / eligibility</text>
+<path d="M 300 225 L 470 282" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="305" y="245" width="160" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="385" y="256" text-anchor="middle" font-size="10.5" fill="#475569">providers / NPIs</text>
+<path d="M 300 345 L 470 306" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="305" y="317" width="160" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="385" y="328" text-anchor="middle" font-size="10.5" fill="#475569">prior authorizations</text>
+<path d="M 300 465 L 470 332" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="305" y="390" width="160" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="385" y="401" text-anchor="middle" font-size="10.5" fill="#475569">plan / premium status</text>
+<path d="M 750 258 L 880 105" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="735" y="173" width="160" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="815" y="184" text-anchor="middle" font-size="10.5" fill="#475569">denied / partial outcomes</text>
+<path d="M 750 282 L 880 225" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="735" y="245" width="160" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="815" y="256" text-anchor="middle" font-size="10.5" fill="#475569">claim feed → FWA screen</text>
+<path d="M 750 306 L 880 345" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="735" y="317" width="160" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="815" y="328" text-anchor="middle" font-size="10.5" fill="#475569">complex cases</text>
+<path d="M 750 332 L 880 465" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="735" y="390" width="160" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="815" y="401" text-anchor="middle" font-size="10.5" fill="#475569">claims / EOB data</text>
+<path d="M 1010 140 L 760 638" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="805" y="381" width="160" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="885" y="392" text-anchor="middle" font-size="10.5" fill="#475569">appeal evidence</text>
+<path d="M 1010 260 L 860 638" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="855" y="441" width="160" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="935" y="452" text-anchor="middle" font-size="10.5" fill="#475569">FWA findings</text>
+<path d="M 1010 380 L 960 638" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="905" y="501" width="160" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="985" y="512" text-anchor="middle" font-size="10.5" fill="#475569">care plan evidence</text>
+<path d="M 1010 500 L 1060 638" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="955" y="561" width="160" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="1035" y="572" text-anchor="middle" font-size="10.5" fill="#475569">service logs</text>
+<path d="M 180 140 L 300 638" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="160" y="381" width="160" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="240" y="392" text-anchor="middle" font-size="10.5" fill="#475569">membership evidence</text>
+<path d="M 180 500 L 240 638" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="130" y="561" width="160" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="210" y="572" text-anchor="middle" font-size="10.5" fill="#475569">premium evidence</text>
+<path d="M 300 485 Q 640 277 860 470" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" stroke-dasharray="6,5" opacity="0.9"/>
+<rect x="500" y="469" width="160" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="580" y="480" text-anchor="middle" font-size="10.5" fill="#475569">premium / ledger</text>
+<rect x="60" y="70" width="240" height="70" rx="10" fill="#1e3a8a"/>
+<rect x="60" y="70" width="240" height="70" rx="10" fill="none" stroke="rgba(0,0,0,0.15)"/>
+<text x="180" y="92" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">01 · Membership &amp; Benefits</text>
+<text x="180" y="108" text-anchor="middle" font-size="9.5" fill="#e2e8f0">members.json  (eligibility, plans)</text>
+<rect x="60" y="190" width="240" height="70" rx="10" fill="#1e3a8a"/>
+<rect x="60" y="190" width="240" height="70" rx="10" fill="none" stroke="rgba(0,0,0,0.15)"/>
+<text x="180" y="212" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">02 · Provider Operations</text>
+<text x="180" y="228" text-anchor="middle" font-size="9.5" fill="#e2e8f0">providers.json  (NPIs, contracts)</text>
+<rect x="60" y="310" width="240" height="70" rx="10" fill="#1e3a8a"/>
+<rect x="60" y="310" width="240" height="70" rx="10" fill="none" stroke="rgba(0,0,0,0.15)"/>
+<text x="180" y="332" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">03 · Utilization Mgmt</text>
+<text x="180" y="348" text-anchor="middle" font-size="9.5" fill="#e2e8f0">authorizations.json  (prior auth)</text>
+<rect x="60" y="430" width="240" height="70" rx="10" fill="#1e3a8a"/>
+<rect x="60" y="430" width="240" height="70" rx="10" fill="none" stroke="rgba(0,0,0,0.15)"/>
+<text x="180" y="452" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">04 · Premium Billing</text>
+<text x="180" y="468" text-anchor="middle" font-size="9.5" fill="#e2e8f0">premium_ledger.json  (premiums)</text>
+<rect x="470" y="230" width="280" height="120" rx="10" fill="#b45309"/>
+<rect x="470" y="230" width="280" height="120" rx="10" fill="none" stroke="rgba(0,0,0,0.15)"/>
+<text x="610" y="252" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">CLAIMS ADJUDICATION</text>
+<text x="610" y="268" text-anchor="middle" font-size="9.5" fill="#e2e8f0">agentic state machine  SUBMIT→…→PAY/DENY/PENDING</text>
+<rect x="880" y="70" width="260" height="70" rx="10" fill="#065f46"/>
+<rect x="880" y="70" width="260" height="70" rx="10" fill="none" stroke="rgba(0,0,0,0.15)"/>
+<text x="1010" y="92" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">05 · Appeals &amp; Disputes</text>
+<text x="1010" y="108" text-anchor="middle" font-size="9.5" fill="#e2e8f0">appeals.json  (post-adjudication)</text>
+<rect x="880" y="190" width="260" height="70" rx="10" fill="#6d28d9"/>
+<rect x="880" y="190" width="260" height="70" rx="10" fill="none" stroke="rgba(0,0,0,0.15)"/>
+<text x="1010" y="212" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">06 · Payment Integrity</text>
+<text x="1010" y="228" text-anchor="middle" font-size="9.5" fill="#e2e8f0">FWA  screening_log.json</text>
+<rect x="880" y="310" width="260" height="70" rx="10" fill="#065f46"/>
+<rect x="880" y="310" width="260" height="70" rx="10" fill="none" stroke="rgba(0,0,0,0.15)"/>
+<text x="1010" y="332" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">07 · Care &amp; Case Mgmt</text>
+<text x="1010" y="348" text-anchor="middle" font-size="9.5" fill="#e2e8f0">care_cases.json</text>
+<rect x="880" y="430" width="260" height="70" rx="10" fill="#065f46"/>
+<rect x="880" y="430" width="260" height="70" rx="10" fill="none" stroke="rgba(0,0,0,0.15)"/>
+<text x="1010" y="452" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">08 · Member Services</text>
+<text x="1010" y="468" text-anchor="middle" font-size="9.5" fill="#e2e8f0">inquiries.json</text>
+<rect x="60" y="640" width="1080" height="60" rx="10" fill="#9f1239"/>
+<rect x="60" y="640" width="1080" height="60" rx="10" fill="none" stroke="rgba(0,0,0,0.15)"/>
+<text x="600" y="662" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">09 · Compliance &amp; Regulatory</text>
+<text x="600" y="678" text-anchor="middle" font-size="9.5" fill="#e2e8f0">compliance_register.json  — audits evidence from ALL flows</text>
+</svg>

@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" font-family="-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#64748b"/></marker></defs>
+<rect width="1200" height="900" fill="#ffffff"/>
+<text x="600.0" y="34" text-anchor="middle" font-size="22" font-weight="700" fill="#0f172a">GEHA — 9 Services + HIPAA Audit / Egress Controls</text>
+<text x="600.0" y="54" text-anchor="middle" font-size="12" fill="#64748b">solid = data flow · dashed red = PHI boundary · dashed slate = audit evidence fan-in</text>
+<rect x="30" y="95" width="1140" height="655" rx="16" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="8,5" opacity="0.7"/>
+<text x="42" y="112" font-size="12" font-weight="700" fill="#dc2626">PHI BOUNDARY — EGRESS CONTROL: deny-by-default · allowlist · DLP content scan</text>
+<rect x="470" y="700" width="280" height="86" rx="10" fill="#0f172a"/>
+<rect x="470" y="700" width="280" height="86" rx="10" fill="none" stroke="rgba(255,255,255,0.25)"/>
+<text x="610" y="726" text-anchor="middle" font-size="13.5" font-weight="700" fill="#ffffff">AUDIT LOG (persistent service)</text>
+<text x="610" y="744" text-anchor="middle" font-size="9" fill="#e2e8f0">off-box · append-only · hash-chain tamper-evident</text>
+<text x="610" y="760" text-anchor="middle" font-size="9" fill="#e2e8f0">write-ahead before action "done" · 6-yr retention</text>
+<text x="610" y="774" text-anchor="middle" font-size="9" fill="#e2e8f0">fed by every flow (dashed)</text>
+<path d="M300 155 L470 308" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="300" y="223" width="170" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="385" y="234" text-anchor="middle" font-size="10.5" fill="#475569">members / eligibility</text>
+<path d="M300 275 L470 332" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="300" y="295" width="170" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="385" y="306" text-anchor="middle" font-size="10.5" fill="#475569">providers / NPIs</text>
+<path d="M300 395 L470 356" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="300" y="367" width="170" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="385" y="378" text-anchor="middle" font-size="10.5" fill="#475569">prior authorizations</text>
+<path d="M300 515 L470 380" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="300" y="439" width="170" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="385" y="450" text-anchor="middle" font-size="10.5" fill="#475569">plan / premium status</text>
+<path d="M750 308 L880 155" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="730" y="223" width="170" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="815" y="234" text-anchor="middle" font-size="10.5" fill="#475569">denied / partial outcomes</text>
+<path d="M750 332 L880 275" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="730" y="295" width="170" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="815" y="306" text-anchor="middle" font-size="10.5" fill="#475569">claim feed → FWA screen</text>
+<path d="M750 356 L880 395" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="730" y="367" width="170" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="815" y="378" text-anchor="middle" font-size="10.5" fill="#475569">complex cases</text>
+<path d="M750 380 L880 515" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" opacity="0.9"/>
+<rect x="730" y="439" width="170" height="14" rx="3" fill="#ffffff" opacity="0.85"/>
+<text x="815" y="450" text-anchor="middle" font-size="10.5" fill="#475569">claims / EOB data</text>
+<path d="M300 190 L740 740" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" stroke-dasharray="6,5" opacity="0.9"/>
+<path d="M300 310 L740 740" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" stroke-dasharray="6,5" opacity="0.9"/>
+<path d="M300 430 L740 740" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" stroke-dasharray="6,5" opacity="0.9"/>
+<path d="M300 550 L740 740" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" stroke-dasharray="6,5" opacity="0.9"/>
+<path d="M610 400 L610 700" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" stroke-dasharray="6,5" opacity="0.9"/>
+<path d="M1010 190 L820 740" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" stroke-dasharray="6,5" opacity="0.9"/>
+<path d="M1010 310 L840 740" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" stroke-dasharray="6,5" opacity="0.9"/>
+<path d="M1010 430 L860 740" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" stroke-dasharray="6,5" opacity="0.9"/>
+<path d="M1010 550 L880 740" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#arr)" stroke-dasharray="6,5" opacity="0.9"/>
+<rect x="60" y="120" width="240" height="70" rx="10" fill="#1e3a8a"/>
+<rect x="60" y="120" width="240" height="70" rx="10" fill="none" stroke="rgba(0,0,0,0.15)"/>
+<text x="180" y="150" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">01 · Membership &amp; Benefits</text>
+<text x="180" y="166" text-anchor="middle" font-size="9" fill="#e2e8f0">members.json  (eligibility, plans)</text>
+<rect x="60" y="240" width="240" height="70" rx="10" fill="#1e3a8a"/>
+<rect x="60" y="240" width="240" height="70" rx="10" fill="none" stroke="rgba(0,0,0,0.15)"/>
+<text x="180" y="270" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">02 · Provider Operations</text>
+<text x="180" y="286" text-anchor="middle" font-size="9" fill="#e2e8f0">providers.json  (NPIs, contracts)</text>
+<rect x="60" y="360" width="240" height="70" rx="10" fill="#1e3a8a"/>
+<rect x="60" y="360" width="240" height="70" rx="10" fill="none" stroke="rgba(0,0,0,0.15)"/>
+<text x="180" y="390" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">03 · Utilization Mgmt</text>
+<text x="180" y="406" text-anchor="middle" font-size="9" fill="#e2e8f0">authorizations.json  (prior auth)</text>
+<rect x="60" y="480" width="240" height="70" rx="10" fill="#1e3a8a"/>
+<rect x="60" y="480" width="240" height="70" rx="10" fill="none" stroke="rgba(0,0,0,0.15)"/>
+<text x="180" y="510" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">04 · Premium Billing</text>
+<text x="180" y="526" text-anchor="middle" font-size="9" fill="#e2e8f0">premium_ledger.json  (premiums)</text>
+<rect x="470" y="280" width="280" height="120" rx="10" fill="#b45309"/>
+<rect x="470" y="280" width="280" height="120" rx="10" fill="none" stroke="rgba(0,0,0,0.15)"/>
+<text x="610" y="310" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">CLAIMS ADJUDICATION</text>
+<text x="610" y="326" text-anchor="middle" font-size="9" fill="#e2e8f0">agentic state machine  SUBMIT→…→PAY/DENY/PENDING</text>
+<rect x="880" y="120" width="260" height="70" rx="10" fill="#065f46"/>
+<rect x="880" y="120" width="260" height="70" rx="10" fill="none" stroke="rgba(0,0,0,0.15)"/>
+<text x="1010" y="150" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">05 · Appeals &amp; Disputes</text>
+<text x="1010" y="166" text-anchor="middle" font-size="9" fill="#e2e8f0">appeals.json  (post-adjudication)</text>
+<rect x="880" y="240" width="260" height="70" rx="10" fill="#6d28d9"/>
+<rect x="880" y="240" width="260" height="70" rx="10" fill="none" stroke="rgba(0,0,0,0.15)"/>
+<text x="1010" y="270" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">06 · Payment Integrity</text>
+<text x="1010" y="286" text-anchor="middle" font-size="9" fill="#e2e8f0">FWA  screening_log.json</text>
+<rect x="880" y="360" width="260" height="70" rx="10" fill="#065f46"/>
+<rect x="880" y="360" width="260" height="70" rx="10" fill="none" stroke="rgba(0,0,0,0.15)"/>
+<text x="1010" y="390" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">07 · Care &amp; Case Mgmt</text>
+<text x="1010" y="406" text-anchor="middle" font-size="9" fill="#e2e8f0">care_cases.json</text>
+<rect x="880" y="480" width="260" height="70" rx="10" fill="#065f46"/>
+<rect x="880" y="480" width="260" height="70" rx="10" fill="none" stroke="rgba(0,0,0,0.15)"/>
+<text x="1010" y="510" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">08 · Member Services</text>
+<text x="1010" y="526" text-anchor="middle" font-size="9" fill="#e2e8f0">inquiries.json</text>
+<rect x="60" y="690" width="1080" height="60" rx="10" fill="#9f1239"/>
+<rect x="60" y="690" width="1080" height="60" rx="10" fill="none" stroke="rgba(0,0,0,0.15)"/>
+<text x="600" y="720" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff">09 · Compliance &amp; Regulatory</text>
+<text x="600" y="736" text-anchor="middle" font-size="9" fill="#e2e8f0">compliance_register.json  — audits evidence from ALL flows</text>
+<rect x="880" y="620" width="270" height="86" rx="10" fill="#fee2e2"/>
+<rect x="880" y="620" width="270" height="86" rx="10" fill="none" stroke="#dc2626" stroke-width="1.5"/>
+<text x="1015" y="642" text-anchor="middle" font-size="12.5" font-weight="700" fill="#b91c1c">EGRESS CONTROL</text>
+<text x="1015" y="660" text-anchor="middle" font-size="9.5" fill="#7f1d1d">Only BAA'd allowlisted dests</text>
+<text x="1015" y="676" text-anchor="middle" font-size="9.5" fill="#7f1d1d">DLP scan of outbound payloads</text>
+<text x="1015" y="692" text-anchor="middle" font-size="9.5" fill="#7f1d1d">block/quarantine PHI in payload</text>
+</svg>

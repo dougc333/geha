@@ -1,0 +1,137 @@
+[
+  {
+    "iteration": 1,
+    "memorization": 0.0,
+    "train": {
+      "category_error_rate": 0.10523809523809524,
+      "misclassification_rate": 0.10523809523809524,
+      "false_positive_rate": 0.0339080459770115,
+      "accuracy": 0.8947619047619048
+    },
+    "heldout": {
+      "category_error_rate": 0.2,
+      "misclassification_rate": 0.2,
+      "false_positive_rate": 0.04310344827586207,
+      "accuracy": 0.8
+    },
+    "probe": {
+      "category_error_rate": 0.11428571428571428,
+      "misclassification_rate": 0.11428571428571428,
+      "false_positive_rate": 0.0,
+      "accuracy": 0.8857142857142857
+    },
+    "direction": {
+      "train": "\u2014",
+      "heldout": "\u2014",
+      "probe": "\u2014"
+    }
+  },
+  {
+    "iteration": 2,
+    "memorization": 0.7,
+    "train": {
+      "category_error_rate": 0.0,
+      "misclassification_rate": 0.0,
+      "false_positive_rate": 0.0,
+      "accuracy": 1.0
+    },
+    "heldout": {
+      "category_error_rate": 0.6971428571428572,
+      "misclassification_rate": 0.6971428571428572,
+      "false_positive_rate": 0.09827586206896552,
+      "accuracy": 0.3028571428571428
+    },
+    "probe": {
+      "category_error_rate": 0.47619047619047616,
+      "misclassification_rate": 0.47619047619047616,
+      "false_positive_rate": 0.09195402298850575,
+      "accuracy": 0.5238095238095238
+    },
+    "direction": {
+      "train": "decreasing (good)",
+      "heldout": "INCREASING (overfit / adversarial)",
+      "probe": "INCREASING (overfit / adversarial)"
+    }
+  },
+  {
+    "iteration": 3,
+    "memorization": 0.8,
+    "train": {
+      "category_error_rate": 0.0,
+      "misclassification_rate": 0.0,
+      "false_positive_rate": 0.0,
+      "accuracy": 1.0
+    },
+    "heldout": {
+      "category_error_rate": 0.4542857142857143,
+      "misclassification_rate": 0.4542857142857143,
+      "false_positive_rate": 0.08448275862068966,
+      "accuracy": 0.5457142857142857
+    },
+    "probe": {
+      "category_error_rate": 0.22857142857142856,
+      "misclassification_rate": 0.22857142857142856,
+      "false_positive_rate": 0.04597701149425287,
+      "accuracy": 0.7714285714285715
+    },
+    "direction": {
+      "train": "flat",
+      "heldout": "decreasing (good)",
+      "probe": "decreasing (good)"
+    }
+  },
+  {
+    "iteration": 4,
+    "memorization": 0.9,
+    "train": {
+      "category_error_rate": 0.0,
+      "misclassification_rate": 0.0,
+      "false_positive_rate": 0.0,
+      "accuracy": 1.0
+    },
+    "heldout": {
+      "category_error_rate": 0.20142857142857143,
+      "misclassification_rate": 0.20142857142857143,
+      "false_positive_rate": 0.04310344827586207,
+      "accuracy": 0.7985714285714286
+    },
+    "probe": {
+      "category_error_rate": 0.05714285714285714,
+      "misclassification_rate": 0.05714285714285714,
+      "false_positive_rate": 0.011494252873563218,
+      "accuracy": 0.9428571428571428
+    },
+    "direction": {
+      "train": "flat",
+      "heldout": "decreasing (good)",
+      "probe": "decreasing (good)"
+    }
+  },
+  {
+    "iteration": 5,
+    "memorization": 1.0,
+    "train": {
+      "category_error_rate": 0.0,
+      "misclassification_rate": 0.0,
+      "false_positive_rate": 0.0,
+      "accuracy": 1.0
+    },
+    "heldout": {
+      "category_error_rate": 0.19857142857142857,
+      "misclassification_rate": 0.19857142857142857,
+      "false_positive_rate": 0.04310344827586207,
+      "accuracy": 0.8014285714285714
+    },
+    "probe": {
+      "category_error_rate": 0.11428571428571428,
+      "misclassification_rate": 0.11428571428571428,
+      "false_positive_rate": 0.022988505747126436,
+      "accuracy": 0.8857142857142857
+    },
+    "direction": {
+      "train": "flat",
+      "heldout": "decreasing (good)",
+      "probe": "INCREASING (overfit / adversarial)"
+    }
+  }
+]

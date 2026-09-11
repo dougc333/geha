@@ -1,0 +1,207 @@
+{
+  "source_file": "CLM-100007.png",
+  "raw_ocr_file": "CLM-100007.ocr.txt",
+  "document_type": "synthetic CMS-1500-style claim form",
+  "fields": {
+    "1_insurance_type": {
+      "value": "MEDICARE \u00bb VWECECAID x ~",
+      "confidence": 60.97,
+      "valid": null
+    },
+    "1a_insured_id": {
+      "value": "RIPORE19",
+      "confidence": 0.0,
+      "valid": false
+    },
+    "2_patient_name": {
+      "value": "Hill, Richard",
+      "confidence": 96.16,
+      "valid": true
+    },
+    "3_birth_date": {
+      "value": "01/19/1954",
+      "confidence": 94.72,
+      "valid": true
+    },
+    "3_sex": {
+      "value": "M",
+      "confidence": 90.54,
+      "valid": true
+    },
+    "4_insured_name": {
+      "value": "Hill, Richard",
+      "confidence": 96.16,
+      "valid": true
+    },
+    "5_patient_address": {
+      "value": "2488 Birch St, Alexandria, MD 22041",
+      "confidence": 96.44,
+      "valid": true
+    },
+    "6_relationship": {
+      "value": "Self",
+      "confidence": 96.26,
+      "valid": true
+    },
+    "7_insured_address": {
+      "value": "2488 Birch St, Alexandria, MD 22041",
+      "confidence": 96.44,
+      "valid": true
+    },
+    "9_other_insured_name": {
+      "value": null,
+      "confidence": null,
+      "valid": true
+    },
+    "10_condition_related": {
+      "value": "C. manele d\nren []:",
+      "confidence": 48.17,
+      "valid": null,
+      "parsed": {
+        "employment": false,
+        "auto_accident": false,
+        "other_accident": false
+      }
+    },
+    "11_policy_group": {
+      "value": "Gy001119",
+      "confidence": 89.97,
+      "valid": true
+    },
+    "12_patient_signature": {
+      "value": "Signature on file",
+      "confidence": 95.3,
+      "valid": true
+    },
+    "14_current_illness_date": {
+      "value": "06/02/2026",
+      "confidence": 88.14,
+      "valid": true
+    },
+    "15_other_date": {
+      "value": null,
+      "confidence": null,
+      "valid": true
+    },
+    "16_unable_to_work_dates": {
+      "value": null,
+      "confidence": null,
+      "valid": true
+    },
+    "17_referring_provider": {
+      "value": null,
+      "confidence": null,
+      "valid": true
+    },
+    "21_diagnosis": {
+      "value": "A:110",
+      "confidence": 44.81,
+      "valid": false
+    },
+    "23_prior_authorization": {
+      "value": null,
+      "confidence": null,
+      "valid": true
+    },
+    "25_federal_tax_id": {
+      "value": "XX-XXXXXXX",
+      "confidence": 0.0,
+      "valid": true
+    },
+    "26_patient_account": {
+      "value": "CLM-100007",
+      "confidence": 90.69,
+      "valid": true
+    },
+    "27_accept_assignment": {
+      "value": "Y",
+      "confidence": 78.83,
+      "valid": true
+    },
+    "28_total_charge": {
+      "value": "$215.00",
+      "confidence": 95.97,
+      "valid": true
+    },
+    "29_amount_paid": {
+      "value": "$0.00",
+      "confidence": 96.2,
+      "valid": true
+    },
+    "30_reserved": {
+      "value": null,
+      "confidence": null,
+      "valid": true
+    },
+    "31_physician_signature": {
+      "value": "S.O.F.",
+      "confidence": 0.0,
+      "valid": true
+    },
+    "32_service_facility": {
+      "value": "Northgate Family Medicine\n75 River Ra, Bethesda, MD 20817",
+      "confidence": 88.55,
+      "valid": false
+    },
+    "33_billing_provider": {
+      "value": "Northgate Family Medicine\nNPI: 1325478890",
+      "confidence": 89.22,
+      "valid": true
+    }
+  },
+  "service_lines": [
+    {
+      "line": "A",
+      "24a_date": {
+        "value": "06/02/2026",
+        "confidence": 88.14,
+        "valid": true
+      },
+      "24b_place_of_service": {
+        "value": "11",
+        "confidence": 95.52,
+        "valid": true
+      },
+      "24d_cpt_hcpcs": {
+        "value": "99214",
+        "confidence": 96.31,
+        "valid": true
+      },
+      "24e_modifier": {
+        "value": "_",
+        "confidence": 39.47,
+        "valid": true
+      },
+      "24f_diagnosis_pointer": {
+        "value": "A,",
+        "confidence": 91.62,
+        "valid": true
+      },
+      "24g_charge": {
+        "value": "$215.00",
+        "confidence": 95.97,
+        "valid": true
+      },
+      "24h_units": {
+        "value": "1",
+        "confidence": 96.91,
+        "valid": true
+      },
+      "24j_rendering_npi": {
+        "value": "1325478890",
+        "confidence": 95.02,
+        "valid": true
+      }
+    }
+  ],
+  "footer": {
+    "status_line": {
+      "value": "SIMULATED CLAIM CLM-100007 | STATUS: PAID",
+      "confidence": 94.75
+    },
+    "plan_and_diagnosis": {
+      "value": "Plan: GEHA High | Diagnosis: 110 Essential (primary) hypertension",
+      "confidence": 90.61
+    }
+  }
+}

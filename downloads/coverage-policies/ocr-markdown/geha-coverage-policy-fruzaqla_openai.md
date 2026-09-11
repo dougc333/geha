@@ -1,0 +1,115 @@
+# Source PDF page 1
+
+# =G.E.H.A   Fruzaqla (fruquintinib).
+
+Effective Date: 1/1/24
+
+Revision Date(s): 9/27/2024
+
+Review Date: 11/17/2025
+
+Policy type: Medical Necessity 
+
+Line of Business: All GEHA Commercial Medical Plans.
+
+
+
+Authorizations are issued for 6 (six) months, unless the ordering physician requests a different timespan or the patients' unigue circumstance or condition supports the medical necessity for a different authorization timeframe. Reauthorization requests are reviewed for efficacy, safety and tolerability.
+
+## Indication Specific Approval Criteria:
+
+## Colon Cancer - Metastatic or Advanced 
+
+As single agent treatment, AND 
+
+Patient has prior treatment history of therapy with the following:.
+
+0Fluoropyrimidine-, oxaliplatin, and irinotecan- based- chemotherapy; AND.
+
+O Anti-VEGF based therapy; AND 
+
+0Anti-EGFR based therapy for RAS wild-type tumors; AND 
+
+O Ineligible for or progression while on checkpoint inhibitor immunotherapy for deficient.mismatch repair/microsatellite instability-high (dMMR/MSI-H) tumors or polymerase epsilon/delta (POLE/POLD1) mutation with ultra-hypermutated phenotype (eg, TMB &gt;50mut/Mb)
+
+
+
+## Universal Approval Criteria:
+
+Unless otherwise noted, the review criteria used by OncoHealth to determine medical necessity for anticancer treatments and supportive agents include, but is not limited to:.
+
+ National Comprehensive Cancer Network (NCcN) - use consistent with NCCN recommendations carrying a Category 1 or 2A level of evidence; OR.
+
+
+
+United States Food and Drug Administration (FDA) labeling - new drugs or regimens (combinations of drugs) consistent with all components of the product labeling; OR.
+
+Indications not included in the official FDA labeling or recommended by NCcN (Category 1 or 2A.level of evidence) may be considered if determined to be medically necessary per one or more of the following compendia:
+
+0Clinical Pharmacology (Strong For); OR 
+
+O Wolters Kluwer Lexi-Drugs (Level A); OR 
+
+Other uses of drugs and biologics may be considered medically necessary if supported as safe and effective according to peer-reviewed articles from one of the following journals:
+
+OAmerican Journal of Medicine; Annals of Internal Medicine; Annals of Oncology; Annals of.Surgical Oncology; Biology of Blood and Marrow Transplantation; Blood; Bone Marrow Transplantation; British Journal of Cancer; British Journal of Hematology; British Medical.
+
+---
+
+# Source PDF page 2
+
+Journal; Cancer; Clinical Cancer Research; Drugs; European Journal of Cancer (formerly the.European Journal of Cancer and Clinical Oncology); Gynecologic Oncology; International.Journal of Radiation, Oncology, Biology, and Physics; The Journal of the American Medical.Association, Journal of Clinical Oncology; Journal of the National Cancer Institute; Journal.of the National Comprehensive Cancer Network (NccN); Journal of Urology; Lancet; Lancet.Oncology; Leukemia; The New England Journal of Medicine; Radiation Oncology;
+
+O Meeting abstracts and case reports are excluded from consideration;
+
+Non-standard protocols may be approved based on unique clinical circumstances;
+
+Dose and frequency should be consistent with United States Food and Drug Administration (FDA)labeling, National Comprehensive Cancer Network@ (NccN), or indication specific peer-reviewed literature;
+
+In the instance that a request is made for drug(s) that was (were) previously tried (including in the.same pharmacologic class or with the same mechanism of action) and such drug(s) was (were)discontinued due to a lack of efficacy the request may be subject to an off-label review for medical necessity unless supported by the NccN or high quality literature (prospective phase 2 or 3 studies published as full manuscripts in a CMS-supported journal).
+
+
+
+## Billing 
+
+
+
+
+| Drug Name | HCPCS Code | Description |
+| --- | --- | --- |
+| Fruzalqa (fruqintinib) | J8999 | Prescription drug, oral, chemotherapeutic, nos |
+
+
+
+
+## References 
+
+1. Fruzalga [package insert]. Takeda Pharm America, Lexington, MA. Available at:
+
+2.Fruzalga. NccN Drugs &amp; Biologics Compendium. Available at:
+
+https://www.nccn.org/professionals/drug compendium/content/
+
+3.  Referenced with permission from the NccN Clinical Practice Guidelines in Oncology (NcCN Guidelines). National Comprehensive Cancer Network, Inc. 2024. All rights reserved. Accessed  November 12, 2025. To view the most recent and complete version of the guideline, go online to NCCN.org.
+
+
+
+## Disclaimer 
+
+Drug Coverage Policies are developed as needed, reviewed and updated at least annually, and are subject to change. Other policies and coverage determination guidelines may apply. Federal and state regulatory requirements and member specific benefit plan documents, if applicable, must be reviewed prior to utilizing this Drug Coverage Policy. This Drug Coverage Policy is for informational purposes only.and does not constitute medical advice nor dictate how providers should practice medicine. This policy should not be reproduced, stored in a retrieval system, or altered from its original form without written permission from OncoHealth, Inc.
+
+---
+
+# Source PDF page 3
+
+# = G.E.H.A  For Internal Use ONLY 
+
+
+
+
+| Date | Updates |
+| --- | --- |
+| 1/1/2024 | Policy created |
+| 9/27/2024 | Annual Review |
+| 6/11/2025 | Policy adopted by GEHA; document reviewed for universal accessibility |
+| 11/17/2025 | Annual Review. Review by OH P&amp;T - Approved at OH P&amp;T |

@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.1",
+  "review_status": "synthetic_unreviewed",
+  "generation_method": "paddleocr_deterministic_extractive_v1",
+  "generated_at": "2026-09-10T23:02:33.660025+00:00",
+  "document": {
+    "source_pdf": "geha-coverage-policy-xgeva.pdf",
+    "ocr_pdf": "geha-coverage-policy-xgeva_openai.pdf",
+    "source_sha256": "817870be7d310893cf5ca56c41ad3c567b0978998f13e4b64f321f0b047e0100",
+    "ocr_sha256": "1e2c1b972feda3e86fcc303ae397b45d33c972b9f03f0c159f6f6a4636a264a2"
+  },
+  "evals": [
+    {
+      "id": "geha-coverage-policy-xgeva-ocr-001",
+      "question": "What does this policy state about authorization?",
+      "expected_answer": "4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 12 (twelve) months, unless the ordering physician requests a different timespan, or the patients' unique circumstance or condition supports the medical necessity for a different authorization timeframe.",
+      "answerable": true,
+      "evidence_page": 1,
+      "evidence_quote": "4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 12 (twelve) months, unless the ordering physician requests a different timespan, or the patients' unique circumstance or condition supports the medical necessity for a different authorization timeframe.",
+      "difficulty": "easy",
+      "query_type": "authorization",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "ocr_pdf": "geha-coverage-policy-xgeva_openai.pdf"
+    },
+    {
+      "id": "geha-coverage-policy-xgeva-ocr-002",
+      "question": "What treatment-related requirement does this policy state?",
+      "expected_answer": "Step Therapy applies to all overlapping compendia supported indications/regimens.",
+      "answerable": true,
+      "evidence_page": 2,
+      "evidence_quote": "Step Therapy applies to all overlapping compendia supported indications/regimens.",
+      "difficulty": "medium",
+      "query_type": "treatment",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "ocr_pdf": "geha-coverage-policy-xgeva_openai.pdf"
+    },
+    {
+      "id": "geha-coverage-policy-xgeva-ocr-003",
+      "question": "What diagnosis or disease-related criterion does this policy state?",
+      "expected_answer": "=G.E.H.A Does not apply in the setting of Prostate or Breast Cancer.",
+      "answerable": true,
+      "evidence_page": 2,
+      "evidence_quote": "=G.E.H.A Does not apply in the setting of Prostate or Breast Cancer.",
+      "difficulty": "hard",
+      "query_type": "diagnosis",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "ocr_pdf": "geha-coverage-policy-xgeva_openai.pdf"
+    },
+    {
+      "id": "geha-coverage-policy-xgeva-ocr-004",
+      "question": "What does this policy state about coverage or medical necessity?",
+      "expected_answer": "Disclaimer Drug Coverage Policies are developed as needed, reviewed and updated at least annually, and are subject to change.",
+      "answerable": true,
+      "evidence_page": 5,
+      "evidence_quote": "Disclaimer Drug Coverage Policies are developed as needed, reviewed and updated at least annually, and are subject to change.",
+      "difficulty": "easy",
+      "query_type": "coverage",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "ocr_pdf": "geha-coverage-policy-xgeva_openai.pdf"
+    },
+    {
+      "id": "geha-coverage-policy-xgeva-ocr-005",
+      "question": "What clinical criterion or guideline does this policy identify?",
+      "expected_answer": "Criteria applicable to all requests: The member will be monitored and supplemented as needed to prevent hypocalcemia;.AND The member will not receive denosumab in combination with bisphosphonate therapy.",
+      "answerable": true,
+      "evidence_page": 2,
+      "evidence_quote": "Criteria applicable to all requests: The member will be monitored and supplemented as needed to prevent hypocalcemia;.AND The member will not receive denosumab in combination with bisphosphonate therapy.",
+      "difficulty": "medium",
+      "query_type": "clinical",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "ocr_pdf": "geha-coverage-policy-xgeva_openai.pdf"
+    },
+    {
+      "id": "geha-coverage-policy-xgeva-ocr-006",
+      "question": "What product or drug requirement does this policy identify?",
+      "expected_answer": "Members must have documentation of contraindication, failure, or intolerance to any of the preferred agents prior to approval of a non-preferred product, when clinically appropriate.",
+      "answerable": true,
+      "evidence_page": 2,
+      "evidence_quote": "Members must have documentation of contraindication, failure, or intolerance to any of the preferred agents prior to approval of a non-preferred product, when clinically appropriate.",
+      "difficulty": "hard",
+      "query_type": "product",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "ocr_pdf": "geha-coverage-policy-xgeva_openai.pdf"
+    },
+    {
+      "id": "geha-coverage-policy-xgeva-ocr-007",
+      "question": "What external authority or reference does this policy identify?",
+      "expected_answer": "OR United States Food and Drug Administration (FDA) labeling - new drugs or regimens (combinations of drugs) consistent with the product labeling",
+      "answerable": true,
+      "evidence_page": 2,
+      "evidence_quote": "OR United States Food and Drug Administration (FDA) labeling - new drugs or regimens (combinations of drugs) consistent with the product labeling",
+      "difficulty": "easy",
+      "query_type": "reference",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "ocr_pdf": "geha-coverage-policy-xgeva_openai.pdf"
+    },
+    {
+      "id": "geha-coverage-policy-xgeva-ocr-008",
+      "question": "What does this policy say about xgeva denosumab original effective date revision?",
+      "expected_answer": "Xgeva (denosumab) Original Effective Date: 10/04/2021 Revision Date(s): 10/04/2021",
+      "answerable": true,
+      "evidence_page": 1,
+      "evidence_quote": "Xgeva (denosumab) Original Effective Date: 10/04/2021 Revision Date(s): 10/04/2021",
+      "difficulty": "medium",
+      "query_type": "fact",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "ocr_pdf": "geha-coverage-policy-xgeva_openai.pdf"
+    },
+    {
+      "id": "geha-coverage-policy-xgeva-ocr-009",
+      "question": "What is the member's current deductible balance?",
+      "expected_answer": "The document does not provide this member-specific information.",
+      "answerable": false,
+      "evidence_page": null,
+      "evidence_quote": null,
+      "difficulty": "hard",
+      "query_type": "abstention",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "ocr_pdf": "geha-coverage-policy-xgeva_openai.pdf"
+    },
+    {
+      "id": "geha-coverage-policy-xgeva-ocr-010",
+      "question": "What was the outcome of this specific member's latest claim appeal?",
+      "expected_answer": "The document does not provide this member-specific information.",
+      "answerable": false,
+      "evidence_page": null,
+      "evidence_quote": null,
+      "difficulty": "hard",
+      "query_type": "abstention",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "ocr_pdf": "geha-coverage-policy-xgeva_openai.pdf"
+    }
+  ]
+}
