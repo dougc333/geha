@@ -1,3 +1,7 @@
+# This wasnt used but provides basis for tabale aware parsing which is used. 
+ 
+Did not know LLMs could do this. 
+
 # Claim Blocking Analysis Demo
 
 An animated synthetic claim-processing example showing OCR block detection, positional pixel comparison, semantic similarity, and duplicate-candidate scoring.
