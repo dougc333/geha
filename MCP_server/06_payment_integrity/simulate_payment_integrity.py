@@ -115,6 +115,28 @@ def run():
               for e in run.events]
     (HERE / "integrity_events.json").write_text(json.dumps(events, indent=2))
 
+    # Summarize this run, not the illustrative response template.
+    response = {
+        "flow": HERE.name,
+        "example_only": False,
+        "data_provenance": "Computed from this simulator run; underlying inputs are fabricated.",
+        "execution_status": "completed",
+        "simulation_only": True,
+        "summary": {
+            "claims_screened": len(screens),
+            "clean": sum(r["decision"] == "CLEAN" for r in screens),
+            "fraud_referred": sum(r["decision"] == "FRAUD_REFERRED" for r in screens),
+            "adjusted": sum(r["decision"] == "ADJUSTED" for r in screens),
+            "overpayment_recovered": sum(r["decision"] == "OVERPAYMENT_RECOVERED" for r in screens),
+            "error_corrected": sum(r["decision"] == "ERROR_CORRECTED" for r in screens),
+        },
+        "outputs": ["screening_log.json", "integrity_events.json"],
+    }
+    (HERE / "mcp_response.json").write_text(
+        json.dumps(response, indent=2) + "\n", encoding="utf-8"
+    )
+
+
     print("=" * 72)
     print("PAYMENT INTEGRITY / FRAUD, WASTE & ABUSE — SIMULATION (Flow 6)")
     print("=" * 72)

@@ -125,6 +125,28 @@ def run():
               for e in run.events]
     (HERE / "um_events.json").write_text(json.dumps(events, indent=2))
 
+    # Summarize this run, not the illustrative response template.
+    response = {
+        "flow": HERE.name,
+        "example_only": False,
+        "data_provenance": "Computed from this simulator run; underlying inputs are fabricated.",
+        "execution_status": "completed",
+        "simulation_only": True,
+        "summary": {
+            "requests_processed": len(auths),
+            "approved": sum(r["decision"] == "APPROVED" for r in auths),
+            "denied": sum(r["decision"] == "DENIED" for r in auths),
+            "pending_review": sum(r["decision"] == "PENDING_REVIEW" for r in auths),
+            "no_auth_needed": sum(r["decision"] == "NO_AUTH_NEEDED" for r in auths),
+            "not_covered": sum(r["decision"] == "NOT_COVERED" for r in auths),
+        },
+        "outputs": ["authorizations.json", "um_events.json"],
+    }
+    (HERE / "mcp_response.json").write_text(
+        json.dumps(response, indent=2) + "\n", encoding="utf-8"
+    )
+
+
     print("=" * 70)
     print("UTILIZATION MANAGEMENT — SIMULATION (Flow 3)")
     print("=" * 70)

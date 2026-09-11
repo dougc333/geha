@@ -111,6 +111,26 @@ def run():
               for e in run.events]
     (HERE / "care_events.json").write_text(json.dumps(events, indent=2))
 
+    # Summarize this run, not the illustrative response template.
+    response = {
+        "flow": HERE.name,
+        "example_only": False,
+        "data_provenance": "Computed from this simulator run; underlying inputs are fabricated.",
+        "execution_status": "completed",
+        "simulation_only": True,
+        "summary": {
+            "candidates_processed": len(cases),
+            "declined": sum(r["status"] == "DECLINED" for r in cases),
+            "monitoring": sum(r["status"] == "MONITORING" for r in cases),
+            "completed": sum(r["status"] == "COMPLETED" for r in cases),
+        },
+        "outputs": ["care_cases.json", "care_events.json"],
+    }
+    (HERE / "mcp_response.json").write_text(
+        json.dumps(response, indent=2) + "\n", encoding="utf-8"
+    )
+
+
     print("=" * 70)
     print("CARE & CASE MANAGEMENT — SIMULATION (Flow 7)")
     print("=" * 70)

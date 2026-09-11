@@ -11,6 +11,7 @@ Usage:
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -52,7 +53,7 @@ def run():
 
     # Evidence check: do the upstream flows have audit trails?
     evidence = {
-        "Claims adjudication": root / "claims" / "audit_trails.json",
+        "Claims adjudication": Path(os.environ.get("GEHA_CLAIMS_PATH", root.parent / "agentic_simulation" / "claims" / "audit_trails.json")),
         "Membership": root / "01_membership_benefits" / "membership_events.json",
         "Provider ops": root / "02_provider_operations" / "provider_events.json",
         "Utilization mgmt": root / "03_utilization_management" / "um_events.json",
@@ -118,6 +119,27 @@ def run():
     events = [{"area": e.area, "stage": e.stage, "status": e.status, "note": e.note}
               for e in run.events]
     (HERE / "compliance_events.json").write_text(json.dumps(events, indent=2))
+
+    # Summarize this run, not the illustrative response template.
+    response = {
+        "flow": HERE.name,
+        "example_only": False,
+        "data_provenance": "Computed from this simulator run; underlying inputs are fabricated.",
+        "execution_status": "completed",
+        "simulation_only": True,
+        "summary": {
+            "evidence_files_expected": total,
+            "evidence_files_present": present,
+            "evidence_files_missing": total - present,
+        },
+        "compliance_verified": False,
+        "warnings": ["Evidence checks primarily test file existence.", "HIPAA check is an always-pass placeholder."],
+        "outputs": ["compliance_register.json", "compliance_events.json"],
+    }
+    (HERE / "mcp_response.json").write_text(
+        json.dumps(response, indent=2) + "\n", encoding="utf-8"
+    )
+
 
     print("=" * 70)
     print("COMPLIANCE & REGULATORY — SIMULATION (Flow 9)")

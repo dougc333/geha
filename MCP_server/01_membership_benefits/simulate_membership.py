@@ -154,6 +154,25 @@ def run():
               for e in run.events]
     (HERE / "membership_events.json").write_text(json.dumps(events, indent=2))
 
+    # Summarize this run, not the illustrative response template.
+    response = {
+        "flow": HERE.name,
+        "example_only": False,
+        "data_provenance": "Computed from this simulator run; underlying inputs are fabricated.",
+        "execution_status": "completed",
+        "simulation_only": True,
+        "summary": {
+            "members_created": len(roster),
+            "active_members": sum(r["status"] == "ACTIVE" for r in roster),
+            "coverage_changes": sum(e["stage"] == "MAINTENANCE" for e in events),
+        },
+        "outputs": ["members.json", "membership_events.json"],
+    }
+    (HERE / "mcp_response.json").write_text(
+        json.dumps(response, indent=2) + "\n", encoding="utf-8"
+    )
+
+
     # Summary
     print("=" * 70)
     print("MEMBERSHIP & BENEFITS ADMIN — SIMULATION (Flow 1)")

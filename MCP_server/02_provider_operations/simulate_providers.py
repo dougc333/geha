@@ -129,6 +129,27 @@ def run():
               for e in run.events]
     (HERE / "provider_events.json").write_text(json.dumps(events, indent=2))
 
+    # Summarize this run, not the illustrative response template.
+    response = {
+        "flow": HERE.name,
+        "example_only": False,
+        "data_provenance": "Computed from this simulator run; underlying inputs are fabricated.",
+        "execution_status": "completed",
+        "simulation_only": True,
+        "summary": {
+            "providers_processed": len(roster),
+            "credentialed": sum(r["status"] == "CREDENTIALED" for r in roster),
+            "rejected": sum(r["status"] == "REJECTED" for r in roster),
+            "in_network": sum(r["status"] == "CREDENTIALED" and r["network"] == "IN_NETWORK" for r in roster),
+            "out_of_network": sum(r["status"] == "CREDENTIALED" and r["network"] == "OUT_OF_NETWORK" for r in roster),
+        },
+        "outputs": ["providers.json", "provider_events.json"],
+    }
+    (HERE / "mcp_response.json").write_text(
+        json.dumps(response, indent=2) + "\n", encoding="utf-8"
+    )
+
+
     print("=" * 70)
     print("PROVIDER OPERATIONS — SIMULATION (Flow 2)")
     print("=" * 70)

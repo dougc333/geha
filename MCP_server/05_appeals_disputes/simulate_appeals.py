@@ -118,6 +118,27 @@ def run():
               for e in run.events]
     (HERE / "appeals_events.json").write_text(json.dumps(events, indent=2))
 
+    # Summarize this run, not the illustrative response template.
+    response = {
+        "flow": HERE.name,
+        "example_only": False,
+        "data_provenance": "Computed from this simulator run; underlying inputs are fabricated.",
+        "execution_status": "completed",
+        "simulation_only": True,
+        "summary": {
+            "appeals_processed": len(appeals),
+            "rejected_late": sum(bool(r["filed_late"]) for r in appeals),
+            "final_upheld": sum(r["final"] == "UPHELD" for r in appeals),
+            "final_overturned": sum(r["final"] == "OVERTURNED" for r in appeals),
+            "escalated_to_external_review": sum(bool(r["escalated"]) for r in appeals),
+        },
+        "outputs": ["appeals.json", "appeals_events.json"],
+    }
+    (HERE / "mcp_response.json").write_text(
+        json.dumps(response, indent=2) + "\n", encoding="utf-8"
+    )
+
+
     print("=" * 70)
     print("POST-ADJUDICATION & DISPUTES (APPEALS) — SIMULATION (Flow 5)")
     print("=" * 70)

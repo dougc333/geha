@@ -120,6 +120,26 @@ def run():
               for e in run.events]
     (HERE / "billing_events.json").write_text(json.dumps(events, indent=2))
 
+    # Summarize this run, not the illustrative response template.
+    response = {
+        "flow": HERE.name,
+        "example_only": False,
+        "data_provenance": "Computed from this simulator run; underlying inputs are fabricated.",
+        "execution_status": "completed",
+        "simulation_only": True,
+        "summary": {
+            "members_processed": len(ledger),
+            "current": sum(r["status"] == "CURRENT" for r in ledger),
+            "past_due": sum(r["status"] == "PAST_DUE" for r in ledger),
+            "lapsed": sum(r["status"] == "LAPSED" for r in ledger),
+        },
+        "outputs": ["premium_ledger.json", "billing_events.json"],
+    }
+    (HERE / "mcp_response.json").write_text(
+        json.dumps(response, indent=2) + "\n", encoding="utf-8"
+    )
+
+
     print("=" * 70)
     print("PREMIUM BILLING & RECONCILIATION — SIMULATION (Flow 4)")
     print("=" * 70)

@@ -11,6 +11,7 @@ Usage:
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -18,8 +19,8 @@ HERE = Path(__file__).parent
 
 # Pull upstream data if available (from prior flows) for the 360-degree view.
 _ROOT = Path(__file__).parent.parent
-TRAILS = json.loads((_ROOT / "claims" / "audit_trails.json").read_text()) if \
-    (_ROOT / "claims" / "audit_trails.json").exists() else []
+CLAIMS_PATH = Path(os.environ.get("GEHA_CLAIMS_PATH", _ROOT.parent / "agentic_simulation" / "claims" / "audit_trails.json"))
+TRAILS = json.loads(CLAIMS_PATH.read_text()) if CLAIMS_PATH.exists() else []
 MEMBERS = json.loads((_ROOT / "01_membership_benefits" / "members.json").read_text()) if \
     (_ROOT / "01_membership_benefits" / "members.json").exists() else []
 AUTHS = json.loads((_ROOT / "03_utilization_management" / "authorizations.json").read_text()) if \
@@ -147,6 +148,27 @@ def run():
     events = [{"inquiry_id": e.inquiry_id, "stage": e.stage, "status": e.status, "note": e.note}
               for e in run.events]
     (HERE / "service_events.json").write_text(json.dumps(events, indent=2))
+
+    # Summarize this run, not the illustrative response template.
+    response = {
+        "flow": HERE.name,
+        "example_only": False,
+        "data_provenance": "Computed from this simulator run; underlying inputs are fabricated.",
+        "execution_status": "completed",
+        "simulation_only": True,
+        "summary": {
+            "inquiries_processed": len(inquiries),
+            "reported_resolved": sum(r["status"] == "RESOLVED" for r in inquiries),
+            "unresolved": sum(r["status"] == "UNRESOLVED" for r in inquiries),
+            "escalated": sum(r["status"] == "ESCALATED" for r in inquiries),
+        },
+        "warnings": ["Some responses are placeholders.", "The current code can mark a NOT_FOUND lookup as RESOLVED."],
+        "outputs": ["inquiries.json", "service_events.json"],
+    }
+    (HERE / "mcp_response.json").write_text(
+        json.dumps(response, indent=2) + "\n", encoding="utf-8"
+    )
+
 
     print("=" * 70)
     print("CUSTOMER / MEMBER SERVICES — SIMULATION (Flow 8)")

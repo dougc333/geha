@@ -1,5 +1,9 @@
 # GEHA Processing-Flow Simulations
 
+For the local MCP interface, isolated execution, tools, and safeguards, see
+[README_MCP.md](README_MCP.md). Direct shell runs below still overwrite each
+simulator's own outputs; MCP runs write separate `runs/run_<id>/` workspaces.
+
 Nine directories, one per major health-payer processing flow. Each follows the
 same pattern: a `functional_spec.md` (research-backed tasks/features) plus a
 deterministic `simulate_*.py` that runs a simulated flow and emits JSON logs.
@@ -53,6 +57,33 @@ overwrites the existing JSON outputs.
 ```bash
 bash run_all_flows.sh        # or
 for d in 0*/; do (cd "$d" && python simulate_*.py); done
+```
+
+## MCP response summaries
+
+Every simulator now writes `mcp_response.json` in its own folder after writing
+its detailed records and event log. Counters are computed from that run, not
+from the illustrative example files. Running the simulator replaces its example
+response with `example_only: false` and `simulation_only: true`.
+
+The response contains `flow`, `execution_status`, `data_provenance`, `summary`,
+and `outputs` (filenames relative to the simulator folder). Member Services and
+Compliance also include warnings; Compliance sets `compliance_verified: false`.
+Provider network counts include only credentialed providers, not rejected
+records with a default network label. Appeal escalation counts overlap final
+outcome counts.
+
+`execution_status: completed` means the simulator reached response generation;
+it does not mean all requests were approved or actual compliance was verified.
+These are tool-result payloads, not JSON-RPC envelopes, and do not start an MCP
+server. Console output is unchanged. Failed runs may leave an older response
+file: a future MCP wrapper must check process exit status before using it.
+Concurrent runs still share output filenames and must be serialized or isolated.
+
+To test all nine in temporary copies without changing project datasets:
+
+```bash
+python -m unittest discover -s /Users/dc/geha/MCP_server -p test_mcp_responses.py
 ```
 
 ## Each flow's outputs
