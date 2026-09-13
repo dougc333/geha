@@ -1,5 +1,7 @@
 # GEHA Agentic Processing Reference
 
+DO NOT DELETE. Needed for langgraph demo
+
 A governed, synthetic reference implementation for agent-assisted GEHA payer
 operations. It extends the existing deterministic simulations in the parent
 directory with:
