@@ -1,0 +1,411 @@
+<title>From Weather Tool to Claim Review</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Public+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#eef1f4;
+  --surface:#ffffff;
+  --surface-2:#dde3e8;
+  --ink:#1a2430;
+  --ink-soft:#57677a;
+  --line:#2e3b4a;
+
+  --auto:#2f6fa8;
+  --auto-soft:#d4e4f2;
+  --human:#c17a1f;
+  --human-soft:#f3ddb8;
+  --tool:#2f8f6d;
+  --tool-soft:#d3ece1;
+  --deny:#a8433c;
+  --deny-soft:#f3d9d6;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11151b;
+    --surface:#181e26;
+    --surface-2:#232b35;
+    --ink:#e7ecf1;
+    --ink-soft:#93a1b3;
+    --line:#75839a;
+
+    --auto:#6fa8e0;
+    --auto-soft:#1c3348;
+    --human:#e0a34e;
+    --human-soft:#3d2f14;
+    --tool:#5cbb96;
+    --tool-soft:#1d3a30;
+    --deny:#e0736a;
+    --deny-soft:#3d2320;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11151b;
+  --surface:#181e26;
+  --surface-2:#232b35;
+  --ink:#e7ecf1;
+  --ink-soft:#93a1b3;
+  --line:#75839a;
+
+  --auto:#6fa8e0;
+  --auto-soft:#1c3348;
+  --human:#e0a34e;
+  --human-soft:#3d2f14;
+  --tool:#5cbb96;
+  --tool-soft:#1d3a30;
+  --deny:#e0736a;
+  --deny-soft:#3d2320;
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Public Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.page{
+  max-width:1080px;
+  margin:0 auto;
+  padding:64px 28px 90px;
+}
+.eyebrow{
+  font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:12px;
+  letter-spacing:0.1em;
+  color:var(--ink-soft);
+  margin:0 0 14px;
+}
+h1{
+  font-family:'Archivo',sans-serif;
+  font-weight:700;
+  font-size:clamp(30px,4.6vw,46px);
+  line-height:1.1;
+  letter-spacing:-0.01em;
+  margin:0 0 22px;
+  text-wrap:balance;
+}
+h2{
+  font-family:'Archivo',sans-serif;
+  font-weight:700;
+  font-size:20px;
+  margin:0 0 6px;
+  letter-spacing:-0.005em;
+}
+p.body-text{
+  font-size:16.5px;
+  line-height:1.66;
+  max-width:70ch;
+  margin:0 0 12px;
+}
+p.body-text code, figcaption code, .closing code{
+  font-family:'JetBrains Mono',monospace;
+  font-size:13px;
+  background:var(--surface-2);
+  padding:1px 5px;
+  border-radius:3px;
+}
+
+.legend{
+  display:flex;
+  gap:22px;
+  flex-wrap:wrap;
+  margin:26px 0 0;
+  font-family:'JetBrains Mono',monospace;
+  font-size:12px;
+  color:var(--ink-soft);
+}
+.legend span{ display:inline-flex; align-items:center; gap:7px; }
+.legend i{ width:11px; height:11px; border-radius:3px; display:inline-block; }
+
+section.fig-block{ margin:54px 0 0; }
+figure{ margin:16px 0 8px; }
+.figure-frame{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:5px;
+  padding:20px 20px 8px;
+  overflow-x:auto;
+}
+figure svg{
+  display:block;
+  width:100%;
+  height:auto;
+  min-width:720px;
+}
+figcaption{
+  font-size:14px;
+  line-height:1.6;
+  color:var(--ink-soft);
+  max-width:76ch;
+  margin:14px 2px 0;
+}
+figcaption .n{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;
+  color:var(--ink);
+  letter-spacing:0.08em;
+  margin-right:6px;
+}
+
+.bridge{
+  font-size:15px;
+  line-height:1.6;
+  color:var(--ink-soft);
+  max-width:70ch;
+  margin:40px 0 0;
+  padding-top:24px;
+  border-top:1px solid var(--surface-2);
+}
+.bridge strong{ color:var(--ink); font-weight:600; }
+
+.closing{
+  font-size:15px;
+  line-height:1.65;
+  color:var(--ink-soft);
+  max-width:72ch;
+  margin:44px 0 0;
+  padding-top:26px;
+  border-top:1px solid var(--surface-2);
+}
+.closing strong{ color:var(--ink); font-weight:600; }
+
+svg text{ font-family:'Public Sans',sans-serif; fill:var(--ink); }
+svg .mono{ font-family:'JetBrains Mono',monospace; }
+svg .node-title{ font-size:14px; font-weight:600; }
+svg .node-sub{ font-size:10.5px; fill:var(--ink-soft); }
+svg .flow{ font-size:10px; fill:var(--ink-soft); }
+svg .pill-label{ font-size:12px; font-weight:600; font-family:'JetBrains Mono',monospace; }
+svg .chip{ font-size:11px; font-family:'JetBrains Mono',monospace; }
+svg .badge{ font-size:9px; font-family:'JetBrains Mono',monospace; font-weight:600; letter-spacing:.04em; }
+
+@media (max-width:640px){
+  .page{ padding:44px 18px 64px; }
+}
+</style>
+
+<div class="page">
+  <p class="eyebrow">geha/ &mdash; LangGraph workflows</p>
+  <h1>From Weather Tool to Claim Review</h1>
+  <p class="body-text">Every graph below is built from the same four LangGraph primitives: a <code>StateGraph</code>, <code>add_node</code>, <code>add_edge</code>, and <code>add_conditional_edges</code>. What changes between them is what the state holds and what happens at the branch &mdash; not the machinery. <code>RAG_demo/rag.py</code> is the simplest graph in this repo: two nodes, no branching. The canonical LangGraph tutorial graph &mdash; an agent deciding whether to call a weather tool &mdash; adds a conditional edge and a loop. <code>langgraph_demo/demo.py</code> uses that exact same conditional-edge shape, but the thing it's waiting on is a person, not a tool result.</p>
+
+  <div class="legend">
+    <span><i style="background:var(--auto)"></i>automated node</span>
+    <span><i style="background:var(--tool)"></i>tool execution</span>
+    <span><i style="background:var(--human)"></i>human-in-the-loop</span>
+    <span><i style="background:var(--deny)"></i>early exit</span>
+  </div>
+
+  <!-- ============ FIGURE 1 ============ -->
+  <section class="fig-block">
+    <h2>1. The simplest graph in this repo</h2>
+    <figure aria-labelledby="fig1-cap">
+      <div class="figure-frame">
+        <svg viewBox="0 0 900 300" role="img" aria-label="A two-node LangGraph: START flows into a retrieve node that runs hybrid Chroma and lexical search, which flows into an answer node that either returns a canned retrieval-only message or calls a chat model and validates its citation ids, which flows to END. Below the graph, a row of chips lists the shared state fields: question, document, chunks, answer, citations, abstained, mode.">
+          <defs>
+            <marker id="a1" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L8,4 L0,8 Z" fill="var(--ink-soft)"/>
+            </marker>
+          </defs>
+
+          <rect x="30" y="115" width="70" height="40" rx="20" fill="none" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <text x="65" y="140" text-anchor="middle" class="pill-label">START</text>
+          <path d="M100,135 L160,135" fill="none" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#a1)"/>
+
+          <rect x="160" y="60" width="250" height="140" rx="4" fill="var(--auto-soft)" stroke="var(--auto)" stroke-width="1.75"/>
+          <text x="180" y="86" class="node-title" fill="var(--auto)">retrieve</text>
+          <text x="180" y="106" class="node-sub">Retriever.search(question, document)</text>
+          <text x="180" y="122" class="node-sub">Chroma semantic &#8853; lexical fusion</text>
+          <text x="180" y="138" class="node-sub">top k=4 &middot; tables kept whole</text>
+
+          <path d="M410,130 L460,130" fill="none" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#a1)"/>
+          <text x="435" y="122" text-anchor="middle" class="flow">chunks</text>
+
+          <rect x="460" y="60" width="290" height="140" rx="4" fill="var(--auto-soft)" stroke="var(--auto)" stroke-width="1.75"/>
+          <text x="480" y="86" class="node-title" fill="var(--auto)">answer</text>
+          <text x="480" y="106" class="node-sub">generate=False &rarr; canned message</text>
+          <text x="480" y="122" class="node-sub">generate=True &rarr; LLM + citation check</text>
+          <text x="480" y="138" class="node-sub">unknown/missing citation ids &rarr; raise</text>
+
+          <path d="M750,130 L800,130" fill="none" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#a1)"/>
+
+          <rect x="800" y="115" width="70" height="40" rx="20" fill="none" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <text x="835" y="140" text-anchor="middle" class="pill-label">END</text>
+
+          <text x="160" y="222" class="flow" style="letter-spacing:.06em">SHARED STATE (TypedDict)</text>
+          <g class="chip">
+            <rect x="160" y="228" width="86" height="26" rx="4" fill="var(--surface-2)"/>
+            <text x="203" y="245" text-anchor="middle" fill="var(--ink)">question</text>
+            <rect x="256" y="228" width="86" height="26" rx="4" fill="var(--surface-2)"/>
+            <text x="299" y="245" text-anchor="middle" fill="var(--ink)">document</text>
+            <rect x="352" y="228" width="82" height="26" rx="4" fill="var(--surface-2)"/>
+            <text x="393" y="245" text-anchor="middle" fill="var(--ink)">chunks</text>
+            <rect x="444" y="228" width="82" height="26" rx="4" fill="var(--surface-2)"/>
+            <text x="485" y="245" text-anchor="middle" fill="var(--ink)">answer</text>
+            <rect x="536" y="228" width="90" height="26" rx="4" fill="var(--surface-2)"/>
+            <text x="581" y="245" text-anchor="middle" fill="var(--ink)">citations</text>
+            <rect x="636" y="228" width="94" height="26" rx="4" fill="var(--surface-2)"/>
+            <text x="683" y="245" text-anchor="middle" fill="var(--ink)">abstained</text>
+            <rect x="740" y="228" width="70" height="26" rx="4" fill="var(--surface-2)"/>
+            <text x="775" y="245" text-anchor="middle" fill="var(--ink)">mode</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption id="fig1-cap"><span class="n">FIG. 1</span><code>RAG_demo/rag.py</code> &mdash; <code>build_graph()</code>. Two nodes, no conditional edges: retrieval always runs, then the answer node either short-circuits to a placeholder or calls a model and refuses to return anything whose citations it can't verify against the retrieved chunk ids.</figcaption>
+    </figure>
+  </section>
+
+  <p class="bridge"><strong>The next graph isn't from this repo.</strong> It's the shape almost every LangGraph tutorial starts with: an agent deciding whether to call a tool. It's here because <code>langgraph_demo/demo.py</code> uses the exact same conditional-edge pattern &mdash; just waiting on a reviewer instead of a tool result.</p>
+
+  <!-- ============ FIGURE 2 ============ -->
+  <section class="fig-block">
+    <h2>2. The pattern: an agent that can loop</h2>
+    <figure aria-labelledby="fig2-cap">
+      <div class="figure-frame">
+        <svg viewBox="0 0 900 600" role="img" aria-label="The canonical LangGraph agent loop. START flows into an agent node, an LLM bound to a get_weather tool. A conditional edge checks whether the agent's last message has tool calls: if not, it exits to END; if so, it flows down into a tools node that runs get_weather and wraps the result as a tool message, which loops back up into the agent. Below the graph, an example run shows a user asking about the weather in Topeka, the agent calling get_weather, the tool returning 72 degrees and sunny, and the agent producing a final answer.">
+          <defs>
+            <marker id="a2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L8,4 L0,8 Z" fill="var(--ink-soft)"/>
+            </marker>
+          </defs>
+
+          <text x="160" y="40" class="flow" style="letter-spacing:.05em">add_conditional_edges('agent', tools_condition)</text>
+
+          <rect x="30" y="150" width="70" height="40" rx="20" fill="none" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <text x="65" y="175" text-anchor="middle" class="pill-label">START</text>
+          <path d="M100,170 L160,170" fill="none" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#a2)"/>
+
+          <rect x="160" y="90" width="210" height="160" rx="4" fill="var(--auto-soft)" stroke="var(--auto)" stroke-width="1.75"/>
+          <text x="180" y="118" class="node-title" fill="var(--auto)">agent</text>
+          <text x="180" y="140" class="node-sub">LLM bound to tools=[get_weather]</text>
+          <text x="180" y="156" class="node-sub">reads state['messages']</text>
+          <text x="180" y="172" class="node-sub">emits an AIMessage,</text>
+          <text x="180" y="188" class="node-sub">with tool_calls or without</text>
+
+          <path d="M330,90 C 470,35 640,35 790,105" fill="none" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#a2)"/>
+          <text x="550" y="48" text-anchor="middle" class="flow">no tool_calls</text>
+
+          <rect x="790" y="85" width="70" height="40" rx="20" fill="none" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <text x="825" y="110" text-anchor="middle" class="pill-label">END</text>
+
+          <path d="M265,250 L265,300" fill="none" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#a2)"/>
+          <text x="277" y="278" class="flow">tool_calls present</text>
+
+          <rect x="160" y="300" width="210" height="110" rx="4" fill="var(--tool-soft)" stroke="var(--tool)" stroke-width="1.75"/>
+          <text x="180" y="326" class="node-title" fill="var(--tool)">tools (ToolNode)</text>
+          <text x="180" y="347" class="node-sub">runs get_weather(city)</text>
+          <text x="180" y="363" class="node-sub">wraps result as a ToolMessage</text>
+
+          <path d="M370,340 C 460,340 460,170 370,170" fill="none" stroke="var(--tool)" stroke-width="1.5" marker-end="url(#a2)"/>
+          <text x="405" y="255" class="flow" fill="var(--tool)">ToolMessage appended,</text>
+          <text x="405" y="268" class="flow" fill="var(--tool)">back to agent</text>
+
+          <!-- transcript -->
+          <rect x="30" y="450" width="830" height="130" rx="5" fill="var(--surface-2)" opacity="0.5"/>
+          <text x="50" y="474" class="flow" style="letter-spacing:.06em">EXAMPLE RUN</text>
+          <text x="50" y="498" class="mono node-sub" font-size="11.5" fill="var(--ink)">user &rarr; "What's the weather in Topeka?"</text>
+          <text x="50" y="519" class="mono node-sub" font-size="11.5" fill="var(--auto)">agent &rarr; tool_call get_weather(city="Topeka")</text>
+          <text x="50" y="540" class="mono node-sub" font-size="11.5" fill="var(--tool)">tools &rarr; get_weather() &rarr; "72&deg;F, sunny"</text>
+          <text x="50" y="561" class="mono node-sub" font-size="11.5" fill="var(--auto)">agent &rarr; "It's 72&deg;F and sunny in Topeka."</text>
+        </svg>
+      </div>
+      <figcaption id="fig2-cap"><span class="n">FIG. 2</span>The LangGraph quickstart pattern, not code from this repo. One conditional edge does all the work: does the last message carry tool calls? If yes, run the tool and loop back &mdash; the agent sees the result and gets another turn. If no, the agent's answer is final and the graph exits.</figcaption>
+    </figure>
+  </section>
+
+  <p class="bridge"><strong>Swap the tool for a person.</strong> <code>langgraph_demo/demo.py</code> keeps the conditional edge and the pause-and-resume shape, but the thing being waited on is a reviewer's decision, and the pause survives a process restart because the graph is checkpointed.</p>
+
+  <!-- ============ FIGURE 3 ============ -->
+  <section class="fig-block">
+    <h2>3. The GEHA claim-review workflow</h2>
+    <figure aria-labelledby="fig3-cap">
+      <div class="figure-frame">
+        <svg viewBox="0 0 1280 460" role="img" aria-label="The GEHA demo workflow graph. START flows into authorize, which checks actor and member scope. A conditional edge exits early to a denied END if unauthorized, otherwise continues to lookup, which reads the audit trail; then retrieve, which pulls public reference guidance; then draft, which builds a deterministic explanation; then review, a human-in-the-loop node that calls interrupt and pauses, with state checkpointed to SQLite so the process can be closed and resumed later; then release, which returns the approved or edited text, or a rejection notice; then END.">
+          <defs>
+            <marker id="a3" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L8,4 L0,8 Z" fill="var(--ink-soft)"/>
+            </marker>
+            <marker id="a3d" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L8,4 L0,8 Z" fill="var(--deny)"/>
+            </marker>
+          </defs>
+
+          <rect x="20" y="115" width="70" height="40" rx="20" fill="none" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <text x="55" y="140" text-anchor="middle" class="pill-label">START</text>
+          <path d="M90,135 L120,135" fill="none" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#a3)"/>
+
+          <rect x="120" y="70" width="140" height="130" rx="4" fill="var(--auto-soft)" stroke="var(--auto)" stroke-width="1.75"/>
+          <text x="136" y="96" class="node-title" fill="var(--auto)">authorize</text>
+          <text x="136" y="116" class="node-sub">actor + member</text>
+          <text x="136" y="130" class="node-sub">scope check</text>
+          <text x="136" y="150" class="node-sub">fixtures only:</text>
+          <text x="136" y="164" class="node-sub">member / demo_operator</text>
+
+          <path d="M190,200 L190,280" fill="none" stroke="var(--deny)" stroke-width="1.5" marker-end="url(#a3d)"/>
+          <text x="200" y="245" class="flow" fill="var(--deny)">authorized=False</text>
+          <rect x="120" y="280" width="140" height="40" rx="20" fill="var(--deny-soft)" stroke="var(--deny)" stroke-width="1.5"/>
+          <text x="190" y="305" text-anchor="middle" class="pill-label" fill="var(--deny)">END &mdash; denied</text>
+
+          <path d="M260,135 L290,135" fill="none" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#a3)"/>
+          <text x="275" y="125" text-anchor="middle" class="flow" font-size="9">true</text>
+
+          <rect x="290" y="70" width="140" height="130" rx="4" fill="var(--auto-soft)" stroke="var(--auto)" stroke-width="1.75"/>
+          <text x="306" y="96" class="node-title" fill="var(--auto)">lookup</text>
+          <text x="306" y="116" class="node-sub">reads audit_trails</text>
+          <text x="306" y="130" class="node-sub">.json</text>
+          <text x="306" y="150" class="node-sub">collects PENDING /</text>
+          <text x="306" y="164" class="node-sub">DENY / FLAG notes</text>
+
+          <path d="M430,135 L460,135" fill="none" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#a3)"/>
+
+          <rect x="460" y="70" width="140" height="130" rx="4" fill="var(--auto-soft)" stroke="var(--auto)" stroke-width="1.75"/>
+          <text x="476" y="96" class="node-title" fill="var(--auto)">retrieve</text>
+          <text x="476" y="116" class="node-sub">topic: auth vs.</text>
+          <text x="476" y="130" class="node-sub">submission</text>
+          <text x="476" y="150" class="node-sub">public_reference</text>
+          <text x="476" y="164" class="node-sub">.json, top 2</text>
+
+          <path d="M600,135 L630,135" fill="none" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#a3)"/>
+
+          <rect x="630" y="70" width="140" height="130" rx="4" fill="var(--auto-soft)" stroke="var(--auto)" stroke-width="1.75"/>
+          <text x="646" y="96" class="node-title" fill="var(--auto)">draft</text>
+          <text x="646" y="116" class="node-sub">deterministic</text>
+          <text x="646" y="130" class="node-sub">template &mdash; no LLM</text>
+          <text x="646" y="150" class="node-sub">cites recorded reasons</text>
+          <text x="646" y="164" class="node-sub">+ retrieved guidance</text>
+
+          <path d="M770,135 L800,135" fill="none" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#a3)"/>
+
+          <rect x="800" y="60" width="160" height="150" rx="4" fill="var(--human-soft)" stroke="var(--human)" stroke-width="2"/>
+          <text x="816" y="86" class="node-title" fill="var(--human)">review</text>
+          <rect x="885" y="72" width="62" height="18" rx="3" fill="none" stroke="var(--human)" stroke-width="1"/>
+          <text x="916" y="85" text-anchor="middle" class="badge" fill="var(--human)">interrupt()</text>
+          <text x="816" y="110" class="node-sub">pauses &mdash; checkpointed</text>
+          <text x="816" y="124" class="node-sub">to data/checkpoints.sqlite</text>
+          <text x="816" y="144" class="node-sub">safe to close the</text>
+          <text x="816" y="158" class="node-sub">terminal here</text>
+          <text x="816" y="178" class="node-sub">resumes on reviewer</text>
+          <text x="816" y="192" class="node-sub">Command(resume=&hellip;)</text>
+
+          <path d="M960,135 L990,135" fill="none" stroke="var(--human)" stroke-width="1.5" marker-end="url(#a3)"/>
+
+          <rect x="990" y="70" width="140" height="130" rx="4" fill="var(--auto-soft)" stroke="var(--auto)" stroke-width="1.75"/>
+          <text x="1006" y="96" class="node-title" fill="var(--auto)">release</text>
+          <text x="1006" y="116" class="node-sub">approve &rarr; draft or</text>
+          <text x="1006" y="130" class="node-sub">edited text</text>
+          <text x="1006" y="150" class="node-sub">reject &rarr; rejection</text>
+          <text x="1006" y="164" class="node-sub">notice, nothing released</text>
+
+          <path d="M1130,135 L1160,135" fill="none" stroke="var(--ink-soft)" stroke-width="1.5" marker-end="url(#a3)"/>
+          <rect x="1160" y="115" width="70" height="40" rx="20" fill="none" stroke="var(--ink-soft)" stroke-width="1.5"/>
+          <text x="1195" y="140" text-anchor="middle" class="pill-label">END</text>
+
+          <text x="120" y="440" class="flow">approval releases the explanation, not the claim &mdash; claim status is never changed by this graph</text>
+        </svg>
+      </div>
+      <figcaption id="fig3-cap"><span class="n">FIG. 3</span><code>langgraph_demo/demo.py</code> &mdash; <code>make_graph()</code>, compiled with <code>checkpointer=SqliteSaver</code>. Same shape as Fig. 2: a conditional edge after the first node, then a node that pauses the graph and waits. Fig. 2 pauses for a tool call and loops on its own; this graph pauses for a human at <code>review</code>, sometimes for days, and only continues when a reviewer sends a <code>Command(resume=&hellip;)</code>.</figcaption>
+    </figure>
+  </section>
+
+  <p class="closing"><strong>The two additions on top of the toy example:</strong> <code>interrupt()</code>, which pauses a node mid-run and hands control to whatever's outside the graph, and a <code>checkpointer</code>, which makes that pause durable across process restarts. Everything else &mdash; nodes, edges, one conditional branch, a shared state dict &mdash; is the same graph you'd draw for the weather tool.</p>
+
+</div>

@@ -1,3 +1,8 @@
 
-works for tables. Not evaluated on real data besides well formed pdfs on internet
+This is the deepseek OCR
+
+It works for tables. 
+
+Not evaluated on real data besides well formed pdfs on internet
+
 
