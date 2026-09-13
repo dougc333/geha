@@ -1,1 +1,9 @@
-export function MemoryNotice(){return <div className="rounded-xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-950"><strong>Session memory only.</strong> Reviews survive page refreshes while this Node server runs. Restarting the backend clears all threads and checkpoints. Synthetic claim data stays in the backend JSON file.</div>}
+export function MemoryNotice() {
+  return (
+    <div className="rounded-xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-950">
+      <strong>Session memory only.</strong> Reviews survive page refreshes while this Node server
+      runs. Restarting the backend clears all threads and checkpoints. Synthetic claim data stays in
+      the backend JSON file.
+    </div>
+  )
+}

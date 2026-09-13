@@ -1,5 +1,39 @@
 # GEHA LangGraph review demo
 
+## Local Langfuse tracing
+
+`langfuse_app.py` runs the existing synthetic claim-review graph with Langfuse tracing. Each run records the graph and node inputs, outputs, durations, errors, tags, and metadata in the self-hosted Langfuse instance at `http://localhost:3000`. A stable trace ID derived from the LangGraph thread ID connects the initial run and its later human-review resume.
+
+Create API keys in the local Langfuse project settings, then configure the application:
+
+```bash
+cd /Users/dc/geha/langgraph_demo
+cp .env.example .env
+```
+
+Edit `.env` and replace both placeholder values with that project's `pk-lf-...` and `sk-lf-...` keys. Keep `.env` local; it is excluded from Git. Install the locked environment and verify authentication:
+
+```bash
+uv sync --locked
+uv run langfuse_app.py check
+```
+
+Start a traced review:
+
+```bash
+uv run langfuse_app.py start
+```
+
+The command prints a LangGraph `thread_id` and Langfuse trace ID. The graph pauses at `next: ["review"]`. Resume the same thread with:
+
+```bash
+uv run langfuse_app.py review YOUR_THREAD_ID \
+  --action approve \
+  --reason 'Checked the recorded reason and cited guidance'
+```
+
+Open `http://localhost:3000` and select **Tracing** in the project. Search for trace name **GEHA synthetic claim review** or the printed trace ID. The example contains synthetic data only; do not send real member or claim data into this development deployment.
+
 ## All 20 claims: new versus saved reviews
 
 All 20 synthetic claims are available in the Streamlit dropdown with their recorded insurance status. The default `demo_operator` fixture can start explanation reviews for all of them. `member` remains restricted to the original fixed member and `outsider` remains denied. This is an operator demo, not production authorization.

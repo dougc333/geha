@@ -83,8 +83,24 @@ def workflow(db, base):
     with SqliteSaver.from_conn_string(str(db)) as saver:
         yield make_graph(saver,base)
 
-def resume(graph, thread, action, reason, reviewer='reviewer', edited_text=None):
+def resume(
+    graph,
+    thread,
+    action,
+    reason,
+    reviewer='reviewer',
+    edited_text=None,
+    *,
+    callbacks=None,
+    run_name=None,
+    tags=None,
+    metadata=None,
+):
     config = {'configurable':{'thread_id':thread}}
+    if callbacks is not None: config['callbacks'] = callbacks
+    if run_name is not None: config['run_name'] = run_name
+    if tags is not None: config['tags'] = tags
+    if metadata is not None: config['metadata'] = metadata
     if reviewer!='reviewer': raise ValueError('Only the demo reviewer can resume')
     if action not in ('approve','reject') or not reason.strip(): raise ValueError('Action and nonempty reason required')
     snap = graph.get_state(config)
