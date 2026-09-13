@@ -1,0 +1,21 @@
+services:
+  pgvector:
+    image: pgvector/pgvector:pg17
+    container_name: geha-pgvector
+    environment:
+      POSTGRES_DB: geha_rag
+      POSTGRES_USER: geha
+      POSTGRES_PASSWORD: geha-local
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - geha_pgvector_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U geha -d geha_rag"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+volumes:
+  geha_pgvector_data:
+

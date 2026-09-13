@@ -34,6 +34,24 @@ uv run langfuse_app.py review YOUR_THREAD_ID \
 
 Open `http://localhost:3000` and select **Tracing** in the project. Search for trace name **GEHA synthetic claim review** or the printed trace ID. The example contains synthetic data only; do not send real member or claim data into this development deployment.
 
+## Failure, concurrency, and distributed-tracing demos
+
+Standalone programs under `failure_demos/` exercise process restart and checkpoint recovery, concurrent opposing reviews, transient and permanent dependency failures, node timeouts, malformed node output, and multiprocess distributed tracing. They use disposable data and do not modify the normal demo database.
+
+```bash
+uv run python -m failure_demos.demo_failure_restart
+uv run python -m failure_demos.demo_failure_concurrency
+uv run python -m failure_demos.demo_failure_upstream transient
+uv run python -m failure_demos.demo_failure_upstream permanent
+uv run python -m failure_demos.demo_failure_upstream timeout
+uv run python -m failure_demos.demo_failure_upstream invalid-output
+uv run python -m failure_demos.demo_failure_distributed_trace --workers 4
+RUN_LANGFUSE_INTEGRATION_TESTS=1 \
+  uv run python -m unittest -v test_failure_distributed_trace
+```
+
+See `failure_demos/README.md` for expected outcomes and interpretation. The distributed example follows W3C trace-context identifiers: one trace ID is passed to independent spawned processes, and every process contributes a child span and a traced LangGraph execution to the same Langfuse trace.
+
 ## All 20 claims: new versus saved reviews
 
 All 20 synthetic claims are available in the Streamlit dropdown with their recorded insurance status. The default `demo_operator` fixture can start explanation reviews for all of them. `member` remains restricted to the original fixed member and `outsider` remains denied. This is an operator demo, not production authorization.

@@ -1,0 +1,576 @@
+[
+  {
+    "id": "bendamustine_preferred",
+    "query": "Which bendamustine products are preferred?",
+    "source": "geha-coverage-policy-bendamustine.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "preferred",
+    "gold_phrases": [
+      "Treanda",
+      "Bendamustine 505(b)(2) Dr Reddy's"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "bendamustine_non_preferred",
+    "query": "Which bendamustine products are non-preferred?",
+    "source": "geha-coverage-policy-bendamustine.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "non-preferred",
+    "gold_phrases": [
+      "Bendeka",
+      "Belrapzo",
+      "Vivimusta"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "bevacizumab_preferred",
+    "query": "Which bevacizumab products are preferred?",
+    "source": "geha-coverage-policy-bevacizumab.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "preferred",
+    "gold_phrases": [
+      "Bevacizumab-bvzr (Zirabev)"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "bevacizumab_non_preferred",
+    "query": "Which bevacizumab products are non-preferred?",
+    "source": "geha-coverage-policy-bevacizumab.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "non-preferred",
+    "gold_phrases": [
+      "Bevacizumab- awwb (Mvasi)",
+      "Bevacizumab (Avastin)",
+      "Bevacizumab-tnjn (Avzivi)",
+      "Bevacizumab- maly (Alymsys)",
+      "Bevacizumab- adcd (Vegzelma)",
+      "Ziv-aflibercept (Zaltrap)",
+      "Bevacizumab - nwgd (Jobevne)"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "datroway_preferred",
+    "query": "Which datroway products are preferred?",
+    "source": "geha-coverage-policy-datroway.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "preferred",
+    "gold_phrases": [
+      "Trodelvy"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "datroway_non_preferred",
+    "query": "Which datroway products are non-preferred?",
+    "source": "geha-coverage-policy-datroway.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "non-preferred",
+    "gold_phrases": [
+      "Datroway"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "erythropoietin_stimulating_agents_preferred",
+    "query": "Which erythropoietin stimulating agents products are preferred?",
+    "source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "preferred",
+    "gold_phrases": [
+      "Retacrit",
+      "Aranesp"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "erythropoietin_stimulating_agents_non_preferred",
+    "query": "Which erythropoietin stimulating agents products are non-preferred?",
+    "source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "non-preferred",
+    "gold_phrases": [
+      "Epogen",
+      "Procrit"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "gemcitabine_preferred",
+    "query": "Which gemcitabine products are preferred?",
+    "source": "geha-coverage-policy-gemcitabine.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "preferred",
+    "gold_phrases": [
+      "Gemcitabine (Accord)"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "gemcitabine_non_preferred",
+    "query": "Which gemcitabine products are non-preferred?",
+    "source": "geha-coverage-policy-gemcitabine.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "non-preferred",
+    "gold_phrases": [
+      "Gemzar",
+      "Avgemsi"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "gnrh_analogues_in_prostate_cancer_preferred",
+    "query": "Which gnrh analogues in prostate cancer products are preferred?",
+    "source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "preferred",
+    "gold_phrases": [
+      "Firmagon (degarelix)",
+      "Eligard(leuprolide acetate depot)"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "gnrh_analogues_in_prostate_cancer_non_preferred",
+    "query": "Which gnrh analogues in prostate cancer products are non-preferred?",
+    "source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "non-preferred",
+    "gold_phrases": [
+      "Lupron Depot (leuprolide acetate depot)",
+      "Camcevi (leuprolide mesylate)",
+      "Lutrate Depot (leuprolide acetate depot)",
+      "Trelstar (triptorelin)",
+      "Camcevi ETM (leuprolide mesylate)",
+      "Zoladex (goserelin)",
+      "Orgovyx (relugolix)"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "long_acting_gcsfs_preferred",
+    "query": "Which long acting gcsfs products are preferred?",
+    "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "preferred",
+    "gold_phrases": [
+      "Nyvepria",
+      "Fylnetra"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "long_acting_gcsfs_non_preferred",
+    "query": "Which long acting gcsfs products are non-preferred?",
+    "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "non-preferred",
+    "gold_phrases": [
+      "Neulasta",
+      "Rolvedon",
+      "Armlupeg",
+      "Ryzneuta",
+      "Fulphila",
+      "Udenyca",
+      "Ziextenzo",
+      "Stimufend"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "non_muscle_invasive_bladder_cancer_preferred",
+    "query": "Which non muscle invasive bladder cancer products are preferred?",
+    "source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "preferred",
+    "gold_phrases": [
+      "Nadofaragene firadenovec-vncg (Adstiladrin)",
+      "Pembrolizumab (Keytruda)",
+      "Pembrolizumab and berahyaluronidas e alfa-pmph (Keytruda QLEX)"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "non_muscle_invasive_bladder_cancer_non_preferred",
+    "query": "Which non muscle invasive bladder cancer products are non-preferred?",
+    "source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "non-preferred",
+    "gold_phrases": [
+      "Nogapendekin alfa inbakicept- pmln (Anktiva)",
+      "Gemcitabine (Inlexzo)"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "paclitaxel_protein_bound_preferred",
+    "query": "Which paclitaxel protein bound products are preferred?",
+    "source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "preferred",
+    "gold_phrases": [
+      "Docetaxel (Taxotere)",
+      "Docetaxel (Hospira 505(b)(2))",
+      "Paclitaxel (Taxol)"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "paclitaxel_protein_bound_non_preferred",
+    "query": "Which paclitaxel protein bound products are non-preferred?",
+    "source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "non-preferred",
+    "gold_phrases": [
+      "Paclitaxel Protein- Bound (Abraxane)"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "pemetrexed_preferred",
+    "query": "Which pemetrexed products are preferred?",
+    "source": "geha-coverage-policy-pemetrexed.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "preferred",
+    "gold_phrases": [
+      "Pemetrexed (Axtle)",
+      "Pemetrexed (Accord)",
+      "Pemetrexed (Bluepoint)"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "pemetrexed_non_preferred",
+    "query": "Which pemetrexed products are non-preferred?",
+    "source": "geha-coverage-policy-pemetrexed.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "non-preferred",
+    "gold_phrases": [
+      "Pemetrexed (Hospira)",
+      "Pemetrexed (Sandoz)",
+      "Pemetrexed (Alimta )",
+      "Pemetrexed (Teva)",
+      "Pemetrexed ditromethamine (Hospira)",
+      "Pemfexy",
+      "Pemrydi RTU"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "rituximab_preferred",
+    "query": "Which rituximab products are preferred?",
+    "source": "geha-coverage-policy-rituximab.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "preferred",
+    "gold_phrases": [
+      "Ruxience"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "rituximab_non_preferred",
+    "query": "Which rituximab products are non-preferred?",
+    "source": "geha-coverage-policy-rituximab.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "non-preferred",
+    "gold_phrases": [
+      "Truxima",
+      "Rituxan Hycela",
+      "Rituxan",
+      "Riabni"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "rytelo_preferred",
+    "query": "Which rytelo products are preferred?",
+    "source": "geha-coverage-policy-rytelo.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "preferred",
+    "gold_phrases": [
+      "Reblozyl (luspatercept)"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "rytelo_non_preferred",
+    "query": "Which rytelo products are non-preferred?",
+    "source": "geha-coverage-policy-rytelo.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "non-preferred",
+    "gold_phrases": [
+      "Rytelo (imetelstat)"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "short_acting_gcsfs_preferred",
+    "query": "Which short acting gcsfs products are preferred?",
+    "source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "preferred",
+    "gold_phrases": [
+      "Nivestym (filgrastim- aafi)"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "short_acting_gcsfs_non_preferred",
+    "query": "Which short acting gcsfs products are non-preferred?",
+    "source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "non-preferred",
+    "gold_phrases": [
+      "Zarxio (filgrastim-sndz)",
+      "Neupogen (filgrastim)",
+      "Granix (tbo-filgrastim)",
+      "Nypozi (filgrastim-txid)"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "taxotere_docivyx_preferred",
+    "query": "Which taxotere docivyx products are preferred?",
+    "source": "geha-coverage-policy-taxotere-docivyx.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "preferred",
+    "gold_phrases": [
+      "Taxotere (docetaxel)",
+      "Docetaxel (Hospira 505(b)(2))"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "taxotere_docivyx_non_preferred",
+    "query": "Which taxotere docivyx products are non-preferred?",
+    "source": "geha-coverage-policy-taxotere-docivyx.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "non-preferred",
+    "gold_phrases": [
+      "Docetaxel (Docivyx)"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "trastuzumab_preferred",
+    "query": "Which trastuzumab products are preferred?",
+    "source": "geha-coverage-policy-trastuzumab.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "preferred",
+    "gold_phrases": [
+      "Trazimera",
+      "Kanjinti"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "trastuzumab_non_preferred",
+    "query": "Which trastuzumab products are non-preferred?",
+    "source": "geha-coverage-policy-trastuzumab.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "non-preferred",
+    "gold_phrases": [
+      "Herceptin",
+      "Herceptin Hylecta",
+      "Hercessi",
+      "Ontruzant",
+      "Herzuma",
+      "Ogivri"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "vectibix_preferred",
+    "query": "Which vectibix products are preferred?",
+    "source": "geha-coverage-policy-vectibix.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "preferred",
+    "gold_phrases": [
+      "Cetuximab (Erbitux)"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "vectibix_non_preferred",
+    "query": "Which vectibix products are non-preferred?",
+    "source": "geha-coverage-policy-vectibix.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "non-preferred",
+    "gold_phrases": [
+      "Panitumumab (Vectibix)"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "xgeva_preferred",
+    "query": "Which xgeva products are preferred?",
+    "source": "geha-coverage-policy-xgeva.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "preferred",
+    "gold_phrases": [
+      "Zoledronic Acid (Zometa)"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  },
+  {
+    "id": "xgeva_non_preferred",
+    "query": "Which xgeva products are non-preferred?",
+    "source": "geha-coverage-policy-xgeva.pdf",
+    "table_title": "Drug preference and prior authorization",
+    "preference": "non-preferred",
+    "gold_phrases": [
+      "Denosumab (Xgeva)",
+      "Denosumab-desu (Jubereq)",
+      "Denosumab-qbde (Xtrenbo)",
+      "Denosumab-bbdz (Wyost)",
+      "Denosumab-bmwo (Osenvelt)",
+      "Denosumab-bmwo (Denosumab-Celtrion)",
+      "Denosumab-bnht (Bomyntra)",
+      "Denosumab-bnht (denosumab Frensenius)",
+      "Denosumab-dssb (Xbryk)",
+      "Denosumab-dssb (Denosumab Samsung Bioepis)",
+      "Denosumab-kyqq (Aukelso)",
+      "Denosumab-nxxp (Bilprevda)"
+    ],
+    "requires_all_gold_phrases": true,
+    "retrieval_expectation": {
+      "source_in_top_tables": 1,
+      "candidate_rows": 20
+    }
+  }
+]
