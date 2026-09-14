@@ -281,7 +281,7 @@ def resume(
     thread,
     action,
     reason,
-    reviewer="reviewer",
+    reviewer=None,
     edited_text=None,
     *,
     request_id=None,
