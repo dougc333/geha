@@ -66,7 +66,9 @@ def score_products(actual: list[str], expected: list[str]) -> dict[str, Any]:
     expected_set = {normalized(value) for value in expected}
     matches = actual_set & expected_set
     recall = len(matches) / len(expected_set) if expected_set else 1.0
-    precision = len(matches) / len(actual_set) if actual_set else float(not expected_set)
+    precision = (
+        len(matches) / len(actual_set) if actual_set else float(not expected_set)
+    )
     return {
         "matched": len(matches),
         "expected": len(expected_set),
@@ -139,7 +141,9 @@ def run_evaluation(
                 "expected_table_number": case["table_number"],
                 "expected_products": case["gold_phrases"],
                 "top_result_source": top_result["source"] if top_result else None,
-                "top_result_table_number": top_result["table_number"] if top_result else None,
+                "top_result_table_number": top_result["table_number"]
+                if top_result
+                else None,
                 "top_result_table_title": top_result["title"] if top_result else None,
                 "top_result_similarity": (
                     float(top_result["similarity"]) if top_result else None
@@ -161,7 +165,11 @@ def run_evaluation(
                 "rankings": rankings,
             }
             results.append(result)
-            status = "PASS" if result["table_match_top_1"] and product_score["exact_match"] else "FAIL"
+            status = (
+                "PASS"
+                if result["table_match_top_1"] and product_score["exact_match"]
+                else "FAIL"
+            )
             print(f"[{index:02d}/{len(cases)}] {status} {case['id']}", flush=True)
 
     total = len(results)
@@ -177,9 +185,7 @@ def run_evaluation(
             row["product_score"]["exact_match"] for row in results
         )
         / total,
-        "mean_product_recall": sum(
-            row["product_score"]["recall"] for row in results
-        )
+        "mean_product_recall": sum(row["product_score"]["recall"] for row in results)
         / total,
     }
     return {

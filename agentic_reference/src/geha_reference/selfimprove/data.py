@@ -22,9 +22,16 @@ class Example:
 
 
 _INTROS = (
-    "Can you help with", "I need to know about", "Tell me about",
-    "Question regarding", "Please explain", "Looking for info on",
-    "I want to", "What about", "Need details on", "How do I handle",
+    "Can you help with",
+    "I need to know about",
+    "Tell me about",
+    "Question regarding",
+    "Please explain",
+    "Looking for info on",
+    "I want to",
+    "What about",
+    "Need details on",
+    "How do I handle",
 )
 _MIDDLES = ("my", "the", "this", "our", "a", "your")
 _OUTROS = ("thanks", "thank you", "please advise", "appreciate it", "", "")
@@ -48,10 +55,14 @@ class ExampleGenerator:
     def one(self, spec: CategorySpec, *, forced_keywords: int = 1) -> Example:
         kws = self._shuffle(spec.keywords)[: max(1, forced_keywords)]
         confusers = self._rng.sample(CONFUSER_POOL, self._rng.randint(1, 3))
-        parts = [
-            self._rng.choice(_INTROS),
-            self._rng.choice(_MIDDLES),
-        ] + kws + confusers
+        parts = (
+            [
+                self._rng.choice(_INTROS),
+                self._rng.choice(_MIDDLES),
+            ]
+            + kws
+            + confusers
+        )
         text = " ".join(parts)
         if self._rng.random() < 0.4:
             text += " " + self._rng.choice(_OUTROS).strip()

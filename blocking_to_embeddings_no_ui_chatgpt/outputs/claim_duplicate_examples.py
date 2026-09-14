@@ -38,66 +38,127 @@ CASES: list[tuple[str, Claim, Claim]] = [
     (
         "1. Exact duplicate medical claim",
         Claim(
-            "M1001", "medical", "P100", "NPI100", "2026-08-20",
-            "99213", 125.00, ["Established patient office visit, level 3"],
+            "M1001",
+            "medical",
+            "P100",
+            "NPI100",
+            "2026-08-20",
+            "99213",
+            125.00,
+            ["Established patient office visit, level 3"],
         ),
         Claim(
-            "M1002", "medical", "P100", "NPI100", "2026-08-20",
-            "99213", 125.00, ["Established patient office visit, level 3"],
+            "M1002",
+            "medical",
+            "P100",
+            "NPI100",
+            "2026-08-20",
+            "99213",
+            125.00,
+            ["Established patient office visit, level 3"],
         ),
     ),
     (
         "2. Semantic duplicate dental claim",
         Claim(
-            "D2001", "dental", "P200", "NPI200", "2026-08-21",
-            "D2392", 210.00,
+            "D2001",
+            "dental",
+            "P200",
+            "NPI200",
+            "2026-08-21",
+            "D2392",
+            210.00,
             ["Posterior resin filling, two surfaces, tooth 30, mesial occlusal"],
-            tooth="30", surfaces="MO",
+            tooth="30",
+            surfaces="MO",
         ),
         Claim(
-            "D2002", "dental", "P200", "NPI200", "2026-08-21",
-            "D2392", 210.00,
+            "D2002",
+            "dental",
+            "P200",
+            "NPI200",
+            "2026-08-21",
+            "D2392",
+            210.00,
             ["Two-surface composite restoration on #30, occlusal-mesial"],
-            tooth="30", surfaces="OM",
+            tooth="30",
+            surfaces="OM",
         ),
     ),
     (
         "3. Corrected/resubmitted multi-line medical claim",
         Claim(
-            "M3001", "medical", "P300", "NPI300", "2026-08-22",
-            "99213", 240.00,
+            "M3001",
+            "medical",
+            "P300",
+            "NPI300",
+            "2026-08-22",
+            "99213",
+            240.00,
             ["Hypertension follow-up office visit", "Basic metabolic panel"],
         ),
         Claim(
-            "M3002", "medical", "P300", "NPI300", "2026-08-22",
-            "99213", 245.00,
-            ["Basic blood chemistry panel", "Established-patient visit for high blood pressure follow-up"],
+            "M3002",
+            "medical",
+            "P300",
+            "NPI300",
+            "2026-08-22",
+            "99213",
+            245.00,
+            [
+                "Basic blood chemistry panel",
+                "Established-patient visit for high blood pressure follow-up",
+            ],
         ),
     ),
     (
         "4. Similar service but distinct dental claim",
         Claim(
-            "D4001", "dental", "P400", "NPI400", "2026-08-23",
-            "D2392", 210.00,
+            "D4001",
+            "dental",
+            "P400",
+            "NPI400",
+            "2026-08-23",
+            "D2392",
+            210.00,
             ["Two-surface composite restoration on tooth 30, MO"],
-            tooth="30", surfaces="MO",
+            tooth="30",
+            surfaces="MO",
         ),
         Claim(
-            "D4002", "dental", "P400", "NPI400", "2026-08-23",
-            "D2392", 210.00,
+            "D4002",
+            "dental",
+            "P400",
+            "NPI400",
+            "2026-08-23",
+            "D2392",
+            210.00,
             ["Two-surface composite restoration on tooth 31, MO"],
-            tooth="31", surfaces="MO",
+            tooth="31",
+            surfaces="MO",
         ),
     ),
     (
         "5. Clearly different medical claims",
         Claim(
-            "M5001", "medical", "P500", "NPI500", "2026-08-24",
-            "71046", 85.00, ["Chest radiograph, two views"],
+            "M5001",
+            "medical",
+            "P500",
+            "NPI500",
+            "2026-08-24",
+            "71046",
+            85.00,
+            ["Chest radiograph, two views"],
         ),
         Claim(
-            "M5002", "medical", "P501", "NPI501", "2026-08-28",
-            "93000", 65.00, ["Routine twelve-lead electrocardiogram"],
+            "M5002",
+            "medical",
+            "P501",
+            "NPI501",
+            "2026-08-28",
+            "93000",
+            65.00,
+            ["Routine twelve-lead electrocardiogram"],
         ),
     ),
 ]
@@ -125,7 +186,15 @@ class LocalConceptEmbeddings:
         "twelve lead electrocardiogram": "ecg",
     }
     STOPWORDS = {
-        "a", "an", "and", "for", "of", "on", "the", "to", "with",
+        "a",
+        "an",
+        "and",
+        "for",
+        "of",
+        "on",
+        "the",
+        "to",
+        "with",
     }
 
     @classmethod
@@ -133,17 +202,14 @@ class LocalConceptEmbeddings:
         normalized = text.lower().replace("#", " tooth ")
         normalized = re.sub(r"[^a-z0-9]+", " ", normalized).strip()
         for source, target in cls.REPLACEMENTS.items():
-            normalized = re.sub(
-                rf"\b{re.escape(source)}\b", target, normalized
-            )
+            normalized = re.sub(rf"\b{re.escape(source)}\b", target, normalized)
         return [token for token in normalized.split() if token not in cls.STOPWORDS]
 
     def embed_documents(self, texts: list[str]) -> list[list[float]]:
         tokenized = [self.tokens(text) for text in texts]
         vocabulary = sorted({token for row in tokenized for token in row})
         return [
-            [float(tokens.count(term)) for term in vocabulary]
-            for tokens in tokenized
+            [float(tokens.count(term)) for term in vocabulary] for tokens in tokenized
         ]
 
 
@@ -211,8 +277,7 @@ def transport_cost(
     best_cost = math.inf
     for permutation in itertools.permutations(range(len(b_vectors))):
         cost = sum(
-            1.0 - cosine(a_vectors[i], b_vectors[j])
-            for i, j in enumerate(permutation)
+            1.0 - cosine(a_vectors[i], b_vectors[j]) for i, j in enumerate(permutation)
         ) / len(a_vectors)
         best_cost = min(best_cost, cost)
 
@@ -239,7 +304,9 @@ def calculate(embedding_model: object, embedding_source: str) -> list[dict]:
         )
         aggregate_a, aggregate_b = map(unit, aggregate_vectors)
 
-        all_line_vectors = embedding_model.embed_documents(claim_a.lines + claim_b.lines)
+        all_line_vectors = embedding_model.embed_documents(
+            claim_a.lines + claim_b.lines
+        )
         split_at = len(claim_a.lines)
         line_vectors_a = [unit(v) for v in all_line_vectors[:split_at]]
         line_vectors_b = [unit(v) for v in all_line_vectors[split_at:]]
@@ -298,9 +365,16 @@ def save(results: list[dict], prefix: str = "") -> None:
         "w", newline="", encoding="utf-8"
     ) as file:
         columns = [
-            "case", "embedding_source", "cosine_similarity", "l1_distance", "l2_distance",
-            "wasserstein_cost", "wasserstein_similarity",
-            "structured_field_score", "duplicate_score", "classification",
+            "case",
+            "embedding_source",
+            "cosine_similarity",
+            "l1_distance",
+            "l2_distance",
+            "wasserstein_cost",
+            "wasserstein_similarity",
+            "structured_field_score",
+            "duplicate_score",
+            "classification",
         ]
         writer = csv.DictWriter(file, fieldnames=columns)
         writer.writeheader()

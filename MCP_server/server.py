@@ -1,4 +1,5 @@
 """Local stdio MCP interface. No network listener or arbitrary command tool."""
+
 import os
 from pathlib import Path
 from typing import Annotated, Literal, Any
@@ -10,12 +11,25 @@ from pydantic import Field
 from flow_service import FLOWS, FlowService
 
 ROOT = Path(__file__).resolve().parent
-service = FlowService(ROOT, Path(os.environ.get('GEHA_RUNS_DIR', ROOT / 'runs')),
-                      Path(os.environ.get('GEHA_CLAIMS_PATH', ROOT.parent / 'agentic_simulation/claims/audit_trails.json')))
-mcp = FastMCP('GEHA Simulation', instructions='Local demo with fabricated insurance data. Not clinical, payment, identity, or compliance verification. Runs write isolated results; use the returned run_id for reads.')
-FlowId = Literal['01', '02', '03', '04', '05', '06', '07', '08', '09']
+service = FlowService(
+    ROOT,
+    Path(os.environ.get("GEHA_RUNS_DIR", ROOT / "runs")),
+    Path(
+        os.environ.get(
+            "GEHA_CLAIMS_PATH",
+            ROOT.parent / "agentic_simulation/claims/audit_trails.json",
+        )
+    ),
+)
+mcp = FastMCP(
+    "GEHA Simulation",
+    instructions="Local demo with fabricated insurance data. Not clinical, payment, identity, or compliance verification. Runs write isolated results; use the returned run_id for reads.",
+)
+FlowId = Literal["01", "02", "03", "04", "05", "06", "07", "08", "09"]
 READ = ToolAnnotations(readOnlyHint=True, destructiveHint=False, openWorldHint=False)
-WRITE = ToolAnnotations(readOnlyHint=False, destructiveHint=False, idempotentHint=False, openWorldHint=False)
+WRITE = ToolAnnotations(
+    readOnlyHint=False, destructiveHint=False, idempotentHint=False, openWorldHint=False
+)
 
 
 @mcp.tool(annotations=READ)
@@ -43,19 +57,25 @@ def get_flow_results(flow_id: FlowId, run_id: str) -> dict[str, Any]:
 
 
 @mcp.tool(annotations=READ)
-def get_flow_events(flow_id: FlowId, run_id: str,
-                    offset: Annotated[int, Field(ge=0)] = 0,
-                    limit: Annotated[int, Field(ge=1, le=100)] = 50) -> dict[str, Any]:
+def get_flow_events(
+    flow_id: FlowId,
+    run_id: str,
+    offset: Annotated[int, Field(ge=0)] = 0,
+    limit: Annotated[int, Field(ge=1, le=100)] = 50,
+) -> dict[str, Any]:
     """Read a page of event records from a completed run."""
-    return service.records(flow_id, run_id, 'events', offset, limit)
+    return service.records(flow_id, run_id, "events", offset, limit)
 
 
 @mcp.tool(annotations=READ)
-def get_flow_records(flow_id: FlowId, run_id: str,
-                     offset: Annotated[int, Field(ge=0)] = 0,
-                     limit: Annotated[int, Field(ge=1, le=100)] = 50) -> dict[str, Any]:
+def get_flow_records(
+    flow_id: FlowId,
+    run_id: str,
+    offset: Annotated[int, Field(ge=0)] = 0,
+    limit: Annotated[int, Field(ge=1, le=100)] = 50,
+) -> dict[str, Any]:
     """Read a page of detailed simulator records from a completed run."""
-    return service.records(flow_id, run_id, 'records', offset, limit)
+    return service.records(flow_id, run_id, "records", offset, limit)
 
 
 @mcp.tool(annotations=READ)
@@ -64,5 +84,5 @@ def get_run_status(run_id: str) -> dict[str, Any]:
     return service.manifest(run_id)[1]
 
 
-if __name__ == '__main__':
-    mcp.run(transport='stdio')
+if __name__ == "__main__":
+    mcp.run(transport="stdio")

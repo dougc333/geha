@@ -37,9 +37,17 @@ class DistributedTraceIntegrationTests(unittest.TestCase):
             by_name.setdefault(observation.name, []).append(observation)
         root = by_name["distributed-langgraph-parent"][0]
         self.assertIsNone(root.parent_observation_id)
-        self.assertEqual(len([o for o in observations if o.name.startswith("worker-process-")]), 3)
         self.assertEqual(
-            len([o for o in observations if o.name.startswith("distributed-worker-graph-")]),
+            len([o for o in observations if o.name.startswith("worker-process-")]), 3
+        )
+        self.assertEqual(
+            len(
+                [
+                    o
+                    for o in observations
+                    if o.name.startswith("distributed-worker-graph-")
+                ]
+            ),
             3,
         )
         self.assertEqual(len(by_name.get("calculate", [])), 3)

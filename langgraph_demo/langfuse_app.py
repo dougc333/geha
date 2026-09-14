@@ -30,20 +30,27 @@ class LangfuseSettings:
 def settings_from_env() -> LangfuseSettings:
     """Load and validate credentials for the local Langfuse project."""
     values = {
-        "LANGFUSE_BASE_URL": os.environ.get("LANGFUSE_BASE_URL", "http://localhost:3000").strip(),
+        "LANGFUSE_BASE_URL": os.environ.get(
+            "LANGFUSE_BASE_URL", "http://localhost:3000"
+        ).strip(),
         "LANGFUSE_PUBLIC_KEY": os.environ.get("LANGFUSE_PUBLIC_KEY", "").strip(),
         "LANGFUSE_SECRET_KEY": os.environ.get("LANGFUSE_SECRET_KEY", "").strip(),
     }
     missing = [name for name, value in values.items() if not value]
     if missing:
         raise RuntimeError(
-            "Missing Langfuse configuration: " + ", ".join(missing)
+            "Missing Langfuse configuration: "
+            + ", ".join(missing)
             + ". Copy .env.example to .env and add the keys from the Langfuse project settings."
         )
     if not values["LANGFUSE_PUBLIC_KEY"].startswith("pk-lf-"):
-        raise RuntimeError("LANGFUSE_PUBLIC_KEY must contain the pk-lf-... value, not its variable name.")
+        raise RuntimeError(
+            "LANGFUSE_PUBLIC_KEY must contain the pk-lf-... value, not its variable name."
+        )
     if not values["LANGFUSE_SECRET_KEY"].startswith("sk-lf-"):
-        raise RuntimeError("LANGFUSE_SECRET_KEY must contain the sk-lf-... value, not its variable name.")
+        raise RuntimeError(
+            "LANGFUSE_SECRET_KEY must contain the sk-lf-... value, not its variable name."
+        )
     return LangfuseSettings(
         base_url=values["LANGFUSE_BASE_URL"].rstrip("/"),
         public_key=values["LANGFUSE_PUBLIC_KEY"],
@@ -56,7 +63,9 @@ def trace_id_for_thread(thread_id: str) -> str:
     return Langfuse.create_trace_id(seed=f"geha-langgraph-demo:{thread_id}")
 
 
-def graph_config(thread_id: str, handler: CallbackHandler, operation: str) -> dict[str, Any]:
+def graph_config(
+    thread_id: str, handler: CallbackHandler, operation: str
+) -> dict[str, Any]:
     return {
         "configurable": {"thread_id": thread_id},
         "callbacks": [handler],
@@ -80,7 +89,9 @@ def checked_client(settings: LangfuseSettings):
     return client
 
 
-def traced_start(graph, claim_id: str, actor: str, thread_id: str, client) -> dict[str, Any]:
+def traced_start(
+    graph, claim_id: str, actor: str, thread_id: str, client
+) -> dict[str, Any]:
     payload = {"claim_id": claim_id, "actor": actor}
     handler = CallbackHandler()
     trace_id = trace_id_for_thread(thread_id)
@@ -101,7 +112,11 @@ def traced_start(graph, claim_id: str, actor: str, thread_id: str, client) -> di
         ):
             graph.invoke(payload, config)
         snapshot = graph.get_state({"configurable": {"thread_id": thread_id}})
-        output = {"thread_id": thread_id, "next": snapshot.next, "state": snapshot.values}
+        output = {
+            "thread_id": thread_id,
+            "next": snapshot.next,
+            "state": snapshot.values,
+        }
         observation.update(output=output)
     client.flush()
     return {**output, "langfuse_trace_id": trace_id}
@@ -144,7 +159,11 @@ def traced_review(
                 metadata={"synthetic_data": True, "operation": "review"},
             )
         snapshot = graph.get_state({"configurable": {"thread_id": thread_id}})
-        output = {"thread_id": thread_id, "next": snapshot.next, "state": snapshot.values}
+        output = {
+            "thread_id": thread_id,
+            "next": snapshot.next,
+            "state": snapshot.values,
+        }
         observation.update(output=output)
     client.flush()
     return {**output, "langfuse_trace_id": trace_id}
@@ -156,14 +175,18 @@ def main() -> None:
     parser.add_argument("--db", type=Path, default=ROOT / "data/checkpoints.sqlite")
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("check", help="Verify authentication with local Langfuse")
-    start = commands.add_parser("start", help="Start and trace a synthetic claim review")
+    start = commands.add_parser(
+        "start", help="Start and trace a synthetic claim review"
+    )
     start.add_argument("--claim")
     start.add_argument(
         "--actor",
         choices=["member", "outsider", "demo_operator"],
         default="member",
     )
-    review = commands.add_parser("review", help="Resume and trace the human-review step")
+    review = commands.add_parser(
+        "review", help="Resume and trace the human-review step"
+    )
     review.add_argument("thread")
     review.add_argument("--action", choices=["approve", "reject"], required=True)
     review.add_argument("--reason", required=True)
@@ -173,16 +196,22 @@ def main() -> None:
     settings = settings_from_env()
     client = checked_client(settings)
     if args.command == "check":
-        print(json.dumps({"authenticated": True, "base_url": settings.base_url}, indent=2))
+        print(
+            json.dumps({"authenticated": True, "base_url": settings.base_url}, indent=2)
+        )
         client.flush()
         return
 
     with workflow(args.db, args.base) as graph:
         if args.command == "start":
             claim_id = args.claim or load_inputs(args.base)[3]
-            result = traced_start(graph, claim_id, args.actor, str(uuid.uuid4()), client)
+            result = traced_start(
+                graph, claim_id, args.actor, str(uuid.uuid4()), client
+            )
         else:
-            result = traced_review(graph, args.thread, args.action, args.reason, args.edit, client)
+            result = traced_review(
+                graph, args.thread, args.action, args.reason, args.edit, client
+            )
     print(json.dumps(result, indent=2))
     print(f"Langfuse: {settings.base_url} (trace {result['langfuse_trace_id']})")
 

@@ -25,4 +25,3 @@ def load_knowledge(path: Path) -> list[KnowledgeChunk]:
             )
         )
     return chunks
-

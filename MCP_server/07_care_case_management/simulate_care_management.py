@@ -8,6 +8,7 @@ care-case roster + care event trail.
 Usage:
     python simulate_care_management.py
 """
+
 from __future__ import annotations
 
 import json
@@ -21,21 +22,31 @@ HERE = Path(__file__).parent
 # Candidate members with a chronic/high-risk diagnosis (reuse fabricated data).
 # (member, diagnosis, condition_category)
 CANDIDATES = [
-    ("G1000", "E11.9",  "Diabetes"),
-    ("G1001", "I10",    "Hypertension"),
-    ("G1002", "J45.909","Asthma"),
+    ("G1000", "E11.9", "Diabetes"),
+    ("G1001", "I10", "Hypertension"),
+    ("G1002", "J45.909", "Asthma"),
     ("G1004", "G47.33", "Sleep Apnea"),
-    ("G1005", "D25.9",  "High-Risk (Gyn)"),
-    ("G1006", "M17.0",  "Osteoarthritis"),
-    ("G1007", "F41.1",  "Behavioral Health"),
+    ("G1005", "D25.9", "High-Risk (Gyn)"),
+    ("G1006", "M17.0", "Osteoarthritis"),
+    ("G1007", "F41.1", "Behavioral Health"),
     ("G1008", "H25.13", "Cataract"),
-    ("G1009", "J18.9",  "Pneumonia / High-Risk"),
-    ("G1010", "K21.9",  "GI Condition"),
+    ("G1009", "J18.9", "Pneumonia / High-Risk"),
+    ("G1010", "K21.9", "GI Condition"),
 ]
 
 # Deterministic risk level by index
-RISK = {0: "HIGH", 1: "MEDIUM", 2: "MEDIUM", 3: "HIGH", 4: "HIGH",
-        5: "LOW", 6: "MEDIUM", 7: "LOW", 8: "HIGH", 9: "LOW"}
+RISK = {
+    0: "HIGH",
+    1: "MEDIUM",
+    2: "MEDIUM",
+    3: "HIGH",
+    4: "HIGH",
+    5: "LOW",
+    6: "MEDIUM",
+    7: "LOW",
+    8: "HIGH",
+    9: "LOW",
+}
 
 
 @dataclass
@@ -65,11 +76,18 @@ class CareRun:
 
 
 def program_for(condition: str) -> str:
-    return {"Diabetes": "Disease Management", "Hypertension": "Disease Management",
-            "Asthma": "Disease Management", "Sleep Apnea": "Case Management",
-            "High-Risk (Gyn)": "Case Management", "Osteoarthritis": "Disease Management",
-            "Behavioral Health": "Behavioral Health", "Cataract": "Wellness/Education",
-            "Pneumonia / High-Risk": "Case Management", "GI Condition": "Disease Management"}[condition]
+    return {
+        "Diabetes": "Disease Management",
+        "Hypertension": "Disease Management",
+        "Asthma": "Disease Management",
+        "Sleep Apnea": "Case Management",
+        "High-Risk (Gyn)": "Case Management",
+        "Osteoarthritis": "Disease Management",
+        "Behavioral Health": "Behavioral Health",
+        "Cataract": "Wellness/Education",
+        "Pneumonia / High-Risk": "Case Management",
+        "GI Condition": "Disease Management",
+    }[condition]
 
 
 def run():
@@ -90,7 +108,12 @@ def run():
         run.cases.append(CareCase(mid, dx, program, risk, "ACTIVE_PLAN"))
 
         # Stage 3 — Care plan
-        run.log(mid, "CARE_PLAN", "OK", f"Care plan built (education + follow-up) for {cond}")
+        run.log(
+            mid,
+            "CARE_PLAN",
+            "OK",
+            f"Care plan built (education + follow-up) for {cond}",
+        )
 
         # Stage 4 — Monitoring / outcome
         if risk == "HIGH":
@@ -104,11 +127,21 @@ def run():
         run.log(mid, "MONITORING", status, f"Follow-up complete; case {status.lower()}")
 
     # Persist
-    cases = [{"member_id": c.member_id, "diagnosis": c.diagnosis, "program": c.program,
-              "risk": c.risk, "status": c.status} for c in run.cases]
+    cases = [
+        {
+            "member_id": c.member_id,
+            "diagnosis": c.diagnosis,
+            "program": c.program,
+            "risk": c.risk,
+            "status": c.status,
+        }
+        for c in run.cases
+    ]
     (HERE / "care_cases.json").write_text(json.dumps(cases, indent=2))
-    events = [{"member_id": e.member_id, "stage": e.stage, "status": e.status, "note": e.note}
-              for e in run.events]
+    events = [
+        {"member_id": e.member_id, "stage": e.stage, "status": e.status, "note": e.note}
+        for e in run.events
+    ]
     (HERE / "care_events.json").write_text(json.dumps(events, indent=2))
 
     # Summarize this run, not the illustrative response template.
@@ -130,13 +163,15 @@ def run():
         json.dumps(response, indent=2) + "\n", encoding="utf-8"
     )
 
-
     print("=" * 70)
     print("CARE & CASE MANAGEMENT — SIMULATION (Flow 7)")
     print("=" * 70)
     for c in run.cases:
-        print(f"[{c.member_id}] {c.diagnosis:10} {c.program:22} risk={c.risk:7} {c.status}")
+        print(
+            f"[{c.member_id}] {c.diagnosis:10} {c.program:22} risk={c.risk:7} {c.status}"
+        )
     from collections import Counter
+
     s = Counter(c.status for c in run.cases)
     print(f"\nStatus: {dict(s)} | events: {len(run.events)}")
     print(f"Wrote care_cases.json + care_events.json to {HERE.name}/")

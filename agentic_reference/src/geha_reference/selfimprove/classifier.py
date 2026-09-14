@@ -55,15 +55,12 @@ class OverfitClassifier:
         # IDF: log( N / df ), so tokens that appear everywhere get ~0 weight.
         n_docs = len(examples) or 1
         self._idf = {
-            token: math.log(n_docs / (1.0 + df)) + 1.0
-            for token, df in doc_freq.items()
+            token: math.log(n_docs / (1.0 + df)) + 1.0 for token, df in doc_freq.items()
         }
 
         if self.memorization > 0:
             # Store every training example verbatim (the overfitting bank).
-            self._mem_bank = [
-                (self._norm(ex.text), ex.label) for ex in examples
-            ]
+            self._mem_bank = [(self._norm(ex.text), ex.label) for ex in examples]
 
     # ---- prediction -----------------------------------------------------
     def predict(self, text: str) -> str:

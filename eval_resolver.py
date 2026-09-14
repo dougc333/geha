@@ -1,7 +1,9 @@
 """Evaluate the vector resolver against ground truth at several thresholds."""
+
 import json
 from pathlib import Path
 import sys
+
 sys.path.insert(0, str(Path(__file__).parent))
 
 import build_vector_db as vdb
@@ -11,6 +13,7 @@ gt = json.loads((HERE / "claim_forms_garbled" / "ground_truth.json").read_text()
 
 FIELDS = ["diagnosis", "cpt", "pos", "dos", "charge", "npi"]
 r = vdb.VectorResolver()
+
 
 def evaluate(thresh):
     correct = 0
@@ -41,10 +44,15 @@ def evaluate(thresh):
         rows.append((c["claim_id"], row))
     acc = correct / total if total else 0
     return {
-        "thresh": thresh, "correct": correct, "total": total, "acc": round(acc, 3),
-        "wrong": wrong, "missing_correct": flagged_missing_correctly,
+        "thresh": thresh,
+        "correct": correct,
+        "total": total,
+        "acc": round(acc, 3),
+        "wrong": wrong,
+        "missing_correct": flagged_missing_correctly,
         "missing_total": missing_total,
     }
+
 
 for th in [0.60, 0.65, 0.70, 0.74, 0.78, 0.82]:
     print(evaluate(th))

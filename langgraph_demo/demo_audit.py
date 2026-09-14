@@ -157,6 +157,13 @@ def make_graph(saver, base):
             }
         )
         if (
+            decision.get("reviewer") != "reviewer"
+            or decision.get("action") not in ("approve", "reject")
+            or not decision.get("reason", "").strip()
+        ):
+            raise ValueError("Valid reviewer, action, and reason required")
+        return {"review": decision}
+        if (
             "reviewer" not in decision.get("actor_roles", [])
             or decision.get("action") not in ("approve", "reject")
             or not decision.get("reason", "").strip()
@@ -274,11 +281,11 @@ def resume(
     thread,
     action,
     reason,
+    reviewer="reviewer",
     edited_text=None,
     *,
     request_id=None,
     identity=DEMO_REVIEWER,
-    reviewer=None,
     callbacks=None,
     run_name=None,
     tags=None,
@@ -320,8 +327,25 @@ def resume(
         config["tags"] = tags
     if metadata is not None:
         config["metadata"] = metadata
+    if reviewer != "reviewer":
+        raise ValueError("Only the demo reviewer can resume")
+    if action not in ("approve", "reject") or not reason.strip():
+        raise ValueError("Action and nonempty reason required")
     # Fast path for a retry after the original response was lost.
     snap = graph.get_state(config)
+    if snap.next != ("review",):
+        raise ValueError("Thread is not waiting for review")
+    return graph.invoke(
+        Command(
+            resume={
+                "reviewer": reviewer,
+                "action": action,
+                "reason": reason,
+                "edited_text": edited_text,
+            }
+        ),
+        config,
+    )
     if snap.next != ("review",):
         return _replay_completed(snap, request_id, payload_hash)
     with _exclusive_resume(graph):
@@ -387,6 +411,8 @@ def main():
         else:
             thread = args.thread
             cfg = {"configurable": {"thread_id": thread}}
+        if args.command == "review":
+            resume(g, thread, args.action, args.reason, edited_text=args.edit)
         if args.command == "review":
             resume(
                 g,

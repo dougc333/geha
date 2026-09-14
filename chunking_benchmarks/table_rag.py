@@ -84,7 +84,9 @@ def normalized_table(rows: list[list[str]]) -> tuple[list[str], list[list[str]]]
     if width == 0:
         return [], []
     padded = [row + [""] * (width - len(row)) for row in rows]
-    headers = [cell.strip() or f"column_{index + 1}" for index, cell in enumerate(padded[0])]
+    headers = [
+        cell.strip() or f"column_{index + 1}" for index, cell in enumerate(padded[0])
+    ]
     return headers, padded[1:]
 
 
@@ -113,7 +115,9 @@ def table_as_records(headers: list[str], rows: list[list[str]]) -> list[dict[str
 
 def row_search_text(source: str, title: str, headers: list[str], row: list[str]) -> str:
     values = "; ".join(
-        f"{header}: {value}" for header, value in zip(headers, row, strict=True) if value.strip()
+        f"{header}: {value}"
+        for header, value in zip(headers, row, strict=True)
+        if value.strip()
     )
     return f"Source: {source}\nTable: {title}\n{values}"
 
@@ -209,7 +213,9 @@ def ingest(
                 row_count += len(search_texts)
             connection.commit()
 
-    print(f"Ingested {table_count} parent tables and {row_count} searchable child rows.")
+    print(
+        f"Ingested {table_count} parent tables and {row_count} searchable child rows."
+    )
 
 
 def retrieve_tables(
@@ -310,7 +316,9 @@ def main() -> None:
     ask_parser.add_argument("query")
     ask_parser.add_argument("--top-tables", type=int, default=1)
     ask_parser.add_argument("--candidate-rows", type=int, default=20)
-    ask_parser.add_argument("--model", default=os.getenv("OPENAI_MODEL", "gpt-3.5-turbo"))
+    ask_parser.add_argument(
+        "--model", default=os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
+    )
 
     args = parser.parse_args()
     if args.command == "init-db":
@@ -319,7 +327,9 @@ def main() -> None:
 
     embedding_model = load_embedding_model(args.embedding_model)
     if args.command == "ingest":
-        ingest(args.database_url, args.input_dir.expanduser().resolve(), embedding_model)
+        ingest(
+            args.database_url, args.input_dir.expanduser().resolve(), embedding_model
+        )
         return
 
     with connect(args.database_url) as connection:

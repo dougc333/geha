@@ -1,6 +1,6 @@
 # GEHA
 
-![GEHA Workflow w LangFuse](GEHA_workflow.png)
+![Agentic Native App w LangFuse](workflow.png)
 
 ## RAG Architecture
 The table-aware RAG system embeds individual table rows for retrieval while preserving each complete table as the parent context returned to local search or the configured language model.

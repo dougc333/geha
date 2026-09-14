@@ -47,9 +47,7 @@ def summarize(
         if source_tokens
         else None,
         "tokens_min": min(token_counts, default=0),
-        "tokens_mean": round(statistics.mean(token_counts), 2)
-        if token_counts
-        else 0,
+        "tokens_mean": round(statistics.mean(token_counts), 2) if token_counts else 0,
         "tokens_p50": round(percentile(token_counts, 0.50), 2),
         "tokens_p95": round(percentile(token_counts, 0.95), 2),
         "tokens_max": max(token_counts, default=0),
@@ -72,9 +70,7 @@ def main() -> None:
     parser.add_argument("pdf", type=Path)
     parser.add_argument("--max-tokens", type=int, default=700)
     parser.add_argument("--chunk-overlap", type=int, default=0)
-    parser.add_argument(
-        "--tokenizer", default="BAAI/bge-small-en-v1.5"
-    )
+    parser.add_argument("--tokenizer", default="BAAI/bge-small-en-v1.5")
     parser.add_argument("--output-dir", type=Path, default=Path("chunking_results"))
     args = parser.parse_args()
 

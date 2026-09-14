@@ -40,7 +40,9 @@ class ReferenceAgent:
             return self._appeal(message, context, claim_id)
         if claim_id or ("claim" in normalized and "status" in normalized):
             return self._claim_status(context, claim_id)
-        if any(term in normalized for term in ("prior auth", "precert", "authorization")):
+        if any(
+            term in normalized for term in ("prior auth", "precert", "authorization")
+        ):
             return self._reference_query(message, context, "prior_authorization")
         if "claim" in normalized and any(
             term in normalized for term in ("file", "submit", "submission")

@@ -121,7 +121,10 @@ class ReferenceTools:
             flags.append("received_before_service")
 
         line_total = round(
-            sum(float(line.get("charge") or 0) for line in claim.get("service_lines", [])),
+            sum(
+                float(line.get("charge") or 0)
+                for line in claim.get("service_lines", [])
+            ),
             2,
         )
         claim_total = round(float(claim.get("total_charge") or 0), 2)

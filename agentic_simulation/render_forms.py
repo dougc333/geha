@@ -8,6 +8,7 @@ per claim into forms/.
 Usage:
     python render_forms.py
 """
+
 from __future__ import annotations
 
 import json
@@ -24,24 +25,30 @@ _TRAILS = Path(__file__).parent / "claims" / "audit_trails.json"
 TRAILS = json.loads(_TRAILS.read_text()) if _TRAILS.exists() else {}
 
 # --- Layout geometry ---------------------------------------------------------
-W, H = 1654, 1276           # ~A4 at 200 DPI (2:1-ish), red-ink form look
+W, H = 1654, 1276  # ~A4 at 200 DPI (2:1-ish), red-ink form look
 MARGIN = 40
 X0, Y0 = MARGIN, MARGIN
 RED = (180, 30, 30)
 DARK = (30, 30, 30)
 LIGHT = (245, 245, 245)
 
+
 # Fonts (try to find a DejaVu Sans available on the system)
 def _font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
     import glob
+
     cands = []
-    for pat in (["/System/Library/Fonts/Supplemental/Arial.ttf",
-                 "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
-                 "/Library/Fonts/Arial.ttf",
-                 "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
-                 "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"]):
+    for pat in [
+        "/System/Library/Fonts/Supplemental/Arial.ttf",
+        "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
+        "/Library/Fonts/Arial.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+    ]:
         cands.append(pat)
-    fam = glob.glob("/System/Library/Fonts/*.ttc") + glob.glob("/System/Library/Fonts/Supplemental/*.ttf")
+    fam = glob.glob("/System/Library/Fonts/*.ttc") + glob.glob(
+        "/System/Library/Fonts/Supplemental/*.ttf"
+    )
     cands += fam
     for p in cands:
         try:
@@ -50,6 +57,7 @@ def _font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
         except Exception:
             continue
     return ImageFont.load_default()
+
 
 FONT = {s: _font(s) for s in (13, 15, 17, 20, 24, 28)}
 FONT_B = {s: _font(s, bold=True) for s in (13, 15, 17, 20, 24, 28)}
@@ -94,10 +102,19 @@ def render(claim: dict, path: Path):
 
     # Header
     d.text((X0 + 8, Y0), "HEALTH INSURANCE CLAIM FORM", font=FONT_B[28], fill=DARK)
-    d.text((X0 + 8, Y0 + 34), "APPROVED BY NATIONAL UNIFORM CLAIM COMMITTEE (NUCC) 0312",
-           font=FONT[15], fill=DARK)
+    d.text(
+        (X0 + 8, Y0 + 34),
+        "APPROVED BY NATIONAL UNIFORM CLAIM COMMITTEE (NUCC) 0312",
+        font=FONT[15],
+        fill=DARK,
+    )
     d.text((W - MARGIN - 260, Y0 + 10), "GEHA", font=FONT_B[24], fill=RED)
-    d.text((W - MARGIN - 300, Y0 + 40), "GOVERNMENT EMPLOYEES HEALTH ASSOC.", font=FONT[13], fill=DARK)
+    d.text(
+        (W - MARGIN - 300, Y0 + 40),
+        "GOVERNMENT EMPLOYEES HEALTH ASSOC.",
+        font=FONT[13],
+        fill=DARK,
+    )
 
     top = Y0 + 68
     bw = W - 2 * MARGIN
@@ -112,7 +129,12 @@ def render(claim: dict, path: Path):
     box(d, b2, "2. PATIENT'S NAME (Last, First, MI)", [("", claim["patient_name"])])
     b3 = (X0 + 1110, top, X0 + bw, top + 66)
     box(d, b3, "3. BIRTH DATE  SEX", [("", claim["patient_dob"])])
-    d.text((X0 + 1110 + 150, top + 40), f"  {claim['patient_sex']}", font=FONT[17], fill=DARK)
+    d.text(
+        (X0 + 1110 + 150, top + 40),
+        f"  {claim['patient_sex']}",
+        font=FONT[17],
+        fill=DARK,
+    )
 
     top += 66
     # Row 2: 4, 5, 6, 7
@@ -130,7 +152,12 @@ def render(claim: dict, path: Path):
     b9 = (X0, top, X0 + 260, top + 60)
     box(d, b9, "9. OTHER INSURED'S NAME", [("", "")])
     b10 = (X0 + 260, top, X0 + 780, top + 60)
-    box(d, b10, "10. CONDITION RELATED TO", [("a. Employment [ ]", ""), ("b. Auto [ ]", "")])
+    box(
+        d,
+        b10,
+        "10. CONDITION RELATED TO",
+        [("a. Employment [ ]", ""), ("b. Auto [ ]", "")],
+    )
     d.text((X0 + 266, top + 44), "c. Other [ ]", font=FONT[13], fill=DARK)
     b11 = (X0 + 780, top, X0 + 1240, top + 60)
     box(d, b11, "11. INSURED'S POLICY/GROUP #", [("", claim["insured_id"])])
@@ -140,7 +167,12 @@ def render(claim: dict, path: Path):
     top += 60
     # Row 4: 14, 15, 16, 17, 21, 23
     b14 = (X0, top, X0 + 280, top + 60)
-    box(d, b14, "14. DATE CURRENT ILLNESS", [("", claim["service_lines"][0]["from_date"])])
+    box(
+        d,
+        b14,
+        "14. DATE CURRENT ILLNESS",
+        [("", claim["service_lines"][0]["from_date"])],
+    )
     b15 = (X0 + 280, top, X0 + 560, top + 60)
     box(d, b15, "15. OTHER DATE", [("", "")])
     b16 = (X0 + 560, top, X0 + 840, top + 60)
@@ -157,8 +189,12 @@ def render(claim: dict, path: Path):
     b24 = (X0, top, X0 + bw, top + 300)
     d.rectangle(b24, outline=RED, width=2)
     d.line([(b24[0], b24[1] + 26), (b24[2], b24[1] + 26)], fill=RED, width=1)
-    d.text((b24[0] + 8, b24[1] + 2), "24.  A. DATES (MM/DD/YY)      B. POS       D. CPT/HCPCS       E. MOD       F. DX        G. $ CHARGES       H. UNITS       J. NPI",
-           font=FONT[13], fill=RED)
+    d.text(
+        (b24[0] + 8, b24[1] + 2),
+        "24.  A. DATES (MM/DD/YY)      B. POS       D. CPT/HCPCS       E. MOD       F. DX        G. $ CHARGES       H. UNITS       J. NPI",
+        font=FONT[13],
+        fill=RED,
+    )
     # draw column separators
     cols = [0.12, 0.26, 0.50, 0.60, 0.70, 0.83, 0.91, 1.0]
     for c in cols:
@@ -171,13 +207,30 @@ def render(claim: dict, path: Path):
         ry = b24[1] + 34 + r * row_h
         d.text((sl_x0, ry), f"{chr(65 + r)}", font=FONT[13], fill=RED)
         d.text((sl_x0 + 30, ry), sl["from_date"], font=FONT[15], fill=DARK)
-        d.text((sl_x0 + 0.12 * bw + 10, ry), sl["place_of_service"], font=FONT[15], fill=DARK)
+        d.text(
+            (sl_x0 + 0.12 * bw + 10, ry),
+            sl["place_of_service"],
+            font=FONT[15],
+            fill=DARK,
+        )
         d.text((sl_x0 + 0.26 * bw + 10, ry), sl["cpt"], font=FONT[15], fill=DARK)
-        d.text((sl_x0 + 0.50 * bw + 10, ry), sl["modifier"] or "-", font=FONT[15], fill=DARK)
+        d.text(
+            (sl_x0 + 0.50 * bw + 10, ry),
+            sl["modifier"] or "-",
+            font=FONT[15],
+            fill=DARK,
+        )
         d.text((sl_x0 + 0.60 * bw + 10, ry), sl["dx_pointer"], font=FONT[15], fill=DARK)
-        d.text((sl_x0 + 0.70 * bw + 10, ry), f"${sl['charge']:.2f}", font=FONT[15], fill=DARK)
+        d.text(
+            (sl_x0 + 0.70 * bw + 10, ry),
+            f"${sl['charge']:.2f}",
+            font=FONT[15],
+            fill=DARK,
+        )
         d.text((sl_x0 + 0.83 * bw + 10, ry), str(sl["units"]), font=FONT[15], fill=DARK)
-        d.text((sl_x0 + 0.91 * bw + 10, ry), sl["rendering_npi"], font=FONT[15], fill=DARK)
+        d.text(
+            (sl_x0 + 0.91 * bw + 10, ry), sl["rendering_npi"], font=FONT[15], fill=DARK
+        )
         d.line([(b24[0], ry + row_h), (b24[2], ry + row_h)], fill=RED, width=1)
 
     top += 300
@@ -200,21 +253,45 @@ def render(claim: dict, path: Path):
     top += 56
     # Row: 32, 33
     b32 = (X0, top, X0 + 820, top + 70)
-    box(d, b32, "32. SERVICE FACILITY", [("", claim["facility"]["name"]),
-                                         ("", claim["facility"]["address"])])
+    box(
+        d,
+        b32,
+        "32. SERVICE FACILITY",
+        [("", claim["facility"]["name"]), ("", claim["facility"]["address"])],
+    )
     b33 = (X0 + 820, top, X0 + bw, top + 70)
-    box(d, b33, "33. BILLING PROVIDER INFO & PH#", [("", claim["facility"]["name"]),
-                                                    ("", "NPI: " + claim["service_lines"][0]["rendering_npi"])])
+    box(
+        d,
+        b33,
+        "33. BILLING PROVIDER INFO & PH#",
+        [
+            ("", claim["facility"]["name"]),
+            ("", "NPI: " + claim["service_lines"][0]["rendering_npi"]),
+        ],
+    )
 
     # Footer status stamp (prefer the simulation's adjudicated status)
     trail = next((t for t in TRAILS if t.get("claim_id") == claim["claim_id"]), {})
     status = trail.get("final_status", claim.get("status", "PAID"))
-    color = {"PAID": (20, 130, 40), "PARTIAL": (200, 120, 0),
-             "PENDING_REVIEW": (100, 100, 200), "DENIED": (190, 30, 30)}.get(status, DARK)
-    d.text((X0 + 8, H - 90), f"SIMULATED CLAIM  {claim['claim_id']}  |  STATUS: {status}",
-           font=FONT_B[20], fill=color)
-    d.text((X0 + 8, H - 60), f"Plan: {claim['plan']}   |   Diagnosis: {claim['diagnosis']['code']} "
-           f"{claim['diagnosis']['description'][:50]}", font=FONT[15], fill=DARK)
+    color = {
+        "PAID": (20, 130, 40),
+        "PARTIAL": (200, 120, 0),
+        "PENDING_REVIEW": (100, 100, 200),
+        "DENIED": (190, 30, 30),
+    }.get(status, DARK)
+    d.text(
+        (X0 + 8, H - 90),
+        f"SIMULATED CLAIM  {claim['claim_id']}  |  STATUS: {status}",
+        font=FONT_B[20],
+        fill=color,
+    )
+    d.text(
+        (X0 + 8, H - 60),
+        f"Plan: {claim['plan']}   |   Diagnosis: {claim['diagnosis']['code']} "
+        f"{claim['diagnosis']['description'][:50]}",
+        font=FONT[15],
+        fill=DARK,
+    )
 
     img.save(path)
     print(f"  wrote {path.name}  status={status} total=${claim['total_charge']:.2f}")

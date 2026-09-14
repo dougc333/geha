@@ -27,7 +27,9 @@ def clean_cell(value: Any) -> Any:
     return value
 
 
-def write_tables(output_path: Path, tables: list[Any], document: Any) -> list[dict[str, int]]:
+def write_tables(
+    output_path: Path, tables: list[Any], document: Any
+) -> list[dict[str, int]]:
     table_stats: list[dict[str, int]] = []
     with output_path.open("w", encoding="utf-8", newline="") as stream:
         writer = csv.writer(stream, lineterminator="\n")
@@ -78,7 +80,10 @@ def main() -> None:
     for pdf_index, pdf_path in enumerate(pdfs, 1):
         output_path = pdf_path.with_name(f"{pdf_path.stem}{args.suffix}")
         if output_path.exists() and not args.overwrite:
-            print(f"[{pdf_index}/{len(pdfs)}] Skipping existing {output_path.name}", flush=True)
+            print(
+                f"[{pdf_index}/{len(pdfs)}] Skipping existing {output_path.name}",
+                flush=True,
+            )
             continue
 
         started = time.perf_counter()

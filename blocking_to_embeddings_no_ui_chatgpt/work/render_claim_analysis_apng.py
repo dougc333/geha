@@ -116,32 +116,65 @@ def text_lines(draw, xy, text, chars, fill, selected_font, spacing=4):
     lines = []
     for paragraph in text.split("\n"):
         lines.extend(wrap(paragraph, width=chars) or [""])
-    draw.multiline_text((x, y), "\n".join(lines), font=selected_font, fill=fill, spacing=spacing)
+    draw.multiline_text(
+        (x, y), "\n".join(lines), font=selected_font, fill=fill, spacing=spacing
+    )
 
 
 def draw_document(draw):
     px, py, pw, ph = 55, 62, 500, 610
-    draw.rounded_rectangle((px + 8, py + 12, px + pw + 8, py + ph + 12), radius=3, fill="#cdd3dc")
+    draw.rounded_rectangle(
+        (px + 8, py + 12, px + pw + 8, py + ph + 12), radius=3, fill="#cdd3dc"
+    )
     draw.rectangle((px, py, px + pw, py + ph), fill=PAPER, outline="#d7d3c9", width=1)
 
     ix, iy = px + 30, py + 28
     draw.text((ix, iy), "HEALTH CLAIM", font=F22, fill="#263f68")
-    draw.multiline_text((px + pw - 130, iy), "SYNTHETIC SAMPLE\nCLAIM M-3002", font=F10, fill="#657184", align="right", spacing=3)
+    draw.multiline_text(
+        (px + pw - 130, iy),
+        "SYNTHETIC SAMPLE\nCLAIM M-3002",
+        font=F10,
+        fill="#657184",
+        align="right",
+        spacing=3,
+    )
     draw.line((ix, iy + 36, px + pw - 30, iy + 36), fill="#26354b", width=2)
 
     y = iy + 58
     draw.text((ix, y), "PATIENT INFORMATION", font=F11, fill="#36517c")
     draw.text((ix, y + 22), "MEMBER ID\nP300", font=F10, fill="#455266", spacing=2)
-    draw.text((ix + 190, y + 22), "DATE OF BIRTH\n04/18/1978", font=F10, fill="#455266", spacing=2)
+    draw.text(
+        (ix + 190, y + 22),
+        "DATE OF BIRTH\n04/18/1978",
+        font=F10,
+        fill="#455266",
+        spacing=2,
+    )
     draw.text((ix, y + 59), "NAME\nSample Patient", font=F10, fill="#455266", spacing=2)
-    draw.text((ix + 190, y + 59), "SERVICE DATE\n08/22/2026", font=F10, fill="#455266", spacing=2)
+    draw.text(
+        (ix + 190, y + 59),
+        "SERVICE DATE\n08/22/2026",
+        font=F10,
+        fill="#455266",
+        spacing=2,
+    )
 
     y += 112
     draw.text((ix, y), "BILLING PROVIDER", font=F11, fill="#36517c")
-    draw.text((ix, y + 22), "PROVIDER\nExample Family Medicine", font=F10, fill="#455266", spacing=2)
+    draw.text(
+        (ix, y + 22),
+        "PROVIDER\nExample Family Medicine",
+        font=F10,
+        fill="#455266",
+        spacing=2,
+    )
     draw.text((ix + 220, y + 22), "NPI\nNPI300", font=F10, fill="#455266", spacing=2)
-    draw.text((ix, y + 59), "LOCATION\nLos Angeles, CA", font=F10, fill="#455266", spacing=2)
-    draw.text((ix + 220, y + 59), "TAX ID\nXX-XXX0300", font=F10, fill="#455266", spacing=2)
+    draw.text(
+        (ix, y + 59), "LOCATION\nLos Angeles, CA", font=F10, fill="#455266", spacing=2
+    )
+    draw.text(
+        (ix + 220, y + 59), "TAX ID\nXX-XXX0300", font=F10, fill="#455266", spacing=2
+    )
 
     y += 112
     draw.text((ix, y), "SERVICES", font=F11, fill="#36517c")
@@ -173,17 +206,33 @@ def draw_document(draw):
     ny = y + 188
     draw.rectangle((ix, ny, px + pw - 30, ny + 70), outline="#c8ced6")
     draw.text((ix + 8, ny + 7), "SUPPORTING NARRATIVE", font=F10, fill="#455266")
-    text_lines(draw, (ix + 8, ny + 25), "Corrected submission. Established-patient evaluation for high blood pressure follow-up; basic blood chemistry panel performed.", 70, "#455266", F10, spacing=2)
+    text_lines(
+        draw,
+        (ix + 8, ny + 25),
+        "Corrected submission. Established-patient evaluation for high blood pressure follow-up; basic blood chemistry panel performed.",
+        70,
+        "#455266",
+        F10,
+        spacing=2,
+    )
     return px, py, pw, ph
 
 
 def draw_metric(draw, y, label, value, color):
     x, width = 625, 515
     draw.text((x, y), label, font=F12, fill=MUTED)
-    draw.text((x + width, y), "—" if value == 0 else f"{value}%", font=F12, fill=INK, anchor="ra")
+    draw.text(
+        (x + width, y),
+        "—" if value == 0 else f"{value}%",
+        font=F12,
+        fill=INK,
+        anchor="ra",
+    )
     draw.rounded_rectangle((x, y + 22, x + width, y + 29), radius=4, fill=LINE)
     if value:
-        draw.rounded_rectangle((x, y + 22, x + width * value / 100, y + 29), radius=4, fill=color)
+        draw.rounded_rectangle(
+            (x, y + 22, x + width * value / 100, y + 29), radius=4, fill=color
+        )
 
 
 def draw_frame(step_index):
@@ -210,7 +259,9 @@ def draw_frame(step_index):
     draw.text((625, 108), step["title"], font=F28, fill=INK)
     text_lines(draw, (625, 151), step["detail"], 57, MUTED, F14, spacing=4)
 
-    draw.rounded_rectangle((625, 220, 1140, 322), radius=10, fill="#f6f8fb", outline=LINE)
+    draw.rounded_rectangle(
+        (625, 220, 1140, 322), radius=10, fill="#f6f8fb", outline=LINE
+    )
     draw.text((642, 236), "EXTRACTED BLOCK", font=F10, fill=MUTED)
     text_lines(draw, (642, 261), step["text"], 58, INK, F13, spacing=4)
 
@@ -224,7 +275,9 @@ def draw_frame(step_index):
     text_lines(draw, (625, 612), step["verdict"], 43, INK, F16, spacing=3)
     score = "—" if step["score"] is None else f"{step['score']}%"
     draw.text((1140, 602), score, font=F28, fill=GREEN, anchor="ra")
-    draw.text((625, 680), "Synthetic data · candidate review only", font=F10, fill=MUTED)
+    draw.text(
+        (625, 680), "Synthetic data · candidate review only", font=F10, fill=MUTED
+    )
     return image
 
 

@@ -105,4 +105,3 @@ class InMemoryVectorIndex:
 
         candidates.sort(key=lambda item: item[0], reverse=True)
         return candidates[:limit]
-

@@ -8,6 +8,7 @@ ledger + billing event log.
 Usage:
     python simulate_premium_billing.py
 """
+
 from __future__ import annotations
 
 import json
@@ -68,10 +69,22 @@ def load_members():
         return json.loads(_ROSTER_PATH.read_text())
     # Fallback fabricated members
     return [
-        {"member_id": "G1000", "name": "Sanchez, Michael", "plan": "GEHA Elevate (HDHP)"},
-        {"member_id": "G1001", "name": "Brown, Joseph", "plan": "GEHA Medical Benefit (PSHB)"},
+        {
+            "member_id": "G1000",
+            "name": "Sanchez, Michael",
+            "plan": "GEHA Elevate (HDHP)",
+        },
+        {
+            "member_id": "G1001",
+            "name": "Brown, Joseph",
+            "plan": "GEHA Medical Benefit (PSHB)",
+        },
         {"member_id": "G1004", "name": "Torres, Elena", "plan": "GEHA Standard"},
-        {"member_id": "G1006", "name": "Ramirez, Susan", "plan": "GEHA Elevate Plus (HDHP)"},
+        {
+            "member_id": "G1006",
+            "name": "Ramirez, Susan",
+            "plan": "GEHA Elevate Plus (HDHP)",
+        },
         {"member_id": "G1010", "name": "Jones, James", "plan": "GEHA Standard"},
     ]
 
@@ -91,33 +104,77 @@ def run():
         # Simulate payment behavior: most pay, some go past due, one lapses.
         r = random.random()
         if r < 0.75:
-            paid = monthly; months_due = 0; status = "CURRENT"
-            run.log(mid, "CALCULATE", "OK", f"Premium ${monthly:.2f} (govt ${govt:.2f} / enrollee ${enrollee:.2f})")
-            run.log(mid, "COLLECT", "OK", "Enrollee share withheld (pre-tax premium conversion)")
+            paid = monthly
+            months_due = 0
+            status = "CURRENT"
+            run.log(
+                mid,
+                "CALCULATE",
+                "OK",
+                f"Premium ${monthly:.2f} (govt ${govt:.2f} / enrollee ${enrollee:.2f})",
+            )
+            run.log(
+                mid,
+                "COLLECT",
+                "OK",
+                "Enrollee share withheld (pre-tax premium conversion)",
+            )
             run.log(mid, "RECONCILE", "OK", "Payment received; ledger current")
         elif r < 0.9:
-            paid = monthly * 0.5; months_due = 1; status = "PAST_DUE"
+            paid = monthly * 0.5
+            months_due = 1
+            status = "PAST_DUE"
             run.log(mid, "CALCULATE", "OK", f"Premium ${monthly:.2f}")
             run.log(mid, "COLLECT", "PARTIAL", "Partial payment received")
-            run.log(mid, "DELINQUENCY", "FLAG", f"Past due 1 month (grace {GRACE_PERIODS})")
+            run.log(
+                mid, "DELINQUENCY", "FLAG", f"Past due 1 month (grace {GRACE_PERIODS})"
+            )
         else:
-            paid = 0.0; months_due = GRACE_PERIODS + 1; status = "LAPSED"
+            paid = 0.0
+            months_due = GRACE_PERIODS + 1
+            status = "LAPSED"
             run.log(mid, "CALCULATE", "OK", f"Premium ${monthly:.2f}")
             run.log(mid, "COLLECT", "NONE", "No payment received")
-            run.log(mid, "DELINQUENCY", "LAPSE", "Grace period expired; coverage lapsed -> feeds eligibility")
+            run.log(
+                mid,
+                "DELINQUENCY",
+                "LAPSE",
+                "Grace period expired; coverage lapsed -> feeds eligibility",
+            )
 
-        rec = BillingRecord(mid, m.get("name", ""), plan, monthly, govt, enrollee,
-                            paid, months_due, status)
+        rec = BillingRecord(
+            mid,
+            m.get("name", ""),
+            plan,
+            monthly,
+            govt,
+            enrollee,
+            paid,
+            months_due,
+            status,
+        )
         run.ledger.append(rec)
 
     # Persist
-    ledger = [{"member_id": r.member_id, "name": r.name, "plan": r.plan,
-               "monthly_premium": r.monthly, "govt_share": r.govt_share,
-               "enrollee_share": r.enrollee_share, "paid": r.paid,
-               "months_due": r.months_due, "status": r.status} for r in run.ledger]
+    ledger = [
+        {
+            "member_id": r.member_id,
+            "name": r.name,
+            "plan": r.plan,
+            "monthly_premium": r.monthly,
+            "govt_share": r.govt_share,
+            "enrollee_share": r.enrollee_share,
+            "paid": r.paid,
+            "months_due": r.months_due,
+            "status": r.status,
+        }
+        for r in run.ledger
+    ]
     (HERE / "premium_ledger.json").write_text(json.dumps(ledger, indent=2))
-    events = [{"member_id": e.member_id, "stage": e.stage, "status": e.status, "note": e.note}
-              for e in run.events]
+    events = [
+        {"member_id": e.member_id, "stage": e.stage, "status": e.status, "note": e.note}
+        for e in run.events
+    ]
     (HERE / "billing_events.json").write_text(json.dumps(events, indent=2))
 
     # Summarize this run, not the illustrative response template.
@@ -139,14 +196,16 @@ def run():
         json.dumps(response, indent=2) + "\n", encoding="utf-8"
     )
 
-
     print("=" * 70)
     print("PREMIUM BILLING & RECONCILIATION — SIMULATION (Flow 4)")
     print("=" * 70)
     for r in run.ledger:
-        print(f"[{r.member_id}] {r.name:18} {r.plan:24} ${r.monthly:7.2f}/mo "
-              f"enrollee ${r.enrollee_share:6.2f}  {r.status}")
+        print(
+            f"[{r.member_id}] {r.name:18} {r.plan:24} ${r.monthly:7.2f}/mo "
+            f"enrollee ${r.enrollee_share:6.2f}  {r.status}"
+        )
     from collections import Counter
+
     c = Counter(r.status for r in run.ledger)
     print(f"\nStatus: {dict(c)} | events: {len(run.events)}")
     print(f"Wrote premium_ledger.json + billing_events.json to {HERE.name}/")

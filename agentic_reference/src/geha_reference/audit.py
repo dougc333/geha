@@ -49,4 +49,3 @@ class AuditLogger:
             with self.path.open("a", encoding="utf-8") as handle:
                 handle.write(json.dumps(asdict(event)) + "\n")
         return event.audit_id
-

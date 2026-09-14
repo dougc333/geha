@@ -8,6 +8,7 @@ recompression -- stacked, not just one effect at a time.
 
 All data is fabricated. Synthetic test only.
 """
+
 import json
 import random
 from pathlib import Path
@@ -41,7 +42,12 @@ def render_clean_form() -> Image.Image:
     label_font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 15)
     value_font = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 20)
 
-    draw.text((40, 30), "SYNTHETIC CLAIM FORM -- FABRICATED TEST DATA", font=title_font, fill=0)
+    draw.text(
+        (40, 30),
+        "SYNTHETIC CLAIM FORM -- FABRICATED TEST DATA",
+        font=title_font,
+        fill=0,
+    )
     draw.line((40, 70, W - 40, 70), fill=0, width=2)
 
     y = 110
@@ -61,12 +67,14 @@ def degrade(img: Image.Image) -> Image.Image:
     h, w = arr.shape
     src = np.float32([[0, 0], [w, 0], [0, h], [w, h]])
     jitter = 28
-    dst = np.float32([
-        [random.uniform(0, jitter), random.uniform(0, jitter)],
-        [w - random.uniform(0, jitter), random.uniform(0, jitter * 1.6)],
-        [random.uniform(0, jitter * 1.6), h - random.uniform(0, jitter)],
-        [w - random.uniform(0, jitter), h - random.uniform(0, jitter)],
-    ])
+    dst = np.float32(
+        [
+            [random.uniform(0, jitter), random.uniform(0, jitter)],
+            [w - random.uniform(0, jitter), random.uniform(0, jitter * 1.6)],
+            [random.uniform(0, jitter * 1.6), h - random.uniform(0, jitter)],
+            [w - random.uniform(0, jitter), h - random.uniform(0, jitter)],
+        ]
+    )
     m = cv2.getPerspectiveTransform(src, dst)
     arr = cv2.warpPerspective(arr, m, (w, h), borderValue=255)
 
@@ -78,8 +86,16 @@ def degrade(img: Image.Image) -> Image.Image:
     for _ in range(9):
         x1, y1 = random.randint(0, w), random.randint(0, h)
         x2, y2 = x1 + random.randint(-160, 160), y1 + random.randint(-40, 40)
-        cv2.line(arr, (x1, y1), (x2, y2), color=int(random.choice([30, 210])), thickness=random.choice([1, 2, 3]))
-    cv2.ellipse(arr, (int(w * 0.78), int(h * 0.22)), (70, 55), 0, 0, 360, color=140, thickness=3)
+        cv2.line(
+            arr,
+            (x1, y1),
+            (x2, y2),
+            color=int(random.choice([30, 210])),
+            thickness=random.choice([1, 2, 3]),
+        )
+    cv2.ellipse(
+        arr, (int(w * 0.78), int(h * 0.22)), (70, 55), 0, 0, 360, color=140, thickness=3
+    )
 
     # 4. Gaussian blur -- heavier than the original pipeline's.
     arr = cv2.GaussianBlur(arr, (5, 5), sigmaX=1.8)
@@ -91,7 +107,9 @@ def degrade(img: Image.Image) -> Image.Image:
     arr[mask > 1 - density / 2] = 255
 
     # 6. Contrast crush (washed-out photocopy-of-a-photocopy look).
-    arr = np.clip((arr.astype(np.float32) - 128) * 0.72 + 128 + 12, 0, 255).astype(np.uint8)
+    arr = np.clip((arr.astype(np.float32) - 128) * 0.72 + 128 + 12, 0, 255).astype(
+        np.uint8
+    )
 
     degraded = Image.fromarray(arr)
 
@@ -114,7 +132,7 @@ def main() -> None:
     (ROOT / "ground_truth.json").write_text(
         json.dumps({label: value for label, value in FIELDS}, indent=2)
     )
-    print(f"Wrote {ROOT/'form_noisy.png'} and ground_truth.json")
+    print(f"Wrote {ROOT / 'form_noisy.png'} and ground_truth.json")
 
 
 if __name__ == "__main__":

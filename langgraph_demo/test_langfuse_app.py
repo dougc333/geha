@@ -7,8 +7,12 @@ from langfuse_app import graph_config, settings_from_env, trace_id_for_thread
 
 class LangfuseApplicationTests(unittest.TestCase):
     def test_trace_id_is_stable_per_thread(self):
-        self.assertEqual(trace_id_for_thread("thread-1"), trace_id_for_thread("thread-1"))
-        self.assertNotEqual(trace_id_for_thread("thread-1"), trace_id_for_thread("thread-2"))
+        self.assertEqual(
+            trace_id_for_thread("thread-1"), trace_id_for_thread("thread-1")
+        )
+        self.assertNotEqual(
+            trace_id_for_thread("thread-1"), trace_id_for_thread("thread-2")
+        )
 
     def test_graph_config_preserves_checkpoint_thread(self):
         handler = object()

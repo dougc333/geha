@@ -63,9 +63,7 @@ python -m pip install -e '.[embeddings]'
 ```python
 from geha_reference.bootstrap import build_agent
 
-agent = build_agent(
-    semantic_model="sentence-transformers/all-MiniLM-L6-v2"
-)
+agent = build_agent(semantic_model="sentence-transformers/all-MiniLM-L6-v2")
 ```
 
 An approved healthcare-domain embedding model should be evaluated against a

@@ -9,16 +9,16 @@ cd /Users/dc/geha/langgraph_demo
 uv run python -m unittest discover -s reliability_tests -p 'test_*.py' -v
 ```
 
-Current result (2026-09-11): **8 tests: 5 pass, 3 fail** on LangGraph 1.2.11 and langgraph-checkpoint-sqlite 3.1.1. Failures deliberately assert desired guarantees and are not marked skipped or expected failures. The command exits nonzero until the gaps are fixed. Production code was not changed to make tests pass.
+Current result (2026-09-13): **8 tests: 7 pass, 1 failure** on LangGraph 1.2.11 and langgraph-checkpoint-sqlite 3.1.1. The remaining failure deliberately asserts the desired upstream router-recovery guarantee and is not marked skipped or expected. The command exits nonzero until that gap is fixed.
 
 | Test area | What is exercised | Observed result |
 | --- | --- | --- |
 | Crash after interrupt commit | Kill child with SQLite connection still open; inspect in fresh process and resume | Pass |
 | Crash before resume checkpoint put | Test-only hook signals before checkpoint persistence; kill worker; recover pending work in another process | Pass |
 | Crash after completion, before client acknowledgement | Kill worker after commit; reject repeat review without altering saved result | Pass |
-| Concurrent reviews | Two child processes both read pending state, then attempt opposing decisions | **Fail: both accepted** |
+| Concurrent reviews | Two child processes both read pending state, then attempt opposing decisions | Pass: one accepted |
 | Sequential duplicate | Repeated approval or rejection after completion creates no new checkpoints | Pass |
-| Persistent request IDs | Require `request_id`, replay the original response after reopen, and reject mismatched payload reuse | **Fail: API has no request_id parameter** |
+| Persistent request IDs | Require `request_id`, replay the original response after reopen, and reject mismatched payload reuse | Pass |
 | Upstream node-exception control | Retry a transient node failure with SQLite | Pass |
 | Upstream router-exception recovery | Retry a transient conditional-router failure and reach the downstream node | **Fail: downstream skipped** |
 
@@ -30,7 +30,7 @@ Current result (2026-09-11): **8 tests: 5 pass, 3 fail** on LangGraph 1.2.11 and
 - `test_idempotency.py`: sequential-duplicate protection and persistent idempotency contract.
 - `test_upstream_regressions.py`: independently adapted behavioral reproduction of [LangGraph issue #8834](https://github.com/langchain-ai/langgraph/issues/8834), with a passing node-failure control and versions in failure output.
 
-The idempotency contract currently stops at the missing-parameter assertion; its replay/conflicting-payload checks execute only after the API exists. It is not evidence that persistent deduplication works. Concurrent same-request-ID testing is also still dependent on implementing that API. The tested router failure is a minimal graph, not a claim that ordinary authorization currently throws this error.
+The tested router failure is a minimal graph, not a claim that ordinary authorization currently throws this error. SQLite resume coordination uses a sibling `*.resume.lock` file and is local-demo infrastructure; a distributed deployment must use a PostgreSQL transaction, advisory lock, or compare-and-set operation instead.
 
 ## Safety and boundaries
 

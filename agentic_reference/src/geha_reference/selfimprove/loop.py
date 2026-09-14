@@ -102,7 +102,9 @@ def run_loop(
 
         direction = {
             "train": _direction(prev["train"], train_metrics["category_error_rate"]),
-            "heldout": _direction(prev["heldout"], heldout_metrics["category_error_rate"]),
+            "heldout": _direction(
+                prev["heldout"], heldout_metrics["category_error_rate"]
+            ),
             "probe": _direction(prev["probe"], probe_metrics["category_error_rate"]),
         }
         prev["train"] = train_metrics["category_error_rate"]
@@ -133,9 +135,7 @@ def run_loop(
                 "direction": r.direction,
             }
         )
-    (output_dir / "loop_summary.json").write_text(
-        json.dumps(summary, indent=2)
-    )
+    (output_dir / "loop_summary.json").write_text(json.dumps(summary, indent=2))
     return results
 
 

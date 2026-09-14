@@ -43,4 +43,3 @@ class AgentResponse:
     review_reason: str | None = None
     audit_id: str | None = None
     structured_data: dict[str, Any] = field(default_factory=dict)
-

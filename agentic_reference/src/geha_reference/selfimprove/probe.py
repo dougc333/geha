@@ -70,15 +70,15 @@ class ProbeAgent:
         per_category: int = DEFAULT_PER_CATEGORY,
         iteration: int = 1,
     ) -> list[Example]:
-        examples = self.generate(
-            per_category=per_category, iteration=iteration
-        )
+        examples = self.generate(per_category=per_category, iteration=iteration)
         output_dir.mkdir(parents=True, exist_ok=True)
         path = output_dir / f"probes_iter{iteration}.jsonl"
         with open(path, "w") as handle:
             for ex in examples:
                 handle.write(
-                    json.dumps({"text": ex.text, "label": ex.label, "source": ex.source})
+                    json.dumps(
+                        {"text": ex.text, "label": ex.label, "source": ex.source}
+                    )
                     + "\n"
                 )
         return examples

@@ -10,6 +10,7 @@ Deterministic rule-based logic, no ML. Emits a member roster + event audit log.
 Usage:
     python simulate_membership.py
 """
+
 from __future__ import annotations
 
 import json
@@ -22,28 +23,81 @@ HERE = Path(__file__).parent
 
 # --- Plan config snapshot (deductible/coinsurance read by adjudication) ------
 PLAN_CONFIG = {
-    "GEHA Elevate (HDHP)":   {"code": "E-HDHP", "deductible": 1300.0, "coins": 0.15, "premium_monthly": 320.00},
-    "GEHA Elevate Plus (HDHP)": {"code": "EP-HDHP", "deductible": 1500.0, "coins": 0.15, "premium_monthly": 360.00},
-    "GEHA Standard":         {"code": "314", "deductible": 250.0, "coins": 0.20, "premium_monthly": 187.95},
-    "GEHA High":             {"code": "311", "deductible": 150.0, "coins": 0.10, "premium_monthly": 423.13},
-    "GEHA Medical Benefit (PSHB)": {"code": "PSHB", "deductible": 350.0, "coins": 0.20, "premium_monthly": 210.00},
+    "GEHA Elevate (HDHP)": {
+        "code": "E-HDHP",
+        "deductible": 1300.0,
+        "coins": 0.15,
+        "premium_monthly": 320.00,
+    },
+    "GEHA Elevate Plus (HDHP)": {
+        "code": "EP-HDHP",
+        "deductible": 1500.0,
+        "coins": 0.15,
+        "premium_monthly": 360.00,
+    },
+    "GEHA Standard": {
+        "code": "314",
+        "deductible": 250.0,
+        "coins": 0.20,
+        "premium_monthly": 187.95,
+    },
+    "GEHA High": {
+        "code": "311",
+        "deductible": 150.0,
+        "coins": 0.10,
+        "premium_monthly": 423.13,
+    },
+    "GEHA Medical Benefit (PSHB)": {
+        "code": "PSHB",
+        "deductible": 350.0,
+        "coins": 0.20,
+        "premium_monthly": 210.00,
+    },
 }
 COVERAGE_LEVELS = ["Self Only", "Self Plus One", "Self and Family"]
 
 # Reuse fabricated member names/plans from the claims dataset where possible.
 MEMBERS = [
-    {"name": "Sanchez, Michael", "plan": "GEHA Elevate (HDHP)", "coverage": "Self Only"},
-    {"name": "Brown, Joseph", "plan": "GEHA Medical Benefit (PSHB)", "coverage": "Self Plus One"},
-    {"name": "Lee, Anthony", "plan": "GEHA Elevate Plus (HDHP)", "coverage": "Self Only"},
+    {
+        "name": "Sanchez, Michael",
+        "plan": "GEHA Elevate (HDHP)",
+        "coverage": "Self Only",
+    },
+    {
+        "name": "Brown, Joseph",
+        "plan": "GEHA Medical Benefit (PSHB)",
+        "coverage": "Self Plus One",
+    },
+    {
+        "name": "Lee, Anthony",
+        "plan": "GEHA Elevate Plus (HDHP)",
+        "coverage": "Self Only",
+    },
     {"name": "Moore, Donna", "plan": "GEHA Standard", "coverage": "Self and Family"},
     {"name": "Torres, Elena", "plan": "GEHA Standard", "coverage": "Self Only"},
     {"name": "Hernandez, Rachel", "plan": "GEHA Standard", "coverage": "Self Plus One"},
-    {"name": "Ramirez, Susan", "plan": "GEHA Elevate Plus (HDHP)", "coverage": "Self Only"},
+    {
+        "name": "Ramirez, Susan",
+        "plan": "GEHA Elevate Plus (HDHP)",
+        "coverage": "Self Only",
+    },
     {"name": "Clark, David", "plan": "GEHA Standard", "coverage": "Self and Family"},
-    {"name": "Nguyen, Thomas", "plan": "GEHA Elevate Plus (HDHP)", "coverage": "Self Only"},
-    {"name": "Walker, William", "plan": "GEHA Elevate (HDHP)", "coverage": "Self Plus One"},
+    {
+        "name": "Nguyen, Thomas",
+        "plan": "GEHA Elevate Plus (HDHP)",
+        "coverage": "Self Only",
+    },
+    {
+        "name": "Walker, William",
+        "plan": "GEHA Elevate (HDHP)",
+        "coverage": "Self Plus One",
+    },
     {"name": "Jones, James", "plan": "GEHA Standard", "coverage": "Self Only"},
-    {"name": "Wilson, Charles", "plan": "GEHA Elevate Plus (HDHP)", "coverage": "Self and Family"},
+    {
+        "name": "Wilson, Charles",
+        "plan": "GEHA Elevate Plus (HDHP)",
+        "coverage": "Self and Family",
+    },
     {"name": "Hill, Robert", "plan": "GEHA Standard", "coverage": "Self Only"},
     {"name": "Moore, Donna", "plan": "GEHA Standard", "coverage": "Self and Family"},
 ]
@@ -113,8 +167,12 @@ def run():
 
         # Stage 1 — Enrollment
         _validate_eligibility(m["name"], m["plan"], run, mid)
-        run.log(mid, "ENROLL", "OK",
-                f"SF-2809 accepted; plan {PLAN_CONFIG[m['plan']]['code']}, {m['coverage']}")
+        run.log(
+            mid,
+            "ENROLL",
+            "OK",
+            f"SF-2809 accepted; plan {PLAN_CONFIG[m['plan']]['code']}, {m['coverage']}",
+        )
 
         # Stage 2 — Eligibility verification
         run.log(mid, "ELIGIBILITY_VERIFY", "OK", "Active on plan at date of service")
@@ -124,7 +182,12 @@ def run():
             new_cov = random.choice([c for c in COVERAGE_LEVELS if c != m["coverage"]])
             rec.coverage = new_cov
             rec.dependents = dependents_for(new_cov)
-            run.log(mid, "MAINTENANCE", "OK", f"Coverage level changed to {new_cov} (qualifying life event)")
+            run.log(
+                mid,
+                "MAINTENANCE",
+                "OK",
+                f"Coverage level changed to {new_cov} (qualifying life event)",
+            )
 
         # Stage 4 — ID card issuance
         run.log(mid, "ID_CARD", "OK", f"Health plan ID card issued (card active)")
@@ -135,23 +198,27 @@ def run():
     # Persist
     roster = []
     for rec in run.members.values():
-        roster.append({
-            "member_id": rec.member_id,
-            "name": rec.name,
-            "plan": rec.plan,
-            "plan_code": rec.plan_config["code"],
-            "coverage": rec.coverage,
-            "dependents": rec.dependents,
-            "status": rec.status,
-            "effective_date": rec.effective_date,
-            "card_status": rec.card_status,
-            "deductible": rec.plan_config["deductible"],
-            "coinsurance": rec.plan_config["coins"],
-        })
+        roster.append(
+            {
+                "member_id": rec.member_id,
+                "name": rec.name,
+                "plan": rec.plan,
+                "plan_code": rec.plan_config["code"],
+                "coverage": rec.coverage,
+                "dependents": rec.dependents,
+                "status": rec.status,
+                "effective_date": rec.effective_date,
+                "card_status": rec.card_status,
+                "deductible": rec.plan_config["deductible"],
+                "coinsurance": rec.plan_config["coins"],
+            }
+        )
     (HERE / "members.json").write_text(json.dumps(roster, indent=2))
 
-    events = [{"member_id": e.member_id, "stage": e.stage, "status": e.status, "note": e.note}
-              for e in run.events]
+    events = [
+        {"member_id": e.member_id, "stage": e.stage, "status": e.status, "note": e.note}
+        for e in run.events
+    ]
     (HERE / "membership_events.json").write_text(json.dumps(events, indent=2))
 
     # Summarize this run, not the illustrative response template.
@@ -172,14 +239,15 @@ def run():
         json.dumps(response, indent=2) + "\n", encoding="utf-8"
     )
 
-
     # Summary
     print("=" * 70)
     print("MEMBERSHIP & BENEFITS ADMIN — SIMULATION (Flow 1)")
     print("=" * 70)
     for rec in run.members.values():
-        print(f"[{rec.member_id}] {rec.name:22} {rec.plan:24} {rec.coverage:16} "
-              f"{rec.dependents} dep  {rec.status}")
+        print(
+            f"[{rec.member_id}] {rec.name:22} {rec.plan:24} {rec.coverage:16} "
+            f"{rec.dependents} dep  {rec.status}"
+        )
     print(f"\nTotal members: {len(run.members)} | events logged: {len(run.events)}")
     print(f"Wrote members.json + membership_events.json to {HERE.name}/")
 

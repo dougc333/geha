@@ -34,4 +34,3 @@ class ClaimRepository:
         if not (member_access or staff_access):
             raise AccessDeniedError("Claim was not found or is not authorized")
         return claim
-

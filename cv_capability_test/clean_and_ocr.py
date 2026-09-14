@@ -2,6 +2,7 @@
 normalize uneven lighting, deskew, binarize -- then OCR both the raw noisy
 image and the cleaned one, and score both against ground truth.
 """
+
 import json
 import subprocess
 from pathlib import Path
@@ -28,7 +29,9 @@ def clean(path: Path) -> np.ndarray:
     # 1. Kill salt-and-pepper first -- median blur is the right tool for it,
     #    unlike a gaussian blur which just smears it around.
     denoised = cv2.medianBlur(img, 3)
-    denoised = cv2.fastNlMeansDenoising(denoised, h=12, templateWindowSize=7, searchWindowSize=21)
+    denoised = cv2.fastNlMeansDenoising(
+        denoised, h=12, templateWindowSize=7, searchWindowSize=21
+    )
 
     # 2. CLAHE fixes the uneven scan-lighting gradient locally instead of
     #    one global contrast stretch, which would blow out the dark side.
@@ -61,7 +64,8 @@ def clean(path: Path) -> np.ndarray:
 def ocr(image_path: Path) -> str:
     result = subprocess.run(
         ["tesseract", str(image_path), "stdout", "--psm", "6"],
-        capture_output=True, text=True,
+        capture_output=True,
+        text=True,
     )
     return result.stdout
 

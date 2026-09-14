@@ -14,6 +14,7 @@ Steps:
 
 Usage:  python load_mysql.py
 """
+
 from __future__ import annotations
 
 import json
@@ -25,30 +26,33 @@ import build_vector_db as vdb
 
 HERE = Path(__file__).parent
 DB = {
-    "host": "127.0.0.1", "port": 3306,
-    "user": "root", "password": "geha_root", "database": "geha_claims",
+    "host": "127.0.0.1",
+    "port": 3306,
+    "user": "root",
+    "password": "geha_root",
+    "database": "geha_claims",
 }
 
 # Form fields -> (sql column, sql type). Schema MATCHES the CMS-1500 form fields.
 SCHEMA = {
-    "claim_id":    "VARCHAR(20) PRIMARY KEY",
+    "claim_id": "VARCHAR(20) PRIMARY KEY",
     "source_image": "VARCHAR(100)",
     "patient_name": "VARCHAR(120)",
-    "patient_dob":  "VARCHAR(10)",
-    "patient_sex":  "CHAR(1)",
-    "member_id":    "VARCHAR(20)",
-    "diagnosis":    "VARCHAR(12)",
-    "cpt":          "VARCHAR(10)",
-    "pos":          "VARCHAR(2)",
-    "dos":          "VARCHAR(10)",
-    "charge":       "DECIMAL(10,2)",
-    "auth_number":  "VARCHAR(20)",
-    "provider":     "VARCHAR(120)",
-    "npi":          "VARCHAR(10)",
-    "facility":     "VARCHAR(160)",
-    "ocr_text":     "TEXT",
+    "patient_dob": "VARCHAR(10)",
+    "patient_sex": "CHAR(1)",
+    "member_id": "VARCHAR(20)",
+    "diagnosis": "VARCHAR(12)",
+    "cpt": "VARCHAR(10)",
+    "pos": "VARCHAR(2)",
+    "dos": "VARCHAR(10)",
+    "charge": "DECIMAL(10,2)",
+    "auth_number": "VARCHAR(20)",
+    "provider": "VARCHAR(120)",
+    "npi": "VARCHAR(10)",
+    "facility": "VARCHAR(160)",
+    "ocr_text": "TEXT",
     # metadata columns for missing-data detection
-    "missing_data":   "VARCHAR(3) DEFAULT 'No'",
+    "missing_data": "VARCHAR(3) DEFAULT 'No'",
     "missing_fields": "TEXT NULL",
 }
 
@@ -86,11 +90,19 @@ def main():
         # Build row dict: resolved values; missing -> None
         row: dict = {"claim_id": cid, "source_image": f"{cid}.png"}
         mapping = {
-            "patient_name": "patient_name", "patient_dob": "patient_dob",
-            "patient_sex": "patient_sex", "member_id": "member_id",
-            "diagnosis": "diagnosis", "cpt": "cpt", "pos": "pos", "dos": "dos",
-            "charge": "charge", "auth_number": "auth_number",
-            "provider": "provider", "npi": "npi", "facility": "facility",
+            "patient_name": "patient_name",
+            "patient_dob": "patient_dob",
+            "patient_sex": "patient_sex",
+            "member_id": "member_id",
+            "diagnosis": "diagnosis",
+            "cpt": "cpt",
+            "pos": "pos",
+            "dos": "dos",
+            "charge": "charge",
+            "auth_number": "auth_number",
+            "provider": "provider",
+            "npi": "npi",
+            "facility": "facility",
         }
         for canon, col in mapping.items():
             val = resolved.get(canon)
@@ -101,9 +113,9 @@ def main():
         cols = list(SCHEMA.keys())
         vals = [row.get(col) for col in cols]
         ph = ", ".join(["%s"] * len(cols))
-        sql = f"INSERT INTO claims_resolved ({', '.join('`'+c+'`' for c in cols)}) VALUES ({ph})"
+        sql = f"INSERT INTO claims_resolved ({', '.join('`' + c + '`' for c in cols)}) VALUES ({ph})"
         cur.execute(sql, vals)
-        print(f"  inserted {cid}: resolved={ {k:v for k,v in resolved.items()} }")
+        print(f"  inserted {cid}: resolved={ {k: v for k, v in resolved.items()} }")
 
     conn.close()
     print("\nLoaded resolved claims into MySQL (geha_claims.claims_resolved)")

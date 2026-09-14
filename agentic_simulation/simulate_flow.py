@@ -15,6 +15,7 @@ and a summary report.
 Usage:
     python simulate_flow.py
 """
+
 from __future__ import annotations
 
 import json
@@ -26,14 +27,50 @@ CLAIMS_PATH = Path(__file__).parent / "claims" / "claims.json"
 
 # Valid ICD-10 / CPT lookup tables (subset used by the sample claims)
 VALID_ICD10 = {
-    "J06.9", "M54.5", "E11.9", "I10", "K21.9", "F41.1", "S93.401A", "Z23",
-    "N39.0", "J45.909", "H25.13", "K08.101", "G47.33", "M17.0", "Z01.810",
-    "L20.9", "K35.80", "Z00.00", "D25.9", "J18.9",
+    "J06.9",
+    "M54.5",
+    "E11.9",
+    "I10",
+    "K21.9",
+    "F41.1",
+    "S93.401A",
+    "Z23",
+    "N39.0",
+    "J45.909",
+    "H25.13",
+    "K08.101",
+    "G47.33",
+    "M17.0",
+    "Z01.810",
+    "L20.9",
+    "K35.80",
+    "Z00.00",
+    "D25.9",
+    "J18.9",
 }
 VALID_CPT = {
-    "99213", "99214", "99215", "99204", "99283", "90834", "97140", "83036",
-    "91034", "73630", "90670", "90471", "81003", "94010", "92004", "D0150",
-    "95782", "73564", "74178", "76830", "71045", "99396",
+    "99213",
+    "99214",
+    "99215",
+    "99204",
+    "99283",
+    "90834",
+    "97140",
+    "83036",
+    "91034",
+    "73630",
+    "90670",
+    "90471",
+    "81003",
+    "94010",
+    "92004",
+    "D0150",
+    "95782",
+    "73564",
+    "74178",
+    "76830",
+    "71045",
+    "99396",
 }
 # Services that tend to require prior authorization / manual review
 AUTH_REQUIRED = {"95782", "74178", "91034", "76830"}
@@ -123,10 +160,15 @@ def _stage_3_coding(claim: dict, trail: AuditTrail) -> bool:
     if claim.get("service_lines") and all(
         sl.get("cpt") in NOT_COVERED for sl in claim["service_lines"]
     ):
-        trail.log("CODING/VALIDATION", "DENY",
-                  "No service line is a covered benefit under this medical plan")
+        trail.log(
+            "CODING/VALIDATION",
+            "DENY",
+            "No service line is a covered benefit under this medical plan",
+        )
         return False
-    trail.log("CODING/VALIDATION", "PASS", "ICD-10 and CPT codes valid; pointers linked")
+    trail.log(
+        "CODING/VALIDATION", "PASS", "ICD-10 and CPT codes valid; pointers linked"
+    )
     return True
 
 
@@ -134,12 +176,22 @@ def _stage_4_manual_review(claim: dict, trail: AuditTrail) -> bool:
     """Route to manual review if prior auth required / high cost."""
     for sl in claim.get("service_lines", []):
         if sl.get("cpt") in AUTH_REQUIRED:
-            trail.log("MANUAL REVIEW", "PENDING", f"{sl['cpt']} requires prior auth — manual review")
+            trail.log(
+                "MANUAL REVIEW",
+                "PENDING",
+                f"{sl['cpt']} requires prior auth — manual review",
+            )
             return False
     if claim.get("total_charge", 0) > 1500:
-        trail.log("MANUAL REVIEW", "PENDING", f"Charge ${claim['total_charge']:.2f} exceeds auto-adjudication threshold")
+        trail.log(
+            "MANUAL REVIEW",
+            "PENDING",
+            f"Charge ${claim['total_charge']:.2f} exceeds auto-adjudication threshold",
+        )
         return False
-    trail.log("MANUAL REVIEW", "PASS", "No prior-auth requirement; within auto threshold")
+    trail.log(
+        "MANUAL REVIEW", "PASS", "No prior-auth requirement; within auto threshold"
+    )
     return True
 
 
@@ -186,17 +238,23 @@ def _stage_5_adjudicate(claim: dict, trail: AuditTrail) -> str:
         note = "All service lines approved; benefits applied"
     else:
         # Some (not all) lines are non-covered -> partial payment.
-        covered_charge = sum(sl["charge"] for sl in lines
-                             if sl.get("cpt") not in NOT_COVERED)
+        covered_charge = sum(
+            sl["charge"] for sl in lines if sl.get("cpt") not in NOT_COVERED
+        )
         status = "PARTIAL"
-        note = (f"Covered ${covered_charge:.2f} of ${total:.2f} billed; "
-                f"non-covered line(s) not payable")
+        note = (
+            f"Covered ${covered_charge:.2f} of ${total:.2f} billed; "
+            f"non-covered line(s) not payable"
+        )
 
     trail.allowed_amount = allowed
     trail.member_responsibility = member_owed
     trail.log("ADJUDICATION", status, note)
-    trail.log("PAYMENT", "PASS" if status in ("PAID", "PARTIAL") else "DENY",
-              f"GEHA pays ${geha_pays:.2f}; ERA to provider + EOB to member")
+    trail.log(
+        "PAYMENT",
+        "PASS" if status in ("PAID", "PARTIAL") else "DENY",
+        f"GEHA pays ${geha_pays:.2f}; ERA to provider + EOB to member",
+    )
     return status
 
 
@@ -228,9 +286,14 @@ def summarize(trails: list[AuditTrail], claims: list[dict]) -> dict[str, Any]:
     for t in trails:
         counts[t.final_status] = counts.get(t.final_status, 0) + 1
     total_billed = sum(c["total_charge"] for c in claims)
-    total_allowed = sum(t.allowed_amount for t in trails if t.final_status in ("PAID", "PARTIAL"))
-    return {"status_counts": counts, "total_billed": round(total_billed, 2),
-            "total_allowed": round(total_allowed, 2)}
+    total_allowed = sum(
+        t.allowed_amount for t in trails if t.final_status in ("PAID", "PARTIAL")
+    )
+    return {
+        "status_counts": counts,
+        "total_billed": round(total_billed, 2),
+        "total_allowed": round(total_allowed, 2),
+    }
 
 
 def main():
@@ -243,12 +306,18 @@ def main():
     print("GEHA CLAIMS ADJUDICATION SIMULATION")
     print("=" * 72)
     for c, t in zip(claims, trails):
-        print(f"\n[{c['claim_id']}] {c['patient_name']}  |  "
-              f"{c['diagnosis']['code']} {c['diagnosis']['description'][:35]}")
-        print(f"    Plan: {c['plan']} | Billed: ${c['total_charge']:.2f} | "
-              f"Final: {t.final_status}")
+        print(
+            f"\n[{c['claim_id']}] {c['patient_name']}  |  "
+            f"{c['diagnosis']['code']} {c['diagnosis']['description'][:35]}"
+        )
+        print(
+            f"    Plan: {c['plan']} | Billed: ${c['total_charge']:.2f} | "
+            f"Final: {t.final_status}"
+        )
         for s in t.stages:
-            flag = {"PASS": "OK ", "DENY": "X  ", "PENDING": "…  "}.get(s.status, s.status)
+            flag = {"PASS": "OK ", "DENY": "X  ", "PENDING": "…  "}.get(
+                s.status, s.status
+            )
             print(f"    {flag} {s.name:22} {s.note}")
 
     s = summarize(trails, claims)
@@ -263,16 +332,21 @@ def main():
     # Persist the audit trails
     out = []
     for c, t in zip(claims, trails):
-        out.append({
-            "claim_id": c["claim_id"],
-            "final_status": t.final_status,
-            "allowed_amount": t.allowed_amount,
-            "member_responsibility": t.member_responsibility,
-            "stages": [{"name": s.name, "status": s.status, "note": s.note}
-                       for s in t.stages],
-        })
+        out.append(
+            {
+                "claim_id": c["claim_id"],
+                "final_status": t.final_status,
+                "allowed_amount": t.allowed_amount,
+                "member_responsibility": t.member_responsibility,
+                "stages": [
+                    {"name": s.name, "status": s.status, "note": s.note}
+                    for s in t.stages
+                ],
+            }
+        )
     (Path(__file__).parent / "claims" / "audit_trails.json").write_text(
-        json.dumps(out, indent=2))
+        json.dumps(out, indent=2)
+    )
     print(f"\nWrote claims/audit_trails.json ({len(out)} trails)")
 
 

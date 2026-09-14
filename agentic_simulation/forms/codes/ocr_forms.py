@@ -62,23 +62,50 @@ REGIONS = [
     Region("7_insured_address", "7 insured address", (1220, 200, 1614, 234)),
     Region("9_other_insured_name", "9 other insured name", (40, 260, 300, 294)),
     Region("10_condition_related", "10 condition related to", (300, 260, 820, 294), 6),
-    Region("11_policy_group", "11 policy/group number", (820, 260, 1280, 294), kind="id"),
+    Region(
+        "11_policy_group", "11 policy/group number", (820, 260, 1280, 294), kind="id"
+    ),
     Region("12_patient_signature", "12 patient signature", (1280, 260, 1614, 294)),
-    Region("14_current_illness_date", "14 current illness date", (40, 320, 320, 354), kind="date"),
+    Region(
+        "14_current_illness_date",
+        "14 current illness date",
+        (40, 320, 320, 354),
+        kind="date",
+    ),
     Region("15_other_date", "15 other date", (320, 320, 600, 354), kind="date"),
     Region("16_unable_to_work_dates", "16 dates unable to work", (600, 320, 880, 354)),
     Region("17_referring_provider", "17 referring provider", (880, 320, 1180, 354)),
-    Region("21_diagnosis", "21 diagnosis ICD-10", (1180, 320, 1394, 354), kind="diagnosis"),
-    Region("23_prior_authorization", "23 prior authorization number", (1394, 320, 1614, 354)),
-    Region("25_federal_tax_id", "25 federal tax ID", (40, 684, 260, 710), kind="tax_id"),
-    Region("26_patient_account", "26 patient account number", (260, 680, 480, 710), kind="claim_id"),
+    Region(
+        "21_diagnosis", "21 diagnosis ICD-10", (1180, 320, 1394, 354), kind="diagnosis"
+    ),
+    Region(
+        "23_prior_authorization",
+        "23 prior authorization number",
+        (1394, 320, 1614, 354),
+    ),
+    Region(
+        "25_federal_tax_id", "25 federal tax ID", (40, 684, 260, 710), kind="tax_id"
+    ),
+    Region(
+        "26_patient_account",
+        "26 patient account number",
+        (260, 680, 480, 710),
+        kind="claim_id",
+    ),
     Region("27_accept_assignment", "27 accept assignment", (480, 680, 680, 710)),
     Region("28_total_charge", "28 total charge", (680, 680, 860, 710), kind="money"),
     Region("29_amount_paid", "29 amount paid", (860, 680, 1040, 710), kind="money"),
     Region("30_reserved", "30 reserved", (1040, 680, 1220, 710)),
-    Region("31_physician_signature", "31 physician signature", (1220, 684, 1614, 710), kind="signature"),
+    Region(
+        "31_physician_signature",
+        "31 physician signature",
+        (1220, 684, 1614, 710),
+        kind="signature",
+    ),
     Region("32_service_facility", "32 service facility", (40, 736, 860, 781), 6),
-    Region("33_billing_provider", "33 billing provider and NPI", (860, 736, 1614, 781), 6),
+    Region(
+        "33_billing_provider", "33 billing provider and NPI", (860, 736, 1614, 781), 6
+    ),
 ]
 
 SERVICE_COLUMNS = [
@@ -191,8 +218,7 @@ def ocr_region(
         grouped.setdefault(line_key, []).append((left, text))
         confidences.append(confidence)
     lines = [
-        " ".join(text for _, text in sorted(grouped[key]))
-        for key in sorted(grouped)
+        " ".join(text for _, text in sorted(grouped[key])) for key in sorted(grouped)
     ]
     value = "\n".join(line for line in lines if line).strip()
     mean_confidence = (

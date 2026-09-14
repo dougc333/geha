@@ -5,6 +5,7 @@ bendamustine policy in d1.py, looped over the whole folder. Skips PDFs that
 already have a .docling.md next to them, so a killed/timed-out run can just
 be re-invoked to pick up where it left off.
 """
+
 from pathlib import Path
 import time
 import traceback
@@ -56,10 +57,14 @@ def main() -> None:
         try:
             n_chunks = convert_one(converter, chunker, pdf_path)
             elapsed = time.perf_counter() - started
-            print(f"[{index}/{len(todo)}] {pdf_path.name}: {n_chunks} chunks in {elapsed:.1f}s")
+            print(
+                f"[{index}/{len(todo)}] {pdf_path.name}: {n_chunks} chunks in {elapsed:.1f}s"
+            )
         except Exception as exc:  # keep going; report at the end
             elapsed = time.perf_counter() - started
-            print(f"[{index}/{len(todo)}] {pdf_path.name}: FAILED after {elapsed:.1f}s - {exc}")
+            print(
+                f"[{index}/{len(todo)}] {pdf_path.name}: FAILED after {elapsed:.1f}s - {exc}"
+            )
             traceback.print_exc()
             failures.append(pdf_path.name)
 

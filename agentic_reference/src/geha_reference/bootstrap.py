@@ -31,4 +31,3 @@ def build_agent(
     claims = ClaimRepository(geha_root / "claims" / "claims.json")
     tools = ReferenceTools(claims, index, AuditLogger(audit_path))
     return ReferenceAgent(tools)
-

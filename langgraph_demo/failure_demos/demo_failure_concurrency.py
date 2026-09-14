@@ -45,9 +45,7 @@ def run_concurrency_demo() -> dict:
         db = base / "checkpoints.sqlite"
         write_synthetic_inputs(base)
         with workflow(db, base) as graph:
-            graph.invoke(
-                {"claim_id": "CLM-FAILURE-DEMO", "actor": "member"}, CONFIG
-            )
+            graph.invoke({"claim_id": "CLM-FAILURE-DEMO", "actor": "member"}, CONFIG)
 
         workers = []
         pipes = []

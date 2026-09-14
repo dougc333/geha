@@ -14,9 +14,7 @@ from failure_demos.common import CONFIG, receive, stop_process, write_synthetic_
 def _start_worker(pipe, base: str, db: str) -> None:
     try:
         with workflow(Path(db), Path(base)) as graph:
-            graph.invoke(
-                {"claim_id": "CLM-FAILURE-DEMO", "actor": "member"}, CONFIG
-            )
+            graph.invoke({"claim_id": "CLM-FAILURE-DEMO", "actor": "member"}, CONFIG)
             snapshot = graph.get_state(CONFIG)
             pipe.send(("committed", {"next": snapshot.next, "state": snapshot.values}))
             pipe.recv()
