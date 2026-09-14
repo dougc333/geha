@@ -27,6 +27,38 @@ Complete parent table
    +--> ask: OpenAI answer with source and table citation
 ```
 
+## Semantic search implementation
+
+Semantic search is implemented locally with Sentence Transformers and PostgreSQL `pgvector`; it does not require an LLM. During ingestion, every normalized table row is converted into text containing its source filename, inferred table title, column names, and nonempty cell values. `BAAI/bge-small-en-v1.5` encodes that text as a normalized 384-dimensional vector, which is stored in `policy_table_vectors` and linked to the complete table in `policy_tables`.
+
+At query time, the same model encodes and normalizes the user's question. PostgreSQL uses the `pgvector` cosine-distance operator to rank child rows:
+
+```sql
+1 - (embedding <=> query_embedding) AS similarity
+```
+
+An HNSW index using `vector_cosine_ops` accelerates this search. The nearest `--candidate-rows` are grouped by `table_id`; each parent table receives the maximum similarity of any matching child row. The highest-ranked `--top-tables` parent records are then returned with their complete CSV, structured rows, source filename, table number, and title.
+
+```text
+Table row + headers + source metadata
+               |
+               v
+      normalized row embedding
+               |
+Question --> normalized query embedding
+               |
+               v
+       cosine similarity search
+               |
+               v
+ best child rows grouped by table_id
+               |
+               v
+        complete parent tables
+```
+
+The current retriever is semantic-only: it does not yet combine vector similarity with PostgreSQL full-text search, BM25, exact procedure-code matching, or a separate reranker. The optional `ask` command runs only after retrieval and does not affect which tables are selected.
+
 ## Requirements
 
 - macOS or Linux
@@ -155,7 +187,19 @@ The unit tests cover table separation, uneven-row normalization, and inferred ta
 
 [`table_preference_evals.json`](table_preference_evals.json) contains one preferred query and one non-preferred query for every qualifying policy. Each case records the expected source, table title, preference class, and all expected drug-name phrases.
 
-[`tables.md`](tables.md) lists the qualifying PDFs and row counts. The current suite contains 34 cases across 17 policy documents. Its initial local retrieval baseline is 31/34 at top 1, 33/34 at top 3, and 34/34 at top 5.
+[`tables.md`](tables.md) lists the qualifying PDFs and row counts. The current suite contains 34 cases across 17 policy documents. Detailed per-query rankings and product comparisons are in [`table_preference_eval_results.md`](table_preference_eval_results.md).
+
+| Measurement | Correct | Accuracy | Error rate |
+| --- | ---: | ---: | ---: |
+| Expected source at top 1 | 31/34 | 91.2% | 8.8% |
+| Expected source within top 3 | 33/34 | 97.1% | 2.9% |
+| Expected source within top 5 | 34/34 | 100.0% | 0.0% |
+| Exact table at top 1 | 28/34 | 82.4% | 17.6% |
+| Exact table within top 3 | 32/34 | 94.1% | 5.9% |
+| Exact table within top 5 | 33/34 | 97.1% | 2.9% |
+| Exact product-list match from the top table | 28/34 | 82.4% | 17.6% |
+
+Error rate is `1 - accuracy`. Product answers are extracted deterministically from the top retrieved table, without an LLM, so the table reports retrieval and table-interpretation errors rather than generation or hallucination errors.
 
 Run the complete local comparison:
 

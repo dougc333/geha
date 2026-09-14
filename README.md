@@ -11,6 +11,134 @@ See [Table-Aware Coverage Policy RAG](chunking_benchmarks/README.md) for setup, 
 
 ![MCP Server from workflow simulations](mcp_server_architecture.png)
 
+## Runnable demos
+
+This repository contains several independent demos rather than one installed
+top-level executable. Run the Python applications through `uv`, Streamlit, or
+Python, and run the TypeScript application through npm.
+
+### LangGraph Streamlit application
+
+This is the quickest interactive demonstration of the synthetic claim-review
+workflow:
+
+```bash
+cd /Users/dc/geha/langgraph_demo
+uv sync
+uv run streamlit run app.py --server.address 127.0.0.1 --server.port 8503
+```
+
+Open `http://localhost:8503`. See
+[langgraph_demo/README.md](langgraph_demo/README.md) for the workflow and review
+instructions.
+
+### LangGraph command-line demonstration
+
+```bash
+cd /Users/dc/geha/langgraph_demo
+uv run demo.py example
+uv run demo.py start
+```
+
+The `start` command prints a thread ID. Use the commands documented in
+[langgraph_demo/README.md](langgraph_demo/README.md) to inspect or review that
+thread.
+
+### Standalone RAG application
+
+```bash
+cd /Users/dc/geha/RAG_demo
+uv sync
+uv run streamlit run app.py
+```
+
+See [RAG_demo/README.md](RAG_demo/README.md) for ingestion, local model, and
+evaluation options.
+
+### MCP end-to-end demonstration
+
+```bash
+cd /Users/dc/geha/MCP_server
+uv sync
+uv run --locked demo_client.py
+uv run --locked demo_client.py --run-all
+```
+
+The first client command discovers the MCP tools without running simulations.
+The second creates an isolated run and executes all flows. To start only the
+stdio MCP server for an MCP host:
+
+```bash
+uv run --locked server.py
+```
+
+See [MCP_server/README.md](MCP_server/README.md) for the tools, safeguards, and
+generated run artifacts.
+
+### Table-aware RAG command line
+
+Run these commands from the repository root:
+
+```bash
+cd /Users/dc/geha
+uv sync
+docker compose -f chunking_benchmarks/docker-compose.pgvector.yml up -d
+uv run python chunking_benchmarks/table_rag.py init-db
+```
+
+The same program provides the `ingest`, `search`, and optional `ask` commands.
+Their required arguments and database configuration are documented in
+[chunking_benchmarks/README.md](chunking_benchmarks/README.md).
+
+### Synthetic claims pipeline
+
+```bash
+cd /Users/dc/geha/agentic_simulation
+python generate_claims.py
+python simulate_flow.py
+python render_forms.py
+```
+
+This rebuilds the synthetic claims, runs the simulated adjudication pipeline,
+and renders the sample forms. See
+[agentic_simulation/README.md](agentic_simulation/README.md).
+
+### Agentic reference implementation
+
+Run the dependency-free demonstration:
+
+```bash
+cd /Users/dc/geha/agentic_reference
+PYTHONPATH=src python -m geha_reference.demo
+```
+
+Run the optional API:
+
+```bash
+cd /Users/dc/geha/agentic_reference
+python -m pip install -e '.[api]'
+uvicorn 'geha_reference.api:create_app' --factory --port 8000
+```
+
+See [agentic_reference/README.md](agentic_reference/README.md) for semantic
+embedding support and the production adapter boundaries.
+
+### LangGraph TypeScript web application
+
+```bash
+cd /Users/dc/geha/langgraph_web
+npm ci
+npm run dev
+```
+
+For a production build:
+
+```bash
+npm run build
+npm start
+```
+
+See [langgraph_web/README.md](langgraph_web/README.md) for configuration details.
+
 # HTML Version
 ![table_aware_parsing.apng]
-
