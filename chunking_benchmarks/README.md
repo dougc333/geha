@@ -8,6 +8,8 @@ This project retrieves information from tables extracted from synthetic coverage
 - The `search` command works locally without an LLM.
 - The `ask` command sends the retrieved table to OpenAI and generates a cited answer.
 
+![Table-aware parent-child RAG architecture](table_rag_architecture.svg)
+
 ```text
 Question
    |
@@ -155,6 +157,18 @@ The unit tests cover table separation, uneven-row normalization, and inferred ta
 
 [`tables.md`](tables.md) lists the qualifying PDFs and row counts. The current suite contains 34 cases across 17 policy documents. Its initial local retrieval baseline is 31/34 at top 1, 33/34 at top 3, and 34/34 at top 5.
 
+Run the complete local comparison:
+
+```bash
+cd /Users/dc/geha/chunking_benchmarks
+uv run python evaluate_table_preferences.py
+```
+
+The evaluator records the top-five tables and similarity scores for every query, compares the expected and retrieved table, and extracts the requested products from the top result without calling an LLM. It writes:
+
+- `table_preference_eval_results.md`: readable comparison of all 34 cases
+- `table_preference_eval_results.json`: complete machine-readable results
+
 ## Stop the database
 
 ```bash
@@ -170,5 +184,10 @@ This keeps the database volume. To delete the stored database as well, explicitl
 - `docker-compose.pgvector.yml`: PostgreSQL 17 with pgvector
 - `.env.example`: safe configuration template
 - `table_preference_evals.json`: preferred and non-preferred retrieval/answer cases
+- `evaluate_table_preferences.py`: repeatable local evaluation runner
+- `table_preference_eval_results.md`: complete readable evaluation report
+- `table_preference_eval_results.json`: machine-readable evaluation report
 - `tables.md`: qualifying policy inventory and retrieval baseline
+- `table_rag_architecture.svg`: editable architecture figure
+- `table_rag_architecture.png`: rendered architecture figure
 - `*_table_openai.csv`: extracted table inputs in the coverage-policy directory

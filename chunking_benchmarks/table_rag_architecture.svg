@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1120" viewBox="0 0 1800 1120">
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#14201d" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#556763"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#c47b12"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#237c60"/>
+    </marker>
+    <style>
+      .section { font: 600 18px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 2px; fill: #596965; }
+      .title { font: 700 24px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #18211f; }
+      .body { font: 17px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #4b5c58; }
+      .small { font: 15px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #53645f; }
+      .label { font: 700 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #52635f; }
+      .orange { fill: #af6507; }
+      .green { fill: #237c60; }
+      .mono { font: 15px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #40514d; }
+      .box { fill: #ffffff; stroke: #354743; stroke-width: 2; rx: 8; filter: url(#shadow); }
+      .orangeBox { fill: #fffaf1; stroke: #c47b12; stroke-width: 2.5; rx: 8; filter: url(#shadow); }
+      .greenBox { fill: #f4fcf8; stroke: #237c60; stroke-width: 2.5; rx: 8; filter: url(#shadow); }
+      .line { fill: none; stroke: #556763; stroke-width: 2.5; marker-end: url(#arrow); }
+      .orangeLine { fill: none; stroke: #c47b12; stroke-width: 2.5; marker-end: url(#arrowOrange); }
+      .greenLine { fill: none; stroke: #237c60; stroke-width: 3; marker-end: url(#arrowGreen); }
+    </style>
+  </defs>
+
+  <rect width="1800" height="1120" fill="#f7f9f8"/>
+  <text x="70" y="55" class="section">INGESTION</text>
+  <text x="70" y="410" class="section">INDEX &amp; STORE — POSTGRESQL + PGVECTOR</text>
+  <text x="70" y="760" class="section">RETRIEVAL &amp; ANSWERING</text>
+
+  <!-- Ingestion -->
+  <rect x="70" y="95" width="250" height="220" class="box"/>
+  <text x="95" y="133" class="title">Extracted policy</text>
+  <text x="95" y="162" class="body">table CSV</text>
+  <rect x="100" y="190" width="190" height="82" fill="#fff4d7" stroke="#c47b12" stroke-width="2"/>
+  <line x1="100" y1="217" x2="290" y2="217" stroke="#c47b12"/>
+  <line x1="165" y1="190" x2="165" y2="272" stroke="#c47b12"/>
+  <line x1="229" y1="190" x2="229" y2="272" stroke="#c47b12"/>
+  <text x="100" y="298" class="small">*_table_openai.csv</text>
+
+  <rect x="400" y="120" width="270" height="165" class="box"/>
+  <text x="425" y="160" class="title">Table parser</text>
+  <text x="425" y="193" class="body">split on two blank rows</text>
+  <text x="425" y="222" class="body">normalize headers + rows</text>
+  <text x="425" y="251" class="body">infer table type</text>
+
+  <rect x="770" y="75" width="370" height="250" class="orangeBox"/>
+  <text x="795" y="116" class="title">Parent: complete table</text>
+  <text x="795" y="145" class="body">kept intact for final context</text>
+  <rect x="800" y="172" width="310" height="105" fill="#fff0ce" stroke="#c47b12" stroke-width="1.5"/>
+  <line x1="800" y1="207" x2="1110" y2="207" stroke="#c47b12"/>
+  <line x1="900" y1="172" x2="900" y2="277" stroke="#c47b12"/>
+  <line x1="1005" y1="172" x2="1005" y2="277" stroke="#c47b12"/>
+  <text x="812" y="195" class="small">Preference</text>
+  <text x="914" y="195" class="small">Drug</text>
+  <text x="1018" y="195" class="small">Code</text>
+  <text x="812" y="233" class="small">Preferred</text>
+  <text x="914" y="233" class="small">Treanda</text>
+  <text x="1018" y="233" class="small">J9033</text>
+  <text x="812" y="263" class="small">Non-pref.</text>
+  <text x="914" y="263" class="small">Bendeka</text>
+  <text x="1018" y="263" class="small">J9034</text>
+  <text x="795" y="304" class="mono">policy_tables.id = 42</text>
+
+  <rect x="1250" y="75" width="475" height="250" class="box"/>
+  <text x="1275" y="116" class="title">Children: searchable rows</text>
+  <text x="1275" y="145" class="body">one search record and vector per row</text>
+  <rect x="1280" y="170" width="415" height="55" fill="#eaf1ef" stroke="#7a8b87"/>
+  <text x="1294" y="193" class="small">Preference: Preferred; Drug: Treanda;</text>
+  <text x="1294" y="214" class="small">Source: bendamustine.pdf; Table: preference</text>
+  <rect x="1280" y="238" width="415" height="55" fill="#eaf1ef" stroke="#7a8b87"/>
+  <text x="1294" y="261" class="small">Preference: Non-preferred; Drug: Bendeka;</text>
+  <text x="1294" y="282" class="small">Source: bendamustine.pdf; Table: preference</text>
+  <text x="1280" y="313" class="mono">each child stores table_id = 42</text>
+
+  <path d="M320 205 L400 205" class="line"/>
+  <path d="M670 175 L770 175" class="orangeLine"/>
+  <text x="690" y="157" class="label orange">store parent</text>
+  <path d="M670 235 C820 350,1100 350,1250 235" class="line"/>
+  <text x="868" y="359" class="label">expand into row children</text>
+
+  <!-- Store -->
+  <rect x="290" y="455" width="610" height="220" class="box"/>
+  <text x="318" y="498" class="title">policy_table_vectors</text>
+  <text x="318" y="530" class="body">HNSW cosine index over 384-D vectors</text>
+  <rect x="320" y="558" width="550" height="80" fill="#edf3f1" stroke="#7a8b87"/>
+  <text x="340" y="586" class="mono">table_id · row_number · search_text</text>
+  <text x="340" y="615" class="mono">embedding vector(384)</text>
+  <text x="318" y="658" class="small">BAAI/bge-small-en-v1.5</text>
+
+  <rect x="1030" y="455" width="610" height="220" class="orangeBox"/>
+  <text x="1058" y="498" class="title">policy_tables</text>
+  <text x="1058" y="530" class="body">complete parent tables, keyed by id</text>
+  <rect x="1060" y="558" width="550" height="80" fill="#fff0ce" stroke="#c47b12"/>
+  <text x="1080" y="586" class="mono">id · source · table_number · title</text>
+  <text x="1080" y="615" class="mono">full_csv · rows_json</text>
+  <text x="1058" y="658" class="small">full table is never split for LLM context</text>
+
+  <path d="M1450 325 L1450 410 L820 410 L820 455" class="line"/>
+  <text x="1180" y="400" class="label">embed child rows</text>
+  <path d="M955 325 L955 375 L1300 375 L1300 455" class="orangeLine"/>
+  <text x="1042" y="362" class="label orange">store complete table</text>
+  <path d="M900 565 L1030 565" stroke="#c47b12" stroke-width="2.5" stroke-dasharray="7 7" marker-end="url(#arrowOrange)"/>
+  <text x="917" y="547" class="label orange">join by table_id</text>
+
+  <!-- Retrieval -->
+  <rect x="70" y="805" width="280" height="135" class="box"/>
+  <text x="95" y="848" class="title">User query</text>
+  <text x="95" y="883" class="body">“Which bendamustine</text>
+  <text x="95" y="909" class="body">products are preferred?”</text>
+
+  <rect x="425" y="805" width="250" height="135" class="box"/>
+  <text x="450" y="848" class="title">Embed query</text>
+  <text x="450" y="883" class="body">same local model</text>
+  <text x="450" y="911" class="body">384-D vector</text>
+
+  <rect x="760" y="775" width="340" height="195" class="box"/>
+  <text x="785" y="818" class="title">Vector search</text>
+  <text x="785" y="852" class="body">find matching child rows</text>
+  <text x="785" y="882" class="body">group hits by table_id</text>
+  <text x="785" y="912" class="body">rank parent tables</text>
+  <text x="785" y="946" class="mono">top_tables · candidate_rows</text>
+
+  <rect x="1180" y="775" width="310" height="195" class="orangeBox"/>
+  <text x="1205" y="818" class="title">Fetch parent</text>
+  <text x="1205" y="852" class="body">retrieve full_csv using</text>
+  <text x="1205" y="880" class="body">the winning table_id</text>
+  <text x="1205" y="918" class="label orange">whole table, intact</text>
+
+  <rect x="1550" y="750" width="200" height="105" class="greenBox"/>
+  <text x="1575" y="793" class="title">Local search</text>
+  <text x="1575" y="826" class="body">print table</text>
+
+  <rect x="1550" y="900" width="200" height="105" class="greenBox"/>
+  <text x="1575" y="943" class="title">OpenAI</text>
+  <text x="1575" y="976" class="body">cited answer</text>
+
+  <path d="M350 872 L425 872" class="line"/>
+  <path d="M675 872 L760 872" class="line"/>
+  <path d="M900 775 L900 675" class="line"/>
+  <text x="914" y="730" class="label">cosine search</text>
+  <path d="M1100 872 L1180 872" class="orangeLine"/>
+  <text x="1108" y="850" class="label orange">table_id</text>
+  <path d="M1335 775 L1335 675" class="orangeLine"/>
+  <text x="1350" y="730" class="label orange">fetch full_csv</text>
+  <path d="M1490 825 L1550 805" class="greenLine"/>
+  <path d="M1490 915 L1550 950" class="greenLine"/>
+
+  <text x="70" y="1065" class="small">Current implementation: row-level child embeddings + intact parent-table retrieval. Prose chunks and table-summary vectors are not yet indexed.</text>
+</svg>
