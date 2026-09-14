@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1120" viewBox="0 0 1800 1120">
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#14201d" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#52645f"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#2878a8"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#c47b12"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#7453a6"/>
+    </marker>
+    <style>
+      .section { font: 600 18px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 2px; fill: #596965; }
+      .headline { font: 750 32px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #17211f; }
+      .title { font: 700 22px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #18211f; }
+      .body { font: 16px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #4b5c58; }
+      .small { font: 14px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #53645f; }
+      .mono { font: 14px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #40514d; }
+      .label { font: 700 15px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #52635f; }
+      .box { fill: #ffffff; stroke: #354743; stroke-width: 2; rx: 9; filter: url(#shadow); }
+      .blueBox { fill: #f1f8fc; stroke: #2878a8; stroke-width: 2.5; rx: 9; filter: url(#shadow); }
+      .orangeBox { fill: #fff9ee; stroke: #c47b12; stroke-width: 2.5; rx: 9; filter: url(#shadow); }
+      .purpleBox { fill: #f8f4fc; stroke: #7453a6; stroke-width: 2.5; rx: 9; filter: url(#shadow); }
+      .redBox { fill: #fff5f4; stroke: #b75449; stroke-width: 2.5; rx: 9; filter: url(#shadow); }
+      .greenBox { fill: #f1fbf6; stroke: #237c60; stroke-width: 2.5; rx: 9; filter: url(#shadow); }
+      .line { fill: none; stroke: #52645f; stroke-width: 2.5; marker-end: url(#arrow); }
+      .blueLine { fill: none; stroke: #2878a8; stroke-width: 2.7; marker-end: url(#arrowBlue); }
+      .orangeLine { fill: none; stroke: #c47b12; stroke-width: 2.7; marker-end: url(#arrowOrange); }
+      .purpleLine { fill: none; stroke: #7453a6; stroke-width: 2.3; marker-end: url(#arrowPurple); stroke-dasharray: 7 6; }
+      .dataLine { fill: none; stroke: #788884; stroke-width: 2; marker-end: url(#arrow); stroke-dasharray: 6 6; }
+    </style>
+  </defs>
+
+  <rect width="1800" height="1120" fill="#f7f9f8"/>
+  <text x="70" y="58" class="headline">Current GEHA LangGraph review demo</text>
+  <text x="70" y="94" class="body">Fixed Python workflow · synthetic data · durable human review · optional local Langfuse tracing</text>
+
+  <text x="70" y="145" class="section">ENTRY POINTS</text>
+
+  <rect x="70" y="175" width="315" height="125" class="box"/>
+  <text x="95" y="215" class="title">Command-line demo</text>
+  <text x="95" y="248" class="mono">demo.py</text>
+  <text x="95" y="276" class="body">start · show · review · history</text>
+
+  <rect x="450" y="175" width="315" height="125" class="box"/>
+  <text x="475" y="215" class="title">Streamlit UI</text>
+  <text x="475" y="248" class="mono">app.py</text>
+  <text x="475" y="276" class="body">new and saved review cases</text>
+
+  <rect x="830" y="175" width="355" height="125" class="purpleBox"/>
+  <text x="855" y="215" class="title">Traced command line</text>
+  <text x="855" y="248" class="mono">langfuse_app.py</text>
+  <text x="855" y="276" class="body">start and review with callbacks</text>
+
+  <rect x="1290" y="175" width="440" height="125" class="blueBox"/>
+  <text x="1315" y="215" class="title">LangGraph StateGraph</text>
+  <text x="1315" y="248" class="mono">make_graph() · workflow()</text>
+  <text x="1315" y="276" class="body">thread_id selects durable graph state</text>
+
+  <path d="M228 300 L228 326 L1345 326 L1345 300" class="line"/>
+  <path d="M608 300 L608 341 L1420 341 L1420 300" class="line"/>
+  <path d="M1008 300 L1008 356 L1495 356 L1495 300" class="purpleLine"/>
+  <text x="1080" y="322" class="small">invoke graph</text>
+
+  <text x="70" y="365" class="section">FIXED WORKFLOW</text>
+
+  <circle cx="95" cy="470" r="31" fill="#354743"/>
+  <text x="72" y="476" font-family="sans-serif" font-size="16" font-weight="700" fill="#fff">START</text>
+
+  <polygon points="235,410 315,470 235,530 155,470" fill="#f1f8fc" stroke="#2878a8" stroke-width="2.5" filter="url(#shadow)"/>
+  <text x="192" y="465" class="title">authorize</text>
+  <text x="188" y="491" class="small">actor + claim</text>
+
+  <rect x="390" y="405" width="215" height="130" class="blueBox"/>
+  <text x="415" y="447" class="title">lookup</text>
+  <text x="415" y="480" class="body">recorded status</text>
+  <text x="415" y="507" class="body">and reasons</text>
+
+  <rect x="675" y="405" width="215" height="130" class="blueBox"/>
+  <text x="700" y="447" class="title">retrieve</text>
+  <text x="700" y="480" class="body">topic-filter public</text>
+  <text x="700" y="507" class="body">reference snippets</text>
+
+  <rect x="960" y="405" width="215" height="130" class="blueBox"/>
+  <text x="985" y="447" class="title">draft</text>
+  <text x="985" y="480" class="body">deterministic</text>
+  <text x="985" y="507" class="body">Python template</text>
+
+  <rect x="1245" y="390" width="235" height="160" class="orangeBox"/>
+  <text x="1270" y="432" class="title">review</text>
+  <text x="1270" y="465" class="mono">interrupt()</text>
+  <text x="1270" y="497" class="body">pause for reviewer</text>
+  <text x="1270" y="524" class="body">approve · edit · reject</text>
+
+  <rect x="1525" y="405" width="175" height="130" class="greenBox"/>
+  <text x="1545" y="447" class="title">release</text>
+  <text x="1545" y="480" class="body">approved text or</text>
+  <text x="1545" y="507" class="body">rejection notice</text>
+
+  <path d="M126 470 L155 470" class="blueLine"/>
+  <path d="M315 470 L390 470" class="blueLine"/>
+  <text x="330" y="450" class="label" fill="#2878a8">authorized</text>
+  <path d="M605 470 L675 470" class="blueLine"/>
+  <path d="M890 470 L960 470" class="blueLine"/>
+  <path d="M1175 470 L1245 470" class="orangeLine"/>
+  <path d="M1480 470 L1525 470" class="orangeLine"/>
+  <circle cx="1755" cy="470" r="28" fill="#237c60"/>
+  <text x="1738" y="476" font-family="sans-serif" font-size="16" font-weight="700" fill="#fff">END</text>
+  <path d="M1700 470 L1727 470" class="line"/>
+
+  <rect x="120" y="610" width="300" height="105" class="redBox"/>
+  <text x="145" y="650" class="title">Access denied</text>
+  <text x="145" y="682" class="body">no lookup, retrieval, or draft</text>
+  <path d="M235 530 L235 610" fill="none" stroke="#b75449" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="250" y="575" class="label" fill="#b75449">unauthorized</text>
+  <circle cx="465" cy="663" r="27" fill="#b75449"/>
+  <text x="450" y="669" font-family="sans-serif" font-size="14" font-weight="700" fill="#fff">END</text>
+  <path d="M420 663 L438 663" fill="none" stroke="#b75449" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <text x="70" y="790" class="section">DATA, PERSISTENCE &amp; OBSERVABILITY</text>
+
+  <rect x="70" y="825" width="420" height="190" class="box"/>
+  <text x="95" y="867" class="title">Read-only synthetic inputs</text>
+  <text x="95" y="905" class="mono">claims.json</text>
+  <text x="95" y="934" class="mono">audit_trails.json</text>
+  <text x="95" y="963" class="mono">public_reference.json</text>
+  <text x="95" y="994" class="small">No source records are modified</text>
+
+  <rect x="610" y="825" width="420" height="190" class="orangeBox"/>
+  <text x="635" y="867" class="title">SQLite checkpointer</text>
+  <text x="635" y="905" class="mono">data/checkpoints.sqlite</text>
+  <text x="635" y="938" class="body">state + history keyed by thread_id</text>
+  <text x="635" y="969" class="body">survives terminal/server restart</text>
+  <text x="635" y="998" class="small">resume must use the same thread ID</text>
+
+  <rect x="1150" y="825" width="580" height="190" class="purpleBox"/>
+  <text x="1175" y="867" class="title">Local Langfuse (optional path)</text>
+  <text x="1175" y="905" class="mono">http://localhost:3000</text>
+  <text x="1175" y="938" class="body">graph/node inputs, outputs, durations, errors</text>
+  <text x="1175" y="969" class="body">stable trace ID connects start and review resume</text>
+  <text x="1175" y="998" class="small">used by langfuse_app.py; demo.py works without it</text>
+
+  <path d="M280 825 C280 715,495 675,495 535" class="dataLine"/>
+  <path d="M380 825 C380 705,783 690,783 535" class="dataLine"/>
+  <path d="M1362 550 L1362 745 L820 745 L820 825" class="orangeLine"/>
+  <text x="920" y="731" class="label" fill="#c47b12">checkpoint before interrupt · resume later</text>
+  <path d="M1008 300 C1008 650,1440 650,1440 825" class="purpleLine"/>
+  <text x="1285" y="682" class="label" fill="#7453a6">callbacks + spans</text>
+
+  <rect x="70" y="1050" width="1660" height="42" fill="#edf2f0" stroke="#b7c2bf" rx="6"/>
+  <text x="92" y="1077" class="body">Current behavior: fixed workflow, template drafting, curated JSON retrieval, human approval. No ReAct loop, autonomous tool choice, vector search, or LLM call.</text>
+</svg>

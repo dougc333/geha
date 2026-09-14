@@ -1,5 +1,11 @@
 # GEHA LangGraph review demo
 
+## Architecture
+
+![Current GEHA LangGraph review demo architecture](langgraph_demo_architecture.svg)
+
+The application uses a fixed LangGraph workflow with an authorization branch, read-only synthetic data, a SQLite checkpoint before human review, and optional local Langfuse tracing. It does not use a ReAct loop or autonomous tool selection.
+
 ## Local Langfuse tracing
 
 `langfuse_app.py` runs the existing synthetic claim-review graph with Langfuse tracing. Each run records the graph and node inputs, outputs, durations, errors, tags, and metadata in the self-hosted Langfuse instance at `http://localhost:3000`. A stable trace ID derived from the LangGraph thread ID connects the initial run and its later human-review resume.

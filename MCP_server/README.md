@@ -1,5 +1,11 @@
 # GEHA simulations and MCP server
 
+## Architecture
+
+![GEHA simulation MCP server architecture](mcp_server_architecture.svg)
+
+The MCP host communicates with `server.py` over stdio. FastMCP validates one of seven typed tool calls, and `FlowService` plans dependencies, admits at most two runs, snapshots allowlisted inputs into a private run directory, executes the required simulators, validates their outputs, and returns structured results. Read tools require the explicit `run_id` returned by an execution call.
+
 This directory contains nine Python health-insurance workflow simulators and
 one local Model Context Protocol (MCP) server that exposes them as tools.
 

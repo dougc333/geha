@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1160" viewBox="0 0 1800 1160">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#18302d" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#526662"/>
+    </marker>
+    <marker id="blueArrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#1879ad"/>
+    </marker>
+    <marker id="orangeArrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#c57908"/>
+    </marker>
+    <style>
+      .headline { font: 700 34px system-ui, -apple-system, sans-serif; fill: #16211f; }
+      .section { font: 700 17px ui-monospace, SFMono-Regular, monospace; letter-spacing: 2px; fill: #62736f; }
+      .title { font: 700 23px system-ui, -apple-system, sans-serif; fill: #172320; }
+      .body { font: 16px system-ui, -apple-system, sans-serif; fill: #4c5e5a; }
+      .small { font: 14px system-ui, -apple-system, sans-serif; fill: #60716d; }
+      .mono { font: 15px ui-monospace, SFMono-Regular, monospace; fill: #425451; }
+      .tool { font: 600 15px ui-monospace, SFMono-Regular, monospace; fill: #174c68; }
+      .box { fill: #fff; stroke: #39534e; stroke-width: 2; rx: 16; filter: url(#shadow); }
+      .blueBox { fill: #eef7fc; stroke: #1879ad; stroke-width: 2.5; rx: 16; filter: url(#shadow); }
+      .orangeBox { fill: #fff8ec; stroke: #c57908; stroke-width: 2.5; rx: 16; filter: url(#shadow); }
+      .greenBox { fill: #eff9f4; stroke: #258061; stroke-width: 2.5; rx: 16; filter: url(#shadow); }
+      .grayBox { fill: #f2f5f4; stroke: #82918e; stroke-width: 1.8; rx: 13; }
+      .line { fill: none; stroke: #526662; stroke-width: 2.7; marker-end: url(#arrow); }
+      .blueLine { fill: none; stroke: #1879ad; stroke-width: 3; marker-end: url(#blueArrow); }
+      .orangeLine { fill: none; stroke: #c57908; stroke-width: 3; marker-end: url(#orangeArrow); }
+      .dash { fill: none; stroke: #71847f; stroke-width: 2.2; stroke-dasharray: 8 7; marker-end: url(#arrow); }
+      .divider { stroke: #ced8d5; stroke-width: 1.5; }
+    </style>
+  </defs>
+
+  <rect width="1800" height="1160" fill="#f7f9f8"/>
+  <text x="70" y="58" class="headline">GEHA simulation MCP server</text>
+  <text x="70" y="94" class="body">Local stdio MCP · seven typed tools · nine fabricated workflows · isolated, reproducible run outputs</text>
+
+  <text x="70" y="145" class="section">MCP CLIENT AND PROTOCOL</text>
+  <rect x="70" y="175" width="360" height="130" class="box"/>
+  <text x="96" y="216" class="title">MCP host or agent</text>
+  <text x="96" y="249" class="body">discovers tools and supplies typed arguments</text>
+  <text x="96" y="278" class="mono">demo_client.py is the local example</text>
+
+  <path d="M430 240 L535 240" class="line"/>
+  <text x="481" y="219" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#60716d">stdio MCP</text>
+
+  <rect x="535" y="175" width="420" height="130" class="blueBox"/>
+  <text x="563" y="214" class="title">FastMCP server · server.py</text>
+  <text x="563" y="247" class="body">initializes session · publishes schemas</text>
+  <text x="563" y="276" class="body">validates flow IDs, pagination, and tool inputs</text>
+
+  <path d="M955 240 L1080 240" class="blueLine"/>
+  <rect x="1080" y="160" width="650" height="160" class="greenBox"/>
+  <text x="1108" y="199" class="title">Structured MCP response</text>
+  <text x="1108" y="230" class="body">run_id · execution order · warnings · actual summaries</text>
+  <line x1="1108" y1="249" x2="1700" y2="249" class="divider"/>
+  <text x="1108" y="278" class="small">Read calls return a manifest, summary, or paginated records/events.</text>
+  <text x="1108" y="300" class="small">Failed, cancelled, or unfinished work is never reported as successful.</text>
+
+  <text x="70" y="370" class="section">SEVEN MCP TOOLS</text>
+  <rect x="70" y="400" width="775" height="150" class="blueBox"/>
+  <text x="98" y="438" class="title">Execution tools</text>
+  <text x="98" y="474" class="tool">run_flow(flow_id)</text>
+  <text x="365" y="474" class="body">one requested flow plus prerequisites</text>
+  <text x="98" y="510" class="tool">run_all_flows()</text>
+  <text x="365" y="510" class="body">all nine in dependency order</text>
+
+  <rect x="885" y="400" width="845" height="150" class="greenBox"/>
+  <text x="913" y="438" class="title">Discovery and read tools</text>
+  <text x="913" y="474" class="tool">list_flows()</text>
+  <text x="1120" y="474" class="tool">get_run_status(run_id)</text>
+  <text x="913" y="510" class="tool">get_flow_results()</text>
+  <text x="1195" y="510" class="tool">get_flow_records()</text>
+  <text x="1490" y="510" class="tool">get_flow_events()</text>
+
+  <path d="M458 550 L458 600" class="blueLine"/>
+  <path d="M1308 550 L1308 1030 L1510 1030" class="dash"/>
+  <text x="1330" y="1012" class="small">read by explicit run_id</text>
+
+  <text x="70" y="610" class="section">FLOW SERVICE EXECUTION</text>
+  <rect x="70" y="640" width="1660" height="260" class="orangeBox"/>
+  <text x="98" y="681" class="title">FlowService · flow_service.py</text>
+
+  <rect x="100" y="715" width="245" height="135" class="grayBox"/>
+  <text x="122" y="750" class="title">1 · Plan</text>
+  <text x="122" y="782" class="body">validate allowlisted ID</text>
+  <text x="122" y="808" class="body">expand dependencies</text>
+  <text x="122" y="834" font-family="ui-monospace, monospace" font-size="13" fill="#425451">04→01 · 08→01,03 · 09→01…08</text>
+
+  <path d="M345 782 L390 782" class="orangeLine"/>
+  <rect x="390" y="715" width="245" height="135" class="grayBox"/>
+  <text x="412" y="750" class="title">2 · Admit</text>
+  <text x="412" y="782" class="body">two concurrent runs</text>
+  <text x="412" y="808" class="body">100-directory quota</text>
+  <text x="412" y="834" class="mono">asyncio.Semaphore(2)</text>
+
+  <path d="M635 782 L680 782" class="orangeLine"/>
+  <rect x="680" y="715" width="265" height="135" class="grayBox"/>
+  <text x="702" y="750" class="title">3 · Isolate</text>
+  <text x="702" y="782" class="body">private run_&lt;uuid&gt; folder</text>
+  <text x="702" y="808" class="body">atomic running manifest</text>
+  <text x="702" y="834" class="body">snapshot scripts and claims</text>
+
+  <path d="M945 782 L990 782" class="orangeLine"/>
+  <rect x="990" y="715" width="275" height="135" class="grayBox"/>
+  <text x="1012" y="750" class="title">4 · Execute</text>
+  <text x="1012" y="782" class="body">flows run sequentially</text>
+  <text x="1012" y="808" class="body">separate Python subprocesses</text>
+  <text x="1012" y="834" class="body">30 s timeout and process kill</text>
+
+  <path d="M1265 782 L1310 782" class="orangeLine"/>
+  <rect x="1310" y="715" width="390" height="135" class="grayBox"/>
+  <text x="1332" y="750" class="title">5 · Validate and record</text>
+  <text x="1332" y="782" class="body">check exit code, response schema, and JSON lists</text>
+  <text x="1332" y="808" class="body">add hashes, timestamps, warnings, completed flows</text>
+  <text x="1332" y="834" class="body">mark run completed, failed, or cancelled</text>
+
+  <path d="M1505 850 L1505 940" class="orangeLine"/>
+  <text x="70" y="955" class="section">TRUSTED SIMULATORS AND DURABLE OUTPUT</text>
+
+  <rect x="70" y="985" width="1030" height="120" class="box"/>
+  <text x="96" y="1022" class="title">Nine allowlisted simulation scripts</text>
+  <text x="96" y="1054" class="body">01 Membership · 02 Providers · 03 Utilization · 04 Billing · 05 Appeals</text>
+  <text x="96" y="1082" class="body">06 Payment integrity · 07 Care management · 08 Member services · 09 Compliance</text>
+
+  <path d="M1100 1045 L1160 1045" class="line"/>
+  <rect x="1160" y="955" width="570" height="150" class="greenBox"/>
+  <text x="1186" y="994" class="title">runs/run_&lt;uuid&gt;/</text>
+  <text x="1186" y="1025" class="mono">run.json · script SHA-256 · claims snapshot</text>
+  <text x="1186" y="1053" class="mono">mcp_response.json · records.json · events.json</text>
+  <text x="1186" y="1081" class="mono">stdout.log · stderr.log</text>
+
+  <rect x="70" y="1120" width="1660" height="28" rx="8" fill="#edf3f1" stroke="#c8d5d1"/>
+  <text x="92" y="1140" class="small">Boundary: local trusted-code demo; no HTTP listener, arbitrary command tool, inherited API keys, LLM call, or real insurance action.</text>
+</svg>
