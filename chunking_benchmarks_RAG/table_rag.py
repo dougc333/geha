@@ -7,6 +7,7 @@ import csv
 import io
 import json
 import os
+import re
 from pathlib import Path
 from typing import Any
 
@@ -18,10 +19,10 @@ from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
 from sentence_transformers import SentenceTransformer
 
-
 DEFAULT_DATABASE_URL = "postgresql://geha:geha-local@127.0.0.1:5433/geha_rag"
 DEFAULT_EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5"
 CSV_SUFFIX = "_table_openai.csv"
+DOCLING_SUFFIX = ".docling.md"
 
 
 SCHEMA_SQL = """
@@ -34,8 +35,15 @@ CREATE TABLE IF NOT EXISTS policy_tables (
     title text NOT NULL,
     full_csv text NOT NULL,
     rows_json jsonb NOT NULL,
+    conditions_json jsonb NOT NULL DEFAULT '[]'::jsonb,
+    indication_context text NOT NULL DEFAULT '',
     UNIQUE (source, table_number)
 );
+
+ALTER TABLE policy_tables
+    ADD COLUMN IF NOT EXISTS conditions_json jsonb NOT NULL DEFAULT '[]'::jsonb;
+ALTER TABLE policy_tables
+    ADD COLUMN IF NOT EXISTS indication_context text NOT NULL DEFAULT '';
 
 CREATE TABLE IF NOT EXISTS policy_table_vectors (
     id bigserial PRIMARY KEY,
@@ -80,6 +88,8 @@ def split_csv_tables(path: Path) -> list[list[list[str]]]:
 
 
 def normalized_table(rows: list[list[str]]) -> tuple[list[str], list[list[str]]]:
+    if len(rows) > 1 and rows[0] == [str(index) for index in range(len(rows[0]))]:
+        rows = rows[1:]
     width = max((len(row) for row in rows), default=0)
     if width == 0:
         return [], []
@@ -113,13 +123,79 @@ def table_as_records(headers: list[str], rows: list[list[str]]) -> list[dict[str
     return [dict(zip(headers, row, strict=True)) for row in rows]
 
 
-def row_search_text(source: str, title: str, headers: list[str], row: list[str]) -> str:
+INDICATION_HEADING_RE = re.compile(
+    r"^#{1,6}\s+Indication\s+Specific(?:\s+Approval)?\s+Criteria\s*:?(.*)$",
+    re.IGNORECASE,
+)
+MARKDOWN_HEADING_RE = re.compile(r"^#{1,6}\s+(.+?)\s*$")
+UNIVERSAL_HEADING_RE = re.compile(
+    r"^#{1,6}\s+Universal\s+Approval\s+Criteria\s*:?\s*$", re.IGNORECASE
+)
+NON_CONDITION_HEADINGS = {
+    "g.e.h.a",
+    "geha",
+    "limitations",
+    "for internal use only",
+}
+
+
+def extract_indication_metadata(markdown_path: Path) -> tuple[list[str], str]:
+    """Extract explicit indication headings and their source section from Docling Markdown."""
+    if not markdown_path.exists():
+        return [], ""
+
+    section_lines: list[str] = []
+    candidates: list[str] = []
+    in_section = False
+    for line in markdown_path.read_text(encoding="utf-8").splitlines():
+        indication_match = INDICATION_HEADING_RE.match(line.strip())
+        if indication_match:
+            in_section = True
+            section_lines.append(line)
+            inline_condition = indication_match.group(1).strip(" :-")
+            if inline_condition:
+                candidates.append(inline_condition)
+            continue
+        if not in_section:
+            continue
+        if UNIVERSAL_HEADING_RE.match(line.strip()):
+            break
+
+        section_lines.append(line)
+        heading_match = MARKDOWN_HEADING_RE.match(line.strip())
+        if not heading_match:
+            continue
+        heading = heading_match.group(1).strip().rstrip(":")
+        if heading.casefold() in NON_CONDITION_HEADINGS:
+            continue
+        if candidates and candidates[-1].endswith("-") and heading[:1].islower():
+            candidates[-1] = f"{candidates[-1]} {heading}"
+        else:
+            candidates.append(heading)
+
+    conditions = list(
+        dict.fromkeys(
+            candidate.strip() for candidate in candidates if candidate.strip()
+        )
+    )
+    context = "\n".join(section_lines).strip()
+    return conditions, context
+
+
+def row_search_text(
+    source: str,
+    title: str,
+    headers: list[str],
+    row: list[str],
+    conditions: list[str] | None = None,
+) -> str:
     values = "; ".join(
         f"{header}: {value}"
         for header, value in zip(headers, row, strict=True)
         if value.strip()
     )
-    return f"Source: {source}\nTable: {title}\n{values}"
+    condition_text = ", ".join(conditions or []) or "Not explicitly enumerated"
+    return f"Source: {source}\nTable: {title}\nConditions: {condition_text}\n{values}"
 
 
 def connect(database_url: str):
@@ -158,8 +234,15 @@ def ingest(
     with connect(database_url) as connection:
         for csv_path in csv_paths:
             source = f"{csv_path.name.removesuffix(CSV_SUFFIX)}.pdf"
+            markdown_path = csv_path.with_name(
+                f"{csv_path.name.removesuffix(CSV_SUFFIX)}{DOCLING_SUFFIX}"
+            )
+            conditions, indication_context = extract_indication_metadata(markdown_path)
             tables = split_csv_tables(csv_path)
-            print(f"{source}: {len(tables)} table(s)", flush=True)
+            print(
+                f"{source}: {len(tables)} table(s), {len(conditions)} condition(s)",
+                flush=True,
+            )
 
             for table_number, raw_table in enumerate(tables, 1):
                 headers, rows = normalized_table(raw_table)
@@ -172,26 +255,44 @@ def ingest(
                 table_id = connection.execute(
                     """
                     INSERT INTO policy_tables
-                        (source, table_number, title, full_csv, rows_json)
-                    VALUES (%s, %s, %s, %s, %s)
+                        (source, table_number, title, full_csv, rows_json,
+                         conditions_json, indication_context)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s)
                     ON CONFLICT (source, table_number) DO UPDATE SET
                         title = EXCLUDED.title,
                         full_csv = EXCLUDED.full_csv,
-                        rows_json = EXCLUDED.rows_json
+                        rows_json = EXCLUDED.rows_json,
+                        conditions_json = EXCLUDED.conditions_json,
+                        indication_context = EXCLUDED.indication_context
                     RETURNING id
                     """,
-                    (source, table_number, title, full_csv, Jsonb(records)),
+                    (
+                        source,
+                        table_number,
+                        title,
+                        full_csv,
+                        Jsonb(records),
+                        Jsonb(conditions),
+                        indication_context,
+                    ),
                 ).fetchone()["id"]
                 connection.execute(
                     "DELETE FROM policy_table_vectors WHERE table_id = %s", (table_id,)
                 )
 
                 search_texts = [
-                    row_search_text(source, title, headers, row) for row in rows
+                    row_search_text(source, title, headers, row, conditions)
+                    for row in rows
                 ]
                 if not search_texts:
                     search_texts = [
-                        f"Source: {source}\nTable: {title}\nColumns: {', '.join(headers)}"
+                        row_search_text(
+                            source,
+                            title,
+                            ["Columns"],
+                            [", ".join(headers)],
+                            conditions,
+                        )
                     ]
                 embeddings = embedding_model.encode(
                     search_texts,
@@ -250,6 +351,8 @@ def retrieve_tables(
             t.title,
             t.full_csv,
             t.rows_json,
+            t.conditions_json,
+            t.indication_context,
             r.similarity
         FROM ranked_tables AS r
         JOIN policy_tables AS t ON t.id = r.table_id
@@ -270,20 +373,30 @@ def print_retrieval(results: list[dict[str, Any]]) -> None:
             f"\n=== TABLE {rank}: {result['source']} / {result['title']} "
             f"(similarity={result['similarity']:.4f}) ===\n"
         )
+        conditions = result.get("conditions_json") or []
+        print(
+            f"Conditions: {', '.join(conditions) if conditions else 'Not explicitly enumerated'}"
+        )
         print(result["full_csv"], end="")
 
 
 def generate_answer(query: str, results: list[dict[str, Any]], model: str) -> str:
     context = "\n\n".join(
-        f"SOURCE: {result['source']}\nTABLE: {result['title']}\n{result['full_csv']}"
+        f"SOURCE: {result['source']}\n"
+        f"TABLE: {result['title']}\n"
+        f"CONDITIONS: {json.dumps(result.get('conditions_json') or [])}\n"
+        f"{result['full_csv']}"
         for result in results
     )
     client = OpenAI()
     response = client.responses.create(
         model=model,
         instructions=(
-            "Answer only from the supplied policy tables. Cite the source filename and table title. "
-            "If the tables do not contain the answer, say that the supplied tables are insufficient."
+            "Answer only from the supplied policy tables and structured condition metadata. "
+            "Cite the source filename and table title. Return conditions exactly as supplied; "
+            "never infer a condition from outside knowledge. An empty CONDITIONS array means the "
+            "policy did not explicitly enumerate conditions in an Indication Specific Criteria "
+            "section. If the supplied context does not contain the answer, say it is insufficient."
         ),
         input=f"Question:\n{query}\n\nRetrieved tables:\n{context}",
     )

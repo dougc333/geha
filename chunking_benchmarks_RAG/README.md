@@ -29,7 +29,9 @@ Complete parent table
 
 ## Semantic search implementation
 
-Semantic search is implemented locally with Sentence Transformers and PostgreSQL `pgvector`; it does not require an LLM. During ingestion, every normalized table row is converted into text containing its source filename, inferred table title, column names, and nonempty cell values. `BAAI/bge-small-en-v1.5` encodes that text as a normalized 384-dimensional vector, which is stored in `policy_table_vectors` and linked to the complete table in `policy_tables`.
+Semantic search is implemented locally with Sentence Transformers and PostgreSQL `pgvector`; it does not require an LLM. During ingestion, explicit condition headings are extracted from each policy's `.docling.md` section between `Indication Specific Criteria` and `Universal Approval Criteria`. Every normalized table row is then converted into text containing those conditions, its source filename, inferred table title, column names, and nonempty cell values. `BAAI/bge-small-en-v1.5` encodes that text as a normalized 384-dimensional vector, which is stored in `policy_table_vectors` and linked to the complete table in `policy_tables`.
+
+The extracted condition list and the original indication-section text are stored on each parent table as `conditions_json` and `indication_context`. Policies that do not explicitly enumerate an indication retain an empty list; the pipeline does not guess conditions from the drug name or outside knowledge.
 
 At query time, the same model encodes and normalizes the user's question. PostgreSQL uses the `pgvector` cosine-distance operator to rank child rows:
 
@@ -123,7 +125,7 @@ uv run python chunking_benchmarks_RAG/table_rag.py init-db
 
 This creates:
 
-- `policy_tables`: complete parent tables and source metadata
+- `policy_tables`: complete parent tables, source metadata, structured conditions, and the supporting indication section
 - `policy_table_vectors`: embedded child rows
 - An HNSW cosine-similarity index over the 384-dimensional embeddings
 
@@ -150,7 +152,7 @@ uv run python chunking_benchmarks_RAG/table_rag.py ingest \
   /Users/dc/geha/downloads/coverage-policies
 ```
 
-Ingestion is repeatable. Existing tables with the same source filename and table number are updated, and their child vectors are rebuilt.
+Ingestion is repeatable. Existing tables with the same source filename and table number are updated, and their condition-aware child vectors are rebuilt. Run `init-db` once after upgrading an existing database so the condition metadata columns are added before re-ingestion.
 
 The current sample corpus produces 103 parent tables and 691 searchable child rows from 35 extracted CSV files.
 
@@ -174,7 +176,7 @@ uv run python chunking_benchmarks_RAG/table_rag.py search \
 
 ## Generate an answer
 
-The policy documents in this demo are synthetic. The `ask` command transmits the retrieved table content to the configured OpenAI model:
+The policy documents in this demo are synthetic. The `ask` command transmits the retrieved table content and its structured condition list to the configured OpenAI model:
 
 ```bash
 uv run python chunking_benchmarks_RAG/table_rag.py ask \
@@ -196,6 +198,32 @@ uv run python chunking_benchmarks_RAG/table_rag.py ask \
   "Which bendamustine products are non-preferred?" \
   --model gpt-3.5-turbo
 ```
+
+## Medical claims policy advisor
+
+The medical claims advisor uses the same pgvector parent-child table retriever,
+then asks an OpenAI model to explain only the retrieved evidence. It distinguishes
+policies with explicit condition metadata from policies whose extracted tables do
+not enumerate conditions. An empty condition list is treated as unknown, never as
+evidence that a condition is excluded.
+
+Run the chat interface:
+
+```bash
+uv run streamlit run chunking_benchmarks_RAG/medical_claims_advisor_ui.py
+```
+
+Inspect retrieval without making an LLM call:
+
+```bash
+uv run python chunking_benchmarks_RAG/medical_claims_advisor.py \
+  "Does Ziihera require prior authorization for biliary tract cancer?" \
+  --evidence-only
+```
+
+The advisor explains policy evidence but does not adjudicate claims, determine
+medical necessity, or guarantee coverage or payment. Do not enter member or
+patient identifiers.
 
 ## Langfuse trace and A/B evaluation UI
 
@@ -292,6 +320,9 @@ This keeps the database volume. To delete the stored database as well, explicitl
 - `evaluate_table_preferences.py`: repeatable local evaluation runner
 - `table_rag_comparison.py`: deterministic-versus-LLM evaluation and Langfuse tracing
 - `table_rag_ui.py`: Streamlit comparison dashboard with Langfuse trace links
+- `medical_claims_advisor.py`: grounded claims-advisor retrieval and generation core
+- `medical_claims_advisor_ui.py`: Streamlit claims chat interface
+- `test_medical_claims_advisor.py`: condition-handling and grounding tests
 - `test_table_rag_comparison.py`: contract, scoring, token, and cost unit tests
 - `table_preference_eval_results.md`: complete readable evaluation report
 - `table_preference_eval_results.json`: machine-readable evaluation report
