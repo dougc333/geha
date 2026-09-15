@@ -1,6 +1,0 @@
-case,embedding_source,cosine_similarity,l1_distance,l2_distance,wasserstein_cost,wasserstein_similarity,structured_field_score,duplicate_score,classification
-1. Exact duplicate medical claim,offline canonicalized bag-of-concepts (not OpenAI embeddings),1.0,0.0,0.0,-0.0,1.0,1.0,100.0,likely duplicate
-2. Semantic duplicate dental claim,offline canonicalized bag-of-concepts (not OpenAI embeddings),0.875,0.7071,0.5,0.125,0.875,1.0,91.88,likely duplicate
-3. Corrected/resubmitted multi-line medical claim,offline canonicalized bag-of-concepts (not OpenAI embeddings),1.0,0.0,0.0,-0.0,1.0,1.0,100.0,likely duplicate
-4. Similar service but distinct dental claim,offline canonicalized bag-of-concepts (not OpenAI embeddings),0.875,0.7071,0.5,0.125,0.875,0.9,49.0,manual review / unlikely duplicate
-5. Clearly different medical claims,offline canonicalized bag-of-concepts (not OpenAI embeddings),0.0,3.4142,1.4142,1.0,0.0,0.0,0.0,manual review / unlikely duplicate
