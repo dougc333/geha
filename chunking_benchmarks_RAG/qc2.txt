@@ -1,0 +1,155 @@
+GEHA TableRAG Condition-to-Document QC Inventory (Revision History Removed)
+Generated from policy_tables.conditions_json in the local pgvector index.
+
+Purpose
+-------
+This file is the manual verification checkpoint before implementing evals or
+correlating conditions with treatment sets. Condition names and document names
+are preserved exactly as stored. No OpenAI output was used to create this
+inventory.
+
+Excluded tables
+---------------
+- Revision history
+- !Date / !Updates
+- Date / !Updates
+
+These table titles represent revision/update history rather than substantive
+drug-preference, prior-authorization, or billing evidence.
+
+Summary
+-------
+Distinct condition strings: 24
+Relevant source PDFs: 18
+
+Initial eval anchors
+--------------------
+Ziihera
+  Condition: Biliary Tract Cancer (BTC)
+  Document: geha-coverage-policy-ziihera.pdf
+  Substantive tables:
+    1. Billing codes
+
+Multiple Myeloma (MM)
+  Document: geha-coverage-policy-elrexfio.pdf
+  Substantive tables:
+    1. Billing codes
+  Document: geha-coverage-policy-talvey.pdf
+  Substantive tables:
+    1. Billing codes
+  Document: geha-coverage-policy-tecvayli.pdf
+  Substantive tables:
+    1. Billing codes
+
+Full condition-to-document inventory
+------------------------------------
+1. Anemia secondary to Myelodysplastic Syndrome
+   Document: geha-coverage-policy-erythropoietin-stimulating-agents.pdf
+   Substantive tables: Drug preference and prior authorization; Billing codes
+
+2. Anemia secondary to Myeloproliferative Neoplasms (MPN) - Myelofibrosis
+   Document: geha-coverage-policy-erythropoietin-stimulating-agents.pdf
+   Substantive tables: Drug preference and prior authorization; Billing codes
+
+3. Biliary Tract Cancer (BTC)
+   Document: geha-coverage-policy-ziihera.pdf
+   Substantive tables: Billing codes
+
+4. Breast cancer - unresectable or metastatic
+   Document: geha-coverage-policy-datroway.pdf
+   Substantive tables: Drug preference and prior authorization; Billing codes
+
+5. Chemotherapy Induced Anemia
+   Document: geha-coverage-policy-erythropoietin-stimulating-agents.pdf
+   Substantive tables: Drug preference and prior authorization; Billing codes
+
+6. Chemotherapy-induced thrombocytopenia
+   Document: geha-coverage-policy-nplate.pdf
+   Substantive tables: Billing codes
+
+7. Colon Cancer - Metastatic or Advanced
+   Document: geha-coverage-policy-fruzaqla.pdf
+   Substantive tables: Billing codes
+
+8. EGFR-Mutated Non-squamous non-small cell lung cancer - locally advanced or metastatic
+   Document: geha-coverage-policy-datroway.pdf
+   Substantive tables: Drug preference and prior authorization; Billing codes
+
+9. Extensive Stage Small Cell Lung Cancer (SCLC)
+   Document: geha-coverage-policy-imdelltra.pdf
+   Substantive tables: Billing codes
+
+10. Follicular Lymphoma - Relapsed or Refractory (Grade 1, 2 or 3A)
+    Document: geha-coverage-policy-lunsumio.pdf
+    Substantive tables: Billing codes
+
+11. Hepatocellular Carcinoma
+    Document: geha-coverage-policy-cyramza.pdf
+    Substantive tables: Billing codes
+
+12. Hypercalcemia of malignancy
+    Document: geha-coverage-policy-xgeva.pdf
+    Substantive tables: Drug preference and prior authorization; Billing codes
+
+13. Hypogammaglobulinemia in Chronic Lymphocytic Leukemia
+    Document: geha-coverage-policy-intravenous-immune-globulin.pdf
+    Substantive tables: Billing codes
+
+14. Hypogammaglobulinemia in Multiple Myeloma
+    Document: geha-coverage-policy-intravenous-immune-globulin.pdf
+    Substantive tables: Billing codes
+
+15. Management of CAR-T Cell Related Toxicities
+    Document: geha-coverage-policy-intravenous-immune-globulin.pdf
+    Substantive tables: Billing codes
+
+16. Management of Checkpoint Inhibitor Related Toxicities
+    Document: geha-coverage-policy-intravenous-immune-globulin.pdf
+    Substantive tables: Billing codes
+
+17. Multiple Myeloma (MM)
+    Document: geha-coverage-policy-elrexfio.pdf
+    Substantive tables: Billing codes
+    Document: geha-coverage-policy-talvey.pdf
+    Substantive tables: Billing codes
+    Document: geha-coverage-policy-tecvayli.pdf
+    Substantive tables: Billing codes
+
+18. Myelodysplastic Syndrome
+    Document: geha-coverage-policy-nplate.pdf
+    Substantive tables: Billing codes
+
+19. Myelodysplastic Syndrome (MDS)
+    Document: geha-coverage-policy-rytelo.pdf
+    Substantive tables: Drug preference and prior authorization; Billing codes
+
+20. Myelofibrosis (MF)
+    Document: geha-coverage-policy-ojjaara-momelotinib.pdf
+    Substantive tables: Billing codes
+
+21. Non-Small Cell Lung Cancer
+    Document: geha-coverage-policy-cyramza.pdf
+    Substantive tables: Billing codes
+
+22. Prostate Cancer, Metastastic
+    Document: geha-coverage-policy-provenge.pdf
+    Substantive tables: Billing codes
+
+23. Prostate Cancer, Metastatic
+    Document: geha-coverage-policy-pluvicto.pdf
+    Substantive tables: Billing codes
+
+24. Unresectable Locally Advanced or Metastatic Breast Cancer
+    Document: geha-coverage-policy-trodelvy.pdf
+    Substantive tables: Billing codes
+
+Manual QC flags
+---------------
+1. Confirm whether "Prostate Cancer, Metastastic" in the Provenge extraction is
+   a source-document typo/OCR artifact and should normalize to "Metastatic".
+2. Confirm whether "Myelodysplastic Syndrome" and "Myelodysplastic Syndrome
+   (MDS)" should remain separate condition labels or share one normalized alias.
+3. Confirm whether the two breast-cancer condition strings should remain
+   distinct or share a normalized disease-family alias.
+4. Treatment-set correlation and eval implementation are intentionally deferred
+   until this inventory is manually approved.

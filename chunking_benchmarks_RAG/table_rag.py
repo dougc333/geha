@@ -380,7 +380,29 @@ def print_retrieval(results: list[dict[str, Any]]) -> None:
         print(result["full_csv"], end="")
 
 
-def generate_answer(query: str, results: list[dict[str, Any]], model: str) -> str:
+OPENAI_ASK_INSTRUCTIONS = (
+    "This is an OpenAI model-generated typo-correction pass, not GEHA source data or an "
+    "official coverage determination. Answer only from the supplied policy tables and "
+    "structured condition metadata. Correct only obvious typographical errors, OCR errors, "
+    "and misspellings in human-readable names. Do not add or remove rows, infer missing "
+    "facts, reclassify preference or prior-authorization values, or alter drug names, codes, "
+    "numbers, or policy criteria unless the supplied text makes an obvious spelling repair "
+    "unambiguous. Preserve uncertain text and identify it as uncertain. Cite the source "
+    "filename and table title. An empty CONDITIONS array means the policy did not explicitly "
+    "enumerate conditions in an Indication Specific Criteria section. If the supplied "
+    "context does not contain the answer, say it is insufficient. Clearly identify any "
+    "spelling corrections you applied. Do not use outside medical knowledge to expand the "
+    "GEHA evidence."
+)
+
+
+def generate_answer(
+    query: str,
+    results: list[dict[str, Any]],
+    model: str,
+    *,
+    client: Any | None = None,
+) -> str:
     context = "\n\n".join(
         f"SOURCE: {result['source']}\n"
         f"TABLE: {result['title']}\n"
@@ -388,17 +410,12 @@ def generate_answer(query: str, results: list[dict[str, Any]], model: str) -> st
         f"{result['full_csv']}"
         for result in results
     )
-    client = OpenAI()
-    response = client.responses.create(
+    openai_client = client or OpenAI()
+    response = openai_client.responses.create(
         model=model,
-        instructions=(
-            "Answer only from the supplied policy tables and structured condition metadata. "
-            "Cite the source filename and table title. Return conditions exactly as supplied; "
-            "never infer a condition from outside knowledge. An empty CONDITIONS array means the "
-            "policy did not explicitly enumerate conditions in an Indication Specific Criteria "
-            "section. If the supplied context does not contain the answer, say it is insufficient."
-        ),
+        instructions=OPENAI_ASK_INSTRUCTIONS,
         input=f"Question:\n{query}\n\nRetrieved tables:\n{context}",
+        store=False,
     )
     return response.output_text
 

@@ -1,0 +1,111 @@
+GEHA Secondary Conditions and Associated Policies - QC Inventory
+
+Purpose
+-------
+This file records secondary conditions, treatment-related complications, and
+disease-associated manifestations verified in the source policy PDFs. It is a
+manual QC artifact and is not an assertion of guaranteed member coverage.
+Medical necessity criteria and member-specific benefit documents still apply.
+
+Explicitly named policy indications
+-----------------------------------
+1. Chemotherapy-induced anemia
+   Policy: Erythropoietin Stimulating Agents
+   Source: geha-coverage-policy-erythropoietin-stimulating-agents.pdf
+
+2. Anemia secondary to Myelodysplastic Syndrome
+   Policy: Erythropoietin Stimulating Agents
+   Source: geha-coverage-policy-erythropoietin-stimulating-agents.pdf
+
+3. Anemia secondary to Myeloproliferative Neoplasms (MPN) - Myelofibrosis
+   Policy: Erythropoietin Stimulating Agents
+   Source: geha-coverage-policy-erythropoietin-stimulating-agents.pdf
+
+4. Chemotherapy-induced thrombocytopenia
+   Policy: Nplate (romiplostim)
+   Source: geha-coverage-policy-nplate.pdf
+
+5. Hypogammaglobulinemia in Multiple Myeloma
+   Policy: Intravenous Immune Globulin
+   Source: geha-coverage-policy-intravenous-immune-globulin.pdf
+
+6. Hypogammaglobulinemia in Chronic Lymphocytic Leukemia
+   Policy: Intravenous Immune Globulin
+   Source: geha-coverage-policy-intravenous-immune-globulin.pdf
+
+7. Management of Checkpoint Inhibitor Related Toxicities
+   Policy: Intravenous Immune Globulin
+   Source: geha-coverage-policy-intravenous-immune-globulin.pdf
+   Documented manifestations:
+   - Myocarditis not improved after pulse-dose methylprednisolone
+   - Severe or life-threatening bullous dermatitis
+   - Stevens-Johnson Syndrome
+   - Toxic Epidermal Necrolysis
+   - Moderate or severe steroid-refractory myalgias or myositis
+   - Severe myasthenia gravis
+   - Moderate or severe Guillain-Barre Syndrome
+   - Severe peripheral neuropathy
+   - Severe encephalitis
+   - Transverse myelitis
+   - Moderate or severe pneumonitis not improved after corticosteroids
+
+8. Management of CAR-T Cell Related Toxicities
+   Policy: Intravenous Immune Globulin
+   Source: geha-coverage-policy-intravenous-immune-globulin.pdf
+   Documented manifestations:
+   - Secondary hypogammaglobulinemia with serious or recurrent bacterial infections
+   - Cytokine release syndrome refractory to high-dose corticosteroids and anti-IL-6 therapy
+
+9. Iatrogenic infertility
+   Policy: Infertility Services
+   Source: geha-coverage-policy-infertility-services.pdf
+   Documented causes:
+   - Surgery
+   - Radiation
+   - Chemotherapy
+   - Other medical treatment affecting reproductive organs
+   - Gonadotoxic therapies
+   - Ovary or testicle removal for treatment of disease
+
+10. Hypercalcemia of malignancy
+    Policy: Xgeva (denosumab)
+    Source: geha-coverage-policy-xgeva.pdf
+
+Complications present inside broader disease criteria
+-----------------------------------------------------
+11. Myelodysplastic Syndrome-associated thrombocytopenia
+    Policy: Nplate (romiplostim)
+    Source: geha-coverage-policy-nplate.pdf
+    Note: The heading is "Myelodysplastic Syndrome"; thrombocytopenia appears
+    in the approval criteria rather than in the condition heading.
+
+12. Myelofibrosis with anemia or transfusion-dependent anemia
+    Policy: Ojjaara (momelotinib)
+    Source: geha-coverage-policy-ojjaara-momelotinib.pdf
+    Note: The heading is "Myelofibrosis (MF)"; anemia appears in the approval
+    criteria rather than in the condition heading.
+
+13. Myelodysplastic Syndrome with red-blood-cell transfusion dependence
+    Policy: Rytelo (imetelstat)
+    Source: geha-coverage-policy-rytelo.pdf
+    Note: The heading is "Myelodysplastic Syndrome (MDS)"; transfusion
+    dependence appears in the approval criteria rather than in the heading.
+
+Not explicitly supported as a condition
+---------------------------------------
+14. Chemotherapy-induced neutropenia
+    Status: Not verified as an explicit condition in the downloaded policies.
+    Related documents:
+    - geha-coverage-policy-short-acting-gcsfs.pdf
+    - geha-coverage-policy-long-acting-gcsfs.pdf
+    Note: These policies contain G-CSF preference and prior-authorization
+    tables, but they do not explicitly name neutropenia or febrile neutropenia
+    in their policy criteria. Do not use this as a confirmed condition eval
+    without additional source evidence.
+
+QC boundary
+-----------
+- Items 1-10 are explicit policy indications or explicitly named treatment-related categories.
+- Items 11-13 are manifestations found inside broader disease approval criteria.
+- Item 14 is intentionally excluded from the verified condition set.
+- These mappings do not guarantee coverage, authorization, or payment.

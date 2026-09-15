@@ -103,6 +103,36 @@ LANGFUSE_SECRET_KEY=sk-lf-your-secret-key
 
 The program loads this project file with `override=True`, so its values replace stale variables exported by an earlier shell session. The `.env` file is ignored by Git. Never put a real key in `.env.example`.
 
+## Quick start: database and Medical Claims Advisor
+
+Run both commands from the repository root. First, create or start the pgvector
+database container:
+
+```bash
+cd /Users/dc/geha
+docker compose -f chunking_benchmarks_RAG/docker-compose.pgvector.yml up -d pgvector
+```
+
+Confirm that the database is running and healthy:
+
+```bash
+docker compose -f chunking_benchmarks_RAG/docker-compose.pgvector.yml ps
+```
+
+Then start the Medical Claims Advisor Streamlit application:
+
+```bash
+uv run streamlit run chunking_benchmarks_RAG/medical_claims_advisor_ui.py
+```
+
+Open the local URL printed by Streamlit, normally `http://localhost:8501`.
+Keep the database container running while using the application. Stop it later
+without deleting its persistent data volume:
+
+```bash
+docker compose -f chunking_benchmarks_RAG/docker-compose.pgvector.yml stop pgvector
+```
+
 ## Start PostgreSQL and pgvector
 
 ```bash
@@ -202,10 +232,25 @@ uv run python chunking_benchmarks_RAG/table_rag.py ask \
 ## Medical claims policy advisor
 
 The medical claims advisor uses the same pgvector parent-child table retriever,
-then asks an OpenAI model to explain only the retrieved evidence. It distinguishes
-policies with explicit condition metadata from policies whose extracted tables do
-not enumerate conditions. An empty condition list is treated as unknown, never as
-evidence that a condition is excluded.
+then formats the retrieved GEHA records with deterministic Python code. The GEHA
+result and exact retrieved tables are shown first. A separate `table_rag.py ask`
+pass sends those tables to OpenAI to correct obvious spelling/OCR errors and is
+shown last under an explicit model-generated label. That output is display-only:
+it is never stored in pgvector or mixed into the GEHA policy records. The prompt
+forbids adding or removing rows, changing codes or policy values, or inferring
+missing medical facts.
+
+The advisor distinguishes policies with explicit condition metadata from
+policies whose extracted tables do not enumerate conditions. An empty condition
+list is treated as unknown, never as evidence that a condition is excluded.
+Queries that name an explicitly indexed condition or its documented
+parenthetical abbreviation bypass semantic top-K ranking and return every parent
+table associated with that condition. For example, `MM` resolves to `Multiple
+Myeloma (MM)` and returns the Elrexfio, Talvey, and Tecvayli tables, with billing
+tables ordered before revision-history tables.
+
+Use `--no-openai` with the CLI to suppress the final correction pass, or
+`--evidence-only` to print retrieved evidence as JSON.
 
 Run the chat interface:
 
@@ -213,7 +258,49 @@ Run the chat interface:
 uv run streamlit run chunking_benchmarks_RAG/medical_claims_advisor_ui.py
 ```
 
-Inspect retrieval without making an LLM call:
+### Reproduce the chemotherapy-induced anemia answer
+
+From the repository root, install/synchronize the project environment and start
+the pgvector database:
+
+```bash
+cd /Users/dc/geha
+uv sync
+docker compose -f chunking_benchmarks_RAG/docker-compose.pgvector.yml up -d pgvector
+docker compose -f chunking_benchmarks_RAG/docker-compose.pgvector.yml ps
+```
+
+If this is a new or empty database, initialize it and ingest the extracted
+coverage-policy tables:
+
+```bash
+uv run python chunking_benchmarks_RAG/table_rag.py init-db
+uv run python chunking_benchmarks_RAG/table_rag.py ingest \
+  /Users/dc/geha/downloads/coverage-policies
+```
+
+Start the Streamlit application:
+
+```bash
+uv run streamlit run chunking_benchmarks_RAG/medical_claims_advisor_ui.py
+```
+
+Open the local URL printed by Streamlit, normally `http://localhost:8501`, and
+submit this query:
+
+```text
+Which policies discuss anemia caused by cancer treatment?
+```
+
+The structured result should identify the **Erythropoietin Stimulating Agents**
+policy and its **Chemotherapy Induced Anemia** section. It should show Retacrit
+and Aranesp as preferred, Epogen and Procrit as non-preferred, prior
+authorization as Yes for all four, the extracted condition criteria, source-file
+download buttons, and the complete retrieved TableRAG evidence. Any OpenAI
+typo/OCR-correction result is displayed separately at the end and is not stored
+in pgvector.
+
+Inspect retrieval as JSON:
 
 ```bash
 uv run python chunking_benchmarks_RAG/medical_claims_advisor.py \
@@ -302,6 +389,69 @@ The evaluator records the top-five tables and similarity scores for every query,
 - `table_preference_eval_results.md`: readable comparison of all 34 cases
 - `table_preference_eval_results.json`: complete machine-readable results
 
+## Secondary-condition policy evals
+
+[`secondary_condition_evals.json`](secondary_condition_evals.json) tests the ten
+manually verified secondary conditions in [`qc3.txt`](qc3.txt). It contains
+three natural-language query variants per condition (30 cases total), including
+questions such as `Is anemia covered when undergoing chemotherapy?`.
+
+[`condition_aliases.json`](condition_aliases.json) stores the corresponding
+human-approved canonical conditions, aliases, required concept groups, and
+source-policy relationships. The advisor checks this versioned metadata before
+falling back to extracted-condition matching or semantic TableRAG. These aliases
+are not OpenAI output and are not embedded in pgvector.
+
+Each case declares the expected source policy, normalized condition label,
+answer terms, maximum source rank, and whether revision-history tables must be
+excluded. The evaluator uses the same deterministic condition-metadata routing,
+semantic TableRAG fallback, and policy-summary formatter as the Streamlit app.
+It does not call OpenAI.
+
+With the pgvector database running, execute:
+
+```bash
+cd /Users/dc/geha
+uv run python chunking_benchmarks_RAG/evaluate_secondary_conditions.py \
+  --output chunking_benchmarks_RAG/secondary_condition_eval_results.json
+```
+
+The report separates four checks:
+
+- expected policy source ranks first;
+- expected condition is returned;
+- required grounded answer terms are present; and
+- revision-history tables are not displayed as evidence.
+
+A case passes end to end only when all four checks pass. This distinction makes
+it clear whether a failure came from retrieval, condition metadata, or response
+formatting.
+
+| Measurement | Before approved aliases | After approved aliases |
+| --- | ---: | ---: |
+| Expected policy source at rank one | 19/30 (63.3%) | 30/30 (100.0%) |
+| Complete response passed | 12/30 (40.0%) | 30/30 (100.0%) |
+| Revision-history filtering passed | 30/30 (100.0%) | 30/30 (100.0%) |
+
+The after-alias measurement is stored in
+[`secondary_condition_eval_results.json`](secondary_condition_eval_results.json).
+
+## Combined Streamlit-backend condition evals
+
+The combined runner executes both condition fixture sets through the same
+condition routing, semantic TableRAG fallback, and policy-summary functions used
+by the Streamlit application:
+
+```bash
+cd /Users/dc/geha
+uv run python chunking_benchmarks_RAG/evaluate_streamlit_backend.py
+```
+
+It evaluates 56 queries: 26 indication-specific condition-to-policy cases from
+`indication_specific_criteria_evals.json` and 30 secondary-condition semantic
+queries from `secondary_condition_evals.json`. It does not call OpenAI or write
+to PostgreSQL. Results are written to `streamlit_backend_eval_results.json`.
+
 ## Stop the database
 
 ```bash
@@ -318,6 +468,12 @@ This keeps the database volume. To delete the stored database as well, explicitl
 - `.env.example`: safe configuration template
 - `table_preference_evals.json`: preferred and non-preferred retrieval/answer cases
 - `evaluate_table_preferences.py`: repeatable local evaluation runner
+- `secondary_condition_evals.json`: 30 secondary-condition policy eval cases
+- `secondary_condition_eval_results.json`: latest machine-readable eval results
+- `condition_aliases.json`: approved condition aliases and source-policy mappings
+- `evaluate_secondary_conditions.py`: deterministic Streamlit-path eval runner
+- `evaluate_streamlit_backend.py`: combined 56-case Streamlit-backend runner
+- `streamlit_backend_eval_results.json`: latest combined backend results
 - `table_rag_comparison.py`: deterministic-versus-LLM evaluation and Langfuse tracing
 - `table_rag_ui.py`: Streamlit comparison dashboard with Langfuse trace links
 - `medical_claims_advisor.py`: grounded claims-advisor retrieval and generation core

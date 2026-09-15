@@ -1,0 +1,1412 @@
+{
+  "eval_files": [
+    "/Users/dc/geha/chunking_benchmarks_RAG/indication_specific_criteria_evals.json",
+    "/Users/dc/geha/chunking_benchmarks_RAG/secondary_condition_evals.json"
+  ],
+  "summary": {
+    "cases": 56,
+    "complete_pass": {
+      "passed": 56,
+      "total": 56,
+      "rate": 1.0
+    },
+    "expected_source_at_rank_1": {
+      "passed": 56,
+      "total": 56,
+      "rate": 1.0
+    },
+    "expected_condition_returned": {
+      "passed": 56,
+      "total": 56,
+      "rate": 1.0
+    },
+    "expected_answer_terms_returned": {
+      "passed": 56,
+      "total": 56,
+      "rate": 1.0
+    },
+    "revision_history_excluded": {
+      "passed": 56,
+      "total": 56,
+      "rate": 1.0
+    }
+  },
+  "suites": {
+    "indication_specific": {
+      "cases": 26,
+      "passed": 26,
+      "failed": 0,
+      "pass_rate": 1.0,
+      "expected_source_at_rank_1": 26,
+      "expected_source_at_rank_1_rate": 1.0,
+      "expected_condition_returned": 26,
+      "expected_condition_returned_rate": 1.0,
+      "expected_answer_terms_returned": 26,
+      "expected_answer_terms_returned_rate": 1.0,
+      "revision_history_excluded": 26,
+      "revision_history_excluded_rate": 1.0,
+      "by_condition": {
+        "Hepatocellular Carcinoma": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Non-Small Cell Lung Cancer": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Breast cancer - unresectable or metastatic": {
+          "passed": 1,
+          "cases": 1
+        },
+        "EGFR-Mutated Non-squamous non-small cell lung cancer - locally advanced or metastatic": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Multiple Myeloma (MM)": {
+          "passed": 3,
+          "cases": 3
+        },
+        "Chemotherapy Induced Anemia": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Anemia secondary to Myelodysplastic Syndrome": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Anemia secondary to Myeloproliferative Neoplasms (MPN) - Myelofibrosis": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Colon Cancer - Metastatic or Advanced": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Extensive Stage Small Cell Lung Cancer (SCLC)": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Hypogammaglobulinemia in Multiple Myeloma": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Hypogammaglobulinemia in Chronic Lymphocytic Leukemia": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Management of Checkpoint Inhibitor Related Toxicities": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Management of CAR-T Cell Related Toxicities": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Follicular Lymphoma - Relapsed or Refractory (Grade 1, 2 or 3A)": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Chemotherapy-induced thrombocytopenia": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Myelodysplastic Syndrome": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Myelofibrosis (MF)": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Prostate Cancer, Metastatic": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Prostate Cancer, Metastastic": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Myelodysplastic Syndrome (MDS)": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Unresectable Locally Advanced or Metastatic Breast Cancer": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Hypercalcemia of malignancy": {
+          "passed": 1,
+          "cases": 1
+        },
+        "Biliary Tract Cancer (BTC)": {
+          "passed": 1,
+          "cases": 1
+        }
+      }
+    },
+    "secondary_semantic": {
+      "cases": 30,
+      "passed": 30,
+      "failed": 0,
+      "pass_rate": 1.0,
+      "expected_source_at_rank_1": 30,
+      "expected_source_at_rank_1_rate": 1.0,
+      "expected_condition_returned": 30,
+      "expected_condition_returned_rate": 1.0,
+      "expected_answer_terms_returned": 30,
+      "expected_answer_terms_returned_rate": 1.0,
+      "revision_history_excluded": 30,
+      "revision_history_excluded_rate": 1.0,
+      "by_condition": {
+        "1": {
+          "passed": 3,
+          "cases": 3
+        },
+        "2": {
+          "passed": 3,
+          "cases": 3
+        },
+        "3": {
+          "passed": 3,
+          "cases": 3
+        },
+        "4": {
+          "passed": 3,
+          "cases": 3
+        },
+        "5": {
+          "passed": 3,
+          "cases": 3
+        },
+        "6": {
+          "passed": 3,
+          "cases": 3
+        },
+        "7": {
+          "passed": 3,
+          "cases": 3
+        },
+        "8": {
+          "passed": 3,
+          "cases": 3
+        },
+        "9": {
+          "passed": 3,
+          "cases": 3
+        },
+        "10": {
+          "passed": 3,
+          "cases": 3
+        }
+      }
+    }
+  },
+  "results": [
+    {
+      "suite": "indication_specific",
+      "id": "cyramza_hepatocellular_carcinoma",
+      "condition_id": null,
+      "query": "Which policy lists Hepatocellular Carcinoma as an indication-specific criterion?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-cyramza.pdf",
+      "actual_source": "geha-coverage-policy-cyramza.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Hepatocellular Carcinoma",
+      "actual_condition": "Hepatocellular Carcinoma",
+      "term_matches": {
+        "Hepatocellular Carcinoma": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "cyramza_non_small_cell_lung_cancer",
+      "condition_id": null,
+      "query": "Which policy lists Non-Small Cell Lung Cancer as an indication-specific criterion?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-cyramza.pdf",
+      "actual_source": "geha-coverage-policy-cyramza.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Non-Small Cell Lung Cancer",
+      "actual_condition": "Non-Small Cell Lung Cancer",
+      "term_matches": {
+        "Non-Small Cell Lung Cancer": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "datroway_unresectable_or_metastatic_breast_cancer",
+      "condition_id": null,
+      "query": "Which policy lists unresectable or metastatic breast cancer as an indication-specific criterion for Datroway?",
+      "route": "semantic_table_rag",
+      "expected_source": "geha-coverage-policy-datroway.pdf",
+      "actual_source": "geha-coverage-policy-datroway.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Breast cancer - unresectable or metastatic",
+      "actual_condition": "Breast cancer - unresectable or metastatic",
+      "term_matches": {
+        "Breast cancer - unresectable or metastatic": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "datroway_egfr_mutated_non_squamous_nsclc",
+      "condition_id": null,
+      "query": "Which Datroway policy lists EGFR-Mutated Non-squamous non-small cell lung cancer - locally advanced or metastatic as an indication-specific criterion?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-datroway.pdf",
+      "actual_source": "geha-coverage-policy-datroway.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "EGFR-Mutated Non-squamous non-small cell lung cancer - locally advanced or metastatic",
+      "actual_condition": "EGFR-Mutated Non-squamous non-small cell lung cancer - locally advanced or metastatic",
+      "term_matches": {
+        "EGFR-Mutated Non-squamous non-small cell lung cancer - locally advanced or metastatic": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "elrexfio_multiple_myeloma",
+      "condition_id": null,
+      "query": "Which policy lists Multiple Myeloma as an indication-specific criterion for Elrexfio?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-elrexfio.pdf",
+      "actual_source": "geha-coverage-policy-elrexfio.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Multiple Myeloma (MM)",
+      "actual_condition": "Multiple Myeloma (MM)",
+      "term_matches": {
+        "Multiple Myeloma (MM)": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "esa_chemotherapy_induced_anemia",
+      "condition_id": null,
+      "query": "Which policy lists Chemotherapy Induced Anemia as an indication-specific criterion?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "actual_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Chemotherapy Induced Anemia",
+      "actual_condition": "Chemotherapy Induced Anemia",
+      "term_matches": {
+        "Chemotherapy Induced Anemia": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "esa_anemia_secondary_to_mds",
+      "condition_id": null,
+      "query": "Which policy lists anemia secondary to Myelodysplastic Syndrome as an indication-specific criterion?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "actual_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Anemia secondary to Myelodysplastic Syndrome",
+      "actual_condition": "Anemia secondary to Myelodysplastic Syndrome",
+      "term_matches": {
+        "Anemia secondary to Myelodysplastic Syndrome": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "esa_anemia_secondary_to_mpn_myelofibrosis",
+      "condition_id": null,
+      "query": "Which policy lists anemia secondary to MPN or myelofibrosis as an indication-specific criterion?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "actual_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Anemia secondary to Myeloproliferative Neoplasms (MPN) - Myelofibrosis",
+      "actual_condition": "Anemia secondary to Myeloproliferative Neoplasms (MPN) - Myelofibrosis",
+      "term_matches": {
+        "Anemia secondary to Myeloproliferative Neoplasms (MPN) - Myelofibrosis": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "fruzaqla_metastatic_or_advanced_colon_cancer",
+      "condition_id": null,
+      "query": "Which policy lists metastatic or advanced colon cancer as an indication-specific approval criterion?",
+      "route": "semantic_table_rag",
+      "expected_source": "geha-coverage-policy-fruzaqla.pdf",
+      "actual_source": "geha-coverage-policy-fruzaqla.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Colon Cancer - Metastatic or Advanced",
+      "actual_condition": "Colon Cancer - Metastatic or Advanced",
+      "term_matches": {
+        "Colon Cancer - Metastatic or Advanced": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "imdelltra_extensive_stage_sclc",
+      "condition_id": null,
+      "query": "Which policy lists Extensive Stage Small Cell Lung Cancer as an indication-specific approval criterion?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-imdelltra.pdf",
+      "actual_source": "geha-coverage-policy-imdelltra.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Extensive Stage Small Cell Lung Cancer (SCLC)",
+      "actual_condition": "Extensive Stage Small Cell Lung Cancer (SCLC)",
+      "term_matches": {
+        "Extensive Stage Small Cell Lung Cancer (SCLC)": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "ivig_hypogammaglobulinemia_multiple_myeloma",
+      "condition_id": null,
+      "query": "Which policy lists hypogammaglobulinemia in Multiple Myeloma as an indication-specific criterion?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "actual_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Hypogammaglobulinemia in Multiple Myeloma",
+      "actual_condition": "Hypogammaglobulinemia in Multiple Myeloma",
+      "term_matches": {
+        "Hypogammaglobulinemia in Multiple Myeloma": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "ivig_hypogammaglobulinemia_cll",
+      "condition_id": null,
+      "query": "Which policy lists hypogammaglobulinemia in Chronic Lymphocytic Leukemia as an indication-specific criterion?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "actual_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Hypogammaglobulinemia in Chronic Lymphocytic Leukemia",
+      "actual_condition": "Hypogammaglobulinemia in Chronic Lymphocytic Leukemia",
+      "term_matches": {
+        "Hypogammaglobulinemia in Chronic Lymphocytic Leukemia": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "ivig_checkpoint_inhibitor_toxicities",
+      "condition_id": null,
+      "query": "Which policy lists management of checkpoint inhibitor related toxicities as an indication-specific criterion?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "actual_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Management of Checkpoint Inhibitor Related Toxicities",
+      "actual_condition": "Management of Checkpoint Inhibitor Related Toxicities",
+      "term_matches": {
+        "Management of Checkpoint Inhibitor Related Toxicities": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "ivig_car_t_cell_toxicities",
+      "condition_id": null,
+      "query": "Which policy lists management of CAR-T Cell related toxicities as an indication-specific criterion?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "actual_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Management of CAR-T Cell Related Toxicities",
+      "actual_condition": "Management of CAR-T Cell Related Toxicities",
+      "term_matches": {
+        "Management of CAR-T Cell Related Toxicities": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "lunsumio_follicular_lymphoma",
+      "condition_id": null,
+      "query": "Which policy lists relapsed or refractory follicular lymphoma as an indication-specific criterion?",
+      "route": "semantic_table_rag",
+      "expected_source": "geha-coverage-policy-lunsumio.pdf",
+      "actual_source": "geha-coverage-policy-lunsumio.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Follicular Lymphoma - Relapsed or Refractory (Grade 1, 2 or 3A)",
+      "actual_condition": "Follicular Lymphoma - Relapsed or Refractory (Grade 1, 2 or 3A)",
+      "term_matches": {
+        "Follicular Lymphoma - Relapsed or Refractory (Grade 1, 2 or 3A)": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "nplate_chemotherapy_induced_thrombocytopenia",
+      "condition_id": null,
+      "query": "Which policy lists chemotherapy-induced thrombocytopenia as an indication-specific approval criterion?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-nplate.pdf",
+      "actual_source": "geha-coverage-policy-nplate.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Chemotherapy-induced thrombocytopenia",
+      "actual_condition": "Chemotherapy-induced thrombocytopenia",
+      "term_matches": {
+        "Chemotherapy-induced thrombocytopenia": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "nplate_myelodysplastic_syndrome",
+      "condition_id": null,
+      "query": "Which Nplate policy lists Myelodysplastic Syndrome as an indication-specific approval criterion?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-nplate.pdf",
+      "actual_source": "geha-coverage-policy-nplate.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Myelodysplastic Syndrome",
+      "actual_condition": "Myelodysplastic Syndrome",
+      "term_matches": {
+        "Myelodysplastic Syndrome": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "ojjaara_myelofibrosis",
+      "condition_id": null,
+      "query": "Which policy lists Myelofibrosis as an indication-specific criterion?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-ojjaara-momelotinib.pdf",
+      "actual_source": "geha-coverage-policy-ojjaara-momelotinib.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Myelofibrosis (MF)",
+      "actual_condition": "Myelofibrosis (MF)",
+      "term_matches": {
+        "Myelofibrosis (MF)": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "pluvicto_metastatic_prostate_cancer",
+      "condition_id": null,
+      "query": "Which Pluvicto policy lists Prostate Cancer, Metastatic as an indication-specific approval criterion?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-pluvicto.pdf",
+      "actual_source": "geha-coverage-policy-pluvicto.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Prostate Cancer, Metastatic",
+      "actual_condition": "Prostate Cancer, Metastatic",
+      "term_matches": {
+        "Prostate Cancer, Metastatic": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "provenge_metastastic_prostate_cancer",
+      "condition_id": null,
+      "query": "Which policy lists Prostate Cancer, Metastastic as an indication-specific criterion?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-provenge.pdf",
+      "actual_source": "geha-coverage-policy-provenge.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Prostate Cancer, Metastastic",
+      "actual_condition": "Prostate Cancer, Metastastic",
+      "term_matches": {
+        "Prostate Cancer, Metastastic": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "rytelo_myelodysplastic_syndrome",
+      "condition_id": null,
+      "query": "Which Rytelo policy lists Myelodysplastic Syndrome as an indication-specific approval criterion?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-rytelo.pdf",
+      "actual_source": "geha-coverage-policy-rytelo.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Myelodysplastic Syndrome (MDS)",
+      "actual_condition": "Myelodysplastic Syndrome (MDS)",
+      "term_matches": {
+        "Myelodysplastic Syndrome (MDS)": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "talvey_multiple_myeloma",
+      "condition_id": null,
+      "query": "Which policy lists Multiple Myeloma as an indication-specific criterion for Talvey?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-talvey.pdf",
+      "actual_source": "geha-coverage-policy-talvey.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Multiple Myeloma (MM)",
+      "actual_condition": "Multiple Myeloma (MM)",
+      "term_matches": {
+        "Multiple Myeloma (MM)": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "tecvayli_multiple_myeloma",
+      "condition_id": null,
+      "query": "Which policy lists Multiple Myeloma as an indication-specific criterion for Tecvayli?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-tecvayli.pdf",
+      "actual_source": "geha-coverage-policy-tecvayli.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Multiple Myeloma (MM)",
+      "actual_condition": "Multiple Myeloma (MM)",
+      "term_matches": {
+        "Multiple Myeloma (MM)": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "trodelvy_advanced_or_metastatic_breast_cancer",
+      "condition_id": null,
+      "query": "Which policy lists unresectable locally advanced or metastatic breast cancer as an indication-specific criterion?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-trodelvy.pdf",
+      "actual_source": "geha-coverage-policy-trodelvy.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Unresectable Locally Advanced or Metastatic Breast Cancer",
+      "actual_condition": "Unresectable Locally Advanced or Metastatic Breast Cancer",
+      "term_matches": {
+        "Unresectable Locally Advanced or Metastatic Breast Cancer": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "xgeva_hypercalcemia_of_malignancy",
+      "condition_id": null,
+      "query": "Which policy lists Hypercalcemia of malignancy as an indication-specific criterion?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-xgeva.pdf",
+      "actual_source": "geha-coverage-policy-xgeva.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Hypercalcemia of malignancy",
+      "actual_condition": "Hypercalcemia of malignancy",
+      "term_matches": {
+        "Hypercalcemia of malignancy": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "indication_specific",
+      "id": "ziihera_biliary_tract_cancer",
+      "condition_id": null,
+      "query": "Which policy lists Biliary Tract Cancer as an indication-specific criterion?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-ziihera.pdf",
+      "actual_source": "geha-coverage-policy-ziihera.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Biliary Tract Cancer (BTC)",
+      "actual_condition": "Biliary Tract Cancer (BTC)",
+      "term_matches": {
+        "Biliary Tract Cancer (BTC)": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_01_chemotherapy_induced_anemia_direct",
+      "condition_id": 1,
+      "query": "Is anemia covered when undergoing chemotherapy?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "actual_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Chemotherapy Induced Anemia",
+      "actual_condition": "Chemotherapy Induced Anemia",
+      "term_matches": {
+        "Erythropoietin Stimulating Agents": true,
+        "Chemotherapy Induced Anemia": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_01_chemotherapy_induced_anemia_paraphrase",
+      "condition_id": 1,
+      "query": "Which policy addresses low hemoglobin caused by cancer treatment?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "actual_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Chemotherapy Induced Anemia",
+      "actual_condition": "Chemotherapy Induced Anemia",
+      "term_matches": {
+        "Erythropoietin Stimulating Agents": true,
+        "Chemotherapy Induced Anemia": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_01_chemotherapy_induced_anemia_policy",
+      "condition_id": 1,
+      "query": "What coverage policy discusses chemotherapy-related anemia?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "actual_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Chemotherapy Induced Anemia",
+      "actual_condition": "Chemotherapy Induced Anemia",
+      "term_matches": {
+        "Erythropoietin Stimulating Agents": true,
+        "Chemotherapy Induced Anemia": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_02_mds_anemia_direct",
+      "condition_id": 2,
+      "query": "Which policy addresses anemia caused by myelodysplastic syndrome?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "actual_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Anemia secondary to Myelodysplastic Syndrome",
+      "actual_condition": "Anemia secondary to Myelodysplastic Syndrome",
+      "term_matches": {
+        "Erythropoietin Stimulating Agents": true,
+        "Anemia secondary to Myelodysplastic Syndrome": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_02_mds_anemia_paraphrase",
+      "condition_id": 2,
+      "query": "Is anemia associated with MDS included in a GEHA policy?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "actual_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Anemia secondary to Myelodysplastic Syndrome",
+      "actual_condition": "Anemia secondary to Myelodysplastic Syndrome",
+      "term_matches": {
+        "Erythropoietin Stimulating Agents": true,
+        "Anemia secondary to Myelodysplastic Syndrome": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_02_mds_anemia_low_hemoglobin",
+      "condition_id": 2,
+      "query": "What policy discusses low hemoglobin secondary to MDS?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "actual_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Anemia secondary to Myelodysplastic Syndrome",
+      "actual_condition": "Anemia secondary to Myelodysplastic Syndrome",
+      "term_matches": {
+        "Erythropoietin Stimulating Agents": true,
+        "Anemia secondary to Myelodysplastic Syndrome": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_03_mpn_myelofibrosis_anemia_direct",
+      "condition_id": 3,
+      "query": "Is anemia secondary to myelofibrosis addressed by a policy?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "actual_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Anemia secondary to Myeloproliferative Neoplasms (MPN) - Myelofibrosis",
+      "actual_condition": "Anemia secondary to Myeloproliferative Neoplasms (MPN) - Myelofibrosis",
+      "term_matches": {
+        "Erythropoietin Stimulating Agents": true,
+        "Myelofibrosis": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_03_mpn_myelofibrosis_anemia_paraphrase",
+      "condition_id": 3,
+      "query": "Which GEHA policy covers low hemoglobin due to a myeloproliferative neoplasm?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "actual_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Anemia secondary to Myeloproliferative Neoplasms (MPN) - Myelofibrosis",
+      "actual_condition": "Anemia secondary to Myeloproliferative Neoplasms (MPN) - Myelofibrosis",
+      "term_matches": {
+        "Erythropoietin Stimulating Agents": true,
+        "Myelofibrosis": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_03_mpn_myelofibrosis_anemia_policy",
+      "condition_id": 3,
+      "query": "What policy discusses anemia from MPN or myelofibrosis?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "actual_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Anemia secondary to Myeloproliferative Neoplasms (MPN) - Myelofibrosis",
+      "actual_condition": "Anemia secondary to Myeloproliferative Neoplasms (MPN) - Myelofibrosis",
+      "term_matches": {
+        "Erythropoietin Stimulating Agents": true,
+        "Myelofibrosis": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_04_chemotherapy_thrombocytopenia_direct",
+      "condition_id": 4,
+      "query": "Is low platelet count after chemotherapy addressed by a policy?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-nplate.pdf",
+      "actual_source": "geha-coverage-policy-nplate.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Chemotherapy-induced thrombocytopenia",
+      "actual_condition": "Chemotherapy-induced thrombocytopenia",
+      "term_matches": {
+        "Nplate": true,
+        "Chemotherapy-induced thrombocytopenia": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_04_chemotherapy_thrombocytopenia_paraphrase",
+      "condition_id": 4,
+      "query": "Which policy discusses chemotherapy-related thrombocytopenia?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-nplate.pdf",
+      "actual_source": "geha-coverage-policy-nplate.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Chemotherapy-induced thrombocytopenia",
+      "actual_condition": "Chemotherapy-induced thrombocytopenia",
+      "term_matches": {
+        "Nplate": true,
+        "Chemotherapy-induced thrombocytopenia": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_04_chemotherapy_thrombocytopenia_delay",
+      "condition_id": 4,
+      "query": "What policy applies when chemotherapy is delayed because platelets stay low?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-nplate.pdf",
+      "actual_source": "geha-coverage-policy-nplate.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Chemotherapy-induced thrombocytopenia",
+      "actual_condition": "Chemotherapy-induced thrombocytopenia",
+      "term_matches": {
+        "Nplate": true,
+        "Chemotherapy-induced thrombocytopenia": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_05_mm_hypogammaglobulinemia_direct",
+      "condition_id": 5,
+      "query": "Which policy addresses hypogammaglobulinemia in multiple myeloma?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "actual_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Hypogammaglobulinemia in Multiple Myeloma",
+      "actual_condition": "Hypogammaglobulinemia in Multiple Myeloma",
+      "term_matches": {
+        "Intravenous Immune Globulin": true,
+        "Hypogammaglobulinemia in Multiple Myeloma": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_05_mm_hypogammaglobulinemia_low_igg",
+      "condition_id": 5,
+      "query": "Is low IgG associated with multiple myeloma addressed by GEHA?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "actual_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Hypogammaglobulinemia in Multiple Myeloma",
+      "actual_condition": "Hypogammaglobulinemia in Multiple Myeloma",
+      "term_matches": {
+        "Intravenous Immune Globulin": true,
+        "Hypogammaglobulinemia in Multiple Myeloma": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_05_mm_hypogammaglobulinemia_infections",
+      "condition_id": 5,
+      "query": "What policy covers recurrent infections with low immunoglobulin in a multiple myeloma patient?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "actual_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Hypogammaglobulinemia in Multiple Myeloma",
+      "actual_condition": "Hypogammaglobulinemia in Multiple Myeloma",
+      "term_matches": {
+        "Intravenous Immune Globulin": true,
+        "Hypogammaglobulinemia in Multiple Myeloma": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_06_cll_hypogammaglobulinemia_direct",
+      "condition_id": 6,
+      "query": "Which policy addresses hypogammaglobulinemia in chronic lymphocytic leukemia?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "actual_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Hypogammaglobulinemia in Chronic Lymphocytic Leukemia",
+      "actual_condition": "Hypogammaglobulinemia in Chronic Lymphocytic Leukemia",
+      "term_matches": {
+        "Intravenous Immune Globulin": true,
+        "Hypogammaglobulinemia in Chronic Lymphocytic Leukemia": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_06_cll_hypogammaglobulinemia_low_igg",
+      "condition_id": 6,
+      "query": "Is low IgG in CLL included in a GEHA policy?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "actual_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Hypogammaglobulinemia in Chronic Lymphocytic Leukemia",
+      "actual_condition": "Hypogammaglobulinemia in Chronic Lymphocytic Leukemia",
+      "term_matches": {
+        "Intravenous Immune Globulin": true,
+        "Hypogammaglobulinemia in Chronic Lymphocytic Leukemia": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_06_cll_hypogammaglobulinemia_infections",
+      "condition_id": 6,
+      "query": "What policy discusses recurrent bacterial infections and low immunoglobulin in CLL?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "actual_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Hypogammaglobulinemia in Chronic Lymphocytic Leukemia",
+      "actual_condition": "Hypogammaglobulinemia in Chronic Lymphocytic Leukemia",
+      "term_matches": {
+        "Intravenous Immune Globulin": true,
+        "Hypogammaglobulinemia in Chronic Lymphocytic Leukemia": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_07_checkpoint_toxicity_direct",
+      "condition_id": 7,
+      "query": "Which policy discusses management of checkpoint inhibitor toxicities?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "actual_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Management of Checkpoint Inhibitor Related Toxicities",
+      "actual_condition": "Management of Checkpoint Inhibitor Related Toxicities",
+      "term_matches": {
+        "Intravenous Immune Globulin": true,
+        "Checkpoint Inhibitor Related Toxicities": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_07_checkpoint_toxicity_myocarditis",
+      "condition_id": 7,
+      "query": "What policy applies to myocarditis caused by checkpoint inhibitor immunotherapy?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "actual_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Management of Checkpoint Inhibitor Related Toxicities",
+      "actual_condition": "Management of Checkpoint Inhibitor Related Toxicities",
+      "term_matches": {
+        "Intravenous Immune Globulin": true,
+        "Checkpoint Inhibitor Related Toxicities": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_07_checkpoint_toxicity_myositis",
+      "condition_id": 7,
+      "query": "Which policy addresses severe steroid-refractory myositis after immunotherapy?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "actual_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Management of Checkpoint Inhibitor Related Toxicities",
+      "actual_condition": "Management of Checkpoint Inhibitor Related Toxicities",
+      "term_matches": {
+        "Intravenous Immune Globulin": true,
+        "Checkpoint Inhibitor Related Toxicities": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_08_cart_toxicity_direct",
+      "condition_id": 8,
+      "query": "Which policy discusses management of CAR-T cell related toxicities?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "actual_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Management of CAR-T Cell Related Toxicities",
+      "actual_condition": "Management of CAR-T Cell Related Toxicities",
+      "term_matches": {
+        "Intravenous Immune Globulin": true,
+        "CAR-T Cell Related Toxicities": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_08_cart_toxicity_crs",
+      "condition_id": 8,
+      "query": "What policy applies to cytokine release syndrome after CAR-T therapy?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "actual_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Management of CAR-T Cell Related Toxicities",
+      "actual_condition": "Management of CAR-T Cell Related Toxicities",
+      "term_matches": {
+        "Intravenous Immune Globulin": true,
+        "CAR-T Cell Related Toxicities": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_08_cart_toxicity_hypogammaglobulinemia",
+      "condition_id": 8,
+      "query": "Which policy covers low immunoglobulin and recurrent infections after CAR-T treatment?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "actual_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Management of CAR-T Cell Related Toxicities",
+      "actual_condition": "Management of CAR-T Cell Related Toxicities",
+      "term_matches": {
+        "Intravenous Immune Globulin": true,
+        "CAR-T Cell Related Toxicities": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_09_iatrogenic_infertility_direct",
+      "condition_id": 9,
+      "query": "Which policy covers infertility caused by chemotherapy or radiation?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-infertility-services.pdf",
+      "actual_source": "geha-coverage-policy-infertility-services.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Iatrogenic infertility",
+      "actual_condition": "Iatrogenic infertility",
+      "term_matches": {
+        "Infertility Services": true,
+        "Iatrogenic Infertility": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_09_iatrogenic_infertility_preservation",
+      "condition_id": 9,
+      "query": "Is fertility preservation addressed before gonadotoxic cancer treatment?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-infertility-services.pdf",
+      "actual_source": "geha-coverage-policy-infertility-services.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Iatrogenic infertility",
+      "actual_condition": "Iatrogenic infertility",
+      "term_matches": {
+        "Infertility Services": true,
+        "Iatrogenic Infertility": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_09_iatrogenic_infertility_freezing",
+      "condition_id": 9,
+      "query": "What policy discusses freezing eggs or sperm before chemotherapy?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-infertility-services.pdf",
+      "actual_source": "geha-coverage-policy-infertility-services.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Iatrogenic infertility",
+      "actual_condition": "Iatrogenic infertility",
+      "term_matches": {
+        "Infertility Services": true,
+        "Iatrogenic Infertility": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_10_hypercalcemia_malignancy_direct",
+      "condition_id": 10,
+      "query": "Which policy addresses hypercalcemia of malignancy?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-xgeva.pdf",
+      "actual_source": "geha-coverage-policy-xgeva.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Hypercalcemia of malignancy",
+      "actual_condition": "Hypercalcemia of malignancy",
+      "term_matches": {
+        "Xgeva": true,
+        "Hypercalcemia of malignancy": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_10_hypercalcemia_malignancy_paraphrase",
+      "condition_id": 10,
+      "query": "What GEHA policy discusses dangerously high calcium caused by cancer?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-xgeva.pdf",
+      "actual_source": "geha-coverage-policy-xgeva.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Hypercalcemia of malignancy",
+      "actual_condition": "Hypercalcemia of malignancy",
+      "term_matches": {
+        "Xgeva": true,
+        "Hypercalcemia of malignancy": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    },
+    {
+      "suite": "secondary_semantic",
+      "id": "secondary_10_hypercalcemia_malignancy_threshold",
+      "condition_id": 10,
+      "query": "Which policy uses an albumin-corrected calcium threshold above 12.5 mg/dL?",
+      "route": "condition_metadata",
+      "expected_source": "geha-coverage-policy-xgeva.pdf",
+      "actual_source": "geha-coverage-policy-xgeva.pdf",
+      "expected_source_rank": 1,
+      "expected_condition": "Hypercalcemia of malignancy",
+      "actual_condition": "Hypercalcemia of malignancy",
+      "term_matches": {
+        "Xgeva": true,
+        "Hypercalcemia of malignancy": true
+      },
+      "revision_history_excluded": true,
+      "source_pass": true,
+      "condition_pass": true,
+      "answer_pass": true,
+      "revision_pass": true,
+      "pass": true
+    }
+  ]
+}

@@ -1,0 +1,293 @@
+QC TABLE QUERIES
+================
+
+These 90 queries are backed by the current evaluation fixtures and are expected
+to retrieve complete parent tables in the Medical Claims Policy Advisor.
+The source shown after each query is the expected top policy document.
+
+A. Indication-specific condition queries (26)
+---------------------------------------------
+
+1. Which policy lists Hepatocellular Carcinoma as an indication-specific criterion?
+   Expected source: geha-coverage-policy-cyramza.pdf
+
+2. Which policy lists Non-Small Cell Lung Cancer as an indication-specific criterion?
+   Expected source: geha-coverage-policy-cyramza.pdf
+
+3. Which policy lists unresectable or metastatic breast cancer as an indication-specific criterion for Datroway?
+   Expected source: geha-coverage-policy-datroway.pdf
+
+4. Which Datroway policy lists EGFR-Mutated Non-squamous non-small cell lung cancer - locally advanced or metastatic as an indication-specific criterion?
+   Expected source: geha-coverage-policy-datroway.pdf
+
+5. Which policy lists Multiple Myeloma as an indication-specific criterion for Elrexfio?
+   Expected source: geha-coverage-policy-elrexfio.pdf
+
+6. Which policy lists Chemotherapy Induced Anemia as an indication-specific criterion?
+   Expected source: geha-coverage-policy-erythropoietin-stimulating-agents.pdf
+
+7. Which policy lists anemia secondary to Myelodysplastic Syndrome as an indication-specific criterion?
+   Expected source: geha-coverage-policy-erythropoietin-stimulating-agents.pdf
+
+8. Which policy lists anemia secondary to MPN or myelofibrosis as an indication-specific criterion?
+   Expected source: geha-coverage-policy-erythropoietin-stimulating-agents.pdf
+
+9. Which policy lists metastatic or advanced colon cancer as an indication-specific approval criterion?
+   Expected source: geha-coverage-policy-fruzaqla.pdf
+
+10. Which policy lists Extensive Stage Small Cell Lung Cancer as an indication-specific approval criterion?
+   Expected source: geha-coverage-policy-imdelltra.pdf
+
+11. Which policy lists hypogammaglobulinemia in Multiple Myeloma as an indication-specific criterion?
+   Expected source: geha-coverage-policy-intravenous-immune-globulin.pdf
+
+12. Which policy lists hypogammaglobulinemia in Chronic Lymphocytic Leukemia as an indication-specific criterion?
+   Expected source: geha-coverage-policy-intravenous-immune-globulin.pdf
+
+13. Which policy lists management of checkpoint inhibitor related toxicities as an indication-specific criterion?
+   Expected source: geha-coverage-policy-intravenous-immune-globulin.pdf
+
+14. Which policy lists management of CAR-T Cell related toxicities as an indication-specific criterion?
+   Expected source: geha-coverage-policy-intravenous-immune-globulin.pdf
+
+15. Which policy lists relapsed or refractory follicular lymphoma as an indication-specific criterion?
+   Expected source: geha-coverage-policy-lunsumio.pdf
+
+16. Which policy lists chemotherapy-induced thrombocytopenia as an indication-specific approval criterion?
+   Expected source: geha-coverage-policy-nplate.pdf
+
+17. Which Nplate policy lists Myelodysplastic Syndrome as an indication-specific approval criterion?
+   Expected source: geha-coverage-policy-nplate.pdf
+
+18. Which policy lists Myelofibrosis as an indication-specific criterion?
+   Expected source: geha-coverage-policy-ojjaara-momelotinib.pdf
+
+19. Which Pluvicto policy lists Prostate Cancer, Metastatic as an indication-specific approval criterion?
+   Expected source: geha-coverage-policy-pluvicto.pdf
+
+20. Which policy lists Prostate Cancer, Metastastic as an indication-specific criterion?
+   Expected source: geha-coverage-policy-provenge.pdf
+
+21. Which Rytelo policy lists Myelodysplastic Syndrome as an indication-specific approval criterion?
+   Expected source: geha-coverage-policy-rytelo.pdf
+
+22. Which policy lists Multiple Myeloma as an indication-specific criterion for Talvey?
+   Expected source: geha-coverage-policy-talvey.pdf
+
+23. Which policy lists Multiple Myeloma as an indication-specific criterion for Tecvayli?
+   Expected source: geha-coverage-policy-tecvayli.pdf
+
+24. Which policy lists unresectable locally advanced or metastatic breast cancer as an indication-specific criterion?
+   Expected source: geha-coverage-policy-trodelvy.pdf
+
+25. Which policy lists Hypercalcemia of malignancy as an indication-specific criterion?
+   Expected source: geha-coverage-policy-xgeva.pdf
+
+26. Which policy lists Biliary Tract Cancer as an indication-specific criterion?
+   Expected source: geha-coverage-policy-ziihera.pdf
+
+B. Secondary-condition semantic queries (30)
+--------------------------------------------
+
+1. Is anemia covered when undergoing chemotherapy?
+   Expected source: geha-coverage-policy-erythropoietin-stimulating-agents.pdf
+
+2. Which policy addresses low hemoglobin caused by cancer treatment?
+   Expected source: geha-coverage-policy-erythropoietin-stimulating-agents.pdf
+
+3. What coverage policy discusses chemotherapy-related anemia?
+   Expected source: geha-coverage-policy-erythropoietin-stimulating-agents.pdf
+
+4. Which policy addresses anemia caused by myelodysplastic syndrome?
+   Expected source: geha-coverage-policy-erythropoietin-stimulating-agents.pdf
+
+5. Is anemia associated with MDS included in a GEHA policy?
+   Expected source: geha-coverage-policy-erythropoietin-stimulating-agents.pdf
+
+6. What policy discusses low hemoglobin secondary to MDS?
+   Expected source: geha-coverage-policy-erythropoietin-stimulating-agents.pdf
+
+7. Is anemia secondary to myelofibrosis addressed by a policy?
+   Expected source: geha-coverage-policy-erythropoietin-stimulating-agents.pdf
+
+8. Which GEHA policy covers low hemoglobin due to a myeloproliferative neoplasm?
+   Expected source: geha-coverage-policy-erythropoietin-stimulating-agents.pdf
+
+9. What policy discusses anemia from MPN or myelofibrosis?
+   Expected source: geha-coverage-policy-erythropoietin-stimulating-agents.pdf
+
+10. Is low platelet count after chemotherapy addressed by a policy?
+   Expected source: geha-coverage-policy-nplate.pdf
+
+11. Which policy discusses chemotherapy-related thrombocytopenia?
+   Expected source: geha-coverage-policy-nplate.pdf
+
+12. What policy applies when chemotherapy is delayed because platelets stay low?
+   Expected source: geha-coverage-policy-nplate.pdf
+
+13. Which policy addresses hypogammaglobulinemia in multiple myeloma?
+   Expected source: geha-coverage-policy-intravenous-immune-globulin.pdf
+
+14. Is low IgG associated with multiple myeloma addressed by GEHA?
+   Expected source: geha-coverage-policy-intravenous-immune-globulin.pdf
+
+15. What policy covers recurrent infections with low immunoglobulin in a multiple myeloma patient?
+   Expected source: geha-coverage-policy-intravenous-immune-globulin.pdf
+
+16. Which policy addresses hypogammaglobulinemia in chronic lymphocytic leukemia?
+   Expected source: geha-coverage-policy-intravenous-immune-globulin.pdf
+
+17. Is low IgG in CLL included in a GEHA policy?
+   Expected source: geha-coverage-policy-intravenous-immune-globulin.pdf
+
+18. What policy discusses recurrent bacterial infections and low immunoglobulin in CLL?
+   Expected source: geha-coverage-policy-intravenous-immune-globulin.pdf
+
+19. Which policy discusses management of checkpoint inhibitor toxicities?
+   Expected source: geha-coverage-policy-intravenous-immune-globulin.pdf
+
+20. What policy applies to myocarditis caused by checkpoint inhibitor immunotherapy?
+   Expected source: geha-coverage-policy-intravenous-immune-globulin.pdf
+
+21. Which policy addresses severe steroid-refractory myositis after immunotherapy?
+   Expected source: geha-coverage-policy-intravenous-immune-globulin.pdf
+
+22. Which policy discusses management of CAR-T cell related toxicities?
+   Expected source: geha-coverage-policy-intravenous-immune-globulin.pdf
+
+23. What policy applies to cytokine release syndrome after CAR-T therapy?
+   Expected source: geha-coverage-policy-intravenous-immune-globulin.pdf
+
+24. Which policy covers low immunoglobulin and recurrent infections after CAR-T treatment?
+   Expected source: geha-coverage-policy-intravenous-immune-globulin.pdf
+
+25. Which policy covers infertility caused by chemotherapy or radiation?
+   Expected source: geha-coverage-policy-infertility-services.pdf
+
+26. Is fertility preservation addressed before gonadotoxic cancer treatment?
+   Expected source: geha-coverage-policy-infertility-services.pdf
+
+27. What policy discusses freezing eggs or sperm before chemotherapy?
+   Expected source: geha-coverage-policy-infertility-services.pdf
+
+28. Which policy addresses hypercalcemia of malignancy?
+   Expected source: geha-coverage-policy-xgeva.pdf
+
+29. What GEHA policy discusses dangerously high calcium caused by cancer?
+   Expected source: geha-coverage-policy-xgeva.pdf
+
+30. Which policy uses an albumin-corrected calcium threshold above 12.5 mg/dL?
+   Expected source: geha-coverage-policy-xgeva.pdf
+
+C. Preferred/non-preferred product queries (34)
+-----------------------------------------------
+
+1. Which bendamustine products are preferred?
+   Expected source: geha-coverage-policy-bendamustine.pdf
+
+2. Which bendamustine products are non-preferred?
+   Expected source: geha-coverage-policy-bendamustine.pdf
+
+3. Which bevacizumab products are preferred?
+   Expected source: geha-coverage-policy-bevacizumab.pdf
+
+4. Which bevacizumab products are non-preferred?
+   Expected source: geha-coverage-policy-bevacizumab.pdf
+
+5. Which datroway products are preferred?
+   Expected source: geha-coverage-policy-datroway.pdf
+
+6. Which datroway products are non-preferred?
+   Expected source: geha-coverage-policy-datroway.pdf
+
+7. Which erythropoietin stimulating agents products are preferred?
+   Expected source: geha-coverage-policy-erythropoietin-stimulating-agents.pdf
+
+8. Which erythropoietin stimulating agents products are non-preferred?
+   Expected source: geha-coverage-policy-erythropoietin-stimulating-agents.pdf
+
+9. Which gemcitabine products are preferred?
+   Expected source: geha-coverage-policy-gemcitabine.pdf
+
+10. Which gemcitabine products are non-preferred?
+   Expected source: geha-coverage-policy-gemcitabine.pdf
+
+11. Which gnrh analogues in prostate cancer products are preferred?
+   Expected source: geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf
+
+12. Which gnrh analogues in prostate cancer products are non-preferred?
+   Expected source: geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf
+
+13. Which long acting gcsfs products are preferred?
+   Expected source: geha-coverage-policy-long-acting-gcsfs.pdf
+
+14. Which long acting gcsfs products are non-preferred?
+   Expected source: geha-coverage-policy-long-acting-gcsfs.pdf
+
+15. Which non muscle invasive bladder cancer products are preferred?
+   Expected source: geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf
+
+16. Which non muscle invasive bladder cancer products are non-preferred?
+   Expected source: geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf
+
+17. Which paclitaxel protein bound products are preferred?
+   Expected source: geha-coverage-policy-paclitaxel-protein-bound.pdf
+
+18. Which paclitaxel protein bound products are non-preferred?
+   Expected source: geha-coverage-policy-paclitaxel-protein-bound.pdf
+
+19. Which pemetrexed products are preferred?
+   Expected source: geha-coverage-policy-pemetrexed.pdf
+
+20. Which pemetrexed products are non-preferred?
+   Expected source: geha-coverage-policy-pemetrexed.pdf
+
+21. Which rituximab products are preferred?
+   Expected source: geha-coverage-policy-rituximab.pdf
+
+22. Which rituximab products are non-preferred?
+   Expected source: geha-coverage-policy-rituximab.pdf
+
+23. Which rytelo products are preferred?
+   Expected source: geha-coverage-policy-rytelo.pdf
+
+24. Which rytelo products are non-preferred?
+   Expected source: geha-coverage-policy-rytelo.pdf
+
+25. Which short acting gcsfs products are preferred?
+   Expected source: geha-coverage-policy-short-acting-gcsfs.pdf
+
+26. Which short acting gcsfs products are non-preferred?
+   Expected source: geha-coverage-policy-short-acting-gcsfs.pdf
+
+27. Which taxotere docivyx products are preferred?
+   Expected source: geha-coverage-policy-taxotere-docivyx.pdf
+
+28. Which taxotere docivyx products are non-preferred?
+   Expected source: geha-coverage-policy-taxotere-docivyx.pdf
+
+29. Which trastuzumab products are preferred?
+   Expected source: geha-coverage-policy-trastuzumab.pdf
+
+30. Which trastuzumab products are non-preferred?
+   Expected source: geha-coverage-policy-trastuzumab.pdf
+
+31. Which vectibix products are preferred?
+   Expected source: geha-coverage-policy-vectibix.pdf
+
+32. Which vectibix products are non-preferred?
+   Expected source: geha-coverage-policy-vectibix.pdf
+
+33. Which xgeva products are preferred?
+   Expected source: geha-coverage-policy-xgeva.pdf
+
+34. Which xgeva products are non-preferred?
+   Expected source: geha-coverage-policy-xgeva.pdf
+
+Additional verified drug-name example
+-------------------------------------
+
+1. What does Treanda return?
+   Expected source: geha-coverage-policy-bendamustine.pdf
+   Expected complete tables: Billing codes; Drug preference and prior authorization
+

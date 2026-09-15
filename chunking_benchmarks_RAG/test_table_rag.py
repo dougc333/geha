@@ -1,3 +1,4 @@
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -12,6 +13,25 @@ from chunking_benchmarks_RAG.table_rag import (
 
 
 class TableRagTests(unittest.TestCase):
+    def test_pdf_verified_indication_specific_criteria_evals(self):
+        project_root = Path(__file__).resolve().parents[1]
+        eval_path = Path(__file__).with_name(
+            "indication_specific_criteria_evals.json"
+        )
+        cases = json.loads(eval_path.read_text(encoding="utf-8"))
+        self.assertEqual(len(cases), 26)
+
+        for case in cases:
+            with self.subTest(case=case["id"]):
+                markdown_path = (
+                    project_root
+                    / "downloads"
+                    / "coverage-policies"
+                    / case["source"].replace(".pdf", ".docling.md")
+                )
+                conditions, _ = extract_indication_metadata(markdown_path)
+                self.assertIn(case["expected_condition"], conditions)
+
     def test_two_blank_rows_separate_tables(self):
         content = "a,b\n1,2\n\n\nc,d\n3,4\n"
         with tempfile.TemporaryDirectory() as directory:
