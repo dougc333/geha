@@ -90,10 +90,8 @@ class Fixture(unittest.TestCase):
         self.addCleanup(self.tmp.cleanup)
         self.base = Path(self.tmp.name)
         self.db = self.base / "checkpoints.sqlite"
-        folder = self.base / "agentic_simulation/claims"
+        folder = self.base / "demo_data"
         folder.mkdir(parents=True)
-        refs = self.base / "agentic_reference/data"
-        refs.mkdir(parents=True)
         self.sources = {
             folder / "claims.json": [
                 {"claim_id": "CLM-1", "member_id": "M1", "plan": "Synthetic"}
@@ -105,7 +103,7 @@ class Fixture(unittest.TestCase):
                     "stages": [{"status": "PENDING", "note": "Prior auth review"}],
                 }
             ],
-            refs / "public_reference.json": [],
+            folder / "public_reference.json": [],
         }
         for p, value in self.sources.items():
             p.write_text(json.dumps(value))

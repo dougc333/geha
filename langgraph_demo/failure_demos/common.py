@@ -11,10 +11,8 @@ CONFIG = {"configurable": {"thread_id": "failure-demo"}}
 
 def write_synthetic_inputs(base: Path) -> None:
     """Create the smallest valid input tree used by demo.make_graph()."""
-    claims = base / "agentic_simulation" / "claims"
-    refs = base / "agentic_reference" / "data"
+    claims = base / "demo_data"
     claims.mkdir(parents=True)
-    refs.mkdir(parents=True)
     (claims / "claims.json").write_text(
         json.dumps(
             [
@@ -39,7 +37,7 @@ def write_synthetic_inputs(base: Path) -> None:
             ]
         )
     )
-    (refs / "public_reference.json").write_text("[]")
+    (claims / "public_reference.json").write_text("[]")
 
 
 def receive(pipe, expected: str, timeout: float = 15.0):

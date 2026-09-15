@@ -13,9 +13,10 @@ See [Table-Aware Coverage Policy RAG](chunking_benchmarks/README.md) for setup, 
 
 ## Runnable demos
 
-This repository contains several independent demos rather than one installed
-top-level executable. Run the Python applications through `uv`, Streamlit, or
-Python, and run the TypeScript application through npm.
+This repository contains focused LangGraph, table-RAG, MCP, and web demos that
+share a small set of fabricated fixtures in `demo_data/`. Run the Python
+applications through `uv` or Streamlit and the TypeScript application through
+npm.
 
 ### LangGraph Streamlit application
 
@@ -90,38 +91,12 @@ The same program provides the `ingest`, `search`, and optional `ask` commands.
 Their required arguments and database configuration are documented in
 [chunking_benchmarks/README.md](chunking_benchmarks/README.md).
 
-### Synthetic claims pipeline
+### Shared synthetic fixtures
 
-```bash
-cd /Users/dc/geha/agentic_simulation
-python generate_claims.py
-python simulate_flow.py
-python render_forms.py
-```
-
-This rebuilds the synthetic claims, runs the simulated adjudication pipeline,
-and renders the sample forms. See
-[agentic_simulation/README.md](agentic_simulation/README.md).
-
-### Agentic reference implementation
-
-Run the dependency-free demonstration:
-
-```bash
-cd /Users/dc/geha/agentic_reference
-PYTHONPATH=src python -m geha_reference.demo
-```
-
-Run the optional API:
-
-```bash
-cd /Users/dc/geha/agentic_reference
-python -m pip install -e '.[api]'
-uvicorn 'geha_reference.api:create_app' --factory --port 8000
-```
-
-See [agentic_reference/README.md](agentic_reference/README.md) for semantic
-embedding support and the production adapter boundaries.
+`demo_data/` contains the fabricated claim records, recorded claim outcomes,
+and curated public-reference snippets used by LangGraph and MCP. These files
+are read-only demo inputs, not real claims, live coverage rules, or production
+systems of record.
 
 ### LangGraph TypeScript web application
 

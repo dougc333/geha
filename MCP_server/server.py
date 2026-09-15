@@ -17,7 +17,7 @@ service = FlowService(
     Path(
         os.environ.get(
             "GEHA_CLAIMS_PATH",
-            ROOT.parent / "agentic_simulation/claims/audit_trails.json",
+            ROOT.parent / "demo_data/audit_trails.json",
         )
     ),
 )

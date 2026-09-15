@@ -1,6 +1,7 @@
-"""Extract every Docling-detected table into one CSV per PDF.
+"""Extract embedded PDF tables into one CSV per PDF, with OCR disabled.
 
 Multiple tables from the same PDF are separated by exactly two empty CSV rows.
+Image-only PDFs fail validation instead of silently invoking an OCR engine.
 """
 
 from __future__ import annotations
@@ -8,11 +9,35 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import math
 import time
 from pathlib import Path
 from typing import Any
 
-from docling.document_converter import DocumentConverter
+from docling.datamodel.base_models import InputFormat
+from docling.datamodel.pipeline_options import PdfPipelineOptions
+from docling.document_converter import DocumentConverter, PdfFormatOption
+
+
+def native_text_converter() -> DocumentConverter:
+    """Build a PDF converter that is prohibited from running OCR."""
+    options = PdfPipelineOptions()
+    options.do_ocr = False
+    options.do_table_structure = True
+    return DocumentConverter(
+        format_options={
+            InputFormat.PDF: PdfFormatOption(pipeline_options=options),
+        }
+    )
+
+
+def require_embedded_text(document: Any, pdf_name: str) -> None:
+    """Reject image-only input; this pipeline intentionally has no OCR fallback."""
+    text = document.export_to_text().strip()
+    if not text:
+        raise ValueError(
+            f"{pdf_name} has no extractable embedded text; OCR is disabled"
+        )
 
 
 def clean_cell(value: Any) -> Any:
@@ -20,7 +45,7 @@ def clean_cell(value: Any) -> Any:
     if value is None:
         return ""
     try:
-        if value != value:  # NaN
+        if math.isnan(value):
             return ""
     except (TypeError, ValueError):
         pass
@@ -73,7 +98,7 @@ def main() -> None:
     if not pdfs:
         raise FileNotFoundError(f"No PDFs found in {input_dir}")
 
-    converter = DocumentConverter()
+    converter = native_text_converter()
     results: list[dict[str, Any]] = []
 
     print(f"Found {len(pdfs)} PDFs in {input_dir}", flush=True)
@@ -91,16 +116,20 @@ def main() -> None:
         try:
             conversion = converter.convert(pdf_path)
             document = conversion.document
+            require_embedded_text(document, pdf_path.name)
             table_stats = write_tables(output_path, list(document.tables), document)
             result = {
                 "pdf": pdf_path.name,
                 "csv": output_path.name,
                 "status": "ok",
+                "extraction_method": "embedded_pdf_text",
+                "ocr_used": False,
                 "tables": len(table_stats),
                 "table_shapes": table_stats,
                 "elapsed_seconds": round(time.perf_counter() - started, 3),
             }
-        except Exception as exc:
+        # A batch should record one malformed PDF and continue with the rest.
+        except Exception as exc:  # noqa: BLE001
             result = {
                 "pdf": pdf_path.name,
                 "csv": output_path.name,

@@ -1,6 +1,6 @@
 # Table-Aware Coverage Policy RAG
 
-This project retrieves information from tables extracted from synthetic coverage-policy PDFs. It uses a parent-child retrieval design:
+This project retrieves information from tables extracted from synthetic coverage-policy PDFs. The PDFs contain embedded text, so ingestion explicitly disables OCR and does not use Tesseract. It uses a parent-child retrieval design:
 
 - Each table row is embedded as a searchable child record.
 - The complete table is stored as its parent record.
@@ -65,7 +65,7 @@ The current retriever is semantic-only: it does not yet combine vector similarit
 - Docker with Compose
 - [`uv`](https://docs.astral.sh/uv/)
 - An OpenAI API key for the optional `ask` command
-- Extracted table files named `*_table_openai.csv`
+- Text-layer PDFs and extracted table files named `*_table_openai.csv`
 
 The CSV extractor places multiple tables in one file and separates them with two blank rows.
 
@@ -90,6 +90,13 @@ Edit `chunking_benchmarks/.env`:
 GEHA_RAG_DATABASE_URL=postgresql://geha:geha-local@127.0.0.1:5433/geha_rag
 OPENAI_API_KEY=sk-your-key
 OPENAI_MODEL=gpt-3.5-turbo
+OPENAI_INPUT_COST_PER_1M_USD=
+OPENAI_OUTPUT_COST_PER_1M_USD=
+
+# Optional tracing to Langfuse Cloud or a self-hosted instance
+LANGFUSE_BASE_URL=http://localhost:3000
+LANGFUSE_PUBLIC_KEY=pk-lf-your-public-key
+LANGFUSE_SECRET_KEY=sk-lf-your-secret-key
 ```
 
 The program loads this project file with `override=True`, so its values replace stale variables exported by an earlier shell session. The `.env` file is ignored by Git. Never put a real key in `.env.example`.
@@ -121,6 +128,22 @@ This creates:
 - An HNSW cosine-similarity index over the 384-dimensional embeddings
 
 ## Ingest extracted tables
+
+Regenerate the CSV inputs directly from the PDFs' embedded text layer when needed:
+
+```bash
+uv run python chunking_benchmarks/extract_pdf_tables.py \
+  /Users/dc/geha/downloads/coverage-policies \
+  --overwrite \
+  --summary /Users/dc/geha/chunking_benchmarks/table_extraction_summary.json
+```
+
+The extractor configures Docling with `do_ocr = False`. An image-only PDF is
+reported as an error instead of invoking Tesseract or another OCR engine. The
+historical `_table_openai.csv` suffix is retained for compatibility with the
+existing index and evaluation data; extraction itself does not call OpenAI.
+
+Then load the extracted tables:
 
 ```bash
 uv run python chunking_benchmarks/table_rag.py ingest \
@@ -174,10 +197,48 @@ uv run python chunking_benchmarks/table_rag.py ask \
   --model gpt-3.5-turbo
 ```
 
+## Langfuse trace and A/B evaluation UI
+
+The comparison UI runs deterministic table interpretation and LLM table
+interpretation against the same top retrieved parent table. This holds retrieval
+constant for each case and compares objective product-list accuracy, error rate,
+latency, token usage, and cost. Each case is emitted as a Langfuse trace with
+`retriever`, `evaluator`, and `generation` observations.
+
+Start the existing Langfuse instance, create a project, and place its public and
+secret keys in `chunking_benchmarks/.env`. Then run:
+
+```bash
+cd /Users/dc/geha
+uv sync
+uv run streamlit run chunking_benchmarks/table_rag_ui.py
+```
+
+Open the Streamlit URL printed by the command. The UI links each result to its
+trace in the Langfuse UI configured by `LANGFUSE_BASE_URL`.
+
+The batch action is deliberately guarded because it makes one paid LLM call per
+case. The deterministic method makes no LLM calls. Langfuse infers model cost
+from recorded usage when its model definition has current pricing. To also show
+a local cost estimate, set the current input and output prices per million tokens
+in `.env` or enter them in the UI; do not treat the example configuration as a
+pricing source.
+
+For a small CLI comparison without Streamlit:
+
+```bash
+uv run python chunking_benchmarks/table_rag_comparison.py --limit 3
+```
+
+This evaluation compares the two interpretation methods end to end using the
+same top retrieved table. `expected_table_retrieved` is reported separately so
+retrieval failures are not mistaken for LLM interpretation failures.
+
 ## Run tests
 
 ```bash
 uv run python -m unittest -v chunking_benchmarks/test_table_rag.py
+uv run python -m unittest -v chunking_benchmarks/test_table_rag_comparison.py
 uv run python -m py_compile chunking_benchmarks/table_rag.py
 ```
 
@@ -229,6 +290,9 @@ This keeps the database volume. To delete the stored database as well, explicitl
 - `.env.example`: safe configuration template
 - `table_preference_evals.json`: preferred and non-preferred retrieval/answer cases
 - `evaluate_table_preferences.py`: repeatable local evaluation runner
+- `table_rag_comparison.py`: deterministic-versus-LLM evaluation and Langfuse tracing
+- `table_rag_ui.py`: Streamlit comparison dashboard with Langfuse trace links
+- `test_table_rag_comparison.py`: contract, scoring, token, and cost unit tests
 - `table_preference_eval_results.md`: complete readable evaluation report
 - `table_preference_eval_results.json`: machine-readable evaluation report
 - `tables.md`: qualifying policy inventory and retrieval baseline

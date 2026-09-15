@@ -125,11 +125,11 @@ Test unauthorized access with `uv run demo.py start --actor outsider`. It ends b
 
 ## Read-only dependencies
 
-- `../agentic_simulation/claims/claims.json`: synthetic member/claim identifiers and plan labels.
-- `../agentic_simulation/claims/audit_trails.json`: recorded status and reasons (authoritative within this simulation).
-- `../agentic_reference/data/public_reference.json`: curated, summarized guidance with source URLs.
+- `../demo_data/claims.json`: synthetic member/claim identifiers and plan labels.
+- `../demo_data/audit_trails.json`: recorded status and reasons (authoritative within this simulation).
+- `../demo_data/public_reference.json`: curated, summarized guidance with source URLs.
 
-No dependency on the deleted `vector_db` or `fuzzy_search` directories. No imports from the reference agent are required. `--base /path/to/geha` selects another input root; `--db /path/to/checkpoints.sqlite` selects another checkpoint store. Put these options before the subcommand.
+No imports from a separate reference agent are required. `--base /path/to/geha` selects another input root; `--db /path/to/checkpoints.sqlite` selects another checkpoint store. Put these options before the subcommand.
 
 ## Deliberate limits
 

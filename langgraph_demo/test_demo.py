@@ -11,7 +11,7 @@ class DemoTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.base = Path(self.temp.name)
         self.db = self.base / "checkpoints.sqlite"
-        folder = self.base / "agentic_simulation/claims"
+        folder = self.base / "demo_data"
         folder.mkdir(parents=True)
         (folder / "claims.json").write_text(
             json.dumps([{"claim_id": "CLM-1", "member_id": "M1", "plan": "Synthetic"}])
@@ -29,9 +29,7 @@ class DemoTests(unittest.TestCase):
                 ]
             )
         )
-        refs = self.base / "agentic_reference/data"
-        refs.mkdir(parents=True)
-        (refs / "public_reference.json").write_text(
+        (folder / "public_reference.json").write_text(
             json.dumps(
                 [
                     {

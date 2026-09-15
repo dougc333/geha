@@ -23,7 +23,7 @@ _ROOT = Path(__file__).parent.parent
 CLAIMS_PATH = Path(
     os.environ.get(
         "GEHA_CLAIMS_PATH",
-        _ROOT.parent / "agentic_simulation" / "claims" / "audit_trails.json",
+        _ROOT.parent / "demo_data" / "audit_trails.json",
     )
 )
 TRAILS = json.loads(CLAIMS_PATH.read_text()) if CLAIMS_PATH.exists() else []

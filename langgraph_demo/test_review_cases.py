@@ -21,7 +21,7 @@ class ReviewCasesTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.base = Path(self.temp.name)
         self.db = self.base / "checkpoints.sqlite"
-        folder = self.base / "agentic_simulation/claims"
+        folder = self.base / "demo_data"
         folder.mkdir(parents=True)
         self.ids = [f"CLM-{100000 + i}" for i in range(20)]
         statuses = ["PENDING_REVIEW", "PAID", "DENIED", "PARTIAL"]
@@ -45,12 +45,10 @@ class ReviewCasesTests(unittest.TestCase):
             }
             for cid in self.ids
         ]
-        refs = self.base / "agentic_reference/data"
-        refs.mkdir(parents=True)
         self.sources = {
             folder / "claims.json": json.dumps(claims),
             folder / "audit_trails.json": json.dumps(trails),
-            refs / "public_reference.json": json.dumps(
+            folder / "public_reference.json": json.dumps(
                 [
                     {
                         "text": "Contact the provider for assistance.",

@@ -57,7 +57,7 @@ def run():
         "Claims adjudication": Path(
             os.environ.get(
                 "GEHA_CLAIMS_PATH",
-                root.parent / "agentic_simulation" / "claims" / "audit_trails.json",
+                root.parent / "demo_data" / "audit_trails.json",
             )
         ),
         "Membership": root / "01_membership_benefits" / "membership_events.json",

@@ -97,7 +97,7 @@ runs/run_<32-hex-uuid>/
 
 The two dependent simulators now default to:
 
-`/Users/dc/geha/agentic_simulation/claims/audit_trails.json`
+`/Users/dc/geha/demo_data/audit_trails.json`
 
 The MCP runner snapshots that existing file into the isolated run and supplies
 `GEHA_CLAIMS_PATH` to the child processes. It does **not** rerun the claims

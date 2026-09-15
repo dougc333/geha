@@ -57,16 +57,14 @@ class State(TypedDict, total=False):
 
 
 def load_inputs(base):
-    folder = Path(base) / "agentic_simulation/claims"
+    folder = Path(base) / "demo_data"
     claims = {
         c["claim_id"]: c for c in json.loads((folder / "claims.json").read_text())
     }
     trails = {
         c["claim_id"]: c for c in json.loads((folder / "audit_trails.json").read_text())
     }
-    refs = json.loads(
-        (Path(base) / "agentic_reference/data/public_reference.json").read_text()
-    )
+    refs = json.loads((folder / "public_reference.json").read_text())
     pending = sorted(
         k
         for k, v in trails.items()
@@ -110,9 +108,7 @@ def make_graph(saver, base):
                 "status": t["final_status"],
                 "plan": c["plan"],
                 "reasons": reasons,
-                "source": str(
-                    Path(base) / "agentic_simulation/claims/audit_trails.json"
-                ),
+                "source": str(Path(base) / "demo_data/audit_trails.json"),
             }
         }
 

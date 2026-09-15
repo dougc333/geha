@@ -136,7 +136,7 @@ they never silently substitute a latest result or an illustrative example.
 
 Claims-dependent runs snapshot the existing external audit file:
 
-`/Users/dc/geha/agentic_simulation/claims/audit_trails.json`
+`/Users/dc/geha/demo_data/audit_trails.json`
 
 The claims adjudication engine is separate and is **not** rerun by these tools.
 Missing claims data produces a warning; malformed data fails the run. The copied
