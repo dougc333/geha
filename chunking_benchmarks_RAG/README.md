@@ -81,10 +81,10 @@ uv sync
 Create the local configuration:
 
 ```bash
-cp chunking_benchmarks/.env.example chunking_benchmarks/.env
+cp chunking_benchmarks_RAG/.env.example chunking_benchmarks_RAG/.env
 ```
 
-Edit `chunking_benchmarks/.env`:
+Edit `chunking_benchmarks_RAG/.env`:
 
 ```dotenv
 GEHA_RAG_DATABASE_URL=postgresql://geha:geha-local@127.0.0.1:5433/geha_rag
@@ -104,13 +104,13 @@ The program loads this project file with `override=True`, so its values replace 
 ## Start PostgreSQL and pgvector
 
 ```bash
-docker compose -f chunking_benchmarks/docker-compose.pgvector.yml up -d
+docker compose -f chunking_benchmarks_RAG/docker-compose.pgvector.yml up -d
 ```
 
 Check its status:
 
 ```bash
-docker compose -f chunking_benchmarks/docker-compose.pgvector.yml ps
+docker compose -f chunking_benchmarks_RAG/docker-compose.pgvector.yml ps
 ```
 
 The database listens on `127.0.0.1:5433` and stores its data in the `geha_pgvector_data` Docker volume.
@@ -118,7 +118,7 @@ The database listens on `127.0.0.1:5433` and stores its data in the `geha_pgvect
 ## Initialize the schema
 
 ```bash
-uv run python chunking_benchmarks/table_rag.py init-db
+uv run python chunking_benchmarks_RAG/table_rag.py init-db
 ```
 
 This creates:
@@ -132,10 +132,10 @@ This creates:
 Regenerate the CSV inputs directly from the PDFs' embedded text layer when needed:
 
 ```bash
-uv run python chunking_benchmarks/extract_pdf_tables.py \
+uv run python chunking_benchmarks_RAG/extract_pdf_tables.py \
   /Users/dc/geha/downloads/coverage-policies \
   --overwrite \
-  --summary /Users/dc/geha/chunking_benchmarks/table_extraction_summary.json
+  --summary /Users/dc/geha/chunking_benchmarks_RAG/table_extraction_summary.json
 ```
 
 The extractor configures Docling with `do_ocr = False`. An image-only PDF is
@@ -146,7 +146,7 @@ existing index and evaluation data; extraction itself does not call OpenAI.
 Then load the extracted tables:
 
 ```bash
-uv run python chunking_benchmarks/table_rag.py ingest \
+uv run python chunking_benchmarks_RAG/table_rag.py ingest \
   /Users/dc/geha/downloads/coverage-policies
 ```
 
@@ -157,14 +157,14 @@ The current sample corpus produces 103 parent tables and 691 searchable child ro
 ## Retrieve a complete table locally
 
 ```bash
-uv run python chunking_benchmarks/table_rag.py search \
+uv run python chunking_benchmarks_RAG/table_rag.py search \
   "Which bendamustine products are non-preferred?"
 ```
 
 Useful retrieval controls:
 
 ```bash
-uv run python chunking_benchmarks/table_rag.py search \
+uv run python chunking_benchmarks_RAG/table_rag.py search \
   "Which bendamustine products are non-preferred?" \
   --top-tables 3 \
   --candidate-rows 30
@@ -177,7 +177,7 @@ uv run python chunking_benchmarks/table_rag.py search \
 The policy documents in this demo are synthetic. The `ask` command transmits the retrieved table content to the configured OpenAI model:
 
 ```bash
-uv run python chunking_benchmarks/table_rag.py ask \
+uv run python chunking_benchmarks_RAG/table_rag.py ask \
   "Which bendamustine products are non-preferred?"
 ```
 
@@ -192,7 +192,7 @@ Table: Drug preference and prior authorization)
 Override the configured model for one request:
 
 ```bash
-uv run python chunking_benchmarks/table_rag.py ask \
+uv run python chunking_benchmarks_RAG/table_rag.py ask \
   "Which bendamustine products are non-preferred?" \
   --model gpt-3.5-turbo
 ```
@@ -206,12 +206,12 @@ latency, token usage, and cost. Each case is emitted as a Langfuse trace with
 `retriever`, `evaluator`, and `generation` observations.
 
 Start the existing Langfuse instance, create a project, and place its public and
-secret keys in `chunking_benchmarks/.env`. Then run:
+secret keys in `chunking_benchmarks_RAG/.env`. Then run:
 
 ```bash
 cd /Users/dc/geha
 uv sync
-uv run streamlit run chunking_benchmarks/table_rag_ui.py
+uv run streamlit run chunking_benchmarks_RAG/table_rag_ui.py
 ```
 
 Open the Streamlit URL printed by the command. The UI links each result to its
@@ -227,7 +227,7 @@ pricing source.
 For a small CLI comparison without Streamlit:
 
 ```bash
-uv run python chunking_benchmarks/table_rag_comparison.py --limit 3
+uv run python chunking_benchmarks_RAG/table_rag_comparison.py --limit 3
 ```
 
 This evaluation compares the two interpretation methods end to end using the
@@ -237,9 +237,9 @@ retrieval failures are not mistaken for LLM interpretation failures.
 ## Run tests
 
 ```bash
-uv run python -m unittest -v chunking_benchmarks/test_table_rag.py
-uv run python -m unittest -v chunking_benchmarks/test_table_rag_comparison.py
-uv run python -m py_compile chunking_benchmarks/table_rag.py
+uv run python -m unittest -v chunking_benchmarks_RAG/test_table_rag.py
+uv run python -m unittest -v chunking_benchmarks_RAG/test_table_rag_comparison.py
+uv run python -m py_compile chunking_benchmarks_RAG/table_rag.py
 ```
 
 The unit tests cover table separation, uneven-row normalization, and inferred table titles.
@@ -265,7 +265,7 @@ Error rate is `1 - accuracy`. Product answers are extracted deterministically fr
 Run the complete local comparison:
 
 ```bash
-cd /Users/dc/geha/chunking_benchmarks
+cd /Users/dc/geha/chunking_benchmarks_RAG
 uv run python evaluate_table_preferences.py
 ```
 
@@ -277,7 +277,7 @@ The evaluator records the top-five tables and similarity scores for every query,
 ## Stop the database
 
 ```bash
-docker compose -f chunking_benchmarks/docker-compose.pgvector.yml down
+docker compose -f chunking_benchmarks_RAG/docker-compose.pgvector.yml down
 ```
 
 This keeps the database volume. To delete the stored database as well, explicitly remove the `geha_pgvector_data` Docker volume.

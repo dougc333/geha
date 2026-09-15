@@ -2,7 +2,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from chunking_benchmarks.table_rag import (
+from chunking_benchmarks_RAG.table_rag import (
     infer_title,
     normalized_table,
     split_csv_tables,

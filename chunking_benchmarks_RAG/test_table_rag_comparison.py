@@ -2,7 +2,7 @@ import json
 import unittest
 from types import SimpleNamespace
 
-from chunking_benchmarks.table_rag_comparison import (
+from chunking_benchmarks_RAG.table_rag_comparison import (
     estimated_cost,
     exact_product_match,
     extract_products,

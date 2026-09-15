@@ -1,6 +1,6 @@
 """Integration test: run all flows in isolation and verify response counters.
 
-Run: python -m unittest discover -s /Users/dc/geha/MCP_server -p test_mcp_responses.py
+Run: python -m unittest discover -s /Users/dc/geha/highlevel_simulation -p test_responses.py
 """
 
 import json

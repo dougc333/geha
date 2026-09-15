@@ -123,7 +123,7 @@ with single_tab:
     st.write(selected["query"])
     if st.button("Run single comparison", type="primary"):
         if not os.getenv("OPENAI_API_KEY"):
-            st.error("Set OPENAI_API_KEY in chunking_benchmarks/.env first.")
+            st.error("Set OPENAI_API_KEY in chunking_benchmarks_RAG/.env first.")
         else:
             with st.spinner("Retrieving one table and running both methods..."):
                 try:
@@ -176,7 +176,7 @@ with batch_tab:
     confirmed = st.checkbox("I understand this batch makes paid API calls")
     if st.button("Run batch comparison", disabled=not confirmed):
         if not os.getenv("OPENAI_API_KEY"):
-            st.error("Set OPENAI_API_KEY in chunking_benchmarks/.env first.")
+            st.error("Set OPENAI_API_KEY in chunking_benchmarks_RAG/.env first.")
         else:
             results = []
             progress = st.progress(0)

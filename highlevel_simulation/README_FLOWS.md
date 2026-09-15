@@ -1,7 +1,7 @@
 # GEHA Processing-Flow Simulations
 
 For the local MCP interface, isolated execution, tools, and safeguards, see
-[README_MCP.md](README_MCP.md). Direct shell runs below still overwrite each
+[README_MCP.md](../MCP_server/README_MCP.md). Direct shell runs below still overwrite each
 simulator's own outputs; MCP runs write separate `runs/run_<id>/` workspaces.
 
 Nine directories, one per major health-payer processing flow. Each follows the
@@ -51,7 +51,7 @@ regulatory compliance**.
 ## Run everything
 
 [run_all_flows.sh](run_all_flows.sh) runs all nine simulations sequentially.
-Run the following from the GEHA project directory. Running these commands
+Run the following from the `highlevel_simulation` directory. Running these commands
 overwrites the existing JSON outputs.
 
 ```bash
@@ -76,14 +76,15 @@ outcome counts.
 `execution_status: completed` means the simulator reached response generation;
 it does not mean all requests were approved or actual compliance was verified.
 These are tool-result payloads, not JSON-RPC envelopes, and do not start an MCP
-server. Console output is unchanged. Failed runs may leave an older response
-file: a future MCP wrapper must check process exit status before using it.
-Concurrent runs still share output filenames and must be serialized or isolated.
+server. Console output is unchanged. Failed direct runs may leave an older
+response file. The MCP wrapper checks process exit status and required outputs
+before reporting success. Concurrent direct runs share output filenames; MCP
+runs use isolated `runs/run_<id>/` workspaces.
 
 To test all nine in temporary copies without changing project datasets:
 
 ```bash
-python -m unittest discover -s /Users/dc/geha/MCP_server -p test_mcp_responses.py
+python -m unittest discover -s /Users/dc/geha/highlevel_simulation -p test_responses.py
 ```
 
 ## Each flow's outputs

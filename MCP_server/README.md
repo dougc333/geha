@@ -6,8 +6,9 @@
 
 The MCP host communicates with `server.py` over stdio. FastMCP validates one of seven typed tool calls, and `FlowService` plans dependencies, admits at most two runs, snapshots allowlisted inputs into a private run directory, executes the required simulators, validates their outputs, and returns structured results. Read tools require the explicit `run_id` returned by an execution call.
 
-This directory contains nine Python health-insurance workflow simulators and
-one local Model Context Protocol (MCP) server that exposes them as tools.
+This directory contains one local Model Context Protocol (MCP) server. Its nine
+Python health-insurance workflow simulators are grouped under
+`../highlevel_simulation/` and exposed as tools by the server.
 
 **The MCP interface is real; the insurance operations are simulated.** Data is
 fabricated, decisions use fixed rules and seeded randomness, and no LLM or API
@@ -74,20 +75,20 @@ all nine flows; there is no need for one server or container per directory.
 
 | File or directory | Purpose |
 |---|---|
-| `01_membership_benefits/` through `09_compliance/` | Simulator scripts, functional specifications, records, event logs, and response files. |
+| `../highlevel_simulation/` | Nine simulator directories, direct-run tooling, simulation tests, documentation, and diagrams. |
 | [server.py](server.py) | Registers seven MCP tools and starts the local stdio server. |
 | [flow_service.py](flow_service.py) | Allowlist, dependencies, isolated execution, timeouts, validation, provenance, and result retrieval. |
 | [demo_client.py](demo_client.py) | Minimal MCP client for discovery or an end-to-end run. |
-| [run_all_flows.sh](run_all_flows.sh) | Runs the nine scripts directly, without MCP isolation. |
+| [run_all_flows.sh](../highlevel_simulation/run_all_flows.sh) | Runs the nine scripts directly, without MCP isolation. |
 | [mcp_config.example.json](mcp_config.example.json) | Example host connection configuration. |
 | [pyproject.toml](pyproject.toml), [uv.lock](uv.lock) | Python requirements and locked dependencies; uses the official MCP Python SDK v1 line. |
 | `.venv/` | Local Python environment created by `uv sync`. |
 | `runs/` | Isolated MCP run directories, including manifests and captured logs. |
-| [test_mcp_responses.py](test_mcp_responses.py) | Checks that all nine response summaries match generated data. |
+| [test_responses.py](../highlevel_simulation/test_responses.py) | Checks that all nine response summaries match generated data. |
 | [test_server.py](test_server.py) | Runner safeguards and actual stdio MCP protocol tests. |
-| [README_FLOWS.md](README_FLOWS.md) | Detailed simulation overview, outputs, and workflow diagrams. |
+| [README_FLOWS.md](../highlevel_simulation/README_FLOWS.md) | Detailed simulation overview, outputs, and workflow diagrams. |
 | [README_MCP.md](README_MCP.md) | Detailed MCP behavior, safeguards, configuration, and limitations. |
-| `geha_services_flowchart.png`, `geha_run_order.png`, `geha_hipaa_overlay.png` | Supporting diagrams embedded in `README_FLOWS.md`. |
+| `../highlevel_simulation/geha_services_flowchart.png`, `../highlevel_simulation/geha_run_order.png`, `../highlevel_simulation/geha_hipaa_overlay.png` | Supporting diagrams embedded in `README_FLOWS.md`. |
 | `.gitignore` | Excludes environments, Python caches, and generated run directories. |
 
 ## The nine simulations
@@ -98,15 +99,15 @@ workflows; not every described feature is implemented by the simplified code.
 
 | ID / folder | Program and behavior | Detailed outputs |
 |---|---|---|
-| `01_membership_benefits` | [simulate_membership.py](01_membership_benefits/simulate_membership.py): creates fabricated members, assigns plans/dependents, simulates coverage changes, and logs ID-card issuance. | `members.json`, `membership_events.json` |
-| `02_provider_operations` | [simulate_providers.py](02_provider_operations/simulate_providers.py): checks fabricated exclusion and credentialing flags, then assigns network status and facilities. | `providers.json`, `provider_events.json` |
-| `03_utilization_management` | [simulate_utilization.py](03_utilization_management/simulate_utilization.py): uses fixed procedure requirements and fabricated necessity scores to simulate authorization decisions. | `authorizations.json`, `um_events.json` |
-| `04_premium_billing` | [simulate_premium_billing.py](04_premium_billing/simulate_premium_billing.py): reads members, calculates simulated premium shares, and assigns payment statuses. | `premium_ledger.json`, `billing_events.json` |
-| `05_appeals_disputes` | [simulate_appeals.py](05_appeals_disputes/simulate_appeals.py): processes predefined disputes through simulated deadlines, internal decisions, and external review. | `appeals.json`, `appeals_events.json` |
-| `06_payment_integrity` | [simulate_payment_integrity.py](06_payment_integrity/simulate_payment_integrity.py): scores injected billing flags, diagnosis/procedure pairs, and charge thresholds. | `screening_log.json`, `integrity_events.json` |
-| `07_care_case_management` | [simulate_care_management.py](07_care_case_management/simulate_care_management.py): assigns care programs and simulated enrollment/monitoring outcomes. | `care_cases.json`, `care_events.json` |
-| `08_member_services` | [simulate_member_services.py](08_member_services/simulate_member_services.py): looks up claim, membership, and authorization statuses; some other replies are canned. | `inquiries.json`, `service_events.json` |
-| `09_compliance` | [simulate_compliance.py](09_compliance/simulate_compliance.py): primarily checks upstream evidence-file existence and emits simulated compliance statuses. | `compliance_register.json`, `compliance_events.json` |
+| `01_membership_benefits` | [simulate_membership.py](../highlevel_simulation/01_membership_benefits/simulate_membership.py): creates fabricated members, assigns plans/dependents, simulates coverage changes, and logs ID-card issuance. | `members.json`, `membership_events.json` |
+| `02_provider_operations` | [simulate_providers.py](../highlevel_simulation/02_provider_operations/simulate_providers.py): checks fabricated exclusion and credentialing flags, then assigns network status and facilities. | `providers.json`, `provider_events.json` |
+| `03_utilization_management` | [simulate_utilization.py](../highlevel_simulation/03_utilization_management/simulate_utilization.py): uses fixed procedure requirements and fabricated necessity scores to simulate authorization decisions. | `authorizations.json`, `um_events.json` |
+| `04_premium_billing` | [simulate_premium_billing.py](../highlevel_simulation/04_premium_billing/simulate_premium_billing.py): reads members, calculates simulated premium shares, and assigns payment statuses. | `premium_ledger.json`, `billing_events.json` |
+| `05_appeals_disputes` | [simulate_appeals.py](../highlevel_simulation/05_appeals_disputes/simulate_appeals.py): processes predefined disputes through simulated deadlines, internal decisions, and external review. | `appeals.json`, `appeals_events.json` |
+| `06_payment_integrity` | [simulate_payment_integrity.py](../highlevel_simulation/06_payment_integrity/simulate_payment_integrity.py): scores injected billing flags, diagnosis/procedure pairs, and charge thresholds. | `screening_log.json`, `integrity_events.json` |
+| `07_care_case_management` | [simulate_care_management.py](../highlevel_simulation/07_care_case_management/simulate_care_management.py): assigns care programs and simulated enrollment/monitoring outcomes. | `care_cases.json`, `care_events.json` |
+| `08_member_services` | [simulate_member_services.py](../highlevel_simulation/08_member_services/simulate_member_services.py): looks up claim, membership, and authorization statuses; some other replies are canned. | `inquiries.json`, `service_events.json` |
+| `09_compliance` | [simulate_compliance.py](../highlevel_simulation/09_compliance/simulate_compliance.py): primarily checks upstream evidence-file existence and emits simulated compliance statuses. | `compliance_register.json`, `compliance_events.json` |
 
 ## MCP server methods
 
@@ -177,13 +178,13 @@ do not use the MCP runner's isolation, concurrency limits, or timeout safeguards
 
 ```bash
 cd /Users/dc/geha/MCP_server
-uv run --locked python 01_membership_benefits/simulate_membership.py
+uv run --locked python ../highlevel_simulation/01_membership_benefits/simulate_membership.py
 ```
 
 Run all nine directly, using the project environment:
 
 ```bash
-uv run --locked bash run_all_flows.sh
+uv run --locked bash ../highlevel_simulation/run_all_flows.sh
 ```
 
 Prefer `uv run --locked demo_client.py --run-all` when you want preserved,
@@ -215,7 +216,8 @@ The MCP safeguards do not turn these into real insurance or clinical workflows.
 
 ```bash
 cd /Users/dc/geha/MCP_server
-uv run --locked python -B -m unittest discover -s . -p 'test_*.py'
+uv run --locked python -B -m unittest discover -s . -p 'test_server.py'
+uv run --locked python -B -m unittest discover -s ../highlevel_simulation -p 'test_responses.py'
 ```
 
 The current suite has 16 tests. They run in temporary directories, checking all

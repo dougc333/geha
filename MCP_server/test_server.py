@@ -15,6 +15,7 @@ from mcp.client.stdio import stdio_client
 from flow_service import FLOWS, FlowService
 
 ROOT = Path(__file__).resolve().parent
+SIMULATION_ROOT = ROOT.parent / "highlevel_simulation"
 
 
 class RunnerTests(unittest.IsolatedAsyncioTestCase):
@@ -25,7 +26,10 @@ class RunnerTests(unittest.IsolatedAsyncioTestCase):
         self.source = self.base / "source"
         for f in FLOWS.values():
             (self.source / f.folder).mkdir(parents=True)
-            shutil.copy2(ROOT / f.folder / f.script, self.source / f.folder / f.script)
+            shutil.copy2(
+                SIMULATION_ROOT / f.folder / f.script,
+                self.source / f.folder / f.script,
+            )
         self.claims = self.base / "audit.json"
         self.claims.write_text(
             json.dumps([{"claim_id": "CLM-100005", "final_status": "PAID"}])
@@ -113,7 +117,9 @@ class RunnerTests(unittest.IsolatedAsyncioTestCase):
     async def test_symlink_source(self):
         path = self.source / FLOWS["01"].folder / FLOWS["01"].script
         path.unlink()
-        path.symlink_to(ROOT / FLOWS["01"].folder / FLOWS["01"].script)
+        path.symlink_to(
+            SIMULATION_ROOT / FLOWS["01"].folder / FLOWS["01"].script
+        )
         with self.assertRaisesRegex(RuntimeError, "escapes"):
             await self.service.execute(["01"])
 

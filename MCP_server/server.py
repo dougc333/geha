@@ -11,8 +11,9 @@ from pydantic import Field
 from flow_service import FLOWS, FlowService
 
 ROOT = Path(__file__).resolve().parent
+SIMULATION_ROOT = ROOT.parent / "highlevel_simulation"
 service = FlowService(
-    ROOT,
+    SIMULATION_ROOT,
     Path(os.environ.get("GEHA_RUNS_DIR", ROOT / "runs")),
     Path(
         os.environ.get(

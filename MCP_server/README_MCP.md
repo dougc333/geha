@@ -1,7 +1,7 @@
 # GEHA simulation MCP server
 
 A real, local **stdio MCP server** wrapping the nine fabricated insurance
-simulations. Uses the official Python MCP SDK (v1 maintenance line, pinned below
+simulations under `../highlevel_simulation/`. Uses the official Python MCP SDK (v1 maintenance line, pinned below
 v2). No LLM, API key, network listener, real insurance transaction, or database is
 required. The server does not certify medical necessity or regulatory compliance.
 
@@ -109,7 +109,7 @@ Operator-only environment overrides (not tool arguments):
 - `GEHA_CLAIMS_PATH`: trusted claims audit JSON input.
 - `GEHA_RUNS_DIR`: output root, default `MCP_server/runs`.
 
-Direct `bash run_all_flows.sh` still runs in the source folders and overwrites
+Direct `bash ../highlevel_simulation/run_all_flows.sh` still runs in the source folders and overwrites
 their JSON outputs. Use the MCP tools for isolation.
 
 ## Scope and remaining limitations
@@ -130,7 +130,8 @@ preserves warnings and `simulation_only: true`, and compliance summaries retain
 ## Tests
 
 ```bash
-uv run --locked python -B -m unittest discover -s . -p 'test_*.py'
+uv run --locked python -B -m unittest discover -s . -p 'test_server.py'
+uv run --locked python -B -m unittest discover -s ../highlevel_simulation -p 'test_responses.py'
 ```
 
 Tests use temporary copies and include all nine response counters, dependency
