@@ -2,9 +2,11 @@ import json
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import patch
 
 from chunking_benchmarks_RAG.medical_claims_advisor import (
     build_policy_summary,
+    canonical_condition,
     condition_status,
     condition_table_priority,
     evidence_records,
@@ -14,10 +16,14 @@ from chunking_benchmarks_RAG.medical_claims_advisor import (
     inventory_evidence,
     is_condition_inventory_query,
     is_preferred_condition_query,
+    matching_policy_sources,
     match_approved_condition_alias,
     preferred_products,
     query_mentions_policy_source,
     query_mentions_condition,
+    retrieve_policy_sections,
+    retrieve_tables_for_named_condition,
+    should_expand_universal,
     table_records,
 )
 from chunking_benchmarks_RAG.table_rag import OPENAI_ASK_INSTRUCTIONS
@@ -44,7 +50,110 @@ class FakeResponses:
         return SimpleNamespace(output_text="Corrected result")
 
 
+class FakePolicyConnection:
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *_args):
+        return False
+
+    def execute(self, statement, _params=None):
+        if "FROM policy_source_terms" in statement:
+            rows = [
+                {
+                    "source_pdf": "geha-coverage-policy-nplate.pdf",
+                    "term": term,
+                    "term_type": "filename" if term == "nplate" else "generic_name",
+                }
+                for term in ("nplate", "romiplostim")
+            ]
+        elif "FROM policy_chunks" in statement:
+            rows = [
+                {
+                    "chunk_number": number,
+                    "section_type": "indication" if number < 4 else "universal",
+                    "condition": condition,
+                    "content": condition or "Universal Approval Criteria",
+                }
+                for number, condition in (
+                    (2, "Chemotherapy-induced thrombocytopenia"),
+                    (3, "Myelodysplastic Syndrome"),
+                    (4, None),
+                )
+            ]
+        elif "FROM policy_tables" in statement:
+            rows = [{
+                "source": "geha-coverage-policy-nplate.pdf",
+                "table_number": 1,
+                "title": "Billing codes",
+                "full_csv": "Drug Name,HCPCS Code\nRomiplostim,J2802\n",
+                "rows_json": [],
+                "conditions_json": [
+                    "Chemotherapy-induced thrombocytopenia",
+                    "Myelodysplastic Syndrome",
+                ],
+                "indication_context": "",
+            }]
+        else:
+            raise AssertionError(statement)
+        return SimpleNamespace(fetchall=lambda: rows)
+
+
 class MedicalClaimsAdvisorTests(unittest.TestCase):
+    def test_universal_criteria_expands_only_for_general_rules_questions(self):
+        self.assertFalse(should_expand_universal("nplate"))
+        self.assertTrue(should_expand_universal("nplate universal approval criteria"))
+        self.assertTrue(should_expand_universal("nplate general approval rules"))
+
+    def test_policy_name_outranks_another_policys_billing_mention(self):
+        terms = [
+            {
+                "source_pdf": "geha-coverage-policy-trodelvy.pdf",
+                "term": "trodelvy",
+                "term_type": "filename",
+            },
+            {
+                "source_pdf": "geha-coverage-policy-datroway.pdf",
+                "term": "trodelvy",
+                "term_type": "billing_drug_name",
+            },
+        ]
+        self.assertEqual(
+            matching_policy_sources("trodelvy", terms),
+            ["geha-coverage-policy-trodelvy.pdf"],
+        )
+
+    def test_nplate_and_romiplostim_lookup_return_both_criteria_sections(self):
+        with patch(
+            "chunking_benchmarks_RAG.medical_claims_advisor.connect",
+            return_value=FakePolicyConnection(),
+        ):
+            for query in ("nplate", "romiplostim"):
+                with self.subTest(query=query):
+                    tables = retrieve_tables_for_named_condition(query, "unused")
+                    self.assertEqual(len(tables), 1)
+                    summary = build_policy_summary(query, tables)
+                    self.assertEqual(summary["preferred"], [])
+                    self.assertEqual(summary["non_preferred"], [])
+                    sections = retrieve_policy_sections(
+                        "unused", summary["source"], query
+                    )
+                    self.assertEqual(
+                        [item["chunk_number"] for item in sections], [2, 3, 4]
+                    )
+
+    def test_named_condition_returns_only_its_indication_and_universal_section(self):
+        with patch(
+            "chunking_benchmarks_RAG.medical_claims_advisor.connect",
+            return_value=FakePolicyConnection(),
+        ):
+            sections = retrieve_policy_sections(
+                "unused",
+                "geha-coverage-policy-nplate.pdf",
+                "nplate Myelodysplastic Syndrome",
+            )
+        self.assertEqual([item["chunk_number"] for item in sections], [3, 4])
+
     def test_all_secondary_condition_eval_queries_match_approved_aliases(self):
         eval_path = Path(__file__).with_name("secondary_condition_evals.json")
         cases = json.loads(eval_path.read_text(encoding="utf-8"))
@@ -171,6 +280,71 @@ class MedicalClaimsAdvisorTests(unittest.TestCase):
         self.assertNotIn("Condition B", answer)
         self.assertIn("policy-level associations", answer)
         self.assertIn("extracted condition metadata", answer)
+
+    def test_condition_display_mapping_is_source_specific(self):
+        self.assertEqual(
+            canonical_condition(
+                "geha-coverage-policy-provenge.pdf",
+                "Prostate Cancer, Metastastic",
+            ),
+            "Prostate Cancer, Metastatic",
+        )
+        self.assertEqual(
+            canonical_condition("another-policy.pdf", "Prostate Cancer, Metastastic"),
+            "Prostate Cancer, Metastastic",
+        )
+
+    def test_inventory_groups_policies_without_dropping_sources(self):
+        inventory = [
+            {
+                "condition": "Multiple Myeloma (MM)",
+                "source": f"geha-coverage-policy-{name}.pdf",
+                "preferred_treatments": [],
+                "condition_basis": "extracted_condition",
+            }
+            for name in ("elrexfio", "talvey", "tecvayli")
+        ]
+        answer = format_condition_inventory(inventory, preferred_only=False)
+        self.assertEqual(answer.count("**Multiple Myeloma (MM)**"), 1)
+        for name in ("elrexfio", "talvey", "tecvayli"):
+            self.assertEqual(
+                answer.count(f"`geha-coverage-policy-{name}.pdf`"), 1
+            )
+
+    def test_inventory_groups_approved_typo_and_preserves_source_wording(self):
+        inventory = [
+            {
+                "condition": "Prostate Cancer, Metastastic",
+                "source": "geha-coverage-policy-provenge.pdf",
+                "preferred_treatments": [],
+                "condition_basis": "extracted_condition",
+            },
+            {
+                "condition": "Prostate Cancer, Metastatic",
+                "source": "geha-coverage-policy-pluvicto.pdf",
+                "preferred_treatments": [],
+                "condition_basis": "extracted_condition",
+            },
+        ]
+        answer = format_condition_inventory(inventory, preferred_only=False)
+        self.assertEqual(answer.count("**Prostate Cancer, Metastatic**"), 1)
+        self.assertIn("`geha-coverage-policy-provenge.pdf`", answer)
+        self.assertIn("`geha-coverage-policy-pluvicto.pdf`", answer)
+        self.assertIn("source wording: `Prostate Cancer, Metastastic`", answer)
+
+    def test_inventory_deduplicates_same_condition_source_for_display(self):
+        inventory = [
+            {
+                "condition": "Condition A",
+                "source": "policy.pdf",
+                "preferred_treatments": [],
+                "condition_basis": basis,
+            }
+            for basis in ("approved_alias", "extracted_condition")
+        ]
+        answer = format_condition_inventory(inventory, preferred_only=False)
+        self.assertEqual(answer.count("`policy.pdf`"), 1)
+        self.assertIn("Basis: extracted condition metadata", answer)
 
     def test_explicit_conditions_are_labeled_and_serialized(self):
         item = result(

@@ -4,16 +4,22 @@
 
 ![GEHA simulation MCP server architecture](mcp_server_architecture.svg)
 
-The MCP host communicates with `server.py` over stdio. FastMCP validates one of seven typed tool calls, and `FlowService` plans dependencies, admits at most two runs, snapshots allowlisted inputs into a private run directory, executes the required simulators, validates their outputs, and returns structured results. Read tools require the explicit `run_id` returned by an execution call.
+The MCP host communicates with `server.py` over stdio. FastMCP exposes nine
+typed tools: seven simulation tools and two read-only policy RAG tools.
+`FlowService` plans dependencies, admits at most two runs, snapshots allowlisted
+inputs into a private run directory, executes simulators, validates outputs,
+and returns structured results. `PolicyService` reuses the existing policy
+index to retrieve citation metadata and full source tables.
 
 This directory contains one local Model Context Protocol (MCP) server. Its nine
 Python health-insurance workflow simulators are grouped under
 `../highlevel_simulation/` and exposed as tools by the server.
 
-**The MCP interface is real; the insurance operations are simulated.** Data is
-fabricated, decisions use fixed rules and seeded randomness, and no LLM or API
-key is required. The programs do not issue cards, collect money, contact
-reviewers, or establish medical necessity or regulatory compliance.
+**The MCP interface is real; the insurance operations are simulated.** The
+policy tools retrieve indexed reference documents, not live claims or member
+data. The server makes no coverage or medical-necessity determination and does
+not call an LLM or require an API key. Policy search requires the existing
+PostgreSQL/pgvector index; simulations do not.
 
 ## Quick start
 
@@ -56,6 +62,8 @@ Use [mcp_config.example.json](mcp_config.example.json) with clients supporting
 the `mcpServers` configuration format. It points to the local `.venv/bin/python`
 and `server.py` using absolute paths. Adapt it to the host's configuration schema;
 this project does not automatically register itself with any agent application.
+After the client initializes, it discovers the tool schemas via MCP `tools/list`.
+See [README_MCP.md](README_MCP.md) for policy-index setup and example calls.
 
 ## How the pieces work together
 
@@ -76,8 +84,9 @@ all nine flows; there is no need for one server or container per directory.
 | File or directory | Purpose |
 |---|---|
 | `../highlevel_simulation/` | Nine simulator directories, direct-run tooling, simulation tests, documentation, and diagrams. |
-| [server.py](server.py) | Registers seven MCP tools and starts the local stdio server. |
+| [server.py](server.py) | Registers nine MCP tools and starts the local stdio server. |
 | [flow_service.py](flow_service.py) | Allowlist, dependencies, isolated execution, timeouts, validation, provenance, and result retrieval. |
+| [policy_service.py](policy_service.py) | Read-only adapter to the existing parent-child policy RAG index. |
 | [demo_client.py](demo_client.py) | Minimal MCP client for discovery or an end-to-end run. |
 | [run_all_flows.sh](../highlevel_simulation/run_all_flows.sh) | Runs the nine scripts directly, without MCP isolation. |
 | [mcp_config.example.json](mcp_config.example.json) | Example host connection configuration. |
@@ -86,6 +95,7 @@ all nine flows; there is no need for one server or container per directory.
 | `runs/` | Isolated MCP run directories, including manifests and captured logs. |
 | [test_responses.py](../highlevel_simulation/test_responses.py) | Checks that all nine response summaries match generated data. |
 | [test_server.py](test_server.py) | Runner safeguards and actual stdio MCP protocol tests. |
+| [test_policy_service.py](test_policy_service.py) | Policy search routing, citation, and input-validation tests. |
 | [README_FLOWS.md](../highlevel_simulation/README_FLOWS.md) | Detailed simulation overview, outputs, and workflow diagrams. |
 | [README_MCP.md](README_MCP.md) | Detailed MCP behavior, safeguards, configuration, and limitations. |
 | `../highlevel_simulation/geha_services_flowchart.png`, `../highlevel_simulation/geha_run_order.png`, `../highlevel_simulation/geha_hipaa_overlay.png` | Supporting diagrams embedded in `README_FLOWS.md`. |

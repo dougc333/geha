@@ -19,6 +19,11 @@ from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
 from sentence_transformers import SentenceTransformer
 
+try:  # Support module and direct-script execution.
+    from .billing_code_data import docling_billing_rows
+except ImportError:  # pragma: no cover - direct CLI execution
+    from billing_code_data import docling_billing_rows
+
 DEFAULT_DATABASE_URL = "postgresql://geha:geha-local@127.0.0.1:5433/geha_rag"
 DEFAULT_EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5"
 CSV_SUFFIX = "_table_openai.csv"
@@ -56,6 +61,41 @@ CREATE TABLE IF NOT EXISTS policy_table_vectors (
 
 CREATE INDEX IF NOT EXISTS policy_table_vectors_embedding_hnsw
 ON policy_table_vectors USING hnsw (embedding vector_cosine_ops);
+
+CREATE TABLE IF NOT EXISTS policy_chunks (
+    source_pdf text NOT NULL,
+    chunk_number integer NOT NULL,
+    section_type text NOT NULL,
+    condition text,
+    content text NOT NULL,
+    PRIMARY KEY (source_pdf, chunk_number)
+);
+
+CREATE INDEX IF NOT EXISTS policy_chunks_source_section_condition
+ON policy_chunks (source_pdf, section_type, condition);
+
+CREATE TABLE IF NOT EXISTS policy_source_terms (
+    source_pdf text NOT NULL,
+    term text NOT NULL,
+    term_type text NOT NULL,
+    PRIMARY KEY (source_pdf, term)
+);
+
+CREATE INDEX IF NOT EXISTS policy_source_terms_term
+ON policy_source_terms (term);
+
+CREATE TABLE IF NOT EXISTS policy_billing_codes (
+    source_pdf text NOT NULL,
+    table_name text NOT NULL,
+    code text NOT NULL,
+    item_name text NOT NULL,
+    raw_code_cell text NOT NULL,
+    source_line integer NOT NULL,
+    PRIMARY KEY (source_pdf, table_name, source_line, code)
+);
+
+CREATE INDEX IF NOT EXISTS policy_billing_codes_code
+ON policy_billing_codes (code);
 """
 
 
@@ -180,6 +220,213 @@ def extract_indication_metadata(markdown_path: Path) -> tuple[list[str], str]:
     )
     context = "\n".join(section_lines).strip()
     return conditions, context
+
+
+CHUNK_HEADING_RE = re.compile(r"^## Chunk (\d+)\s*$", re.MULTILINE)
+
+
+def split_markdown_chunks(path: Path) -> list[tuple[int, str]]:
+    """Read Docling's numbered chunks without changing their source wording."""
+    text = path.read_text(encoding="utf-8")
+    headings = list(CHUNK_HEADING_RE.finditer(text))
+    chunks: list[tuple[int, str]] = []
+    for index, heading in enumerate(headings):
+        end = headings[index + 1].start() if index + 1 < len(headings) else len(text)
+        content = text[heading.end() : end].strip()
+        if content:
+            chunks.append((int(heading.group(1)), content))
+    return chunks
+
+
+def _heading_key(value: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", value.casefold())
+
+
+def classify_policy_chunks(
+    chunks: list[tuple[int, str]], conditions: list[str]
+) -> list[dict[str, Any]]:
+    """Label chunks using conditions extracted from the matching Docling document."""
+    condition_names = {_heading_key(value): value for value in conditions}
+    output: list[dict[str, Any]] = []
+    current_type = "overview"
+    current_condition: str | None = None
+    used_conditions: set[str] = set()
+    for number, content in chunks:
+        first_line = next((line.strip() for line in content.splitlines() if line.strip()), "")
+        key = _heading_key(first_line.rstrip(":"))
+        condition = condition_names.get(key)
+        if not condition and key.startswith("indicationspecificcriteria"):
+            suffix = key.removeprefix("indicationspecificcriteria")
+            condition = condition_names.get(suffix)
+        if not condition and len(key) >= 12:
+            condition = next(
+                (
+                    name for condition_key, name in condition_names.items()
+                    if name not in used_conditions and condition_key.endswith(key)
+                ),
+                None,
+            )
+        if condition:
+            current_type, current_condition = "indication", condition
+            used_conditions.add(condition)
+        elif key.startswith("universalapprovalcriteria"):
+            current_type, current_condition = "universal", None
+        elif key.startswith("billing"):
+            current_type, current_condition = "billing", None
+        elif key.startswith("references"):
+            current_type, current_condition = "references", None
+        elif key.startswith("disclaimer"):
+            current_type, current_condition = "disclaimer", None
+        elif key.startswith("revisionhistory"):
+            current_type, current_condition = "revision", None
+        # A long section may span multiple numbered chunks. In that case the
+        # current label carries forward until a new documented heading appears.
+        output.append(
+            {
+                "chunk_number": number,
+                "section_type": current_type,
+                "condition": current_condition,
+                "content": content,
+            }
+        )
+    return output
+
+
+def policy_source_terms(
+    source_pdf: str,
+    chunks: list[tuple[int, str]],
+    csv_path: Path,
+    conditions: list[str],
+) -> dict[str, str]:
+    """Build explicit policy-name and drug-name lookup terms, without an LLM."""
+    terms: dict[str, str] = {}
+
+    def add(value: str, kind: str) -> None:
+        term = " ".join(re.findall(r"[a-z0-9]+", value.casefold()))
+        if len(term) >= 4:
+            terms.setdefault(term, kind)
+
+    stem = Path(source_pdf).stem.removeprefix("geha-coverage-policy-")
+    add(stem.replace("-", " "), "filename")
+    for item in classify_policy_chunks(chunks, conditions)[:3]:
+        if item["section_type"] != "overview":
+            continue
+        content = item["content"]
+        first_line = next(
+            (line.strip() for line in content.splitlines() if line.strip()), ""
+        )
+        title_match = re.match(r"^(.+?)\s*[-–]?\s*\(([^)]+)\)", first_line)
+        if title_match and "G.E.H.A" not in title_match.group(1):
+            add(title_match.group(1), "policy_title")
+            add(title_match.group(2), "generic_name")
+            break
+
+    if csv_path.exists():
+        for raw_table in split_csv_tables(csv_path):
+            headers, rows = normalized_table(raw_table)
+            names = [_heading_key(header) for header in headers]
+            if "drugname" not in names:
+                continue
+            name_index = names.index("drugname")
+            for row in rows:
+                add(row[name_index], "billing_drug_name")
+    return terms
+
+
+def policy_chunk_paths(input_dir: Path) -> list[Path]:
+    """Discover only policy chunks directly inside the selected input directory."""
+    return sorted(input_dir.glob("*.docling_chunks.md"))
+
+
+def ingest_policy_sections(database_url: str, input_dir: Path) -> None:
+    """Ingest top-level Docling chunks, keeping non-criteria sections out of search results."""
+    chunk_paths = policy_chunk_paths(input_dir)
+    if not chunk_paths:
+        raise FileNotFoundError(f"No *.docling_chunks.md files found in {input_dir}")
+    section_count = 0
+    with connect(database_url) as connection:
+        for path in chunk_paths:
+            source_pdf = str(path.relative_to(input_dir)).removesuffix(
+                ".docling_chunks.md"
+            ) + ".pdf"
+            markdown_path = path.with_name(
+                path.name.removesuffix(".docling_chunks.md") + ".docling.md"
+            )
+            csv_path = path.with_name(
+                path.name.removesuffix(".docling_chunks.md") + CSV_SUFFIX
+            )
+            conditions, _ = extract_indication_metadata(markdown_path)
+            chunks = split_markdown_chunks(path)
+            labeled = classify_policy_chunks(chunks, conditions)
+            terms = policy_source_terms(source_pdf, chunks, csv_path, conditions)
+            connection.execute("DELETE FROM policy_chunks WHERE source_pdf = %s", (source_pdf,))
+            connection.execute(
+                "DELETE FROM policy_source_terms WHERE source_pdf = %s", (source_pdf,)
+            )
+            for item in labeled:
+                connection.execute(
+                    """
+                    INSERT INTO policy_chunks
+                        (source_pdf, chunk_number, section_type, condition, content)
+                    VALUES (%s, %s, %s, %s, %s)
+                    """,
+                    (
+                        source_pdf,
+                        item["chunk_number"],
+                        item["section_type"],
+                        item["condition"],
+                        item["content"],
+                    ),
+                )
+            for term, kind in terms.items():
+                connection.execute(
+                    """
+                    INSERT INTO policy_source_terms (source_pdf, term, term_type)
+                    VALUES (%s, %s, %s)
+                    """,
+                    (source_pdf, term, kind),
+                )
+            section_count += len(labeled)
+        connection.commit()
+    print(f"Ingested {section_count} chunks from {len(chunk_paths)} Docling files.")
+
+
+def ingest_billing_codes(database_url: str, input_dir: Path) -> None:
+    """Index exact codes from top-level Docling billing and applicable-code tables."""
+    markdown_paths = sorted(input_dir.glob("*.docling.md"))
+    if not markdown_paths:
+        raise FileNotFoundError(f"No *.docling.md files found in {input_dir}")
+    code_count = 0
+    with connect(database_url) as connection:
+        source_pdfs = [path.name.removesuffix(".docling.md") + ".pdf" for path in markdown_paths]
+        connection.execute(
+            "DELETE FROM policy_billing_codes WHERE source_pdf <> ALL(%s)",
+            (source_pdfs,),
+        )
+        for path in markdown_paths:
+            source_pdf = path.name.removesuffix(".docling.md") + ".pdf"
+            connection.execute(
+                "DELETE FROM policy_billing_codes WHERE source_pdf = %s", (source_pdf,)
+            )
+            for row in docling_billing_rows(path):
+                connection.execute(
+                    """
+                    INSERT INTO policy_billing_codes
+                        (source_pdf, table_name, code, item_name, raw_code_cell, source_line)
+                    VALUES (%s, %s, %s, %s, %s, %s)
+                    """,
+                    (
+                        source_pdf,
+                        row["table_name"],
+                        row["code"],
+                        row["item_name"],
+                        row["raw_code_cell"],
+                        row["line"],
+                    ),
+                )
+                code_count += 1
+        connection.commit()
+    print(f"Ingested {code_count} billing-code rows from {len(markdown_paths)} Docling files.")
 
 
 def row_search_text(
@@ -317,6 +564,8 @@ def ingest(
     print(
         f"Ingested {table_count} parent tables and {row_count} searchable child rows."
     )
+    ingest_policy_sections(database_url, input_dir)
+    ingest_billing_codes(database_url, input_dir)
 
 
 def retrieve_tables(
@@ -437,6 +686,12 @@ def main() -> None:
     ingest_parser = subparsers.add_parser("ingest")
     ingest_parser.add_argument("input_dir", type=Path)
 
+    sections_parser = subparsers.add_parser("ingest-sections")
+    sections_parser.add_argument("input_dir", type=Path)
+
+    billing_parser = subparsers.add_parser("ingest-billing-codes")
+    billing_parser.add_argument("input_dir", type=Path)
+
     search_parser = subparsers.add_parser("search")
     search_parser.add_argument("query")
     search_parser.add_argument("--top-tables", type=int, default=1)
@@ -453,6 +708,16 @@ def main() -> None:
     args = parser.parse_args()
     if args.command == "init-db":
         initialize_database(args.database_url)
+        return
+
+    if args.command == "ingest-sections":
+        initialize_database(args.database_url)
+        ingest_policy_sections(args.database_url, args.input_dir.expanduser().resolve())
+        return
+
+    if args.command == "ingest-billing-codes":
+        initialize_database(args.database_url)
+        ingest_billing_codes(args.database_url, args.input_dir.expanduser().resolve())
         return
 
     embedding_model = load_embedding_model(args.embedding_model)

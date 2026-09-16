@@ -1,0 +1,346 @@
+{
+  "eval_file": "/Users/dc/geha/chunking_benchmarks_RAG/parent_child_retrieval_evals.json",
+  "top_tables": 3,
+  "candidate_rows": 30,
+  "cases": 12,
+  "passed": 12,
+  "top1_parent": 12,
+  "results": [
+    {
+      "id": "treanda_preference",
+      "query": "preferred Treanda bendamustine hydrochloride J9033 prior authorization",
+      "expected_source": "geha-coverage-policy-bendamustine.pdf",
+      "expected_table_number": 1,
+      "parent_rank": 1,
+      "child_row_rank": 1,
+      "source_line_verified": true,
+      "complete_parent_with_distinct_sibling": true,
+      "returned_parent_tables": [
+        {
+          "source": "geha-coverage-policy-bendamustine.pdf",
+          "table_number": 1,
+          "title": "Drug preference and prior authorization"
+        },
+        {
+          "source": "geha-coverage-policy-bendamustine.pdf",
+          "table_number": 2,
+          "title": "Billing codes"
+        },
+        {
+          "source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+          "table_number": 1,
+          "title": "Drug preference and prior authorization"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "bendeka_billing",
+      "query": "billing code for Bendeka bendamustine hcl injection 1 mg J9034",
+      "expected_source": "geha-coverage-policy-bendamustine.pdf",
+      "expected_table_number": 2,
+      "parent_rank": 1,
+      "child_row_rank": 1,
+      "source_line_verified": true,
+      "complete_parent_with_distinct_sibling": true,
+      "returned_parent_tables": [
+        {
+          "source": "geha-coverage-policy-bendamustine.pdf",
+          "table_number": 2,
+          "title": "Billing codes"
+        },
+        {
+          "source": "geha-coverage-policy-bendamustine.pdf",
+          "table_number": 1,
+          "title": "Drug preference and prior authorization"
+        },
+        {
+          "source": "geha-coverage-policy-gemcitabine.pdf",
+          "table_number": 2,
+          "title": "Billing codes"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "mvasi_preference",
+      "query": "non-preferred Mvasi bevacizumab-awwb Q5107 prior authorization",
+      "expected_source": "geha-coverage-policy-bevacizumab.pdf",
+      "expected_table_number": 1,
+      "parent_rank": 1,
+      "child_row_rank": 1,
+      "source_line_verified": true,
+      "complete_parent_with_distinct_sibling": true,
+      "returned_parent_tables": [
+        {
+          "source": "geha-coverage-policy-bevacizumab.pdf",
+          "table_number": 1,
+          "title": "Drug preference and prior authorization"
+        },
+        {
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 1,
+          "title": "Drug preference and prior authorization"
+        },
+        {
+          "source": "geha-coverage-policy-xgeva.pdf",
+          "table_number": 1,
+          "title": "Drug preference and prior authorization"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "retacrit_preference",
+      "query": "preferred Retacrit epoetin alfa-epbx Q5106 non-ESRD",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_table_number": 1,
+      "parent_rank": 1,
+      "child_row_rank": 1,
+      "source_line_verified": true,
+      "complete_parent_with_distinct_sibling": true,
+      "returned_parent_tables": [
+        {
+          "source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+          "table_number": 1,
+          "title": "Drug preference and prior authorization"
+        },
+        {
+          "source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+          "table_number": 2,
+          "title": "Billing codes"
+        },
+        {
+          "source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+          "table_number": 1,
+          "title": "Drug preference and prior authorization"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "pemetrexed_hospira_billing",
+      "query": "billing code J9323 pemetrexed ditromethamine Hospira injection 10 mg",
+      "expected_source": "geha-coverage-policy-pemetrexed.pdf",
+      "expected_table_number": 3,
+      "parent_rank": 1,
+      "child_row_rank": 1,
+      "source_line_verified": true,
+      "complete_parent_with_distinct_sibling": true,
+      "returned_parent_tables": [
+        {
+          "source": "geha-coverage-policy-pemetrexed.pdf",
+          "table_number": 3,
+          "title": "Billing codes"
+        },
+        {
+          "source": "geha-coverage-policy-pemetrexed.pdf",
+          "table_number": 2,
+          "title": "Billing codes"
+        },
+        {
+          "source": "geha-coverage-policy-pemetrexed.pdf",
+          "table_number": 1,
+          "title": "Drug preference and prior authorization"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "gamunex_billing",
+      "query": "billing Gamunex-C immune globulin nonlyophilized J1561 500 mg",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_table_number": 1,
+      "parent_rank": 1,
+      "child_row_rank": 1,
+      "source_line_verified": true,
+      "complete_parent_with_distinct_sibling": true,
+      "returned_parent_tables": [
+        {
+          "source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+          "table_number": 1,
+          "title": "Billing codes"
+        },
+        {
+          "source": "geha-coverage-policy-pd-1pd-l1s.pdf",
+          "table_number": 1,
+          "title": "Billing codes"
+        },
+        {
+          "source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+          "table_number": 2,
+          "title": "Billing codes"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "ryzneuta_billing",
+      "query": "billing Ryzneuta efbemalenograstim alfa-vuxw J9361 injection",
+      "expected_source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "expected_table_number": 2,
+      "parent_rank": 1,
+      "child_row_rank": 1,
+      "source_line_verified": true,
+      "complete_parent_with_distinct_sibling": true,
+      "returned_parent_tables": [
+        {
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 2,
+          "title": "Billing codes"
+        },
+        {
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 1,
+          "title": "Drug preference and prior authorization"
+        },
+        {
+          "source": "geha-coverage-policy-xgeva.pdf",
+          "table_number": 2,
+          "title": "Billing codes"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "neupogen_preference",
+      "query": "non-preferred Neupogen filgrastim J1442 prior authorization",
+      "expected_source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+      "expected_table_number": 1,
+      "parent_rank": 1,
+      "child_row_rank": 1,
+      "source_line_verified": true,
+      "complete_parent_with_distinct_sibling": true,
+      "returned_parent_tables": [
+        {
+          "source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+          "table_number": 1,
+          "title": "Drug preference and prior authorization"
+        },
+        {
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 1,
+          "title": "Drug preference and prior authorization"
+        },
+        {
+          "source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+          "table_number": 1,
+          "title": "Drug preference and prior authorization"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "rytelo_preference",
+      "query": "non-preferred Rytelo imetelstat J0870 prior authorization",
+      "expected_source": "geha-coverage-policy-rytelo.pdf",
+      "expected_table_number": 1,
+      "parent_rank": 1,
+      "child_row_rank": 1,
+      "source_line_verified": true,
+      "complete_parent_with_distinct_sibling": true,
+      "returned_parent_tables": [
+        {
+          "source": "geha-coverage-policy-rytelo.pdf",
+          "table_number": 1,
+          "title": "Drug preference and prior authorization"
+        },
+        {
+          "source": "geha-coverage-policy-xgeva.pdf",
+          "table_number": 1,
+          "title": "Drug preference and prior authorization"
+        },
+        {
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 1,
+          "title": "Drug preference and prior authorization"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "truxima_preference",
+      "query": "non-preferred Truxima rituximab-abbs Q5115 prior authorization",
+      "expected_source": "geha-coverage-policy-rituximab.pdf",
+      "expected_table_number": 1,
+      "parent_rank": 1,
+      "child_row_rank": 1,
+      "source_line_verified": true,
+      "complete_parent_with_distinct_sibling": true,
+      "returned_parent_tables": [
+        {
+          "source": "geha-coverage-policy-rituximab.pdf",
+          "table_number": 1,
+          "title": "Preference / Requires Prior Drug / Name / HCPCS Code / Description"
+        },
+        {
+          "source": "geha-coverage-policy-rituximab.pdf",
+          "table_number": 2,
+          "title": "Billing codes"
+        },
+        {
+          "source": "geha-coverage-policy-xgeva.pdf",
+          "table_number": 1,
+          "title": "Drug preference and prior authorization"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "imfinzi_billing",
+      "query": "billing code J9173 Imfinzi durvalumab injection 10 mg",
+      "expected_source": "geha-coverage-policy-pd-1pd-l1s.pdf",
+      "expected_table_number": 1,
+      "parent_rank": 1,
+      "child_row_rank": 1,
+      "source_line_verified": true,
+      "complete_parent_with_distinct_sibling": true,
+      "returned_parent_tables": [
+        {
+          "source": "geha-coverage-policy-pd-1pd-l1s.pdf",
+          "table_number": 1,
+          "title": "Billing codes"
+        },
+        {
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 2,
+          "title": "Billing codes"
+        },
+        {
+          "source": "geha-coverage-policy-bevacizumab.pdf",
+          "table_number": 2,
+          "title": "Billing codes"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "id": "mvasi_billing",
+      "query": "billing code Q5107 Mvasi bevacizumab-awwb biosimilar injection",
+      "expected_source": "geha-coverage-policy-bevacizumab.pdf",
+      "expected_table_number": 2,
+      "parent_rank": 1,
+      "child_row_rank": 1,
+      "source_line_verified": true,
+      "complete_parent_with_distinct_sibling": true,
+      "returned_parent_tables": [
+        {
+          "source": "geha-coverage-policy-bevacizumab.pdf",
+          "table_number": 2,
+          "title": "Billing codes"
+        },
+        {
+          "source": "geha-coverage-policy-bevacizumab.pdf",
+          "table_number": 1,
+          "title": "Drug preference and prior authorization"
+        },
+        {
+          "source": "geha-coverage-policy-trastuzumab.pdf",
+          "table_number": 2,
+          "title": "Billing codes"
+        }
+      ],
+      "pass": true
+    }
+  ]
+}

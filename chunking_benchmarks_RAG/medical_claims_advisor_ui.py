@@ -3,25 +3,28 @@
 from __future__ import annotations
 
 import os
+import time
 from pathlib import Path
 
 import streamlit as st
-from openai import AuthenticationError, OpenAIError, PermissionDeniedError
 from psycopg import Error as PsycopgError
 
 try:  # Support Streamlit execution from the repository root or this directory.
+    from .billing_code_data import requested_billing_codes
     from .medical_claims_advisor import (
         condition_inventory,
         build_policy_summary,
         evidence_records,
         format_condition_inventory,
+        format_billing_code_matches,
         format_retrieval_summary,
-        generate_openai_section,
-        inventory_evidence,
         is_condition_inventory_query,
         is_preferred_condition_query,
         retrieve_claims_evidence,
+        retrieve_billing_code_matches,
+        retrieve_policy_sections,
         retrieve_tables_for_named_condition,
+        should_expand_universal,
         table_records,
     )
     from .table_rag import (
@@ -30,18 +33,21 @@ try:  # Support Streamlit execution from the repository root or this directory.
         load_embedding_model,
     )
 except ImportError:  # pragma: no cover - Streamlit direct-script execution
+    from billing_code_data import requested_billing_codes
     from medical_claims_advisor import (
         condition_inventory,
         build_policy_summary,
         evidence_records,
         format_condition_inventory,
+        format_billing_code_matches,
         format_retrieval_summary,
-        generate_openai_section,
-        inventory_evidence,
         is_condition_inventory_query,
         is_preferred_condition_query,
         retrieve_claims_evidence,
+        retrieve_billing_code_matches,
+        retrieve_policy_sections,
         retrieve_tables_for_named_condition,
+        should_expand_universal,
         table_records,
     )
     from table_rag import (
@@ -53,6 +59,17 @@ except ImportError:  # pragma: no cover - Streamlit direct-script execution
 
 st.set_page_config(page_title="Medical Claims Policy Advisor", page_icon="🩺")
 POLICY_DIR = Path(__file__).resolve().parents[1] / "downloads" / "coverage-policies"
+POLICY_CHUNK_SUFFIX = ".docling_chunks.md"
+
+
+def policy_name_qc_terms() -> list[str]:
+    """Derive search terms from the policy chunk files in filename order."""
+    prefix = "geha-coverage-policy-"
+    return [
+        path.name.removeprefix(prefix).removesuffix(POLICY_CHUNK_SUFFIX)
+        for path in sorted(POLICY_DIR.glob(f"{prefix}*{POLICY_CHUNK_SUFFIX}"))
+        if path.is_file()
+    ]
 
 
 @st.cache_resource
@@ -106,9 +123,32 @@ def render_policy_summary(summary: dict, key_prefix: str) -> None:
     else:
         st.markdown("- **Prior authorization:** Not present in the extracted table")
 
-    if summary["criteria"]:
+    sections = summary.get("sections", [])
+    indication_sections = [
+        section for section in sections if section["section_type"] == "indication"
+    ]
+    universal_sections = [
+        section for section in sections if section["section_type"] == "universal"
+    ]
+    if indication_sections:
+        st.markdown("#### Indication-specific approval criteria")
+        for section in indication_sections:
+            st.markdown(
+                f"**{section['condition']}** · source chunk {section['chunk_number']}"
+            )
+            st.markdown(section["content"])
+    elif summary["criteria"]:
         st.markdown(f"#### {summary['matched_condition']} criteria")
         st.markdown("\n".join(f"- {criterion}" for criterion in summary["criteria"]))
+
+    if universal_sections:
+        with st.expander(
+            "Universal approval criteria for this policy",
+            expanded=summary.get("expand_universal", False),
+        ):
+            for section in universal_sections:
+                st.caption(f"Source chunk {section['chunk_number']}")
+                st.markdown(section["content"])
 
     st.markdown("#### Extracted GEHA policy tables")
     for table_index, table in enumerate(summary.get("tables", [])):
@@ -138,11 +178,6 @@ st.warning(
     "Do not enter names, member IDs, Social Security numbers, dates of birth, "
     "medical-record numbers, credentials, or payment information."
 )
-st.caption(
-    "GEHA evidence is shown first. A separately labeled OpenAI typo/OCR-correction pass is "
-    "shown last and is never written to the GEHA database."
-)
-
 with st.sidebar:
     st.header("Retrieval settings")
     database_url = st.text_input(
@@ -151,11 +186,38 @@ with st.sidebar:
         type="password",
     )
     embedding_name = st.text_input("Embedding model", DEFAULT_EMBEDDING_MODEL)
-    model_name = st.text_input("OpenAI correction model", os.getenv("OPENAI_MODEL", "gpt-3.5-turbo"))
     top_tables = st.slider("Parent tables", 1, 8, 3)
     candidate_rows = st.slider("Candidate rows", 5, 100, 30, step=5)
+    st.divider()
+    st.subheader("Policy-name search QC")
+    st.caption("Search each policy name from a .docling_chunks.md file; show each result for 3 seconds.")
+    if st.button("Start 3-second search cycle"):
+        terms = policy_name_qc_terms()
+        if terms:
+            st.session_state.qc_terms = terms
+            st.session_state.qc_index = 0
+            st.session_state.qc_active = True
+            st.session_state.claims_messages = []
+        else:
+            st.warning(f"No policy chunk files found in {POLICY_DIR}")
+    if st.session_state.get("qc_active"):
+        if st.button("Stop search cycle"):
+            st.session_state.qc_active = False
+        else:
+            st.caption(
+                f"Search {st.session_state.qc_index + 1} of "
+                f"{len(st.session_state.qc_terms)}: "
+                f"{st.session_state.qc_terms[st.session_state.qc_index]}"
+            )
+    elif st.session_state.get("qc_complete"):
+        st.caption(f"Completed {st.session_state.qc_complete} policy-name searches.")
 
 if "claims_messages" not in st.session_state:
+    st.session_state.claims_messages = []
+qc_search = st.session_state.get("qc_active", False)
+if qc_search:
+    # Clear the previous result before rendering history, so the QC cycle
+    # behaves like a slideshow instead of accumulating large policy tables.
     st.session_state.claims_messages = []
 
 for message_index, message in enumerate(st.session_state.claims_messages):
@@ -177,22 +239,33 @@ for message_index, message in enumerate(st.session_state.claims_messages):
                         f"Conditions: `{item['conditions']}`"
                     )
                     st.code(item["table_csv"], language="csv")
-        if message.get("openai_section"):
-            st.markdown(message["openai_section"])
 
 question = st.chat_input(
     "Ask about a drug, HCPCS code, preference, prior authorization, or documented condition"
 )
+if qc_search:
+    # Use the same search branch as a submitted chat query, showing one result
+    # at a time rather than accumulating dozens of large policy tables.
+    question = st.session_state.qc_terms[st.session_state.qc_index]
 if question:
     st.session_state.claims_messages.append({"role": "user", "content": question})
     with st.chat_message("user"):
         st.markdown(question)
 
     with st.chat_message("assistant"):
-        openai_evidence = []
         expand_evidence = False
         policy_summary = None
-        if is_condition_inventory_query(question):
+        if requested_billing_codes(question):
+            try:
+                with st.spinner("Checking exact GEHA billing-code rows..."):
+                    billing_matches = retrieve_billing_code_matches(question, database_url)
+                answer = format_billing_code_matches(question, billing_matches)
+                evidence = []
+            except PsycopgError:
+                answer = "Billing-code lookup is unavailable. Check the GEHA database and retry."
+                evidence = []
+                st.error(answer)
+        elif is_condition_inventory_query(question):
             try:
                 inventory = condition_inventory(database_url)
                 preferred_only = is_preferred_condition_query(question)
@@ -200,7 +273,6 @@ if question:
                     inventory, preferred_only=preferred_only
                 )
                 evidence = []
-                openai_evidence = inventory_evidence(inventory)
             except PsycopgError:
                 answer = (
                     "The condition inventory is unavailable. Confirm that the pgvector "
@@ -224,6 +296,10 @@ if question:
                         )
                     policy_summary = build_policy_summary(question, results)
                     if policy_summary:
+                        policy_summary["sections"] = retrieve_policy_sections(
+                            database_url, policy_summary["source"], question
+                        )
+                        policy_summary["expand_universal"] = should_expand_universal(question)
                         results = [
                             result
                             for result in results
@@ -236,7 +312,6 @@ if question:
                         ]
                     evidence = evidence_records(results)
                     answer = format_retrieval_summary(question, results)
-                    openai_evidence = results
             except (PsycopgError, RuntimeError, ValueError):
                 answer = (
                     "Policy retrieval is unavailable. Confirm that the pgvector service and "
@@ -260,38 +335,6 @@ if question:
                     )
                     st.code(item["table_csv"], language="csv")
 
-        openai_section = ""
-        if openai_evidence:
-            if not os.getenv("OPENAI_API_KEY"):
-                openai_section = (
-                    "### OPENAI ASK — UNAVAILABLE\n\n"
-                    "No OpenAI API key is configured. The GEHA evidence above is unaffected."
-                )
-            else:
-                try:
-                    with st.spinner("Running the separate OpenAI typo/OCR-correction pass..."):
-                        openai_section = generate_openai_section(
-                            question, openai_evidence, model_name
-                        )
-                except AuthenticationError:
-                    openai_section = (
-                        "### OPENAI ASK — UNAVAILABLE\n\n"
-                        "OpenAI authentication failed. The GEHA evidence above is unaffected."
-                    )
-                except PermissionDeniedError:
-                    openai_section = (
-                        "### OPENAI ASK — UNAVAILABLE\n\n"
-                        "The configured OpenAI project cannot use this model. The GEHA evidence "
-                        "above is unaffected."
-                    )
-                except OpenAIError:
-                    openai_section = (
-                        "### OPENAI ASK — UNAVAILABLE\n\n"
-                        "OpenAI could not run the correction pass. The GEHA evidence above is "
-                        "unaffected."
-                    )
-            st.markdown(openai_section)
-
     st.session_state.claims_messages.append(
         {
             "role": "assistant",
@@ -299,6 +342,13 @@ if question:
             "policy_summary": policy_summary,
             "evidence": evidence,
             "expand_evidence": expand_evidence,
-            "openai_section": openai_section,
         }
     )
+    if qc_search:
+        st.session_state.qc_index += 1
+        if st.session_state.qc_index < len(st.session_state.qc_terms):
+            time.sleep(3)
+            st.rerun()
+        else:
+            st.session_state.qc_complete = len(st.session_state.qc_terms)
+            st.session_state.qc_active = False

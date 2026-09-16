@@ -1,5 +1,6 @@
-"""Local stdio MCP interface. No network listener or arbitrary command tool."""
+"""Local stdio MCP interface for simulations and read-only policy evidence."""
 
+import asyncio
 import os
 from pathlib import Path
 from typing import Annotated, Literal, Any
@@ -9,6 +10,7 @@ from mcp.types import ToolAnnotations
 from pydantic import Field
 
 from flow_service import FLOWS, FlowService
+from policy_service import PolicyService
 
 ROOT = Path(__file__).resolve().parent
 SIMULATION_ROOT = ROOT.parent / "highlevel_simulation"
@@ -22,9 +24,15 @@ service = FlowService(
         )
     ),
 )
+policy_service = PolicyService()
 mcp = FastMCP(
     "GEHA Simulation",
-    instructions="Local demo with fabricated insurance data. Not clinical, payment, identity, or compliance verification. Runs write isolated results; use the returned run_id for reads.",
+    instructions=(
+        "Local demo with fabricated insurance data and read-only extracted policy evidence. "
+        "Not clinical, payment, identity, coverage, or compliance verification. "
+        "Do not send real member or claim data. Simulation runs write isolated results; "
+        "use the returned run_id for reads."
+    ),
 )
 FlowId = Literal["01", "02", "03", "04", "05", "06", "07", "08", "09"]
 READ = ToolAnnotations(readOnlyHint=True, destructiveHint=False, openWorldHint=False)
@@ -83,6 +91,30 @@ def get_flow_records(
 def get_run_status(run_id: str) -> dict[str, Any]:
     """Inspect a run manifest, including failed/cancelled status and input provenance."""
     return service.manifest(run_id)[1]
+
+
+@mcp.tool(annotations=READ)
+async def search_policy_evidence(
+    query: Annotated[str, Field(min_length=1, max_length=500)],
+    top_tables: Annotated[int, Field(ge=1, le=8)] = 5,
+    candidate_rows: Annotated[int, Field(ge=5, le=100)] = 30,
+) -> dict[str, Any]:
+    """Search indexed policy evidence by exact billing code, policy/condition, then semantic fallback. Returns citations, not a claim decision. Never submit member identifiers."""
+    return await asyncio.to_thread(
+        policy_service.search, query, top_tables, candidate_rows
+    )
+
+
+@mcp.tool(annotations=READ)
+async def get_policy_evidence(
+    source_pdf: str,
+    table_number: Annotated[int, Field(ge=1)],
+    question: Annotated[str, Field(max_length=500)] = "",
+) -> dict[str, Any]:
+    """Get a complete indexed parent table and source-linked criteria by citation. source_pdf must be a filename returned by search, never a filesystem path."""
+    return await asyncio.to_thread(
+        policy_service.evidence, source_pdf, table_number, question
+    )
 
 
 if __name__ == "__main__":

@@ -1,0 +1,163 @@
+{
+  "corpus": {
+    "source_files": 35,
+    "chunks": 409
+  },
+  "cases": [
+    {
+      "id": "nplate_brand_all_indications",
+      "query": "nplate",
+      "source": "geha-coverage-policy-nplate.pdf",
+      "indication_chunks": [2, 3],
+      "conditions": ["Chemotherapy-induced thrombocytopenia", "Myelodysplastic Syndrome"],
+      "universal_chunks": [4],
+      "universal_expanded": false,
+      "preferred": [],
+      "non_preferred": [],
+      "required_text": {
+        "2": ["100,000/mcL"],
+        "3": ["50,000/mcL or lower"],
+        "4": [
+          "National Comprehensive Cancer Network",
+          "consistent with the product labeling"
+        ]
+      }
+    },
+    {
+      "id": "nplate_generic_all_indications",
+      "query": "romiplostim",
+      "source": "geha-coverage-policy-nplate.pdf",
+      "indication_chunks": [2, 3],
+      "conditions": ["Chemotherapy-induced thrombocytopenia", "Myelodysplastic Syndrome"],
+      "universal_chunks": [4],
+      "universal_expanded": false,
+      "preferred": [],
+      "non_preferred": []
+    },
+    {
+      "id": "nplate_chemotherapy_indication_only",
+      "query": "nplate chemotherapy-induced thrombocytopenia",
+      "source": "geha-coverage-policy-nplate.pdf",
+      "indication_chunks": [2],
+      "conditions": ["Chemotherapy-induced thrombocytopenia"],
+      "universal_chunks": [4],
+      "universal_expanded": false,
+      "preferred": [],
+      "non_preferred": []
+    },
+    {
+      "id": "nplate_mds_indication_only",
+      "query": "nplate Myelodysplastic Syndrome",
+      "source": "geha-coverage-policy-nplate.pdf",
+      "indication_chunks": [3],
+      "conditions": ["Myelodysplastic Syndrome"],
+      "universal_chunks": [4],
+      "universal_expanded": false,
+      "preferred": [],
+      "non_preferred": []
+    },
+    {
+      "id": "nplate_condition_without_brand",
+      "query": "Chemotherapy-induced thrombocytopenia",
+      "source": "geha-coverage-policy-nplate.pdf",
+      "indication_chunks": [2],
+      "conditions": ["Chemotherapy-induced thrombocytopenia"],
+      "universal_chunks": [4],
+      "universal_expanded": false,
+      "preferred": [],
+      "non_preferred": []
+    },
+    {
+      "id": "nplate_universal_question",
+      "query": "nplate universal approval criteria",
+      "source": "geha-coverage-policy-nplate.pdf",
+      "indication_chunks": [2, 3],
+      "conditions": ["Chemotherapy-induced thrombocytopenia", "Myelodysplastic Syndrome"],
+      "universal_chunks": [4],
+      "universal_expanded": true,
+      "preferred": [],
+      "non_preferred": []
+    },
+    {
+      "id": "ivig_uses_its_own_universal_wording",
+      "query": "hypogammaglobulinemia in Multiple Myeloma",
+      "source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "indication_chunks": [3],
+      "conditions": ["Hypogammaglobulinemia in Multiple Myeloma"],
+      "universal_chunks": [7],
+      "universal_expanded": false,
+      "preferred": [],
+      "non_preferred": [],
+      "required_text": {
+        "7": ["consistent with all components of the product labeling"]
+      }
+    },
+    {
+      "id": "trodelvy_policy_name_beats_datroway_billing_mention",
+      "query": "trodelvy",
+      "source": "geha-coverage-policy-trodelvy.pdf",
+      "indication_chunks": [3, 4],
+      "conditions": [
+        "Unresectable Locally Advanced or Metastatic Breast Cancer",
+        "Unresectable Locally Advanced or Metastatic Breast Cancer"
+      ],
+      "universal_chunks": [5],
+      "universal_expanded": false,
+      "preferred": [],
+      "non_preferred": []
+    },
+    {
+      "id": "datroway_two_indications",
+      "query": "datroway",
+      "source": "geha-coverage-policy-datroway.pdf",
+      "indication_chunks": [3, 4],
+      "conditions": [
+        "Breast cancer - unresectable or metastatic",
+        "EGFR-Mutated Non-squamous non-small cell lung cancer - locally advanced or metastatic"
+      ],
+      "universal_chunks": [5],
+      "universal_expanded": false,
+      "preferred": ["Trodelvy"],
+      "non_preferred": ["Datroway"],
+      "required_text": {
+        "3": ["hormone receptor (HR) positive disease"],
+        "4": ["EGFR mutations"]
+      }
+    },
+    {
+      "id": "datroway_specific_indication",
+      "query": "datroway EGFR-Mutated Non-squamous non-small cell lung cancer - locally advanced or metastatic",
+      "source": "geha-coverage-policy-datroway.pdf",
+      "indication_chunks": [4],
+      "conditions": [
+        "EGFR-Mutated Non-squamous non-small cell lung cancer - locally advanced or metastatic"
+      ],
+      "universal_chunks": [5],
+      "universal_expanded": false,
+      "preferred": ["Trodelvy"],
+      "non_preferred": ["Datroway"]
+    },
+    {
+      "id": "talvey_multiple_myeloma",
+      "query": "talvey Multiple Myeloma",
+      "source": "geha-coverage-policy-talvey.pdf",
+      "indication_chunks": [3],
+      "conditions": ["Multiple Myeloma (MM)"],
+      "universal_chunks": [4],
+      "universal_expanded": false,
+      "preferred": [],
+      "non_preferred": []
+    },
+    {
+      "id": "ziihera_biliary_tract_cancer",
+      "query": "ziihera",
+      "source": "geha-coverage-policy-ziihera.pdf",
+      "indication_chunks": [2],
+      "conditions": ["Biliary Tract Cancer (BTC)"],
+      "universal_chunks": [3],
+      "universal_expanded": false,
+      "preferred": [],
+      "non_preferred": []
+    }
+  ]
+}

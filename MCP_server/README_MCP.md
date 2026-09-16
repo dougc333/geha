@@ -1,9 +1,10 @@
-# GEHA simulation MCP server
+# GEHA MCP server: simulations and policy RAG
 
-A real, local **stdio MCP server** wrapping the nine fabricated insurance
-simulations under `../highlevel_simulation/`. Uses the official Python MCP SDK (v1 maintenance line, pinned below
-v2). No LLM, API key, network listener, real insurance transaction, or database is
-required. The server does not certify medical necessity or regulatory compliance.
+A local **stdio MCP server** exposing nine fabricated insurance simulations and
+two read-only tools backed by the existing policy-table RAG index. It uses the
+official Python MCP SDK (v1 line, pinned below v2). The simulation tools need
+no database; the policy tools need the existing PostgreSQL/pgvector index.
+Neither tool family certifies medical necessity or regulatory compliance.
 
 ## Setup and run
 
@@ -22,6 +23,7 @@ To exercise it through an actual MCP client:
 ```bash
 uv run --locked demo_client.py            # discover tools and list flows (read-only)
 uv run --locked demo_client.py --run-all  # create a new isolated simulation run
+uv run --locked demo_client.py --policy-query "bendamustine"  # query an indexed policy
 ```
 
 `mcp_config.example.json` provides a conventional `mcpServers` configuration for
@@ -40,6 +42,40 @@ configuration to your client's schema. No client settings are changed automatica
 | `get_flow_records` | `flow_id`, `run_id`, `offset=0`, `limit=50` | Pages through detailed records. |
 | `get_flow_events` | same | Pages through event logs. |
 | `get_run_status` | `run_id` | Reads status, provenance, warnings, and failure information. |
+| `search_policy_evidence` | `query`, `top_tables=5`, `candidate_rows=30` | Searches exact billing codes first, then named policies/conditions, then semantic row embeddings. Returns source and table citations; does not decide a claim. |
+| `get_policy_evidence` | `source_pdf`, `table_number`, `question=""` | Opens the cited full table and source-linked criteria sections. |
+
+The client discovers these tools with the standard MCP `tools/list` request after
+`initialize`, then invokes them with `tools/call`. `demo_client.py` exercises
+that exchange; it does not import and call tool functions directly. Discovery
+of the *server process itself* is host configuration (`mcp_config.example.json`),
+not the `tools/list` message.
+
+## Policy RAG setup
+
+The policy tools reuse the database and retrieval functions under
+`../chunking_benchmarks_RAG/`; they do not build a second index. Follow that
+directory's [index setup](../chunking_benchmarks_RAG/README.md) to start
+PostgreSQL/pgvector and ingest policy tables and sections. Then start this
+server as above. The default database URL is
+`postgresql://geha:geha-local@127.0.0.1:5433/geha_rag`; override it with
+`GEHA_RAG_DATABASE_URL`. The embedding model defaults to
+`BAAI/bge-small-en-v1.5`; override with `GEHA_RAG_EMBEDDING_MODEL` only when it
+matches the indexed vectors. The semantic route may download the model on its
+first use. Exact-code and named-condition routes do not load it. No OpenAI API
+call is made by these MCP tools.
+
+Example two-step evidence workflow:
+
+```bash
+uv run --locked demo_client.py --policy-query "bendamustine"
+uv run --locked demo_client.py --source-pdf geha-coverage-policy-bendamustine.pdf --table-number 1
+```
+
+The search result is a candidate citation, not an answer. Open the parent table
+and verify the extracted text against the source PDF before relying on it. The
+indexed policy corpus is reference material; do not pass member identifiers,
+claim details, or other protected health information to these demo tools.
 
 Flow IDs are the strings `"01"` through `"09"`, not paths or script names.
 Pagination is capped at 100 records per request. `next_offset: null` means the

@@ -1,0 +1,126 @@
+{
+  "purpose": "A semantic child-row hit must return the linked complete parent policy table, not just the row.",
+  "source_scope": "Selected top-level downloads/coverage-policies/*.docling.md rows; no revision-history rows",
+  "cases": [
+    {
+      "id": "treanda_preference",
+      "query": "preferred Treanda bendamustine hydrochloride J9033 prior authorization",
+      "source": "geha-coverage-policy-bendamustine.pdf",
+      "docling_line": 35,
+      "table_number": 1,
+      "table_title": "Drug preference and prior authorization",
+      "child_term": "Treanda",
+      "sibling_term": "Bendeka"
+    },
+    {
+      "id": "bendeka_billing",
+      "query": "billing code for Bendeka bendamustine hcl injection 1 mg J9034",
+      "source": "geha-coverage-policy-bendamustine.pdf",
+      "docling_line": 75,
+      "table_number": 2,
+      "table_title": "Billing codes",
+      "child_term": "Bendeka",
+      "sibling_term": "Treanda"
+    },
+    {
+      "id": "mvasi_preference",
+      "query": "non-preferred Mvasi bevacizumab-awwb Q5107 prior authorization",
+      "source": "geha-coverage-policy-bevacizumab.pdf",
+      "docling_line": 37,
+      "table_number": 1,
+      "table_title": "Drug preference and prior authorization",
+      "child_term": "Mvasi",
+      "sibling_term": "Avastin"
+    },
+    {
+      "id": "retacrit_preference",
+      "query": "preferred Retacrit epoetin alfa-epbx Q5106 non-ESRD",
+      "source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "docling_line": 37,
+      "table_number": 1,
+      "table_title": "Drug preference and prior authorization",
+      "child_term": "Retacrit",
+      "sibling_term": "Aranesp"
+    },
+    {
+      "id": "pemetrexed_hospira_billing",
+      "query": "billing code J9323 pemetrexed ditromethamine Hospira injection 10 mg",
+      "source": "geha-coverage-policy-pemetrexed.pdf",
+      "docling_line": 95,
+      "table_number": 3,
+      "table_title": "Billing codes",
+      "child_term": "Pemetrexed ditromethamine (Hospira)",
+      "sibling_term": "Alimta"
+    },
+    {
+      "id": "gamunex_billing",
+      "query": "billing Gamunex-C immune globulin nonlyophilized J1561 500 mg",
+      "source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "docling_line": 114,
+      "table_number": 1,
+      "table_title": "Billing codes",
+      "child_term": "Gamunex-C",
+      "sibling_term": "Privigen"
+    },
+    {
+      "id": "ryzneuta_billing",
+      "query": "billing Ryzneuta efbemalenograstim alfa-vuxw J9361 injection",
+      "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "docling_line": 73,
+      "table_number": 2,
+      "table_title": "Billing codes",
+      "child_term": "Ryzneuta",
+      "sibling_term": "Neulasta"
+    },
+    {
+      "id": "neupogen_preference",
+      "query": "non-preferred Neupogen filgrastim J1442 prior authorization",
+      "source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+      "docling_line": 35,
+      "table_number": 1,
+      "table_title": "Drug preference and prior authorization",
+      "child_term": "Neupogen",
+      "sibling_term": "Zarxio"
+    },
+    {
+      "id": "rytelo_preference",
+      "query": "non-preferred Rytelo imetelstat J0870 prior authorization",
+      "source": "geha-coverage-policy-rytelo.pdf",
+      "docling_line": 30,
+      "table_number": 1,
+      "table_title": "Drug preference and prior authorization",
+      "child_term": "Rytelo",
+      "sibling_term": "Reblozyl"
+    },
+    {
+      "id": "truxima_preference",
+      "query": "non-preferred Truxima rituximab-abbs Q5115 prior authorization",
+      "source": "geha-coverage-policy-rituximab.pdf",
+      "docling_line": 36,
+      "table_number": 1,
+      "table_title": "Preference / Requires Prior Drug / Name / HCPCS Code / Description",
+      "child_term": "Truxima",
+      "sibling_term": "Rituxan"
+    },
+    {
+      "id": "imfinzi_billing",
+      "query": "billing code J9173 Imfinzi durvalumab injection 10 mg",
+      "source": "geha-coverage-policy-pd-1pd-l1s.pdf",
+      "docling_line": 69,
+      "table_number": 1,
+      "table_title": "Billing codes",
+      "child_term": "Imfinzi",
+      "sibling_term": "Tecentriq"
+    },
+    {
+      "id": "mvasi_billing",
+      "query": "billing code Q5107 Mvasi bevacizumab-awwb biosimilar injection",
+      "source": "geha-coverage-policy-bevacizumab.pdf",
+      "docling_line": 74,
+      "table_number": 2,
+      "table_title": "Billing codes",
+      "child_term": "Mvasi",
+      "sibling_term": "Avastin"
+    }
+  ]
+}

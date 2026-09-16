@@ -1,0 +1,173 @@
+{
+  "eval_file": "/Users/dc/geha/chunking_benchmarks_RAG/semantic_fallback_evals.json",
+  "cases": 10,
+  "passed": 8,
+  "failed": 2,
+  "results": [
+    {
+      "id": "liquid_antibody_replacement",
+      "query": "Find the table for a liquid antibody replacement injection dosed at 500 mg",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_table": "Billing codes",
+      "actual_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "actual_tables": [
+        "Billing codes"
+      ],
+      "docling_source_verified": true,
+      "no_exact_billing_code": true,
+      "no_direct_policy_or_condition_match": true,
+      "full_parent_displayed": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "liquid_immunoglobulin",
+      "query": "nonlyophilized immunoglobulin liquid injection 500 mg",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_table": "Billing codes",
+      "actual_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "actual_tables": [
+        "Billing codes"
+      ],
+      "docling_source_verified": true,
+      "no_exact_billing_code": true,
+      "no_direct_policy_or_condition_match": true,
+      "full_parent_displayed": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "gamma_globulin_liquid",
+      "query": "intravenous gamma globulin liquid product 500 mg",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_table": "Billing codes",
+      "actual_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "actual_tables": [
+        "Billing codes"
+      ],
+      "docling_source_verified": true,
+      "no_exact_billing_code": true,
+      "no_direct_policy_or_condition_match": true,
+      "full_parent_displayed": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "red_cell_biosimilar",
+      "query": "erythropoiesis biosimilar injection 1000 units non ESRD",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_table": "Drug preference and prior authorization",
+      "actual_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "actual_tables": [
+        "Drug preference and prior authorization",
+        "Billing codes"
+      ],
+      "docling_source_verified": true,
+      "no_exact_billing_code": true,
+      "no_direct_policy_or_condition_match": true,
+      "full_parent_displayed": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "red_cell_one_microgram",
+      "query": "a non dialysis red cell stimulant injected at one microgram",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_table": "Billing codes",
+      "actual_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "actual_tables": [
+        "Billing codes",
+        "Drug preference and prior authorization"
+      ],
+      "docling_source_verified": true,
+      "no_exact_billing_code": true,
+      "no_direct_policy_or_condition_match": true,
+      "full_parent_displayed": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "long_acting_white_cell_factor",
+      "query": "efbemalenograstim alfa-vuxw injection 0.5 mg",
+      "expected_source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "expected_table": "Drug preference and prior authorization",
+      "actual_source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "actual_tables": [
+        "Drug preference and prior authorization",
+        "Billing codes"
+      ],
+      "docling_source_verified": true,
+      "no_exact_billing_code": true,
+      "no_direct_policy_or_condition_match": true,
+      "full_parent_displayed": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "bone_resorption_inhibitor",
+      "query": "bone resorption inhibitor antibody injection billed at 1 mg",
+      "expected_source": "geha-coverage-policy-xgeva.pdf",
+      "expected_table": "Drug preference and prior authorization",
+      "actual_source": "geha-coverage-policy-xgeva.pdf",
+      "actual_tables": [
+        "Drug preference and prior authorization",
+        "Billing codes"
+      ],
+      "docling_source_verified": true,
+      "no_exact_billing_code": true,
+      "no_direct_policy_or_condition_match": true,
+      "full_parent_displayed": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "bone_metastasis_antibody",
+      "query": "bone metastasis monoclonal antibody injection 1 mg",
+      "expected_source": "geha-coverage-policy-xgeva.pdf",
+      "expected_table": "Drug preference and prior authorization",
+      "actual_source": "geha-coverage-policy-xgeva.pdf",
+      "actual_tables": [
+        "Drug preference and prior authorization",
+        "Billing codes"
+      ],
+      "docling_source_verified": true,
+      "no_exact_billing_code": true,
+      "no_direct_policy_or_condition_match": true,
+      "full_parent_displayed": true,
+      "pass": true,
+      "errors": []
+    },
+    {
+      "id": "radiopharmaceutical_200_millicuries",
+      "query": "Which billing table describes a radiopharmaceutical injection measured at 200 millicuries?",
+      "expected_source": "geha-coverage-policy-pluvicto.pdf",
+      "expected_table": "Billing codes",
+      "actual_source": "geha-coverage-policy-elrexfio.pdf",
+      "actual_tables": [
+        "Billing codes"
+      ],
+      "docling_source_verified": true,
+      "no_exact_billing_code": true,
+      "no_direct_policy_or_condition_match": true,
+      "full_parent_displayed": false,
+      "pass": false,
+      "errors": []
+    },
+    {
+      "id": "platelet_growth_factor_one_microgram",
+      "query": "Which table lists an injection measured at 1 microgram for raising platelets?",
+      "expected_source": "geha-coverage-policy-nplate.pdf",
+      "expected_table": "Billing codes",
+      "actual_source": "geha-coverage-policy-infertility-services.pdf",
+      "actual_tables": [
+        "column_1 / S0132 / Injection, ganirelix acetate, 250 mcg"
+      ],
+      "docling_source_verified": true,
+      "no_exact_billing_code": true,
+      "no_direct_policy_or_condition_match": true,
+      "full_parent_displayed": false,
+      "pass": false,
+      "errors": []
+    }
+  ]
+}

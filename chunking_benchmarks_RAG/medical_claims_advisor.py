@@ -16,6 +16,7 @@ from dotenv import load_dotenv
 from openai import AuthenticationError, OpenAIError, PermissionDeniedError
 
 try:  # Support module and direct-script execution.
+    from .billing_code_data import requested_billing_codes
     from .table_rag import (
         DEFAULT_DATABASE_URL,
         DEFAULT_EMBEDDING_MODEL,
@@ -25,6 +26,7 @@ try:  # Support module and direct-script execution.
         retrieve_tables,
     )
 except ImportError:  # pragma: no cover - exercised by direct CLI use
+    from billing_code_data import requested_billing_codes
     from table_rag import (
         DEFAULT_DATABASE_URL,
         DEFAULT_EMBEDDING_MODEL,
@@ -36,6 +38,9 @@ except ImportError:  # pragma: no cover - exercised by direct CLI use
 
 
 CONDITION_ALIASES_PATH = Path(__file__).with_name("condition_aliases.json")
+CONDITION_CANONICAL_NAMES_PATH = Path(__file__).with_name(
+    "condition_canonical_names.json"
+)
 
 
 def condition_status(result: dict[str, Any]) -> str:
@@ -46,6 +51,32 @@ def condition_status(result: dict[str, Any]) -> str:
 
 def normalized(value: str) -> str:
     return re.sub(r"[^a-z0-9]", "", value.casefold())
+
+
+@lru_cache(maxsize=1)
+def load_condition_canonical_names() -> dict[tuple[str, str], str]:
+    """Load reviewed, source-specific display names without changing source data."""
+    records = json.loads(CONDITION_CANONICAL_NAMES_PATH.read_text(encoding="utf-8"))
+    mappings: dict[tuple[str, str], str] = {}
+    for record in records:
+        source = record["source"]
+        original = record["original_condition"]
+        canonical = record["canonical_condition"]
+        if not all(
+            isinstance(value, str) and value.strip()
+            for value in (source, original, canonical)
+        ):
+            raise ValueError(f"Invalid condition display mapping: {record}")
+        key = (source, original)
+        if key in mappings:
+            raise ValueError(f"Duplicate condition display mapping: {key}")
+        mappings[key] = canonical
+    return mappings
+
+
+def canonical_condition(source: str, condition: str) -> str:
+    """Return an approved display name, retaining the source label elsewhere."""
+    return load_condition_canonical_names().get((source, condition), condition)
 
 
 def normalized_search_text(value: str) -> str:
@@ -176,6 +207,22 @@ def query_mentions_policy_source(question: str, source: str) -> bool:
     return len(identifier) >= 4 and contains_search_term(question, identifier)
 
 
+def matching_policy_sources(question: str, terms: list[dict[str, str]]) -> list[str]:
+    """Prefer a policy's own name over a drug merely listed by another policy."""
+    priorities = {
+        "filename": 3,
+        "policy_title": 3,
+        "generic_name": 2,
+        "billing_drug_name": 1,
+    }
+    matches = [item for item in terms if contains_search_term(question, item["term"])]
+    if not matches:
+        return []
+    score = lambda item: (priorities.get(item["term_type"], 0), len(item["term"].split()))
+    best = max(score(item) for item in matches)
+    return sorted({item["source_pdf"] for item in matches if score(item) == best})
+
+
 def condition_table_priority(table: dict[str, Any]) -> tuple[int, str, int]:
     title = table["title"].casefold()
     if "preference" in title or "prior auth" in title:
@@ -192,10 +239,25 @@ def condition_table_priority(table: dict[str, Any]) -> tuple[int, str, int]:
 def retrieve_tables_for_named_condition(
     question: str, database_url: str
 ) -> list[dict[str, Any]]:
-    """Return parent tables selected by approved aliases or extracted conditions."""
+    """Return parent tables selected by a policy term, alias, or condition."""
     alias_match = match_approved_condition_alias(question)
     with connect(database_url) as connection:
-        if alias_match:
+        source_terms = connection.execute(
+            "SELECT source_pdf, term, term_type FROM policy_source_terms"
+        ).fetchall()
+        named_sources = matching_policy_sources(question, source_terms)
+        if named_sources:
+            tables = connection.execute(
+                """
+                SELECT source, table_number, title, full_csv, rows_json,
+                       conditions_json, indication_context
+                FROM policy_tables
+                WHERE source = ANY(%s)
+                ORDER BY source, table_number
+                """,
+                (named_sources,),
+            ).fetchall()
+        elif alias_match:
             tables = connection.execute(
                 """
                 SELECT source, table_number, title, full_csv, rows_json,
@@ -219,14 +281,14 @@ def retrieve_tables_for_named_condition(
 
     results: list[dict[str, Any]] = []
     for table in tables:
-        if not alias_match and not any(
+        if not named_sources and not alias_match and not any(
             query_mentions_condition(question, condition)
             for condition in table["conditions_json"]
         ):
             continue
         item = dict(table)
         item["similarity"] = 1.0
-        if alias_match:
+        if alias_match and item["source"] == alias_match["source"]:
             item["matched_condition_alias"] = alias_match["canonical_condition"]
             item["condition_match_basis"] = "approved_alias"
         results.append(item)
@@ -240,6 +302,45 @@ def retrieve_tables_for_named_condition(
             result for result in results if result["source"] in named_sources
         ]
     return sorted(results, key=condition_table_priority)
+
+
+def retrieve_policy_sections(
+    database_url: str, source: str, question: str
+) -> list[dict[str, Any]]:
+    """Fetch source-linked approval criteria without semantic or LLM inference."""
+    with connect(database_url) as connection:
+        sections = connection.execute(
+            """
+            SELECT chunk_number, section_type, condition, content
+            FROM policy_chunks
+            WHERE source_pdf = %s AND section_type IN ('indication', 'universal')
+            ORDER BY chunk_number
+            """,
+            (source,),
+        ).fetchall()
+
+    conditions = list(dict.fromkeys(
+        section["condition"] for section in sections if section["condition"]
+    ))
+    matched = [
+        condition for condition in conditions if query_mentions_condition(question, condition)
+    ]
+    alias = match_approved_condition_alias(question)
+    if alias and alias["source"] == source and alias["canonical_condition"] in conditions:
+        matched = [alias["canonical_condition"]]
+    return [
+        dict(section)
+        for section in sections
+        if section["section_type"] == "universal"
+        or not matched
+        or section["condition"] in matched
+    ]
+
+
+def should_expand_universal(question: str) -> bool:
+    """Open the universal-criteria panel when the user asks for general rules."""
+    wording = question.casefold()
+    return "universal" in wording or "general approval" in wording
 
 
 def condition_inventory(database_url: str) -> list[dict[str, Any]]:
@@ -323,20 +424,40 @@ def format_condition_inventory(
         if preferred_only
         else "Policy conditions"
     )
-    lines = [f"### {heading}", ""]
+    groups: dict[str, dict[str, dict[str, Any]]] = {}
     for item in selected:
-        products = ", ".join(item["preferred_treatments"])
-        treatment_text = products or "No Preferred row was found in this policy's tables"
-        basis = item.get("condition_basis", "extracted_condition")
-        basis_label = (
-            "approved condition alias"
-            if basis == "approved_alias"
-            else "extracted condition metadata"
-        )
-        lines.append(
-            f"- **{item['condition']}** — {treatment_text} "
-            f"(Source: `{item['source']}`; Basis: {basis_label})"
-        )
+        condition = canonical_condition(item["source"], item["condition"])
+        sources = groups.setdefault(condition, {})
+        current = sources.get(item["source"])
+        if current is None or (
+            current.get("condition_basis") == "approved_alias"
+            and item.get("condition_basis") == "extracted_condition"
+        ):
+            sources[item["source"]] = item
+
+    lines = [f"### {heading}", ""]
+    for condition in sorted(groups, key=lambda value: (normalized(value), value)):
+        lines.append(f"- **{condition}**")
+        for source, item in sorted(groups[condition].items()):
+            products = ", ".join(item["preferred_treatments"])
+            treatment_text = (
+                products or "No Preferred row was found in this policy's tables"
+            )
+            basis = item.get("condition_basis", "extracted_condition")
+            basis_label = (
+                "approved condition alias"
+                if basis == "approved_alias"
+                else "extracted condition metadata"
+            )
+            source_wording = (
+                f"; source wording: `{item['condition']}`"
+                if item["condition"] != condition
+                else ""
+            )
+            lines.append(
+                f"  - `{source}` — {treatment_text} "
+                f"(Basis: {basis_label}{source_wording})"
+            )
     lines.extend(
         [
             "",
@@ -657,6 +778,58 @@ def retrieve_claims_evidence(
             top_tables,
             candidate_rows,
         )
+
+
+def retrieve_billing_code_matches(query: str, database_url: str) -> list[dict[str, Any]]:
+    """Match codes in billing/applicable-code rows, never by vector similarity."""
+    requested = set(requested_billing_codes(query))
+    if not requested:
+        return []
+    with connect(database_url) as connection:
+        rows = connection.execute(
+            """
+            SELECT source_pdf, table_name, code, item_name, source_line
+            FROM policy_billing_codes
+            WHERE code = ANY(%s)
+            ORDER BY code, source_pdf, table_name, source_line
+            """,
+            (sorted(requested),),
+        ).fetchall()
+    grouped: dict[tuple[str, str, str], dict[str, Any]] = {}
+    for row in rows:
+        key = (row["code"], row["source_pdf"], row["table_name"])
+        match = grouped.setdefault(
+            key,
+            {
+                "billing_code": row["code"],
+                "source_document": row["source_pdf"],
+                "table_name": row["table_name"],
+                "items": [],
+                "source_lines": [],
+            },
+        )
+        if row["item_name"] and row["item_name"] not in match["items"]:
+            match["items"].append(row["item_name"])
+        match["source_lines"].append(row["source_line"])
+    return sorted(grouped.values(), key=lambda item: (
+        item["billing_code"], item["source_document"], item["table_name"]
+    ))
+
+
+def format_billing_code_matches(query: str, matches: list[dict[str, Any]]) -> str:
+    """Present exact code matches with their source document and table name."""
+    lines: list[str] = []
+    for code in requested_billing_codes(query):
+        code_matches = [item for item in matches if item["billing_code"] == code]
+        if not code_matches:
+            lines.append(f"Billing Code: {code}; no exact match in the indexed billing tables.")
+        else:
+            for item in code_matches:
+                lines.append(
+                    f"- Billing Code: {code}; Source document: {item['source_document']}; "
+                    f"Table: {item['table_name']}"
+                )
+    return "\n".join(lines)
 
 
 def main() -> None:

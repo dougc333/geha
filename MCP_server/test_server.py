@@ -187,6 +187,8 @@ class ProtocolTests(unittest.IsolatedAsyncioTestCase):
                             "get_flow_records",
                             "get_flow_events",
                             "get_run_status",
+                            "search_policy_evidence",
+                            "get_policy_evidence",
                         },
                     )
                     listed = await session.call_tool("list_flows", {})
@@ -215,6 +217,11 @@ class ProtocolTests(unittest.IsolatedAsyncioTestCase):
                         "get_flow_results", {"flow_id": "01", "run_id": "../bad"}
                     )
                     self.assertTrue(bad.isError)
+                    bad_policy = await session.call_tool(
+                        "get_policy_evidence",
+                        {"source_pdf": "../secret.pdf", "table_number": 1},
+                    )
+                    self.assertTrue(bad_policy.isError)
 
 
 if __name__ == "__main__":

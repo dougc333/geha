@@ -1,0 +1,85 @@
+{
+  "purpose": "Verify that name-free, code-free Streamlit queries use pgvector child-row retrieval and display the expected full parent table.",
+  "cases": [
+    {
+      "id": "liquid_antibody_replacement",
+      "query": "Find the table for a liquid antibody replacement injection dosed at 500 mg",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_table": "Billing codes",
+      "docling_line": 118,
+      "source_anchor": "nonlyophilized"
+    },
+    {
+      "id": "liquid_immunoglobulin",
+      "query": "nonlyophilized immunoglobulin liquid injection 500 mg",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_table": "Billing codes",
+      "docling_line": 115,
+      "source_anchor": "Gammagard Liquid"
+    },
+    {
+      "id": "gamma_globulin_liquid",
+      "query": "intravenous gamma globulin liquid product 500 mg",
+      "expected_source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_table": "Billing codes",
+      "docling_line": 114,
+      "source_anchor": "Gamunex-C"
+    },
+    {
+      "id": "red_cell_biosimilar",
+      "query": "erythropoiesis biosimilar injection 1000 units non ESRD",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_table": "Drug preference and prior authorization",
+      "docling_line": 37,
+      "source_anchor": "1000 units"
+    },
+    {
+      "id": "red_cell_one_microgram",
+      "query": "a non dialysis red cell stimulant injected at one microgram",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_table": "Billing codes",
+      "docling_line": 105,
+      "source_anchor": "1 microgram"
+    },
+    {
+      "id": "long_acting_white_cell_factor",
+      "query": "efbemalenograstim alfa-vuxw injection 0.5 mg",
+      "expected_source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "expected_table": "Drug preference and prior authorization",
+      "docling_line": 36,
+      "source_anchor": "efbemalenograstim alfa-vuxw"
+    },
+    {
+      "id": "bone_resorption_inhibitor",
+      "query": "bone resorption inhibitor antibody injection billed at 1 mg",
+      "expected_source": "geha-coverage-policy-xgeva.pdf",
+      "expected_table": "Drug preference and prior authorization",
+      "docling_line": 32,
+      "source_anchor": "Injection, denosumab, 1 mg"
+    },
+    {
+      "id": "bone_metastasis_antibody",
+      "query": "bone metastasis monoclonal antibody injection 1 mg",
+      "expected_source": "geha-coverage-policy-xgeva.pdf",
+      "expected_table": "Drug preference and prior authorization",
+      "docling_line": 32,
+      "source_anchor": "Denosumab (Xgeva)"
+    },
+    {
+      "id": "radiopharmaceutical_200_millicuries",
+      "query": "Which billing table describes a radiopharmaceutical injection measured at 200 millicuries?",
+      "expected_source": "geha-coverage-policy-pluvicto.pdf",
+      "expected_table": "Billing codes",
+      "docling_line": 77,
+      "source_anchor": "200 mCi"
+    },
+    {
+      "id": "platelet_growth_factor_one_microgram",
+      "query": "Which table lists an injection measured at 1 microgram for raising platelets?",
+      "expected_source": "geha-coverage-policy-nplate.pdf",
+      "expected_table": "Billing codes",
+      "docling_line": 78,
+      "source_anchor": "romiplostim, 1 microgram"
+    }
+  ]
+}

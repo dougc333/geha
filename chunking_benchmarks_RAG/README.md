@@ -157,6 +157,8 @@ This creates:
 
 - `policy_tables`: complete parent tables, source metadata, structured conditions, and the supporting indication section
 - `policy_table_vectors`: embedded child rows
+- `policy_chunks`: numbered Docling chunks labeled as indication, universal, or non-criteria sections
+- `policy_source_terms`: policy-name and drug-name terms for direct source lookup
 - An HNSW cosine-similarity index over the 384-dimensional embeddings
 
 ## Ingest extracted tables
@@ -183,6 +185,29 @@ uv run python chunking_benchmarks_RAG/table_rag.py ingest \
 ```
 
 Ingestion is repeatable. Existing tables with the same source filename and table number are updated, and their condition-aware child vectors are rebuilt. Run `init-db` once after upgrading an existing database so the condition metadata columns are added before re-ingestion.
+
+The same `ingest` command also loads all 35 `*.docling_chunks.md` files into
+`policy_chunks`, including the nested medical-necessity-review document. Chunk
+labels come from indication headings in the matching `.docling.md`; billing,
+references, disclaimers, and revision history are retained for traceability
+but are not returned as approval criteria. Universal approval criteria remain
+linked to their own source policy. These chunks are not embedded in pgvector.
+
+To add only the new policy-section tables to an existing database without
+rebuilding table-row embeddings, run:
+
+```bash
+uv run python chunking_benchmarks_RAG/table_rag.py ingest-sections \
+  /Users/dc/geha/downloads/coverage-policies
+```
+
+`ingest-sections` creates the new tables if necessary and reloads each source's
+chunk records and direct-lookup terms in a transaction. Restart Streamlit after
+loading them. A drug-name lookup such as `nplate` or `romiplostim` then displays
+both Nplate indication sections, followed by its policy-specific universal
+criteria in an expandable section. A query naming one documented condition
+displays that indication section instead. Preferred and non-preferred lists
+still come only from extracted preference tables, not from criteria text.
 
 The current sample corpus produces 103 parent tables and 691 searchable child rows from 35 extracted CSV files.
 
@@ -232,13 +257,10 @@ uv run python chunking_benchmarks_RAG/table_rag.py ask \
 ## Medical claims policy advisor
 
 The medical claims advisor uses the same pgvector parent-child table retriever,
-then formats the retrieved GEHA records with deterministic Python code. The GEHA
-result and exact retrieved tables are shown first. A separate `table_rag.py ask`
-pass sends those tables to OpenAI to correct obvious spelling/OCR errors and is
-shown last under an explicit model-generated label. That output is display-only:
-it is never stored in pgvector or mixed into the GEHA policy records. The prompt
-forbids adding or removing rows, changing codes or policy values, or inferring
-missing medical facts.
+then formats the retrieved GEHA records with deterministic Python code. The
+Streamlit search displays GEHA evidence and exact retrieved tables without
+calling OpenAI. The CLI retains an optional, separately labeled OpenAI
+typo/OCR-correction pass; use `--no-openai` to suppress it.
 
 The advisor distinguishes policies with explicit condition metadata from
 policies whose extracted tables do not enumerate conditions. An empty condition
@@ -257,6 +279,15 @@ Run the chat interface:
 ```bash
 uv run streamlit run chunking_benchmarks_RAG/medical_claims_advisor_ui.py
 ```
+
+To review policy-name search results, click **Start 3-second search cycle** in
+the sidebar. The app reads the 34 `geha-coverage-policy-*.docling_chunks.md`
+files directly under `downloads/coverage-policies`, removes the filename prefix
+and `.docling_chunks.md` suffix, and submits each resulting term through the
+normal search path. It shows one result at a time, waits 3 seconds after each
+search, then advances. Click **Stop search cycle** to end the run. The file
+count is determined from the directory at start and may change as files are
+added or removed.
 
 ### Reproduce the chemotherapy-induced anemia answer
 
@@ -296,9 +327,8 @@ The structured result should identify the **Erythropoietin Stimulating Agents**
 policy and its **Chemotherapy Induced Anemia** section. It should show Retacrit
 and Aranesp as preferred, Epogen and Procrit as non-preferred, prior
 authorization as Yes for all four, the extracted condition criteria, source-file
-download buttons, and the complete retrieved TableRAG evidence. Any OpenAI
-typo/OCR-correction result is displayed separately at the end and is not stored
-in pgvector.
+download buttons, and the complete retrieved TableRAG evidence. The Streamlit
+search does not generate or display an OpenAI correction result.
 
 Inspect retrieval as JSON:
 
@@ -311,6 +341,38 @@ uv run python chunking_benchmarks_RAG/medical_claims_advisor.py \
 The advisor explains policy evidence but does not adjudicate claims, determine
 medical necessity, or guarantee coverage or payment. Do not enter member or
 patient identifiers.
+
+### LangChain Preferred-table tool
+
+`preferred_table_tool.py` exports `search_preferred_policy_tables`, a LangChain
+tool that looks up a policy, drug, or documented condition in PostgreSQL and
+returns only tables with an explicit `Preferred` row. Each result includes the
+source PDF, preferred product names, documented conditions, and the complete
+extracted CSV table. It does not call OpenAI or infer coverage from a missing
+Preferred row. Set `GEHA_RAG_DATABASE_URL` if the database is not at the local
+default URL.
+
+```python
+from chunking_benchmarks_RAG.preferred_table_tool import search_preferred_policy_tables
+
+result = search_preferred_policy_tables.invoke({"query": "bendamustine"})
+print(result["tables"])
+
+# To make it available to a LangChain agent, register it in that agent's tool list.
+tools = [search_preferred_policy_tables]
+```
+
+After loading pgvector, compare the LangChain tool with all 17 source CSVs
+containing explicit Preferred rows:
+
+```bash
+GEHA_RUN_DB_TESTS=1 uv run python -m unittest \
+  chunking_benchmarks_RAG.test_preferred_table_integration
+```
+
+The test checks each source PDF, its Preferred product names, and the returned
+complete table. It is skipped in the ordinary unit-test run unless
+`GEHA_RUN_DB_TESTS=1` is set.
 
 ## Langfuse trace and A/B evaluation UI
 
@@ -452,6 +514,63 @@ It evaluates 56 queries: 26 indication-specific condition-to-policy cases from
 queries from `secondary_condition_evals.json`. It does not call OpenAI or write
 to PostgreSQL. Results are written to `streamlit_backend_eval_results.json`.
 
+## Parent-child table retrieval evals
+
+The Docling-grounded cases in `parent_child_retrieval_evals.json` test semantic
+row retrieval while treating the complete policy table as the returned evidence
+unit. Each case checks the cited Docling row, the indexed child-row hit, the
+linked parent table, and a distinct sibling row in that parent. Run against the
+loaded pgvector database:
+
+```bash
+cd /Users/dc/geha
+.venv/bin/python chunking_benchmarks_RAG/evaluate_parent_child_retrieval.py \
+  --output chunking_benchmarks_RAG/parent_child_retrieval_eval_results.json
+```
+
+The runner reports both parent-table rank and child-row rank using the app's
+default retrieval settings (3 parent tables, 30 candidate rows). It does not
+call OpenAI or adjudicate coverage.
+
+To test whether Streamlit itself reaches that semantic fallback, run the
+name-free, code-free cases in `semantic_fallback_evals.json`:
+
+```bash
+cd /Users/dc/geha
+.venv/bin/python chunking_benchmarks_RAG/evaluate_semantic_fallback.py \
+  --output chunking_benchmarks_RAG/semantic_fallback_eval_results.json
+```
+
+The runner verifies that direct source/condition lookup and billing-code lookup
+do not intercept each query, then checks the displayed parent table against a
+Docling source line. It deliberately includes known misses as regression cases
+and exits nonzero while any expected table is absent.
+
+## Policy-section retrieval evals
+
+The separate section suite tests the new direct drug-name and indication paths
+without calling OpenAI or creating embeddings. Start and load the database as
+above, then run:
+
+```bash
+cd /Users/dc/geha
+uv run python chunking_benchmarks_RAG/evaluate_policy_sections.py \
+  --output chunking_benchmarks_RAG/policy_section_eval_results.json
+```
+
+The runner executes 46 query cases: 12 focused cases in
+`policy_section_evals.json` and one filename-derived name lookup for each of
+the 34 root policy chunk files in `policy_name_section_evals.json`. The focused
+cases cover Nplate and romiplostim, condition-specific narrowing,
+policy-specific universal wording, and Datroway/Trodelvy source precedence.
+The filename cases check the exact source and indication/universal chunk list
+for every root policy, including policies with no such sections. The 35th file
+is a nested general medical-necessity review document rather than a treatment
+policy; the runner verifies its stored chunks separately and confirms it has
+no treatment table. It also verifies the complete 35-file, 409-chunk inventory.
+The command exits nonzero if any check fails. This suite is additive to the
+existing 56 condition evals; it does not replace or alter them.
+
 ## Stop the database
 
 ```bash
@@ -474,6 +593,10 @@ This keeps the database volume. To delete the stored database as well, explicitl
 - `evaluate_secondary_conditions.py`: deterministic Streamlit-path eval runner
 - `evaluate_streamlit_backend.py`: combined 56-case Streamlit-backend runner
 - `streamlit_backend_eval_results.json`: latest combined backend results
+- `policy_section_evals.json`: 12 focused policy-section retrieval cases
+- `policy_name_section_evals.json`: 34 filename-derived policy-name query cases and the nested general-review document check
+- `evaluate_policy_sections.py`: deterministic section-eval runner
+- `policy_section_eval_results.json`: latest section-eval results
 - `table_rag_comparison.py`: deterministic-versus-LLM evaluation and Langfuse tracing
 - `table_rag_ui.py`: Streamlit comparison dashboard with Langfuse trace links
 - `medical_claims_advisor.py`: grounded claims-advisor retrieval and generation core

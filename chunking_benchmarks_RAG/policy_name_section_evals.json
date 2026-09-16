@@ -1,0 +1,577 @@
+{
+  "purpose": "Direct filename-name lookup for every root coverage-policy chunk file",
+  "cases": [
+    {
+      "id": "geha-coverage-policy-bendamustine",
+      "query": "bendamustine",
+      "source": "geha-coverage-policy-bendamustine.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 3,
+          "section_type": "universal",
+          "condition": null
+        },
+        {
+          "chunk_number": 4,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-bevacizumab",
+      "query": "bevacizumab",
+      "source": "geha-coverage-policy-bevacizumab.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 4,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-cyramza",
+      "query": "cyramza",
+      "source": "geha-coverage-policy-cyramza.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 3,
+          "section_type": "indication",
+          "condition": "Hepatocellular Carcinoma"
+        },
+        {
+          "chunk_number": 4,
+          "section_type": "indication",
+          "condition": "Non-Small Cell Lung Cancer"
+        },
+        {
+          "chunk_number": 5,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-datroway",
+      "query": "datroway",
+      "source": "geha-coverage-policy-datroway.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 3,
+          "section_type": "indication",
+          "condition": "Breast cancer - unresectable or metastatic"
+        },
+        {
+          "chunk_number": 4,
+          "section_type": "indication",
+          "condition": "EGFR-Mutated Non-squamous non-small cell lung cancer - locally advanced or metastatic"
+        },
+        {
+          "chunk_number": 5,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-elrexfio",
+      "query": "elrexfio",
+      "source": "geha-coverage-policy-elrexfio.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 2,
+          "section_type": "indication",
+          "condition": "Multiple Myeloma (MM)"
+        },
+        {
+          "chunk_number": 3,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-erythropoietin-stimulating-agents",
+      "query": "erythropoietin stimulating agents",
+      "source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 4,
+          "section_type": "indication",
+          "condition": "Chemotherapy Induced Anemia"
+        },
+        {
+          "chunk_number": 5,
+          "section_type": "indication",
+          "condition": "Anemia secondary to Myelodysplastic Syndrome"
+        },
+        {
+          "chunk_number": 6,
+          "section_type": "indication",
+          "condition": "Anemia secondary to Myeloproliferative Neoplasms (MPN) - Myelofibrosis"
+        },
+        {
+          "chunk_number": 7,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-fruzaqla",
+      "query": "fruzaqla",
+      "source": "geha-coverage-policy-fruzaqla.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 2,
+          "section_type": "indication",
+          "condition": "Colon Cancer - Metastatic or Advanced"
+        },
+        {
+          "chunk_number": 3,
+          "section_type": "universal",
+          "condition": null
+        },
+        {
+          "chunk_number": 4,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-gemcitabine",
+      "query": "gemcitabine",
+      "source": "geha-coverage-policy-gemcitabine.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 2,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer",
+      "query": "gnrh analogues in prostate cancer",
+      "source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 5,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-imdelltra",
+      "query": "imdelltra",
+      "source": "geha-coverage-policy-imdelltra.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 2,
+          "section_type": "indication",
+          "condition": "Extensive Stage Small Cell Lung Cancer (SCLC)"
+        },
+        {
+          "chunk_number": 3,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-infertility-services",
+      "query": "infertility services",
+      "source": "geha-coverage-policy-infertility-services.pdf",
+      "expected_sections": []
+    },
+    {
+      "id": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve",
+      "query": "intraosseous radiofrequency ablation of the basivertebral nerve",
+      "source": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf",
+      "expected_sections": []
+    },
+    {
+      "id": "geha-coverage-policy-intravenous-immune-globulin",
+      "query": "intravenous immune globulin",
+      "source": "geha-coverage-policy-intravenous-immune-globulin.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 3,
+          "section_type": "indication",
+          "condition": "Hypogammaglobulinemia in Multiple Myeloma"
+        },
+        {
+          "chunk_number": 4,
+          "section_type": "indication",
+          "condition": "Hypogammaglobulinemia in Chronic Lymphocytic Leukemia"
+        },
+        {
+          "chunk_number": 5,
+          "section_type": "indication",
+          "condition": "Management of Checkpoint Inhibitor Related Toxicities"
+        },
+        {
+          "chunk_number": 6,
+          "section_type": "indication",
+          "condition": "Management of CAR-T Cell Related Toxicities"
+        },
+        {
+          "chunk_number": 7,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-long-acting-gcsfs",
+      "query": "long acting gcsfs",
+      "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 4,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-lunsumio",
+      "query": "lunsumio",
+      "source": "geha-coverage-policy-lunsumio.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 3,
+          "section_type": "indication",
+          "condition": "Follicular Lymphoma - Relapsed or Refractory (Grade 1, 2 or 3A)"
+        },
+        {
+          "chunk_number": 4,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-non-muscle-invasive-bladder-cancer",
+      "query": "non muscle invasive bladder cancer",
+      "source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 5,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-nplate",
+      "query": "nplate",
+      "source": "geha-coverage-policy-nplate.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 2,
+          "section_type": "indication",
+          "condition": "Chemotherapy-induced thrombocytopenia"
+        },
+        {
+          "chunk_number": 3,
+          "section_type": "indication",
+          "condition": "Myelodysplastic Syndrome"
+        },
+        {
+          "chunk_number": 4,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-ojjaara-momelotinib",
+      "query": "ojjaara momelotinib",
+      "source": "geha-coverage-policy-ojjaara-momelotinib.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 2,
+          "section_type": "indication",
+          "condition": "Myelofibrosis (MF)"
+        },
+        {
+          "chunk_number": 3,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-paclitaxel-protein-bound",
+      "query": "paclitaxel protein bound",
+      "source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 3,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-pd-1pd-l1s",
+      "query": "pd 1pd l1s",
+      "source": "geha-coverage-policy-pd-1pd-l1s.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 2,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-pemetrexed",
+      "query": "pemetrexed",
+      "source": "geha-coverage-policy-pemetrexed.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 5,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-pluvicto",
+      "query": "pluvicto",
+      "source": "geha-coverage-policy-pluvicto.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 3,
+          "section_type": "indication",
+          "condition": "Prostate Cancer, Metastatic"
+        },
+        {
+          "chunk_number": 4,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-provenge",
+      "query": "provenge",
+      "source": "geha-coverage-policy-provenge.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 2,
+          "section_type": "indication",
+          "condition": "Prostate Cancer, Metastastic"
+        },
+        {
+          "chunk_number": 3,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-rituximab",
+      "query": "rituximab",
+      "source": "geha-coverage-policy-rituximab.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 3,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-rytelo",
+      "query": "rytelo",
+      "source": "geha-coverage-policy-rytelo.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 2,
+          "section_type": "indication",
+          "condition": "Myelodysplastic Syndrome (MDS)"
+        },
+        {
+          "chunk_number": 3,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-short-acting-gcsfs",
+      "query": "short acting gcsfs",
+      "source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 2,
+          "section_type": "universal",
+          "condition": null
+        },
+        {
+          "chunk_number": 3,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-talvey",
+      "query": "talvey",
+      "source": "geha-coverage-policy-talvey.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 3,
+          "section_type": "indication",
+          "condition": "Multiple Myeloma (MM)"
+        },
+        {
+          "chunk_number": 4,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-taxotere-docivyx",
+      "query": "taxotere docivyx",
+      "source": "geha-coverage-policy-taxotere-docivyx.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 3,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-tecvayli",
+      "query": "tecvayli",
+      "source": "geha-coverage-policy-tecvayli.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 3,
+          "section_type": "indication",
+          "condition": "Multiple Myeloma (MM)"
+        },
+        {
+          "chunk_number": 4,
+          "section_type": "universal",
+          "condition": null
+        },
+        {
+          "chunk_number": 5,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-trastuzumab",
+      "query": "trastuzumab",
+      "source": "geha-coverage-policy-trastuzumab.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 4,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-trodelvy",
+      "query": "trodelvy",
+      "source": "geha-coverage-policy-trodelvy.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 3,
+          "section_type": "indication",
+          "condition": "Unresectable Locally Advanced or Metastatic Breast Cancer"
+        },
+        {
+          "chunk_number": 4,
+          "section_type": "indication",
+          "condition": "Unresectable Locally Advanced or Metastatic Breast Cancer"
+        },
+        {
+          "chunk_number": 5,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-vectibix",
+      "query": "vectibix",
+      "source": "geha-coverage-policy-vectibix.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 2,
+          "section_type": "universal",
+          "condition": null
+        },
+        {
+          "chunk_number": 3,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-xgeva",
+      "query": "xgeva",
+      "source": "geha-coverage-policy-xgeva.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 5,
+          "section_type": "indication",
+          "condition": "Hypercalcemia of malignancy"
+        },
+        {
+          "chunk_number": 6,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    },
+    {
+      "id": "geha-coverage-policy-ziihera",
+      "query": "ziihera",
+      "source": "geha-coverage-policy-ziihera.pdf",
+      "expected_sections": [
+        {
+          "chunk_number": 2,
+          "section_type": "indication",
+          "condition": "Biliary Tract Cancer (BTC)"
+        },
+        {
+          "chunk_number": 3,
+          "section_type": "universal",
+          "condition": null
+        }
+      ]
+    }
+  ],
+  "stored_only": {
+    "source": "aa_source_not_consistent/geha-medical-necessity-review-criteria.pdf",
+    "expected_sections": [
+      {
+        "chunk_number": 4,
+        "section_type": "universal",
+        "condition": null
+      },
+      {
+        "chunk_number": 5,
+        "section_type": "universal",
+        "condition": null
+      }
+    ],
+    "reason": "Nested general review document, not a treatment policy"
+  }
+}
