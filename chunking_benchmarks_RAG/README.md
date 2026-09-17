@@ -163,6 +163,114 @@ This creates:
 
 ## Ingest extracted tables
 
+### Review-only extraction tools for a new PDF
+
+Three LangChain tools can stage a single policy for the data-cleaning workflow:
+
+```python
+from chunking_benchmarks_RAG.policy_extraction_tools import (
+    docling_extract,
+    html_table_extract,
+    pdf_page_screenshots,
+)
+
+source = "geha-coverage-policy-nplate.pdf"
+docling_result = docling_extract.invoke({"pdf_filename": source})
+html_result = html_table_extract.invoke({"pdf_filename": source})
+page_result = pdf_page_screenshots.invoke({"pdf_filename": source, "dpi": 180})
+print(docling_result)  # Markdown and numbered chunk paths
+print(html_result)     # HTML table paths, headings, and excluded revisions
+print(page_result)     # One PNG path and page number per source PDF page
+```
+
+The tools accept a PDF filename in `downloads/coverage-policies`, not an
+arbitrary path. They write new files under
+`downloads/coverage-policies/extraction_review/<policy-name>/` and never
+overwrite the existing `.docling.md`, `.docling_chunks.md`, or published HTML
+tables. The HTML tool reuses the existing closest-heading, embedded-CSS, and
+revision-history filtering logic. When Docling gives a table numeric columns
+(`0`, `1`, `2`, ...), the HTML extractor promotes the first row only if it has
+recognizable, unique policy-table column labels; the extraction result records
+`header_promoted: true` for review. Existing published HTML files are not
+changed by this rule until they are explicitly regenerated. None of the tools writes
+to PostgreSQL; validate the staged outputs against the PDF before promoting or
+ingesting them. The `pdf_page_screenshots` tool uses Poppler (`pdfinfo` and
+`pdftoppm`) to render the original PDF at 100-300 DPI. It returns a numbered
+PNG path for each requested page, stored in a source-hash-specific review
+directory, but does not send images to an LLM or compare them automatically.
+Because the Docling and HTML tools are independent, calling both converts the
+PDF twice.
+
+For a table that continues onto the next page without repeating its column
+labels, the HTML extractor inherits the preceding table's headers only when the
+pages are adjacent, the section heading and column count match, and the prior
+headers are recognizable. It retains every continuation row and records
+`header_inherited_from_table` in the extraction result. A numeric-column table
+without that evidence is left unchanged for manual review; `0`, `1`, `2` are not
+silently hidden. Run the batch extractor with `--output-dir` pointing to a new
+directory to compare results without replacing previously published HTML.
+
+Reusable extraction functions now live in `policy_table_html_lib.py`; the
+`extract_pdf_tables_html.py` command remains a compatible batch wrapper. The
+continuation check also handles a Docling fragment that puts its first billing
+data row in the DataFrame column names: with adjacent pages, matching headings,
+and a recognizable HCPCS code, it restores that row before rendering. The two
+small PDFs in `test_fixtures/` exercise numeric headers and page continuation
+through real Docling conversion. Run the focused suite with
+`uv run python -m unittest -v chunking_benchmarks_RAG.test_extract_pdf_tables_html`.
+
+### Local LangGraph review loop
+
+The review-only graph stages HTML tables, renders their source PDF pages, runs
+structural checks, and uses a conditional edge to repair a recognizable
+`0`/`1`/`2` header artifact once. It then rechecks the staged table. Other
+issues go directly to human review. Even when structural checks pass, the
+status is `awaiting_visual_review`: this workflow **does not** establish that
+the extracted values match the PDF. Compare each HTML table with its PNG
+before publishing or ingesting anything.
+
+```bash
+cd /Users/dc/geha
+uv sync --frozen
+uv run python -m chunking_benchmarks_RAG.policy_review_graph \
+  geha-coverage-policy-ziihera.pdf
+```
+
+The command prints the status and path to `qc_report.json`. Its run-specific
+HTML and report are under `downloads/coverage-policies/extraction_review/`;
+the page PNGs are source-hash-specific. There are no database writes and no
+external model calls in the default mode.
+
+For the synthetic policy documents, opt in to the OpenAI visual-QC pass:
+Set a valid `OPENAI_API_KEY` in the process environment first; the review
+command does not load a `.env` file automatically. Never put the key in a
+source file or share it in chat.
+
+```bash
+cd /Users/dc/geha
+uv run python -m chunking_benchmarks_RAG.policy_review_graph \
+  geha-coverage-policy-ziihera.pdf --vision-model gpt-4.1-mini
+```
+
+This converts the PDF to Docling chunks with assigned headings and page
+provenance, renders the relevant source pages to PNGs, and renders every
+extracted HTML table into a full-height comparison PNG. For each chunk the
+model checks heading/section association against its source page; for each
+table it checks heading, columns, rows, and values against the PDF image. The
+table PNG is a deterministic rendering of the HTML cells, not a pixel-exact
+browser screenshot. The OpenAI Responses API receives the relevant PNGs and
+chunk text; it does not receive the database or full repository. Requests use
+`store=False`. Findings are model-generated QC suggestions, not policy facts.
+
+The graph prints and saves one summary per pass: `table_error_count`,
+`chunk_heading_error_count`, `chunk_other_error_count`, `total_error_count`,
+`uncertain_count`, and `structural_error_count`. Error counts are individual
+reported issues, not the number of files. API/render failures count as
+**uncertain**, never as a successful comparison. When it detects the known
+numeric-header artifact, the graph applies only the deterministic header-row
+repair to staged HTML and runs one more comparison; all other discrepancies
+go to human review. It never promotes an extract or writes to PostgreSQL.
+
 Regenerate the CSV inputs directly from the PDFs' embedded text layer when needed:
 
 ```bash

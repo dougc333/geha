@@ -151,6 +151,10 @@ def infer_title(headers: list[str]) -> str:
     return " / ".join(headers)
 
 
+def is_revision_history_table(headers: list[str]) -> bool:
+    return infer_title(headers).casefold() == "revision history"
+
+
 def table_as_csv(headers: list[str], rows: list[list[str]]) -> str:
     stream = io.StringIO(newline="")
     writer = csv.writer(stream, lineterminator="\n")
@@ -479,6 +483,10 @@ def ingest(
     table_count = 0
     row_count = 0
     with connect(database_url) as connection:
+        # Remove previously indexed revision tables; child vectors cascade with them.
+        connection.execute(
+            "DELETE FROM policy_tables WHERE lower(btrim(title)) = 'revision history'"
+        )
         for csv_path in csv_paths:
             source = f"{csv_path.name.removesuffix(CSV_SUFFIX)}.pdf"
             markdown_path = csv_path.with_name(
@@ -494,6 +502,8 @@ def ingest(
             for table_number, raw_table in enumerate(tables, 1):
                 headers, rows = normalized_table(raw_table)
                 if not headers:
+                    continue
+                if is_revision_history_table(headers):
                     continue
                 title = infer_title(headers)
                 full_csv = table_as_csv(headers, rows)

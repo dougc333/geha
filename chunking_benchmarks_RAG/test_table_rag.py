@@ -2,11 +2,14 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import MagicMock, patch
 
 from chunking_benchmarks_RAG.table_rag import (
     classify_policy_chunks,
     extract_indication_metadata,
     infer_title,
+    ingest,
+    is_revision_history_table,
     normalized_table,
     policy_chunk_paths,
     policy_source_terms,
@@ -79,6 +82,43 @@ class TableRagTests(unittest.TestCase):
             infer_title(["Drug Name", "HCPCS Code", "Description"]),
             "Billing codes",
         )
+
+    def test_revision_history_is_not_searchable(self):
+        self.assertTrue(is_revision_history_table(["Date", "Updates"]))
+        self.assertFalse(
+            is_revision_history_table(["Drug Name", "HCPCS Code", "Description"])
+        )
+
+    def test_ingestion_skips_revision_history_and_purges_existing_rows(self):
+        with tempfile.TemporaryDirectory() as directory:
+            csv_path = Path(directory) / "geha-coverage-policy-nplate_table_openai.csv"
+            csv_path.write_text(
+                "Drug Name,HCPCS Code\nNplate,J2802\n\n\n"
+                "Date,Updates\n1/1/2025,Annual review\n",
+                encoding="utf-8",
+            )
+            connection = MagicMock()
+            connection.execute.return_value.fetchone.return_value = {"id": 1}
+            model = MagicMock()
+            model.encode.return_value = [[0.0] * 384]
+
+            with (
+                patch("chunking_benchmarks_RAG.table_rag.connect") as connect_mock,
+                patch("chunking_benchmarks_RAG.table_rag.ingest_policy_sections"),
+                patch("chunking_benchmarks_RAG.table_rag.ingest_billing_codes"),
+            ):
+                connect_mock.return_value.__enter__.return_value = connection
+                ingest("unused", Path(directory), model)
+
+            statements = [call.args[0] for call in connection.execute.call_args_list]
+            self.assertEqual(sum("INSERT INTO policy_tables" in sql for sql in statements), 1)
+            self.assertEqual(
+                sum("INSERT INTO policy_table_vectors" in sql for sql in statements), 1
+            )
+            self.assertTrue(
+                any("DELETE FROM policy_tables" in sql for sql in statements)
+            )
+            self.assertEqual(model.encode.call_count, 1)
 
     def test_extracts_single_indication_and_context(self):
         markdown = """## Drug

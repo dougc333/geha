@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "purpose": "Immutable before-state for a LangGraph parsing-repair demonstration",
+  "source_root": "downloads/coverage-policies",
+  "cases": [
+    {
+      "id": "datroway_numeric_header",
+      "source_pdf": "geha-coverage-policy-datroway.pdf",
+      "source_pdf_sha256": "2fada993e5d40fa441ba6fa952befa658705cdba0d1756aec4d2734b0c6e6458",
+      "source_page": 3,
+      "legacy_html": "geha-coverage-policy-datroway_billing.html",
+      "legacy_html_sha256": "f77e9bf0cb6d0862e27a636f6a2b038f9a2ba0e34ebaf49c4930901bf1fac2a4",
+      "error": "numeric_header_with_source_header_as_first_data_row",
+      "expected_headers": ["Drug Name", "HCPCS Code", "Description"],
+      "expected_data_rows": 2
+    },
+    {
+      "id": "bevacizumab_page_boundary",
+      "source_pdf": "geha-coverage-policy-bevacizumab.pdf",
+      "source_pdf_sha256": "de7ee4bfdb1832b904a48657dc69ca957695690a30e349d8ffe001667a196cad",
+      "source_pages": [2, 3],
+      "first_fragment_html": "geha-coverage-policy-bevacizumab_billing.html",
+      "first_fragment_html_sha256": "e27f1293ee4031d61a4c9d640d8fd346e57525bf70e4c0f408fb645928f14365",
+      "legacy_html": "geha-coverage-policy-bevacizumab_billing_2.html",
+      "legacy_html_sha256": "c57857f6a07fdd4667c131e031b7d0ab71c27f762d70b1bd690f4657c794b0b4",
+      "error": "continuation_fragment_has_numeric_header",
+      "expected_headers": ["Drug Name", "HCPCS Code", "Description"],
+      "expected_data_rows_on_page_3": 3
+    }
+  ]
+}
