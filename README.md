@@ -1,9 +1,5 @@
 # GEHA
 
-## Agentic Design Process
-
-
-
 ## High-level simulations
 
 These simulations were drafted with assistance from an LLM. The LLM accelerated
@@ -161,6 +157,3 @@ npm start
 ```
 
 See [langgraph_web/README.md](langgraph_web/README.md) for configuration details.
-
-# HTML Version
-![table_aware_parsing.apng]
