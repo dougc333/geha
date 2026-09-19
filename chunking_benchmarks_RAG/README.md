@@ -1,5 +1,40 @@
 # Table-Aware Coverage Policy RAG
 
+## Postgres RAG reliability features not in Chroma
+
+PostgreSQL enforces the integrity of this parent-child RAG index at the database level:
+
+- The foreign key from `policy_table_vectors.table_id` to `policy_tables.id` prevents a child row from pointing to a nonexistent parent table.
+- `ON DELETE CASCADE` removes the associated child rows when a parent table is deleted.
+- `UNIQUE (table_id, row_number)` prevents duplicate logical child rows for the same parent table.
+- Transactions ensure that ingestion either commits a complete update or rolls it back, avoiding partially completed table updates.
+
+Chroma can represent the same parent-child structure through IDs and metadata, but it does not enforce foreign keys. Without application-level checks, Chroma allows:
+
+- A child pointing to a nonexistent parent.
+- Deleting a parent while leaving its children.
+- Duplicate logical rows with different IDs.
+- Partially completed updates.
+
+A Chroma ingestion pipeline should validate these relationships explicitly:
+
+```python
+parent_ids = set(parent_collection.get()["ids"])
+children = child_collection.get(include=["metadatas"])
+
+orphan_table_ids = sorted({
+    metadata["table_id"]
+    for metadata in children["metadatas"]
+    if metadata["table_id"] not in parent_ids
+})
+
+if orphan_table_ids:
+    raise ValueError(f"Orphaned table rows: {orphan_table_ids}")
+```
+
+The application should also generate deterministic IDs, reject duplicate `(table_id, row_number)` values, and use a staged replacement process so readers never observe a partially updated index.
+
+
 This project retrieves information from tables extracted from synthetic coverage-policy PDFs. The PDFs contain embedded text, so ingestion explicitly disables OCR and does not use Tesseract. It uses a parent-child retrieval design:
 
 - Each table row is embedded as a searchable child record.
@@ -666,16 +701,16 @@ uv run python chunking_benchmarks_RAG/evaluate_policy_sections.py \
   --output chunking_benchmarks_RAG/policy_section_eval_results.json
 ```
 
-The runner executes 46 query cases: 12 focused cases in
+The runner is configured for 44 query cases: 12 focused cases in
 `policy_section_evals.json` and one filename-derived name lookup for each of
-the 34 root policy chunk files in `policy_name_section_evals.json`. The focused
+the 32 root policy chunk files in `policy_name_section_evals.json`. The focused
 cases cover Nplate and romiplostim, condition-specific narrowing,
 policy-specific universal wording, and Datroway/Trodelvy source precedence.
 The filename cases check the exact source and indication/universal chunk list
-for every root policy, including policies with no such sections. The 35th file
-is a nested general medical-necessity review document rather than a treatment
-policy; the runner verifies its stored chunks separately and confirms it has
-no treatment table. It also verifies the complete 35-file, 409-chunk inventory.
+for every root policy, including policies with no such sections. A nested
+general medical-necessity review document is checked separately as stored-only
+and must have no treatment table. The runner also checks the indexed source
+inventory against these expected sources.
 The command exits nonzero if any check fails. This suite is additive to the
 existing 56 condition evals; it does not replace or alter them.
 
@@ -702,7 +737,7 @@ This keeps the database volume. To delete the stored database as well, explicitl
 - `evaluate_streamlit_backend.py`: combined 56-case Streamlit-backend runner
 - `streamlit_backend_eval_results.json`: latest combined backend results
 - `policy_section_evals.json`: 12 focused policy-section retrieval cases
-- `policy_name_section_evals.json`: 34 filename-derived policy-name query cases and the nested general-review document check
+- `policy_name_section_evals.json`: 32 filename-derived policy-name query cases and the nested general-review document check
 - `evaluate_policy_sections.py`: deterministic section-eval runner
 - `policy_section_eval_results.json`: latest section-eval results
 - `table_rag_comparison.py`: deterministic-versus-LLM evaluation and Langfuse tracing

@@ -1,0 +1,2906 @@
+{
+  "summary": {
+    "questions": 99,
+    "policies": 17,
+    "indexed_chunks": 240,
+    "indexed_pdfs": 32,
+    "indexable_gold_rows": 97,
+    "unindexed_gold_rows": 2,
+    "row_hit_at_1": 72,
+    "row_hit_at_4": 91,
+    "row_hit_at_10": 95,
+    "row_hit_anywhere": 97,
+    "source_hit_at_1": 88,
+    "mrr": 0.8228,
+    "miss_categories": {
+      "source page not indexed": 2,
+      "other page": 6,
+      "same page wrong chunk": 10,
+      "other policy": 9
+    },
+    "by_preference": {
+      "preferred": {
+        "queries": 29,
+        "hit_at_1": 24,
+        "hit_at_4": 28
+      },
+      "non-preferred": {
+        "queries": 70,
+        "hit_at_1": 48,
+        "hit_at_4": 63
+      }
+    },
+    "by_policy": {
+      "geha-coverage-policy-bendamustine.pdf": {
+        "queries": 5,
+        "hit_at_1": 5,
+        "hit_at_4": 5
+      },
+      "geha-coverage-policy-bevacizumab.pdf": {
+        "queries": 8,
+        "hit_at_1": 8,
+        "hit_at_4": 8
+      },
+      "geha-coverage-policy-datroway.pdf": {
+        "queries": 2,
+        "hit_at_1": 0,
+        "hit_at_4": 0
+      },
+      "geha-coverage-policy-erythropoietin-stimulating-agents.pdf": {
+        "queries": 4,
+        "hit_at_1": 4,
+        "hit_at_4": 4
+      },
+      "geha-coverage-policy-gemcitabine.pdf": {
+        "queries": 3,
+        "hit_at_1": 2,
+        "hit_at_4": 3
+      },
+      "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf": {
+        "queries": 10,
+        "hit_at_1": 6,
+        "hit_at_4": 10
+      },
+      "geha-coverage-policy-long-acting-gcsfs.pdf": {
+        "queries": 10,
+        "hit_at_1": 2,
+        "hit_at_4": 10
+      },
+      "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf": {
+        "queries": 5,
+        "hit_at_1": 1,
+        "hit_at_4": 5
+      },
+      "geha-coverage-policy-paclitaxel-protein-bound.pdf": {
+        "queries": 4,
+        "hit_at_1": 4,
+        "hit_at_4": 4
+      },
+      "geha-coverage-policy-pemetrexed.pdf": {
+        "queries": 10,
+        "hit_at_1": 7,
+        "hit_at_4": 7
+      },
+      "geha-coverage-policy-rituximab.pdf": {
+        "queries": 5,
+        "hit_at_1": 4,
+        "hit_at_4": 5
+      },
+      "geha-coverage-policy-rytelo.pdf": {
+        "queries": 2,
+        "hit_at_1": 2,
+        "hit_at_4": 2
+      },
+      "geha-coverage-policy-short-acting-gcsfs.pdf": {
+        "queries": 5,
+        "hit_at_1": 5,
+        "hit_at_4": 5
+      },
+      "geha-coverage-policy-taxotere-docivyx.pdf": {
+        "queries": 3,
+        "hit_at_1": 3,
+        "hit_at_4": 3
+      },
+      "geha-coverage-policy-trastuzumab.pdf": {
+        "queries": 8,
+        "hit_at_1": 8,
+        "hit_at_4": 8
+      },
+      "geha-coverage-policy-vectibix.pdf": {
+        "queries": 2,
+        "hit_at_1": 2,
+        "hit_at_4": 2
+      },
+      "geha-coverage-policy-xgeva.pdf": {
+        "queries": 13,
+        "hit_at_1": 9,
+        "hit_at_4": 10
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "bendamustine_01",
+      "query": "In the bendamustine policy, is Treanda preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-bendamustine.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 1,
+      "drug_name": "Treanda",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9033",
+      "expected_answer": "Treanda: preferred; HCPCS J9033; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-bendamustine-p1-c1"
+      ],
+      "row_anchor": "treanda",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-bendamustine-p1-c1",
+        "source_file": "geha-coverage-policy-bendamustine.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.965,
+        "excerpt": "Bendamustine: Belrapzo, Bendeka, Treanda, Vivimusta Original Effective Date: 12/5/2022 Revision Date(s): 12/5/2022; 11/7/2023; 4/25/2024; 9/24/2024; 11/4/2024; 10/1/2025 Review Date: 10/1/2025 Policy type: Medical Necessity Line of Business: All GEHA Medical Plans Authorizations "
+      },
+      "error_reason": null
+    },
+    {
+      "id": "bendamustine_02",
+      "query": "In the bendamustine policy, is Bendamustine 505(b)(2) Dr Reddy's preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-bendamustine.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 2,
+      "drug_name": "Bendamustine 505(b)(2) Dr Reddy's",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9999",
+      "expected_answer": "Bendamustine 505(b)(2) Dr Reddy's: preferred; HCPCS J9999; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-bendamustine-p1-c1"
+      ],
+      "row_anchor": "bendamustine",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-bendamustine-p1-c1",
+        "source_file": "geha-coverage-policy-bendamustine.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6972,
+        "excerpt": "Bendamustine: Belrapzo, Bendeka, Treanda, Vivimusta Original Effective Date: 12/5/2022 Revision Date(s): 12/5/2022; 11/7/2023; 4/25/2024; 9/24/2024; 11/4/2024; 10/1/2025 Review Date: 10/1/2025 Policy type: Medical Necessity Line of Business: All GEHA Medical Plans Authorizations "
+      },
+      "error_reason": null
+    },
+    {
+      "id": "bendamustine_03",
+      "query": "In the bendamustine policy, is Bendeka preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-bendamustine.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 3,
+      "drug_name": "Bendeka",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9034",
+      "expected_answer": "Bendeka: non-preferred; HCPCS J9034; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-bendamustine-p1-c1"
+      ],
+      "row_anchor": "bendeka",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-bendamustine-p1-c1",
+        "source_file": "geha-coverage-policy-bendamustine.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.8872,
+        "excerpt": "Bendamustine: Belrapzo, Bendeka, Treanda, Vivimusta Original Effective Date: 12/5/2022 Revision Date(s): 12/5/2022; 11/7/2023; 4/25/2024; 9/24/2024; 11/4/2024; 10/1/2025 Review Date: 10/1/2025 Policy type: Medical Necessity Line of Business: All GEHA Medical Plans Authorizations "
+      },
+      "error_reason": null
+    },
+    {
+      "id": "bendamustine_04",
+      "query": "In the bendamustine policy, is Belrapzo preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-bendamustine.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 4,
+      "drug_name": "Belrapzo",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9036",
+      "expected_answer": "Belrapzo: non-preferred; HCPCS J9036; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-bendamustine-p1-c1"
+      ],
+      "row_anchor": "belrapzo",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-bendamustine-p1-c1",
+        "source_file": "geha-coverage-policy-bendamustine.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.7556,
+        "excerpt": "Bendamustine: Belrapzo, Bendeka, Treanda, Vivimusta Original Effective Date: 12/5/2022 Revision Date(s): 12/5/2022; 11/7/2023; 4/25/2024; 9/24/2024; 11/4/2024; 10/1/2025 Review Date: 10/1/2025 Policy type: Medical Necessity Line of Business: All GEHA Medical Plans Authorizations "
+      },
+      "error_reason": null
+    },
+    {
+      "id": "bendamustine_05",
+      "query": "In the bendamustine policy, is Vivimusta preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-bendamustine.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 5,
+      "drug_name": "Vivimusta",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9056",
+      "expected_answer": "Vivimusta: non-preferred; HCPCS J9056; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-bendamustine-p1-c1"
+      ],
+      "row_anchor": "vivimusta",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-bendamustine-p1-c1",
+        "source_file": "geha-coverage-policy-bendamustine.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.8444,
+        "excerpt": "Bendamustine: Belrapzo, Bendeka, Treanda, Vivimusta Original Effective Date: 12/5/2022 Revision Date(s): 12/5/2022; 11/7/2023; 4/25/2024; 9/24/2024; 11/4/2024; 10/1/2025 Review Date: 10/1/2025 Policy type: Medical Necessity Line of Business: All GEHA Medical Plans Authorizations "
+      },
+      "error_reason": null
+    },
+    {
+      "id": "bevacizumab_01",
+      "query": "In the bevacizumab policy, is Bevacizumab-awwb (Mvasi) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-bevacizumab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 1,
+      "drug_name": "Bevacizumab- awwb (Mvasi)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5107",
+      "expected_answer": "Bevacizumab- awwb (Mvasi): non-preferred; HCPCS Q5107; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-bevacizumab-p1-c1"
+      ],
+      "row_anchor": "mvasi",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-bevacizumab-p1-c1",
+        "source_file": "geha-coverage-policy-bevacizumab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.7891,
+        "excerpt": "Bevacizumab and Zaltrap: Alymsys, Avastin, Avzivi, Jobvene, Mvasi, Vegzelma, Zirabev, Zaltrap Original Effective Date: 1/1/2023 Revision Date(s): 1/1/23, 7/1/23, 8/19/2024; 05/27/2025, 1/1/2026 Review Date: 1/1/2026 Policy type: Medical Necessity Line of business: All G.E.H.A Med"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "bevacizumab_02",
+      "query": "In the bevacizumab policy, is Bevacizumab-bvzr (Zirabev) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-bevacizumab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 2,
+      "drug_name": "Bevacizumab-bvzr (Zirabev)",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5118",
+      "expected_answer": "Bevacizumab-bvzr (Zirabev): preferred; HCPCS Q5118; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-bevacizumab-p1-c1"
+      ],
+      "row_anchor": "zirabev",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-bevacizumab-p1-c1",
+        "source_file": "geha-coverage-policy-bevacizumab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6127,
+        "excerpt": "Bevacizumab and Zaltrap: Alymsys, Avastin, Avzivi, Jobvene, Mvasi, Vegzelma, Zirabev, Zaltrap Original Effective Date: 1/1/2023 Revision Date(s): 1/1/23, 7/1/23, 8/19/2024; 05/27/2025, 1/1/2026 Review Date: 1/1/2026 Policy type: Medical Necessity Line of business: All G.E.H.A Med"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "bevacizumab_03",
+      "query": "In the bevacizumab policy, is Bevacizumab (Avastin) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-bevacizumab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 3,
+      "drug_name": "Bevacizumab (Avastin)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9035",
+      "expected_answer": "Bevacizumab (Avastin): non-preferred; HCPCS J9035; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-bevacizumab-p1-c1"
+      ],
+      "row_anchor": "avastin",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-bevacizumab-p1-c1",
+        "source_file": "geha-coverage-policy-bevacizumab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.7121,
+        "excerpt": "Bevacizumab and Zaltrap: Alymsys, Avastin, Avzivi, Jobvene, Mvasi, Vegzelma, Zirabev, Zaltrap Original Effective Date: 1/1/2023 Revision Date(s): 1/1/23, 7/1/23, 8/19/2024; 05/27/2025, 1/1/2026 Review Date: 1/1/2026 Policy type: Medical Necessity Line of business: All G.E.H.A Med"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "bevacizumab_04",
+      "query": "In the bevacizumab policy, is Bevacizumab-tnjn (Avzivi) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-bevacizumab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 4,
+      "drug_name": "Bevacizumab-tnjn (Avzivi)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9999",
+      "expected_answer": "Bevacizumab-tnjn (Avzivi): non-preferred; HCPCS J9999; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-bevacizumab-p1-c1"
+      ],
+      "row_anchor": "avzivi",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-bevacizumab-p1-c1",
+        "source_file": "geha-coverage-policy-bevacizumab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6801,
+        "excerpt": "Bevacizumab and Zaltrap: Alymsys, Avastin, Avzivi, Jobvene, Mvasi, Vegzelma, Zirabev, Zaltrap Original Effective Date: 1/1/2023 Revision Date(s): 1/1/23, 7/1/23, 8/19/2024; 05/27/2025, 1/1/2026 Review Date: 1/1/2026 Policy type: Medical Necessity Line of business: All G.E.H.A Med"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "bevacizumab_05",
+      "query": "In the bevacizumab policy, is Bevacizumab-maly (Alymsys) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-bevacizumab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 5,
+      "drug_name": "Bevacizumab- maly (Alymsys)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5126",
+      "expected_answer": "Bevacizumab- maly (Alymsys): non-preferred; HCPCS Q5126; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-bevacizumab-p1-c1"
+      ],
+      "row_anchor": "alymsys",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-bevacizumab-p1-c1",
+        "source_file": "geha-coverage-policy-bevacizumab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6787,
+        "excerpt": "Bevacizumab and Zaltrap: Alymsys, Avastin, Avzivi, Jobvene, Mvasi, Vegzelma, Zirabev, Zaltrap Original Effective Date: 1/1/2023 Revision Date(s): 1/1/23, 7/1/23, 8/19/2024; 05/27/2025, 1/1/2026 Review Date: 1/1/2026 Policy type: Medical Necessity Line of business: All G.E.H.A Med"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "bevacizumab_06",
+      "query": "In the bevacizumab policy, is Bevacizumab-adcd (Vegzelma) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-bevacizumab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 6,
+      "drug_name": "Bevacizumab- adcd (Vegzelma)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5129",
+      "expected_answer": "Bevacizumab- adcd (Vegzelma): non-preferred; HCPCS Q5129; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-bevacizumab-p1-c1"
+      ],
+      "row_anchor": "vegzelma",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-bevacizumab-p1-c1",
+        "source_file": "geha-coverage-policy-bevacizumab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.7422,
+        "excerpt": "Bevacizumab and Zaltrap: Alymsys, Avastin, Avzivi, Jobvene, Mvasi, Vegzelma, Zirabev, Zaltrap Original Effective Date: 1/1/2023 Revision Date(s): 1/1/23, 7/1/23, 8/19/2024; 05/27/2025, 1/1/2026 Review Date: 1/1/2026 Policy type: Medical Necessity Line of business: All G.E.H.A Med"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "bevacizumab_07",
+      "query": "In the bevacizumab policy, is Ziv-aflibercept (Zaltrap) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-bevacizumab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 7,
+      "drug_name": "Ziv-aflibercept (Zaltrap)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9400",
+      "expected_answer": "Ziv-aflibercept (Zaltrap): non-preferred; HCPCS J9400; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-bevacizumab-p1-c1",
+        "geha-coverage-policy-bevacizumab-p1-c2"
+      ],
+      "row_anchor": "aflibercept",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-bevacizumab-p1-c1",
+        "source_file": "geha-coverage-policy-bevacizumab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.521,
+        "excerpt": "Bevacizumab and Zaltrap: Alymsys, Avastin, Avzivi, Jobvene, Mvasi, Vegzelma, Zirabev, Zaltrap Original Effective Date: 1/1/2023 Revision Date(s): 1/1/23, 7/1/23, 8/19/2024; 05/27/2025, 1/1/2026 Review Date: 1/1/2026 Policy type: Medical Necessity Line of business: All G.E.H.A Med"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "bevacizumab_08",
+      "query": "In the bevacizumab policy, is Bevacizumab - nwgd (Jobevne) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-bevacizumab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 8,
+      "drug_name": "Bevacizumab - nwgd (Jobevne)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5160",
+      "expected_answer": "Bevacizumab - nwgd (Jobevne): non-preferred; HCPCS Q5160; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-bevacizumab-p1-c1",
+        "geha-coverage-policy-bevacizumab-p1-c2"
+      ],
+      "row_anchor": "jobevne",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-bevacizumab-p1-c1",
+        "source_file": "geha-coverage-policy-bevacizumab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.7557,
+        "excerpt": "Bevacizumab and Zaltrap: Alymsys, Avastin, Avzivi, Jobvene, Mvasi, Vegzelma, Zirabev, Zaltrap Original Effective Date: 1/1/2023 Revision Date(s): 1/1/23, 7/1/23, 8/19/2024; 05/27/2025, 1/1/2026 Review Date: 1/1/2026 Policy type: Medical Necessity Line of business: All G.E.H.A Med"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "datroway_01",
+      "query": "In the datroway policy, is Trodelvy preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-datroway.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 1,
+      "drug_name": "Trodelvy",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9317",
+      "expected_answer": "Trodelvy: preferred; HCPCS J9317; prior authorization Yes.",
+      "gold_chunk_ids": [],
+      "row_anchor": "trodelvy",
+      "unindexed_reason": "Source preference table is on page 1, which has no embedded text; OCR is disabled.",
+      "gold_rank": null,
+      "source_rank": 18,
+      "top1": {
+        "id": "geha-coverage-policy-imdelltra-p3-c1",
+        "source_file": "geha-coverage-policy-imdelltra.pdf",
+        "page": 3,
+        "chunk": 1,
+        "distance": 1.0934,
+        "excerpt": "Disclaimer Drug Coverage Policies are developed as needed, reviewed and updated at least annually, and are subject to change. Other policies and coverage determination guidelines may apply. Federal and state regulatory requirements and member specific benefit plan documents, if a"
+      },
+      "error_reason": "Source preference table is on page 1, which has no embedded text; OCR is disabled."
+    },
+    {
+      "id": "datroway_02",
+      "query": "In the datroway policy, is Datroway preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-datroway.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 2,
+      "drug_name": "Datroway",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9011",
+      "expected_answer": "Datroway: non-preferred; HCPCS J9011; prior authorization Yes.",
+      "gold_chunk_ids": [],
+      "row_anchor": "datroway",
+      "unindexed_reason": "Source preference table is on page 1, which has no embedded text; OCR is disabled.",
+      "gold_rank": null,
+      "source_rank": 13,
+      "top1": {
+        "id": "geha-coverage-policy-bendamustine-p3-c2",
+        "source_file": "geha-coverage-policy-bendamustine.pdf",
+        "page": 3,
+        "chunk": 2,
+        "distance": 1.0049,
+        "excerpt": "ONLY Date Updates 11/7/2023 Addition of HCPCS; Addition of Universal Criteria; Updated references 4/25/2024 Annual Review; Universal Criteria language update 9/24/2024 updated PI links; updated to QUMC approved policy template 11/4/2024 Updated HCPCS Codes per CMS 1/1/2025 update"
+      },
+      "error_reason": "Source preference table is on page 1, which has no embedded text; OCR is disabled."
+    },
+    {
+      "id": "erythropoietin-stimulating-agents_01",
+      "query": "In the erythropoietin stimulating agents policy, is Retacrit preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 1,
+      "drug_name": "Retacrit",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5106",
+      "expected_answer": "Retacrit: preferred; HCPCS Q5106; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-erythropoietin-stimulating-agents-p1-c1"
+      ],
+      "row_anchor": "retacrit",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-erythropoietin-stimulating-agents-p1-c1",
+        "source_file": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6185,
+        "excerpt": "Erythropoietin Stimulating Agents: Aranesp (Darbepoetin alfa), Procrit (Epoetin alfa), Epogen (Epoetin alfa), Retacrit (epoetin alfa-epbx) Original Effective Date: 5/2/2022 Revision Date(s): 05/02/2022; 3/18/2023; 2/19/2024; 3/24/2025; 3/16/2026 Review Date: 3/16/2026 Policy type"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "erythropoietin-stimulating-agents_02",
+      "query": "In the erythropoietin stimulating agents policy, is Aranesp preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 2,
+      "drug_name": "Aranesp",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J0881",
+      "expected_answer": "Aranesp: preferred; HCPCS J0881; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-erythropoietin-stimulating-agents-p1-c1"
+      ],
+      "row_anchor": "aranesp",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-erythropoietin-stimulating-agents-p1-c1",
+        "source_file": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.5771,
+        "excerpt": "Erythropoietin Stimulating Agents: Aranesp (Darbepoetin alfa), Procrit (Epoetin alfa), Epogen (Epoetin alfa), Retacrit (epoetin alfa-epbx) Original Effective Date: 5/2/2022 Revision Date(s): 05/02/2022; 3/18/2023; 2/19/2024; 3/24/2025; 3/16/2026 Review Date: 3/16/2026 Policy type"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "erythropoietin-stimulating-agents_03",
+      "query": "In the erythropoietin stimulating agents policy, is Epogen preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 3,
+      "drug_name": "Epogen",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J0885",
+      "expected_answer": "Epogen: non-preferred; HCPCS J0885; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-erythropoietin-stimulating-agents-p1-c1"
+      ],
+      "row_anchor": "epogen",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-erythropoietin-stimulating-agents-p1-c1",
+        "source_file": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.5228,
+        "excerpt": "Erythropoietin Stimulating Agents: Aranesp (Darbepoetin alfa), Procrit (Epoetin alfa), Epogen (Epoetin alfa), Retacrit (epoetin alfa-epbx) Original Effective Date: 5/2/2022 Revision Date(s): 05/02/2022; 3/18/2023; 2/19/2024; 3/24/2025; 3/16/2026 Review Date: 3/16/2026 Policy type"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "erythropoietin-stimulating-agents_04",
+      "query": "In the erythropoietin stimulating agents policy, is Procrit preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 4,
+      "drug_name": "Procrit",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J0885",
+      "expected_answer": "Procrit: non-preferred; HCPCS J0885; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-erythropoietin-stimulating-agents-p1-c1"
+      ],
+      "row_anchor": "procrit",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-erythropoietin-stimulating-agents-p1-c1",
+        "source_file": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.5689,
+        "excerpt": "Erythropoietin Stimulating Agents: Aranesp (Darbepoetin alfa), Procrit (Epoetin alfa), Epogen (Epoetin alfa), Retacrit (epoetin alfa-epbx) Original Effective Date: 5/2/2022 Revision Date(s): 05/02/2022; 3/18/2023; 2/19/2024; 3/24/2025; 3/16/2026 Review Date: 3/16/2026 Policy type"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "gemcitabine_01",
+      "query": "In the gemcitabine policy, is Gemzar preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-gemcitabine.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 1,
+      "drug_name": "Gemzar",
+      "preference": "non-preferred",
+      "prior_auth": "No",
+      "hcpcs_code": "J9201",
+      "expected_answer": "Gemzar: non-preferred; HCPCS J9201; prior authorization No.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-gemcitabine-p1-c1"
+      ],
+      "row_anchor": "gemzar",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-gemcitabine-p1-c1",
+        "source_file": "geha-coverage-policy-gemcitabine.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6818,
+        "excerpt": "Gemcitabine Original Effective Date: 8/1/2022 Revision Date(s): 8/1/2022, 12/12/2022, 11/7/2023, 2/10/2025, 1/1/2026, 02/16/2026 Review Date: 02/16/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 6 (six) months, unless"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "gemcitabine_02",
+      "query": "In the gemcitabine policy, is Gemcitabine (Accord) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-gemcitabine.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 2,
+      "drug_name": "Gemcitabine (Accord)",
+      "preference": "preferred",
+      "prior_auth": "No",
+      "hcpcs_code": "J9196",
+      "expected_answer": "Gemcitabine (Accord): preferred; HCPCS J9196; prior authorization No.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-gemcitabine-p1-c1"
+      ],
+      "row_anchor": "gemcitabine",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-gemcitabine-p1-c1",
+        "source_file": "geha-coverage-policy-gemcitabine.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6942,
+        "excerpt": "Gemcitabine Original Effective Date: 8/1/2022 Revision Date(s): 8/1/2022, 12/12/2022, 11/7/2023, 2/10/2025, 1/1/2026, 02/16/2026 Review Date: 02/16/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 6 (six) months, unless"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "gemcitabine_03",
+      "query": "In the gemcitabine policy, is Avgemsi preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-gemcitabine.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 3,
+      "drug_name": "Avgemsi",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9184",
+      "expected_answer": "Avgemsi: non-preferred; HCPCS J9184; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-gemcitabine-p1-c1"
+      ],
+      "row_anchor": "avgemsi",
+      "gold_rank": 2,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-gemcitabine-p3-c2",
+        "source_file": "geha-coverage-policy-gemcitabine.pdf",
+        "page": 3,
+        "chunk": 2,
+        "distance": 0.9102,
+        "excerpt": "by G.E.H.A and formatted for accessibility. 1/1/2026 Added Avgemsi, J9184, Avyxa 505(b)(2) product; removed Infugem (no longer available) 02/16/2026 Note: Infugem, J9198 (no longer available, discontinued however product may still be available until run out; HCPCS has not been re"
+      },
+      "error_reason": "Another mention of the drug or code elsewhere in the right PDF outranked its preference table."
+    },
+    {
+      "id": "gnrh-analogues-in-prostate-cancer_01",
+      "query": "In the gnrh analogues in prostate cancer policy, is Firmagon (degarelix) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 1,
+      "drug_name": "Firmagon (degarelix)",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9155",
+      "expected_answer": "Firmagon (degarelix): preferred; HCPCS J9155; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c1"
+      ],
+      "row_anchor": "degarelix",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c1",
+        "source_file": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.524,
+        "excerpt": "Gonadotropin-Releasing Hormone (GnRH) Analogues in Prostate Cancer Original Effective Date: 9/1/2022 Revision Date(s): 9/1/2022; 11/7/2022; 7/5/2024; 7/1/2025; 4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of business: All G.E.H.A Medical Plans Authorizations"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "gnrh-analogues-in-prostate-cancer_02",
+      "query": "In the gnrh analogues in prostate cancer policy, is Eligard (leuprolide acetate depot) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 2,
+      "drug_name": "Eligard(leuprolide acetate depot)",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9217",
+      "expected_answer": "Eligard(leuprolide acetate depot): preferred; HCPCS J9217; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c1"
+      ],
+      "row_anchor": "eligard",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c1",
+        "source_file": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.5228,
+        "excerpt": "Gonadotropin-Releasing Hormone (GnRH) Analogues in Prostate Cancer Original Effective Date: 9/1/2022 Revision Date(s): 9/1/2022; 11/7/2022; 7/5/2024; 7/1/2025; 4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of business: All G.E.H.A Medical Plans Authorizations"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "gnrh-analogues-in-prostate-cancer_03",
+      "query": "In the gnrh analogues in prostate cancer policy, is Lupron Depot (leuprolide acetate depot) at the 3.75 mg dose preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 3,
+      "drug_name": "Lupron Depot (leuprolide acetate depot)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J1950",
+      "expected_answer": "Lupron Depot (leuprolide acetate depot): non-preferred; HCPCS J1950; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c1"
+      ],
+      "row_anchor": "lupron",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c1",
+        "source_file": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.4771,
+        "excerpt": "Gonadotropin-Releasing Hormone (GnRH) Analogues in Prostate Cancer Original Effective Date: 9/1/2022 Revision Date(s): 9/1/2022; 11/7/2022; 7/5/2024; 7/1/2025; 4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of business: All G.E.H.A Medical Plans Authorizations"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "gnrh-analogues-in-prostate-cancer_04",
+      "query": "In the gnrh analogues in prostate cancer policy, is Camcevi (leuprolide mesylate) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 4,
+      "drug_name": "Camcevi (leuprolide mesylate)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J1952",
+      "expected_answer": "Camcevi (leuprolide mesylate): non-preferred; HCPCS J1952; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c1"
+      ],
+      "row_anchor": "mesylate",
+      "gold_rank": 2,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p5-c1",
+        "source_file": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+        "page": 5,
+        "chunk": 1,
+        "distance": 0.6833,
+        "excerpt": "For Internal Use ONLY Date Updates 11/7/22 Policy approved by P&T 7/5/2024 Annual Review, approved by P&T 7/1/2025 HCPCS Code Description Update (J1954) for 7/1/2025 3/16/2026 OH P&T annual review - 4/1/2026 Policy adopted by GEHA; document updated for universal accessibility. Ad"
+      },
+      "error_reason": "General prose in the right PDF outranked the preference table."
+    },
+    {
+      "id": "gnrh-analogues-in-prostate-cancer_05",
+      "query": "In the gnrh analogues in prostate cancer policy, is Lutrate Depot (leuprolide acetate depot) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 5,
+      "drug_name": "Lutrate Depot (leuprolide acetate depot)",
+      "preference": "non-preferred",
+      "prior_auth": "No",
+      "hcpcs_code": "J1954",
+      "expected_answer": "Lutrate Depot (leuprolide acetate depot): non-preferred; HCPCS J1954; prior authorization No.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c1"
+      ],
+      "row_anchor": "lutrate",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c1",
+        "source_file": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.5188,
+        "excerpt": "Gonadotropin-Releasing Hormone (GnRH) Analogues in Prostate Cancer Original Effective Date: 9/1/2022 Revision Date(s): 9/1/2022; 11/7/2022; 7/5/2024; 7/1/2025; 4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of business: All G.E.H.A Medical Plans Authorizations"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "gnrh-analogues-in-prostate-cancer_06",
+      "query": "In the gnrh analogues in prostate cancer policy, is Trelstar (triptorelin) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 6,
+      "drug_name": "Trelstar (triptorelin)",
+      "preference": "non-preferred",
+      "prior_auth": "No",
+      "hcpcs_code": "J3315",
+      "expected_answer": "Trelstar (triptorelin): non-preferred; HCPCS J3315; prior authorization No.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c1",
+        "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c2"
+      ],
+      "row_anchor": "triptorelin",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c2",
+        "source_file": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+        "page": 1,
+        "chunk": 2,
+        "distance": 0.7191,
+        "excerpt": "Trelstar (triptorelin) J3315 Injection, triptorelin pamoate, 3.75 mg Non-Preferred No Camcevi ETM J9003 Leuprolide injectable (camcevi etm), 1 mg (leuprolide mesylate) Non-Preferred No Zoladex (goserelin) J9202 Goserelin acetate implant, per 3.6 mg Non-Preferred No Lupron Depot J"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "gnrh-analogues-in-prostate-cancer_07",
+      "query": "In the gnrh analogues in prostate cancer policy, is Camcevi ETM (leuprolide mesylate) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 7,
+      "drug_name": "Camcevi ETM (leuprolide mesylate)",
+      "preference": "non-preferred",
+      "prior_auth": "No",
+      "hcpcs_code": "J9003",
+      "expected_answer": "Camcevi ETM (leuprolide mesylate): non-preferred; HCPCS J9003; prior authorization No.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c1",
+        "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c2"
+      ],
+      "row_anchor": "etm",
+      "gold_rank": 2,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p5-c1",
+        "source_file": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+        "page": 5,
+        "chunk": 1,
+        "distance": 0.6262,
+        "excerpt": "For Internal Use ONLY Date Updates 11/7/22 Policy approved by P&T 7/5/2024 Annual Review, approved by P&T 7/1/2025 HCPCS Code Description Update (J1954) for 7/1/2025 3/16/2026 OH P&T annual review - 4/1/2026 Policy adopted by GEHA; document updated for universal accessibility. Ad"
+      },
+      "error_reason": "Another mention of the drug or code elsewhere in the right PDF outranked its preference table."
+    },
+    {
+      "id": "gnrh-analogues-in-prostate-cancer_08",
+      "query": "In the gnrh analogues in prostate cancer policy, is Zoladex (goserelin) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 8,
+      "drug_name": "Zoladex (goserelin)",
+      "preference": "non-preferred",
+      "prior_auth": "No",
+      "hcpcs_code": "J9202",
+      "expected_answer": "Zoladex (goserelin): non-preferred; HCPCS J9202; prior authorization No.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c1",
+        "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c2"
+      ],
+      "row_anchor": "goserelin",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c1",
+        "source_file": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.7625,
+        "excerpt": "Gonadotropin-Releasing Hormone (GnRH) Analogues in Prostate Cancer Original Effective Date: 9/1/2022 Revision Date(s): 9/1/2022; 11/7/2022; 7/5/2024; 7/1/2025; 4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of business: All G.E.H.A Medical Plans Authorizations"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "gnrh-analogues-in-prostate-cancer_09",
+      "query": "In the gnrh analogues in prostate cancer policy, is Lupron Depot (leuprolide acetate depot) at the 7.5 mg dose preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 9,
+      "drug_name": "Lupron Depot (leuprolide acetate depot)",
+      "preference": "non-preferred",
+      "prior_auth": "No",
+      "hcpcs_code": "J9217",
+      "expected_answer": "Lupron Depot (leuprolide acetate depot): non-preferred; HCPCS J9217; prior authorization No.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c2"
+      ],
+      "row_anchor": "lupron",
+      "gold_rank": 4,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c1",
+        "source_file": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.4624,
+        "excerpt": "Gonadotropin-Releasing Hormone (GnRH) Analogues in Prostate Cancer Original Effective Date: 9/1/2022 Revision Date(s): 9/1/2022; 11/7/2022; 7/5/2024; 7/1/2025; 4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of business: All G.E.H.A Medical Plans Authorizations"
+      },
+      "error_reason": "An adjacent fixed-size chunk from the same table page outranked the chunk containing this row."
+    },
+    {
+      "id": "gnrh-analogues-in-prostate-cancer_10",
+      "query": "In the gnrh analogues in prostate cancer policy, is Orgovyx (relugolix) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 10,
+      "drug_name": "Orgovyx (relugolix)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J8999",
+      "expected_answer": "Orgovyx (relugolix): non-preferred; HCPCS J8999; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c2"
+      ],
+      "row_anchor": "relugolix",
+      "gold_rank": 4,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer-p1-c1",
+        "source_file": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6582,
+        "excerpt": "Gonadotropin-Releasing Hormone (GnRH) Analogues in Prostate Cancer Original Effective Date: 9/1/2022 Revision Date(s): 9/1/2022; 11/7/2022; 7/5/2024; 7/1/2025; 4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of business: All G.E.H.A Medical Plans Authorizations"
+      },
+      "error_reason": "An adjacent fixed-size chunk from the same table page outranked the chunk containing this row."
+    },
+    {
+      "id": "long-acting-gcsfs_01",
+      "query": "In the long acting gcsfs policy, is Neulasta preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 1,
+      "drug_name": "Neulasta",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J2506",
+      "expected_answer": "Neulasta: non-preferred; HCPCS J2506; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-long-acting-gcsfs-p1-c1"
+      ],
+      "row_anchor": "neulasta",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-long-acting-gcsfs-p1-c1",
+        "source_file": "geha-coverage-policy-long-acting-gcsfs.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.8187,
+        "excerpt": "Long-Acting GCSFs Original Effective Date: 6/2021 Revision Date(s): 6/2021; 9/2021; 5/2/2022; 06/13/2022; 7/28/2022; 10/26/2022; 12/5/2023; 4/17/2024; 7/1/2024; 2/17/2025; 1/1/2026; 3/16/2026 Review Date: 3/16/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medi"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "long-acting-gcsfs_02",
+      "query": "In the long acting gcsfs policy, is Rolvedon preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 2,
+      "drug_name": "Rolvedon",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J1449",
+      "expected_answer": "Rolvedon: non-preferred; HCPCS J1449; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-long-acting-gcsfs-p1-c1"
+      ],
+      "row_anchor": "rolvedon",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-long-acting-gcsfs-p1-c1",
+        "source_file": "geha-coverage-policy-long-acting-gcsfs.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.766,
+        "excerpt": "Long-Acting GCSFs Original Effective Date: 6/2021 Revision Date(s): 6/2021; 9/2021; 5/2/2022; 06/13/2022; 7/28/2022; 10/26/2022; 12/5/2023; 4/17/2024; 7/1/2024; 2/17/2025; 1/1/2026; 3/16/2026 Review Date: 3/16/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medi"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "long-acting-gcsfs_03",
+      "query": "In the long acting gcsfs policy, is Armlupeg preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 3,
+      "drug_name": "Armlupeg",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J3590",
+      "expected_answer": "Armlupeg: non-preferred; HCPCS J3590; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-long-acting-gcsfs-p1-c1"
+      ],
+      "row_anchor": "armlupeg",
+      "gold_rank": 2,
+      "source_rank": 2,
+      "top1": {
+        "id": "geha-coverage-policy-short-acting-gcsfs-p1-c1",
+        "source_file": "geha-coverage-policy-short-acting-gcsfs.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.8461,
+        "excerpt": "Short-Acting GCSFs Original Effective Date: 5/2/2022 Revision Date(s): 5/2/2022; 3/18/2023; 1/16/2024; 2/10/2025; 2/17/2025; 3/16/2026 Review Date: 3/16/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 6 (six) months, u"
+      },
+      "error_reason": "The short-acting G-CSF table's similar preference language outranked the long-acting drug row."
+    },
+    {
+      "id": "long-acting-gcsfs_04",
+      "query": "In the long acting gcsfs policy, is Ryzneuta preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 4,
+      "drug_name": "Ryzneuta",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9361",
+      "expected_answer": "Ryzneuta: non-preferred; HCPCS J9361; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-long-acting-gcsfs-p1-c1"
+      ],
+      "row_anchor": "ryzneuta",
+      "gold_rank": 2,
+      "source_rank": 2,
+      "top1": {
+        "id": "geha-coverage-policy-short-acting-gcsfs-p1-c1",
+        "source_file": "geha-coverage-policy-short-acting-gcsfs.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.8586,
+        "excerpt": "Short-Acting GCSFs Original Effective Date: 5/2/2022 Revision Date(s): 5/2/2022; 3/18/2023; 1/16/2024; 2/10/2025; 2/17/2025; 3/16/2026 Review Date: 3/16/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 6 (six) months, u"
+      },
+      "error_reason": "The short-acting G-CSF table's similar preference language outranked the long-acting drug row."
+    },
+    {
+      "id": "long-acting-gcsfs_05",
+      "query": "In the long acting gcsfs policy, is Fulphila preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 5,
+      "drug_name": "Fulphila",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5108",
+      "expected_answer": "Fulphila: non-preferred; HCPCS Q5108; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-long-acting-gcsfs-p1-c1"
+      ],
+      "row_anchor": "fulphila",
+      "gold_rank": 2,
+      "source_rank": 2,
+      "top1": {
+        "id": "geha-coverage-policy-short-acting-gcsfs-p1-c1",
+        "source_file": "geha-coverage-policy-short-acting-gcsfs.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.892,
+        "excerpt": "Short-Acting GCSFs Original Effective Date: 5/2/2022 Revision Date(s): 5/2/2022; 3/18/2023; 1/16/2024; 2/10/2025; 2/17/2025; 3/16/2026 Review Date: 3/16/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 6 (six) months, u"
+      },
+      "error_reason": "The short-acting G-CSF table's similar preference language outranked the long-acting drug row."
+    },
+    {
+      "id": "long-acting-gcsfs_06",
+      "query": "In the long acting gcsfs policy, is Udenyca preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 6,
+      "drug_name": "Udenyca",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5111",
+      "expected_answer": "Udenyca: non-preferred; HCPCS Q5111; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-long-acting-gcsfs-p1-c1"
+      ],
+      "row_anchor": "udenyca",
+      "gold_rank": 2,
+      "source_rank": 2,
+      "top1": {
+        "id": "geha-coverage-policy-short-acting-gcsfs-p1-c1",
+        "source_file": "geha-coverage-policy-short-acting-gcsfs.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.8225,
+        "excerpt": "Short-Acting GCSFs Original Effective Date: 5/2/2022 Revision Date(s): 5/2/2022; 3/18/2023; 1/16/2024; 2/10/2025; 2/17/2025; 3/16/2026 Review Date: 3/16/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 6 (six) months, u"
+      },
+      "error_reason": "The short-acting G-CSF table's similar preference language outranked the long-acting drug row."
+    },
+    {
+      "id": "long-acting-gcsfs_07",
+      "query": "In the long acting gcsfs policy, is Ziextenzo preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 7,
+      "drug_name": "Ziextenzo",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5120",
+      "expected_answer": "Ziextenzo: non-preferred; HCPCS Q5120; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-long-acting-gcsfs-p1-c1"
+      ],
+      "row_anchor": "ziextenzo",
+      "gold_rank": 2,
+      "source_rank": 2,
+      "top1": {
+        "id": "geha-coverage-policy-short-acting-gcsfs-p1-c1",
+        "source_file": "geha-coverage-policy-short-acting-gcsfs.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.8297,
+        "excerpt": "Short-Acting GCSFs Original Effective Date: 5/2/2022 Revision Date(s): 5/2/2022; 3/18/2023; 1/16/2024; 2/10/2025; 2/17/2025; 3/16/2026 Review Date: 3/16/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 6 (six) months, u"
+      },
+      "error_reason": "The short-acting G-CSF table's similar preference language outranked the long-acting drug row."
+    },
+    {
+      "id": "long-acting-gcsfs_08",
+      "query": "In the long acting gcsfs policy, is Nyvepria preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 8,
+      "drug_name": "Nyvepria",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5122",
+      "expected_answer": "Nyvepria: preferred; HCPCS Q5122; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-long-acting-gcsfs-p1-c1",
+        "geha-coverage-policy-long-acting-gcsfs-p1-c2"
+      ],
+      "row_anchor": "nyvepria",
+      "gold_rank": 2,
+      "source_rank": 2,
+      "top1": {
+        "id": "geha-coverage-policy-short-acting-gcsfs-p1-c1",
+        "source_file": "geha-coverage-policy-short-acting-gcsfs.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.8157,
+        "excerpt": "Short-Acting GCSFs Original Effective Date: 5/2/2022 Revision Date(s): 5/2/2022; 3/18/2023; 1/16/2024; 2/10/2025; 2/17/2025; 3/16/2026 Review Date: 3/16/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 6 (six) months, u"
+      },
+      "error_reason": "The short-acting G-CSF table's similar preference language outranked the long-acting drug row."
+    },
+    {
+      "id": "long-acting-gcsfs_09",
+      "query": "In the long acting gcsfs policy, is Stimufend preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 9,
+      "drug_name": "Stimufend",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5127",
+      "expected_answer": "Stimufend: non-preferred; HCPCS Q5127; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-long-acting-gcsfs-p1-c1",
+        "geha-coverage-policy-long-acting-gcsfs-p1-c2"
+      ],
+      "row_anchor": "stimufend",
+      "gold_rank": 2,
+      "source_rank": 2,
+      "top1": {
+        "id": "geha-coverage-policy-short-acting-gcsfs-p1-c1",
+        "source_file": "geha-coverage-policy-short-acting-gcsfs.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.8645,
+        "excerpt": "Short-Acting GCSFs Original Effective Date: 5/2/2022 Revision Date(s): 5/2/2022; 3/18/2023; 1/16/2024; 2/10/2025; 2/17/2025; 3/16/2026 Review Date: 3/16/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 6 (six) months, u"
+      },
+      "error_reason": "The short-acting G-CSF table's similar preference language outranked the long-acting drug row."
+    },
+    {
+      "id": "long-acting-gcsfs_10",
+      "query": "In the long acting gcsfs policy, is Fylnetra preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 10,
+      "drug_name": "Fylnetra",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5130",
+      "expected_answer": "Fylnetra: preferred; HCPCS Q5130; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-long-acting-gcsfs-p1-c1",
+        "geha-coverage-policy-long-acting-gcsfs-p1-c2"
+      ],
+      "row_anchor": "fylnetra",
+      "gold_rank": 2,
+      "source_rank": 2,
+      "top1": {
+        "id": "geha-coverage-policy-short-acting-gcsfs-p1-c1",
+        "source_file": "geha-coverage-policy-short-acting-gcsfs.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.7661,
+        "excerpt": "Short-Acting GCSFs Original Effective Date: 5/2/2022 Revision Date(s): 5/2/2022; 3/18/2023; 1/16/2024; 2/10/2025; 2/17/2025; 3/16/2026 Review Date: 3/16/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 6 (six) months, u"
+      },
+      "error_reason": "The short-acting G-CSF table's similar preference language outranked the long-acting drug row."
+    },
+    {
+      "id": "non-muscle-invasive-bladder-cancer_01",
+      "query": "In the non muscle invasive bladder cancer policy, is Nadofaragene firadenovec-vncg (Adstiladrin) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 1,
+      "drug_name": "Nadofaragene firadenovec-vncg (Adstiladrin)",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9029",
+      "expected_answer": "Nadofaragene firadenovec-vncg (Adstiladrin): preferred; HCPCS J9029; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-non-muscle-invasive-bladder-cancer-p1-c1"
+      ],
+      "row_anchor": "nadofaragene",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-non-muscle-invasive-bladder-cancer-p1-c1",
+        "source_file": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.5142,
+        "excerpt": "Non-Muscle Invasive Bladder Cancer Original Effective Date: 7/15/2024 Revision Date(s): 7/5/2024; 11/22/2024; 1/1/2025; 12/15/2025; 02/16/2026; 04/01/2026 Review Date: 04/01/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued "
+      },
+      "error_reason": null
+    },
+    {
+      "id": "non-muscle-invasive-bladder-cancer_02",
+      "query": "In the non muscle invasive bladder cancer policy, is Pembrolizumab (Keytruda) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 2,
+      "drug_name": "Pembrolizumab (Keytruda)",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9271",
+      "expected_answer": "Pembrolizumab (Keytruda): preferred; HCPCS J9271; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-non-muscle-invasive-bladder-cancer-p1-c1"
+      ],
+      "row_anchor": "pembrolizumab",
+      "gold_rank": 2,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-non-muscle-invasive-bladder-cancer-p5-c2",
+        "source_file": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+        "page": 5,
+        "chunk": 2,
+        "distance": 0.5777,
+        "excerpt": "December P&T 2/16/2026 Added additional RWE references; minimal updates to criteria; Added Keytruda Qlex J9999; added language Prescribed by, or in consultation with, a urologist or oncologist; Approved at OH P&T. Policy adopted by G.E.H.A; document updated for universal accessib"
+      },
+      "error_reason": "General prose in the right PDF outranked the preference table."
+    },
+    {
+      "id": "non-muscle-invasive-bladder-cancer_03",
+      "query": "In the non muscle invasive bladder cancer policy, is Pembrolizumab and berahyaluronidase alfa-pmph (Keytruda QLEX) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 3,
+      "drug_name": "Pembrolizumab and berahyaluronidas e alfa-pmph (Keytruda QLEX)",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9277",
+      "expected_answer": "Pembrolizumab and berahyaluronidas e alfa-pmph (Keytruda QLEX): preferred; HCPCS J9277; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-non-muscle-invasive-bladder-cancer-p1-c1"
+      ],
+      "row_anchor": "berahyaluronidas",
+      "gold_rank": 2,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-non-muscle-invasive-bladder-cancer-p5-c2",
+        "source_file": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+        "page": 5,
+        "chunk": 2,
+        "distance": 0.5439,
+        "excerpt": "December P&T 2/16/2026 Added additional RWE references; minimal updates to criteria; Added Keytruda Qlex J9999; added language Prescribed by, or in consultation with, a urologist or oncologist; Approved at OH P&T. Policy adopted by G.E.H.A; document updated for universal accessib"
+      },
+      "error_reason": "Another mention of the drug or code elsewhere in the right PDF outranked its preference table."
+    },
+    {
+      "id": "non-muscle-invasive-bladder-cancer_04",
+      "query": "In the non muscle invasive bladder cancer policy, is Nogapendekin alfa inbakicept-pmln (Anktiva) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 4,
+      "drug_name": "Nogapendekin alfa inbakicept- pmln (Anktiva)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9028",
+      "expected_answer": "Nogapendekin alfa inbakicept- pmln (Anktiva): non-preferred; HCPCS J9028; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-non-muscle-invasive-bladder-cancer-p1-c1"
+      ],
+      "row_anchor": "nogapendekin",
+      "gold_rank": 2,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-non-muscle-invasive-bladder-cancer-p1-c2",
+        "source_file": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+        "page": 1,
+        "chunk": 2,
+        "distance": 0.3783,
+        "excerpt": "contraindication, failure, or intolerance to any of the preferred agents prior to approval of a non-preferred product, when clinically appropriate. • Preferred product requirements apply to new starts only. • Step Therapy applies to all overlapping compendia supported indications"
+      },
+      "error_reason": "An adjacent fixed-size chunk from the same table page outranked the chunk containing this row."
+    },
+    {
+      "id": "non-muscle-invasive-bladder-cancer_05",
+      "query": "In the non muscle invasive bladder cancer policy, is Gemcitabine (Inlexzo) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 5,
+      "drug_name": "Gemcitabine (Inlexzo)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9183",
+      "expected_answer": "Gemcitabine (Inlexzo): non-preferred; HCPCS J9183; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-non-muscle-invasive-bladder-cancer-p1-c1"
+      ],
+      "row_anchor": "gemcitabine",
+      "gold_rank": 2,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-non-muscle-invasive-bladder-cancer-p5-c2",
+        "source_file": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+        "page": 5,
+        "chunk": 2,
+        "distance": 0.5599,
+        "excerpt": "December P&T 2/16/2026 Added additional RWE references; minimal updates to criteria; Added Keytruda Qlex J9999; added language Prescribed by, or in consultation with, a urologist or oncologist; Approved at OH P&T. Policy adopted by G.E.H.A; document updated for universal accessib"
+      },
+      "error_reason": "Another mention of the drug or code elsewhere in the right PDF outranked its preference table."
+    },
+    {
+      "id": "paclitaxel-protein-bound_01",
+      "query": "In the paclitaxel protein bound policy, is Docetaxel (Taxotere) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 1,
+      "drug_name": "Docetaxel (Taxotere)",
+      "preference": "preferred",
+      "prior_auth": "No",
+      "hcpcs_code": "J9171",
+      "expected_answer": "Docetaxel (Taxotere): preferred; HCPCS J9171; prior authorization No.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-paclitaxel-protein-bound-p1-c1"
+      ],
+      "row_anchor": "taxotere",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-paclitaxel-protein-bound-p1-c1",
+        "source_file": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.5473,
+        "excerpt": "Paclitaxel Protein Bound: Abraxane Original Effective Date: 5/2/2022 Revision Date(s): 9/2021, 11/2022, 12/2022, 7/2023, 12/2023, 4/8/2024, 5/23/2024, 9/4/2024, 11/4/2024, 5/27/2025, 7/1/2026 Review Date: 7/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medic"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "paclitaxel-protein-bound_02",
+      "query": "In the paclitaxel protein bound policy, is Docetaxel (Hospira 505(b)(2)) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 2,
+      "drug_name": "Docetaxel (Hospira 505(b)(2))",
+      "preference": "preferred",
+      "prior_auth": "No",
+      "hcpcs_code": "J9232",
+      "expected_answer": "Docetaxel (Hospira 505(b)(2)): preferred; HCPCS J9232; prior authorization No.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-paclitaxel-protein-bound-p1-c1"
+      ],
+      "row_anchor": "hospira",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-paclitaxel-protein-bound-p1-c1",
+        "source_file": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.4742,
+        "excerpt": "Paclitaxel Protein Bound: Abraxane Original Effective Date: 5/2/2022 Revision Date(s): 9/2021, 11/2022, 12/2022, 7/2023, 12/2023, 4/8/2024, 5/23/2024, 9/4/2024, 11/4/2024, 5/27/2025, 7/1/2026 Review Date: 7/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medic"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "paclitaxel-protein-bound_03",
+      "query": "In the paclitaxel protein bound policy, is Paclitaxel (Taxol) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 3,
+      "drug_name": "Paclitaxel (Taxol)",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9267",
+      "expected_answer": "Paclitaxel (Taxol): preferred; HCPCS J9267; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-paclitaxel-protein-bound-p1-c1"
+      ],
+      "row_anchor": "taxol",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-paclitaxel-protein-bound-p1-c1",
+        "source_file": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.5126,
+        "excerpt": "Paclitaxel Protein Bound: Abraxane Original Effective Date: 5/2/2022 Revision Date(s): 9/2021, 11/2022, 12/2022, 7/2023, 12/2023, 4/8/2024, 5/23/2024, 9/4/2024, 11/4/2024, 5/27/2025, 7/1/2026 Review Date: 7/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medic"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "paclitaxel-protein-bound_04",
+      "query": "In the paclitaxel protein bound policy, is Paclitaxel Protein-Bound (Abraxane) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 4,
+      "drug_name": "Paclitaxel Protein- Bound (Abraxane)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9264",
+      "expected_answer": "Paclitaxel Protein- Bound (Abraxane): non-preferred; HCPCS J9264; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-paclitaxel-protein-bound-p1-c1"
+      ],
+      "row_anchor": "abraxane",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-paclitaxel-protein-bound-p1-c1",
+        "source_file": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.4385,
+        "excerpt": "Paclitaxel Protein Bound: Abraxane Original Effective Date: 5/2/2022 Revision Date(s): 9/2021, 11/2022, 12/2022, 7/2023, 12/2023, 4/8/2024, 5/23/2024, 9/4/2024, 11/4/2024, 5/27/2025, 7/1/2026 Review Date: 7/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medic"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "pemetrexed_01",
+      "query": "In the pemetrexed policy, is Pemetrexed (Axtle) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-pemetrexed.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 1,
+      "drug_name": "Pemetrexed (Axtle)",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9292",
+      "expected_answer": "Pemetrexed (Axtle): preferred; HCPCS J9292; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-pemetrexed-p1-c1"
+      ],
+      "row_anchor": "axtle",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-pemetrexed-p1-c1",
+        "source_file": "geha-coverage-policy-pemetrexed.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.7124,
+        "excerpt": "Pemetrexed: Alimta, Pemfexy, Pemrydi RTU Effective Date: 12/5/2022 Revision Date(s): 12/5/2022; 11/7/2023; 12/29/2023; 5/23/24; 8/5/2024; 9/24/2024; 11/14/2024; 1/1/2025; 07/01/2025; 10/1/2025 Review Date: 10/1/2025 Policy type: Medical Necessity Line of Business: All GEHA Commer"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "pemetrexed_02",
+      "query": "In the pemetrexed policy, is Pemetrexed (Hospira) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-pemetrexed.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 2,
+      "drug_name": "Pemetrexed (Hospira)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9294",
+      "expected_answer": "Pemetrexed (Hospira): non-preferred; HCPCS J9294; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-pemetrexed-p1-c1"
+      ],
+      "row_anchor": "hospira",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-pemetrexed-p1-c1",
+        "source_file": "geha-coverage-policy-pemetrexed.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6214,
+        "excerpt": "Pemetrexed: Alimta, Pemfexy, Pemrydi RTU Effective Date: 12/5/2022 Revision Date(s): 12/5/2022; 11/7/2023; 12/29/2023; 5/23/24; 8/5/2024; 9/24/2024; 11/14/2024; 1/1/2025; 07/01/2025; 10/1/2025 Review Date: 10/1/2025 Policy type: Medical Necessity Line of Business: All GEHA Commer"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "pemetrexed_03",
+      "query": "In the pemetrexed policy, is Pemetrexed (Accord) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-pemetrexed.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 3,
+      "drug_name": "Pemetrexed (Accord)",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9296",
+      "expected_answer": "Pemetrexed (Accord): preferred; HCPCS J9296; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-pemetrexed-p1-c1"
+      ],
+      "row_anchor": "accord",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-pemetrexed-p1-c1",
+        "source_file": "geha-coverage-policy-pemetrexed.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.7597,
+        "excerpt": "Pemetrexed: Alimta, Pemfexy, Pemrydi RTU Effective Date: 12/5/2022 Revision Date(s): 12/5/2022; 11/7/2023; 12/29/2023; 5/23/24; 8/5/2024; 9/24/2024; 11/14/2024; 1/1/2025; 07/01/2025; 10/1/2025 Review Date: 10/1/2025 Policy type: Medical Necessity Line of Business: All GEHA Commer"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "pemetrexed_04",
+      "query": "In the pemetrexed policy, is Pemetrexed (Sandoz) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-pemetrexed.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 4,
+      "drug_name": "Pemetrexed (Sandoz)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9297",
+      "expected_answer": "Pemetrexed (Sandoz): non-preferred; HCPCS J9297; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-pemetrexed-p1-c1"
+      ],
+      "row_anchor": "sandoz",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-pemetrexed-p1-c1",
+        "source_file": "geha-coverage-policy-pemetrexed.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.7856,
+        "excerpt": "Pemetrexed: Alimta, Pemfexy, Pemrydi RTU Effective Date: 12/5/2022 Revision Date(s): 12/5/2022; 11/7/2023; 12/29/2023; 5/23/24; 8/5/2024; 9/24/2024; 11/14/2024; 1/1/2025; 07/01/2025; 10/1/2025 Review Date: 10/1/2025 Policy type: Medical Necessity Line of Business: All GEHA Commer"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "pemetrexed_05",
+      "query": "In the pemetrexed policy, is Pemetrexed (Alimta ) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-pemetrexed.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 5,
+      "drug_name": "Pemetrexed (Alimta )",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9305",
+      "expected_answer": "Pemetrexed (Alimta ): non-preferred; HCPCS J9305; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-pemetrexed-p1-c1"
+      ],
+      "row_anchor": "alimta",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-pemetrexed-p1-c1",
+        "source_file": "geha-coverage-policy-pemetrexed.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6076,
+        "excerpt": "Pemetrexed: Alimta, Pemfexy, Pemrydi RTU Effective Date: 12/5/2022 Revision Date(s): 12/5/2022; 11/7/2023; 12/29/2023; 5/23/24; 8/5/2024; 9/24/2024; 11/14/2024; 1/1/2025; 07/01/2025; 10/1/2025 Review Date: 10/1/2025 Policy type: Medical Necessity Line of Business: All GEHA Commer"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "pemetrexed_06",
+      "query": "In the pemetrexed policy, is Pemetrexed (Teva) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-pemetrexed.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 6,
+      "drug_name": "Pemetrexed (Teva)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9314",
+      "expected_answer": "Pemetrexed (Teva): non-preferred; HCPCS J9314; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-pemetrexed-p1-c1",
+        "geha-coverage-policy-pemetrexed-p1-c2"
+      ],
+      "row_anchor": "teva",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-pemetrexed-p1-c1",
+        "source_file": "geha-coverage-policy-pemetrexed.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.7018,
+        "excerpt": "Pemetrexed: Alimta, Pemfexy, Pemrydi RTU Effective Date: 12/5/2022 Revision Date(s): 12/5/2022; 11/7/2023; 12/29/2023; 5/23/24; 8/5/2024; 9/24/2024; 11/14/2024; 1/1/2025; 07/01/2025; 10/1/2025 Review Date: 10/1/2025 Policy type: Medical Necessity Line of Business: All GEHA Commer"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "pemetrexed_07",
+      "query": "In the pemetrexed policy, is Pemetrexed (Bluepoint) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-pemetrexed.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 7,
+      "drug_name": "Pemetrexed (Bluepoint)",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9322",
+      "expected_answer": "Pemetrexed (Bluepoint): preferred; HCPCS J9322; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-pemetrexed-p1-c1",
+        "geha-coverage-policy-pemetrexed-p1-c2"
+      ],
+      "row_anchor": "bluepoint",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-pemetrexed-p1-c1",
+        "source_file": "geha-coverage-policy-pemetrexed.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.8368,
+        "excerpt": "Pemetrexed: Alimta, Pemfexy, Pemrydi RTU Effective Date: 12/5/2022 Revision Date(s): 12/5/2022; 11/7/2023; 12/29/2023; 5/23/24; 8/5/2024; 9/24/2024; 11/14/2024; 1/1/2025; 07/01/2025; 10/1/2025 Review Date: 10/1/2025 Policy type: Medical Necessity Line of Business: All GEHA Commer"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "pemetrexed_08",
+      "query": "In the pemetrexed policy, is Pemetrexed ditromethamine (Hospira) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-pemetrexed.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 8,
+      "drug_name": "Pemetrexed ditromethamine (Hospira)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9323",
+      "expected_answer": "Pemetrexed ditromethamine (Hospira): non-preferred; HCPCS J9323; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-pemetrexed-p1-c2"
+      ],
+      "row_anchor": "ditromethamine",
+      "gold_rank": 5,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-pemetrexed-p1-c1",
+        "source_file": "geha-coverage-policy-pemetrexed.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6322,
+        "excerpt": "Pemetrexed: Alimta, Pemfexy, Pemrydi RTU Effective Date: 12/5/2022 Revision Date(s): 12/5/2022; 11/7/2023; 12/29/2023; 5/23/24; 8/5/2024; 9/24/2024; 11/14/2024; 1/1/2025; 07/01/2025; 10/1/2025 Review Date: 10/1/2025 Policy type: Medical Necessity Line of Business: All GEHA Commer"
+      },
+      "error_reason": "An adjacent fixed-size chunk from the same table page outranked the chunk containing this row."
+    },
+    {
+      "id": "pemetrexed_09",
+      "query": "In the pemetrexed policy, is Pemfexy preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-pemetrexed.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 9,
+      "drug_name": "Pemfexy",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9304",
+      "expected_answer": "Pemfexy: non-preferred; HCPCS J9304; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-pemetrexed-p1-c2"
+      ],
+      "row_anchor": "pemfexy",
+      "gold_rank": 15,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-pemetrexed-p1-c1",
+        "source_file": "geha-coverage-policy-pemetrexed.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.787,
+        "excerpt": "Pemetrexed: Alimta, Pemfexy, Pemrydi RTU Effective Date: 12/5/2022 Revision Date(s): 12/5/2022; 11/7/2023; 12/29/2023; 5/23/24; 8/5/2024; 9/24/2024; 11/14/2024; 1/1/2025; 07/01/2025; 10/1/2025 Review Date: 10/1/2025 Policy type: Medical Necessity Line of Business: All GEHA Commer"
+      },
+      "error_reason": "An adjacent fixed-size chunk from the same table page outranked the chunk containing this row."
+    },
+    {
+      "id": "pemetrexed_10",
+      "query": "In the pemetrexed policy, is Pemrydi RTU preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-pemetrexed.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 10,
+      "drug_name": "Pemrydi RTU",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9324",
+      "expected_answer": "Pemrydi RTU: non-preferred; HCPCS J9324; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-pemetrexed-p1-c2"
+      ],
+      "row_anchor": "pemrydi",
+      "gold_rank": 5,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-pemetrexed-p1-c1",
+        "source_file": "geha-coverage-policy-pemetrexed.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6926,
+        "excerpt": "Pemetrexed: Alimta, Pemfexy, Pemrydi RTU Effective Date: 12/5/2022 Revision Date(s): 12/5/2022; 11/7/2023; 12/29/2023; 5/23/24; 8/5/2024; 9/24/2024; 11/14/2024; 1/1/2025; 07/01/2025; 10/1/2025 Review Date: 10/1/2025 Policy type: Medical Necessity Line of Business: All GEHA Commer"
+      },
+      "error_reason": "An adjacent fixed-size chunk from the same table page outranked the chunk containing this row."
+    },
+    {
+      "id": "rituximab_01",
+      "query": "In the rituximab policy, is Ruxience preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-rituximab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 1,
+      "drug_name": "Ruxience",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5119",
+      "expected_answer": "Ruxience: preferred; HCPCS Q5119; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-rituximab-p1-c1"
+      ],
+      "row_anchor": "ruxience",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-rituximab-p1-c1",
+        "source_file": "geha-coverage-policy-rituximab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6959,
+        "excerpt": "Rituximab: Riabni, Rituxan, Rituxan Hycela, Ruxience, Truxima Effective Date: 11/10/2024 Revision Date(s): 11/14/2023, 4/17/2024, 9/9/2024, 1/17/2025 Review Date: 9/9/2024 Policy type: Medical Necessity Line of Business: All GEHA Medical Plans Authorizations are issued for 6 (six"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "rituximab_02",
+      "query": "In the rituximab policy, is Truxima preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-rituximab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 2,
+      "drug_name": "Truxima",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5115",
+      "expected_answer": "Truxima: non-preferred; HCPCS Q5115; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-rituximab-p1-c1"
+      ],
+      "row_anchor": "truxima",
+      "gold_rank": 2,
+      "source_rank": 2,
+      "top1": {
+        "id": "geha-coverage-policy-trastuzumab-p1-c1",
+        "source_file": "geha-coverage-policy-trastuzumab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.8725,
+        "excerpt": "Trastuzumab: Herceptin, Herceptin Hylecta, Hercessi, Herzuma, Kanjinti, Ogivri, Ontruzant, Trazimera Effective Date: 11/10/2024 Revision Date(s): 01/17/2025 Review Date: 9/10/2024 Policy type: Medical Necessity Line of Business: All GEHA Medical Plans Authorizations are issued fo"
+      },
+      "error_reason": "An unrelated policy chunk outranked the source table row; semantic similarity favored broad policy wording."
+    },
+    {
+      "id": "rituximab_03",
+      "query": "In the rituximab policy, is Rituxan Hycela preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-rituximab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 3,
+      "drug_name": "Rituxan Hycela",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9311",
+      "expected_answer": "Rituxan Hycela: non-preferred; HCPCS J9311; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-rituximab-p1-c1"
+      ],
+      "row_anchor": "hycela",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-rituximab-p1-c1",
+        "source_file": "geha-coverage-policy-rituximab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.5546,
+        "excerpt": "Rituximab: Riabni, Rituxan, Rituxan Hycela, Ruxience, Truxima Effective Date: 11/10/2024 Revision Date(s): 11/14/2023, 4/17/2024, 9/9/2024, 1/17/2025 Review Date: 9/9/2024 Policy type: Medical Necessity Line of Business: All GEHA Medical Plans Authorizations are issued for 6 (six"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "rituximab_04",
+      "query": "In the rituximab policy, is Rituxan preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-rituximab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 4,
+      "drug_name": "Rituxan",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9312",
+      "expected_answer": "Rituxan: non-preferred; HCPCS J9312; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-rituximab-p1-c1"
+      ],
+      "row_anchor": "rituxan",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-rituximab-p1-c1",
+        "source_file": "geha-coverage-policy-rituximab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.5639,
+        "excerpt": "Rituximab: Riabni, Rituxan, Rituxan Hycela, Ruxience, Truxima Effective Date: 11/10/2024 Revision Date(s): 11/14/2023, 4/17/2024, 9/9/2024, 1/17/2025 Review Date: 9/9/2024 Policy type: Medical Necessity Line of Business: All GEHA Medical Plans Authorizations are issued for 6 (six"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "rituximab_05",
+      "query": "In the rituximab policy, is Riabni preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-rituximab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 5,
+      "drug_name": "Riabni",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5123",
+      "expected_answer": "Riabni: non-preferred; HCPCS Q5123; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-rituximab-p1-c1"
+      ],
+      "row_anchor": "riabni",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-rituximab-p1-c1",
+        "source_file": "geha-coverage-policy-rituximab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.5853,
+        "excerpt": "Rituximab: Riabni, Rituxan, Rituxan Hycela, Ruxience, Truxima Effective Date: 11/10/2024 Revision Date(s): 11/14/2023, 4/17/2024, 9/9/2024, 1/17/2025 Review Date: 9/9/2024 Policy type: Medical Necessity Line of Business: All GEHA Medical Plans Authorizations are issued for 6 (six"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "rytelo_01",
+      "query": "In the rytelo policy, is Reblozyl (luspatercept) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-rytelo.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 1,
+      "drug_name": "Reblozyl (luspatercept)",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J0896",
+      "expected_answer": "Reblozyl (luspatercept): preferred; HCPCS J0896; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-rytelo-p1-c1"
+      ],
+      "row_anchor": "luspatercept",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-rytelo-p1-c1",
+        "source_file": "geha-coverage-policy-rytelo.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.7738,
+        "excerpt": "Rytelo (imetelstat) Original Effective Date: 7/15/2024 Revision Date(s): 7/15/2024; 11/20/2024; 1/1/2025; 12/19/2025 Review Date: 12/19/2025 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 6 (six) months, unless the orderin"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "rytelo_02",
+      "query": "In the rytelo policy, is Rytelo (imetelstat) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-rytelo.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 2,
+      "drug_name": "Rytelo (imetelstat)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J0870",
+      "expected_answer": "Rytelo (imetelstat): non-preferred; HCPCS J0870; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-rytelo-p1-c1"
+      ],
+      "row_anchor": "imetelstat",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-rytelo-p1-c1",
+        "source_file": "geha-coverage-policy-rytelo.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6924,
+        "excerpt": "Rytelo (imetelstat) Original Effective Date: 7/15/2024 Revision Date(s): 7/15/2024; 11/20/2024; 1/1/2025; 12/19/2025 Review Date: 12/19/2025 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 6 (six) months, unless the orderin"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "short-acting-gcsfs_01",
+      "query": "In the short acting gcsfs policy, is Zarxio (filgrastim-sndz) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-short-acting-gcsfs.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 1,
+      "drug_name": "Zarxio (filgrastim-sndz)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5101",
+      "expected_answer": "Zarxio (filgrastim-sndz): non-preferred; HCPCS Q5101; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-short-acting-gcsfs-p1-c1"
+      ],
+      "row_anchor": "zarxio",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-short-acting-gcsfs-p1-c1",
+        "source_file": "geha-coverage-policy-short-acting-gcsfs.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6978,
+        "excerpt": "Short-Acting GCSFs Original Effective Date: 5/2/2022 Revision Date(s): 5/2/2022; 3/18/2023; 1/16/2024; 2/10/2025; 2/17/2025; 3/16/2026 Review Date: 3/16/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 6 (six) months, u"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "short-acting-gcsfs_02",
+      "query": "In the short acting gcsfs policy, is Nivestym (filgrastim-aafi) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-short-acting-gcsfs.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 2,
+      "drug_name": "Nivestym (filgrastim- aafi)",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5110",
+      "expected_answer": "Nivestym (filgrastim- aafi): preferred; HCPCS Q5110; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-short-acting-gcsfs-p1-c1"
+      ],
+      "row_anchor": "nivestym",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-short-acting-gcsfs-p1-c1",
+        "source_file": "geha-coverage-policy-short-acting-gcsfs.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.7275,
+        "excerpt": "Short-Acting GCSFs Original Effective Date: 5/2/2022 Revision Date(s): 5/2/2022; 3/18/2023; 1/16/2024; 2/10/2025; 2/17/2025; 3/16/2026 Review Date: 3/16/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 6 (six) months, u"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "short-acting-gcsfs_03",
+      "query": "In the short acting gcsfs policy, is Neupogen (filgrastim) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-short-acting-gcsfs.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 3,
+      "drug_name": "Neupogen (filgrastim)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J1442",
+      "expected_answer": "Neupogen (filgrastim): non-preferred; HCPCS J1442; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-short-acting-gcsfs-p1-c1"
+      ],
+      "row_anchor": "neupogen",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-short-acting-gcsfs-p1-c1",
+        "source_file": "geha-coverage-policy-short-acting-gcsfs.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.7198,
+        "excerpt": "Short-Acting GCSFs Original Effective Date: 5/2/2022 Revision Date(s): 5/2/2022; 3/18/2023; 1/16/2024; 2/10/2025; 2/17/2025; 3/16/2026 Review Date: 3/16/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 6 (six) months, u"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "short-acting-gcsfs_04",
+      "query": "In the short acting gcsfs policy, is Granix (tbo-filgrastim) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-short-acting-gcsfs.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 4,
+      "drug_name": "Granix (tbo-filgrastim)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J1447",
+      "expected_answer": "Granix (tbo-filgrastim): non-preferred; HCPCS J1447; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-short-acting-gcsfs-p1-c1"
+      ],
+      "row_anchor": "granix",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-short-acting-gcsfs-p1-c1",
+        "source_file": "geha-coverage-policy-short-acting-gcsfs.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.8204,
+        "excerpt": "Short-Acting GCSFs Original Effective Date: 5/2/2022 Revision Date(s): 5/2/2022; 3/18/2023; 1/16/2024; 2/10/2025; 2/17/2025; 3/16/2026 Review Date: 3/16/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 6 (six) months, u"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "short-acting-gcsfs_05",
+      "query": "In the short acting gcsfs policy, is Nypozi (filgrastim-txid) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-short-acting-gcsfs.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 5,
+      "drug_name": "Nypozi (filgrastim-txid)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5148",
+      "expected_answer": "Nypozi (filgrastim-txid): non-preferred; HCPCS Q5148; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-short-acting-gcsfs-p1-c1"
+      ],
+      "row_anchor": "nypozi",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-short-acting-gcsfs-p1-c1",
+        "source_file": "geha-coverage-policy-short-acting-gcsfs.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.767,
+        "excerpt": "Short-Acting GCSFs Original Effective Date: 5/2/2022 Revision Date(s): 5/2/2022; 3/18/2023; 1/16/2024; 2/10/2025; 2/17/2025; 3/16/2026 Review Date: 3/16/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 6 (six) months, u"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "taxotere-docivyx_01",
+      "query": "In the taxotere docivyx policy, is Taxotere (docetaxel) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-taxotere-docivyx.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 1,
+      "drug_name": "Taxotere (docetaxel)",
+      "preference": "preferred",
+      "prior_auth": "No",
+      "hcpcs_code": "J9171",
+      "expected_answer": "Taxotere (docetaxel): preferred; HCPCS J9171; prior authorization No.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-taxotere-docivyx-p1-c1"
+      ],
+      "row_anchor": "taxotere",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-taxotere-docivyx-p1-c1",
+        "source_file": "geha-coverage-policy-taxotere-docivyx.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.603,
+        "excerpt": "Taxotere, Docivyx (docetaxel) Effective Date: 11/10/2024 Revision Date(s): 5/23/2024, 9/4/2024, 1/17/2025, 7/1/2026 Review Date: 7/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 6 (six) months, unless the ordering p"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "taxotere-docivyx_02",
+      "query": "In the taxotere docivyx policy, is Docetaxel (Hospira 505(b)(2)) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-taxotere-docivyx.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 2,
+      "drug_name": "Docetaxel (Hospira 505(b)(2))",
+      "preference": "preferred",
+      "prior_auth": "No",
+      "hcpcs_code": "J9232",
+      "expected_answer": "Docetaxel (Hospira 505(b)(2)): preferred; HCPCS J9232; prior authorization No.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-taxotere-docivyx-p1-c1"
+      ],
+      "row_anchor": "hospira",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-taxotere-docivyx-p1-c1",
+        "source_file": "geha-coverage-policy-taxotere-docivyx.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.5116,
+        "excerpt": "Taxotere, Docivyx (docetaxel) Effective Date: 11/10/2024 Revision Date(s): 5/23/2024, 9/4/2024, 1/17/2025, 7/1/2026 Review Date: 7/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 6 (six) months, unless the ordering p"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "taxotere-docivyx_03",
+      "query": "In the taxotere docivyx policy, is Docetaxel (Docivyx) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-taxotere-docivyx.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 3,
+      "drug_name": "Docetaxel (Docivyx)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9172",
+      "expected_answer": "Docetaxel (Docivyx): non-preferred; HCPCS J9172; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-taxotere-docivyx-p1-c1"
+      ],
+      "row_anchor": "docivyx",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-taxotere-docivyx-p1-c1",
+        "source_file": "geha-coverage-policy-taxotere-docivyx.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6006,
+        "excerpt": "Taxotere, Docivyx (docetaxel) Effective Date: 11/10/2024 Revision Date(s): 5/23/2024, 9/4/2024, 1/17/2025, 7/1/2026 Review Date: 7/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 6 (six) months, unless the ordering p"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "trastuzumab_01",
+      "query": "In the trastuzumab policy, is Trazimera preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-trastuzumab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 1,
+      "drug_name": "Trazimera",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5116",
+      "expected_answer": "Trazimera: preferred; HCPCS Q5116; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-trastuzumab-p1-c1"
+      ],
+      "row_anchor": "trazimera",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-trastuzumab-p1-c1",
+        "source_file": "geha-coverage-policy-trastuzumab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.5978,
+        "excerpt": "Trastuzumab: Herceptin, Herceptin Hylecta, Hercessi, Herzuma, Kanjinti, Ogivri, Ontruzant, Trazimera Effective Date: 11/10/2024 Revision Date(s): 01/17/2025 Review Date: 9/10/2024 Policy type: Medical Necessity Line of Business: All GEHA Medical Plans Authorizations are issued fo"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "trastuzumab_02",
+      "query": "In the trastuzumab policy, is Kanjinti preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-trastuzumab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 2,
+      "drug_name": "Kanjinti",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5117",
+      "expected_answer": "Kanjinti: preferred; HCPCS Q5117; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-trastuzumab-p1-c1"
+      ],
+      "row_anchor": "kanjinti",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-trastuzumab-p1-c1",
+        "source_file": "geha-coverage-policy-trastuzumab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.8701,
+        "excerpt": "Trastuzumab: Herceptin, Herceptin Hylecta, Hercessi, Herzuma, Kanjinti, Ogivri, Ontruzant, Trazimera Effective Date: 11/10/2024 Revision Date(s): 01/17/2025 Review Date: 9/10/2024 Policy type: Medical Necessity Line of Business: All GEHA Medical Plans Authorizations are issued fo"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "trastuzumab_03",
+      "query": "In the trastuzumab policy, is Herceptin preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-trastuzumab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 3,
+      "drug_name": "Herceptin",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9355",
+      "expected_answer": "Herceptin: non-preferred; HCPCS J9355; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-trastuzumab-p1-c1"
+      ],
+      "row_anchor": "herceptin",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-trastuzumab-p1-c1",
+        "source_file": "geha-coverage-policy-trastuzumab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6162,
+        "excerpt": "Trastuzumab: Herceptin, Herceptin Hylecta, Hercessi, Herzuma, Kanjinti, Ogivri, Ontruzant, Trazimera Effective Date: 11/10/2024 Revision Date(s): 01/17/2025 Review Date: 9/10/2024 Policy type: Medical Necessity Line of Business: All GEHA Medical Plans Authorizations are issued fo"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "trastuzumab_04",
+      "query": "In the trastuzumab policy, is Herceptin Hylecta preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-trastuzumab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 4,
+      "drug_name": "Herceptin Hylecta",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9356",
+      "expected_answer": "Herceptin Hylecta: non-preferred; HCPCS J9356; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-trastuzumab-p1-c1"
+      ],
+      "row_anchor": "hylecta",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-trastuzumab-p1-c1",
+        "source_file": "geha-coverage-policy-trastuzumab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.5947,
+        "excerpt": "Trastuzumab: Herceptin, Herceptin Hylecta, Hercessi, Herzuma, Kanjinti, Ogivri, Ontruzant, Trazimera Effective Date: 11/10/2024 Revision Date(s): 01/17/2025 Review Date: 9/10/2024 Policy type: Medical Necessity Line of Business: All GEHA Medical Plans Authorizations are issued fo"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "trastuzumab_05",
+      "query": "In the trastuzumab policy, is Hercessi preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-trastuzumab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 5,
+      "drug_name": "Hercessi",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5416",
+      "expected_answer": "Hercessi: non-preferred; HCPCS Q5416; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-trastuzumab-p1-c1"
+      ],
+      "row_anchor": "hercessi",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-trastuzumab-p1-c1",
+        "source_file": "geha-coverage-policy-trastuzumab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6493,
+        "excerpt": "Trastuzumab: Herceptin, Herceptin Hylecta, Hercessi, Herzuma, Kanjinti, Ogivri, Ontruzant, Trazimera Effective Date: 11/10/2024 Revision Date(s): 01/17/2025 Review Date: 9/10/2024 Policy type: Medical Necessity Line of Business: All GEHA Medical Plans Authorizations are issued fo"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "trastuzumab_06",
+      "query": "In the trastuzumab policy, is Ontruzant preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-trastuzumab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 6,
+      "drug_name": "Ontruzant",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5112",
+      "expected_answer": "Ontruzant: non-preferred; HCPCS Q5112; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-trastuzumab-p1-c1"
+      ],
+      "row_anchor": "ontruzant",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-trastuzumab-p1-c1",
+        "source_file": "geha-coverage-policy-trastuzumab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6717,
+        "excerpt": "Trastuzumab: Herceptin, Herceptin Hylecta, Hercessi, Herzuma, Kanjinti, Ogivri, Ontruzant, Trazimera Effective Date: 11/10/2024 Revision Date(s): 01/17/2025 Review Date: 9/10/2024 Policy type: Medical Necessity Line of Business: All GEHA Medical Plans Authorizations are issued fo"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "trastuzumab_07",
+      "query": "In the trastuzumab policy, is Herzuma preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-trastuzumab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 7,
+      "drug_name": "Herzuma",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5113",
+      "expected_answer": "Herzuma: non-preferred; HCPCS Q5113; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-trastuzumab-p1-c1"
+      ],
+      "row_anchor": "herzuma",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-trastuzumab-p1-c1",
+        "source_file": "geha-coverage-policy-trastuzumab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6829,
+        "excerpt": "Trastuzumab: Herceptin, Herceptin Hylecta, Hercessi, Herzuma, Kanjinti, Ogivri, Ontruzant, Trazimera Effective Date: 11/10/2024 Revision Date(s): 01/17/2025 Review Date: 9/10/2024 Policy type: Medical Necessity Line of Business: All GEHA Medical Plans Authorizations are issued fo"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "trastuzumab_08",
+      "query": "In the trastuzumab policy, is Ogivri preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-trastuzumab.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 8,
+      "drug_name": "Ogivri",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5114",
+      "expected_answer": "Ogivri: non-preferred; HCPCS Q5114; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-trastuzumab-p1-c1",
+        "geha-coverage-policy-trastuzumab-p1-c2"
+      ],
+      "row_anchor": "ogivri",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-trastuzumab-p1-c1",
+        "source_file": "geha-coverage-policy-trastuzumab.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.7956,
+        "excerpt": "Trastuzumab: Herceptin, Herceptin Hylecta, Hercessi, Herzuma, Kanjinti, Ogivri, Ontruzant, Trazimera Effective Date: 11/10/2024 Revision Date(s): 01/17/2025 Review Date: 9/10/2024 Policy type: Medical Necessity Line of Business: All GEHA Medical Plans Authorizations are issued fo"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "vectibix_01",
+      "query": "In the vectibix policy, is Cetuximab (Erbitux) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-vectibix.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 1,
+      "drug_name": "Cetuximab (Erbitux)",
+      "preference": "preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9055",
+      "expected_answer": "Cetuximab (Erbitux): preferred; HCPCS J9055; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-vectibix-p1-c1"
+      ],
+      "row_anchor": "cetuximab",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-vectibix-p1-c1",
+        "source_file": "geha-coverage-policy-vectibix.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.7406,
+        "excerpt": "Vectibix (panitumumab) Original Effective Date: 7/1/2024 Revision Date(s): 5/22/2024; 6/17/2024; 10/1/2025 Review Date: 10/1/2025 Policy type: Medical Necessity Line of Business: All GEHA Medical Plans Authorizations are issued for 6 (six) months, unless the ordering physician re"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "vectibix_02",
+      "query": "In the vectibix policy, is Panitumumab (Vectibix) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-vectibix.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 2,
+      "drug_name": "Panitumumab (Vectibix)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J9303",
+      "expected_answer": "Panitumumab (Vectibix): non-preferred; HCPCS J9303; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-vectibix-p1-c1"
+      ],
+      "row_anchor": "panitumumab",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-vectibix-p1-c1",
+        "source_file": "geha-coverage-policy-vectibix.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.5303,
+        "excerpt": "Vectibix (panitumumab) Original Effective Date: 7/1/2024 Revision Date(s): 5/22/2024; 6/17/2024; 10/1/2025 Review Date: 10/1/2025 Policy type: Medical Necessity Line of Business: All GEHA Medical Plans Authorizations are issued for 6 (six) months, unless the ordering physician re"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "xgeva_01",
+      "query": "In the xgeva policy, is Zoledronic Acid (Zometa) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 1,
+      "drug_name": "Zoledronic Acid (Zometa)",
+      "preference": "preferred",
+      "prior_auth": "No",
+      "hcpcs_code": "J3489",
+      "expected_answer": "Zoledronic Acid (Zometa): preferred; HCPCS J3489; prior authorization No.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-xgeva-p1-c1"
+      ],
+      "row_anchor": "zoledronic",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-xgeva-p1-c1",
+        "source_file": "geha-coverage-policy-xgeva.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6889,
+        "excerpt": "Xgeva (denosumab) Original Effective Date: 10/04/2021 Revision Date(s): 10/04/2021; 10/04/2023; 4/25/2024; 10/1/2025; 1/1/2026; 4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 12 (twelve) mont"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "xgeva_02",
+      "query": "In the xgeva policy, is Denosumab (Xgeva) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 2,
+      "drug_name": "Denosumab (Xgeva)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J0897",
+      "expected_answer": "Denosumab (Xgeva): non-preferred; HCPCS J0897; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-xgeva-p1-c1"
+      ],
+      "row_anchor": "xgeva",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-xgeva-p1-c1",
+        "source_file": "geha-coverage-policy-xgeva.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.5578,
+        "excerpt": "Xgeva (denosumab) Original Effective Date: 10/04/2021 Revision Date(s): 10/04/2021; 10/04/2023; 4/25/2024; 10/1/2025; 1/1/2026; 4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 12 (twelve) mont"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "xgeva_03",
+      "query": "In the xgeva policy, is Denosumab-desu (Jubereq) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 3,
+      "drug_name": "Denosumab-desu (Jubereq)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J3590",
+      "expected_answer": "Denosumab-desu (Jubereq): non-preferred; HCPCS J3590; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-xgeva-p1-c1"
+      ],
+      "row_anchor": "jubereq",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-xgeva-p1-c1",
+        "source_file": "geha-coverage-policy-xgeva.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6362,
+        "excerpt": "Xgeva (denosumab) Original Effective Date: 10/04/2021 Revision Date(s): 10/04/2021; 10/04/2023; 4/25/2024; 10/1/2025; 1/1/2026; 4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 12 (twelve) mont"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "xgeva_04",
+      "query": "In the xgeva policy, is Denosumab-qbde (Xtrenbo) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 4,
+      "drug_name": "Denosumab-qbde (Xtrenbo)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "J3590",
+      "expected_answer": "Denosumab-qbde (Xtrenbo): non-preferred; HCPCS J3590; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-xgeva-p1-c1"
+      ],
+      "row_anchor": "xtrenbo",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-xgeva-p1-c1",
+        "source_file": "geha-coverage-policy-xgeva.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6771,
+        "excerpt": "Xgeva (denosumab) Original Effective Date: 10/04/2021 Revision Date(s): 10/04/2021; 10/04/2023; 4/25/2024; 10/1/2025; 1/1/2026; 4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 12 (twelve) mont"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "xgeva_05",
+      "query": "In the xgeva policy, is Denosumab-bbdz (Wyost) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 5,
+      "drug_name": "Denosumab-bbdz (Wyost)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5136",
+      "expected_answer": "Denosumab-bbdz (Wyost): non-preferred; HCPCS Q5136; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-xgeva-p1-c1"
+      ],
+      "row_anchor": "wyost",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-xgeva-p1-c1",
+        "source_file": "geha-coverage-policy-xgeva.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.7024,
+        "excerpt": "Xgeva (denosumab) Original Effective Date: 10/04/2021 Revision Date(s): 10/04/2021; 10/04/2023; 4/25/2024; 10/1/2025; 1/1/2026; 4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 12 (twelve) mont"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "xgeva_06",
+      "query": "In the xgeva policy, is Denosumab-bmwo (Osenvelt) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 6,
+      "drug_name": "Denosumab-bmwo (Osenvelt)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5157",
+      "expected_answer": "Denosumab-bmwo (Osenvelt): non-preferred; HCPCS Q5157; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-xgeva-p1-c1"
+      ],
+      "row_anchor": "osenvelt",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-xgeva-p1-c1",
+        "source_file": "geha-coverage-policy-xgeva.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6741,
+        "excerpt": "Xgeva (denosumab) Original Effective Date: 10/04/2021 Revision Date(s): 10/04/2021; 10/04/2023; 4/25/2024; 10/1/2025; 1/1/2026; 4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 12 (twelve) mont"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "xgeva_07",
+      "query": "In the xgeva policy, is Denosumab-bmwo (Denosumab-Celtrion) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 7,
+      "drug_name": "Denosumab-bmwo (Denosumab-Celtrion)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5157",
+      "expected_answer": "Denosumab-bmwo (Denosumab-Celtrion): non-preferred; HCPCS Q5157; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-xgeva-p1-c1"
+      ],
+      "row_anchor": "celtrion",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-xgeva-p1-c1",
+        "source_file": "geha-coverage-policy-xgeva.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6305,
+        "excerpt": "Xgeva (denosumab) Original Effective Date: 10/04/2021 Revision Date(s): 10/04/2021; 10/04/2023; 4/25/2024; 10/1/2025; 1/1/2026; 4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 12 (twelve) mont"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "xgeva_08",
+      "query": "In the xgeva policy, is Denosumab-bnht (Bomyntra) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 8,
+      "drug_name": "Denosumab-bnht (Bomyntra)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5158",
+      "expected_answer": "Denosumab-bnht (Bomyntra): non-preferred; HCPCS Q5158; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-xgeva-p1-c1",
+        "geha-coverage-policy-xgeva-p1-c2"
+      ],
+      "row_anchor": "bomyntra",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-xgeva-p1-c1",
+        "source_file": "geha-coverage-policy-xgeva.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.7167,
+        "excerpt": "Xgeva (denosumab) Original Effective Date: 10/04/2021 Revision Date(s): 10/04/2021; 10/04/2023; 4/25/2024; 10/1/2025; 1/1/2026; 4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 12 (twelve) mont"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "xgeva_09",
+      "query": "In the xgeva policy, is Denosumab-bnht (denosumab Frensenius) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 9,
+      "drug_name": "Denosumab-bnht (denosumab Frensenius)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5158",
+      "expected_answer": "Denosumab-bnht (denosumab Frensenius): non-preferred; HCPCS Q5158; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-xgeva-p1-c1",
+        "geha-coverage-policy-xgeva-p1-c2"
+      ],
+      "row_anchor": "frensenius",
+      "gold_rank": 1,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-xgeva-p1-c1",
+        "source_file": "geha-coverage-policy-xgeva.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6404,
+        "excerpt": "Xgeva (denosumab) Original Effective Date: 10/04/2021 Revision Date(s): 10/04/2021; 10/04/2023; 4/25/2024; 10/1/2025; 1/1/2026; 4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 12 (twelve) mont"
+      },
+      "error_reason": null
+    },
+    {
+      "id": "xgeva_10",
+      "query": "In the xgeva policy, is Denosumab-dssb (Xbryk) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 10,
+      "drug_name": "Denosumab-dssb (Xbryk)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5159",
+      "expected_answer": "Denosumab-dssb (Xbryk): non-preferred; HCPCS Q5159; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-xgeva-p1-c2"
+      ],
+      "row_anchor": "xbryk",
+      "gold_rank": 4,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-xgeva-p1-c1",
+        "source_file": "geha-coverage-policy-xgeva.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.7681,
+        "excerpt": "Xgeva (denosumab) Original Effective Date: 10/04/2021 Revision Date(s): 10/04/2021; 10/04/2023; 4/25/2024; 10/1/2025; 1/1/2026; 4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 12 (twelve) mont"
+      },
+      "error_reason": "An adjacent fixed-size chunk from the same table page outranked the chunk containing this row."
+    },
+    {
+      "id": "xgeva_11",
+      "query": "In the xgeva policy, is Denosumab-dssb (Denosumab Samsung Bioepis) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 11,
+      "drug_name": "Denosumab-dssb (Denosumab Samsung Bioepis)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5159",
+      "expected_answer": "Denosumab-dssb (Denosumab Samsung Bioepis): non-preferred; HCPCS Q5159; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-xgeva-p1-c2"
+      ],
+      "row_anchor": "samsung",
+      "gold_rank": 8,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-xgeva-p1-c1",
+        "source_file": "geha-coverage-policy-xgeva.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6758,
+        "excerpt": "Xgeva (denosumab) Original Effective Date: 10/04/2021 Revision Date(s): 10/04/2021; 10/04/2023; 4/25/2024; 10/1/2025; 1/1/2026; 4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 12 (twelve) mont"
+      },
+      "error_reason": "An adjacent fixed-size chunk from the same table page outranked the chunk containing this row."
+    },
+    {
+      "id": "xgeva_12",
+      "query": "In the xgeva policy, is Denosumab-kyqq (Aukelso) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 12,
+      "drug_name": "Denosumab-kyqq (Aukelso)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5161",
+      "expected_answer": "Denosumab-kyqq (Aukelso): non-preferred; HCPCS Q5161; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-xgeva-p1-c2"
+      ],
+      "row_anchor": "aukelso",
+      "gold_rank": 10,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-xgeva-p1-c1",
+        "source_file": "geha-coverage-policy-xgeva.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.7609,
+        "excerpt": "Xgeva (denosumab) Original Effective Date: 10/04/2021 Revision Date(s): 10/04/2021; 10/04/2023; 4/25/2024; 10/1/2025; 1/1/2026; 4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 12 (twelve) mont"
+      },
+      "error_reason": "An adjacent fixed-size chunk from the same table page outranked the chunk containing this row."
+    },
+    {
+      "id": "xgeva_13",
+      "query": "In the xgeva policy, is Denosumab-nxxp (Bilprevda) preferred? What is its HCPCS code and prior authorization requirement?",
+      "source_pdf": "geha-coverage-policy-xgeva.pdf",
+      "source_page": 1,
+      "table_number": 1,
+      "row_number": 13,
+      "drug_name": "Denosumab-nxxp (Bilprevda)",
+      "preference": "non-preferred",
+      "prior_auth": "Yes",
+      "hcpcs_code": "Q5162",
+      "expected_answer": "Denosumab-nxxp (Bilprevda): non-preferred; HCPCS Q5162; prior authorization Yes.",
+      "gold_chunk_ids": [
+        "geha-coverage-policy-xgeva-p1-c2"
+      ],
+      "row_anchor": "bilprevda",
+      "gold_rank": 70,
+      "source_rank": 1,
+      "top1": {
+        "id": "geha-coverage-policy-xgeva-p1-c1",
+        "source_file": "geha-coverage-policy-xgeva.pdf",
+        "page": 1,
+        "chunk": 1,
+        "distance": 0.6234,
+        "excerpt": "Xgeva (denosumab) Original Effective Date: 10/04/2021 Revision Date(s): 10/04/2021; 10/04/2023; 4/25/2024; 10/1/2025; 1/1/2026; 4/1/2026 Review Date: 4/1/2026 Policy type: Medical Necessity Line of Business: All G.E.H.A Medical Plans Authorizations are issued for 12 (twelve) mont"
+      },
+      "error_reason": "An adjacent fixed-size chunk from the same table page outranked the chunk containing this row."
+    }
+  ]
+}

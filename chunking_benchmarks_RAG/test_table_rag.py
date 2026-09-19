@@ -199,8 +199,8 @@ class TableRagTests(unittest.TestCase):
 
     def test_every_documented_indication_is_labeled_in_chunk_corpus(self):
         root = Path(__file__).resolve().parents[1] / "downloads" / "coverage-policies"
-        paths = sorted(root.rglob("*.docling_chunks.md"))
-        self.assertEqual(len(paths), 35)
+        paths = sorted(root.glob("*.docling_chunks.md"))
+        self.assertEqual(len(paths), 32)
         for path in paths:
             with self.subTest(path=path.name):
                 markdown = path.with_name(
@@ -226,7 +226,7 @@ class TableRagTests(unittest.TestCase):
             for path in root.glob("*.docling_chunks.md")
         }
         case_sources = {case["source"] for case in manifest["cases"]}
-        self.assertEqual(len(manifest["cases"]), 34)
+        self.assertEqual(len(manifest["cases"]), 32)
         self.assertEqual(case_sources, root_sources)
         nested = manifest["stored_only"]["source"]
         self.assertEqual(

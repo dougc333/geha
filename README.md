@@ -157,3 +157,13 @@ npm start
 ```
 
 See [langgraph_web/README.md](langgraph_web/README.md) for configuration details.
+
+## Continuous integration
+
+[GEHA CI](.github/workflows/ci.yml) runs on pull requests and pushes to `main`.
+It checks focused policy-RAG and PDF-extraction unit tests, the LangGraph
+workflow smoke tests, and MCP server contracts in their locked Python
+environments. These checks use local fixtures and do not require an API key,
+live PostgreSQL, or model downloads. Database-backed retrieval evaluations,
+vision review, and deployment tests remain separate manual checks; CI does not
+certify clinical correctness or HIPAA compliance.
