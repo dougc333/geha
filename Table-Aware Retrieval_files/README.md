@@ -1,0 +1,1 @@
+This shows the blocking behavior of a LLM as it progresses through the blocks. The bad idea is to one show an image. If this doesn't work then break down the problem where it creates blocks and OCRs the blocks and reassembles them back. 
