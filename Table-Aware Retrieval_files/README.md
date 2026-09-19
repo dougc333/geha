@@ -1,1 +1,6 @@
-This shows the blocking behavior of a LLM as it progresses through the blocks. The bad idea is to one show an image. If this doesn't work then break down the problem where it creates blocks and OCRs the blocks and reassembles them back. 
+
+LLM generated figure for table aware parsing. 
+
+A websearch says table parsing is a bad idea which is true. Easy to confuse the parent child hierarchial parsing to preserve context at parent for search term at child vs. table parsing is bad. 
+
+
