@@ -1,0 +1,243 @@
+[
+  {
+    "case": "1. Exact duplicate medical claim",
+    "embedding_source": "offline canonicalized bag-of-concepts (not OpenAI embeddings)",
+    "claim_a": {
+      "claim_id": "M1001",
+      "claim_type": "medical",
+      "patient_id": "P100",
+      "provider_id": "NPI100",
+      "service_date": "2026-08-20",
+      "procedure_code": "99213",
+      "amount": 125.0,
+      "lines": [
+        "Established patient office visit, level 3"
+      ],
+      "tooth": null,
+      "surfaces": null
+    },
+    "claim_b": {
+      "claim_id": "M1002",
+      "claim_type": "medical",
+      "patient_id": "P100",
+      "provider_id": "NPI100",
+      "service_date": "2026-08-20",
+      "procedure_code": "99213",
+      "amount": 125.0,
+      "lines": [
+        "Established patient office visit, level 3"
+      ],
+      "tooth": null,
+      "surfaces": null
+    },
+    "cosine_similarity": 1.0,
+    "l1_distance": 0.0,
+    "l2_distance": 0.0,
+    "wasserstein_cost": -0.0,
+    "wasserstein_similarity": 1.0,
+    "structured_field_score": 1.0,
+    "field_matches": {
+      "patient": true,
+      "provider": true,
+      "service_date": true,
+      "procedure_code": true,
+      "amount": true
+    },
+    "duplicate_score": 100.0,
+    "classification": "likely duplicate"
+  },
+  {
+    "case": "2. Semantic duplicate dental claim",
+    "embedding_source": "offline canonicalized bag-of-concepts (not OpenAI embeddings)",
+    "claim_a": {
+      "claim_id": "D2001",
+      "claim_type": "dental",
+      "patient_id": "P200",
+      "provider_id": "NPI200",
+      "service_date": "2026-08-21",
+      "procedure_code": "D2392",
+      "amount": 210.0,
+      "lines": [
+        "Posterior resin filling, two surfaces, tooth 30, mesial occlusal"
+      ],
+      "tooth": "30",
+      "surfaces": "MO"
+    },
+    "claim_b": {
+      "claim_id": "D2002",
+      "claim_type": "dental",
+      "patient_id": "P200",
+      "provider_id": "NPI200",
+      "service_date": "2026-08-21",
+      "procedure_code": "D2392",
+      "amount": 210.0,
+      "lines": [
+        "Two-surface composite restoration on #30, occlusal-mesial"
+      ],
+      "tooth": "30",
+      "surfaces": "OM"
+    },
+    "cosine_similarity": 0.875,
+    "l1_distance": 0.7071,
+    "l2_distance": 0.5,
+    "wasserstein_cost": 0.125,
+    "wasserstein_similarity": 0.875,
+    "structured_field_score": 1.0,
+    "field_matches": {
+      "patient": true,
+      "provider": true,
+      "service_date": true,
+      "procedure_code": true,
+      "amount": true,
+      "tooth": true,
+      "surfaces": true
+    },
+    "duplicate_score": 91.88,
+    "classification": "likely duplicate"
+  },
+  {
+    "case": "3. Corrected/resubmitted multi-line medical claim",
+    "embedding_source": "offline canonicalized bag-of-concepts (not OpenAI embeddings)",
+    "claim_a": {
+      "claim_id": "M3001",
+      "claim_type": "medical",
+      "patient_id": "P300",
+      "provider_id": "NPI300",
+      "service_date": "2026-08-22",
+      "procedure_code": "99213",
+      "amount": 240.0,
+      "lines": [
+        "Hypertension follow-up office visit",
+        "Basic metabolic panel"
+      ],
+      "tooth": null,
+      "surfaces": null
+    },
+    "claim_b": {
+      "claim_id": "M3002",
+      "claim_type": "medical",
+      "patient_id": "P300",
+      "provider_id": "NPI300",
+      "service_date": "2026-08-22",
+      "procedure_code": "99213",
+      "amount": 245.0,
+      "lines": [
+        "Basic blood chemistry panel",
+        "Established-patient visit for high blood pressure follow-up"
+      ],
+      "tooth": null,
+      "surfaces": null
+    },
+    "cosine_similarity": 1.0,
+    "l1_distance": 0.0,
+    "l2_distance": 0.0,
+    "wasserstein_cost": -0.0,
+    "wasserstein_similarity": 1.0,
+    "structured_field_score": 1.0,
+    "field_matches": {
+      "patient": true,
+      "provider": true,
+      "service_date": true,
+      "procedure_code": true,
+      "amount": true
+    },
+    "duplicate_score": 100.0,
+    "classification": "likely duplicate"
+  },
+  {
+    "case": "4. Similar service but distinct dental claim",
+    "embedding_source": "offline canonicalized bag-of-concepts (not OpenAI embeddings)",
+    "claim_a": {
+      "claim_id": "D4001",
+      "claim_type": "dental",
+      "patient_id": "P400",
+      "provider_id": "NPI400",
+      "service_date": "2026-08-23",
+      "procedure_code": "D2392",
+      "amount": 210.0,
+      "lines": [
+        "Two-surface composite restoration on tooth 30, MO"
+      ],
+      "tooth": "30",
+      "surfaces": "MO"
+    },
+    "claim_b": {
+      "claim_id": "D4002",
+      "claim_type": "dental",
+      "patient_id": "P400",
+      "provider_id": "NPI400",
+      "service_date": "2026-08-23",
+      "procedure_code": "D2392",
+      "amount": 210.0,
+      "lines": [
+        "Two-surface composite restoration on tooth 31, MO"
+      ],
+      "tooth": "31",
+      "surfaces": "MO"
+    },
+    "cosine_similarity": 0.875,
+    "l1_distance": 0.7071,
+    "l2_distance": 0.5,
+    "wasserstein_cost": 0.125,
+    "wasserstein_similarity": 0.875,
+    "structured_field_score": 0.9,
+    "field_matches": {
+      "patient": true,
+      "provider": true,
+      "service_date": true,
+      "procedure_code": true,
+      "amount": true,
+      "tooth": false,
+      "surfaces": true
+    },
+    "duplicate_score": 49.0,
+    "classification": "manual review / unlikely duplicate"
+  },
+  {
+    "case": "5. Clearly different medical claims",
+    "embedding_source": "offline canonicalized bag-of-concepts (not OpenAI embeddings)",
+    "claim_a": {
+      "claim_id": "M5001",
+      "claim_type": "medical",
+      "patient_id": "P500",
+      "provider_id": "NPI500",
+      "service_date": "2026-08-24",
+      "procedure_code": "71046",
+      "amount": 85.0,
+      "lines": [
+        "Chest radiograph, two views"
+      ],
+      "tooth": null,
+      "surfaces": null
+    },
+    "claim_b": {
+      "claim_id": "M5002",
+      "claim_type": "medical",
+      "patient_id": "P501",
+      "provider_id": "NPI501",
+      "service_date": "2026-08-28",
+      "procedure_code": "93000",
+      "amount": 65.0,
+      "lines": [
+        "Routine twelve-lead electrocardiogram"
+      ],
+      "tooth": null,
+      "surfaces": null
+    },
+    "cosine_similarity": 0.0,
+    "l1_distance": 3.4142,
+    "l2_distance": 1.4142,
+    "wasserstein_cost": 1.0,
+    "wasserstein_similarity": 0.0,
+    "structured_field_score": 0.0,
+    "field_matches": {
+      "patient": false,
+      "provider": false,
+      "service_date": false,
+      "procedure_code": false,
+      "amount": false
+    },
+    "duplicate_score": 0.0,
+    "classification": "manual review / unlikely duplicate"
+  }
+]
