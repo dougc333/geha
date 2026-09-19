@@ -28,7 +28,9 @@ npm test
 npm run typecheck
 ```
 
-LangGraph is not required for this deterministic wizard. It may become useful if the workflow later needs durable checkpoints, human review, multiple specialized agents, or resumption across sessions. The existing `reactAdvisor.ts` remains a separate LangGraph demonstration.
+LangGraph is not required for this deterministic wizard. The pdf is clear in stating first find member zipcode and then find the dental member payment from the zone associated with the zipcode. 
+
+It may become useful if the workflow later needs durable checkpoints, human review, multiple specialized agents, or resumption across sessions. The existing `reactAdvisor.ts` remains a separate LangGraph demonstration.
 
 The reusable LLM system prompt and ordered prompt specification are in `src/enrollmentPrompts.ts`.
 
