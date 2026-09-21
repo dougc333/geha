@@ -9,42 +9,36 @@
       "chunks": 409
     },
     "actual": {
-      "source_files": 35,
-      "chunks": 409
+      "source_files": 34,
+      "chunks": 402
     },
-    "missing_sources": [],
-    "unexpected_sources": [],
-    "pass": true
+    "missing_sources": [
+      "aa_source_not_consistent/geha-medical-necessity-review-criteria.pdf"
+    ],
+    "unexpected_sources": [
+      "geha-coverage-policy-infertility-services.pdf",
+      "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf"
+    ],
+    "pass": false
   },
   "stored_only": {
     "source": "aa_source_not_consistent/geha-medical-necessity-review-criteria.pdf",
     "reason": "Nested general review document, not a treatment policy",
     "table_count": 0,
-    "returned_sections": [
-      {
-        "chunk_number": 4,
-        "section_type": "universal",
-        "condition": null
-      },
-      {
-        "chunk_number": 5,
-        "section_type": "universal",
-        "condition": null
-      }
-    ],
-    "pass": true
+    "returned_sections": [],
+    "pass": false
   },
   "summary": {
-    "cases": 46,
-    "passed": 46,
+    "cases": 44,
+    "passed": 44,
     "failed": 0,
     "pass_rate": 1.0,
     "focused_cases": 12,
     "focused_passed": 12,
-    "filename_cases": 34,
-    "filename_passed": 34,
-    "corpus_pass": true,
-    "stored_only_pass": true
+    "filename_cases": 32,
+    "filename_passed": 32,
+    "corpus_pass": false,
+    "stored_only_pass": false
   },
   "results": [
     {
@@ -713,36 +707,6 @@
           "condition": null
         }
       ],
-      "checks": {
-        "source": true,
-        "exact_sections": true,
-        "criteria_only": true,
-        "revision_excluded": true
-      },
-      "pass": true
-    },
-    {
-      "suite": "filename_lookup",
-      "id": "geha-coverage-policy-infertility-services",
-      "query": "infertility services",
-      "expected_source": "geha-coverage-policy-infertility-services.pdf",
-      "actual_source": "geha-coverage-policy-infertility-services.pdf",
-      "returned_sections": [],
-      "checks": {
-        "source": true,
-        "exact_sections": true,
-        "criteria_only": true,
-        "revision_excluded": true
-      },
-      "pass": true
-    },
-    {
-      "suite": "filename_lookup",
-      "id": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve",
-      "query": "intraosseous radiofrequency ablation of the basivertebral nerve",
-      "expected_source": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf",
-      "actual_source": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf",
-      "returned_sections": [],
       "checks": {
         "source": true,
         "exact_sections": true,

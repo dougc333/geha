@@ -9,7 +9,7 @@ cd /Users/dc/geha/langgraph_demo
 uv run python -m unittest discover -s reliability_tests -p 'test_*.py' -v
 ```
 
-Current result (2026-09-13): **8 tests: 7 pass, 1 failure** on LangGraph 1.2.11 and langgraph-checkpoint-sqlite 3.1.1. The remaining failure deliberately asserts the desired upstream router-recovery guarantee and is not marked skipped or expected. The command exits nonzero until that gap is fixed.
+Current result (2026-09-20): **8 tests: 7 pass, 1 failure** on LangGraph 1.2.11 and langgraph-checkpoint-sqlite 3.1.1. The remaining failure deliberately asserts the desired upstream router-recovery guarantee and is not marked skipped or expected. The command exits nonzero until that gap is fixed.
 
 | Test area | What is exercised | Observed result |
 | --- | --- | --- |
@@ -41,4 +41,9 @@ The tested router failure is a minimal graph, not a claim that ordinary authoriz
 - These tests exercise process death, not machine power loss, disk-full errors, network failures, or external-payment exactly-once guarantees.
 - No network/API access or LLM is needed to run the tests. The upstream report was inspected during authoring; no downloaded code is executed.
 
-Next implementation work is cross-process review coordination and persistent idempotency. The upstream recovery failure requires a tested runtime fix/upgrade or an application-level strategy. Do not weaken the checks to manufacture a green suite.
+The local demo now has cross-process review coordination and persistent
+idempotency for its SQLite checkpoint store. A distributed deployment still
+requires database-backed coordination rather than the local sibling-file lock.
+The upstream recovery failure requires a tested runtime fix/upgrade or an
+application-level strategy. Do not weaken that check to manufacture a green
+suite.

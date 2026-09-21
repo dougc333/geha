@@ -192,7 +192,7 @@ def markdown(report: dict) -> str:
         "The gold file records every accepted chunk ID.", "",
         "The questions explicitly name a policy. Scores apply to these exact questions: the shorter "
         "`Is Treanda preferred?` query, for example, previously placed its table chunk fifth.", "",
-        "Gold labels were seeded from the existing `_table_openai.csv` preference tables and "
+        "Gold labels were originally seeded from legacy CSV preference tables; runtime table ingestion now uses reviewed HTML. "
         "cross-checked against the plain index's page-1 drug and code text where available. "
         "Datroway's two gold rows have no indexed page-1 text. Retain the "
         "source PDFs as the authority if a PDF is later revised.", "",

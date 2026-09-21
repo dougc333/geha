@@ -2,15 +2,15 @@
   "eval_file": "chunking_benchmarks_RAG/indication_specific_criteria_evals.json",
   "summary": {
     "cases": 26,
-    "passed": 26,
-    "failed": 0,
-    "pass_rate": 1.0,
-    "expected_source_at_rank_1": 26,
-    "expected_source_at_rank_1_rate": 1.0,
-    "expected_condition_returned": 26,
-    "expected_condition_returned_rate": 1.0,
-    "expected_answer_terms_returned": 26,
-    "expected_answer_terms_returned_rate": 1.0,
+    "passed": 24,
+    "failed": 2,
+    "pass_rate": 0.9230769230769231,
+    "expected_source_at_rank_1": 24,
+    "expected_source_at_rank_1_rate": 0.9230769230769231,
+    "expected_condition_returned": 24,
+    "expected_condition_returned_rate": 0.9230769230769231,
+    "expected_answer_terms_returned": 24,
+    "expected_answer_terms_returned_rate": 0.9230769230769231,
     "revision_history_excluded": 26,
     "revision_history_excluded_rate": 1.0,
     "by_condition": {
@@ -47,7 +47,7 @@
         "cases": 1
       },
       "Colon Cancer - Metastatic or Advanced": {
-        "passed": 1,
+        "passed": 0,
         "cases": 1
       },
       "Extensive Stage Small Cell Lung Cancer (SCLC)": {
@@ -71,7 +71,7 @@
         "cases": 1
       },
       "Follicular Lymphoma - Relapsed or Refractory (Grade 1, 2 or 3A)": {
-        "passed": 1,
+        "passed": 0,
         "cases": 1
       },
       "Chemotherapy-induced thrombocytopenia": {
@@ -157,7 +157,7 @@
       "id": "datroway_unresectable_or_metastatic_breast_cancer",
       "condition_id": null,
       "query": "Which policy lists unresectable or metastatic breast cancer as an indication-specific criterion for Datroway?",
-      "route": "semantic_table_rag",
+      "route": "condition_metadata",
       "expected_source": "geha-coverage-policy-datroway.pdf",
       "actual_source": "geha-coverage-policy-datroway.pdf",
       "expected_source_rank": 1,
@@ -279,19 +279,19 @@
       "query": "Which policy lists metastatic or advanced colon cancer as an indication-specific approval criterion?",
       "route": "semantic_table_rag",
       "expected_source": "geha-coverage-policy-fruzaqla.pdf",
-      "actual_source": "geha-coverage-policy-fruzaqla.pdf",
-      "expected_source_rank": 1,
+      "actual_source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+      "expected_source_rank": null,
       "expected_condition": "Colon Cancer - Metastatic or Advanced",
-      "actual_condition": "Colon Cancer - Metastatic or Advanced",
+      "actual_condition": null,
       "term_matches": {
-        "Colon Cancer - Metastatic or Advanced": true
+        "Colon Cancer - Metastatic or Advanced": false
       },
       "revision_history_excluded": true,
-      "source_pass": true,
-      "condition_pass": true,
-      "answer_pass": true,
+      "source_pass": false,
+      "condition_pass": false,
+      "answer_pass": false,
       "revision_pass": true,
-      "pass": true
+      "pass": false
     },
     {
       "id": "imdelltra_extensive_stage_sclc",
@@ -399,19 +399,19 @@
       "query": "Which policy lists relapsed or refractory follicular lymphoma as an indication-specific criterion?",
       "route": "semantic_table_rag",
       "expected_source": "geha-coverage-policy-lunsumio.pdf",
-      "actual_source": "geha-coverage-policy-lunsumio.pdf",
-      "expected_source_rank": 1,
+      "actual_source": "geha-coverage-policy-trastuzumab.pdf",
+      "expected_source_rank": null,
       "expected_condition": "Follicular Lymphoma - Relapsed or Refractory (Grade 1, 2 or 3A)",
-      "actual_condition": "Follicular Lymphoma - Relapsed or Refractory (Grade 1, 2 or 3A)",
+      "actual_condition": null,
       "term_matches": {
-        "Follicular Lymphoma - Relapsed or Refractory (Grade 1, 2 or 3A)": true
+        "Follicular Lymphoma - Relapsed or Refractory (Grade 1, 2 or 3A)": false
       },
       "revision_history_excluded": true,
-      "source_pass": true,
-      "condition_pass": true,
-      "answer_pass": true,
+      "source_pass": false,
+      "condition_pass": false,
+      "answer_pass": false,
       "revision_pass": true,
-      "pass": true
+      "pass": false
     },
     {
       "id": "nplate_chemotherapy_induced_thrombocytopenia",

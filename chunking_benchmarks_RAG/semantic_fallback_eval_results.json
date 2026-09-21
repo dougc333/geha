@@ -1,8 +1,8 @@
 {
   "eval_file": "/Users/dc/geha/chunking_benchmarks_RAG/semantic_fallback_evals.json",
   "cases": 10,
-  "passed": 8,
-  "failed": 2,
+  "passed": 6,
+  "failed": 4,
   "results": [
     {
       "id": "liquid_antibody_replacement",
@@ -76,8 +76,8 @@
       "expected_table": "Billing codes",
       "actual_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
       "actual_tables": [
-        "Billing codes",
-        "Drug preference and prior authorization"
+        "Drug preference and prior authorization",
+        "Billing codes"
       ],
       "docling_source_verified": true,
       "no_exact_billing_code": true,
@@ -108,16 +108,15 @@
       "query": "bone resorption inhibitor antibody injection billed at 1 mg",
       "expected_source": "geha-coverage-policy-xgeva.pdf",
       "expected_table": "Drug preference and prior authorization",
-      "actual_source": "geha-coverage-policy-xgeva.pdf",
+      "actual_source": "geha-coverage-policy-vectibix.pdf",
       "actual_tables": [
-        "Drug preference and prior authorization",
-        "Billing codes"
+        "0 / 1 / 2 / 3 / 4"
       ],
       "docling_source_verified": true,
       "no_exact_billing_code": true,
       "no_direct_policy_or_condition_match": true,
-      "full_parent_displayed": true,
-      "pass": true,
+      "full_parent_displayed": false,
+      "pass": false,
       "errors": []
     },
     {
@@ -125,16 +124,15 @@
       "query": "bone metastasis monoclonal antibody injection 1 mg",
       "expected_source": "geha-coverage-policy-xgeva.pdf",
       "expected_table": "Drug preference and prior authorization",
-      "actual_source": "geha-coverage-policy-xgeva.pdf",
+      "actual_source": "geha-coverage-policy-vectibix.pdf",
       "actual_tables": [
-        "Drug preference and prior authorization",
-        "Billing codes"
+        "0 / 1 / 2 / 3 / 4"
       ],
       "docling_source_verified": true,
       "no_exact_billing_code": true,
       "no_direct_policy_or_condition_match": true,
-      "full_parent_displayed": true,
-      "pass": true,
+      "full_parent_displayed": false,
+      "pass": false,
       "errors": []
     },
     {
@@ -142,7 +140,7 @@
       "query": "Which billing table describes a radiopharmaceutical injection measured at 200 millicuries?",
       "expected_source": "geha-coverage-policy-pluvicto.pdf",
       "expected_table": "Billing codes",
-      "actual_source": "geha-coverage-policy-elrexfio.pdf",
+      "actual_source": "geha-coverage-policy-gemcitabine.pdf",
       "actual_tables": [
         "Billing codes"
       ],

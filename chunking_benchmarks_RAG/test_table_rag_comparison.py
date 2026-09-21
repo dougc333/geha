@@ -14,12 +14,11 @@ from chunking_benchmarks_RAG.table_rag_comparison import (
 
 class TableRagComparisonTests(unittest.TestCase):
     def test_deterministic_extraction_normalizes_spacing_and_hyphens(self):
-        table = (
-            "Preference,Drug Name\n"
-            "Non - Preferred,Zarxio\n"
-            "Preferred,Nivestym\n"
-            "Non- Preferred,Neupogen\n"
-        )
+        table = [
+            {"Preference": "Non - Preferred", "Drug Name": "Zarxio"},
+            {"Preference": "Preferred", "Drug Name": "Nivestym"},
+            {"Preference": "Non- Preferred", "Drug Name": "Neupogen"},
+        ]
         self.assertEqual(extract_products(table, "Preferred"), ["Nivestym"])
         self.assertEqual(
             extract_products(table, "Non-Preferred"), ["Zarxio", "Neupogen"]

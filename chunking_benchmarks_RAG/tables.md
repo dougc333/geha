@@ -2,25 +2,25 @@
 
 17 policy PDFs contain at least one preferred row and at least one non-preferred row in the extracted table data.
 
-| Policy PDF | Extracted table CSV | Preferred | Non-preferred |
+| Policy PDF | Reviewed HTML object | Preferred | Non-preferred |
 |---|---|---:|---:|
-| `geha-coverage-policy-bendamustine.pdf` | `geha-coverage-policy-bendamustine_table_openai.csv` | 2 | 3 |
-| `geha-coverage-policy-bevacizumab.pdf` | `geha-coverage-policy-bevacizumab_table_openai.csv` | 1 | 7 |
-| `geha-coverage-policy-datroway.pdf` | `geha-coverage-policy-datroway_table_openai.csv` | 1 | 1 |
-| `geha-coverage-policy-erythropoietin-stimulating-agents.pdf` | `geha-coverage-policy-erythropoietin-stimulating-agents_table_openai.csv` | 2 | 2 |
-| `geha-coverage-policy-gemcitabine.pdf` | `geha-coverage-policy-gemcitabine_table_openai.csv` | 1 | 2 |
-| `geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf` | `geha-coverage-policy-gnrh-analogues-in-prostate-cancer_table_openai.csv` | 2 | 8 |
-| `geha-coverage-policy-long-acting-gcsfs.pdf` | `geha-coverage-policy-long-acting-gcsfs_table_openai.csv` | 2 | 8 |
-| `geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf` | `geha-coverage-policy-non-muscle-invasive-bladder-cancer_table_openai.csv` | 3 | 2 |
-| `geha-coverage-policy-paclitaxel-protein-bound.pdf` | `geha-coverage-policy-paclitaxel-protein-bound_table_openai.csv` | 3 | 1 |
-| `geha-coverage-policy-pemetrexed.pdf` | `geha-coverage-policy-pemetrexed_table_openai.csv` | 3 | 7 |
-| `geha-coverage-policy-rituximab.pdf` | `geha-coverage-policy-rituximab_table_openai.csv` | 1 | 4 |
-| `geha-coverage-policy-rytelo.pdf` | `geha-coverage-policy-rytelo_table_openai.csv` | 1 | 1 |
-| `geha-coverage-policy-short-acting-gcsfs.pdf` | `geha-coverage-policy-short-acting-gcsfs_table_openai.csv` | 1 | 4 |
-| `geha-coverage-policy-taxotere-docivyx.pdf` | `geha-coverage-policy-taxotere-docivyx_table_openai.csv` | 2 | 1 |
-| `geha-coverage-policy-trastuzumab.pdf` | `geha-coverage-policy-trastuzumab_table_openai.csv` | 2 | 6 |
-| `geha-coverage-policy-vectibix.pdf` | `geha-coverage-policy-vectibix_table_openai.csv` | 1 | 1 |
-| `geha-coverage-policy-xgeva.pdf` | `geha-coverage-policy-xgeva_table_openai.csv` | 1 | 12 |
+| `geha-coverage-policy-bendamustine.pdf` | `html_tables/geha-coverage-policy-bendamustine_bendamustine-belrapzo-bendeka-treanda-vivimusta.html` | 2 | 3 |
+| `geha-coverage-policy-bevacizumab.pdf` | `html_tables/geha-coverage-policy-bevacizumab_bevacizumab-and-zaltrap.html` | 1 | 7 |
+| `geha-coverage-policy-datroway.pdf` | `html_tables/geha-coverage-policy-datroway_datroway-datopotamab-deruxtecan-dink.html` | 1 | 1 |
+| `geha-coverage-policy-erythropoietin-stimulating-agents.pdf` | `html_tables/geha-coverage-policy-erythropoietin-stimulating-agents_erythropoietin-stimulating-agents.html` | 2 | 2 |
+| `geha-coverage-policy-gemcitabine.pdf` | `html_tables/geha-coverage-policy-gemcitabine_gemcitabine.html` | 1 | 2 |
+| `geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf` | `html_tables/geha-coverage-policy-gnrh-analogues-in-prostate-cancer_gonadotropin-releasing-hormone-gnrh-analogues-in-prostate-cancer.html` | 2 | 8 |
+| `geha-coverage-policy-long-acting-gcsfs.pdf` | `html_tables/geha-coverage-policy-long-acting-gcsfs_long-acting-gcsfs.html` | 2 | 8 |
+| `geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf` | `html_tables/geha-coverage-policy-non-muscle-invasive-bladder-cancer_non-muscle-invasive-bladder-cancer.html` | 3 | 2 |
+| `geha-coverage-policy-paclitaxel-protein-bound.pdf` | `html_tables/geha-coverage-policy-paclitaxel-protein-bound_paclitaxel-protein-bound-abraxane.html` | 3 | 1 |
+| `geha-coverage-policy-pemetrexed.pdf` | `html_tables/geha-coverage-policy-pemetrexed_pemetrexed-alimta-pemfexy-pemrydi-rtu.html` | 3 | 7 |
+| `geha-coverage-policy-rituximab.pdf` | `html_tables/geha-coverage-policy-rituximab_rituximab-riabni-rituxan-rituxan-hycela-ruxience-truxima.html` | 1 | 4 |
+| `geha-coverage-policy-rytelo.pdf` | `html_tables/geha-coverage-policy-rytelo_rytelo-imetelstat.html` | 1 | 1 |
+| `geha-coverage-policy-short-acting-gcsfs.pdf` | `html_tables/geha-coverage-policy-short-acting-gcsfs_short-acting-gcsfs.html` | 1 | 4 |
+| `geha-coverage-policy-taxotere-docivyx.pdf` | `html_tables/geha-coverage-policy-taxotere-docivyx_taxotere-docivyx-docetaxel.html` | 2 | 1 |
+| `geha-coverage-policy-trastuzumab.pdf` | `html_tables/geha-coverage-policy-trastuzumab_trastuzumab-herceptin-herceptin-hylecta-hercessi-herzuma-kanjinti-ogivri-ontruzant-trazime.html` | 2 | 6 |
+| `geha-coverage-policy-vectibix.pdf` | `html_tables/geha-coverage-policy-vectibix_vectibix-panitumumab.html` | 1 | 1 |
+| `geha-coverage-policy-xgeva.pdf` | `html_tables/geha-coverage-policy-xgeva_xgeva-denosumab.html` | 1 | 12 |
 
 ## Evaluation coverage
 

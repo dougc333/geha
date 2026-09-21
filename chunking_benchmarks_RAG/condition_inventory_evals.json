@@ -1,0 +1,46 @@
+{
+  "purpose": "Evaluate corpus-wide condition inventory routing, filtering, and requested grouping without calling an LLM.",
+  "cases": [
+    {
+      "id": "all_documented_conditions",
+      "query": "List every documented condition.",
+      "expected_route": "condition_inventory",
+      "preferred_only": false,
+      "expected_grouping": "condition",
+      "expected_unique_conditions": 24,
+      "expected_source_policies": 19,
+      "required_terms": [
+        "Policy conditions",
+        "Multiple Myeloma (MM)",
+        "Biliary Tract Cancer (BTC)"
+      ]
+    },
+    {
+      "id": "conditions_with_preferred_treatments",
+      "query": "Which conditions have preferred treatments?",
+      "expected_route": "condition_inventory",
+      "preferred_only": true,
+      "expected_grouping": "condition",
+      "expected_unique_conditions": 7,
+      "expected_source_policies": 4,
+      "required_terms": [
+        "Conditions with preferred treatments in the same policy",
+        "Chemotherapy Induced Anemia",
+        "Hypercalcemia of malignancy"
+      ]
+    },
+    {
+      "id": "conditions_grouped_by_policy",
+      "query": "Show conditions grouped by policy.",
+      "expected_route": "condition_inventory",
+      "preferred_only": false,
+      "expected_grouping": "policy",
+      "expected_unique_conditions": 24,
+      "expected_source_policies": 19,
+      "required_terms": [
+        "geha-coverage-policy-cyramza.pdf",
+        "geha-coverage-policy-nplate.pdf"
+      ]
+    }
+  ]
+}

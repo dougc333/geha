@@ -1,0 +1,65 @@
+{
+  "eval_file": "/Users/dc/geha/chunking_benchmarks_RAG/condition_inventory_evals.json",
+  "summary": {
+    "cases": 3,
+    "passed": 2,
+    "failed": 1,
+    "pass_rate": 0.6666666666666666
+  },
+  "results": [
+    {
+      "id": "all_documented_conditions",
+      "query": "List every documented condition.",
+      "expected_route": "condition_inventory",
+      "expected_grouping": "condition",
+      "actual_grouping": "condition",
+      "actual_unique_conditions": 24,
+      "actual_source_policies": 19,
+      "checks": {
+        "route": true,
+        "preferred_filter": true,
+        "grouping": true,
+        "unique_conditions": true,
+        "source_policies": true,
+        "required_terms": true
+      },
+      "pass": true
+    },
+    {
+      "id": "conditions_with_preferred_treatments",
+      "query": "Which conditions have preferred treatments?",
+      "expected_route": "condition_inventory",
+      "expected_grouping": "condition",
+      "actual_grouping": "condition",
+      "actual_unique_conditions": 7,
+      "actual_source_policies": 4,
+      "checks": {
+        "route": true,
+        "preferred_filter": true,
+        "grouping": true,
+        "unique_conditions": true,
+        "source_policies": true,
+        "required_terms": true
+      },
+      "pass": true
+    },
+    {
+      "id": "conditions_grouped_by_policy",
+      "query": "Show conditions grouped by policy.",
+      "expected_route": "condition_inventory",
+      "expected_grouping": "policy",
+      "actual_grouping": "condition",
+      "actual_unique_conditions": 24,
+      "actual_source_policies": 19,
+      "checks": {
+        "route": true,
+        "preferred_filter": true,
+        "grouping": false,
+        "unique_conditions": true,
+        "source_policies": true,
+        "required_terms": true
+      },
+      "pass": false
+    }
+  ]
+}

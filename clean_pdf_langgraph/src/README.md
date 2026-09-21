@@ -116,3 +116,20 @@ cd /Users/dc/geha/clean_pdf_langgraph
 Only `--approve` invokes the OpenAI Responses API with `store=False`. Source-page
 PNGs and extracted HTML table text leave the machine in that mode. The older
 `cleaning_graph.py` remains separate and does not generate the combined HTML.
+
+## Local slideshow
+
+Use the local slideshow to cycle through source PDF-page PNGs and Docling HTML
+tables side by side every three seconds. It does not call an external service.
+
+```bash
+cd /Users/dc/geha/clean_pdf_langgraph
+/Users/dc/geha/.venv/bin/python artifact_slideshow.py --policy ziihera
+```
+
+Open `http://127.0.0.1:8765/`. Use `--recursive` to include artifacts inside
+`review_runs`, `--interval` to change the delay, or `--port` to select another
+local port. The viewer also provides pause, previous, and next controls. If the
+selected policy has no existing artifacts, the command creates them locally in
+`slideshow_cache/<pdf-stem>/` with vision disabled; this preparation makes no
+OpenAI request.

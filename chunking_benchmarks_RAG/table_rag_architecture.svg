@@ -43,7 +43,7 @@
   <line x1="100" y1="217" x2="290" y2="217" stroke="#c47b12"/>
   <line x1="165" y1="190" x2="165" y2="272" stroke="#c47b12"/>
   <line x1="229" y1="190" x2="229" y2="272" stroke="#c47b12"/>
-  <text x="100" y="298" class="small">*_table_openai.csv</text>
+  <text x="100" y="298" class="small">html_tables/*.html</text>
 
   <rect x="400" y="120" width="270" height="165" class="box"/>
   <text x="425" y="160" class="title">Table parser</text>
@@ -100,7 +100,7 @@
   <text x="1058" y="530" class="body">complete parent tables, keyed by id</text>
   <rect x="1060" y="558" width="550" height="80" fill="#fff0ce" stroke="#c47b12"/>
   <text x="1080" y="586" class="mono">id · source · table_number · title</text>
-  <text x="1080" y="615" class="mono">full_csv · rows_json</text>
+  <text x="1080" y="615" class="mono">full_html · rows_json</text>
   <text x="1058" y="658" class="small">full table is never split for LLM context</text>
 
   <path d="M1450 325 L1450 410 L820 410 L820 455" class="line"/>
@@ -130,7 +130,7 @@
 
   <rect x="1180" y="775" width="310" height="195" class="orangeBox"/>
   <text x="1205" y="818" class="title">Fetch parent</text>
-  <text x="1205" y="852" class="body">retrieve full_csv using</text>
+  <text x="1205" y="852" class="body">retrieve full_html using</text>
   <text x="1205" y="880" class="body">the winning table_id</text>
   <text x="1205" y="918" class="label orange">whole table, intact</text>
 
@@ -149,7 +149,7 @@
   <path d="M1100 872 L1180 872" class="orangeLine"/>
   <text x="1108" y="850" class="label orange">table_id</text>
   <path d="M1335 775 L1335 675" class="orangeLine"/>
-  <text x="1350" y="730" class="label orange">fetch full_csv</text>
+  <text x="1350" y="730" class="label orange">fetch full_html</text>
   <path d="M1490 825 L1550 805" class="greenLine"/>
   <path d="M1490 915 L1550 950" class="greenLine"/>
 

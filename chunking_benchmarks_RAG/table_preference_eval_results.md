@@ -1,6 +1,6 @@
 # Preferred and non-preferred table evaluation results
 
-Generated: `2026-09-14T00:01:20.689456+00:00`
+Generated: `2026-09-20T20:25:20.785201+00:00`
 
 This report covers 34 queries across 17 policy preference tables. Answers are extracted deterministically from the top retrieved table, so these results isolate retrieval and table interpretation without an LLM grader.
 

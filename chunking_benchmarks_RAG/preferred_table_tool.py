@@ -36,7 +36,7 @@ def find_preferred_policy_tables(
     for table in candidates:
         if is_revision_table(table["title"]):
             continue
-        preferred = preferred_products(table["full_csv"])
+        preferred = preferred_products(table["rows_json"])
         if not preferred:
             continue
         matches.append(
@@ -46,7 +46,8 @@ def find_preferred_policy_tables(
                 "table_title": table["title"],
                 "explicit_conditions": list(table.get("conditions_json") or []),
                 "preferred_products": preferred,
-                "full_table_csv": table["full_csv"],
+                "full_table_html": table["full_html"],
+                "rows": table["rows_json"],
             }
         )
 

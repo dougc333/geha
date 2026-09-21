@@ -15,11 +15,15 @@ def _review_worker(pipe, base: str, db: str, action: str) -> None:
     try:
         with workflow(Path(db), Path(base)) as graph:
             original_get_state = graph.get_state
+            barrier_reached = False
 
             def synchronized_get_state(*args, **kwargs):
+                nonlocal barrier_reached
                 snapshot = original_get_state(*args, **kwargs)
-                pipe.send(("ready", snapshot.next))
-                pipe.recv()
+                if not barrier_reached:
+                    barrier_reached = True
+                    pipe.send(("ready", snapshot.next))
+                    pipe.recv()
                 return snapshot
 
             graph.get_state = synchronized_get_state
@@ -79,8 +83,12 @@ def run_concurrency_demo() -> dict:
             "accepted_count": accepted,
             "final_review": final.values.get("review"),
             "race_detected": accepted > 1,
-            "required_production_control": (
-                "cross-process lock or transactional compare-and-set plus idempotency key"
+            "local_control": (
+                "SQLite sibling-file lock plus a second saved-state check and "
+                "persistent request id"
+            ),
+            "distributed_replacement": (
+                "PostgreSQL transaction/advisory lock or transactional compare-and-set"
             ),
         }
 

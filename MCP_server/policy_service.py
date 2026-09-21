@@ -12,7 +12,6 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
-
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 MAX_QUERY_LENGTH = 500
 MAX_TABLE_CHARS = 100_000
@@ -25,8 +24,11 @@ def _backend():
 
     if str(PROJECT_ROOT) not in sys.path:
         sys.path.insert(0, str(PROJECT_ROOT))
-    from chunking_benchmarks_RAG import billing_code_data, medical_claims_advisor
-    from chunking_benchmarks_RAG import table_rag
+    from chunking_benchmarks_RAG import (
+        billing_code_data,
+        medical_claims_advisor,
+        table_rag,
+    )
 
     return billing_code_data, medical_claims_advisor, table_rag
 
@@ -118,7 +120,7 @@ class PolicyService:
         with rag.connect(self.database_url) as connection:
             table = connection.execute(
                 """
-                SELECT source, table_number, title, full_csv, conditions_json
+                SELECT source, table_number, title, full_html, rows_json, conditions_json
                 FROM policy_tables
                 WHERE source = %s AND table_number = %s
                 """,
@@ -126,7 +128,7 @@ class PolicyService:
             ).fetchone()
         if table is None:
             raise ValueError("No indexed table for that source and table number")
-        if len(table["full_csv"]) > MAX_TABLE_CHARS:
+        if len(table["full_html"]) > MAX_TABLE_CHARS:
             raise ValueError("Indexed table exceeds the MCP response limit")
         sections = advisor.retrieve_policy_sections(
             self.database_url, source_pdf, question
@@ -137,7 +139,8 @@ class PolicyService:
             "source_pdf": source_pdf,
             "table_number": table_number,
             "table_title": table["title"],
-            "table_csv": table["full_csv"],
+            "table_html": table["full_html"],
+            "rows": list(table.get("rows_json") or []),
             "conditions": list(table.get("conditions_json") or []),
             "criteria_sections": sections,
             "note": (

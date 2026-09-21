@@ -93,8 +93,8 @@ def run_evaluation(
                 parent
                 and len(rows) > 1
                 and any(child != sibling for child in child_rows for sibling in sibling_rows)
-                and case["child_term"].casefold() in parent["full_csv"].casefold()
-                and case["sibling_term"].casefold() in parent["full_csv"].casefold()
+                and case["child_term"].casefold() in parent["full_html"].casefold()
+                and case["sibling_term"].casefold() in parent["full_html"].casefold()
             )
             passed = source_verified and parent_rank is not None and child_rank is not None and complete_parent
             results.append({

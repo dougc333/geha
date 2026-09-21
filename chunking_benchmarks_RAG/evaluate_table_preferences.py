@@ -3,8 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import csv
-import io
 import json
 import os
 import re
@@ -13,7 +11,6 @@ from pathlib import Path
 from typing import Any
 
 from dotenv import load_dotenv
-
 from table_rag import (
     DEFAULT_DATABASE_URL,
     DEFAULT_EMBEDDING_MODEL,
@@ -27,38 +24,18 @@ def normalized(value: str) -> str:
     return re.sub(r"[^a-z0-9]", "", value.casefold())
 
 
-def extract_products(full_csv: str, preference: str) -> list[str]:
+def extract_products(rows_json: list[dict[str, Any]], preference: str) -> list[str]:
     """Extract products with a preference label from a retrieved parent table."""
-    rows = list(csv.reader(io.StringIO(full_csv)))
     target = normalized(preference)
-    for header_index, header in enumerate(rows):
-        normalized_header = [normalized(cell) for cell in header]
-        if "preference" not in normalized_header:
+    products: list[str] = []
+    for record in rows_json:
+        row = {normalized(key): str(value or "").strip() for key, value in record.items()}
+        if normalized(row.get("preference", "")) != target:
             continue
-        preference_index = normalized_header.index("preference")
-        name_index = next(
-            (
-                index
-                for index, value in enumerate(normalized_header)
-                if value in {"drugname", "name"}
-            ),
-            None,
-        )
-        if name_index is None:
-            continue
-
-        products: list[str] = []
-        for row in rows[header_index + 1 :]:
-            if not row or all(not cell.strip() for cell in row):
-                break
-            if max(preference_index, name_index) >= len(row):
-                continue
-            if normalized(row[preference_index]) == target:
-                product = row[name_index].strip()
-                if product and product not in products:
-                    products.append(product)
-        return products
-    return []
+        product = row.get("drugname") or row.get("name") or ""
+        if product and product not in products:
+            products.append(product)
+    return products
 
 
 def score_products(actual: list[str], expected: list[str]) -> dict[str, Any]:
@@ -128,7 +105,7 @@ def run_evaluation(
             )
             top_result = retrieved[0] if retrieved else None
             actual_products = (
-                extract_products(top_result["full_csv"], case["preference"])
+                extract_products(top_result["rows_json"], case["preference"])
                 if top_result
                 else []
             )

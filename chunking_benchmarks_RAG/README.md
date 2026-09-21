@@ -1,5 +1,74 @@
 # Table-Aware Coverage Policy RAG
 
+## Evaluation coverage: 11 case families
+
+The project currently tracks eleven evaluation case families. Nine have
+dedicated active JSON datasets. The general-policy TF-IDF family has unit tests
+and five legacy fixtures that are not connected to an end-to-end runner. The
+combined Streamlit-backend family is an aggregate regression run and reuses the
+56 cases from the indication-specific and secondary-condition datasets; it does
+not add 56 new cases.
+
+| # | Case family | Cases passed / failed | Dataset or test | Primary code path |
+| ---: | --- | --- | --- | --- |
+| 1 | Exact billing-code lookup | 116 / 0 unique queries; 124 source-table expectations | [`billing_code_evals.json`](billing_code_evals.json) | `billing_code_data.requested_billing_codes` -> `medical_claims_advisor.retrieve_billing_code_matches` |
+| 2 | Preferred/non-preferred table retrieval | 28 / 6 exact top-table answers; source rank 1 is 31 / 3 | [`table_preference_evals.json`](table_preference_evals.json) | `table_rag.retrieve_tables` -> deterministic preference-row extraction |
+| 3 | Parent-child table retrieval | 11 / 1; all 11 successful expected parents rank first | [`parent_child_retrieval_evals.json`](parent_child_retrieval_evals.json) | embedded child row -> `table_id` -> complete parent table |
+| 4 | Indication-specific approval criteria | 24 / 2 | [`indication_specific_criteria_evals.json`](indication_specific_criteria_evals.json) | named condition lookup -> `retrieve_policy_sections` -> grounded policy summary |
+| 5 | Focused policy-section retrieval | 12 / 0 query cases | [`policy_section_evals.json`](policy_section_evals.json) | direct drug/condition lookup -> indication and universal criteria chunks |
+| 6 | Policy-name section retrieval | 32 / 0 query cases | [`policy_name_section_evals.json`](policy_name_section_evals.json) | direct policy/source lookup -> exact section list |
+| 7 | Secondary-condition routing | 30 / 0 | [`secondary_condition_evals.json`](secondary_condition_evals.json) | approved alias metadata -> direct condition match or semantic fallback |
+| 8 | Name-free semantic fallback | 6 / 4 | [`semantic_fallback_evals.json`](semantic_fallback_evals.json) | no billing/direct-name match -> `retrieve_claims_evidence` -> parent-child TableRAG |
+| 9 | Corpus-wide condition inventory | 2 / 1 | [`condition_inventory_evals.json`](condition_inventory_evals.json) | `condition_inventory` -> optional preferred filter -> formatter |
+| 10 | General-policy TF-IDF search | no active end-to-end result; 3 / 0 unit tests | five legacy cases in [`eval.json`](eval.json) are not wired to a runner | `tfidf_policy_search.py` |
+| 11 | Combined Streamlit condition backend | 54 / 2 aggregate cases | reuses the 26 cases in #4 and 30 cases in #7 | the same routing and formatting functions called by `medical_claims_advisor_ui.py` |
+
+The two policy-section datasets (#5 and #6) pass all 44 query cases, but their
+shared evaluator currently fails two additional suite-level integrity checks:
+the indexed corpus differs from the expected source/chunk inventory, and the
+nested stored-only medical-necessity document is missing its expected section
+records. Those failures are not counted as query cases in the table.
+
+### Known evaluation failures
+
+- Preferred/non-preferred retrieval has six exact-answer failures:
+  `gemcitabine_preferred`,
+  `gnrh_analogues_in_prostate_cancer_preferred`,
+  `long_acting_gcsfs_preferred`,
+  `long_acting_gcsfs_non_preferred`,
+  `short_acting_gcsfs_preferred`, and
+  `short_acting_gcsfs_non_preferred`.
+- Parent-child retrieval fails `rytelo_preference`; the expected Rytelo parent
+  and child row are absent from the configured top candidates.
+- Indication-specific routing has two semantic-fallback failures:
+  `fruzaqla_metastatic_or_advanced_colon_cancer` retrieves Non-Muscle Invasive
+  Bladder Cancer instead of Fruzaqla, and `lunsumio_follicular_lymphoma`
+  retrieves Trastuzumab instead of Lunsumio. These are the same two failures in
+  the combined Streamlit-backend result, not two additional cases.
+- Semantic fallback has four failures:
+  `bone_resorption_inhibitor` and `bone_metastasis_antibody` retrieve Vectibix
+  instead of Xgeva; `radiopharmaceutical_200_millicuries` retrieves Gemcitabine
+  instead of Pluvicto; and `platelet_growth_factor_one_microgram` retrieves
+  Infertility Services instead of Nplate.
+- Condition inventory fails `conditions_grouped_by_policy` because the current
+  formatter groups policies beneath conditions instead of conditions beneath
+  policies.
+- Policy-section query retrieval passes 44/44, but the suite fails its corpus
+  inventory and nested stored-only-document checks as described above.
+
+Across the nine active datasets there are 283 stored case definitions. Do not
+add the 56 combined-backend cases to that number because they duplicate #4 and
+#7. The latest result artifacts are the source of truth for detailed failures:
+`streamlit_billing_code_eval_results.json`,
+`table_preference_eval_results.json`,
+`parent_child_retrieval_eval_results.json`,
+`indication_specific_backend_eval_results.json`,
+`policy_section_eval_results.json`,
+`secondary_condition_eval_results.json`,
+`semantic_fallback_eval_results.json`,
+`condition_inventory_eval_results.json`, and
+`streamlit_backend_eval_results.json`.
+
 ## Postgres RAG reliability features not in Chroma
 
 PostgreSQL enforces the integrity of this parent-child RAG index at the database level:
@@ -62,9 +131,23 @@ Complete parent table
    +--> ask: OpenAI answer with source and table citation
 ```
 
-## Semantic search implementation
+## Semantic fallback: embedding and cosine search
 
-Semantic search is implemented locally with Sentence Transformers and PostgreSQL `pgvector`; it does not require an LLM. During ingestion, explicit condition headings are extracted from each policy's `.docling.md` section between `Indication Specific Criteria` and `Universal Approval Criteria`. Every normalized table row is then converted into text containing those conditions, its source filename, inferred table title, column names, and nonempty cell values. `BAAI/bge-small-en-v1.5` encodes that text as a normalized 384-dimensional vector, which is stored in `policy_table_vectors` and linked to the complete table in `policy_tables`.
+Semantic search is the application's fallback retrieval path, implemented locally
+with Sentence Transformers and PostgreSQL `pgvector`; it does not require an
+LLM. Before using this fallback, the Streamlit Medical Claims Advisor checks
+deterministic routes for an exact billing code, a corpus-wide condition-inventory
+request, and direct policy-name, drug-name, documented-condition, or approved
+condition-alias matches. Only a question that is not resolved by those routes is
+encoded and sent to parent-child vector retrieval.
+
+During ingestion, explicit condition headings are extracted from each policy's
+`.docling.md` section between `Indication Specific Criteria` and `Universal
+Approval Criteria`. Every normalized table row is then converted into text
+containing those conditions, its source filename, inferred table title, column
+names, and nonempty cell values. `BAAI/bge-small-en-v1.5` encodes that text as a
+normalized 384-dimensional vector, which is stored in `policy_table_vectors` and
+linked to the complete table in `policy_tables`.
 
 The extracted condition list and the original indication-section text are stored on each parent table as `conditions_json` and `indication_context`. Policies that do not explicitly enumerate an indication retain an empty list; the pipeline does not guess conditions from the drug name or outside knowledge.
 
@@ -94,7 +177,11 @@ Question --> normalized query embedding
         complete parent tables
 ```
 
-The current retriever is semantic-only: it does not yet combine vector similarity with PostgreSQL full-text search, BM25, exact procedure-code matching, or a separate reranker. The optional `ask` command runs only after retrieval and does not affect which tables are selected.
+The `table_rag.retrieve_tables` fallback is vector-only: it does not combine
+cosine similarity with PostgreSQL full-text search, BM25, or a separate
+reranker. Exact billing-code matching is a separate deterministic route, not a
+component of vector ranking. The optional `ask` command runs only after
+retrieval and does not affect which route or tables are selected.
 
 ## Requirements
 
@@ -102,9 +189,12 @@ The current retriever is semantic-only: it does not yet combine vector similarit
 - Docker with Compose
 - [`uv`](https://docs.astral.sh/uv/)
 - An OpenAI API key for the optional `ask` command
-- Text-layer PDFs and extracted table files named `*_table_openai.csv`
+- Text-layer PDFs and reviewed, one-table-per-file HTML artifacts under
+  `downloads/coverage-policies/html_tables/`
 
-The CSV extractor places multiple tables in one file and separates them with two blank rows.
+Each HTML artifact carries its source PDF, table number, page, heading, and a
+semantic table. Ingestion stores HTML as parent evidence and parsed JSONB rows
+for deterministic filtering and child embeddings.
 
 ## Setup
 
@@ -267,7 +357,7 @@ before publishing or ingesting anything.
 ```bash
 cd /Users/dc/geha
 uv sync --frozen
-uv run python -m chunking_benchmarks_RAG.policy_review_graph \
+uv run python -m chunking_benchmarks_RAG.ocr_pipeline.policy_review_graph \
   geha-coverage-policy-ziihera.pdf
 ```
 
@@ -283,7 +373,7 @@ source file or share it in chat.
 
 ```bash
 cd /Users/dc/geha
-uv run python -m chunking_benchmarks_RAG.policy_review_graph \
+uv run python -m chunking_benchmarks_RAG.ocr_pipeline.policy_review_graph \
   geha-coverage-policy-ziihera.pdf --vision-model gpt-4.1-mini
 ```
 
@@ -306,19 +396,17 @@ numeric-header artifact, the graph applies only the deterministic header-row
 repair to staged HTML and runs one more comparison; all other discrepancies
 go to human review. It never promotes an extract or writes to PostgreSQL.
 
-Regenerate the CSV inputs directly from the PDFs' embedded text layer when needed:
+Regenerate HTML inputs into a staging directory and visually review them before
+replacing the published `html_tables/` artifacts:
 
 ```bash
-uv run python chunking_benchmarks_RAG/extract_pdf_tables.py \
+uv run python chunking_benchmarks_RAG/extract_pdf_tables_html.py \
   /Users/dc/geha/downloads/coverage-policies \
-  --overwrite \
-  --summary /Users/dc/geha/chunking_benchmarks_RAG/table_extraction_summary.json
+  --output-dir /Users/dc/geha/downloads/coverage-policies/html_tables_staging
 ```
 
-The extractor configures Docling with `do_ocr = False`. An image-only PDF is
-reported as an error instead of invoking Tesseract or another OCR engine. The
-historical `_table_openai.csv` suffix is retained for compatibility with the
-existing index and evaluation data; extraction itself does not call OpenAI.
+The extractor first uses embedded PDF text with OCR disabled, then uses the
+configured table OCR fallback when needed. Extraction does not call OpenAI.
 
 Then load the extracted tables:
 
@@ -327,14 +415,26 @@ uv run python chunking_benchmarks_RAG/table_rag.py ingest \
   /Users/dc/geha/downloads/coverage-policies
 ```
 
-Ingestion is repeatable. Existing tables with the same source filename and table number are updated, and their condition-aware child vectors are rebuilt. Run `init-db` once after upgrading an existing database so the condition metadata columns are added before re-ingestion.
+Ingestion is repeatable for files present in the selected directory. Existing
+tables with the same source filename and table number are updated, and their
+condition-aware child vectors are rebuilt. Run `init-db` once after upgrading
+an existing database so `full_html` is added and the legacy `full_csv` column
+is dropped, then run `ingest` to rebuild every parent table and child vector.
 
-The same `ingest` command also loads all 35 `*.docling_chunks.md` files into
-`policy_chunks`, including the nested medical-necessity-review document. Chunk
-labels come from indication headings in the matching `.docling.md`; billing,
-references, disclaimers, and revision history are retained for traceability
-but are not returned as approval criteria. Universal approval criteria remain
+The `ingest` command reads reviewed table objects only from the selected input
+directory's `html_tables/` child and does not recurse into
+`aa_source_not_consistent/` or `extraction_review/`. The current corpus contains
+52 reviewed HTML table objects across 32 policy PDFs, plus 32 `.docling.md` and
+32 `.docling_chunks.md` files. The same command loads those top-level chunk
+files into `policy_chunks`. Billing,
+references, disclaimers, and revision history are retained for traceability but
+are not returned as approval criteria. Universal approval criteria remain
 linked to their own source policy. These chunks are not embedded in pgvector.
+
+Nested documents, including the stored-only medical-necessity-review document,
+are not loaded by this command. They require an explicit ingestion design before
+they can be included; the current policy-section corpus-integrity evaluation
+keeps this omission visible as a failure.
 
 To add only the new policy-section tables to an existing database without
 rebuilding table-row embeddings, run:
@@ -352,7 +452,11 @@ criteria in an expandable section. A query naming one documented condition
 displays that indication section instead. Preferred and non-preferred lists
 still come only from extracted preference tables, not from criteria text.
 
-The current sample corpus produces 103 parent tables and 691 searchable child rows from 35 extracted CSV files.
+A clean ingestion of the current 32 top-level CSV files produces 54 parent
+tables and 251 searchable child rows after revision-history tables are excluded.
+An existing database can contain additional stale sources because ingestion
+updates present sources but does not delete every source absent from the input
+directory; use the corpus-integrity evaluation to detect that drift.
 
 ## Retrieve a complete table locally
 
@@ -557,162 +661,15 @@ retrieval failures are not mistaken for LLM interpretation failures.
 ## Run tests
 
 ```bash
-uv run python -m unittest -v chunking_benchmarks_RAG/test_table_rag.py
-uv run python -m unittest -v chunking_benchmarks_RAG/test_table_rag_comparison.py
-uv run python -m py_compile chunking_benchmarks_RAG/table_rag.py
-```
-
-The unit tests cover table separation, uneven-row normalization, and inferred table titles.
-
-## Preference evaluation set
-
-[`table_preference_evals.json`](table_preference_evals.json) contains one preferred query and one non-preferred query for every qualifying policy. Each case records the expected source, table title, preference class, and all expected drug-name phrases.
-
-[`tables.md`](tables.md) lists the qualifying PDFs and row counts. The current suite contains 34 cases across 17 policy documents. Detailed per-query rankings and product comparisons are in [`table_preference_eval_results.md`](table_preference_eval_results.md).
-
-| Measurement | Correct | Accuracy | Error rate |
-| --- | ---: | ---: | ---: |
-| Expected source at top 1 | 31/34 | 91.2% | 8.8% |
-| Expected source within top 3 | 33/34 | 97.1% | 2.9% |
-| Expected source within top 5 | 34/34 | 100.0% | 0.0% |
-| Exact table at top 1 | 28/34 | 82.4% | 17.6% |
-| Exact table within top 3 | 32/34 | 94.1% | 5.9% |
-| Exact table within top 5 | 33/34 | 97.1% | 2.9% |
-| Exact product-list match from the top table | 28/34 | 82.4% | 17.6% |
-
-Error rate is `1 - accuracy`. Product answers are extracted deterministically from the top retrieved table, without an LLM, so the table reports retrieval and table-interpretation errors rather than generation or hallucination errors.
-
-Run the complete local comparison:
-
-```bash
-cd /Users/dc/geha/chunking_benchmarks_RAG
-uv run python evaluate_table_preferences.py
-```
-
-The evaluator records the top-five tables and similarity scores for every query, compares the expected and retrieved table, and extracts the requested products from the top result without calling an LLM. It writes:
-
-- `table_preference_eval_results.md`: readable comparison of all 34 cases
-- `table_preference_eval_results.json`: complete machine-readable results
-
-## Secondary-condition policy evals
-
-[`secondary_condition_evals.json`](secondary_condition_evals.json) tests the ten
-manually verified secondary conditions in [`qc3.txt`](qc3.txt). It contains
-three natural-language query variants per condition (30 cases total), including
-questions such as `Is anemia covered when undergoing chemotherapy?`.
-
-[`condition_aliases.json`](condition_aliases.json) stores the corresponding
-human-approved canonical conditions, aliases, required concept groups, and
-source-policy relationships. The advisor checks this versioned metadata before
-falling back to extracted-condition matching or semantic TableRAG. These aliases
-are not OpenAI output and are not embedded in pgvector.
-
-Each case declares the expected source policy, normalized condition label,
-answer terms, maximum source rank, and whether revision-history tables must be
-excluded. The evaluator uses the same deterministic condition-metadata routing,
-semantic TableRAG fallback, and policy-summary formatter as the Streamlit app.
-It does not call OpenAI.
-
-With the pgvector database running, execute:
-
-```bash
 cd /Users/dc/geha
-uv run python chunking_benchmarks_RAG/evaluate_secondary_conditions.py \
-  --output chunking_benchmarks_RAG/secondary_condition_eval_results.json
+uv run python -m unittest discover -v chunking_benchmarks_RAG
 ```
 
-The report separates four checks:
-
-- expected policy source ranks first;
-- expected condition is returned;
-- required grounded answer terms are present; and
-- revision-history tables are not displayed as evidence.
-
-A case passes end to end only when all four checks pass. This distinction makes
-it clear whether a failure came from retrieval, condition metadata, or response
-formatting.
-
-| Measurement | Before approved aliases | After approved aliases |
-| --- | ---: | ---: |
-| Expected policy source at rank one | 19/30 (63.3%) | 30/30 (100.0%) |
-| Complete response passed | 12/30 (40.0%) | 30/30 (100.0%) |
-| Revision-history filtering passed | 30/30 (100.0%) | 30/30 (100.0%) |
-
-The after-alias measurement is stored in
-[`secondary_condition_eval_results.json`](secondary_condition_eval_results.json).
-
-## Combined Streamlit-backend condition evals
-
-The combined runner executes both condition fixture sets through the same
-condition routing, semantic TableRAG fallback, and policy-summary functions used
-by the Streamlit application:
-
-```bash
-cd /Users/dc/geha
-uv run python chunking_benchmarks_RAG/evaluate_streamlit_backend.py
-```
-
-It evaluates 56 queries: 26 indication-specific condition-to-policy cases from
-`indication_specific_criteria_evals.json` and 30 secondary-condition semantic
-queries from `secondary_condition_evals.json`. It does not call OpenAI or write
-to PostgreSQL. Results are written to `streamlit_backend_eval_results.json`.
-
-## Parent-child table retrieval evals
-
-The Docling-grounded cases in `parent_child_retrieval_evals.json` test semantic
-row retrieval while treating the complete policy table as the returned evidence
-unit. Each case checks the cited Docling row, the indexed child-row hit, the
-linked parent table, and a distinct sibling row in that parent. Run against the
-loaded pgvector database:
-
-```bash
-cd /Users/dc/geha
-.venv/bin/python chunking_benchmarks_RAG/evaluate_parent_child_retrieval.py \
-  --output chunking_benchmarks_RAG/parent_child_retrieval_eval_results.json
-```
-
-The runner reports both parent-table rank and child-row rank using the app's
-default retrieval settings (3 parent tables, 30 candidate rows). It does not
-call OpenAI or adjudicate coverage.
-
-To test whether Streamlit itself reaches that semantic fallback, run the
-name-free, code-free cases in `semantic_fallback_evals.json`:
-
-```bash
-cd /Users/dc/geha
-.venv/bin/python chunking_benchmarks_RAG/evaluate_semantic_fallback.py \
-  --output chunking_benchmarks_RAG/semantic_fallback_eval_results.json
-```
-
-The runner verifies that direct source/condition lookup and billing-code lookup
-do not intercept each query, then checks the displayed parent table against a
-Docling source line. It deliberately includes known misses as regression cases
-and exits nonzero while any expected table is absent.
-
-## Policy-section retrieval evals
-
-The separate section suite tests the new direct drug-name and indication paths
-without calling OpenAI or creating embeddings. Start and load the database as
-above, then run:
-
-```bash
-cd /Users/dc/geha
-uv run python chunking_benchmarks_RAG/evaluate_policy_sections.py \
-  --output chunking_benchmarks_RAG/policy_section_eval_results.json
-```
-
-The runner is configured for 44 query cases: 12 focused cases in
-`policy_section_evals.json` and one filename-derived name lookup for each of
-the 32 root policy chunk files in `policy_name_section_evals.json`. The focused
-cases cover Nplate and romiplostim, condition-specific narrowing,
-policy-specific universal wording, and Datroway/Trodelvy source precedence.
-The filename cases check the exact source and indication/universal chunk list
-for every root policy, including policies with no such sections. A nested
-general medical-necessity review document is checked separately as stored-only
-and must have no treatment table. The runner also checks the indexed source
-inventory against these expected sources.
-The command exits nonzero if any check fails. This suite is additive to the
-existing 56 condition evals; it does not replace or alter them.
+The current suite contains 95 unit tests. The ordinary run passes 94 and skips
+the database-backed preferred-table integration test. That gated test also
+passes when run against the loaded database with `GEHA_RUN_DB_TESTS=1`, so all
+95 tests have been verified. Evaluation datasets and their latest pass/fail
+counts are summarized at the top of this README.
 
 ## Stop the database
 
@@ -725,30 +682,20 @@ This keeps the database volume. To delete the stored database as well, explicitl
 ## Files
 
 - `table_rag.py`: schema creation, ingestion, retrieval, and answer generation
+- `html_table_data.py`: HTML discovery, metadata parsing, and JSON-row normalization
+- `pdf_conversion.py`: shared native-text Docling converter and validation
+- `extract_pdf_tables_html.py`: batch PDF-to-HTML table extraction
 - `test_table_rag.py`: local unit tests
 - `docker-compose.pgvector.yml`: PostgreSQL 17 with pgvector
 - `.env.example`: safe configuration template
-- `table_preference_evals.json`: preferred and non-preferred retrieval/answer cases
-- `evaluate_table_preferences.py`: repeatable local evaluation runner
-- `secondary_condition_evals.json`: 30 secondary-condition policy eval cases
-- `secondary_condition_eval_results.json`: latest machine-readable eval results
 - `condition_aliases.json`: approved condition aliases and source-policy mappings
-- `evaluate_secondary_conditions.py`: deterministic Streamlit-path eval runner
-- `evaluate_streamlit_backend.py`: combined 56-case Streamlit-backend runner
-- `streamlit_backend_eval_results.json`: latest combined backend results
-- `policy_section_evals.json`: 12 focused policy-section retrieval cases
-- `policy_name_section_evals.json`: 32 filename-derived policy-name query cases and the nested general-review document check
-- `evaluate_policy_sections.py`: deterministic section-eval runner
-- `policy_section_eval_results.json`: latest section-eval results
 - `table_rag_comparison.py`: deterministic-versus-LLM evaluation and Langfuse tracing
 - `table_rag_ui.py`: Streamlit comparison dashboard with Langfuse trace links
 - `medical_claims_advisor.py`: grounded claims-advisor retrieval and generation core
 - `medical_claims_advisor_ui.py`: Streamlit claims chat interface
 - `test_medical_claims_advisor.py`: condition-handling and grounding tests
 - `test_table_rag_comparison.py`: contract, scoring, token, and cost unit tests
-- `table_preference_eval_results.md`: complete readable evaluation report
-- `table_preference_eval_results.json`: machine-readable evaluation report
 - `tables.md`: qualifying policy inventory and retrieval baseline
 - `table_rag_architecture.svg`: editable architecture figure
 - `table_rag_architecture.png`: rendered architecture figure
-- `*_table_openai.csv`: extracted table inputs in the coverage-policy directory
+- `downloads/coverage-policies/html_tables/*.html`: reviewed table inputs

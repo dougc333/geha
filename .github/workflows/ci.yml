@@ -33,6 +33,11 @@ jobs:
           chunking_benchmarks_RAG.test_billing_codes
           chunking_benchmarks_RAG.test_preferred_table_tool
           clean_pdf_langgraph.src.test_raw_table_html
+      - name: Compile Streamlit entry points
+        run: >-
+          uv run --no-sync python -m py_compile
+          chunking_benchmarks_RAG/medical_claims_advisor_ui.py
+          chunking_benchmarks_RAG/table_rag_ui.py
       - name: TF-IDF baseline tests
         working-directory: chunking_benchmarks_RAG
         run: ../.venv/bin/python -m unittest -q test_tfidf_policy_search
@@ -53,7 +58,7 @@ jobs:
           uv sync --project langgraph_demo --locked --python 3.12
       - name: Run workflow tests
         working-directory: langgraph_demo
-        run: uv run --no-sync python -m unittest -q test_demo
+        run: uv run --no-sync python -m unittest discover -q -s . -p 'test_*.py'
 
   mcp-server:
     name: MCP server contract tests

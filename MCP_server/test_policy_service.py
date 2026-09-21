@@ -6,12 +6,12 @@ from unittest.mock import Mock, patch
 
 from policy_service import PolicyService
 
-
 TABLE = {
     "source": "geha-coverage-policy-bendamustine.pdf",
     "table_number": 1,
     "title": "Drug preference and prior authorization",
-    "full_csv": "Drug Name,Preference\nTreanda,Preferred\n",
+    "full_html": "<table><tr><th>Drug Name</th><th>Preference</th></tr><tr><td>Treanda</td><td>Preferred</td></tr></table>",
+    "rows_json": [{"Drug Name": "Treanda", "Preference": "Preferred"}],
     "conditions_json": ["Cancer"],
     "similarity": 0.91347,
 }
@@ -58,7 +58,7 @@ class PolicyServiceTests(unittest.TestCase):
         self.assertEqual(result["route"], "policy_or_condition")
         self.assertEqual(result["tables"][0]["source_pdf"], TABLE["source"])
         self.assertEqual(result["tables"][0]["similarity"], 0.9135)
-        self.assertNotIn("full_csv", result["tables"][0])
+        self.assertNotIn("full_html", result["tables"][0])
         self.advisor.retrieve_claims_evidence.assert_not_called()
 
     def test_exact_code_never_runs_semantic_search(self):
@@ -87,7 +87,8 @@ class PolicyServiceTests(unittest.TestCase):
 
     def test_get_evidence_returns_complete_table_and_criteria(self):
         result = self.service.evidence(TABLE["source"], 1, "Cancer")
-        self.assertEqual(result["table_csv"], TABLE["full_csv"])
+        self.assertEqual(result["table_html"], TABLE["full_html"])
+        self.assertEqual(result["rows"], TABLE["rows_json"])
         self.assertEqual(result["criteria_sections"][0]["content"], "Criteria")
         self.assertEqual(self.connection.params, (TABLE["source"], 1))
 

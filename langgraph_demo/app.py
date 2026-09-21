@@ -44,14 +44,22 @@ except (OSError, ValueError, KeyError) as exc:
 
 with st.sidebar:
     st.header("Start a case")
-    available = sorted(
-        k for k, c in claims.items() if c["member_id"] == claims[example]["member_id"]
-    )
     with st.form("start_case"):
+        actor = st.selectbox(
+            "Demo persona", ["demo_operator", "member", "outsider"]
+        )
+        available = (
+            sorted(claims)
+            if actor == "demo_operator"
+            else sorted(
+                claim_id
+                for claim_id, item in claims.items()
+                if item["member_id"] == claims[example]["member_id"]
+            )
+        )
         claim = st.selectbox(
             "Synthetic claim", available, index=available.index(example)
         )
-        actor = st.selectbox("Demo persona", ["member", "outsider"])
         start = st.form_submit_button("Start new review", type="primary")
     st.caption(
         "Thread IDs are automatic. Refreshing the page does not create a new case."

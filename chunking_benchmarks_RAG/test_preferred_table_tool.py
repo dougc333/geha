@@ -17,25 +17,27 @@ class PreferredTableToolTests(unittest.TestCase):
                 "source": "geha-coverage-policy-bendamustine.pdf",
                 "table_number": 1,
                 "title": "Drug preference and prior authorization",
-                "full_csv": (
-                    "Preference,Drug Name\n"
-                    "Preferred,Treanda\n"
-                    "Non-preferred,Bendeka\n"
-                ),
+                "full_html": "<table><tr><td>Preferred</td><td>Treanda</td></tr><tr><td>Non-preferred</td><td>Bendeka</td></tr></table>",
+                "rows_json": [
+                    {"Preference": "Preferred", "Drug Name": "Treanda"},
+                    {"Preference": "Non-preferred", "Drug Name": "Bendeka"},
+                ],
                 "conditions_json": ["Follicular lymphoma"],
             },
             {
                 "source": "geha-coverage-policy-bendamustine.pdf",
                 "table_number": 2,
                 "title": "Billing codes",
-                "full_csv": "Drug Name,HCPCS Code\nTreanda,J9033\n",
+                "full_html": "<table><tr><td>Treanda</td><td>J9033</td></tr></table>",
+                "rows_json": [{"Drug Name": "Treanda", "HCPCS Code": "J9033"}],
                 "conditions_json": [],
             },
             {
                 "source": "geha-coverage-policy-bendamustine.pdf",
                 "table_number": 3,
                 "title": "Revision history",
-                "full_csv": "Preference,Drug Name\nPreferred,OldValue\n",
+                "full_html": "<table><tr><td>Preferred</td><td>OldValue</td></tr></table>",
+                "rows_json": [{"Preference": "Preferred", "Drug Name": "OldValue"}],
                 "conditions_json": [],
             },
         ]
@@ -48,7 +50,8 @@ class PreferredTableToolTests(unittest.TestCase):
         self.assertEqual(
             result["tables"][0]["explicit_conditions"], ["Follicular lymphoma"]
         )
-        self.assertIn("Non-preferred,Bendeka", result["tables"][0]["full_table_csv"])
+        self.assertIn("Non-preferred", result["tables"][0]["full_table_html"])
+        self.assertEqual(len(result["tables"][0]["rows"]), 2)
 
     @patch("chunking_benchmarks_RAG.preferred_table_tool.retrieve_tables_for_named_condition")
     def test_no_preferred_row_is_not_a_coverage_decision(self, retrieve):
@@ -56,7 +59,8 @@ class PreferredTableToolTests(unittest.TestCase):
             "source": "geha-coverage-policy-nplate.pdf",
             "table_number": 1,
             "title": "Billing codes",
-            "full_csv": "Drug Name,HCPCS Code\nNplate,J2802\n",
+            "full_html": "<table><tr><td>Nplate</td><td>J2802</td></tr></table>",
+            "rows_json": [{"Drug Name": "Nplate", "HCPCS Code": "J2802"}],
             "conditions_json": [],
         }]
 

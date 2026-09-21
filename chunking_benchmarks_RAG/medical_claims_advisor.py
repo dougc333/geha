@@ -3,12 +3,11 @@
 from __future__ import annotations
 
 import argparse
-import csv
-import io
 import json
 import os
 import re
 from functools import lru_cache
+from html import escape
 from pathlib import Path
 from typing import Any
 
@@ -138,35 +137,43 @@ def match_approved_condition_alias(question: str) -> dict[str, Any] | None:
     return max(candidates, key=lambda candidate: (candidate[0], candidate[1]))[2]
 
 
-def preferred_products(full_csv: str) -> list[str]:
+def table_records(rows_json: Any) -> list[dict[str, str]]:
+    """Normalize JSONB table rows into string-valued records."""
+    if isinstance(rows_json, str):
+        rows_json = json.loads(rows_json)
+    if not isinstance(rows_json, list):
+        return []
+    return [
+        {str(key): str(value or "").strip() for key, value in row.items()}
+        for row in rows_json
+        if isinstance(row, dict)
+    ]
+
+
+def records_as_html(records: list[dict[str, str]]) -> str:
+    """Render deterministic records as a compact HTML table."""
+    headers = list(records[0]) if records else []
+    head = "".join(f"<th>{escape(header)}</th>" for header in headers)
+    body = "".join(
+        "<tr>"
+        + "".join(f"<td>{escape(str(record.get(header, '')))}</td>" for header in headers)
+        + "</tr>"
+        for record in records
+    )
+    return f"<table><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table>"
+
+
+def preferred_products(rows_json: Any) -> list[str]:
     """Extract rows whose preference value is exactly Preferred after normalization."""
-    rows = list(csv.reader(io.StringIO(full_csv)))
-    for header_index, header in enumerate(rows):
-        normalized_header = [normalized(cell) for cell in header]
-        if "preference" not in normalized_header:
+    products: list[str] = []
+    for record in table_records(rows_json):
+        row = {normalized(key): value for key, value in record.items()}
+        if normalized(row.get("preference", "")) != "preferred":
             continue
-        preference_index = normalized_header.index("preference")
-        name_index = next(
-            (
-                index
-                for index, value in enumerate(normalized_header)
-                if value in {"drugname", "name"}
-            ),
-            None,
-        )
-        if name_index is None:
-            return []
-        products: list[str] = []
-        for row in rows[header_index + 1 :]:
-            if max(preference_index, name_index) >= len(row):
-                continue
-            if normalized(row[preference_index]) != "preferred":
-                continue
-            product = row[name_index].strip()
-            if product and product not in products:
-                products.append(product)
-        return products
-    return []
+        product = row.get("drugname") or row.get("name") or ""
+        if product and product not in products:
+            products.append(product)
+    return products
 
 
 def is_condition_inventory_query(question: str) -> bool:
@@ -249,7 +256,7 @@ def retrieve_tables_for_named_condition(
         if named_sources:
             tables = connection.execute(
                 """
-                SELECT source, table_number, title, full_csv, rows_json,
+                SELECT source, table_number, title, full_html, rows_json,
                        conditions_json, indication_context
                 FROM policy_tables
                 WHERE source = ANY(%s)
@@ -260,7 +267,7 @@ def retrieve_tables_for_named_condition(
         elif alias_match:
             tables = connection.execute(
                 """
-                SELECT source, table_number, title, full_csv, rows_json,
+                SELECT source, table_number, title, full_html, rows_json,
                        conditions_json, indication_context
                 FROM policy_tables
                 WHERE source = %s
@@ -271,7 +278,7 @@ def retrieve_tables_for_named_condition(
         else:
             tables = connection.execute(
                 """
-                SELECT source, table_number, title, full_csv, rows_json,
+                SELECT source, table_number, title, full_html, rows_json,
                        conditions_json, indication_context
                 FROM policy_tables
                 WHERE jsonb_array_length(conditions_json) > 0
@@ -348,7 +355,7 @@ def condition_inventory(database_url: str) -> list[dict[str, Any]]:
     with connect(database_url) as connection:
         tables = connection.execute(
             """
-            SELECT source, table_number, title, full_csv, conditions_json
+            SELECT source, table_number, title, full_html, rows_json, conditions_json
             FROM policy_tables
             ORDER BY source, table_number
             """
@@ -365,7 +372,7 @@ def condition_inventory(database_url: str) -> list[dict[str, Any]]:
                 "preference_tables": [],
             },
         )
-        products = preferred_products(table["full_csv"])
+        products = preferred_products(table["rows_json"])
         if products:
             policy["preference_tables"].append(table["title"])
         for product in products:
@@ -461,10 +468,12 @@ def format_condition_inventory(
     lines.extend(
         [
             "",
-            "These are policy-level associations from extracted condition metadata or the "
-            "versioned, human-approved condition aliases. Preferred rows occur in the same policy. "
-            "The tables do not establish that every listed product applies to every condition, "
-            "and they do not guarantee claim approval or payment.",
+            (
+                "These are policy-level associations from extracted condition metadata or the "
+                "versioned, human-approved condition aliases. Preferred rows occur in the same policy. "
+                "The tables do not establish that every listed product applies to every condition, "
+                "and they do not guarantee claim approval or payment."
+            ),
         ]
     )
     return "\n".join(lines)
@@ -472,23 +481,21 @@ def format_condition_inventory(
 
 def inventory_evidence(inventory: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Convert the verified inventory into table-RAG evidence for the optional ask step."""
-    output = io.StringIO()
-    writer = csv.writer(output)
-    writer.writerow(["Condition", "Preferred Treatments", "GEHA Source"])
     selected = [item for item in inventory if item["preferred_treatments"]]
-    for item in selected:
-        writer.writerow(
-            [
-                item["condition"],
-                "; ".join(item["preferred_treatments"]),
-                item["source"],
-            ]
-        )
+    records = [
+        {
+            "Condition": item["condition"],
+            "Preferred Treatments": "; ".join(item["preferred_treatments"]),
+            "GEHA Source": item["source"],
+        }
+        for item in selected
+    ]
     return [
         {
             "source": "GEHA condition inventory; see GEHA Source column",
             "title": "Conditions with preferred treatments in the same policy",
-            "full_csv": output.getvalue(),
+            "full_html": records_as_html(records),
+            "rows_json": records,
             "conditions_json": [item["condition"] for item in selected],
         }
     ]
@@ -525,35 +532,10 @@ def evidence_records(results: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "similarity": round(float(result["similarity"]), 4),
             "condition_status": condition_status(result),
             "conditions": list(result.get("conditions_json") or []),
-            "table_csv": result["full_csv"],
+            "table_html": result["full_html"],
         }
         for result in results
     ]
-
-
-def table_records(full_csv: str) -> list[dict[str, str]]:
-    """Parse a table CSV, tolerating leading extraction-artifact rows."""
-    rows = list(csv.reader(io.StringIO(full_csv)))
-    known_headers = {
-        "preference",
-        "drugname",
-        "requirespriorauth",
-        "priorauthorization",
-        "hcpcscode",
-    }
-    for index, row in enumerate(rows):
-        normalized_row = [normalized(cell) for cell in row]
-        if not known_headers.intersection(normalized_row):
-            continue
-        headers = [cell.strip() or f"column_{position + 1}" for position, cell in enumerate(row)]
-        records: list[dict[str, str]] = []
-        for values in rows[index + 1 :]:
-            if not any(value.strip() for value in values):
-                continue
-            padded = values + [""] * (len(headers) - len(values))
-            records.append(dict(zip(headers, padded[: len(headers)])))
-        return records
-    return []
 
 
 def is_revision_table(title: str) -> bool:
@@ -654,7 +636,7 @@ def build_policy_summary(
     non_preferred: list[str] = []
     prior_auth: dict[str, str] = {}
     for table in source_tables:
-        for record in table_records(table["full_csv"]):
+        for record in table_records(table["rows_json"]):
             row = {normalized(key): value.strip() for key, value in record.items()}
             name = row.get("drugname") or row.get("name")
             preference = normalized(row.get("preference", ""))
@@ -696,7 +678,8 @@ def build_policy_summary(
             {
                 "table_number": table["table_number"],
                 "title": table["title"],
-                "full_csv": table["full_csv"],
+                "full_html": table["full_html"],
+                "rows_json": table["rows_json"],
             }
             for table in source_tables
         ],
@@ -717,7 +700,7 @@ def format_retrieval_summary(question: str, results: list[dict[str, Any]]) -> st
         source = result["source"]
         title = result["title"]
         conditions = list(result.get("conditions_json") or [])
-        records = table_records(result["full_csv"])
+        records = table_records(result["rows_json"])
         lines.append(f"- **{title}** — `{source}`")
         if conditions:
             lines.append(f"  - Explicit policy conditions: {', '.join(conditions)}")
@@ -728,7 +711,7 @@ def format_retrieval_summary(question: str, results: list[dict[str, Any]]) -> st
             )
 
         if asks_preferred:
-            products = preferred_products(result["full_csv"])
+            products = preferred_products(result["rows_json"])
             if products:
                 lines.append(f"  - Rows marked Preferred: {', '.join(products)}")
             else:
@@ -753,9 +736,11 @@ def format_retrieval_summary(question: str, results: list[dict[str, Any]]) -> st
     lines.extend(
         [
             "",
-            "This section is a deterministic rendering of retrieved GEHA records. It makes no "
-            "medical inference and does not guarantee coverage or payment. Review the exact "
-            "extracted tables below and confirm against the official policy.",
+            (
+                "This section is a deterministic rendering of retrieved GEHA records. It makes no "
+                "medical inference and does not guarantee coverage or payment. Review the exact "
+                "extracted tables below and confirm against the official policy."
+            ),
         ]
     )
     return "\n".join(lines)

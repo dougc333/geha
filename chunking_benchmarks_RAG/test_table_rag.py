@@ -4,6 +4,10 @@ import unittest
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
+from chunking_benchmarks_RAG.html_table_data import (
+    load_policy_html_tables,
+    parse_html_table,
+)
 from chunking_benchmarks_RAG.table_rag import (
     classify_policy_chunks,
     extract_indication_metadata,
@@ -14,7 +18,6 @@ from chunking_benchmarks_RAG.table_rag import (
     policy_chunk_paths,
     policy_source_terms,
     row_search_text,
-    split_csv_tables,
     split_markdown_chunks,
 )
 
@@ -51,15 +54,18 @@ class TableRagTests(unittest.TestCase):
                 conditions, _ = extract_indication_metadata(markdown_path)
                 self.assertIn(case["expected_condition"], conditions)
 
-    def test_two_blank_rows_separate_tables(self):
-        content = "a,b\n1,2\n\n\nc,d\n3,4\n"
+    def test_parses_one_reviewed_html_table(self):
+        content = """<h1>Billing codes</h1>
+<p class="metadata">Source: policy.pdf &middot; Table 2 &middot; Page 3</p>
+<table><thead><tr><th>Drug Name</th><th>HCPCS Code</th></tr></thead>
+<tbody><tr><td>Nplate</td><td>J2802</td></tr></tbody></table>"""
         with tempfile.TemporaryDirectory() as directory:
-            path = Path(directory) / "tables.csv"
+            path = Path(directory) / "table.html"
             path.write_text(content, encoding="utf-8")
-            tables = split_csv_tables(path)
-        self.assertEqual(len(tables), 2)
-        self.assertEqual(tables[0], [["a", "b"], ["1", "2"]])
-        self.assertEqual(tables[1], [["c", "d"], ["3", "4"]])
+            table = parse_html_table(path)
+        self.assertEqual(table["source"], "policy.pdf")
+        self.assertEqual(table["table_number"], 2)
+        self.assertEqual(table["rows_json"], [{"Drug Name": "Nplate", "HCPCS Code": "J2802"}])
 
     def test_normalizes_short_rows(self):
         headers, rows = normalized_table([["a", "b"], ["1"]])
@@ -91,10 +97,14 @@ class TableRagTests(unittest.TestCase):
 
     def test_ingestion_skips_revision_history_and_purges_existing_rows(self):
         with tempfile.TemporaryDirectory() as directory:
-            csv_path = Path(directory) / "geha-coverage-policy-nplate_table_openai.csv"
-            csv_path.write_text(
-                "Drug Name,HCPCS Code\nNplate,J2802\n\n\n"
-                "Date,Updates\n1/1/2025,Annual review\n",
+            table_dir = Path(directory) / "html_tables"
+            table_dir.mkdir()
+            (table_dir / "nplate_billing.html").write_text(
+                """<h1>Billing codes</h1><p class="metadata">Source: geha-coverage-policy-nplate.pdf · Table 1 · Page 1</p><table><thead><tr><th>Drug Name</th><th>HCPCS Code</th></tr></thead><tbody><tr><td>Nplate</td><td>J2802</td></tr></tbody></table>""",
+                encoding="utf-8",
+            )
+            (table_dir / "nplate_revision.html").write_text(
+                """<h1>Revision history</h1><p class="metadata">Source: geha-coverage-policy-nplate.pdf · Table 2 · Page 2</p><table><thead><tr><th>Date</th><th>Updates</th></tr></thead><tbody><tr><td>1/1/2025</td><td>Annual review</td></tr></tbody></table>""",
                 encoding="utf-8",
             )
             connection = MagicMock()
@@ -191,7 +201,7 @@ class TableRagTests(unittest.TestCase):
         terms = policy_source_terms(
             "geha-coverage-policy-nplate.pdf",
             chunks,
-            root / "geha-coverage-policy-nplate_table_openai.csv",
+            load_policy_html_tables(root),
             conditions,
         )
         self.assertIn("nplate", terms)

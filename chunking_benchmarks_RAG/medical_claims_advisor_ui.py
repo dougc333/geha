@@ -12,16 +12,16 @@ from psycopg import Error as PsycopgError
 try:  # Support Streamlit execution from the repository root or this directory.
     from .billing_code_data import requested_billing_codes
     from .medical_claims_advisor import (
-        condition_inventory,
         build_policy_summary,
+        condition_inventory,
         evidence_records,
-        format_condition_inventory,
         format_billing_code_matches,
+        format_condition_inventory,
         format_retrieval_summary,
         is_condition_inventory_query,
         is_preferred_condition_query,
-        retrieve_claims_evidence,
         retrieve_billing_code_matches,
+        retrieve_claims_evidence,
         retrieve_policy_sections,
         retrieve_tables_for_named_condition,
         should_expand_universal,
@@ -35,16 +35,16 @@ try:  # Support Streamlit execution from the repository root or this directory.
 except ImportError:  # pragma: no cover - Streamlit direct-script execution
     from billing_code_data import requested_billing_codes
     from medical_claims_advisor import (
-        condition_inventory,
         build_policy_summary,
+        condition_inventory,
         evidence_records,
-        format_condition_inventory,
         format_billing_code_matches,
+        format_condition_inventory,
         format_retrieval_summary,
         is_condition_inventory_query,
         is_preferred_condition_query,
-        retrieve_claims_evidence,
         retrieve_billing_code_matches,
+        retrieve_claims_evidence,
         retrieve_policy_sections,
         retrieve_tables_for_named_condition,
         should_expand_universal,
@@ -87,9 +87,8 @@ def render_policy_summary(summary: dict, key_prefix: str) -> None:
     assets = [
         ("📕 GEHA policy PDF", POLICY_DIR / source, "application/pdf"),
         ("📄 Extracted policy text", POLICY_DIR / f"{stem}.docling.md", "text/markdown"),
-        ("📊 Extracted tables", POLICY_DIR / f"{stem}_table_openai.csv", "text/csv"),
     ]
-    columns = st.columns(3)
+    columns = st.columns(2)
     for index, (label, path, mime) in enumerate(assets):
         with columns[index]:
             if path.exists():
@@ -155,7 +154,14 @@ def render_policy_summary(summary: dict, key_prefix: str) -> None:
         st.markdown(
             f"**Table {table['table_number']}: {table['title']}**"
         )
-        records = table_records(table["full_csv"])
+        st.download_button(
+            "Download HTML table",
+            data=table["full_html"],
+            file_name=f"{stem}_table_{table['table_number']}.html",
+            mime="text/html",
+            key=f"{key_prefix}-table-download-{table_index}",
+        )
+        records = table_records(table["rows_json"])
         if records:
             st.dataframe(
                 records,
@@ -166,7 +172,7 @@ def render_policy_summary(summary: dict, key_prefix: str) -> None:
         else:
             # Keep unusual extraction output visible even when it cannot be
             # normalized into records.
-            st.code(table["full_csv"], language="csv")
+            st.html(table["full_html"])
 
 
 st.title("Medical Claims Policy Advisor")
@@ -238,7 +244,7 @@ for message_index, message in enumerate(st.session_state.claims_messages):
                         f"Condition status: `{item['condition_status']}`  \n"
                         f"Conditions: `{item['conditions']}`"
                     )
-                    st.code(item["table_csv"], language="csv")
+                    st.html(item["table_html"])
 
 question = st.chat_input(
     "Ask about a drug, HCPCS code, preference, prior authorization, or documented condition"
@@ -258,7 +264,9 @@ if question:
         if requested_billing_codes(question):
             try:
                 with st.spinner("Checking exact GEHA billing-code rows..."):
-                    billing_matches = retrieve_billing_code_matches(question, database_url)
+                    billing_matches = retrieve_billing_code_matches(
+                        question, database_url
+                    )
                 answer = format_billing_code_matches(question, billing_matches)
                 evidence = []
             except PsycopgError:
@@ -333,7 +341,7 @@ if question:
                         f"Condition status: `{item['condition_status']}`  \n"
                         f"Conditions: `{item['conditions']}`"
                     )
-                    st.code(item["table_csv"], language="csv")
+                    st.html(item["table_html"])
 
     st.session_state.claims_messages.append(
         {

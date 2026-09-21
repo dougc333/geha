@@ -3,8 +3,8 @@
   "top_tables": 3,
   "candidate_rows": 30,
   "cases": 12,
-  "passed": 12,
-  "top1_parent": 12,
+  "passed": 11,
+  "top1_parent": 11,
   "results": [
     {
       "id": "treanda_preference",
@@ -27,7 +27,7 @@
           "title": "Billing codes"
         },
         {
-          "source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+          "source": "geha-coverage-policy-datroway.pdf",
           "table_number": 1,
           "title": "Drug preference and prior authorization"
         }
@@ -55,7 +55,7 @@
           "title": "Drug preference and prior authorization"
         },
         {
-          "source": "geha-coverage-policy-gemcitabine.pdf",
+          "source": "geha-coverage-policy-rituximab.pdf",
           "table_number": 2,
           "title": "Billing codes"
         }
@@ -78,14 +78,14 @@
           "title": "Drug preference and prior authorization"
         },
         {
-          "source": "geha-coverage-policy-vectibix.pdf",
+          "source": "geha-coverage-policy-xgeva.pdf",
           "table_number": 1,
           "title": "Drug preference and prior authorization"
         },
         {
-          "source": "geha-coverage-policy-xgeva.pdf",
+          "source": "geha-coverage-policy-vectibix.pdf",
           "table_number": 1,
-          "title": "Drug preference and prior authorization"
+          "title": "0 / 1 / 2 / 3 / 4"
         }
       ],
       "pass": true
@@ -162,13 +162,13 @@
           "title": "Billing codes"
         },
         {
-          "source": "geha-coverage-policy-pd-1pd-l1s.pdf",
-          "table_number": 1,
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 2,
           "title": "Billing codes"
         },
         {
-          "source": "geha-coverage-policy-short-acting-gcsfs.pdf",
-          "table_number": 2,
+          "source": "geha-coverage-policy-pd-1pd-l1s.pdf",
+          "table_number": 1,
           "title": "Billing codes"
         }
       ],
@@ -223,7 +223,7 @@
           "title": "Drug preference and prior authorization"
         },
         {
-          "source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+          "source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
           "table_number": 1,
           "title": "Drug preference and prior authorization"
         }
@@ -235,28 +235,28 @@
       "query": "non-preferred Rytelo imetelstat J0870 prior authorization",
       "expected_source": "geha-coverage-policy-rytelo.pdf",
       "expected_table_number": 1,
-      "parent_rank": 1,
-      "child_row_rank": 1,
+      "parent_rank": null,
+      "child_row_rank": null,
       "source_line_verified": true,
-      "complete_parent_with_distinct_sibling": true,
+      "complete_parent_with_distinct_sibling": false,
       "returned_parent_tables": [
         {
           "source": "geha-coverage-policy-rytelo.pdf",
           "table_number": 1,
-          "title": "Drug preference and prior authorization"
+          "title": "0 / 1 / 2 / 3 / 4"
+        },
+        {
+          "source": "geha-coverage-policy-rytelo.pdf",
+          "table_number": 2,
+          "title": "Billing codes"
         },
         {
           "source": "geha-coverage-policy-xgeva.pdf",
           "table_number": 1,
           "title": "Drug preference and prior authorization"
-        },
-        {
-          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
-          "table_number": 1,
-          "title": "Drug preference and prior authorization"
         }
       ],
-      "pass": true
+      "pass": false
     },
     {
       "id": "truxima_preference",
@@ -307,7 +307,7 @@
           "title": "Billing codes"
         },
         {
-          "source": "geha-coverage-policy-bevacizumab.pdf",
+          "source": "geha-coverage-policy-xgeva.pdf",
           "table_number": 2,
           "title": "Billing codes"
         }
@@ -335,7 +335,7 @@
           "title": "Drug preference and prior authorization"
         },
         {
-          "source": "geha-coverage-policy-trastuzumab.pdf",
+          "source": "geha-coverage-policy-xgeva.pdf",
           "table_number": 2,
           "title": "Billing codes"
         }

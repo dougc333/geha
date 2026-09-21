@@ -36,7 +36,7 @@ class AuthenticatedIdentity:
             raise ValueError("Authenticated identity requires subject and issuer")
 
 
-DEMO_REVIEWER = AuthenticatedIdentity(
+DEMO_REVIEWER = AuthenticatedIdentity( 
     subject="demo-reviewer",
     issuer="local-synthetic-demo",
     roles=frozenset({"reviewer"}),

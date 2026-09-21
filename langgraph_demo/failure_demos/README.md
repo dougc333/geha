@@ -21,7 +21,11 @@ RUN_LANGFUSE_INTEGRATION_TESTS=1 \
   uv run python -m unittest -v test_failure_distributed_trace
 ```
 
-The concurrency program intentionally exposes the current review race. If both opposing reviews are accepted, the output reports `race_detected: true`; that is evidence that a production implementation needs a cross-process lock or transactional compare-and-set plus an idempotency key.
+The concurrency program forces two processes to observe the same pending review
+before either proceeds. The local SQLite implementation uses a sibling-file lock,
+rechecks saved state inside that lock, and accepts exactly one opposing decision;
+the other is rejected. A distributed deployment must replace this local control
+with a PostgreSQL transaction/advisory lock or transactional compare-and-set.
 
 The restart program kills only the worker process it created, after the interrupt checkpoint is durable. A new process reopens the database and resumes the pending review.
 

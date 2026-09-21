@@ -11,16 +11,16 @@ from chunking_benchmarks_RAG.medical_claims_advisor import (
     condition_table_priority,
     evidence_records,
     format_condition_inventory,
-    generate_openai_section,
     format_retrieval_summary,
+    generate_openai_section,
     inventory_evidence,
     is_condition_inventory_query,
     is_preferred_condition_query,
-    matching_policy_sources,
     match_approved_condition_alias,
+    matching_policy_sources,
     preferred_products,
-    query_mentions_policy_source,
     query_mentions_condition,
+    query_mentions_policy_source,
     retrieve_policy_sections,
     retrieve_tables_for_named_condition,
     should_expand_universal,
@@ -34,7 +34,8 @@ def result(*, conditions, indication_context=""):
         "source": "policy.pdf",
         "table_number": 1,
         "title": "Drug preference and prior authorization",
-        "full_csv": "Preference,Drug Name\nPreferred,ExampleDrug\n",
+        "full_html": "<table><tr><th>Preference</th><th>Drug Name</th></tr><tr><td>Preferred</td><td>ExampleDrug</td></tr></table>",
+        "rows_json": [{"Preference": "Preferred", "Drug Name": "ExampleDrug"}],
         "conditions_json": conditions,
         "indication_context": indication_context,
         "similarity": 0.81234,
@@ -86,8 +87,8 @@ class FakePolicyConnection:
                 "source": "geha-coverage-policy-nplate.pdf",
                 "table_number": 1,
                 "title": "Billing codes",
-                "full_csv": "Drug Name,HCPCS Code\nRomiplostim,J2802\n",
-                "rows_json": [],
+                "full_html": "<table><tr><td>Romiplostim</td><td>J2802</td></tr></table>",
+                "rows_json": [{"Drug Name": "Romiplostim", "HCPCS Code": "J2802"}],
                 "conditions_json": [
                     "Chemotherapy-induced thrombocytopenia",
                     "Myelodysplastic Syndrome",
@@ -177,13 +178,13 @@ class MedicalClaimsAdvisorTests(unittest.TestCase):
             ),
         )
         item["source"] = "geha-coverage-policy-erythropoietin-stimulating-agents.pdf"
-        item["full_csv"] = (
-            "Preference,Requires Prior Auth,Drug Name\n"
-            "Preferred,Yes,Retacrit\n"
-            "Preferred,Yes,Aranesp\n"
-            "Non- Preferred,Yes,Epogen\n"
-            "Non- Preferred,Yes,Procrit\n"
-        )
+        item["rows_json"] = [
+            {"Preference": "Preferred", "Requires Prior Auth": "Yes", "Drug Name": "Retacrit"},
+            {"Preference": "Preferred", "Requires Prior Auth": "Yes", "Drug Name": "Aranesp"},
+            {"Preference": "Non- Preferred", "Requires Prior Auth": "Yes", "Drug Name": "Epogen"},
+            {"Preference": "Non- Preferred", "Requires Prior Auth": "Yes", "Drug Name": "Procrit"},
+        ]
+        item["full_html"] = "<table><tr><td>Retacrit</td></tr></table>"
         summary = build_policy_summary(
             "Which policies discuss anemia caused by cancer treatment?", [item]
         )
@@ -193,7 +194,8 @@ class MedicalClaimsAdvisorTests(unittest.TestCase):
         self.assertEqual(summary["non_preferred"], ["Epogen", "Procrit"])
         self.assertEqual(len(summary["prior_auth"]), 4)
         self.assertEqual(len(summary["tables"]), 1)
-        self.assertEqual(summary["tables"][0]["full_csv"], item["full_csv"])
+        self.assertEqual(summary["tables"][0]["full_html"], item["full_html"])
+        self.assertEqual(summary["tables"][0]["rows_json"], item["rows_json"])
         self.assertEqual(
             summary["criteria"], ["Concurrent myelosuppressive antineoplastic therapy; AND"]
         )
@@ -251,12 +253,11 @@ class MedicalClaimsAdvisorTests(unittest.TestCase):
         self.assertFalse(is_preferred_condition_query("List all conditions"))
 
     def test_extracts_only_exact_preferred_rows(self):
-        table = (
-            "Preference,Drug Name\n"
-            "Preferred,Drug A\n"
-            "Non-Preferred,Drug B\n"
-            "PREFERRED,Drug C\n"
-        )
+        table = [
+            {"Preference": "Preferred", "Drug Name": "Drug A"},
+            {"Preference": "Non-Preferred", "Drug Name": "Drug B"},
+            {"Preference": "PREFERRED", "Drug Name": "Drug C"},
+        ]
         self.assertEqual(preferred_products(table), ["Drug A", "Drug C"])
 
     def test_formats_preferred_condition_inventory_without_llm(self):
@@ -368,19 +369,19 @@ class MedicalClaimsAdvisorTests(unittest.TestCase):
         self.assertEqual(records[0]["similarity"], 0.8123)
         self.assertEqual(records[0]["conditions"], [])
 
-    def test_table_records_skips_leading_extraction_artifact(self):
-        records = table_records(
-            "0,1,2\nPreference,Drug Name,Requires Prior Auth\n"
-            "Preferred,Drug A,Yes\n"
-        )
+    def test_table_records_normalizes_json_values(self):
+        records = table_records([
+            {"Preference": "Preferred", "Drug Name": "Drug A", "Requires Prior Auth": "Yes"}
+        ])
         self.assertEqual(records[0]["Drug Name"], "Drug A")
 
     def test_prior_auth_summary_is_deterministic(self):
         item = result(conditions=["Condition A"])
-        item["full_csv"] = (
-            "Preference,Drug Name,Requires Prior Auth\n"
-            "Preferred,ExampleDrug,Yes\n"
-        )
+        item["rows_json"] = [{
+            "Preference": "Preferred",
+            "Drug Name": "ExampleDrug",
+            "Requires Prior Auth": "Yes",
+        }]
         answer = format_retrieval_summary(
             "Does ExampleDrug require prior authorization?", [item]
         )
@@ -410,9 +411,9 @@ class MedicalClaimsAdvisorTests(unittest.TestCase):
                 }
             ]
         )
-        self.assertIn("Condition A", evidence[0]["full_csv"])
-        self.assertIn("Drug A", evidence[0]["full_csv"])
-        self.assertIn("policy-a.pdf", evidence[0]["full_csv"])
+        self.assertIn("Condition A", evidence[0]["full_html"])
+        self.assertIn("Drug A", evidence[0]["full_html"])
+        self.assertIn("policy-a.pdf", evidence[0]["full_html"])
 
     def test_empty_retrieval_reports_insufficient_geha_evidence(self):
         answer = format_retrieval_summary("question", [])

@@ -19,9 +19,9 @@ from docling.datamodel.pipeline_options import PdfPipelineOptions
 from docling.document_converter import DocumentConverter, PdfFormatOption
 
 try:  # Support package imports and direct script execution.
-    from .extract_pdf_tables import native_text_converter, require_embedded_text
+    from .pdf_conversion import native_text_converter, require_embedded_text
 except ImportError:  # pragma: no cover - direct script execution
-    from extract_pdf_tables import native_text_converter, require_embedded_text
+    from pdf_conversion import native_text_converter, require_embedded_text
 
 
 HEADING_LABELS = {"caption", "section_header", "title"}

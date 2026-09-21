@@ -3,8 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import csv
-import io
 import json
 import os
 import re
@@ -21,12 +19,13 @@ from sentence_transformers import SentenceTransformer
 
 try:  # Support module and direct-script execution.
     from .billing_code_data import docling_billing_rows
+    from .html_table_data import load_policy_html_tables
 except ImportError:  # pragma: no cover - direct CLI execution
     from billing_code_data import docling_billing_rows
+    from html_table_data import load_policy_html_tables
 
 DEFAULT_DATABASE_URL = "postgresql://geha:geha-local@127.0.0.1:5433/geha_rag"
 DEFAULT_EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5"
-CSV_SUFFIX = "_table_openai.csv"
 DOCLING_SUFFIX = ".docling.md"
 
 
@@ -38,7 +37,7 @@ CREATE TABLE IF NOT EXISTS policy_tables (
     source text NOT NULL,
     table_number integer NOT NULL,
     title text NOT NULL,
-    full_csv text NOT NULL,
+    full_html text NOT NULL,
     rows_json jsonb NOT NULL,
     conditions_json jsonb NOT NULL DEFAULT '[]'::jsonb,
     indication_context text NOT NULL DEFAULT '',
@@ -49,6 +48,12 @@ ALTER TABLE policy_tables
     ADD COLUMN IF NOT EXISTS conditions_json jsonb NOT NULL DEFAULT '[]'::jsonb;
 ALTER TABLE policy_tables
     ADD COLUMN IF NOT EXISTS indication_context text NOT NULL DEFAULT '';
+ALTER TABLE policy_tables
+    ADD COLUMN IF NOT EXISTS full_html text NOT NULL DEFAULT '';
+ALTER TABLE policy_tables
+    ALTER COLUMN full_html DROP DEFAULT;
+ALTER TABLE policy_tables
+    DROP COLUMN IF EXISTS full_csv;
 
 CREATE TABLE IF NOT EXISTS policy_table_vectors (
     id bigserial PRIMARY KEY,
@@ -99,34 +104,6 @@ ON policy_billing_codes (code);
 """
 
 
-def is_blank_row(row: list[str]) -> bool:
-    return not row or all(not cell.strip() for cell in row)
-
-
-def split_csv_tables(path: Path) -> list[list[list[str]]]:
-    """Split a combined CSV on two consecutive empty records."""
-    tables: list[list[list[str]]] = []
-    current: list[list[str]] = []
-    blank_count = 0
-
-    with path.open(encoding="utf-8", newline="") as stream:
-        for row in csv.reader(stream):
-            if is_blank_row(row):
-                blank_count += 1
-                if blank_count == 2 and current:
-                    tables.append(current)
-                    current = []
-                    blank_count = 0
-                continue
-
-            blank_count = 0
-            current.append(row)
-
-    if current:
-        tables.append(current)
-    return tables
-
-
 def normalized_table(rows: list[list[str]]) -> tuple[list[str], list[list[str]]]:
     if len(rows) > 1 and rows[0] == [str(index) for index in range(len(rows[0]))]:
         rows = rows[1:]
@@ -153,14 +130,6 @@ def infer_title(headers: list[str]) -> str:
 
 def is_revision_history_table(headers: list[str]) -> bool:
     return infer_title(headers).casefold() == "revision history"
-
-
-def table_as_csv(headers: list[str], rows: list[list[str]]) -> str:
-    stream = io.StringIO(newline="")
-    writer = csv.writer(stream, lineterminator="\n")
-    writer.writerow(headers)
-    writer.writerows(rows)
-    return stream.getvalue()
 
 
 def table_as_records(headers: list[str], rows: list[list[str]]) -> list[dict[str, str]]:
@@ -299,7 +268,7 @@ def classify_policy_chunks(
 def policy_source_terms(
     source_pdf: str,
     chunks: list[tuple[int, str]],
-    csv_path: Path,
+    html_tables: list[dict[str, Any]],
     conditions: list[str],
 ) -> dict[str, str]:
     """Build explicit policy-name and drug-name lookup terms, without an LLM."""
@@ -325,15 +294,16 @@ def policy_source_terms(
             add(title_match.group(2), "generic_name")
             break
 
-    if csv_path.exists():
-        for raw_table in split_csv_tables(csv_path):
-            headers, rows = normalized_table(raw_table)
-            names = [_heading_key(header) for header in headers]
-            if "drugname" not in names:
-                continue
-            name_index = names.index("drugname")
-            for row in rows:
-                add(row[name_index], "billing_drug_name")
+    for table in html_tables:
+        if table["source"] != source_pdf:
+            continue
+        headers = table["headers"]
+        names = [_heading_key(header) for header in headers]
+        if "drugname" not in names:
+            continue
+        name_index = names.index("drugname")
+        for row in table["rows"]:
+            add(row[name_index], "billing_drug_name")
     return terms
 
 
@@ -342,11 +312,17 @@ def policy_chunk_paths(input_dir: Path) -> list[Path]:
     return sorted(input_dir.glob("*.docling_chunks.md"))
 
 
-def ingest_policy_sections(database_url: str, input_dir: Path) -> None:
+def ingest_policy_sections(
+    database_url: str,
+    input_dir: Path,
+    html_tables: list[dict[str, Any]] | None = None,
+) -> None:
     """Ingest top-level Docling chunks, keeping non-criteria sections out of search results."""
     chunk_paths = policy_chunk_paths(input_dir)
     if not chunk_paths:
         raise FileNotFoundError(f"No *.docling_chunks.md files found in {input_dir}")
+    if html_tables is None:
+        html_tables = load_policy_html_tables(input_dir)
     section_count = 0
     with connect(database_url) as connection:
         for path in chunk_paths:
@@ -356,13 +332,10 @@ def ingest_policy_sections(database_url: str, input_dir: Path) -> None:
             markdown_path = path.with_name(
                 path.name.removesuffix(".docling_chunks.md") + ".docling.md"
             )
-            csv_path = path.with_name(
-                path.name.removesuffix(".docling_chunks.md") + CSV_SUFFIX
-            )
             conditions, _ = extract_indication_metadata(markdown_path)
             chunks = split_markdown_chunks(path)
             labeled = classify_policy_chunks(chunks, conditions)
-            terms = policy_source_terms(source_pdf, chunks, csv_path, conditions)
+            terms = policy_source_terms(source_pdf, chunks, html_tables, conditions)
             connection.execute("DELETE FROM policy_chunks WHERE source_pdf = %s", (source_pdf,))
             connection.execute(
                 "DELETE FROM policy_source_terms WHERE source_pdf = %s", (source_pdf,)
@@ -476,48 +449,52 @@ def ingest(
     input_dir: Path,
     embedding_model: SentenceTransformer,
 ) -> None:
-    csv_paths = sorted(input_dir.glob(f"*{CSV_SUFFIX}"))
-    if not csv_paths:
-        raise FileNotFoundError(f"No *{CSV_SUFFIX} files found in {input_dir}")
+    html_tables = load_policy_html_tables(input_dir)
+    tables_by_source: dict[str, list[dict[str, Any]]] = {}
+    for table in html_tables:
+        tables_by_source.setdefault(table["source"], []).append(table)
 
     table_count = 0
     row_count = 0
     with connect(database_url) as connection:
-        # Remove previously indexed revision tables; child vectors cascade with them.
+        indexed_sources = sorted(tables_by_source)
         connection.execute(
-            "DELETE FROM policy_tables WHERE lower(btrim(title)) = 'revision history'"
+            "DELETE FROM policy_tables WHERE source <> ALL(%s)", (indexed_sources,)
         )
-        for csv_path in csv_paths:
-            source = f"{csv_path.name.removesuffix(CSV_SUFFIX)}.pdf"
-            markdown_path = csv_path.with_name(
-                f"{csv_path.name.removesuffix(CSV_SUFFIX)}{DOCLING_SUFFIX}"
-            )
+        for source, tables in sorted(tables_by_source.items()):
+            markdown_path = input_dir / f"{Path(source).stem}{DOCLING_SUFFIX}"
             conditions, indication_context = extract_indication_metadata(markdown_path)
-            tables = split_csv_tables(csv_path)
             print(
                 f"{source}: {len(tables)} table(s), {len(conditions)} condition(s)",
                 flush=True,
             )
+            table_numbers = [table["table_number"] for table in tables]
+            connection.execute(
+                "DELETE FROM policy_tables WHERE source = %s AND table_number <> ALL(%s)",
+                (source, table_numbers),
+            )
 
-            for table_number, raw_table in enumerate(tables, 1):
-                headers, rows = normalized_table(raw_table)
+            for table in sorted(tables, key=lambda item: item["table_number"]):
+                table_number = table["table_number"]
+                headers = table["headers"]
+                rows = table["rows"]
                 if not headers:
                     continue
                 if is_revision_history_table(headers):
                     continue
-                title = infer_title(headers)
-                full_csv = table_as_csv(headers, rows)
-                records = table_as_records(headers, rows)
+                title = table["title"]
+                full_html = table["full_html"]
+                records = table["rows_json"]
 
                 table_id = connection.execute(
                     """
                     INSERT INTO policy_tables
-                        (source, table_number, title, full_csv, rows_json,
+                        (source, table_number, title, full_html, rows_json,
                          conditions_json, indication_context)
                     VALUES (%s, %s, %s, %s, %s, %s, %s)
                     ON CONFLICT (source, table_number) DO UPDATE SET
                         title = EXCLUDED.title,
-                        full_csv = EXCLUDED.full_csv,
+                        full_html = EXCLUDED.full_html,
                         rows_json = EXCLUDED.rows_json,
                         conditions_json = EXCLUDED.conditions_json,
                         indication_context = EXCLUDED.indication_context
@@ -527,7 +504,7 @@ def ingest(
                         source,
                         table_number,
                         title,
-                        full_csv,
+                        full_html,
                         Jsonb(records),
                         Jsonb(conditions),
                         indication_context,
@@ -574,7 +551,7 @@ def ingest(
     print(
         f"Ingested {table_count} parent tables and {row_count} searchable child rows."
     )
-    ingest_policy_sections(database_url, input_dir)
+    ingest_policy_sections(database_url, input_dir, html_tables)
     ingest_billing_codes(database_url, input_dir)
 
 
@@ -608,7 +585,7 @@ def retrieve_tables(
             t.source,
             t.table_number,
             t.title,
-            t.full_csv,
+            t.full_html,
             t.rows_json,
             t.conditions_json,
             t.indication_context,
@@ -636,7 +613,7 @@ def print_retrieval(results: list[dict[str, Any]]) -> None:
         print(
             f"Conditions: {', '.join(conditions) if conditions else 'Not explicitly enumerated'}"
         )
-        print(result["full_csv"], end="")
+        print(result["full_html"])
 
 
 OPENAI_ASK_INSTRUCTIONS = (
@@ -666,7 +643,7 @@ def generate_answer(
         f"SOURCE: {result['source']}\n"
         f"TABLE: {result['title']}\n"
         f"CONDITIONS: {json.dumps(result.get('conditions_json') or [])}\n"
-        f"{result['full_csv']}"
+        f"{result['full_html']}"
         for result in results
     )
     openai_client = client or OpenAI()

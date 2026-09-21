@@ -17,10 +17,10 @@ from typing import Any
 from langchain_core.tools import tool
 
 try:  # Package import and direct execution from this directory.
-    from .extract_pdf_tables import native_text_converter, require_embedded_text
+    from .pdf_conversion import native_text_converter, require_embedded_text
     from .extract_pdf_tables_html import extract_pdf, ocr_table_converter
 except ImportError:  # pragma: no cover - direct-script execution
-    from extract_pdf_tables import native_text_converter, require_embedded_text
+    from pdf_conversion import native_text_converter, require_embedded_text
     from extract_pdf_tables_html import extract_pdf, ocr_table_converter
 
 

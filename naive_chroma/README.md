@@ -335,6 +335,6 @@ A top-1 miss measures retrieval only. The answer text above is the source-table 
 
 The questions explicitly name a policy. Scores apply to these exact questions: the shorter `Is Treanda preferred?` query, for example, previously placed its table chunk fifth.
 
-Gold labels were seeded from the existing `_table_openai.csv` preference tables and cross-checked against the plain index's page-1 drug and code text where available. Datroway's two gold rows have no indexed page-1 text. Retain the source PDFs as the authority if a PDF is later revised.
+Gold labels were originally seeded from the legacy CSV preference tables and cross-checked against the plain index's page-1 drug and code text where available. The runtime corpus now uses reviewed HTML table objects. Datroway's two gold rows have no indexed page-1 text. Retain the source PDFs as the authority if a PDF is later revised.
 
 <!-- PREFERENCE_ROW_EVAL_END -->

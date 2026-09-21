@@ -10,12 +10,12 @@ class FailureDemoTests(unittest.TestCase):
         result = run_restart_demo()
         self.assertTrue(result["passed"], result)
 
-    def test_concurrent_review_race_is_observable(self):
+    def test_concurrent_review_race_is_blocked(self):
         result = run_concurrency_demo()
         self.assertEqual(result["both_workers_observed"], [("review",), ("review",)])
         self.assertEqual(len(result["results"]), 2)
-        self.assertEqual(result["accepted_count"], 2)
-        self.assertTrue(result["race_detected"], result)
+        self.assertEqual(result["accepted_count"], 1)
+        self.assertFalse(result["race_detected"], result)
 
     def test_transient_dependency_is_retried(self):
         result = run_upstream_demo("transient")

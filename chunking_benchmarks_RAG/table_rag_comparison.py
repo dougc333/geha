@@ -3,8 +3,6 @@
 from __future__ import annotations
 
 import argparse
-import csv
-import io
 import json
 import os
 import re
@@ -42,37 +40,18 @@ def normalized(value: str) -> str:
     return re.sub(r"[^a-z0-9]", "", value.casefold())
 
 
-def extract_products(full_csv: str, preference: str) -> list[str]:
+def extract_products(rows_json: list[dict[str, Any]], preference: str) -> list[str]:
     """Return products with an exact normalized preference label."""
-    rows = list(csv.reader(io.StringIO(full_csv)))
     target = normalized(preference)
-    for header_index, header in enumerate(rows):
-        normalized_header = [normalized(cell) for cell in header]
-        if "preference" not in normalized_header:
+    products: list[str] = []
+    for record in rows_json:
+        row = {normalized(key): str(value or "").strip() for key, value in record.items()}
+        if normalized(row.get("preference", "")) != target:
             continue
-        preference_index = normalized_header.index("preference")
-        name_index = next(
-            (
-                index
-                for index, value in enumerate(normalized_header)
-                if value in {"drugname", "name"}
-            ),
-            None,
-        )
-        if name_index is None:
-            continue
-        products: list[str] = []
-        for row in rows[header_index + 1 :]:
-            if not row or all(not cell.strip() for cell in row):
-                break
-            if max(preference_index, name_index) >= len(row):
-                continue
-            if normalized(row[preference_index]) == target:
-                product = row[name_index].strip()
-                if product and product not in products:
-                    products.append(product)
-        return products
-    return []
+        product = row.get("drugname") or row.get("name") or ""
+        if product and product not in products:
+            products.append(product)
+    return products
 
 
 def exact_product_match(actual: list[str], expected: list[str]) -> bool:
@@ -159,7 +138,7 @@ def _llm_products(
         f"Target preference label: {preference}\n\n"
         f"Source: {table['source']}\n"
         f"Table: {table['title']}\n"
-        f"{table['full_csv']}\n\n"
+        f"{table['full_html']}\n\n"
         'Return JSON only in the form {"products": ["product name"]}. '
         "Include every product whose Preference cell exactly matches the target "
         "label after ignoring spaces and hyphens. Do not infer missing products."
@@ -270,7 +249,7 @@ def compare_case(
         top = retrieved[0] if retrieved else None
         deterministic_started = time.perf_counter()
         deterministic_products = (
-            extract_products(top["full_csv"], case["preference"]) if top else []
+            extract_products(top["rows_json"], case["preference"]) if top else []
         )
         deterministic_ms = (time.perf_counter() - deterministic_started) * 1000
         deterministic_correct = exact_product_match(
