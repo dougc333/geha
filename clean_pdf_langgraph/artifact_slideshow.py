@@ -12,6 +12,7 @@ from urllib.parse import quote
 
 
 ROOT = Path(__file__).resolve().parent
+PDF_DIR = ROOT.parent / "downloads" / "coverage-policies"
 
 
 def discover_artifacts(
@@ -49,6 +50,7 @@ def prepare_policy_artifacts(
     directory: Path,
     policy: str,
     *,
+    cache_root: Path | None = None,
     runner: Callable[..., dict[str, Any]] | None = None,
 ) -> Path:
     """Create local-only review artifacts when a selected policy has none."""
@@ -68,7 +70,7 @@ def prepare_policy_artifacts(
         raise ValueError(f"Policy filter {policy!r} matches multiple PDFs: {names}")
 
     pdf_path = matches[0]
-    output_dir = directory / "slideshow_cache" / pdf_path.stem
+    output_dir = (cache_root or ROOT / "slideshow_cache") / pdf_path.stem
     pages, tables = discover_artifacts(output_dir) if output_dir.is_dir() else ([], [])
     if pages and tables:
         return output_dir
@@ -236,7 +238,8 @@ class SlideshowHandler(SimpleHTTPRequestHandler):
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--directory", type=Path, default=ROOT)
+    parser.add_argument("--directory", type=Path, default=PDF_DIR,
+                        help="Source PDF directory (default: downloads/coverage-policies)")
     parser.add_argument("--policy", default="", help="Only files whose names contain this text")
     parser.add_argument("--recursive", action="store_true", help="Include review_runs subdirectories")
     parser.add_argument("--interval", type=float, default=3.0, help="Seconds per artifact")
@@ -249,7 +252,7 @@ def main() -> None:
     directory = args.directory.expanduser().resolve()
     if not directory.is_dir():
         parser.error(f"Not a directory: {directory}")
-    artifact_directory = directory
+    artifact_directory = ROOT if directory == PDF_DIR.resolve() else directory
     pages, tables = discover_artifacts(
         artifact_directory, recursive=args.recursive, policy=args.policy
     )

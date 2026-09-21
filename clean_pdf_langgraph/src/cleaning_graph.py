@@ -1,7 +1,8 @@
 """Run one PDF extraction/QC iteration, then stop for human review.
 
-All artifacts are created next to their source PDF, and existing artifacts are
-never overwritten. No repair, approval, or database-ingestion node is present.
+Artifacts are created under clean_pdf_langgraph/first_pass, not beside the
+shared source PDFs. Existing artifacts are never overwritten. No repair,
+approval, or database-ingestion node is present.
 """
 
 from __future__ import annotations
@@ -17,9 +18,7 @@ from .extractors import (
 )
 from .schema import CleaningState, ReviewIssue
 from .vision_review import compare_unit, images_for_pages
-
-
-PDF_DIR = Path(__file__).resolve().parents[1]
+from .paths import PDF_DIR, FIRST_PASS_DIR
 
 
 def resolve_source(pdf_name: str) -> Path:
@@ -32,16 +31,17 @@ def resolve_source(pdf_name: str) -> Path:
     return source
 
 
-def preflight_outputs(pdf_path: Path) -> None:
+def preflight_outputs(pdf_path: Path, output_dir: Path | None = None) -> None:
     """Fail before writing anything if any extraction artifact already exists."""
     stem = pdf_path.stem
+    output_dir = output_dir or FIRST_PASS_DIR / stem
     expected = [
         f"{stem}_pdfplumber.md", f"{stem}.docling.md",
         f"{stem}.docling_chunks.md", f"{stem}_docling_tables.md",
         f"{stem}_errors.md",
     ]
-    existing = [name for name in expected if (pdf_path.parent / name).exists()]
-    existing += [path.name for path in pdf_path.parent.glob(f"{stem}_images_*.png")]
+    existing = [name for name in expected if (output_dir / name).exists()]
+    existing += [path.name for path in output_dir.glob(f"{stem}_images_*.png")]
     if existing:
         raise FileExistsError(f"Existing artifacts; no files changed: {', '.join(existing)}")
 
@@ -183,9 +183,11 @@ def build_graph():
 
 def run_one(pdf_name: str, *, vision_model: str = "gpt-4o", use_vision: bool = True) -> CleaningState:
     pdf_path = resolve_source(pdf_name)
-    preflight_outputs(pdf_path)
+    output_dir = FIRST_PASS_DIR / pdf_path.stem
+    preflight_outputs(pdf_path, output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
     initial: CleaningState = {
-        "pdf_path": str(pdf_path), "output_dir": str(pdf_path.parent),
+        "pdf_path": str(pdf_path), "output_dir": str(output_dir),
         "vision_model": vision_model, "use_vision": use_vision,
         "iteration": 1, "max_iterations": 1, "status": "pending",
     }

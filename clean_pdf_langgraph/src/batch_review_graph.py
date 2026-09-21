@@ -25,9 +25,9 @@ from .html_vision_review import compare_html_table
 from .raw_table_html import combined_raw_html, raw_table_markup
 from .schema import CleaningState, ReviewIssue, TableArtifact
 from .vision_review import images_for_pages
+from .paths import BATCH_RUNS_DIR, PDF_DIR
 
 
-PDF_DIR = Path(__file__).resolve().parents[1]
 EXTRACTORS = ("pdfplumber", "docling")
 
 
@@ -377,7 +377,7 @@ def main() -> None:
     if args.approve or args.reject:
         parser.error("--approve and --reject require --resume")
     run_dir = args.output_dir or (
-        args.input_dir / "review_runs" /
+        BATCH_RUNS_DIR /
         f"run-{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}-{uuid4().hex[:8]}"
     )
     summary = run_batch(

@@ -17,15 +17,17 @@ from typing import Any
 from langchain_core.tools import tool
 
 try:  # Package import and direct execution from this directory.
-    from .extract_pdf_tables import native_text_converter, require_embedded_text
-    from .extract_pdf_tables_html import extract_pdf, ocr_table_converter
+    from .extract_pdf_tables_html import (
+        extract_pdf, native_text_converter, ocr_table_converter, require_embedded_text,
+    )
 except ImportError:  # pragma: no cover - direct-script execution
-    from extract_pdf_tables import native_text_converter, require_embedded_text
-    from extract_pdf_tables_html import extract_pdf, ocr_table_converter
+    from extract_pdf_tables_html import (
+        extract_pdf, native_text_converter, ocr_table_converter, require_embedded_text,
+    )
 
 
 POLICY_DIR = Path(__file__).resolve().parents[1] / "downloads" / "coverage-policies"
-REVIEW_DIR = POLICY_DIR / "extraction_review"
+REVIEW_DIR = Path(__file__).resolve().parent / "extraction_review"
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 
 

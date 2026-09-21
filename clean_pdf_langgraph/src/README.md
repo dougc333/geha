@@ -11,7 +11,9 @@ Graph: `pdfplumber_extract → docling_extract → render_pdf_pages → vision_c
 then `write_errors → END` when any mismatch or uncertainty exists, otherwise
 `END`. The state schema is in `schema.py`. The run is fixed to one iteration.
 
-From `/Users/dc/geha/clean_pdf_langgraph`:
+Source PDFs are read from `/Users/dc/geha/downloads/coverage-policies`.
+Review artifacts remain under `/Users/dc/geha/clean_pdf_langgraph`; the
+shared PDF directory is not used for generated output. From the workflow directory:
 
 ```bash
 # Install/update project dependencies in the GEHA environment first.
@@ -22,7 +24,7 @@ cd /Users/dc/geha/clean_pdf_langgraph
 OPENAI_API_KEY=... /Users/dc/geha/.venv/bin/python -m src.cleaning_graph \
   --pdf geha-coverage-policy-ziihera.pdf
 
-# Or inspect every top-level PDF, one at a time (many vision calls):
+# Or inspect every top-level PDF in downloads/coverage-policies (many vision calls):
 /Users/dc/geha/.venv/bin/python -m src.cleaning_graph --all
 
 # Offline extraction smoke test: still writes an uncertainty report.
@@ -30,7 +32,7 @@ OPENAI_API_KEY=... /Users/dc/geha/.venv/bin/python -m src.cleaning_graph \
   --pdf geha-coverage-policy-ziihera.pdf --no-vision
 ```
 
-The sample outputs, created beside the source PDF, are
+The sample outputs, created in `first_pass/<pdf-stem>/`, are
 `geha-coverage-policy-ziihera_pdfplumber.md`,
 `geha-coverage-policy-ziihera.docling.md`,
 `geha-coverage-policy-ziihera.docling_chunks.md`,
@@ -39,10 +41,9 @@ The sample outputs, created beside the source PDF, are
 If anything mismatches or cannot be verified, the graph also writes
 `geha-coverage-policy-ziihera_errors.md` and stops for human review.
 
-Existing outputs are never overwritten. To run a fresh iteration, use a new
-copy of the PDF in a separate review directory and invoke the graph with that
-source and output directory programmatically, or archive the old artifacts
-after reviewing them. The CLI accepts only top-level source PDF filenames.
+Existing outputs are never overwritten. To run a fresh iteration, archive the
+old `first_pass/<pdf-stem>/` artifacts after reviewing them. The CLI accepts
+only top-level filenames from the shared coverage-policy directory.
 
 The vision service receives the extracted unit and relevant rendered PDF page
 images. Do not run it on PDFs containing protected member data without an
@@ -51,7 +52,7 @@ approved data-transfer path. Requests use `store=False`.
 ## Raw HTML for human side-by-side review
 
 These are two independent, correction-free exporters. Each creates one
-self-contained HTML file per table next to the PDF by default. File names
+self-contained HTML file per table under `raw_tables/<pdf-stem>/` by default. File names
 include `_pdfplumber_` or `_docling_`, the table number, and the source page.
 The CSS comes from the earlier `extract_pdf_tables_html.py` design, but **no**
 header promotion, continuation repair, or revision-history filtering is used.
@@ -71,8 +72,8 @@ cells with the corresponding raw Markdown when investigating parser output.
 
 ## Batch LangGraph: both extractors and HTML-vs-PDF review
 
-`batch_review_graph.py` loops over all top-level PDFs in this directory. For
-each PDF it creates a new subdirectory in a unique `review_runs` run directory,
+`batch_review_graph.py` loops over all top-level PDFs in the shared coverage-policy
+directory. For each PDF it creates a new subdirectory in a unique local `review_runs` run directory,
 so older extractions are not overwritten. Its nodes are:
 
 `pdfplumber_extract → docling_extract → build_combined_html → render_pdf_pages

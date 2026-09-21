@@ -17,14 +17,27 @@ import unicodedata
 from pathlib import Path
 from typing import Any
 
+POLICY_DIR = Path(__file__).resolve().parents[1] / "downloads" / "coverage-policies"
+OUTPUT_DIR = Path(__file__).resolve().parent / "html_tables"
+
 from docling.datamodel.base_models import InputFormat
 from docling.datamodel.pipeline_options import PdfPipelineOptions
 from docling.document_converter import DocumentConverter, PdfFormatOption
 
-try:  # Support package imports and direct script execution.
-    from .extract_pdf_tables import native_text_converter, require_embedded_text
-except ImportError:  # pragma: no cover - direct script execution
-    from extract_pdf_tables import native_text_converter, require_embedded_text
+def native_text_converter() -> DocumentConverter:
+    """Build the first-pass converter without OCR."""
+    options = PdfPipelineOptions()
+    options.do_ocr = False
+    options.do_table_structure = True
+    return DocumentConverter(
+        format_options={InputFormat.PDF: PdfFormatOption(pipeline_options=options)}
+    )
+
+
+def require_embedded_text(document: Any, pdf_name: str) -> None:
+    """Reject image-only PDFs before attempting table extraction."""
+    if not document.export_to_text().strip():
+        raise ValueError(f"{pdf_name} has no extractable embedded text; OCR is disabled")
 
 
 HEADING_LABELS = {"caption", "section_header", "title"}
@@ -466,7 +479,7 @@ def extract_pdf(
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("input_dir", type=Path)
+    parser.add_argument("input_dir", type=Path, nargs="?", default=POLICY_DIR)
     parser.add_argument("--output-dir", type=Path)
     parser.add_argument("--overwrite", action="store_true")
     args = parser.parse_args()
@@ -475,7 +488,7 @@ def main() -> None:
     output_dir = (
         args.output_dir.expanduser().resolve()
         if args.output_dir
-        else input_dir / "html_tables"
+        else OUTPUT_DIR
     )
     pdfs = sorted(input_dir.glob("*.pdf"))
     if not pdfs:

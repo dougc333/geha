@@ -7,7 +7,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from .cleaning_graph import PDF_DIR, compare_node, preflight_outputs
+from .cleaning_graph import PDF_DIR, compare_node, preflight_outputs, run_one
+from .paths import FIRST_PASS_DIR
 from .extractors import naive_pdf_extract, render_pdf_pages
 
 
@@ -35,7 +36,22 @@ class FirstPassTests(unittest.TestCase):
             source = Path(temporary) / "example.pdf"
             (source.parent / "example.docling.md").write_text("old")
             with self.assertRaises(FileExistsError):
-                preflight_outputs(source)
+                preflight_outputs(source, source.parent)
+
+    def test_source_and_review_outputs_are_in_separate_directories(self) -> None:
+        self.assertEqual(PDF_DIR.name, "coverage-policies")
+        self.assertTrue((PDF_DIR / "geha-coverage-policy-ziihera.pdf").is_file())
+        self.assertFalse(FIRST_PASS_DIR.is_relative_to(PDF_DIR))
+
+    def test_run_one_reads_shared_pdf_and_writes_locally(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            with patch("src.cleaning_graph.FIRST_PASS_DIR", Path(temporary)), \
+                    patch("src.cleaning_graph.build_graph") as build_graph:
+                build_graph.return_value.invoke.return_value = {"status": "pending"}
+                run_one("geha-coverage-policy-ziihera.pdf", use_vision=False)
+                state = build_graph.return_value.invoke.call_args.args[0]
+            self.assertEqual(Path(state["pdf_path"]).parent, PDF_DIR)
+            self.assertEqual(Path(state["output_dir"]).parent, Path(temporary))
 
     def test_empty_extraction_cannot_pass_review(self) -> None:
         result = compare_node({

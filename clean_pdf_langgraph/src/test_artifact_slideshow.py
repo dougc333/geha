@@ -54,7 +54,9 @@ class ArtifactSlideshowTests(unittest.TestCase):
                 )
                 return {}
 
-            output = prepare_policy_artifacts(root, "bendamustine", runner=runner)
+            output = prepare_policy_artifacts(
+                root, "bendamustine", cache_root=root / "slideshow_cache", runner=runner
+            )
             self.assertEqual(output.parent.name, "slideshow_cache")
             self.assertEqual(calls[0][0], pdf.resolve())
             self.assertEqual(calls[0][2], {"use_vision": False})
