@@ -61,7 +61,9 @@ def result_rows(results: list[dict]) -> list[dict]:
             "expected table": item["expected_table_retrieved"],
             "deterministic correct": item["deterministic"]["correct"],
             "LLM correct": item["llm"]["correct"],
-            "LLM tokens": item["llm"]["usage"]["total"],
+            "LLM input tokens": item["llm"]["usage"]["input"],
+            "LLM output tokens": item["llm"]["usage"]["output"],
+            "LLM total tokens": item["llm"]["usage"]["total"],
             "LLM cost (USD)": item["llm"]["cost_usd"],
             "LLM latency (ms)": round(item["llm"]["latency_ms"], 1),
             "error": item["llm"]["error"],
@@ -154,7 +156,11 @@ with single_tab:
                         st.metric(
                             "Correct", "Yes" if result["llm"]["correct"] else "No"
                         )
-                        st.metric("Tokens", result["llm"]["usage"]["total"])
+                        usage = result["llm"]["usage"]
+                        st.metric("Total tokens", f"{usage['total']:,}")
+                        st.caption(
+                            f"Input: {usage['input']:,} · Output: {usage['output']:,}"
+                        )
                         cost = result["llm"]["cost_usd"]
                         st.metric(
                             "Configured cost",
