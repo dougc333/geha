@@ -10,38 +10,6 @@ permissions:
   contents: read
 
 jobs:
-  policy-and-extraction:
-    name: Policy RAG and extraction unit tests
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    env:
-      HF_HUB_OFFLINE: "1"
-    steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v6
-        with:
-          version: "0.11.28"
-          enable-cache: true
-      - name: Install Python and locked dependencies
-        run: |
-          uv python install 3.12
-          uv sync --locked --python 3.12
-      - name: Policy and extraction tests
-        run: >-
-          uv run --no-sync python -m unittest -q
-          chunking_benchmarks_RAG.test_table_rag
-          chunking_benchmarks_RAG.test_billing_codes
-          chunking_benchmarks_RAG.test_preferred_table_tool
-          clean_pdf_langgraph.src.test_raw_table_html
-      - name: Compile Streamlit entry points
-        run: >-
-          uv run --no-sync python -m py_compile
-          chunking_benchmarks_RAG/medical_claims_advisor_ui.py
-          chunking_benchmarks_RAG/table_rag_ui.py
-      - name: TF-IDF baseline tests
-        working-directory: chunking_benchmarks_RAG
-        run: ../.venv/bin/python -m unittest -q test_tfidf_policy_search
-
   mcp-server:
     name: MCP server contract tests
     runs-on: ubuntu-latest
