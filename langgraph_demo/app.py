@@ -11,7 +11,7 @@ from demo import ROOT, load_inputs, workflow, resume
 
 st.set_page_config(page_title="GEHA case review", page_icon="📋", layout="wide")
 DB = Path(os.environ.get("GEHA_DEMO_DB", ROOT / "data/checkpoints.sqlite"))
-BASE = Path(os.environ.get("GEHA_DEMO_BASE", ROOT.parent))
+BASE = Path(os.environ.get("GEHA_DEMO_BASE", ROOT))
 
 
 @st.cache_resource

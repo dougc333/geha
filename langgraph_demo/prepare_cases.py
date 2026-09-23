@@ -25,5 +25,5 @@ def prepare(db, base):
 
 if __name__ == "__main__":
     print(
-        "Prepared new reviews:", prepare(ROOT / "data/checkpoints.sqlite", ROOT.parent)
+        "Prepared new reviews:", prepare(ROOT / "data/checkpoints.sqlite", ROOT)
     )

@@ -171,7 +171,7 @@ def traced_review(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--base", type=Path, default=ROOT.parent)
+    parser.add_argument("--base", type=Path, default=ROOT)
     parser.add_argument("--db", type=Path, default=ROOT / "data/checkpoints.sqlite")
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("check", help="Verify authentication with local Langfuse")

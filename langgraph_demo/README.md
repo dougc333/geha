@@ -125,11 +125,35 @@ Test unauthorized access with `uv run demo.py start --actor outsider`. It ends b
 
 ## Read-only dependencies
 
-- `../demo_data/claims.json`: synthetic member/claim identifiers and plan labels.
-- `../demo_data/audit_trails.json`: recorded status and reasons (authoritative within this simulation).
-- `../demo_data/public_reference.json`: curated, summarized guidance with source URLs.
+- `demo_data/claims.json`: synthetic member/claim identifiers and plan labels.
+- `demo_data/audit_trails.json`: recorded status and reasons (authoritative within this simulation).
+- `demo_data/public_reference.json`: curated, summarized guidance with source URLs.
 
-No imports from a separate reference agent are required. `--base /path/to/geha` selects another input root; `--db /path/to/checkpoints.sqlite` selects another checkpoint store. Put these options before the subcommand.
+No imports from a separate reference agent are required. `--base /path/to/input-root` selects another input root containing `demo_data/`; `--db /path/to/checkpoints.sqlite` selects another checkpoint store. By default both CLI and UI use this `langgraph_demo` directory. Put these options before the subcommand.
+
+### Initial source data and state
+
+The demo originally read these three synthetic source files from the repository-level
+`/Users/dc/geha/demo_data/` directory. They are now bundled under
+`langgraph_demo/demo_data/` so the application can run from this directory without
+an external data dependency. The original directory is preserved as a reference copy.
+
+The bundled `claims.json` contains **20 synthetic claims**. The workflow treats
+`audit_trails.json` as authoritative for the simulated final claim status. Its current
+status distribution is:
+
+| Status | Claims |
+| --- | ---: |
+| `PAID` | 10 |
+| `PENDING_REVIEW` | 5 |
+| `DENIED` | 3 |
+| `PARTIAL` | 2 |
+
+The SQLite checkpoint database is separate from this source state. If
+`data/checkpoints.sqlite` does not exist, the source claims and statuses are still
+available, but there are no saved review threads. Running `start` creates a new
+LangGraph thread and persists its state in the checkpoint database. The source JSON
+files are read-only inputs and are not changed by review approval or rejection.
 
 ## Deliberate limits
 

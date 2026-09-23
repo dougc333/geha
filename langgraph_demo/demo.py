@@ -346,7 +346,7 @@ def resume(
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--base", type=Path, default=ROOT.parent)
+    p.add_argument("--base", type=Path, default=ROOT)
     p.add_argument("--db", type=Path, default=ROOT / "data/checkpoints.sqlite")
     sub = p.add_subparsers(dest="command", required=True)
     sub.add_parser("example")
