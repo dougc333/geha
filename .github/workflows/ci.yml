@@ -28,10 +28,6 @@ jobs:
         run: uv run --no-sync python -m unittest discover -s highlevel_simulation -p 'test_*.py'
       - name: Run table-aware RAG tests
         run: uv run --no-sync python -m unittest discover -s chunking_benchmarks_RAG -p 'test_*.py'
-      - name: Run OCR pipeline tests
-        run: uv run --no-sync python -m unittest discover -s chunking_benchmarks_RAG/ocr_pipeline -p 'test_*.py'
-      - name: Run clean-PDF workflow tests
-        run: uv run --no-sync python -m unittest discover -s clean_pdf_langgraph/src -p 'test_*.py'
 
   langgraph-python:
     name: LangGraph Python tests
