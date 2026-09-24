@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import base64
 import gc
+import hashlib
 import tempfile
 import uuid
 from typing import Any, Callable
@@ -37,9 +38,44 @@ class StreamlitApplication:
 
     @staticmethod
     def display_pdf(st: Any, file: Any) -> None:
-        encoded = base64.b64encode(file.getvalue()).decode("utf-8")
+        """Render the bytes from the currently selected upload.
+
+        ``st.pdf`` avoids browser-specific failures with large base64 data URLs
+        and, importantly, receives the selected upload's bytes rather than a
+        path or a hard-coded example document.  The iframe fallback keeps the
+        UI usable with older Streamlit versions.
+        """
+        pdf_bytes = file.getvalue()
+        st.markdown("<h3>PDF Preview</h3>", unsafe_allow_html=True)
+        pdf_renderer = getattr(st, "pdf", None)
+        if callable(pdf_renderer):
+            # A content-derived key forces Streamlit to replace the embedded
+            # viewer when the user selects a different PDF.
+            pdf_key = f"pdf-preview-{hashlib.sha256(pdf_bytes).hexdigest()[:16]}"
+            pdf_renderer(pdf_bytes, key=pdf_key)
+            # Some browser/PDF.js combinations show a blank embedded viewer
+            # for otherwise valid PDFs.  Render the first page locally as a
+            # reliable fallback/preview so every upload remains visible.
+            try:
+                import pymupdf
+
+                with pymupdf.open(stream=pdf_bytes, filetype="pdf") as document:
+                    if document.page_count:
+                        page = document.load_page(0)
+                        pixmap = page.get_pixmap(matrix=pymupdf.Matrix(1.5, 1.5), alpha=False)
+                        st.image(
+                            pixmap.tobytes("png"),
+                            caption="First page preview",
+                            use_container_width=True,
+                        )
+            except Exception:
+                # Keep the embedded viewer available even if local rasterizing
+                # is unavailable for a particular file or environment.
+                pass
+            return
+
+        encoded = base64.b64encode(pdf_bytes).decode("utf-8")
         st.markdown(
-            "<h3>PDF Preview</h3>"
             f'<iframe src="data:application/pdf;base64,{encoded}" '
             'width="400" height="100%" type="application/pdf" '
             'style="height:100vh; width:100%"></iframe>',

@@ -8,6 +8,7 @@ import unittest
 from types import SimpleNamespace
 
 from app_class import CliApplication
+from app_streamlit_class import StreamlitApplication
 from rag_client_class import RagClient
 from reranking_models_class import RerankingModels
 
@@ -55,6 +56,25 @@ class FakeClient:
 
 
 class ClassRefactorTests(unittest.TestCase):
+    def test_streamlit_pdf_preview_uses_selected_upload_bytes(self):
+        rendered = []
+
+        class FakeStreamlit:
+            @staticmethod
+            def markdown(*args, **kwargs):
+                rendered.append((args, kwargs))
+
+            @staticmethod
+            def pdf(value, **kwargs):
+                rendered.append(("pdf", value, kwargs))
+
+        selected_file = SimpleNamespace(getvalue=lambda: b"selected-pdf-bytes")
+        StreamlitApplication.display_pdf(FakeStreamlit, selected_file)
+
+        pdf_render = next(item for item in rendered if item[0] == "pdf")
+        self.assertEqual(pdf_render[1], b"selected-pdf-bytes")
+        self.assertTrue(pdf_render[2]["key"].startswith("pdf-preview-"))
+
     def test_reranker_passthrough_preserves_document_text(self):
         model = RerankingModels()
         docs = [SimpleNamespace(page_content="one"), SimpleNamespace(page_content="two")]

@@ -161,6 +161,8 @@ class BatchReviewTests(unittest.TestCase):
             with patch("src.batch_review_graph.naive_pdf_extract", side_effect=plumber) as first, \
                     patch("src.batch_review_graph.docling_extract", side_effect=docling) as second, \
                     patch("src.batch_review_graph.render_pdf_pages", side_effect=render), \
+                    patch("src.batch_review_graph.webbrowser.open"), \
+                    patch("src.batch_review_graph.time.sleep"), \
                     patch("src.batch_review_graph.images_for_pages", return_value=[Path("page.png")]), \
                     patch("src.batch_review_graph.compare_html_table", return_value=("match", [])) as compare:
                 paused = run_pdf(pdf, output, vision_model="gpt-4o-mini")
@@ -168,6 +170,7 @@ class BatchReviewTests(unittest.TestCase):
                 self.assertEqual(compare.call_count, 0)
                 self.assertTrue(Path(paused["pdfplumber_html"]).is_file())
                 self.assertTrue(Path(paused["docling_html"]).is_file())
+                self.assertTrue(Path(paused["table_slideshow_html"]).is_file())
                 self.assertTrue((output / "checkpoint.sqlite").is_file())
 
                 result = resume_pdf(output, approve=True)
@@ -195,6 +198,8 @@ class BatchReviewTests(unittest.TestCase):
                 "docling_tables_markdown": "tables.md",
                 "docling_tables": [artifact("docling", 1)],
             }), patch("src.batch_review_graph.render_pdf_pages", return_value=["page.png"]), \
+                    patch("src.batch_review_graph.webbrowser.open"), \
+                    patch("src.batch_review_graph.time.sleep"), \
                     patch("src.batch_review_graph.compare_html_table") as compare:
                 self.assertIn("__interrupt__", run_pdf(pdf, output))
                 result = resume_pdf(output, approve=False)

@@ -8,7 +8,10 @@ unverified, never as successful comparisons.
 from __future__ import annotations
 
 import argparse
+import html
 import json
+import time
+import webbrowser
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, TypedDict
@@ -22,7 +25,7 @@ from .extractors import (
     docling_extract, naive_pdf_extract, render_pdf_pages, source_sha256, write_new,
 )
 from .html_vision_review import compare_html_table
-from .raw_table_html import combined_raw_html, raw_table_markup
+from .raw_table_html import RAW_TABLE_CSS, combined_raw_html, raw_table_markup
 from .schema import CleaningState, ReviewIssue, TableArtifact
 from .vision_review import images_for_pages
 from .paths import BATCH_RUNS_DIR, PDF_DIR
@@ -37,6 +40,7 @@ class BatchReviewState(CleaningState, total=False):
     extractor_reviews: dict[str, dict[str, Any]]
     error_reports: dict[str, str]
     vision_approved: bool
+    table_slideshow_html: str
 
 
 def pdfplumber_node(state: BatchReviewState) -> BatchReviewState:
@@ -69,6 +73,69 @@ def render_pages_node(state: BatchReviewState) -> BatchReviewState:
     )}
 
 
+def cycle_html_tables_node(state: BatchReviewState) -> BatchReviewState:
+    """Show every extracted table for three seconds before human approval.
+
+    The slideshow is a self-contained local HTML file so it remains available
+    after this graph pauses at ``interrupt`` and the CLI process exits.
+    """
+    source = Path(state["pdf_path"])
+    output_dir = Path(state["output_dir"])
+    cards: list[str] = []
+    for extractor in EXTRACTORS:
+        for table in state[f"{extractor}_tables"]:
+            markup = raw_table_markup(table["columns"], table["rows"])
+            cards.append(
+                f'<section class="table-card">'
+                f'<h2>{html.escape(extractor)} table {int(table["number"])} '
+                f'· PDF page {int(table["page"])}</h2>'
+                f'<div class="table-wrap">{markup}</div></section>'
+            )
+
+    cards_html = "\n".join(cards) or '<p class="empty">No tables were extracted.</p>'
+    slideshow = f"""<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Table review · {html.escape(source.name)}</title>
+<style>
+{RAW_TABLE_CSS}
+main {{ width:min(1440px,calc(100% - 32px)); margin:24px auto; padding:24px; background:#fff; border-radius:12px; }}
+.table-card {{ display:none; }} .table-card.active {{ display:block; }}
+.status {{ color:#5f6f7f; margin-bottom:18px; }} .empty {{ color:#9f1d20; }}
+</style></head><body><main>
+<h1>Human review: extracted tables</h1>
+<p class="status" id="status">Starting table review…</p>
+{cards_html}
+</main><script>
+const cards = [...document.querySelectorAll('.table-card')];
+const status = document.getElementById('status');
+let index = 0;
+function show() {{
+  cards.forEach((card, i) => card.classList.toggle('active', i === index));
+  status.textContent = cards.length
+    ? `Table ${{index + 1}} of ${{cards.length}} · 3 seconds per table`
+    : 'No extracted tables were found.';
+}}
+show();
+if (cards.length > 1) {{
+  const timer = setInterval(() => {{
+    index += 1;
+    if (index >= cards.length) {{
+      clearInterval(timer);
+      status.textContent = `Review complete · ${{cards.length}} tables displayed`;
+      return;
+    }}
+    show();
+  }}, 3000);
+}}
+</script></body></html>"""
+    path = output_dir / f"{source.stem}_table_review.html"
+    write_new(path, slideshow)
+    if cards:
+        webbrowser.open(path.resolve().as_uri())
+        time.sleep(3 * len(cards))
+    return {"table_slideshow_html": str(path)}
+
+
 def human_review_node(state: BatchReviewState) -> BatchReviewState:
     """Pause after local artifacts exist, before sending any of them to OpenAI."""
     if not state["use_vision"]:
@@ -82,6 +149,7 @@ def human_review_node(state: BatchReviewState) -> BatchReviewState:
         "docling_tables_markdown": state["docling_tables_markdown"],
         "pdfplumber_html": state["pdfplumber_html"],
         "docling_html": state["docling_html"],
+        "table_slideshow_html": state.get("table_slideshow_html"),
         "page_images": state["page_images"],
         "vision_model": state["vision_model"],
     })
@@ -213,6 +281,7 @@ def build_graph(checkpointer=None):
     graph.add_node("docling_extract", docling_node)
     graph.add_node("build_combined_html", html_node)
     graph.add_node("render_pdf_pages", render_pages_node)
+    graph.add_node("cycle_html_tables", cycle_html_tables_node)
     graph.add_node("human_review", human_review_node)
     graph.add_node("vision_compare", vision_node)
     graph.add_node("vision_declined", decline_node)
@@ -221,7 +290,8 @@ def build_graph(checkpointer=None):
     graph.add_edge("pdfplumber_extract", "docling_extract")
     graph.add_edge("docling_extract", "build_combined_html")
     graph.add_edge("build_combined_html", "render_pdf_pages")
-    graph.add_edge("render_pdf_pages", "human_review")
+    graph.add_edge("render_pdf_pages", "cycle_html_tables")
+    graph.add_edge("cycle_html_tables", "human_review")
     graph.add_conditional_edges(
         "human_review",
         lambda state: "approved" if state["vision_approved"] else "declined",
