@@ -1,5 +1,7 @@
 """Streamlit inventory for PDF text quality and Docling extraction risk."""
 
+from datetime import datetime, timezone
+import json
 from pathlib import Path
 import re
 from typing import Any
@@ -10,6 +12,8 @@ import streamlit as st
 
 
 DEFAULT_INPUT_DIR = Path("/Users/dc/geha/downloads/coverage-policies")
+INVENTORY_JSON = Path(__file__).with_name("pdf_inventory_results.json")
+INVENTORY_SCHEMA_VERSION = 1
 
 
 def _word_count(text: str) -> int:
@@ -146,17 +150,78 @@ def scan_directory(directory: str) -> tuple[pd.DataFrame, pd.DataFrame]:
     return pd.DataFrame(summaries), pd.DataFrame(pages)
 
 
+def _normalized_directory(directory: str) -> str:
+    return str(Path(directory).expanduser().resolve(strict=False))
+
+
+def save_inventory(
+    directory: str,
+    summary_df: pd.DataFrame,
+    page_df: pd.DataFrame,
+    path: Path = INVENTORY_JSON,
+) -> str:
+    """Persist a completed scan and return its UTC timestamp."""
+    generated_at = datetime.now(timezone.utc).isoformat()
+    payload = {
+        "schema_version": INVENTORY_SCHEMA_VERSION,
+        "generated_at": generated_at,
+        "source_directory": _normalized_directory(directory),
+        "summaries": summary_df.to_dict(orient="records"),
+        "pages": page_df.to_dict(orient="records"),
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary_path = path.with_suffix(path.suffix + ".tmp")
+    temporary_path.write_text(
+        json.dumps(payload, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    temporary_path.replace(path)
+    return generated_at
+
+
+def load_inventory(
+    directory: str,
+    path: Path = INVENTORY_JSON,
+) -> tuple[pd.DataFrame, pd.DataFrame, str] | None:
+    """Load the last scan when it belongs to the selected PDF directory."""
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        return None
+    if (
+        payload.get("schema_version") != INVENTORY_SCHEMA_VERSION
+        or payload.get("source_directory") != _normalized_directory(directory)
+        or not isinstance(payload.get("summaries"), list)
+        or not isinstance(payload.get("pages"), list)
+    ):
+        return None
+    return (
+        pd.DataFrame(payload["summaries"]),
+        pd.DataFrame(payload["pages"]),
+        str(payload.get("generated_at", "unknown")),
+    )
+
+
 st.set_page_config(page_title="PDF extraction inventory", layout="wide")
 st.title("PDF extraction inventory")
 st.caption("Text coverage and layout signals that affect Docling table extraction.")
 
 with st.sidebar:
     directory = st.text_input("PDF directory", str(DEFAULT_INPUT_DIR))
-    if st.button("Rescan PDFs"):
-        scan_directory.clear()
-        st.rerun()
+    rescan = st.button("Rescan PDFs")
 
-summary_df, page_df = scan_directory(directory)
+cached_inventory = None if rescan else load_inventory(directory)
+if cached_inventory is not None:
+    summary_df, page_df, generated_at = cached_inventory
+    st.caption(f"Loaded saved inventory from {generated_at}.")
+else:
+    if rescan:
+        scan_directory.clear()
+    with st.spinner("Scanning PDFs…"):
+        summary_df, page_df = scan_directory(directory)
+        generated_at = save_inventory(directory, summary_df, page_df)
+    st.caption(f"Saved inventory scan to {INVENTORY_JSON} at {generated_at}.")
+
 if summary_df.empty:
     st.error(f"No top-level PDF files found in {directory}")
     st.stop()
