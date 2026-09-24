@@ -1,5 +1,12 @@
 # GEHA
 
+e2e_RAG:
+Code References: The chat UI and PDF viewer comes from Lightning AI which is a chat assistant: 
+https://lightning.ai/lightning-ai/templates/document-chat-assistant-using-rag?section=featured
+
+
+Code References: 
+
 ## High-level simulations
 
 These simulations were drafted with assistance from an LLM. The LLM accelerated
@@ -31,6 +38,7 @@ tools such as LangSmith or Langfuse can record and analyze execution traces.
 Trajectory data may later support debugging, evaluation, and workflow
 improvement, but it currently has no effect on these deterministic simulations.
 
+
 Folder: `highlevel_simulation`
 
 
@@ -61,60 +69,7 @@ share a small set of fabricated fixtures in `demo_data/`. Run the Python
 applications through `uv` or Streamlit and the TypeScript application through
 npm.
 
-### LangGraph Streamlit application
 
-This is the quickest interactive demonstration of the synthetic claim-review
-workflow:
-
-```bash
-cd /Users/dc/geha/langgraph_demo
-uv sync
-uv run streamlit run app.py --server.address 127.0.0.1 --server.port 8503
-```
-
-Open `http://localhost:8503`. See
-[langgraph_demo/README.md](langgraph_demo/README.md) for the workflow and review
-instructions.
-
-### LangGraph command-line demonstration
-
-```bash
-cd /Users/dc/geha/langgraph_demo
-uv run demo.py example
-uv run demo.py start
-```
-
-The `start` command prints a thread ID. Use the commands documented in
-[langgraph_demo/README.md](langgraph_demo/README.md) to inspect or review that
-thread.
-
-### Standalone RAG application
-
-```bash
-cd /Users/dc/geha/RAG_demo
-uv sync
-uv run streamlit run app.py
-```
-
-See [RAG_demo/README.md](RAG_demo/README.md) for ingestion, local model, and
-evaluation options.
-
-### MCP end-to-end demonstration
-
-```bash
-cd /Users/dc/geha/MCP_server
-uv sync
-uv run --locked demo_client.py
-uv run --locked demo_client.py --run-all
-```
-
-The first client command discovers the MCP tools without running simulations.
-The second creates an isolated run and executes all flows. To start only the
-stdio MCP server for an MCP host:
-
-```bash
-uv run --locked server.py
-```
 
 See [MCP_server/README.md](MCP_server/README.md) for the tools, safeguards, and
 generated run artifacts.

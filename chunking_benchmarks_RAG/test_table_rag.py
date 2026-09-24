@@ -243,7 +243,10 @@ class TableRagTests(unittest.TestCase):
             nested,
             "aa_source_not_consistent/geha-medical-necessity-review-criteria.pdf",
         )
-        self.assertTrue((root / nested.replace(".pdf", ".docling_chunks.md")).exists())
+        self.assertTrue((root / nested).exists())
+        self.assertFalse(
+            (root / nested.replace(".pdf", ".docling_chunks.md")).exists()
+        )
 
 
 if __name__ == "__main__":

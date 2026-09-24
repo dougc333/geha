@@ -1,4 +1,7 @@
-# GEHA RAG demo
+# Table  RAG demo
+
+NOTES TO MYSELF: how hit@k affected by Tables. 
+
 
 Standalone Streamlit + LangGraph + persistent Chroma demo over two GEHA policy PDFs.
 
@@ -33,6 +36,106 @@ codes and preference fields are kept together. Hybrid retrieval fuses local vect
 with keyword matching. Fusion scores are ranks, not probabilities or confidence.
 Document content fingerprints select persistent collections, preventing stale document reuse.
 Old collections remain on disk; this demo does not automatically purge prior indexes.
+
+## Architecture details
+
+### 2. Creates table-aware chunks
+
+[load_chunks() (line 21)](/Users/dc/geha/clean_data_RAG/rag.py:21) reads the generated Markdown.
+
+Chunking rules:
+
+- Each complete table becomes one chunk.
+- Prose uses overlapping windows of 180 words with a 30-word overlap.
+- Chunks shorter than 30 characters are discarded.
+- Every chunk receives separate metadata:
+
+```json
+{
+    "document_id": "bendamustine",
+    "source_file": "geha-coverage-policy-bendamustine.pdf",
+    "page": 1,
+    "kind": "table"
+}
+```
+
+This means the source filename and page are **not embedded as part of the text**. They are stored as Chroma metadata—which is the cleaner design you were asking about earlier.
+
+### 4. Performs hybrid retrieval
+
+[search() (line 83)](/Users/dc/geha/clean_data_RAG/rag.py:83) combines:
+
+- Chroma semantic vector similarity
+- A custom keyword/IDF-style ranking
+- Reciprocal-rank fusion
+- A small boost for billing-table chunks when the question contains terms such as `HCPCS`, `code`, `billing`, or `unit`
+
+It is not full BM25, despite being similar in purpose.
+
+The returned objects include:
+
+```python
+{
+    "id": "bendamustine-p1-001",
+    "text": "...",
+    "metadata": {...},
+    "score": 0.08952
+}
+```
+
+The score is a fused ranking score—not probability or confidence.
+
+### 5. Runs a two-step LangGraph pipeline
+
+[build_graph() (line 139)](/Users/dc/geha/clean_data_RAG/rag.py:139) creates this graph:
+
+```text
+START → retrieve → answer → END
+```
+
+In retrieval-only mode, it returns the excerpts without calling an LLM.
+
+When generation is enabled, it sends the current question and retrieved excerpts to an OpenAI-compatible `/chat/completions` endpoint. The default is local Ollama with `llama3.2:3b`.
+
+Generated answers must return:
+
+```json
+{
+  "answer": "...",
+  "citation_ids": ["bendamustine-p1-001"],
+  "abstained": false
+}
+```
+
+Unknown or missing citations are rejected.
+
+### 6. Provides a Streamlit interface
+
+[app.py (line 7)](/Users/dc/geha/clean_data_RAG/app.py:7) provides:
+
+- Policy questions
+- Retrieval-only or generated-answer mode
+- Document filtering
+- Retrieved evidence display
+- Source page citations
+- Original PDF downloads
+- Retrieval evaluation results
+
+It has no conversation memory. Every question is processed independently.
+
+### 7. Evaluates retrieval quality
+
+The project includes two evaluation systems:
+
+- [evaluate.py (line 10)](/Users/dc/geha/clean_data_RAG/evaluate.py:10): six answerable and two abstention cases.
+- [evaluate_preference_rows.py (line 41)](/Users/dc/geha/clean_data_RAG/evaluate_preference_rows.py:41): thirteen questions checking whether drug name, preference, prior authorization and HCPCS code remain together in the retrieved table.
+
+Reported preference-table performance is:
+
+- Hit@1: 12/13
+- Hit@4: 13/13
+
+[indexed_chunks.txt](/Users/dc/geha/clean_data_RAG/indexed_chunks.txt) shows the exact 26 strings stored and embedded by Chroma.
 
 ## Evaluation
 
