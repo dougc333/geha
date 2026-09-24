@@ -10,8 +10,31 @@ permissions:
   contents: read
 
 jobs:
-  mcp-server:
-    name: MCP server contract tests
+  python-tests:
+    name: Python unit and workflow tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.28"
+          enable-cache: true
+      - name: Install Python and locked dependencies
+        run: |
+          uv python install 3.12
+          uv sync --locked --python 3.12
+      - name: Run high-level simulation tests
+        run: uv run --no-sync python -m unittest discover -s highlevel_simulation -p 'test_*.py'
+      - name: Run table-aware RAG tests
+        run: uv run --no-sync python -m unittest discover -s chunking_benchmarks_RAG -p 'test_*.py'
+      - name: Run OCR pipeline tests
+        run: uv run --no-sync python -m unittest discover -s chunking_benchmarks_RAG/ocr_pipeline -p 'test_*.py'
+      - name: Run clean-PDF workflow tests
+        run: uv run --no-sync python -m unittest discover -s clean_pdf_langgraph/src -p 'test_*.py'
+
+  langgraph-python:
+    name: LangGraph Python tests
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -23,7 +46,43 @@ jobs:
       - name: Install Python and locked dependencies
         run: |
           uv python install 3.12
-          uv sync --project MCP_server --locked --python 3.12
-      - name: Run MCP contract tests
-        working-directory: MCP_server
-        run: uv run --no-sync python -m unittest -q test_server test_policy_service
+          uv sync --project langgraph_python_review_claims --locked --python 3.12
+      - name: Run tests
+        working-directory: langgraph_python_review_claims
+        run: uv run --no-sync python -m unittest discover -p 'test_*.py'
+
+  table-rag:
+    name: Standalone table RAG tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.28"
+          enable-cache: true
+      - name: Install Python and locked dependencies
+        run: |
+          uv python install 3.12
+          uv sync --project table_RAG --locked --python 3.12
+      - name: Run tests
+        working-directory: table_RAG
+        run: uv run --no-sync pytest -q
+
+  langgraph-typescript:
+    name: LangGraph TypeScript tests and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: langgraph_ts_review_claims
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: langgraph_ts_review_claims/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run build

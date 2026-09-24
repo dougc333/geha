@@ -180,47 +180,67 @@ def save_inventory(
 
 
 def load_inventory(
-    directory: str,
     path: Path = INVENTORY_JSON,
-) -> tuple[pd.DataFrame, pd.DataFrame, str] | None:
-    """Load the last scan when it belongs to the selected PDF directory."""
+) -> tuple[str, pd.DataFrame, pd.DataFrame, str] | None:
+    """Load the selected directory and results from the last completed scan."""
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
     except (FileNotFoundError, json.JSONDecodeError, OSError):
         return None
     if (
         payload.get("schema_version") != INVENTORY_SCHEMA_VERSION
-        or payload.get("source_directory") != _normalized_directory(directory)
+        or not isinstance(payload.get("source_directory"), str)
         or not isinstance(payload.get("summaries"), list)
         or not isinstance(payload.get("pages"), list)
     ):
         return None
     return (
+        payload["source_directory"],
         pd.DataFrame(payload["summaries"]),
         pd.DataFrame(payload["pages"]),
         str(payload.get("generated_at", "unknown")),
     )
 
 
+def highlight_incomplete_text_rows(row: pd.Series) -> list[str]:
+    """Highlight PDFs that do not contain extractable text on every page."""
+    if str(row.get("text_on_all_pages", "")).lower() == "no":
+        return ["background-color: #ffd6d6; color: #8b0000; font-weight: bold"] * len(row)
+    return [""] * len(row)
+
+
 st.set_page_config(page_title="PDF extraction inventory", layout="wide")
 st.title("PDF extraction inventory")
 st.caption("Text coverage and layout signals that affect Docling table extraction.")
 
+saved_inventory = load_inventory()
+saved_directory = saved_inventory[0] if saved_inventory is not None else str(DEFAULT_INPUT_DIR)
+
 with st.sidebar:
-    directory = st.text_input("PDF directory", str(DEFAULT_INPUT_DIR))
+    directory = st.text_input("PDF directory", saved_directory)
     rescan = st.button("Rescan PDFs")
 
-cached_inventory = None if rescan else load_inventory(directory)
-if cached_inventory is not None:
-    summary_df, page_df, generated_at = cached_inventory
-    st.caption(f"Loaded saved inventory from {generated_at}.")
-else:
-    if rescan:
-        scan_directory.clear()
+if rescan:
+    scan_directory.clear()
     with st.spinner("Scanning PDFs…"):
         summary_df, page_df = scan_directory(directory)
+        INVENTORY_JSON.unlink(missing_ok=True)
         generated_at = save_inventory(directory, summary_df, page_df)
     st.caption(f"Saved inventory scan to {INVENTORY_JSON} at {generated_at}.")
+elif saved_inventory is not None:
+    source_directory, summary_df, page_df, generated_at = saved_inventory
+    st.caption(f"Loaded saved inventory from {generated_at}.")
+    if _normalized_directory(directory) != source_directory:
+        st.warning(
+            f"Showing saved results for {source_directory}. "
+            "Click Rescan PDFs to scan the directory entered above."
+        )
+else:
+    st.warning(
+        f"No saved inventory was found at {INVENTORY_JSON}. "
+        "Choose a PDF directory and click Rescan PDFs to create it."
+    )
+    st.stop()
 
 if summary_df.empty:
     st.error(f"No top-level PDF files found in {directory}")
@@ -244,7 +264,12 @@ display_columns = [
     "docling_risk", "path",
 ]
 st.subheader("Per-file results")
-st.dataframe(filtered[display_columns], use_container_width=True, hide_index=True)
+display_df = filtered[display_columns]
+st.dataframe(
+    display_df.style.apply(highlight_incomplete_text_rows, axis=1),
+    use_container_width=True,
+    hide_index=True,
+)
 st.download_button(
     "Download CSV",
     filtered.to_csv(index=False).encode("utf-8"),
