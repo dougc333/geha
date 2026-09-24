@@ -9,7 +9,7 @@ from unittest.mock import patch
 
 from .cleaning_graph import PDF_DIR, compare_node, preflight_outputs, run_one
 from .paths import FIRST_PASS_DIR
-from .extractors import docling_extract, render_pdf_pages
+from .extractors import correct_table_headers, docling_extract, render_pdf_pages
 
 
 class FirstPassTests(unittest.TestCase):
@@ -18,6 +18,15 @@ class FirstPassTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             result = docling_extract(sample, Path(temporary))
             self.assertGreater(len(result["docling_tables"]), 0)
+
+    def test_numeric_table_headers_are_promoted(self) -> None:
+        corrected = correct_table_headers([{
+            "extractor": "docling", "number": 1, "page": 2,
+            "markdown": "", "columns": ["0", "1", "2"],
+            "rows": [["Drug Name", "HCPCS Code", "Description"], ["Ziihera", "J9276", "Injection"]],
+        }])
+        self.assertEqual(corrected[0]["columns"], ["Drug Name", "HCPCS Code", "Description"])
+        self.assertEqual(corrected[0]["rows"][0][0], "Ziihera")
 
     def test_page_rendering_uses_installed_pdf_library(self) -> None:
         sample = PDF_DIR / "geha-coverage-policy-ziihera.pdf"

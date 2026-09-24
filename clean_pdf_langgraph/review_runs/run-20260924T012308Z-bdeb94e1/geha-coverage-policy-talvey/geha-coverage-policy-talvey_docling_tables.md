@@ -1,0 +1,16 @@
+## Docling table 1 (page 2)
+
+| Drug Name   | HCPCS Code   | Description                          |
+|:------------|:-------------|:-------------------------------------|
+| Talvey      | J3055        | Injection, talquetamab-tgvs, 0.25 mg |
+
+## Docling table 2 (page 3)
+
+| Date       | Updates                                                                  |
+|:-----------|:-------------------------------------------------------------------------|
+| 10/31/23   | Policy creation                                                          |
+| 12/11/23   | Added ECOG footnote; Updated references                                  |
+| 4/1/24     | HCPCS update from J9999 to J3055 and updated description                 |
+| 9/27/2024  | Annual Review                                                            |
+| 6/11/2025  | Policy adopted by G.E.H.A; document reviewed for universal accessibility |
+| 12/11/2025 | Annual Review                                                            |

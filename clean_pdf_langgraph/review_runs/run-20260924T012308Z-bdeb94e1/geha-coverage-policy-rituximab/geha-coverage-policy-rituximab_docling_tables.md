@@ -1,0 +1,29 @@
+## Docling table 1 (page 1)
+
+| Preference    | Requires Prior Drug   | Name           | HCPCS Code   | Description                                              |
+|:--------------|:----------------------|:---------------|:-------------|:---------------------------------------------------------|
+| Preferred     | Auth Yes              | Ruxience       | Q5119        | Injection, rituximab-pvvr, biosimilar, (Ruxience), 10 mg |
+| Non-Preferred | Yes                   | Truxima        | Q5115        | Injection, rituximab-abbs, biosimilar, (Truxima), 10 mg  |
+| Non-Preferred | Yes                   | Rituxan Hycela | J9311        | Injection, rituximab 10 mg and hyaluronidase             |
+| Non-Preferred | Yes                   | Rituxan        | J9312        | Injection, rituximab, 10 mg                              |
+| Non-Preferred | Yes                   | Riabni         | Q5123        | Injection, rituximab-arrx, biosimilar, (Riabni), 10 mg   |
+
+## Docling table 2 (page 2)
+
+| Drug Name      | HCPCS Code   | Description                                              |
+|:---------------|:-------------|:---------------------------------------------------------|
+| Rituxan Hycela | J9311        | Injection, rituximab 10 mg and hyaluronidase             |
+| Rituxan        | J9312        | Injection, rituximab, 10 mg                              |
+| Truxima        | Q5115        | Injection, rituximab-abbs, biosimilar, (Truxima), 10 mg  |
+| Ruxience       | Q5119        | Injection, rituximab-pvvr, biosimilar, (Ruxience), 10 mg |
+| Riabni         | Q5123        | Injection, rituximab-arrx, biosimilar, (Riabni), 10 mg   |
+
+## Docling table 3 (page 3)
+
+| Date       | Updates                                                                                     |
+|:-----------|:--------------------------------------------------------------------------------------------|
+| 4/1/23     | Policy Inception                                                                            |
+| 11/14/2023 | Updated Step Therapy to Table, Added Universal Criteria, Updated References, Updated footer |
+| 4/17/2024  | Updated Universal Criteria                                                                  |
+| 9/9/2024   | Annual Review - Update to Universal Criterial                                               |
+| 1/17/2025  | Document format updated to be universally accesssible                                       |

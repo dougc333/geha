@@ -1,0 +1,141 @@
+<!doctype html><html><head><meta charset='utf-8'><title>Corrected Docling tables</title><style>
+    :root {
+      color-scheme: light;
+      --ink: #071f36;
+      --muted: #5f6f7f;
+      --line: #d6dee6;
+      --header: #06233d;
+      --header-ink: #ffffff;
+      --stripe: #f4f7f9;
+      --canvas: #edf2f6;
+      --paper: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+    main {
+      width: min(1440px, calc(100% - 32px));
+      margin: 32px auto;
+      padding: clamp(24px, 4vw, 56px);
+      background: var(--paper);
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(7, 31, 54, 0.10);
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+    .metadata { margin: 0 0 28px; color: var(--muted); }
+    .table-source { margin: 0 0 12px; color: var(--muted); font-size: 0.78rem; line-height: 1.35; }
+    .table-source code, .metadata code { overflow-wrap: anywhere; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+    .policy-table { width: 100%; border-collapse: collapse; min-width: 680px; }
+    .policy-table th {
+      padding: 14px 16px;
+      background: var(--header);
+      color: var(--header-ink);
+      text-align: left;
+      vertical-align: top;
+      font-weight: 700;
+    }
+    .policy-table td {
+      padding: 13px 16px;
+      border-top: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+    .policy-table tbody tr:nth-child(even) { background: var(--stripe); }
+    .raw-section { margin: 36px 0; }
+    .raw-section h2 { margin: 0 0 12px; }
+    .note { margin: 24px 0 0; color: var(--muted); font-size: 0.9rem; }
+    @media print {
+      body { background: #fff; }
+      main { width: 100%; margin: 0; padding: 0; box-shadow: none; }
+      .table-wrap { overflow: visible; }
+    }
+ section{margin:24px 0}</style></head><body><main><h1>Corrected Docling tables - geha-coverage-policy-rytelo.pdf</h1><section><h2>Docling table 1 · PDF page 1</h2><table class="dataframe policy-table">
+  <thead>
+    <tr style="text-align: left;">
+      <th>Preference</th>
+      <th>Requires Prior Auth</th>
+      <th>Drug Name</th>
+      <th>HCPCS Code</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Preferred</td>
+      <td>Yes</td>
+      <td>Reblozyl (luspatercept)</td>
+      <td>J0896</td>
+      <td>Injection, luspatercept-aamt, 0.25 mg</td>
+    </tr>
+    <tr>
+      <td>Non-Preferred</td>
+      <td>Yes</td>
+      <td>Rytelo (imetelstat)</td>
+      <td>J0870</td>
+      <td>Injection, imetelstat, 1 mg</td>
+    </tr>
+  </tbody>
+</table></section>
+<section><h2>Docling table 2 · PDF page 2</h2><table>
+  <thead>
+    <tr>
+      <th>Drug Name</th>
+      <th>HCPCS Code</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Rytelo (imetelstat)</td>
+      <td>J0870</td>
+      <td>Injection, imetelstat, 1 mg</td>
+    </tr>
+    <tr>
+      <td>Reblozyl (luspatercept)</td>
+      <td>J0896</td>
+      <td>Injection, luspatercept-aamt, 0.25 mg</td>
+    </tr>
+  </tbody>
+</table></section>
+<section><h2>Docling table 3 · PDF page 3</h2><table class="dataframe policy-table">
+  <thead>
+    <tr style="text-align: left;">
+      <th>Date</th>
+      <th>Updates</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>7/10/2024</td>
+      <td>Policy creation</td>
+    </tr>
+    <tr>
+      <td>7/15/2024</td>
+      <td>Policy adoption by P&amp;T</td>
+    </tr>
+    <tr>
+      <td>11/20/2024</td>
+      <td>For 1/1/2025 - update to permanent HCPCS Code per CMS HCPCS Update</td>
+    </tr>
+    <tr>
+      <td>12/15/2025</td>
+      <td>Policy adopted by G.E.H.A; document updated for universal accessibility</td>
+    </tr>
+    <tr>
+      <td>12/15/2025</td>
+      <td>Annual Review</td>
+    </tr>
+  </tbody>
+</table></section></main></body></html>

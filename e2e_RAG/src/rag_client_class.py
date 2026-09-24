@@ -57,7 +57,7 @@ CONTEXT: ```{context}```
         )
         self.chain = prompt | self.llm | StrOutputParser()
 
-    def retrieve_context_reranked(self, query: str, reranker_model: str = "colbert") -> list[str]:
+    def retrieve_context_reranked(self, query: str, reranker_model: str = "gpt") -> list[str]:
         documents = self.retriever.invoke(query)
         return self.reranker.rerank(documents, query, model=reranker_model)
 
@@ -65,11 +65,11 @@ CONTEXT: ```{context}```
     def format_context(contexts: Iterable[str], limit: int = 3) -> str:
         return "\n".join(str(context) for context in list(contexts)[:limit])
 
-    def stream(self, query: str, reranker_model: str = "colbert"):
+    def stream(self, query: str, reranker_model: str = "gpt"):
         context = self.format_context(self.retrieve_context_reranked(query, reranker_model))
         yield from self.chain.stream({"context": context, "question": query})
 
-    def generate(self, query: str, reranker_model: str = "colbert") -> dict[str, str]:
+    def generate(self, query: str, reranker_model: str = "gpt") -> dict[str, str]:
         context = self.format_context(self.retrieve_context_reranked(query, reranker_model))
         return {
             "contexts": context,

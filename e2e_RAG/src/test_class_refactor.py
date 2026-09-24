@@ -31,7 +31,7 @@ class FakeRetriever:
 
 
 class FakeReranker:
-    def rerank(self, documents, query, model="colbert"):
+    def rerank(self, documents, query, model="gpt"):
         assert query
         return [doc.page_content.upper() for doc in documents]
 

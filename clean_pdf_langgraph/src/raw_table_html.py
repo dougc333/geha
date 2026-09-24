@@ -49,6 +49,8 @@ RAW_TABLE_CSS = """
       line-height: 1.1;
     }
     .metadata { margin: 0 0 28px; color: var(--muted); }
+    .table-source { margin: 0 0 12px; color: var(--muted); font-size: 0.78rem; line-height: 1.35; }
+    .table-source code, .metadata code { overflow-wrap: anywhere; }
     .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
     .policy-table { width: 100%; border-collapse: collapse; min-width: 680px; }
     .policy-table th {
@@ -91,7 +93,14 @@ def raw_table_markup(columns: list[str], rows: list[list[str]]) -> str:
     )
 
 
-def combined_raw_html(source: str, extractor: str, tables: list[dict[str, Any]]) -> str:
+def combined_raw_html(
+    source: str,
+    extractor: str,
+    tables: list[dict[str, Any]],
+    *,
+    html_path: str | None = None,
+    pdf_path: str | None = None,
+) -> str:
     """One self-contained HTML file with every raw table from one extractor."""
     if extractor not in {"pdfplumber", "docling"}:
         raise ValueError(f"Unknown extractor: {extractor}")
@@ -101,16 +110,28 @@ def combined_raw_html(source: str, extractor: str, tables: list[dict[str, Any]])
             raise ValueError("Mixed extractor tables")
         number = int(table["number"])
         page = int(table["page"])
+        nearest_heading = table.get("nearest_heading") or ""
         markup = raw_table_markup(table["columns"], table["rows"])
         sections.append(
             f'<section class="raw-section" id="table-{number}" '
             f'data-page="{page}">\n'
-            f'  <h2>Table {number} · PDF page {page}</h2>\n'
+            f'  <h2>{html.escape(extractor)} table {number} · PDF page {page}</h2>\n'
+            f'  <p class="table-source">Nearest heading: '
+            f'<strong>{html.escape(nearest_heading or "none")}</strong></p>\n'
+            f'  <p class="table-source">HTML source: '
+            f'<code>{html.escape(html_path or "(in-memory)")}</code><br>'
+            f'PDF source: <code>{html.escape(pdf_path or source)}</code> · '
+            f'PDF page: {page}</p>\n'
             f'  <div class="table-wrap">{markup}</div>\n'
             f'</section>'
         )
     body = "\n".join(sections) or "<p>No tables were extracted.</p>"
     title = f"Raw {extractor} tables - {source}"
+    source_line = (
+        f'HTML source: <code>{html.escape(html_path)}</code> · '
+        if html_path else ""
+    )
+    pdf_line = f'PDF source: <code>{html.escape(pdf_path)}</code> · ' if pdf_path else ""
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -122,7 +143,7 @@ def combined_raw_html(source: str, extractor: str, tables: list[dict[str, Any]])
 <body>
   <main>
     <h1>{html.escape(title)}</h1>
-    <p class="metadata">Source: {html.escape(source)} · Extractor: {html.escape(extractor)}
+    <p class="metadata">{source_line}{pdf_line}Extractor: {html.escape(extractor)}
       · {len(tables)} raw table(s)</p>
     {body}
     <p class="note">Uncorrected first-pass extraction. Numeric column names,

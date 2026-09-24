@@ -12,6 +12,7 @@ class TableArtifact(TypedDict):
     markdown: str
     columns: list[str]
     rows: list[list[str]]
+    nearest_heading: str
 
 
 class ChunkArtifact(TypedDict):
