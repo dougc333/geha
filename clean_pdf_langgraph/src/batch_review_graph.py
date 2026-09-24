@@ -21,9 +21,7 @@ from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph import END, START, StateGraph
 from langgraph.types import Command, interrupt
 
-from .extractors import (
-    docling_extract, naive_pdf_extract, render_pdf_pages, source_sha256, write_new,
-)
+from .extractors import docling_extract, render_pdf_pages, source_sha256, write_new
 from .html_vision_review import compare_html_table
 from .raw_table_html import RAW_TABLE_CSS, combined_raw_html, raw_table_markup
 from .schema import CleaningState, ReviewIssue, TableArtifact
@@ -31,11 +29,12 @@ from .vision_review import images_for_pages
 from .paths import BATCH_RUNS_DIR, PDF_DIR
 
 
-EXTRACTORS = ("pdfplumber", "docling")
+EXTRACTORS = ("docling",)
 
 
 class BatchReviewState(CleaningState, total=False):
     pdfplumber_html: str
+    pdfplumber_corrected_html: str
     docling_html: str
     extractor_reviews: dict[str, dict[str, Any]]
     error_reports: dict[str, str]
@@ -43,16 +42,14 @@ class BatchReviewState(CleaningState, total=False):
     table_slideshow_html: str
 
 
-def pdfplumber_node(state: BatchReviewState) -> BatchReviewState:
-    source = Path(state["pdf_path"])
-    return {
-        **naive_pdf_extract(source, Path(state["output_dir"])),
-        "source_sha256": source_sha256(source),
-    }
-
-
 def docling_node(state: BatchReviewState) -> BatchReviewState:
-    return docling_extract(Path(state["pdf_path"]), Path(state["output_dir"]))
+    source = Path(state["pdf_path"])
+    result = docling_extract(source, Path(state["output_dir"]))
+    if "page_count" not in result:
+        import pymupdf
+        with pymupdf.open(source) as document:
+            result["page_count"] = document.page_count
+    return {**result, "source_sha256": source_sha256(source)}
 
 
 def html_node(state: BatchReviewState) -> BatchReviewState:
@@ -143,7 +140,6 @@ def human_review_node(state: BatchReviewState) -> BatchReviewState:
     approved = interrupt({
         "question": "Send the PDF page images and extracted HTML tables for vision review?",
         "source_pdf": state["pdf_path"],
-        "pdfplumber_markdown": state["pdfplumber_markdown"],
         "docling_markdown": state["docling_markdown"],
         "docling_chunks_markdown": state["docling_chunks_markdown"],
         "docling_tables_markdown": state["docling_tables_markdown"],
@@ -277,7 +273,6 @@ def report_node(state: BatchReviewState) -> BatchReviewState:
 
 def build_graph(checkpointer=None):
     graph = StateGraph(BatchReviewState)
-    graph.add_node("pdfplumber_extract", pdfplumber_node)
     graph.add_node("docling_extract", docling_node)
     graph.add_node("build_combined_html", html_node)
     graph.add_node("render_pdf_pages", render_pages_node)
@@ -286,8 +281,7 @@ def build_graph(checkpointer=None):
     graph.add_node("vision_compare", vision_node)
     graph.add_node("vision_declined", decline_node)
     graph.add_node("write_extractor_reports", report_node)
-    graph.add_edge(START, "pdfplumber_extract")
-    graph.add_edge("pdfplumber_extract", "docling_extract")
+    graph.add_edge(START, "docling_extract")
     graph.add_edge("docling_extract", "build_combined_html")
     graph.add_edge("build_combined_html", "render_pdf_pages")
     graph.add_edge("render_pdf_pages", "cycle_html_tables")

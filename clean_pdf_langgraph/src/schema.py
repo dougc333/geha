@@ -43,7 +43,9 @@ class CleaningState(TypedDict, total=False):
     source_sha256: str
     page_count: int
     pdfplumber_markdown: str
+    pdfplumber_corrected_markdown: str
     pdfplumber_tables: list[TableArtifact]
+    pdfplumber_corrected_tables: list[TableArtifact]
     docling_markdown: str
     docling_chunks_markdown: str
     docling_tables_markdown: str

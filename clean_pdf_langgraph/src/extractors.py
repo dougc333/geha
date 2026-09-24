@@ -23,6 +23,35 @@ def source_sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def correct_pdfplumber_tables(tables: list[TableArtifact]) -> list[TableArtifact]:
+    """Apply conservative, non-LLM repairs to PDFPlumber table artifacts.
+
+    PDFPlumber often returns a numeric DataFrame header when it cannot identify
+    the first row as a header.  Promote that first non-empty row only when the
+    header is entirely numeric, and discard rows that are completely empty.
+    Page-boundary decisions are deliberately left untouched for human review.
+    """
+    import pandas as pd
+
+    corrected: list[TableArtifact] = []
+    for table in tables:
+        columns = list(table["columns"])
+        rows = [[str(cell).strip() for cell in row] for row in table["rows"]]
+        rows = [row for row in rows if any(cell for cell in row)]
+        numeric_header = columns and all(column.isdigit() for column in columns)
+        if numeric_header and rows and len(rows[0]) == len(columns):
+            candidate = rows.pop(0)
+            if any(candidate):
+                columns = candidate
+        corrected.append({
+            **table,
+            "columns": columns,
+            "rows": rows,
+            "markdown": pd.DataFrame(rows, columns=columns).to_markdown(index=False),
+        })
+    return corrected
+
+
 def naive_pdf_extract(pdf_path: Path, output_dir: Path) -> dict[str, Any]:
     """Extract each PDF page independently with pdfplumber, preserving errors.
 
@@ -56,10 +85,20 @@ def naive_pdf_extract(pdf_path: Path, output_dir: Path) -> dict[str, Any]:
 
     markdown_path = output_dir / f"{pdf_path.stem}_pdfplumber.md"
     write_new(markdown_path, "\n\n".join(sections) + "\n")
+    corrected_tables = correct_pdfplumber_tables(tables)
+    corrected_sections = [
+        f"### corrected pdfplumber table {table['number']} (page {table['page']})\n\n"
+        f"{table['markdown']}"
+        for table in corrected_tables
+    ]
+    corrected_path = output_dir / f"{pdf_path.stem}_pdfplumber_corrected.md"
+    write_new(corrected_path, "\n\n".join(corrected_sections) + "\n")
     return {
         "page_count": page_count,
         "pdfplumber_markdown": str(markdown_path),
         "pdfplumber_tables": tables,
+        "pdfplumber_corrected_markdown": str(corrected_path),
+        "pdfplumber_corrected_tables": corrected_tables,
     }
 
 

@@ -9,17 +9,15 @@ from unittest.mock import patch
 
 from .cleaning_graph import PDF_DIR, compare_node, preflight_outputs, run_one
 from .paths import FIRST_PASS_DIR
-from .extractors import naive_pdf_extract, render_pdf_pages
+from .extractors import docling_extract, render_pdf_pages
 
 
 class FirstPassTests(unittest.TestCase):
-    def test_pdfplumber_keeps_numeric_dataframe_headers(self) -> None:
+    def test_docling_extracts_tables(self) -> None:
         sample = PDF_DIR / "geha-coverage-policy-ziihera.pdf"
         with tempfile.TemporaryDirectory() as temporary:
-            result = naive_pdf_extract(sample, Path(temporary))
-            self.assertGreater(result["page_count"], 0)
-            self.assertGreater(len(result["pdfplumber_tables"]), 0)
-            self.assertTrue(result["pdfplumber_tables"][0]["markdown"].startswith("| 0 "))
+            result = docling_extract(sample, Path(temporary))
+            self.assertGreater(len(result["docling_tables"]), 0)
 
     def test_page_rendering_uses_installed_pdf_library(self) -> None:
         sample = PDF_DIR / "geha-coverage-policy-ziihera.pdf"
@@ -55,7 +53,7 @@ class FirstPassTests(unittest.TestCase):
 
     def test_empty_extraction_cannot_pass_review(self) -> None:
         result = compare_node({
-            "pdfplumber_tables": [], "docling_tables": [], "docling_chunks": [],
+            "docling_tables": [], "docling_chunks": [],
             "use_vision": False, "page_images": [], "vision_model": "gpt-4o",
         })
         self.assertEqual(result["status"], "needs_human_review")
@@ -67,8 +65,8 @@ class FirstPassTests(unittest.TestCase):
         with patch("src.cleaning_graph.images_for_pages", return_value=[Path("page.png")]), \
                 patch("src.cleaning_graph.compare_unit", side_effect=ValueError("secret key")) as compare:
             result = compare_node({
-                "pdfplumber_tables": [table, {**table, "number": 2}],
-                "docling_tables": [], "docling_chunks": [], "use_vision": True,
+                "docling_tables": [table, {**table, "number": 2}],
+                "docling_chunks": [], "use_vision": True,
                 "page_images": ["page.png"], "vision_model": "gpt-4o",
             })
         self.assertEqual(compare.call_count, 1)

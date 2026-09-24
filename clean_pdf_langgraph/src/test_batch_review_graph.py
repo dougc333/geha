@@ -35,7 +35,6 @@ class BatchReviewTests(unittest.TestCase):
 
     def test_vision_results_are_separate_by_extractor(self) -> None:
         state = {
-            "pdfplumber_tables": [artifact("pdfplumber", 1)],
             "docling_tables": [artifact("docling", 1)],
             "page_images": ["page.png"], "vision_model": "gpt-4o",
             "use_vision": True,
@@ -45,15 +44,13 @@ class BatchReviewTests(unittest.TestCase):
                      "extracted_evidence": "0", "explanation": "Wrong header"})
         with patch("src.batch_review_graph.images_for_pages", return_value=[Path("page.png")]), \
                 patch("src.batch_review_graph.compare_html_table",
-                      side_effect=[("mismatch", [mismatch]), ("match", [])]):
+                      side_effect=[("mismatch", [mismatch])]):
             reviews = vision_node(state)["extractor_reviews"]
-        self.assertEqual(reviews["pdfplumber"]["status"], "needs_human_review")
-        self.assertEqual(reviews["docling"]["status"], "passed")
-        self.assertEqual(reviews["pdfplumber"]["issues"][0]["kind"], "numeric_header")
+        self.assertEqual(reviews["docling"]["status"], "needs_human_review")
+        self.assertEqual(reviews["docling"]["issues"][0]["kind"], "numeric_header")
 
     def test_api_failure_does_not_leak_error_body_or_repeat_calls(self) -> None:
         state = {
-            "pdfplumber_tables": [artifact("pdfplumber", 1)],
             "docling_tables": [artifact("docling", 1)],
             "page_images": ["page.png"], "vision_model": "gpt-4o",
             "use_vision": True,
@@ -63,7 +60,6 @@ class BatchReviewTests(unittest.TestCase):
                       side_effect=ValueError("secret key")) as compare:
             reviews = vision_node(state)["extractor_reviews"]
         self.assertEqual(compare.call_count, 1)
-        self.assertEqual(reviews["pdfplumber"]["counts"]["uncertain"], 1)
         self.assertEqual(reviews["docling"]["counts"]["uncertain"], 1)
         self.assertNotIn("secret key", str(reviews))
 
@@ -94,17 +90,15 @@ class BatchReviewTests(unittest.TestCase):
                 "pdfplumber_html": str(path / "sample_pdfplumber_tables.html"),
                 "docling_html": str(path / "sample_docling_tables.html"),
                 "extractor_reviews": {
-                    name: {"status": "needs_human_review", "table_count": 0,
-                           "verdicts": [], "counts": {"match": 0, "mismatch": 0,
-                                                       "uncertain": 0},
-                           "issues": [{"artifact": name, "kind": "other", "page": 0,
-                                       "pdf_evidence": "", "extracted_evidence": "",
-                                       "explanation": "No tables"}]}
-                    for name in ("pdfplumber", "docling")
+                    "docling": {"status": "needs_human_review", "table_count": 0,
+                                 "verdicts": [], "counts": {"match": 0, "mismatch": 0,
+                                                             "uncertain": 0},
+                                 "issues": [{"artifact": "docling", "kind": "other", "page": 0,
+                                             "pdf_evidence": "", "extracted_evidence": "",
+                                             "explanation": "No tables"}]}
                 },
             }
             reports = report_node(state)["error_reports"]
-            self.assertTrue(Path(reports["pdfplumber"]).name.endswith("pdfplumber_errors.md"))
             self.assertTrue(Path(reports["docling"]).name.endswith("docling_errors.md"))
             self.assertTrue(all(Path(file).is_file() for file in reports.values()))
 
@@ -135,12 +129,6 @@ class BatchReviewTests(unittest.TestCase):
             pdf.write_bytes(b"sample")
             output = root / "review" / "sample"
 
-            def plumber(source, target):
-                markdown = target / "sample_pdfplumber.md"
-                markdown.write_text("raw", encoding="utf-8")
-                return {"page_count": 1, "pdfplumber_markdown": str(markdown),
-                        "pdfplumber_tables": [artifact("pdfplumber", 1)]}
-
             def docling(source, target):
                 paths = {
                     "docling_markdown": target / "sample.docling.md",
@@ -150,6 +138,7 @@ class BatchReviewTests(unittest.TestCase):
                 for path in paths.values():
                     path.write_text("raw", encoding="utf-8")
                 return {**{key: str(path) for key, path in paths.items()},
+                        "page_count": 1,
                         "docling_tables": [artifact("docling", 1)],
                         "docling_chunks": []}
 
@@ -158,8 +147,7 @@ class BatchReviewTests(unittest.TestCase):
                 image.write_bytes(b"image")
                 return [str(image)]
 
-            with patch("src.batch_review_graph.naive_pdf_extract", side_effect=plumber) as first, \
-                    patch("src.batch_review_graph.docling_extract", side_effect=docling) as second, \
+            with patch("src.batch_review_graph.docling_extract", side_effect=docling) as second, \
                     patch("src.batch_review_graph.render_pdf_pages", side_effect=render), \
                     patch("src.batch_review_graph.webbrowser.open"), \
                     patch("src.batch_review_graph.time.sleep"), \
@@ -168,15 +156,13 @@ class BatchReviewTests(unittest.TestCase):
                 paused = run_pdf(pdf, output, vision_model="gpt-4o-mini")
                 self.assertIn("__interrupt__", paused)
                 self.assertEqual(compare.call_count, 0)
-                self.assertTrue(Path(paused["pdfplumber_html"]).is_file())
                 self.assertTrue(Path(paused["docling_html"]).is_file())
                 self.assertTrue(Path(paused["table_slideshow_html"]).is_file())
                 self.assertTrue((output / "checkpoint.sqlite").is_file())
 
                 result = resume_pdf(output, approve=True)
                 self.assertTrue(result["vision_approved"])
-                self.assertEqual(compare.call_count, 2)
-                self.assertEqual(first.call_count, 1)
+                self.assertEqual(compare.call_count, 1)
                 self.assertEqual(second.call_count, 1)
                 self.assertEqual(result["extractor_reviews"]["docling"]["status"], "passed")
                 self.assertTrue(Path(result["error_reports"]["docling"]).is_file())
@@ -189,10 +175,8 @@ class BatchReviewTests(unittest.TestCase):
             pdf = root / "sample.pdf"
             pdf.write_bytes(b"sample")
             output = root / "review" / "sample"
-            with patch("src.batch_review_graph.naive_pdf_extract", return_value={
-                "page_count": 1, "pdfplumber_markdown": "plumber.md",
-                "pdfplumber_tables": [artifact("pdfplumber", 1)],
-            }), patch("src.batch_review_graph.docling_extract", return_value={
+            with patch("src.batch_review_graph.docling_extract", return_value={
+                "page_count": 1,
                 "docling_markdown": "docling.md",
                 "docling_chunks_markdown": "chunks.md",
                 "docling_tables_markdown": "tables.md",

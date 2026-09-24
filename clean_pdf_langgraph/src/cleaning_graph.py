@@ -13,9 +13,7 @@ from pathlib import Path
 
 from langgraph.graph import END, START, StateGraph
 
-from .extractors import (
-    docling_extract, naive_pdf_extract, render_pdf_pages, source_sha256, write_new,
-)
+from .extractors import docling_extract, render_pdf_pages, source_sha256, write_new
 from .schema import CleaningState, ReviewIssue
 from .vision_review import compare_unit, images_for_pages
 from .paths import PDF_DIR, FIRST_PASS_DIR
@@ -36,7 +34,7 @@ def preflight_outputs(pdf_path: Path, output_dir: Path | None = None) -> None:
     stem = pdf_path.stem
     output_dir = output_dir or FIRST_PASS_DIR / stem
     expected = [
-        f"{stem}_pdfplumber.md", f"{stem}.docling.md",
+        f"{stem}.docling.md",
         f"{stem}.docling_chunks.md", f"{stem}_docling_tables.md",
         f"{stem}_errors.md",
     ]
@@ -46,18 +44,17 @@ def preflight_outputs(pdf_path: Path, output_dir: Path | None = None) -> None:
         raise FileExistsError(f"Existing artifacts; no files changed: {', '.join(existing)}")
 
 
-def extract_pdfplumber_node(state: CleaningState) -> CleaningState:
-    if state["iteration"] != 1 or state["max_iterations"] != 1:
-        raise ValueError("This graph permits exactly one extraction iteration")
+def extract_docling_node(state: CleaningState) -> CleaningState:
     pdf_path = Path(state["pdf_path"])
+    import pymupdf
+
+    with pymupdf.open(pdf_path) as document:
+        page_count = document.page_count
     return {
-        **naive_pdf_extract(pdf_path, Path(state["output_dir"])),
+        **docling_extract(pdf_path, Path(state["output_dir"])),
+        "page_count": page_count,
         "source_sha256": source_sha256(pdf_path),
     }
-
-
-def extract_docling_node(state: CleaningState) -> CleaningState:
-    return docling_extract(Path(state["pdf_path"]), Path(state["output_dir"]))
 
 
 def render_pages_node(state: CleaningState) -> CleaningState:
@@ -69,7 +66,7 @@ def render_pages_node(state: CleaningState) -> CleaningState:
 def compare_node(state: CleaningState) -> CleaningState:
     """Compare every raw table and every Docling chunk against source pages."""
     units: list[tuple[str, str, str, list[int]]] = []
-    for table in state["pdfplumber_tables"] + state["docling_tables"]:
+    for table in state["docling_tables"]:
         units.append((
             f"{table['extractor']} table {table['number']}", "table",
             table["markdown"], [table["page"]],
@@ -163,13 +160,11 @@ def write_errors_node(state: CleaningState) -> CleaningState:
 
 def build_graph():
     graph = StateGraph(CleaningState)
-    graph.add_node("pdfplumber_extract", extract_pdfplumber_node)
     graph.add_node("docling_extract", extract_docling_node)
     graph.add_node("render_pdf_pages", render_pages_node)
     graph.add_node("vision_compare", compare_node)
     graph.add_node("write_errors", write_errors_node)
-    graph.add_edge(START, "pdfplumber_extract")
-    graph.add_edge("pdfplumber_extract", "docling_extract")
+    graph.add_edge(START, "docling_extract")
     graph.add_edge("docling_extract", "render_pdf_pages")
     graph.add_edge("render_pdf_pages", "vision_compare")
     graph.add_conditional_edges(
