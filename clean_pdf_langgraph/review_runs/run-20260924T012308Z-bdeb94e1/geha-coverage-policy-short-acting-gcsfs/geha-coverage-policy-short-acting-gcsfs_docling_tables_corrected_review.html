@@ -1,0 +1,137 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Corrected Docling slideshow</title>
+<style>body{font-family:system-ui;margin:0;background:#edf2f6}header{padding:12px 18px;background:#06233d;color:#fff;display:flex;justify-content:space-between;gap:12px}button{padding:7px 12px;margin-left:6px}main{max-width:1400px;margin:20px auto;background:#fff;padding:24px}.card{display:none}.card.active{display:block}#status{margin:0 0 14px;color:#5f6f7f;font-size:.85rem}</style></head>
+<body><header><strong>Corrected Docling tables</strong><span><button id="prev">◀ Previous</button><button id="next">Next ▶</button></span></header>
+<main><p id="status"></p><section class="card"><section><h2>Docling table 1 · PDF page 1</h2><table class="dataframe policy-table">
+  <thead>
+    <tr style="text-align: left;">
+      <th>Preference</th>
+      <th>Requires Prior Auth</th>
+      <th>Drug Name</th>
+      <th>HCPCS Code</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Non - Preferred</td>
+      <td>Yes</td>
+      <td>Zarxio (filgrastim-sndz)</td>
+      <td>Q5101</td>
+      <td>Injection, filgrastim-sndz, biosimilar, (Zarxio), 1 microgram</td>
+    </tr>
+    <tr>
+      <td>Preferred</td>
+      <td>Yes</td>
+      <td>Nivestym (filgrastim- aafi)</td>
+      <td>Q5110</td>
+      <td>Injection, filgrastim-aafi, biosimilar, (Nivestym), 1 microgram</td>
+    </tr>
+    <tr>
+      <td>Non- Preferred</td>
+      <td>Yes</td>
+      <td>Neupogen (filgrastim)</td>
+      <td>J1442</td>
+      <td>Injection, filgrastim (g-csf), excludes biosimilars, 1 microgram</td>
+    </tr>
+    <tr>
+      <td>Non- Preferred</td>
+      <td>Yes</td>
+      <td>Granix (tbo-filgrastim)</td>
+      <td>J1447</td>
+      <td>Injection, tbo-filgrastim, 1 microgram</td>
+    </tr>
+    <tr>
+      <td>Non- Preferred</td>
+      <td>Yes</td>
+      <td>Nypozi (filgrastim-txid)</td>
+      <td>Q5148</td>
+      <td>Injection, filgrastim-txid (nypozi), biosimilar, 1 microgram</td>
+    </tr>
+  </tbody>
+</table></section></section>
+<section class="card"><section><h2>Docling table 2 · PDF page 2</h2><table class="dataframe policy-table">
+  <thead>
+    <tr style="text-align: left;">
+      <th>Drug Name</th>
+      <th>HCPCS Code</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Neupogen</td>
+      <td>J1442</td>
+      <td>Injection, filgrastim (g-csf), excludes biosimilars, 1 microgram</td>
+    </tr>
+    <tr>
+      <td>Granix</td>
+      <td>J1447</td>
+      <td>Injection, tbo-filgrastim, 1 microgram</td>
+    </tr>
+    <tr>
+      <td>Filkri</td>
+      <td>J3590</td>
+      <td>Unclassified biologic</td>
+    </tr>
+    <tr>
+      <td>Nypozi</td>
+      <td>Q5148</td>
+      <td>Injection, filgrastim-txid (nypozi), biosimilar, 1 microgram</td>
+    </tr>
+    <tr>
+      <td>Releuko</td>
+      <td>Q5125</td>
+      <td>Injection, filgrastim-ayow, biosimilar, (Releuko), 1 microgram</td>
+    </tr>
+    <tr>
+      <td>Zarxio</td>
+      <td>Q5101</td>
+      <td>Injection, filgrastim-sndz, biosimilar, (Zarxio), 1 microgram</td>
+    </tr>
+    <tr>
+      <td>Nivestym</td>
+      <td>Q5110</td>
+      <td>Injection, filgrastim-aafi, biosimilar, (Nivestym), 1 microgram</td>
+    </tr>
+  </tbody>
+</table></section></section>
+<section class="card"><section><h2>Docling table 3 · PDF page 4</h2><table class="dataframe policy-table">
+  <thead>
+    <tr style="text-align: left;">
+      <th>Date</th>
+      <th>Updates</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>5/2/2022</td>
+      <td>Added preferred products and recommended step-therapy options. Added Wilms tumor per NCCN, added H-ARS per PI/NCCN, Updated MDS criteria per NCCN, updated AML per NCCN. Added Releuko per FDA approval. Removed stem cell transplant and H-ARS indications (out of scope for OH)</td>
+    </tr>
+    <tr>
+      <td>1/16/2024</td>
+      <td>Updated Step Therapy to Table; Addition of Universal Criteria and Approval Criteria; updated Releuko HCPCS; Updated references</td>
+    </tr>
+    <tr>
+      <td>2/10/2025</td>
+      <td>Annual Review, added Nypozi, template update</td>
+    </tr>
+    <tr>
+      <td>2/17/2025</td>
+      <td>Medical necessity criteria removed from policy - Approved by P&amp;T; update to preferred product requirements</td>
+    </tr>
+    <tr>
+      <td>3/16/2026</td>
+      <td>Annual review at OH P&amp;T; added Nivestym as preferred agent; added Filkri</td>
+    </tr>
+    <tr>
+      <td>3/16/2026</td>
+      <td>Policy adopted by G.E.H.A; document updated for universal accessibility.</td>
+    </tr>
+  </tbody>
+</table></section></section></main><script>
+const cards=[...document.querySelectorAll('.card')], status=document.getElementById('status'); let i=0, timer;
+function show(){cards.forEach((c,n)=>c.classList.toggle('active',n===i));status.textContent=cards.length?`Table ${i+1} of ${cards.length} · 3 seconds per table`:'No corrected tables';}
+function move(d){i=Math.max(0,Math.min(cards.length-1,i+d));show();schedule();}
+function schedule(){clearTimeout(timer);if(i<cards.length-1)timer=setTimeout(()=>move(1),3000);else status.textContent=`Review complete · ${cards.length} tables displayed`;}
+document.getElementById('prev').onclick=()=>move(-1);document.getElementById('next').onclick=()=>move(1);show();schedule();
+</script></body></html>

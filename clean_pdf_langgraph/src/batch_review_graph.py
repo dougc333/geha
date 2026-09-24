@@ -10,6 +10,8 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import os
+import re
 import time
 import webbrowser
 from datetime import datetime, timezone
@@ -17,12 +19,13 @@ from pathlib import Path
 from typing import Any, TypedDict
 from uuid import uuid4
 
-from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph import END, START, StateGraph
 from langgraph.types import Command, interrupt
 
 from .extractors import docling_extract, render_pdf_pages, source_sha256, write_new
-from .html_vision_review import compare_html_table
+from .html_vision_review import (
+    compare_html_table, correct_html_table, render_html_table_screenshot,
+)
 from .raw_table_html import RAW_TABLE_CSS, combined_raw_html, raw_table_markup
 from .schema import CleaningState, ReviewIssue, TableArtifact
 from .vision_review import images_for_pages
@@ -40,6 +43,7 @@ class BatchReviewState(CleaningState, total=False):
     error_reports: dict[str, str]
     vision_approved: bool
     table_slideshow_html: str
+    corrected_docling_html: str
 
 
 def docling_node(state: BatchReviewState) -> BatchReviewState:
@@ -59,7 +63,10 @@ def html_node(state: BatchReviewState) -> BatchReviewState:
     for extractor in EXTRACTORS:
         path = output_dir / f"{source.stem}_{extractor}_tables.html"
         tables: list[TableArtifact] = state[f"{extractor}_tables"]
-        write_new(path, combined_raw_html(source.name, extractor, tables))
+        write_new(path, combined_raw_html(
+            source.name, extractor, tables,
+            html_path=str(path.resolve()), pdf_path=str(source.resolve()),
+        ))
         paths[f"{extractor}_html"] = str(path)
     return paths
 
@@ -78,6 +85,9 @@ def cycle_html_tables_node(state: BatchReviewState) -> BatchReviewState:
     """
     source = Path(state["pdf_path"])
     output_dir = Path(state["output_dir"])
+    interval_seconds = max(0.1, float(os.getenv("GEHA_SLIDESHOW_SECONDS", "3")))
+    slideshow_path = output_dir / f"{source.stem}_table_review.html"
+    html_source_path = output_dir / f"{source.stem}_docling_tables.html"
     cards: list[str] = []
     for extractor in EXTRACTORS:
         for table in state[f"{extractor}_tables"]:
@@ -86,6 +96,12 @@ def cycle_html_tables_node(state: BatchReviewState) -> BatchReviewState:
                 f'<section class="table-card">'
                 f'<h2>{html.escape(extractor)} table {int(table["number"])} '
                 f'· PDF page {int(table["page"])}</h2>'
+                f'<p class="table-source">Nearest heading: '
+                f'<strong>{html.escape(table.get("nearest_heading") or "none")}</strong></p>'
+                f'<p class="table-source">HTML source: '
+                f'<code>{html.escape(str(html_source_path.resolve()))}</code><br>'
+                f'PDF source: <code>{html.escape(str(source.resolve()))}</code> · '
+                f'PDF page: {int(table["page"])}</p>'
                 f'<div class="table-wrap">{markup}</div></section>'
             )
 
@@ -96,6 +112,8 @@ def cycle_html_tables_node(state: BatchReviewState) -> BatchReviewState:
 <style>
 {RAW_TABLE_CSS}
 main {{ width:min(1440px,calc(100% - 32px)); margin:24px auto; padding:24px; background:#fff; border-radius:12px; }}
+.table-source {{ margin:0 0 12px; color:#5f6f7f; font-size:0.78rem; line-height:1.35; }}
+.table-source code {{ overflow-wrap:anywhere; }}
 .table-card {{ display:none; }} .table-card.active {{ display:block; }}
 .status {{ color:#5f6f7f; margin-bottom:18px; }} .empty {{ color:#9f1d20; }}
 </style></head><body><main>
@@ -109,7 +127,7 @@ let index = 0;
 function show() {{
   cards.forEach((card, i) => card.classList.toggle('active', i === index));
   status.textContent = cards.length
-    ? `Table ${{index + 1}} of ${{cards.length}} · 3 seconds per table`
+  ? `Table ${{index + 1}} of ${{cards.length}} · {interval_seconds:g} seconds per table`
     : 'No extracted tables were found.';
 }}
 show();
@@ -122,15 +140,14 @@ if (cards.length > 1) {{
       return;
     }}
     show();
-  }}, 3000);
+  }}, {interval_seconds * 1000:g});
 }}
 </script></body></html>"""
-    path = output_dir / f"{source.stem}_table_review.html"
-    write_new(path, slideshow)
-    if cards:
-        webbrowser.open(path.resolve().as_uri())
-        time.sleep(3 * len(cards))
-    return {"table_slideshow_html": str(path)}
+    write_new(slideshow_path, slideshow)
+    if cards and os.getenv("GEHA_NO_BROWSER") != "1":
+        webbrowser.open(slideshow_path.resolve().as_uri())
+        time.sleep(interval_seconds * len(cards))
+    return {"table_slideshow_html": str(slideshow_path)}
 
 
 def human_review_node(state: BatchReviewState) -> BatchReviewState:
@@ -143,7 +160,6 @@ def human_review_node(state: BatchReviewState) -> BatchReviewState:
         "docling_markdown": state["docling_markdown"],
         "docling_chunks_markdown": state["docling_chunks_markdown"],
         "docling_tables_markdown": state["docling_tables_markdown"],
-        "pdfplumber_html": state["pdfplumber_html"],
         "docling_html": state["docling_html"],
         "table_slideshow_html": state.get("table_slideshow_html"),
         "page_images": state["page_images"],
@@ -164,10 +180,12 @@ def _unverified_issue(artifact: str, explanation: str, page: int = 0) -> ReviewI
 def vision_node(state: BatchReviewState) -> BatchReviewState:
     reviews: dict[str, dict[str, Any]] = {}
     service_failure: str | None = None
+    corrected_markup: list[tuple[TableArtifact, str]] = []
     for extractor in EXTRACTORS:
         tables: list[TableArtifact] = state[f"{extractor}_tables"]
         verdicts: list[dict[str, Any]] = []
         issues: list[ReviewIssue] = []
+        initial_results: list[dict[str, Any]] = []
         if not tables:
             issues.append(_unverified_issue(
                 f"{extractor} extraction", "No tables were extracted; human review required."
@@ -184,13 +202,43 @@ def vision_node(state: BatchReviewState) -> BatchReviewState:
                 )]
             else:
                 try:
-                    verdict, found = compare_html_table(
-                        artifact=artifact, table_html=markup,
-                        pdf_images=images_for_pages(
-                            state["page_images"], [table["page"]]
-                        ),
-                        model=state["vision_model"],
-                    )
+                    current_markup = markup
+                    found: list[ReviewIssue] = []
+                    verdict = "uncertain"
+                    correction_attempts = 0
+                    page_images = images_for_pages(state["page_images"], [table["page"]])
+                    for iteration in range(2):
+                        screenshot = None
+                        if state.get("output_dir"):
+                            screenshot = Path(state["output_dir"]) / (
+                                f"{Path(state['pdf_path']).stem}_{extractor}_table_"
+                                f"{table['number']}_html_{iteration}.png"
+                            )
+                            try:
+                                render_html_table_screenshot(current_markup, screenshot)
+                            except (ImportError, ModuleNotFoundError):
+                                screenshot = None
+                        verdict, found = compare_html_table(
+                            artifact=artifact, table_html=current_markup,
+                            pdf_images=page_images, html_screenshot=screenshot,
+                            model=state["vision_model"],
+                        )
+                        if iteration == 0:
+                            initial_results.append({
+                                "table": table["number"], "page": table["page"],
+                                "verdict": verdict, "issue_count": len(found),
+                            })
+                        if verdict != "mismatch" or iteration == 1:
+                            break
+                        current_markup = correct_html_table(
+                            artifact=artifact, table_html=current_markup,
+                            pdf_images=page_images, issues=found,
+                            model=state["vision_model"],
+                        )
+                        correction_attempts += 1
+                    if initial_results and initial_results[-1]["table"] == table["number"]:
+                        initial_results[-1]["correction_attempts"] = correction_attempts
+                    corrected_markup.append((table, current_markup))
                 except Exception as error:
                     # API bodies can contain credentials or submitted content.
                     # Persist only the exception class and stop further calls.
@@ -200,6 +248,25 @@ def vision_node(state: BatchReviewState) -> BatchReviewState:
                 "table": table["number"], "page": table["page"], "verdict": verdict,
             })
             issues.extend(found)
+
+        if extractor == "docling" and corrected_markup and state.get("output_dir"):
+            source = Path(state["pdf_path"])
+            corrected_path = Path(state["output_dir"]) / (
+                f"{source.stem}_docling_tables_corrected.html"
+            )
+            sections = "\n".join(
+                f'<section><h2>Docling table {table["number"]} · PDF page {table["page"]}</h2>'
+                f'<p class="table-source">Nearest heading: '
+                f'<strong>{html.escape(table.get("nearest_heading") or "none")}</strong></p>'
+                f'{markup}</section>'
+                for table, markup in corrected_markup
+            )
+            write_new(corrected_path, (
+                f"<!doctype html><html><head><meta charset='utf-8'><title>Corrected Docling tables</title>"
+                f"<style>{RAW_TABLE_CSS} section{{margin:24px 0}}</style></head><body><main>"
+                f"<h1>Corrected Docling tables - {html.escape(source.name)}</h1>{sections}"
+                f"</main></body></html>"
+            ))
 
         if not state["use_vision"]:
             issues.append(_unverified_issue(
@@ -218,16 +285,45 @@ def vision_node(state: BatchReviewState) -> BatchReviewState:
         }
         reviews[extractor] = {
             "table_count": len(tables), "verdicts": verdicts,
+            "initial_results": initial_results,
             "counts": counts, "issues": issues,
             "status": "passed" if tables and not issues and counts["match"] == len(tables)
             else "needs_human_review",
         }
-    return {"extractor_reviews": reviews}
+    result: BatchReviewState = {"extractor_reviews": reviews}
+    if state.get("output_dir") and Path(state["output_dir"], f"{Path(state['pdf_path']).stem}_docling_tables_corrected.html").is_file():
+        result["corrected_docling_html"] = str(Path(state["output_dir"]) / f"{Path(state['pdf_path']).stem}_docling_tables_corrected.html")
+    return result
 
 
 def decline_node(state: BatchReviewState) -> BatchReviewState:
     """Produce unverified reports without making a model request."""
     return {"use_vision": False, **vision_node({**state, "use_vision": False})}
+
+
+def corrected_slideshow_node(state: BatchReviewState) -> BatchReviewState:
+    """Open the corrected Docling HTML after the comparison loop."""
+    corrected = state.get("corrected_docling_html")
+    interval_seconds = max(0.1, float(os.getenv("GEHA_SLIDESHOW_SECONDS", "3")))
+    if corrected and os.getenv("GEHA_NO_BROWSER") != "1":
+        source = Path(corrected)
+        document = source.read_text(encoding="utf-8")
+        sections = re.findall(r"<section.*?</section>", document, flags=re.IGNORECASE | re.DOTALL)
+        cards = "\n".join(f'<section class="card">{section}</section>' for section in sections)
+        viewer = f"""<!doctype html><html><head><meta charset="utf-8"><title>Corrected Docling slideshow</title>
+<style>body{{font-family:system-ui;margin:0;background:#edf2f6}}header{{padding:12px 18px;background:#06233d;color:#fff;display:flex;justify-content:space-between;gap:12px}}button{{padding:7px 12px;margin-left:6px}}main{{max-width:1400px;margin:20px auto;background:#fff;padding:24px}}.card{{display:none}}.card.active{{display:block}}#status{{margin:0 0 14px;color:#5f6f7f;font-size:.85rem}}</style></head>
+<body><header><strong>Corrected Docling tables</strong><span><button id="prev">◀ Previous</button><button id="next">Next ▶</button></span></header>
+<main><p id="status"></p>{cards}</main><script>
+const cards=[...document.querySelectorAll('.card')], status=document.getElementById('status'); let i=0, timer;
+function show(){{cards.forEach((c,n)=>c.classList.toggle('active',n===i));status.textContent=cards.length?`Table ${{i+1}} of ${{cards.length}} · {interval_seconds:g} seconds per table`:'No corrected tables';}}
+function move(d){{i=Math.max(0,Math.min(cards.length-1,i+d));show();schedule();}}
+function schedule(){{clearTimeout(timer);if(i<cards.length-1)timer=setTimeout(()=>move(1),{interval_seconds * 1000:g});else status.textContent=`Review complete · ${{cards.length}} tables displayed`;}}
+document.getElementById('prev').onclick=()=>move(-1);document.getElementById('next').onclick=()=>move(1);show();schedule();
+</script></body></html>"""
+        viewer_path = source.with_name(source.stem + "_review.html")
+        write_new(viewer_path, viewer)
+        webbrowser.open(viewer_path.resolve().as_uri())
+    return {}
 
 
 def report_node(state: BatchReviewState) -> BatchReviewState:
@@ -242,13 +338,23 @@ def report_node(state: BatchReviewState) -> BatchReviewState:
             f"- Source SHA-256: `{state['source_sha256']}`",
             f"- Extracted Markdown: `{Path(state[f'{extractor}_markdown']).name}`",
             f"- Combined HTML: `{Path(state[f'{extractor}_html']).name}`",
+            *([f"- Corrected HTML: `{Path(state['corrected_docling_html']).name}`"]
+              if extractor == "docling" and state.get("corrected_docling_html") else []),
             f"- Review status: {review['status']}",
             f"- Tables: {review['table_count']}",
             f"- Vision matches: {review['counts']['match']}",
             f"- Vision mismatches: {review['counts']['mismatch']}",
             f"- Unverified: {review['counts']['uncertain']}",
             f"- Reported issues: {len(review['issues'])}", "",
-            "No extraction content has been corrected. The PDF is the source of truth.",
+            "Initial table results:",
+            *[
+                f"- Table {item['table']} (PDF page {item['page']}): "
+                f"{item['verdict']} ({item['issue_count']} initial issue(s), "
+                f"{item.get('correction_attempts', 0)} correction attempt(s))"
+                for item in review.get("initial_results", [])
+            ],
+            "",
+            "Raw extraction is preserved. Corrected HTML, when produced, is derived from the PDF source of truth.",
             "",
         ]
         for result in review["verdicts"]:
@@ -277,21 +383,17 @@ def build_graph(checkpointer=None):
     graph.add_node("build_combined_html", html_node)
     graph.add_node("render_pdf_pages", render_pages_node)
     graph.add_node("cycle_html_tables", cycle_html_tables_node)
-    graph.add_node("human_review", human_review_node)
     graph.add_node("vision_compare", vision_node)
+    graph.add_node("corrected_slideshow", corrected_slideshow_node)
     graph.add_node("vision_declined", decline_node)
     graph.add_node("write_extractor_reports", report_node)
     graph.add_edge(START, "docling_extract")
     graph.add_edge("docling_extract", "build_combined_html")
     graph.add_edge("build_combined_html", "render_pdf_pages")
     graph.add_edge("render_pdf_pages", "cycle_html_tables")
-    graph.add_edge("cycle_html_tables", "human_review")
-    graph.add_conditional_edges(
-        "human_review",
-        lambda state: "approved" if state["vision_approved"] else "declined",
-        {"approved": "vision_compare", "declined": "vision_declined"},
-    )
-    graph.add_edge("vision_compare", "write_extractor_reports")
+    graph.add_edge("cycle_html_tables", "vision_compare")
+    graph.add_edge("vision_compare", "corrected_slideshow")
+    graph.add_edge("corrected_slideshow", "write_extractor_reports")
     graph.add_edge("vision_declined", "write_extractor_reports")
     graph.add_edge("write_extractor_reports", END)
     return graph.compile(checkpointer=checkpointer)
@@ -311,6 +413,7 @@ def run_pdf(
         "vision_model": vision_model, "use_vision": use_vision,
         "iteration": 1, "max_iterations": 1,
     }
+    from langgraph.checkpoint.sqlite import SqliteSaver
     with SqliteSaver.from_conn_string(str(output_dir / "checkpoint.sqlite")) as saver:
         graph = build_graph(checkpointer=saver)
         config = {"configurable": {"thread_id": output_dir.name}}
@@ -323,6 +426,7 @@ def resume_pdf(output_dir: Path, *, approve: bool) -> BatchReviewState:
     checkpoint = output_dir / "checkpoint.sqlite"
     if not checkpoint.is_file():
         raise FileNotFoundError(f"No saved review checkpoint: {checkpoint}")
+    from langgraph.checkpoint.sqlite import SqliteSaver
     with SqliteSaver.from_conn_string(str(checkpoint)) as saver:
         graph = build_graph(checkpointer=saver)
         config = {"configurable": {"thread_id": output_dir.name}}
@@ -369,7 +473,6 @@ def run_batch(
                 item = {
                     "pdf": pdf_path.name, "status": "awaiting_human_approval",
                     "output_dir": str(output_dir),
-                    "pdfplumber_html": state["pdfplumber_html"],
                     "docling_html": state["docling_html"],
                     "page_images": state["page_images"],
                 }
@@ -381,7 +484,6 @@ def run_batch(
                     state["extractor_reviews"][name]["status"] == "passed"
                     for name in EXTRACTORS
                 ) else "needs_human_review",
-                "pdfplumber_tables": len(state["pdfplumber_tables"]),
                 "docling_tables": len(state["docling_tables"]),
                 "output_dir": str(output_dir),
                 "error_reports": state["error_reports"],

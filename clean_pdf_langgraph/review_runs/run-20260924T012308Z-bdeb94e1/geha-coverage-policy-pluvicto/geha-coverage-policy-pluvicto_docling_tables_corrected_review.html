@@ -1,0 +1,67 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Corrected Docling slideshow</title>
+<style>body{font-family:system-ui;margin:0;background:#edf2f6}header{padding:12px 18px;background:#06233d;color:#fff;display:flex;justify-content:space-between;gap:12px}button{padding:7px 12px;margin-left:6px}main{max-width:1400px;margin:20px auto;background:#fff;padding:24px}.card{display:none}.card.active{display:block}#status{margin:0 0 14px;color:#5f6f7f;font-size:.85rem}</style></head>
+<body><header><strong>Corrected Docling tables</strong><span><button id="prev">◀ Previous</button><button id="next">Next ▶</button></span></header>
+<main><p id="status"></p><section class="card"><section><h2>Docling table 1 · PDF page 2</h2><table class="dataframe policy-table">
+  <thead>
+    <tr style="text-align: left;">
+      <th>Drug Name</th>
+      <th>HCPCS Code</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Pluvicto</td>
+      <td>A9607</td>
+      <td>Inj., Lutetium Lu 177 Vipivotide Tetraxetan, 200 mCi</td>
+    </tr>
+  </tbody>
+</table></section></section>
+<section class="card"><section><h2>Docling table 2 · PDF page 3</h2><table class="dataframe policy-table">
+  <thead>
+    <tr style="text-align: left;">
+      <th>Date</th>
+      <th>Updates</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>11/07/2022</td>
+      <td>Policy approved at P&amp;T</td>
+    </tr>
+    <tr>
+      <td>11/01/2023</td>
+      <td>Updated Indication Specified Approval Criteria Updated Approval Criteria References updated</td>
+    </tr>
+    <tr>
+      <td>5/28/2024</td>
+      <td>Annual Review</td>
+    </tr>
+    <tr>
+      <td>12/2/2024</td>
+      <td>Ad hoc Review of medical necessity criteria; update to policy template including universal criteria and disclaimer</td>
+    </tr>
+    <tr>
+      <td>12/16/2024</td>
+      <td>Ad hoc review approved by P&amp;T</td>
+    </tr>
+    <tr>
+      <td>4/17/2025</td>
+      <td>Annual Review</td>
+    </tr>
+    <tr>
+      <td>4/21/2025</td>
+      <td>Approved by P&amp;T</td>
+    </tr>
+    <tr>
+      <td>5/12/2025</td>
+      <td>Policy adopted by GEHA; document assessed for accessibility</td>
+    </tr>
+  </tbody>
+</table></section></section></main><script>
+const cards=[...document.querySelectorAll('.card')], status=document.getElementById('status'); let i=0, timer;
+function show(){cards.forEach((c,n)=>c.classList.toggle('active',n===i));status.textContent=cards.length?`Table ${i+1} of ${cards.length} · 3 seconds per table`:'No corrected tables';}
+function move(d){i=Math.max(0,Math.min(cards.length-1,i+d));show();schedule();}
+function schedule(){clearTimeout(timer);if(i<cards.length-1)timer=setTimeout(()=>move(1),3000);else status.textContent=`Review complete · ${cards.length} tables displayed`;}
+document.getElementById('prev').onclick=()=>move(-1);document.getElementById('next').onclick=()=>move(1);show();schedule();
+</script></body></html>

@@ -1,0 +1,14 @@
+## Docling table 1 (page 2)
+
+| Drug Name              | HCPCS Code   | Description                                    |
+|:-----------------------|:-------------|:-----------------------------------------------|
+| Fruzalqa (fruqintinib) | J8999        | Prescription drug, oral, chemotherapeutic, nos |
+
+## Docling table 2 (page 3)
+
+| Date       | Updates                                                               |
+|:-----------|:----------------------------------------------------------------------|
+| 1/1/2024   | Policy created                                                        |
+| 9/27/2024  | Annual Review                                                         |
+| 6/11/2025  | Policy adopted by GEHA; document reviewed for universal accessibility |
+| 11/17/2025 | Annual Review. Review by OH P&T - Approved at OH P&T                  |

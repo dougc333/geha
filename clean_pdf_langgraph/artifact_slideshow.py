@@ -16,7 +16,7 @@ PDF_DIR = ROOT.parent / "downloads" / "coverage-policies"
 
 
 def discover_artifacts(
-    directory: Path, *, recursive: bool = False, policy: str = ""
+    directory: Path, *, recursive: bool = False, policy: str = "", corrected_only: bool = False
 ) -> tuple[list[str], list[str]]:
     """Return browser-safe relative URLs for source pages and Docling HTML."""
     directory = directory.expanduser().resolve()
@@ -34,6 +34,7 @@ def discover_artifacts(
         for path in iterator("*.html")
         if path.is_file()
         and "docling" in path.name.casefold()
+        and (not corrected_only or "_corrected" in path.stem.casefold())
         and matches(path)
     )
 
@@ -242,6 +243,7 @@ def main() -> None:
                         help="Source PDF directory (default: downloads/coverage-policies)")
     parser.add_argument("--policy", default="", help="Only files whose names contain this text")
     parser.add_argument("--recursive", action="store_true", help="Include review_runs subdirectories")
+    parser.add_argument("--corrected-only", action="store_true", help="Show only *_corrected.html artifacts")
     parser.add_argument("--interval", type=float, default=3.0, help="Seconds per artifact")
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8765)
@@ -254,11 +256,12 @@ def main() -> None:
         parser.error(f"Not a directory: {directory}")
     artifact_directory = ROOT if directory == PDF_DIR.resolve() else directory
     pages, tables = discover_artifacts(
-        artifact_directory, recursive=args.recursive, policy=args.policy
+        artifact_directory, recursive=args.recursive, policy=args.policy,
+        corrected_only=args.corrected_only
     )
     if args.policy and (not pages or not tables):
         artifact_directory = prepare_policy_artifacts(directory, args.policy)
-        pages, tables = discover_artifacts(artifact_directory)
+        pages, tables = discover_artifacts(artifact_directory, corrected_only=args.corrected_only)
     SlideshowHandler.viewer = viewer_html(pages, tables, args.interval).encode("utf-8")
     handler = partial(SlideshowHandler, directory=str(artifact_directory))
     server = ThreadingHTTPServer((args.host, args.port), handler)

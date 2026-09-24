@@ -9,8 +9,66 @@ from .schema import ReviewIssue
 from .vision_review import _image_part, response_schema
 
 
+def render_html_table_screenshot(table_html: str, output_path: Path) -> Path:
+    """Render one extracted HTML table to PNG using Playwright/Chromium."""
+    from playwright.sync_api import sync_playwright
+
+    document = f"""<!doctype html><html><head><style>
+    body {{ margin: 24px; background: white; font-family: Arial, sans-serif; }}
+    table {{ border-collapse: collapse; width: 100%; }}
+    th, td {{ border: 1px solid #777; padding: 8px; text-align: left; vertical-align: top; }}
+    th {{ background: #163a63; color: white; }}
+    </style></head><body>{table_html}</body></html>"""
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(headless=True)
+        try:
+            page = browser.new_page(viewport={"width": 1600, "height": 1200})
+            page.set_content(document, wait_until="load")
+            page.screenshot(path=str(output_path), full_page=True)
+        finally:
+            browser.close()
+    return output_path
+
+
+def correct_html_table(
+    *, artifact: str, table_html: str, pdf_images: list[Path],
+    issues: list[ReviewIssue], model: str,
+) -> str:
+    """Ask the vision model for a corrected table, returning only table HTML."""
+    from openai import OpenAI
+
+    content: list[dict[str, str]] = [{
+        "type": "input_text",
+        "text": (
+            f"Artifact: {artifact}\n\nCURRENT HTML TABLE:\n{table_html}\n\n"
+            f"REPORTED ISSUES:\n{json.dumps(issues, ensure_ascii=False)}\n\n"
+            "Return the corrected table as complete HTML beginning with <table> "
+            "and ending with </table>. Preserve every value visible in the PDF. "
+            "Do not add commentary, Markdown fences, scripts, or styles."
+        ),
+    }]
+    for image_path in pdf_images:
+        content.append({"type": "input_text", "text": f"SOURCE PDF PAGE: {image_path.name}"})
+        content.append(_image_part(image_path))
+    response = OpenAI(max_retries=1, timeout=120).responses.create(
+        model=model,
+        store=False,
+        instructions=(
+            "Correct extracted HTML table structure using only the supplied PDF "
+            "images as source of truth. Never invent unreadable values."
+        ),
+        input=[{"role": "user", "content": content}],
+    )
+    text = response.output_text.strip()
+    start, end = text.find("<table"), text.lower().rfind("</table>")
+    if start < 0 or end < start:
+        raise ValueError("Correction response did not contain a complete HTML table")
+    return text[start:end + len("</table>")]
+
+
 def compare_html_table(
     *, artifact: str, table_html: str, pdf_images: list[Path], model: str,
+    html_screenshot: Path | None = None,
 ) -> tuple[str, list[ReviewIssue]]:
     """Return a structured verdict; never rewrite or approve an extracted table."""
     if not pdf_images:
@@ -40,6 +98,9 @@ def compare_html_table(
     for image_path in pdf_images:
         content.append({"type": "input_text", "text": f"Source PDF page: {image_path.name}"})
         content.append(_image_part(image_path))
+    if html_screenshot is not None:
+        content.append({"type": "input_text", "text": "Rendered HTML table screenshot:"})
+        content.append(_image_part(html_screenshot))
 
     response = OpenAI(max_retries=1, timeout=120).responses.create(
         model=model,

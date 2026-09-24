@@ -7,10 +7,22 @@ Those are deliberate QC targets, not omissions to repair in this module.
 from __future__ import annotations
 
 import hashlib
+import re
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
 from .schema import ChunkArtifact, TableArtifact
+
+
+@lru_cache(maxsize=1)
+def _docling_tokenizer():
+    """Load the Docling tokenizer once for the entire batch process."""
+    from docling_core.transforms.chunker.tokenizer.huggingface import HuggingFaceTokenizer
+
+    return HuggingFaceTokenizer.from_pretrained(
+        model_name="BAAI/bge-small-en-v1.5", max_tokens=700
+    )
 
 
 def write_new(path: Path, content: str) -> None:
@@ -23,11 +35,11 @@ def source_sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def correct_pdfplumber_tables(tables: list[TableArtifact]) -> list[TableArtifact]:
-    """Apply conservative, non-LLM repairs to PDFPlumber table artifacts.
+def correct_table_headers(tables: list[TableArtifact]) -> list[TableArtifact]:
+    """Apply a conservative header repair to extracted table artifacts.
 
-    PDFPlumber often returns a numeric DataFrame header when it cannot identify
-    the first row as a header.  Promote that first non-empty row only when the
+    Extractors often return a numeric DataFrame header when they cannot identify
+    the first row as a header. Promote that first non-empty row only when the
     header is entirely numeric, and discard rows that are completely empty.
     Page-boundary decisions are deliberately left untouched for human review.
     """
@@ -50,6 +62,35 @@ def correct_pdfplumber_tables(tables: list[TableArtifact]) -> list[TableArtifact
             "markdown": pd.DataFrame(rows, columns=columns).to_markdown(index=False),
         })
     return corrected
+
+
+def nearest_markdown_table_headings(markdown: str) -> list[str]:
+    """Return the closest preceding Markdown heading for each table."""
+    headings: list[str] = []
+    current = ""
+    in_table = False
+    lines = markdown.splitlines()
+    for index, line in enumerate(lines):
+        heading = re.match(r"^\s{0,3}#{1,6}\s+(.+?)\s*#*\s*$", line)
+        if heading:
+            current = heading.group(1).strip()
+            in_table = False
+            continue
+        if line.lstrip().startswith("|") and index + 1 < len(lines):
+            separator = lines[index + 1]
+            if re.match(r"^\s*\|?\s*:?-{3,}", separator):
+                if not in_table:
+                    headings.append(current)
+                in_table = True
+                continue
+        if in_table and not line.lstrip().startswith("|"):
+            in_table = False
+    return headings
+
+
+# Backward-compatible name for callers that used the old PDFPlumber-specific
+# helper before the workflow switched to Docling.
+correct_pdfplumber_tables = correct_table_headers
 
 
 def naive_pdf_extract(pdf_path: Path, output_dir: Path) -> dict[str, Any]:
@@ -79,6 +120,7 @@ def naive_pdf_extract(pdf_path: Path, output_dir: Path) -> dict[str, Any]:
                     "markdown": markdown,
                     "columns": [str(column) for column in frame.columns],
                     "rows": frame.fillna("").astype(str).values.tolist(),
+                    "nearest_heading": "",
                 })
                 sections.append(f"### pdfplumber table {number} (page {page_number})\n\n{markdown}")
         page_count = len(pdf.pages)
@@ -117,9 +159,9 @@ def docling_extract(pdf_path: Path, output_dir: Path) -> dict[str, Any]:
         format_options={InputFormat.PDF: PdfFormatOption(pipeline_options=options)}
     )
     document = converter.convert(pdf_path).document
-    tokenizer = HuggingFaceTokenizer.from_pretrained(
-        model_name="BAAI/bge-small-en-v1.5", max_tokens=700
-    )
+    exported_markdown = document.export_to_markdown()
+    table_headings = nearest_markdown_table_headings(exported_markdown)
+    tokenizer = _docling_tokenizer()
     chunker = HybridChunker(tokenizer=tokenizer, merge_peers=True)
 
     chunks: list[ChunkArtifact] = []
@@ -148,12 +190,13 @@ def docling_extract(pdf_path: Path, output_dir: Path) -> dict[str, Any]:
             "markdown": frame.to_markdown(index=False),  # Raw 0/1/2 headers stay raw.
             "columns": [str(column) for column in frame.columns],
             "rows": frame.fillna("").astype(str).values.tolist(),
+            "nearest_heading": table_headings[number - 1] if number <= len(table_headings) else "",
         })
 
     markdown_path = output_dir / f"{pdf_path.stem}.docling.md"
     chunks_path = output_dir / f"{pdf_path.stem}.docling_chunks.md"
     tables_path = output_dir / f"{pdf_path.stem}_docling_tables.md"
-    write_new(markdown_path, document.export_to_markdown())
+    write_new(markdown_path, exported_markdown)
     write_new(
         chunks_path,
         "\n\n".join(
@@ -163,11 +206,13 @@ def docling_extract(pdf_path: Path, output_dir: Path) -> dict[str, Any]:
             for chunk in chunks
         ) + "\n",
     )
+    corrected_tables = correct_table_headers(tables)
     write_new(
         tables_path,
         "\n\n".join(
-            f"## Docling table {table['number']} (page {table['page']})\n\n{table['markdown']}"
-            for table in tables
+            f"## Docling table {table['number']} (page {table['page']})\n\n"
+            f"Nearest heading: {table.get('nearest_heading') or 'none'}\n\n{table['markdown']}"
+            for table in corrected_tables
         ) + "\n",
     )
     return {
@@ -175,7 +220,7 @@ def docling_extract(pdf_path: Path, output_dir: Path) -> dict[str, Any]:
         "docling_chunks_markdown": str(chunks_path),
         "docling_tables_markdown": str(tables_path),
         "docling_chunks": chunks,
-        "docling_tables": tables,
+        "docling_tables": corrected_tables,
     }
 
 
