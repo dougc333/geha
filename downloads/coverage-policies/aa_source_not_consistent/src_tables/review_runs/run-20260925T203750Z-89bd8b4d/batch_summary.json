@@ -1,0 +1,1603 @@
+{
+  "input_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/singlepage",
+  "source_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent",
+  "run_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d",
+  "vision_model": "gpt-4o",
+  "pdf_count": 68,
+  "source_document_count": 3,
+  "single_page_pdf_count": 68,
+  "revision_normalization": {
+    "purpose": "Revision-table header renormalization across the three source PDFs. On the listed single-page PDFs, Docling encoded the first date/update entry as column headers; this pass restores those headers as data rows.",
+    "source_document_count": 3,
+    "source_pdfs": [
+      "geha-coverage-policy-infertility-services.pdf",
+      "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf",
+      "geha-medical-necessity-review-criteria.pdf"
+    ],
+    "affected_page_count": 3,
+    "affected_pages_and_headers": [
+      {
+        "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+        "page_pdf": "geha-coverage-policy-infertility-services-page-049.pdf",
+        "original_page": 49,
+        "headers_restored_as_rows": [
+          {
+            "table_number": 1,
+            "page": 1,
+            "header_restored_as_row": [
+              "January 2024",
+              "Origination. Changed the code 83520 Anti-Mullerian Hormone to 82166."
+            ]
+          }
+        ]
+      },
+      {
+        "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+        "page_pdf": "geha-coverage-policy-infertility-services-page-050.pdf",
+        "original_page": 50,
+        "headers_restored_as_rows": [
+          {
+            "table_number": 1,
+            "page": 1,
+            "header_restored_as_row": [
+              "April 2024",
+              "Added clarifying language to criteria: If a member meets appropriate clinical scenarios with supporting provider documentation, approval may be granted for IUI treatments with oral medications and triggers."
+            ]
+          }
+        ]
+      },
+      {
+        "source_pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf",
+        "page_pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-015.pdf",
+        "original_page": 15,
+        "headers_restored_as_rows": [
+          {
+            "table_number": 1,
+            "page": 1,
+            "header_restored_as_row": [
+              "October 2023",
+              "Origination"
+            ]
+          }
+        ]
+      }
+    ],
+    "revision_table_count": 4,
+    "raw_revision_rows": 18,
+    "restored_revision_rows": 3,
+    "normalized_revision_rows": 21,
+    "raw_total_table_rows": 221,
+    "normalized_total_table_rows": 224,
+    "raw_revision_noise_percent": 8.14,
+    "normalized_revision_noise_percent": 9.38
+  },
+  "results": [
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-001.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 1,
+      "status": "passed",
+      "docling_tables": 1,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 11,
+        "normalized_total_table_rows": 11,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-001",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-001/geha-coverage-policy-infertility-services-page-001_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-002.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 2,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-002",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-002/geha-coverage-policy-infertility-services-page-002_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-003.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 3,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-003",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-003/geha-coverage-policy-infertility-services-page-003_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-004.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 4,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-004",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-004/geha-coverage-policy-infertility-services-page-004_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-005.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 5,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-005",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-005/geha-coverage-policy-infertility-services-page-005_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-006.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 6,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-006",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-006/geha-coverage-policy-infertility-services-page-006_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-007.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 7,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-007",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-007/geha-coverage-policy-infertility-services-page-007_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-008.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 8,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-008",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-008/geha-coverage-policy-infertility-services-page-008_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-009.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 9,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-009",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-009/geha-coverage-policy-infertility-services-page-009_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-010.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 10,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-010",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-010/geha-coverage-policy-infertility-services-page-010_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-011.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 11,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-011",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-011/geha-coverage-policy-infertility-services-page-011_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-012.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 12,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-012",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-012/geha-coverage-policy-infertility-services-page-012_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-013.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 13,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-013",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-013/geha-coverage-policy-infertility-services-page-013_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-014.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 14,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-014",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-014/geha-coverage-policy-infertility-services-page-014_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-015.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 15,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-015",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-015/geha-coverage-policy-infertility-services-page-015_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-016.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 16,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-016",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-016/geha-coverage-policy-infertility-services-page-016_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-017.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 17,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-017",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-017/geha-coverage-policy-infertility-services-page-017_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-018.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 18,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-018",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-018/geha-coverage-policy-infertility-services-page-018_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-019.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 19,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-019",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-019/geha-coverage-policy-infertility-services-page-019_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-020.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 20,
+      "status": "passed",
+      "docling_tables": 1,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 2,
+        "normalized_total_table_rows": 2,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-020",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-020/geha-coverage-policy-infertility-services-page-020_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-021.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 21,
+      "status": "passed",
+      "docling_tables": 1,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 15,
+        "normalized_total_table_rows": 15,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-021",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-021/geha-coverage-policy-infertility-services-page-021_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-022.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 22,
+      "status": "passed",
+      "docling_tables": 1,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 11,
+        "normalized_total_table_rows": 11,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-022",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-022/geha-coverage-policy-infertility-services-page-022_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-023.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 23,
+      "status": "passed",
+      "docling_tables": 1,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 16,
+        "normalized_total_table_rows": 16,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-023",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-023/geha-coverage-policy-infertility-services-page-023_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-024.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 24,
+      "status": "passed",
+      "docling_tables": 1,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 15,
+        "normalized_total_table_rows": 15,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-024",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-024/geha-coverage-policy-infertility-services-page-024_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-025.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 25,
+      "status": "passed",
+      "docling_tables": 1,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 20,
+        "normalized_total_table_rows": 20,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-025",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-025/geha-coverage-policy-infertility-services-page-025_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-026.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 26,
+      "status": "passed",
+      "docling_tables": 1,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 22,
+        "normalized_total_table_rows": 22,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-026",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-026/geha-coverage-policy-infertility-services-page-026_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-027.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 27,
+      "status": "passed",
+      "docling_tables": 1,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 20,
+        "normalized_total_table_rows": 20,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-027",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-027/geha-coverage-policy-infertility-services-page-027_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-028.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 28,
+      "status": "passed",
+      "docling_tables": 1,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 20,
+        "normalized_total_table_rows": 20,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-028",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-028/geha-coverage-policy-infertility-services-page-028_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-029.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 29,
+      "status": "passed",
+      "docling_tables": 1,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 19,
+        "normalized_total_table_rows": 19,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-029",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-029/geha-coverage-policy-infertility-services-page-029_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-030.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 30,
+      "status": "passed",
+      "docling_tables": 1,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 16,
+        "normalized_total_table_rows": 16,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-030",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-030/geha-coverage-policy-infertility-services-page-030_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-031.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 31,
+      "status": "passed",
+      "docling_tables": 1,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 5,
+        "normalized_total_table_rows": 5,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-031",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-031/geha-coverage-policy-infertility-services-page-031_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-032.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 32,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-032",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-032/geha-coverage-policy-infertility-services-page-032_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-033.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 33,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-033",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-033/geha-coverage-policy-infertility-services-page-033_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-034.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 34,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-034",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-034/geha-coverage-policy-infertility-services-page-034_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-035.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 35,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-035",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-035/geha-coverage-policy-infertility-services-page-035_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-036.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 36,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-036",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-036/geha-coverage-policy-infertility-services-page-036_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-037.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 37,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-037",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-037/geha-coverage-policy-infertility-services-page-037_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-038.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 38,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-038",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-038/geha-coverage-policy-infertility-services-page-038_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-039.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 39,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-039",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-039/geha-coverage-policy-infertility-services-page-039_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-040.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 40,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-040",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-040/geha-coverage-policy-infertility-services-page-040_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-041.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 41,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-041",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-041/geha-coverage-policy-infertility-services-page-041_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-042.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 42,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-042",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-042/geha-coverage-policy-infertility-services-page-042_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-043.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 43,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-043",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-043/geha-coverage-policy-infertility-services-page-043_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-044.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 44,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-044",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-044/geha-coverage-policy-infertility-services-page-044_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-045.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 45,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-045",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-045/geha-coverage-policy-infertility-services-page-045_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-046.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 46,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-046",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-046/geha-coverage-policy-infertility-services-page-046_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-047.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 47,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-047",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-047/geha-coverage-policy-infertility-services-page-047_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-048.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 48,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-048",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-048/geha-coverage-policy-infertility-services-page-048_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-049.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 49,
+      "status": "passed",
+      "docling_tables": 1,
+      "revision_normalization": {
+        "revision_table_count": 1,
+        "raw_revision_rows": 1,
+        "restored_revision_rows": 1,
+        "normalized_revision_rows": 2,
+        "affected_headers": [
+          {
+            "table_number": 1,
+            "page": 1,
+            "header_restored_as_row": [
+              "January 2024",
+              "Origination. Changed the code 83520 Anti-Mullerian Hormone to 82166."
+            ]
+          }
+        ],
+        "raw_total_table_rows": 1,
+        "normalized_total_table_rows": 2,
+        "raw_revision_noise_percent": 100.0,
+        "normalized_revision_noise_percent": 100.0,
+        "normalized_artifact": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-049/geha-coverage-policy-infertility-services-page-049_docling_tables_normalized.md"
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-049",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-049/geha-coverage-policy-infertility-services-page-049_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-infertility-services-page-050.pdf",
+      "source_pdf": "geha-coverage-policy-infertility-services.pdf",
+      "original_page": 50,
+      "status": "passed",
+      "docling_tables": 1,
+      "revision_normalization": {
+        "revision_table_count": 1,
+        "raw_revision_rows": 5,
+        "restored_revision_rows": 1,
+        "normalized_revision_rows": 6,
+        "affected_headers": [
+          {
+            "table_number": 1,
+            "page": 1,
+            "header_restored_as_row": [
+              "April 2024",
+              "Added clarifying language to criteria: If a member meets appropriate clinical scenarios with supporting provider documentation, approval may be granted for IUI treatments with oral medications and triggers."
+            ]
+          }
+        ],
+        "raw_total_table_rows": 5,
+        "normalized_total_table_rows": 6,
+        "raw_revision_noise_percent": 100.0,
+        "normalized_revision_noise_percent": 100.0,
+        "normalized_artifact": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-050/geha-coverage-policy-infertility-services-page-050_docling_tables_normalized.md"
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-050",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-infertility-services-page-050/geha-coverage-policy-infertility-services-page-050_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-001.pdf",
+      "source_pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf",
+      "original_page": 1,
+      "status": "passed",
+      "docling_tables": 1,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 9,
+        "normalized_total_table_rows": 9,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-001",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-001/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-001_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-002.pdf",
+      "source_pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf",
+      "original_page": 2,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-002",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-002/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-002_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-003.pdf",
+      "source_pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf",
+      "original_page": 3,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-003",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-003/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-003_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-004.pdf",
+      "source_pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf",
+      "original_page": 4,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-004",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-004/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-004_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-005.pdf",
+      "source_pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf",
+      "original_page": 5,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-005",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-005/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-005_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-006.pdf",
+      "source_pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf",
+      "original_page": 6,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-006",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-006/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-006_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-007.pdf",
+      "source_pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf",
+      "original_page": 7,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-007",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-007/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-007_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-008.pdf",
+      "source_pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf",
+      "original_page": 8,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-008",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-008/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-008_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-009.pdf",
+      "source_pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf",
+      "original_page": 9,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-009",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-009/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-009_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-010.pdf",
+      "source_pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf",
+      "original_page": 10,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-010",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-010/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-010_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-011.pdf",
+      "source_pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf",
+      "original_page": 11,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-011",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-011/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-011_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-012.pdf",
+      "source_pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf",
+      "original_page": 12,
+      "status": "passed",
+      "docling_tables": 1,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 2,
+        "normalized_total_table_rows": 2,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-012",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-012/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-012_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-013.pdf",
+      "source_pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf",
+      "original_page": 13,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-013",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-013/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-013_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-014.pdf",
+      "source_pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf",
+      "original_page": 14,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-014",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-014/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-014_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-015.pdf",
+      "source_pdf": "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf",
+      "original_page": 15,
+      "status": "passed",
+      "docling_tables": 1,
+      "revision_normalization": {
+        "revision_table_count": 1,
+        "raw_revision_rows": 3,
+        "restored_revision_rows": 1,
+        "normalized_revision_rows": 4,
+        "affected_headers": [
+          {
+            "table_number": 1,
+            "page": 1,
+            "header_restored_as_row": [
+              "October 2023",
+              "Origination"
+            ]
+          }
+        ],
+        "raw_total_table_rows": 3,
+        "normalized_total_table_rows": 4,
+        "raw_revision_noise_percent": 100.0,
+        "normalized_revision_noise_percent": 100.0,
+        "normalized_artifact": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-015/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-015_docling_tables_normalized.md"
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-015",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-015/geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve-page-015_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-medical-necessity-review-criteria-page-001.pdf",
+      "source_pdf": "geha-medical-necessity-review-criteria.pdf",
+      "original_page": 1,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-medical-necessity-review-criteria-page-001",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-medical-necessity-review-criteria-page-001/geha-medical-necessity-review-criteria-page-001_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-medical-necessity-review-criteria-page-002.pdf",
+      "source_pdf": "geha-medical-necessity-review-criteria.pdf",
+      "original_page": 2,
+      "status": "needs_human_review",
+      "docling_tables": 0,
+      "revision_normalization": {
+        "revision_table_count": 0,
+        "raw_revision_rows": 0,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 0,
+        "affected_headers": [],
+        "raw_total_table_rows": 0,
+        "normalized_total_table_rows": 0,
+        "raw_revision_noise_percent": 0.0,
+        "normalized_revision_noise_percent": 0.0
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-medical-necessity-review-criteria-page-002",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-medical-necessity-review-criteria-page-002/geha-medical-necessity-review-criteria-page-002_docling_errors.md"
+      }
+    },
+    {
+      "pdf": "geha-medical-necessity-review-criteria-page-003.pdf",
+      "source_pdf": "geha-medical-necessity-review-criteria.pdf",
+      "original_page": 3,
+      "status": "passed",
+      "docling_tables": 1,
+      "revision_normalization": {
+        "revision_table_count": 1,
+        "raw_revision_rows": 9,
+        "restored_revision_rows": 0,
+        "normalized_revision_rows": 9,
+        "affected_headers": [],
+        "raw_total_table_rows": 9,
+        "normalized_total_table_rows": 9,
+        "raw_revision_noise_percent": 100.0,
+        "normalized_revision_noise_percent": 100.0,
+        "normalized_artifact": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-medical-necessity-review-criteria-page-003/geha-medical-necessity-review-criteria-page-003_docling_tables_normalized.md"
+      },
+      "output_dir": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-medical-necessity-review-criteria-page-003",
+      "error_reports": {
+        "docling": "/Users/dc/geha/downloads/coverage-policies/aa_source_not_consistent/src_tables/review_runs/run-20260925T203750Z-89bd8b4d/geha-medical-necessity-review-criteria-page-003/geha-medical-necessity-review-criteria-page-003_docling_errors.md"
+      }
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1420" height="650" viewBox="0 0 1420 650" role="img" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Corrective RAG pipeline with optional reranking</title>
+  <desc>The query retrieves candidate chunks from a vector database. An optional reranker reduces the candidates. Corrective RAG grades the evidence. Relevant evidence goes to the answer model, while ambiguous or irrelevant evidence triggers query rewriting and alternate retrieval before being graded again.</desc>
+  <style>
+    .bg { fill: #ffffff; }
+    .teal rect { fill: #E1F5EE; stroke: #0F6E56; }
+    .teal text { fill: #085041; }
+    .coral rect { fill: #FAECE7; stroke: #993C1D; }
+    .coral text { fill: #712B13; }
+    .gray rect { fill: #F1EFE8; stroke: #5F5E5A; }
+    .gray text { fill: #444441; }
+    .blue rect { fill: #E6F1FB; stroke: #185FA5; }
+    .blue text { fill: #0C447C; }
+    .amber rect { fill: #FAEEDA; stroke: #BA7517; }
+    .amber text { fill: #633806; }
+    .th { font-size: 15px; font-weight: 600; }
+    .ts { font-size: 12px; fill: #5F5E5A; }
+    .arr { stroke: #5F5E5A; stroke-width: 1.8; fill: none; }
+    .group { stroke: #185FA5; stroke-width: 1.5; fill: #F7FBFF; fill-opacity: 0.7; stroke-dasharray: 7 5; }
+    .label { font-size: 27px; font-weight: 700; fill: #2C2C2A; }
+    .group-label { font-size: 18px; font-weight: 700; fill: #0C447C; }
+    .branch { font-size: 12px; font-weight: 600; fill: #5F5E5A; }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1420" height="650"/>
+
+  <!-- Knowledge-base preparation -->
+  <text class="ts" x="38" y="48">OFFLINE INDEXING</text>
+  <g class="teal"><rect x="38" y="66" width="116" height="48" rx="9"/><text class="th" x="96" y="90" text-anchor="middle" dominant-baseline="central">Documents</text></g>
+  <g class="teal"><rect x="198" y="66" width="116" height="48" rx="9"/><text class="th" x="256" y="90" text-anchor="middle" dominant-baseline="central">Chunking</text></g>
+  <g class="teal"><rect x="358" y="66" width="116" height="48" rx="9"/><text class="th" x="416" y="90" text-anchor="middle" dominant-baseline="central">Embedding</text></g>
+  <g class="teal"><rect x="518" y="58" width="126" height="64" rx="9"/><text class="th" x="581" y="82" text-anchor="middle">Vector DB</text><text class="ts" x="581" y="103" text-anchor="middle">indexed chunks</text></g>
+  <line x1="158" y1="90" x2="194" y2="90" class="arr" marker-end="url(#arrow)"/>
+  <line x1="318" y1="90" x2="354" y2="90" class="arr" marker-end="url(#arrow)"/>
+  <line x1="478" y1="90" x2="514" y2="90" class="arr" marker-end="url(#arrow)"/>
+
+  <!-- Online retrieval -->
+  <text class="ts" x="38" y="244">ONLINE QUERY</text>
+  <g class="coral"><rect x="38" y="264" width="116" height="58" rx="9"/><text class="th" x="96" y="293" text-anchor="middle" dominant-baseline="central">User query</text></g>
+  <g class="coral"><rect x="198" y="264" width="134" height="58" rx="9"/><text class="th" x="265" y="284" text-anchor="middle">Query rewrite</text><text class="ts" x="265" y="306" text-anchor="middle">or expansion</text></g>
+  <g class="gray"><rect x="376" y="256" width="132" height="74" rx="9"/><text class="th" x="442" y="285" text-anchor="middle">Retriever</text><text class="ts" x="442" y="307" text-anchor="middle">vector / hybrid</text></g>
+  <g class="teal"><rect x="552" y="264" width="126" height="58" rx="9"/><text class="th" x="615" y="284" text-anchor="middle">Top-k</text><text class="ts" x="615" y="306" text-anchor="middle">candidate chunks</text></g>
+  <g class="gray"><rect x="722" y="256" width="144" height="74" rx="9"/><text class="th" x="794" y="284" text-anchor="middle">Reranker</text><text class="ts" x="794" y="306" text-anchor="middle">optional top-n</text></g>
+  <line x1="158" y1="293" x2="194" y2="293" class="arr" marker-end="url(#arrow)"/>
+  <line x1="336" y1="293" x2="372" y2="293" class="arr" marker-end="url(#arrow)"/>
+  <line x1="512" y1="293" x2="548" y2="293" class="arr" marker-end="url(#arrow)"/>
+  <line x1="682" y1="293" x2="718" y2="293" class="arr" marker-end="url(#arrow)"/>
+  <path d="M581 126 L581 190 L442 190 L442 252" class="arr" marker-end="url(#arrow)"/>
+
+  <!-- CRAG boundary -->
+  <rect class="group" x="900" y="176" width="326" height="390" rx="18"/>
+  <text class="group-label" x="924" y="207">CRAG: retrieval correction</text>
+
+  <!-- Evidence grader diamond -->
+  <polygon points="1012,235 1108,293 1012,351 916,293" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.5"/>
+  <text class="th" x="1012" y="285" text-anchor="middle" fill="#0C447C">Evidence</text>
+  <text class="th" x="1012" y="305" text-anchor="middle" fill="#0C447C">grader</text>
+  <line x1="870" y1="293" x2="912" y2="293" class="arr" marker-end="url(#arrow)"/>
+
+  <!-- Relevant path -->
+  <g class="blue"><rect x="1070" y="386" width="132" height="68" rx="9"/><text class="th" x="1136" y="411" text-anchor="middle">Verified</text><text class="th" x="1136" y="431" text-anchor="middle">evidence</text></g>
+  <path d="M1072 331 L1136 331 L1136 382" class="arr" marker-end="url(#arrow)"/>
+  <text class="branch" x="1147" y="353">relevant</text>
+
+  <!-- Corrective path -->
+  <g class="amber"><rect x="924" y="478" width="278" height="66" rx="9"/><text class="th" x="1063" y="502" text-anchor="middle">Corrective retrieval</text><text class="ts" x="1063" y="524" text-anchor="middle">rewrite · BM25/hybrid · web · SQL/tool</text></g>
+  <path d="M972 331 L972 474" class="arr" marker-end="url(#arrow)"/>
+  <text class="branch" x="980" y="392">ambiguous / irrelevant</text>
+  <path d="M920 511 L442 511 L442 334" class="arr" marker-end="url(#arrow)"/>
+  <text class="ts" x="625" y="530" text-anchor="middle">retry retrieval, then grade again</text>
+
+  <!-- Generation -->
+  <g class="coral"><rect x="1260" y="386" width="92" height="68" rx="9"/><text class="th" x="1306" y="411" text-anchor="middle">Answer</text><text class="th" x="1306" y="431" text-anchor="middle">LLM</text></g>
+  <line x1="1206" y1="420" x2="1256" y2="420" class="arr" marker-end="url(#arrow)"/>
+  <path d="M96 326 L96 594 L1306 594 L1306 458" class="arr" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <text class="ts" x="690" y="612" text-anchor="middle">original query accompanies the verified evidence</text>
+
+  <g class="teal"><rect x="1260" y="238" width="122" height="56" rx="28"/><text class="th" x="1321" y="266" text-anchor="middle" dominant-baseline="central">Response</text></g>
+  <line x1="1306" y1="382" x2="1306" y2="298" class="arr" marker-end="url(#arrow)"/>
+
+  <text class="label" x="38" y="626">Corrective RAG (CRAG) with reranking</text>
+</svg>

@@ -42,3 +42,13 @@ GEHA_NO_BROWSER=1 .venv/bin/python \
 
 Without `--approve`, extraction still runs but the tables are recorded as
 unverified and no page image or table content is sent to OpenAI.
+
+## Revision-table normalization
+
+The workflow preserves the original Docling extraction and additionally writes
+`*_docling_tables_normalized.md` for pages containing revision tables. If a
+headerless or continued revision table encodes its first date/update entry as
+DataFrame column names, that entry is restored as a row under stable `Date` and
+`Updates` columns. `batch_summary.json` records the three-file normalization
+scope, every affected page and original header, and raw versus normalized row
+and revision-noise statistics.

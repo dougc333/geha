@@ -9,6 +9,7 @@ normal ``clean_pdf_langgraph/review_runs/run-*/<policy>/`` batch run.
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import json
 import os
@@ -50,10 +51,118 @@ from src.schema import ChunkArtifact, TableArtifact  # noqa: E402
 
 
 PAGE_PATTERN = re.compile(r"^(?P<stem>.+)-page-(?P<page>\d+)\.pdf$", re.IGNORECASE)
+REVISION_HEADING_PATTERN = re.compile(
+    r"(?:policy\s+history|revision\s+(?:history|information))", re.IGNORECASE
+)
+DATE_VALUE_PATTERN = re.compile(
+    r"^(?:(?:january|february|march|april|may|june|july|august|september|"
+    r"october|november|december)\s+(?:\d{1,2},?\s+)?\d{2,4}|"
+    r"\d{1,2}[/-]\d{1,2}[/-]\d{2,4})$",
+    re.IGNORECASE,
+)
 
 
 class SinglePageReviewState(BatchReviewState, total=False):
     page_pdf_paths: list[str]
+
+
+def normalize_revision_tables(
+    tables: list[TableArtifact],
+) -> tuple[list[TableArtifact], dict[str, Any]]:
+    """Restore revision entries that Docling encoded as DataFrame headers.
+
+    Headerless revision tables and continued revision tables commonly expose
+    their first ``date, update`` entry as the DataFrame column names.  Preserve
+    all original artifacts, but create a normalized copy in which that entry is
+    restored as a data row under stable ``Date`` and ``Updates`` columns.
+    """
+    import pandas as pd
+
+    normalized = copy.deepcopy(tables)
+    affected_headers: list[dict[str, Any]] = []
+    raw_revision_rows = 0
+    normalized_revision_rows = 0
+    revision_table_count = 0
+
+    for table in normalized:
+        columns = [str(value).strip() for value in table["columns"]]
+        rows = [[str(cell).strip() for cell in row] for row in table["rows"]]
+        heading = str(table.get("nearest_heading") or "")
+        named_revision_table = bool(REVISION_HEADING_PATTERN.search(heading))
+        stable_header = (
+            len(columns) == 2
+            and columns[0].lower() == "date"
+            and columns[1].lower() in {"update", "updates"}
+        )
+        date_encoded_as_header = (
+            len(columns) == 2
+            and bool(DATE_VALUE_PATTERN.fullmatch(columns[0]))
+            and bool(columns[1])
+        )
+        is_revision_table = named_revision_table or stable_header or date_encoded_as_header
+        if not is_revision_table:
+            continue
+
+        revision_table_count += 1
+        raw_revision_rows += len(rows)
+        if date_encoded_as_header:
+            original_columns = columns.copy()
+            rows.insert(0, original_columns)
+            columns = ["Date", "Updates"]
+            affected_headers.append({
+                "table_number": table["number"],
+                "page": table["page"],
+                "header_restored_as_row": original_columns,
+            })
+
+        table["columns"] = columns
+        table["rows"] = rows
+        table["markdown"] = pd.DataFrame(rows, columns=columns).to_markdown(index=False)
+        normalized_revision_rows += len(rows)
+
+    return normalized, {
+        "revision_table_count": revision_table_count,
+        "raw_revision_rows": raw_revision_rows,
+        "restored_revision_rows": len(affected_headers),
+        "normalized_revision_rows": normalized_revision_rows,
+        "affected_headers": affected_headers,
+    }
+
+
+def write_normalized_revision_artifact(
+    *, page_pdf: Path, output_dir: Path, tables: list[TableArtifact]
+) -> dict[str, Any]:
+    """Write the normalized table view and return auditable statistics."""
+    normalized, stats = normalize_revision_tables(tables)
+    raw_total_rows = sum(len(table["rows"]) for table in tables)
+    normalized_total_rows = sum(len(table["rows"]) for table in normalized)
+    stats.update({
+        "raw_total_table_rows": raw_total_rows,
+        "normalized_total_table_rows": normalized_total_rows,
+        "raw_revision_noise_percent": (
+            round(100 * stats["raw_revision_rows"] / raw_total_rows, 2)
+            if raw_total_rows else 0.0
+        ),
+        "normalized_revision_noise_percent": (
+            round(100 * stats["normalized_revision_rows"] / normalized_total_rows, 2)
+            if normalized_total_rows else 0.0
+        ),
+    })
+    if not stats["revision_table_count"]:
+        return stats
+
+    artifact = output_dir / f"{page_pdf.stem}_docling_tables_normalized.md"
+    write_new(
+        artifact,
+        "\n\n".join(
+            f"## Docling table {table['number']} (page {table['page']})\n\n"
+            f"Nearest heading: {table.get('nearest_heading') or 'none'}\n\n"
+            f"{table['markdown']}"
+            for table in normalized
+        ) + "\n",
+    )
+    stats["normalized_artifact"] = str(artifact)
+    return stats
 
 
 def discover_page_groups(input_dir: Path) -> dict[str, list[tuple[int, Path]]]:
@@ -292,12 +401,18 @@ def run_batch(
                 "passed" if review["status"] == "passed" else
                 "needs_human_review"
             )
+            normalization = write_normalized_revision_artifact(
+                page_pdf=page_pdf,
+                output_dir=output_dir,
+                tables=state["docling_tables"],
+            )
             item = {
                 "pdf": page_pdf.name,
                 "source_pdf": source_pdf.name,
                 "original_page": original_page,
                 "status": status,
                 "docling_tables": len(state["docling_tables"]),
+                "revision_normalization": normalization,
                 "output_dir": str(output_dir),
                 "error_reports": state["error_reports"],
             }
@@ -322,6 +437,58 @@ def run_batch(
         results.append(item)
         print(json.dumps(item, ensure_ascii=False), flush=True)
 
+    normalization_results = [
+        item["revision_normalization"]
+        for item in results
+        if "revision_normalization" in item
+    ]
+    affected_pages = [
+        {
+            "source_pdf": item["source_pdf"],
+            "page_pdf": item["pdf"],
+            "original_page": item["original_page"],
+            "headers_restored_as_rows": item["revision_normalization"]["affected_headers"],
+        }
+        for item in results
+        if item.get("revision_normalization", {}).get("affected_headers")
+    ]
+    raw_revision_rows = sum(value["raw_revision_rows"] for value in normalization_results)
+    normalized_revision_rows = sum(
+        value["normalized_revision_rows"] for value in normalization_results
+    )
+    raw_total_rows = sum(value["raw_total_table_rows"] for value in normalization_results)
+    normalized_total_rows = sum(
+        value["normalized_total_table_rows"] for value in normalization_results
+    )
+    revision_normalization_summary = {
+        "purpose": (
+            "Revision-table header renormalization across the three source PDFs. "
+            "On the listed single-page PDFs, Docling encoded the first date/update "
+            "entry as column headers; this pass restores those headers as data rows."
+        ),
+        "source_document_count": len(groups),
+        "source_pdfs": [f"{stem}.pdf" for stem in groups],
+        "affected_page_count": len(affected_pages),
+        "affected_pages_and_headers": affected_pages,
+        "revision_table_count": sum(
+            value["revision_table_count"] for value in normalization_results
+        ),
+        "raw_revision_rows": raw_revision_rows,
+        "restored_revision_rows": sum(
+            value["restored_revision_rows"] for value in normalization_results
+        ),
+        "normalized_revision_rows": normalized_revision_rows,
+        "raw_total_table_rows": raw_total_rows,
+        "normalized_total_table_rows": normalized_total_rows,
+        "raw_revision_noise_percent": (
+            round(100 * raw_revision_rows / raw_total_rows, 2)
+            if raw_total_rows else 0.0
+        ),
+        "normalized_revision_noise_percent": (
+            round(100 * normalized_revision_rows / normalized_total_rows, 2)
+            if normalized_total_rows else 0.0
+        ),
+    }
     summary = {
         "input_dir": str(input_dir.resolve()),
         "source_dir": str(source_dir.resolve()),
@@ -330,6 +497,7 @@ def run_batch(
         "pdf_count": len(page_inputs),
         "source_document_count": len(groups),
         "single_page_pdf_count": len(page_inputs),
+        "revision_normalization": revision_normalization_summary,
         "results": results,
     }
     write_new(run_dir / "batch_summary.json", json.dumps(summary, indent=2) + "\n")
