@@ -1,0 +1,15 @@
+## Docling table 1 (page 3)
+
+Nearest heading: For Internal Use ONLY
+
+| Date       | Updates                                                                      |
+|:-----------|:-----------------------------------------------------------------------------|
+| 6/26/22    | Policy Creation                                                              |
+| 1/10/2023  | Annual Review                                                                |
+| 2/23/2024  | Annual Review; Updated Universal Criteria; Addition of Accelerated Approvals |
+| 6/1/2024   | Policy adopted by GEHA                                                       |
+| 7/12/2024  | Addition of Medicare criteria, Removed Accelerated Approval Language         |
+| 7/29/2024  | Reviewed and approved by OH Compliance                                       |
+| 11/10/2024 | Updated GEHA logo                                                            |
+| 1/17/2025  | Updated document format to make it universally accessible                    |
+| 5/27/2025  | Annual review, approved by OH P&T 5/27/2025 with minor edit                  |

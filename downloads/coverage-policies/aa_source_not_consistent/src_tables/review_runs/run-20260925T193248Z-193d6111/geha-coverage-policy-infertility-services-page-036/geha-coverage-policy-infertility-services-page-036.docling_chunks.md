@@ -1,0 +1,16 @@
+## Chunk 1
+
+Pages: 1
+
+Headings: none
+
+Farquhar CM, Liu E, Armstrong S, et al. Intrauterine insemination with ovarian stimulation vs. expectant
+
+## Chunk 2
+
+Pages: 1
+
+Headings: none
+
+management for unexplained infertility (TUI): a pragmatic, open-label, randomised, controlled, twocentre trial. Lancet 2018;391:441-50. Fauque P, Jouannet P, Davy C, Guibert J, et al. Cumulative results including obstetrical and neonatal outcome of fresh and frozen-thawed cycles in elective single versus double fresh embryo transfers. Fertil Steril 2010;94:927-935. Fauser BC, Nargund G, Anderson AN, et al. Mild ovarian stimulation for IVF: 10 years later. Human Reprod. 2010 Nov; 25(11): 2678-84. Finelli, R. et. al. The validity and reliability of computer-aided semen analyzers in performing semen analysis: a systematic review. Translational Andrology and Urology. 2021 Jul; 10(7): 3069 - 3079. doi: 10.21037/tau-21-276 Foong SC, Fleetham JA, O'Keane JA, Scott SG, Tough SC, Greene CA. A prospective randomized trial of conventional in vitro fertilization versus intracytoplasmic sperm injection in unexplained infertility. J Assist Reprod Genet 2006;23:137 - 40. Forman EJ, Hong KH, Ferry KM, et al. In vitro fertilization with single euploid blastocyst transfer: a randomized controlled trial. Fertil Steril 2013; 100: 100-7. Franasiak JM, Forman EJ, Hong KH, et al. The nature of aneuploidy with increasing age of the female partner: a review of 15,169 consecutive trophectoderm biopsies evaluated with comprehensive chromosomal screening. Fertil Steril 2014;101:656 - 63.e1. Fuat, K. & Baris, A. Sperm function tests in clinical practice. Turk J Urol. 2017 Dec; 43(4): 393 - 400. Published online 2017 Dec 1. doi: 10.5152/tud.2017.96646 Fujimoto A, Morishima K, Harada M, et al. Elective single-embryo transfer improves cumulative pregnancy outcome in young patients but not in women of advanced reproductive age. J Assist Reprod Genet. 2015 Dec;32(12):1773 - 1779. Gardner DK, Surrey E, Minjarez D, Leitz A, Stevens J, Schoolcraft WB. Single blastocyst transfer: a prospective randomized trial. Fertil Steril 2004;81: 551 - 5. Geng T, Geng L, Ge C, Zhang T. The effect of ICSI in infertility couples with non-male factor: a systematic review and meta-analysis. Journal of Assisted Reproduction and Genetics (2020) 37:2929 - 2945. Gerber R, Fazzari M, Kappy M, et al. Differential impact of controlled ovarian hyperstimulation on live birth rate in fresh versus frozen embryo transfer cycles: a Society for Assisted Reproductive Technology
+Clinic Outcome System study. Fertil Steril 2020; 114: 1225-1231.
