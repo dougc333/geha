@@ -91,7 +91,7 @@ Their required arguments and database configuration are documented in
 
 ### Shared synthetic fixtures
 
-`demo_data/` contains the fabricated claim records, recorded claim outcomes,
+`langgraph_python_review_claims/demo_data/` contains the fabricated claim records, recorded claim outcomes,
 and curated public-reference snippets used by LangGraph and MCP. These files
 are read-only demo inputs, not real claims, live coverage rules, or production
 systems of record.

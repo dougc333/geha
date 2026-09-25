@@ -1,0 +1,18 @@
+## Chunk 1
+
+Pages: 1
+
+Headings: Corporate Medical Policy
+
+Corporate Medical Policy
+
+Follicle stimulating hormone (FSH), 82670.82681 = 83001. Follicle stimulating hormone (FSH), Estradiol; total.Estradiol; free, direct measurement (e.g., equilibrium dialysis) = Gonadotropin; follicle stimulating hormone (FSH). Luteinizing hormone (LH), 82670.82681 = 83002. Luteinizing hormone (LH), Estradiol; total.Estradiol; free, direct measurement (e.g., equilibrium dialysis) = Gonadotropin; luteinizing hormone (LH). Progesterone, 82670.82681 = 84144. Progesterone, Estradiol; total.Estradiol; free, direct measurement (e.g., equilibrium dialysis) = Progesterone. , 82670.82681 = 83498. , Estradiol; total.Estradiol; free, direct measurement (e.g., equilibrium dialysis) = Hydroxyprogesterone, 17-d. Prolactin, 82670.82681 = 84146. Prolactin, Estradiol; total.Estradiol; free, direct measurement (e.g., equilibrium dialysis) = Prolactin. Testosterone (total and free), 82670.82681 = 84402. Testosterone (total and free), Estradiol; total.Estradiol; free, direct measurement (e.g., equilibrium dialysis) = Testosterone; free. , 82670.82681 = 84403. , Estradiol; total.Estradiol; free, direct measurement (e.g., equilibrium dialysis) = Testosterone; total. Thyroid stimulating hormone (TSH), 82670.82681 = 84443. Thyroid stimulating hormone (TSH), Estradiol; total.Estradiol; free, direct measurement (e.g., equilibrium dialysis) = Thyroid stimulating hormone (TSH). Laboratory panels, 82670.82681 = 80418. Laboratory panels, Estradiol; total.Estradiol; free, direct measurement (e.g., equilibrium dialysis) = Combined rapid anterior pituitary evaluation panel This panel must include the following: Adrenocorticotropic hormone (ACTH) (82024 x 4) Luteinizing hormone (LH) (83002 x 4) Follicle stimulating hormone (FSH) (83001 x 4) Prolactin (84146 x 4) Human growth hormone (HGH) (83003 x 4) Cortisol (82533 x 4) Thyroid stimulating hormone (TSH) (84443 x 4). , 82670.82681 = 80426. , Estradiol; total.Estradiol; free, direct measurement (e.g., equilibrium dialysis) = Gonadotropin releasing hormone stimulation panel This panel must include the following: Follicle stimulating hormone (FSH) (83001 x 4) Luteinizing hormone
+
+## Chunk 2
+
+Pages: 1
+
+Headings: Corporate Medical Policy
+
+Corporate Medical Policy
+ (LH) (83002 x 4). Hysterosalpingogram (HSG), 82670.82681 = 58340. Hysterosalpingogram (HSG), Estradiol; total.Estradiol; free, direct measurement (e.g., equilibrium dialysis) = Catheterization and introduction of saline or contrast material for saline infusion sonohysterography (SIS) or hysterosalpingography. , 82670.82681 = 74740. , Estradiol; total.Estradiol; free, direct measurement (e.g., equilibrium dialysis) = Hysterosalpingography, radiological supervision and interpretation. , 82670.82681 = 76831. , Estradiol; total.Estradiol; free, direct measurement (e.g., equilibrium dialysis) = Saline infusion sonohysterography (SIS), including color flow Doppler, when performed. Diagnostic hysteroscopy, 82670.82681 = 58555. Diagnostic hysteroscopy, Estradiol; total.Estradiol; free, direct measurement (e.g., equilibrium dialysis) = Hysteroscopy, diagnostic (separate procedure). Diagnostic laparoscopy with or without chromotubation, 82670.82681 = 58345. Diagnostic laparoscopy with or without chromotubation, Estradiol; total.Estradiol; free, direct measurement (e.g., equilibrium dialysis) = Transcervical introduction of fallopian tube catheter for diagnosis and/or re-establishing patency (any method), with or without hysterosalpingography. , 82670.82681 = 58350. , Estradiol; total.Estradiol; free, direct measurement (e.g., equilibrium dialysis) = Chromotubation of oviduct, including materials

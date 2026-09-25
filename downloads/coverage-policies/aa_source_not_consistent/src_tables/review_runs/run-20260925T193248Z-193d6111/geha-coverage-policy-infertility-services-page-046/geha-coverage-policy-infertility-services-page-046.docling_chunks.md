@@ -1,0 +1,17 @@
+## Chunk 1
+
+Pages: 1
+
+Headings: Corporate Medical Policy
+
+Corporate Medical Policy
+Schlegel PN, Sigman M, Collura B, Et al. Diagnosis and treatment of infertility in men: AUA/ASRM guideline part II. Fertil Steril 2020; in press. Available at: https://www.asrm.org/practiceguidance/practice-committeedocuments/diagnosis-and-treatment-of-infertility-in-men-aua-asrmguideline-part2/ Schlegel P, Sigman M, Collura B et al. Diagnosis and Treatment of Infertility in Men: AUA/ ASRM Guideline part III. Fertil Steril 2020; in press Schwarze JE, Crosby JA, Zegers-Hochschild F. Effect of embryo freezing on perinatal outcome after assisted reproduction techniques: lessons from the Latin American Registry of Assisted Reproduction. Reprod Biomed Online 2015;31:39 - 43. Schwarzler P, Zech H, Auer M, Pfau K, Gobel G, Vanderzwalmen P, et al. Pregnancy outcome after blastocyst transfer as compared to early cleavage stage embryo transfer. Hum Reprod. 2004;19:2097 - 2102. Scott, RT. Diminished ovarian reserve and access to care. Fertil Steril 2004; 81:1489-1492. Shapiro BS, Daneshmand ST, Garner FC, et al. Evidence of impaired endometrial receptivity after ovarian stimulation for in vitro fertilization: a prospective randomized trial comparing fresh and frozen-thawed embryo transfer in normal responders. Fertil Steril 2011;96:344 - 348. Shapiro BS, Daneshmand ST, Restrepo H, et al. Matched-cohort comparison of single-embryo transfers in fresh and frozen-thawed embryo transfer cycles Fertil Steril 2013;99:389 - 92. Shapiro BS, Harris DC, Richter KS. Predictive value of 72-hour blastomere cell number on blastocyst development and success of subsequent transfer based on the degree of blastocyst development. Fertil Steril 2000;73:582 - 6. Shapiro BS, Richter KS, Harris DC, Daneshmand ST. Influence of patient age on the growth and transfer of blastocyst-stage embryos. Fertil Steril 2002;77:700 - 5. Shapiro BS, Daneshmand ST, Garner FC, Aguirre M, Hudson C. Clinical rationale for cryopreservation of entire embryo cohorts in lieu of fresh transfer. Fertil Steril 2014a;102:3 - 9. Shapiro BS, Daneshmand ST, Bedient CE, Gaarner FC. Comparison of birth weights in patients randomly assigned to fresh or frozen-thawed embryo transfer Fertil Steril 2016;106:317-21 Shapiro BS, Daneshmand ST, Garner FC, Aguirre M, Hudson C. Frozen embryo transfer following 'Freeze All' is a superior therapy to another fresh transfer in patients with prior fresh embryo implantation failure. Fertil Steril 2014b;101:e6. Sheynkin YR, Ye Z, Menendez S, Liotta D, Veeck LL, Schlegel P.
+
+## Chunk 2
+
+Pages: 1
+
+Headings: Corporate Medical Policy
+
+Corporate Medical Policy
+Controlled comparison of percutaneous and microsurgical sperm retrieval in men with obstructive azoospermia. Hum Reprod 1998;13:3086 - 9.

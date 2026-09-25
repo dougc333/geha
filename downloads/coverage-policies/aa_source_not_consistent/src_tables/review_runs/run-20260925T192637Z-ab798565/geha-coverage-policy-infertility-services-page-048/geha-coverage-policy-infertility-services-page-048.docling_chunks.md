@@ -1,0 +1,16 @@
+## Chunk 1
+
+Pages: 1
+
+Headings: none
+
+Twaite A, Hall J, Barrett J, et al. How common is natural conception in women who have had a live birth
+via assisted reproductive technology? Systematic review and meta-analysis. Human Reproduction. 2023;38:1590- 1600. Tonguc E, Var T, Onalan G, et al. Comparison of the effectiveness of single versus double intrauterine insemination with three different timing regimens. Fertil Steril 2010; 94: 1267-70. Tournaye H, Devroey P, Liu J, Nagy Z, Lissens W, Van Steirteghem A. Microsurgical epididymal sperm aspiration and intracytoplasmic sperm injection: a new effective approach to infertility as a result of congenital absence of the vas deferens. Fertil Steril 1994;61:1045 - 51. Tucker M, Graham J, Han T, Stillman R, Levy M. Conventional insemination versus intracytoplasmic sperm injection. Lancet 2001;358:1645 - 6. Ubaldi F, Anniballo R, Romano S, Baroni E, Albricci L, Colamaria S, et al. Cumulative ongoing pregnancy rate achieved with oocyte vitrification and cleavage stage transfer without embryo selection in a standard infertility program. Hum Reprod 2010;25:1199 - 205. Ubaldi FM, Capalbo A, Colamaria S, et al. Reduction of multiple pregnancies in the advanced maternal age population after implementation of an elective single embryo transfer policy coupled with enhanced embryo selection: pre- and post-intervention study. Hum Reprod 2015;30:2097 - 106. Ubaldi FM, Cimadomo D, Capalbo A, Vaiarelli A, Buffo L, Trabucco E, et al. Preimplantation genetic diagnosis for aneuploidy testing in women older than 44 years: a multicenter experience. Fertil Steril 2017;107:1173 - 80. Van der Westerlaken, Helmerhorst F, Dieben S, Naaktgeboren N. Intracytoplasmic sperm injection as treatment for unexplained total fertilization failure or low fertilization after conventional in vitro fertilization. Fertil Steril 2005;83:612 - 7. Van Montfoort AP, Fiddelers AA, Janssen JM, Derhaag G, Dirksen C, Dunselman G, et al. In unselected patients, elective single embryo transfer prevents all multiples, but results in significantly lower pregnancy rates compared with double embryo transfer: a randomized controlled trial. Hum Reprod 2006;21:338 - 43. Van Tilborg TC, Torrance HL, Oudshoorn SC, et al. Individualized versus standard FSH dosing in women starting IVF/ICSI: an RCT. Part 1: The predicted poor responder. Human Reprod 2017; 32:2496-505.
+
+## Chunk 2
+
+Pages: 1
+
+Headings: none
+
+Van Wely M, Barbey N, Meissner A, Reppping S, Silber S. Live birth rates after MESA or TESE in men with obstructive azoospermia: is there a difference?, Hum Reprod 2015;30:761-766.
