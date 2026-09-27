@@ -89,6 +89,8 @@ class ClassRefactorTests(unittest.TestCase):
         result = client.generate("instruction tuning", reranker_model="none")
         self.assertIn("instruction tuning", result["response"])
         self.assertIn("EVIDENCE FOR", result["contexts"])
+        self.assertEqual(len(result["retrieved_contexts"]), 2)
+        self.assertTrue(result["retrieved_contexts"][0].startswith("EVIDENCE FOR"))
 
     def test_cli_answer_uses_client_and_returns_text(self):
         app = CliApplication.__new__(CliApplication)

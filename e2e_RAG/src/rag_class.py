@@ -6,6 +6,8 @@ import re
 from pathlib import Path
 from typing import Any, Iterable
 
+from httpx2 import query
+
 import pymupdf
 import torch
 from langchain_chroma import Chroma
@@ -155,6 +157,14 @@ class Rag:
             retrievers=[vector_retriever, keyword_retriever],
             weights=[0.5, 0.5],
         )
+    
+    def retrieve_context(
+        self,
+        query: str,
+        retriever: Any,
+    ) -> list[Document]:
+        """Retrieve documents without reranking."""
+        return retriever.invoke(query)
 
     def retrieve_context_reranked(
         self,
