@@ -19,7 +19,7 @@ dependencies = [
     "psycopg[binary]>=3.3.5",
     "python-dotenv>=1.2.3",
     "sentence-transformers>=6.0.1",
-    "streamlit>=1.45,<2",
+    "streamlit[pdf]>=1.45,<2",
     "temporalio>=1.32.0",
     "langchain-classic>=1.0.8",
     "langchain-chroma>=1.1.0",
@@ -36,4 +36,6 @@ dependencies = [
     "pymupdf>=1.28.2",
     "cohere>=7.1.1",
     "langchain-ollama>=1.1.0",
+    "langchain-huggingface>=1.2.2",
+    "watchdog>=6.0.0",
 ]

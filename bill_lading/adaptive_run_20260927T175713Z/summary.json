@@ -1,0 +1,80 @@
+{
+  "one_shot_error_count": 10,
+  "block_count": 31,
+  "accepted_blocks": 10,
+  "unresolved_blocks": 12,
+  "unresolved": [
+    {
+      "step_id": "i1_agent",
+      "errors": [
+        "phone spacing collapsed from +31 10 to +3110"
+      ]
+    },
+    {
+      "step_id": "i2_cargo_left_header",
+      "errors": [
+        "header is omitted and a row value is included"
+      ]
+    },
+    {
+      "step_id": "i2_cargo_desc_header",
+      "errors": [
+        "DESCRIPTION OF GOODS header is omitted and a row value is included"
+      ]
+    },
+    {
+      "step_id": "i2_cargo1_left",
+      "errors": [
+        "second-container content is included"
+      ]
+    },
+    {
+      "step_id": "i2_cargo1_metrics",
+      "errors": [
+        "second-container measurements are included"
+      ]
+    },
+    {
+      "step_id": "i2_cargo2_left",
+      "errors": [
+        "container identity and seal are omitted"
+      ]
+    },
+    {
+      "step_id": "i2_cargo2_metrics",
+      "errors": [
+        "OCR result is empty"
+      ]
+    },
+    {
+      "step_id": "i2_charges",
+      "errors": [
+        "next-section text is included at the bottom"
+      ]
+    },
+    {
+      "step_id": "i2_issue_date",
+      "errors": [
+        "printed field labels are garbled; Antwerp and 2026-03-13 are correct"
+      ]
+    },
+    {
+      "step_id": "i3_cargo1_stowage",
+      "errors": [
+        "+2.0 is read as 22.0"
+      ]
+    },
+    {
+      "step_id": "i3_cargo2_stowage",
+      "errors": [
+        "STOWAGE is damaged and +1.0 is read as +1.@"
+      ]
+    },
+    {
+      "step_id": "i3_metrics_heading",
+      "errors": [
+        "MEASUREMENT remains unreadable"
+      ]
+    }
+  ]
+}

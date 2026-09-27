@@ -1,0 +1,518 @@
+{
+  "schema_version": "1.0",
+  "run_id": "bill_lading_8block_ocr_20260927T182357Z",
+  "created_at_utc": "2026-09-27T18:24:18.061724+00:00",
+  "source_pdf": "/Users/dc/ocr-mini-bench/bench_documents/Logistics/bill_of_lading_alt_1.pdf",
+  "source_page_png": "/Users/dc/geha/bill_lading/adaptive_run_20260927T175713Z/bill_of_lading_alt_1_page.png",
+  "render_dpi": 144,
+  "coordinate_contract": "x,y,width,height on the 2136x3584 page PNG, top-left origin, half-open bounds.",
+  "ocr_engine": "tesseract 5.5.1",
+  "ocr_settings": {
+    "psm": 6,
+    "resize_percent": 250,
+    "grayscale": true,
+    "contrast_stretch": "0x2%"
+  },
+  "accuracy_definition": "Expected atomic label/value counts as correct when its lowercase alphanumeric-normalized form occurs in the normalized OCR output. This is field recall, not layout accuracy.",
+  "summary": {
+    "metric": "normalized atomic-field recall",
+    "aggregate_accuracy_pct": 86.08,
+    "matched_items": 68,
+    "expected_items": 79,
+    "perfect_blocks": 3
+  },
+  "blocks": [
+    {
+      "block": 1,
+      "page_num": 1,
+      "coordinates_px": {
+        "x": 67,
+        "y": 0,
+        "width": 1999,
+        "height": 363
+      },
+      "raw_crop": "blocks/block_1.png",
+      "preprocessed": "preprocessed/block_1.png",
+      "ocr_file": "ocr/block_1.txt",
+      "ocr_result": "M | MERIDIAN SHIPPING BILL OF LADING\nGLOBAL SHIPPING & LOGISTICS B/LNO. 31232472785\nSCAC MRDN",
+      "expected_item_count": 7,
+      "matched_item_count": 6,
+      "accuracy_pct": 85.71,
+      "checks": [
+        {
+          "expected": "MERIDIAN SHIPPING",
+          "matched": true
+        },
+        {
+          "expected": "GLOBAL SHIPPING & LOGISTICS",
+          "matched": true
+        },
+        {
+          "expected": "BILL OF LADING",
+          "matched": true
+        },
+        {
+          "expected": "B/L NO.",
+          "matched": true
+        },
+        {
+          "expected": "BL232472785",
+          "matched": false
+        },
+        {
+          "expected": "SCAC",
+          "matched": true
+        },
+        {
+          "expected": "MRDN",
+          "matched": true
+        }
+      ],
+      "missing_items": [
+        "BL232472785"
+      ]
+    },
+    {
+      "block": 2,
+      "page_num": 1,
+      "coordinates_px": {
+        "x": 67,
+        "y": 363,
+        "width": 1999,
+        "height": 899
+      },
+      "raw_crop": "blocks/block_2.png",
+      "preprocessed": "preprocessed/block_2.png",
+      "ocr_file": "ocr/block_2.txt",
+      "ocr_result": "SHIPPER BOOKING REF. SHIPPER'S REF.\nFRUTAS DEL SOL S.A. BKG5917532 EXP-35782\nAv. de los Incas 456, Buenos Aires, Argentina\nTEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar\nPRE-CARRIAGE BY\nOceanic Meridian Lines\nCONSIGNEE (NEGOTIABLE ONLY IF CONSIGNED \"TO ORDER\")\nFRESH FRUIT IMPORTERS B.V.\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands PLACE OF RECEIPT\nTEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com BUENOS AIRES, ARGENTINA\nNOTIFY PARTY (NO RESPONSIBILITY FOR FAILURE TO NOTIFY) DELIVERY AGENT\nFRESH FRUIT IMPORTERS B.V. LogiTrans Global\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands 88 Harbor Road, Rotterdam, 3011 AA\nTEL: +3110 123 4567 | EMAIL: dispatch@logitrans.com Tel: +31 10 123 4567 | dispatch@logitrans.com",
+      "expected_item_count": 24,
+      "matched_item_count": 24,
+      "accuracy_pct": 100.0,
+      "checks": [
+        {
+          "expected": "SHIPPER",
+          "matched": true
+        },
+        {
+          "expected": "FRUTAS DEL SOL S.A.",
+          "matched": true
+        },
+        {
+          "expected": "Av. de los Incas 456, Buenos Aires, Argentina",
+          "matched": true
+        },
+        {
+          "expected": "+54 11 4789 1234",
+          "matched": true
+        },
+        {
+          "expected": "logistica@frutasdelsol.com.ar",
+          "matched": true
+        },
+        {
+          "expected": "BOOKING REF.",
+          "matched": true
+        },
+        {
+          "expected": "BKG5917532",
+          "matched": true
+        },
+        {
+          "expected": "SHIPPER'S REF.",
+          "matched": true
+        },
+        {
+          "expected": "EXP-35782",
+          "matched": true
+        },
+        {
+          "expected": "PRE-CARRIAGE BY",
+          "matched": true
+        },
+        {
+          "expected": "Oceanic Meridian Lines",
+          "matched": true
+        },
+        {
+          "expected": "CONSIGNEE",
+          "matched": true
+        },
+        {
+          "expected": "FRESH FRUIT IMPORTERS B.V.",
+          "matched": true
+        },
+        {
+          "expected": "Handelsweg 12, 2988 DB Ridderkerk, Netherlands",
+          "matched": true
+        },
+        {
+          "expected": "+1 (555) 123-4567",
+          "matched": true
+        },
+        {
+          "expected": "billing@techcorp.com",
+          "matched": true
+        },
+        {
+          "expected": "PLACE OF RECEIPT",
+          "matched": true
+        },
+        {
+          "expected": "BUENOS AIRES, ARGENTINA",
+          "matched": true
+        },
+        {
+          "expected": "NOTIFY PARTY",
+          "matched": true
+        },
+        {
+          "expected": "+31 10 123 4567",
+          "matched": true
+        },
+        {
+          "expected": "dispatch@logitrans.com",
+          "matched": true
+        },
+        {
+          "expected": "DELIVERY AGENT",
+          "matched": true
+        },
+        {
+          "expected": "LogiTrans Global",
+          "matched": true
+        },
+        {
+          "expected": "88 Harbor Road, Rotterdam, 3011 AA",
+          "matched": true
+        }
+      ],
+      "missing_items": []
+    },
+    {
+      "block": 3,
+      "page_num": 1,
+      "coordinates_px": {
+        "x": 67,
+        "y": 1262,
+        "width": 1999,
+        "height": 149
+      },
+      "raw_crop": "blocks/block_3.png",
+      "preprocessed": "preprocessed/block_3.png",
+      "ocr_file": "ocr/block_3.txt",
+      "ocr_result": "OCEAN VESSEL / VOYAGE PORT OF LOADING PORT OF DISCHARGE\nMERIDIAN LABREA / 124N BUENOS AIRES, ARGENTINA ROTTERDAM, NETHERLANDS",
+      "expected_item_count": 6,
+      "matched_item_count": 6,
+      "accuracy_pct": 100.0,
+      "checks": [
+        {
+          "expected": "OCEAN VESSEL / VOYAGE",
+          "matched": true
+        },
+        {
+          "expected": "MERIDIAN LABREA / 124N",
+          "matched": true
+        },
+        {
+          "expected": "PORT OF LOADING",
+          "matched": true
+        },
+        {
+          "expected": "BUENOS AIRES, ARGENTINA",
+          "matched": true
+        },
+        {
+          "expected": "PORT OF DISCHARGE",
+          "matched": true
+        },
+        {
+          "expected": "ROTTERDAM, NETHERLANDS",
+          "matched": true
+        }
+      ],
+      "missing_items": []
+    },
+    {
+      "block": 4,
+      "page_num": 1,
+      "coordinates_px": {
+        "x": 67,
+        "y": 1411,
+        "width": 1999,
+        "height": 71
+      },
+      "raw_crop": "blocks/block_4.png",
+      "preprocessed": "preprocessed/block_4.png",
+      "ocr_file": "ocr/block_4.txt",
+      "ocr_result": "PARTICULARS FURNISHED BY SHIPPER - CARRIER NOT RESPONSIBLE",
+      "expected_item_count": 1,
+      "matched_item_count": 1,
+      "accuracy_pct": 100.0,
+      "checks": [
+        {
+          "expected": "PARTICULARS FURNISHED BY SHIPPER - CARRIER NOT RESPONSIBLE",
+          "matched": true
+        }
+      ],
+      "missing_items": []
+    },
+    {
+      "block": 5,
+      "page_num": 1,
+      "coordinates_px": {
+        "x": 67,
+        "y": 1482,
+        "width": 1999,
+        "height": 77
+      },
+      "raw_crop": "blocks/block_5.png",
+      "preprocessed": "preprocessed/block_5.png",
+      "ocr_file": "ocr/block_5.txt",
+      "ocr_result": "CONTAINER NO. / SEAL NO. j No. PKos | DESCRIPTION OF GOODS GROSS WT. | MEASUREMEN",
+      "expected_item_count": 5,
+      "matched_item_count": 3,
+      "accuracy_pct": 60.0,
+      "checks": [
+        {
+          "expected": "CONTAINER NO. / SEAL NO.",
+          "matched": true
+        },
+        {
+          "expected": "NO. PKGS",
+          "matched": false
+        },
+        {
+          "expected": "DESCRIPTION OF GOODS",
+          "matched": true
+        },
+        {
+          "expected": "GROSS WT.",
+          "matched": true
+        },
+        {
+          "expected": "MEASUREMENT",
+          "matched": false
+        }
+      ],
+      "missing_items": [
+        "NO. PKGS",
+        "MEASUREMENT"
+      ]
+    },
+    {
+      "block": 6,
+      "page_num": 1,
+      "coordinates_px": {
+        "x": 67,
+        "y": 1559,
+        "width": 1999,
+        "height": 1185
+      },
+      "raw_crop": "blocks/block_6.png",
+      "preprocessed": "preprocessed/block_6.png",
+      "ocr_file": "ocr/block_6.txt",
+      "ocr_result": "MRDN4455667 20 2@ PALLETS STC: 18,500 28.00\nFRESH FRUIT KGS CBM\nSEAL: MSK112233\nFRESH APPLES\nPALLETIZED 20 STOWAGE AT +2.0 DEGREES CELSIUS 19,208 28.00\nPackaging: PALLETS KGS CBM\nSEAL: MSK445566 SET TEMPS tare\nMARKS:\nPALLETIZED 20 PALLETS STC:\nFRESH FRUIT\nFRESH PEARS\nSTOWAGE AT +1.0 DEGREES CELSIUS\nPackaging: PALLETS\nHS CODE: 08083090\nSET TEMP: +1°C\nFREIGHT COLLECT",
+      "expected_item_count": 23,
+      "matched_item_count": 19,
+      "accuracy_pct": 82.61,
+      "checks": [
+        {
+          "expected": "MRDN4455667",
+          "matched": true
+        },
+        {
+          "expected": "SEAL: MSK112233",
+          "matched": true
+        },
+        {
+          "expected": "MARKS: PALLETIZED",
+          "matched": true
+        },
+        {
+          "expected": "20",
+          "matched": true
+        },
+        {
+          "expected": "20 PALLETS STC",
+          "matched": true
+        },
+        {
+          "expected": "FRESH FRUIT",
+          "matched": true
+        },
+        {
+          "expected": "FRESH APPLES",
+          "matched": true
+        },
+        {
+          "expected": "STOWAGE AT +2.0 DEGREES CELSIUS",
+          "matched": true
+        },
+        {
+          "expected": "Packaging: PALLETS",
+          "matched": true
+        },
+        {
+          "expected": "HS CODE: 08081080",
+          "matched": false
+        },
+        {
+          "expected": "SET TEMP: +2°C",
+          "matched": false
+        },
+        {
+          "expected": "18,500",
+          "matched": true
+        },
+        {
+          "expected": "KGS",
+          "matched": true
+        },
+        {
+          "expected": "28.00",
+          "matched": true
+        },
+        {
+          "expected": "CBM",
+          "matched": true
+        },
+        {
+          "expected": "MRDN7788990",
+          "matched": false
+        },
+        {
+          "expected": "SEAL: MSK445566",
+          "matched": true
+        },
+        {
+          "expected": "FRESH PEARS",
+          "matched": true
+        },
+        {
+          "expected": "STOWAGE AT +1.0 DEGREES CELSIUS",
+          "matched": true
+        },
+        {
+          "expected": "HS CODE: 08083090",
+          "matched": true
+        },
+        {
+          "expected": "SET TEMP: +1°C",
+          "matched": true
+        },
+        {
+          "expected": "19,200",
+          "matched": false
+        },
+        {
+          "expected": "FREIGHT COLLECT",
+          "matched": true
+        }
+      ],
+      "missing_items": [
+        "HS CODE: 08081080",
+        "SET TEMP: +2°C",
+        "MRDN7788990",
+        "19,200"
+      ]
+    },
+    {
+      "block": 7,
+      "page_num": 1,
+      "coordinates_px": {
+        "x": 67,
+        "y": 2744,
+        "width": 1999,
+        "height": 256
+      },
+      "raw_crop": "blocks/block_7.png",
+      "preprocessed": "preprocessed/block_7.png",
+      "ocr_file": "ocr/block_7.txt",
+      "ocr_result": "OCEAN FREIGHT COLLECT\n~ 40",
+      "expected_item_count": 6,
+      "matched_item_count": 3,
+      "accuracy_pct": 50.0,
+      "checks": [
+        {
+          "expected": "FREIGHT & CHARGES",
+          "matched": false
+        },
+        {
+          "expected": "OCEAN FREIGHT",
+          "matched": true
+        },
+        {
+          "expected": "THC",
+          "matched": false
+        },
+        {
+          "expected": "COLLECT",
+          "matched": true
+        },
+        {
+          "expected": "TOTAL NUMBER OF PACKAGES",
+          "matched": false
+        },
+        {
+          "expected": "40",
+          "matched": true
+        }
+      ],
+      "missing_items": [
+        "FREIGHT & CHARGES",
+        "THC",
+        "TOTAL NUMBER OF PACKAGES"
+      ]
+    },
+    {
+      "block": 8,
+      "page_num": 1,
+      "coordinates_px": {
+        "x": 67,
+        "y": 3000,
+        "width": 1999,
+        "height": 341
+      },
+      "raw_crop": "blocks/block_8.png",
+      "preprocessed": "preprocessed/block_8.png",
+      "ocr_file": "ocr/block_8.txt",
+      "ocr_result": "RECEIVED by the Carrier in apparent good order and condition (unless otherwise stated herein) the total number or PLACE OF ISSUE DATE OF ISSUE\nquantity of Containers or other packages or units indicated in the box entitled “Total Number of Packages” for\ncarriage subject to all the terms and conditions hereof from the Place of Receipt or Port of Loading to the Port of\nDischarge or Place of Delivery, whichever is applicable. Antwerp 2026-03-1 3\nIN ACCEPTING THIS BILL OF LADING THE MERCHANT EXPRESSLY ACCEPTS AND AGREES TO ALL THE TERMS AND\nCONDITIONS, WHETHER PRINTED, STAMPED OR OTHERWISE INCORPORATED ON THIS SIDE AND ON THE REVERSE\nSIDE OF THIS BILL OF LADING AND THE TERMS AND CONDITIONS OF THE CARRIER'S APPLICABLE TARIFF AS IF\nTHEY WERE ALL SIGNED BY THE MERCHANT.\nSIGNED FOR THE CARRIER\ne e\nNUMBER OF ORIGINAL B/L'S: THREE (3) / \\uthorized Sig natu re",
+      "expected_item_count": 7,
+      "matched_item_count": 6,
+      "accuracy_pct": 85.71,
+      "checks": [
+        {
+          "expected": "PLACE OF ISSUE",
+          "matched": true
+        },
+        {
+          "expected": "Antwerp",
+          "matched": true
+        },
+        {
+          "expected": "DATE OF ISSUE",
+          "matched": true
+        },
+        {
+          "expected": "2026-03-13",
+          "matched": true
+        },
+        {
+          "expected": "SIGNED FOR THE CARRIER",
+          "matched": true
+        },
+        {
+          "expected": "NUMBER OF ORIGINAL B/L'S: THREE (3)",
+          "matched": true
+        },
+        {
+          "expected": "Authorized Signature",
+          "matched": false
+        }
+      ],
+      "missing_items": [
+        "Authorized Signature"
+      ]
+    }
+  ]
+}

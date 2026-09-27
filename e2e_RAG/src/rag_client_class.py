@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Any, Callable, Iterable
 
+from langchain_core.documents import Document
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
@@ -57,6 +58,15 @@ CONTEXT: ```{context}```
         )
         self.chain = prompt | self.llm | StrOutputParser()
 
+    def retrieve_context(
+    self,
+    query: str,
+    retriever: Any,
+) -> list[Document]:
+        """Retrieve documents without reranking."""
+        return retriever.invoke(query)
+
+    
     def retrieve_context_reranked(self, query: str, reranker_model: str = "gpt") -> list[str]:
         documents = self.retriever.invoke(query)
         return self.reranker.rerank(documents, query, model=reranker_model)
@@ -69,9 +79,11 @@ CONTEXT: ```{context}```
         context = self.format_context(self.retrieve_context_reranked(query, reranker_model))
         yield from self.chain.stream({"context": context, "question": query})
 
-    def generate(self, query: str, reranker_model: str = "gpt") -> dict[str, str]:
-        context = self.format_context(self.retrieve_context_reranked(query, reranker_model))
+    def generate(self, query: str, reranker_model: str = "gpt") -> dict[str, Any]:
+        retrieved_contexts = self.retrieve_context_reranked(query, reranker_model)
+        context = self.format_context(retrieved_contexts)
         return {
             "contexts": context,
+            "retrieved_contexts": retrieved_contexts[:3],
             "response": self.chain.invoke({"context": context, "question": query}),
         }

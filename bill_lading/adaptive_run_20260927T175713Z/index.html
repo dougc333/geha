@@ -1,0 +1,187 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Adaptive OCR review</title><style>body{font:16px system-ui;background:#eef3f8;color:#102a43;margin:0}main{max-width:1500px;margin:auto;padding:32px}article{background:white;padding:20px;margin:24px 0;border-left:8px solid #2f855a}article.needs_human_review{border-color:#c53030}article.refined{border-color:#d69e2e}img{max-width:100%;max-height:720px;border:1px solid #bcccdc}pre{white-space:pre-wrap}</style></head><body><main><h1>Adaptive OCR review</h1><p><a href="bill_of_lading_alt_1_page.png">Full parent page</a> · <a href="bill_of_lading_alt_1_ocr_iterations.json">Manifest</a> · <a href="summary.json">Summary</a></p><article class="accepted"><h2>i1_header</h2>
+ <p>Iteration 1 · Parent oneshot · x=40, y=25, w=2056, h=350 · Errors 0 · <b>accepted</b></p>
+ <img src="labeled_crops/i1_header_labeled.png" alt="i1_header"><details><summary>OCR and errors</summary><pre>Mt | MERIDIAN SHIPPING BILL OF LADING
+GLOBAL SHIPPING &amp; LOGISTICS B/L NO. BL232472785
+SCAC MRDN</pre><ul></ul></details></article><article class="accepted"><h2>i1_shipper</h2>
+ <p>Iteration 1 · Parent oneshot · x=40, y=345, w=1040, h=325 · Errors 0 · <b>accepted</b></p>
+ <img src="labeled_crops/i1_shipper_labeled.png" alt="i1_shipper"><details><summary>OCR and errors</summary><pre>SHIPPER
+
+FRUTAS DEL SOL S.A.
+
+Av. de los Incas 456, Buenos Aires, Argentina
+
+TEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar</pre><ul></ul></details></article><article class="accepted"><h2>i1_booking</h2>
+ <p>Iteration 1 · Parent oneshot · x=1030, y=345, w=1066, h=325 · Errors 0 · <b>accepted</b></p>
+ <img src="labeled_crops/i1_booking_labeled.png" alt="i1_booking"><details><summary>OCR and errors</summary><pre>BOOKING REF. SHIPPER&#x27;S REF.
+BKG5917532 EXP-35782
+PRE-CARRIAGE BY
+
+Oceanic Meridian Lines</pre><ul></ul></details></article><article class="accepted"><h2>i1_consignee</h2>
+ <p>Iteration 1 · Parent oneshot · x=40, y=665, w=1040, h=330 · Errors 0 · <b>accepted</b></p>
+ <img src="labeled_crops/i1_consignee_labeled.png" alt="i1_consignee"><details><summary>OCR and errors</summary><pre>CONSIGNEE (NEGOTIABLE ONLY IF CONSIGNED &quot;TO ORDER&quot;)
+FRESH FRUIT IMPORTERS B.V.
+
+Handelsweg 12, 2988 DB Ridderkerk, Netherlands
+
+TEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com</pre><ul></ul></details></article><article class="accepted"><h2>i1_receipt</h2>
+ <p>Iteration 1 · Parent oneshot · x=1030, y=665, w=1066, h=330 · Errors 0 · <b>accepted</b></p>
+ <img src="labeled_crops/i1_receipt_labeled.png" alt="i1_receipt"><details><summary>OCR and errors</summary><pre>PLACE OF RECEIPT
+BUENOS AIRES, ARGENTINA</pre><ul></ul></details></article><article class="accepted"><h2>i1_notify</h2>
+ <p>Iteration 1 · Parent oneshot · x=40, y=965, w=1040, h=310 · Errors 0 · <b>accepted</b></p>
+ <img src="labeled_crops/i1_notify_labeled.png" alt="i1_notify"><details><summary>OCR and errors</summary><pre>NOTIFY PARTY (NO RESPONSIBILITY FOR FAILURE TO NOTIFY)
+FRESH FRUIT IMPORTERS B.V.
+
+Handelsweg 12, 2988 DB Ridderkerk, Netherlands
+
+TEL: +31 10 123 4567 | EMAIL: dispatch@logitrans.com</pre><ul></ul></details></article><article class="needs_human_review"><h2>i1_agent</h2>
+ <p>Iteration 1 · Parent oneshot · x=1030, y=965, w=1066, h=310 · Errors 1 · <b>needs_human_review</b></p>
+ <img src="labeled_crops/i1_agent_labeled.png" alt="i1_agent"><details><summary>OCR and errors</summary><pre>DELIVERY AGENT
+
+LogiTrans Global
+
+88 Harbor Road, Rotterdam, 3011 AA
+
+Tel: +3110 123 4567 | dispatch@logitrans.com</pre><ul><li>phone spacing collapsed from +31 10 to +3110</li></ul></details></article><article class="accepted"><h2>i1_vessel_ports</h2>
+ <p>Iteration 1 · Parent oneshot · x=40, y=1250, w=2056, h=230 · Errors 0 · <b>accepted</b></p>
+ <img src="labeled_crops/i1_vessel_ports_labeled.png" alt="i1_vessel_ports"><details><summary>OCR and errors</summary><pre>OCEAN VESSEL / VOYAGE PORT OF LOADING PORT OF DISCHARGE
+MERIDIAN LABREA | 124N BUENOS AIRES, ARGENTINA ROTTERDAM, NETHERLANDS
+PARTICULARS FURNISHED BY SHIPPER - CARRIER NOT RESPONSIBLE</pre><ul></ul></details></article><article class="refined"><h2>i1_cargo_header</h2>
+ <p>Iteration 1 · Parent oneshot · x=40, y=1460, w=2056, h=170 · Errors 1 · <b>refined</b></p>
+ <img src="labeled_crops/i1_cargo_header_labeled.png" alt="i1_cargo_header"><details><summary>OCR and errors</summary><pre>SS 8 oo
+MRNDN4Z455667 A 20 PALLETS STC: 18 ,500 28.00</pre><ul><li>table header text is garbled and first-row values are mixed into the heading</li></ul></details></article><article class="refined"><h2>i1_cargo_row1</h2>
+ <p>Iteration 1 · Parent oneshot · x=40, y=1580, w=2056, h=520 · Errors 3 · <b>refined</b></p>
+ <img src="labeled_crops/i1_cargo_row1_labeled.png" alt="i1_cargo_row1"><details><summary>OCR and errors</summary><pre>MRDN4455667 20 20 PALLETS STC: 18 ,500 28.00
+FRESH FRUIT KGS CBM
+
+SEAL: MSK112233
+FRESH APPLES
+
+MARKS:
+
+PALLETIZED 20 STOWAGE AT +2.@ DEGREES CELSIUS 19,200 28.00
+Packaging: PALLETS KGS CBM
+H DE: 08081080
+
+MRDN7788990 &gt; 60
+SET TEMP: +2°C
+
+SEAL: MSK445566
+
+MARKS:
+
+PALLETIZED 20 PALLETS STC:</pre><ul><li>container rows overlap in the OCR reading order</li><li>+2.0 is read as +2.@</li><li>HS CODE label is damaged</li></ul></details></article><article class="refined"><h2>i1_cargo_row2</h2>
+ <p>Iteration 1 · Parent oneshot · x=40, y=2050, w=2056, h=610 · Errors 3 · <b>refined</b></p>
+ <img src="labeled_crops/i1_cargo_row2_labeled.png" alt="i1_cargo_row2"><details><summary>OCR and errors</summary><pre>PALLETIZED 20 PALLETS STC:
+FRESH FRUIT
+FRESH PEARS
+STOWAGE AT +1.@ DEGREES CELSIUS
+Packaging: PALLETS
+HS CODE: 08083090
+SET TEMP: +1°C
+ERETGCUHUT COILILECT</pre><ul><li>left-side container identity is omitted</li><li>+1.0 is read as +1.@</li><li>footer line is garbled</li></ul></details></article><article class="refined"><h2>i1_charges_totals</h2>
+ <p>Iteration 1 · Parent oneshot · x=40, y=2730, w=2056, h=330 · Errors 2 · <b>refined</b></p>
+ <img src="labeled_crops/i1_charges_totals_labeled.png" alt="i1_charges_totals"><details><summary>OCR and errors</summary><pre>FREIGHT &amp; CHARGES TOTAL NUMBER OF PACKAGES
+
+OCEAN FREIGHT COLLECT
+
+THC
+
+RECEIVED by the Carrier in apparent good order and condition (unless otherwise stated herein) the total number or PLACE OF ISSUE DATE OF ISSUE
+auantity of Containers or other packages or units indicated in the box entitled &quot;Total Number of Packages” for</pre><ul><li>total package value 40 is omitted</li><li>legal text from the next section is included</li></ul></details></article><article class="refined"><h2>i1_issue_signature</h2>
+ <p>Iteration 1 · Parent oneshot · x=40, y=3010, w=2056, h=500 · Errors 1 · <b>refined</b></p>
+ <img src="labeled_crops/i1_issue_signature_labeled.png" alt="i1_issue_signature"><details><summary>OCR and errors</summary><pre>RECEIVED by the Carrier in apparent good order and condition (unless otherwise stated herein) the total number or PLACE OF ISSUE DATE OF ISSUE
+quantity of Containers or other packages or units indicated in the box entitled &quot;Total Number of Packages” for
+carriage subject to all the terms and conditions hereof from the Place of Receipt or Port of Loading to the Port of
+Discharge or Place of Delivery, whichever is applicable. Antwerp 2026-03-13
+IN ACCEPTING THIS BILL OF LADING THE MERCHANT EXPRESSLY ACCEPTS AND AGREES TO ALL THE TERMS AND
+CONDITIONS, WHETHER PRINTED, STAMPED OR OTHERWISE INCORPORATED ON THIS SIDE AND ON THE REVERSE
+SIDE OF THIS BILL OF LADING AND THE TERMS AND CONDITIONS OF THE CARRIER&#x27;S APPLICABLE TARIFF AS IF
+THEY WERE ALL SIGNED BY THE MERCHANT. SIGNED FOR THE CARRIER
+- e
+BER OF ORIOINAL BYL&#x27;S: THREES) SSS Authorized Signature
+FRUTAS DEL SOL S.A. - +54 11 4789 1234 - loaistica@frutasdelsol.com.ar</pre><ul><li>number-of-originals line is garbled</li></ul></details></article><article class="needs_human_review"><h2>i2_cargo_left_header</h2>
+ <p>Iteration 2 · Parent i1_cargo_header · x=35, y=1460, w=730, h=170 · Errors 1 · <b>needs_human_review</b></p>
+ <img src="labeled_crops/i2_cargo_left_header_labeled.png" alt="i2_cargo_left_header"><details><summary>OCR and errors</summary><pre>MRNDN4455667 0A</pre><ul><li>header is omitted and a row value is included</li></ul></details></article><article class="needs_human_review"><h2>i2_cargo_desc_header</h2>
+ <p>Iteration 2 · Parent i1_cargo_header · x=720, y=1460, w=960, h=170 · Errors 1 · <b>needs_human_review</b></p>
+ <img src="labeled_crops/i2_cargo_desc_header_labeled.png" alt="i2_cargo_desc_header"><details><summary>OCR and errors</summary><pre>20 PALLETS STC:</pre><ul><li>DESCRIPTION OF GOODS header is omitted and a row value is included</li></ul></details></article><article class="refined"><h2>i2_cargo_metrics_header</h2>
+ <p>Iteration 2 · Parent i1_cargo_header · x=1620, y=1460, w=480, h=170 · Errors 1 · <b>refined</b></p>
+ <img src="labeled_crops/i2_cargo_metrics_header_labeled.png" alt="i2_cargo_metrics_header"><details><summary>OCR and errors</summary><pre>[seer [me
+18 ,500 28.00</pre><ul><li>GROSS WT. and MEASUREMENT headings are garbled</li></ul></details></article><article class="needs_human_review"><h2>i2_cargo1_left</h2>
+ <p>Iteration 2 · Parent i1_cargo_row1 · x=35, y=1550, w=730, h=530 · Errors 1 · <b>needs_human_review</b></p>
+ <img src="labeled_crops/i2_cargo1_left_labeled.png" alt="i2_cargo1_left"><details><summary>OCR and errors</summary><pre>MRDN4455667 20
+SEAL: MSK112233
+
+MARKS:
+
+PALLETIZED 20
+MRDN7788990
+
+SEAL: MSK445566
+
+MARKS:
+
+PALLETIZED</pre><ul><li>second-container content is included</li></ul></details></article><article class="refined"><h2>i2_cargo1_desc</h2>
+ <p>Iteration 2 · Parent i1_cargo_row1 · x=720, y=1550, w=960, h=530 · Errors 2 · <b>refined</b></p>
+ <img src="labeled_crops/i2_cargo1_desc_labeled.png" alt="i2_cargo1_desc"><details><summary>OCR and errors</summary><pre>20 PALLETS STC:
+
+FRESH FRUIT
+
+FRESH APPLES
+
+STOWAGE AT +2.@ DEGREES CELSIUS
+Packaging: PALLETS
+
+HS CODE: 08081080
+
+SET TEMP: +2°C
+
+20 PALLETS STC:</pre><ul><li>+2.0 is read as +2.@</li><li>first line of the second container is included</li></ul></details></article><article class="needs_human_review"><h2>i2_cargo1_metrics</h2>
+ <p>Iteration 2 · Parent i1_cargo_row1 · x=1620, y=1550, w=480, h=530 · Errors 1 · <b>needs_human_review</b></p>
+ <img src="labeled_crops/i2_cargo1_metrics_labeled.png" alt="i2_cargo1_metrics"><details><summary>OCR and errors</summary><pre>18 ,500 28.00
+KGS CBM
+19,200 28.00
+KGS CBM</pre><ul><li>second-container measurements are included</li></ul></details></article><article class="needs_human_review"><h2>i2_cargo2_left</h2>
+ <p>Iteration 2 · Parent i1_cargo_row2 · x=35, y=2050, w=730, h=600 · Errors 1 · <b>needs_human_review</b></p>
+ <img src="labeled_crops/i2_cargo2_left_labeled.png" alt="i2_cargo2_left"><details><summary>OCR and errors</summary><pre>PALLETIZED</pre><ul><li>container identity and seal are omitted</li></ul></details></article><article class="refined"><h2>i2_cargo2_desc</h2>
+ <p>Iteration 2 · Parent i1_cargo_row2 · x=720, y=2050, w=960, h=600 · Errors 2 · <b>refined</b></p>
+ <img src="labeled_crops/i2_cargo2_desc_labeled.png" alt="i2_cargo2_desc"><details><summary>OCR and errors</summary><pre>20 PALLETS STC:
+FRESH FRUIT
+FRESH PEARS
+STOWAGE AT +1.@ DEGREES CELSIUS
+Packaging: PALLETS
+HS CODE: 08083090
+SET TEMP: +1°C
+roe TT feu Tr FAIL Ii PFT fr tT</pre><ul><li>+1.0 is read as +1.@</li><li>footer line is garbled</li></ul></details></article><article class="needs_human_review"><h2>i2_cargo2_metrics</h2>
+ <p>Iteration 2 · Parent i1_cargo_row2 · x=1620, y=2050, w=480, h=600 · Errors 1 · <b>needs_human_review</b></p>
+ <img src="labeled_crops/i2_cargo2_metrics_labeled.png" alt="i2_cargo2_metrics"><details><summary>OCR and errors</summary><pre></pre><ul><li>OCR result is empty</li></ul></details></article><article class="needs_human_review"><h2>i2_charges</h2>
+ <p>Iteration 2 · Parent i1_charges_totals · x=35, y=2735, w=1240, h=310 · Errors 1 · <b>needs_human_review</b></p>
+ <img src="labeled_crops/i2_charges_labeled.png" alt="i2_charges"><details><summary>OCR and errors</summary><pre>FREIGHT &amp; CHARGES
+
+OCEAN FREIGHT COLLECT
+
+THC
+
+RECEIVED by the Carrier in apparent good order and condition (unless otherwise stated herein) the total number or PLACE OF ISSU:</pre><ul><li>next-section text is included at the bottom</li></ul></details></article><article class="refined"><h2>i2_total_packages</h2>
+ <p>Iteration 2 · Parent i1_charges_totals · x=1245, y=2735, w=850, h=310 · Errors 1 · <b>refined</b></p>
+ <img src="labeled_crops/i2_total_packages_labeled.png" alt="i2_total_packages"><details><summary>OCR and errors</summary><pre>TOTAL NUMBER OF PACKAGES
+SUE DATE OF ISSUE</pre><ul><li>package value 40 is omitted and issue labels are included</li></ul></details></article><article class="needs_human_review"><h2>i2_issue_date</h2>
+ <p>Iteration 2 · Parent i1_issue_signature · x=995, y=3015, w=1100, h=250 · Errors 1 · <b>needs_human_review</b></p>
+ <img src="labeled_crops/i2_issue_date_labeled.png" alt="i2_issue_date"><details><summary>OCR and errors</summary><pre>oer or PLACE OF ISSUE DATE OF ISSUE
+f
+ore! | Antwerp 2026-03-13
+&gt; AND
+/ERSE
+AS IF
+SIGNED FOR THE CARRIER</pre><ul><li>printed field labels are garbled; Antwerp and 2026-03-13 are correct</li></ul></details></article><article class="accepted"><h2>i2_originals</h2>
+ <p>Iteration 2 · Parent i1_issue_signature · x=35, y=3230, w=1050, h=210 · Errors 0 · <b>accepted</b></p>
+ <img src="labeled_crops/i2_originals_labeled.png" alt="i2_originals"><details><summary>OCR and errors</summary><pre>NUMBER OF ORIGINAL B/L&#x27;S: THREE (3)</pre><ul></ul></details></article><article class="accepted"><h2>i2_signature</h2>
+ <p>Iteration 2 · Parent i1_issue_signature · x=995, y=3180, w=1100, h=260 · Errors 0 · <b>accepted</b></p>
+ <img src="labeled_crops/i2_signature_labeled.png" alt="i2_signature"><details><summary>OCR and errors</summary><pre>— Authorized Signature</pre><ul></ul></details></article><article class="needs_human_review"><h2>i3_cargo1_stowage</h2>
+ <p>Iteration 3 · Parent i2_cargo1_desc · x=775, y=1690, w=850, h=100 · Errors 1 · <b>needs_human_review</b></p>
+ <img src="labeled_crops/i3_cargo1_stowage_labeled.png" alt="i3_cargo1_stowage"><details><summary>OCR and errors</summary><pre>STOWAGE AT 22.0 DEGREES CELSIUS</pre><ul><li>+2.0 is read as 22.0</li></ul></details></article><article class="needs_human_review"><h2>i3_cargo2_stowage</h2>
+ <p>Iteration 3 · Parent i2_cargo2_desc · x=775, y=2190, w=850, h=100 · Errors 1 · <b>needs_human_review</b></p>
+ <img src="labeled_crops/i3_cargo2_stowage_labeled.png" alt="i3_cargo2_stowage"><details><summary>OCR and errors</summary><pre>SOWA AT +1.@ DEGREES CELSIUS</pre><ul><li>STOWAGE is damaged and +1.0 is read as +1.@</li></ul></details></article><article class="accepted"><h2>i3_packages_value</h2>
+ <p>Iteration 3 · Parent i2_total_packages · x=1435, y=2835, w=420, h=170 · Errors 0 · <b>accepted</b></p>
+ <img src="labeled_crops/i3_packages_value_labeled.png" alt="i3_packages_value"><details><summary>OCR and errors</summary><pre>40</pre><ul></ul></details></article><article class="needs_human_review"><h2>i3_metrics_heading</h2>
+ <p>Iteration 3 · Parent i2_cargo_metrics_header · x=1580, y=1435, w=520, h=105 · Errors 1 · <b>needs_human_review</b></p>
+ <img src="labeled_crops/i3_metrics_heading_labeled.png" alt="i3_metrics_heading"><details><summary>OCR and errors</summary><pre>| GROSS WT. et</pre><ul><li>MEASUREMENT remains unreadable</li></ul></details></article></main></body></html>
