@@ -30,6 +30,7 @@
     .timing{font-size:11px;color:var(--muted);margin-top:6px;white-space:normal}
     .composer{display:flex;gap:8px;padding:14px;border-top:1px solid var(--line)}.composer textarea{flex:1;resize:none;height:52px}
     .empty{color:var(--muted);margin:auto;text-align:center;max-width:420px}.empty em{color:var(--ink)}
+    .fb{margin-top:8px;display:flex;gap:6px;align-items:center;font-size:12px;color:var(--muted);white-space:normal}.fb button{background:none;border:1px solid var(--line);color:var(--ink);padding:3px 9px;font-weight:400;border-radius:999px}.fb button:hover{background:#eef5f7}
     @media(max-width:820px){main{grid-template-columns:1fr}aside{position:static}.chat{height:70vh}}
   </style>
 </head>
@@ -60,6 +61,7 @@
     const $=id=>document.getElementById(id);
     const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
     const history=[]; let turn=0;
+    const sessionId=crypto.randomUUID(); // one Langfuse session per page load
 
     async function loadPapers(){
       try{
@@ -81,7 +83,8 @@
       const t=d.timings, ms=k=>t[k]!=null?`${k.replace('_ms','')} ${Math.round(t[k])}ms`:null;
       const timing=['rewrite_ms','bm25_ms','vector_ms','rerank_ms','generation_ms','total_ms'].map(ms).filter(Boolean).join(' · ');
       const searched=d.standalone_question!==history.at(-1)?.content?`<div class="timing">Searched for: “${esc(d.standalone_question)}”</div>`:'';
-      return body+(sources?`<details><summary>${d.sources.length} sources</summary>${sources}</details>`:'')+searched+`<div class="timing">${timing}</div>`;
+      const fb=d.trace_id?`<div class="fb" data-trace="${esc(d.trace_id)}">Helpful? <button data-helpful="true" aria-label="Helpful">👍</button><button data-helpful="false" aria-label="Not helpful">👎</button></div>`:'';
+      return body+(sources?`<details><summary>${d.sources.length} sources</summary>${sources}</details>`:'')+searched+`<div class="timing">${timing}</div>`+fb;
     }
 
     async function send(){
@@ -90,7 +93,7 @@
       history.push({role:'user',content:text});
       const pending=addMessage('bot','Searching the papers…'); $('send').disabled=true;
       try{
-        const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history.slice(-20)})});
+        const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history.slice(-20),session_id:sessionId})});
         const d=await r.json(); if(!r.ok)throw new Error(typeof d.detail==='string'?d.detail:JSON.stringify(d.detail));
         pending.innerHTML=renderAnswer(d,'m'+(++turn)); history.push({role:'assistant',content:d.answer});
       }catch(e){pending.classList.add('err');pending.textContent='Something went wrong: '+e.message}
@@ -116,6 +119,15 @@
       finally{$('addBtn').disabled=false}
     }
 
+    $('log').addEventListener('click',async e=>{
+      const b=e.target.closest('.fb button'); if(!b)return;
+      const box=b.parentElement; box.querySelectorAll('button').forEach(x=>x.disabled=true);
+      try{
+        const r=await fetch('/api/feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({trace_id:box.dataset.trace,helpful:b.dataset.helpful==='true'})});
+        if(!r.ok)throw new Error();
+        box.textContent=b.dataset.helpful==='true'?'Thanks! 👍 recorded':'Thanks! 👎 recorded';
+      }catch{box.textContent='Could not record feedback'}
+    });
     $('composer').addEventListener('submit',e=>{e.preventDefault();send()});
     $('input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}});
     $('addBtn').addEventListener('click',addPaper);

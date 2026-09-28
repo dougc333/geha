@@ -62,7 +62,7 @@ Each JSONL line looks like:
 | `query/rag_core.py` | BM25 and reciprocal-rank fusion |
 | `query/index.html` | The retrieval lab UI (`/`) |
 | `query/chat.py`, `query/chat.html` | Paper chatbot: `/api/chat`, `/api/arxiv`, and the `/chat` page |
-| `query/requirements.txt` | `fastapi`, `mangum`, `psycopg[binary]`, `pgvector` |
+| `query/requirements.txt` | `fastapi`, `mangum`, `psycopg[binary]`, `pgvector`, `langfuse` |
 
 ## Prerequisites
 
@@ -221,6 +221,41 @@ by `query/chat.py` (`POST /api/chat`, `POST /api/arxiv`) and `query/chat.html`.
 Papers added by arXiv ID land in `s3://<raw>/arxiv/`, with their title passed
 through S3 metadata → chunker → embedder. See [`../chatbot`](../chatbot) for
 the design, the `add_arxiv.py` command-line loader, cost and limits.
+
+### Tracing with Langfuse
+
+Every chat message and lab search is traced to [Langfuse](https://langfuse.com)
+(Langfuse Cloud, EU region by default). A chat trace (`chat-turn`) contains
+`rewrite` (follow-ups only), `retrieve` → `embed-query`, `rerank` and `answer`,
+with the prompts, retrieved chunk IDs, rerank scores, token usage and timings.
+Each chat page load is one Langfuse **session**, and 👍/👎 under an answer is
+stored as a `user-feedback` score on its trace (`POST /api/feedback`).
+
+Setup: create a Langfuse project, then store its keys in Parameter Store:
+
+```bash
+printf %s "$LANGFUSE_PUBLIC_KEY" | aws ssm put-parameter --region us-west-2 \
+  --name /rag-demo/langfuse-public-key --type SecureString --value file:///dev/stdin
+printf %s "$LANGFUSE_SECRET_KEY" | aws ssm put-parameter --region us-west-2 \
+  --name /rag-demo/langfuse-secret-key --type SecureString --value file:///dev/stdin
+```
+
+For a US-region project deploy with
+`--parameter-overrides LangfuseBaseUrl=https://us.cloud.langfuse.com`. Without
+the parameters, tracing is disabled and everything else works. Traces are
+flushed at the end of each request, because Lambda freezes between requests.
+
+Costs: Langfuse has no Bedrock prices built in. The code reports embedding
+and rerank costs itself (`EMBEDDING_PRICE_PER_TOKEN`, default $0.02/1M Titan
+tokens; `RERANK_PRICE_PER_UNIT`, default $0.001 per search unit of up to 100
+chunks). Nova Lite is priced by a model definition in the Langfuse project
+(**Settings → Models**: `amazon.nova-lite-v1:0`, $0.06 input / $0.24 output
+per 1M tokens), so add one there if you change `GenerationModel`. A follow-up
+chat message comes to about $0.0012, mostly rerank. Prices apply to traces
+received after they're set.
+
+Traces contain questions, retrieved passages and answers. That's fine for
+public arXiv papers; think twice before tracing sensitive documents.
 
 ### Existing PDFs (backfill)
 

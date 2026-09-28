@@ -18,6 +18,10 @@ aws cloudformation describe-stacks --stack-name sam-app --region us-west-2 \
   QLoRA?" then "what hardware did they fine-tune on?"
 - **Cited answers.** Each answer cites numbered sources `[1]`; the sources
   (paper, page, chunk, rerank score, snippet) are listed under the answer.
+- **Traced in Langfuse.** Each message is a trace (rewrite → retrieve →
+  rerank → answer, with prompts, chunks, tokens and timings), each page load a
+  session, and 👍/👎 under an answer becomes a score. Setup is in
+  [`../aws_rag/README.md`](../aws_rag/README.md#tracing-with-langfuse).
 - **Add papers by arXiv ID or link** from the page, or with `add_arxiv.py`.
   A new paper is searchable about 10 seconds later.
 
