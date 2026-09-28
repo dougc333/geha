@@ -19,9 +19,12 @@ from typing import Literal
 import boto3
 from botocore.exceptions import ClientError
 from fastapi import APIRouter, HTTPException
+from langfuse import observe, propagate_attributes
 from pydantic import BaseModel, Field
 
-from app import GENERATION_MODEL, RERANK_CANDIDATES, _embed_query, _rerank, bedrock, database
+from app import (
+    GENERATION_MODEL, RERANK_CANDIDATES, _embed_query, _rerank, converse, database, langfuse
+)
 from rag_core import bm25_rank, reciprocal_rank_fusion
 
 router = APIRouter()
@@ -58,8 +61,15 @@ class ChatMessage(BaseModel):
 
 class ChatRequest(BaseModel):
     messages: list[ChatMessage] = Field(min_length=1, max_length=40)
+    session_id: str | None = Field(default=None, pattern=r"^[A-Za-z0-9-]{1,64}$")  # groups traces
     document_ids: list[str] | None = Field(default=None, max_length=50)  # None = all papers
     top_k: int = Field(default=6, ge=1, le=10)
+
+
+class FeedbackRequest(BaseModel):
+    trace_id: str = Field(pattern=r"^[0-9a-f]{32}$")
+    helpful: bool
+    comment: str | None = Field(default=None, max_length=1000)
 
 
 class ArxivRequest(BaseModel):
@@ -92,7 +102,8 @@ def _standalone_question(messages: list[ChatMessage]) -> str:
     if not earlier:
         return latest
     history = "\n".join(f"{m.role.upper()}: {m.content[:HISTORY_CHARS]}" for m in earlier)
-    response = bedrock.converse(
+    response = converse(
+        "rewrite",
         modelId=GENERATION_MODEL,
         system=[{"text": REWRITE_PROMPT}],
         messages=[{
@@ -104,7 +115,9 @@ def _standalone_question(messages: list[ChatMessage]) -> str:
     return _text(response) or latest
 
 
+@observe(name="retrieve", as_type="retriever", capture_input=False, capture_output=False)
 def _retrieve(connection, query: str, document_ids: list[str] | None, timings: dict) -> list[dict]:
+    langfuse.update_current_span(input={"query": query, "document_ids": document_ids})
     where, params = ("WHERE c.document_id = ANY(%s)", [document_ids]) if document_ids else ("", [])
     select = """SELECT c.id, c.chunk_index, c.page_number, c.content, d.id, d.title
                 FROM rag_chunks c JOIN rag_documents d ON d.id = c.document_id"""
@@ -133,13 +146,26 @@ def _retrieve(connection, query: str, document_ids: list[str] | None, timings: d
         semantic = rows(cursor)
     timings["vector_ms"] = round((time.perf_counter() - step) * 1000, 1)
 
-    return reciprocal_rank_fusion([semantic, lexical[:CANDIDATES_PER_RETRIEVER]])
+    fused = reciprocal_rank_fusion([semantic, lexical[:CANDIDATES_PER_RETRIEVER]])
+    langfuse.update_current_span(
+        output={"bm25_hits": len(lexical), "vector_hits": len(semantic), "fused": len(fused)},
+        metadata={k: timings[k] for k in ("bm25_ms", "vector_ms")},
+    )
+    return fused
 
 
 @router.post("/api/chat")
 def chat(request: ChatRequest) -> dict:
     if request.messages[-1].role != "user":
         raise HTTPException(status_code=422, detail="The last message must be from the user")
+    # Set before the root span opens so every observation carries the session.
+    with propagate_attributes(session_id=request.session_id, tags=["chat"]):
+        return _chat_turn(request)
+
+
+@observe(name="chat-turn", capture_input=False, capture_output=False)
+def _chat_turn(request: ChatRequest) -> dict:
+    langfuse.update_current_span(input=request.messages[-1].content)
     started = time.perf_counter()
     timings: dict[str, float] = {}
     try:
@@ -169,7 +195,8 @@ def chat(request: ChatRequest) -> dict:
             else:
                 turns.append({"role": "user", "content": [{"text": question}]})
             step = time.perf_counter()
-            answer = _text(bedrock.converse(
+            answer = _text(converse(
+                "answer",
                 modelId=GENERATION_MODEL,
                 system=[{"text": ANSWER_PROMPT}],
                 messages=turns,
@@ -180,8 +207,12 @@ def chat(request: ChatRequest) -> dict:
             answer = "No papers are indexed yet. Add one by arXiv ID to get started."
 
         timings["total_ms"] = round((time.perf_counter() - started) * 1000, 1)
+        langfuse.update_current_span(
+            output=answer, metadata={"standalone_question": query, "timings": timings}
+        )
         return {
             "answer": answer,
+            "trace_id": langfuse.get_current_trace_id(),  # for /api/feedback
             "standalone_question": query,
             "sources": [
                 {
@@ -201,6 +232,19 @@ def chat(request: ChatRequest) -> dict:
         raise
     except Exception as exc:
         raise HTTPException(status_code=500, detail=str(exc)) from exc
+
+
+@router.post("/api/feedback")
+def feedback(request: FeedbackRequest) -> dict:
+    """Thumbs up/down on an answer, stored as a Langfuse score on its trace."""
+    langfuse.create_score(
+        name="user-feedback",
+        value=1 if request.helpful else 0,
+        data_type="BOOLEAN",
+        trace_id=request.trace_id,
+        comment=request.comment,
+    )
+    return {"status": "ok"}
 
 
 # New-style arXiv IDs (2305.14314, optionally v2), bare or inside an abs/pdf URL.

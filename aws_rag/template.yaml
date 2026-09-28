@@ -26,6 +26,19 @@ Parameters:
     Default: amazon.nova-lite-v1:0
     Description: Any Bedrock Converse model ID, e.g. us.amazon.nova-2-lite-v1:0, openai.gpt-oss-120b-1:0
 
+  LangfuseBaseUrl:
+    Type: String
+    Default: https://cloud.langfuse.com
+    Description: Langfuse region (EU https://cloud.langfuse.com, US https://us.cloud.langfuse.com) or self-hosted URL
+  LangfusePublicKeyParameter:
+    Type: String
+    Default: /rag-demo/langfuse-public-key
+    Description: SSM parameter with the Langfuse public key (tracing is off if it doesn't exist)
+  LangfuseSecretKeyParameter:
+    Type: String
+    Default: /rag-demo/langfuse-secret-key
+    Description: SSM SecureString with the Langfuse secret key
+
 Resources:
   # Names are fixed (not generated) so the queue policy can reference the raw
   # bucket's ARN without a circular dependency on the bucket's notification.
@@ -200,12 +213,18 @@ Resources:
           RERANK_MODEL: !Ref RerankModel
           GENERATION_MODEL: !Ref GenerationModel
           RAW_BUCKET: !Ref RawBucket    # /api/arxiv drops PDFs here for the chunker
+          LANGFUSE_BASE_URL: !Ref LangfuseBaseUrl
+          LANGFUSE_PUBLIC_KEY_PARAMETER: !Ref LangfusePublicKeyParameter
+          LANGFUSE_SECRET_KEY_PARAMETER: !Ref LangfuseSecretKeyParameter
           ARXIV_MAX_MB: "25"
       Policies:
         - Statement:
             - Effect: Allow
-              Action: ssm:GetParameter   # SecureString under the AWS-managed aws/ssm key
-              Resource: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${DatabaseUrlParameter}"
+              Action: ssm:GetParameters   # SecureStrings under the AWS-managed aws/ssm key
+              Resource:
+                - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${DatabaseUrlParameter}"
+                - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${LangfusePublicKeyParameter}"
+                - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${LangfuseSecretKeyParameter}"
             - Effect: Allow
               Action: bedrock:InvokeModel
               Resource:

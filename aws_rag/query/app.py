@@ -12,6 +12,7 @@ import boto3
 import psycopg
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from langfuse import get_client, observe
 from pgvector.psycopg import register_vector
 from pydantic import BaseModel, Field
 
@@ -30,6 +31,29 @@ GENERATION_MODEL = os.getenv("GENERATION_MODEL", "amazon.nova-lite-v1:0")
 
 bedrock = boto3.client("bedrock-runtime", region_name=REGION)
 bedrock_agent = boto3.client("bedrock-agent-runtime", region_name=REGION)
+
+# Tracing to Langfuse; a no-op when LANGFUSE_PUBLIC_KEY/SECRET_KEY aren't set.
+langfuse = get_client()
+
+
+def converse(name: str, **kwargs) -> dict:
+    """bedrock.converse, recorded as a Langfuse generation with token usage."""
+    with langfuse.start_as_current_observation(
+        as_type="generation",
+        name=name,
+        model=kwargs["modelId"],
+        input={"system": kwargs.get("system"), "messages": kwargs.get("messages")},
+        model_parameters=kwargs.get("inferenceConfig"),
+    ) as generation:
+        response = bedrock.converse(**kwargs)
+        generation.update(
+            output=response["output"]["message"]["content"],
+            usage_details={
+                "input": response["usage"]["inputTokens"],
+                "output": response["usage"]["outputTokens"],
+            },
+        )
+        return response
 
 
 app = FastAPI(title="Selectable RAG Demo", version="1.0.0")
@@ -78,6 +102,7 @@ def _all_chunks(connection, document_id: str) -> list[dict]:
         ]
 
 
+@observe(name="embed-query", as_type="embedding", capture_output=False)
 def _embed_query(query: str) -> list[float]:
     # Same model and settings as the embedder, or cosine scores are meaningless.
     response = bedrock.invoke_model(
@@ -112,10 +137,14 @@ def _vector_rank(connection, document_id: str, query: str, limit: int) -> list[d
         ]
 
 
+@observe(name="rerank", capture_input=False, capture_output=False)
 def _rerank(query: str, rows: list[dict]) -> list[dict]:
     """Reorder candidates with a Bedrock reranking model (cross-encoder scores)."""
     if not rows:
         return []
+    langfuse.update_current_span(
+        input={"query": query, "candidates": len(rows)}, metadata={"model": RERANK_MODEL}
+    )
     response = bedrock_agent.rerank(
         queries=[{"type": "TEXT", "textQuery": {"text": query}}],
         sources=[
@@ -141,6 +170,10 @@ def _rerank(query: str, rows: list[dict]) -> list[dict]:
         row["rerank_position"] = rank
         row["rerank_score"] = result["relevanceScore"]
         ordered.append(row)
+    langfuse.update_current_span(output=[
+        {"chunk_id": r["id"], "page": r["page"], "score": round(r["rerank_score"], 4)}
+        for r in ordered[:10]
+    ])
     return ordered
 
 
@@ -148,7 +181,8 @@ def _answer(query: str, rows: list[dict]) -> str:
     context = "\n\n".join(
         f"[chunk {row['id']}, page {row['page']}]\n{row['content']}" for row in rows
     )
-    response = bedrock.converse(
+    response = converse(
+        "answer",
         modelId=GENERATION_MODEL,
         system=[{
             "text": (
@@ -193,6 +227,7 @@ def documents() -> dict:
 
 
 @app.post("/api/search")
+@observe(name="lab-search", capture_output=False)
 def search(request: SearchRequest) -> dict:
     started = time.perf_counter()
     timings: dict[str, float] = {}
