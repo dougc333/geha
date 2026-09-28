@@ -199,6 +199,8 @@ Resources:
           EMBEDDING_DIMENSIONS: !Ref EmbeddingDimensions
           RERANK_MODEL: !Ref RerankModel
           GENERATION_MODEL: !Ref GenerationModel
+          RAW_BUCKET: !Ref RawBucket    # /api/arxiv drops PDFs here for the chunker
+          ARXIV_MAX_MB: "25"
       Policies:
         - Statement:
             - Effect: Allow
@@ -212,6 +214,12 @@ Resources:
             - Effect: Allow
               Action: bedrock:Rerank    # does not support resource-level permissions
               Resource: "*"
+            - Effect: Allow
+              Action: [s3:PutObject, s3:GetObject]   # GetObject also covers HeadObject
+              Resource: !Sub "arn:aws:s3:::${AWS::StackName}-raw-${AWS::AccountId}/arxiv/*"
+            - Effect: Allow
+              Action: s3:ListBucket   # makes HeadObject return 404, not 403, for new papers
+              Resource: !Sub "arn:aws:s3:::${AWS::StackName}-raw-${AWS::AccountId}"
       FunctionUrlConfig:
         AuthType: NONE                  # public
 
@@ -232,6 +240,9 @@ Outputs:
     Value: !Ref EmbedDLQ
   EmbedderFunctionName:
     Value: !Ref Embedder
+  ChatUrl:
+    Description: Open in a browser for the paper chatbot
+    Value: !Sub "${QueryApiUrl.FunctionUrl}chat"
   QueryUrl:
     Description: Open in a browser for the RAG UI
     Value: !GetAtt QueryApiUrl.FunctionUrl

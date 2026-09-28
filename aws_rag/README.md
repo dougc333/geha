@@ -60,7 +60,8 @@ Each JSONL line looks like:
 | `query/lambda_function.py` | Lambda entry point: loads `DATABASE_URL` from Parameter Store, serves `index.html` at `/`, wraps the app with Mangum |
 | `query/app.py` | FastAPI search API: `/api/documents`, `/api/search` (BM25, vector, hybrid, rerank, answer) |
 | `query/rag_core.py` | BM25 and reciprocal-rank fusion |
-| `query/index.html` | The UI |
+| `query/index.html` | The retrieval lab UI (`/`) |
+| `query/chat.py`, `query/chat.html` | Paper chatbot: `/api/chat`, `/api/arxiv`, and the `/chat` page |
 | `query/requirements.txt` | `fastapi`, `mangum`, `psycopg[binary]`, `pgvector` |
 
 ## Prerequisites
@@ -211,6 +212,15 @@ idle adds a second or two of cold start.
 The Function URL is public (`AuthType: NONE`), and
 each search with rerank or answer generation costs Bedrock usage. Switch to
 `AuthType: AWS_IAM` or put it behind CloudFront + WAF if it shouldn't be open.
+
+### Paper chatbot
+
+`/chat` on the same URL (the `ChatUrl` output) is a multi-turn chatbot over all
+indexed papers, with cited answers and an "add an arXiv paper" box. It's served
+by `query/chat.py` (`POST /api/chat`, `POST /api/arxiv`) and `query/chat.html`.
+Papers added by arXiv ID land in `s3://<raw>/arxiv/`, with their title passed
+through S3 metadata → chunker → embedder. See [`../chatbot`](../chatbot) for
+the design, the `add_arxiv.py` command-line loader, cost and limits.
 
 ### Existing PDFs (backfill)
 

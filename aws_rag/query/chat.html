@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Paper Chat</title>
+  <style>
+    :root{--ink:#10233e;--muted:#607086;--line:#dce4ec;--paper:#fff;--bg:#eef3f7;--navy:#062f4f;--cyan:#13a8a8;--user:#e3f1f4}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,sans-serif}
+    header{padding:22px clamp(20px,5vw,72px);background:linear-gradient(125deg,#052c4d,#0b5270);color:white;display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap}
+    header h1{margin:0;font-size:clamp(26px,3.5vw,40px);letter-spacing:-.04em} header p{margin:6px 0 0;color:#d8ecf2;max-width:720px} header a{color:#bfe9ee;font-weight:600}
+    main{display:grid;grid-template-columns:minmax(260px,320px) 1fr;gap:22px;max-width:1300px;margin:22px auto;padding:0 20px 24px}
+    .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 25px rgba(24,49,75,.06)}
+    aside{padding:20px;height:max-content;position:sticky;top:18px} h2{font-size:16px;margin:0 0 10px}
+    .papers{list-style:none;margin:0;padding:0;display:grid;gap:8px;max-height:44vh;overflow:auto}
+    .papers li{font-size:13px;padding:8px 10px;border:1px solid #edf1f4;border-radius:9px}.papers .meta{color:var(--muted);font-size:12px}
+    .add{margin-top:18px;padding-top:16px;border-top:1px solid #edf1f4}.add .row{display:flex;gap:6px}
+    input,textarea{border:1px solid #bcc9d5;border-radius:9px;padding:10px;background:white;color:var(--ink);font:inherit}input{flex:1;min-width:0}
+    button{border:0;border-radius:9px;background:var(--cyan);color:white;font-weight:800;padding:10px 14px;cursor:pointer}button:disabled{opacity:.55;cursor:wait}
+    .status{font-size:12px;color:var(--muted);margin-top:8px;min-height:18px}.status.err{color:#9b2424}
+    .chat{display:flex;flex-direction:column;height:calc(100vh - 150px);min-height:480px}
+    .log{flex:1;overflow:auto;padding:22px;display:flex;flex-direction:column;gap:16px}
+    .msg{max-width:88%;padding:12px 16px;border-radius:14px;white-space:pre-wrap}
+    .msg.user{align-self:flex-end;background:var(--user)}.msg.bot{align-self:flex-start;border:1px solid var(--line);background:#fbfdfe}
+    .msg.bot.err{border-color:#efcaca;background:#fff1f1;color:#9b2424}
+    .cite{color:var(--cyan);font-weight:700;text-decoration:none;font-size:12px;vertical-align:super}
+    details{margin-top:10px;font-size:13px;white-space:normal}summary{cursor:pointer;color:var(--muted)}
+    .src{margin-top:8px;padding:8px 10px;border-left:3px solid var(--cyan);background:#f4f9fa;border-radius:6px}.src:target{background:#fff6e2}
+    .src b{display:block}.src .meta{color:var(--muted);font-size:12px}.src .snip{margin-top:4px;color:#33475e}
+    .timing{font-size:11px;color:var(--muted);margin-top:6px;white-space:normal}
+    .composer{display:flex;gap:8px;padding:14px;border-top:1px solid var(--line)}.composer textarea{flex:1;resize:none;height:52px}
+    .empty{color:var(--muted);margin:auto;text-align:center;max-width:420px}.empty em{color:var(--ink)}
+    @media(max-width:820px){main{grid-template-columns:1fr}aside{position:static}.chat{height:70vh}}
+  </style>
+</head>
+<body>
+  <header>
+    <div><h1>Paper Chat</h1><p>Ask questions across every indexed arXiv paper. Answers cite the passages they came from.</p></div>
+    <a href="/">Retrieval lab →</a>
+  </header>
+  <main>
+    <aside class="card">
+      <h2>Papers</h2>
+      <ul class="papers" id="papers"><li class="meta">Loading…</li></ul>
+      <div class="add">
+        <h2>Add an arXiv paper</h2>
+        <div class="row"><input id="arxiv" placeholder="2305.14314 or arxiv.org link" aria-label="arXiv ID or link"><button id="addBtn">Add</button></div>
+        <div class="status" id="addStatus"></div>
+      </div>
+    </aside>
+    <section class="card chat">
+      <div class="log" id="log"><div class="empty" id="empty">Try <em>what is orca?</em> then a follow-up like <em>how was it evaluated?</em></div></div>
+      <form class="composer" id="composer">
+        <textarea id="input" placeholder="Ask about the papers…  (Enter to send, Shift+Enter for a new line)" aria-label="Message" maxlength="4000"></textarea>
+        <button id="send">Send</button>
+      </form>
+    </section>
+  </main>
+  <script>
+    const $=id=>document.getElementById(id);
+    const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+    const history=[]; let turn=0;
+
+    async function loadPapers(){
+      try{
+        const r=await fetch('/api/documents'); const d=await r.json(); if(!r.ok)throw new Error(d.detail||r.statusText);
+        $('papers').innerHTML=d.documents.map(p=>`<li>${esc(p.title)}<div class="meta">${p.chunks} chunks</div></li>`).join('')||'<li class="meta">No papers yet. Add one below.</li>';
+        return d.documents;
+      }catch(e){$('papers').innerHTML=`<li class="meta">Couldn't load papers: ${esc(e.message)}</li>`;return []}
+    }
+
+    function addMessage(cls,html){
+      $('empty')?.remove();
+      const div=document.createElement('div'); div.className='msg '+cls; div.innerHTML=html;
+      $('log').appendChild(div); $('log').scrollTop=$('log').scrollHeight; return div;
+    }
+
+    function renderAnswer(d,id){
+      const body=esc(d.answer).replace(/\[(\d+)\]/g,(m,n)=>d.sources.some(s=>s.n==n)?`<a class="cite" href="#${id}-s${n}">[${n}]</a>`:m);
+      const sources=d.sources.map(s=>`<div class="src" id="${id}-s${s.n}"><b>[${s.n}] ${esc(s.title)}</b><span class="meta">page ${esc(s.page??'?')} · chunk ${s.chunk_id}${s.rerank_score!=null?` · rerank ${Number(s.rerank_score).toFixed(3)}`:''}</span><div class="snip">${esc(s.snippet)}…</div></div>`).join('');
+      const t=d.timings, ms=k=>t[k]!=null?`${k.replace('_ms','')} ${Math.round(t[k])}ms`:null;
+      const timing=['rewrite_ms','bm25_ms','vector_ms','rerank_ms','generation_ms','total_ms'].map(ms).filter(Boolean).join(' · ');
+      const searched=d.standalone_question!==history.at(-1)?.content?`<div class="timing">Searched for: “${esc(d.standalone_question)}”</div>`:'';
+      return body+(sources?`<details><summary>${d.sources.length} sources</summary>${sources}</details>`:'')+searched+`<div class="timing">${timing}</div>`;
+    }
+
+    async function send(){
+      const text=$('input').value.trim(); if(!text||$('send').disabled)return;
+      $('input').value=''; addMessage('user',esc(text));
+      history.push({role:'user',content:text});
+      const pending=addMessage('bot','Searching the papers…'); $('send').disabled=true;
+      try{
+        const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history.slice(-20)})});
+        const d=await r.json(); if(!r.ok)throw new Error(typeof d.detail==='string'?d.detail:JSON.stringify(d.detail));
+        pending.innerHTML=renderAnswer(d,'m'+(++turn)); history.push({role:'assistant',content:d.answer});
+      }catch(e){pending.classList.add('err');pending.textContent='Something went wrong: '+e.message}
+      finally{$('send').disabled=false;$('input').focus();$('log').scrollTop=$('log').scrollHeight}
+    }
+
+    async function addPaper(){
+      const paper=$('arxiv').value.trim(); if(!paper)return;
+      const status=$('addStatus'); status.className='status'; status.textContent='Downloading from arXiv…'; $('addBtn').disabled=true;
+      try{
+        const r=await fetch('/api/arxiv',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({paper})});
+        const d=await r.json(); if(!r.ok)throw new Error(typeof d.detail==='string'?d.detail:'Invalid input');
+        $('arxiv').value='';
+        if(d.status==='exists'){status.textContent=`Already added: ${d.title}`;return}
+        status.textContent=`Indexing “${d.title}”…`;
+        for(let i=0;i<30;i++){ // the S3 → chunker → embedder pipeline usually takes ~10 s
+          await new Promise(res=>setTimeout(res,3000));
+          const docs=await loadPapers();
+          if(docs.some(p=>p.title===d.title&&p.chunks>0)){status.textContent=`Ready: ${d.title}`;return}
+        }
+        status.textContent=`Still indexing “${d.title}”. It will appear in the list when done.`;
+      }catch(e){status.className='status err';status.textContent=e.message}
+      finally{$('addBtn').disabled=false}
+    }
+
+    $('composer').addEventListener('submit',e=>{e.preventDefault();send()});
+    $('input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}});
+    $('addBtn').addEventListener('click',addPaper);
+    $('arxiv').addEventListener('keydown',e=>{if(e.key==='Enter')addPaper()});
+    loadPapers();
+  </script>
+</body>
+</html>

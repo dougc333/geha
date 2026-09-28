@@ -34,8 +34,12 @@ def handler(event, context):
 
 
 def process(bucket, key):
-    data = s3.get_object(Bucket=bucket, Key=key)["Body"].read()
+    obj = s3.get_object(Bucket=bucket, Key=key)
+    data = obj["Body"].read()
     doc_id = hashlib.sha256(data).hexdigest()
+    # Optional display title (set by the chatbot's arXiv loader, URL-quoted
+    # because S3 metadata must be ASCII); the embedder falls back to the file name.
+    title = urllib.parse.unquote(obj.get("Metadata", {}).get("title", ""))
     out_key = f"{OUT_PREFIX}{doc_id}.jsonl"
 
     lines, index = [], 0
@@ -46,6 +50,7 @@ def process(bucket, key):
                 lines.append(json.dumps({
                     "document_id": doc_id,
                     "source": f"s3://{bucket}/{key}",
+                    **({"title": title} if title else {}),
                     "chunk_index": index,
                     "page_number": page_no,
                     "content": chunk,
