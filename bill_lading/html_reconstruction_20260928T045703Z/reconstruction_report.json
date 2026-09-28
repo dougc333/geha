@@ -1,0 +1,92 @@
+{
+  "status": "needs_human_review",
+  "model": "gpt-4o",
+  "ocr_results": "gpt4o_only_run_20260927T183545Z/gpt4o_only_results.json",
+  "schema": "schema.json",
+  "reconstructed_html": "bill_of_lading_reconstructed.html",
+  "data_iterations": 5,
+  "visual_iterations": 1,
+  "data_error_count": 1,
+  "visual_error_count": null,
+  "text_fidelity_passed": false,
+  "visual_fidelity_passed": false,
+  "iterations": [
+    {
+      "stage": "data",
+      "iteration": 1,
+      "num_errors": 1,
+      "issues": [
+        {
+          "block": 6,
+          "cell": "packages_column",
+          "kind": "mismatch",
+          "description": "The second '0' in each line is actually an 'Ø'. The extracted text does not match the image.",
+          "corrected_text": "2Ø\n2Ø"
+        }
+      ]
+    },
+    {
+      "stage": "data",
+      "iteration": 2,
+      "num_errors": 1,
+      "issues": [
+        {
+          "block": 6,
+          "cell": "packages_column",
+          "kind": "mismatch",
+          "description": "The OCR incorrectly extracted 'Ø' instead of '0'.",
+          "corrected_text": "20\n20"
+        }
+      ]
+    },
+    {
+      "stage": "data",
+      "iteration": 3,
+      "num_errors": 2,
+      "issues": [
+        {
+          "block": 6,
+          "cell": "packages_column",
+          "kind": "mismatch",
+          "description": "The second '0' in each '20' appears to have a diagonal slash (Ø) in the image.",
+          "corrected_text": "2Ø\n2Ø"
+        },
+        {
+          "block": 6,
+          "cell": "description_column",
+          "kind": "mismatch",
+          "description": "Extracted text has missing colons in temperature settings.",
+          "corrected_text": "20 PALLETS STC:\nFRESH FRUIT\n\nFRESH APPLES\nSTOWAGE AT +2.0 DEGREES CELSIUS\nPackaging: PALLETS\n\nHS CODE: 08081080\nSET TEMP: +2.0°C\n\n20 PALLETS STC:\nFRESH FRUIT\n\nFRESH PEARS\nSTOWAGE AT +1.0 DEGREES CELSIUS\nPackaging: PALLETS\n\nHS CODE: 08083090\nSET TEMP: +1.0°C\n\n_________________\nFREIGHT COLLECT"
+        }
+      ]
+    },
+    {
+      "stage": "data",
+      "iteration": 4,
+      "num_errors": 1,
+      "issues": [
+        {
+          "block": 6,
+          "cell": "description_column",
+          "kind": "mismatch",
+          "description": "The extracted text did not include the underline before 'FREIGHT COLLECT'.",
+          "corrected_text": "20 PALLETS STC:\nFRESH FRUIT\n\nFRESH APPLES\nSTOWAGE AT +2.0 DEGREES CELSIUS\nPackaging: PALLETS\n\nHS CODE: 08081080\nSET TEMP: +2°C\n\n20 PALLETS STC:\nFRESH FRUIT\n\nFRESH PEARS\nSTOWAGE AT +1.0 DEGREES CELSIUS\nPackaging: PALLETS\n\nHS CODE: 08083090\nSET TEMP: +1°C\n\n_________________\nFREIGHT COLLECT"
+        }
+      ]
+    },
+    {
+      "stage": "data",
+      "iteration": 5,
+      "num_errors": 1,
+      "issues": [
+        {
+          "block": 6,
+          "cell": "packages_column",
+          "kind": "mismatch",
+          "description": "Incorrect character detected: 'Ø' instead of '0'",
+          "corrected_text": "20\n20"
+        }
+      ]
+    }
+  ]
+}
