@@ -190,9 +190,10 @@ aws cloudformation describe-stacks --stack-name $STACK \
   --query "Stacks[0].Outputs[?OutputKey=='QueryUrl'].OutputValue" --output text
 ```
 
-Pick a document, a retrieval mode,
-and optionally the LLM reranker and answer generation. The API can also be
-called directly:
+Pick a document, a retrieval mode, and optionally the reranker and answer
+generation. Selecting a document fills in a starter question for the three
+demo papers; the question box is editable. The API can also be called
+directly:
 
 ```bash
 URL=$(aws cloudformation describe-stacks --stack-name $STACK \
