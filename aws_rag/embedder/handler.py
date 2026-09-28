@@ -67,7 +67,7 @@ def process(bucket, key):
 
     document_id = chunks[0]["document_id"]
     source = chunks[0]["source"]
-    title = posixpath.splitext(posixpath.basename(source))[0]
+    title = chunks[0].get("title") or posixpath.splitext(posixpath.basename(source))[0]
 
     with ThreadPoolExecutor(max_workers=WORKERS) as pool:
         embeddings = list(pool.map(embed, [c["content"] for c in chunks]))  # keeps order
