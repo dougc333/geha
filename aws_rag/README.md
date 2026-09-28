@@ -245,9 +245,14 @@ For a US-region project deploy with
 the parameters, tracing is disabled and everything else works. Traces are
 flushed at the end of each request, because Lambda freezes between requests.
 
-Langfuse doesn't know Bedrock prices, so traces show token counts but $0 cost
-until you add the models under **Settings → Models** in Langfuse (e.g.
-`amazon.nova-lite-v1:0`: $0.06 input / $0.24 output per 1M tokens).
+Costs: Langfuse has no Bedrock prices built in. The code reports embedding
+and rerank costs itself (`EMBEDDING_PRICE_PER_TOKEN`, default $0.02/1M Titan
+tokens; `RERANK_PRICE_PER_UNIT`, default $0.001 per search unit of up to 100
+chunks). Nova Lite is priced by a model definition in the Langfuse project
+(**Settings → Models**: `amazon.nova-lite-v1:0`, $0.06 input / $0.24 output
+per 1M tokens), so add one there if you change `GenerationModel`. A follow-up
+chat message comes to about $0.0012, mostly rerank. Prices apply to traces
+received after they're set.
 
 Traces contain questions, retrieved passages and answers. That's fine for
 public arXiv papers; think twice before tracing sensitive documents.
