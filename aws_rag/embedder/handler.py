@@ -1,34 +1,45 @@
 """Lambda: embed chunk JSONL files from S3 and load them into Postgres/pgvector.
 
-Writes the same rag_documents / rag_chunks rows as vercel_app/scripts/ingest.py,
-so documents chunked on AWS are searchable from the Vercel app.
+Embeds with Amazon Titan Text Embeddings v2 on Bedrock (the query API must use the same model)
+and replaces the document's rag_chunks rows in one transaction.
 """
 
 import json
 import os
 import posixpath
 import urllib.parse
+from concurrent.futures import ThreadPoolExecutor
 
 import boto3
 import psycopg
-from openai import OpenAI
 from pgvector.psycopg import register_vector
 
 s3 = boto3.client("s3")
-SECRET_ID = os.environ["SECRET_ID"]
-MODEL = os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
-BATCH = int(os.getenv("EMBED_BATCH_SIZE", "100"))
+bedrock = boto3.client("bedrock-runtime")
+DATABASE_URL_PARAMETER = os.environ["DATABASE_URL_PARAMETER"]
+MODEL = os.getenv("EMBEDDING_MODEL", "amazon.titan-embed-text-v2:0")
+DIMENSIONS = int(os.getenv("EMBEDDING_DIMENSIONS", "1024"))  # schema.sql vector(1024)
+WORKERS = int(os.getenv("EMBED_CONCURRENCY", "8"))  # Titan embeds one text per call
 
-_secret = None
+_database_url = None
 
 
-def secret():
-    """DATABASE_URL and OPENAI_API_KEY from Secrets Manager, cached per container."""
-    global _secret
-    if _secret is None:
-        value = boto3.client("secretsmanager").get_secret_value(SecretId=SECRET_ID)
-        _secret = json.loads(value["SecretString"])
-    return _secret
+def database_url():
+    """DATABASE_URL from an SSM SecureString parameter, cached per container."""
+    global _database_url
+    if _database_url is None:
+        _database_url = boto3.client("ssm").get_parameter(
+            Name=DATABASE_URL_PARAMETER, WithDecryption=True
+        )["Parameter"]["Value"]
+    return _database_url
+
+
+def embed(text):
+    response = bedrock.invoke_model(
+        modelId=MODEL,
+        body=json.dumps({"inputText": text, "dimensions": DIMENSIONS, "normalize": True}),
+    )
+    return json.loads(response["body"].read())["embedding"]
 
 
 def handler(event, context):
@@ -58,15 +69,11 @@ def process(bucket, key):
     source = chunks[0]["source"]
     title = posixpath.splitext(posixpath.basename(source))[0]
 
-    client = OpenAI(api_key=secret()["OPENAI_API_KEY"])
-    embeddings = []
-    for start in range(0, len(chunks), BATCH):
-        batch = [c["content"] for c in chunks[start : start + BATCH]]
-        response = client.embeddings.create(model=MODEL, input=batch)
-        embeddings.extend(item.embedding for item in response.data)
+    with ThreadPoolExecutor(max_workers=WORKERS) as pool:
+        embeddings = list(pool.map(embed, [c["content"] for c in chunks]))  # keeps order
 
     # One transaction: readers never see a document with half its chunks.
-    with psycopg.connect(secret()["DATABASE_URL"]) as connection:
+    with psycopg.connect(database_url()) as connection:
         register_vector(connection)
         with connection.cursor() as cursor:
             cursor.execute(

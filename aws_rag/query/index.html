@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RAG Architecture Lab</title>
+  <style>
+    :root{--ink:#10233e;--muted:#607086;--line:#dce4ec;--paper:#fff;--bg:#eef3f7;--navy:#062f4f;--cyan:#13a8a8;--amber:#f2a93b}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,sans-serif}
+    header{padding:28px clamp(20px,5vw,72px);background:linear-gradient(125deg,#052c4d,#0b5270);color:white}
+    header h1{margin:0;font-size:clamp(27px,4vw,48px);letter-spacing:-.04em} header p{max-width:780px;margin:8px 0 0;color:#d8ecf2}
+    main{display:grid;grid-template-columns:minmax(280px,360px) 1fr;gap:22px;max-width:1400px;margin:24px auto;padding:0 20px 48px}
+    .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 25px rgba(24,49,75,.06)}
+    aside{padding:22px;height:max-content;position:sticky;top:18px} h2{font-size:18px;margin:0 0 16px} label{display:block;font-weight:700;margin:16px 0 7px}
+    select,textarea,input[type=range]{width:100%} select,textarea{border:1px solid #bcc9d5;border-radius:9px;padding:11px;background:white;color:var(--ink)} textarea{min-height:112px;resize:vertical}
+    .modes{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.modes input{position:absolute;opacity:0}.modes span{display:block;text-align:center;border:1px solid #b9c7d4;border-radius:8px;padding:9px 4px;font-size:13px;cursor:pointer}.modes input:checked+span{background:var(--navy);color:white;border-color:var(--navy)}
+    .toggle{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #edf1f4}.toggle label{margin:0;font-weight:600}.toggle input{width:20px;height:20px}
+    button{width:100%;margin-top:18px;border:0;border-radius:10px;background:var(--cyan);color:white;font-weight:800;padding:13px;cursor:pointer}button:disabled{opacity:.55;cursor:wait}
+    .content{display:grid;gap:18px}.summary{padding:20px}.summary .empty{color:var(--muted)}.answer{padding:20px;border-left:5px solid var(--cyan)}
+    .metrics{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.metric{background:#edf5f6;border-radius:999px;padding:5px 10px;font-size:12px;color:#28535d}
+    .result{padding:20px}.result-head{display:flex;justify-content:space-between;gap:12px;align-items:baseline}.rank{font-weight:900;color:var(--cyan)}.score{font:12px ui-monospace,SFMono-Regular,monospace;color:var(--muted)}.meta{font-size:12px;color:var(--muted);margin:5px 0 10px}.text{white-space:pre-wrap}
+    .error{color:#9b2424;background:#fff1f1;border:1px solid #efcaca;padding:13px;border-radius:9px}@media(max-width:820px){main{grid-template-columns:1fr}aside{position:static}}
+  </style>
+</head>
+<body>
+  <header><h1>RAG Architecture Lab</h1><p>Hold the document and question constant. Change one retrieval feature at a time and inspect the evidence, ranking, and latency.</p></header>
+  <main>
+    <aside class="card">
+      <h2>Experiment configuration</h2>
+      <label for="document">Document</label><select id="document"><option>Loading indexed documents…</option></select>
+      <label>Retrieval mode</label>
+      <div class="modes">
+        <label><input type="radio" name="mode" value="vector"><span>Vector</span></label>
+        <label><input type="radio" name="mode" value="bm25"><span>BM25</span></label>
+        <label><input type="radio" name="mode" value="hybrid" checked><span>Hybrid</span></label>
+      </div>
+      <div class="toggle"><label for="reranker">LLM reranker</label><input id="reranker" type="checkbox"></div>
+      <div class="toggle"><label for="generate">Generate answer</label><input id="generate" type="checkbox"></div>
+      <label for="topk">Chunks displayed: <output id="topkValue">5</output></label><input id="topk" type="range" min="1" max="10" value="5">
+      <label for="question">Question</label><textarea id="question" readonly aria-readonly="true">what is orca</textarea>
+      <button id="run">Run comparison</button>
+    </aside>
+    <section class="content" id="content">
+      <div class="card summary"><h2>Retrieved evidence</h2><div class="empty">Choose a document and run a query. Retrieval-only mode makes it easier to inspect ranking quality before adding generation.</div></div>
+    </section>
+  </main>
+  <script>
+    const $=id=>document.getElementById(id), content=$('content'), run=$('run');
+    const fixedQuestions={
+      '1706.03762v7':'what is attention',
+      '2306.02707':'what is orca'
+    };
+    let documentsById=new Map();
+    const fixedQuestionForTitle=title=>{
+      const text=String(title??'');
+      return Object.entries(fixedQuestions).find(([documentName])=>text.includes(documentName))?.[1]??'';
+    };
+    const fixedQuestionForSelection=()=>{
+      const selectedId=$('document').value;
+      const selectedRecord=documentsById.get(selectedId);
+      const selectedLabel=$('document').selectedOptions[0]?.textContent;
+      return fixedQuestionForTitle(selectedRecord?.title)||fixedQuestionForTitle(selectedLabel);
+    };
+    function syncFixedQuestion(){
+      const question=fixedQuestionForSelection();
+      $('question').value=question;
+      $('question').placeholder=question?'':'No fixed question configured for this document';
+    }
+    $('document').addEventListener('change',syncFixedQuestion);
+    $('topk').addEventListener('input',e=>$('topkValue').textContent=e.target.value);
+    const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+    async function loadDocuments(){
+      try{const r=await fetch('/api/documents');if(!r.ok)throw new Error((await r.json()).detail||r.statusText);const d=await r.json();
+        documentsById=new Map(d.documents.map(x=>[x.id,x]));
+        $('document').innerHTML=d.documents.map(x=>`<option value="${esc(x.id)}">${esc(x.title)} · ${x.chunks} chunks</option>`).join('')||'<option value="">No documents indexed</option>';
+        syncFixedQuestion();
+      }catch(e){$('document').innerHTML='<option value="">Database unavailable</option>';showError(e.message)}
+    }
+    function showError(message){content.innerHTML=`<div class="error"><strong>Request failed:</strong> ${esc(message)}</div>`}
+    run.addEventListener('click',async()=>{
+      const documentId=$('document').value;
+      const query=fixedQuestionForSelection();
+      syncFixedQuestion();
+      const payload={document_id:documentId,query,retrieval_mode:document.querySelector('input[name=mode]:checked').value,use_reranker:$('reranker').checked,generate_answer:$('generate').checked,top_k:Number($('topk').value)};
+      if(!payload.document_id||!payload.query){showError('Select a document with a configured fixed question.');return}
+      run.disabled=true;run.textContent='Running…';
+      try{const r=await fetch('/api/search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const d=await r.json();if(!r.ok)throw new Error(d.detail||r.statusText);
+        const metrics=Object.entries(d.timings).map(([k,v])=>`<span class="metric">${esc(k.replace('_ms',''))}: ${v} ms</span>`).join('');
+        let html=`<div class="card summary"><h2>${esc(payload.retrieval_mode.toUpperCase())} results</h2><div>${payload.use_reranker?'LLM reranking enabled':'Raw retrieval order'} · ${payload.generate_answer?'Answer generated':'Retrieval only'}</div><div class="metrics">${metrics}</div></div>`;
+        if(d.answer)html+=`<div class="card answer"><h2>Grounded answer</h2><div class="text">${esc(d.answer)}</div></div>`;
+        html+=d.results.map((x,i)=>`<article class="card result"><div class="result-head"><span class="rank">#${i+1}</span><span class="score">${esc(x.score_type)} ${Number(x.score).toFixed(4)}</span></div><div class="meta">Page ${esc(x.page??'unknown')} · chunk ${esc(x.id)}</div><div class="text">${esc(x.content)}</div></article>`).join('');content.innerHTML=html;
+      }catch(e){showError(e.message)}finally{run.disabled=false;run.textContent='Run comparison'}
+    });
+    loadDocuments();
+  </script>
+</body>
+</html>

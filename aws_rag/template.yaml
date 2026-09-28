@@ -1,12 +1,30 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
-Description: S3 -> SQS -> Lambda PDF chunker and embedder (Postgres/pgvector)
+Description: RAG on AWS - PDF chunker and embedder (S3 -> SQS -> Lambda -> Postgres/pgvector) plus query API and UI (Lambda Function URL), models on Amazon Bedrock
 
 Parameters:
-  SecretName:
+  DatabaseUrlParameter:
     Type: String
-    Default: aws-rag/embedder
-    Description: Secrets Manager secret holding JSON {"DATABASE_URL", "OPENAI_API_KEY"}
+    Default: /rag-demo/database-url
+    AllowedPattern: "^/.*"
+    Description: SSM Parameter Store SecureString holding the Postgres connection string (name starts with /)
+  EmbeddingModel:
+    Type: String
+    Default: amazon.titan-embed-text-v2:0
+    Description: Bedrock Titan text embedding model; used by both the embedder and the query API
+  EmbeddingDimensions:
+    Type: Number
+    Default: 1024
+    AllowedValues: [256, 512, 1024]
+    Description: Titan v2 output size; must match vector(N) in schema.sql
+  RerankModel:
+    Type: String
+    Default: amazon.rerank-v1:0
+    Description: Bedrock reranking model ID
+  GenerationModel:
+    Type: String
+    Default: amazon.nova-lite-v1:0
+    Description: Any Bedrock Converse model ID, e.g. us.amazon.nova-2-lite-v1:0, openai.gpt-oss-120b-1:0
 
 Resources:
   # Names are fixed (not generated) so the queue policy can reference the raw
@@ -137,19 +155,25 @@ Resources:
     Properties:
       Runtime: python3.12
       Handler: handler.handler
-      CodeUri: embedder/                # handler.py, requirements.txt (openai, psycopg, pgvector)
+      CodeUri: embedder/                # handler.py, requirements.txt (psycopg, pgvector)
       MemorySize: 512
       Timeout: 300
       Environment:
         Variables:
-          SECRET_ID: !Ref SecretName
-          OPENAI_EMBEDDING_MODEL: text-embedding-3-small   # must match the Vercel app's query model
+          DATABASE_URL_PARAMETER: !Ref DatabaseUrlParameter
+          EMBEDDING_MODEL: !Ref EmbeddingModel
+          EMBEDDING_DIMENSIONS: !Ref EmbeddingDimensions
       Policies:
         - S3ReadPolicy: { BucketName: !Sub "${AWS::StackName}-chunks-${AWS::AccountId}" }
         - Statement:
             - Effect: Allow
-              Action: secretsmanager:GetSecretValue
-              Resource: !Sub "arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:${SecretName}-*"
+              Action: ssm:GetParameter   # SecureString under the AWS-managed aws/ssm key
+              Resource: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${DatabaseUrlParameter}"
+            - Effect: Allow
+              Action: bedrock:InvokeModel
+              Resource:   # a "us." inference profile routes to the model in any US region
+                - "arn:aws:bedrock:*::foundation-model/*"
+                - !Sub "arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:inference-profile/*"
       Events:
         Queue:
           Type: SQS
@@ -157,7 +181,39 @@ Resources:
             Queue: !GetAtt EmbedQueue.Arn
             BatchSize: 1
             FunctionResponseTypes: [ReportBatchItemFailures]
-            ScalingConfig: { MaximumConcurrency: 2 }   # protects DB connections and OpenAI rate limits
+            ScalingConfig: { MaximumConcurrency: 2 }   # protects DB connections and Bedrock quotas
+
+  # Query API + UI: FastAPI behind a public Function URL.
+  QueryApi:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: python3.12
+      Handler: lambda_function.handler
+      CodeUri: query/                   # lambda_function.py, app.py, rag_core.py, index.html
+      MemorySize: 1024
+      Timeout: 120                      # embed + rerank + answer are three Bedrock calls
+      Environment:
+        Variables:
+          DATABASE_URL_PARAMETER: !Ref DatabaseUrlParameter
+          EMBEDDING_MODEL: !Ref EmbeddingModel
+          EMBEDDING_DIMENSIONS: !Ref EmbeddingDimensions
+          RERANK_MODEL: !Ref RerankModel
+          GENERATION_MODEL: !Ref GenerationModel
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action: ssm:GetParameter   # SecureString under the AWS-managed aws/ssm key
+              Resource: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${DatabaseUrlParameter}"
+            - Effect: Allow
+              Action: bedrock:InvokeModel
+              Resource:
+                - "arn:aws:bedrock:*::foundation-model/*"
+                - !Sub "arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:inference-profile/*"
+            - Effect: Allow
+              Action: bedrock:Rerank    # does not support resource-level permissions
+              Resource: "*"
+      FunctionUrlConfig:
+        AuthType: NONE                  # public
 
 Outputs:
   RawBucketName:
@@ -176,3 +232,8 @@ Outputs:
     Value: !Ref EmbedDLQ
   EmbedderFunctionName:
     Value: !Ref Embedder
+  QueryUrl:
+    Description: Open in a browser for the RAG UI
+    Value: !GetAtt QueryApiUrl.FunctionUrl
+  QueryFunctionName:
+    Value: !Ref QueryApi
