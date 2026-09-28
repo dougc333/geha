@@ -34,10 +34,10 @@
         <label><input type="radio" name="mode" value="bm25"><span>BM25</span></label>
         <label><input type="radio" name="mode" value="hybrid" checked><span>Hybrid</span></label>
       </div>
-      <div class="toggle"><label for="reranker">LLM reranker</label><input id="reranker" type="checkbox"></div>
+      <div class="toggle"><label for="reranker">Reranker</label><input id="reranker" type="checkbox"></div>
       <div class="toggle"><label for="generate">Generate answer</label><input id="generate" type="checkbox"></div>
       <label for="topk">Chunks displayed: <output id="topkValue">5</output></label><input id="topk" type="range" min="1" max="10" value="5">
-      <label for="question">Question</label><textarea id="question" readonly aria-readonly="true">what is orca</textarea>
+      <label for="question">Question</label><textarea id="question" maxlength="2000" placeholder="Ask a question about the selected document"></textarea>
       <button id="run">Run comparison</button>
     </aside>
     <section class="content" id="content">
@@ -46,49 +46,44 @@
   </main>
   <script>
     const $=id=>document.getElementById(id), content=$('content'), run=$('run');
-    const fixedQuestions={
+    // Starter questions, filled in when a document is selected; the box stays editable.
+    const suggestedQuestions={
       '1706.03762v7':'what is attention',
-      '2306.02707':'what is orca'
+      '2306.02707':'what is orca',
+      '2310.11511v1':'what are reflection tokens'
     };
     let documentsById=new Map();
-    const fixedQuestionForTitle=title=>{
+    const suggestedQuestionForTitle=title=>{
       const text=String(title??'');
-      return Object.entries(fixedQuestions).find(([documentName])=>text.includes(documentName))?.[1]??'';
+      return Object.entries(suggestedQuestions).find(([documentName])=>text.includes(documentName))?.[1]??'';
     };
-    const fixedQuestionForSelection=()=>{
-      const selectedId=$('document').value;
-      const selectedRecord=documentsById.get(selectedId);
-      const selectedLabel=$('document').selectedOptions[0]?.textContent;
-      return fixedQuestionForTitle(selectedRecord?.title)||fixedQuestionForTitle(selectedLabel);
-    };
-    function syncFixedQuestion(){
-      const question=fixedQuestionForSelection();
-      $('question').value=question;
-      $('question').placeholder=question?'':'No fixed question configured for this document';
+    function suggestQuestion(){
+      const selected=documentsById.get($('document').value);
+      $('question').value=suggestedQuestionForTitle(selected?.title);
     }
-    $('document').addEventListener('change',syncFixedQuestion);
+    $('document').addEventListener('change',suggestQuestion);
     $('topk').addEventListener('input',e=>$('topkValue').textContent=e.target.value);
     const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
     async function loadDocuments(){
       try{const r=await fetch('/api/documents');if(!r.ok)throw new Error((await r.json()).detail||r.statusText);const d=await r.json();
         documentsById=new Map(d.documents.map(x=>[x.id,x]));
         $('document').innerHTML=d.documents.map(x=>`<option value="${esc(x.id)}">${esc(x.title)} · ${x.chunks} chunks</option>`).join('')||'<option value="">No documents indexed</option>';
-        syncFixedQuestion();
+        suggestQuestion();
       }catch(e){$('document').innerHTML='<option value="">Database unavailable</option>';showError(e.message)}
     }
     function showError(message){content.innerHTML=`<div class="error"><strong>Request failed:</strong> ${esc(message)}</div>`}
     run.addEventListener('click',async()=>{
       const documentId=$('document').value;
-      const query=fixedQuestionForSelection();
-      syncFixedQuestion();
+      const query=$('question').value.trim();
       const payload={document_id:documentId,query,retrieval_mode:document.querySelector('input[name=mode]:checked').value,use_reranker:$('reranker').checked,generate_answer:$('generate').checked,top_k:Number($('topk').value)};
-      if(!payload.document_id||!payload.query){showError('Select a document with a configured fixed question.');return}
+      if(!payload.document_id){showError('Select a document.');return}
+      if(payload.query.length<2){showError('Enter a question.');return}
       run.disabled=true;run.textContent='Running…';
       try{const r=await fetch('/api/search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const d=await r.json();if(!r.ok)throw new Error(d.detail||r.statusText);
         const metrics=Object.entries(d.timings).map(([k,v])=>`<span class="metric">${esc(k.replace('_ms',''))}: ${v} ms</span>`).join('');
-        let html=`<div class="card summary"><h2>${esc(payload.retrieval_mode.toUpperCase())} results</h2><div>${payload.use_reranker?'LLM reranking enabled':'Raw retrieval order'} · ${payload.generate_answer?'Answer generated':'Retrieval only'}</div><div class="metrics">${metrics}</div></div>`;
+        let html=`<div class="card summary"><h2>${esc(payload.retrieval_mode.toUpperCase())} results</h2><div>${payload.use_reranker?'Reranked':'Raw retrieval order'} · ${payload.generate_answer?'Answer generated':'Retrieval only'}</div><div class="metrics">${metrics}</div></div>`;
         if(d.answer)html+=`<div class="card answer"><h2>Grounded answer</h2><div class="text">${esc(d.answer)}</div></div>`;
-        html+=d.results.map((x,i)=>`<article class="card result"><div class="result-head"><span class="rank">#${i+1}</span><span class="score">${esc(x.score_type)} ${Number(x.score).toFixed(4)}</span></div><div class="meta">Page ${esc(x.page??'unknown')} · chunk ${esc(x.id)}</div><div class="text">${esc(x.content)}</div></article>`).join('');content.innerHTML=html;
+        html+=d.results.map((x,i)=>`<article class="card result"><div class="result-head"><span class="rank">#${i+1}</span><span class="score">${esc(x.score_type)} ${Number(x.score).toFixed(4)}</span></div><div class="meta">Page ${esc(x.page??'unknown')} · chunk ${esc(x.id)}${x.rerank_score!=null?` · rerank ${Number(x.rerank_score).toFixed(3)}`:''}</div><div class="text">${esc(x.content)}</div></article>`).join('');content.innerHTML=html;
       }catch(e){showError(e.message)}finally{run.disabled=false;run.textContent='Run comparison'}
     });
     loadDocuments();
