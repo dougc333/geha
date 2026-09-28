@@ -37,7 +37,7 @@
       <div class="toggle"><label for="reranker">LLM reranker</label><input id="reranker" type="checkbox"></div>
       <div class="toggle"><label for="generate">Generate answer</label><input id="generate" type="checkbox"></div>
       <label for="topk">Chunks displayed: <output id="topkValue">5</output></label><input id="topk" type="range" min="1" max="10" value="5">
-      <label for="question">Question</label><textarea id="question" placeholder="Ask a question answerable from the selected document"></textarea>
+      <label for="question">Question</label><textarea id="question" readonly aria-readonly="true" placeholder="Select a configured document"></textarea>
       <button id="run">Run comparison</button>
     </aside>
     <section class="content" id="content">
@@ -46,17 +46,35 @@
   </main>
   <script>
     const $=id=>document.getElementById(id), content=$('content'), run=$('run');
+    const fixedQuestions={
+      '1706.03762v7':'what is attention',
+      '2306.02707':'what is orca'
+    };
+    let documentsById=new Map();
+    const documentKey=title=>String(title??'').replace(/\.pdf$/i,'');
+    const fixedQuestionForDocument=documentRecord=>fixedQuestions[documentKey(documentRecord?.title)]??'';
+    function syncFixedQuestion(){
+      const question=fixedQuestionForDocument(documentsById.get($('document').value));
+      $('question').value=question;
+      $('question').placeholder=question?'':'No fixed question configured for this document';
+    }
+    $('document').addEventListener('change',syncFixedQuestion);
     $('topk').addEventListener('input',e=>$('topkValue').textContent=e.target.value);
     const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
     async function loadDocuments(){
       try{const r=await fetch('/api/documents');if(!r.ok)throw new Error((await r.json()).detail||r.statusText);const d=await r.json();
+        documentsById=new Map(d.documents.map(x=>[x.id,x]));
         $('document').innerHTML=d.documents.map(x=>`<option value="${esc(x.id)}">${esc(x.title)} · ${x.chunks} chunks</option>`).join('')||'<option value="">No documents indexed</option>';
+        syncFixedQuestion();
       }catch(e){$('document').innerHTML='<option value="">Database unavailable</option>';showError(e.message)}
     }
     function showError(message){content.innerHTML=`<div class="error"><strong>Request failed:</strong> ${esc(message)}</div>`}
     run.addEventListener('click',async()=>{
-      const payload={document_id:$('document').value,query:$('question').value.trim(),retrieval_mode:document.querySelector('input[name=mode]:checked').value,use_reranker:$('reranker').checked,generate_answer:$('generate').checked,top_k:Number($('topk').value)};
-      if(!payload.document_id||payload.query.length<2){showError('Select an indexed document and enter a question.');return}
+      const documentId=$('document').value;
+      const query=fixedQuestionForDocument(documentsById.get(documentId));
+      syncFixedQuestion();
+      const payload={document_id:documentId,query,retrieval_mode:document.querySelector('input[name=mode]:checked').value,use_reranker:$('reranker').checked,generate_answer:$('generate').checked,top_k:Number($('topk').value)};
+      if(!payload.document_id||!payload.query){showError('Select a document with a configured fixed question.');return}
       run.disabled=true;run.textContent='Running…';
       try{const r=await fetch('/api/search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const d=await r.json();if(!r.ok)throw new Error(d.detail||r.statusText);
         const metrics=Object.entries(d.timings).map(([k,v])=>`<span class="metric">${esc(k.replace('_ms',''))}: ${v} ms</span>`).join('');
