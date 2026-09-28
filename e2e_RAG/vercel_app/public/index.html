@@ -37,7 +37,7 @@
       <div class="toggle"><label for="reranker">LLM reranker</label><input id="reranker" type="checkbox"></div>
       <div class="toggle"><label for="generate">Generate answer</label><input id="generate" type="checkbox"></div>
       <label for="topk">Chunks displayed: <output id="topkValue">5</output></label><input id="topk" type="range" min="1" max="10" value="5">
-      <label for="question">Question</label><textarea id="question" readonly aria-readonly="true" placeholder="Select a configured document"></textarea>
+      <label for="question">Question</label><textarea id="question" readonly aria-readonly="true">what is orca</textarea>
       <button id="run">Run comparison</button>
     </aside>
     <section class="content" id="content">
@@ -51,10 +51,18 @@
       '2306.02707':'what is orca'
     };
     let documentsById=new Map();
-    const documentKey=title=>String(title??'').replace(/\.pdf$/i,'');
-    const fixedQuestionForDocument=documentRecord=>fixedQuestions[documentKey(documentRecord?.title)]??'';
+    const fixedQuestionForTitle=title=>{
+      const text=String(title??'');
+      return Object.entries(fixedQuestions).find(([documentName])=>text.includes(documentName))?.[1]??'';
+    };
+    const fixedQuestionForSelection=()=>{
+      const selectedId=$('document').value;
+      const selectedRecord=documentsById.get(selectedId);
+      const selectedLabel=$('document').selectedOptions[0]?.textContent;
+      return fixedQuestionForTitle(selectedRecord?.title)||fixedQuestionForTitle(selectedLabel);
+    };
     function syncFixedQuestion(){
-      const question=fixedQuestionForDocument(documentsById.get($('document').value));
+      const question=fixedQuestionForSelection();
       $('question').value=question;
       $('question').placeholder=question?'':'No fixed question configured for this document';
     }
@@ -71,7 +79,7 @@
     function showError(message){content.innerHTML=`<div class="error"><strong>Request failed:</strong> ${esc(message)}</div>`}
     run.addEventListener('click',async()=>{
       const documentId=$('document').value;
-      const query=fixedQuestionForDocument(documentsById.get(documentId));
+      const query=fixedQuestionForSelection();
       syncFixedQuestion();
       const payload={document_id:documentId,query,retrieval_mode:document.querySelector('input[name=mode]:checked').value,use_reranker:$('reranker').checked,generate_answer:$('generate').checked,top_k:Number($('topk').value)};
       if(!payload.document_id||!payload.query){showError('Select a document with a configured fixed question.');return}

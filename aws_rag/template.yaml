@@ -1,0 +1,178 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: S3 -> SQS -> Lambda PDF chunker and embedder (Postgres/pgvector)
+
+Parameters:
+  SecretName:
+    Type: String
+    Default: aws-rag/embedder
+    Description: Secrets Manager secret holding JSON {"DATABASE_URL", "OPENAI_API_KEY"}
+
+Resources:
+  # Names are fixed (not generated) so the queue policy can reference the raw
+  # bucket's ARN without a circular dependency on the bucket's notification.
+  RawBucket:
+    Type: AWS::S3::Bucket
+    DependsOn: ChunkQueuePolicy
+    Properties:
+      BucketName: !Sub "${AWS::StackName}-raw-${AWS::AccountId}"
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      NotificationConfiguration:
+        QueueConfigurations:
+          - Event: s3:ObjectCreated:*
+            Queue: !GetAtt ChunkQueue.Arn
+            Filter:
+              S3Key:
+                Rules:
+                  - { Name: suffix, Value: .pdf }
+
+  ChunkBucket:
+    Type: AWS::S3::Bucket
+    DependsOn: EmbedQueuePolicy
+    Properties:
+      BucketName: !Sub "${AWS::StackName}-chunks-${AWS::AccountId}"
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      NotificationConfiguration:
+        QueueConfigurations:
+          - Event: s3:ObjectCreated:*
+            Queue: !GetAtt EmbedQueue.Arn
+            Filter:
+              S3Key:
+                Rules:
+                  - { Name: prefix, Value: chunks/ }
+                  - { Name: suffix, Value: .jsonl }
+
+  ChunkQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      VisibilityTimeout: 960            # longer than the Lambda timeout
+      RedrivePolicy:
+        deadLetterTargetArn: !GetAtt ChunkDLQ.Arn
+        maxReceiveCount: 3
+
+  ChunkDLQ:
+    Type: AWS::SQS::Queue
+    Properties:
+      MessageRetentionPeriod: 1209600   # 14 days
+
+  ChunkQueuePolicy:
+    Type: AWS::SQS::QueuePolicy
+    Properties:
+      Queues: [!Ref ChunkQueue]
+      PolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal: { Service: s3.amazonaws.com }
+            Action: sqs:SendMessage
+            Resource: !GetAtt ChunkQueue.Arn
+            Condition:
+              ArnEquals:
+                aws:SourceArn: !Sub "arn:aws:s3:::${AWS::StackName}-raw-${AWS::AccountId}"
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
+
+  Chunker:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: python3.12
+      Handler: handler.handler
+      CodeUri: chunker/                 # handler.py, rag_core.py, requirements.txt (pymupdf)
+      MemorySize: 2048
+      Timeout: 900
+      EphemeralStorage: { Size: 2048 }
+      Environment:
+        Variables:
+          OUT_BUCKET: !Ref ChunkBucket
+      Policies:
+        - S3ReadPolicy: { BucketName: !Sub "${AWS::StackName}-raw-${AWS::AccountId}" }
+        - S3CrudPolicy: { BucketName: !Ref ChunkBucket }
+      Events:
+        Queue:
+          Type: SQS
+          Properties:
+            Queue: !GetAtt ChunkQueue.Arn
+            BatchSize: 5
+            FunctionResponseTypes: [ReportBatchItemFailures]
+            ScalingConfig: { MaximumConcurrency: 10 }
+
+  EmbedQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      VisibilityTimeout: 1800           # 6x the Lambda timeout, per AWS guidance for SQS sources
+      RedrivePolicy:
+        deadLetterTargetArn: !GetAtt EmbedDLQ.Arn
+        maxReceiveCount: 3
+
+  EmbedDLQ:
+    Type: AWS::SQS::Queue
+    Properties:
+      MessageRetentionPeriod: 1209600   # 14 days
+
+  EmbedQueuePolicy:
+    Type: AWS::SQS::QueuePolicy
+    Properties:
+      Queues: [!Ref EmbedQueue]
+      PolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal: { Service: s3.amazonaws.com }
+            Action: sqs:SendMessage
+            Resource: !GetAtt EmbedQueue.Arn
+            Condition:
+              ArnEquals:
+                aws:SourceArn: !Sub "arn:aws:s3:::${AWS::StackName}-chunks-${AWS::AccountId}"
+              StringEquals:
+                aws:SourceAccount: !Ref AWS::AccountId
+
+  Embedder:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: python3.12
+      Handler: handler.handler
+      CodeUri: embedder/                # handler.py, requirements.txt (openai, psycopg, pgvector)
+      MemorySize: 512
+      Timeout: 300
+      Environment:
+        Variables:
+          SECRET_ID: !Ref SecretName
+          OPENAI_EMBEDDING_MODEL: text-embedding-3-small   # must match the Vercel app's query model
+      Policies:
+        - S3ReadPolicy: { BucketName: !Sub "${AWS::StackName}-chunks-${AWS::AccountId}" }
+        - Statement:
+            - Effect: Allow
+              Action: secretsmanager:GetSecretValue
+              Resource: !Sub "arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:${SecretName}-*"
+      Events:
+        Queue:
+          Type: SQS
+          Properties:
+            Queue: !GetAtt EmbedQueue.Arn
+            BatchSize: 1
+            FunctionResponseTypes: [ReportBatchItemFailures]
+            ScalingConfig: { MaximumConcurrency: 2 }   # protects DB connections and OpenAI rate limits
+
+Outputs:
+  RawBucketName:
+    Value: !Ref RawBucket
+  ChunkBucketName:
+    Value: !Ref ChunkBucket
+  ChunkQueueUrl:
+    Value: !Ref ChunkQueue
+  DeadLetterQueueUrl:
+    Value: !Ref ChunkDLQ
+  ChunkerFunctionName:
+    Value: !Ref Chunker
+  EmbedQueueUrl:
+    Value: !Ref EmbedQueue
+  EmbedDeadLetterQueueUrl:
+    Value: !Ref EmbedDLQ
+  EmbedderFunctionName:
+    Value: !Ref Embedder
