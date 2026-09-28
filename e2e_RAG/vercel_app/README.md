@@ -57,6 +57,9 @@ environment variables:
 - `OPENAI_GENERATION_MODEL` (optional; defaults to `gpt-4o-mini`)
 - `ALLOWED_ORIGINS` (optional; defaults to `*`)
 
+The included `vercel.json` pins the function to Vercel's `iad1` region to keep
+it close to the Neon database provisioned in the Washington, D.C. region.
+
 Then deploy from the project directory:
 
 ```bash
