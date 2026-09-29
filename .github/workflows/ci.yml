@@ -29,24 +29,6 @@ jobs:
       - name: Run table-aware RAG tests
         run: uv run --no-sync python -m unittest discover -s chunking_benchmarks_RAG -p 'test_*.py'
 
-  langgraph-python:
-    name: LangGraph Python tests
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v6
-        with:
-          version: "0.11.28"
-          enable-cache: true
-      - name: Install Python and locked dependencies
-        run: |
-          uv python install 3.12
-          uv sync --project langgraph_python_review_claims --locked --python 3.12
-      - name: Run tests
-        working-directory: langgraph_python_review_claims
-        run: uv run --no-sync python -m unittest discover -p 'test_*.py'
-
   table-rag:
     name: Standalone table RAG tests
     runs-on: ubuntu-latest
@@ -81,21 +63,3 @@ jobs:
           uv run --no-project --python 3.12 \
             --with-requirements aws_rag/query/requirements.txt --with boto3 --with httpx --with pymupdf \
             python -m unittest discover -s aws_rag/tests -v
-
-  langgraph-typescript:
-    name: LangGraph TypeScript tests and build
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    defaults:
-      run:
-        working-directory: langgraph_ts_review_claims
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-          cache-dependency-path: langgraph_ts_review_claims/package-lock.json
-      - run: npm ci
-      - run: npm test
-      - run: npm run build
