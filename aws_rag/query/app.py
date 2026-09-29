@@ -79,14 +79,41 @@ class SearchRequest(BaseModel):
     top_k: int = Field(default=5, ge=1, le=10)
 
 
-@contextmanager
-def database():
+# One connection per Lambda container, reused across requests. Opening a new
+# TLS connection to Neon cost ~1 s per request. A Lambda container handles one
+# request at a time, so sharing it is safe. Autocommit: every query here is a
+# read, so no transaction is left open between requests.
+_connection: psycopg.Connection | None = None
+_last_used = 0.0
+IDLE_CHECK_SECONDS = 60  # Neon may drop idle connections; ping before reusing one
+
+
+def _connect() -> psycopg.Connection:
     url = os.getenv("DATABASE_URL")
     if not url:
         raise RuntimeError("DATABASE_URL is not configured")
-    with psycopg.connect(url) as connection:
-        register_vector(connection)
-        yield connection
+    connection = psycopg.connect(url, autocommit=True)
+    register_vector(connection)
+    return connection
+
+
+@contextmanager
+def database():
+    global _connection, _last_used
+    if _connection is not None and not _connection.closed and time.monotonic() - _last_used > IDLE_CHECK_SECONDS:
+        try:
+            _connection.execute("SELECT 1")
+        except psycopg.Error:
+            _connection.close()
+    if _connection is None or _connection.closed or _connection.broken:
+        _connection = _connect()
+    try:
+        yield _connection
+    except psycopg.OperationalError:
+        _connection.close()  # connection lost mid-request; reconnect next time
+        raise
+    finally:
+        _last_used = time.monotonic()
 
 
 def _all_chunks(connection, document_id: str) -> list[dict]:
