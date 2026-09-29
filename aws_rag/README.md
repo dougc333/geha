@@ -726,6 +726,23 @@ triggers and indexes are created, so the BM25 trigger doesn't duplicate
 bucket. Re-uploading `chunks/*.jsonl` refills a fresh database through the
 embedder (Titan re-embedding only, no Docling or Nova).
 
+## Tests
+
+`tests/` has fast unit tests (35, well under a second) that need no AWS,
+database or network: `tests/support.py` sets fake credentials and settings and
+the tests stub Bedrock, S3 and Postgres. They cover chunking and table splitting,
+RRF/BM25, the eval's answer matching, the embedder (Titan retry, NUL stripping,
+figure `image`), `describe_figures.py` (caching, `--redo`, upload order), and the
+query API (access key, `no-cache` pages, `/api/chat` route, router fallback,
+presigned figure URLs). CI runs them in the `aws-rag` job.
+
+```bash
+uv run --no-project --python 3.12 --with-requirements query/requirements.txt \
+  --with boto3 --with httpx python -m unittest discover -s tests
+```
+
+Retrieval and answer quality need the live stack: see `evals/`.
+
 ## Failures
 
 A message that fails 3 times moves to its dead-letter queue. For the chunker,

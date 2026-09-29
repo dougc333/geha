@@ -65,6 +65,23 @@ jobs:
         working-directory: table_RAG
         run: uv run --no-sync pytest -q
 
+  aws-rag:
+    name: aws_rag unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.28"
+          enable-cache: true
+      - name: Run tests (no AWS, database or network; see aws_rag/tests/support.py)
+        run: |
+          uv python install 3.12
+          uv run --no-project --python 3.12 \
+            --with-requirements aws_rag/query/requirements.txt --with boto3 --with httpx \
+            python -m unittest discover -s aws_rag/tests -v
+
   langgraph-typescript:
     name: LangGraph TypeScript tests and build
     runs-on: ubuntu-latest
