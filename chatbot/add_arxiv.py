@@ -6,7 +6,8 @@
 Each paper is downloaded by the deployed /api/arxiv endpoint into the raw S3
 bucket; the chunker -> embedder pipeline indexes it in about 10 seconds. The
 endpoint URL comes from --url, $CHATBOT_URL, or the sam-app stack's QueryUrl
-output (needs the AWS CLI).
+output (needs the AWS CLI). The access key comes from $CHATBOT_API_KEY or the
+SSM parameter /rag-demo/api-key.
 """
 
 from __future__ import annotations
@@ -29,9 +30,21 @@ def stack_url(stack: str, region: str) -> str:
     ).stdout.strip()
 
 
+def api_key(region: str) -> str:
+    """The shared access key: $CHATBOT_API_KEY, else SSM /rag-demo/api-key (AWS CLI)."""
+    return os.getenv("CHATBOT_API_KEY") or subprocess.run(
+        ["aws", "ssm", "get-parameter", "--region", region, "--name", "/rag-demo/api-key",
+         "--with-decryption", "--query", "Parameter.Value", "--output", "text"],
+        check=True, capture_output=True, text=True,
+    ).stdout.strip()
+
+
+KEY = ""
+
+
 def call(url: str, payload: dict | None = None) -> dict:
     data = json.dumps(payload).encode() if payload is not None else None
-    request = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json"})
+    request = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json", "X-API-Key": KEY})
     try:
         with urllib.request.urlopen(request, timeout=120) as response:
             return json.load(response)
@@ -48,6 +61,8 @@ def main() -> None:
     parser.add_argument("--no-wait", action="store_true", help="don't wait for indexing")
     args = parser.parse_args()
     base = (args.url or stack_url(args.stack, args.region)).rstrip("/")
+    global KEY
+    KEY = api_key(args.region)
 
     pending = []
     for paper in args.papers:

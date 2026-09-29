@@ -1,0 +1,2778 @@
+{
+  "summary": {
+    "pg-keyword": {
+      "hit@1": 0.2222222222222222,
+      "hit@5": 0.4444444444444444,
+      "hit@10": 0.6666666666666666,
+      "MRR@10": 0.3430335097001764,
+      "paper hit@5": 0.4444444444444444,
+      "figure hit@5": 0.4444444444444444,
+      "median ms": 392.3
+    },
+    "pg-bm25": {
+      "hit@1": 0.7777777777777778,
+      "hit@5": 0.8888888888888888,
+      "hit@10": 1,
+      "MRR@10": 0.8492063492063492,
+      "paper hit@5": 0.8888888888888888,
+      "figure hit@5": 0.8888888888888888,
+      "median ms": 209.8
+    },
+    "pg-vector": {
+      "hit@1": 0.8888888888888888,
+      "hit@5": 1,
+      "hit@10": 1,
+      "MRR@10": 0.9259259259259259,
+      "paper hit@5": 1,
+      "figure hit@5": 1,
+      "median ms": 163.1
+    },
+    "pg-hybrid": {
+      "hit@1": 0.6666666666666666,
+      "hit@5": 0.8888888888888888,
+      "hit@10": 1,
+      "MRR@10": 0.7685185185185185,
+      "paper hit@5": 0.8888888888888888,
+      "figure hit@5": 0.8888888888888888,
+      "median ms": 0.2
+    },
+    "pg-hybrid-2:1": {
+      "hit@1": 0.7777777777777778,
+      "hit@5": 1,
+      "hit@10": 1,
+      "MRR@10": 0.8518518518518519,
+      "paper hit@5": 1,
+      "figure hit@5": 1,
+      "median ms": 0.1
+    },
+    "pg-hybrid-bm25": {
+      "hit@1": 0.8888888888888888,
+      "hit@5": 1,
+      "hit@10": 1,
+      "MRR@10": 0.9444444444444444,
+      "paper hit@5": 1,
+      "figure hit@5": 1,
+      "median ms": 0.1
+    },
+    "pg-hybrid+rerank": {
+      "hit@1": 1,
+      "hit@5": 1,
+      "hit@10": 1,
+      "MRR@10": 1.0,
+      "paper hit@5": 1,
+      "figure hit@5": 1,
+      "median ms": 1537.9
+    },
+    "pg-vector+rerank": {
+      "hit@1": 1,
+      "hit@5": 1,
+      "hit@10": 1,
+      "MRR@10": 1.0,
+      "paper hit@5": 1,
+      "figure hit@5": 1,
+      "median ms": 1267.5
+    },
+    "pg-hybrid-bm25+rerank": {
+      "hit@1": 1,
+      "hit@5": 1,
+      "hit@10": 1,
+      "MRR@10": 1.0,
+      "paper hit@5": 1,
+      "figure hit@5": 1,
+      "median ms": 1054.9
+    }
+  },
+  "per_question": {
+    "pg-keyword": [
+      {
+        "id": "f01",
+        "type": "figure",
+        "ms": 375.4,
+        "rank": 2,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.5,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "YOLOv4: Optimal Speed and Accuracy of Ob",
+            12
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "YOLOv4: Optimal Speed and Accuracy of Ob",
+            12
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "YOLOv4: Optimal Speed and Accuracy of Ob",
+            11
+          ]
+        ]
+      },
+      {
+        "id": "f02",
+        "type": "figure",
+        "ms": 551.4,
+        "rank": 3,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.3333333333333333,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "YOLOv4: Optimal Speed and Accuracy of Ob",
+            12
+          ],
+          [
+            "YOLOv4: Optimal Speed and Accuracy of Ob",
+            12
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "YOLOv4: Optimal Speed and Accuracy of Ob",
+            11
+          ],
+          [
+            "YOLOv4: Optimal Speed and Accuracy of Ob",
+            13
+          ]
+        ]
+      },
+      {
+        "id": "f03",
+        "type": "figure",
+        "ms": 1158.8,
+        "rank": 7,
+        "hit1": false,
+        "hit5": false,
+        "hit10": true,
+        "rr": 0.14285714285714285,
+        "paper_hit5": false,
+        "top5": [
+          [
+            "YOLOv4: Optimal Speed and Accuracy of Ob",
+            12
+          ],
+          [
+            "YOLOv4: Optimal Speed and Accuracy of Ob",
+            12
+          ],
+          [
+            "YOLOv4: Optimal Speed and Accuracy of Ob",
+            11
+          ],
+          [
+            "YOLOv4: Optimal Speed and Accuracy of Ob",
+            13
+          ],
+          [
+            "YOLOv4: Optimal Speed and Accuracy of Ob",
+            13
+          ]
+        ]
+      },
+      {
+        "id": "f04",
+        "type": "figure",
+        "ms": 528.3,
+        "rank": null,
+        "hit1": false,
+        "hit5": false,
+        "hit10": false,
+        "rr": 0.0,
+        "paper_hit5": false,
+        "top5": [
+          [
+            "Efficient Estimation of Word Representat",
+            4
+          ],
+          [
+            "Efficient Estimation of Word Representat",
+            5
+          ],
+          [
+            "Evaluating Large Language Models Trained",
+            20
+          ],
+          [
+            "Distributed Representations of Sentences",
+            2
+          ],
+          [
+            "Efficient Estimation of Word Representat",
+            2
+          ]
+        ]
+      },
+      {
+        "id": "f05",
+        "type": "figure",
+        "ms": 343.5,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "A Style-Based Generator Architecture for",
+            2
+          ],
+          [
+            "Improving neural networks by preventing ",
+            18
+          ],
+          [
+            "Layer Normalization",
+            10
+          ],
+          [
+            "MobileNets: Efficient Convolutional Neur",
+            3
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            3
+          ]
+        ]
+      },
+      {
+        "id": "f06",
+        "type": "figure",
+        "ms": 544.6,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            4
+          ],
+          [
+            "Language Models are Few-Shot Learners",
+            45
+          ],
+          [
+            "Unsupervised Cross-lingual Representatio",
+            7
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            7
+          ],
+          [
+            "Language Models are Few-Shot Learners",
+            63
+          ]
+        ]
+      },
+      {
+        "id": "f07",
+        "type": "figure",
+        "ms": 338.2,
+        "rank": null,
+        "hit1": false,
+        "hit5": false,
+        "hit10": false,
+        "rr": 0.0,
+        "paper_hit5": false,
+        "top5": [
+          [
+            "Unsupervised Cross-lingual Representatio",
+            7
+          ],
+          [
+            "Exploring the Limits of Transfer Learnin",
+            18
+          ],
+          [
+            "wav2vec 2.0: A Framework for Self-Superv",
+            14
+          ],
+          [
+            "Exploring the Limits of Transfer Learnin",
+            19
+          ],
+          [
+            "Exploring the Limits of Transfer Learnin",
+            16
+          ]
+        ]
+      },
+      {
+        "id": "f08",
+        "type": "figure",
+        "ms": 392.3,
+        "rank": null,
+        "hit1": false,
+        "hit5": false,
+        "hit10": false,
+        "rr": 0.0,
+        "paper_hit5": false,
+        "top5": [
+          [
+            "The Cityscapes Dataset for Semantic Urba",
+            22
+          ],
+          [
+            "Fashion-MNIST: a Novel Image Dataset for",
+            4
+          ],
+          [
+            "Fashion-MNIST: a Novel Image Dataset for",
+            5
+          ],
+          [
+            "The Cityscapes Dataset for Semantic Urba",
+            22
+          ],
+          [
+            "PaLM: Scaling Language Modeling with Pat",
+            83
+          ]
+        ]
+      },
+      {
+        "id": "f09",
+        "type": "figure",
+        "ms": 372.9,
+        "rank": 9,
+        "hit1": false,
+        "hit5": false,
+        "hit10": true,
+        "rr": 0.1111111111111111,
+        "paper_hit5": false,
+        "top5": [
+          [
+            "Community detection in graphs",
+            93
+          ],
+          [
+            "Self-RAG: Learning to Retrieve, Generate",
+            22
+          ],
+          [
+            "A Comprehensive Survey on Graph Neural N",
+            3
+          ],
+          [
+            "A Comprehensive Survey on Graph Neural N",
+            14
+          ],
+          [
+            "Community detection in graphs",
+            23
+          ]
+        ]
+      }
+    ],
+    "pg-bm25": [
+      {
+        "id": "f01",
+        "type": "figure",
+        "ms": 121.2,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            5
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            1
+          ]
+        ]
+      },
+      {
+        "id": "f02",
+        "type": "figure",
+        "ms": 114.0,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            9
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            1
+          ]
+        ]
+      },
+      {
+        "id": "f03",
+        "type": "figure",
+        "ms": 117.4,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            9
+          ],
+          [
+            "YOLO9000: Better, Faster, Stronger",
+            2
+          ]
+        ]
+      },
+      {
+        "id": "f04",
+        "type": "figure",
+        "ms": 247.8,
+        "rank": 2,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.5,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            12
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            5
+          ],
+          [
+            "An Image is Worth 16x16 Words: Transform",
+            8
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            5
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            13
+          ]
+        ]
+      },
+      {
+        "id": "f05",
+        "type": "figure",
+        "ms": 133.7,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "A Style-Based Generator Architecture for",
+            2
+          ],
+          [
+            "Generative Adversarial Networks",
+            15
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            4
+          ],
+          [
+            "Going Deeper with Convolutions",
+            5
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            5
+          ]
+        ]
+      },
+      {
+        "id": "f06",
+        "type": "figure",
+        "ms": 439.7,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            4
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            4
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            8
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            6
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            8
+          ]
+        ]
+      },
+      {
+        "id": "f07",
+        "type": "figure",
+        "ms": 292.7,
+        "rank": 7,
+        "hit1": false,
+        "hit5": false,
+        "hit10": true,
+        "rr": 0.14285714285714285,
+        "paper_hit5": false,
+        "top5": [
+          [
+            "Exploring the Limits of Transfer Learnin",
+            15
+          ],
+          [
+            "Exploring the Limits of Transfer Learnin",
+            16
+          ],
+          [
+            "Exploring the Limits of Transfer Learnin",
+            17
+          ],
+          [
+            "End-to-End Object Detection with Transfo",
+            7
+          ],
+          [
+            "Exploring the Limits of Transfer Learnin",
+            18
+          ]
+        ]
+      },
+      {
+        "id": "f08",
+        "type": "figure",
+        "ms": 212.4,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            10
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            11
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            11
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "f09",
+        "type": "figure",
+        "ms": 209.8,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Semi-Supervised Classification with Grap",
+            8
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            8
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            8
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            7
+          ],
+          [
+            "Asynchronous Methods for Deep Reinforcem",
+            17
+          ]
+        ]
+      }
+    ],
+    "pg-vector": [
+      {
+        "id": "f01",
+        "type": "figure",
+        "ms": 162.3,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            12
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            12
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            11
+          ]
+        ]
+      },
+      {
+        "id": "f02",
+        "type": "figure",
+        "ms": 266.0,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            6
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            7
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            3
+          ]
+        ]
+      },
+      {
+        "id": "f03",
+        "type": "figure",
+        "ms": 129.8,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            7
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            6
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            10
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            10
+          ]
+        ]
+      },
+      {
+        "id": "f04",
+        "type": "figure",
+        "ms": 111.5,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            5
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            4
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            3
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            15
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            12
+          ]
+        ]
+      },
+      {
+        "id": "f05",
+        "type": "figure",
+        "ms": 233.5,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "A Style-Based Generator Architecture for",
+            2
+          ],
+          [
+            "Generative Adversarial Networks",
+            15
+          ],
+          [
+            "A Style-Based Generator Architecture for",
+            1
+          ],
+          [
+            "Progressive Growing of GANs for Improved",
+            4
+          ],
+          [
+            "Layer Normalization",
+            2
+          ]
+        ]
+      },
+      {
+        "id": "f06",
+        "type": "figure",
+        "ms": 163.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            4
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            8
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            8
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            8
+          ],
+          [
+            "SMOTE: Synthetic Minority Over-sampling ",
+            25
+          ]
+        ]
+      },
+      {
+        "id": "f07",
+        "type": "figure",
+        "ms": 184.0,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Attention Is All You Need",
+            3
+          ],
+          [
+            "Attention Is All You Need",
+            3
+          ],
+          [
+            "Exploring the Limits of Transfer Learnin",
+            16
+          ],
+          [
+            "Exploring the Limits of Transfer Learnin",
+            4
+          ],
+          [
+            "Exploring the Limits of Transfer Learnin",
+            20
+          ]
+        ]
+      },
+      {
+        "id": "f08",
+        "type": "figure",
+        "ms": 184.8,
+        "rank": 3,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.3333333333333333,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Squeeze-and-Excitation Networks",
+            7
+          ],
+          [
+            "Fast R-CNN",
+            8
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            10
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ],
+          [
+            "YOLOv3: An Incremental Improvement",
+            4
+          ]
+        ]
+      },
+      {
+        "id": "f09",
+        "type": "figure",
+        "ms": 110.7,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Semi-Supervised Classification with Grap",
+            8
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            8
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            9
+          ],
+          [
+            "Deep Compression: Compressing Deep Neura",
+            14
+          ],
+          [
+            "A Comprehensive Survey on Graph Neural N",
+            10
+          ]
+        ]
+      }
+    ],
+    "pg-hybrid": [
+      {
+        "id": "f01",
+        "type": "figure",
+        "ms": 0.4,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            5
+          ]
+        ]
+      },
+      {
+        "id": "f02",
+        "type": "figure",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            1
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "YOLOv4: Optimal Speed and Accuracy of Ob",
+            12
+          ]
+        ]
+      },
+      {
+        "id": "f03",
+        "type": "figure",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "YOLOv4: Optimal Speed and Accuracy of Ob",
+            13
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            1
+          ]
+        ]
+      },
+      {
+        "id": "f04",
+        "type": "figure",
+        "ms": 0.1,
+        "rank": 2,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.5,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            12
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            5
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            5
+          ],
+          [
+            "Efficient Estimation of Word Representat",
+            4
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            4
+          ]
+        ]
+      },
+      {
+        "id": "f05",
+        "type": "figure",
+        "ms": 0.2,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "A Style-Based Generator Architecture for",
+            2
+          ],
+          [
+            "Layer Normalization",
+            10
+          ],
+          [
+            "Layer Normalization",
+            2
+          ],
+          [
+            "Layer Normalization",
+            1
+          ],
+          [
+            "Unsupervised Representation Learning wit",
+            3
+          ]
+        ]
+      },
+      {
+        "id": "f06",
+        "type": "figure",
+        "ms": 0.2,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            4
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            8
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            4
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            8
+          ],
+          [
+            "Language Models are Few-Shot Learners",
+            45
+          ]
+        ]
+      },
+      {
+        "id": "f07",
+        "type": "figure",
+        "ms": 0.1,
+        "rank": 4,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.25,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Exploring the Limits of Transfer Learnin",
+            16
+          ],
+          [
+            "End-to-End Object Detection with Transfo",
+            7
+          ],
+          [
+            "Exploring the Limits of Transfer Learnin",
+            18
+          ],
+          [
+            "Attention Is All You Need",
+            3
+          ],
+          [
+            "Unsupervised Cross-lingual Representatio",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "f08",
+        "type": "figure",
+        "ms": 0.2,
+        "rank": 6,
+        "hit1": false,
+        "hit5": false,
+        "hit10": true,
+        "rr": 0.16666666666666666,
+        "paper_hit5": false,
+        "top5": [
+          [
+            "Squeeze-and-Excitation Networks",
+            7
+          ],
+          [
+            "The Cityscapes Dataset for Semantic Urba",
+            22
+          ],
+          [
+            "Fashion-MNIST: a Novel Image Dataset for",
+            4
+          ],
+          [
+            "Fast R-CNN",
+            8
+          ],
+          [
+            "Fashion-MNIST: a Novel Image Dataset for",
+            5
+          ]
+        ]
+      },
+      {
+        "id": "f09",
+        "type": "figure",
+        "ms": 0.2,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Semi-Supervised Classification with Grap",
+            8
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            6
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            8
+          ],
+          [
+            "Community detection in graphs",
+            93
+          ],
+          [
+            "Self-RAG: Learning to Retrieve, Generate",
+            22
+          ]
+        ]
+      }
+    ],
+    "pg-hybrid-2:1": [
+      {
+        "id": "f01",
+        "type": "figure",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            5
+          ]
+        ]
+      },
+      {
+        "id": "f02",
+        "type": "figure",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            1
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            6
+          ]
+        ]
+      },
+      {
+        "id": "f03",
+        "type": "figure",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "YOLOv4: Optimal Speed and Accuracy of Ob",
+            13
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            1
+          ]
+        ]
+      },
+      {
+        "id": "f04",
+        "type": "figure",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            5
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            12
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            5
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            4
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            3
+          ]
+        ]
+      },
+      {
+        "id": "f05",
+        "type": "figure",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "A Style-Based Generator Architecture for",
+            2
+          ],
+          [
+            "Layer Normalization",
+            10
+          ],
+          [
+            "Layer Normalization",
+            2
+          ],
+          [
+            "Layer Normalization",
+            1
+          ],
+          [
+            "Unsupervised Representation Learning wit",
+            3
+          ]
+        ]
+      },
+      {
+        "id": "f06",
+        "type": "figure",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            4
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            8
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            8
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            8
+          ],
+          [
+            "SMOTE: Synthetic Minority Over-sampling ",
+            25
+          ]
+        ]
+      },
+      {
+        "id": "f07",
+        "type": "figure",
+        "ms": 0.0,
+        "rank": 3,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.3333333333333333,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Exploring the Limits of Transfer Learnin",
+            16
+          ],
+          [
+            "End-to-End Object Detection with Transfo",
+            7
+          ],
+          [
+            "Attention Is All You Need",
+            3
+          ],
+          [
+            "Exploring the Limits of Transfer Learnin",
+            18
+          ],
+          [
+            "Attention Is All You Need",
+            3
+          ]
+        ]
+      },
+      {
+        "id": "f08",
+        "type": "figure",
+        "ms": 0.2,
+        "rank": 3,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.3333333333333333,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Squeeze-and-Excitation Networks",
+            7
+          ],
+          [
+            "Fast R-CNN",
+            8
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            10
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ],
+          [
+            "YOLOv3: An Incremental Improvement",
+            4
+          ]
+        ]
+      },
+      {
+        "id": "f09",
+        "type": "figure",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Semi-Supervised Classification with Grap",
+            8
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            6
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            8
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            9
+          ],
+          [
+            "Deep Compression: Compressing Deep Neura",
+            14
+          ]
+        ]
+      }
+    ],
+    "pg-hybrid-bm25": [
+      {
+        "id": "f01",
+        "type": "figure",
+        "ms": 0.3,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            5
+          ]
+        ]
+      },
+      {
+        "id": "f02",
+        "type": "figure",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            1
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            8
+          ]
+        ]
+      },
+      {
+        "id": "f03",
+        "type": "figure",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            2
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "YOLO9000: Better, Faster, Stronger",
+            2
+          ]
+        ]
+      },
+      {
+        "id": "f04",
+        "type": "figure",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            5
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            12
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            4
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            5
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            13
+          ]
+        ]
+      },
+      {
+        "id": "f05",
+        "type": "figure",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "A Style-Based Generator Architecture for",
+            2
+          ],
+          [
+            "Generative Adversarial Networks",
+            15
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            4
+          ],
+          [
+            "Generative Adversarial Networks",
+            14
+          ],
+          [
+            "Going Deeper with Convolutions",
+            5
+          ]
+        ]
+      },
+      {
+        "id": "f06",
+        "type": "figure",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            4
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            8
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            8
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            8
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            1
+          ]
+        ]
+      },
+      {
+        "id": "f07",
+        "type": "figure",
+        "ms": 0.0,
+        "rank": 2,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.5,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Exploring the Limits of Transfer Learnin",
+            16
+          ],
+          [
+            "Attention Is All You Need",
+            3
+          ],
+          [
+            "End-to-End Object Detection with Transfo",
+            7
+          ],
+          [
+            "Exploring the Limits of Transfer Learnin",
+            18
+          ],
+          [
+            "End-to-End Object Detection with Transfo",
+            22
+          ]
+        ]
+      },
+      {
+        "id": "f08",
+        "type": "figure",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            10
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ],
+          [
+            "Feature Pyramid Networks for Object Dete",
+            7
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            11
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "f09",
+        "type": "figure",
+        "ms": 0.2,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Semi-Supervised Classification with Grap",
+            8
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            8
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            6
+          ],
+          [
+            "Community detection in graphs",
+            26
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            8
+          ]
+        ]
+      }
+    ],
+    "pg-hybrid+rerank": [
+      {
+        "id": "f01",
+        "type": "figure",
+        "ms": 1714.7,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "YOLO9000: Better, Faster, Stronger",
+            2
+          ],
+          [
+            "YOLO9000: Better, Faster, Stronger",
+            5
+          ]
+        ]
+      },
+      {
+        "id": "f02",
+        "type": "figure",
+        "ms": 1537.9,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            7
+          ],
+          [
+            "YOLOv4: Optimal Speed and Accuracy of Ob",
+            11
+          ]
+        ]
+      },
+      {
+        "id": "f03",
+        "type": "figure",
+        "ms": 1584.8,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            7
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            6
+          ],
+          [
+            "YOLOv4: Optimal Speed and Accuracy of Ob",
+            11
+          ]
+        ]
+      },
+      {
+        "id": "f04",
+        "type": "figure",
+        "ms": 1841.7,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            5
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            12
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            13
+          ],
+          [
+            "BERTScore: Evaluating Text Generation wi",
+            26
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            5
+          ]
+        ]
+      },
+      {
+        "id": "f05",
+        "type": "figure",
+        "ms": 899.3,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "A Style-Based Generator Architecture for",
+            2
+          ],
+          [
+            "Generative Adversarial Networks",
+            15
+          ],
+          [
+            "A Style-Based Generator Architecture for",
+            1
+          ],
+          [
+            "A Style-Based Generator Architecture for",
+            2
+          ],
+          [
+            "Improved Training of Wasserstein GANs",
+            20
+          ]
+        ]
+      },
+      {
+        "id": "f06",
+        "type": "figure",
+        "ms": 1438.8,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            4
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            4
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            8
+          ],
+          [
+            "Training language models to follow instr",
+            56
+          ],
+          [
+            "Language Models are Few-Shot Learners",
+            63
+          ]
+        ]
+      },
+      {
+        "id": "f07",
+        "type": "figure",
+        "ms": 1072.9,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Attention Is All You Need",
+            3
+          ],
+          [
+            "Attention Is All You Need",
+            3
+          ],
+          [
+            "PaLM: Scaling Language Modeling with Pat",
+            74
+          ],
+          [
+            "Exploring the Limits of Transfer Learnin",
+            17
+          ],
+          [
+            "End-to-End Object Detection with Transfo",
+            22
+          ]
+        ]
+      },
+      {
+        "id": "f08",
+        "type": "figure",
+        "ms": 2295.8,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            10
+          ],
+          [
+            "Squeeze-and-Excitation Networks",
+            7
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            11
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ]
+        ]
+      },
+      {
+        "id": "f09",
+        "type": "figure",
+        "ms": 894.0,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Semi-Supervised Classification with Grap",
+            8
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            8
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            9
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            8
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            6
+          ]
+        ]
+      }
+    ],
+    "pg-vector+rerank": [
+      {
+        "id": "f01",
+        "type": "figure",
+        "ms": 1267.5,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "YOLO9000: Better, Faster, Stronger",
+            5
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            11
+          ]
+        ]
+      },
+      {
+        "id": "f02",
+        "type": "figure",
+        "ms": 1789.4,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            7
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            6
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            10
+          ]
+        ]
+      },
+      {
+        "id": "f03",
+        "type": "figure",
+        "ms": 1556.4,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            7
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            6
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            10
+          ]
+        ]
+      },
+      {
+        "id": "f04",
+        "type": "figure",
+        "ms": 983.9,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            5
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            12
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            13
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            5
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            15
+          ]
+        ]
+      },
+      {
+        "id": "f05",
+        "type": "figure",
+        "ms": 1247.5,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "A Style-Based Generator Architecture for",
+            2
+          ],
+          [
+            "Generative Adversarial Networks",
+            15
+          ],
+          [
+            "A Style-Based Generator Architecture for",
+            1
+          ],
+          [
+            "A Style-Based Generator Architecture for",
+            2
+          ],
+          [
+            "Progressive Growing of GANs for Improved",
+            5
+          ]
+        ]
+      },
+      {
+        "id": "f06",
+        "type": "figure",
+        "ms": 1775.8,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            4
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            8
+          ],
+          [
+            "Training language models to follow instr",
+            56
+          ],
+          [
+            "Bootstrap your own latent: A new approac",
+            27
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            8
+          ]
+        ]
+      },
+      {
+        "id": "f07",
+        "type": "figure",
+        "ms": 895.0,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Attention Is All You Need",
+            3
+          ],
+          [
+            "Attention Is All You Need",
+            3
+          ],
+          [
+            "End-to-End Object Detection with Transfo",
+            22
+          ],
+          [
+            "Exploring the Limits of Transfer Learnin",
+            16
+          ],
+          [
+            "An Image is Worth 16x16 Words: Transform",
+            3
+          ]
+        ]
+      },
+      {
+        "id": "f08",
+        "type": "figure",
+        "ms": 1498.4,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            10
+          ],
+          [
+            "YOLO9000: Better, Faster, Stronger",
+            6
+          ],
+          [
+            "Squeeze-and-Excitation Networks",
+            7
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            11
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            11
+          ]
+        ]
+      },
+      {
+        "id": "f09",
+        "type": "figure",
+        "ms": 786.4,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Semi-Supervised Classification with Grap",
+            8
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            8
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            9
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            6
+          ],
+          [
+            "A Comprehensive Survey on Graph Neural N",
+            11
+          ]
+        ]
+      }
+    ],
+    "pg-hybrid-bm25+rerank": [
+      {
+        "id": "f01",
+        "type": "figure",
+        "ms": 1601.6,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "YOLO9000: Better, Faster, Stronger",
+            2
+          ]
+        ]
+      },
+      {
+        "id": "f02",
+        "type": "figure",
+        "ms": 1054.9,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            7
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            1
+          ]
+        ]
+      },
+      {
+        "id": "f03",
+        "type": "figure",
+        "ms": 1726.5,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            7
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            6
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            10
+          ]
+        ]
+      },
+      {
+        "id": "f04",
+        "type": "figure",
+        "ms": 1025.0,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            5
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            12
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            13
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            5
+          ],
+          [
+            "GLUE: A Multi-Task Benchmark and Analysi",
+            16
+          ]
+        ]
+      },
+      {
+        "id": "f05",
+        "type": "figure",
+        "ms": 921.5,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "A Style-Based Generator Architecture for",
+            2
+          ],
+          [
+            "Generative Adversarial Networks",
+            15
+          ],
+          [
+            "A Style-Based Generator Architecture for",
+            1
+          ],
+          [
+            "A Style-Based Generator Architecture for",
+            2
+          ],
+          [
+            "Improved Training of Wasserstein GANs",
+            20
+          ]
+        ]
+      },
+      {
+        "id": "f06",
+        "type": "figure",
+        "ms": 1058.3,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            4
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            4
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            8
+          ],
+          [
+            "Training language models to follow instr",
+            56
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            6
+          ]
+        ]
+      },
+      {
+        "id": "f07",
+        "type": "figure",
+        "ms": 940.4,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Attention Is All You Need",
+            3
+          ],
+          [
+            "Attention Is All You Need",
+            3
+          ],
+          [
+            "Exploring the Limits of Transfer Learnin",
+            17
+          ],
+          [
+            "End-to-End Object Detection with Transfo",
+            22
+          ],
+          [
+            "Exploring the Limits of Transfer Learnin",
+            16
+          ]
+        ]
+      },
+      {
+        "id": "f08",
+        "type": "figure",
+        "ms": 1133.5,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            10
+          ],
+          [
+            "Squeeze-and-Excitation Networks",
+            7
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            11
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            11
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            11
+          ]
+        ]
+      },
+      {
+        "id": "f09",
+        "type": "figure",
+        "ms": 816.6,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Semi-Supervised Classification with Grap",
+            8
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            8
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            9
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            8
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            6
+          ]
+        ]
+      }
+    ]
+  }
+}

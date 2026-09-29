@@ -1,0 +1,7526 @@
+[
+  {
+    "page": 1,
+    "bbox": [
+      16.2,
+      85.8,
+      504.3,
+      709.6
+    ],
+    "rows": 48,
+    "cols": 9,
+    "header": [
+      "",
+      "repr",
+      "oduce the ta",
+      "bles and",
+      "figures in this",
+      "paper solely",
+      "for use in",
+      "journalis",
+      "tic or"
+    ],
+    "markdown": "|Col1|repr|oduce the ta|bles and|figures in this|paper solely|for use in|journalis|tic or|\n|---|---|---|---|---|---|---|---|---|\n|||||scholarly|works.||||\n|||||<br>|<br>||||\n||||**Atte**|**ntion Is**|**  All You**|**    Need**|||\n||||||||||\n|23|||||||||\n|0|**As**|**hish Vaswani**|_∗_<br>|**Noam Shazeer**_∗_|**Niki Pa**|** rmar**_∗_|**Jakob U**|** szkoreit**_∗_|\n|2|G|oogle Brain||Google Brain|Google R|esearch|Google R|esearch|\n|g|`avasw`|`ani@google.`|`com`<br>`no`|`am@google.com`|`nikip@goo`|`gle.com`|`usz@goog`|`le.com`|\n|u|||||||||\n|A||**Llion Jones**_∗_||**Aidan N. Gom**|**  ez**_∗†_|**Łuka**|**sz Kaiser**_∗_||\n|2|G|oogle Research||University of To|ronto|Goo|gle Brain||\n||`lli`|`on@google.c`|`om`<br>`a`|`idan@cs.toron`|`to.edu`<br>`l`|`ukaszkais`|`er@googl`|`e.com`|\n|L]|||||||||\n|C||||**Illia Polos**|** ukhin**_∗‡_||||\n|.|||`i`|`llia.polosukh`|`in@gmail.co`|`m`|||\n|[cs|||||||||\n||||||||||\n||||||||||\n|7||||**Abst**|**ract**||||\n|v|||||||||\n|2||The dominant|sequence|transduction mo|dels are based|on complex|recurrent|or|\n|76||convolutional|neural net|works that inclu|de an encoder|and a decod|er. The be|st|\n|3||performing m|odels also|connect the enc|oder and deco|der through|an attentio|n|\n|0||mechanism.|We propos|e a new simple|network archit|ecture, the|Transform|er,|\n|.||based solely on|attention|mechanisms, disp|ensing with rec|urrence and|convolutio|ns|\n|6||entirely. Exp|eriments o|n two machine|translation task|s show the|se models|to|\n|70||be superior in|quality w|hile being more p|arallelizable a|nd requiring|significant|ly|\n|1||less time to tr|ain. Our|model achieves 2|8.4 BLEU on|the WMT 2|014 Englis|h-|\n|:||to-German tra|nslation t|ask, improving o|ver the existin|g best resul|ts, includin|g|\n|v||ensembles, by|over 2 BL|EU. On the WMT|2014 English-|to-French tra|nslation tas|k,|\n|Xi||our model esta|blishes a n|ew single-model|state-of-the-art|BLEU score|of 41.8 aft|er|\n|r||training for 3.|5 days on|eight GPUs, a s|mall fraction of|the training|costs of th|e|\n|a||best models fr|om the lite|rature. We show|that the Transf|ormer gener|alizes well|to|\n|||other tasks by|applying|it successfully to|English consti|tuency parsi|ng both wi|th|\n|||large and limit|ed trainin|g data.|||||\n|||<br>|<br>|<br>|||||\n||_∗_Equa|l contribution. Li|sting order|is random. Jakob p|roposed replacin|g RNNs with|self-attention|and started|\n||the effort|to evaluate this i|dea. Ashis|h, with Illia, design|ed and impleme|nted the first|Transformer|models and|\n||has been c|rucially involved|in every as|pect of this work.|Noam proposed s|caled dot-prod|uct attention|, multi-head|\n||attention|and the paramet|er-free posi|tion representation|and became the|other person|involved in|nearly every|\n||detail. Ni|ki designed, imp|lemented, t|uned and evaluated|countless mode|l variants in o|ur original c|odebase and|\n||tensor2ten|sor. Llion also e|xperimente|d with novel mode|l variants, was re|sponsible for|our initial co|debase, and|\n||efficient in|ference and visu|alizations.|Lukasz and Aidan s|pent countless lo|ng days desig|ning various|parts of and|\n||implemen|ting tensor2tenso|r, replacing|our earlier codeba|se, greatly impro|ving results an|d massively|accelerating|\n||our resear<br>|ch.<br>|||||||\n||_†_Work<br>|performed whil<br>|e at Google<br>|Brain.<br>|||||\n||_‡_Work|performed whil|e at Google|Research.|||||\n\n",
+    "cells": [
+      [
+        "",
+        "repr",
+        "oduce the ta",
+        "bles and",
+        "figures in this",
+        "paper solely",
+        "for use in",
+        "journalis",
+        "tic or"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "scholarly",
+        "works.",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "Atte",
+        "ntion Is",
+        "All You",
+        "Need",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "23",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "0",
+        "As",
+        "hish Vaswani",
+        "∗",
+        "Noam Shazeer∗",
+        "Niki Pa",
+        "rmar∗",
+        "Jakob U",
+        "szkoreit∗"
+      ],
+      [
+        "2",
+        "G",
+        "oogle Brain",
+        "",
+        "Google Brain",
+        "Google R",
+        "esearch",
+        "Google R",
+        "esearch"
+      ],
+      [
+        "g",
+        "avasw",
+        "ani@google.",
+        "com no",
+        "am@google.com",
+        "nikip@goo",
+        "gle.com",
+        "usz@goog",
+        "le.com"
+      ],
+      [
+        "u",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "A",
+        "",
+        "Llion Jones∗",
+        "",
+        "Aidan N. Gom",
+        "ez∗ †",
+        "Łuka",
+        "sz Kaiser∗",
+        ""
+      ],
+      [
+        "2",
+        "G",
+        "oogle Research",
+        "",
+        "University of To",
+        "ronto",
+        "Goo",
+        "gle Brain",
+        ""
+      ],
+      [
+        "",
+        "lli",
+        "on@google.c",
+        "om a",
+        "idan@cs.toron",
+        "to.edu l",
+        "ukaszkais",
+        "er@googl",
+        "e.com"
+      ],
+      [
+        "L]",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "C",
+        "",
+        "",
+        "",
+        "Illia Polos",
+        "ukhin∗ ‡",
+        "",
+        "",
+        ""
+      ],
+      [
+        ".",
+        "",
+        "",
+        "i",
+        "llia.polosukh",
+        "in@gmail.co",
+        "m",
+        "",
+        ""
+      ],
+      [
+        "[cs",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "7",
+        "",
+        "",
+        "",
+        "Abst",
+        "ract",
+        "",
+        "",
+        ""
+      ],
+      [
+        "v",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "2",
+        "",
+        "The dominant",
+        "sequence",
+        "transduction mo",
+        "dels are based",
+        "on complex",
+        "recurrent",
+        "or"
+      ],
+      [
+        "76",
+        "",
+        "convolutional",
+        "neural net",
+        "works that inclu",
+        "de an encoder",
+        "and a decod",
+        "er. The be",
+        "st"
+      ],
+      [
+        "3",
+        "",
+        "performing m",
+        "odels also",
+        "connect the enc",
+        "oder and deco",
+        "der through",
+        "an attentio",
+        "n"
+      ],
+      [
+        "0",
+        "",
+        "mechanism.",
+        "We propos",
+        "e a new simple",
+        "network archit",
+        "ecture, the",
+        "Transform",
+        "er,"
+      ],
+      [
+        ".",
+        "",
+        "based solely on",
+        "attention",
+        "mechanisms, disp",
+        "ensing with rec",
+        "urrence and",
+        "convolutio",
+        "ns"
+      ],
+      [
+        "6",
+        "",
+        "entirely. Exp",
+        "eriments o",
+        "n two machine",
+        "translation task",
+        "s show the",
+        "se models",
+        "to"
+      ],
+      [
+        "70",
+        "",
+        "be superior in",
+        "quality w",
+        "hile being more p",
+        "arallelizable a",
+        "nd requiring",
+        "significant",
+        "ly"
+      ],
+      [
+        "1",
+        "",
+        "less time to tr",
+        "ain. Our",
+        "model achieves 2",
+        "8.4 BLEU on",
+        "the WMT 2",
+        "014 Englis",
+        "h-"
+      ],
+      [
+        ":",
+        "",
+        "to-German tra",
+        "nslation t",
+        "ask, improving o",
+        "ver the existin",
+        "g best resul",
+        "ts, includin",
+        "g"
+      ],
+      [
+        "v",
+        "",
+        "ensembles, by",
+        "over 2 BL",
+        "EU. On the WMT",
+        "2014 English-",
+        "to-French tra",
+        "nslation tas",
+        "k,"
+      ],
+      [
+        "Xi",
+        "",
+        "our model esta",
+        "blishes a n",
+        "ew single-model",
+        "state-of-the-art",
+        "BLEU score",
+        "of 41.8 aft",
+        "er"
+      ],
+      [
+        "r",
+        "",
+        "training for 3.",
+        "5 days on",
+        "eight GPUs, a s",
+        "mall fraction of",
+        "the training",
+        "costs of th",
+        "e"
+      ],
+      [
+        "a",
+        "",
+        "best models fr",
+        "om the lite",
+        "rature. We show",
+        "that the Transf",
+        "ormer gener",
+        "alizes well",
+        "to"
+      ],
+      [
+        "",
+        "",
+        "other tasks by",
+        "applying",
+        "it successfully to",
+        "English consti",
+        "tuency parsi",
+        "ng both wi",
+        "th"
+      ],
+      [
+        "",
+        "",
+        "large and limit",
+        "ed trainin",
+        "g data.",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "∗Equa",
+        "l contribution. Li",
+        "sting order",
+        "is random. Jakob p",
+        "roposed replacin",
+        "g RNNs with",
+        "self-attention",
+        "and started"
+      ],
+      [
+        "",
+        "the effort",
+        "to evaluate this i",
+        "dea. Ashis",
+        "h, with Illia, design",
+        "ed and impleme",
+        "nted the first",
+        "Transformer",
+        "models and"
+      ],
+      [
+        "",
+        "has been c",
+        "rucially involved",
+        "in every as",
+        "pect of this work.",
+        "Noam proposed s",
+        "caled dot-prod",
+        "uct attention",
+        ", multi-head"
+      ],
+      [
+        "",
+        "attention",
+        "and the paramet",
+        "er-free posi",
+        "tion representation",
+        "and became the",
+        "other person",
+        "involved in",
+        "nearly every"
+      ],
+      [
+        "",
+        "detail. Ni",
+        "ki designed, imp",
+        "lemented, t",
+        "uned and evaluated",
+        "countless mode",
+        "l variants in o",
+        "ur original c",
+        "odebase and"
+      ],
+      [
+        "",
+        "tensor2ten",
+        "sor. Llion also e",
+        "xperimente",
+        "d with novel mode",
+        "l variants, was re",
+        "sponsible for",
+        "our initial co",
+        "debase, and"
+      ],
+      [
+        "",
+        "efficient in",
+        "ference and visu",
+        "alizations.",
+        "Lukasz and Aidan s",
+        "pent countless lo",
+        "ng days desig",
+        "ning various",
+        "parts of and"
+      ],
+      [
+        "",
+        "implemen",
+        "ting tensor2tenso",
+        "r, replacing",
+        "our earlier codeba",
+        "se, greatly impro",
+        "ving results an",
+        "d massively",
+        "accelerating"
+      ],
+      [
+        "",
+        "our resear",
+        "ch.",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "†Work",
+        "performed whil",
+        "e at Google",
+        "Brain.",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "‡Work",
+        "performed whil",
+        "e at Google",
+        "Research.",
+        "",
+        "",
+        "",
+        ""
+      ]
+    ]
+  },
+  {
+    "page": 2,
+    "bbox": [
+      107.6,
+      72.8,
+      505.7,
+      722.4
+    ],
+    "rows": 64,
+    "cols": 5,
+    "header": [
+      "1 Introduction",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "markdown": "|1 Introduction|Col2|Col3|Col4|Col5|\n|---|---|---|---|---|\n||||||\n|Recurrent neural netw|orks, long sho|rt-term memory [1|3] and gated recurrent [7]|neural networks|\n|in particular, have bee|n firmly establ|ished as state of th|e art approaches in sequen|ce modeling and|\n|transduction problems|such as langu|age modeling and|machine translation [35, 2|, 5]. Numerous|\n|efforts have since conti|nued to push th|e boundaries of recu|rrent language models and|encoder-decoder|\n|architectures [38, 24,|15].||||\n|<br>|<br>||||\n|Recurrent models typi|cally factor co|mputation along th|e symbol positions of the i|nput and output|\n|sequences. Aligning t|he positions to|steps in computatio|n time, they generate a seq|uence of hidden|\n||||||\n|states_ ht_, as a function|of the previou|s hidden state_ ht−_1|and the input for position_ t_|. This inherently|\n|sequential nature precl|udes paralleliza|<br>   tion within training|<br>      examples, which becomes|critical at longer|\n|sequence lengths, as m|emory constra|ints limit batching a|cross examples. Recent w|ork has achieved|\n|significant improveme|nts in computat|ional efficiency thro|ugh factorization tricks [21|] and conditional|\n|computation [32], whi|le also improv|ing model perform|ance in case of the latter. T|he fundamental|\n|constraint of sequentia|l computation,|however, remains.|||\n|<br>|<br>|<br>|||\n|Attention mechanisms|have become a|n integral part of c|ompelling sequence modeli|ng and transduc-|\n|tion models in various|tasks, allowin|g modeling of depe|ndencies without regard to|their distance in|\n|the input or output seq|uences [2, 19].|In all but a few case|s [27], however, such atten|tion mechanisms|\n|are used in conjunctio|n with a recurr|ent network.|||\n|<br>|<br>|<br>|||\n|In this work we propo|se the Transfo|rmer, a model arch|itecture eschewing recurre|nce and instead|\n|relying entirely on an|attention mech|anism to draw glob|al dependencies between i|nput and output.|\n|The Transformer allow|s for significa|ntly more paralleliz|ation and can reach a new s|tate of the art in|\n|translation quality afte|r being trained|for as little as twel|ve hours on eight P100 GP|Us.|\n|<br><br>|||||\n|**2**<br>**Background**|||||\n||||||\n|The goal of reducing s|equential comp|utation also forms t|he foundation of the Exten|ded Neural GPU|\n|[16], ByteNet [18] and|ConvS2S [9],|all of which use con|volutional neural networks|as basic building|\n|block, computing hidd|en representatio|ns in parallel for all|input and output positions.|In these models,|\n|the number of operatio|ns required to r|elate signals from t|wo arbitrary input or output|positions grows|\n|in the distance betwee|n positions, line|arly for ConvS2S a|nd logarithmically for Byte|Net. This makes|\n|it more difficult to lea|rn dependenci|es between distant|positions [12]. In the Tra|nsformer this is|\n|reduced to a constant|number of op|erations, albeit at th|e cost of reduced effectiv|e resolution due|\n|to averaging attention|-weighted pos|itions, an effect we|counteract with Multi-He|ad Attention as|\n|described in section 3.|2.||||\n|<br>|<br>||||\n|Self-attention, sometim|es called intra|-attention is an atten|tion mechanism relating di|fferent positions|\n|of a single sequence i|n order to com|pute a representatio|n of the sequence. Self-at|tention has been|\n|used successfully in a|variety of task|s including reading|comprehension, abstractive|summarization,|\n|textual entailment and|learning task-i|ndependent sentenc|e representations [4, 27, 2|8, 22].|\n|<br>|<br>|<br>|<br>|<br>|\n|End-to-end memory n|etworks are b|ased on a recurrent|attention mechanism inste|ad of sequence-|\n|aligned recurrence and|have been sho|wn to perform well|on simple-language questio|n answering and|\n|language modeling tas|ks [34].||||\n|<br>|<br>||||\n|To the best of our kn|owledge, how|ever, the Transform|er is the first transductio|n model relying|\n|entirely on self-attenti|on to compute|representations of i|ts input and output without|using sequence-|\n|aligned RNNs or conv|olution. In the|following sections,|we will describe the Trans|former, motivate|\n|self-attention and disc|uss its advanta|ges over models suc|h as [17, 18] and [9].||\n|<br><br>|<br>||||\n|**3**<br>**Model Archit**|** ecture**||||\n|<br>|<br>||||\n|Most competitive neur|al sequence tra|nsduction models h|ave an encoder-decoder str|ucture [5, 2, 35].|\n||||||\n|Here, the encoder ma|ps an input se|quence of symbol|representations (_x_1_, ..., xn_|) to a sequence|\n||||||\n|of continuous represe|ntations **z** =|(_z_1_, ..., zn_). Give|**z**, the decoder then gen|rates an output|\n||||||\n|sequence (_y_1_, ..., ym_)|of symbols on|e element at a time|At each step the model is|auto-regressive|\n|[10], consuming the p|reviously gener|ated symbols as ad|ditional input when genera|ting the next.|\n\n",
+    "cells": [
+      [
+        "1 Introduction",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Recurrent neural netw",
+        "orks, long sho",
+        "rt-term memory [1",
+        "3] and gated recurrent [7]",
+        "neural networks"
+      ],
+      [
+        "in particular, have bee",
+        "n firmly establ",
+        "ished as state of th",
+        "e art approaches in sequen",
+        "ce modeling and"
+      ],
+      [
+        "transduction problems",
+        "such as langu",
+        "age modeling and",
+        "machine translation [35, 2",
+        ", 5]. Numerous"
+      ],
+      [
+        "efforts have since conti",
+        "nued to push th",
+        "e boundaries of recu",
+        "rrent language models and",
+        "encoder-decoder"
+      ],
+      [
+        "architectures [38, 24,",
+        "15].",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Recurrent models typi",
+        "cally factor co",
+        "mputation along th",
+        "e symbol positions of the i",
+        "nput and output"
+      ],
+      [
+        "sequences. Aligning t",
+        "he positions to",
+        "steps in computatio",
+        "n time, they generate a seq",
+        "uence of hidden"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "states h , as a function\nt",
+        "of the previou",
+        "s hidden state h\nt−1",
+        "and the input for position t",
+        ". This inherently"
+      ],
+      [
+        "sequential nature precl",
+        "udes paralleliza",
+        "tion within training",
+        "examples, which becomes",
+        "critical at longer"
+      ],
+      [
+        "sequence lengths, as m",
+        "emory constra",
+        "ints limit batching a",
+        "cross examples. Recent w",
+        "ork has achieved"
+      ],
+      [
+        "significant improveme",
+        "nts in computat",
+        "ional efficiency thro",
+        "ugh factorization tricks [21",
+        "] and conditional"
+      ],
+      [
+        "computation [32], whi",
+        "le also improv",
+        "ing model perform",
+        "ance in case of the latter. T",
+        "he fundamental"
+      ],
+      [
+        "constraint of sequentia",
+        "l computation,",
+        "however, remains.",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Attention mechanisms",
+        "have become a",
+        "n integral part of c",
+        "ompelling sequence modeli",
+        "ng and transduc-"
+      ],
+      [
+        "tion models in various",
+        "tasks, allowin",
+        "g modeling of depe",
+        "ndencies without regard to",
+        "their distance in"
+      ],
+      [
+        "the input or output seq",
+        "uences [2, 19].",
+        "In all but a few case",
+        "s [27], however, such atten",
+        "tion mechanisms"
+      ],
+      [
+        "are used in conjunctio",
+        "n with a recurr",
+        "ent network.",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "In this work we propo",
+        "se the Transfo",
+        "rmer, a model arch",
+        "itecture eschewing recurre",
+        "nce and instead"
+      ],
+      [
+        "relying entirely on an",
+        "attention mech",
+        "anism to draw glob",
+        "al dependencies between i",
+        "nput and output."
+      ],
+      [
+        "The Transformer allow",
+        "s for significa",
+        "ntly more paralleliz",
+        "ation and can reach a new s",
+        "tate of the art in"
+      ],
+      [
+        "translation quality afte",
+        "r being trained",
+        "for as little as twel",
+        "ve hours on eight P100 GP",
+        "Us."
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "2 Background",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "The goal of reducing s",
+        "equential comp",
+        "utation also forms t",
+        "he foundation of the Exten",
+        "ded Neural GPU"
+      ],
+      [
+        "[16], ByteNet [18] and",
+        "ConvS2S [9],",
+        "all of which use con",
+        "volutional neural networks",
+        "as basic building"
+      ],
+      [
+        "block, computing hidd",
+        "en representatio",
+        "ns in parallel for all",
+        "input and output positions.",
+        "In these models,"
+      ],
+      [
+        "the number of operatio",
+        "ns required to r",
+        "elate signals from t",
+        "wo arbitrary input or output",
+        "positions grows"
+      ],
+      [
+        "in the distance betwee",
+        "n positions, line",
+        "arly for ConvS2S a",
+        "nd logarithmically for Byte",
+        "Net. This makes"
+      ],
+      [
+        "it more difficult to lea",
+        "rn dependenci",
+        "es between distant",
+        "positions [12]. In the Tra",
+        "nsformer this is"
+      ],
+      [
+        "reduced to a constant",
+        "number of op",
+        "erations, albeit at th",
+        "e cost of reduced effectiv",
+        "e resolution due"
+      ],
+      [
+        "to averaging attention",
+        "-weighted pos",
+        "itions, an effect we",
+        "counteract with Multi-He",
+        "ad Attention as"
+      ],
+      [
+        "described in section 3.",
+        "2.",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Self-attention, sometim",
+        "es called intra",
+        "-attention is an atten",
+        "tion mechanism relating di",
+        "fferent positions"
+      ],
+      [
+        "of a single sequence i",
+        "n order to com",
+        "pute a representatio",
+        "n of the sequence. Self-at",
+        "tention has been"
+      ],
+      [
+        "used successfully in a",
+        "variety of task",
+        "s including reading",
+        "comprehension, abstractive",
+        "summarization,"
+      ],
+      [
+        "textual entailment and",
+        "learning task-i",
+        "ndependent sentenc",
+        "e representations [4, 27, 2",
+        "8, 22]."
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "End-to-end memory n",
+        "etworks are b",
+        "ased on a recurrent",
+        "attention mechanism inste",
+        "ad of sequence-"
+      ],
+      [
+        "aligned recurrence and",
+        "have been sho",
+        "wn to perform well",
+        "on simple-language questio",
+        "n answering and"
+      ],
+      [
+        "language modeling tas",
+        "ks [34].",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "To the best of our kn",
+        "owledge, how",
+        "ever, the Transform",
+        "er is the first transductio",
+        "n model relying"
+      ],
+      [
+        "entirely on self-attenti",
+        "on to compute",
+        "representations of i",
+        "ts input and output without",
+        "using sequence-"
+      ],
+      [
+        "aligned RNNs or conv",
+        "olution. In the",
+        "following sections,",
+        "we will describe the Trans",
+        "former, motivate"
+      ],
+      [
+        "self-attention and disc",
+        "uss its advanta",
+        "ges over models suc",
+        "h as [17, 18] and [9].",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "3 Model Archit",
+        "ecture",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Most competitive neur",
+        "al sequence tra",
+        "nsduction models h",
+        "ave an encoder-decoder str",
+        "ucture [5, 2, 35]."
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Here, the encoder ma",
+        "ps an input se",
+        "quence of symbol",
+        "representations (x , ..., x\n1 n",
+        ") to a sequence"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "of continuous represe",
+        "ntations z =",
+        "(z , ..., z ). Given\n1 n",
+        "z, the decoder then gen",
+        "erates an output"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "sequence (y , ..., y )\n1 m",
+        "of symbols on",
+        "e element at a time",
+        ". At each step the model is",
+        "auto-regressive"
+      ],
+      [
+        "[10], consuming the p",
+        "reviously gener",
+        "ated symbols as ad",
+        "ditional input when genera",
+        "ting the next."
+      ]
+    ]
+  },
+  {
+    "page": 3,
+    "bbox": [
+      107.6,
+      404.7,
+      505.7,
+      722.4
+    ],
+    "rows": 29,
+    "cols": 8,
+    "header": [
+      "",
+      "",
+      "Figure 1: The",
+      "Transformer -",
+      "model",
+      "architectu",
+      "re.",
+      ""
+    ],
+    "markdown": "|Col1|Col2|Figure 1: The|Transformer -|model|architectu|re.|Col8|\n|---|---|---|---|---|---|---|---|\n|||<br>|<br>|<br>|<br>|<br>||\n|The Transform|er follows|this overall ar|chitecture usin|g stack|ed self-at|tention and poi|nt-wise, fully|\n|connected laye|rs for bot|h the encoder a|nd decoder, sh|own i|n the left|and right halve|s of Figure 1,|\n|respectively.||||||||\n|||||||||\n|**3.1**<br>**Encoder**|** and Deco**|**  der Stacks**||||||\n|<br>|<br>|<br>||||||\n|**Encoder:**<br>Th|e encoder|is composed|of a stack of|_N_ = 6|identical|layers. Each l|ayer has two|\n|sub-layers. The|first is a|multi-head self|-attention mec|hanism|, and the|second is a sim|ple, position-|\n|wise fully conn|ected fee|d-forward netw|ork. We empl|oy a re|sidual con|nection [11] ar|ound each of|\n|the two sub-la|yers, follo|wed by layer|normalization|[1]. T|hat is, the|output of eac|h sub-layer is|\n|LayerNorm(_x_|+ Sublay|er(_x_)), where|Sublayer(_x_) i|s the f|unction im|plemented by|the sub-layer|\n|itself. To facilit|ate these r|esidual connec|tions, all sub-l|ayers i|n the mod|el, as well as th|e embedding|\n|||||||||\n|layers, produce|outputs o|f dimension_ d_m|odel = 512.|||||\n||||<br>|||||\n|**Decoder:**<br>Th|e decoder i|s also compose|d of a stack of|_ N_ = 6|identical|layers. In addit|ion to the two|\n|sub-layers in e|ach encod|er layer, the de|coder inserts a|third|sub-layer,|which perform|s multi-head|\n|attention over t|he output o|f the encoder s|tack. Similar to|the en|coder, we|employ residua|l connections|\n|around each of|the sub-la|yers, followed|by layer norm|alizat|ion. We al|so modify the|self-attention|\n|sub-layer in th|e decoder|stack to preve|nt positions fr|om att|ending to|subsequent po|sitions. This|\n|masking, comb|ined with|fact that the ou|tput embeddin|gs are|offset by o|ne position, en|sures that the|\n|predictions for|position_ i_|can depend on|ly on the know|n outp|uts at posi|tions less than|_ i_.|\n|<br><br>|<br>|||||||\n|**3.2**<br>**Attention**||||||||\n|||||||||\n|An attention fu|nction can|be described a|s mapping a q|uery a|nd a set of|key-value pair|s to an output,|\n|where the quer|y, keys, va|lues, and outpu|t are all vector|s. The|output is|computed as a|weighted sum|\n\n",
+    "cells": [
+      [
+        "",
+        "",
+        "Figure 1: The",
+        "Transformer -",
+        "model",
+        "architectu",
+        "re.",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "The Transform",
+        "er follows",
+        "this overall ar",
+        "chitecture usin",
+        "g stack",
+        "ed self-at",
+        "tention and poi",
+        "nt-wise, fully"
+      ],
+      [
+        "connected laye",
+        "rs for bot",
+        "h the encoder a",
+        "nd decoder, sh",
+        "own i",
+        "n the left",
+        "and right halve",
+        "s of Figure 1,"
+      ],
+      [
+        "respectively.",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "3.1 Encoder",
+        "and Deco",
+        "der Stacks",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Encoder: Th",
+        "e encoder",
+        "is composed",
+        "of a stack of",
+        "N = 6",
+        "identical",
+        "layers. Each l",
+        "ayer has two"
+      ],
+      [
+        "sub-layers. The",
+        "first is a",
+        "multi-head self",
+        "-attention mec",
+        "hanism",
+        ", and the",
+        "second is a sim",
+        "ple, position-"
+      ],
+      [
+        "wise fully conn",
+        "ected fee",
+        "d-forward netw",
+        "ork. We empl",
+        "oy a re",
+        "sidual con",
+        "nection [11] ar",
+        "ound each of"
+      ],
+      [
+        "the two sub-la",
+        "yers, follo",
+        "wed by layer",
+        "normalization",
+        "[1]. T",
+        "hat is, the",
+        "output of eac",
+        "h sub-layer is"
+      ],
+      [
+        "LayerNorm(x",
+        "+ Sublay",
+        "er(x)), where",
+        "Sublayer(x) i",
+        "s the f",
+        "unction im",
+        "plemented by",
+        "the sub-layer"
+      ],
+      [
+        "itself. To facilit",
+        "ate these r",
+        "esidual connec",
+        "tions, all sub-l",
+        "ayers i",
+        "n the mod",
+        "el, as well as th",
+        "e embedding"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "layers, produce",
+        "outputs o",
+        "f dimension d\nm",
+        "= 512.\nodel",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Decoder: Th",
+        "e decoder i",
+        "s also compose",
+        "d of a stack of",
+        "N = 6",
+        "identical",
+        "layers. In addit",
+        "ion to the two"
+      ],
+      [
+        "sub-layers in e",
+        "ach encod",
+        "er layer, the de",
+        "coder inserts a",
+        "third",
+        "sub-layer,",
+        "which perform",
+        "s multi-head"
+      ],
+      [
+        "attention over t",
+        "he output o",
+        "f the encoder s",
+        "tack. Similar to",
+        "the en",
+        "coder, we",
+        "employ residua",
+        "l connections"
+      ],
+      [
+        "around each of",
+        "the sub-la",
+        "yers, followed",
+        "by layer norm",
+        "alizat",
+        "ion. We al",
+        "so modify the",
+        "self-attention"
+      ],
+      [
+        "sub-layer in th",
+        "e decoder",
+        "stack to preve",
+        "nt positions fr",
+        "om att",
+        "ending to",
+        "subsequent po",
+        "sitions. This"
+      ],
+      [
+        "masking, comb",
+        "ined with",
+        "fact that the ou",
+        "tput embeddin",
+        "gs are",
+        "offset by o",
+        "ne position, en",
+        "sures that the"
+      ],
+      [
+        "predictions for",
+        "position i",
+        "can depend on",
+        "ly on the know",
+        "n outp",
+        "uts at posi",
+        "tions less than",
+        "i."
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "3.2 Attention",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "An attention fu",
+        "nction can",
+        "be described a",
+        "s mapping a q",
+        "uery a",
+        "nd a set of",
+        "key-value pair",
+        "s to an output,"
+      ],
+      [
+        "where the quer",
+        "y, keys, va",
+        "lues, and outpu",
+        "t are all vector",
+        "s. The",
+        "output is",
+        "computed as a",
+        "weighted sum"
+      ]
+    ]
+  },
+  {
+    "page": 4,
+    "bbox": [
+      107.5,
+      71.2,
+      505.7,
+      723.2
+    ],
+    "rows": 55,
+    "cols": 8,
+    "header": [
+      "Sca",
+      "led Dot",
+      "-Product Attenti",
+      "on",
+      "Mu",
+      "lti-Head",
+      "Attention",
+      ""
+    ],
+    "markdown": "|Sca|led Dot|-Product Attenti|on|Mu|lti-Head|Attention|Col8|\n|---|---|---|---|---|---|---|---|\n|<br>|<br>|<br>|<br>|<br>|<br>|<br>||\n|Figure 2: (le|ft) Scal|ed Dot-Product|Attention. (rig|ht) Multi-Hea|d Attent|ion consis|ts of several|\n|attention laye|rs runni|ng in parallel.||||||\n|<br>|<br>|<br>||||||\n|of the values,|where t|he weight assign|ed to each value|is computed b|y a comp|atibility fu|nction of the|\n|query with th|e corres|ponding key.||||||\n|<br><br>|<br>|<br>||||||\n|**3.2.1**<br>**Scale**|**d Dot-P**|** roduct Attentio**|**  n**|||||\n|<br>|<br>|<br>|<br>|||||\n|We call our p|articula|r attention \"Sca|led Dot-Product|Attention\" (|Figure 2)|. The inp|ut consists of|\n|queries and k<br>|eys of d<br>|imension_ dk_, an<br>  _√_|d values of dime<br>|nsion_ dv_. We<br>|compute<br>|the dot pr<br>|oducts of the<br>|\n|query with al|l keys, d|ivide each by|_dk_, and apply a|softmax func|tion to ob|tain the w|eights on the|\n|values.||||||||\n|||||||||\n|In practice, w|e comp|ute the attention|function on a s|et of queries|simultane|ously, pac|ked together|\n|into a matrix|_ Q_. The|keys and values|are also packed|together into|matrices|_ K_ and_ V_ .|We compute|\n|the matrix of|outputs|as:||||||\n|||<br>||||||\n|||||_QKT_<br>||||\n|||||<br>||||\n|||Attentio|n(_Q, K, V_ ) = s|ftmax(<br>~~_√_~~|)_V_||(1)|\n|||||<br>_dk_||||\n|||||||||\n|The two most|commo|nly used attenti|on functions are|additive atten|tion [2],|and dot-pr|oduct (multi-|\n|plicative) atte<br>|ntion. D|ot-product atten|tion is identical|to our algorit|hm, exce|pt for the|scaling factor|\n|of<br>1<br>~~_√_~~ . Addi|tive atte|ntion computes|the compatibilit|y function usi|ng a feed|-forward|network with|\n|_dk_   <br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|\n|<br>a single hidd|en layer|. While the two|are similar in th|eoretical com|plexity,|ot-produc|t attention is|\n|much faster a|nd more|space-efficient i|n practice, since|it can be imp|lemented|using hig|hly optimized|\n|matrix multip|lication|code.||||||\n|<br>|<br>|<br>||||||\n|||||||||\n|While for sm|ll valu|s of_ dk_ the two|mechanisms per|orm similarl|, additiv|attention|outperforms|\n|||<br>||||||\n|dot product a|tention|without scaling|for larger value|of_ dk_ [3]. W|e suspect|that for la|rge values of|\n|||||<br>||||\n|_dk_, the dot pr<br>|oducts g<br>|row large in ma<br>|nitude, pushing<br>|the softmax f<br>|unction i<br>|to region<br><br>|where it has|\n|extremely sm|all grad|ents 4. To count|eract this effect,|we scale the|dot prod|cts by<br>1<br>~~_√_~~|.|\n|||||||<br>_d_||\n|||||||<br>|_k_|\n|||||||||\n|**3.2.2**<br>**Multi**|**-Head**|** Attention**||||||\n|<br>|<br>|<br>||||||\n|||||||||\n|Instead of pe|formin|a single attenti|on function wit|_ d_model-dime|sional k|ys, value|and queries,|\n|we found it b|eneficial|to linearly proj|ect the queries, k|eys and value|s_ h_ times|with diffe|rent, learned|\n|||||||||\n|linear project|ions to|_k_,_ dk_ and_ dv_ di|ensions, respe|tively. On ea|h of the|e projecte|d versions of|\n|||<br>||||||\n|queries, keys|and val|es we then perf|rm the attentio|function in|arallel, y|ielding_ dv_|-dimensional|\n|||||||||\n|4To illustrat<br>|e why th<br>|e dot products get<br>|large, assume that<br>|the component<br>|s of_ q_ and <br>|_ k_ are indep|endent random|\n|variables with|ean 0 a|d variance 1. Th|n their dot produ|t,_ q · k_ =P_dk_<br>|_qk_, ha|mean 0 a|d variance_ d_.|\n|||||<br>_i_=|1 _ii_||_k_|\n\n",
+    "cells": [
+      [
+        "Sca",
+        "led Dot",
+        "-Product Attenti",
+        "on",
+        "Mu",
+        "lti-Head",
+        "Attention",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Figure 2: (le",
+        "ft) Scal",
+        "ed Dot-Product",
+        "Attention. (rig",
+        "ht) Multi-Hea",
+        "d Attent",
+        "ion consis",
+        "ts of several"
+      ],
+      [
+        "attention laye",
+        "rs runni",
+        "ng in parallel.",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "of the values,",
+        "where t",
+        "he weight assign",
+        "ed to each value",
+        "is computed b",
+        "y a comp",
+        "atibility fu",
+        "nction of the"
+      ],
+      [
+        "query with th",
+        "e corres",
+        "ponding key.",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "3.2.1 Scale",
+        "d Dot-P",
+        "roduct Attentio",
+        "n",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "We call our p",
+        "articula",
+        "r attention \"Sca",
+        "led Dot-Product",
+        "Attention\" (",
+        "Figure 2)",
+        ". The inp",
+        "ut consists of"
+      ],
+      [
+        "queries and k",
+        "eys of d",
+        "imension d k, a√n",
+        "d values of dime",
+        "nsion d . We\nv",
+        "compute",
+        "the dot pr",
+        "oducts of the"
+      ],
+      [
+        "query with al",
+        "l keys, d",
+        "ivide each by",
+        "d , and apply a\nk",
+        "softmax func",
+        "tion to ob",
+        "tain the w",
+        "eights on the"
+      ],
+      [
+        "values.",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "In practice, w",
+        "e comp",
+        "ute the attention",
+        "function on a s",
+        "et of queries",
+        "simultane",
+        "ously, pac",
+        "ked together"
+      ],
+      [
+        "into a matrix",
+        "Q. The",
+        "keys and values",
+        "are also packed",
+        "together into",
+        "matrices",
+        "K and V .",
+        "We compute"
+      ],
+      [
+        "the matrix of",
+        "outputs",
+        "as:",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "QKT",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "Attentio",
+        "n(Q, K, V ) = s",
+        "oftmax( √",
+        ")V",
+        "",
+        "(1)"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "d\nk",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "The two most",
+        "commo",
+        "nly used attenti",
+        "on functions are",
+        "additive atten",
+        "tion [2],",
+        "and dot-pr",
+        "oduct (multi-"
+      ],
+      [
+        "plicative) atte",
+        "ntion. D",
+        "ot-product atten",
+        "tion is identical",
+        "to our algorit",
+        "hm, exce",
+        "pt for the",
+        "scaling factor"
+      ],
+      [
+        "of √1 . Addi",
+        "tive atte",
+        "ntion computes",
+        "the compatibilit",
+        "y function usi",
+        "ng a feed",
+        "-forward",
+        "network with"
+      ],
+      [
+        "dk",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "a single hidd",
+        "en layer",
+        ". While the two",
+        "are similar in th",
+        "eoretical com",
+        "plexity,",
+        "dot-produc",
+        "t attention is"
+      ],
+      [
+        "much faster a",
+        "nd more",
+        "space-efficient i",
+        "n practice, since",
+        "it can be imp",
+        "lemented",
+        "using hig",
+        "hly optimized"
+      ],
+      [
+        "matrix multip",
+        "lication",
+        "code.",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "While for sm",
+        "all value",
+        "s of d the two\nk",
+        "mechanisms per",
+        "form similarl",
+        "y, additiv",
+        "e attention",
+        "outperforms"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "dot product a",
+        "ttention",
+        "without scaling",
+        "for larger values",
+        "of d [3]. W\nk",
+        "e suspect",
+        "that for la",
+        "rge values of"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "d , the dot pr\nk",
+        "oducts g",
+        "row large in ma",
+        "gnitude, pushing",
+        "the softmax f",
+        "unction i",
+        "nto regions",
+        "where it has"
+      ],
+      [
+        "extremely sm",
+        "all grad",
+        "ients 4. To count",
+        "eract this effect,",
+        "we scale the",
+        "dot produ",
+        "cts by √1",
+        "."
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "d",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "k"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "3.2.2 Multi",
+        "-Head",
+        "Attention",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Instead of pe",
+        "rformin",
+        "g a single attenti",
+        "on function with",
+        "d -dime\nmodel",
+        "nsional k",
+        "eys, values",
+        "and queries,"
+      ],
+      [
+        "we found it b",
+        "eneficial",
+        "to linearly proj",
+        "ect the queries, k",
+        "eys and value",
+        "s h times",
+        "with diffe",
+        "rent, learned"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "linear project",
+        "ions to",
+        "d k, d and d di\nk v",
+        "mensions, respec",
+        "tively. On ea",
+        "ch of thes",
+        "e projecte",
+        "d versions of"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "queries, keys",
+        "and val",
+        "ues we then perf",
+        "orm the attention",
+        "function in p",
+        "arallel, y",
+        "ielding d\nv",
+        "-dimensional"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "4To illustrat",
+        "e why th",
+        "e dot products get",
+        "large, assume that",
+        "the component",
+        "s of q and",
+        "k are indep",
+        "endent random"
+      ],
+      [
+        "variables with",
+        "mean 0 a",
+        "nd variance 1. Th",
+        "en their dot produc",
+        "t, q · k =Pdk",
+        "q k , ha",
+        "s mean 0 an",
+        "d variance d ."
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "i=",
+        "1 i i",
+        "",
+        "k"
+      ]
+    ]
+  },
+  {
+    "page": 5,
+    "bbox": [
+      107.5,
+      74.3,
+      505.7,
+      722.8
+    ],
+    "rows": 65,
+    "cols": 6,
+    "header": [
+      "output value",
+      "s. These are co",
+      "ncatenated an",
+      "d once again pro",
+      "jected, resulting in the",
+      "final values, as"
+    ],
+    "markdown": "|output value|s. These are co|ncatenated an|d once again pro|jected, resulting in the|final values, as|\n|---|---|---|---|---|---|\n|depicted in F|igure 2.|||||\n|<br>|<br>|||||\n|Multi-head a|ttention allows t|he model to jo|intly attend to in|formation from different|representation|\n|subspaces at|different positio|ns. With a sin|gle attention head|, averaging inhibits this|.|\n||<br>|<br>|<br>|<br>||\n||MultiH|ad(_Q, K, V_ )|Concat(head|_, ...,_ head)_W O_||\n||||1|h||\n|||||<br>||\n|||||_Q_<br>  _ K_<br>  _ V_<br>||\n|||where headi|Attention(_Q_|<br>_i , KW _<br>_i , V W _<br>_i_ )||\n|||<br>||<br> <br> <br><br>||\n|Where the pr<br>|ojections are par<br>|ameter matrice|s_ W Q_<br>_i_<br>_∈_R_d_model_×_|_dk_,_ W K_<br>_i_<br>_∈_R_d_model_×dk_,_ W_|_V_<br>_i_<br>_∈_R_d_model_×dv_|\n|and_ W O ∈_R|_hdv×d_model.|||||\n|||||||\n|In this work|we employ _h_|= 8 parallel|attention layers,|or heads. For each o|f these we use|\n|||||||\n|_dk_ =_ dv_ =_ d_|model_/h_ = 64.|ue to the redu|ed dimension of|each head, the total co|putational cost|\n|<br>is similar to t|hat of single-he|ad attention wi|th full dimensio|nality.||\n|<br><br>|<br>|<br>|<br>|||\n|**3.2.3**<br>**Appl**|**ications of Atte**|**  ntion in our M**|**     odel**|||\n|<br>|<br>|<br>|<br>|||\n|The Transfor|mer uses multi-|head attention|in three different|ways:||\n|<br>|<br>|<br>|<br>|<br>||\n|• In \"|encoder-decode|r attention\" la|yers, the queries|come from the previous|decoder layer,|\n|and|the memory ke|ys and values|come from the o|utput of the encoder. Th|is allows every|\n|pos|ition in the deco|der to attend o|ver all positions|in the input sequence. T|his mimics the|\n|typi|cal encoder-dec|oder attention|mechanisms in|sequence-to-sequence|models such as|\n|[38,|2, 9].|||||\n|<br>|<br>|||||\n|• The|encoder contai|ns self-attentio|n layers. In a se|lf-attention layer all of t|he keys, values|\n|and|queries come fr|om the same p|lace, in this case|, the output of the previ|ous layer in the|\n|enc|oder. Each posit|ion in the enco|der can attend to|all positions in the previ|ous layer of the|\n|enc|oder.|||||\n|||||||\n|• Sim|ilarly, self-atten|tion layers in th|e decoder allow|each position in the deco|der to attend to|\n|all p|ositions in the|decoder up to a|nd including tha|t position. We need to p|revent leftward|\n|info|rmation flow in|the decoder to|preserve the auto|-regressive property. We|implement this|\n|insi|de of scaled dot-|product attenti|on by masking ou|t (setting to_ −∞_) all val|ues in the input|\n|of t|he softmax whic|h correspond t|o illegal connect|ions. See Figure 2.||\n|<br><br>|<br>|<br>|<br>|||\n|**3.3**<br>**Positio**|**n-wise Feed-Fo**|** rward Netwo**|**  rks**|||\n|<br>|<br>|<br>|<br>|||\n|In addition t|o attention sub-|layers, each of|the layers in ou|r encoder and decoder c|ontains a fully|\n|connected fe|ed-forward netw|ork, which is|applied to each p|osition separately and i|dentically. This|\n|consists of t|wo linear transfo|rmations with|a ReLU activatio|n in between.||\n|||<br>|<br>|<br>||\n|||||||\n|||FFN(_x_) = m|ax(0_, xW_1 +_ b_1|)_W_2 +_ b_2|(2)|\n||||<br>|<br>||\n|While the lin|ear transformati|ons are the sam|e across different|positions, they use diffe|rent parameters|\n|from layer t|o layer. Anoth|er way of des|cribing this is a|s two convolutions with|kernel size 1.|\n|||||||\n|The dimensi|onality of inpu|and output is|_d_model = 512,|nd the inner-layer has|dimensionality|\n|||||||\n|_dff_ = 2048.||||||\n|<br><br>||||||\n|**3.4**<br>**Embed**|**dings and Soft**|**  max**||||\n|<br>|<br>|<br>||||\n|Similarly to|other sequence|transduction m|odels, we use le|arned embeddings to co|nvert the input|\n|||||||\n|tokens and o|tput tokens to v|ectors of dime|sion_ d_model. We|lso use the usual learne|linear transfor-|\n|mation and s|oftmax function|to convert the|decoder output t|o predicted next-token p|robabilities. In|\n|our model, w<br>|e share the sam<br>|e weight matrix<br>|between the tw<br>|o embedding layers and t<br>|he pre-softmax<br>  _√_|\n|linear transfo|rmation, similar|to [30]. In the|embedding layer|s, we multiply those wei|hts by _d_model.|\n\n",
+    "cells": [
+      [
+        "output value",
+        "s. These are co",
+        "ncatenated an",
+        "d once again pro",
+        "jected, resulting in the",
+        "final values, as"
+      ],
+      [
+        "depicted in F",
+        "igure 2.",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Multi-head a",
+        "ttention allows t",
+        "he model to jo",
+        "intly attend to in",
+        "formation from different",
+        "representation"
+      ],
+      [
+        "subspaces at",
+        "different positio",
+        "ns. With a sin",
+        "gle attention head",
+        ", averaging inhibits this",
+        "."
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "MultiHe",
+        "ad(Q, K, V )",
+        "= Concat(head",
+        ", ..., head )WO",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "1",
+        "h",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "Q K V",
+        ""
+      ],
+      [
+        "",
+        "",
+        "where head\ni",
+        "= Attention(QW",
+        ", KW , V W )\ni i i",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Where the pr",
+        "ojections are par",
+        "ameter matrice",
+        "s W iQ ∈Rdmodel×",
+        "dk, W iK ∈Rdmodel×dk, W",
+        "iV ∈Rdmodel×dv"
+      ],
+      [
+        "and W O ∈R",
+        "hdv×dmodel.",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "In this work",
+        "we employ h",
+        "= 8 parallel",
+        "attention layers,",
+        "or heads. For each o",
+        "f these we use"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "d = d = d\nk v",
+        "/h = 64. D\nmodel",
+        "ue to the reduc",
+        "ed dimension of",
+        "each head, the total com",
+        "putational cost"
+      ],
+      [
+        "is similar to t",
+        "hat of single-he",
+        "ad attention wi",
+        "th full dimensio",
+        "nality.",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "3.2.3 Appl",
+        "ications of Atte",
+        "ntion in our M",
+        "odel",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "The Transfor",
+        "mer uses multi-",
+        "head attention",
+        "in three different",
+        "ways:",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "• In \"",
+        "encoder-decode",
+        "r attention\" la",
+        "yers, the queries",
+        "come from the previous",
+        "decoder layer,"
+      ],
+      [
+        "and",
+        "the memory ke",
+        "ys and values",
+        "come from the o",
+        "utput of the encoder. Th",
+        "is allows every"
+      ],
+      [
+        "pos",
+        "ition in the deco",
+        "der to attend o",
+        "ver all positions",
+        "in the input sequence. T",
+        "his mimics the"
+      ],
+      [
+        "typi",
+        "cal encoder-dec",
+        "oder attention",
+        "mechanisms in",
+        "sequence-to-sequence",
+        "models such as"
+      ],
+      [
+        "[38,",
+        "2, 9].",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "• The",
+        "encoder contai",
+        "ns self-attentio",
+        "n layers. In a se",
+        "lf-attention layer all of t",
+        "he keys, values"
+      ],
+      [
+        "and",
+        "queries come fr",
+        "om the same p",
+        "lace, in this case",
+        ", the output of the previ",
+        "ous layer in the"
+      ],
+      [
+        "enc",
+        "oder. Each posit",
+        "ion in the enco",
+        "der can attend to",
+        "all positions in the previ",
+        "ous layer of the"
+      ],
+      [
+        "enc",
+        "oder.",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "• Sim",
+        "ilarly, self-atten",
+        "tion layers in th",
+        "e decoder allow",
+        "each position in the deco",
+        "der to attend to"
+      ],
+      [
+        "all p",
+        "ositions in the",
+        "decoder up to a",
+        "nd including tha",
+        "t position. We need to p",
+        "revent leftward"
+      ],
+      [
+        "info",
+        "rmation flow in",
+        "the decoder to",
+        "preserve the auto",
+        "-regressive property. We",
+        "implement this"
+      ],
+      [
+        "insi",
+        "de of scaled dot-",
+        "product attenti",
+        "on by masking ou",
+        "t (setting to −∞) all val",
+        "ues in the input"
+      ],
+      [
+        "of t",
+        "he softmax whic",
+        "h correspond t",
+        "o illegal connect",
+        "ions. See Figure 2.",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "3.3 Positio",
+        "n-wise Feed-Fo",
+        "rward Netwo",
+        "rks",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "In addition t",
+        "o attention sub-",
+        "layers, each of",
+        "the layers in ou",
+        "r encoder and decoder c",
+        "ontains a fully"
+      ],
+      [
+        "connected fe",
+        "ed-forward netw",
+        "ork, which is",
+        "applied to each p",
+        "osition separately and i",
+        "dentically. This"
+      ],
+      [
+        "consists of t",
+        "wo linear transfo",
+        "rmations with",
+        "a ReLU activatio",
+        "n in between.",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "FFN(x) = m",
+        "ax(0, xW + b\n1 1",
+        ")W + b\n2 2",
+        "(2)"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "While the lin",
+        "ear transformati",
+        "ons are the sam",
+        "e across different",
+        "positions, they use diffe",
+        "rent parameters"
+      ],
+      [
+        "from layer t",
+        "o layer. Anoth",
+        "er way of des",
+        "cribing this is a",
+        "s two convolutions with",
+        "kernel size 1."
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "The dimensi",
+        "onality of input",
+        "and output is",
+        "d = 512,\nmodel",
+        "and the inner-layer has",
+        "dimensionality"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "d = 2048.\nff",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "3.4 Embed",
+        "dings and Soft",
+        "max",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Similarly to",
+        "other sequence",
+        "transduction m",
+        "odels, we use le",
+        "arned embeddings to co",
+        "nvert the input"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "tokens and o",
+        "utput tokens to v",
+        "ectors of dimen",
+        "sion d . We\nmodel",
+        "also use the usual learned",
+        "linear transfor-"
+      ],
+      [
+        "mation and s",
+        "oftmax function",
+        "to convert the",
+        "decoder output t",
+        "o predicted next-token p",
+        "robabilities. In"
+      ],
+      [
+        "our model, w",
+        "e share the sam",
+        "e weight matrix",
+        "between the tw",
+        "o embedding layers and t",
+        "he pre-√softmax"
+      ],
+      [
+        "linear transfo",
+        "rmation, similar",
+        "to [30]. In the",
+        "embedding layer",
+        "s, we multiply those weig",
+        "hts by d .\nmodel"
+      ]
+    ]
+  },
+  {
+    "page": 6,
+    "bbox": [
+      106.8,
+      71.3,
+      505.7,
+      752.3
+    ],
+    "rows": 68,
+    "cols": 6,
+    "header": [
+      "Table 1: Maxi",
+      "mum path length",
+      "s, per-layer comp",
+      "lexity and minimum",
+      "number of seque",
+      "ntial operations"
+    ],
+    "markdown": "|Table 1: Maxi|mum path length|s, per-layer comp|lexity and minimum|number of seque|ntial operations|\n|---|---|---|---|---|---|\n|for different la|yer types. _n_ is t|he sequence lengt|h,_ d_ is the represent|ation dimension|,_ k_ is the kernel|\n|size of convolu|tions and_ r_ the|size of the neighb|orhood in restricted|self-attention.||\n|<br>|<br>|<br>|<br> <br>|<br><br>||\n|Layer Typ|e|Complexity pe|r Layer<br>Sequentia|l<br>Maximum P|ath Length|\n||||Operation<br>|s||\n|Self-Atten|tion|_O_(_n_2 _· d_<br>|)<br>_O_(1)<br>|_O_(|1)|\n|Recurrent||_O_(_n · d_2<br>|)<br>_O_(_n_)<br>|_O_(|_n_)|\n||||2<br>|||\n|Convoluti|nal|_O_(_k · n · _|)<br>_O_(1)|_O_(_log_|_k_(_n_))|\n|Self-Atten|tion (restricted)|_O_(_r · n · _|_ d_)<br>_O_(1)|_O_(_n_|_/r_)|\n|<br><br>|<br>|||||\n|**3.5**<br>**Position**|**al Encoding**|||||\n|<br>|<br>|||||\n|Since our mod|el contains no re|currence and no c|onvolution, in order|for the model to|make use of the|\n|order of the se|quence, we must|inject some infor|mation about the re|lative or absolute|position of the|\n|tokens in the s|equence. To thi|s end, we add \"po|sitional encodings\"|to the input em|beddings at the|\n|||||||\n|bottoms of the|encoder and dec|oder stacks. The|ositional encodings|have the same d|imension_ d_model|\n|as the embeddi|ngs, so that the|two can be summ|ed. There are many|choices of positi|onal encodings,|\n|learned and fix|ed [9].|||||\n|<br>|<br>|||||\n|In this work, w|e use sine and c|osine functions o|f different frequenci|es:||\n|||<br>|<br>|<br>||\n||||2_i/d_mod|el||\n|||_PE_(_pos,_2_i_) =_ si_|_ n_(_pos/_10000|)||\n|||<br>||||\n||||2_i/d_mod|el||\n|||_E_(_pos,_2_i_+1) =_ c_|_ s_(_pos/_10000|)||\n|||<br>||||\n|where_ pos_ is th|e position and_ i_|is the dimension.|That is, each dime|nsion of the posi|tional encoding|\n|corresponds to|a sinusoid. The|wavelengths form|a geometric progres|sion from 2_π_ to|10000_ ·_ 2_π_. We|\n|chose this fun|ction because w|e hypothesized it|would allow the m|odel to easily le|arn to attend by|\n|||||||\n|relative positi|ns, since for an|y fixed offset_ k_,|_ Epos_+_k_ can be rep|resented as a li|ear function of|\n|||||||\n|_PEpos_.||||||\n|||||||\n|We also experi|mented with usi|ng learned positio|nal embeddings [9]|instead, and fou|nd that the two|\n|versions produ|ced nearly iden|tical results (see|Table 3 row (E)). W|e chose the sin|usoidal version|\n|because it may|allow the mode|l to extrapolate to|sequence lengths l|onger than the on|es encountered|\n|during training|.|||||\n|<br><br>|<br>|||||\n|**4**<br>**Why Se**|** lf-Attention**|||||\n|<br>|<br>|||||\n|In this section|we compare v|arious aspects of|self-attention layer|s to the recurre|nt and convolu-|\n|tional layers c<br>|ommonly used f<br>|or mapping one v<br>|ariable-length sequ<br>|ence of symbol<br>|representations<br>|\n|<br>|<br>|<br>|<br>|<br>   _d_|<br>|\n|(_x_1_, ..., xn_) to|another sequen|ce of equal lengt|h (_z_1_, ..., zn_), with|_xi, zi ∈_, su|ch as a hidden|\n|layer in a typic|al sequence tran|sduction encoder|or decoder. Motiva|<br>ting our use of s|elf-attention we|\n|consider three|desiderata.|||||\n|<br>|<br>|||||\n|One is the tota|l computational|complexity per la|yer. Another is the|amount of comp|utation that can|\n|be parallelized|, as measured b|y the minimum nu|mber of sequential|operations requi|red.|\n|<br>|<br>|<br>|<br>|<br>|<br>|\n|The third is th|e path length bet|ween long-range|dependencies in th|e network. Learn|ing long-range|\n|dependencies i|s a key challeng|e in many sequen|ce transduction tas|ks. One key fact|or affecting the|\n|ability to learn|such dependen|cies is the length|of the paths forwar|d and backward|signals have to|\n|traverse in the|network. The s|horter these paths|between any comb|ination of positi|ons in the input|\n|and output seq|uences, the easie|r it is to learn lon|g-range dependenci|es [12]. Hence w|e also compare|\n|the maximum|path length betw|een any two inpu|t and output positio|ns in networks c|omposed of the|\n|different layer|types.|||||\n|<br>|<br>|||||\n|As noted in Tab|le 1, a self-atten|tion layer connect|s all positions with a|constant numbe|r of sequentially|\n|executed oper|ations, whereas|a recurrent layer|requires _O_(_n_) seq|uential operatio|ns. In terms of|\n|computational|complexity, sel|f-attention layers|are faster than recu|rrent layers whe|n the sequence|\n||||<br>|||\n||||6|||\n\n",
+    "cells": [
+      [
+        "Table 1: Maxi",
+        "mum path length",
+        "s, per-layer comp",
+        "lexity and minimum",
+        "number of seque",
+        "ntial operations"
+      ],
+      [
+        "for different la",
+        "yer types. n is t",
+        "he sequence lengt",
+        "h, d is the represent",
+        "ation dimension",
+        ", k is the kernel"
+      ],
+      [
+        "size of convolu",
+        "tions and r the",
+        "size of the neighb",
+        "orhood in restricted",
+        "self-attention.",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Layer Typ",
+        "e",
+        "Complexity pe",
+        "r Layer Sequentia",
+        "l Maximum P",
+        "ath Length"
+      ],
+      [
+        "",
+        "",
+        "",
+        "Operation",
+        "s",
+        ""
+      ],
+      [
+        "Self-Atten",
+        "tion",
+        "O(n2 · d",
+        ") O(1)",
+        "O(",
+        "1)"
+      ],
+      [
+        "Recurrent",
+        "",
+        "O(n · d2",
+        ") O(n)",
+        "O(",
+        "n)"
+      ],
+      [
+        "",
+        "",
+        "",
+        "2",
+        "",
+        ""
+      ],
+      [
+        "Convolutio",
+        "nal",
+        "O(k · n · d",
+        ") O(1)",
+        "O(log",
+        "(n))\nk"
+      ],
+      [
+        "Self-Atten",
+        "tion (restricted)",
+        "O(r · n ·",
+        "d) O(1)",
+        "O(n",
+        "/r)"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "3.5 Position",
+        "al Encoding",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Since our mod",
+        "el contains no re",
+        "currence and no c",
+        "onvolution, in order",
+        "for the model to",
+        "make use of the"
+      ],
+      [
+        "order of the se",
+        "quence, we must",
+        "inject some infor",
+        "mation about the re",
+        "lative or absolute",
+        "position of the"
+      ],
+      [
+        "tokens in the s",
+        "equence. To thi",
+        "s end, we add \"po",
+        "sitional encodings\"",
+        "to the input em",
+        "beddings at the"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "bottoms of the",
+        "encoder and dec",
+        "oder stacks. The",
+        "positional encodings",
+        "have the same d",
+        "imension d\nmodel"
+      ],
+      [
+        "as the embeddi",
+        "ngs, so that the",
+        "two can be summ",
+        "ed. There are many",
+        "choices of positi",
+        "onal encodings,"
+      ],
+      [
+        "learned and fix",
+        "ed [9].",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "In this work, w",
+        "e use sine and c",
+        "osine functions o",
+        "f different frequenci",
+        "es:",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "2i/dmod",
+        "el",
+        ""
+      ],
+      [
+        "",
+        "",
+        "PE = si\n(pos,2i)",
+        "n(pos/10000",
+        ")",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "2i/dmod",
+        "el",
+        ""
+      ],
+      [
+        "",
+        "P",
+        "E = co\n(pos,2i+1)",
+        "s(pos/10000",
+        ")",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "where pos is th",
+        "e position and i",
+        "is the dimension.",
+        "That is, each dime",
+        "nsion of the posi",
+        "tional encoding"
+      ],
+      [
+        "corresponds to",
+        "a sinusoid. The",
+        "wavelengths form",
+        "a geometric progres",
+        "sion from 2π to",
+        "10000 · 2π. We"
+      ],
+      [
+        "chose this fun",
+        "ction because w",
+        "e hypothesized it",
+        "would allow the m",
+        "odel to easily le",
+        "arn to attend by"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "relative positio",
+        "ns, since for an",
+        "y fixed offset k,",
+        "PE can be rep\npos+k",
+        "resented as a lin",
+        "ear function of"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "PE .\npos",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "We also experi",
+        "mented with usi",
+        "ng learned positio",
+        "nal embeddings [9]",
+        "instead, and fou",
+        "nd that the two"
+      ],
+      [
+        "versions produ",
+        "ced nearly iden",
+        "tical results (see",
+        "Table 3 row (E)). W",
+        "e chose the sin",
+        "usoidal version"
+      ],
+      [
+        "because it may",
+        "allow the mode",
+        "l to extrapolate to",
+        "sequence lengths l",
+        "onger than the on",
+        "es encountered"
+      ],
+      [
+        "during training",
+        ".",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "4 Why Se",
+        "lf-Attention",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "In this section",
+        "we compare v",
+        "arious aspects of",
+        "self-attention layer",
+        "s to the recurre",
+        "nt and convolu-"
+      ],
+      [
+        "tional layers c",
+        "ommonly used f",
+        "or mapping one v",
+        "ariable-length sequ",
+        "ence of symbol",
+        "representations"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "Rd",
+        ""
+      ],
+      [
+        "(x , ..., x ) to\n1 n",
+        "another sequen",
+        "ce of equal lengt",
+        "h (z , ..., z ), with\n1 n",
+        "x i, z ∈ , su\ni",
+        "ch as a hidden"
+      ],
+      [
+        "layer in a typic",
+        "al sequence tran",
+        "sduction encoder",
+        "or decoder. Motiva",
+        "ting our use of s",
+        "elf-attention we"
+      ],
+      [
+        "consider three",
+        "desiderata.",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "One is the tota",
+        "l computational",
+        "complexity per la",
+        "yer. Another is the",
+        "amount of comp",
+        "utation that can"
+      ],
+      [
+        "be parallelized",
+        ", as measured b",
+        "y the minimum nu",
+        "mber of sequential",
+        "operations requi",
+        "red."
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "The third is th",
+        "e path length bet",
+        "ween long-range",
+        "dependencies in th",
+        "e network. Learn",
+        "ing long-range"
+      ],
+      [
+        "dependencies i",
+        "s a key challeng",
+        "e in many sequen",
+        "ce transduction tas",
+        "ks. One key fact",
+        "or affecting the"
+      ],
+      [
+        "ability to learn",
+        "such dependen",
+        "cies is the length",
+        "of the paths forwar",
+        "d and backward",
+        "signals have to"
+      ],
+      [
+        "traverse in the",
+        "network. The s",
+        "horter these paths",
+        "between any comb",
+        "ination of positi",
+        "ons in the input"
+      ],
+      [
+        "and output seq",
+        "uences, the easie",
+        "r it is to learn lon",
+        "g-range dependenci",
+        "es [12]. Hence w",
+        "e also compare"
+      ],
+      [
+        "the maximum",
+        "path length betw",
+        "een any two inpu",
+        "t and output positio",
+        "ns in networks c",
+        "omposed of the"
+      ],
+      [
+        "different layer",
+        "types.",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "As noted in Tab",
+        "le 1, a self-atten",
+        "tion layer connect",
+        "s all positions with a",
+        "constant numbe",
+        "r of sequentially"
+      ],
+      [
+        "executed oper",
+        "ations, whereas",
+        "a recurrent layer",
+        "requires O(n) seq",
+        "uential operatio",
+        "ns. In terms of"
+      ],
+      [
+        "computational",
+        "complexity, sel",
+        "f-attention layers",
+        "are faster than recu",
+        "rrent layers whe",
+        "n the sequence"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "6",
+        "",
+        ""
+      ]
+    ]
+  },
+  {
+    "page": 7,
+    "bbox": [
+      107.5,
+      74.2,
+      505.7,
+      722.4
+    ],
+    "rows": 64,
+    "cols": 6,
+    "header": [
+      "length n is smaller",
+      "than the re",
+      "presentation",
+      "dimensionality d, wh",
+      "ich is most often th",
+      "e case with"
+    ],
+    "markdown": "|length n is smaller|than the re|presentation|dimensionality d, wh|ich is most often th|e case with|\n|---|---|---|---|---|---|\n|sentence representa|tions used by|state-of-the-|art models in machine|translations, such as|word-piece|\n|[38] and byte-pair [|31] represen|tations. To im|prove computational|performance for tas|ks involving|\n|very long sequences|, self-attenti|on could be re|stricted to considering|only a neighborhoo|d of size_ r_ in|\n|the input sequence c|entered arou|nd the respec|tive output position. T|his would increase th|e maximum|\n|path length to_ O_(_n/_|_r_). We plan|to investigat|e this approach further|in future work.||\n|<br>|<br>|<br>|<br>|<br>||\n|A single convolutio|nal layer wit|h kernel widt|h_ k < n_ does not con|nect all pairs of inpu|t and output|\n|positions. Doing so|requires a st|ack of_ O_(_n/k_|) convolutional layers|in the case of contig|uous kernels,|\n|||||||\n|or_ O_(_logk_(_n_)) in t|e case of di|lated convol|tions [18], increasing|the length of the l|ngest paths|\n|between any two po|sitions in th|e network. C|onvolutional layers ar|e generally more ex|pensive than|\n|recurrent layers, by<br>|a factor of <br>|_k_. Separable<br>|convolutions [6], ho<br>|wever, decrease the<br>|complexity<br>|\n|<br>considerably, to_ O_(|<br>_k · n · d_ +|<br>_ n · d_2). Even|<br> with_ k_ = _n_, however|<br>, the complexity of|<br>   a separable|\n|convolution is equal|to the comb|ination of a s|elf-attention layer and|a point-wise feed-f|orward layer,|\n|the approach we tak|e in our mo|del.||||\n|<br>|<br>|<br>||||\n|As side benefit, self-|attention cou|ld yield more|interpretable models.|We inspect attention|distributions|\n|from our models an|d present an|d discuss exa|mples in the appendix.|Not only do individ|ual attention|\n|heads clearly learn t|o perform di|fferent tasks,|many appear to exhibit|behavior related to|the syntactic|\n|and semantic struct|ure of the se|ntences.||||\n|<br><br>||||||\n|**5**<br>**Training**||||||\n|||||||\n|This section describ|es the traini|ng regime for|our models.|||\n|<br><br>|<br>|<br>||||\n|**5.1**<br>**Training Dat**|** a and Batch**|**   ing**||||\n|<br>|<br>|<br>||||\n|We trained on the|standard W|MT 2014 En|glish-German dataset|consisting of about|4.5 million|\n|sentence pairs. Sen|tences were|encoded usi|ng byte-pair encoding|[3], which has a sh|ared source-|\n|target vocabulary of|about 3700|0 tokens. For|English-French, we us|ed the significantly|larger WMT|\n|2014 English-Frenc|h dataset co|nsisting of 36|M sentences and split|tokens into a 32000|word-piece|\n|vocabulary [38]. Se|ntence pairs|were batched|together by approximat|e sequence length. E|ach training|\n|batch contained a s|et of senten|ce pairs conta|ining approximately|25000 source token|s and 25000|\n|target tokens.||||||\n|<br><br>||||||\n|**5.2**<br>**Hardware an**|** d Schedule**|||||\n|<br>|<br>|||||\n|We trained our mo|dels on one|machine with|8 NVIDIA P100 GP|Us. For our base m|odels using|\n|the hyperparameter|s described t|hroughout th|e paper, each training|step took about 0.4|seconds. We|\n|trained the base mo|dels for a tot|al of 100,000|steps or 12 hours. For|our big models,(desc|ribed on the|\n|bottom line of table|3), step tim|e was 1.0 sec|onds. The big models|were trained for 3|00,000 steps|\n|(3.5 days).||||||\n|<br><br>||||||\n|**5.3**<br>**Optimizer**||||||\n|||||||\n|||||_−_9||\n|We used the Adam|optimizer [2|0] with_ β_1 =|0_._9,_ β_2 = 0_._98 and_ ϵ_|= 10. We varied|the learning|\n|rate over the course|of training,|<br>      according to|<br>        the formula:|||\n|<br>|<br><br>|<br>|<br>|||\n|_lrate_|=_ d−_0_._5<br> _·_|in(_stepnu_|_−_0_._5_, stepnum · wa_|_ rmupsteps−_1_._5)|(3)|\n||<br>model|_|_|_||\n|||||||\n|This corresponds t|increasing|he learning r|te linearly for the fir|t_ warmupsteps_ tr|ining steps,|\n|||||_||\n|||||||\n|and decreasing it t|ereafter pro|portionally t|the inverse square ro|ot of the step numb|er. We used|\n|_warmupsteps_ =|000.|||||\n|||||||\n|_||||||\n|||||||\n|**5.4**<br>**Regularizatio**|**n**|||||\n|||||||\n|We employ three ty|pes of regula|rization duri|ng training:|||\n\n",
+    "cells": [
+      [
+        "length n is smaller",
+        "than the re",
+        "presentation",
+        "dimensionality d, wh",
+        "ich is most often th",
+        "e case with"
+      ],
+      [
+        "sentence representa",
+        "tions used by",
+        "state-of-the-",
+        "art models in machine",
+        "translations, such as",
+        "word-piece"
+      ],
+      [
+        "[38] and byte-pair [",
+        "31] represen",
+        "tations. To im",
+        "prove computational",
+        "performance for tas",
+        "ks involving"
+      ],
+      [
+        "very long sequences",
+        ", self-attenti",
+        "on could be re",
+        "stricted to considering",
+        "only a neighborhoo",
+        "d of size r in"
+      ],
+      [
+        "the input sequence c",
+        "entered arou",
+        "nd the respec",
+        "tive output position. T",
+        "his would increase th",
+        "e maximum"
+      ],
+      [
+        "path length to O(n/",
+        "r). We plan",
+        "to investigat",
+        "e this approach further",
+        "in future work.",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "A single convolutio",
+        "nal layer wit",
+        "h kernel widt",
+        "h k < n does not con",
+        "nect all pairs of inpu",
+        "t and output"
+      ],
+      [
+        "positions. Doing so",
+        "requires a st",
+        "ack of O(n/k",
+        ") convolutional layers",
+        "in the case of contig",
+        "uous kernels,"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "or O(log (n)) in th\nk",
+        "e case of di",
+        "lated convolu",
+        "tions [18], increasing",
+        "the length of the l",
+        "ongest paths"
+      ],
+      [
+        "between any two po",
+        "sitions in th",
+        "e network. C",
+        "onvolutional layers ar",
+        "e generally more ex",
+        "pensive than"
+      ],
+      [
+        "recurrent layers, by",
+        "a factor of",
+        "k. Separable",
+        "convolutions [6], ho",
+        "wever, decrease the",
+        "complexity"
+      ],
+      [
+        "considerably, to O(",
+        "k · n · d +",
+        "n · d2). Even",
+        "with k = n, however",
+        ", the complexity of",
+        "a separable"
+      ],
+      [
+        "convolution is equal",
+        "to the comb",
+        "ination of a s",
+        "elf-attention layer and",
+        "a point-wise feed-f",
+        "orward layer,"
+      ],
+      [
+        "the approach we tak",
+        "e in our mo",
+        "del.",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "As side benefit, self-",
+        "attention cou",
+        "ld yield more",
+        "interpretable models.",
+        "We inspect attention",
+        "distributions"
+      ],
+      [
+        "from our models an",
+        "d present an",
+        "d discuss exa",
+        "mples in the appendix.",
+        "Not only do individ",
+        "ual attention"
+      ],
+      [
+        "heads clearly learn t",
+        "o perform di",
+        "fferent tasks,",
+        "many appear to exhibit",
+        "behavior related to",
+        "the syntactic"
+      ],
+      [
+        "and semantic struct",
+        "ure of the se",
+        "ntences.",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "5 Training",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "This section describ",
+        "es the traini",
+        "ng regime for",
+        "our models.",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "5.1 Training Dat",
+        "a and Batch",
+        "ing",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "We trained on the",
+        "standard W",
+        "MT 2014 En",
+        "glish-German dataset",
+        "consisting of about",
+        "4.5 million"
+      ],
+      [
+        "sentence pairs. Sen",
+        "tences were",
+        "encoded usi",
+        "ng byte-pair encoding",
+        "[3], which has a sh",
+        "ared source-"
+      ],
+      [
+        "target vocabulary of",
+        "about 3700",
+        "0 tokens. For",
+        "English-French, we us",
+        "ed the significantly",
+        "larger WMT"
+      ],
+      [
+        "2014 English-Frenc",
+        "h dataset co",
+        "nsisting of 36",
+        "M sentences and split",
+        "tokens into a 32000",
+        "word-piece"
+      ],
+      [
+        "vocabulary [38]. Se",
+        "ntence pairs",
+        "were batched",
+        "together by approximat",
+        "e sequence length. E",
+        "ach training"
+      ],
+      [
+        "batch contained a s",
+        "et of senten",
+        "ce pairs conta",
+        "ining approximately",
+        "25000 source token",
+        "s and 25000"
+      ],
+      [
+        "target tokens.",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "5.2 Hardware an",
+        "d Schedule",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "We trained our mo",
+        "dels on one",
+        "machine with",
+        "8 NVIDIA P100 GP",
+        "Us. For our base m",
+        "odels using"
+      ],
+      [
+        "the hyperparameter",
+        "s described t",
+        "hroughout th",
+        "e paper, each training",
+        "step took about 0.4",
+        "seconds. We"
+      ],
+      [
+        "trained the base mo",
+        "dels for a tot",
+        "al of 100,000",
+        "steps or 12 hours. For",
+        "our big models,(desc",
+        "ribed on the"
+      ],
+      [
+        "bottom line of table",
+        "3), step tim",
+        "e was 1.0 sec",
+        "onds. The big models",
+        "were trained for 3",
+        "00,000 steps"
+      ],
+      [
+        "(3.5 days).",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "5.3 Optimizer",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "−9",
+        ""
+      ],
+      [
+        "We used the Adam",
+        "optimizer [2",
+        "0] with β =\n1",
+        "0.9, β = 0.98 and ϵ\n2",
+        "= 10 . We varied",
+        "the learning"
+      ],
+      [
+        "rate over the course",
+        "of training,",
+        "according to",
+        "the formula:",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "lrate",
+        "= d−0.5 · m",
+        "in(step num",
+        "−0.5, step num · wa",
+        "rmup steps−1.5)",
+        "(3)"
+      ],
+      [
+        "",
+        "model",
+        "_",
+        "_",
+        "_",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "This corresponds to",
+        "increasing t",
+        "he learning r",
+        "ate linearly for the firs",
+        "t warmup steps tr",
+        "aining steps,"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "_",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "and decreasing it th",
+        "ereafter pro",
+        "portionally to",
+        "the inverse square ro",
+        "ot of the step numb",
+        "er. We used"
+      ],
+      [
+        "warmup steps =",
+        "4000.",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "_",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "5.4 Regularizatio",
+        "n",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "We employ three ty",
+        "pes of regula",
+        "rization duri",
+        "ng training:",
+        "",
+        ""
+      ]
+    ]
+  },
+  {
+    "page": 8,
+    "bbox": [
+      107.6,
+      71.2,
+      505.2,
+      722.2
+    ],
+    "rows": 61,
+    "cols": 6,
+    "header": [
+      "Table 2: The Transform",
+      "er achieves better BL",
+      "EU scores",
+      "than previous",
+      "state-of-the-",
+      "art models on the"
+    ],
+    "markdown": "|Table 2: The Transform|er achieves better BL|EU scores|than previous|state-of-the-|art models on the|\n|---|---|---|---|---|---|\n|English-to-German and|English-to-French ne|wstest201|4 tests at a fra|ction of the tr|aining cost.|\n|||<br>|<br>|<br>|<br>|\n|||BLE|U|Training Cos|t (FLOPs)|\n|Model||||<br>|<br>|\n|||EN-DE<br>|EN-FR|EN-DE|EN-FR|\n|ByteNet [18]||23.75||||\n|Deep-Att + PosU|nk [39]||39.2||1_._0_ ·_ 1020<br>|\n|GNMT + RL [38|]|24.6|39.92|2_._3_ ·_ 1019<br><br><br>|1_._4_ ·_ 1020<br>|\n|ConvS2S [9]||25.16|40.46|9_._6_ ·_ 1018<br><br><br>|1_._5_ ·_ 1020<br>|\n|MoE[32]||26.03|40.56|2_._0_ ·_ 1019<br>|1_._2_ ·_ 1020|\n|Deep-Att + PosU|nk Ensemble [39]||40.4||8_._0_ ·_ 1020<br>|\n|GNMT + RL En|semble [38]|26.30|41.16|1_._8_ ·_ 1020<br><br><br>|1_._1_ ·_ 1021<br>|\n|ConvS2S Ensem|ble[9]|26.36|**41.29**|7_._7_ ·_ 1019<br>|1_._2_ ·_ 1021|\n|Transformer (ba|se model)|27.3|38.1|**3****_._3****_ ·_ 1**<br>|** 018**<br>|\n|Transformer (big|)|**28.4**|**41.8**|2_._3_ ·_ 1|019|\n|<br>||||||\n|**Residual Dropout**<br>W|e apply dropout [33] t|o the outpu|t of each sub|-layer, before|it is added to the|\n|sub-layer input and norm|alized. In addition, w|e apply dr|opout to the s|ums of the em|beddings and the|\n|positional encodings in|both the encoder and|decoder s|tacks. For th|e base model|, we use a rate of|\n|||||||\n|_Pdrop_ = 0_._1.||||||\n|<br>||||||\n|<br>||||||\n|**Label Smoothing**<br>D|ring training, we em|ployed lab|el smoothin|of value_ ϵls_|= 0_._1 [36]. This|\n|hurts perplexity, as the|model learns to be mo|re unsure,|but improves|<br>            accuracy and|BLEU score.|\n|<br><br>||||||\n|**6**<br>**Results**||||||\n|||||||\n|**6.1**<br>**Machine Transla**|** tion**|||||\n|<br>|<br>|||||\n|On the WMT 2014 Engl|ish-to-German transla|tion task, t|he big transfo|rmer model (|Transformer (big)|\n|in Table 2) outperforms|the best previously re|ported mo|dels (includin|g ensembles)|by more than 2_._0|\n|BLEU, establishing a n|ew state-of-the-art B|LEU score|of 28_._4. The|configuration|of this model is|\n|listed in the bottom line|of Table 3. Training|took 3_._5 d|ays on 8 P10|0 GPUs. Eve|n our base model|\n|surpasses all previously|published models an|d ensemble|s, at a fractio|n of the traini|ng cost of any of|\n|the competitive models.||||||\n|<br>||||||\n|On the WMT 2014 Engl|ish-to-French translat|ion task, o|ur big model|achieves a BL|EU score of 41_._0,|\n|outperforming all of the|previously published|single mo|dels, at less t|han 1_/_4 the tr|aining cost of the|\n|previous state-of-the-ar|t model. The Transfo|rmer (big)|model train|ed for Englis|h-to-French used|\n|||||||\n|dropout rate_ Pdrop_ = 0_._|1, instead of 0_._3.|||||\n|<br>||||||\n|For the base models, w|e used a single mode|l obtained|by averaging|the last 5 ch|eckpoints, which|\n|were written at 10-min|ute intervals. For the|big model|s, we average|d the last 20|checkpoints. We|\n|used beam search with|a beam size of 4 and|length pen|alty_ α_ = 0_._6|[38]. These|hyperparameters|\n|were chosen after experi|mentation on the deve|lopment se|t. We set the|maximum out|put length during|\n|inference to input length|+ 50, but terminate e|arly when|possible [38|].||\n|<br>|<br>|<br>|<br>|<br>||\n|Table 2 summarizes our|results and compares|our translat|ion quality a|nd training co|sts to other model|\n|architectures from the li|terature. We estimate|the numbe|r of floating|point operatio|ns used to train a|\n|model by multiplying th<br>|e training time, the n<br>|umber of G<br>|PUs used, a|nd an estimat|e of the sustained|\n|single-precision floating|-point capacity of eac|h GPU 5.||||\n|<br><br>|<br>|||||\n|**6.2**<br>**Model Variations**||||||\n|<br>|<br>|||||\n|To evaluate the importa|nce of different comp|onents of|the Transfor|mer, we varie|d our base model|\n|in different ways, meas|uring the change in p|erformanc|e on English|-to-German t|ranslation on the|\n|<br>|<br>|<br>|<br>|<br>|<br>|\n|5We used values of 2.8|, 3.7, 6.0 and 9.5 TFLO|PS for K80,|K40, M40 and|P100, respecti|vely.|\n\n",
+    "cells": [
+      [
+        "Table 2: The Transform",
+        "er achieves better BL",
+        "EU scores",
+        "than previous",
+        "state-of-the-",
+        "art models on the"
+      ],
+      [
+        "English-to-German and",
+        "English-to-French ne",
+        "wstest201",
+        "4 tests at a fra",
+        "ction of the tr",
+        "aining cost."
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "BLE",
+        "U",
+        "Training Cos",
+        "t (FLOPs)"
+      ],
+      [
+        "Model",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "EN-DE",
+        "EN-FR",
+        "EN-DE",
+        "EN-FR"
+      ],
+      [
+        "ByteNet [18]",
+        "",
+        "23.75",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Deep-Att + PosU",
+        "nk [39]",
+        "",
+        "39.2",
+        "",
+        "1.0 · 1020"
+      ],
+      [
+        "GNMT + RL [38",
+        "]",
+        "24.6",
+        "39.92",
+        "2.3 · 1019",
+        "1.4 · 1020"
+      ],
+      [
+        "ConvS2S [9]",
+        "",
+        "25.16",
+        "40.46",
+        "9.6 · 1018",
+        "1.5 · 1020"
+      ],
+      [
+        "MoE [32]",
+        "",
+        "26.03",
+        "40.56",
+        "2.0 · 1019",
+        "1.2 · 1020"
+      ],
+      [
+        "Deep-Att + PosU",
+        "nk Ensemble [39]",
+        "",
+        "40.4",
+        "",
+        "8.0 · 1020"
+      ],
+      [
+        "GNMT + RL En",
+        "semble [38]",
+        "26.30",
+        "41.16",
+        "1.8 · 1020",
+        "1.1 · 1021"
+      ],
+      [
+        "ConvS2S Ensem",
+        "ble [9]",
+        "26.36",
+        "41.29",
+        "7.7 · 1019",
+        "1.2 · 1021"
+      ],
+      [
+        "Transformer (ba",
+        "se model)",
+        "27.3",
+        "38.1",
+        "3.3 · 1",
+        "018"
+      ],
+      [
+        "Transformer (big",
+        ")",
+        "28.4",
+        "41.8",
+        "2.3 · 1",
+        "019"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Residual Dropout W",
+        "e apply dropout [33] t",
+        "o the outpu",
+        "t of each sub",
+        "-layer, before",
+        "it is added to the"
+      ],
+      [
+        "sub-layer input and norm",
+        "alized. In addition, w",
+        "e apply dr",
+        "opout to the s",
+        "ums of the em",
+        "beddings and the"
+      ],
+      [
+        "positional encodings in",
+        "both the encoder and",
+        "decoder s",
+        "tacks. For th",
+        "e base model",
+        ", we use a rate of"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "P = 0.1.\ndrop",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Label Smoothing Du",
+        "ring training, we em",
+        "ployed lab",
+        "el smoothing",
+        "of value ϵ\nls",
+        "= 0.1 [36]. This"
+      ],
+      [
+        "hurts perplexity, as the",
+        "model learns to be mo",
+        "re unsure,",
+        "but improves",
+        "accuracy and",
+        "BLEU score."
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "6 Results",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "6.1 Machine Transla",
+        "tion",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "On the WMT 2014 Engl",
+        "ish-to-German transla",
+        "tion task, t",
+        "he big transfo",
+        "rmer model (",
+        "Transformer (big)"
+      ],
+      [
+        "in Table 2) outperforms",
+        "the best previously re",
+        "ported mo",
+        "dels (includin",
+        "g ensembles)",
+        "by more than 2.0"
+      ],
+      [
+        "BLEU, establishing a n",
+        "ew state-of-the-art B",
+        "LEU score",
+        "of 28.4. The",
+        "configuration",
+        "of this model is"
+      ],
+      [
+        "listed in the bottom line",
+        "of Table 3. Training",
+        "took 3.5 d",
+        "ays on 8 P10",
+        "0 GPUs. Eve",
+        "n our base model"
+      ],
+      [
+        "surpasses all previously",
+        "published models an",
+        "d ensemble",
+        "s, at a fractio",
+        "n of the traini",
+        "ng cost of any of"
+      ],
+      [
+        "the competitive models.",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "On the WMT 2014 Engl",
+        "ish-to-French translat",
+        "ion task, o",
+        "ur big model",
+        "achieves a BL",
+        "EU score of 41.0,"
+      ],
+      [
+        "outperforming all of the",
+        "previously published",
+        "single mo",
+        "dels, at less t",
+        "han 1/4 the tr",
+        "aining cost of the"
+      ],
+      [
+        "previous state-of-the-ar",
+        "t model. The Transfo",
+        "rmer (big)",
+        "model train",
+        "ed for Englis",
+        "h-to-French used"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "dropout rate P = 0.\ndrop",
+        "1, instead of 0.3.",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "For the base models, w",
+        "e used a single mode",
+        "l obtained",
+        "by averaging",
+        "the last 5 ch",
+        "eckpoints, which"
+      ],
+      [
+        "were written at 10-min",
+        "ute intervals. For the",
+        "big model",
+        "s, we average",
+        "d the last 20",
+        "checkpoints. We"
+      ],
+      [
+        "used beam search with",
+        "a beam size of 4 and",
+        "length pen",
+        "alty α = 0.6",
+        "[38]. These",
+        "hyperparameters"
+      ],
+      [
+        "were chosen after experi",
+        "mentation on the deve",
+        "lopment se",
+        "t. We set the",
+        "maximum out",
+        "put length during"
+      ],
+      [
+        "inference to input length",
+        "+ 50, but terminate e",
+        "arly when",
+        "possible [38",
+        "].",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Table 2 summarizes our",
+        "results and compares",
+        "our translat",
+        "ion quality a",
+        "nd training co",
+        "sts to other model"
+      ],
+      [
+        "architectures from the li",
+        "terature. We estimate",
+        "the numbe",
+        "r of floating",
+        "point operatio",
+        "ns used to train a"
+      ],
+      [
+        "model by multiplying th",
+        "e training time, the n",
+        "umber of G",
+        "PUs used, a",
+        "nd an estimat",
+        "e of the sustained"
+      ],
+      [
+        "single-precision floating",
+        "-point capacity of eac",
+        "h GPU 5.",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "6.2 Model Variations",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "To evaluate the importa",
+        "nce of different comp",
+        "onents of",
+        "the Transfor",
+        "mer, we varie",
+        "d our base model"
+      ],
+      [
+        "in different ways, meas",
+        "uring the change in p",
+        "erformanc",
+        "e on English",
+        "-to-German t",
+        "ranslation on the"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "5We used values of 2.8",
+        ", 3.7, 6.0 and 9.5 TFLO",
+        "PS for K80,",
+        "K40, M40 and",
+        "P100, respecti",
+        "vely."
+      ]
+    ]
+  },
+  {
+    "page": 9,
+    "bbox": [
+      107.5,
+      71.3,
+      504.0,
+      722.4
+    ],
+    "rows": 68,
+    "cols": 8,
+    "header": [
+      "Table 3: Variatio",
+      "ns on the Transf",
+      "ormer ar",
+      "chitecture.",
+      "Unlisted v",
+      "alues are iden",
+      "tical to those of",
+      "the base"
+    ],
+    "markdown": "|Table 3: Variatio|ns on the Transf|ormer ar|chitecture.|Unlisted v|alues are iden|tical to those of|the base|\n|---|---|---|---|---|---|---|---|\n|model. All metr|ics are on the En|glish-to-|German tr|anslation d|evelopment s|et, newstest2013|. Listed|\n|perplexities are|per-wordpiece, a|ccording|to our byt|e-pair enc|oding, and sh|ould not be com|pared to|\n|per-word perple|xities.|||||||\n|||||||||\n||||||train<br>|PL<br>BLEU|params|\n|||||||||\n|_N_<br>|model<br>_d_ff<br>|_h_<br>_dk_|_dv_<br>|_drop_<br>_ϵl_|_s_<br><br>||6|\n||||||steps<br>(|ev)<br>(dev)|_×_10|\n|base<br>6<br>|512<br>2048|8<br>64|64|0.1<br>0.|1<br>100K<br>4|.92<br>25.8|65|\n|||1<br>512|512||5|.29<br>24.9||\n|||4<br>128|128|||.00<br>25.5||\n|(A)||||||||\n|||||||||\n|||6<br>32|32|||.91<br>25.8||\n|||32<br>16|16||5|.01<br>25.4||\n|||16||||.16<br>25.1|58|\n|||||||||\n|(B)||||||||\n|||32||||.01<br>25.4|60|\n|2|||||6|.11<br>23.7|36|\n|4|||||5|.19<br>25.3|50|\n|8|||||4|.88<br>25.5|80|\n|(C)<br>|256|32|32||5|.75<br>24.5|28|\n|1|024|128|128||4|.66<br>26.0|168|\n||1024||||5|.12<br>25.4|53|\n||4096||||4|.75<br>26.2|90|\n|||||0.0|5|.77<br>24.6||\n|||||0.2||.95<br>25.5||\n|||||||||\n|(D)||||||||\n|||||0.||.67<br>25.3||\n|||||0.|2<br>5|.47<br>25.7||\n|(E)|positional emb|edding i|nstead of s|inusoids|4|.92<br>25.7||\n|big<br>6<br>1|024<br>4096<br>|16||0.3|300K<br>**4**|**.33**<br>**26.4**|213|\n|||||||||\n|development se|t, newstest2013.|We used|beam sea|rch as des|cribed in the|previous section|, but no|\n|checkpoint aver|aging. We prese|nt these r|esults in T|able 3.||||\n|<br>|<br>|<br>|<br>|<br>||||\n|In Table 3 rows (|A), we vary the|number o|f attention|heads and|the attention k|ey and value dim|ensions|\n|keeping the am|ount of comput|ation con|stant, as|described|in Section 3.|2.2. While sing|le-head|\n|attention is 0.9|BLEU worse tha|n the bes|t setting, q|uality also|drops off wit|h too many head|s.|\n|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|\n|||||||||\n|In Table 3 rows|(B), we observ|that re|ucing the|attention|ey size_ dk_ h|rts model quali|ty. This|\n|suggests that d|etermining com|patibility|is not eas|y and tha|<br>t a more sop|histicated comp|atibility|\n|function than do|t product may be|benefici|al. We furt|her observ|e in rows (C) a|nd (D) that, as e|xpected|\n|bigger models ar|e better, and dro|pout is ve|ry helpful i|n avoiding|over-fitting. I|n row (E) we rep|lace our|\n|sinusoidal posit|ional encoding w|ith learn|ed position|al embed|dings [9], and|observe nearly i|dentical|\n|results to the ba|se model.|||||||\n|<br><br>|<br>|||||||\n|**6.3**<br>**English C**|** onstituency Pa**|**  rsing**||||||\n|<br>|<br>|<br>||||||\n|To evaluate if th|e Transformer c|an gener|alize to ot|her tasks|we performed|experiments on|English|\n|constituency par|sing. This task p|resents s|pecific cha|llenges: th|e output is su|bject to strong st|ructural|\n|constraints and|is significantly|longer t|han the in|put. Furth|ermore, RNN|sequence-to-s|equence|\n|models have no|t been able to att|ain state-|of-the-art|results in s|mall-data reg|imes [37].||\n|<br>|<br>|<br>|<br>|<br>|<br>|<br>||\n|||||||||\n|We trained a 4-l|yer transformer|with_ dmo_|_del_ = 102|on the|all Street Jour|nal (WSJ) porti|n of the|\n|Penn Treebank|[25], about 40K|training|<br>    sentences.|We also t|rained it in a|semi-supervised|setting,|\n|using the larger|high-confidence|and Berk|leyParser|corpora fr|om with appro|ximately 17M se|ntences|\n|[37]. We used a|vocabulary of 1|6K token|s for the W|SJ only s|etting and a v|ocabulary of 32K|tokens|\n|for the semi-sup|ervised setting.|||||||\n|<br>|<br>|||||||\n|We performed o|nly a small num|ber of ex|periments|to select th|e dropout, bo|th attention and|residual|\n|(section 5.4), le|arning rates and|beam siz|e on the S|ection 22|development|set, all other par|ameters|\n|remained uncha|nged from the|English-t|o-German|base tran|slation model|. During infere|nce, we|\n\n",
+    "cells": [
+      [
+        "Table 3: Variatio",
+        "ns on the Transf",
+        "ormer ar",
+        "chitecture.",
+        "Unlisted v",
+        "alues are iden",
+        "tical to those of",
+        "the base"
+      ],
+      [
+        "model. All metr",
+        "ics are on the En",
+        "glish-to-",
+        "German tr",
+        "anslation d",
+        "evelopment s",
+        "et, newstest2013",
+        ". Listed"
+      ],
+      [
+        "perplexities are",
+        "per-wordpiece, a",
+        "ccording",
+        "to our byt",
+        "e-pair enc",
+        "oding, and sh",
+        "ould not be com",
+        "pared to"
+      ],
+      [
+        "per-word perple",
+        "xities.",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "train P",
+        "PL BLEU",
+        "params"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "N d",
+        "d\nmodel ff",
+        "h d\nk",
+        "d P\nv",
+        "ϵ\ndrop l",
+        "s",
+        "",
+        "6"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "steps (",
+        "dev) (dev)",
+        "×10"
+      ],
+      [
+        "base 6",
+        "512 2048",
+        "8 64",
+        "64",
+        "0.1 0.",
+        "1 100K 4",
+        ".92 25.8",
+        "65"
+      ],
+      [
+        "",
+        "",
+        "1 512",
+        "512",
+        "",
+        "5",
+        ".29 24.9",
+        ""
+      ],
+      [
+        "",
+        "",
+        "4 128",
+        "128",
+        "",
+        "5",
+        ".00 25.5",
+        ""
+      ],
+      [
+        "(A)",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "16 32",
+        "32",
+        "",
+        "4",
+        ".91 25.8",
+        ""
+      ],
+      [
+        "",
+        "",
+        "32 16",
+        "16",
+        "",
+        "5",
+        ".01 25.4",
+        ""
+      ],
+      [
+        "",
+        "",
+        "16",
+        "",
+        "",
+        "5",
+        ".16 25.1",
+        "58"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "(B)",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "32",
+        "",
+        "",
+        "5",
+        ".01 25.4",
+        "60"
+      ],
+      [
+        "2",
+        "",
+        "",
+        "",
+        "",
+        "6",
+        ".11 23.7",
+        "36"
+      ],
+      [
+        "4",
+        "",
+        "",
+        "",
+        "",
+        "5",
+        ".19 25.3",
+        "50"
+      ],
+      [
+        "8",
+        "",
+        "",
+        "",
+        "",
+        "4",
+        ".88 25.5",
+        "80"
+      ],
+      [
+        "(C)",
+        "256",
+        "32",
+        "32",
+        "",
+        "5",
+        ".75 24.5",
+        "28"
+      ],
+      [
+        "1",
+        "024",
+        "128",
+        "128",
+        "",
+        "4",
+        ".66 26.0",
+        "168"
+      ],
+      [
+        "",
+        "1024",
+        "",
+        "",
+        "",
+        "5",
+        ".12 25.4",
+        "53"
+      ],
+      [
+        "",
+        "4096",
+        "",
+        "",
+        "",
+        "4",
+        ".75 26.2",
+        "90"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "0.0",
+        "5",
+        ".77 24.6",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "0.2",
+        "4",
+        ".95 25.5",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "(D)",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "0.",
+        "0 4",
+        ".67 25.3",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "0.",
+        "2 5",
+        ".47 25.7",
+        ""
+      ],
+      [
+        "(E)",
+        "positional emb",
+        "edding i",
+        "nstead of s",
+        "inusoids",
+        "4",
+        ".92 25.7",
+        ""
+      ],
+      [
+        "big 6 1",
+        "024 4096",
+        "16",
+        "",
+        "0.3",
+        "300K 4",
+        ".33 26.4",
+        "213"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "development se",
+        "t, newstest2013.",
+        "We used",
+        "beam sea",
+        "rch as des",
+        "cribed in the",
+        "previous section",
+        ", but no"
+      ],
+      [
+        "checkpoint aver",
+        "aging. We prese",
+        "nt these r",
+        "esults in T",
+        "able 3.",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "In Table 3 rows (",
+        "A), we vary the",
+        "number o",
+        "f attention",
+        "heads and",
+        "the attention k",
+        "ey and value dim",
+        "ensions"
+      ],
+      [
+        "keeping the am",
+        "ount of comput",
+        "ation con",
+        "stant, as",
+        "described",
+        "in Section 3.",
+        "2.2. While sing",
+        "le-head"
+      ],
+      [
+        "attention is 0.9",
+        "BLEU worse tha",
+        "n the bes",
+        "t setting, q",
+        "uality also",
+        "drops off wit",
+        "h too many head",
+        "s."
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "In Table 3 rows",
+        "(B), we observ",
+        "e that red",
+        "ucing the",
+        "attention",
+        "key size d hu\nk",
+        "rts model quali",
+        "ty. This"
+      ],
+      [
+        "suggests that d",
+        "etermining com",
+        "patibility",
+        "is not eas",
+        "y and tha",
+        "t a more sop",
+        "histicated comp",
+        "atibility"
+      ],
+      [
+        "function than do",
+        "t product may be",
+        "benefici",
+        "al. We furt",
+        "her observ",
+        "e in rows (C) a",
+        "nd (D) that, as e",
+        "xpected"
+      ],
+      [
+        "bigger models ar",
+        "e better, and dro",
+        "pout is ve",
+        "ry helpful i",
+        "n avoiding",
+        "over-fitting. I",
+        "n row (E) we rep",
+        "lace our"
+      ],
+      [
+        "sinusoidal posit",
+        "ional encoding w",
+        "ith learn",
+        "ed position",
+        "al embed",
+        "dings [9], and",
+        "observe nearly i",
+        "dentical"
+      ],
+      [
+        "results to the ba",
+        "se model.",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "6.3 English C",
+        "onstituency Pa",
+        "rsing",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "To evaluate if th",
+        "e Transformer c",
+        "an gener",
+        "alize to ot",
+        "her tasks",
+        "we performed",
+        "experiments on",
+        "English"
+      ],
+      [
+        "constituency par",
+        "sing. This task p",
+        "resents s",
+        "pecific cha",
+        "llenges: th",
+        "e output is su",
+        "bject to strong st",
+        "ructural"
+      ],
+      [
+        "constraints and",
+        "is significantly",
+        "longer t",
+        "han the in",
+        "put. Furth",
+        "ermore, RNN",
+        "sequence-to-s",
+        "equence"
+      ],
+      [
+        "models have no",
+        "t been able to att",
+        "ain state-",
+        "of-the-art",
+        "results in s",
+        "mall-data reg",
+        "imes [37].",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "We trained a 4-l",
+        "ayer transformer",
+        "with d\nmo",
+        "= 102\ndel",
+        "4 on the W",
+        "all Street Jour",
+        "nal (WSJ) portio",
+        "n of the"
+      ],
+      [
+        "Penn Treebank",
+        "[25], about 40K",
+        "training",
+        "sentences.",
+        "We also t",
+        "rained it in a",
+        "semi-supervised",
+        "setting,"
+      ],
+      [
+        "using the larger",
+        "high-confidence",
+        "and Berk",
+        "leyParser",
+        "corpora fr",
+        "om with appro",
+        "ximately 17M se",
+        "ntences"
+      ],
+      [
+        "[37]. We used a",
+        "vocabulary of 1",
+        "6K token",
+        "s for the W",
+        "SJ only s",
+        "etting and a v",
+        "ocabulary of 32K",
+        "tokens"
+      ],
+      [
+        "for the semi-sup",
+        "ervised setting.",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "We performed o",
+        "nly a small num",
+        "ber of ex",
+        "periments",
+        "to select th",
+        "e dropout, bo",
+        "th attention and",
+        "residual"
+      ],
+      [
+        "(section 5.4), le",
+        "arning rates and",
+        "beam siz",
+        "e on the S",
+        "ection 22",
+        "development",
+        "set, all other par",
+        "ameters"
+      ],
+      [
+        "remained uncha",
+        "nged from the",
+        "English-t",
+        "o-German",
+        "base tran",
+        "slation model",
+        ". During infere",
+        "nce, we"
+      ]
+    ]
+  },
+  {
+    "page": 10,
+    "bbox": [
+      107.5,
+      71.3,
+      505.7,
+      752.3
+    ],
+    "rows": 63,
+    "cols": 9,
+    "header": [
+      "T",
+      "able",
+      "4: The Transformer generalizes",
+      "w",
+      "ell to En",
+      "glish",
+      "constituency parsing",
+      "(Results are on Sectio",
+      "n 23"
+    ],
+    "markdown": "|T|able|4: The Transformer generalizes|w|ell to En|glish|constituency parsing|(Results are on Sectio|n 23|\n|---|---|---|---|---|---|---|---|---|\n|o|f W|SJ)|||||||\n|||**Parser**||||**Training**|**WSJ 23 F1**||\n|||Vinyals & Kaiser el al. (20|1|4) [37]|WSJ|only, discriminativ|e<br>88.3||\n|||Petrov et al. (2006) [2|9|]|WSJ|only, discriminativ|e<br>90.4||\n|||Zhu et al. (2013) [40|]||WSJ|only, discriminativ|e<br>90.4||\n|||Dyer et al. (2016) [8|]||WSJ|only, discriminativ|e<br>91.7||\n|||Transformer(4 layer|s)||WSJ|only, discriminativ|e<br>91.3||\n|||Zhu et al. (2013) [40|]|||semi-supervised|91.3||\n|||Huang & Harper (2009)|[|14]||semi-supervised|91.3||\n|||McClosky et al. (2006)|[|26]||semi-supervised|92.1||\n|||Vinyals & Kaiser el al. (20|1|4) [37]||semi-supervised|92.1||\n|||Transformer(4 layer|s)|||semi-supervised|92.7||\n|||Luong et al. (2015) [2|3|]||multi-task|93.0||\n|||Dyer et al. (2016) [8|]|||generative|93.3||\n|||<br>|||||||\n|i|ncre|ased the maximum output length|to|input le|ngth|+ 300. We used a be|am size of 21 and_ α_ =|0_._3|\n|f|or bo|th WSJ only and the semi-super|v|ised setti|ng.||||\n|<br>|<br>|<br>|<br>|<br>|<br>||||\n|O|ur r|esults in Table 4 show that des|pi|te the la|ck of|task-specific tunin|g our model performs|sur-|\n|p|risin|gly well, yielding better results|th|an all pr|eviou|sly reported model|s with the exception o|f the|\n|R|ecu|rrent Neural Network Grammar|[8|].|||||\n|<br>|<br>|<br>|<br>|<br>|||||\n|I|n co|ntrast to RNN sequence-to-sequ|en|ce mode|ls [3|7], the Transformer|outperforms the Berk|eley-|\n|P|arse|r [29] even when training only o|n|the WSJ|train|ing set of 40K sente|nces.||\n|<br>|<br><br>|<br>|||||||\n|**7**||**Conclusion**|||||||\n||||||||||\n|I|n thi|s work, we presented the Transf|or|mer, the|first s|equence transductio|n model based entirel|y on|\n|a|ttent|ion, replacing the recurrent layer|s|most co|mmo|nly used in encoder-|decoder architectures|with|\n|m|ulti|-headed self-attention.|||||||\n|<br>|<br>|<br>|||||||\n|F|or tr|anslation tasks, the Transforme|r|can be t|raine|d significantly faste|r than architectures b|ased|\n|o|n re|current or convolutional layers.||On both|WM|T 2014 English-to-|German and WMT 2|014|\n|E|ngli|sh-to-French translation tasks,|w|e achieve|a ne|w state of the art. I|n the former task our|best|\n|m|ode|l outperforms even all previousl|y|reported|ense|mbles.|||\n|<br>|<br>|<br>|<br>|<br>|<br>|<br>|||\n|W|e ar|e excited about the future of atte|nt|ion-base|d mo|dels and plan to app|ly them to other tasks|. We|\n|p|lan t|o extend the Transformer to prob|le|ms invol|ving|input and output mo|dalities other than text|and|\n|t|o inv|estigate local, restricted attentio|n|mechan|isms|to efficiently handl|e large inputs and out|puts|\n|s|uch|as images, audio and video. Mak|in|g genera|tion l|ess sequential is ano|ther research goals of|ours.|\n|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|<br>|\n|T|he|code we used to train and ev|al|uate our|mo|dels is available at|`https://github.`|`com/`|\n|`t`|`ens`|`orflow/tensor2tensor`.|||||||\n||||||||||\n|**A**|**ckn**|**owledgements**<br>We are gratef|ul|to Nal|Kalch|brenner and Stepha|n Gouws for their fru|itful|\n|c|omm|ents, corrections and inspiration|.||||||\n|<br>|<br>|<br>|||||||\n|**R**|**efe**|**rences**|||||||\n||||||||||\n||[1]|Jimmy Lei Ba, Jamie Ryan Kiro|s,|and Geo|ffrey|E Hinton. Layer nor|malization. _arXiv pre_|_ print_|\n|||_arXiv:1607.06450_, 2016.|||||||\n|||<br>|||||||\n||[2]|Dzmitry Bahdanau, Kyunghyun|Ch|o, and Y|oshu|a Bengio. Neural ma|chine translation by jo|intly|\n|||learning to align and translate. _C_|_o_|_RR_, abs/|1409.|0473, 2014.|||\n||<br>|<br>||<br>|<br>|<br>|||\n||[3]|Denny Britz, Anna Goldie, Minh|-T|hang Lu|ong,|and Quoc V. Le. Ma|ssive exploration of n|eural|\n|||machine translation architecture|s.|_CoRR_, a|bs/17|03.03906, 2017.|||\n||<br>|<br>|<br>|<br>|<br>|<br>|||\n||[4]|Jianpeng Cheng, Li Dong, and M|ir|ella Lap|ata. L|ong short-term mem|ory-networks for mac|hine|\n|||reading. _arXiv preprint arXiv:16_|_  0_|_  1.06733_,|2016|.|||\n||||||<br>||||\n||||||10||||\n\n",
+    "cells": [
+      [
+        "T",
+        "able",
+        "4: The Transformer generalizes",
+        "w",
+        "ell to En",
+        "glish",
+        "constituency parsing",
+        "(Results are on Sectio",
+        "n 23"
+      ],
+      [
+        "o",
+        "f W",
+        "SJ)",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "Parser",
+        "",
+        "",
+        "",
+        "Training",
+        "WSJ 23 F1",
+        ""
+      ],
+      [
+        "",
+        "",
+        "Vinyals & Kaiser el al. (20",
+        "1",
+        "4) [37]",
+        "WSJ",
+        "only, discriminativ",
+        "e 88.3",
+        ""
+      ],
+      [
+        "",
+        "",
+        "Petrov et al. (2006) [2",
+        "9",
+        "]",
+        "WSJ",
+        "only, discriminativ",
+        "e 90.4",
+        ""
+      ],
+      [
+        "",
+        "",
+        "Zhu et al. (2013) [40",
+        "]",
+        "",
+        "WSJ",
+        "only, discriminativ",
+        "e 90.4",
+        ""
+      ],
+      [
+        "",
+        "",
+        "Dyer et al. (2016) [8",
+        "]",
+        "",
+        "WSJ",
+        "only, discriminativ",
+        "e 91.7",
+        ""
+      ],
+      [
+        "",
+        "",
+        "Transformer (4 layer",
+        "s)",
+        "",
+        "WSJ",
+        "only, discriminativ",
+        "e 91.3",
+        ""
+      ],
+      [
+        "",
+        "",
+        "Zhu et al. (2013) [40",
+        "]",
+        "",
+        "",
+        "semi-supervised",
+        "91.3",
+        ""
+      ],
+      [
+        "",
+        "",
+        "Huang & Harper (2009)",
+        "[",
+        "14]",
+        "",
+        "semi-supervised",
+        "91.3",
+        ""
+      ],
+      [
+        "",
+        "",
+        "McClosky et al. (2006)",
+        "[",
+        "26]",
+        "",
+        "semi-supervised",
+        "92.1",
+        ""
+      ],
+      [
+        "",
+        "",
+        "Vinyals & Kaiser el al. (20",
+        "1",
+        "4) [37]",
+        "",
+        "semi-supervised",
+        "92.1",
+        ""
+      ],
+      [
+        "",
+        "",
+        "Transformer (4 layer",
+        "s)",
+        "",
+        "",
+        "semi-supervised",
+        "92.7",
+        ""
+      ],
+      [
+        "",
+        "",
+        "Luong et al. (2015) [2",
+        "3",
+        "]",
+        "",
+        "multi-task",
+        "93.0",
+        ""
+      ],
+      [
+        "",
+        "",
+        "Dyer et al. (2016) [8",
+        "]",
+        "",
+        "",
+        "generative",
+        "93.3",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "i",
+        "ncre",
+        "ased the maximum output length",
+        "to",
+        "input le",
+        "ngth",
+        "+ 300. We used a be",
+        "am size of 21 and α =",
+        "0.3"
+      ],
+      [
+        "f",
+        "or bo",
+        "th WSJ only and the semi-super",
+        "v",
+        "ised setti",
+        "ng.",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "O",
+        "ur r",
+        "esults in Table 4 show that des",
+        "pi",
+        "te the la",
+        "ck of",
+        "task-specific tunin",
+        "g our model performs",
+        "sur-"
+      ],
+      [
+        "p",
+        "risin",
+        "gly well, yielding better results",
+        "th",
+        "an all pr",
+        "eviou",
+        "sly reported model",
+        "s with the exception o",
+        "f the"
+      ],
+      [
+        "R",
+        "ecu",
+        "rrent Neural Network Grammar",
+        "[8",
+        "].",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "I",
+        "n co",
+        "ntrast to RNN sequence-to-sequ",
+        "en",
+        "ce mode",
+        "ls [3",
+        "7], the Transformer",
+        "outperforms the Berk",
+        "eley-"
+      ],
+      [
+        "P",
+        "arse",
+        "r [29] even when training only o",
+        "n",
+        "the WSJ",
+        "train",
+        "ing set of 40K sente",
+        "nces.",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "7",
+        "",
+        "Conclusion",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "I",
+        "n thi",
+        "s work, we presented the Transf",
+        "or",
+        "mer, the",
+        "first s",
+        "equence transductio",
+        "n model based entirel",
+        "y on"
+      ],
+      [
+        "a",
+        "ttent",
+        "ion, replacing the recurrent layer",
+        "s",
+        "most co",
+        "mmo",
+        "nly used in encoder-",
+        "decoder architectures",
+        "with"
+      ],
+      [
+        "m",
+        "ulti",
+        "-headed self-attention.",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "F",
+        "or tr",
+        "anslation tasks, the Transforme",
+        "r",
+        "can be t",
+        "raine",
+        "d significantly faste",
+        "r than architectures b",
+        "ased"
+      ],
+      [
+        "o",
+        "n re",
+        "current or convolutional layers.",
+        "",
+        "On both",
+        "WM",
+        "T 2014 English-to-",
+        "German and WMT 2",
+        "014"
+      ],
+      [
+        "E",
+        "ngli",
+        "sh-to-French translation tasks,",
+        "w",
+        "e achieve",
+        "a ne",
+        "w state of the art. I",
+        "n the former task our",
+        "best"
+      ],
+      [
+        "m",
+        "ode",
+        "l outperforms even all previousl",
+        "y",
+        "reported",
+        "ense",
+        "mbles.",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "W",
+        "e ar",
+        "e excited about the future of atte",
+        "nt",
+        "ion-base",
+        "d mo",
+        "dels and plan to app",
+        "ly them to other tasks",
+        ". We"
+      ],
+      [
+        "p",
+        "lan t",
+        "o extend the Transformer to prob",
+        "le",
+        "ms invol",
+        "ving",
+        "input and output mo",
+        "dalities other than text",
+        "and"
+      ],
+      [
+        "t",
+        "o inv",
+        "estigate local, restricted attentio",
+        "n",
+        "mechan",
+        "isms",
+        "to efficiently handl",
+        "e large inputs and out",
+        "puts"
+      ],
+      [
+        "s",
+        "uch",
+        "as images, audio and video. Mak",
+        "in",
+        "g genera",
+        "tion l",
+        "ess sequential is ano",
+        "ther research goals of",
+        "ours."
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "T",
+        "he",
+        "code we used to train and ev",
+        "al",
+        "uate our",
+        "mo",
+        "dels is available at",
+        "https://github.",
+        "com/"
+      ],
+      [
+        "t",
+        "ens",
+        "orflow/tensor2tensor.",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "A",
+        "ckn",
+        "owledgements We are gratef",
+        "ul",
+        "to Nal",
+        "Kalch",
+        "brenner and Stepha",
+        "n Gouws for their fru",
+        "itful"
+      ],
+      [
+        "c",
+        "omm",
+        "ents, corrections and inspiration",
+        ".",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "R",
+        "efe",
+        "rences",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "[1]",
+        "Jimmy Lei Ba, Jamie Ryan Kiro",
+        "s,",
+        "and Geo",
+        "ffrey",
+        "E Hinton. Layer nor",
+        "malization. arXiv pre",
+        "print"
+      ],
+      [
+        "",
+        "",
+        "arXiv:1607.06450, 2016.",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "[2]",
+        "Dzmitry Bahdanau, Kyunghyun",
+        "Ch",
+        "o, and Y",
+        "oshu",
+        "a Bengio. Neural ma",
+        "chine translation by jo",
+        "intly"
+      ],
+      [
+        "",
+        "",
+        "learning to align and translate. C",
+        "o",
+        "RR, abs/",
+        "1409.",
+        "0473, 2014.",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "[3]",
+        "Denny Britz, Anna Goldie, Minh",
+        "-T",
+        "hang Lu",
+        "ong,",
+        "and Quoc V. Le. Ma",
+        "ssive exploration of n",
+        "eural"
+      ],
+      [
+        "",
+        "",
+        "machine translation architecture",
+        "s.",
+        "CoRR, a",
+        "bs/17",
+        "03.03906, 2017.",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "[4]",
+        "Jianpeng Cheng, Li Dong, and M",
+        "ir",
+        "ella Lap",
+        "ata. L",
+        "ong short-term mem",
+        "ory-networks for mac",
+        "hine"
+      ],
+      [
+        "",
+        "",
+        "reading. arXiv preprint arXiv:16",
+        "0",
+        "1.06733,",
+        "2016",
+        ".",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "10",
+        "",
+        "",
+        ""
+      ]
+    ]
+  },
+  {
+    "page": 11,
+    "bbox": [
+      108.0,
+      74.3,
+      505.7,
+      722.4
+    ],
+    "rows": 63,
+    "cols": 6,
+    "header": [
+      "[5]",
+      "Kyunghyun Cho, Bar",
+      "t van Merrienb",
+      "oer, Cagl",
+      "ar Gulcehre, Fethi Bougar",
+      "es, Holger Schwenk,"
+    ],
+    "markdown": "|[5]|Kyunghyun Cho, Bar|t van Merrienb|oer, Cagl|ar Gulcehre, Fethi Bougar|es, Holger Schwenk,|\n|---|---|---|---|---|---|\n||and Yoshua Bengio. L|earning phrase|represent|ations using rnn encoder-d|ecoder for statistical|\n||machine translation.|_CoRR_, abs/1406|.1078, 20|14.||\n||<br>|<br>|<br>|<br>||\n|[6]|Francois Chollet. Xc|eption: Deep l|earning|with depthwise separable|convolutions. _arXiv_|\n||_preprint arXiv:1610.0_|_ 2357_, 2016.||||\n|||<br>||||\n|[7]|Junyoung Chung, Çag|lar Gülçehre, K|yunghyun|Cho, and Yoshua Bengio.|Empirical evaluation|\n||of gated recurrent neu|ral networks on|sequence|modeling. _CoRR_, abs/141|2.3555, 2014.|\n||<br>|<br>|<br>|<br>|<br>|\n|[8]|Chris Dyer, Adhigun|a Kuncoro, Mi|guel Ball|esteros, and Noah A. Smit|h. Recurrent neural|\n||network grammars. In|_ Proc. of NAAC_|_   L_, 2016.|||\n||<br>||<br>|||\n|[9]|Jonas Gehring, Micha|el Auli, David|Grangier,|Denis Yarats, and Yann N|. Dauphin. Convolu-|\n||tional sequence to seq|uence learning.|_arXiv pr_|_ eprint arXiv:1705.03122v2_|, 2017.|\n||||||<br>|\n|[10]|Alex Graves.<br>Gen|erating sequen|ces with|recurrent neural network|s.<br>_arXiv preprint_|\n||_arXiv:1308.0850_, 201|3.||||\n||<br>|<br>||||\n|[11]|Kaiming He, Xiangy|u Zhang, Shao|qing Ren,|and Jian Sun. Deep resid|ual learning for im-|\n||age recognition. In|_Proceedings of _|_the IEEE_|_Conference on Computer_|_Vision and Pattern_|\n||_Recognition_, pages 77|0–778, 2016.||||\n||<br>|<br>||||\n|[12]|Sepp Hochreiter, Yos|hua Bengio, Pa|olo Frasc|oni, and Jürgen Schmidhub|er. Gradient flow in|\n||recurrent nets: the dif|ficulty of learni|ng long-te|rm dependencies, 2001.||\n||<br>|<br>|<br>|<br>||\n|[13]|Sepp Hochreiter and|Jürgen Schmid|huber. L|ong short-term memory.|_Neural computation_,|\n||9(8):1735–1780, 1997|.||||\n||<br>|<br>||||\n|[14]|Zhongqiang Huang a|nd Mary Harpe|r. Self-tra|ining PCFG grammars wi|th latent annotations|\n||across languages. In|_ Proceedings of_|_   the 2009_|_     Conference on Empirical_|_        Methods in Natural_|\n||_Language Processing_,|pages 832–841|. ACL, A|ugust 2009.||\n||<br>|<br>|<br>|<br>||\n|[15]|Rafal Jozefowicz, Ori|ol Vinyals, Mik|e Schust|er, Noam Shazeer, and Yon|ghui Wu. Exploring|\n||the limits of language|modeling. _arX_|_iv preprin_|_ t arXiv:1602.02410_, 2016.||\n||<br>|<br>||<br>||\n|[16]|Łukasz Kaiser and Sa|my Bengio. Can|active m|emory replace attention? In|_ Advances in Neural_|\n||_Information Processin_|_ g Systems, (NI_|_   PS)_, 2016|.||\n||||<br>|<br>||\n|[17]|Łukasz Kaiser and Ily|a Sutskever. Ne|ural GPU|s learn algorithms. In_ Inter_|_ national Conference_|\n||_on Learning Represen_|_  tations (ICLR)_,|2016.|||\n|||<br>|<br>|||\n|[18]|Nal Kalchbrenner, Las|se Espeholt, Ka|ren Simo|nyan, Aaron van den Oord,|Alex Graves, and Ko-|\n||ray Kavukcuoglu. Neu|ral machine tra|nslation in|linear time._ arXiv preprint_|_   arXiv:1610.10099v2_,|\n||2017.|||||\n|||||||\n|[19]|Yoon Kim, Carl Dento|n, Luong Hoan|g, and Al|exander M. Rush. Structure|d attention networks.|\n||In_ International Conf_|_  erence on Learn_|_    ing Repr_|_     esentations_, 2017.||\n|||||<br>||\n|[20]|Diederik Kingma and|Jimmy Ba. Ad|am: A me|thod for stochastic optimiz|ation. In_ ICLR_, 2015.|\n|||||||\n|[21]|Oleksii Kuchaiev and|Boris Ginsburg|. Factoriz|ation tricks for LSTM netw|orks. _arXiv preprint_|\n||_arXiv:1703.10722_, 20|17.||||\n||<br>|<br>||||\n|[22]|Zhouhan Lin, Minw|ei Feng, Cicer|o Noguei|ra dos Santos, Mo Yu,|Bing Xiang, Bowen|\n||Zhou, and Yoshua Be|ngio. A struct|ured self-|attentive sentence embedd|ing. _arXiv preprint_|\n||_arXiv:1703.03130_, 20|17.||||\n||<br>|<br>||||\n|[23]|Minh-Thang Luong,|Quoc V. Le, Ilya|Sutskeve|r, Oriol Vinyals, and Luka|sz Kaiser. Multi-task|\n||sequence to sequence|learning. _arXiv_|_ preprint_|_  arXiv:1511.06114_, 2015.||\n||<br>|<br>||<br>||\n|[24]|Minh-Thang Luong, H|ieu Pham, and|Christoph|er D Manning. Effective ap|proaches to attention-|\n||based neural machine|translation. _ar_|_Xiv prepri_|_ nt arXiv:1508.04025_, 2015|.|\n\n",
+    "cells": [
+      [
+        "[5]",
+        "Kyunghyun Cho, Bar",
+        "t van Merrienb",
+        "oer, Cagl",
+        "ar Gulcehre, Fethi Bougar",
+        "es, Holger Schwenk,"
+      ],
+      [
+        "",
+        "and Yoshua Bengio. L",
+        "earning phrase",
+        "represent",
+        "ations using rnn encoder-d",
+        "ecoder for statistical"
+      ],
+      [
+        "",
+        "machine translation.",
+        "CoRR, abs/1406",
+        ".1078, 20",
+        "14.",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[6]",
+        "Francois Chollet. Xc",
+        "eption: Deep l",
+        "earning",
+        "with depthwise separable",
+        "convolutions. arXiv"
+      ],
+      [
+        "",
+        "preprint arXiv:1610.0",
+        "2357, 2016.",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[7]",
+        "Junyoung Chung, Çag",
+        "lar Gülçehre, K",
+        "yunghyun",
+        "Cho, and Yoshua Bengio.",
+        "Empirical evaluation"
+      ],
+      [
+        "",
+        "of gated recurrent neu",
+        "ral networks on",
+        "sequence",
+        "modeling. CoRR, abs/141",
+        "2.3555, 2014."
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[8]",
+        "Chris Dyer, Adhigun",
+        "a Kuncoro, Mi",
+        "guel Ball",
+        "esteros, and Noah A. Smit",
+        "h. Recurrent neural"
+      ],
+      [
+        "",
+        "network grammars. In",
+        "Proc. of NAAC",
+        "L, 2016.",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[9]",
+        "Jonas Gehring, Micha",
+        "el Auli, David",
+        "Grangier,",
+        "Denis Yarats, and Yann N",
+        ". Dauphin. Convolu-"
+      ],
+      [
+        "",
+        "tional sequence to seq",
+        "uence learning.",
+        "arXiv pr",
+        "eprint arXiv:1705.03122v2",
+        ", 2017."
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[10]",
+        "Alex Graves. Gen",
+        "erating sequen",
+        "ces with",
+        "recurrent neural network",
+        "s. arXiv preprint"
+      ],
+      [
+        "",
+        "arXiv:1308.0850, 201",
+        "3.",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[11]",
+        "Kaiming He, Xiangy",
+        "u Zhang, Shao",
+        "qing Ren,",
+        "and Jian Sun. Deep resid",
+        "ual learning for im-"
+      ],
+      [
+        "",
+        "age recognition. In",
+        "Proceedings of",
+        "the IEEE",
+        "Conference on Computer",
+        "Vision and Pattern"
+      ],
+      [
+        "",
+        "Recognition, pages 77",
+        "0–778, 2016.",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[12]",
+        "Sepp Hochreiter, Yos",
+        "hua Bengio, Pa",
+        "olo Frasc",
+        "oni, and Jürgen Schmidhub",
+        "er. Gradient flow in"
+      ],
+      [
+        "",
+        "recurrent nets: the dif",
+        "ficulty of learni",
+        "ng long-te",
+        "rm dependencies, 2001.",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[13]",
+        "Sepp Hochreiter and",
+        "Jürgen Schmid",
+        "huber. L",
+        "ong short-term memory.",
+        "Neural computation,"
+      ],
+      [
+        "",
+        "9(8):1735–1780, 1997",
+        ".",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[14]",
+        "Zhongqiang Huang a",
+        "nd Mary Harpe",
+        "r. Self-tra",
+        "ining PCFG grammars wi",
+        "th latent annotations"
+      ],
+      [
+        "",
+        "across languages. In",
+        "Proceedings of",
+        "the 2009",
+        "Conference on Empirical",
+        "Methods in Natural"
+      ],
+      [
+        "",
+        "Language Processing,",
+        "pages 832–841",
+        ". ACL, A",
+        "ugust 2009.",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[15]",
+        "Rafal Jozefowicz, Ori",
+        "ol Vinyals, Mik",
+        "e Schust",
+        "er, Noam Shazeer, and Yon",
+        "ghui Wu. Exploring"
+      ],
+      [
+        "",
+        "the limits of language",
+        "modeling. arX",
+        "iv preprin",
+        "t arXiv:1602.02410, 2016.",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[16]",
+        "Łukasz Kaiser and Sa",
+        "my Bengio. Can",
+        "active m",
+        "emory replace attention? In",
+        "Advances in Neural"
+      ],
+      [
+        "",
+        "Information Processin",
+        "g Systems, (NI",
+        "PS), 2016",
+        ".",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[17]",
+        "Łukasz Kaiser and Ily",
+        "a Sutskever. Ne",
+        "ural GPU",
+        "s learn algorithms. In Inter",
+        "national Conference"
+      ],
+      [
+        "",
+        "on Learning Represen",
+        "tations (ICLR),",
+        "2016.",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[18]",
+        "Nal Kalchbrenner, Las",
+        "se Espeholt, Ka",
+        "ren Simo",
+        "nyan, Aaron van den Oord,",
+        "Alex Graves, and Ko-"
+      ],
+      [
+        "",
+        "ray Kavukcuoglu. Neu",
+        "ral machine tra",
+        "nslation in",
+        "linear time. arXiv preprint",
+        "arXiv:1610.10099v2,"
+      ],
+      [
+        "",
+        "2017.",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[19]",
+        "Yoon Kim, Carl Dento",
+        "n, Luong Hoan",
+        "g, and Al",
+        "exander M. Rush. Structure",
+        "d attention networks."
+      ],
+      [
+        "",
+        "In International Conf",
+        "erence on Learn",
+        "ing Repr",
+        "esentations, 2017.",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[20]",
+        "Diederik Kingma and",
+        "Jimmy Ba. Ad",
+        "am: A me",
+        "thod for stochastic optimiz",
+        "ation. In ICLR, 2015."
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[21]",
+        "Oleksii Kuchaiev and",
+        "Boris Ginsburg",
+        ". Factoriz",
+        "ation tricks for LSTM netw",
+        "orks. arXiv preprint"
+      ],
+      [
+        "",
+        "arXiv:1703.10722, 20",
+        "17.",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[22]",
+        "Zhouhan Lin, Minw",
+        "ei Feng, Cicer",
+        "o Noguei",
+        "ra dos Santos, Mo Yu,",
+        "Bing Xiang, Bowen"
+      ],
+      [
+        "",
+        "Zhou, and Yoshua Be",
+        "ngio. A struct",
+        "ured self-",
+        "attentive sentence embedd",
+        "ing. arXiv preprint"
+      ],
+      [
+        "",
+        "arXiv:1703.03130, 20",
+        "17.",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[23]",
+        "Minh-Thang Luong,",
+        "Quoc V. Le, Ilya",
+        "Sutskeve",
+        "r, Oriol Vinyals, and Luka",
+        "sz Kaiser. Multi-task"
+      ],
+      [
+        "",
+        "sequence to sequence",
+        "learning. arXiv",
+        "preprint",
+        "arXiv:1511.06114, 2015.",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[24]",
+        "Minh-Thang Luong, H",
+        "ieu Pham, and",
+        "Christoph",
+        "er D Manning. Effective ap",
+        "proaches to attention-"
+      ],
+      [
+        "",
+        "based neural machine",
+        "translation. ar",
+        "Xiv prepri",
+        "nt arXiv:1508.04025, 2015",
+        "."
+      ]
+    ]
+  },
+  {
+    "page": 12,
+    "bbox": [
+      108.0,
+      74.4,
+      505.7,
+      720.3
+    ],
+    "rows": 57,
+    "cols": 6,
+    "header": [
+      "[25]",
+      "Mitchell P Marcus,",
+      "Mary Ann Marcinkiewic",
+      "z, and Beatric",
+      "e Santorini. Buildi",
+      "ng a large annotated"
+    ],
+    "markdown": "|[25]|Mitchell P Marcus,|Mary Ann Marcinkiewic|z, and Beatric|e Santorini. Buildi|ng a large annotated|\n|---|---|---|---|---|---|\n||corpus of english: T|he penn treebank. _Com_|_putational li_|_ nguistics_, 19(2):31|3–330, 1993.|\n||<br>|<br>||<br>|<br>|\n|[26]|David McClosky, E|ugene Charniak, and M|ark Johnson.|Effective self-trai|ning for parsing. In|\n||_Proceedings of the H_|_   uman Language Techn_|_     ology Confer_|_      ence of the NAACL_|_         , Main Conference_,|\n||pages 152–159. AC|L, June 2006.||||\n||<br>|<br>||||\n|[27]|Ankur Parikh, Oscar|Täckström, Dipanjan D|as, and Jakob|Uszkoreit. A deco|mposable attention|\n||model. In_ Empirical_|_  Methods in Natural La_|_     nguage Proc_|_      essing_, 2016.||\n||<br>|||<br>||\n|[28]|Romain Paulus, Cai|ming Xiong, and Richa|rd Socher. A|deep reinforced m|odel for abstractive|\n||summarization. _arX_|_iv preprint arXiv:1705._|_  04304_, 2017.|||\n||||<br>|||\n|[29]|Slav Petrov, Leon|Barrett, Romain Thiba|ux, and Dan|Klein. Learning|accurate, compact,|\n||and interpretable tr|ee annotation. In _Pro_|_ceedings of t_|_he 21st Internatio_|_nal Conference on_|\n||_Computational Ling_|_ uistics and 44th Annu_|_    al Meeting of_|_       the ACL_, pages 4|33–440. ACL, July|\n||2006.|||||\n|||||||\n|[30]|Ofir Press and Lior|Wolf. Using the outpu|t embedding|to improve langu|age models. _arXiv_|\n||_preprint arXiv:1608_|_ .05859_, 2016.||||\n|||<br>||||\n|[31]|Rico Sennrich, Barr|y Haddow, and Alexand|ra Birch. Ne|ural machine transl|ation of rare words|\n||with subword units.|_arXiv preprint arXiv:1_|_  508.07909_, 2|015.||\n||<br>||<br>|<br>||\n|[32]|Noam Shazeer, Azal|ia Mirhoseini, Krzyszto|f Maziarz, A|ndy Davis, Quoc L|e, Geoffrey Hinton,|\n||and Jeff Dean. Out|rageously large neural|networks: T|he sparsely-gated|mixture-of-experts|\n||layer. _arXiv preprin_|_ t arXiv:1701.06538_, 20|17.|||\n|||<br>|<br>|||\n|[33]|Nitish Srivastava, G|eoffrey E Hinton, Alex|Krizhevsky, I|lya Sutskever, and|Ruslan Salakhutdi-|\n||nov. Dropout: a sim|ple way to prevent neu|ral networks|from overfitting. _J_|_ournal of Machine_|\n||_Learning Research_,|15(1):1929–1958, 2014|.|||\n||<br>|<br>|<br>|||\n|[34]|Sainbayar Sukhbaat|ar, Arthur Szlam, Jaso|n Weston, a|nd Rob Fergus. E|nd-to-end memory|\n||networks. In C. Co|rtes, N. D. Lawrence,|D. D. Lee, M|. Sugiyama, and|R. Garnett, editors,|\n||_Advances in Neural_|_   Information Processing_|_     Systems 28_,|pages 2440–2448.|Curran Associates,|\n||Inc., 2015.|||||\n||<br>|||||\n|[35]|Ilya Sutskever, Orio|l Vinyals, and Quoc V|V Le. Seque|nce to sequence le|arning with neural|\n||networks. In_ Advan_|_ ces in Neural Informati_|_    on Processin_|_     g Systems_, pages 3|104–3112, 2014.|\n||<br>|||<br>|<br>|\n|[36]|Christian Szegedy,|Vincent Vanhoucke, Se|rgey Ioffe, Jo|nathon Shlens, an|d Zbigniew Wojna.|\n||Rethinking the ince|ption architecture for co|mputer visio|n. _CoRR_, abs/1512|.00567, 2015.|\n||<br>|<br>|<br>|<br>|<br>|\n|[37]|Vinyals & Kaiser,|Koo, Petrov, Sutskever,|and Hinton.|Grammar as a fo|reign language. In|\n||_Advances in Neural_|_   Information Processing_|_     Systems_, 20|15.||\n||||<br>|<br>||\n|[38]|Yonghui Wu, Mike|Schuster, Zhifeng Ch|en, Quoc V|Le, Mohammad|Norouzi, Wolfgang|\n||Macherey, Maxim K|rikun, Yuan Cao, Qin G|ao, Klaus Ma|cherey, et al. Goog|le’s neural machine|\n||translation system:|Bridging the gap betwe|en human an|d machine translat|ion. _arXiv preprint_|\n||_arXiv:1609.08144_, 2|016.||||\n||<br>|<br>||||\n|[39]|Jie Zhou, Ying Cao|, Xuguang Wang, Pen|g Li, and W|ei Xu. Deep recu|rrent models with|\n||fast-forward connec|tions for neural machin|e translation.|_CoRR_, abs/1606.0|4199, 2016.|\n||<br>|<br>|<br>|<br>|<br>|\n|[40]|Muhua Zhu, Yue Z|hang, Wenliang Chen,|Min Zhang,|and Jingbo Zhu.|Fast and accurate|\n||shift-reduce constitu|ent parsing. In_ Proceed_|_ ings of the 51_|_    st Annual Meeting_|_       of the ACL (Volume_|\n||_1: Long Papers)_, pa|ges 434–443. ACL, Au|gust 2013.|||\n\n",
+    "cells": [
+      [
+        "[25]",
+        "Mitchell P Marcus,",
+        "Mary Ann Marcinkiewic",
+        "z, and Beatric",
+        "e Santorini. Buildi",
+        "ng a large annotated"
+      ],
+      [
+        "",
+        "corpus of english: T",
+        "he penn treebank. Com",
+        "putational li",
+        "nguistics, 19(2):31",
+        "3–330, 1993."
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[26]",
+        "David McClosky, E",
+        "ugene Charniak, and M",
+        "ark Johnson.",
+        "Effective self-trai",
+        "ning for parsing. In"
+      ],
+      [
+        "",
+        "Proceedings of the H",
+        "uman Language Techn",
+        "ology Confer",
+        "ence of the NAACL",
+        ", Main Conference,"
+      ],
+      [
+        "",
+        "pages 152–159. AC",
+        "L, June 2006.",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[27]",
+        "Ankur Parikh, Oscar",
+        "Täckström, Dipanjan D",
+        "as, and Jakob",
+        "Uszkoreit. A deco",
+        "mposable attention"
+      ],
+      [
+        "",
+        "model. In Empirical",
+        "Methods in Natural La",
+        "nguage Proc",
+        "essing, 2016.",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[28]",
+        "Romain Paulus, Cai",
+        "ming Xiong, and Richa",
+        "rd Socher. A",
+        "deep reinforced m",
+        "odel for abstractive"
+      ],
+      [
+        "",
+        "summarization. arX",
+        "iv preprint arXiv:1705.",
+        "04304, 2017.",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[29]",
+        "Slav Petrov, Leon",
+        "Barrett, Romain Thiba",
+        "ux, and Dan",
+        "Klein. Learning",
+        "accurate, compact,"
+      ],
+      [
+        "",
+        "and interpretable tr",
+        "ee annotation. In Pro",
+        "ceedings of t",
+        "he 21st Internatio",
+        "nal Conference on"
+      ],
+      [
+        "",
+        "Computational Ling",
+        "uistics and 44th Annu",
+        "al Meeting of",
+        "the ACL, pages 4",
+        "33–440. ACL, July"
+      ],
+      [
+        "",
+        "2006.",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[30]",
+        "Ofir Press and Lior",
+        "Wolf. Using the outpu",
+        "t embedding",
+        "to improve langu",
+        "age models. arXiv"
+      ],
+      [
+        "",
+        "preprint arXiv:1608",
+        ".05859, 2016.",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[31]",
+        "Rico Sennrich, Barr",
+        "y Haddow, and Alexand",
+        "ra Birch. Ne",
+        "ural machine transl",
+        "ation of rare words"
+      ],
+      [
+        "",
+        "with subword units.",
+        "arXiv preprint arXiv:1",
+        "508.07909, 2",
+        "015.",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[32]",
+        "Noam Shazeer, Azal",
+        "ia Mirhoseini, Krzyszto",
+        "f Maziarz, A",
+        "ndy Davis, Quoc L",
+        "e, Geoffrey Hinton,"
+      ],
+      [
+        "",
+        "and Jeff Dean. Out",
+        "rageously large neural",
+        "networks: T",
+        "he sparsely-gated",
+        "mixture-of-experts"
+      ],
+      [
+        "",
+        "layer. arXiv preprin",
+        "t arXiv:1701.06538, 20",
+        "17.",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[33]",
+        "Nitish Srivastava, G",
+        "eoffrey E Hinton, Alex",
+        "Krizhevsky, I",
+        "lya Sutskever, and",
+        "Ruslan Salakhutdi-"
+      ],
+      [
+        "",
+        "nov. Dropout: a sim",
+        "ple way to prevent neu",
+        "ral networks",
+        "from overfitting. J",
+        "ournal of Machine"
+      ],
+      [
+        "",
+        "Learning Research,",
+        "15(1):1929–1958, 2014",
+        ".",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[34]",
+        "Sainbayar Sukhbaat",
+        "ar, Arthur Szlam, Jaso",
+        "n Weston, a",
+        "nd Rob Fergus. E",
+        "nd-to-end memory"
+      ],
+      [
+        "",
+        "networks. In C. Co",
+        "rtes, N. D. Lawrence,",
+        "D. D. Lee, M",
+        ". Sugiyama, and",
+        "R. Garnett, editors,"
+      ],
+      [
+        "",
+        "Advances in Neural",
+        "Information Processing",
+        "Systems 28,",
+        "pages 2440–2448.",
+        "Curran Associates,"
+      ],
+      [
+        "",
+        "Inc., 2015.",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[35]",
+        "Ilya Sutskever, Orio",
+        "l Vinyals, and Quoc V",
+        "V Le. Seque",
+        "nce to sequence le",
+        "arning with neural"
+      ],
+      [
+        "",
+        "networks. In Advan",
+        "ces in Neural Informati",
+        "on Processin",
+        "g Systems, pages 3",
+        "104–3112, 2014."
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[36]",
+        "Christian Szegedy,",
+        "Vincent Vanhoucke, Se",
+        "rgey Ioffe, Jo",
+        "nathon Shlens, an",
+        "d Zbigniew Wojna."
+      ],
+      [
+        "",
+        "Rethinking the ince",
+        "ption architecture for co",
+        "mputer visio",
+        "n. CoRR, abs/1512",
+        ".00567, 2015."
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[37]",
+        "Vinyals & Kaiser,",
+        "Koo, Petrov, Sutskever,",
+        "and Hinton.",
+        "Grammar as a fo",
+        "reign language. In"
+      ],
+      [
+        "",
+        "Advances in Neural",
+        "Information Processing",
+        "Systems, 20",
+        "15.",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[38]",
+        "Yonghui Wu, Mike",
+        "Schuster, Zhifeng Ch",
+        "en, Quoc V",
+        "Le, Mohammad",
+        "Norouzi, Wolfgang"
+      ],
+      [
+        "",
+        "Macherey, Maxim K",
+        "rikun, Yuan Cao, Qin G",
+        "ao, Klaus Ma",
+        "cherey, et al. Goog",
+        "le’s neural machine"
+      ],
+      [
+        "",
+        "translation system:",
+        "Bridging the gap betwe",
+        "en human an",
+        "d machine translat",
+        "ion. arXiv preprint"
+      ],
+      [
+        "",
+        "arXiv:1609.08144, 2",
+        "016.",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[39]",
+        "Jie Zhou, Ying Cao",
+        ", Xuguang Wang, Pen",
+        "g Li, and W",
+        "ei Xu. Deep recu",
+        "rrent models with"
+      ],
+      [
+        "",
+        "fast-forward connec",
+        "tions for neural machin",
+        "e translation.",
+        "CoRR, abs/1606.0",
+        "4199, 2016."
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "[40]",
+        "Muhua Zhu, Yue Z",
+        "hang, Wenliang Chen,",
+        "Min Zhang,",
+        "and Jingbo Zhu.",
+        "Fast and accurate"
+      ],
+      [
+        "",
+        "shift-reduce constitu",
+        "ent parsing. In Proceed",
+        "ings of the 51",
+        "st Annual Meeting",
+        "of the ACL (Volume"
+      ],
+      [
+        "",
+        "1: Long Papers), pa",
+        "ges 434–443. ACL, Au",
+        "gust 2013.",
+        "",
+        ""
+      ]
+    ]
+  },
+  {
+    "page": 13,
+    "bbox": [
+      108.0,
+      72.8,
+      504.2,
+      355.1
+    ],
+    "rows": 14,
+    "cols": 10,
+    "header": [
+      "Attention V",
+      "isualization",
+      "s",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "markdown": "|Attention V|isualization|s|Col4|Col5|Col6|Col7|Col8|Col9|Col10|\n|---|---|---|---|---|---|---|---|---|---|\n|||<br>||||||||\n|||ts||||||||\n|||n||||n||||\n||y|an<br>me||||atio<br>s<br>t|>|||\n||it<br><br>orit|eric<br>ern<br>e|sed<br>|s|e<br>9<br>king|str<br>ng<br>ces<br>e<br>cul|OS<br>d><br>d><br>d>|d><br>d>|d>|\n|It<br>is<br>in<br>this|spir<br>that<br>a<br>maj<br>of|Am<br>gov<br>hav|pas<br>new|law|sinc<br>200<br>ma<br>the|regi<br>or<br>voti<br>pro<br>mor<br>diffi|.<br><E<br><pa<br><pa<br><pa|<pa<br><pa|<pa|\n|||||||||||\n|It<br>is<br>in<br>this|spirit<br>that<br>a<br>majority<br>of|American<br>governments<br>have|passed<br>new|laws|since<br>2009<br>making<br>the|registration<br>or<br>voting<br>process<br>more<br>difficult|.<br><EOS><br><pad><br><pad><br><pad>|<pad><br><pad>|<pad>|\n|||||||||||\n|Figure 3: An|example of th|e attenti|on me|ch|anism follo|wing long-distance|dependencie|s in|the|\n|encoder self-at|tention in layer|5 of 6.|Many|of|the attentio|n heads attend to a|distant depen|dency|of|\n|the verb ‘maki|ng’, completin|g the phr|ase ‘m|ak|ing...more|difficult’. Attention|s here shown|only|for|\n|the word ‘mak|ing’. Different|colors re|prese|nt d|ifferent he|ads. Best viewed in|color.|||\n\n",
+    "cells": [
+      [
+        "Attention V",
+        "isualization",
+        "s",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "ts",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "n",
+        "",
+        "",
+        "",
+        "n",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "y",
+        "an me",
+        "",
+        "",
+        "",
+        "atio s t",
+        ">",
+        "",
+        ""
+      ],
+      [
+        "",
+        "it orit",
+        "eric ern e",
+        "sed",
+        "s",
+        "e 9 king",
+        "str ng ces e cul",
+        "OS d> d> d>",
+        "d> d>",
+        "d>"
+      ],
+      [
+        "It is in this",
+        "spir that a maj of",
+        "Am gov hav",
+        "pas new",
+        "law",
+        "sinc 200 ma the",
+        "regi or voti pro mor diffi",
+        ". <E <pa <pa <pa",
+        "<pa <pa",
+        "<pa"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "It is in this",
+        "spirit that a majority of",
+        "American governments have",
+        "passed new",
+        "laws",
+        "since 2009 making the",
+        "registration or voting process more difficult",
+        ". <EOS> <pad> <pad> <pad>",
+        "<pad> <pad>",
+        "<pad>"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Figure 3: An",
+        "example of th",
+        "e attenti",
+        "on me",
+        "ch",
+        "anism follo",
+        "wing long-distance",
+        "dependencie",
+        "s in",
+        "the"
+      ],
+      [
+        "encoder self-at",
+        "tention in layer",
+        "5 of 6.",
+        "Many",
+        "of",
+        "the attentio",
+        "n heads attend to a",
+        "distant depen",
+        "dency",
+        "of"
+      ],
+      [
+        "the verb ‘maki",
+        "ng’, completin",
+        "g the phr",
+        "ase ‘m",
+        "ak",
+        "ing...more",
+        "difficult’. Attention",
+        "s here shown",
+        "only",
+        "for"
+      ],
+      [
+        "the word ‘mak",
+        "ing’. Different",
+        "colors re",
+        "prese",
+        "nt d",
+        "ifferent he",
+        "ads. Best viewed in",
+        "color.",
+        "",
+        ""
+      ]
+    ]
+  },
+  {
+    "page": 14,
+    "bbox": [
+      124.3,
+      170.7,
+      496.5,
+      646.1
+    ],
+    "rows": 21,
+    "cols": 13,
+    "header": [
+      "",
+      "",
+      "",
+      "",
+      "tion",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "g",
+      "",
+      ""
+    ],
+    "markdown": "|Col1|Col2|Col3|Col4|tion|Col6|Col7|Col8|Col9|Col10|g|Col12|Col13|\n|---|---|---|---|---|---|---|---|---|---|---|---|---|\n|||ct||a<br>d||||||n|n|><br>>|\n|||er<br>e||lic<br>ul||||t||si|io|S<br>d|\n|e<br>w|ll|v<br><br>rf|t<br>|p<br>o<br>|st||s|ha<br>|e<br>|s|y<br>in|O<br>a|\n|h<br>a|wi|e<br>e<br>e|u<br>ts|p<br>h<br>e|u||hi<br>s|w<br>|r<br>|m|n<br>m<br>p|E<br>p|\n|T<br>L||n<br>b<br>p<br>|,<br>b<br>i|a<br>s<br>b|j|-|t<br>i||a<br>||,<br>i<br><br>o<br>.|<<br><|\n||||||||||||||\n|The<br>Law|will|never<br>be<br>perfect<br>|,<br>but<br>its|application<br>should<br>be|just|-|this<br>is|what<br>|we<br>are<br>|missing|,<br>in<br>my<br>opinion<br>.|<EOS><br><pad>|\n||||||||||||||\n|||||tion||||||g|||\n|||ct||a<br>d||||||n|n|><br>|\n|||er<br>e||lic<br>ul||||t||si|io|S<br>d|\n|e<br>w|ll|v<br><br>rf|t<br>|p<br>o<br>|st||s|ha|e<br>e|s|y<br>in|O<br>|\n|h<br>a|wi|e<br>e<br>e|u<br>ts|p<br>h<br>e|u||hi<br>s|w|w<br>r|mi|n<br>m<br>p|E<br>|\n|T<br>L||n<br>b<br>p|,<br>b<br>i|a<br>s<br>b|j|-|t<br>i||a||,<br>i<br><br>o<br>.|<<br>|\n||||||||||||||\n|The<br>Law|will|never<br>be<br>perfect|,<br>but<br>its|application<br>should<br>be|just|-|this<br>is|what|we<br>are|missing|,<br>in<br>my<br>opinion<br>.|<EOS><br><d>|\n||||||||||||||\n|re 4:|Two|attention he|ads, also|in layer 5|of|6, ap|parentl|y in|volved|in|anaphora resoluti|on. To|\n|atten|tions|for head 5.|Bottom:|Isolated a|tten|tion|s from|just|the wo|rd|‘its’ for attention|heads|\n|6. No|te th|at the attenti|ons are v|ery sharp|for|this|word.||||||\n\n",
+    "cells": [
+      [
+        "",
+        "",
+        "",
+        "",
+        "tion",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "g",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "ct",
+        "",
+        "a d",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "n",
+        "n",
+        "> >"
+      ],
+      [
+        "",
+        "",
+        "er e",
+        "",
+        "lic ul",
+        "",
+        "",
+        "",
+        "t",
+        "",
+        "si",
+        "io",
+        "S d"
+      ],
+      [
+        "e w",
+        "ll",
+        "v rf",
+        "t",
+        "p o",
+        "st",
+        "",
+        "s",
+        "ha",
+        "e e",
+        "s",
+        "y in",
+        "O a"
+      ],
+      [
+        "h a",
+        "wi",
+        "e e e",
+        "u ts",
+        "p h e",
+        "u",
+        "",
+        "hi s",
+        "w",
+        "w r",
+        "mi",
+        "n m p",
+        "E p"
+      ],
+      [
+        "T L",
+        "",
+        "n b p ,",
+        "b i",
+        "a s b",
+        "j",
+        "-",
+        "t i",
+        "",
+        "a",
+        "",
+        ", i o .",
+        "< <"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "The Law",
+        "will",
+        "never be perfect ,",
+        "but its",
+        "application should be",
+        "just",
+        "-",
+        "this is",
+        "what",
+        "we are",
+        "missing",
+        ", in my opinion .",
+        "<EOS> <pad>"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "tion",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "g",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "ct",
+        "",
+        "a d",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "n",
+        "n",
+        ">"
+      ],
+      [
+        "",
+        "",
+        "er e",
+        "",
+        "lic ul",
+        "",
+        "",
+        "",
+        "t",
+        "",
+        "si",
+        "io",
+        "S"
+      ],
+      [
+        "e w",
+        "ll",
+        "v rf",
+        "t",
+        "p o",
+        "st",
+        "",
+        "s",
+        "ha",
+        "e e",
+        "s",
+        "y in",
+        "O"
+      ],
+      [
+        "h a",
+        "wi",
+        "e e e",
+        "u ts",
+        "p h e",
+        "u",
+        "",
+        "hi s",
+        "w",
+        "w r",
+        "mi",
+        "n m p",
+        "E"
+      ],
+      [
+        "T L",
+        "",
+        "n b p ,",
+        "b i",
+        "a s b",
+        "j",
+        "-",
+        "t i",
+        "",
+        "a",
+        "",
+        ", i o .",
+        "<"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "The Law",
+        "will",
+        "never be perfect ,",
+        "but its",
+        "application should be",
+        "just",
+        "-",
+        "this is",
+        "what",
+        "we are",
+        "missing",
+        ", in my opinion .",
+        "<EOS>"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "re 4:",
+        "Two",
+        "attention he",
+        "ads, also",
+        "in layer 5",
+        "of",
+        "6, ap",
+        "parentl",
+        "y in",
+        "volved",
+        "in",
+        "anaphora resoluti",
+        "on. To"
+      ],
+      [
+        "atten",
+        "tions",
+        "for head 5.",
+        "Bottom:",
+        "Isolated a",
+        "tten",
+        "tion",
+        "s from",
+        "just",
+        "the wo",
+        "rd",
+        "‘its’ for attention",
+        "heads"
+      ],
+      [
+        "6. No",
+        "te th",
+        "at the attenti",
+        "ons are v",
+        "ery sharp",
+        "for",
+        "this",
+        "word.",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    ]
+  },
+  {
+    "page": 15,
+    "bbox": [
+      123.1,
+      185.1,
+      504.0,
+      634.2
+    ],
+    "rows": 21,
+    "cols": 20,
+    "header": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "tion",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "g",
+      "",
+      "",
+      ""
+    ],
+    "markdown": "|Col1|Col2|Col3|Col4|Col5|Col6|Col7|Col8|tion|Col10|Col11|Col12|Col13|Col14|Col15|Col16|g|Col18|Col19|Col20|\n|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|\n|||||t||||a|d|||||||n||n|><br>>|\n||||er||e|||lic|ul||||t|||si||io|S<br>d|\n|e|w|ll|v|f|r|t||p|o||st||s<br>ha|e|e|s||y<br>in|O<br>a|\n|h|a|wi|e|e<br>||u|ts|p|h|e|u||s<br>w|w|r|mi|n|m<br>p|E<br>p|\n|T|L||n|b<br>|,|b|i|a|s|b|j|-<br>t|i<br>||a|,|i|o|.<br><<br><|\n|||||||||||||||||||||\n|The|Law|will|never|be<br>ft|perec<br>,|but|its|application|should|be|just|-<br>thi|s<br>is<br>what|we|are|missing<br>,|in|my<br>opinion|.<br><EOS><br><pad>|\n|||||||||||||||||||||\n|||||||||tion||||||||g||||\n|||||t||||a|d|||||||n||n|><br>>|\n||||er|e||||lic|ul||||t|||si||io|S<br>d|\n|e|w|ll|v|rf||t||p|o||st||s<br>ha|e|e|s||y<br>in|O<br>a|\n|h|a|wi|e|e<br>||u|ts|p|h|e|u||s<br>w|w|r|mi|n|m<br>p|E<br>p|\n|T|L||n|b<br>|,|b|i|a|s|b|j|-<br>t|i<br>||a|,|i|o|.<br><<br><|\n|||||||||||||||||||||\n|The|Law|will|never|be<br>erfect|p<br>,|but|its|application|should|be|just|-<br>thi|s<br>is<br>what|we|are|missing<br>,|in|my<br>opinion|.<br><EOS><br><pad>|\n|||||||||||||||||||||\n|ure|5:|Ma|ny o|f the|atten|tion|he|ads|ex|hibi|t be|havi|our that s|eem|s|related|to t|he str|ucture of the|\n|enc|e.|We|give|two|such e|xa|mple|s a|bov|e, fr|om|two|different|head|s f|rom the|enc|oder|self-attention|\n|yer|5|of 6|. Th|e he|ads cl|earl|y le|arn|ed t|o pe|rfo|rm d|ifferent ta|sks|.|||||\n\n",
+    "cells": [
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "tion",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "g",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "ct",
+        "",
+        "",
+        "a",
+        "d",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "n",
+        "",
+        "n",
+        "> >"
+      ],
+      [
+        "",
+        "",
+        "",
+        "er",
+        "",
+        "e",
+        "",
+        "",
+        "lic",
+        "ul",
+        "",
+        "",
+        "",
+        "t",
+        "",
+        "",
+        "si",
+        "",
+        "io",
+        "S d"
+      ],
+      [
+        "e",
+        "w",
+        "ll",
+        "v",
+        "",
+        "rf",
+        "t",
+        "",
+        "p",
+        "o",
+        "",
+        "st",
+        "",
+        "s ha",
+        "e",
+        "e",
+        "s",
+        "",
+        "y in",
+        "O a"
+      ],
+      [
+        "h",
+        "a",
+        "wi",
+        "e",
+        "e",
+        "e",
+        "u",
+        "ts",
+        "p",
+        "h",
+        "e",
+        "u",
+        "",
+        "hi s w",
+        "w",
+        "r",
+        "mi",
+        "n",
+        "m p",
+        "E p"
+      ],
+      [
+        "T",
+        "L",
+        "",
+        "n",
+        "b",
+        "p ,",
+        "b",
+        "i",
+        "a",
+        "s",
+        "b",
+        "j",
+        "-",
+        "t i",
+        "",
+        "a",
+        ",",
+        "i",
+        "o",
+        ". < <"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "The",
+        "Law",
+        "will",
+        "never",
+        "be",
+        "perfect ,",
+        "but",
+        "its",
+        "application",
+        "should",
+        "be",
+        "just",
+        "-",
+        "this is what",
+        "we",
+        "are",
+        "missing ,",
+        "in",
+        "my opinion",
+        ". <EOS> <pad>"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "tion",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "g",
+        "",
+        "",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "ct",
+        "",
+        "",
+        "",
+        "a",
+        "d",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "n",
+        "",
+        "n",
+        "> >"
+      ],
+      [
+        "",
+        "",
+        "",
+        "er",
+        "e",
+        "",
+        "",
+        "",
+        "lic",
+        "ul",
+        "",
+        "",
+        "",
+        "t",
+        "",
+        "",
+        "si",
+        "",
+        "io",
+        "S d"
+      ],
+      [
+        "e",
+        "w",
+        "ll",
+        "v",
+        "rf",
+        "",
+        "t",
+        "",
+        "p",
+        "o",
+        "",
+        "st",
+        "",
+        "s ha",
+        "e",
+        "e",
+        "s",
+        "",
+        "y in",
+        "O a"
+      ],
+      [
+        "h",
+        "a",
+        "wi",
+        "e",
+        "e e",
+        "",
+        "u",
+        "ts",
+        "p",
+        "h",
+        "e",
+        "u",
+        "",
+        "hi s w",
+        "w",
+        "r",
+        "mi",
+        "n",
+        "m p",
+        "E p"
+      ],
+      [
+        "T",
+        "L",
+        "",
+        "n",
+        "b p",
+        ",",
+        "b",
+        "i",
+        "a",
+        "s",
+        "b",
+        "j",
+        "-",
+        "t i",
+        "",
+        "a",
+        ",",
+        "i",
+        "o",
+        ". < <"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "The",
+        "Law",
+        "will",
+        "never",
+        "be perfect",
+        ",",
+        "but",
+        "its",
+        "application",
+        "should",
+        "be",
+        "just",
+        "-",
+        "this is what",
+        "we",
+        "are",
+        "missing ,",
+        "in",
+        "my opinion",
+        ". <EOS> <pad>"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "ure",
+        "5:",
+        "Ma",
+        "ny o",
+        "f the",
+        "atten",
+        "tion",
+        "he",
+        "ads",
+        "ex",
+        "hibi",
+        "t be",
+        "havi",
+        "our that s",
+        "eem",
+        "s",
+        "related",
+        "to t",
+        "he str",
+        "ucture of the"
+      ],
+      [
+        "enc",
+        "e.",
+        "We",
+        "give",
+        "two",
+        "such e",
+        "xa",
+        "mple",
+        "s a",
+        "bov",
+        "e, fr",
+        "om",
+        "two",
+        "different",
+        "head",
+        "s f",
+        "rom the",
+        "enc",
+        "oder",
+        "self-attention"
+      ],
+      [
+        "yer",
+        "5",
+        "of 6",
+        ". Th",
+        "e he",
+        "ads cl",
+        "earl",
+        "y le",
+        "arn",
+        "ed t",
+        "o pe",
+        "rfo",
+        "rm d",
+        "ifferent ta",
+        "sks",
+        ".",
+        "",
+        "",
+        "",
+        ""
+      ]
+    ]
+  }
+]

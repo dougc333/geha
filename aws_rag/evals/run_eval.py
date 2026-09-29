@@ -48,6 +48,9 @@ sys.path.insert(0, str(HERE.parent / "query"))
 
 
 def load_secrets(region: str) -> None:
+    # Eval runs shouldn't send traces to the chatbot's Langfuse project (and stale
+    # LANGFUSE_* keys in a shell made every batch fail with 401).
+    os.environ["LANGFUSE_TRACING_ENABLED"] = "false"
     ssm = boto3.client("ssm", region_name=region)
     for env, name in {"DATABASE_URL": "/rag-demo/database-url",
                       "WEAVIATE_URL": "/rag-demo/weaviate-url",
@@ -74,6 +77,8 @@ def main() -> None:
     parser.add_argument("--region", default="us-west-2")
     parser.add_argument("--no-rerank", action="store_true", help="skip the two rerank setups (no cost)")
     parser.add_argument("--no-weaviate", action="store_true")
+    parser.add_argument("--types", default="", help="only these question types, e.g. table or fact,paraphrase")
+    parser.add_argument("--out", default="results", help="output file stem in evals/")
     args = parser.parse_args()
     load_secrets(args.region)
 
@@ -83,6 +88,8 @@ def main() -> None:
     from rag_core import reciprocal_rank_fusion  # noqa: E402
 
     questions = [json.loads(l) for l in (HERE / "questions.jsonl").read_text().splitlines() if l.strip()]
+    if args.types:
+        questions = [q for q in questions if q["type"] in args.types.split(",")]
 
     # Retriever results are computed once per question and shared by every setup
     # that uses them (SQL BM25 takes seconds, so recomputing it per setup was slow).
@@ -155,21 +162,22 @@ def main() -> None:
         }
 
     table = {name: {**summary(rows),
-                    "fact hit@5": summary([r for r in rows if r["type"] == "fact"])["hit@5"],
-                    "paraphrase hit@5": summary([r for r in rows if r["type"] == "paraphrase"])["hit@5"],
+                    **{f"{t} hit@5": summary([r for r in rows if r["type"] == t])["hit@5"]
+                       for t in sorted({q["type"] for q in questions})},
                     "median ms": statistics.median(r["ms"] for r in rows)}
              for name, rows in results.items()}
-    (HERE / "results.json").write_text(json.dumps({"summary": table, "per_question": results}, indent=2))
+    (HERE / f"{args.out}.json").write_text(json.dumps({"summary": table, "per_question": results}, indent=2))
 
-    cols = ["hit@1", "hit@5", "hit@10", "MRR@10", "paper hit@5", "fact hit@5", "paraphrase hit@5", "median ms"]
-    lines = [f"# Retrieval eval: {len(questions)} questions "
-             f"({sum(q['type'] == 'fact' for q in questions)} fact, "
-             f"{sum(q['type'] == 'paraphrase' for q in questions)} paraphrase)\n",
+    cols = (["hit@1", "hit@5", "hit@10", "MRR@10", "paper hit@5"]
+            + [f"{t} hit@5" for t in sorted({q["type"] for q in questions})] + ["median ms"])
+    counts = ", ".join(f"{sum(q['type'] == t for q in questions)} {t}"
+                       for t in sorted({q["type"] for q in questions}))
+    lines = [f"# Retrieval eval: {len(questions)} questions ({counts})\n",
              "| setup | " + " | ".join(cols) + " |", "|---" * (len(cols) + 1) + "|"]
     for name, row in table.items():
         lines.append(f"| {name} | " + " | ".join(
             f"{row[c]:.0f}" if c == "median ms" else f"{row[c]:.2f}" for c in cols) + " |")
-    (HERE / "results.md").write_text("\n".join(lines) + "\n")
+    (HERE / f"{args.out}.md").write_text("\n".join(lines) + "\n")
     print("\n" + "\n".join(lines))
 
 

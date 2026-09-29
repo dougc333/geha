@@ -6,7 +6,8 @@ into a Weaviate collection, so both stores can be compared on identical data.
 
 No re-embedding: vectors are read from rag_chunks.embedding and handed to
 Weaviate as self-provided vectors (no Weaviate vectorizer module). Object IDs
-are derived from rag_chunks.id, so re-running updates rather than duplicates.
+are derived from rag_chunks.id, so re-running updates rather than duplicates,
+and objects whose chunk no longer exists in Neon are deleted.
 Connection details come from SSM: /rag-demo/database-url,
 /rag-demo/weaviate-url, /rag-demo/weaviate-api-key.
 """
@@ -22,6 +23,7 @@ import weaviate
 from pgvector.psycopg import register_vector
 from weaviate.classes.config import Configure, DataType, Property, Tokenization, VectorDistances
 from weaviate.classes.init import Auth
+from weaviate.classes.query import Filter
 from weaviate.util import generate_uuid5
 
 COLLECTION = "Chunk"
@@ -87,6 +89,14 @@ def main() -> None:
                     vector=embedding.to_list(),  # pgvector Vector -> list[float]
                 )
         failed = chunks.batch.failed_objects
+
+        # Remove objects whose chunk is gone from Neon (papers re-embedded since the
+        # last copy get new rag_chunks ids), so both engines search the same set.
+        current = {generate_uuid5(row[0]) for row in rows}
+        stale = [str(obj.uuid) for obj in chunks.iterator(return_properties=[]) if str(obj.uuid) not in current]
+        for start in range(0, len(stale), 500):
+            chunks.data.delete_many(where=Filter.by_id().contains_any(stale[start:start + 500]))
+        print(f"removed {len(stale)} stale objects")
         total = chunks.aggregate.over_all(total_count=True).total_count
         print(f"wrote {len(rows) - len(failed)} objects in {time.perf_counter() - step:.1f}s; "
               f"failed {len(failed)}; collection now holds {total}")

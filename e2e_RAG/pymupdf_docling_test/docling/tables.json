@@ -1,0 +1,525 @@
+[
+  {
+    "page": 6,
+    "rows": 5,
+    "cols": 4,
+    "caption": "Table 1: Maximum path lengths, per-layer complexity and minimum number of sequential operations for different layer types. n is the sequence length, d is the representation dimension, k is the kernel size of convolutions and r the size of the neighborhood in restricted self-attention.",
+    "markdown": "Table 1: Maximum path lengths, per-layer complexity and minimum number of sequential operations for different layer types. n is the sequence length, d is the representation dimension, k is the kernel size of convolutions and r the size of the neighborhood in restricted self-attention.\n\n| Layer Type                  | Complexity per Layer   | Sequential Operations   | Maximum Path Length   |\n|-----------------------------|------------------------|-------------------------|-----------------------|\n| Self-Attention              | O ( n 2 · d )          | O (1)                   | O (1)                 |\n| Recurrent                   | O ( n · d 2 )          | O ( n )                 | O ( n )               |\n| Convolutional               | O ( k · n · d 2 )      | O (1)                   | O ( log k ( n ))      |\n| Self-Attention (restricted) | O ( r · n · d )        | O (1)                   | O ( n/r )             |",
+    "cells": [
+      [
+        "Layer Type",
+        "Complexity per Layer",
+        "Sequential Operations",
+        "Maximum Path Length"
+      ],
+      [
+        "Self-Attention",
+        "O ( n 2 · d )",
+        "O (1)",
+        "O (1)"
+      ],
+      [
+        "Recurrent",
+        "O ( n · d 2 )",
+        "O ( n )",
+        "O ( n )"
+      ],
+      [
+        "Convolutional",
+        "O ( k · n · d 2 )",
+        "O (1)",
+        "O ( log k ( n ))"
+      ],
+      [
+        "Self-Attention (restricted)",
+        "O ( r · n · d )",
+        "O (1)",
+        "O ( n/r )"
+      ]
+    ]
+  },
+  {
+    "page": 8,
+    "rows": 12,
+    "cols": 5,
+    "caption": "Table 2: The Transformer achieves better BLEU scores than previous state-of-the-art models on the English-to-German and English-to-French newstest2014 tests at a fraction of the training cost.",
+    "markdown": "Table 2: The Transformer achieves better BLEU scores than previous state-of-the-art models on the English-to-German and English-to-French newstest2014 tests at a fraction of the training cost.\n\n| Model                           |   BLEU - EN-DE |   BLEU - EN-FR | Training Cost (FLOPs) - EN-DE   | Training Cost (FLOPs) - EN-FR   |\n|---------------------------------|----------------|----------------|---------------------------------|---------------------------------|\n| ByteNet [18]                    |          23.75 |                |                                 |                                 |\n| Deep-Att + PosUnk [39]          |                |           39.2 |                                 | 1 . 0 · 10 20                   |\n| GNMT + RL [38]                  |           24.6 |          39.92 | 2 . 3 · 10 19                   | 1 . 4 · 10 20                   |\n| ConvS2S [9]                     |          25.16 |          40.46 | 9 . 6 · 10 18                   | 1 . 5 · 10 20                   |\n| MoE [32]                        |          26.03 |          40.56 | 2 . 0 · 10 19                   | 1 . 2 · 10 20                   |\n| Deep-Att + PosUnk Ensemble [39] |                |           40.4 |                                 | 8 . 0 · 10 20                   |\n| GNMT + RL Ensemble [38]         |          26.30 |          41.16 | 1 . 8 · 10 20                   | 1 . 1 · 10 21                   |\n| ConvS2S Ensemble [9]            |          26.36 |          41.29 | 7 . 7 · 10 19                   | 1 . 2 · 10 21                   |\n| Transformer (base model)        |           27.3 |           38.1 | 3 . 3 · 10 18                   | 3 . 3 · 10 18                   |\n| Transformer (big)               |           28.4 |           41.8 | 2 . 3 · 10 19                   | 2 . 3 · 10 19                   |",
+    "cells": [
+      [
+        "Model.",
+        "BLEU.EN-DE",
+        "BLEU.EN-FR",
+        "Training Cost (FLOPs).EN-DE",
+        "Training Cost (FLOPs).EN-FR"
+      ],
+      [
+        "ByteNet [18]",
+        "23.75",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Deep-Att + PosUnk [39]",
+        "",
+        "39.2",
+        "",
+        "1 . 0 · 10 20"
+      ],
+      [
+        "GNMT + RL [38]",
+        "24.6",
+        "39.92",
+        "2 . 3 · 10 19",
+        "1 . 4 · 10 20"
+      ],
+      [
+        "ConvS2S [9]",
+        "25.16",
+        "40.46",
+        "9 . 6 · 10 18",
+        "1 . 5 · 10 20"
+      ],
+      [
+        "MoE [32]",
+        "26.03",
+        "40.56",
+        "2 . 0 · 10 19",
+        "1 . 2 · 10 20"
+      ],
+      [
+        "Deep-Att + PosUnk Ensemble [39]",
+        "",
+        "40.4",
+        "",
+        "8 . 0 · 10 20"
+      ],
+      [
+        "GNMT + RL Ensemble [38]",
+        "26.30",
+        "41.16",
+        "1 . 8 · 10 20",
+        "1 . 1 · 10 21"
+      ],
+      [
+        "ConvS2S Ensemble [9]",
+        "26.36",
+        "41.29",
+        "7 . 7 · 10 19",
+        "1 . 2 · 10 21"
+      ],
+      [
+        "Transformer (base model)",
+        "27.3",
+        "38.1",
+        "3 . 3 · 10 18",
+        "3 . 3 · 10 18"
+      ],
+      [
+        "Transformer (big)",
+        "28.4",
+        "41.8",
+        "2 . 3 · 10 19",
+        "2 . 3 · 10 19"
+      ]
+    ]
+  },
+  {
+    "page": 9,
+    "rows": 21,
+    "cols": 13,
+    "caption": "Table 3: Variations on the Transformer architecture. Unlisted values are identical to those of the base model. All metrics are on the English-to-German translation development set, newstest2013. Listed perplexities are per-wordpiece, according to our byte-pair encoding, and should not be compared to per-word perplexities.",
+    "markdown": "Table 3: Variations on the Transformer architecture. Unlisted values are identical to those of the base model. All metrics are on the English-to-German translation development set, newstest2013. Listed perplexities are per-wordpiece, according to our byte-pair encoding, and should not be compared to per-word perplexities.\n\n|      | N                                         | d model                                   | d ff                                      | h                                         | d k                                       | d v                                       | P drop                                    | ϵ ls                                      | train steps   |   PPL (dev) |   BLEU (dev) |   params × 10 6 |\n|------|-------------------------------------------|-------------------------------------------|-------------------------------------------|-------------------------------------------|-------------------------------------------|-------------------------------------------|-------------------------------------------|-------------------------------------------|---------------|-------------|--------------|-----------------|\n| base | 6                                         | 512                                       | 2048                                      | 8                                         | 64                                        | 64                                        | 0.1                                       | 0.1                                       | 100K          |        4.92 |         25.8 |              65 |\n|      |                                           |                                           |                                           | 1                                         | 512                                       | 512                                       |                                           |                                           |               |        5.29 |         24.9 |                 |\n|      |                                           |                                           |                                           | 4                                         | 128                                       | 128                                       |                                           |                                           |               |        5.00 |         25.5 |                 |\n| (A)  |                                           |                                           |                                           | 16                                        | 32                                        | 32                                        |                                           |                                           |               |        4.91 |         25.8 |                 |\n|      |                                           |                                           |                                           | 32                                        | 16                                        | 16                                        |                                           |                                           |               |        5.01 |         25.4 |                 |\n|      |                                           |                                           |                                           |                                           | 16                                        |                                           |                                           |                                           |               |        5.16 |         25.1 |              58 |\n| (B)  |                                           |                                           |                                           |                                           | 32                                        |                                           |                                           |                                           |               |        5.01 |         25.4 |              60 |\n|      | 2                                         |                                           |                                           |                                           |                                           |                                           |                                           |                                           |               |        6.11 |         23.7 |              36 |\n|      | 4                                         |                                           |                                           |                                           |                                           |                                           |                                           |                                           |               |        5.19 |         25.3 |              50 |\n|      | 8                                         |                                           |                                           |                                           |                                           |                                           |                                           |                                           |               |        4.88 |         25.5 |              80 |\n| (C)  |                                           | 256                                       |                                           |                                           | 32                                        | 32                                        |                                           |                                           |               |        5.75 |         24.5 |              28 |\n|      |                                           | 1024                                      |                                           |                                           | 128                                       | 128                                       |                                           |                                           |               |        4.66 |         26.0 |             168 |\n|      |                                           |                                           | 1024                                      |                                           |                                           |                                           |                                           |                                           |               |        5.12 |         25.4 |              53 |\n|      |                                           |                                           | 4096                                      |                                           |                                           |                                           |                                           |                                           |               |        4.75 |         26.2 |              90 |\n|      |                                           |                                           |                                           |                                           |                                           |                                           | 0.0                                       |                                           |               |        5.77 |         24.6 |                 |\n|      |                                           |                                           |                                           |                                           |                                           |                                           | 0.2                                       |                                           |               |        4.95 |         25.5 |                 |\n| (D)  |                                           |                                           |                                           |                                           |                                           |                                           |                                           | 0.0                                       |               |        4.67 |         25.3 |                 |\n|      |                                           |                                           |                                           |                                           |                                           |                                           |                                           | 0.2                                       |               |        5.47 |         25.7 |                 |\n| (E)  | positional embedding instead of sinusoids | positional embedding instead of sinusoids | positional embedding instead of sinusoids | positional embedding instead of sinusoids | positional embedding instead of sinusoids | positional embedding instead of sinusoids | positional embedding instead of sinusoids | positional embedding instead of sinusoids |               |        4.92 |         25.7 |                 |\n| big  | 6                                         | 1024                                      | 4096                                      | 16                                        |                                           |                                           | 0.3                                       |                                           | 300K          |        4.33 |         26.4 |             213 |",
+    "cells": [
+      [
+        "",
+        "N",
+        "d model",
+        "d ff",
+        "h",
+        "d k",
+        "d v",
+        "P drop",
+        "ϵ ls",
+        "train steps",
+        "PPL (dev)",
+        "BLEU (dev)",
+        "params × 10 6"
+      ],
+      [
+        "base",
+        "6",
+        "512",
+        "2048",
+        "8",
+        "64",
+        "64",
+        "0.1",
+        "0.1",
+        "100K",
+        "4.92",
+        "25.8",
+        "65"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "1",
+        "512",
+        "512",
+        "",
+        "",
+        "",
+        "5.29",
+        "24.9",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "4",
+        "128",
+        "128",
+        "",
+        "",
+        "",
+        "5.00",
+        "25.5",
+        ""
+      ],
+      [
+        "(A)",
+        "",
+        "",
+        "",
+        "16",
+        "32",
+        "32",
+        "",
+        "",
+        "",
+        "4.91",
+        "25.8",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "32",
+        "16",
+        "16",
+        "",
+        "",
+        "",
+        "5.01",
+        "25.4",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "16",
+        "",
+        "",
+        "",
+        "",
+        "5.16",
+        "25.1",
+        "58"
+      ],
+      [
+        "(B)",
+        "",
+        "",
+        "",
+        "",
+        "32",
+        "",
+        "",
+        "",
+        "",
+        "5.01",
+        "25.4",
+        "60"
+      ],
+      [
+        "",
+        "2",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "6.11",
+        "23.7",
+        "36"
+      ],
+      [
+        "",
+        "4",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "5.19",
+        "25.3",
+        "50"
+      ],
+      [
+        "",
+        "8",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "4.88",
+        "25.5",
+        "80"
+      ],
+      [
+        "(C)",
+        "",
+        "256",
+        "",
+        "",
+        "32",
+        "32",
+        "",
+        "",
+        "",
+        "5.75",
+        "24.5",
+        "28"
+      ],
+      [
+        "",
+        "",
+        "1024",
+        "",
+        "",
+        "128",
+        "128",
+        "",
+        "",
+        "",
+        "4.66",
+        "26.0",
+        "168"
+      ],
+      [
+        "",
+        "",
+        "",
+        "1024",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "5.12",
+        "25.4",
+        "53"
+      ],
+      [
+        "",
+        "",
+        "",
+        "4096",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "4.75",
+        "26.2",
+        "90"
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "0.0",
+        "",
+        "",
+        "5.77",
+        "24.6",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "0.2",
+        "",
+        "",
+        "4.95",
+        "25.5",
+        ""
+      ],
+      [
+        "(D)",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "0.0",
+        "",
+        "4.67",
+        "25.3",
+        ""
+      ],
+      [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "0.2",
+        "",
+        "5.47",
+        "25.7",
+        ""
+      ],
+      [
+        "(E)",
+        "positional embedding instead of sinusoids",
+        "positional embedding instead of sinusoids",
+        "positional embedding instead of sinusoids",
+        "positional embedding instead of sinusoids",
+        "positional embedding instead of sinusoids",
+        "positional embedding instead of sinusoids",
+        "positional embedding instead of sinusoids",
+        "positional embedding instead of sinusoids",
+        "",
+        "4.92",
+        "25.7",
+        ""
+      ],
+      [
+        "big",
+        "6",
+        "1024",
+        "4096",
+        "16",
+        "",
+        "",
+        "0.3",
+        "",
+        "300K",
+        "4.33",
+        "26.4",
+        "213"
+      ]
+    ]
+  },
+  {
+    "page": 10,
+    "rows": 13,
+    "cols": 3,
+    "caption": "Table 4: The Transformer generalizes well to English constituency parsing (Results are on Section 23 of WSJ)",
+    "markdown": "Table 4: The Transformer generalizes well to English constituency parsing (Results are on Section 23 of WSJ)\n\n| Parser                             | Training                 |   WSJ 23 F1 |\n|------------------------------------|--------------------------|-------------|\n| Vinyals &Kaiser el al. (2014) [37] | WSJ only, discriminative |        88.3 |\n| Petrov et al. (2006) [29]          | WSJ only, discriminative |        90.4 |\n| Zhu et al. (2013) [40]             | WSJ only, discriminative |        90.4 |\n| Dyer et al. (2016) [8]             | WSJ only, discriminative |        91.7 |\n| Transformer (4 layers)             | WSJ only, discriminative |        91.3 |\n| Zhu et al. (2013) [40]             | semi-supervised          |        91.3 |\n| Huang &Harper (2009) [14]          | semi-supervised          |        91.3 |\n| McClosky et al. (2006) [26]        | semi-supervised          |        92.1 |\n| Vinyals &Kaiser el al. (2014) [37] | semi-supervised          |        92.1 |\n| Transformer (4 layers)             | semi-supervised          |        92.7 |\n| Luong et al. (2015) [23]           | multi-task               |        93.0 |\n| Dyer et al. (2016) [8]             | generative               |        93.3 |",
+    "cells": [
+      [
+        "Parser",
+        "Training",
+        "WSJ 23 F1"
+      ],
+      [
+        "Vinyals &Kaiser el al. (2014) [37]",
+        "WSJ only, discriminative",
+        "88.3"
+      ],
+      [
+        "Petrov et al. (2006) [29]",
+        "WSJ only, discriminative",
+        "90.4"
+      ],
+      [
+        "Zhu et al. (2013) [40]",
+        "WSJ only, discriminative",
+        "90.4"
+      ],
+      [
+        "Dyer et al. (2016) [8]",
+        "WSJ only, discriminative",
+        "91.7"
+      ],
+      [
+        "Transformer (4 layers)",
+        "WSJ only, discriminative",
+        "91.3"
+      ],
+      [
+        "Zhu et al. (2013) [40]",
+        "semi-supervised",
+        "91.3"
+      ],
+      [
+        "Huang &Harper (2009) [14]",
+        "semi-supervised",
+        "91.3"
+      ],
+      [
+        "McClosky et al. (2006) [26]",
+        "semi-supervised",
+        "92.1"
+      ],
+      [
+        "Vinyals &Kaiser el al. (2014) [37]",
+        "semi-supervised",
+        "92.1"
+      ],
+      [
+        "Transformer (4 layers)",
+        "semi-supervised",
+        "92.7"
+      ],
+      [
+        "Luong et al. (2015) [23]",
+        "multi-task",
+        "93.0"
+      ],
+      [
+        "Dyer et al. (2016) [8]",
+        "generative",
+        "93.3"
+      ]
+    ]
+  }
+]

@@ -104,7 +104,7 @@
   <text x="236" y="448" class="m">rag_documents</text>
   <text x="340" y="448" class="b">title, arxiv_id, authors[], published, abstract, categories… (103 papers)</text>
   <text x="236" y="468" class="m">rag_chunks</text>
-  <text x="340" y="468" class="b">content, page, embedding vector(1024) HNSW, tsv tsvector GIN (5,300)</text>
+  <text x="340" y="468" class="b">content, page, vector(1024) HNSW, tsv GIN (5,300) · rag_terms: BM25 index</text>
   <text x="236" y="488" class="b">DATABASE_URL in SSM Parameter Store; one reused connection per Lambda</text>
 
   <rect x="960" y="402" width="400" height="98" rx="8" class="db"/>
@@ -166,10 +166,10 @@
   <text x="410" y="712" class="m">content</text>
 
   <rect x="295" y="724" width="230" height="84" rx="8" class="db"/>
-  <text x="309" y="746" class="t">Keyword search</text>
-  <text x="309" y="765" class="b">Postgres full-text (GIN,</text>
-  <text x="309" y="782" class="b">ts_rank_cd) top 25</text>
-  <text x="309" y="799" class="m">bm25_search: SQL BM25 (eval)</text>
+  <text x="309" y="746" class="t">BM25 keyword search</text>
+  <text x="309" y="765" class="b">Okapi BM25 in SQL over</text>
+  <text x="309" y="782" class="b">rag_terms, top 25 · ~0.2 s</text>
+  <text x="309" y="799" class="m">KEYWORD_SEARCH=bm25|fts</text>
 
   <rect x="295" y="818" width="230" height="84" rx="8" class="db"/>
   <text x="309" y="840" class="t">Vector search</text>
@@ -203,7 +203,7 @@
   <rect x="1195" y="770" width="150" height="84" rx="8" class="ui"/>
   <text x="1209" y="792" class="t">Cited answer</text>
   <text x="1209" y="812" class="b">+ sources, timings</text>
-  <text x="1209" y="830" class="b">~3–3.8 s</text>
+  <text x="1209" y="830" class="b">~2.4–3.9 s</text>
   <line x1="1160" y1="812" x2="1193" y2="812" class="ln" marker-end="url(#arr)"/>
 
   <rect x="1130" y="600" width="215" height="92" rx="8" class="ext"/>
@@ -216,7 +216,7 @@
 
   <!-- links to stores -->
   <line x1="880" y1="560" x2="880" y2="504" class="dash" marker-end="url(#arr)"/>
-  <text x="888" y="538" class="m">SQL, full-text, pgvector</text>
+  <text x="888" y="538" class="m">SQL, BM25, pgvector</text>
   <line x1="1250" y1="560" x2="1250" y2="504" class="dash" marker-end="url(#arr)"/>
   <text x="1258" y="538" class="m">hybrid</text>
 

@@ -1,0 +1,3966 @@
+{
+  "summary": {
+    "pg-keyword": {
+      "hit@1": 0.07692307692307693,
+      "hit@5": 0.23076923076923078,
+      "hit@10": 0.3076923076923077,
+      "MRR@10": 0.1358974358974359,
+      "paper hit@5": 0.3076923076923077,
+      "table hit@5": 0.23076923076923078,
+      "median ms": 461.5
+    },
+    "pg-bm25": {
+      "hit@1": 0.5384615384615384,
+      "hit@5": 0.8461538461538461,
+      "hit@10": 0.8461538461538461,
+      "MRR@10": 0.6692307692307692,
+      "paper hit@5": 1,
+      "table hit@5": 0.8461538461538461,
+      "median ms": 233.9
+    },
+    "pg-vector": {
+      "hit@1": 0.7692307692307693,
+      "hit@5": 0.8461538461538461,
+      "hit@10": 0.9230769230769231,
+      "MRR@10": 0.8076923076923077,
+      "paper hit@5": 1,
+      "table hit@5": 0.8461538461538461,
+      "median ms": 105.4
+    },
+    "pg-hybrid": {
+      "hit@1": 0.23076923076923078,
+      "hit@5": 0.7692307692307693,
+      "hit@10": 0.9230769230769231,
+      "MRR@10": 0.48534798534798534,
+      "paper hit@5": 0.8461538461538461,
+      "table hit@5": 0.7692307692307693,
+      "median ms": 0.3
+    },
+    "pg-hybrid-2:1": {
+      "hit@1": 0.38461538461538464,
+      "hit@5": 0.7692307692307693,
+      "hit@10": 1,
+      "MRR@10": 0.5982905982905983,
+      "paper hit@5": 0.8461538461538461,
+      "table hit@5": 0.7692307692307693,
+      "median ms": 0.1
+    },
+    "pg-hybrid-bm25": {
+      "hit@1": 0.6923076923076923,
+      "hit@5": 0.8461538461538461,
+      "hit@10": 0.8461538461538461,
+      "MRR@10": 0.7269230769230769,
+      "paper hit@5": 1,
+      "table hit@5": 0.8461538461538461,
+      "median ms": 0.1
+    },
+    "pg-hybrid+rerank": {
+      "hit@1": 0.8461538461538461,
+      "hit@5": 0.9230769230769231,
+      "hit@10": 1,
+      "MRR@10": 0.8794871794871795,
+      "paper hit@5": 1,
+      "table hit@5": 0.9230769230769231,
+      "median ms": 1298.8
+    },
+    "pg-vector+rerank": {
+      "hit@1": 0.8461538461538461,
+      "hit@5": 0.9230769230769231,
+      "hit@10": 1,
+      "MRR@10": 0.8803418803418803,
+      "paper hit@5": 1,
+      "table hit@5": 0.9230769230769231,
+      "median ms": 1093.5
+    },
+    "pg-hybrid-bm25+rerank": {
+      "hit@1": 0.8461538461538461,
+      "hit@5": 0.9230769230769231,
+      "hit@10": 0.9230769230769231,
+      "MRR@10": 0.8615384615384616,
+      "paper hit@5": 1,
+      "table hit@5": 0.9230769230769231,
+      "median ms": 1112.9
+    }
+  },
+  "per_question": {
+    "pg-keyword": [
+      {
+        "id": "t01",
+        "type": "table",
+        "ms": 464.3,
+        "rank": null,
+        "hit1": false,
+        "hit5": false,
+        "hit10": false,
+        "rr": 0.0,
+        "paper_hit5": false,
+        "top5": [
+          [
+            "BERTScore: Evaluating Text Generation wi",
+            23
+          ],
+          [
+            "BERTScore: Evaluating Text Generation wi",
+            43
+          ],
+          [
+            "Exploring the Limits of Transfer Learnin",
+            39
+          ],
+          [
+            "Unsupervised Cross-lingual Representatio",
+            8
+          ],
+          [
+            "XLNet: Generalized Autoregressive Pretra",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t02",
+        "type": "table",
+        "ms": 596.1,
+        "rank": null,
+        "hit1": false,
+        "hit5": false,
+        "hit10": false,
+        "rr": 0.0,
+        "paper_hit5": false,
+        "top5": [
+          [
+            "SMOTE: Synthetic Minority Over-sampling ",
+            13
+          ],
+          [
+            "Segment Anything",
+            26
+          ],
+          [
+            "SMOTE: Synthetic Minority Over-sampling ",
+            13
+          ],
+          [
+            "Learning Transferable Visual Models From",
+            37
+          ],
+          [
+            "ImageNet Large Scale Visual Recognition ",
+            25
+          ]
+        ]
+      },
+      {
+        "id": "t03",
+        "type": "table",
+        "ms": 1048.6,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ],
+          [
+            "Domain-Adversarial Training of Neural Ne",
+            19
+          ],
+          [
+            "Spatial Pyramid Pooling in Deep Convolut",
+            6
+          ],
+          [
+            "Inception-v4, Inception-ResNet and the I",
+            11
+          ],
+          [
+            "Explaining and Harnessing Adversarial Ex",
+            5
+          ]
+        ]
+      },
+      {
+        "id": "t04",
+        "type": "table",
+        "ms": 466.0,
+        "rank": null,
+        "hit1": false,
+        "hit5": false,
+        "hit10": false,
+        "rr": 0.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            3
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            6
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            6
+          ],
+          [
+            "Segment Anything",
+            26
+          ],
+          [
+            "Learning Transferable Visual Models From",
+            37
+          ]
+        ]
+      },
+      {
+        "id": "t05",
+        "type": "table",
+        "ms": 429.0,
+        "rank": null,
+        "hit1": false,
+        "hit5": false,
+        "hit10": false,
+        "rr": 0.0,
+        "paper_hit5": false,
+        "top5": [
+          [
+            "Inception-v4, Inception-ResNet and the I",
+            11
+          ],
+          [
+            "Explaining and Harnessing Adversarial Ex",
+            5
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            9
+          ],
+          [
+            "wav2vec 2.0: A Framework for Self-Superv",
+            16
+          ],
+          [
+            "Chain-of-Thought Prompting Elicits Reaso",
+            16
+          ]
+        ]
+      },
+      {
+        "id": "t06",
+        "type": "table",
+        "ms": 436.6,
+        "rank": null,
+        "hit1": false,
+        "hit5": false,
+        "hit10": false,
+        "rr": 0.0,
+        "paper_hit5": false,
+        "top5": [
+          [
+            "Densely Connected Convolutional Networks",
+            4
+          ],
+          [
+            "Delving Deep into Rectifiers: Surpassing",
+            7
+          ],
+          [
+            "Swin Transformer: Hierarchical Vision Tr",
+            10
+          ],
+          [
+            "ImageNet Large Scale Visual Recognition ",
+            23
+          ],
+          [
+            "High-Resolution Image Synthesis with Lat",
+            25
+          ]
+        ]
+      },
+      {
+        "id": "t07",
+        "type": "table",
+        "ms": 609.6,
+        "rank": 10,
+        "hit1": false,
+        "hit5": false,
+        "hit10": true,
+        "rr": 0.1,
+        "paper_hit5": false,
+        "top5": [
+          [
+            "Delving Deep into Rectifiers: Surpassing",
+            7
+          ],
+          [
+            "Densely Connected Convolutional Networks",
+            4
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            5
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            11
+          ],
+          [
+            "YOLO9000: Better, Faster, Stronger",
+            4
+          ]
+        ]
+      },
+      {
+        "id": "t09",
+        "type": "table",
+        "ms": 390.4,
+        "rank": null,
+        "hit1": false,
+        "hit5": false,
+        "hit10": false,
+        "rr": 0.0,
+        "paper_hit5": false,
+        "top5": [
+          [
+            "Model-Agnostic Meta-Learning for Fast Ad",
+            2
+          ],
+          [
+            "Model-Agnostic Meta-Learning for Fast Ad",
+            10
+          ],
+          [
+            "Advances and Open Problems in Federated ",
+            7
+          ],
+          [
+            "Advances and Open Problems in Federated ",
+            29
+          ],
+          [
+            "Model-Agnostic Meta-Learning for Fast Ad",
+            1
+          ]
+        ]
+      },
+      {
+        "id": "t10",
+        "type": "table",
+        "ms": 380.6,
+        "rank": null,
+        "hit1": false,
+        "hit5": false,
+        "hit10": false,
+        "rr": 0.0,
+        "paper_hit5": false,
+        "top5": [
+          [
+            "Asynchronous Methods for Deep Reinforcem",
+            18
+          ],
+          [
+            "Learning Transferable Visual Models From",
+            39
+          ],
+          [
+            "DeepWalk: Online Learning of Social Repr",
+            3
+          ],
+          [
+            "Fashion-MNIST: a Novel Image Dataset for",
+            5
+          ],
+          [
+            "Bootstrap your own latent: A new approac",
+            22
+          ]
+        ]
+      },
+      {
+        "id": "t11",
+        "type": "table",
+        "ms": 394.1,
+        "rank": 3,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.3333333333333333,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Densely Connected Convolutional Networks",
+            4
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            11
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "Rethinking Atrous Convolution for Semant",
+            7
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            11
+          ]
+        ]
+      },
+      {
+        "id": "t12",
+        "type": "table",
+        "ms": 462.1,
+        "rank": 3,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.3333333333333333,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "wav2vec 2.0: A Framework for Self-Superv",
+            16
+          ],
+          [
+            "Explaining and Harnessing Adversarial Ex",
+            5
+          ],
+          [
+            "Densely Connected Convolutional Networks",
+            5
+          ],
+          [
+            "Llama 2: Open Foundation and Fine-Tuned ",
+            26
+          ],
+          [
+            "The Llama 3 Herd of Models",
+            6
+          ]
+        ]
+      },
+      {
+        "id": "t13",
+        "type": "table",
+        "ms": 461.5,
+        "rank": null,
+        "hit1": false,
+        "hit5": false,
+        "hit10": false,
+        "rr": 0.0,
+        "paper_hit5": false,
+        "top5": [
+          [
+            "Qwen3 Technical Report",
+            5
+          ],
+          [
+            "Qwen3 Technical Report",
+            5
+          ],
+          [
+            "Qwen3 Technical Report",
+            9
+          ],
+          [
+            "Model-Agnostic Meta-Learning for Fast Ad",
+            2
+          ],
+          [
+            "Asynchronous Methods for Deep Reinforcem",
+            18
+          ]
+        ]
+      },
+      {
+        "id": "t14",
+        "type": "table",
+        "ms": 310.2,
+        "rank": null,
+        "hit1": false,
+        "hit5": false,
+        "hit10": false,
+        "rr": 0.0,
+        "paper_hit5": false,
+        "top5": [
+          [
+            "MobileNets: Efficient Convolutional Neur",
+            3
+          ],
+          [
+            "Improving neural networks by preventing ",
+            18
+          ],
+          [
+            "Encoder-Decoder with Atrous Separable Co",
+            5
+          ],
+          [
+            "Scaling Laws for Neural Language Models",
+            8
+          ],
+          [
+            "Exploring the Limits of Transfer Learnin",
+            19
+          ]
+        ]
+      }
+    ],
+    "pg-bm25": [
+      {
+        "id": "t01",
+        "type": "table",
+        "ms": 306.9,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            7
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            7
+          ],
+          [
+            "Language Models are Few-Shot Learners",
+            20
+          ],
+          [
+            "XLNet: Generalized Autoregressive Pretra",
+            7
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            12
+          ]
+        ]
+      },
+      {
+        "id": "t02",
+        "type": "table",
+        "ms": 115.4,
+        "rank": 2,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.5,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Graph Attention Networks",
+            6
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            5
+          ],
+          [
+            "A Comprehensive Survey on Graph Neural N",
+            21
+          ],
+          [
+            "Graph Attention Networks",
+            9
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            6
+          ]
+        ]
+      },
+      {
+        "id": "t03",
+        "type": "table",
+        "ms": 297.5,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            8
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            9
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t04",
+        "type": "table",
+        "ms": 121.6,
+        "rank": null,
+        "hit1": false,
+        "hit5": false,
+        "hit10": false,
+        "rr": 0.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            10
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            6
+          ],
+          [
+            "Multi-Scale Context Aggregation by Dilat",
+            6
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            2
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            10
+          ]
+        ]
+      },
+      {
+        "id": "t05",
+        "type": "table",
+        "ms": 242.9,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Batch Normalization: Accelerating Deep N",
+            8
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            9
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            8
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            6
+          ],
+          [
+            "Inception-v4, Inception-ResNet and the I",
+            11
+          ]
+        ]
+      },
+      {
+        "id": "t06",
+        "type": "table",
+        "ms": 256.4,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "SSD: Single Shot MultiBox Detector",
+            8
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            11
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            13
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            15
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t07",
+        "type": "table",
+        "ms": 202.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            10
+          ],
+          [
+            "YOLO9000: Better, Faster, Stronger",
+            4
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            7
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            10
+          ]
+        ]
+      },
+      {
+        "id": "t09",
+        "type": "table",
+        "ms": 141.5,
+        "rank": 5,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.2,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            8
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            1
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            9
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            9
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t10",
+        "type": "table",
+        "ms": 147.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Fully Convolutional Networks for Semanti",
+            8
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            8
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            9
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            6
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            8
+          ]
+        ]
+      },
+      {
+        "id": "t11",
+        "type": "table",
+        "ms": 155.3,
+        "rank": 2,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.5,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "YOLO9000: Better, Faster, Stronger",
+            4
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "Rich feature hierarchies for accurate ob",
+            5
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ]
+        ]
+      },
+      {
+        "id": "t12",
+        "type": "table",
+        "ms": 301.6,
+        "rank": 2,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.5,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "mixup: Beyond Empirical Risk Minimizatio",
+            5
+          ],
+          [
+            "Densely Connected Convolutional Networks",
+            5
+          ],
+          [
+            "On Calibration of Modern Neural Networks",
+            13
+          ],
+          [
+            "Densely Connected Convolutional Networks",
+            6
+          ],
+          [
+            "On Calibration of Modern Neural Networks",
+            6
+          ]
+        ]
+      },
+      {
+        "id": "t13",
+        "type": "table",
+        "ms": 235.9,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "An Image is Worth 16x16 Words: Transform",
+            14
+          ],
+          [
+            "Llama 2: Open Foundation and Fine-Tuned ",
+            9
+          ],
+          [
+            "An Image is Worth 16x16 Words: Transform",
+            5
+          ],
+          [
+            "BLIP-2: Bootstrapping Language-Image Pre",
+            12
+          ],
+          [
+            "An Image is Worth 16x16 Words: Transform",
+            16
+          ]
+        ]
+      },
+      {
+        "id": "t14",
+        "type": "table",
+        "ms": 233.9,
+        "rank": null,
+        "hit1": false,
+        "hit5": false,
+        "hit10": false,
+        "rr": 0.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Going Deeper with Convolutions",
+            5
+          ],
+          [
+            "FaceNet: A Unified Embedding for Face Re",
+            4
+          ],
+          [
+            "SqueezeNet: AlexNet-level accuracy with ",
+            2
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            2
+          ],
+          [
+            "Learning Deep Features for Discriminativ",
+            5
+          ]
+        ]
+      }
+    ],
+    "pg-vector": [
+      {
+        "id": "t01",
+        "type": "table",
+        "ms": 190.8,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            7
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            8
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            9
+          ],
+          [
+            "Exploring the Limits of Transfer Learnin",
+            34
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            3
+          ]
+        ]
+      },
+      {
+        "id": "t02",
+        "type": "table",
+        "ms": 265.9,
+        "rank": 3,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.3333333333333333,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "DeepLab: Semantic Image Segmentation wit",
+            6
+          ],
+          [
+            "SMOTE: Synthetic Minority Over-sampling ",
+            13
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            5
+          ],
+          [
+            "Aggregated Residual Transformations for ",
+            7
+          ],
+          [
+            "How transferable are features in deep ne",
+            3
+          ]
+        ]
+      },
+      {
+        "id": "t03",
+        "type": "table",
+        "ms": 90.6,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            8
+          ],
+          [
+            "Squeeze-and-Excitation Networks",
+            7
+          ],
+          [
+            "Densely Connected Convolutional Networks",
+            6
+          ],
+          [
+            "Squeeze-and-Excitation Networks",
+            8
+          ]
+        ]
+      },
+      {
+        "id": "t04",
+        "type": "table",
+        "ms": 211.2,
+        "rank": 6,
+        "hit1": false,
+        "hit5": false,
+        "hit10": true,
+        "rr": 0.16666666666666666,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            6
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            6
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            2
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            11
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            10
+          ]
+        ]
+      },
+      {
+        "id": "t05",
+        "type": "table",
+        "ms": 102.8,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Batch Normalization: Accelerating Deep N",
+            8
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            6
+          ],
+          [
+            "Densely Connected Convolutional Networks",
+            6
+          ],
+          [
+            "Squeeze-and-Excitation Networks",
+            7
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            8
+          ]
+        ]
+      },
+      {
+        "id": "t06",
+        "type": "table",
+        "ms": 105.4,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "SSD: Single Shot MultiBox Detector",
+            8
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            15
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            13
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            7
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            8
+          ]
+        ]
+      },
+      {
+        "id": "t07",
+        "type": "table",
+        "ms": 91.2,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            11
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            8
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            11
+          ]
+        ]
+      },
+      {
+        "id": "t09",
+        "type": "table",
+        "ms": 92.2,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            7
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            9
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            9
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            1
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            1
+          ]
+        ]
+      },
+      {
+        "id": "t10",
+        "type": "table",
+        "ms": 93.2,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Fully Convolutional Networks for Semanti",
+            8
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            8
+          ],
+          [
+            "The Cityscapes Dataset for Semantic Urba",
+            28
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            6
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t11",
+        "type": "table",
+        "ms": 91.4,
+        "rank": null,
+        "hit1": false,
+        "hit5": false,
+        "hit10": false,
+        "rr": 0.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "YOLO9000: Better, Faster, Stronger",
+            5
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            11
+          ],
+          [
+            "YOLO9000: Better, Faster, Stronger",
+            4
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            2
+          ],
+          [
+            "YOLOv7: Trainable bag-of-freebies sets n",
+            10
+          ]
+        ]
+      },
+      {
+        "id": "t12",
+        "type": "table",
+        "ms": 201.5,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Densely Connected Convolutional Networks",
+            5
+          ],
+          [
+            "Squeeze-and-Excitation Networks",
+            7
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            7
+          ],
+          [
+            "Squeeze-and-Excitation Networks",
+            7
+          ],
+          [
+            "Densely Connected Convolutional Networks",
+            6
+          ]
+        ]
+      },
+      {
+        "id": "t13",
+        "type": "table",
+        "ms": 171.3,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "An Image is Worth 16x16 Words: Transform",
+            14
+          ],
+          [
+            "Improved Training of Wasserstein GANs",
+            14
+          ],
+          [
+            "Denoising Diffusion Probabilistic Models",
+            14
+          ],
+          [
+            "Communication-Efficient Learning of Deep",
+            7
+          ],
+          [
+            "Squeeze-and-Excitation Networks",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t14",
+        "type": "table",
+        "ms": 164.2,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Going Deeper with Convolutions",
+            6
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            1
+          ],
+          [
+            "Going Deeper with Convolutions",
+            8
+          ],
+          [
+            "FaceNet: A Unified Embedding for Face Re",
+            4
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            3
+          ]
+        ]
+      }
+    ],
+    "pg-hybrid": [
+      {
+        "id": "t01",
+        "type": "table",
+        "ms": 0.3,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            7
+          ],
+          [
+            "BERTScore: Evaluating Text Generation wi",
+            23
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            8
+          ],
+          [
+            "BERTScore: Evaluating Text Generation wi",
+            43
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            9
+          ]
+        ]
+      },
+      {
+        "id": "t02",
+        "type": "table",
+        "ms": 0.2,
+        "rank": 7,
+        "hit1": false,
+        "hit5": false,
+        "hit10": true,
+        "rr": 0.14285714285714285,
+        "paper_hit5": false,
+        "top5": [
+          [
+            "SMOTE: Synthetic Minority Over-sampling ",
+            13
+          ],
+          [
+            "SMOTE: Synthetic Minority Over-sampling ",
+            13
+          ],
+          [
+            "SMOTE: Synthetic Minority Over-sampling ",
+            14
+          ],
+          [
+            "How transferable are features in deep ne",
+            11
+          ],
+          [
+            "DeepLab: Semantic Image Segmentation wit",
+            6
+          ]
+        ]
+      },
+      {
+        "id": "t03",
+        "type": "table",
+        "ms": 0.4,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ],
+          [
+            "Inception-v4, Inception-ResNet and the I",
+            10
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            8
+          ],
+          [
+            "Domain-Adversarial Training of Neural Ne",
+            19
+          ]
+        ]
+      },
+      {
+        "id": "t04",
+        "type": "table",
+        "ms": 0.3,
+        "rank": null,
+        "hit1": false,
+        "hit5": false,
+        "hit10": false,
+        "rr": 0.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            6
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            6
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            3
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            2
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            10
+          ]
+        ]
+      },
+      {
+        "id": "t05",
+        "type": "table",
+        "ms": 0.2,
+        "rank": 6,
+        "hit1": false,
+        "hit5": false,
+        "hit10": true,
+        "rr": 0.16666666666666666,
+        "paper_hit5": false,
+        "top5": [
+          [
+            "Inception-v4, Inception-ResNet and the I",
+            11
+          ],
+          [
+            "Inception-v4, Inception-ResNet and the I",
+            10
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            9
+          ],
+          [
+            "Inception-v4, Inception-ResNet and the I",
+            10
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            8
+          ]
+        ]
+      },
+      {
+        "id": "t06",
+        "type": "table",
+        "ms": 0.3,
+        "rank": 3,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.3333333333333333,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "SSD: Single Shot MultiBox Detector",
+            11
+          ],
+          [
+            "Densely Connected Convolutional Networks",
+            4
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            8
+          ],
+          [
+            "Delving Deep into Rectifiers: Surpassing",
+            7
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            15
+          ]
+        ]
+      },
+      {
+        "id": "t07",
+        "type": "table",
+        "ms": 0.3,
+        "rank": 3,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.3333333333333333,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Deep Residual Learning for Image Recogni",
+            11
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            11
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            11
+          ],
+          [
+            "Fast R-CNN",
+            5
+          ]
+        ]
+      },
+      {
+        "id": "t09",
+        "type": "table",
+        "ms": 0.3,
+        "rank": 2,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.5,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Model-Agnostic Meta-Learning for Fast Ad",
+            2
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            7
+          ],
+          [
+            "Model-Agnostic Meta-Learning for Fast Ad",
+            10
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            9
+          ],
+          [
+            "Advances and Open Problems in Federated ",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t10",
+        "type": "table",
+        "ms": 0.3,
+        "rank": 2,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.5,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Learning Transferable Visual Models From",
+            43
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            8
+          ],
+          [
+            "Asynchronous Methods for Deep Reinforcem",
+            18
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            8
+          ],
+          [
+            "Learning Transferable Visual Models From",
+            39
+          ]
+        ]
+      },
+      {
+        "id": "t11",
+        "type": "table",
+        "ms": 0.3,
+        "rank": 2,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.5,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "YOLO9000: Better, Faster, Stronger",
+            4
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "Rich feature hierarchies for accurate ob",
+            5
+          ],
+          [
+            "Densely Connected Convolutional Networks",
+            4
+          ],
+          [
+            "YOLO9000: Better, Faster, Stronger",
+            5
+          ]
+        ]
+      },
+      {
+        "id": "t12",
+        "type": "table",
+        "ms": 0.4,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Densely Connected Convolutional Networks",
+            5
+          ],
+          [
+            "Densely Connected Convolutional Networks",
+            6
+          ],
+          [
+            "wav2vec 2.0: A Framework for Self-Superv",
+            16
+          ],
+          [
+            "Explaining and Harnessing Adversarial Ex",
+            5
+          ],
+          [
+            "Squeeze-and-Excitation Networks",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t13",
+        "type": "table",
+        "ms": 0.4,
+        "rank": 2,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.5,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Qwen3 Technical Report",
+            5
+          ],
+          [
+            "An Image is Worth 16x16 Words: Transform",
+            14
+          ],
+          [
+            "Qwen3 Technical Report",
+            5
+          ],
+          [
+            "Improved Training of Wasserstein GANs",
+            14
+          ],
+          [
+            "Qwen3 Technical Report",
+            9
+          ]
+        ]
+      },
+      {
+        "id": "t14",
+        "type": "table",
+        "ms": 0.3,
+        "rank": 3,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.3333333333333333,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "SqueezeNet: AlexNet-level accuracy with ",
+            3
+          ],
+          [
+            "MobileNets: Efficient Convolutional Neur",
+            3
+          ],
+          [
+            "Going Deeper with Convolutions",
+            6
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            1
+          ],
+          [
+            "Improving neural networks by preventing ",
+            18
+          ]
+        ]
+      }
+    ],
+    "pg-hybrid-2:1": [
+      {
+        "id": "t01",
+        "type": "table",
+        "ms": 0.2,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            7
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            8
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            9
+          ],
+          [
+            "Exploring the Limits of Transfer Learnin",
+            34
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            3
+          ]
+        ]
+      },
+      {
+        "id": "t02",
+        "type": "table",
+        "ms": 0.1,
+        "rank": 6,
+        "hit1": false,
+        "hit5": false,
+        "hit10": true,
+        "rr": 0.16666666666666666,
+        "paper_hit5": false,
+        "top5": [
+          [
+            "SMOTE: Synthetic Minority Over-sampling ",
+            13
+          ],
+          [
+            "SMOTE: Synthetic Minority Over-sampling ",
+            13
+          ],
+          [
+            "How transferable are features in deep ne",
+            11
+          ],
+          [
+            "SMOTE: Synthetic Minority Over-sampling ",
+            14
+          ],
+          [
+            "DeepLab: Semantic Image Segmentation wit",
+            6
+          ]
+        ]
+      },
+      {
+        "id": "t03",
+        "type": "table",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ],
+          [
+            "Inception-v4, Inception-ResNet and the I",
+            10
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            8
+          ],
+          [
+            "Squeeze-and-Excitation Networks",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t04",
+        "type": "table",
+        "ms": 0.1,
+        "rank": 9,
+        "hit1": false,
+        "hit5": false,
+        "hit10": true,
+        "rr": 0.1111111111111111,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            6
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            6
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            2
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            3
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            10
+          ]
+        ]
+      },
+      {
+        "id": "t05",
+        "type": "table",
+        "ms": 0.1,
+        "rank": 6,
+        "hit1": false,
+        "hit5": false,
+        "hit10": true,
+        "rr": 0.16666666666666666,
+        "paper_hit5": false,
+        "top5": [
+          [
+            "Inception-v4, Inception-ResNet and the I",
+            10
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            9
+          ],
+          [
+            "Inception-v4, Inception-ResNet and the I",
+            11
+          ],
+          [
+            "Inception-v4, Inception-ResNet and the I",
+            10
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            8
+          ]
+        ]
+      },
+      {
+        "id": "t06",
+        "type": "table",
+        "ms": 0.1,
+        "rank": 2,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.5,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "SSD: Single Shot MultiBox Detector",
+            11
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            8
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            15
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            13
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t07",
+        "type": "table",
+        "ms": 0.1,
+        "rank": 2,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.5,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Deep Residual Learning for Image Recogni",
+            11
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            11
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            11
+          ],
+          [
+            "Fast R-CNN",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t09",
+        "type": "table",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            7
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            9
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            9
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            1
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            1
+          ]
+        ]
+      },
+      {
+        "id": "t10",
+        "type": "table",
+        "ms": 0.1,
+        "rank": 2,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.5,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Learning Transferable Visual Models From",
+            43
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            8
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            8
+          ],
+          [
+            "The Cityscapes Dataset for Semantic Urba",
+            28
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            6
+          ]
+        ]
+      },
+      {
+        "id": "t11",
+        "type": "table",
+        "ms": 0.2,
+        "rank": 3,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.3333333333333333,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "YOLO9000: Better, Faster, Stronger",
+            4
+          ],
+          [
+            "Rich feature hierarchies for accurate ob",
+            5
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "YOLO9000: Better, Faster, Stronger",
+            5
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            11
+          ]
+        ]
+      },
+      {
+        "id": "t12",
+        "type": "table",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Densely Connected Convolutional Networks",
+            5
+          ],
+          [
+            "Densely Connected Convolutional Networks",
+            6
+          ],
+          [
+            "Squeeze-and-Excitation Networks",
+            7
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            7
+          ],
+          [
+            "Squeeze-and-Excitation Networks",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t13",
+        "type": "table",
+        "ms": 0.2,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "An Image is Worth 16x16 Words: Transform",
+            14
+          ],
+          [
+            "Improved Training of Wasserstein GANs",
+            14
+          ],
+          [
+            "Denoising Diffusion Probabilistic Models",
+            14
+          ],
+          [
+            "Communication-Efficient Learning of Deep",
+            7
+          ],
+          [
+            "Squeeze-and-Excitation Networks",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t14",
+        "type": "table",
+        "ms": 0.2,
+        "rank": 2,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.5,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "SqueezeNet: AlexNet-level accuracy with ",
+            3
+          ],
+          [
+            "Going Deeper with Convolutions",
+            6
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            1
+          ],
+          [
+            "Going Deeper with Convolutions",
+            8
+          ],
+          [
+            "FaceNet: A Unified Embedding for Face Re",
+            4
+          ]
+        ]
+      }
+    ],
+    "pg-hybrid-bm25": [
+      {
+        "id": "t01",
+        "type": "table",
+        "ms": 0.2,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            7
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            7
+          ],
+          [
+            "RoBERTa: A Robustly Optimized BERT Pretr",
+            6
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            8
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            9
+          ]
+        ]
+      },
+      {
+        "id": "t02",
+        "type": "table",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Semi-Supervised Classification with Grap",
+            5
+          ],
+          [
+            "A Comprehensive Survey on Graph Neural N",
+            21
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            7
+          ],
+          [
+            "How transferable are features in deep ne",
+            11
+          ],
+          [
+            "SMOTE: Synthetic Minority Over-sampling ",
+            13
+          ]
+        ]
+      },
+      {
+        "id": "t03",
+        "type": "table",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            8
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ],
+          [
+            "Inception-v4, Inception-ResNet and the I",
+            10
+          ]
+        ]
+      },
+      {
+        "id": "t04",
+        "type": "table",
+        "ms": 0.1,
+        "rank": null,
+        "hit1": false,
+        "hit5": false,
+        "hit10": false,
+        "rr": 0.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            6
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            10
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            2
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            6
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            10
+          ]
+        ]
+      },
+      {
+        "id": "t05",
+        "type": "table",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Batch Normalization: Accelerating Deep N",
+            8
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            6
+          ],
+          [
+            "Inception-v4, Inception-ResNet and the I",
+            10
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            9
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            8
+          ]
+        ]
+      },
+      {
+        "id": "t06",
+        "type": "table",
+        "ms": 0.2,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "SSD: Single Shot MultiBox Detector",
+            8
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            15
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            13
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            11
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t07",
+        "type": "table",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            11
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            11
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            8
+          ]
+        ]
+      },
+      {
+        "id": "t09",
+        "type": "table",
+        "ms": 0.1,
+        "rank": 4,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.25,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            1
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            9
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            9
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            7
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            8
+          ]
+        ]
+      },
+      {
+        "id": "t10",
+        "type": "table",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Fully Convolutional Networks for Semanti",
+            8
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            8
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            6
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            7
+          ],
+          [
+            "The Cityscapes Dataset for Semantic Urba",
+            23
+          ]
+        ]
+      },
+      {
+        "id": "t11",
+        "type": "table",
+        "ms": 0.1,
+        "rank": 5,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.2,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "YOLO9000: Better, Faster, Stronger",
+            4
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ],
+          [
+            "Rich feature hierarchies for accurate ob",
+            5
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            2
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t12",
+        "type": "table",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Densely Connected Convolutional Networks",
+            5
+          ],
+          [
+            "Densely Connected Convolutional Networks",
+            6
+          ],
+          [
+            "Densely Connected Convolutional Networks",
+            5
+          ],
+          [
+            "Densely Connected Convolutional Networks",
+            6
+          ],
+          [
+            "Densely Connected Convolutional Networks",
+            5
+          ]
+        ]
+      },
+      {
+        "id": "t13",
+        "type": "table",
+        "ms": 0.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "An Image is Worth 16x16 Words: Transform",
+            14
+          ],
+          [
+            "Llama 2: Open Foundation and Fine-Tuned ",
+            9
+          ],
+          [
+            "Improved Training of Wasserstein GANs",
+            14
+          ],
+          [
+            "An Image is Worth 16x16 Words: Transform",
+            5
+          ],
+          [
+            "Denoising Diffusion Probabilistic Models",
+            14
+          ]
+        ]
+      },
+      {
+        "id": "t14",
+        "type": "table",
+        "ms": 0.1,
+        "rank": null,
+        "hit1": false,
+        "hit5": false,
+        "hit10": false,
+        "rr": 0.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "FaceNet: A Unified Embedding for Face Re",
+            4
+          ],
+          [
+            "Going Deeper with Convolutions",
+            5
+          ],
+          [
+            "SqueezeNet: AlexNet-level accuracy with ",
+            2
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            3
+          ],
+          [
+            "A Survey on Deep Learning in Medical Ima",
+            5
+          ]
+        ]
+      }
+    ],
+    "pg-hybrid+rerank": [
+      {
+        "id": "t01",
+        "type": "table",
+        "ms": 2378.9,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            7
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            7
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            7
+          ],
+          [
+            "BERTScore: Evaluating Text Generation wi",
+            34
+          ],
+          [
+            "Unsupervised Cross-lingual Representatio",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t02",
+        "type": "table",
+        "ms": 1305.7,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Semi-Supervised Classification with Grap",
+            5
+          ],
+          [
+            "Graph Attention Networks",
+            6
+          ],
+          [
+            "A Comprehensive Survey on Graph Neural N",
+            21
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            7
+          ],
+          [
+            "DeepLab: Semantic Image Segmentation wit",
+            6
+          ]
+        ]
+      },
+      {
+        "id": "t03",
+        "type": "table",
+        "ms": 1606.7,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            8
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            6
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t04",
+        "type": "table",
+        "ms": 1016.9,
+        "rank": 10,
+        "hit1": false,
+        "hit5": false,
+        "hit10": true,
+        "rr": 0.1,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            10
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            10
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            6
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            12
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            2
+          ]
+        ]
+      },
+      {
+        "id": "t05",
+        "type": "table",
+        "ms": 1193.4,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Batch Normalization: Accelerating Deep N",
+            8
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            9
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            6
+          ],
+          [
+            "Going Deeper with Convolutions",
+            9
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            6
+          ]
+        ]
+      },
+      {
+        "id": "t06",
+        "type": "table",
+        "ms": 1296.9,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "SSD: Single Shot MultiBox Detector",
+            8
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            15
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            13
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            7
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t07",
+        "type": "table",
+        "ms": 1280.9,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            11
+          ]
+        ]
+      },
+      {
+        "id": "t09",
+        "type": "table",
+        "ms": 1033.6,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            7
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            1
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            9
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            7
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t10",
+        "type": "table",
+        "ms": 1613.8,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Fully Convolutional Networks for Semanti",
+            8
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            6
+          ],
+          [
+            "The Cityscapes Dataset for Semantic Urba",
+            23
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            8
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t11",
+        "type": "table",
+        "ms": 1402.6,
+        "rank": 3,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.3333333333333333,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "SSD: Single Shot MultiBox Detector",
+            11
+          ],
+          [
+            "YOLO9000: Better, Faster, Stronger",
+            5
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "Rich feature hierarchies for accurate ob",
+            5
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            6
+          ]
+        ]
+      },
+      {
+        "id": "t12",
+        "type": "table",
+        "ms": 1298.8,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Densely Connected Convolutional Networks",
+            5
+          ],
+          [
+            "Densely Connected Convolutional Networks",
+            6
+          ],
+          [
+            "mixup: Beyond Empirical Risk Minimizatio",
+            5
+          ],
+          [
+            "Densely Connected Convolutional Networks",
+            6
+          ],
+          [
+            "Squeeze-and-Excitation Networks",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t13",
+        "type": "table",
+        "ms": 1339.2,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "An Image is Worth 16x16 Words: Transform",
+            14
+          ],
+          [
+            "SGDR: Stochastic Gradient Descent with W",
+            2
+          ],
+          [
+            "SGDR: Stochastic Gradient Descent with W",
+            5
+          ],
+          [
+            "SGDR: Stochastic Gradient Descent with W",
+            15
+          ],
+          [
+            "Communication-Efficient Learning of Deep",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t14",
+        "type": "table",
+        "ms": 1212.3,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Going Deeper with Convolutions",
+            6
+          ],
+          [
+            "YOLOv3: An Incremental Improvement",
+            2
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            3
+          ],
+          [
+            "Going Deeper with Convolutions",
+            9
+          ],
+          [
+            "SqueezeNet: AlexNet-level accuracy with ",
+            2
+          ]
+        ]
+      }
+    ],
+    "pg-vector+rerank": [
+      {
+        "id": "t01",
+        "type": "table",
+        "ms": 1635.5,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            7
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            7
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            7
+          ],
+          [
+            "BERTScore: Evaluating Text Generation wi",
+            34
+          ],
+          [
+            "Unsupervised Cross-lingual Representatio",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t02",
+        "type": "table",
+        "ms": 900.8,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Semi-Supervised Classification with Grap",
+            5
+          ],
+          [
+            "A Comprehensive Survey on Graph Neural N",
+            21
+          ],
+          [
+            "A Comprehensive Survey on Graph Neural N",
+            17
+          ],
+          [
+            "Semi-Supervised Classification with Grap",
+            7
+          ],
+          [
+            "DeepLab: Semantic Image Segmentation wit",
+            6
+          ]
+        ]
+      },
+      {
+        "id": "t03",
+        "type": "table",
+        "ms": 858.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            8
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            6
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t04",
+        "type": "table",
+        "ms": 1093.5,
+        "rank": 9,
+        "hit1": false,
+        "hit5": false,
+        "hit10": true,
+        "rr": 0.1111111111111111,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            10
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            10
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            6
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            12
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            2
+          ]
+        ]
+      },
+      {
+        "id": "t05",
+        "type": "table",
+        "ms": 922.0,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Batch Normalization: Accelerating Deep N",
+            8
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            9
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            6
+          ],
+          [
+            "Going Deeper with Convolutions",
+            9
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            6
+          ]
+        ]
+      },
+      {
+        "id": "t06",
+        "type": "table",
+        "ms": 1029.0,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "SSD: Single Shot MultiBox Detector",
+            8
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            15
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            13
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            7
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t07",
+        "type": "table",
+        "ms": 1141.7,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            11
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            8
+          ]
+        ]
+      },
+      {
+        "id": "t09",
+        "type": "table",
+        "ms": 704.3,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            7
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            1
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            9
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            7
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t10",
+        "type": "table",
+        "ms": 1128.2,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Fully Convolutional Networks for Semanti",
+            8
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            6
+          ],
+          [
+            "The Cityscapes Dataset for Semantic Urba",
+            23
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            8
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t11",
+        "type": "table",
+        "ms": 1824.0,
+        "rank": 3,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.3333333333333333,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "SSD: Single Shot MultiBox Detector",
+            11
+          ],
+          [
+            "YOLO9000: Better, Faster, Stronger",
+            5
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            11
+          ],
+          [
+            "Rich feature hierarchies for accurate ob",
+            5
+          ]
+        ]
+      },
+      {
+        "id": "t12",
+        "type": "table",
+        "ms": 1026.8,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Densely Connected Convolutional Networks",
+            5
+          ],
+          [
+            "Densely Connected Convolutional Networks",
+            6
+          ],
+          [
+            "mixup: Beyond Empirical Risk Minimizatio",
+            5
+          ],
+          [
+            "Densely Connected Convolutional Networks",
+            6
+          ],
+          [
+            "Squeeze-and-Excitation Networks",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t13",
+        "type": "table",
+        "ms": 1102.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "An Image is Worth 16x16 Words: Transform",
+            14
+          ],
+          [
+            "SGDR: Stochastic Gradient Descent with W",
+            2
+          ],
+          [
+            "SGDR: Stochastic Gradient Descent with W",
+            5
+          ],
+          [
+            "SGDR: Stochastic Gradient Descent with W",
+            15
+          ],
+          [
+            "Communication-Efficient Learning of Deep",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t14",
+        "type": "table",
+        "ms": 1148.8,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Going Deeper with Convolutions",
+            6
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            3
+          ],
+          [
+            "Going Deeper with Convolutions",
+            9
+          ],
+          [
+            "SqueezeNet: AlexNet-level accuracy with ",
+            2
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            3
+          ]
+        ]
+      }
+    ],
+    "pg-hybrid-bm25+rerank": [
+      {
+        "id": "t01",
+        "type": "table",
+        "ms": 2041.6,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            7
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            7
+          ],
+          [
+            "BERT: Pre-training of Deep Bidirectional",
+            7
+          ],
+          [
+            "BERTScore: Evaluating Text Generation wi",
+            34
+          ],
+          [
+            "Language Models are Few-Shot Learners",
+            20
+          ]
+        ]
+      },
+      {
+        "id": "t02",
+        "type": "table",
+        "ms": 1304.4,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Semi-Supervised Classification with Grap",
+            5
+          ],
+          [
+            "Graph Attention Networks",
+            6
+          ],
+          [
+            "A Comprehensive Survey on Graph Neural N",
+            21
+          ],
+          [
+            "Graph Attention Networks",
+            9
+          ],
+          [
+            "A Comprehensive Survey on Graph Neural N",
+            17
+          ]
+        ]
+      },
+      {
+        "id": "t03",
+        "type": "table",
+        "ms": 1394.4,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            8
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            6
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t04",
+        "type": "table",
+        "ms": 1089.7,
+        "rank": null,
+        "hit1": false,
+        "hit5": false,
+        "hit10": false,
+        "rr": 0.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            10
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            10
+          ],
+          [
+            "Show, Attend and Tell: Neural Image Capt",
+            7
+          ],
+          [
+            "Fast R-CNN",
+            9
+          ],
+          [
+            "Microsoft COCO: Common Objects in Contex",
+            6
+          ]
+        ]
+      },
+      {
+        "id": "t05",
+        "type": "table",
+        "ms": 807.0,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Batch Normalization: Accelerating Deep N",
+            8
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            9
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            6
+          ],
+          [
+            "Going Deeper with Convolutions",
+            9
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            6
+          ]
+        ]
+      },
+      {
+        "id": "t06",
+        "type": "table",
+        "ms": 1023.8,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "SSD: Single Shot MultiBox Detector",
+            8
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            15
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            13
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            1
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t07",
+        "type": "table",
+        "ms": 1110.2,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            10
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ],
+          [
+            "Faster R-CNN: Towards Real-Time Object D",
+            9
+          ],
+          [
+            "Deep Residual Learning for Image Recogni",
+            11
+          ]
+        ]
+      },
+      {
+        "id": "t09",
+        "type": "table",
+        "ms": 911.8,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            7
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            1
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            9
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            7
+          ],
+          [
+            "XGBoost: A Scalable Tree Boosting System",
+            7
+          ]
+        ]
+      },
+      {
+        "id": "t10",
+        "type": "table",
+        "ms": 1139.2,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Fully Convolutional Networks for Semanti",
+            8
+          ],
+          [
+            "The Cityscapes Dataset for Semantic Urba",
+            23
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            6
+          ],
+          [
+            "The Cityscapes Dataset for Semantic Urba",
+            6
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            9
+          ]
+        ]
+      },
+      {
+        "id": "t11",
+        "type": "table",
+        "ms": 1266.1,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "SSD: Single Shot MultiBox Detector",
+            11
+          ],
+          [
+            "YOLO9000: Better, Faster, Stronger",
+            5
+          ],
+          [
+            "You Only Look Once: Unified, Real-Time O",
+            7
+          ],
+          [
+            "Rich feature hierarchies for accurate ob",
+            5
+          ]
+        ]
+      },
+      {
+        "id": "t12",
+        "type": "table",
+        "ms": 1227.2,
+        "rank": 5,
+        "hit1": false,
+        "hit5": true,
+        "hit10": true,
+        "rr": 0.2,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "On Calibration of Modern Neural Networks",
+            13
+          ],
+          [
+            "On Calibration of Modern Neural Networks",
+            6
+          ],
+          [
+            "On Calibration of Modern Neural Networks",
+            13
+          ],
+          [
+            "On Calibration of Modern Neural Networks",
+            12
+          ],
+          [
+            "Densely Connected Convolutional Networks",
+            5
+          ]
+        ]
+      },
+      {
+        "id": "t13",
+        "type": "table",
+        "ms": 1112.9,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "An Image is Worth 16x16 Words: Transform",
+            14
+          ],
+          [
+            "SGDR: Stochastic Gradient Descent with W",
+            2
+          ],
+          [
+            "An Image is Worth 16x16 Words: Transform",
+            16
+          ],
+          [
+            "SGDR: Stochastic Gradient Descent with W",
+            5
+          ],
+          [
+            "SGDR: Stochastic Gradient Descent with W",
+            15
+          ]
+        ]
+      },
+      {
+        "id": "t14",
+        "type": "table",
+        "ms": 1020.6,
+        "rank": 1,
+        "hit1": true,
+        "hit5": true,
+        "hit10": true,
+        "rr": 1.0,
+        "paper_hit5": true,
+        "top5": [
+          [
+            "Going Deeper with Convolutions",
+            6
+          ],
+          [
+            "Fully Convolutional Networks for Semanti",
+            5
+          ],
+          [
+            "Very Deep Convolutional Networks for Lar",
+            3
+          ],
+          [
+            "Rethinking the Inception Architecture fo",
+            8
+          ],
+          [
+            "Going Deeper with Convolutions",
+            9
+          ]
+        ]
+      }
+    ]
+  }
+}

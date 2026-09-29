@@ -42,6 +42,10 @@ Parameters:
     Type: String
     Default: /rag-demo/weaviate-url
     Description: SSM parameter with the Weaviate REST URL (comparison backend; optional)
+  ApiKeyParameter:
+    Type: String
+    Default: /rag-demo/api-key
+    Description: SSM SecureString with the shared access key required on /api/* (X-API-Key)
   WeaviateApiKeyParameter:
     Type: String
     Default: /rag-demo/weaviate-api-key
@@ -221,11 +225,13 @@ Resources:
           RERANK_MODEL: !Ref RerankModel
           GENERATION_MODEL: !Ref GenerationModel
           RAW_BUCKET: !Ref RawBucket    # /api/arxiv drops PDFs here for the chunker
+          CHUNK_BUCKET: !Ref ChunkBucket  # figure thumbnails (figures/*), via presigned URLs
           LANGFUSE_BASE_URL: !Ref LangfuseBaseUrl
           LANGFUSE_PUBLIC_KEY_PARAMETER: !Ref LangfusePublicKeyParameter
           LANGFUSE_SECRET_KEY_PARAMETER: !Ref LangfuseSecretKeyParameter
           WEAVIATE_URL_PARAMETER: !Ref WeaviateUrlParameter
           WEAVIATE_API_KEY_PARAMETER: !Ref WeaviateApiKeyParameter
+          API_KEY_PARAMETER: !Ref ApiKeyParameter
           ARXIV_MAX_MB: "25"
       Policies:
         - Statement:
@@ -237,6 +243,7 @@ Resources:
                 - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${LangfuseSecretKeyParameter}"
                 - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${WeaviateUrlParameter}"
                 - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${WeaviateApiKeyParameter}"
+                - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${ApiKeyParameter}"
             - Effect: Allow
               Action: bedrock:InvokeModel
               Resource:
@@ -251,6 +258,9 @@ Resources:
             - Effect: Allow
               Action: s3:ListBucket   # makes HeadObject return 404, not 403, for new papers
               Resource: !Sub "arn:aws:s3:::${AWS::StackName}-raw-${AWS::AccountId}"
+            - Effect: Allow
+              Action: s3:GetObject    # figure images, served to the browser by presigned URL
+              Resource: !Sub "arn:aws:s3:::${ChunkBucket}/figures/*"
       FunctionUrlConfig:
         AuthType: NONE                  # public
 

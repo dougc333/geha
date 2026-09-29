@@ -34,7 +34,7 @@
   </header>
   <div class="wrap">
     <div class="how">
-      <div class="card"><h3>Postgres (Neon)</h3>Three steps we wrote ourselves: <b>full-text search</b> (GIN index, <code>ts_rank_cd</code>), <b>pgvector</b> nearest neighbours (HNSW, cosine), then <b>Reciprocal Rank Fusion</b> of the two top-25 lists (equal weight).</div>
+      <div class="card"><h3>Postgres (Neon)</h3>Three steps we wrote ourselves: <b>BM25</b> in SQL over a word-count table (<code>rag_terms</code>), <b>pgvector</b> nearest neighbours (HNSW, cosine), then <b>Reciprocal Rank Fusion</b> of the two top-25 lists (equal weight).</div>
       <div class="card"><h3>Weaviate</h3>One <b>hybrid</b> query: native <b>BM25</b> plus vector search (HFresh index, cosine), fused inside the engine. <b>alpha</b> sets the balance (0 = keyword only, 1 = vector only); <b>fusion</b> chooses rank-based or normalised-score blending.</div>
     </div>
     <section class="card controls">
@@ -51,6 +51,33 @@
     <section class="cols" id="cols"></section>
   </div>
   <script>
+    // Access key: add X-API-Key to /api/ calls; ask once on 401 (in-page dialog) and remember it.
+    (()=>{const send=window.fetch.bind(window),K='ragApiKey';
+      let mem='',asking=null;
+      const load=()=>{try{return localStorage.getItem(K)||mem}catch{return mem}};
+      const save=v=>{mem=v;try{localStorage.setItem(K,v)}catch{}};
+      // In-page dialog: some browsers (embedded panes) block window.prompt().
+      const ask=()=>asking||(asking=new Promise(done=>{
+        const d=document.createElement('div');
+        d.style.cssText='position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,.55)';
+        d.innerHTML='<form style="background:#fff;color:#0f172a;padding:24px;border-radius:12px;width:min(360px,calc(100% - 32px));font:15px system-ui,sans-serif">'
+          +'<label style="display:block;font-weight:600;margin-bottom:10px">This demo needs an access key</label>'
+          +'<input type="password" autocomplete="off" style="width:100%;box-sizing:border-box;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font:inherit">'
+          +'<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px"><button type="button" style="padding:8px 14px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#0f172a;font:inherit;font-weight:600;cursor:pointer">Cancel</button>'
+          +'<button type="submit" style="padding:8px 14px;border:0;border-radius:8px;background:#4fa6a6;color:#fff;font:inherit;font-weight:600;cursor:pointer">Save</button></div></form>';
+        const input=d.querySelector('input'),finish=v=>{d.remove();asking=null;done(v)};
+        d.querySelector('form').onsubmit=e=>{e.preventDefault();finish(input.value.trim())};
+        d.querySelector('button[type=button]').onclick=()=>finish('');
+        document.body.appendChild(d);input.focus();
+      }));
+      window.fetch=async(url,opts={})=>{
+        if(!String(url).startsWith('/api/'))return send(url,opts);
+        for(let tries=0;;tries++){
+          const headers=new Headers(opts.headers||{});const key=load();if(key)headers.set('X-API-Key',key);
+          const r=await send(url,{...opts,headers});
+          if(r.status!==401||tries)return r;
+          const entered=await ask();if(!entered)return r;save(entered);
+        }};})();
     const $=id=>document.getElementById(id);
     const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
     const color=id=>`hsl(${(id*137.508)%360} 62% 48%)`;
@@ -74,14 +101,14 @@
       const t=d.timings, pg=t.postgres;
       $('summary').innerHTML=`<div class="card summary"><b>${d.overlap}</b> of the top ${p.top_k} chunks are the same in both · #1 ${d.same_first?'<b>matches</b>':'<b>differs</b>'}<br>
         <span class="metric">embed question ${Math.round(t.embed_ms)} ms (shared)</span>
-        <span class="metric">Postgres: full-text ${Math.round(pg.keyword_ms)} + pgvector ${Math.round(pg.vector_ms)} = ${Math.round(pg.total_ms)} ms</span>
+        <span class="metric">Postgres: BM25 ${Math.round(pg.keyword_ms)} + pgvector ${Math.round(pg.vector_ms)} = ${Math.round(pg.total_ms)} ms</span>
         <span class="metric">Weaviate hybrid ${Math.round(t.weaviate_ms)} ms</span></div>`;
       const rankIn=(list,id)=>{const i=list.findIndex(h=>h.id===id);return i<0?null:i+1};
       const col=(name,sub,list,other,otherName,showExplain)=>`<div class="card col"><h2>${name}</h2><div class="sub">${sub}</div>${list.map((h,i)=>{const r=rankIn(other,h.id);
         return `<div class="hit" style="--c:${color(h.id)}" data-id="${h.id}"><div class="top"><span><span class="rank">#${i+1}</span> · p.${esc(h.page)} · chunk ${h.id}</span><span>${Number(h.score).toFixed(4)}</span></div>
         <div class="t">${esc(h.title)}</div><div class="other">${r?`${otherName} #${r}`:`not in ${otherName}'s top ${p.top_k}`}</div><div class="snip">${esc(h.snippet)}…</div>${showExplain&&h.explain?`<pre>${esc(h.explain)}</pre>`:''}</div>`}).join('')}</div>`;
       $('cols').classList.remove('focusing');
-      $('cols').innerHTML=col('Postgres','full-text + pgvector → RRF',d.postgres,d.weaviate,'Weaviate',false)+col('Weaviate',`hybrid · alpha ${p.alpha} · ${p.fusion.replace('_',' ')} fusion (click for score explanation)`,d.weaviate,d.postgres,'Postgres',true);
+      $('cols').innerHTML=col('Postgres','BM25 + pgvector → RRF',d.postgres,d.weaviate,'Weaviate',false)+col('Weaviate',`hybrid · alpha ${p.alpha} · ${p.fusion.replace('_',' ')} fusion (click for score explanation)`,d.weaviate,d.postgres,'Postgres',true);
     }
     $('cols').addEventListener('click',e=>{const h=e.target.closest('.hit');if(!h)return;const on=!h.classList.contains('focus');
       document.querySelectorAll('.hit').forEach(x=>x.classList.toggle('focus',on&&x.dataset.id===h.dataset.id));$('cols').classList.toggle('focusing',on)});

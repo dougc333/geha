@@ -4,6 +4,47 @@
 
 *Current architecture. Source: `docs/architecture.svg` (a PNG copy is in `docs/architecture.png`).*
 
+**Retrieval quality and speed** (40-question eval over 103 papers, see
+[Retrieval eval](#retrieval-eval); hit@k = the page holding the answer is in the
+top k chunks, MRR@10 = mean of 1/rank of that page):
+
+| Setup | hit@1 | hit@5 | MRR@10 | Retrieval time* |
+|---|---|---|---|---|
+| **Chatbot now: BM25 + vector → RRF → rerank** | **0.82** | **0.95** | **0.88** | ~1.0 s (rerank ~0.8 s) |
+| Chatbot before: full-text + vector → RRF → rerank | 0.75 | 0.85 | 0.79 | ~1.2 s |
+| Weaviate hybrid → rerank | 0.82 | 0.95 | 0.88 | ~1.5 s |
+| BM25 alone (Postgres, `rag_terms`) | 0.68 | 0.85 | 0.75 | ~0.18 s |
+| Vector alone (pgvector) | 0.55 | 0.80 | 0.65 | ~0.19 s |
+| Full-text alone (Postgres `ts_rank_cd`) | 0.30 | 0.50 | 0.39 | ~0.31 s |
+
+These are with 103 papers. With 202 papers (10,167 chunks) the chatbot scores
+0.78 / 0.93 / 0.84 and Weaviate + rerank 0.78 / 0.95 / 0.85; see
+[Scaling from 103 to 202 papers](#retrieval-eval).
+
+\*Median per question, measured from a laptop to Neon/Weaviate/Bedrock
+(includes network round trips). In the Lambda, a whole chat answer takes
+~2.4–3.9 s: route ~0.4–0.7 s, BM25 ~0.2 s, vector ~0.25 s, rerank ~1 s,
+answer ~0.45–1.8 s.
+
+**Improvement from table-aware parsing (Docling)**, all 202 papers, chatbot setup
+(BM25 + vector → RRF → rerank → Nova Lite):
+
+| | Flat PDF text (before) | Table-aware, Docling (after) | Change |
+|---|---|---|---|
+| **Table questions: correct answer** (13) | 8/13 = 0.62 | **11/13 = 0.85** | **+23 points** |
+| Table questions: hit@1 | 0.54 | **0.85** | +31 points |
+| Table questions: hit@5 | 0.85 | **1.00** | +15 points |
+| Table questions: MRR@10 | 0.65 | **0.90** | +25 points |
+| Other questions (40): hit@1 / hit@5 / MRR@10 | 0.78 / 0.93 / 0.84 | 0.75 / 0.93 / 0.83 | unchanged within noise |
+
+Flat extraction turns a results table into a run of numbers without rows or
+columns, so the model found the right page but read the wrong value (BERT-Large
+on SWAG: 86.3 instead of 86.6). Docling rebuilds each table as its own Markdown
+chunk with its caption, so the value sits next to its row and column labels. A
+first Docling version dropped figure captions and footnotes and cost ordinary
+questions some rank-1 hits (hit@1 0.72); keeping them restored it to 0.75 (one
+question from flat's 0.78). Details: [Tables: Docling pilot](#tables-docling-pilot).
+
 A serverless RAG demo on AWS. When a PDF is uploaded to S3, it is split into
 page-aware text chunks (one JSONL file per document), and those chunks are
 embedded and loaded into Postgres/pgvector (Neon). A PDF dropped in S3 shows up
@@ -186,6 +227,27 @@ UI's document picker, titled with the PDF's file name, or you can check with:
 psql "$DATABASE_URL" -c "SELECT d.title, count(c.id) FROM rag_documents d JOIN rag_chunks c ON c.document_id = d.id GROUP BY d.title"
 ```
 
+### Access key
+
+Every `/api/*` call except `/api/health` needs a shared access key in the
+`X-API-Key` header; without it the API returns 401. The pages themselves (`/`,
+`/chat`, `/backends`, `/docs`) load without it: on the first API call they ask
+for the key once and remember it in the browser (localStorage). In Swagger
+(`/docs`), click **Authorize** and paste the key. `chatbot/add_arxiv.py` reads it
+from `CHATBOT_API_KEY` or SSM.
+
+The key is an SSM SecureString, `/rag-demo/api-key`. Show it, or replace it:
+
+```bash
+aws ssm get-parameter --region us-west-2 --name /rag-demo/api-key --with-decryption --query Parameter.Value --output text
+python3 -c "import secrets; print(secrets.token_urlsafe(24), end='')" | aws ssm put-parameter --region us-west-2 --name /rag-demo/api-key --type SecureString --value file:///dev/stdin --overwrite
+```
+
+A new key takes effect when Lambda containers restart (redeploy to force it).
+If the parameter is configured but missing, the Lambda refuses to start rather
+than serving without a key. It's one shared key, not per-user accounts: anyone
+you give it to has full access, including adding papers.
+
 ### Query UI and API
 
 Open the `QueryUrl` output in a browser:
@@ -203,8 +265,9 @@ directly:
 ```bash
 URL=$(aws cloudformation describe-stacks --stack-name $STACK \
   --query "Stacks[0].Outputs[?OutputKey=='QueryUrl'].OutputValue" --output text)
-curl -s ${URL}api/documents
-curl -s -X POST ${URL}api/search -H 'Content-Type: application/json' -d '{
+KEY=$(aws ssm get-parameter --region us-west-2 --name /rag-demo/api-key --with-decryption --query Parameter.Value --output text)
+curl -s -H "X-API-Key: $KEY" ${URL}api/documents
+curl -s -X POST ${URL}api/search -H "X-API-Key: $KEY" -H 'Content-Type: application/json' -d '{
   "document_id": "<id from /api/documents>", "query": "what is orca",
   "retrieval_mode": "hybrid", "use_reranker": true, "generate_answer": true, "top_k": 3}'
 ```
@@ -333,7 +396,8 @@ less predictable).
 The same chunks and Titan vectors are mirrored into a Weaviate collection
 (`Chunk`) so the two search engines can be compared on identical data:
 
-- **Postgres:** full-text search (GIN, `ts_rank_cd`) + pgvector (HNSW) → our RRF.
+- **Postgres:** BM25 in SQL over `rag_terms` + pgvector (HNSW) → our RRF
+  (full-text `ts_rank_cd` before 2026-09-29).
 - **Weaviate:** one `hybrid` query (native BM25 + vector, fused in the engine),
   with `alpha` (0 = keyword, 1 = vector) and `relative_score` or `ranked` fusion.
 
@@ -370,7 +434,7 @@ the answer (~1–1.8 s), not retrieval.
 | Step (warm) | Time |
 |---|---|
 | Route (Nova Lite) | ~0.5 s |
-| Keyword + vector search (Postgres) | ~0.3–0.5 s |
+| BM25 + vector search (Postgres) | ~0.45 s (BM25 ~0.2 s, vector ~0.25 s) |
 | Rerank (Amazon Rerank) | ~1 s |
 | Answer (Nova Lite) | ~1–1.8 s |
 | **Content question, total** | **~3–3.8 s** |
@@ -393,40 +457,212 @@ the answer (~1–1.8 s), not retrieval.
 
 Results on 2026-09-29 (page hit@5 = the answer's page is in the top 5 chunks):
 
-| Setup | hit@1 | hit@5 | MRR@10 | fact hit@5 | paraphrase hit@5 |
-|---|---|---|---|---|---|
-| Postgres keyword (full-text, `ts_rank_cd`) | 0.30 | 0.50 | 0.39 | 0.65 | 0.35 |
-| Postgres BM25 (in SQL, `chat.bm25_search`) | 0.68 | 0.85 | 0.75 | 0.95 | 0.75 |
-| Postgres vector | 0.55 | 0.80 | 0.65 | 0.85 | 0.75 |
-| Postgres hybrid (full-text + vector, RRF) | 0.57 | 0.78 | 0.66 | 0.80 | 0.75 |
-| Postgres hybrid, RRF weighted 2:1 to vector | 0.57 | 0.78 | 0.67 | 0.80 | 0.75 |
-| Postgres hybrid (BM25 + vector, RRF) | 0.60 | 0.85 | 0.70 | 0.90 | 0.80 |
-| **Postgres hybrid + rerank (chatbot default)** | 0.75 | 0.85 | 0.79 | 0.85 | 0.85 |
-| Postgres vector + rerank | 0.78 | 0.88 | 0.81 | 0.85 | 0.90 |
-| **Postgres BM25 hybrid + rerank** | **0.82** | **0.95** | **0.88** | 0.95 | 0.95 |
-| Weaviate BM25 (alpha 0) | 0.62 | 0.85 | 0.72 | 0.95 | 0.75 |
-| Weaviate hybrid (alpha 0.5) | 0.60 | 0.90 | 0.71 | 0.95 | 0.85 |
-| Weaviate vector (alpha 1) | 0.55 | 0.80 | 0.65 | 0.85 | 0.75 |
-| **Weaviate hybrid + rerank** | **0.82** | **0.95** | **0.88** | 0.95 | 0.95 |
+| Setup | hit@1 | hit@5 | MRR@10 | fact hit@5 | paraphrase hit@5 | median time* |
+|---|---|---|---|---|---|---|
+| Postgres full-text (`ts_rank_cd`) | 0.30 | 0.50 | 0.39 | 0.65 | 0.35 | 311 ms |
+| Postgres BM25 (`rag_terms`) | 0.68 | 0.85 | 0.75 | 0.95 | 0.75 | 184 ms |
+| Postgres vector | 0.55 | 0.80 | 0.65 | 0.85 | 0.75 | 186 ms |
+| Postgres hybrid (full-text + vector, RRF) | 0.57 | 0.78 | 0.66 | 0.80 | 0.75 | – |
+| Postgres hybrid, RRF weighted 2:1 to vector | 0.57 | 0.78 | 0.67 | 0.80 | 0.75 | – |
+| Postgres hybrid (BM25 + vector, RRF) | 0.60 | 0.85 | 0.70 | 0.90 | 0.80 | – |
+| Postgres full-text hybrid + rerank (chatbot until 2026-09-29) | 0.75 | 0.85 | 0.79 | 0.85 | 0.85 | 1,235 ms |
+| Postgres vector + rerank | 0.78 | 0.88 | 0.81 | 0.85 | 0.90 | 1,622 ms |
+| **Postgres BM25 hybrid + rerank (chatbot now)** | **0.82** | **0.95** | **0.88** | 0.95 | 0.95 | 1,025 ms |
+| Weaviate BM25 (alpha 0) | 0.62 | 0.85 | 0.72 | 0.95 | 0.75 | 168 ms |
+| Weaviate hybrid (alpha 0.5) | 0.60 | 0.90 | 0.71 | 0.95 | 0.85 | 98 ms |
+| Weaviate vector (alpha 1) | 0.55 | 0.80 | 0.65 | 0.85 | 0.75 | 95 ms |
+| **Weaviate hybrid + rerank** | **0.82** | **0.95** | **0.88** | 0.95 | 0.95 | 1,499 ms |
 
-What it shows:
+\*Median per question from a laptop (network included). "–": the setup reuses
+retriever results already timed in another row; the query itself is RRF only.
+Rerank setups include the ~0.8–1 s Amazon Rerank call.
+
+These are the 103-paper results (`evals/results_103_papers.md`).
+
+**Scaling from 103 to 202 papers** (10,167 chunks; the same 40 questions, all
+from the first 100 papers, so the new papers act as distractors):
+
+| Setup | hit@1 (103 → 202) | hit@5 | MRR@10 | median time* |
+|---|---|---|---|---|
+| **Chatbot: BM25 + vector + rerank** | 0.82 → 0.78 | 0.95 → 0.93 | 0.88 → 0.84 | 1,025 → 1,054 ms |
+| Weaviate hybrid + rerank | 0.82 → 0.78 | 0.95 → 0.95 | 0.88 → 0.85 | 1,499 → 1,632 ms |
+| Full-text + vector + rerank (old chatbot) | 0.75 → 0.70 | 0.85 → 0.85 | 0.79 → 0.76 | 1,235 → 1,206 ms |
+| BM25 alone | 0.68 → 0.65 | 0.85 → 0.85 | 0.75 → 0.73 | 184 → 294 ms |
+| Vector alone | 0.55 → 0.47 | 0.80 → 0.78 | 0.65 → 0.58 | 186 → 363 ms |
+| Full-text alone | 0.30 → 0.23 | 0.50 → 0.40 | 0.39 → 0.31 | 311 → 368 ms |
+
+- **Reranked setups barely move:** the chatbot drops one question at hit@5, within
+  noise. The reranker still finds the right page among twice as many near-misses.
+- **Vector search loses most at the top** (hit@1 −3 questions): similar passages
+  from the new papers crowd out the right one; BM25 and reranking compensate.
+- **BM25 slows as common words match more chunks** (184 → 294 ms from a laptop),
+  but the ~1 s rerank still dominates. Laptop timings vary with the network.
+- Full 202-paper results: `evals/results.md`.
+
+What it shows (103 papers):
 
 - **Postgres full-text ranking was the weak link, not Postgres.** `ts_rank_cd`
-  finds the page for 50% of questions; real BM25 computed in SQL over the same
-  `tsvector` finds 85%, the same as Weaviate's BM25. With BM25 + vector + rerank,
-  Postgres **matches Weaviate + rerank exactly** (0.82 / 0.95 / 0.88).
+  finds the page for 50% of questions; real BM25 over the same words finds 85%,
+  the same as Weaviate's BM25. With BM25 + vector + rerank, Postgres **matches
+  Weaviate + rerank exactly** (0.82 / 0.95 / 0.88), so the chatbot now uses it
+  (`KEYWORD_SEARCH=bm25`, the default; `fts` switches back).
+- **How BM25 runs in Postgres:** Neon no longer allows the `pg_search`
+  extension, so `rag_terms` holds one row per (word, chunk, count), filled by a
+  trigger from each chunk's `tsvector` (656k rows, 70 MB for 5,300 chunks).
+  `chat.bm25_search` looks up only the query's words through the index and
+  scores them with Okapi BM25 (k1 1.2, b 0.75): 9–38 ms in the database. The
+  first version, which unpacked every candidate chunk's `tsvector`, took ~8.5 s.
 - **Weighting fusion toward vector doesn't help** (0.78); dropping keyword search
-  and reranking vector results alone does a little better than today (0.88).
+  and reranking vector results alone does a little better than the old setup (0.88).
 - **Vector search is identical in both engines** (0.80) because the vectors are the same.
 - **The reranker is worth its ~1 s:** +18 to +22 points of hit@1.
-- **The SQL BM25 is too slow to deploy as written** (median ~8.5 s: it unpacks
-  the tsvector of every candidate chunk per query). The fix is a precomputed
-  (chunk, word, count) table so BM25 becomes indexed lookups. Neon no longer
-  allows the `pg_search` BM25 extension.
 - **Caveats:** 40 questions, so one question is 2.5 points and differences under
   ~5 points are noise. Generated questions tend to reuse the page's wording,
   which favours keyword search. Timings in `results.md` are from a laptop, not
   the Lambda; a retriever shared by several setups is timed once (0 ms rows).
+
+### Tables: Docling pilot
+
+The chunker flattens each page's text, so a results table becomes a run of
+numbers without rows or columns. `local_ingest/docling_chunks.py` (run on a laptop
+with Docling from `/Users/dc/geha/.venv`, OCR off for born-digital PDFs) instead
+writes text chunks plus **one chunk per table**: "Table N: caption" and the table
+as compact Markdown, split by rows with the header repeated if it's over ~4,000
+characters. It produces the same chunk-file format with the same `document_id`
+(the PDF's SHA-256), so uploading to `s3://<chunks bucket>/chunks/` replaces a
+paper's flat chunks through the normal embedder. It takes 2–13 s per paper.
+
+Pilot: 20 of the most-cited papers (≤ 30 pages; 136 tables). 13 table questions
+(`type: "table"` in `evals/questions.jsonl`, from `evals/generate_table_questions.py`)
+each ask for one value in a table. `evals/answer_check.py` asks the chatbot's
+full content path and checks the answer contains the gold value.
+
+| Chatbot setup (BM25 + vector + rerank) | Flat chunks | Docling chunks |
+|---|---|---|
+| Table questions: **answer accuracy** | 8/13 = 0.62 | **11/13 = 0.85** |
+| Table questions: hit@1 / hit@5 / MRR@10 | 0.54 / 0.85 / 0.65 | **0.85 / 0.92 / 0.86** |
+| Other 40 questions: hit@1 / hit@5 / MRR@10 | 0.78 / 0.93 / 0.84 | 0.80 / 0.93 / 0.85 |
+
+With flat chunks the right page was usually retrieved, but the model read the
+wrong number off it (BERT-Large SWAG 86.3 instead of 86.6; FCN-16s pixel
+accuracy 78.6 instead of 85.2). Docling fixed those. The two remaining misses
+pick the wrong row or column of a wide table. Docling occasionally mistakes an
+author block for a table; those questions were dropped.
+
+**Full rollout (all 202 papers, 2026-09-29):** 1,600+ tables as their own chunks,
+10,230 chunks in total, ~34 minutes of Docling on a laptop.
+
+| Chatbot setup (BM25 + vector + rerank) | Flat (202 papers) | Docling (202 papers) |
+|---|---|---|
+| Table questions (13): **answer accuracy** | 8/13 = 0.62 | **11/13 = 0.85** |
+| Table questions: hit@1 / hit@5 / MRR@10 | 0.54 / 0.85 / 0.65 | **0.85 / 0.92 / 0.86** |
+| Other 40 questions: hit@1 / hit@5 / MRR@10 | 0.78 / 0.93 / 0.84 | 0.72 / 0.93 / 0.80 |
+
+**Docling v2 (captions and footnotes kept):** tables 0.85 / **1.00** / 0.90
+(hit@1 / hit@5 / MRR@10), answers 11/13; ordinary questions 0.75 / 0.93 / 0.83;
+10,988 chunks. The v1 numbers above were before this fix. With v1, tables
+improved a lot and hit@5 on ordinary questions held, but three ordinary
+questions dropped from rank 1. One (q21, answer in "Figure 7: …") is a
+chunker flaw: `docling_chunks.py` drops captions and footnotes from the text, so
+**figure captions are not indexed**. The fix is to keep them and drop only page
+headers/footers; it needs a re-run. Weaviate with Docling chunks: tables
+0.77 / 0.92 / 0.82, other questions 0.72 / 0.90 / 0.80. Full results:
+`evals/results.md` (53 questions) vs `evals/results_202_flat.md`.
+
+Oversized chunks: one T5 table row was ~14,000 characters (8,257 tokens), over
+Titan's 8,192-token limit, so that paper failed to embed. The splitter now cuts
+long rows, and the embedder embeds at most the first 10,000 characters of a
+chunk (`MAX_EMBED_CHARS`; the full text is stored and searched by BM25).
+
+Notes: papers converted this way have `source = docling:<file>` in
+`rag_documents`. Re-uploading such a PDF to the raw bucket would re-chunk it flat
+and overwrite the Docling version. Weaviate needs `scripts/load_weaviate.py` after
+re-chunking. Results: `evals/results_tables_{flat,docling}.md`,
+`evals/answers_tables_{flat,docling}.json`, `evals/results_docling_pilot.md`.
+
+### Figures: descriptions with Nova Lite
+
+Text search can't see what's inside a figure: the values on a chart, the blocks
+in an architecture diagram, the example input in an illustration. Two steps add
+a **figure chunk** for each figure:
+
+1. `local_ingest/docling_chunks.py --figures` also saves each figure (Docling
+   "picture" or "chart", at 2x scale, skipping images under 150 px) as a PNG in
+   `local_ingest/out/figures/<document_id>/`, with its page and caption in
+   `figures.json`.
+2. `local_ingest/describe_figures.py` sends each image, with the paper title and
+   caption, to **Nova Lite** and appends one chunk per figure to the paper's JSONL:
+
+   ```
+   Figure (page 6) from "You Only Look Once: …": Figure 4: Error Analysis: …
+   Text in figure: Fast R-CNN | YOLO | Background: 13.6% | … | Loc: 19.0% | Correct: 65.5%
+   Description: two pie charts comparing …
+   ```
+
+   The prompt asks for every word and number in the figure verbatim first, then a
+   short description, using only what is visible. Descriptions are cached in
+   `figures.json`, so re-runs are free (`--redo` to describe again). With
+   `--upload` it puts the PNGs at `s3://<chunks bucket>/figures/<document_id>/`
+   (not a trigger path) and then the JSONL, which the embedder indexes as usual.
+
+```bash
+/Users/dc/geha/.venv/bin/python local_ingest/docling_chunks.py <pdf folder> --figures
+uv run --with boto3 --with 'botocore[crt]' python local_ingest/describe_figures.py --upload
+```
+
+Figure chunks store their PNG's S3 key in `rag_chunks.image`. `/api/chat` looks
+it up for the chosen sources and returns a presigned `image_url` (1 hour); the
+chat page shows those figures as thumbnails under the answer.
+
+**Pilot, 20 papers (133 figures), $0.0175 of Nova Lite.** Nine questions
+(`type: "figure"`, f01–f09) whose answer appears only in a figure, not in the
+page text (checked with grep): chart values, diagram labels, an example input.
+
+| Chatbot setup (BM25 + vector + rerank) | Before | With figure chunks |
+|---|---|---|
+| Figure questions: **answer accuracy** | 0/9 | **7/9** |
+| Figure questions: hit@1 / hit@5 / MRR@10 | 0.78 / 1.00 / 0.87 | **1.00 / 1.00 / 1.00** |
+| Other 53 questions: hit@1 / hit@5 / MRR@10 | 0.77 / 0.94 / 0.85 | 0.75 / 0.94 / 0.84 |
+
+What Nova Lite gets right and wrong:
+
+- Charts with printed numbers are transcribed exactly (every value in YOLO's
+  error-analysis pies).
+- A first prompt ("describe the figure") only summarized diagrams, often from the
+  caption; asking for "Text in figure: …" first got "PixelNorm" (StyleGAN) and the
+  BERT example tokens. The Transformer diagram still comes back as a summary
+  (f07 misses "Outputs (shifted right)"); Nova Pro transcribes it.
+- Plots without printed values are weaker: Faster R-CNN's recall curves (f08)
+  lost "which curve is highest" with the new prompt, and in GCN's timing chart
+  both Nova Lite and Nova Pro say the *CPU* ran out of memory; it was the GPU.
+- Docling occasionally renders a vector drawing badly (ViT Figure 1 is a jumble
+  of boxes); the description then just restates the caption.
+
+The other 53 questions are unchanged apart from one question moving from rank 1
+to rank 2. Results: `evals/results_figures.md`, `evals/results_with_figures.md`,
+`evals/answers_figures_{before,after}.json`.
+
+**Full rollout (all 203 papers, 2026-09-29): 1,886 figures, $0.24 of Nova Lite**
+(2.28 M input / 0.44 M output tokens), ~70 minutes of Docling on a laptop.
+Neon now holds 12,916 chunks; Weaviate was re-synced.
+
+| Chatbot setup (BM25 + vector + rerank), 203 papers | hit@1 | hit@5 | MRR@10 | Answers |
+|---|---|---|---|---|
+| Figure questions (9) | 1.00 | 1.00 | 1.00 | **7/9** |
+| Table questions (13) | | 1.00 | | 11/13 |
+| All 62 questions | 0.77 | 0.95 | 0.85 | |
+| Weaviate hybrid + rerank, all 62 | 0.76 | 0.95 | 0.84 | |
+
+Adding 1,886 figure chunks didn't hurt the other questions (0.77 / 0.94 / 0.85
+on the 53 before). f05 passes as "Pixel normalization" (the checker ignores
+spaces), close to but not the diagram's exact label. Full results:
+`evals/results_figures_all.md`, `evals/answers_figures_all.json`.
+
+The rollout exposed an embedder weakness: Titan sometimes returns
+`ModelErrorException` ("try your request again") for a request that succeeds on
+retry. botocore doesn't retry it, so one failed call failed the whole paper;
+Llama 3 (274 chunks) failed on every redelivery. The embedder now retries each
+chunk up to 3 times with backoff.
 
 ### Existing PDFs (backfill)
 
@@ -449,6 +685,46 @@ for the chunk files:
 aws s3 cp s3://$CHUNKS/chunks/ s3://$CHUNKS/chunks/ --recursive \
   --metadata-directive REPLACE
 ```
+
+## Backup and restore
+
+**Neon is the only store that matters.** Weaviate is rebuilt from it by
+`scripts/load_weaviate.py` (~2.5 minutes, stored vectors, no re-embedding), so it
+needs no backup.
+
+**Back up** (≈ 1.5 minutes; 80 MB compressed on 2026-09-29, 203 papers, 12,916 chunks):
+
+```bash
+brew install libpq@18        # pg_dump must match Neon's Postgres 18
+scripts/backup_db.sh         # → s3://<chunks bucket>/backups/rag_neon_<UTC time>.dump
+```
+
+The script reads the connection string from `/rag-demo/database-url`, writes a
+`pg_dump --format=custom` file, checks it with `pg_restore --list`, uploads it,
+and deletes the local copy (`--keep-local` keeps it in `backups/`, which git
+ignores). `backups/` in the chunks bucket doesn't trigger the embedder.
+
+**Restore** into an empty database (a new Neon project or branch, or a local
+Postgres 18 with pgvector):
+
+```bash
+aws s3 cp s3://<chunks bucket>/backups/<file>.dump .
+export TARGET_URL='postgresql://…'          # the new database
+psql "$TARGET_URL" -c 'CREATE EXTENSION IF NOT EXISTS vector; CREATE SCHEMA IF NOT EXISTS teaching'
+pg_restore --no-owner --no-privileges -n public -n teaching \
+  --dbname="$TARGET_URL" <file>.dump
+```
+
+Then point `/rag-demo/database-url` at the new database and redeploy (or wait
+for the Lambdas to reconnect). `-n public -n teaching` skips `neon_auth` (and, with `-n`, pg_restore doesn't create
+the `teaching` schema, hence the `CREATE SCHEMA`), a
+Neon-managed schema that the new project creates itself. Tables load before
+triggers and indexes are created, so the BM25 trigger doesn't duplicate
+`rag_terms`; the HNSW vector index is rebuilt during restore (a few minutes).
+
+**Without a dump:** the chunk files and figure PNGs are still in the chunks
+bucket. Re-uploading `chunks/*.jsonl` refills a fresh database through the
+embedder (Titan re-embedding only, no Docling or Nova).
 
 ## Failures
 

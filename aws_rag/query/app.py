@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hmac
 import json
 import os
 import time
@@ -10,8 +11,10 @@ from typing import Literal
 
 import boto3
 import psycopg
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.openapi.utils import get_openapi
+from fastapi.responses import JSONResponse
 from langfuse import get_client, observe
 from pgvector.psycopg import register_vector
 from pydantic import BaseModel, Field
@@ -62,11 +65,41 @@ def converse(name: str, **kwargs) -> dict:
 
 
 app = FastAPI(title="Selectable RAG Demo", version="1.0.0")
+
+# Shared access key: every /api/* call except /api/health must send it in the
+# X-API-Key header (the pages ask for it once and keep it in the browser). Unset
+# API_KEY disables the check. The key lives in SSM (/rag-demo/api-key).
+API_KEY = os.getenv("API_KEY", "")
+OPEN_PATHS = {"/api/health"}
+
+
+@app.middleware("http")
+async def require_api_key(request: Request, call_next):
+    path = request.url.path
+    if (API_KEY and path.startswith("/api/") and path not in OPEN_PATHS
+            and request.method != "OPTIONS"
+            and not hmac.compare_digest(request.headers.get("x-api-key", ""), API_KEY)):
+        return JSONResponse({"detail": "Missing or wrong X-API-Key"}, status_code=401)
+    return await call_next(request)
+
+
+def _openapi() -> dict:
+    """Swagger UI (/docs) gets an Authorize button for the X-API-Key header."""
+    if not app.openapi_schema:
+        schema = get_openapi(title=app.title, version=app.version, routes=app.routes)
+        schema.setdefault("components", {})["securitySchemes"] = {
+            "ApiKey": {"type": "apiKey", "in": "header", "name": "X-API-Key"}}
+        schema["security"] = [{"ApiKey": []}]
+        app.openapi_schema = schema
+    return app.openapi_schema
+
+
+app.openapi = _openapi
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[origin.strip() for origin in os.getenv("ALLOWED_ORIGINS", "*").split(",")],
     allow_methods=["GET", "POST"],
-    allow_headers=["Content-Type"],
+    allow_headers=["Content-Type", "X-API-Key"],
 )
 
 

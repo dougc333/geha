@@ -45,3 +45,43 @@ ALTER TABLE rag_chunks
     GENERATED ALWAYS AS (to_tsvector('english', content)) STORED;
 
 CREATE INDEX IF NOT EXISTS rag_chunks_tsv_idx ON rag_chunks USING gin (tsv);
+
+-- Figure chunks (local_ingest/describe_figures.py): S3 key of the figure's PNG in
+-- the chunks bucket, e.g. figures/<document_id>/p003_f01.png. NULL for text and
+-- table chunks. The query API turns it into a short-lived presigned URL.
+ALTER TABLE rag_chunks ADD COLUMN IF NOT EXISTS image text;
+
+-- BM25 support (Neon doesn't allow the pg_search extension). rag_terms is an
+-- inverted index: one row per (word, chunk) with the word's count in that chunk,
+-- filled from the tsvector by a trigger, so the embedder needs no changes and
+-- deleting a paper's chunks cascades. chat.bm25_search reads it with indexed
+-- lookups instead of unpacking every candidate chunk's tsvector per query.
+ALTER TABLE rag_chunks
+    ADD COLUMN IF NOT EXISTS content_len integer GENERATED ALWAYS AS (length(content)) STORED;
+
+CREATE TABLE IF NOT EXISTS rag_terms (
+    lexeme text NOT NULL,
+    chunk_id bigint NOT NULL REFERENCES rag_chunks(id) ON DELETE CASCADE,
+    tf integer NOT NULL,
+    PRIMARY KEY (lexeme, chunk_id)
+);
+CREATE INDEX IF NOT EXISTS rag_terms_chunk_idx ON rag_terms (chunk_id);
+
+CREATE OR REPLACE FUNCTION rag_terms_fill() RETURNS trigger LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO rag_terms (lexeme, chunk_id, tf)
+    SELECT u.lexeme, NEW.id, coalesce(array_length(u.positions, 1), 1)
+    FROM unnest(NEW.tsv) AS u
+    ON CONFLICT DO NOTHING;
+    RETURN NEW;
+END $$;
+
+DROP TRIGGER IF EXISTS rag_terms_fill ON rag_chunks;
+CREATE TRIGGER rag_terms_fill AFTER INSERT ON rag_chunks
+    FOR EACH ROW EXECUTE FUNCTION rag_terms_fill();
+
+-- Backfill chunks that existed before the trigger (no-op afterwards).
+INSERT INTO rag_terms (lexeme, chunk_id, tf)
+SELECT u.lexeme, c.id, coalesce(array_length(u.positions, 1), 1)
+FROM rag_chunks c, unnest(c.tsv) AS u
+ON CONFLICT DO NOTHING;

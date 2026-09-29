@@ -7,6 +7,7 @@ and replaces the document's rag_chunks rows in one transaction.
 import json
 import os
 import posixpath
+import time
 import urllib.parse
 from concurrent.futures import ThreadPoolExecutor
 
@@ -40,12 +41,27 @@ def database_url():
     return _database_url
 
 
+# Titan v2 accepts at most 8,192 tokens; number-dense table text can hit that below
+# its 50,000-character limit. Embed a prefix of very long chunks (the full text is
+# still stored and searchable by BM25) rather than failing the whole paper.
+MAX_EMBED_CHARS = int(os.getenv("MAX_EMBED_CHARS", "10000"))  # T5: 14k chars = 8,257 tokens
+
+
 def embed(text):
-    response = bedrock.invoke_model(
-        modelId=MODEL,
-        body=json.dumps({"inputText": text, "dimensions": DIMENSIONS, "normalize": True}),
-    )
-    return json.loads(response["body"].read())["embedding"]
+    # Titan sometimes returns ModelErrorException ("unexpected error ... try again")
+    # for a request that succeeds on retry; botocore doesn't retry it, and one such
+    # call used to fail a whole paper (Llama 3, 274 chunks, failed on every redelivery).
+    for attempt in range(4):
+        try:
+            response = bedrock.invoke_model(
+                modelId=MODEL,
+                body=json.dumps({"inputText": text[:MAX_EMBED_CHARS], "dimensions": DIMENSIONS, "normalize": True}),
+            )
+            return json.loads(response["body"].read())["embedding"]
+        except bedrock.exceptions.ModelErrorException:
+            if attempt == 3:
+                raise
+            time.sleep(0.5 * 2 ** attempt)
 
 
 def handler(event, context):
@@ -108,10 +124,10 @@ def process(bucket, key):
             cursor.execute("DELETE FROM rag_chunks WHERE document_id = %s", (document_id,))
             cursor.executemany(
                 """INSERT INTO rag_chunks
-                   (document_id, chunk_index, page_number, content, embedding)
-                   VALUES (%s, %s, %s, %s, %s)""",
+                   (document_id, chunk_index, page_number, content, embedding, image)
+                   VALUES (%s, %s, %s, %s, %s, %s)""",
                 [
-                    (document_id, c["chunk_index"], c["page_number"], c["content"], e)
+                    (document_id, c["chunk_index"], c["page_number"], c["content"], e, c.get("image"))
                     for c, e in zip(chunks, embeddings)
                 ],
             )
