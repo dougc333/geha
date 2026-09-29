@@ -273,7 +273,7 @@ score became 11/13.
 | Chatbot setup | Flat text | Docling v1 |
 |---|---|---|
 | Table answers correct | 0.62 | **0.85** |
-| Figure answers correct | 0/9 (not indexed) | **7/9** |
+| Figure answers correct | 0/9 (not indexed) | **7/9** (description-first prompt, all 2,112 figures) |
 | Table hit@1 / hit@5 / MRR@10 | 0.54 / 0.85 / 0.65 | 0.85 / 0.92 / 0.86 |
 | Other 40: hit@1 / hit@5 / MRR@10 | 0.78 / 0.93 / 0.84 | 0.72 / 0.93 / 0.80 |
 
