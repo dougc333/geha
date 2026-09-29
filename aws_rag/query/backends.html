@@ -34,7 +34,7 @@
   </header>
   <div class="wrap">
     <div class="how">
-      <div class="card"><h3>Postgres (Neon)</h3>Three steps we wrote ourselves: <b>full-text search</b> (GIN index, <code>ts_rank_cd</code>), <b>pgvector</b> nearest neighbours (HNSW, cosine), then <b>Reciprocal Rank Fusion</b> of the two top-25 lists (equal weight).</div>
+      <div class="card"><h3>Postgres (Neon)</h3>Three steps we wrote ourselves: <b>BM25</b> in SQL over a word-count table (<code>rag_terms</code>), <b>pgvector</b> nearest neighbours (HNSW, cosine), then <b>Reciprocal Rank Fusion</b> of the two top-25 lists (equal weight).</div>
       <div class="card"><h3>Weaviate</h3>One <b>hybrid</b> query: native <b>BM25</b> plus vector search (HFresh index, cosine), fused inside the engine. <b>alpha</b> sets the balance (0 = keyword only, 1 = vector only); <b>fusion</b> chooses rank-based or normalised-score blending.</div>
     </div>
     <section class="card controls">
@@ -74,14 +74,14 @@
       const t=d.timings, pg=t.postgres;
       $('summary').innerHTML=`<div class="card summary"><b>${d.overlap}</b> of the top ${p.top_k} chunks are the same in both · #1 ${d.same_first?'<b>matches</b>':'<b>differs</b>'}<br>
         <span class="metric">embed question ${Math.round(t.embed_ms)} ms (shared)</span>
-        <span class="metric">Postgres: full-text ${Math.round(pg.keyword_ms)} + pgvector ${Math.round(pg.vector_ms)} = ${Math.round(pg.total_ms)} ms</span>
+        <span class="metric">Postgres: BM25 ${Math.round(pg.keyword_ms)} + pgvector ${Math.round(pg.vector_ms)} = ${Math.round(pg.total_ms)} ms</span>
         <span class="metric">Weaviate hybrid ${Math.round(t.weaviate_ms)} ms</span></div>`;
       const rankIn=(list,id)=>{const i=list.findIndex(h=>h.id===id);return i<0?null:i+1};
       const col=(name,sub,list,other,otherName,showExplain)=>`<div class="card col"><h2>${name}</h2><div class="sub">${sub}</div>${list.map((h,i)=>{const r=rankIn(other,h.id);
         return `<div class="hit" style="--c:${color(h.id)}" data-id="${h.id}"><div class="top"><span><span class="rank">#${i+1}</span> · p.${esc(h.page)} · chunk ${h.id}</span><span>${Number(h.score).toFixed(4)}</span></div>
         <div class="t">${esc(h.title)}</div><div class="other">${r?`${otherName} #${r}`:`not in ${otherName}'s top ${p.top_k}`}</div><div class="snip">${esc(h.snippet)}…</div>${showExplain&&h.explain?`<pre>${esc(h.explain)}</pre>`:''}</div>`}).join('')}</div>`;
       $('cols').classList.remove('focusing');
-      $('cols').innerHTML=col('Postgres','full-text + pgvector → RRF',d.postgres,d.weaviate,'Weaviate',false)+col('Weaviate',`hybrid · alpha ${p.alpha} · ${p.fusion.replace('_',' ')} fusion (click for score explanation)`,d.weaviate,d.postgres,'Postgres',true);
+      $('cols').innerHTML=col('Postgres','BM25 + pgvector → RRF',d.postgres,d.weaviate,'Weaviate',false)+col('Weaviate',`hybrid · alpha ${p.alpha} · ${p.fusion.replace('_',' ')} fusion (click for score explanation)`,d.weaviate,d.postgres,'Postgres',true);
     }
     $('cols').addEventListener('click',e=>{const h=e.target.closest('.hit');if(!h)return;const on=!h.classList.contains('focus');
       document.querySelectorAll('.hit').forEach(x=>x.classList.toggle('focus',on&&x.dataset.id===h.dataset.id));$('cols').classList.toggle('focusing',on)});

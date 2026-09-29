@@ -4,6 +4,24 @@
 
 *Current architecture. Source: `docs/architecture.svg` (a PNG copy is in `docs/architecture.png`).*
 
+**Retrieval quality and speed** (40-question eval over 103 papers, see
+[Retrieval eval](#retrieval-eval); hit@k = the page holding the answer is in the
+top k chunks, MRR@10 = mean of 1/rank of that page):
+
+| Setup | hit@1 | hit@5 | MRR@10 | Retrieval time* |
+|---|---|---|---|---|
+| **Chatbot now: BM25 + vector → RRF → rerank** | **0.82** | **0.95** | **0.88** | ~1.0 s (rerank ~0.8 s) |
+| Chatbot before: full-text + vector → RRF → rerank | 0.75 | 0.85 | 0.79 | ~1.2 s |
+| Weaviate hybrid → rerank | 0.82 | 0.95 | 0.88 | ~1.5 s |
+| BM25 alone (Postgres, `rag_terms`) | 0.68 | 0.85 | 0.75 | ~0.18 s |
+| Vector alone (pgvector) | 0.55 | 0.80 | 0.65 | ~0.19 s |
+| Full-text alone (Postgres `ts_rank_cd`) | 0.30 | 0.50 | 0.39 | ~0.31 s |
+
+\*Median per question, measured from a laptop to Neon/Weaviate/Bedrock
+(includes network round trips). In the Lambda, a whole chat answer takes
+~2.4–3.9 s: route ~0.4–0.7 s, BM25 ~0.2 s, vector ~0.25 s, rerank ~1 s,
+answer ~0.45–1.8 s.
+
 A serverless RAG demo on AWS. When a PDF is uploaded to S3, it is split into
 page-aware text chunks (one JSONL file per document), and those chunks are
 embedded and loaded into Postgres/pgvector (Neon). A PDF dropped in S3 shows up
@@ -333,7 +351,8 @@ less predictable).
 The same chunks and Titan vectors are mirrored into a Weaviate collection
 (`Chunk`) so the two search engines can be compared on identical data:
 
-- **Postgres:** full-text search (GIN, `ts_rank_cd`) + pgvector (HNSW) → our RRF.
+- **Postgres:** BM25 in SQL over `rag_terms` + pgvector (HNSW) → our RRF
+  (full-text `ts_rank_cd` before 2026-09-29).
 - **Weaviate:** one `hybrid` query (native BM25 + vector, fused in the engine),
   with `alpha` (0 = keyword, 1 = vector) and `relative_score` or `ranked` fusion.
 
@@ -370,7 +389,7 @@ the answer (~1–1.8 s), not retrieval.
 | Step (warm) | Time |
 |---|---|
 | Route (Nova Lite) | ~0.5 s |
-| Keyword + vector search (Postgres) | ~0.3–0.5 s |
+| BM25 + vector search (Postgres) | ~0.45 s (BM25 ~0.2 s, vector ~0.25 s) |
 | Rerank (Amazon Rerank) | ~1 s |
 | Answer (Nova Lite) | ~1–1.8 s |
 | **Content question, total** | **~3–3.8 s** |
@@ -393,36 +412,43 @@ the answer (~1–1.8 s), not retrieval.
 
 Results on 2026-09-29 (page hit@5 = the answer's page is in the top 5 chunks):
 
-| Setup | hit@1 | hit@5 | MRR@10 | fact hit@5 | paraphrase hit@5 |
-|---|---|---|---|---|---|
-| Postgres keyword (full-text, `ts_rank_cd`) | 0.30 | 0.50 | 0.39 | 0.65 | 0.35 |
-| Postgres BM25 (in SQL, `chat.bm25_search`) | 0.68 | 0.85 | 0.75 | 0.95 | 0.75 |
-| Postgres vector | 0.55 | 0.80 | 0.65 | 0.85 | 0.75 |
-| Postgres hybrid (full-text + vector, RRF) | 0.57 | 0.78 | 0.66 | 0.80 | 0.75 |
-| Postgres hybrid, RRF weighted 2:1 to vector | 0.57 | 0.78 | 0.67 | 0.80 | 0.75 |
-| Postgres hybrid (BM25 + vector, RRF) | 0.60 | 0.85 | 0.70 | 0.90 | 0.80 |
-| **Postgres hybrid + rerank (chatbot default)** | 0.75 | 0.85 | 0.79 | 0.85 | 0.85 |
-| Postgres vector + rerank | 0.78 | 0.88 | 0.81 | 0.85 | 0.90 |
-| **Postgres BM25 hybrid + rerank** | **0.82** | **0.95** | **0.88** | 0.95 | 0.95 |
-| Weaviate BM25 (alpha 0) | 0.62 | 0.85 | 0.72 | 0.95 | 0.75 |
-| Weaviate hybrid (alpha 0.5) | 0.60 | 0.90 | 0.71 | 0.95 | 0.85 |
-| Weaviate vector (alpha 1) | 0.55 | 0.80 | 0.65 | 0.85 | 0.75 |
-| **Weaviate hybrid + rerank** | **0.82** | **0.95** | **0.88** | 0.95 | 0.95 |
+| Setup | hit@1 | hit@5 | MRR@10 | fact hit@5 | paraphrase hit@5 | median time* |
+|---|---|---|---|---|---|---|
+| Postgres full-text (`ts_rank_cd`) | 0.30 | 0.50 | 0.39 | 0.65 | 0.35 | 311 ms |
+| Postgres BM25 (`rag_terms`) | 0.68 | 0.85 | 0.75 | 0.95 | 0.75 | 184 ms |
+| Postgres vector | 0.55 | 0.80 | 0.65 | 0.85 | 0.75 | 186 ms |
+| Postgres hybrid (full-text + vector, RRF) | 0.57 | 0.78 | 0.66 | 0.80 | 0.75 | – |
+| Postgres hybrid, RRF weighted 2:1 to vector | 0.57 | 0.78 | 0.67 | 0.80 | 0.75 | – |
+| Postgres hybrid (BM25 + vector, RRF) | 0.60 | 0.85 | 0.70 | 0.90 | 0.80 | – |
+| Postgres full-text hybrid + rerank (chatbot until 2026-09-29) | 0.75 | 0.85 | 0.79 | 0.85 | 0.85 | 1,235 ms |
+| Postgres vector + rerank | 0.78 | 0.88 | 0.81 | 0.85 | 0.90 | 1,622 ms |
+| **Postgres BM25 hybrid + rerank (chatbot now)** | **0.82** | **0.95** | **0.88** | 0.95 | 0.95 | 1,025 ms |
+| Weaviate BM25 (alpha 0) | 0.62 | 0.85 | 0.72 | 0.95 | 0.75 | 168 ms |
+| Weaviate hybrid (alpha 0.5) | 0.60 | 0.90 | 0.71 | 0.95 | 0.85 | 98 ms |
+| Weaviate vector (alpha 1) | 0.55 | 0.80 | 0.65 | 0.85 | 0.75 | 95 ms |
+| **Weaviate hybrid + rerank** | **0.82** | **0.95** | **0.88** | 0.95 | 0.95 | 1,499 ms |
+
+\*Median per question from a laptop (network included). "–": the setup reuses
+retriever results already timed in another row; the query itself is RRF only.
+Rerank setups include the ~0.8–1 s Amazon Rerank call.
 
 What it shows:
 
 - **Postgres full-text ranking was the weak link, not Postgres.** `ts_rank_cd`
-  finds the page for 50% of questions; real BM25 computed in SQL over the same
-  `tsvector` finds 85%, the same as Weaviate's BM25. With BM25 + vector + rerank,
-  Postgres **matches Weaviate + rerank exactly** (0.82 / 0.95 / 0.88).
+  finds the page for 50% of questions; real BM25 over the same words finds 85%,
+  the same as Weaviate's BM25. With BM25 + vector + rerank, Postgres **matches
+  Weaviate + rerank exactly** (0.82 / 0.95 / 0.88), so the chatbot now uses it
+  (`KEYWORD_SEARCH=bm25`, the default; `fts` switches back).
+- **How BM25 runs in Postgres:** Neon no longer allows the `pg_search`
+  extension, so `rag_terms` holds one row per (word, chunk, count), filled by a
+  trigger from each chunk's `tsvector` (656k rows, 70 MB for 5,300 chunks).
+  `chat.bm25_search` looks up only the query's words through the index and
+  scores them with Okapi BM25 (k1 1.2, b 0.75): 9–38 ms in the database. The
+  first version, which unpacked every candidate chunk's `tsvector`, took ~8.5 s.
 - **Weighting fusion toward vector doesn't help** (0.78); dropping keyword search
-  and reranking vector results alone does a little better than today (0.88).
+  and reranking vector results alone does a little better than the old setup (0.88).
 - **Vector search is identical in both engines** (0.80) because the vectors are the same.
 - **The reranker is worth its ~1 s:** +18 to +22 points of hit@1.
-- **The SQL BM25 is too slow to deploy as written** (median ~8.5 s: it unpacks
-  the tsvector of every candidate chunk per query). The fix is a precomputed
-  (chunk, word, count) table so BM25 becomes indexed lookups. Neon no longer
-  allows the `pg_search` BM25 extension.
 - **Caveats:** 40 questions, so one question is 2.5 points and differences under
   ~5 points are noise. Generated questions tend to reuse the page's wording,
   which favours keyword search. Timings in `results.md` are from a laptop, not

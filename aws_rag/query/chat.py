@@ -36,6 +36,9 @@ ARXIV_MAX_BYTES = int(os.getenv("ARXIV_MAX_MB", "25")) * 1024 * 1024
 HISTORY_MESSAGES = 10     # earlier messages sent to the model each turn
 HISTORY_CHARS = 1500      # per message, so long answers don't crowd out sources
 CANDIDATES_PER_RETRIEVER = 25
+# Keyword retriever for the chatbot: "bm25" (Okapi BM25 over rag_terms; hit@5 0.95
+# with rerank in evals/) or "fts" (Postgres ts_rank_cd; 0.85).
+KEYWORD_SEARCH = os.getenv("KEYWORD_SEARCH", "bm25")
 
 ROUTER_PROMPT = """You route messages for a chatbot over a library of arXiv papers.
 Reply with ONE JSON object and nothing else:
@@ -208,38 +211,36 @@ def keyword_search(connection, query: str, document_ids: list[str] | None = None
         return _rows(cursor)
 
 
-# Okapi BM25 computed in SQL (Neon disallows the pg_search extension). Query words
-# are stemmed with Postgres's English config; term frequency comes from the tsvector's
-# positions, document frequency from GIN-indexed counts, and document length from
-# the chunk's character count (only the ratio to the average matters).
+# Okapi BM25 in SQL (Neon disallows the pg_search extension), over rag_terms: an
+# inverted index of (word, chunk, count) filled by a trigger from the tsvector (see
+# schema.sql). Query words are stemmed with Postgres's English config; document
+# frequency and term frequency are indexed lookups, and length is content_len.
 BM25_SQL = """
 WITH q AS (
     SELECT DISTINCT lexeme FROM unnest(tsvector_to_array(to_tsvector('english', %(query)s))) AS lexeme
 ), stats AS (
-    SELECT count(*)::float8 AS n, avg(length(content))::float8 AS avglen FROM rag_chunks
+    SELECT count(*)::float8 AS n, avg(content_len)::float8 AS avglen FROM rag_chunks
 ), df AS (
-    SELECT q.lexeme,
-           (SELECT count(*) FROM rag_chunks c WHERE c.tsv @@ quote_literal(q.lexeme)::tsquery)::float8 AS df
-    FROM q
-), cand AS (
-    SELECT c.id, c.tsv, length(c.content)::float8 AS len FROM rag_chunks c
-    WHERE c.tsv @@ (SELECT string_agg(quote_literal(lexeme), ' | ')::tsquery FROM q)
-      {document_filter}
+    SELECT t.lexeme, count(*)::float8 AS df FROM rag_terms t JOIN q USING (lexeme) GROUP BY t.lexeme
 ), scored AS (
-    SELECT cand.id,
+    SELECT t.chunk_id,
            sum(ln(1 + (s.n - df.df + 0.5) / (df.df + 0.5))
                * t.tf * (%(k1)s + 1)
-               / (t.tf + %(k1)s * (1 - %(b)s + %(b)s * cand.len / s.avglen))) AS score
-    FROM cand CROSS JOIN stats s
-    CROSS JOIN LATERAL (SELECT u.lexeme, coalesce(array_length(u.positions, 1), 1)::float8 AS tf
-                        FROM unnest(cand.tsv) AS u) AS t
-    JOIN df ON df.lexeme = t.lexeme
-    GROUP BY cand.id
+               / (t.tf + %(k1)s * (1 - %(b)s + %(b)s * c.content_len / s.avglen))) AS score
+    FROM df
+    -- Each query word is an index lookup on rag_terms (lexeme, chunk_id). OFFSET 0
+    -- stops the planner flattening this into a join that scans all of rag_terms.
+    CROSS JOIN LATERAL (SELECT chunk_id, tf FROM rag_terms
+                        WHERE rag_terms.lexeme = df.lexeme OFFSET 0) AS t
+    JOIN rag_chunks c ON c.id = t.chunk_id
+    CROSS JOIN stats s
+    {document_filter}
+    GROUP BY t.chunk_id
     ORDER BY score DESC
     LIMIT %(limit)s
 )
 SELECT c.id, c.chunk_index, c.page_number, c.content, d.id, d.title
-FROM scored JOIN rag_chunks c ON c.id = scored.id JOIN rag_documents d ON d.id = c.document_id
+FROM scored JOIN rag_chunks c ON c.id = scored.chunk_id JOIN rag_documents d ON d.id = c.document_id
 ORDER BY scored.score DESC
 """
 
@@ -249,7 +250,7 @@ def bm25_search(connection, query: str, document_ids: list[str] | None = None,
     """Okapi BM25 over every chunk, in SQL (see BM25_SQL)."""
     if not tokenize(query):
         return []
-    sql = BM25_SQL.format(document_filter="AND c.document_id = ANY(%(docs)s)" if document_ids else "")
+    sql = BM25_SQL.format(document_filter="WHERE c.document_id = ANY(%(docs)s)" if document_ids else "")
     with connection.cursor() as cursor:
         cursor.execute(sql, {"query": query, "k1": k1, "b": b, "limit": limit, "docs": document_ids})
         return _rows(cursor)
@@ -270,10 +271,13 @@ def vector_search(connection, embedding: list[float], document_ids: list[str] | 
 @observe(name="retrieve", as_type="retriever", capture_input=False, capture_output=False)
 def _retrieve(connection, query: str, document_ids: list[str] | None, timings: dict,
               embedding: list[float] | None = None) -> list[dict]:
-    """Keyword + vector search fused with reciprocal-rank fusion."""
+    """Keyword (BM25 by default) + vector search, fused with reciprocal-rank fusion."""
     langfuse.update_current_span(input={"query": query, "document_ids": document_ids})
     step = time.perf_counter()
-    lexical = keyword_search(connection, query, document_ids)
+    if KEYWORD_SEARCH == "fts":
+        lexical = keyword_search(connection, query, document_ids)
+    else:
+        lexical = bm25_search(connection, query, document_ids)
     timings["keyword_ms"] = round((time.perf_counter() - step) * 1000, 1)
 
     step = time.perf_counter()
