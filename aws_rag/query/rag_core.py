@@ -52,16 +52,19 @@ def bm25_rank(query: str, rows: list[dict], *, k1: float = 1.5, b: float = 0.75)
 
 
 def reciprocal_rank_fusion(
-    ranked_lists: Iterable[list[dict]], *, rank_constant: int = 60
+    ranked_lists: Iterable[list[dict]], *, rank_constant: int = 60,
+    weights: Iterable[float] | None = None,
 ) -> list[dict]:
-    """Combine independently ranked lists with reciprocal-rank fusion."""
+    """Combine independently ranked lists with (optionally weighted) reciprocal-rank fusion."""
+    ranked_lists = list(ranked_lists)
+    weights = list(weights) if weights is not None else [1.0] * len(ranked_lists)
     combined: dict[int, dict] = {}
-    for ranked in ranked_lists:
+    for ranked, weight in zip(ranked_lists, weights):
         for rank, row in enumerate(ranked, start=1):
             chunk_id = int(row["id"])
             if chunk_id not in combined:
                 combined[chunk_id] = {**row, "score": 0.0, "score_type": "rrf"}
-            combined[chunk_id]["score"] += 1.0 / (rank_constant + rank)
+            combined[chunk_id]["score"] += weight / (rank_constant + rank)
     return sorted(combined.values(), key=lambda item: (-item["score"], item["chunk_index"]))
 
 

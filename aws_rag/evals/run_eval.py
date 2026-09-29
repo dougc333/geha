@@ -15,14 +15,20 @@ Setups (all searching every paper, like the chatbot):
   pg-keyword       Postgres full-text only
   pg-vector        pgvector only (Titan embeddings)
   pg-hybrid        keyword + vector top 25 each, reciprocal-rank fusion (chatbot default)
+  pg-bm25          Okapi BM25 computed in SQL over the tsvector (chat.bm25_search)
+  pg-hybrid-2:1    pg-hybrid with the vector list weighted double in RRF
+  pg-hybrid-bm25   vector + SQL BM25, reciprocal-rank fusion
   pg-hybrid+rerank pg-hybrid top 50 reranked by Amazon Rerank (what the chatbot uses)
+  pg-vector+rerank pgvector top 50 reranked (no keyword search)
+  pg-hybrid-bm25+rerank  pg-hybrid-bm25 top 50 reranked
   wv-a0 … wv-a1    Weaviate hybrid, alpha 0 (BM25) to 1 (vector), relative-score fusion
   wv-ranked        Weaviate hybrid alpha 0.5 with rank-based fusion
   wv-a0.5+rerank   Weaviate hybrid top 50 reranked by Amazon Rerank
 
 Writes evals/results.json (every ranking) and evals/results.md (summary tables).
 Timings are measured from this machine, not the Lambda, so compare them only
-with each other. Cost: ~$0.001 per question per rerank setup (~$0.08 total).
+with each other; a retriever shared by several setups is timed only where it runs
+first (later setups reuse its cached result). Cost: ~$0.001 per question per rerank setup (~$0.08 total).
 """
 
 from __future__ import annotations
@@ -78,28 +84,57 @@ def main() -> None:
 
     questions = [json.loads(l) for l in (HERE / "questions.jsonl").read_text().splitlines() if l.strip()]
 
+    # Retriever results are computed once per question and shared by every setup
+    # that uses them (SQL BM25 takes seconds, so recomputing it per setup was slow).
+    cache: dict[tuple, list[dict]] = {}
+
+    def cached(key: tuple, compute):
+        if key not in cache:
+            cache[key] = compute()
+        return cache[key]
+
     def pg_hybrid(conn, q, emb, limit=25):
-        return reciprocal_rank_fusion([chat.vector_search(conn, emb, limit=limit),
-                                       chat.keyword_search(conn, q, limit=limit)])
+        return reciprocal_rank_fusion([
+            cached(("vector", q, limit), lambda: chat.vector_search(conn, emb, limit=limit)),
+            cached(("fts", q, limit), lambda: chat.keyword_search(conn, q, limit=limit))])
+
+    def pg_hybrid_bm25(conn, q, emb, limit=25):
+        return reciprocal_rank_fusion([
+            cached(("vector", q, limit), lambda: chat.vector_search(conn, emb, limit=limit)),
+            cached(("bm25", q, limit), lambda: chat.bm25_search(conn, q, limit=limit))])
+
+    def pg_hybrid_weighted(conn, q, emb, limit=25):  # vector counts double
+        return reciprocal_rank_fusion([
+            cached(("vector", q, limit), lambda: chat.vector_search(conn, emb, limit=limit)),
+            cached(("fts", q, limit), lambda: chat.keyword_search(conn, q, limit=limit))], weights=[2, 1])
+
+    def rerank(q, rows):
+        return app._rerank(q, [dict(r) for r in rows[:50]])
 
     setups = {
-        "pg-keyword": lambda conn, q, emb: chat.keyword_search(conn, q, limit=10),
-        "pg-vector": lambda conn, q, emb: chat.vector_search(conn, emb, limit=10),
+        "pg-keyword": lambda conn, q, emb: cached(("fts", q, 25), lambda: chat.keyword_search(conn, q, limit=25))[:10],
+        "pg-bm25": lambda conn, q, emb: cached(("bm25", q, 25), lambda: chat.bm25_search(conn, q, limit=25))[:10],
+        "pg-vector": lambda conn, q, emb: cached(("vector", q, 25), lambda: chat.vector_search(conn, emb, limit=25))[:10],
         "pg-hybrid": pg_hybrid,
+        "pg-hybrid-2:1": pg_hybrid_weighted,
+        "pg-hybrid-bm25": pg_hybrid_bm25,
     }
     if not args.no_rerank:
-        setups["pg-hybrid+rerank"] = lambda conn, q, emb: app._rerank(q, [dict(r) for r in pg_hybrid(conn, q, emb)[:50]])
+        setups["pg-hybrid+rerank"] = lambda conn, q, emb: rerank(q, pg_hybrid(conn, q, emb))
+        setups["pg-vector+rerank"] = lambda conn, q, emb: rerank(q, chat.vector_search(conn, emb, limit=50))
+        setups["pg-hybrid-bm25+rerank"] = lambda conn, q, emb: rerank(q, pg_hybrid_bm25(conn, q, emb))
     if not args.no_weaviate:
         for alpha in (0.0, 0.25, 0.5, 0.75, 1.0):
             setups[f"wv-a{alpha:g}"] = (lambda a: lambda conn, q, emb: weaviate_store.hybrid(q, emb, alpha=a, limit=10))(alpha)
         setups["wv-ranked"] = lambda conn, q, emb: weaviate_store.hybrid(q, emb, alpha=0.5, fusion="ranked", limit=10)
         if not args.no_rerank:
-            setups["wv-a0.5+rerank"] = lambda conn, q, emb: app._rerank(q, weaviate_store.hybrid(q, emb, alpha=0.5, limit=50))
+            setups["wv-a0.5+rerank"] = lambda conn, q, emb: rerank(q, weaviate_store.hybrid(q, emb, alpha=0.5, limit=50))
 
     results = {name: [] for name in setups}
     with app.database() as conn:
         for n, gold in enumerate(questions, start=1):
             emb = app._embed_query(gold["question"])
+            cache.clear()
             for name, run in setups.items():
                 started = time.perf_counter()
                 ranked = run(conn, gold["question"], emb)

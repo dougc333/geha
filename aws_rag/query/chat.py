@@ -208,6 +208,53 @@ def keyword_search(connection, query: str, document_ids: list[str] | None = None
         return _rows(cursor)
 
 
+# Okapi BM25 computed in SQL (Neon disallows the pg_search extension). Query words
+# are stemmed with Postgres's English config; term frequency comes from the tsvector's
+# positions, document frequency from GIN-indexed counts, and document length from
+# the chunk's character count (only the ratio to the average matters).
+BM25_SQL = """
+WITH q AS (
+    SELECT DISTINCT lexeme FROM unnest(tsvector_to_array(to_tsvector('english', %(query)s))) AS lexeme
+), stats AS (
+    SELECT count(*)::float8 AS n, avg(length(content))::float8 AS avglen FROM rag_chunks
+), df AS (
+    SELECT q.lexeme,
+           (SELECT count(*) FROM rag_chunks c WHERE c.tsv @@ quote_literal(q.lexeme)::tsquery)::float8 AS df
+    FROM q
+), cand AS (
+    SELECT c.id, c.tsv, length(c.content)::float8 AS len FROM rag_chunks c
+    WHERE c.tsv @@ (SELECT string_agg(quote_literal(lexeme), ' | ')::tsquery FROM q)
+      {document_filter}
+), scored AS (
+    SELECT cand.id,
+           sum(ln(1 + (s.n - df.df + 0.5) / (df.df + 0.5))
+               * t.tf * (%(k1)s + 1)
+               / (t.tf + %(k1)s * (1 - %(b)s + %(b)s * cand.len / s.avglen))) AS score
+    FROM cand CROSS JOIN stats s
+    CROSS JOIN LATERAL (SELECT u.lexeme, coalesce(array_length(u.positions, 1), 1)::float8 AS tf
+                        FROM unnest(cand.tsv) AS u) AS t
+    JOIN df ON df.lexeme = t.lexeme
+    GROUP BY cand.id
+    ORDER BY score DESC
+    LIMIT %(limit)s
+)
+SELECT c.id, c.chunk_index, c.page_number, c.content, d.id, d.title
+FROM scored JOIN rag_chunks c ON c.id = scored.id JOIN rag_documents d ON d.id = c.document_id
+ORDER BY scored.score DESC
+"""
+
+
+def bm25_search(connection, query: str, document_ids: list[str] | None = None,
+                limit: int = CANDIDATES_PER_RETRIEVER, k1: float = 1.2, b: float = 0.75) -> list[dict]:
+    """Okapi BM25 over every chunk, in SQL (see BM25_SQL)."""
+    if not tokenize(query):
+        return []
+    sql = BM25_SQL.format(document_filter="AND c.document_id = ANY(%(docs)s)" if document_ids else "")
+    with connection.cursor() as cursor:
+        cursor.execute(sql, {"query": query, "k1": k1, "b": b, "limit": limit, "docs": document_ids})
+        return _rows(cursor)
+
+
 def vector_search(connection, embedding: list[float], document_ids: list[str] | None = None,
                   limit: int = CANDIDATES_PER_RETRIEVER) -> list[dict]:
     """pgvector nearest neighbours by cosine distance (HNSW index)."""
