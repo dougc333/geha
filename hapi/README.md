@@ -15,6 +15,7 @@ MCP server without real patient data.
 
 ```bash
 cd /Users/dc/geha/hapi
+echo "HAPI_DB_PASSWORD=$(openssl rand -hex 16)" > .env   # once; .env is git-ignored
 docker compose up -d            # HAPI + Postgres; FHIR base http://localhost:8080/fhir
 ./load_synthea.sh 50 Missouri   # generate 50 patients (seed 42) and load them
 ```
