@@ -49,10 +49,15 @@ def compact_markdown(markdown: str) -> str:
 
 
 def table_chunks(caption: str, markdown: str) -> list[str]:
-    lines = markdown.splitlines()
+    # A single row can exceed the limit (T5 has one ~14k-character row); cut such
+    # rows into pieces first so no chunk is too long to embed.
+    lines = []
+    for line in markdown.splitlines():
+        lines += [line[i:i + MAX_TABLE_CHARS] for i in range(0, len(line), MAX_TABLE_CHARS)] or [line]
+    markdown = "\n".join(lines)
     header, rows = lines[:2], lines[2:]
     prefix = (caption + "\n\n") if caption else ""
-    if len(markdown) <= MAX_TABLE_CHARS or len(lines) < 4:
+    if len(markdown) <= MAX_TABLE_CHARS or len(lines) < 3:
         return [prefix + markdown]
     parts, current = [], []
     for row in rows:

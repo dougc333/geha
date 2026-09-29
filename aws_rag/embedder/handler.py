@@ -40,10 +40,16 @@ def database_url():
     return _database_url
 
 
+# Titan v2 accepts at most 8,192 tokens; number-dense table text can hit that below
+# its 50,000-character limit. Embed a prefix of very long chunks (the full text is
+# still stored and searchable by BM25) rather than failing the whole paper.
+MAX_EMBED_CHARS = int(os.getenv("MAX_EMBED_CHARS", "10000"))  # T5: 14k chars = 8,257 tokens
+
+
 def embed(text):
     response = bedrock.invoke_model(
         modelId=MODEL,
-        body=json.dumps({"inputText": text, "dimensions": DIMENSIONS, "normalize": True}),
+        body=json.dumps({"inputText": text[:MAX_EMBED_CHARS], "dimensions": DIMENSIONS, "normalize": True}),
     )
     return json.loads(response["body"].read())["embedding"]
 
