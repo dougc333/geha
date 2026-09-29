@@ -1,10 +1,6 @@
 # aws_rag: project log
 
-A condensed, chronological history of how `aws_rag` was built, from the first
-question ("how do I build a chunker on AWS for PDFs in S3?") to now. It records
-what was asked, what was decided and why, what broke and how it was fixed,
-the measurements, and the commits and pull requests. Secrets (keys, passwords,
-connection strings) are deliberately left out.
+A condensed, chronological history of how `aws_rag` was built
 
 Dates: 2026-09-28 to 2026-09-29. Account/region: AWS `669059827483`, stack
 `sam-app` in `us-west-2`. Repo: `dougc333/geha`.
