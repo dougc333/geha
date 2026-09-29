@@ -76,7 +76,29 @@ def table_chunks(caption: str, markdown: str) -> list[str]:
             for i, part in enumerate(parts, 1)]
 
 
-MIN_FIGURE_PX = 150  # skip logos and icons (shorter side, at images_scale 2)
+MIN_FIGURE_PX = 150  # uncaptioned images below 150x150 px of area (at images_scale 2) are logos/icons
+
+
+def keep_figure(width: int, height: int, caption: str) -> bool:
+    """Captioned pictures are real figures whatever their shape: wide strips such
+    as YOLO's Figure 1 (475x98) or Atari's screenshots (794x103) were dropped by an
+    earlier "shorter side >= 150 px" rule. Uncaptioned ones must be large enough."""
+    return bool(caption) or width * height >= MIN_FIGURE_PX * MIN_FIGURE_PX
+
+
+def carry_descriptions(old: list[dict], new: list[dict]) -> int:
+    """Copy describe_figures.py's descriptions from the previous figures.json to the
+    same figures in a new run. Matched on page, caption and size, not the file name:
+    names are numbered in page order, so keeping one more figure renames the rest."""
+    def key(f: dict) -> tuple:
+        return f["page"], f["caption"], f["width"], f["height"]
+    described = {key(f): f["description"] for f in old if "description" in f}
+    carried = 0
+    for f in new:
+        if key(f) in described:
+            f["description"] = described[key(f)]
+            carried += 1
+    return carried
 
 
 def convert(pdf: Path, converter, figure_dir: Path | None = None
@@ -93,11 +115,11 @@ def convert(pdf: Path, converter, figure_dir: Path | None = None
         page = item.prov[0].page_no if getattr(item, "prov", None) else 0
         if label in ("picture", "chart") and figure_dir is not None:
             image = item.get_image(doc)
-            if image is not None and min(image.size) >= MIN_FIGURE_PX:
+            caption = " ".join(item.caption_text(doc).split())
+            if image is not None and keep_figure(*image.size, caption):
                 name = f"p{page:03d}_f{len(figures) + 1:02d}.png"
                 image.save(figure_dir / name)
-                figures.append({"file": name, "page": page, "kind": label,
-                                "caption": " ".join(item.caption_text(doc).split()),
+                figures.append({"file": name, "page": page, "kind": label, "caption": caption,
                                 "width": image.size[0], "height": image.size[1]})
         elif label == "table":
             markdown = compact_markdown(item.export_to_markdown(doc=doc))
@@ -166,12 +188,10 @@ def main() -> None:
             figure_dir.mkdir(parents=True, exist_ok=True)
         chunks, figures, seconds = convert(pdf, converter, figure_dir)
         if figure_dir is not None:
-            # Keep descriptions already made by describe_figures.py for unchanged files.
+            # Keep descriptions already made by describe_figures.py for the same figures.
             figure_index = figure_dir / "figures.json"
-            old = {f["file"]: f for f in json.loads(figure_index.read_text())} if figure_index.exists() else {}
-            for f in figures:
-                if f["file"] in old and "description" in old[f["file"]]:
-                    f["description"] = old[f["file"]]["description"]
+            if figure_index.exists():
+                carry_descriptions(json.loads(figure_index.read_text()), figures)
             figure_index.write_text(json.dumps(figures, indent=2))
         lines = []
         for index, (page, kind, text) in enumerate(chunks):
