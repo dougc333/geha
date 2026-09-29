@@ -16,6 +16,7 @@ from langfuse import get_client, observe
 from pgvector.psycopg import register_vector
 from pydantic import BaseModel, Field
 
+import library
 from rag_core import bm25_rank, reciprocal_rank_fusion
 
 
@@ -224,25 +225,16 @@ def health() -> dict:
 
 
 @app.get("/api/documents")
-def documents() -> dict:
+def documents(author: str | None = None, year_from: int | None = None, year_to: int | None = None,
+              category: str | None = None, q: str | None = None) -> dict:
+    """Papers in the library with their metadata. Optional filters: author
+    (partial name), year_from / year_to (published year), category (arXiv,
+    e.g. cs.CV) and q (words in the title or abstract, ranked by relevance)."""
     try:
-        with database() as connection, connection.cursor() as cursor:
-            cursor.execute(
-                """SELECT d.id, d.title, d.source, count(c.id),
-                          d.arxiv_id, d.authors, d.published, d.primary_category
-                   FROM rag_documents d
-                   LEFT JOIN rag_chunks c ON c.document_id = d.id
-                   GROUP BY d.id ORDER BY d.title"""
-            )
-            return {
-                "documents": [
-                    {"id": row[0], "title": row[1], "source": row[2], "chunks": row[3],
-                     "arxiv_id": row[4], "authors": row[5] or [],
-                     "published": row[6].isoformat() if row[6] else None,
-                     "primary_category": row[7]}
-                    for row in cursor.fetchall()
-                ]
-            }
+        with database() as connection:
+            return {"documents": library.find_papers(
+                connection, author=author, year_from=year_from, year_to=year_to,
+                category=category, topic=q)}
     except Exception as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
 

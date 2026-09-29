@@ -18,7 +18,7 @@ aws cloudformation describe-stacks --stack-name sam-app --region us-west-2 \
   QLoRA?" then "what hardware did they fine-tune on?"
 - **Cited answers.** Each answer cites numbered sources `[1]`; the sources
   (paper, page, chunk, rerank score, snippet) are listed under the answer.
-- **Traced in Langfuse.** Each message is a trace (rewrite → retrieve →
+- **Traced in Langfuse.** Each message is a trace (route → retrieve →
   rerank → answer, with prompts, chunks, tokens and timings), each page load a
   session, and 👍/👎 under an answer becomes a score. Setup is in
   [`../aws_rag/README.md`](../aws_rag/README.md#tracing-with-langfuse).
@@ -32,7 +32,8 @@ browser (chat.html, keeps the conversation)
   │  POST /api/chat {messages: [...last 20]}
   ▼
 QueryApi Lambda (aws_rag/query/chat.py)
-  1. rewrite   follow-up → standalone query           Nova Lite (skipped on the first turn)
+  1. route     library question or content? + standalone query   Nova Lite
+              library (list/count/authors/topics) → SQL on rag_documents, done
   2. retrieve  BM25 over all chunks + pgvector top 25  Titan Text Embeddings v2, Neon
                fused with reciprocal-rank fusion
   3. rerank    up to 50 candidates → top 6            Amazon Rerank 1.0
@@ -66,7 +67,7 @@ indexed; `--no-wait` returns right away.
 
 ## Cost and speed
 
-About 3.5–5 s per message: roughly 0.3 s rewrite, 0.5 s BM25, 0.25 s vector,
+About 3.5–5 s per content message (library answers ~1.5–2.5 s): roughly 0.4 s route, 0.5 s BM25, 0.25 s vector,
 0.8 s rerank and 0.5–2 s generation. Per message, about $0.0015 in Bedrock
 (rerank $0.001, two Nova Lite calls, one embedding). Adding a 15-page paper
 costs about $0.0002 to embed. Lambda, SQS and logs are within the free tier.

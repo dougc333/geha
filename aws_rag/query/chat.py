@@ -24,6 +24,7 @@ from app import (
     GENERATION_MODEL, RERANK_CANDIDATES, _embed_query, _rerank, converse, database, langfuse
 )
 import arxiv_meta
+import library
 import weaviate_store
 from rag_core import reciprocal_rank_fusion, tokenize
 
@@ -36,45 +37,39 @@ HISTORY_MESSAGES = 10     # earlier messages sent to the model each turn
 HISTORY_CHARS = 1500      # per message, so long answers don't crowd out sources
 CANDIDATES_PER_RETRIEVER = 25
 
-REWRITE_PROMPT = (
-    "Rewrite the user's latest message as a standalone search query for a library "
-    "of research papers, resolving pronouns and references from the conversation. "
-    "Return only the query, with no quotes or explanation. If the message is "
-    "already standalone, return it unchanged."
-)
+ROUTER_PROMPT = """You route messages for a chatbot over a library of arXiv papers.
+Reply with ONE JSON object and nothing else:
+{"route": "list" | "find" | "content", "count_only": true|false, "author": string|null,
+ "year_from": int|null, "year_to": int|null, "category": string|null,
+ "title_contains": string|null, "topic": string|null, "search_query": string}
+
+route:
+- "list": list or count papers by title, author, year or category.
+  "show me all the titles", "how many papers do you have", "papers by Kaiming He",
+  "papers from 2020 or later", "who wrote the Adam paper" (title_contains "Adam").
+- "find": which papers are ABOUT a subject. "which papers are about object detection",
+  "do you have anything on GANs" (topic "GAN or generative adversarial").
+- "content": what papers say or explain. "what is dropout", "how was Orca evaluated",
+  "compare BERT and GPT-3", "what BLEU did the Transformer get".
+topic: a search expression over titles and abstracts. Add common expansions and
+synonyms joined with " or ", e.g. "GAN or generative adversarial",
+"object detection or object detector", "RL or reinforcement learning".
+count_only: true only when the user asks how many.
+category: an arXiv code when a field is named: computer vision cs.CV, NLP or language
+cs.CL, machine learning cs.LG, AI cs.AI, robotics cs.RO, neural/evolutionary cs.NE,
+information retrieval cs.IR, statistical ML stat.ML.
+search_query: for "content", the latest message rewritten as a standalone search query,
+resolving references from the conversation; otherwise the latest message unchanged.
+Use null for anything not stated."""
 ANSWER_PROMPT = (
     "You are a research assistant for a library of arXiv papers. Every question is "
     "about those papers: interpret names and terms as the papers use them (for "
     "example, a model or method a paper introduces), never in their everyday sense. "
-    "For questions about the library itself (which papers exist, how many, titles, "
-    "authors, dates, categories), answer from the LIBRARY list below. For questions "
-    "about what the papers say, answer only from the numbered sources in the latest "
-    "message, citing them inline like [1] or [2][3]. Don't use outside knowledge. If "
-    "neither contains the answer, say so plainly. Be concise, and name the paper when "
-    "sources come from more than one."
+    "Answer only from the numbered sources in the latest message, citing them inline "
+    "like [1] or [2][3]. Don't use outside knowledge. If the sources don't contain the "
+    "answer, say so plainly. Be concise, and name the paper when sources come from "
+    "more than one."
 )
-MAX_CATALOG_AUTHORS = 12  # per paper; longer lists end with "et al."
-
-
-def _library(connection) -> str:
-    """Catalog of every paper, sent with each turn (fine up to ~100 papers)."""
-    with connection.cursor() as cursor:
-        cursor.execute(
-            """SELECT title, arxiv_id, authors, published, primary_category
-               FROM rag_documents ORDER BY published NULLS LAST, title"""
-        )
-        rows = cursor.fetchall()
-    lines = []
-    for n, (title, arxiv_id, authors, published, category) in enumerate(rows, start=1):
-        details = ", ".join(filter(None, [
-            f"arXiv {arxiv_id}" if arxiv_id else None,
-            f"published {published}" if published else None,
-            category,
-        ]))
-        names = authors or []
-        by = "; ".join(names[:MAX_CATALOG_AUTHORS]) + (" et al." if len(names) > MAX_CATALOG_AUTHORS else "")
-        lines.append(f"{n}. {title}" + (f" ({details})" if details else "") + (f". Authors: {by}" if by else ""))
-    return f"LIBRARY ({len(rows)} papers):\n" + "\n".join(lines)
 
 
 class ChatMessage(BaseModel):
@@ -127,23 +122,60 @@ def _conversation(messages: list[ChatMessage]) -> list[dict]:
     return turns
 
 
-def _standalone_question(messages: list[ChatMessage]) -> str:
+def _route(messages: list[ChatMessage]) -> dict:
+    """One Nova Lite call: which route, any library filters, and the search query."""
     latest = messages[-1].content
     earlier = messages[-HISTORY_MESSAGES - 1 : -1]
-    if not earlier:
-        return latest
     history = "\n".join(f"{m.role.upper()}: {m.content[:HISTORY_CHARS]}" for m in earlier)
-    response = converse(
-        "rewrite",
+    text = _text(converse(
+        "route",
         modelId=GENERATION_MODEL,
-        system=[{"text": REWRITE_PROMPT}],
-        messages=[{
-            "role": "user",
-            "content": [{"text": f"CONVERSATION:\n{history}\n\nLATEST MESSAGE:\n{latest}"}],
-        }],
-        inferenceConfig={"maxTokens": 200, "temperature": 0},
-    )
-    return _text(response) or latest
+        system=[{"text": ROUTER_PROMPT}],
+        messages=[{"role": "user", "content": [{"text":
+            (f"CONVERSATION:\n{history}\n\n" if history else "") + f"LATEST MESSAGE:\n{latest}"}]}],
+        inferenceConfig={"maxTokens": 300, "temperature": 0},
+    ))
+    try:
+        decision = json.loads(text[text.index("{"): text.rindex("}") + 1])
+    except ValueError:
+        decision = {}
+    if decision.get("route") not in {"list", "find", "content"}:
+        decision["route"] = "content"  # unparseable → the safe default, normal RAG
+    decision["search_query"] = (decision.get("search_query") or latest).strip() or latest
+    for key in ("year_from", "year_to"):
+        try:
+            decision[key] = int(decision[key]) if decision.get(key) else None
+        except (TypeError, ValueError):
+            decision[key] = None
+    return decision
+
+
+def _answer_library(connection, decision: dict) -> tuple[str, list[dict]]:
+    """Exact answer from rag_documents: a count or a complete numbered list."""
+    filters = {k: decision.get(k) or None for k in ("author", "year_from", "year_to", "category", "title_contains")}
+    topic = decision.get("topic") if decision["route"] == "find" else None
+    papers = library.find_papers(connection, **filters, topic=topic)
+    described = "".join(filter(None, [
+        f" about {topic}" if topic else None,
+        f" by {filters['author']}" if filters["author"] else None,
+        f" with \"{filters['title_contains']}\" in the title" if filters["title_contains"] else None,
+        f" in {filters['category']}" if filters["category"] else None,
+        f" from {filters['year_from']}" if filters["year_from"] else None,
+        f" up to {filters['year_to']}" if filters["year_to"] else None,
+    ]))
+    if not papers:
+        return f"No papers in the library{' match' if described else ''}{described}.", []
+    noun = "paper" if len(papers) == 1 else "papers"
+    if decision.get("count_only"):
+        return f"The library has {len(papers)} {noun}{described}.", papers
+    few = len(papers) <= 5  # show full author lists for short answers ("who wrote X")
+    lines = []
+    for n, p in enumerate(papers, start=1):
+        names = p["authors"]
+        by = ", ".join(names) if few else (names[0] + (" et al." if len(names) > 1 else "") if names else "")
+        year = (p["published"] or "")[:4]
+        lines.append(f"{n}. {p['title']}" + (f" — {by}" if by else "") + (f" ({year})" if year else ""))
+    return f"{len(papers)} {noun}{described}:\n" + "\n".join(lines), papers
 
 
 @observe(name="retrieve", as_type="retriever", capture_input=False, capture_output=False)
@@ -278,11 +310,30 @@ def _chat_turn(request: ChatRequest) -> dict:
     timings: dict[str, float] = {}
     try:
         step = time.perf_counter()
-        query = _standalone_question(request.messages)
-        timings["rewrite_ms"] = round((time.perf_counter() - step) * 1000, 1)
+        decision = _route(request.messages)
+        query = decision["search_query"]
+        timings["route_ms"] = round((time.perf_counter() - step) * 1000, 1)
+        langfuse.update_current_span(metadata={"route": decision})
+
+        if decision["route"] in {"list", "find"}:
+            step = time.perf_counter()
+            with database() as connection:
+                answer, papers = _answer_library(connection, decision)
+            timings["library_ms"] = round((time.perf_counter() - step) * 1000, 1)
+            timings["total_ms"] = round((time.perf_counter() - started) * 1000, 1)
+            langfuse.update_current_span(output=answer)
+            return {
+                "answer": answer,
+                "route": decision["route"],
+                "papers": [{k: p[k] for k in ("title", "arxiv_id", "authors", "published", "primary_category")}
+                           for p in papers],
+                "trace_id": langfuse.get_current_trace_id(),
+                "standalone_question": query,
+                "sources": [],
+                "timings": timings,
+            }
 
         with database() as connection:
-            library = _library(connection)
             if request.backend == "weaviate":
                 candidates = _retrieve_weaviate(query, request.document_ids, timings)
             else:
@@ -310,7 +361,7 @@ def _chat_turn(request: ChatRequest) -> dict:
             answer = _text(converse(
                 "answer",
                 modelId=GENERATION_MODEL,
-                system=[{"text": f"{ANSWER_PROMPT}\n\n{library}"}],
+                system=[{"text": ANSWER_PROMPT}],
                 messages=turns,
                 inferenceConfig={"maxTokens": 1024, "temperature": 0.2},
             ))
@@ -324,6 +375,7 @@ def _chat_turn(request: ChatRequest) -> dict:
         )
         return {
             "answer": answer,
+            "route": "content",
             "trace_id": langfuse.get_current_trace_id(),  # for /api/feedback
             "standalone_question": query,
             "sources": [
