@@ -686,6 +686,45 @@ aws s3 cp s3://$CHUNKS/chunks/ s3://$CHUNKS/chunks/ --recursive \
   --metadata-directive REPLACE
 ```
 
+## Backup and restore
+
+**Neon is the only store that matters.** Weaviate is rebuilt from it by
+`scripts/load_weaviate.py` (~2.5 minutes, stored vectors, no re-embedding), so it
+needs no backup.
+
+**Back up** (≈ 1.5 minutes; 80 MB compressed on 2026-09-29, 203 papers, 12,916 chunks):
+
+```bash
+brew install libpq@18        # pg_dump must match Neon's Postgres 18
+scripts/backup_db.sh         # → s3://<chunks bucket>/backups/rag_neon_<UTC time>.dump
+```
+
+The script reads the connection string from `/rag-demo/database-url`, writes a
+`pg_dump --format=custom` file, checks it with `pg_restore --list`, uploads it,
+and deletes the local copy (`--keep-local` keeps it in `backups/`, which git
+ignores). `backups/` in the chunks bucket doesn't trigger the embedder.
+
+**Restore** into an empty database (a new Neon project or branch, or a local
+Postgres 18 with pgvector):
+
+```bash
+aws s3 cp s3://<chunks bucket>/backups/<file>.dump .
+export TARGET_URL='postgresql://…'          # the new database
+psql "$TARGET_URL" -c 'CREATE EXTENSION IF NOT EXISTS vector'
+pg_restore --no-owner --no-privileges -n public -n teaching \
+  --dbname="$TARGET_URL" <file>.dump
+```
+
+Then point `/rag-demo/database-url` at the new database and redeploy (or wait
+for the Lambdas to reconnect). `-n public -n teaching` skips `neon_auth`, a
+Neon-managed schema that the new project creates itself. Tables load before
+triggers and indexes are created, so the BM25 trigger doesn't duplicate
+`rag_terms`; the HNSW vector index is rebuilt during restore (a few minutes).
+
+**Without a dump:** the chunk files and figure PNGs are still in the chunks
+bucket. Re-uploading `chunks/*.jsonl` refills a fresh database through the
+embedder (Titan re-embedding only, no Docling or Nova).
+
 ## Failures
 
 A message that fails 3 times moves to its dead-letter queue. For the chunker,
