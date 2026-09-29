@@ -273,6 +273,7 @@ score became 11/13.
 | Chatbot setup | Flat text | Docling v1 |
 |---|---|---|
 | Table answers correct | 0.62 | **0.85** |
+| Figure answers correct | 0/9 (not indexed) | **7/9** |
 | Table hit@1 / hit@5 / MRR@10 | 0.54 / 0.85 / 0.65 | 0.85 / 0.92 / 0.86 |
 | Other 40: hit@1 / hit@5 / MRR@10 | 0.78 / 0.93 / 0.84 | 0.72 / 0.93 / 0.80 |
 
@@ -303,6 +304,30 @@ embedder embeds at most 10,000 characters of a chunk (`MAX_EMBED_CHARS`) while
 storing the full text.
 
 ---
+
+### 4.6 Figures: Nova Lite descriptions
+
+Docling saves each figure as a PNG (`--figures`); Nova Lite writes "Text in
+figure: …" (every visible word and number) plus a short description; each becomes
+a searchable chunk with its page and caption, and the chat shows the image.
+
+| | Pilot (20 papers) | All 203 papers |
+|---|---|---|
+| Figures | 133 | 1,886 |
+| Nova Lite cost | $0.0175 | $0.24 |
+| Docling time (laptop) | ~4 min | ~70 min |
+| Figure answers (9 questions) | 0/9 → 7/9 | 7/9 |
+| Figure page at rank 1 (chatbot) | 0.78 → 1.00 | 1.00 |
+| Other questions, hit@1 / hit@5 / MRR | 0.77 / 0.94 / 0.85 → 0.75 / 0.94 / 0.84 | 0.77 / 0.95 / 0.85 (all 62) |
+
+The first prompt ("describe the figure") summarized diagrams without their
+labels; asking for the verbatim text first fixed two of the three misses. Still
+weak: diagram labels in the Transformer figure (Nova Pro gets them), curve
+comparisons without printed values, and which bar an asterisk marks (both Nova
+Lite and Pro misread it).
+
+Thumbnail cost: one indexed lookup of `rag_chunks.image` for the ~6 sources and
+local presigning, a few milliseconds per answer.
 
 ## 5. Ingestion and batch jobs
 

@@ -17,6 +17,9 @@ so the embedder handles it unchanged:
 document_id is the PDF's SHA-256, as in the chunker, so --upload (to
 s3://<chunks bucket>/chunks/) replaces that paper's flat chunks in Neon. The
 PDF itself is not uploaded, which would re-trigger the flat chunker.
+With --figures, each figure (picture or chart) is also saved as a PNG with its
+page and caption in local_ingest/out/figures/<sha256>/figures.json, for
+describe_figures.py to turn into "figure" chunks.
 Docling is installed in /Users/dc/geha/.venv (not the Lambda).
 """
 
@@ -73,16 +76,30 @@ def table_chunks(caption: str, markdown: str) -> list[str]:
             for i, part in enumerate(parts, 1)]
 
 
-def convert(pdf: Path, converter) -> tuple[list[tuple[int, str, str]], float]:
-    """(page, kind, text) chunks for one PDF, in reading order."""
+MIN_FIGURE_PX = 150  # skip logos and icons (shorter side, at images_scale 2)
+
+
+def convert(pdf: Path, converter, figure_dir: Path | None = None
+            ) -> tuple[list[tuple[int, str, str]], list[dict], float]:
+    """(page, kind, text) chunks for one PDF in reading order, plus its figures
+    (saved as PNGs in figure_dir when given)."""
     started = time.perf_counter()
     doc = converter.convert(str(pdf)).document
     pages: dict[int, list[str]] = {}
     tables: list[tuple[int, str]] = []
+    figures: list[dict] = []
     for item, _level in doc.iterate_items():
         label = str(getattr(item, "label", "")).split(".")[-1].lower()
         page = item.prov[0].page_no if getattr(item, "prov", None) else 0
-        if label == "table":
+        if label in ("picture", "chart") and figure_dir is not None:
+            image = item.get_image(doc)
+            if image is not None and min(image.size) >= MIN_FIGURE_PX:
+                name = f"p{page:03d}_f{len(figures) + 1:02d}.png"
+                image.save(figure_dir / name)
+                figures.append({"file": name, "page": page, "kind": label,
+                                "caption": " ".join(item.caption_text(doc).split()),
+                                "width": image.size[0], "height": image.size[1]})
+        elif label == "table":
             markdown = compact_markdown(item.export_to_markdown(doc=doc))
             caption = " ".join(item.caption_text(doc).split())
             if caption and markdown.startswith(caption):  # Docling puts the caption first
@@ -96,7 +113,7 @@ def convert(pdf: Path, converter) -> tuple[list[tuple[int, str, str]], float]:
         text = " ".join(" ".join(pages.get(page, [])).split())
         chunks += [(page, "text", c) for c in chunk_text(text)] if text else []
         chunks += [(page, "table", t) for p, t in tables if p == page]
-    return chunks, time.perf_counter() - started
+    return chunks, figures, time.perf_counter() - started
 
 
 def main() -> None:
@@ -106,6 +123,8 @@ def main() -> None:
     parser.add_argument("--limit", type=int)
     parser.add_argument("--max-pages", type=int, default=0, help="skip longer PDFs (0 = no limit)")
     parser.add_argument("--upload", action="store_true")
+    parser.add_argument("--figures", action="store_true",
+                        help="also save figure images to out/figures/<doc_id>/ for describe_figures.py")
     parser.add_argument("--region", default="us-west-2")
     args = parser.parse_args()
 
@@ -114,7 +133,8 @@ def main() -> None:
     from docling.datamodel.pipeline_options import PdfPipelineOptions
     from docling.document_converter import DocumentConverter, PdfFormatOption
 
-    options = PdfPipelineOptions(do_ocr=False, do_table_structure=True)  # born-digital PDFs
+    options = PdfPipelineOptions(do_ocr=False, do_table_structure=True,  # born-digital PDFs
+                                 generate_picture_images=args.figures, images_scale=2.0)
     converter = DocumentConverter(format_options={InputFormat.PDF: PdfFormatOption(pipeline_options=options)})
 
     ids = [i.strip() for i in args.ids.split(",") if i.strip()] or sorted(
@@ -140,7 +160,19 @@ def main() -> None:
                 continue
         metadata = json.loads(pdf.with_suffix(".json").read_text())
         doc_id = hashlib.sha256(pdf.read_bytes()).hexdigest()
-        chunks, seconds = convert(pdf, converter)
+        figure_dir = None
+        if args.figures:
+            figure_dir = out_dir / "figures" / doc_id
+            figure_dir.mkdir(parents=True, exist_ok=True)
+        chunks, figures, seconds = convert(pdf, converter, figure_dir)
+        if figure_dir is not None:
+            # Keep descriptions already made by describe_figures.py for unchanged files.
+            figure_index = figure_dir / "figures.json"
+            old = {f["file"]: f for f in json.loads(figure_index.read_text())} if figure_index.exists() else {}
+            for f in figures:
+                if f["file"] in old and "description" in old[f["file"]]:
+                    f["description"] = old[f["file"]]["description"]
+            figure_index.write_text(json.dumps(figures, indent=2))
         lines = []
         for index, (page, kind, text) in enumerate(chunks):
             line = {"document_id": doc_id, "source": f"docling:{pdf.name}", "title": metadata["title"],
@@ -153,7 +185,8 @@ def main() -> None:
         path = out_dir / f"{doc_id}.jsonl"
         path.write_text("\n".join(lines) + "\n")
         n_tables = sum(1 for _, kind, _ in chunks if kind == "table")
-        print(f"{arxiv_id}: {len(chunks)} chunks ({n_tables} table) in {seconds:.0f}s  {metadata['title'][:50]}", flush=True)
+        print(f"{arxiv_id}: {len(chunks)} chunks ({n_tables} table, {len(figures)} figures) "
+              f"in {seconds:.0f}s  {metadata['title'][:50]}", flush=True)
         if s3:
             s3.upload_file(str(path), bucket, f"chunks/{doc_id}.jsonl",
                            ExtraArgs={"ContentType": "application/x-ndjson"})

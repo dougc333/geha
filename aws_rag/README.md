@@ -580,6 +580,90 @@ and overwrite the Docling version. Weaviate needs `scripts/load_weaviate.py` aft
 re-chunking. Results: `evals/results_tables_{flat,docling}.md`,
 `evals/answers_tables_{flat,docling}.json`, `evals/results_docling_pilot.md`.
 
+### Figures: descriptions with Nova Lite
+
+Text search can't see what's inside a figure: the values on a chart, the blocks
+in an architecture diagram, the example input in an illustration. Two steps add
+a **figure chunk** for each figure:
+
+1. `local_ingest/docling_chunks.py --figures` also saves each figure (Docling
+   "picture" or "chart", at 2x scale, skipping images under 150 px) as a PNG in
+   `local_ingest/out/figures/<document_id>/`, with its page and caption in
+   `figures.json`.
+2. `local_ingest/describe_figures.py` sends each image, with the paper title and
+   caption, to **Nova Lite** and appends one chunk per figure to the paper's JSONL:
+
+   ```
+   Figure (page 6) from "You Only Look Once: …": Figure 4: Error Analysis: …
+   Text in figure: Fast R-CNN | YOLO | Background: 13.6% | … | Loc: 19.0% | Correct: 65.5%
+   Description: two pie charts comparing …
+   ```
+
+   The prompt asks for every word and number in the figure verbatim first, then a
+   short description, using only what is visible. Descriptions are cached in
+   `figures.json`, so re-runs are free (`--redo` to describe again). With
+   `--upload` it puts the PNGs at `s3://<chunks bucket>/figures/<document_id>/`
+   (not a trigger path) and then the JSONL, which the embedder indexes as usual.
+
+```bash
+/Users/dc/geha/.venv/bin/python local_ingest/docling_chunks.py <pdf folder> --figures
+uv run --with boto3 --with 'botocore[crt]' python local_ingest/describe_figures.py --upload
+```
+
+Figure chunks store their PNG's S3 key in `rag_chunks.image`. `/api/chat` looks
+it up for the chosen sources and returns a presigned `image_url` (1 hour); the
+chat page shows those figures as thumbnails under the answer.
+
+**Pilot, 20 papers (133 figures), $0.0175 of Nova Lite.** Nine questions
+(`type: "figure"`, f01–f09) whose answer appears only in a figure, not in the
+page text (checked with grep): chart values, diagram labels, an example input.
+
+| Chatbot setup (BM25 + vector + rerank) | Before | With figure chunks |
+|---|---|---|
+| Figure questions: **answer accuracy** | 0/9 | **7/9** |
+| Figure questions: hit@1 / hit@5 / MRR@10 | 0.78 / 1.00 / 0.87 | **1.00 / 1.00 / 1.00** |
+| Other 53 questions: hit@1 / hit@5 / MRR@10 | 0.77 / 0.94 / 0.85 | 0.75 / 0.94 / 0.84 |
+
+What Nova Lite gets right and wrong:
+
+- Charts with printed numbers are transcribed exactly (every value in YOLO's
+  error-analysis pies).
+- A first prompt ("describe the figure") only summarized diagrams, often from the
+  caption; asking for "Text in figure: …" first got "PixelNorm" (StyleGAN) and the
+  BERT example tokens. The Transformer diagram still comes back as a summary
+  (f07 misses "Outputs (shifted right)"); Nova Pro transcribes it.
+- Plots without printed values are weaker: Faster R-CNN's recall curves (f08)
+  lost "which curve is highest" with the new prompt, and in GCN's timing chart
+  both Nova Lite and Nova Pro say the *CPU* ran out of memory; it was the GPU.
+- Docling occasionally renders a vector drawing badly (ViT Figure 1 is a jumble
+  of boxes); the description then just restates the caption.
+
+The other 53 questions are unchanged apart from one question moving from rank 1
+to rank 2. Results: `evals/results_figures.md`, `evals/results_with_figures.md`,
+`evals/answers_figures_{before,after}.json`.
+
+**Full rollout (all 203 papers, 2026-09-29): 1,886 figures, $0.24 of Nova Lite**
+(2.28 M input / 0.44 M output tokens), ~70 minutes of Docling on a laptop.
+Neon now holds 12,916 chunks; Weaviate was re-synced.
+
+| Chatbot setup (BM25 + vector + rerank), 203 papers | hit@1 | hit@5 | MRR@10 | Answers |
+|---|---|---|---|---|
+| Figure questions (9) | 1.00 | 1.00 | 1.00 | **7/9** |
+| Table questions (13) | | 1.00 | | 11/13 |
+| All 62 questions | 0.77 | 0.95 | 0.85 | |
+| Weaviate hybrid + rerank, all 62 | 0.76 | 0.95 | 0.84 | |
+
+Adding 1,886 figure chunks didn't hurt the other questions (0.77 / 0.94 / 0.85
+on the 53 before). f05 passes as "Pixel normalization" (the checker ignores
+spaces), close to but not the diagram's exact label. Full results:
+`evals/results_figures_all.md`, `evals/answers_figures_all.json`.
+
+The rollout exposed an embedder weakness: Titan sometimes returns
+`ModelErrorException` ("try your request again") for a request that succeeds on
+retry. botocore doesn't retry it, so one failed call failed the whole paper;
+Llama 3 (274 chunks) failed on every redelivery. The embedder now retries each
+chunk up to 3 times with backoff.
+
 ### Existing PDFs (backfill)
 
 S3 only sends events for new objects. To chunk PDFs that were already in the

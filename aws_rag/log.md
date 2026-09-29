@@ -250,6 +250,26 @@ reads it from SSM. The key was pasted into the chat later; rotation declined.
 - **Docs:** `README.md` (architecture figure `docs/architecture.svg`, quality
   and timing tables, eval results), this log.
 
+## Figure search (2026-09-29)
+
+- Asked how to search figures; chose option 1: Nova Lite describes each
+  Docling-extracted figure and the description is indexed as a chunk (vs.
+  ColPali-style image embeddings).
+- `docling_chunks.py --figures` saves PNGs + `figures.json`;
+  `describe_figures.py` calls Nova Lite (title + caption + image), caches
+  descriptions, appends `kind: "figure"` chunks, uploads PNGs and JSONL.
+- 9 figure-only questions (f01–f09), answers checked absent from page text.
+  Pilot on 20 papers: 0/9 → 6/9; a "Text in figure first" prompt → 7/9.
+- Chat UI fixes found while testing: the key `prompt()` is blocked in the app's
+  browser pane (replaced by an in-page dialog; Cancel label was white on
+  white); answers' Markdown tables now render as HTML tables.
+- Thumbnails: PNGs in `s3://…chunks…/figures/`, `rag_chunks.image`, presigned
+  `image_url` on chat sources, figure strip under the answer.
+- Rollout to all 203 papers (incl. Orca and Self-RAG from `e2e_RAG/data/`):
+  1,886 figures, $0.24. Llama 3 failed to embed repeatedly on a Titan
+  `ModelErrorException`; added a per-chunk retry in the embedder.
+- Final: all 62 questions 0.77 / 0.95 / 0.85; figures 7/9; tables 11/13.
+
 ## Pull requests
 
 | PR | Content | State |

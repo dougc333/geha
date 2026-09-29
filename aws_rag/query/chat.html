@@ -22,6 +22,15 @@
     .log{flex:1;overflow:auto;padding:22px;display:flex;flex-direction:column;gap:16px}
     .msg{max-width:88%;padding:12px 16px;border-radius:14px;white-space:pre-wrap}
     .msg.user{align-self:flex-end;background:var(--user)}.msg.bot{align-self:flex-start;border:1px solid var(--line);background:#fbfdfe}
+    .figs{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0;white-space:normal}
+    .figcard{margin:0;flex:0 1 260px;min-width:0;border:1px solid var(--line);border-radius:10px;background:#fff;padding:8px}
+    .figcard img{display:block;width:100%;max-height:220px;object-fit:contain}
+    .figcard figcaption{font-size:12px;color:#475569;margin-top:6px}
+    .fig{display:block;max-width:100%;max-height:260px;margin:8px 0;border:1px solid var(--line);border-radius:8px;background:#fff}
+    .tbl{overflow-x:auto;margin:8px 0 12px;white-space:normal}
+    .tbl table{border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+    .tbl th,.tbl td{border:1px solid var(--line);padding:5px 10px;text-align:left;vertical-align:top}
+    .tbl th{background:#eef3f7;font-weight:600}.tbl tbody tr:nth-child(even){background:#f7fafc}
     .msg.bot.err{border-color:#efcaca;background:#fff1f1;color:#9b2424}
     .cite{color:var(--cyan);font-weight:700;text-decoration:none;font-size:12px;vertical-align:super}
     details{margin-top:10px;font-size:13px;white-space:normal}summary{cursor:pointer;color:var(--muted)}
@@ -64,17 +73,32 @@
     </section>
   </main>
   <script>
-    // Access key: add X-API-Key to /api/ calls; ask once on 401 and remember it.
+    // Access key: add X-API-Key to /api/ calls; ask once on 401 (in-page dialog) and remember it.
     (()=>{const send=window.fetch.bind(window),K='ragApiKey';
-      const load=()=>{try{return localStorage.getItem(K)||''}catch{return ''}};
-      const save=v=>{try{localStorage.setItem(K,v)}catch{}};
+      let mem='',asking=null;
+      const load=()=>{try{return localStorage.getItem(K)||mem}catch{return mem}};
+      const save=v=>{mem=v;try{localStorage.setItem(K,v)}catch{}};
+      // In-page dialog: some browsers (embedded panes) block window.prompt().
+      const ask=()=>asking||(asking=new Promise(done=>{
+        const d=document.createElement('div');
+        d.style.cssText='position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,.55)';
+        d.innerHTML='<form style="background:#fff;color:#0f172a;padding:24px;border-radius:12px;width:min(360px,calc(100% - 32px));font:15px system-ui,sans-serif">'
+          +'<label style="display:block;font-weight:600;margin-bottom:10px">This demo needs an access key</label>'
+          +'<input type="password" autocomplete="off" style="width:100%;box-sizing:border-box;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font:inherit">'
+          +'<div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px"><button type="button" style="padding:8px 14px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#0f172a;font:inherit;font-weight:600;cursor:pointer">Cancel</button>'
+          +'<button type="submit" style="padding:8px 14px;border:0;border-radius:8px;background:#4fa6a6;color:#fff;font:inherit;font-weight:600;cursor:pointer">Save</button></div></form>';
+        const input=d.querySelector('input'),finish=v=>{d.remove();asking=null;done(v)};
+        d.querySelector('form').onsubmit=e=>{e.preventDefault();finish(input.value.trim())};
+        d.querySelector('button[type=button]').onclick=()=>finish('');
+        document.body.appendChild(d);input.focus();
+      }));
       window.fetch=async(url,opts={})=>{
         if(!String(url).startsWith('/api/'))return send(url,opts);
         for(let tries=0;;tries++){
           const headers=new Headers(opts.headers||{});const key=load();if(key)headers.set('X-API-Key',key);
           const r=await send(url,{...opts,headers});
           if(r.status!==401||tries)return r;
-          const entered=prompt('This demo needs an access key:');if(!entered)return r;save(entered.trim());
+          const entered=await ask();if(!entered)return r;save(entered);
         }};})();
     const $=id=>document.getElementById(id);
     const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
@@ -96,15 +120,33 @@
       $('log').appendChild(div); $('log').scrollTop=$('log').scrollHeight; return div;
     }
 
+    // Minimal Markdown for answers (input already escaped): pipe tables and **bold**.
+    function md(text){
+      const lines=text.split('\n'),out=[];
+      const cells=l=>l.trim().replace(/^\||\|$/g,'').split('|').map(c=>c.trim());
+      for(let i=0;i<lines.length;){
+        if(!/^\s*\|.*\|\s*$/.test(lines[i])){out.push(lines[i++]);continue}
+        const rows=[];while(i<lines.length&&/^\s*\|.*\|\s*$/.test(lines[i]))rows.push(cells(lines[i++]));
+        const sep=rows.findIndex(r=>r.every(c=>/^:?-{2,}:?$/.test(c)));
+        const head=sep===1?rows[0]:null,body=rows.filter((_,k)=>k!==sep&&!(head&&k===0));
+        const tr=(r,tag)=>'<tr>'+r.map(c=>`<${tag}>${c}</${tag}>`).join('')+'</tr>';
+        out.push('<div class="tbl"><table>'+(head?'<thead>'+tr(head,'th')+'</thead>':'')+'<tbody>'+body.map(r=>tr(r,'td')).join('')+'</tbody></table></div>');
+      }
+      // Join with newlines except around tables (the bubble uses pre-wrap).
+      return out.reduce((a,l,k)=>a+(k&&!l.startsWith('<div class="tbl">')&&!out[k-1].startsWith('<div class="tbl">')?'\n':'')+l,'')
+        .replace(/\*\*([^*\n]+)\*\*/g,'<b>$1</b>');
+    }
+
     function renderAnswer(d,id){
       if(d.route&&d.route!=='content')return renderLibrary(d);
-      const body=esc(d.answer).replace(/\[(\d+)\]/g,(m,n)=>d.sources.some(s=>s.n==n)?`<a class="cite" href="#${id}-s${n}">[${n}]</a>`:m);
-      const sources=d.sources.map(s=>`<div class="src" id="${id}-s${s.n}"><b>[${s.n}] ${esc(s.title)}</b><span class="meta">page ${esc(s.page??'?')} · chunk ${s.chunk_id}${s.rerank_score!=null?` · rerank ${Number(s.rerank_score).toFixed(3)}`:''}</span><div class="snip">${esc(s.snippet)}…</div></div>`).join('');
+      const body=md(esc(d.answer)).replace(/\[(\d+)\]/g,(m,n)=>d.sources.some(s=>s.n==n)?`<a class="cite" href="#${id}-s${n}">[${n}]</a>`:m);
+      const sources=d.sources.map(s=>`<div class="src" id="${id}-s${s.n}"><b>[${s.n}] ${esc(s.title)}</b><span class="meta">page ${esc(s.page??'?')} · chunk ${s.chunk_id}${s.rerank_score!=null?` · rerank ${Number(s.rerank_score).toFixed(3)}`:''}</span>${s.image_url?`<a href="${esc(s.image_url)}" target="_blank" rel="noopener"><img class="fig" src="${esc(s.image_url)}" alt="Figure from ${esc(s.title)}, page ${esc(s.page??'?')}" loading="lazy"></a>`:''}<div class="snip">${esc(s.snippet)}…</div></div>`).join('');
       const t=d.timings, ms=k=>t[k]!=null?`${k.replace('_ms','')} ${Math.round(t[k])}ms`:null;
       const timing=['route_ms','library_ms','keyword_ms','vector_ms','embed_ms','weaviate_ms','rerank_ms','generation_ms','total_ms'].map(ms).filter(Boolean).join(' · ');
       const searched=d.standalone_question!==history.at(-1)?.content?`<div class="timing">Searched for: “${esc(d.standalone_question)}”</div>`:'';
       const fb=d.trace_id?`<div class="fb" data-trace="${esc(d.trace_id)}">Helpful? <button data-helpful="true" aria-label="Helpful">👍</button><button data-helpful="false" aria-label="Not helpful">👎</button></div>`:'';
-      return body+(sources?`<details><summary>${d.sources.length} sources</summary>${sources}</details>`:'')+searched+`<div class="timing">${timing}</div>`+fb;
+      const figs=d.sources.filter(s=>s.image_url).map(s=>`<figure class="figcard"><a href="${esc(s.image_url)}" target="_blank" rel="noopener"><img src="${esc(s.image_url)}" alt="Figure from ${esc(s.title)}, page ${esc(s.page??'?')}" loading="lazy"></a><figcaption><a class="cite" href="#${id}-s${s.n}">[${s.n}]</a> ${esc(s.title)}, p. ${esc(s.page??'?')}</figcaption></figure>`).join('');
+      return body+(figs?`<div class="figs">${figs}</div>`:'')+(sources?`<details><summary>${d.sources.length} sources</summary>${sources}</details>`:'')+searched+`<div class="timing">${timing}</div>`+fb;
     }
 
     // Library answers come from SQL: a header line plus one linked item per paper.

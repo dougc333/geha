@@ -46,6 +46,11 @@ ALTER TABLE rag_chunks
 
 CREATE INDEX IF NOT EXISTS rag_chunks_tsv_idx ON rag_chunks USING gin (tsv);
 
+-- Figure chunks (local_ingest/describe_figures.py): S3 key of the figure's PNG in
+-- the chunks bucket, e.g. figures/<document_id>/p003_f01.png. NULL for text and
+-- table chunks. The query API turns it into a short-lived presigned URL.
+ALTER TABLE rag_chunks ADD COLUMN IF NOT EXISTS image text;
+
 -- BM25 support (Neon doesn't allow the pg_search extension). rag_terms is an
 -- inverted index: one row per (word, chunk) with the word's count in that chunk,
 -- filled from the tsvector by a trigger, so the embedder needs no changes and

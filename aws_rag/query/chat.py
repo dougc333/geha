@@ -15,6 +15,7 @@ import urllib.parse
 from typing import Literal
 
 import boto3
+from botocore.config import Config
 from botocore.exceptions import ClientError
 from fastapi import APIRouter, HTTPException
 from langfuse import observe, propagate_attributes
@@ -29,9 +30,11 @@ import weaviate_store
 from rag_core import reciprocal_rank_fusion, tokenize
 
 router = APIRouter()
-s3 = boto3.client("s3")
+s3 = boto3.client("s3", config=Config(signature_version="s3v4"))  # v4: presigned figure URLs
 
 RAW_BUCKET = os.getenv("RAW_BUCKET", "")
+CHUNK_BUCKET = os.getenv("CHUNK_BUCKET", "")
+FIGURE_URL_SECONDS = 3600  # presigned figure thumbnails in chat sources
 ARXIV_MAX_BYTES = int(os.getenv("ARXIV_MAX_MB", "25")) * 1024 * 1024
 HISTORY_MESSAGES = 10     # earlier messages sent to the model each turn
 HISTORY_CHARS = 1500      # per message, so long answers don't crowd out sources
@@ -355,6 +358,19 @@ def _compare_backends(request: CompareBackendsRequest) -> dict:
         raise HTTPException(status_code=500, detail=str(exc)) from exc
 
 
+def _figure_urls(connection, chunk_ids: list[int]) -> dict[int, str]:
+    """Presigned URLs for the figure images of these chunks (only figure chunks
+    have rag_chunks.image). Looked up by ID after reranking, so it works for both
+    backends (Weaviate objects carry the Postgres chunk ID)."""
+    if not CHUNK_BUCKET or not chunk_ids:
+        return {}
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT id, image FROM rag_chunks WHERE id = ANY(%s) AND image IS NOT NULL", (chunk_ids,))
+        return {chunk_id: s3.generate_presigned_url("get_object", Params={"Bucket": CHUNK_BUCKET, "Key": key},
+                                                    ExpiresIn=FIGURE_URL_SECONDS)
+                for chunk_id, key in cursor.fetchall()}
+
+
 @router.post("/api/chat")
 def chat(request: ChatRequest) -> dict:
     if request.messages[-1].role != "user":
@@ -403,6 +419,8 @@ def _chat_turn(request: ChatRequest) -> dict:
         step = time.perf_counter()
         sources = _rerank(query, candidates[:RERANK_CANDIDATES])[: request.top_k]
         timings["rerank_ms"] = round((time.perf_counter() - step) * 1000, 1)
+        with database() as connection:
+            figure_urls = _figure_urls(connection, [s["id"] for s in sources])
 
         if sources:
             context = "\n\n".join(
@@ -448,6 +466,7 @@ def _chat_turn(request: ChatRequest) -> dict:
                     "chunk_id": s["id"],
                     "rerank_score": s.get("rerank_score"),
                     "snippet": s["content"][:400],
+                    "image_url": figure_urls.get(s["id"]),
                 }
                 for n, s in enumerate(sources, start=1)
             ],

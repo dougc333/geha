@@ -225,6 +225,7 @@ Resources:
           RERANK_MODEL: !Ref RerankModel
           GENERATION_MODEL: !Ref GenerationModel
           RAW_BUCKET: !Ref RawBucket    # /api/arxiv drops PDFs here for the chunker
+          CHUNK_BUCKET: !Ref ChunkBucket  # figure thumbnails (figures/*), via presigned URLs
           LANGFUSE_BASE_URL: !Ref LangfuseBaseUrl
           LANGFUSE_PUBLIC_KEY_PARAMETER: !Ref LangfusePublicKeyParameter
           LANGFUSE_SECRET_KEY_PARAMETER: !Ref LangfuseSecretKeyParameter
@@ -257,6 +258,9 @@ Resources:
             - Effect: Allow
               Action: s3:ListBucket   # makes HeadObject return 404, not 403, for new papers
               Resource: !Sub "arn:aws:s3:::${AWS::StackName}-raw-${AWS::AccountId}"
+            - Effect: Allow
+              Action: s3:GetObject    # figure images, served to the browser by presigned URL
+              Resource: !Sub "arn:aws:s3:::${ChunkBucket}/figures/*"
       FunctionUrlConfig:
         AuthType: NONE                  # public
 
