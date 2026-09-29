@@ -49,19 +49,23 @@ CHAT_HTML = (Path(__file__).parent / "chat.html").read_text()
 BACKENDS_HTML = (Path(__file__).parent / "backends.html").read_text()
 
 
+# no-cache: browsers revalidate, so a deploy's UI changes show on the next load.
+NO_CACHE = {"Cache-Control": "no-cache"}
+
+
 @app.get("/", response_class=HTMLResponse, include_in_schema=False)
-def index() -> str:
-    return INDEX_HTML
+def index() -> HTMLResponse:
+    return HTMLResponse(INDEX_HTML, headers=NO_CACHE)
 
 
 @app.get("/chat", response_class=HTMLResponse, include_in_schema=False)
-def chat_page() -> str:
-    return CHAT_HTML
+def chat_page() -> HTMLResponse:
+    return HTMLResponse(CHAT_HTML, headers=NO_CACHE)
 
 
 @app.get("/backends", response_class=HTMLResponse, include_in_schema=False)
-def backends_page() -> str:
-    return BACKENDS_HTML
+def backends_page() -> HTMLResponse:
+    return HTMLResponse(BACKENDS_HTML, headers=NO_CACHE)
 
 
 _asgi = Mangum(app, lifespan="off")
