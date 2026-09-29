@@ -1,0 +1,233 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 980" width="1400" height="980" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4a4f57"/>
+    </marker>
+    <style>
+      .t  { font-size: 14px; font-weight: 600; fill: #1f2328; }
+      .b  { font-size: 12px; fill: #3d434b; }
+      .m  { font-size: 11px; fill: #5b6169; font-family: ui-monospace, 'SF Mono', Menlo, monospace; }
+      .band { font-size: 12.5px; font-weight: 700; letter-spacing: 0.08em; fill: #6b6f76; }
+      .ln { stroke: #4a4f57; stroke-width: 1.5; fill: none; }
+      .dash { stroke: #8a8f97; stroke-width: 1.4; fill: none; stroke-dasharray: 6 4; }
+      .py { fill: #eaf1fb; stroke: #3b6fb6; stroke-width: 1.4; }
+      .ai { fill: #f1ecfa; stroke: #7353ba; stroke-width: 1.4; }
+      .db { fill: #e6f4f1; stroke: #2c8a7a; stroke-width: 1.4; }
+      .aws { fill: #fff5e8; stroke: #c77d1a; stroke-width: 1.4; }
+      .ui { fill: #ffffff; stroke: #7a7f86; stroke-width: 1.4; }
+      .ext { fill: #fdf0f2; stroke: #b0485a; stroke-width: 1.4; }
+    </style>
+  </defs>
+  <rect width="1400" height="980" fill="#fbfaf7"/>
+
+  <text x="36" y="40" font-size="22" font-weight="700" fill="#1f2328">aws_rag: current architecture</text>
+  <text x="36" y="62" class="b">Serverless RAG over ~100 arXiv papers on AWS (sam-app, us-west-2). Amazon Bedrock models, Neon Postgres + pgvector, optional Weaviate mirror, Langfuse tracing.</text>
+
+  <!-- ================= INGESTION ================= -->
+  <rect x="20" y="78" width="1360" height="300" rx="10" fill="#f3f1ec" stroke="#e2ded5"/>
+  <text x="36" y="100" class="band">INGESTION</text>
+
+  <!-- sources -->
+  <rect x="40" y="114" width="230" height="104" rx="8" class="ui"/>
+  <text x="54" y="136" class="t">Laptop scripts</text>
+  <text x="54" y="156" class="m">download_top_cited.py</text>
+  <text x="54" y="172" class="b">Semantic Scholar ranks, arXiv PDFs</text>
+  <text x="54" y="190" class="m">upload_papers.py</text>
+  <text x="54" y="206" class="b">sidecar .json first, then .pdf</text>
+
+  <rect x="40" y="232" width="230" height="62" rx="8" class="ui"/>
+  <text x="54" y="254" class="t">POST /api/arxiv</text>
+  <text x="54" y="274" class="b">chat page "Add paper" box</text>
+
+  <rect x="40" y="306" width="230" height="58" rx="8" class="ext"/>
+  <text x="54" y="328" class="t">arXiv API</text>
+  <text x="54" y="347" class="b">title, authors, abstract, dates</text>
+
+  <!-- raw bucket -->
+  <rect x="310" y="150" width="190" height="104" rx="8" class="aws"/>
+  <text x="324" y="172" class="t">S3 raw bucket</text>
+  <text x="324" y="192" class="m">papers/&lt;id&gt;.pdf</text>
+  <text x="324" y="208" class="m">papers/&lt;id&gt;.json</text>
+  <text x="324" y="226" class="b">(metadata sidecar)</text>
+  <text x="324" y="243" class="m">arxiv/&lt;id&gt;.pdf|.json</text>
+
+  <line x1="270" y1="166" x2="308" y2="180" class="ln" marker-end="url(#arr)"/>
+  <line x1="270" y1="262" x2="308" y2="232" class="ln" marker-end="url(#arr)"/>
+  <line x1="155" y1="306" x2="155" y2="296" class="ln" marker-end="url(#arr)"/>
+
+  <!-- chunker -->
+  <rect x="545" y="150" width="200" height="104" rx="8" class="py"/>
+  <text x="559" y="172" class="t">Chunker λ</text>
+  <text x="559" y="192" class="b">PyMuPDF text per page</text>
+  <text x="559" y="209" class="b">350 words, 50 overlap</text>
+  <text x="559" y="226" class="b">+ sidecar metadata</text>
+  <text x="559" y="243" class="m">SQS + DLQ in front</text>
+  <line x1="500" y1="202" x2="543" y2="202" class="ln" marker-end="url(#arr)"/>
+  <text x="506" y="194" class="m">.pdf</text>
+
+  <!-- chunk bucket -->
+  <rect x="790" y="150" width="175" height="104" rx="8" class="aws"/>
+  <text x="804" y="172" class="t">S3 chunks bucket</text>
+  <text x="804" y="194" class="m">chunks/&lt;sha256&gt;</text>
+  <text x="804" y="210" class="m">.jsonl</text>
+  <text x="804" y="232" class="b">one line per chunk</text>
+  <line x1="745" y1="202" x2="788" y2="202" class="ln" marker-end="url(#arr)"/>
+
+  <!-- embedder -->
+  <rect x="1010" y="150" width="200" height="104" rx="8" class="ai"/>
+  <text x="1024" y="172" class="t">Embedder λ</text>
+  <text x="1024" y="192" class="b">Titan Text Embeddings v2</text>
+  <text x="1024" y="209" class="b">1024-d, 8 calls in parallel</text>
+  <text x="1024" y="226" class="b">upsert doc + chunks</text>
+  <text x="1024" y="243" class="m">SQS + DLQ in front</text>
+  <line x1="965" y1="202" x2="1008" y2="202" class="ln" marker-end="url(#arr)"/>
+
+  <rect x="1240" y="150" width="120" height="104" rx="8" class="ext"/>
+  <text x="1252" y="172" class="t">Bedrock</text>
+  <text x="1252" y="192" class="b">Titan v2</text>
+  <text x="1252" y="208" class="b">Nova Lite</text>
+  <text x="1252" y="224" class="b">Amazon</text>
+  <text x="1252" y="240" class="b">Rerank 1.0</text>
+  <line x1="1210" y1="202" x2="1238" y2="202" class="dash" marker-end="url(#arr)"/>
+
+  <path d="M1110,254 V372 H700 V401" class="ln" marker-end="url(#arr)"/>
+  <text x="1118" y="300" class="m">one transaction</text>
+  <text x="1118" y="316" class="m">per paper</text>
+
+
+  <!-- ================= STORES ================= -->
+  <rect x="20" y="392" width="1360" height="118" rx="10" fill="#eef6f4" stroke="#cfe3de"/>
+  <text x="36" y="414" class="band">STORES</text>
+
+  <rect x="220" y="402" width="700" height="98" rx="8" class="db"/>
+  <text x="236" y="426" class="t">Neon Postgres 18 + pgvector (source of truth)</text>
+  <text x="236" y="448" class="m">rag_documents</text>
+  <text x="340" y="448" class="b">title, arxiv_id, authors[], published, abstract, categories… (103 papers)</text>
+  <text x="236" y="468" class="m">rag_chunks</text>
+  <text x="340" y="468" class="b">content, page, embedding vector(1024) HNSW, tsv tsvector GIN (5,300)</text>
+  <text x="236" y="488" class="b">DATABASE_URL in SSM Parameter Store; one reused connection per Lambda</text>
+
+  <rect x="960" y="402" width="400" height="98" rx="8" class="db"/>
+  <text x="976" y="426" class="t">Weaviate Cloud sandbox (comparison)</text>
+  <text x="976" y="448" class="m">Chunk</text>
+  <text x="1030" y="448" class="b">same text + vectors, HFresh index</text>
+  <text x="976" y="468" class="b">native BM25 + hybrid (alpha, fusion), us-east-1</text>
+  <text x="976" y="488" class="b">filled from Neon by load_weaviate.py (no re-embed)</text>
+  <line x1="920" y1="456" x2="958" y2="456" class="dash" marker-end="url(#arr)"/>
+  <text x="922" y="448" class="m">copy</text>
+
+  <!-- ================= QUERY ================= -->
+  <rect x="20" y="524" width="1360" height="410" rx="10" fill="#f3f1ec" stroke="#e2ded5"/>
+  <text x="36" y="546" class="band">QUERY · public Lambda Function URL</text>
+
+  <!-- browser pages -->
+  <rect x="40" y="562" width="200" height="150" rx="8" class="ui"/>
+  <text x="54" y="584" class="t">Browser pages</text>
+  <text x="54" y="606" class="m">/</text>
+  <text x="80" y="606" class="b">retrieval lab (1 paper)</text>
+  <text x="54" y="626" class="m">/chat</text>
+  <text x="100" y="626" class="b">chatbot, all papers</text>
+  <text x="54" y="646" class="m">/backends</text>
+  <text x="128" y="646" class="b">PG vs Weaviate</text>
+  <text x="54" y="666" class="m">/docs</text>
+  <text x="100" y="666" class="b">Swagger UI (REST)</text>
+  <text x="54" y="690" class="b">session id, thumbs up/down</text>
+
+  <!-- query lambda box -->
+  <rect x="275" y="562" width="1085" height="355" rx="10" fill="#ffffff" stroke="#b9bdc3" stroke-width="1.2"/>
+  <text x="291" y="584" class="t">QueryApi λ</text>
+  <text x="375" y="584" class="m">FastAPI + Mangum · query/app.py, chat.py, library.py, weaviate_store.py</text>
+  <line x1="240" y1="636" x2="273" y2="636" class="ln" marker-end="url(#arr)"/>
+
+  <!-- router -->
+  <rect x="295" y="600" width="210" height="92" rx="8" class="ai"/>
+  <text x="309" y="622" class="t">Router</text>
+  <text x="309" y="642" class="b">Nova Lite → JSON</text>
+  <text x="309" y="660" class="m">list | find | content</text>
+  <text x="309" y="678" class="b">+ filters, search query</text>
+
+  <!-- library path -->
+  <rect x="578" y="600" width="222" height="92" rx="8" class="db"/>
+  <text x="592" y="622" class="t">Library answer (SQL)</text>
+  <text x="592" y="642" class="b">list/count by author, year,</text>
+  <text x="592" y="659" class="b">category, title; find =</text>
+  <text x="592" y="676" class="b">title + abstract. No LLM.</text>
+  <line x1="505" y1="646" x2="576" y2="646" class="ln" marker-end="url(#arr)"/>
+  <text x="511" y="638" class="m">list/find</text>
+
+  <rect x="840" y="600" width="250" height="92" rx="8" class="ui"/>
+  <text x="854" y="622" class="t">Exact numbered list</text>
+  <text x="854" y="642" class="b">all matches, linked to arXiv</text>
+  <text x="854" y="662" class="b">~0.75 s</text>
+  <line x1="800" y1="646" x2="838" y2="646" class="ln" marker-end="url(#arr)"/>
+
+  <!-- content path -->
+  <line x1="400" y1="692" x2="400" y2="722" class="ln" marker-end="url(#arr)"/>
+  <text x="410" y="712" class="m">content</text>
+
+  <rect x="295" y="724" width="230" height="84" rx="8" class="db"/>
+  <text x="309" y="746" class="t">Keyword search</text>
+  <text x="309" y="765" class="b">Postgres full-text (GIN,</text>
+  <text x="309" y="782" class="b">ts_rank_cd) top 25</text>
+  <text x="309" y="799" class="m">bm25_search: SQL BM25 (eval)</text>
+
+  <rect x="295" y="818" width="230" height="84" rx="8" class="db"/>
+  <text x="309" y="840" class="t">Vector search</text>
+  <text x="309" y="859" class="b">Titan query embedding →</text>
+  <text x="309" y="876" class="b">pgvector cosine top 25</text>
+
+  <rect x="565" y="770" width="175" height="84" rx="8" class="py"/>
+  <text x="579" y="792" class="t">RRF fusion</text>
+  <text x="579" y="812" class="b">1/(60+rank), summed</text>
+  <text x="579" y="830" class="b">→ top 50 candidates</text>
+  <line x1="525" y1="766" x2="563" y2="800" class="ln" marker-end="url(#arr)"/>
+  <line x1="525" y1="860" x2="563" y2="828" class="ln" marker-end="url(#arr)"/>
+
+  <rect x="565" y="864" width="175" height="46" rx="8" class="db"/>
+  <text x="579" y="884" class="t">or Weaviate hybrid</text>
+  <text x="579" y="901" class="m">backend=weaviate</text>
+
+  <rect x="780" y="770" width="170" height="84" rx="8" class="ai"/>
+  <text x="794" y="792" class="t">Rerank</text>
+  <text x="794" y="812" class="b">Amazon Rerank 1.0</text>
+  <text x="794" y="830" class="b">top 50 → top 6 · ~1 s</text>
+  <line x1="740" y1="812" x2="778" y2="812" class="ln" marker-end="url(#arr)"/>
+  <line x1="740" y1="886" x2="778" y2="838" class="ln" marker-end="url(#arr)"/>
+
+  <rect x="990" y="770" width="170" height="84" rx="8" class="ai"/>
+  <text x="1004" y="792" class="t">Answer</text>
+  <text x="1004" y="812" class="b">Nova Lite, cites [n]</text>
+  <text x="1004" y="830" class="b">only from sources</text>
+  <line x1="950" y1="812" x2="988" y2="812" class="ln" marker-end="url(#arr)"/>
+
+  <rect x="1195" y="770" width="150" height="84" rx="8" class="ui"/>
+  <text x="1209" y="792" class="t">Cited answer</text>
+  <text x="1209" y="812" class="b">+ sources, timings</text>
+  <text x="1209" y="830" class="b">~3–3.8 s</text>
+  <line x1="1160" y1="812" x2="1193" y2="812" class="ln" marker-end="url(#arr)"/>
+
+  <rect x="1130" y="600" width="215" height="92" rx="8" class="ext"/>
+  <text x="1144" y="622" class="t">Langfuse (EU)</text>
+  <text x="1144" y="642" class="b">trace per request: route,</text>
+  <text x="1144" y="659" class="b">retrieve, rerank, answer;</text>
+  <text x="1144" y="676" class="b">costs, sessions, feedback</text>
+
+  <text x="295" y="930" class="m" fill="#8a8f97"> </text>
+
+  <!-- links to stores -->
+  <line x1="880" y1="560" x2="880" y2="504" class="dash" marker-end="url(#arr)"/>
+  <text x="888" y="538" class="m">SQL, full-text, pgvector</text>
+  <line x1="1250" y1="560" x2="1250" y2="504" class="dash" marker-end="url(#arr)"/>
+  <text x="1258" y="538" class="m">hybrid</text>
+
+  <!-- Legend -->
+  <g transform="translate(36,958)">
+    <rect x="0" y="-12" width="18" height="14" rx="3" class="py"/><text x="26" y="0" class="b">Python compute</text>
+    <rect x="150" y="-12" width="18" height="14" rx="3" class="db"/><text x="176" y="0" class="b">Database / search</text>
+    <rect x="320" y="-12" width="18" height="14" rx="3" class="ai"/><text x="346" y="0" class="b">Bedrock model call</text>
+    <rect x="490" y="-12" width="18" height="14" rx="3" class="aws"/><text x="516" y="0" class="b">S3 bucket</text>
+    <rect x="620" y="-12" width="18" height="14" rx="3" class="ext"/><text x="646" y="0" class="b">External service</text>
+    <rect x="790" y="-12" width="18" height="14" rx="3" class="ui"/><text x="816" y="0" class="b">Client / script / output</text>
+    <line x1="990" y1="-5" x2="1030" y2="-5" class="dash"/><text x="1038" y="0" class="b">Reads data / on-demand copy</text>
+  </g>
+</svg>

@@ -178,49 +178,106 @@ def _answer_library(connection, decision: dict) -> tuple[str, list[dict]]:
     return f"{len(papers)} {noun}{described}:\n" + "\n".join(lines), papers
 
 
+_CHUNK_SELECT = """SELECT c.id, c.chunk_index, c.page_number, c.content, d.id, d.title
+                   FROM rag_chunks c JOIN rag_documents d ON d.id = c.document_id"""
+
+
+def _rows(cursor) -> list[dict]:
+    return [
+        {"id": r[0], "chunk_index": r[1], "page": r[2], "content": r[3],
+         "document_id": r[4], "title": r[5]}
+        for r in cursor.fetchall()
+    ]
+
+
+def keyword_search(connection, query: str, document_ids: list[str] | None = None,
+                   limit: int = CANDIDATES_PER_RETRIEVER) -> list[dict]:
+    """Postgres full-text search (GIN index on rag_chunks.tsv): any query word may
+    match ("or"), stopwords are dropped, and ts_rank_cd ranks by term frequency and
+    proximity. Unlike the lab's Python BM25 it never loads every chunk."""
+    terms = tokenize(query)
+    if not terms:
+        return []
+    with connection.cursor() as cursor:
+        cursor.execute(
+            f"""{_CHUNK_SELECT}, websearch_to_tsquery('english', %s) AS q
+                WHERE c.tsv @@ q {"AND c.document_id = ANY(%s)" if document_ids else ""}
+                ORDER BY ts_rank_cd(c.tsv, q, 32) DESC LIMIT %s""",
+            [" or ".join(terms)] + ([document_ids] if document_ids else []) + [limit],
+        )
+        return _rows(cursor)
+
+
+# Okapi BM25 computed in SQL (Neon disallows the pg_search extension). Query words
+# are stemmed with Postgres's English config; term frequency comes from the tsvector's
+# positions, document frequency from GIN-indexed counts, and document length from
+# the chunk's character count (only the ratio to the average matters).
+BM25_SQL = """
+WITH q AS (
+    SELECT DISTINCT lexeme FROM unnest(tsvector_to_array(to_tsvector('english', %(query)s))) AS lexeme
+), stats AS (
+    SELECT count(*)::float8 AS n, avg(length(content))::float8 AS avglen FROM rag_chunks
+), df AS (
+    SELECT q.lexeme,
+           (SELECT count(*) FROM rag_chunks c WHERE c.tsv @@ quote_literal(q.lexeme)::tsquery)::float8 AS df
+    FROM q
+), cand AS (
+    SELECT c.id, c.tsv, length(c.content)::float8 AS len FROM rag_chunks c
+    WHERE c.tsv @@ (SELECT string_agg(quote_literal(lexeme), ' | ')::tsquery FROM q)
+      {document_filter}
+), scored AS (
+    SELECT cand.id,
+           sum(ln(1 + (s.n - df.df + 0.5) / (df.df + 0.5))
+               * t.tf * (%(k1)s + 1)
+               / (t.tf + %(k1)s * (1 - %(b)s + %(b)s * cand.len / s.avglen))) AS score
+    FROM cand CROSS JOIN stats s
+    CROSS JOIN LATERAL (SELECT u.lexeme, coalesce(array_length(u.positions, 1), 1)::float8 AS tf
+                        FROM unnest(cand.tsv) AS u) AS t
+    JOIN df ON df.lexeme = t.lexeme
+    GROUP BY cand.id
+    ORDER BY score DESC
+    LIMIT %(limit)s
+)
+SELECT c.id, c.chunk_index, c.page_number, c.content, d.id, d.title
+FROM scored JOIN rag_chunks c ON c.id = scored.id JOIN rag_documents d ON d.id = c.document_id
+ORDER BY scored.score DESC
+"""
+
+
+def bm25_search(connection, query: str, document_ids: list[str] | None = None,
+                limit: int = CANDIDATES_PER_RETRIEVER, k1: float = 1.2, b: float = 0.75) -> list[dict]:
+    """Okapi BM25 over every chunk, in SQL (see BM25_SQL)."""
+    if not tokenize(query):
+        return []
+    sql = BM25_SQL.format(document_filter="AND c.document_id = ANY(%(docs)s)" if document_ids else "")
+    with connection.cursor() as cursor:
+        cursor.execute(sql, {"query": query, "k1": k1, "b": b, "limit": limit, "docs": document_ids})
+        return _rows(cursor)
+
+
+def vector_search(connection, embedding: list[float], document_ids: list[str] | None = None,
+                  limit: int = CANDIDATES_PER_RETRIEVER) -> list[dict]:
+    """pgvector nearest neighbours by cosine distance (HNSW index)."""
+    with connection.cursor() as cursor:
+        cursor.execute(
+            f"""{_CHUNK_SELECT} {"WHERE c.document_id = ANY(%s)" if document_ids else ""}
+                ORDER BY c.embedding <=> %s::vector LIMIT %s""",
+            ([document_ids] if document_ids else []) + [embedding, limit],
+        )
+        return _rows(cursor)
+
+
 @observe(name="retrieve", as_type="retriever", capture_input=False, capture_output=False)
 def _retrieve(connection, query: str, document_ids: list[str] | None, timings: dict,
               embedding: list[float] | None = None) -> list[dict]:
+    """Keyword + vector search fused with reciprocal-rank fusion."""
     langfuse.update_current_span(input={"query": query, "document_ids": document_ids})
-    where, params = ("WHERE c.document_id = ANY(%s)", [document_ids]) if document_ids else ("", [])
-    select = """SELECT c.id, c.chunk_index, c.page_number, c.content, d.id, d.title
-                FROM rag_chunks c JOIN rag_documents d ON d.id = c.document_id"""
-
-    def rows(cursor) -> list[dict]:
-        return [
-            {"id": r[0], "chunk_index": r[1], "page": r[2], "content": r[3],
-             "document_id": r[4], "title": r[5]}
-            for r in cursor.fetchall()
-        ]
-
-    # Keyword search runs in Postgres (GIN index on rag_chunks.tsv): any query
-    # word may match ("or"), stopwords are dropped, and ts_rank_cd ranks by term
-    # frequency and proximity. Unlike the lab's Python BM25 it never loads every
-    # chunk, so it scales to the whole library.
     step = time.perf_counter()
-    terms = tokenize(query)
-    lexical: list[dict] = []
-    if terms:
-        with connection.cursor() as cursor:
-            cursor.execute(
-                f"""SELECT c.id, c.chunk_index, c.page_number, c.content, d.id, d.title
-                    FROM rag_chunks c JOIN rag_documents d ON d.id = c.document_id,
-                         websearch_to_tsquery('english', %s) AS q
-                    WHERE c.tsv @@ q {"AND c.document_id = ANY(%s)" if document_ids else ""}
-                    ORDER BY ts_rank_cd(c.tsv, q, 32) DESC LIMIT %s""",
-                [" or ".join(terms)] + ([document_ids] if document_ids else []) + [CANDIDATES_PER_RETRIEVER],
-            )
-            lexical = rows(cursor)
+    lexical = keyword_search(connection, query, document_ids)
     timings["keyword_ms"] = round((time.perf_counter() - step) * 1000, 1)
 
     step = time.perf_counter()
-    embedding = embedding or _embed_query(query)
-    with connection.cursor() as cursor:
-        cursor.execute(
-            f"{select} {where} ORDER BY c.embedding <=> %s::vector LIMIT %s",
-            params + [embedding, CANDIDATES_PER_RETRIEVER],
-        )
-        semantic = rows(cursor)
+    semantic = vector_search(connection, embedding or _embed_query(query), document_ids)
     timings["vector_ms"] = round((time.perf_counter() - step) * 1000, 1)
 
     fused = reciprocal_rank_fusion([semantic, lexical])
