@@ -257,6 +257,50 @@ received after they're set.
 Traces contain questions, retrieved passages and answers. That's fine for
 public arXiv papers; think twice before tracing sensitive documents.
 
+### Paper metadata (arXiv)
+
+`rag_documents` stores each paper's arXiv metadata: `arxiv_id`, `authors`,
+`published`, `updated`, `abstract`, `primary_category`, `categories`,
+`comment`, `journal_ref` and `doi` (see `schema.sql`). The metadata travels
+with the PDF as a sidecar JSON next to it in S3 (`papers/2306.02707.pdf` +
+`papers/2306.02707.json`). The chunker adds it to the first line of the chunk
+file, and the embedder writes it to the row; a re-run without metadata keeps
+what's stored. `POST /api/arxiv` writes the sidecar automatically (via
+`query/arxiv_meta.py`). For papers indexed earlier, run once:
+
+```bash
+python scripts/backfill_arxiv_metadata.py --dry-run   # then without --dry-run
+```
+
+The chatbot sends a catalog of every paper (title, arXiv ID, date, category,
+up to 12 authors) with each turn, so it can answer "which papers do you have?"
+or "who wrote X?". That's fine up to roughly 100 papers; beyond that, route
+library questions to SQL instead.
+
+### Weaviate comparison
+
+The same chunks and Titan vectors are mirrored into a Weaviate collection
+(`Chunk`) so the two search engines can be compared on identical data:
+
+- **Postgres:** full-text search (GIN, `ts_rank_cd`) + pgvector (HNSW) → our RRF.
+- **Weaviate:** one `hybrid` query (native BM25 + vector, fused in the engine),
+  with `alpha` (0 = keyword, 1 = vector) and `relative_score` or `ranked` fusion.
+
+`/backends` shows both top-k lists side by side (`POST /api/compare-backends`),
+and the chat page has a search-engine selector (`backend` on `/api/chat`).
+
+Setup: create a Weaviate Cloud cluster, store its URL and key in SSM
+(`/rag-demo/weaviate-url`, `/rag-demo/weaviate-api-key`), then copy the chunks
+(no re-embedding; object IDs come from `rag_chunks.id`, so re-runs update):
+
+```bash
+python scripts/load_weaviate.py            # --recreate to rebuild the collection
+```
+
+Weaviate Cloud sandboxes only allow the HFresh vector index, not HNSW, so the
+approximate-nearest-neighbour algorithms differ between the two engines. New
+papers are not copied automatically; re-run the script after loading more.
+
 ### Existing PDFs (backfill)
 
 S3 only sends events for new objects. To chunk PDFs that were already in the

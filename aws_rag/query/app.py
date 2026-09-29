@@ -228,14 +228,18 @@ def documents() -> dict:
     try:
         with database() as connection, connection.cursor() as cursor:
             cursor.execute(
-                """SELECT d.id, d.title, d.source, count(c.id)
+                """SELECT d.id, d.title, d.source, count(c.id),
+                          d.arxiv_id, d.authors, d.published, d.primary_category
                    FROM rag_documents d
                    LEFT JOIN rag_chunks c ON c.document_id = d.id
-                   GROUP BY d.id, d.title, d.source ORDER BY d.title"""
+                   GROUP BY d.id ORDER BY d.title"""
             )
             return {
                 "documents": [
-                    {"id": row[0], "title": row[1], "source": row[2], "chunks": row[3]}
+                    {"id": row[0], "title": row[1], "source": row[2], "chunks": row[3],
+                     "arxiv_id": row[4], "authors": row[5] or [],
+                     "published": row[6].isoformat() if row[6] else None,
+                     "primary_category": row[7]}
                     for row in cursor.fetchall()
                 ]
             }

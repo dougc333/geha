@@ -59,7 +59,7 @@
     };
     function suggestQuestion(){
       const selected=documentsById.get($('document').value);
-      $('question').value=suggestedQuestionForTitle(selected?.title);
+      $('question').value=suggestedQuestionForTitle(`${selected?.title} ${selected?.source} ${selected?.arxiv_id}`);
     }
     $('document').addEventListener('change',suggestQuestion);
     $('topk').addEventListener('input',e=>$('topkValue').textContent=e.target.value);

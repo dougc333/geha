@@ -23,6 +23,12 @@ WORKERS = int(os.getenv("EMBED_CONCURRENCY", "8"))  # Titan embeds one text per 
 
 _database_url = None
 
+# rag_documents columns filled from paper metadata (see schema.sql).
+METADATA_COLUMNS = (
+    "arxiv_id", "authors", "published", "updated", "abstract",
+    "primary_category", "categories", "comment", "journal_ref", "doi",
+)
+
 
 def database_url():
     """DATABASE_URL from an SSM SecureString parameter, cached per container."""
@@ -61,13 +67,19 @@ def handler(event, context):
 def process(bucket, key):
     body = s3.get_object(Bucket=bucket, Key=key)["Body"].read().decode()
     chunks = [json.loads(line) for line in body.splitlines() if line.strip()]
+    for chunk in chunks:  # some PDFs yield NUL characters, which Postgres text rejects
+        chunk["content"] = chunk["content"].replace("\x00", "")
     if not chunks:
         raise ValueError(f"empty chunk file {key}")
     chunks.sort(key=lambda c: c["chunk_index"])
 
     document_id = chunks[0]["document_id"]
     source = chunks[0]["source"]
-    title = chunks[0].get("title") or posixpath.splitext(posixpath.basename(source))[0]
+    metadata = next((c["metadata"] for c in chunks if c.get("metadata")), {})
+    # A real title (arXiv metadata or S3 object metadata) replaces a stored one;
+    # the file name is only a fallback for documents seen for the first time.
+    real_title = metadata.get("title") or chunks[0].get("title")
+    fallback_title = posixpath.splitext(posixpath.basename(source))[0]
 
     with ThreadPoolExecutor(max_workers=WORKERS) as pool:
         embeddings = list(pool.map(embed, [c["content"] for c in chunks]))  # keeps order
@@ -76,11 +88,22 @@ def process(bucket, key):
     with psycopg.connect(database_url()) as connection:
         register_vector(connection)
         with connection.cursor() as cursor:
+            # Metadata columns keep their stored values when a re-run has none.
             cursor.execute(
-                """INSERT INTO rag_documents (id, title, source)
-                   VALUES (%s, %s, %s)
-                   ON CONFLICT (id) DO UPDATE SET title = EXCLUDED.title, source = EXCLUDED.source""",
-                (document_id, title, source),
+                f"""INSERT INTO rag_documents (id, title, source, {", ".join(METADATA_COLUMNS)})
+                   VALUES (%(id)s, %(insert_title)s, %(source)s,
+                           {", ".join(f"%({c})s" for c in METADATA_COLUMNS)})
+                   ON CONFLICT (id) DO UPDATE SET
+                       title = COALESCE(%(real_title)s, rag_documents.title),
+                       source = EXCLUDED.source,
+                       {", ".join(f"{c} = COALESCE(EXCLUDED.{c}, rag_documents.{c})" for c in METADATA_COLUMNS)}""",
+                {
+                    "id": document_id,
+                    "source": source,
+                    "insert_title": real_title or fallback_title,
+                    "real_title": real_title,
+                    **{c: metadata.get(c) for c in METADATA_COLUMNS},
+                },
             )
             cursor.execute("DELETE FROM rag_chunks WHERE document_id = %s", (document_id,))
             cursor.executemany(

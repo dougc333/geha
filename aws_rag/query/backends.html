@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Postgres vs Weaviate</title>
+  <style>
+    :root{--ink:#10233e;--muted:#5d6e84;--line:#dce4ec;--paper:#fff;--bg:#eef3f7;--navy:#062f4f;--cyan:#13a8a8;--amber:#f2a93b}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,sans-serif}
+    header{padding:22px clamp(18px,5vw,64px);background:linear-gradient(125deg,#052c4d,#0b5270);color:#fff;display:flex;justify-content:space-between;align-items:end;gap:14px;flex-wrap:wrap}
+    header h1{margin:0;font-size:clamp(24px,3.2vw,38px);letter-spacing:-.03em} header p{margin:6px 0 0;color:#d8ecf2;max-width:820px} header a{color:#bfe9ee;font-weight:600;margin-left:14px}
+    .wrap{max-width:1400px;margin:0 auto;padding:18px 18px 48px}
+    .card{background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 20px rgba(24,49,75,.05)}
+    .how{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}.how .card{padding:14px 18px;font-size:14px}.how h3{margin:0 0 4px;font-size:15px}
+    .controls{padding:16px 18px;display:grid;grid-template-columns:1fr auto;gap:12px 16px;align-items:end;margin-bottom:14px}
+    label{display:block;font-weight:700;font-size:13px;margin-bottom:5px} input[type=text],select{width:100%;border:1px solid #bcc9d5;border-radius:9px;padding:10px;font:inherit;background:#fff;color:var(--ink)}
+    .row{display:flex;gap:18px;flex-wrap:wrap;align-items:center;grid-column:1/-1;font-size:14px}.row label{margin:0;display:flex;gap:8px;align-items:center}
+    .suggest{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.suggest button{border:1px dashed #9fb3c5;background:#f7fafc;color:var(--ink);border-radius:999px;padding:4px 10px;font-size:12px;cursor:pointer}
+    .run{border:0;border-radius:10px;background:var(--cyan);color:#fff;font-weight:800;padding:11px 22px;cursor:pointer;font-size:15px}.run:disabled{opacity:.55;cursor:wait}
+    .summary{padding:12px 16px;margin-bottom:14px;border-left:5px solid var(--amber);font-size:14px}.metric{display:inline-block;background:#e4eff2;border-radius:999px;padding:2px 9px;margin:2px 4px 2px 0;font-size:12px;color:#28535d}
+    .cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}.col{padding:14px}.col h2{margin:0 0 2px;font-size:16px}.col .sub{font-size:12.5px;color:var(--muted);margin-bottom:10px}
+    .hit{border:1px solid var(--line);border-left:6px solid var(--c);border-radius:10px;padding:9px 11px;margin-bottom:9px;cursor:pointer}.hit:hover,.hit.focus{box-shadow:0 0 0 2px var(--c)}.cols.focusing .hit:not(.focus){opacity:.35}
+    .hit .top{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted)}.hit .rank{font-weight:900;color:var(--ink);font-size:14px}
+    .hit .t{font-weight:600;font-size:13px;margin-top:2px}.hit .other{font-size:11.5px;color:#28535d}.hit .snip{font-size:13px;margin-top:4px;max-height:4.8em;overflow:hidden}.hit.focus .snip{max-height:none}
+    .hit pre{white-space:pre-wrap;font-size:11px;color:var(--muted);background:#f5f8fa;padding:6px;border-radius:6px;display:none}.hit.focus pre{display:block}
+    .error{color:#9b2424;background:#fff1f1;border:1px solid #efcaca;padding:12px;border-radius:9px}
+    @media(max-width:820px){.how,.cols,.controls{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <div><h1>Postgres vs Weaviate</h1><p>The same 5,300 chunks and the same Titan vectors, searched two ways. Compare which chunks each engine ranks highest for one question across all papers.</p></div>
+    <nav><a href="/">Retrieval lab</a><a href="/chat">Chat</a></nav>
+  </header>
+  <div class="wrap">
+    <div class="how">
+      <div class="card"><h3>Postgres (Neon)</h3>Three steps we wrote ourselves: <b>full-text search</b> (GIN index, <code>ts_rank_cd</code>), <b>pgvector</b> nearest neighbours (HNSW, cosine), then <b>Reciprocal Rank Fusion</b> of the two top-25 lists (equal weight).</div>
+      <div class="card"><h3>Weaviate</h3>One <b>hybrid</b> query: native <b>BM25</b> plus vector search (HFresh index, cosine), fused inside the engine. <b>alpha</b> sets the balance (0 = keyword only, 1 = vector only); <b>fusion</b> chooses rank-based or normalised-score blending.</div>
+    </div>
+    <section class="card controls">
+      <div><label for="q">Question (searches all papers)</label><input type="text" id="q" maxlength="2000" value="how does dropout prevent overfitting">
+        <div class="suggest" id="suggest"></div></div>
+      <button class="run" id="run">Compare</button>
+      <div class="row">
+        <label>Weaviate alpha <input type="range" id="alpha" min="0" max="1" step="0.1" value="0.5"> <output id="alphaV">0.5</output></label>
+        <label>Fusion <select id="fusion" style="width:auto;padding:5px"><option value="relative_score">relative score</option><option value="ranked">ranked (like RRF)</option></select></label>
+        <label>Top <select id="topk" style="width:auto;padding:5px"><option>5</option><option selected>8</option><option>10</option><option>15</option></select></label>
+      </div>
+    </section>
+    <div id="summary"></div>
+    <section class="cols" id="cols"></section>
+  </div>
+  <script>
+    const $=id=>document.getElementById(id);
+    const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+    const color=id=>`hsl(${(id*137.508)%360} 62% 48%)`;
+    const SUGGEST=['how does dropout prevent overfitting','what is the learning rate schedule in Adam','ResNet-152 top-5 error on ImageNet','which models use residual connections','GAN generator and discriminator objective','BLEU score of the big Transformer on EN-FR'];
+    $('suggest').innerHTML=SUGGEST.map(q=>`<button type="button">${esc(q)}</button>`).join('');
+    $('suggest').addEventListener('click',e=>{if(e.target.tagName==='BUTTON'){$('q').value=e.target.textContent;run()}});
+    $('alpha').addEventListener('input',e=>$('alphaV').textContent=e.target.value);
+
+    async function run(){
+      const payload={query:$('q').value.trim(),alpha:Number($('alpha').value),fusion:$('fusion').value,top_k:Number($('topk').value)};
+      if(payload.query.length<2)return;
+      $('run').disabled=true;$('run').textContent='Comparing…';
+      try{
+        const r=await fetch('/api/compare-backends',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const d=await r.json();
+        if(!r.ok)throw new Error(typeof d.detail==='string'?d.detail:JSON.stringify(d.detail));
+        render(d,payload);
+      }catch(e){$('summary').innerHTML=`<div class="error">${esc(e.message)}</div>`;$('cols').innerHTML=''}
+      finally{$('run').disabled=false;$('run').textContent='Compare'}
+    }
+    function render(d,p){
+      const t=d.timings, pg=t.postgres;
+      $('summary').innerHTML=`<div class="card summary"><b>${d.overlap}</b> of the top ${p.top_k} chunks are the same in both · #1 ${d.same_first?'<b>matches</b>':'<b>differs</b>'}<br>
+        <span class="metric">embed question ${Math.round(t.embed_ms)} ms (shared)</span>
+        <span class="metric">Postgres: full-text ${Math.round(pg.keyword_ms)} + pgvector ${Math.round(pg.vector_ms)} = ${Math.round(pg.total_ms)} ms</span>
+        <span class="metric">Weaviate hybrid ${Math.round(t.weaviate_ms)} ms</span></div>`;
+      const rankIn=(list,id)=>{const i=list.findIndex(h=>h.id===id);return i<0?null:i+1};
+      const col=(name,sub,list,other,otherName,showExplain)=>`<div class="card col"><h2>${name}</h2><div class="sub">${sub}</div>${list.map((h,i)=>{const r=rankIn(other,h.id);
+        return `<div class="hit" style="--c:${color(h.id)}" data-id="${h.id}"><div class="top"><span><span class="rank">#${i+1}</span> · p.${esc(h.page)} · chunk ${h.id}</span><span>${Number(h.score).toFixed(4)}</span></div>
+        <div class="t">${esc(h.title)}</div><div class="other">${r?`${otherName} #${r}`:`not in ${otherName}'s top ${p.top_k}`}</div><div class="snip">${esc(h.snippet)}…</div>${showExplain&&h.explain?`<pre>${esc(h.explain)}</pre>`:''}</div>`}).join('')}</div>`;
+      $('cols').classList.remove('focusing');
+      $('cols').innerHTML=col('Postgres','full-text + pgvector → RRF',d.postgres,d.weaviate,'Weaviate',false)+col('Weaviate',`hybrid · alpha ${p.alpha} · ${p.fusion.replace('_',' ')} fusion (click for score explanation)`,d.weaviate,d.postgres,'Postgres',true);
+    }
+    $('cols').addEventListener('click',e=>{const h=e.target.closest('.hit');if(!h)return;const on=!h.classList.contains('focus');
+      document.querySelectorAll('.hit').forEach(x=>x.classList.toggle('focus',on&&x.dataset.id===h.dataset.id));$('cols').classList.toggle('focusing',on)});
+    $('run').addEventListener('click',run);$('q').addEventListener('keydown',e=>{if(e.key==='Enter')run()});
+  </script>
+</body>
+</html>

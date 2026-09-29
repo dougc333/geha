@@ -44,6 +44,11 @@
       <h2>Papers</h2>
       <ul class="papers" id="papers"><li class="meta">Loading…</li></ul>
       <div class="add">
+        <h2>Search engine</h2>
+        <select id="backend" style="width:100%;border:1px solid #bcc9d5;border-radius:9px;padding:9px;font:inherit"><option value="postgres">Postgres (full-text + pgvector + RRF)</option><option value="weaviate">Weaviate (hybrid)</option></select>
+        <div class="status"><a href="/backends">Compare the two side by side →</a></div>
+      </div>
+      <div class="add">
         <h2>Add an arXiv paper</h2>
         <div class="row"><input id="arxiv" placeholder="2305.14314 or arxiv.org link" aria-label="arXiv ID or link"><button id="addBtn">Add</button></div>
         <div class="status" id="addStatus"></div>
@@ -66,7 +71,8 @@
     async function loadPapers(){
       try{
         const r=await fetch('/api/documents'); const d=await r.json(); if(!r.ok)throw new Error(d.detail||r.statusText);
-        $('papers').innerHTML=d.documents.map(p=>`<li>${esc(p.title)}<div class="meta">${p.chunks} chunks</div></li>`).join('')||'<li class="meta">No papers yet. Add one below.</li>';
+        const byline=p=>{const a=p.authors||[];return [a.length?a[0]+(a.length>1?' et al.':''):null,p.published?.slice(0,4)].filter(Boolean).join(' · ')};
+        $('papers').innerHTML=d.documents.map(p=>`<li>${esc(p.title)}<div class="meta">${esc(byline(p))}${byline(p)?' · ':''}${p.chunks} chunks</div></li>`).join('')||'<li class="meta">No papers yet. Add one below.</li>';
         return d.documents;
       }catch(e){$('papers').innerHTML=`<li class="meta">Couldn't load papers: ${esc(e.message)}</li>`;return []}
     }
@@ -81,7 +87,7 @@
       const body=esc(d.answer).replace(/\[(\d+)\]/g,(m,n)=>d.sources.some(s=>s.n==n)?`<a class="cite" href="#${id}-s${n}">[${n}]</a>`:m);
       const sources=d.sources.map(s=>`<div class="src" id="${id}-s${s.n}"><b>[${s.n}] ${esc(s.title)}</b><span class="meta">page ${esc(s.page??'?')} · chunk ${s.chunk_id}${s.rerank_score!=null?` · rerank ${Number(s.rerank_score).toFixed(3)}`:''}</span><div class="snip">${esc(s.snippet)}…</div></div>`).join('');
       const t=d.timings, ms=k=>t[k]!=null?`${k.replace('_ms','')} ${Math.round(t[k])}ms`:null;
-      const timing=['rewrite_ms','bm25_ms','vector_ms','rerank_ms','generation_ms','total_ms'].map(ms).filter(Boolean).join(' · ');
+      const timing=['rewrite_ms','keyword_ms','vector_ms','embed_ms','weaviate_ms','rerank_ms','generation_ms','total_ms'].map(ms).filter(Boolean).join(' · ');
       const searched=d.standalone_question!==history.at(-1)?.content?`<div class="timing">Searched for: “${esc(d.standalone_question)}”</div>`:'';
       const fb=d.trace_id?`<div class="fb" data-trace="${esc(d.trace_id)}">Helpful? <button data-helpful="true" aria-label="Helpful">👍</button><button data-helpful="false" aria-label="Not helpful">👎</button></div>`:'';
       return body+(sources?`<details><summary>${d.sources.length} sources</summary>${sources}</details>`:'')+searched+`<div class="timing">${timing}</div>`+fb;
@@ -93,7 +99,7 @@
       history.push({role:'user',content:text});
       const pending=addMessage('bot','Searching the papers…'); $('send').disabled=true;
       try{
-        const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history.slice(-20),session_id:sessionId})});
+        const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history.slice(-20),session_id:sessionId,backend:$('backend').value})});
         const d=await r.json(); if(!r.ok)throw new Error(typeof d.detail==='string'?d.detail:JSON.stringify(d.detail));
         pending.innerHTML=renderAnswer(d,'m'+(++turn)); history.push({role:'assistant',content:d.answer});
       }catch(e){pending.classList.add('err');pending.textContent='Something went wrong: '+e.message}
