@@ -248,8 +248,14 @@ def documents() -> dict:
 
 
 @app.post("/api/search")
-@observe(name="lab-search", capture_output=False)
 def search(request: SearchRequest) -> dict:
+    return _search(request)
+
+
+# Traced separately: FastAPI must see the endpoint's own signature, not a wrapper's
+# (with the decorator on the endpoint, it treated `request` as a query parameter).
+@observe(name="lab-search", capture_output=False)
+def _search(request: SearchRequest) -> dict:
     started = time.perf_counter()
     timings: dict[str, float] = {}
     try:
