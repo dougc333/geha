@@ -19,7 +19,7 @@ from botocore.config import Config
 from botocore.exceptions import ClientError
 from fastapi import APIRouter, HTTPException
 from langfuse import observe, propagate_attributes
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 from app import (
     GENERATION_MODEL, RERANK_CANDIDATES, _embed_query, _rerank, converse, database, langfuse
@@ -78,9 +78,22 @@ ANSWER_PROMPT = (
 )
 
 
+MAX_MESSAGE_CHARS = 4000
+
+
 class ChatMessage(BaseModel):
     role: Literal["user", "assistant"]
-    content: str = Field(min_length=1, max_length=4000)
+    content: str = Field(min_length=1, max_length=MAX_MESSAGE_CHARS)
+
+    @model_validator(mode="before")
+    @classmethod
+    def _trim_assistant(cls, data):
+        # The page sends earlier answers back as history, and a library answer
+        # (all 203 titles) is longer than the limit. Only HISTORY_CHARS of each
+        # is used, so trim answers instead of rejecting the whole request.
+        if isinstance(data, dict) and data.get("role") == "assistant" and isinstance(data.get("content"), str):
+            data = {**data, "content": data["content"][:MAX_MESSAGE_CHARS]}
+        return data
 
 
 class ChatRequest(BaseModel):

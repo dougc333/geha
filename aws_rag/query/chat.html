@@ -166,7 +166,7 @@
       try{
         const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history.slice(-20),session_id:sessionId,backend:$('backend').value})});
         const d=await r.json(); if(!r.ok)throw new Error(typeof d.detail==='string'?d.detail:JSON.stringify(d.detail));
-        pending.innerHTML=renderAnswer(d,'m'+(++turn)); history.push({role:'assistant',content:d.answer});
+        pending.innerHTML=renderAnswer(d,'m'+(++turn)); history.push({role:'assistant',content:d.answer.slice(0,1500)}); // the API only reads 1,500 chars of history
       }catch(e){pending.classList.add('err');pending.textContent='Something went wrong: '+e.message}
       finally{$('send').disabled=false;$('input').focus();$('log').scrollTop=$('log').scrollHeight}
     }

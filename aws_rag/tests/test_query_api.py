@@ -49,6 +49,17 @@ class AccessKeyTest(unittest.TestCase):
         self.assertEqual(response.json()["detail"], "The last message must be from the user")
 
 
+class HistoryTest(unittest.TestCase):
+    def test_long_earlier_answer_is_trimmed_not_rejected(self):
+        # A library answer listing all 203 titles came back as history and got a 422.
+        message = chat.ChatMessage(role="assistant", content="x" * 12000)
+        self.assertEqual(len(message.content), chat.MAX_MESSAGE_CHARS)
+
+    def test_long_user_message_is_still_rejected(self):
+        with self.assertRaises(ValueError):
+            chat.ChatMessage(role="user", content="x" * 12000)
+
+
 class RouterTest(unittest.TestCase):
     def route(self, model_text: str, message: str = "tables in BERT") -> dict:
         with mock.patch.object(chat, "converse"), mock.patch.object(chat, "_text", return_value=model_text):
