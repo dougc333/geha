@@ -272,10 +272,57 @@ what's stored. `POST /api/arxiv` writes the sidecar automatically (via
 python scripts/backfill_arxiv_metadata.py --dry-run   # then without --dry-run
 ```
 
-The chatbot sends a catalog of every paper (title, arXiv ID, date, category,
-up to 12 authors) with each turn, so it can answer "which papers do you have?"
-or "who wrote X?". That's fine up to roughly 100 papers; beyond that, route
-library questions to SQL instead.
+Questions about the library itself ("which papers do you have?", "who wrote
+X?") are answered from these columns with SQL; see "Chat routing" below.
+`GET /api/documents` takes the same filters: `author` (whole words, e.g.
+`?author=Kaiming%20He`), `year_from`, `year_to`, `category` (arXiv code, e.g.
+`cs.CV`) and `q` (words in the title or abstract, ranked by relevance).
+
+### Chat routing
+
+Every chat message first goes through a **router**. Questions about the
+library are answered exactly from `rag_documents` with SQL; everything else
+goes through RAG as before.
+
+```
+POST /api/chat → QueryApi Lambda (chat.py)
+  _route(messages)        one Nova Lite call → {"route": "list" | "find" | "content",
+                          filters (author, years, category, title, topic), search_query}
+  ├─ list   → library.find_papers(filters)            "show all titles", "how many papers",
+  │                                                    "papers by Kaiming He", "who wrote Adam?"
+  ├─ find   → library.find_papers(topic=…) over        "which papers are about object detection?",
+  │           title + abstract (Postgres full-text)    "anything on GANs?"
+  └─ content → search → rerank → Nova Lite answer      "what is dropout?", "how was Orca evaluated?"
+```
+
+- **List and find answers are built by code, not written by the model.** They're
+  complete (all 103 titles, not the ~10 a model will reproduce), carry no invented
+  citations, and take about 1.5–2.5 s. The chat page renders them as a numbered
+  list linking to arXiv.
+- **The router replaces the old rewrite step:** its `search_query` is the
+  standalone version of a follow-up, so a content turn still makes one extra
+  model call. The router also runs on the first turn, adding ~0.4 s there.
+- **The paper catalog is no longer in the answer prompt,** saving ~6,000 input
+  tokens on every content question at 100 papers.
+- **Topic search** matches the router's `topic` against titles and arXiv
+  abstracts. The router adds synonyms ("GAN or generative adversarial"); all
+  words are required first, then any word if nothing matches.
+- **If the router's JSON can't be parsed,** the message falls back to `content`,
+  so the worst case is today's RAG behaviour. Each decision is recorded on the
+  Langfuse trace (`route` generation, `route` metadata on `chat-turn`).
+- **Mixed questions** ("summarise the papers by Kaiming He") go to `content`;
+  answering them needs a list-then-retrieve step that isn't built.
+
+**What implements the router:** a function (`_route`, plus `_answer_library`
+and `library.py`) inside the existing QueryApi Lambda, not a separate Lambda.
+It needs the same database connection, Bedrock client and request context, and
+a Lambda-to-Lambda hop would add network latency and a possible second cold
+start to a ~0.4 s decision. It would be worth splitting out if routes needed
+different compute or scaling (Step Functions or separate Lambdas), were owned
+by different teams (separate services behind API Gateway paths), or if a model
+should orchestrate multi-step tool use (Amazon Bedrock Agents with SQL and
+search as tools: more capable for mixed questions, but slower, costlier and
+less predictable).
 
 ### Weaviate comparison
 

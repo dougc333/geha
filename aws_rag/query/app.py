@@ -16,6 +16,7 @@ from langfuse import get_client, observe
 from pgvector.psycopg import register_vector
 from pydantic import BaseModel, Field
 
+import library
 from rag_core import bm25_rank, reciprocal_rank_fusion
 
 
@@ -78,14 +79,41 @@ class SearchRequest(BaseModel):
     top_k: int = Field(default=5, ge=1, le=10)
 
 
-@contextmanager
-def database():
+# One connection per Lambda container, reused across requests. Opening a new
+# TLS connection to Neon cost ~1 s per request. A Lambda container handles one
+# request at a time, so sharing it is safe. Autocommit: every query here is a
+# read, so no transaction is left open between requests.
+_connection: psycopg.Connection | None = None
+_last_used = 0.0
+IDLE_CHECK_SECONDS = 60  # Neon may drop idle connections; ping before reusing one
+
+
+def _connect() -> psycopg.Connection:
     url = os.getenv("DATABASE_URL")
     if not url:
         raise RuntimeError("DATABASE_URL is not configured")
-    with psycopg.connect(url) as connection:
-        register_vector(connection)
-        yield connection
+    connection = psycopg.connect(url, autocommit=True)
+    register_vector(connection)
+    return connection
+
+
+@contextmanager
+def database():
+    global _connection, _last_used
+    if _connection is not None and not _connection.closed and time.monotonic() - _last_used > IDLE_CHECK_SECONDS:
+        try:
+            _connection.execute("SELECT 1")
+        except psycopg.Error:
+            _connection.close()
+    if _connection is None or _connection.closed or _connection.broken:
+        _connection = _connect()
+    try:
+        yield _connection
+    except psycopg.OperationalError:
+        _connection.close()  # connection lost mid-request; reconnect next time
+        raise
+    finally:
+        _last_used = time.monotonic()
 
 
 def _all_chunks(connection, document_id: str) -> list[dict]:
@@ -224,32 +252,29 @@ def health() -> dict:
 
 
 @app.get("/api/documents")
-def documents() -> dict:
+def documents(author: str | None = None, year_from: int | None = None, year_to: int | None = None,
+              category: str | None = None, q: str | None = None) -> dict:
+    """Papers in the library with their metadata. Optional filters: author
+    (partial name), year_from / year_to (published year), category (arXiv,
+    e.g. cs.CV) and q (words in the title or abstract, ranked by relevance)."""
     try:
-        with database() as connection, connection.cursor() as cursor:
-            cursor.execute(
-                """SELECT d.id, d.title, d.source, count(c.id),
-                          d.arxiv_id, d.authors, d.published, d.primary_category
-                   FROM rag_documents d
-                   LEFT JOIN rag_chunks c ON c.document_id = d.id
-                   GROUP BY d.id ORDER BY d.title"""
-            )
-            return {
-                "documents": [
-                    {"id": row[0], "title": row[1], "source": row[2], "chunks": row[3],
-                     "arxiv_id": row[4], "authors": row[5] or [],
-                     "published": row[6].isoformat() if row[6] else None,
-                     "primary_category": row[7]}
-                    for row in cursor.fetchall()
-                ]
-            }
+        with database() as connection:
+            return {"documents": library.find_papers(
+                connection, author=author, year_from=year_from, year_to=year_to,
+                category=category, topic=q)}
     except Exception as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
 
 
 @app.post("/api/search")
-@observe(name="lab-search", capture_output=False)
 def search(request: SearchRequest) -> dict:
+    return _search(request)
+
+
+# Traced separately: FastAPI must see the endpoint's own signature, not a wrapper's
+# (with the decorator on the endpoint, it treated `request` as a query parameter).
+@observe(name="lab-search", capture_output=False)
+def _search(request: SearchRequest) -> dict:
     started = time.perf_counter()
     timings: dict[str, float] = {}
     try:
