@@ -56,5 +56,31 @@ class TableChunksTest(unittest.TestCase):
                          "| name | score |\n|---|---|\n| a | 1 |")
 
 
+class FigureFilterTest(unittest.TestCase):
+    def test_captioned_wide_strips_are_kept(self):
+        # YOLO Figure 1 (475x98) and Atari's screenshots (794x103) used to be dropped.
+        self.assertTrue(docling_chunks.keep_figure(475, 98, "Figure 1: The YOLO Detection System."))
+        self.assertTrue(docling_chunks.keep_figure(794, 103, "Figure 1: Screen shots from five Atari games"))
+
+    def test_small_uncaptioned_images_are_skipped(self):
+        self.assertFalse(docling_chunks.keep_figure(303, 41, ""))    # a rule or logo strip
+        self.assertFalse(docling_chunks.keep_figure(73, 147, ""))
+        self.assertTrue(docling_chunks.keep_figure(131, 252, ""))    # big enough without a caption
+
+
+class CarryDescriptionsTest(unittest.TestCase):
+    def fig(self, file, page, caption, **extra):
+        return {"file": file, "page": page, "caption": caption, "width": 400, "height": 300, **extra}
+
+    def test_descriptions_follow_the_figure_not_the_file_name(self):
+        old = [self.fig("p006_f01.png", 6, "Figure 4: Error analysis.", description="pie charts")]
+        # A newly kept figure on page 1 shifts the numbering: page 6 is now f02.
+        new = [self.fig("p001_f01.png", 1, "Figure 1: The YOLO Detection System."),
+               self.fig("p006_f02.png", 6, "Figure 4: Error analysis.")]
+        self.assertEqual(docling_chunks.carry_descriptions(old, new), 1)
+        self.assertNotIn("description", new[0])
+        self.assertEqual(new[1]["description"], "pie charts")
+
+
 if __name__ == "__main__":
     unittest.main()
