@@ -1,0 +1,43 @@
+# Local HAPI FHIR R4 server with Postgres, for synthetic (Synthea) test data only.
+#   printf "HAPI_DB_USER=hapi\nHAPI_DB_PASSWORD=$(openssl rand -hex 16)\n" > .env   # once; git-ignored
+#   docker compose up -d        # FHIR base: http://localhost:8080/fhir
+#   docker compose down         # stop (data kept in the hapi-db volume)
+#   docker compose down -v      # stop and delete all data
+services:
+  hapi:
+    image: hapiproject/hapi:latest
+    ports:
+      - "127.0.0.1:8080:8080"   # localhost only
+    environment:
+      spring.datasource.url: jdbc:postgresql://db:5432/hapi
+      spring.datasource.username: ${HAPI_DB_USER}
+      spring.datasource.password: ${HAPI_DB_PASSWORD}
+      spring.datasource.driverClassName: org.postgresql.Driver
+      spring.jpa.properties.hibernate.dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgresDialect
+      hapi.fhir.fhir_version: R4
+      # Synthea bundles reference Practitioner/Organization/Location by conditional
+      # URLs and are loaded as transactions; allow large bundles and external refs.
+      hapi.fhir.allow_external_references: "true"
+      hapi.fhir.bulk_export_enabled: "false"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: hapi
+      POSTGRES_USER: ${HAPI_DB_USER}
+      POSTGRES_PASSWORD: ${HAPI_DB_PASSWORD}
+    volumes:
+      - hapi-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hapi -d hapi"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+volumes:
+  hapi-db:

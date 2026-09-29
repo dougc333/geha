@@ -1,0 +1,30 @@
+# langcare-mcp-fhir config for the local HAPI server (synthetic Synthea data only).
+# Based on configs/config.example.yaml in github.com/langcare/langcare-mcp-fhir.
+#   bin/langcare-mcp-fhir -config /Users/dc/geha/hapi/langcare-config.yaml   (build: see README)
+
+fhir_server:
+  provider: "generic"
+  base_url: "http://localhost:8080/fhir"   # docker compose up -d (this folder)
+  auth:
+    type: "none"   # local test server, no login; real EMRs use epic/cerner/OAuth providers
+  timeout: 30s
+
+mcp:
+  name: "LangCare MCP FHIR (local HAPI)"
+  version: "2.0.0"
+
+transport:
+  stdio: true      # runs as a local process started by the MCP client; no MCP auth needed
+  http:
+    enabled: false # HAPI already uses port 8080
+
+logging:
+  level: "info"
+  format: "json"
+  scrub_phi: true  # keep on, even for synthetic data
+
+security:
+  rate_limit:
+    enabled: true
+    rate: 100
+    burst: 200
