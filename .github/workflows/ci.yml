@@ -79,7 +79,7 @@ jobs:
         run: |
           uv python install 3.12
           uv run --no-project --python 3.12 \
-            --with-requirements aws_rag/query/requirements.txt --with boto3 --with httpx \
+            --with-requirements aws_rag/query/requirements.txt --with boto3 --with httpx --with pymupdf \
             python -m unittest discover -s aws_rag/tests -v
 
   langgraph-typescript:

@@ -72,9 +72,31 @@ class ProcessTest(unittest.TestCase):
         self.assertEqual(keys, [f"figures/{DOC}/p003_f01.png", f"figures/{DOC}/p005_f02.png",
                                 f"chunks/{DOC}.jsonl"])
 
+    def test_chunk_keeps_description_first_output(self):
+        chunk = describe_figures.figure_chunk("A Paper", {
+            "page": 4, "caption": "Figure 3: AUC.", "pdf_text": "Test AUC | global eps=0.3",
+            "description": "Description: A line plot; global eps=0.3 is lowest.\n\nText in figure: Test AUC"})
+        # The raw PDF text is only a hint to the model; it isn't pasted into the chunk.
+        self.assertEqual(chunk, 'Figure (page 4) from "A Paper": Figure 3: AUC.\n'
+                                "Description: A line plot; global eps=0.3 is lowest.\n\nText in figure: Test AUC")
+
+    def test_pdf_text_is_passed_as_a_hint(self):
+        client = mock.Mock()
+        client.converse.return_value = {"output": {"message": {"content": [{"text": "Description: A plot."}]}},
+                                        "usage": USAGE}
+        with mock.patch.object(describe_figures, "bedrock", client):
+            describe_figures.describe(b"png", "A Paper", 4, "Figure 3", pdf_text="Test AUC")
+            prompt = client.converse.call_args.kwargs["messages"][0]["content"][1]["text"]
+            self.assertIn("from the PDF (exact spelling, not in layout order): Test AUC", prompt)
+            self.assertIn("Leave out axis tick", prompt)
+
+            describe_figures.describe(b"png", "A Paper", 4, "Figure 3")  # no text layer
+            prompt = client.converse.call_args.kwargs["messages"][0]["content"][1]["text"]
+            self.assertNotIn("from the PDF", prompt)
+
     def test_chunk_without_caption_or_text_section(self):
         chunk = describe_figures.figure_chunk("A Paper", {"page": 2, "caption": "", "description": "A plot."})
-        self.assertEqual(chunk, 'Figure (page 2) from "A Paper"\nDescription: A plot.')
+        self.assertEqual(chunk, 'Figure (page 2) from "A Paper"\nDescription: A plot.')  # prefix added
 
 
 if __name__ == "__main__":

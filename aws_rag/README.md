@@ -676,11 +676,19 @@ Distillation, the deep-learning survey) have none. Retrieval is unchanged
 (all 62: 0.77 / 0.95 / 0.85); figure answers 6/9 (f06 flipped: see below),
 tables 11/13. Results: `evals/results_figures_v2.md`, `evals/answers_figures_v2.json`.
 
-Known issue: 73 descriptions (3.5%) are degenerate. Nova Lite transcribed the
-labels, then repeated empty " | " separators until the token limit and never
-wrote the description. XGBoost's AUC plot (f06) is one, so the model guesses
-which curve is lowest, and its answer changes between runs. They can be
-re-described with `describe_figures.py --redo --files …`, e.g. with Nova Pro.
+**Degenerate descriptions fixed (same day).** 73 descriptions (3.5%) had
+looped: Nova Lite transcribed every axis tick, then repeated empty " | "
+separators until the token limit and never wrote the description (e.g.
+XGBoost's AUC plot, f06). The prompt now asks for the **description first**,
+then the text **grouped by panel**, without axis ticks and at most 80 items.
+`docling_chunks.py` also reads the words inside each figure's box from the PDF
+text layer (`pdf_text`, 57% of figures have one), passed to the model as a
+spelling hint only: pasted into the chunk, it lost which pie chart a value
+belonged to (f02 dropped from 3/3 to 1/3 in a test). Re-describing the 73 plus
+the eval-page figures (80, $0.0096) left 0 degenerate; on the 9 figure questions
+(3 runs each, the page's figure chunks as sources) 20/27 → 24/27 (f06 and f07
+fixed; f08 still misses). `reimage.md` lists the 73; `textfigquery.md` has a
+text query and a figure query for each of the 80 re-described figures.
 
 ### Existing PDFs (backfill)
 
@@ -756,7 +764,7 @@ presigned figure URLs). CI runs them in the `aws-rag` job.
 
 ```bash
 uv run --no-project --python 3.12 --with-requirements query/requirements.txt \
-  --with boto3 --with httpx python -m unittest discover -s tests
+  --with boto3 --with httpx --with pymupdf python -m unittest discover -s tests
 ```
 
 Retrieval and answer quality need the live stack: see `evals/`.
