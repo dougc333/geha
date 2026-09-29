@@ -502,6 +502,40 @@ What it shows (103 papers):
   which favours keyword search. Timings in `results.md` are from a laptop, not
   the Lambda; a retriever shared by several setups is timed once (0 ms rows).
 
+### Tables: Docling pilot
+
+The chunker flattens each page's text, so a results table becomes a run of
+numbers without rows or columns. `local_ingest/docling_chunks.py` (run on a laptop
+with Docling from `/Users/dc/geha/.venv`, OCR off for born-digital PDFs) instead
+writes text chunks plus **one chunk per table**: "Table N: caption" and the table
+as compact Markdown, split by rows with the header repeated if it's over ~4,000
+characters. It produces the same chunk-file format with the same `document_id`
+(the PDF's SHA-256), so uploading to `s3://<chunks bucket>/chunks/` replaces a
+paper's flat chunks through the normal embedder. It takes 2–13 s per paper.
+
+Pilot: 20 of the most-cited papers (≤ 30 pages; 136 tables). 13 table questions
+(`type: "table"` in `evals/questions.jsonl`, from `evals/generate_table_questions.py`)
+each ask for one value in a table. `evals/answer_check.py` asks the chatbot's
+full content path and checks the answer contains the gold value.
+
+| Chatbot setup (BM25 + vector + rerank) | Flat chunks | Docling chunks |
+|---|---|---|
+| Table questions: **answer accuracy** | 8/13 = 0.62 | **11/13 = 0.85** |
+| Table questions: hit@1 / hit@5 / MRR@10 | 0.54 / 0.85 / 0.65 | **0.85 / 0.92 / 0.86** |
+| Other 40 questions: hit@1 / hit@5 / MRR@10 | 0.78 / 0.93 / 0.84 | 0.80 / 0.93 / 0.85 |
+
+With flat chunks the right page was usually retrieved, but the model read the
+wrong number off it (BERT-Large SWAG 86.3 instead of 86.6; FCN-16s pixel
+accuracy 78.6 instead of 85.2). Docling fixed those. The two remaining misses
+pick the wrong row or column of a wide table. Docling occasionally mistakes an
+author block for a table; those questions were dropped.
+
+Notes: papers converted this way have `source = docling:<file>` in
+`rag_documents`. Re-uploading such a PDF to the raw bucket would re-chunk it flat
+and overwrite the Docling version. Weaviate needs `scripts/load_weaviate.py` after
+re-chunking. Results: `evals/results_tables_{flat,docling}.md`,
+`evals/answers_tables_{flat,docling}.json`, `evals/results_docling_pilot.md`.
+
 ### Existing PDFs (backfill)
 
 S3 only sends events for new objects. To chunk PDFs that were already in the
