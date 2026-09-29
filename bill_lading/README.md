@@ -24,6 +24,50 @@ expected-field recall, not character-error rate or complete layout fidelity.
 - [Machine-readable results](paddle_vs_gpt4o_run_20260927T192115Z/comparison_results.json)
 - [LangGraph benchmark program](langgraph_paddle_vs_chat5.py)
 
+## Field-level accuracy: Claude vs GPT-4o vs PaddleOCR-VL
+
+All three engines score 79/79 on the recall metric above, which only checks that
+each expected string appears somewhere in the block after removing case, spaces
+and punctuation. Field-level accuracy is stricter: a field counts only if its
+value appears **exactly** (case, punctuation, decimal points and signs kept) and
+**as its own field**, not run together with the neighbouring text. Quote style
+(`'` vs `"`) is treated as equal, because the ground truth has `'TO ORDER'` where
+all three engines read `"TO ORDER"`.
+
+| Block | Fields | Claude Opus 5.5 | GPT-4o | PaddleOCR-VL |
+|---|---:|---:|---:|---:|
+| 1. Header (carrier, B/L no.) | 7 | 7/7 (100%) | 7/7 (100%) | 7/7 (100%) |
+| 2. Parties & references | 24 | 24/24 (100%) | 24/24 (100%) | **9/24 (38%)** |
+| 3. Vessel & ports | 6 | 6/6 (100%) | 6/6 (100%) | **0/6 (0%)** |
+| 4. Particulars notice | 1 | 1/1 (100%) | 1/1 (100%) | 1/1 (100%) |
+| 5. Cargo headers | 5 | 5/5 (100%) | 5/5 (100%) | 5/5 (100%) |
+| 6. Cargo table | 23 | 23/23 (100%) | 23/23 (100%) | 23/23 (100%) |
+| 7. Charges & packages | 6 | 6/6 (100%) | 6/6 (100%) | 6/6 (100%) |
+| 8. Issue & signature | 7 | 7/7 (100%) | 7/7 (100%) | **1/7 (14%)** |
+| **Total** | **79** | **79/79 (100%)** | **79/79 (100%)** | **52/79 (65.8%)** |
+| Latency, 8 blocks | | 35.2 s | 14.9 s | 2.5 s |
+
+- **PaddleOCR-VL** reads every character correctly, but in `Table Recognition:`
+  mode it joins a cell's lines without a space, so labels and values run together
+  ("OCEAN VESSEL / VOYAGE**MERIDIAN** LABREA / 124N", "SHIPPER**FRUTAS** DEL SOL
+  S.A.**Av.** de los Incas…") and can't be extracted as fields. This affects the
+  label-over-value boxes in blocks 2, 3 and 8; blocks run in `OCR:` mode and the
+  cargo table are unaffected. `OCR:` mode for those blocks, or parsing the table
+  output with a break per line, may recover them (not tested).
+- **Claude Opus 5.5 and GPT-4o** tie: no field errors on this page, and no
+  decimal-point or sign errors from any engine; every value that occurs twice
+  (one per container) is present twice. The remaining differences are layout:
+  in block 6 GPT-4o used the value `MRDN4455667` as a heading and transcribed the
+  printed underline; Claude returned five clean columns.
+- One page, 79 fields, one run per engine: enough to show Paddle's field-boundary
+  problem, too small to rank Claude against GPT-4o.
+
+Sources: Claude from [`claude_run_20260929T220854Z`](claude_run_20260929T220854Z/README_claude.md)
+([`claude_block_ocr.py`](claude_block_ocr.py): same eight block images and the same
+instructions, cell counts and block-6 hint as GPT, Claude API, effort `medium`,
+~$0.09); GPT-4o and PaddleOCR-VL from
+[`paddle_vs_gpt4o_run_20260927T192115Z`](paddle_vs_gpt4o_run_20260927T192115Z/comparison_results.json).
+
 # Reproduction notes
 
 The full page was rendered at 144 DPI, producing a 2136×3584 PNG. Every block in `bill_of_lading_alt_1_ocr_iterations.json` is defined against that image using top-left `x, y, width, height` coordinates and half-open bounds.
