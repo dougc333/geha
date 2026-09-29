@@ -22,3 +22,17 @@ CREATE INDEX IF NOT EXISTS rag_chunks_document_idx
 
 CREATE INDEX IF NOT EXISTS rag_chunks_embedding_hnsw_idx
     ON rag_chunks USING hnsw (embedding vector_cosine_ops);
+
+-- Paper metadata, mostly from the arXiv API (NULL for PDFs without it). Safe
+-- to re-run on an existing database.
+ALTER TABLE rag_documents
+    ADD COLUMN IF NOT EXISTS arxiv_id text,
+    ADD COLUMN IF NOT EXISTS authors text[],
+    ADD COLUMN IF NOT EXISTS published date,
+    ADD COLUMN IF NOT EXISTS updated date,
+    ADD COLUMN IF NOT EXISTS abstract text,
+    ADD COLUMN IF NOT EXISTS primary_category text,
+    ADD COLUMN IF NOT EXISTS categories text[],
+    ADD COLUMN IF NOT EXISTS comment text,
+    ADD COLUMN IF NOT EXISTS journal_ref text,
+    ADD COLUMN IF NOT EXISTS doi text;

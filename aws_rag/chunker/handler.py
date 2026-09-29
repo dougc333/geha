@@ -33,6 +33,15 @@ def handler(event, context):
     return {"batchItemFailures": failures}  # retry only the failed messages
 
 
+def sidecar(bucket, key):
+    """Paper metadata stored next to the PDF as <name>.json (e.g. from arXiv), if any."""
+    try:
+        body = s3.get_object(Bucket=bucket, Key=key.rsplit(".", 1)[0] + ".json")["Body"].read()
+    except s3.exceptions.NoSuchKey:
+        return {}
+    return json.loads(body)
+
+
 def process(bucket, key):
     obj = s3.get_object(Bucket=bucket, Key=key)
     data = obj["Body"].read()
@@ -40,6 +49,8 @@ def process(bucket, key):
     # Optional display title (set by the chatbot's arXiv loader, URL-quoted
     # because S3 metadata must be ASCII); the embedder falls back to the file name.
     title = urllib.parse.unquote(obj.get("Metadata", {}).get("title", ""))
+    metadata = sidecar(bucket, key)
+    title = metadata.get("title") or title
     out_key = f"{OUT_PREFIX}{doc_id}.jsonl"
 
     lines, index = [], 0
@@ -59,6 +70,10 @@ def process(bucket, key):
 
     if not lines:
         raise ValueError(f"no extractable text in {key} (scanned? use Textract)")
+    if metadata:  # once per document, on the first chunk, for the embedder
+        first = json.loads(lines[0])
+        first["metadata"] = metadata
+        lines[0] = json.dumps(first)
     s3.put_object(
         Bucket=OUT_BUCKET,
         Key=out_key,
