@@ -710,13 +710,14 @@ Postgres 18 with pgvector):
 ```bash
 aws s3 cp s3://<chunks bucket>/backups/<file>.dump .
 export TARGET_URL='postgresql://…'          # the new database
-psql "$TARGET_URL" -c 'CREATE EXTENSION IF NOT EXISTS vector'
+psql "$TARGET_URL" -c 'CREATE EXTENSION IF NOT EXISTS vector; CREATE SCHEMA IF NOT EXISTS teaching'
 pg_restore --no-owner --no-privileges -n public -n teaching \
   --dbname="$TARGET_URL" <file>.dump
 ```
 
 Then point `/rag-demo/database-url` at the new database and redeploy (or wait
-for the Lambdas to reconnect). `-n public -n teaching` skips `neon_auth`, a
+for the Lambdas to reconnect). `-n public -n teaching` skips `neon_auth` (and, with `-n`, pg_restore doesn't create
+the `teaching` schema, hence the `CREATE SCHEMA`), a
 Neon-managed schema that the new project creates itself. Tables load before
 triggers and indexes are created, so the BM25 trigger doesn't duplicate
 `rag_terms`; the HNSW vector index is rebuilt during restore (a few minutes).
