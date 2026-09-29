@@ -348,6 +348,72 @@ Weaviate Cloud sandboxes only allow the HFresh vector index, not HNSW, so the
 approximate-nearest-neighbour algorithms differ between the two engines. New
 papers are not copied automatically; re-run the script after loading more.
 
+### Performance
+
+**Postgres connection reuse.** The query Lambda reuses one Postgres connection
+between requests (`database()` in `query/app.py`) instead of opening a new TLS
+connection to Neon for each one. It cuts ~1 s from every chat message (content
+questions ~5 s → ~4 s) and makes the Postgres-vs-Weaviate timing comparison
+fair. After 60 s idle it pings the connection first, and it reconnects if Neon
+has dropped it.
+
+**Where the time goes now.** The Postgres-vs-Weaviate comparison is fair:
+about 310 ms vs 160 ms, and the gap that remains is real query time. The first
+request after idle is still slow (~6 s) while Neon wakes up and the connection
+opens. In a content answer, most of the time goes to rerank (~1 s) and writing
+the answer (~1–1.8 s), not retrieval.
+
+| Step (warm) | Time |
+|---|---|
+| Route (Nova Lite) | ~0.5 s |
+| Keyword + vector search (Postgres) | ~0.3–0.5 s |
+| Rerank (Amazon Rerank) | ~1 s |
+| Answer (Nova Lite) | ~1–1.8 s |
+| **Content question, total** | **~3–3.8 s** |
+| Library question (route + SQL), total | ~0.75 s |
+
+### Retrieval eval
+
+`evals/` measures how often retrieval finds the page that answers a question.
+
+- `evals/generate_questions.py` builds `evals/questions.jsonl`: 40 questions
+  (20 about specific facts, 20 paraphrasing a concept), each from a different
+  paper, written by Nova Lite from one chunk and kept only if its evidence quote
+  appears verbatim on that page. It skips reference lists, questions about
+  citations, and questions that don't name their subject; `--replace q03,q17`
+  regenerates individual questions.
+- `evals/run_eval.py` runs every question through each setup using the deployed
+  query code (`chat.keyword_search`, `chat.vector_search`, `app._rerank`,
+  `weaviate_store.hybrid`), and writes `evals/results.md` and `evals/results.json`
+  (every ranking). About $0.08 per run, mostly reranking.
+
+Results on 2026-09-29 (page hit@5 = the answer's page is in the top 5 chunks):
+
+| Setup | hit@1 | hit@5 | MRR@10 | fact hit@5 | paraphrase hit@5 |
+|---|---|---|---|---|---|
+| Postgres keyword (full-text) | 0.28 | 0.55 | 0.39 | 0.70 | 0.40 |
+| Postgres vector | 0.55 | 0.80 | 0.65 | 0.85 | 0.75 |
+| Postgres hybrid (RRF) | 0.57 | 0.78 | 0.66 | 0.80 | 0.75 |
+| **Postgres hybrid + rerank (chatbot default)** | 0.75 | 0.85 | 0.79 | 0.85 | 0.85 |
+| Weaviate BM25 (alpha 0) | 0.62 | 0.85 | 0.72 | 0.95 | 0.75 |
+| Weaviate hybrid (alpha 0.5) | 0.60 | 0.90 | 0.71 | 0.95 | 0.85 |
+| Weaviate vector (alpha 1) | 0.55 | 0.80 | 0.65 | 0.85 | 0.75 |
+| **Weaviate hybrid + rerank** | 0.82 | 0.95 | 0.88 | 0.95 | 0.95 |
+
+What it shows:
+
+- **Postgres full-text ranking is the weak link.** Weaviate's true BM25 finds
+  the page for 85% of questions; Postgres `ts_rank_cd` for 55%. Because the
+  keyword list is weak, Postgres hybrid (0.78) is no better than vector alone
+  (0.80): fusion adds noise instead of the exact-term matches it should.
+- **Vector search is identical in both** (0.80) because the vectors are the same;
+  the engines differ in keyword search and fusion.
+- **The reranker is worth its ~1 s:** +7 to +22 points of hit@1 on both engines.
+- **Caveats:** 40 questions, so one question is 2.5 points and differences under
+  ~5 points are noise. Generated questions tend to reuse the page's wording,
+  which favours keyword search. Timings in `results.md` are from a laptop, not
+  the Lambda.
+
 ### Existing PDFs (backfill)
 
 S3 only sends events for new objects. To chunk PDFs that were already in the
