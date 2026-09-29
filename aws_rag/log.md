@@ -227,19 +227,23 @@ reads it from SSM. The key was pasted into the chat later; rotation declined.
   - Results: tables 0.62 → 0.85 correct; ordinary questions hit@5 unchanged
     (0.93) but hit@1 0.78 → 0.72. Partly a chunker flaw: **figure captions and
     footnotes were dropped** (q21's answer is a figure caption).
-- **In progress:** a re-conversion that keeps captions and footnotes (only
-  page headers/footers dropped), then re-embedding, Weaviate re-sync and a
-  final eval. The README's top-of-page table will be updated with the result.
+- **v2, captions and footnotes kept** (only page headers/footers dropped):
+  10,988 chunks. The eval run hit an expired AWS session partway and was re-run
+  after `aws login`. Final: table answers **0.85**, table hit@1/hit@5/MRR
+  **0.85 / 1.00 / 0.90**, ordinary questions 0.75 / 0.93 / 0.83 (flat was
+  0.78 / 0.93 / 0.84, within noise). q21 is back at rank 1.
 
 ---
 
 ## Current state (2026-09-29)
 
 - **Papers:** 202, most-cited ML/AI, with arXiv metadata; Docling chunks
-  (tables as Markdown chunks); ~10,230 chunks in Neon, mirrored in Weaviate.
+  (tables as Markdown chunks, captions and footnotes kept); 10,988 chunks in
+  Neon, mirrored in Weaviate.
 - **Chatbot:** router → SQL library answers, or BM25 (`rag_terms`) + pgvector →
   RRF → Amazon Rerank → Nova Lite with citations. ~2.4–3.9 s per answer.
-- **Quality:** ordinary questions hit@5 0.93; table answers 85% correct.
+- **Quality:** ordinary questions hit@5 0.93; table questions hit@5 1.00 and
+  85% of table answers correct.
 - **Pages:** `/` retrieval lab, `/chat`, `/backends`, `/docs` (Swagger); API
   key required on `/api/*`.
 - **Tracing:** Langfuse (EU), with costs, sessions and feedback.
@@ -260,7 +264,6 @@ reads it from SSM. The key was pasted into the chat later; rotation declined.
 
 ## Open items
 
-- Finish the caption-preserving Docling run, re-eval, and update the README.
 - Storage: 319 MB of Neon's free 0.5 GB; the remaining 100 downloaded papers
   would need a paid plan or trimming.
 - The Weaviate sandbox expires ~14 days after creation; it's optional now.

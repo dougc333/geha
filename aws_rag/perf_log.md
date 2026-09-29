@@ -276,10 +276,23 @@ score became 11/13.
 | Table hit@1 / hit@5 / MRR@10 | 0.54 / 0.85 / 0.65 | 0.85 / 0.92 / 0.86 |
 | Other 40: hit@1 / hit@5 / MRR@10 | 0.78 / 0.93 / 0.84 | 0.72 / 0.93 / 0.80 |
 
-The drop in hit@1 on ordinary questions is partly a chunker flaw: figure
+The drop in hit@1 on ordinary questions was partly a chunker flaw: figure
 captions and footnotes were dropped from the text (q21's answer is a figure
-caption; its rank went 1 → 4). A re-conversion that keeps them is in progress;
-this section will get its results.
+caption; its rank went 1 → 4).
+
+**Docling v2 (captions and footnotes kept; only page headers/footers dropped),
+202 papers, 10,988 chunks:**
+
+| Chatbot setup | Flat | Docling v1 | Docling v2 |
+|---|---|---|---|
+| Table answers correct | 0.62 | 0.85 | **0.85** |
+| Table hit@1 / hit@5 / MRR@10 | 0.54 / 0.85 / 0.65 | 0.85 / 0.92 / 0.86 | **0.85 / 1.00 / 0.90** |
+| Other 40: hit@1 / hit@5 / MRR@10 | 0.78 / 0.93 / 0.84 | 0.72 / 0.93 / 0.80 | **0.75 / 0.93 / 0.83** |
+
+q21 is back at rank 1. Weaviate + rerank on the same chunks: tables
+0.85 / 1.00 / 0.89, ordinary 0.75 / 0.93 / 0.83. BM25 alone improved to
+0.68 / 0.91 / 0.76 over all 53 questions. The v2 re-conversion took about the
+same time as v1 (~35 minutes); upload, re-embedding and Weaviate sync ~12 minutes.
 
 ### 4.5 Failure: an oversized table chunk
 
@@ -333,7 +346,8 @@ the image-only 2203.00667 (no text); T5 (section 4.5).
 | 103 papers, 5,300 chunks, before `rag_terms` | ~100 MB |
 | + `rag_terms` (656k rows, 70 MB) | 171 MB |
 | 202 papers, 10,167 chunks | **319 MB** of the free plan's 0.5 GB |
-| After Docling (10,230 chunks) | `rag_terms` 1,246,705 rows |
+| After Docling v1 (10,230 chunks) | `rag_terms` 1,246,705 rows |
+| After Docling v2 (10,988 chunks, captions/footnotes kept) | |
 
 The remaining ~100 downloaded papers would exceed the free plan.
 
