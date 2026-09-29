@@ -67,6 +67,8 @@ def handler(event, context):
 def process(bucket, key):
     body = s3.get_object(Bucket=bucket, Key=key)["Body"].read().decode()
     chunks = [json.loads(line) for line in body.splitlines() if line.strip()]
+    for chunk in chunks:  # some PDFs yield NUL characters, which Postgres text rejects
+        chunk["content"] = chunk["content"].replace("\x00", "")
     if not chunks:
         raise ValueError(f"empty chunk file {key}")
     chunks.sort(key=lambda c: c["chunk_index"])

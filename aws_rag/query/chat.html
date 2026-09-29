@@ -82,7 +82,7 @@
       const body=esc(d.answer).replace(/\[(\d+)\]/g,(m,n)=>d.sources.some(s=>s.n==n)?`<a class="cite" href="#${id}-s${n}">[${n}]</a>`:m);
       const sources=d.sources.map(s=>`<div class="src" id="${id}-s${s.n}"><b>[${s.n}] ${esc(s.title)}</b><span class="meta">page ${esc(s.page??'?')} · chunk ${s.chunk_id}${s.rerank_score!=null?` · rerank ${Number(s.rerank_score).toFixed(3)}`:''}</span><div class="snip">${esc(s.snippet)}…</div></div>`).join('');
       const t=d.timings, ms=k=>t[k]!=null?`${k.replace('_ms','')} ${Math.round(t[k])}ms`:null;
-      const timing=['rewrite_ms','bm25_ms','vector_ms','rerank_ms','generation_ms','total_ms'].map(ms).filter(Boolean).join(' · ');
+      const timing=['rewrite_ms','keyword_ms','vector_ms','rerank_ms','generation_ms','total_ms'].map(ms).filter(Boolean).join(' · ');
       const searched=d.standalone_question!==history.at(-1)?.content?`<div class="timing">Searched for: “${esc(d.standalone_question)}”</div>`:'';
       const fb=d.trace_id?`<div class="fb" data-trace="${esc(d.trace_id)}">Helpful? <button data-helpful="true" aria-label="Helpful">👍</button><button data-helpful="false" aria-label="Not helpful">👎</button></div>`:'';
       return body+(sources?`<details><summary>${d.sources.length} sources</summary>${sources}</details>`:'')+searched+`<div class="timing">${timing}</div>`+fb;

@@ -24,7 +24,7 @@ from app import (
     GENERATION_MODEL, RERANK_CANDIDATES, _embed_query, _rerank, converse, database, langfuse
 )
 import arxiv_meta
-from rag_core import bm25_rank, reciprocal_rank_fusion
+from rag_core import reciprocal_rank_fusion, tokenize
 
 router = APIRouter()
 s3 = boto3.client("s3")
@@ -151,12 +151,25 @@ def _retrieve(connection, query: str, document_ids: list[str] | None, timings: d
             for r in cursor.fetchall()
         ]
 
-    # BM25 statistics are computed over the whole searched collection.
+    # Keyword search runs in Postgres (GIN index on rag_chunks.tsv): any query
+    # word may match ("or"), stopwords are dropped, and ts_rank_cd ranks by term
+    # frequency and proximity. Unlike the lab's Python BM25 it never loads every
+    # chunk, so it scales to the whole library.
     step = time.perf_counter()
-    with connection.cursor() as cursor:
-        cursor.execute(f"{select} {where}", params)
-        lexical = [r for r in bm25_rank(query, rows(cursor)) if r["score"] > 0]
-    timings["bm25_ms"] = round((time.perf_counter() - step) * 1000, 1)
+    terms = tokenize(query)
+    lexical: list[dict] = []
+    if terms:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                f"""SELECT c.id, c.chunk_index, c.page_number, c.content, d.id, d.title
+                    FROM rag_chunks c JOIN rag_documents d ON d.id = c.document_id,
+                         websearch_to_tsquery('english', %s) AS q
+                    WHERE c.tsv @@ q {"AND c.document_id = ANY(%s)" if document_ids else ""}
+                    ORDER BY ts_rank_cd(c.tsv, q, 32) DESC LIMIT %s""",
+                [" or ".join(terms)] + ([document_ids] if document_ids else []) + [CANDIDATES_PER_RETRIEVER],
+            )
+            lexical = rows(cursor)
+    timings["keyword_ms"] = round((time.perf_counter() - step) * 1000, 1)
 
     step = time.perf_counter()
     embedding = _embed_query(query)
@@ -168,10 +181,10 @@ def _retrieve(connection, query: str, document_ids: list[str] | None, timings: d
         semantic = rows(cursor)
     timings["vector_ms"] = round((time.perf_counter() - step) * 1000, 1)
 
-    fused = reciprocal_rank_fusion([semantic, lexical[:CANDIDATES_PER_RETRIEVER]])
+    fused = reciprocal_rank_fusion([semantic, lexical])
     langfuse.update_current_span(
-        output={"bm25_hits": len(lexical), "vector_hits": len(semantic), "fused": len(fused)},
-        metadata={k: timings[k] for k in ("bm25_ms", "vector_ms")},
+        output={"keyword_hits": len(lexical), "vector_hits": len(semantic), "fused": len(fused)},
+        metadata={k: timings[k] for k in ("keyword_ms", "vector_ms")},
     )
     return fused
 

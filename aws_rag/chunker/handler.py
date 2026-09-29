@@ -56,7 +56,8 @@ def process(bucket, key):
     lines, index = [], 0
     with pymupdf.open(stream=data, filetype="pdf") as pdf:
         for page_no, page in enumerate(pdf, start=1):
-            text = " ".join(page.get_text("text").split())
+            # Some PDFs yield NUL characters, which Postgres text columns reject.
+            text = " ".join(page.get_text("text").replace("\x00", " ").split())
             for chunk in chunk_text(text, size=SIZE, overlap=OVERLAP):
                 lines.append(json.dumps({
                     "document_id": doc_id,

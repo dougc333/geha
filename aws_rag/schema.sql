@@ -36,3 +36,12 @@ ALTER TABLE rag_documents
     ADD COLUMN IF NOT EXISTS comment text,
     ADD COLUMN IF NOT EXISTS journal_ref text,
     ADD COLUMN IF NOT EXISTS doi text;
+
+-- Keyword search for the chatbot, which searches every paper: Postgres full-text
+-- search instead of loading all chunks into Python for BM25. Generated, so the
+-- embedder doesn't need to change; existing rows are filled when it's added.
+ALTER TABLE rag_chunks
+    ADD COLUMN IF NOT EXISTS tsv tsvector
+    GENERATED ALWAYS AS (to_tsvector('english', content)) STORED;
+
+CREATE INDEX IF NOT EXISTS rag_chunks_tsv_idx ON rag_chunks USING gin (tsv);
