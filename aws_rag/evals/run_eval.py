@@ -48,6 +48,9 @@ sys.path.insert(0, str(HERE.parent / "query"))
 
 
 def load_secrets(region: str) -> None:
+    # Eval runs shouldn't send traces to the chatbot's Langfuse project (and stale
+    # LANGFUSE_* keys in a shell made every batch fail with 401).
+    os.environ["LANGFUSE_TRACING_ENABLED"] = "false"
     ssm = boto3.client("ssm", region_name=region)
     for env, name in {"DATABASE_URL": "/rag-demo/database-url",
                       "WEAVIATE_URL": "/rag-demo/weaviate-url",

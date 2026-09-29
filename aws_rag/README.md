@@ -17,6 +17,10 @@ top k chunks, MRR@10 = mean of 1/rank of that page):
 | Vector alone (pgvector) | 0.55 | 0.80 | 0.65 | ~0.19 s |
 | Full-text alone (Postgres `ts_rank_cd`) | 0.30 | 0.50 | 0.39 | ~0.31 s |
 
+These are with 103 papers. With 202 papers (10,167 chunks) the chatbot scores
+0.78 / 0.93 / 0.84 and Weaviate + rerank 0.78 / 0.95 / 0.85; see
+[Scaling from 103 to 202 papers](#retrieval-eval).
+
 \*Median per question, measured from a laptop to Neon/Weaviate/Bedrock
 (includes network round trips). In the Lambda, a whole chat answer takes
 ~2.4–3.9 s: route ~0.4–0.7 s, BM25 ~0.2 s, vector ~0.25 s, rerank ~1 s,
@@ -454,7 +458,29 @@ Results on 2026-09-29 (page hit@5 = the answer's page is in the top 5 chunks):
 retriever results already timed in another row; the query itself is RRF only.
 Rerank setups include the ~0.8–1 s Amazon Rerank call.
 
-What it shows:
+These are the 103-paper results (`evals/results_103_papers.md`).
+
+**Scaling from 103 to 202 papers** (10,167 chunks; the same 40 questions, all
+from the first 100 papers, so the new papers act as distractors):
+
+| Setup | hit@1 (103 → 202) | hit@5 | MRR@10 | median time* |
+|---|---|---|---|---|
+| **Chatbot: BM25 + vector + rerank** | 0.82 → 0.78 | 0.95 → 0.93 | 0.88 → 0.84 | 1,025 → 1,054 ms |
+| Weaviate hybrid + rerank | 0.82 → 0.78 | 0.95 → 0.95 | 0.88 → 0.85 | 1,499 → 1,632 ms |
+| Full-text + vector + rerank (old chatbot) | 0.75 → 0.70 | 0.85 → 0.85 | 0.79 → 0.76 | 1,235 → 1,206 ms |
+| BM25 alone | 0.68 → 0.65 | 0.85 → 0.85 | 0.75 → 0.73 | 184 → 294 ms |
+| Vector alone | 0.55 → 0.47 | 0.80 → 0.78 | 0.65 → 0.58 | 186 → 363 ms |
+| Full-text alone | 0.30 → 0.23 | 0.50 → 0.40 | 0.39 → 0.31 | 311 → 368 ms |
+
+- **Reranked setups barely move:** the chatbot drops one question at hit@5, within
+  noise. The reranker still finds the right page among twice as many near-misses.
+- **Vector search loses most at the top** (hit@1 −3 questions): similar passages
+  from the new papers crowd out the right one; BM25 and reranking compensate.
+- **BM25 slows as common words match more chunks** (184 → 294 ms from a laptop),
+  but the ~1 s rerank still dominates. Laptop timings vary with the network.
+- Full 202-paper results: `evals/results.md`.
+
+What it shows (103 papers):
 
 - **Postgres full-text ranking was the weak link, not Postgres.** `ts_rank_cd`
   finds the page for 50% of questions; real BM25 over the same words finds 85%,
