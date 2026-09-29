@@ -274,6 +274,11 @@ reads it from SSM. The key was pasted into the chat later; rotation declined.
   figure is kept; cached descriptions matched by page/caption/size. Re-run:
   +226 figures (2,112 in 198 papers), $0.026. 73 descriptions are degenerate
   (repeated " | "), e.g. XGBoost's AUC plot; figures 6/9 on this run.
+- Degenerate descriptions: new description-first prompt (text grouped by panel,
+  no axis ticks, capped); PDF text layer read inside each figure box as a
+  spelling hint (as chunk text it lost which pie a value belonged to). 73 → 0;
+  figure questions 20/27 → 24/27 (offline, 3 runs). Then all 2,032 other
+  figures re-described ($0.253). Live: 7/9. New architecture diagram.
 
 ## Pull requests
 

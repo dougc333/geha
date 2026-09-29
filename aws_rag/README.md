@@ -2,7 +2,7 @@
 
 ![aws_rag architecture](docs/architecture.svg)
 
-*Current architecture. Source: `docs/architecture.svg` (a PNG copy is in `docs/architecture.png`).*
+*Current architecture (2026-09-29): Docling ingestion with table and figure chunks, Nova Lite figure descriptions, figure thumbnails in the chat, Weaviate as a copy of Neon, and backups. Source: `docs/architecture.svg` (a PNG copy is in `docs/architecture.png`).*
 
 **Retrieval quality and speed** (40-question eval over 103 papers, see
 [Retrieval eval](#retrieval-eval); hit@k = the page holding the answer is in the
@@ -689,6 +689,13 @@ the eval-page figures (80, $0.0096) left 0 degenerate; on the 9 figure questions
 (3 runs each, the page's figure chunks as sources) 20/27 → 24/27 (f06 and f07
 fixed; f08 still misses). `reimage.md` lists the 73; `textfigquery.md` has a
 text query and a figure query for each of the 80 re-described figures.
+
+**All figures on the new prompt (same day).** The other 2,032 figures were
+re-described too ($0.253; 2.72 M input / 0.37 M output tokens; ~25 minutes from
+the laptop, Nova Lite on Bedrock), re-indexed, and Weaviate re-synced: 2,112
+figures, 0 degenerate. Live chat, 9 figure questions: 7/9 (f06 now correct;
+f07 "Outputs (shifted right)" and f08 "RPN VGG" still miss). Results:
+`evals/answers_figures_v3.json`.
 
 ### Existing PDFs (backfill)
 
