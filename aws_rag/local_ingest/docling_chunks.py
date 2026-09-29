@@ -101,12 +101,29 @@ def carry_descriptions(old: list[dict], new: list[dict]) -> int:
     return carried
 
 
+MIN_PDF_TEXT_WORDS = 3  # fewer words inside a figure's box: treat it as having no text layer
+
+
+def figure_pdf_text(page, box: tuple[float, float, float, float]) -> str:
+    """Words printed inside a figure, read from the PDF's text layer (PyMuPDF page,
+    top-left box in points). Exact where the figure is vector graphics; empty for
+    embedded pictures and scans. Lines are joined with " | "."""
+    import pymupdf
+    l, t, r, b = box
+    lines = page.get_text("text", clip=pymupdf.Rect(l - 2, t - 2, r + 2, b + 2)).splitlines()
+    return " | ".join(" ".join(line.split()) for line in lines if line.strip())[:3000]
+
+
 def convert(pdf: Path, converter, figure_dir: Path | None = None
             ) -> tuple[list[tuple[int, str, str]], list[dict], float]:
     """(page, kind, text) chunks for one PDF in reading order, plus its figures
     (saved as PNGs in figure_dir when given)."""
     started = time.perf_counter()
     doc = converter.convert(str(pdf)).document
+    pdf_pages = None
+    if figure_dir is not None:
+        import pymupdf
+        pdf_pages = pymupdf.open(pdf)
     pages: dict[int, list[str]] = {}
     tables: list[tuple[int, str]] = []
     figures: list[dict] = []
@@ -119,8 +136,12 @@ def convert(pdf: Path, converter, figure_dir: Path | None = None
             if image is not None and keep_figure(*image.size, caption):
                 name = f"p{page:03d}_f{len(figures) + 1:02d}.png"
                 image.save(figure_dir / name)
+                box = item.prov[0].bbox.to_top_left_origin(page_height=doc.pages[page].size.height)
+                box = (round(box.l, 1), round(box.t, 1), round(box.r, 1), round(box.b, 1))
+                pdf_text = figure_pdf_text(pdf_pages[page - 1], box)
                 figures.append({"file": name, "page": page, "kind": label, "caption": caption,
-                                "width": image.size[0], "height": image.size[1]})
+                                "width": image.size[0], "height": image.size[1], "bbox": box,
+                                "pdf_text": pdf_text if len(pdf_text.split()) >= MIN_PDF_TEXT_WORDS else ""})
         elif label == "table":
             markdown = compact_markdown(item.export_to_markdown(doc=doc))
             caption = " ".join(item.caption_text(doc).split())
@@ -135,6 +156,8 @@ def convert(pdf: Path, converter, figure_dir: Path | None = None
         text = " ".join(" ".join(pages.get(page, [])).split())
         chunks += [(page, "text", c) for c in chunk_text(text)] if text else []
         chunks += [(page, "table", t) for p, t in tables if p == page]
+    if pdf_pages is not None:
+        pdf_pages.close()
     return chunks, figures, time.perf_counter() - started
 
 
@@ -148,6 +171,7 @@ def main() -> None:
     parser.add_argument("--figures", action="store_true",
                         help="also save figure images to out/figures/<doc_id>/ for describe_figures.py")
     parser.add_argument("--region", default="us-west-2")
+    parser.add_argument("--out", type=Path, default=HERE / "out", help="output folder (default local_ingest/out)")
     args = parser.parse_args()
 
     import pymupdf
@@ -161,8 +185,8 @@ def main() -> None:
 
     ids = [i.strip() for i in args.ids.split(",") if i.strip()] or sorted(
         p.stem for p in args.folder.glob("*.pdf") if p.with_suffix(".json").exists())
-    out_dir = HERE / "out"
-    out_dir.mkdir(exist_ok=True)
+    out_dir = args.out
+    out_dir.mkdir(parents=True, exist_ok=True)
     s3 = bucket = None
     if args.upload:
         import boto3

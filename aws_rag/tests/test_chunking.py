@@ -82,5 +82,18 @@ class CarryDescriptionsTest(unittest.TestCase):
         self.assertEqual(new[1]["description"], "pie charts")
 
 
+class FigurePdfTextTest(unittest.TestCase):
+    def test_reads_only_the_text_inside_the_figure_box(self):
+        import pymupdf
+        pdf = pymupdf.open()
+        page = pdf.new_page(width=600, height=800)
+        page.insert_text((100, 120), "Test AUC")           # inside the figure
+        page.insert_text((100, 160), "global eps=0.3")     # inside the figure
+        page.insert_text((100, 400), "Body text below")    # outside
+        self.assertEqual(docling_chunks.figure_pdf_text(page, (90, 100, 300, 180)),
+                         "Test AUC | global eps=0.3")
+        self.assertEqual(docling_chunks.figure_pdf_text(page, (300, 500, 500, 700)), "")
+
+
 if __name__ == "__main__":
     unittest.main()

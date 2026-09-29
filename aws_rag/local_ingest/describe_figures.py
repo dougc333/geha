@@ -24,32 +24,41 @@ OUT = Path(__file__).parent / "out"
 MODEL_ID = os.environ.get("FIGURE_MODEL_ID", "amazon.nova-lite-v1:0")
 REGION = os.environ.get("AWS_REGION", "us-west-2")
 
+# Description first (so it is always written), text grouped by panel, no axis
+# ticks, capped: transcribing every tick made Nova Lite repeat empty " | "
+# separators until the token limit for 73 plots. Words from the PDF's text layer
+# (docling_chunks.py "pdf_text") are only a spelling hint: they come without
+# layout, so pasting them into the chunk lost which pie a value belonged to.
 PROMPT = """This figure is from the paper "{title}" (page {page}).
 Caption: {caption}
+{hint}
+Write two sections for a search index, using only what is visible in the image.
 
-Write two parts for a search index, using only what is visible in the image.
+Description: at most 120 words. What kind of figure it is and what it shows. For plots:
+which series is highest and which is lowest, where, and roughly by how much, naming each
+series by its legend label; say which series a marker such as * or an annotation belongs
+to. For diagrams: how the labeled blocks connect, from input to output.
 
-Text in figure: every word, label and number printed in the figure, verbatim and in
-reading order, separated by " | " (block and layer names, arrows' labels, axis titles
-and tick labels, legend entries, values on bars or slices, example inputs).
+Text in figure: the words and printed values, grouped by panel or chart (for example
+"YOLO: Correct 65.5%, Loc 19.0%"): block and layer names, legend entries, axis titles,
+labels on arrows, example inputs, values printed on bars or slices. Leave out axis tick
+numbers. At most 80 items."""
 
-Description: at most 150 words. What kind of figure it is (plot, diagram, architecture,
-examples) and what it shows. For plots, which series is highest or lowest and where,
-and values you can read; say which series a marker such as * or an annotation belongs
-to. For diagrams, how the labeled blocks connect. Do not restate the caption and do not
-add facts from the paper that are not in the image."""
+PDF_HINT = "Words printed in the figure, from the PDF (exact spelling, not in layout order): {pdf_text}\n"
 
 bedrock = boto3.client("bedrock-runtime", region_name=REGION)
 
 
-def describe(image: bytes, title: str, page: int, caption: str) -> tuple[str, dict]:
+def describe(image: bytes, title: str, page: int, caption: str, pdf_text: str = "") -> tuple[str, dict]:
+    prompt = PROMPT.format(title=title, page=page, caption=caption or "(none)",
+                           hint=PDF_HINT.format(pdf_text=pdf_text) if pdf_text else "")
     response = bedrock.converse(
         modelId=MODEL_ID,
         messages=[{"role": "user", "content": [
             {"image": {"format": "png", "source": {"bytes": image}}},
-            {"text": PROMPT.format(title=title, page=page, caption=caption or "(none)")},
+            {"text": prompt},
         ]}],
-        inferenceConfig={"maxTokens": 700, "temperature": 0},
+        inferenceConfig={"maxTokens": 600, "temperature": 0},
     )
     text = response["output"]["message"]["content"][0]["text"].strip()
     return text, response["usage"]
@@ -60,7 +69,7 @@ def figure_chunk(title: str, fig: dict) -> str:
     if fig["caption"]:
         head += f': {fig["caption"]}'
     body = fig["description"]
-    if not body.startswith("Text in figure"):
+    if not body.startswith(("Description", "Text in figure")):
         body = f"Description: {body}"
     return f"{head}\n{body}"
 
@@ -78,7 +87,8 @@ def process(jsonl: Path, s3, bucket: str | None, redo: bool = False,
 
     def run(fig):
         image = (index_path.parent / fig["file"]).read_bytes()
-        fig["description"], usage = describe(image, title, fig["page"], fig["caption"])
+        fig["description"], usage = describe(image, title, fig["page"], fig["caption"],
+                                             fig.get("pdf_text", ""))
         return usage
 
     with ThreadPoolExecutor(4) as pool:
@@ -108,9 +118,13 @@ def main():
     parser.add_argument("--limit", type=int)
     parser.add_argument("--redo", action="store_true", help="describe again even if a description exists")
     parser.add_argument("--files", default="", help="with --redo: only these figure files, e.g. p003_f01.png")
+    parser.add_argument("--out", type=Path, help="folder written by docling_chunks.py --out (default local_ingest/out)")
     parser.add_argument("--upload", action="store_true",
                         help="upload figure PNGs and the rewritten JSONL to the chunks bucket")
     args = parser.parse_args()
+    if args.out:
+        global OUT
+        OUT = args.out
 
     s3 = bucket = None
     if args.upload:

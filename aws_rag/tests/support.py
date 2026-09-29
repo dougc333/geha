@@ -5,7 +5,7 @@ region but no credentials), so the environment is set before any of them are
 imported. Nothing here talks to AWS, Neon, Weaviate or Langfuse.
 
     uv run --no-project --with-requirements aws_rag/query/requirements.txt \
-        --with boto3 --with httpx python -m unittest discover -s aws_rag/tests
+        --with boto3 --with httpx --with pymupdf python -m unittest discover -s aws_rag/tests
 """
 
 from __future__ import annotations
