@@ -80,6 +80,19 @@ It exposes `fhir_read`, `fhir_search`, `fhir_create` and `fhir_update`. With thi
 config, create and update write to the local HAPI server; that's fine for synthetic
 data. Against a real EMR, give the backend credentials read-only scopes.
 
+**Agent demo** (`mcp_agent_demo.py`): starts the MCP server over stdio, gives Claude
+Opus 5.5 only the read-only tools (`fhir_search`, `fhir_read`), and prints every FHIR
+call. Needs `ANTHROPIC_API_KEY` and `pip install anthropic`:
+
+```bash
+python mcp_agent_demo.py                      # default: type 2 diabetes patients, HbA1c, claims
+python mcp_agent_demo.py "your question"
+```
+
+On 2026-09-29 it answered the default question in 15 FHIR calls: 2 patients with type
+2 diabetes, their latest HbA1c (6.06% and 6.93%), 98 and 119 EOBs, and $94,102.24 and
+$116,476.77 paid, all matching direct queries against HAPI.
+
 Payer-style questions to try: "find members with type 2 diabetes and their latest
 HbA1c", "list the claims for Patient/<id> in the last year and what was paid", "which
 providers billed the most encounters".
