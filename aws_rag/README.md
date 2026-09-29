@@ -26,6 +26,26 @@ These are with 103 papers. With 202 papers (10,167 chunks) the chatbot scores
 ~2.4–3.9 s: route ~0.4–0.7 s, BM25 ~0.2 s, vector ~0.25 s, rerank ~1 s,
 answer ~0.45–1.8 s.
 
+**Improvement from table-aware parsing (Docling)**, all 202 papers, chatbot setup
+(BM25 + vector → RRF → rerank → Nova Lite):
+
+| | Flat PDF text (before) | Table-aware, Docling (after) | Change |
+|---|---|---|---|
+| **Table questions: correct answer** (13) | 8/13 = 0.62 | **11/13 = 0.85** | **+23 points** |
+| Table questions: hit@1 | 0.54 | **0.85** | +31 points |
+| Table questions: hit@5 | 0.85 | **0.92** | +7 points |
+| Table questions: MRR@10 | 0.65 | **0.86** | +21 points |
+| Other questions (40): hit@1 / hit@5 / MRR@10 | 0.78 / 0.93 / 0.84 | 0.72 / 0.93 / 0.80 | see note |
+
+Flat extraction turns a results table into a run of numbers without rows or
+columns, so the model found the right page but read the wrong value (BERT-Large
+on SWAG: 86.3 instead of 86.6). Docling rebuilds each table as its own Markdown
+chunk with its caption, so the value sits next to its row and column labels.
+Note: the first Docling version left figure captions and footnotes out of the
+text, which cost some ordinary questions their rank-1 hit; a re-run that keeps
+them is in progress, and this table will be updated with its results. Details:
+[Tables: Docling pilot](#tables-docling-pilot).
+
 A serverless RAG demo on AWS. When a PDF is uploaded to S3, it is split into
 page-aware text chunks (one JSONL file per document), and those chunks are
 embedded and loaded into Postgres/pgvector (Neon). A PDF dropped in S3 shows up

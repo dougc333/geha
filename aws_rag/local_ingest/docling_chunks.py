@@ -34,7 +34,9 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "query"))
 from rag_core import chunk_text  # noqa: E402
 
-SKIP_LABELS = {"page_header", "page_footer", "caption", "footnote"}
+# Only running headers/footers are noise. Captions (figures too) and footnotes stay
+# in the text: dropping them hid answers such as "Figure 7: CIFAR10 samples…".
+SKIP_LABELS = {"page_header", "page_footer"}
 MAX_TABLE_CHARS = 4000
 
 
