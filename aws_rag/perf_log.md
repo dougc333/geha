@@ -313,7 +313,7 @@ a searchable chunk with its page and caption, and the chat shows the image.
 
 | | Pilot (20 papers) | All 203 papers |
 |---|---|---|
-| Figures | 133 | 1,886 |
+| Figures | 133 (149 after the filter fix) | 1,886 → **2,112** after the filter fix |
 | Nova Lite cost | $0.0175 | $0.24 |
 | Docling time (laptop) | ~4 min | ~70 min |
 | Figure answers (9 questions) | 0/9 → 7/9 | 7/9 |

@@ -269,6 +269,11 @@ reads it from SSM. The key was pasted into the chat later; rotation declined.
   1,886 figures, $0.24. Llama 3 failed to embed repeatedly on a Titan
   `ModelErrorException`; added a per-chunk retry in the embedder.
 - Final: all 62 questions 0.77 / 0.95 / 0.85; figures 7/9; tables 11/13.
+- Filter bug: "shorter side >= 150 px" dropped wide figures (Atari's three,
+  YOLO Figure 1, ResNet Figure 2; 16 of 149 in the pilot). Now every captioned
+  figure is kept; cached descriptions matched by page/caption/size. Re-run:
+  +226 figures (2,112 in 198 papers), $0.026. 73 descriptions are degenerate
+  (repeated " | "), e.g. XGBoost's AUC plot; figures 6/9 on this run.
 
 ## Pull requests
 

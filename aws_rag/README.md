@@ -587,7 +587,8 @@ in an architecture diagram, the example input in an illustration. Two steps add
 a **figure chunk** for each figure:
 
 1. `local_ingest/docling_chunks.py --figures` also saves each figure (Docling
-   "picture" or "chart", at 2x scale, skipping images under 150 px) as a PNG in
+   "picture" or "chart", at 2x scale; every captioned figure, and uncaptioned
+   images of at least 150 x 150 px of area, so logos and icons are skipped) as a PNG in
    `local_ingest/out/figures/<document_id>/`, with its page and caption in
    `figures.json`.
 2. `local_ingest/describe_figures.py` sends each image, with the paper title and
@@ -663,6 +664,23 @@ The rollout exposed an embedder weakness: Titan sometimes returns
 retry. botocore doesn't retry it, so one failed call failed the whole paper;
 Llama 3 (274 chunks) failed on every redelivery. The embedder now retries each
 chunk up to 3 times with backoff.
+
+**Filter fix (same day): 2,112 figures in 198 papers.** The first rollout skipped
+any image whose *shorter* side was under 150 px, which also dropped wide
+figures: 16 of 149 in the pilot papers (e.g. YOLO Figure 1, ResNet Figure 2,
+DenseNet Figure 2) and all three in the Atari paper. Captioned figures are now
+always kept. Re-running all 203 papers added 226 figures for $0.026 (existing
+descriptions are reused, matched by page, caption and size, because file names
+are renumbered). The 5 papers without figures (scikit-learn, VGG, RoBERTa,
+Distillation, the deep-learning survey) have none. Retrieval is unchanged
+(all 62: 0.77 / 0.95 / 0.85); figure answers 6/9 (f06 flipped: see below),
+tables 11/13. Results: `evals/results_figures_v2.md`, `evals/answers_figures_v2.json`.
+
+Known issue: 73 descriptions (3.5%) are degenerate. Nova Lite transcribed the
+labels, then repeated empty " | " separators until the token limit and never
+wrote the description. XGBoost's AUC plot (f06) is one, so the model guesses
+which curve is lowest, and its answer changes between runs. They can be
+re-described with `describe_figures.py --redo --files …`, e.g. with Nova Pro.
 
 ### Existing PDFs (backfill)
 
