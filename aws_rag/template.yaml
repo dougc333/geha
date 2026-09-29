@@ -38,6 +38,14 @@ Parameters:
     Type: String
     Default: /rag-demo/langfuse-secret-key
     Description: SSM SecureString with the Langfuse secret key
+  WeaviateUrlParameter:
+    Type: String
+    Default: /rag-demo/weaviate-url
+    Description: SSM parameter with the Weaviate REST URL (comparison backend; optional)
+  WeaviateApiKeyParameter:
+    Type: String
+    Default: /rag-demo/weaviate-api-key
+    Description: SSM SecureString with the Weaviate API key
 
 Resources:
   # Names are fixed (not generated) so the queue policy can reference the raw
@@ -216,6 +224,8 @@ Resources:
           LANGFUSE_BASE_URL: !Ref LangfuseBaseUrl
           LANGFUSE_PUBLIC_KEY_PARAMETER: !Ref LangfusePublicKeyParameter
           LANGFUSE_SECRET_KEY_PARAMETER: !Ref LangfuseSecretKeyParameter
+          WEAVIATE_URL_PARAMETER: !Ref WeaviateUrlParameter
+          WEAVIATE_API_KEY_PARAMETER: !Ref WeaviateApiKeyParameter
           ARXIV_MAX_MB: "25"
       Policies:
         - Statement:
@@ -225,6 +235,8 @@ Resources:
                 - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${DatabaseUrlParameter}"
                 - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${LangfusePublicKeyParameter}"
                 - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${LangfuseSecretKeyParameter}"
+                - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${WeaviateUrlParameter}"
+                - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${WeaviateApiKeyParameter}"
             - Effect: Allow
               Action: bedrock:InvokeModel
               Resource:

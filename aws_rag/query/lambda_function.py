@@ -17,6 +17,8 @@ _SECRETS = {
     "DATABASE_URL": os.environ["DATABASE_URL_PARAMETER"],
     "LANGFUSE_PUBLIC_KEY": os.getenv("LANGFUSE_PUBLIC_KEY_PARAMETER"),
     "LANGFUSE_SECRET_KEY": os.getenv("LANGFUSE_SECRET_KEY_PARAMETER"),
+    "WEAVIATE_URL": os.getenv("WEAVIATE_URL_PARAMETER"),  # optional: Weaviate comparison
+    "WEAVIATE_API_KEY": os.getenv("WEAVIATE_API_KEY_PARAMETER"),
 }
 _wanted = {env: name for env, name in _SECRETS.items() if name and env not in os.environ}
 if _wanted:
@@ -42,6 +44,7 @@ app.include_router(chat_router)
 
 INDEX_HTML = (Path(__file__).parent / "index.html").read_text()
 CHAT_HTML = (Path(__file__).parent / "chat.html").read_text()
+BACKENDS_HTML = (Path(__file__).parent / "backends.html").read_text()
 
 
 @app.get("/", response_class=HTMLResponse, include_in_schema=False)
@@ -52,6 +55,11 @@ def index() -> str:
 @app.get("/chat", response_class=HTMLResponse, include_in_schema=False)
 def chat_page() -> str:
     return CHAT_HTML
+
+
+@app.get("/backends", response_class=HTMLResponse, include_in_schema=False)
+def backends_page() -> str:
+    return BACKENDS_HTML
 
 
 _asgi = Mangum(app, lifespan="off")

@@ -24,6 +24,7 @@ from app import (
     GENERATION_MODEL, RERANK_CANDIDATES, _embed_query, _rerank, converse, database, langfuse
 )
 import arxiv_meta
+import weaviate_store
 from rag_core import reciprocal_rank_fusion, tokenize
 
 router = APIRouter()
@@ -86,6 +87,14 @@ class ChatRequest(BaseModel):
     session_id: str | None = Field(default=None, pattern=r"^[A-Za-z0-9-]{1,64}$")  # groups traces
     document_ids: list[str] | None = Field(default=None, max_length=50)  # None = all papers
     top_k: int = Field(default=6, ge=1, le=10)
+    backend: Literal["postgres", "weaviate"] = "postgres"  # where retrieval runs
+
+
+class CompareBackendsRequest(BaseModel):
+    query: str = Field(min_length=2, max_length=2000)
+    top_k: int = Field(default=8, ge=1, le=20)
+    alpha: float = Field(default=0.5, ge=0.0, le=1.0)  # Weaviate: 0 = keyword only, 1 = vector only
+    fusion: Literal["relative_score", "ranked"] = "relative_score"
 
 
 class FeedbackRequest(BaseModel):
@@ -138,7 +147,8 @@ def _standalone_question(messages: list[ChatMessage]) -> str:
 
 
 @observe(name="retrieve", as_type="retriever", capture_input=False, capture_output=False)
-def _retrieve(connection, query: str, document_ids: list[str] | None, timings: dict) -> list[dict]:
+def _retrieve(connection, query: str, document_ids: list[str] | None, timings: dict,
+              embedding: list[float] | None = None) -> list[dict]:
     langfuse.update_current_span(input={"query": query, "document_ids": document_ids})
     where, params = ("WHERE c.document_id = ANY(%s)", [document_ids]) if document_ids else ("", [])
     select = """SELECT c.id, c.chunk_index, c.page_number, c.content, d.id, d.title
@@ -172,7 +182,7 @@ def _retrieve(connection, query: str, document_ids: list[str] | None, timings: d
     timings["keyword_ms"] = round((time.perf_counter() - step) * 1000, 1)
 
     step = time.perf_counter()
-    embedding = _embed_query(query)
+    embedding = embedding or _embed_query(query)
     with connection.cursor() as cursor:
         cursor.execute(
             f"{select} {where} ORDER BY c.embedding <=> %s::vector LIMIT %s",
@@ -187,6 +197,69 @@ def _retrieve(connection, query: str, document_ids: list[str] | None, timings: d
         metadata={k: timings[k] for k in ("keyword_ms", "vector_ms")},
     )
     return fused
+
+
+def _retrieve_weaviate(query: str, document_ids: list[str] | None, timings: dict) -> list[dict]:
+    """Same job as _retrieve (keyword + vector + fusion), done by one Weaviate hybrid query."""
+    if not weaviate_store.enabled():
+        raise HTTPException(status_code=503, detail="Weaviate is not configured")
+    step = time.perf_counter()
+    embedding = _embed_query(query)
+    timings["embed_ms"] = round((time.perf_counter() - step) * 1000, 1)
+    step = time.perf_counter()
+    rows = weaviate_store.hybrid(query, embedding, limit=RERANK_CANDIDATES, document_ids=document_ids)
+    timings["weaviate_ms"] = round((time.perf_counter() - step) * 1000, 1)
+    return rows
+
+
+def _brief(rows: list[dict], top_k: int) -> list[dict]:
+    return [
+        {"id": r["id"], "title": r["title"], "page": r["page"], "score": r["score"],
+         "snippet": r["content"][:300], "explain": r.get("explain")}
+        for r in rows[:top_k]
+    ]
+
+
+@router.post("/api/compare-backends")
+def compare_backends(request: CompareBackendsRequest) -> dict:
+    """Postgres (full-text + pgvector + RRF) vs Weaviate hybrid on the same query vector."""
+    if not weaviate_store.enabled():
+        raise HTTPException(status_code=503, detail="Weaviate is not configured")
+    return _compare_backends(request)
+
+
+# Traced separately: FastAPI must see the endpoint's own signature, not a wrapper's.
+@observe(name="compare-backends")
+def _compare_backends(request: CompareBackendsRequest) -> dict:
+    try:
+        step = time.perf_counter()
+        embedding = _embed_query(request.query)
+        embed_ms = round((time.perf_counter() - step) * 1000, 1)
+
+        pg_timings: dict[str, float] = {}
+        step = time.perf_counter()
+        with database() as connection:
+            postgres = _retrieve(connection, request.query, None, pg_timings, embedding=embedding)
+        pg_timings["total_ms"] = round((time.perf_counter() - step) * 1000, 1)
+
+        step = time.perf_counter()
+        weaviate = weaviate_store.hybrid(request.query, embedding, alpha=request.alpha,
+                                         fusion=request.fusion, limit=request.top_k)
+        weaviate_ms = round((time.perf_counter() - step) * 1000, 1)
+
+        top_pg = [r["id"] for r in postgres[: request.top_k]]
+        top_wv = [r["id"] for r in weaviate[: request.top_k]]
+        return {
+            "postgres": _brief(postgres, request.top_k),
+            "weaviate": _brief(weaviate, request.top_k),
+            "overlap": len(set(top_pg) & set(top_wv)),
+            "same_first": bool(top_pg and top_wv and top_pg[0] == top_wv[0]),
+            "timings": {"embed_ms": embed_ms, "postgres": pg_timings, "weaviate_ms": weaviate_ms},
+        }
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=str(exc)) from exc
 
 
 @router.post("/api/chat")
@@ -210,7 +283,10 @@ def _chat_turn(request: ChatRequest) -> dict:
 
         with database() as connection:
             library = _library(connection)
-            candidates = _retrieve(connection, query, request.document_ids, timings)
+            if request.backend == "weaviate":
+                candidates = _retrieve_weaviate(query, request.document_ids, timings)
+            else:
+                candidates = _retrieve(connection, query, request.document_ids, timings)
 
         step = time.perf_counter()
         sources = _rerank(query, candidates[:RERANK_CANDIDATES])[: request.top_k]
