@@ -19,6 +19,7 @@ _SECRETS = {
     "LANGFUSE_SECRET_KEY": os.getenv("LANGFUSE_SECRET_KEY_PARAMETER"),
     "WEAVIATE_URL": os.getenv("WEAVIATE_URL_PARAMETER"),  # optional: Weaviate comparison
     "WEAVIATE_API_KEY": os.getenv("WEAVIATE_API_KEY_PARAMETER"),
+    "API_KEY": os.getenv("API_KEY_PARAMETER"),  # shared access key for /api/*
 }
 _wanted = {env: name for env, name in _SECRETS.items() if name and env not in os.environ}
 if _wanted:
@@ -31,8 +32,9 @@ if _wanted:
     for env, name in _wanted.items():
         if name in _found:
             os.environ[env] = _found[name]
-    if "DATABASE_URL" not in os.environ:
-        raise RuntimeError(f"SSM parameter {_SECRETS['DATABASE_URL']} not found")
+    for required in ("DATABASE_URL", "API_KEY"):  # fail closed: never serve without the key
+        if _SECRETS[required] and required not in os.environ:
+            raise RuntimeError(f"SSM parameter {_SECRETS[required]} not found")
 
 from fastapi.responses import HTMLResponse  # noqa: E402
 from mangum import Mangum  # noqa: E402

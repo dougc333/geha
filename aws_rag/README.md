@@ -204,6 +204,27 @@ UI's document picker, titled with the PDF's file name, or you can check with:
 psql "$DATABASE_URL" -c "SELECT d.title, count(c.id) FROM rag_documents d JOIN rag_chunks c ON c.document_id = d.id GROUP BY d.title"
 ```
 
+### Access key
+
+Every `/api/*` call except `/api/health` needs a shared access key in the
+`X-API-Key` header; without it the API returns 401. The pages themselves (`/`,
+`/chat`, `/backends`, `/docs`) load without it: on the first API call they ask
+for the key once and remember it in the browser (localStorage). In Swagger
+(`/docs`), click **Authorize** and paste the key. `chatbot/add_arxiv.py` reads it
+from `CHATBOT_API_KEY` or SSM.
+
+The key is an SSM SecureString, `/rag-demo/api-key`. Show it, or replace it:
+
+```bash
+aws ssm get-parameter --region us-west-2 --name /rag-demo/api-key --with-decryption --query Parameter.Value --output text
+python3 -c "import secrets; print(secrets.token_urlsafe(24), end='')" | aws ssm put-parameter --region us-west-2 --name /rag-demo/api-key --type SecureString --value file:///dev/stdin --overwrite
+```
+
+A new key takes effect when Lambda containers restart (redeploy to force it).
+If the parameter is configured but missing, the Lambda refuses to start rather
+than serving without a key. It's one shared key, not per-user accounts: anyone
+you give it to has full access, including adding papers.
+
 ### Query UI and API
 
 Open the `QueryUrl` output in a browser:
@@ -221,8 +242,9 @@ directly:
 ```bash
 URL=$(aws cloudformation describe-stacks --stack-name $STACK \
   --query "Stacks[0].Outputs[?OutputKey=='QueryUrl'].OutputValue" --output text)
-curl -s ${URL}api/documents
-curl -s -X POST ${URL}api/search -H 'Content-Type: application/json' -d '{
+KEY=$(aws ssm get-parameter --region us-west-2 --name /rag-demo/api-key --with-decryption --query Parameter.Value --output text)
+curl -s -H "X-API-Key: $KEY" ${URL}api/documents
+curl -s -X POST ${URL}api/search -H "X-API-Key: $KEY" -H 'Content-Type: application/json' -d '{
   "document_id": "<id from /api/documents>", "query": "what is orca",
   "retrieval_mode": "hybrid", "use_reranker": true, "generate_answer": true, "top_k": 3}'
 ```

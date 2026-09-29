@@ -64,6 +64,18 @@
     </section>
   </main>
   <script>
+    // Access key: add X-API-Key to /api/ calls; ask once on 401 and remember it.
+    (()=>{const send=window.fetch.bind(window),K='ragApiKey';
+      const load=()=>{try{return localStorage.getItem(K)||''}catch{return ''}};
+      const save=v=>{try{localStorage.setItem(K,v)}catch{}};
+      window.fetch=async(url,opts={})=>{
+        if(!String(url).startsWith('/api/'))return send(url,opts);
+        for(let tries=0;;tries++){
+          const headers=new Headers(opts.headers||{});const key=load();if(key)headers.set('X-API-Key',key);
+          const r=await send(url,{...opts,headers});
+          if(r.status!==401||tries)return r;
+          const entered=prompt('This demo needs an access key:');if(!entered)return r;save(entered.trim());
+        }};})();
     const $=id=>document.getElementById(id);
     const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
     const history=[]; let turn=0;

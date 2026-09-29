@@ -42,6 +42,10 @@ Parameters:
     Type: String
     Default: /rag-demo/weaviate-url
     Description: SSM parameter with the Weaviate REST URL (comparison backend; optional)
+  ApiKeyParameter:
+    Type: String
+    Default: /rag-demo/api-key
+    Description: SSM SecureString with the shared access key required on /api/* (X-API-Key)
   WeaviateApiKeyParameter:
     Type: String
     Default: /rag-demo/weaviate-api-key
@@ -226,6 +230,7 @@ Resources:
           LANGFUSE_SECRET_KEY_PARAMETER: !Ref LangfuseSecretKeyParameter
           WEAVIATE_URL_PARAMETER: !Ref WeaviateUrlParameter
           WEAVIATE_API_KEY_PARAMETER: !Ref WeaviateApiKeyParameter
+          API_KEY_PARAMETER: !Ref ApiKeyParameter
           ARXIV_MAX_MB: "25"
       Policies:
         - Statement:
@@ -237,6 +242,7 @@ Resources:
                 - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${LangfuseSecretKeyParameter}"
                 - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${WeaviateUrlParameter}"
                 - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${WeaviateApiKeyParameter}"
+                - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${ApiKeyParameter}"
             - Effect: Allow
               Action: bedrock:InvokeModel
               Resource:
