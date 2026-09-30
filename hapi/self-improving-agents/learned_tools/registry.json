@@ -31,7 +31,7 @@
   }
  },
  "find_next_day_rebills": {
-  "status": "pending",
+  "status": "approved",
   "created_utc": "2026-09-30T18:13:47+00:00",
   "description": "Find claims re-billed shortly after an identical claim.\n\nA match is the same provider, same patient, same service code and same paid amount, with\nservice dates 1 to max_gap_days apart. Same-day repeats are excluded, because\nfind_duplicate_claims already covers them. Use this to catch duplicate billing that is\nshifted by a day so that exact-date duplicate checks miss it.\n\nProviders need at least min_pairs such pairs to be listed. They are ranked by the number\nof re-billed claims, then by the amount paid on them. Each provider lists its pairs\n(original eob, re-billed eob, dates, amount), its re-bill rate over all claims, and the\nrate across all other providers for comparison.",
   "params": {
