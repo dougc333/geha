@@ -15,6 +15,7 @@ providers or schemes to look for. Events (dicts) are passed to `emit` as they ha
 
 from __future__ import annotations
 
+import asyncio
 import json
 import os
 import re
@@ -32,14 +33,27 @@ from langgraph.prebuilt import ToolNode, tools_condition
 from tools import ANALYTIC_TOOLS
 
 HAPI = Path(__file__).resolve().parent.parent
-# Models the agent can run on. "nous" is Nous Research's Portal (OpenAI-compatible; Hermes
-# models): set NOUS_API_KEY, and optionally NOUS_MODEL / NOUS_BASE_URL. result_chars is the
-# cap on each tool result, smaller where the context window is smaller.
+# Models the agent can run on (ladder.py --model, the app's dropdown). "nous" is Nous
+# Research's Portal (OpenAI-compatible; Hermes models): set NOUS_API_KEY, and optionally
+# NOUS_MODEL / NOUS_BASE_URL. result_chars is the cap on each tool result, smaller where the
+# context window is smaller.
 MODELS = {
-    "claude": {"provider": "anthropic", "model": "claude-opus-5-5", "result_chars": 30_000},
-    "nous": {"provider": "openai-compatible", "model": os.getenv("NOUS_MODEL", "Hermes-4-405B"),
+    "claude": {"provider": "anthropic", "model": "claude-opus-5-5", "result_chars": 30_000,
+               "kwargs": {"thinking": {"type": "adaptive", "display": "summarized"}}},
+    "sonnet": {"provider": "anthropic", "model": "claude-sonnet-5-5", "result_chars": 30_000,
+               "kwargs": {"thinking": {"type": "adaptive", "display": "summarized"}}},
+    # Haiku 4.5 takes a thinking budget (not adaptive) and has a 200k context window.
+    "haiku": {"provider": "anthropic", "model": "claude-haiku-4-5", "result_chars": 15_000,
+              "kwargs": {"thinking": {"type": "enabled", "budget_tokens": 4000}}},
+    "gpt-4o": {"provider": "openai-compatible", "model": "gpt-4o", "api_key_env": "OPENAI_API_KEY",
+               "result_chars": 8_000, "kwargs": {"temperature": 0}},
+    "gpt-5": {"provider": "openai-compatible", "model": "gpt-5", "api_key_env": "OPENAI_API_KEY",
+              "result_chars": 15_000, "kwargs": {}},  # gpt-5 only accepts the default temperature
+    # Nous Portal is a gateway (no Hermes models listed on 2026-09-30); default to DeepSeek V4 Pro.
+    "nous": {"provider": "openai-compatible", "model": os.getenv("NOUS_MODEL", "deepseek/deepseek-v4-pro"),
              "base_url": os.getenv("NOUS_BASE_URL", "https://inference-api.nousresearch.com/v1"),
-             "api_key_env": "NOUS_API_KEY", "result_chars": 8_000},
+             "api_key_env": "NOUS_API_KEY", "api_key_alt": "NOUS_KEY", "result_chars": 30_000,
+             "kwargs": {"temperature": 0}},
 }
 DEFAULT_MODEL = "claude"
 QUESTION = ("Investigate our claims (ExplanationOfBenefit) for billing fraud, waste or abuse. "
@@ -89,7 +103,17 @@ def capped(tool: BaseTool, limit: int = MAX_RESULT_CHARS) -> BaseTool:
     """Same tool, but results longer than `limit` characters are cut, with a note telling
     the agent how to narrow the call, so a single huge result can't fill its context."""
     async def run(**kwargs):
-        text = as_text(await tool.ainvoke(kwargs))
+        # Each MCP call starts the stdio server; the pipe occasionally breaks (seen with four
+        # parallel fhir_read calls). Retry, then hand the error to the agent instead of ending the run.
+        for attempt in range(3):
+            try:
+                text = as_text(await tool.ainvoke(kwargs))
+                break
+            except Exception as exc:
+                if attempt == 2:
+                    detail = "; ".join(f"{type(e).__name__}: {e}" for e in getattr(exc, "exceptions", [exc]))
+                    return f"[TOOL ERROR after 3 attempts: {detail[:300]}. Try the call again or a different one.]"
+                await asyncio.sleep(0.5 * (attempt + 1))
         if len(text) <= limit:
             return text
         return (text[:limit] + f"\n\n[TRUNCATED: the result was {len(text):,} characters; only the first "
@@ -118,13 +142,13 @@ def chat_model(name: str):
     """The chat model for a MODELS entry."""
     spec = MODELS[name]
     if spec["provider"] == "anthropic":
-        return ChatAnthropic(model=spec["model"], max_tokens=16000,
-                             thinking={"type": "adaptive", "display": "summarized"})
+        return ChatAnthropic(model=spec["model"], max_tokens=16000, **spec["kwargs"])
     from langchain_openai import ChatOpenAI  # only needed for OpenAI-compatible providers
-    key = os.getenv(spec["api_key_env"])
+    key = os.getenv(spec["api_key_env"]) or os.getenv(spec.get("api_key_alt", ""))
     if not key:
         raise RuntimeError(f"{spec['api_key_env']} is not set (needed for model '{name}')")
-    return ChatOpenAI(model=spec["model"], base_url=spec["base_url"], api_key=key, max_tokens=8000, temperature=0)
+    return ChatOpenAI(model=spec["model"], base_url=spec.get("base_url"), api_key=key, max_tokens=8000,
+                      **spec["kwargs"])
 
 
 def build(tools: list, model_name: str = DEFAULT_MODEL):

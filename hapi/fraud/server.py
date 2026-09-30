@@ -168,7 +168,8 @@ def models() -> dict:
     import os
     return {"default": DEFAULT_MODEL, "models": [
         {"id": name, "model": spec["model"],
-         "available": bool(os.getenv(spec.get("api_key_env", "ANTHROPIC_API_KEY")))}
+         "available": bool(os.getenv(spec.get("api_key_env", "ANTHROPIC_API_KEY"))
+                           or os.getenv(spec.get("api_key_alt", "")))}
         for name, spec in MODELS.items()]}
 
 
