@@ -59,6 +59,24 @@ median and he looked normal (1.15x instead of 6.08x).
 
 ## Results (2026-09-29)
 
+**What the agent was and wasn't told.** It was not told which providers, services,
+dates or amounts to look at; it found those itself and confirmed them in the raw
+records. But the scheme *types* were given away by the design:
+
+- the required findings format lists them: `"scheme": "upcoding | impossible_day | after_death | duplicates | other"`;
+- the analytics tools map one-to-one onto the planted schemes (`find_duplicate_claims`,
+  `claims_after_patient_death`, `provider_daily_load` for the impossible day,
+  `service_cost_by_provider` for upcoding), and the system prompt describes them;
+- `service_cost_by_provider` was changed to compare against *other* providers after
+  a first version missed the upcoding, with the answer known.
+
+So this shows the agent matching providers to a checklist of fraud types, with correct
+amounts and evidence, not open-ended discovery. A fairer test would drop the scheme
+names from the output format, replace the one-per-scheme tools with a generic
+group-and-aggregate tool, and plant schemes nothing mentions (e.g. unbundling, a
+referral ring, excessive units).
+
+
 Planted vs found, latest run (`20260930T030348Z-c12551`; the other two completed runs match):
 
 | Planted scheme | Planted | Agent found | Match |
