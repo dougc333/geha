@@ -88,6 +88,27 @@ default, so the tools loaded the claims from before the planting and the agent (
 found nothing at level 1. HAPI's search cache is now off (`docker-compose.yml`) and the
 tools send `Cache-Control: no-cache`.
 
+## Running the agent on another model (`--model`)
+
+The agent's model is a small registry in `agent.py` (`MODELS`), selectable in the app
+(dropdown next to Run), in `ladder.py --model`, and in `POST /api/runs {"model": ...}`:
+
+| Option | Model | Notes |
+|---|---|---|
+| `claude` (default) | Claude Opus 5.5 (Anthropic API) | summarized reasoning in the trace; tool results capped at 30,000 characters |
+| `nous` | `Hermes-4-405B` on [Nous Portal](https://portal.nousresearch.com) (OpenAI-compatible, `https://inference-api.nousresearch.com/v1`) | needs `NOUS_API_KEY`; override the model id or URL with `NOUS_MODEL` / `NOUS_BASE_URL`; tool results capped at 8,000 characters for the smaller context window |
+
+```bash
+python ladder.py --model nous          # same five levels, labelled graph/Hermes-4-405B in the ladder table
+```
+
+Everything else is shared: graph, tools, MCP server, trace, scoring. The Nous option is
+wired and unit-checked (client, endpoint, missing-key error) but **has not been run**:
+no Nous key was available. Expect no reasoning summaries unless the API returns
+`reasoning_content`, and check that the findings JSON parses before trusting a score
+(the parser accepts a fenced or a bare `{"findings": ...}` object). Check the current
+model ids at the portal.
+
 ## Tools the agent chooses from
 
 | Tool | Kind | What it returns |
