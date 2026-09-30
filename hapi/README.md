@@ -138,3 +138,33 @@ matching each member's exact RxCUI: D-0292-2025 (metformin ER 500 mg, lot 426034
 foreign tablets) and D-0471-2025 (acetaminophen 325 mg, lot AEF124004A, cGMP). Both
 checked against api.fda.gov. Synthea prescriptions have no NDC or lot, so whether a
 member got the recalled lot needs pharmacy claims.
+
+## Fraud investigation demo and difficulty ladder
+
+[`fraud/`](fraud/README.md) has a LangGraph agent that investigates this server's claims
+for billing fraud, choosing among the read-only FHIR MCP tools and six claims-analytics
+tools, with a React app that shows its reasoning, tool choices and results live
+(`fraud/run_server.sh`, http://localhost:8765).
+
+Synthea's claims contain no fraud, so `fraud/seed_fraud.py --level 1-5` plants it at five
+difficulty levels, and `fraud/ladder.py` runs the agent on each and scores it by provider.
+
+**Difficulty ladder results (2026-09-30, one run per level, so indicative only):**
+
+| Level | What's planted | Guilty providers found | Schemes described | Innocent providers accused | Tool calls | Time |
+|---|---|---:|---:|---:|---:|---:|
+| 1 Obvious | upcoding at ~6x peers, a 26-visit day, visits after death, exact duplicates | 2/2 | 4/4 | 0 | 25 | 71 s |
+| 2 Subtle | 1.6x upcoding on half a provider's claims, 14 visits in 10 hours, duplicates re-billed a day later, visits 2-3 weeks after death | 2/2 | 3/4 | 0 | 21 | 80 s |
+| 3 Spread thin | six existing Synthea providers: one exact duplicate each, or three claims at 2.5x | 5/6 | 5/6 | 0 | 24 | 77 s |
+| 4 Unnamed schemes | unbundling, weekly therapy for 26 weeks, phantom patients (no tool covers these) | 2/3 | 2/3 | 0 | 31 | 86 s |
+| 5 Clean | nothing | n/a | n/a | **0** | 33 | 70 s |
+
+- **Found without a dedicated tool:** unbundling (one blood count billed as four tests)
+  and the weekly therapy.
+- **Missed:** the next-day re-billing (level 2), one provider's three 2.5x claims
+  (level 3), the phantom patients (level 4).
+- **No innocent provider was accused at any level**, including the clean one.
+- Levels 1-3 map onto the analytics tools, so 4 and 5 are the fairer tests. The agent
+  describes schemes in its own words. About $6 of Claude usage per pass.
+
+Details, caveats and how to run it: [`fraud/README.md`](fraud/README.md).
