@@ -237,24 +237,30 @@ innocent providers accused.
 - **The gain is paid for in effort:** with lessons, DeepSeek made 3-4 times as many tool
   calls and read about 10 times as many input tokens.
 
-**Cost.** Same five held-out cases, at list prices without prompt caching: Opus 5.5 at
-$4 / $20 per million input / output tokens, DeepSeek V4 Pro on Nous at $0.94 / $1.89.
+**Cost.** Same five held-out cases. DeepSeek V4 Pro figures are from the Nous Portal
+billing, which charged $3.01 for 09:00-10:00 and $4.01 for 10:00-11:00 PDT on 2026-09-30:
+$7.02 for the whole loop (5 baseline, 5 train and 5 test runs). The billing is hourly, so
+each hour was split across the runs in it in proportion to their tokens. Opus 5.5 figures are
+estimates at list price ($4 / $20 per million input / output tokens), not yet checked
+against the Anthropic console.
 
 | | Guilty found | Innocent accused | Score | Cost, 5 cases | Cost per case | Time per case |
 |---|---:|---:|---:|---:|---:|---:|
-| Opus 5.5, no lessons | 13/13 | 0 | **13** | $7.36 | $1.47 | 1-2 min |
-| Opus 5.5, with lessons | 12/13 | 0 | 12 | $11.42 | $2.28 | 1-2 min |
-| DeepSeek V4 Pro, no lessons | 3/13 | 14 | −11 | $2.14 | $0.43 | 4-11 min |
-| DeepSeek V4 Pro, with lessons | 11/13 | 0 | **11** | $19.91 | $3.98 | 5-8 min |
+| Opus 5.5, no lessons | 13/13 | 0 | **13** | ~$7.36 (estimate) | ~$1.47 | 1-2 min |
+| Opus 5.5, with lessons | 12/13 | 0 | 12 | ~$11.42 (estimate) | ~$2.28 | 1-2 min |
+| DeepSeek V4 Pro, no lessons | 3/13 | 14 | −11 | ~$0.41 (billed) | ~$0.08 | 4-11 min |
+| DeepSeek V4 Pro, with lessons | 11/13 | 0 | **11** | ~$3.11 (billed) | ~$0.62 | 5-8 min |
 
-The lessons brought DeepSeek close to Opus on accuracy but not on cost: they make it run
-every screen on every provider (82-173 tool calls per case), and each call re-sends the whole
-conversation, so input grew from 2.1 M to 20.8 M tokens. With lessons it cost about 2.7 times
-as much as plain Opus for a slightly lower score. Prompt caching would lower both bills, since
-most input is the re-sent conversation. The reflector (five Opus calls, under $1, paid once at
-training time) is not included. Ways to keep the accuracy for less: cap tool calls, have the
-reflector write targeted lessons rather than "check everything", or add a cost term to the
-loop's score so a lesson has to pay for itself.
+The lessons raised DeepSeek's input from 2.1 M to 20.8 M tokens (they make it run every screen
+on every provider, 82-173 tool calls per case), so its cost per case went up about eightfold.
+It still cost about 40% of plain Opus per case, for a score of 11 against 13. The billed cost
+was about 16-19% of DeepSeek's list price, because most of each request is the conversation
+re-sent from the previous step, which the portal charges at its cached-input rate. An earlier
+version of this table priced DeepSeek at list price ($3.98 per case with lessons) and
+overstated it about sixfold. The reflector (five Opus calls, under $1, paid once at training
+time) is not included. Ways to keep the accuracy for less: cap tool calls, have the reflector
+write targeted lessons rather than "check everything", or add a cost term to the loop's score
+so a lesson has to pay for itself.
 
 How far this goes: one run per case, so single cells can be luck (DeepSeek's baseline swings
 between runs). The test variants reuse the training scheme types with new actors, so this
