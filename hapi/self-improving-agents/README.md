@@ -237,6 +237,25 @@ innocent providers accused.
 - **The gain is paid for in effort:** with lessons, DeepSeek made 3-4 times as many tool
   calls and read about 10 times as many input tokens.
 
+**Cost.** Same five held-out cases, at list prices without prompt caching: Opus 5.5 at
+$4 / $20 per million input / output tokens, DeepSeek V4 Pro on Nous at $0.94 / $1.89.
+
+| | Guilty found | Innocent accused | Score | Cost, 5 cases | Cost per case | Time per case |
+|---|---:|---:|---:|---:|---:|---:|
+| Opus 5.5, no lessons | 13/13 | 0 | **13** | $7.36 | $1.47 | 1-2 min |
+| Opus 5.5, with lessons | 12/13 | 0 | 12 | $11.42 | $2.28 | 1-2 min |
+| DeepSeek V4 Pro, no lessons | 3/13 | 14 | −11 | $2.14 | $0.43 | 4-11 min |
+| DeepSeek V4 Pro, with lessons | 11/13 | 0 | **11** | $19.91 | $3.98 | 5-8 min |
+
+The lessons brought DeepSeek close to Opus on accuracy but not on cost: they make it run
+every screen on every provider (82-173 tool calls per case), and each call re-sends the whole
+conversation, so input grew from 2.1 M to 20.8 M tokens. With lessons it cost about 2.7 times
+as much as plain Opus for a slightly lower score. Prompt caching would lower both bills, since
+most input is the re-sent conversation. The reflector (five Opus calls, under $1, paid once at
+training time) is not included. Ways to keep the accuracy for less: cap tool calls, have the
+reflector write targeted lessons rather than "check everything", or add a cost term to the
+loop's score so a lesson has to pay for itself.
+
 How far this goes: one run per case, so single cells can be luck (DeepSeek's baseline swings
 between runs). The test variants reuse the training scheme types with new actors, so this
 shows learning from feedback on recurring schemes, not discovery of new ones; some lessons
