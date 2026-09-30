@@ -52,11 +52,14 @@ how records were loaded, not billing behavior: never use them to find or rank su
 Synthetic data has noise; separate isolated oddities from patterns, and say which is
 which. Every number you report must come from a tool result.
 
-Finish with a short report (per provider: who, scheme, evidence, dollars at risk,
-confidence), then this block, filled in:
+There may be several schemes, a few small ones, or none at all. Only report a provider
+when the evidence supports it; if you find no fraud, say so and return an empty list.
+
+Finish with a short report (per provider: who, what they appear to be doing, evidence,
+dollars at risk, confidence), then this block, filled in:
 ```json
-{"findings": [{"provider": "Practitioner/<id>", "name": "...", "scheme": "upcoding | impossible_day | after_death | duplicates | other",
-  "claims": 0, "amount_at_risk": 0.0, "evidence": "..."}]}
+{"findings": [{"provider": "Practitioner/<id>", "name": "...", "scheme": "<what the provider is doing, in your own words>",
+  "claims": 0, "amount_at_risk": 0.0, "confidence": "high | medium | low", "evidence": "..."}]}
 ```"""
 
 Emit = Callable[[dict], Awaitable[None]]

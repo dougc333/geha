@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import type { AnswerKey, Finding, SavedRun, ToolInfo, TraceEvent } from "./types";
+import type { AnswerKey, Finding, LadderRow, SavedRun, ScoreResult, ToolInfo, TraceEvent } from "./types";
 
 type CallEvent = Extract<TraceEvent, { type: "tool_call" }>;
 type ResultEvent = Extract<TraceEvent, { type: "tool_result" }>;
@@ -18,6 +18,9 @@ const SCHEME_LABEL: Record<string, string> = {
   impossible_day: "Impossible day",
   after_death: "Billing after death",
   duplicates: "Duplicate billing",
+  unbundling: "Unbundling",
+  excessive_frequency: "Excessive frequency",
+  phantom_patients: "Phantom patients",
 };
 
 function money(n?: number) {
@@ -58,7 +61,7 @@ export default function App() {
   const [runs, setRuns] = useState<SavedRun[]>([]);
   const [key, setKey] = useState<AnswerKey | null>(null);
   const [showKey, setShowKey] = useState(false);
-  const [tab, setTab] = useState<"investigate" | "choices" | "history">("investigate");
+  const [tab, setTab] = useState<"investigate" | "choices" | "history" | "ladder">("investigate");
   const bottom = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -112,6 +115,7 @@ export default function App() {
   const done = events.find((e) => e.type === "done") as Extract<TraceEvent, { type: "done" }> | undefined;
   const error = events.find((e) => e.type === "error") as Extract<TraceEvent, { type: "error" }> | undefined;
   const lastCall = [...events].reverse().find((e) => e.type === "tool_call") as CallEvent | undefined;
+  const scoreEvent = events.find((e) => e.type === "score") as (ScoreResult & { type: "score" }) | undefined;
   const counts = useMemo(() => {
     const c: Record<string, number> = {};
     for (const e of events) if (e.type === "tool_call") c[e.name] = (c[e.name] ?? 0) + 1;
@@ -136,7 +140,7 @@ export default function App() {
               <option value="">Replay a saved run…</option>
               {runs.map((r) => (
                 <option key={r.run_id} value={r.run_id}>
-                  {r.run_id} · {r.status} · {r.tool_calls ?? "?"} calls{r.score != null ? ` · ${r.score}/${r.score_of}` : ""}
+                  {r.run_id}{r.level ? ` · L${r.level}` : ""} · {r.status} · {r.tool_calls ?? "?"} calls{r.found != null ? ` · ${r.found}/${r.guilty} found` : ""}
                 </option>
               ))}
             </select>
@@ -152,12 +156,13 @@ export default function App() {
       </header>
 
       <nav className="tabs">
-        {([["investigate", "Investigation"], ["choices", "Tool choices"], ["history", `Run history (${runs.length})`]] as const).map(([id, label]) => (
+        {([["investigate", "Investigation"], ["choices", "Tool choices"], ["history", `Run history (${runs.length})`], ["ladder", "Difficulty ladder"]] as const).map(([id, label]) => (
           <button key={id} className={tab === id ? "tab active" : "tab"} onClick={() => setTab(id)}>{label}</button>
         ))}
       </nav>
 
       {tab === "choices" && <ChoicesView steps={steps} tools={tools} counts={counts} runId={runId} />}
+      {tab === "ladder" && <LadderView onOpen={(id) => { setRunId(id); setTab("investigate"); }} />}
       {tab === "history" && (
         <HistoryView runs={runs} current={runId} onOpen={(id) => { setRunId(id); setTab("investigate"); }} onRefresh={refreshRuns} />
       )}
@@ -219,7 +224,7 @@ export default function App() {
           <h2>Findings</h2>
           {!final && <p className="muted">{status === "running" ? "Investigating…" : "No report yet."}</p>}
           {final?.findings && <FindingsTable findings={final.findings} />}
-          {key && final && <Scorecard answerKey={key} findings={final.findings ?? []} />}
+          {scoreEvent && <Scorecard result={scoreEvent} />}
           {final && (
             <details className="report">
               <summary>Full report</summary>
@@ -233,9 +238,11 @@ export default function App() {
               </button>
               {showKey && (
                 <ul>
-                  {Object.entries(key.schemes).map(([name, s]) => (
-                    <li key={name}><strong>{SCHEME_LABEL[name] ?? name}</strong> · {key.providers[s.provider]?.name} ({s.provider}) · {s.detail}</li>
-                  ))}
+                  <li><strong>Level {key.level} · {key.title}</strong>: {key.description}</li>
+                  {Object.entries(key.guilty).map(([ref, g]) => Object.entries(g.details).map(([name, detail]) => (
+                    <li key={ref + name}><strong>{SCHEME_LABEL[name] ?? name}</strong> · {g.name} ({ref}) · {detail}</li>
+                  )))}
+                  {!Object.keys(key.guilty).length && <li>No fraud planted at this level.</li>}
                 </ul>
               )}
             </div>
@@ -269,13 +276,14 @@ function FindingsTable({ findings }: { findings: Finding[] }) {
   return (
     <table className="ftable">
       <thead>
-        <tr><th>Provider</th><th>Scheme</th><th>Claims</th><th>At risk</th></tr>
+        <tr><th>Provider</th><th>Scheme (agent's words)</th><th>Conf.</th><th>Claims</th><th>At risk</th></tr>
       </thead>
       <tbody>
         {findings.map((f, i) => (
           <tr key={i} title={f.evidence}>
             <td>{f.name || f.provider}<div className="muted small">{f.provider}</div></td>
             <td>{SCHEME_LABEL[f.scheme] ?? f.scheme}</td>
+            <td>{f.confidence ?? ""}</td>
             <td className="num">{f.claims ?? ""}</td>
             <td className="num">{money(f.amount_at_risk)}</td>
           </tr>
@@ -285,27 +293,27 @@ function FindingsTable({ findings }: { findings: Finding[] }) {
   );
 }
 
-function Scorecard({ answerKey, findings }: { answerKey: AnswerKey; findings: Finding[] }) {
-  const rows = Object.entries(answerKey.schemes).map(([name, s]) => {
-    const hit = findings.find((f) => f.provider === s.provider && f.scheme === name);
-    return { name, s, hit };
-  });
-  const found = rows.filter((r) => r.hit).length;
-  const extra = findings.filter((f) => !rows.some((r) => r.hit === f));
+function Scorecard({ result }: { result: ScoreResult }) {
   return (
     <div className="scorecard">
-      <h3>Against the planted answer key: {found}/{rows.length}</h3>
-      {rows.map(({ name, s, hit }) => (
-        <div key={name} className={`score ${hit ? "hit" : "miss"}`}>
-          <span>{hit ? "✓" : "✗"}</span>
+      <h3>{result.guilty ? `Guilty providers found: ${result.found}/${result.guilty}` : "No fraud was planted at this level"}
+        {result.schemes_total ? ` · schemes described ${result.schemes_described}/${result.schemes_total}` : ""}
+        {` · false accusations: ${result.false_positive_providers}`}</h3>
+      {result.providers.map((p) => (
+        <div key={p.provider} className={`score ${p.found ? "hit" : "miss"}`}>
+          <span>{p.found ? "✓" : "✗"}</span>
           <div>
-            <strong>{SCHEME_LABEL[name]}</strong> · {answerKey.providers[s.provider]?.name}
-            <div className="muted small">planted {s.claims} claims{s.paid ? ` · ${money(s.paid)} paid` : ""}{s.overpaid ? ` · ${money(s.overpaid)} overpaid` : ""}
-              {hit ? ` · agent: ${hit.claims ?? "?"} claims, ${money(hit.amount_at_risk)}` : ""}</div>
+            <strong>{p.name}</strong> <span className="muted small">{p.provider}</span>
+            <div className="muted small">{Object.entries(p.schemes).map(([name, ok]) => `${ok ? "✓" : "✗"} ${SCHEME_LABEL[name] ?? name}`).join(" · ")}</div>
           </div>
         </div>
       ))}
-      {extra.length > 0 && <div className="muted small">Other findings not in the key: {extra.map((f) => `${f.name || f.provider} (${f.scheme})`).join("; ")}</div>}
+      {result.false_positives.map((f, i) => (
+        <div key={i} className="score miss">
+          <span>!</span>
+          <div><strong>{f.name || f.provider}</strong> accused, not planted <span className="muted small">{f.confidence} · {f.scheme}</span></div>
+        </div>
+      ))}
     </div>
   );
 }
@@ -413,14 +421,16 @@ function HistoryView({ runs, current, onOpen, onRefresh }: { runs: SavedRun[]; c
       <p className="muted">Every run is saved to <code>hapi/fraud/traces/&lt;run id&gt;.json</code>, including failed ones. Click a run to replay its trace.</p>
       <table className="history">
         <thead>
-          <tr><th>Run</th><th>Status</th><th>Score</th><th>Steps</th><th>Tool calls</th><th>Time</th><th>Tokens in / out</th><th>Question / error</th></tr>
+          <tr><th>Run</th><th>Level</th><th>Status</th><th>Found</th><th>False acc.</th><th>Steps</th><th>Tool calls</th><th>Time</th><th>Tokens in / out</th><th>Question / error</th></tr>
         </thead>
         <tbody>
           {runs.map((r) => (
             <tr key={r.run_id} className={r.run_id === current ? "current" : ""} onClick={() => onOpen(r.run_id)}>
               <td><code>{r.run_id}</code></td>
+              <td>{r.level ? `${r.level} ${r.level_title ?? ""}` : "–"}</td>
               <td><span className={`badge ${r.status}`}>{r.status}</span></td>
-              <td className="num">{r.score != null ? `${r.score}/${r.score_of}` : "–"}</td>
+              <td className="num">{r.found != null ? (r.guilty ? `${r.found}/${r.guilty}` : "n/a") : "–"}</td>
+              <td className="num">{r.false_positive_providers ?? "–"}</td>
               <td className="num">{r.model_steps ?? "–"}</td>
               <td className="num">{r.tool_calls ?? "–"}</td>
               <td className="num">{r.seconds != null ? `${r.seconds}s` : "–"}</td>
@@ -428,7 +438,44 @@ function HistoryView({ runs, current, onOpen, onRefresh }: { runs: SavedRun[]; c
               <td className={r.error ? "err-text" : "muted"}>{r.error ?? r.question}</td>
             </tr>
           ))}
-          {!runs.length && <tr><td colSpan={8} className="muted">No saved runs yet.</td></tr>}
+          {!runs.length && <tr><td colSpan={10} className="muted">No saved runs yet.</td></tr>}
+        </tbody>
+      </table>
+    </section>
+  );
+}
+
+function LadderView({ onOpen }: { onOpen: (id: string) => void }) {
+  const [rows, setRows] = useState<LadderRow[]>([]);
+  useEffect(() => {
+    fetch("/api/ladder").then((r) => r.json()).then(setRows).catch(() => setRows([]));
+  }, []);
+  return (
+    <section className="page">
+      <h2>Difficulty ladder</h2>
+      <p className="muted">Each level plants fraud of increasing difficulty (level 5 plants none) and runs the agent on it.
+        Scoring is by provider: guilty providers named, whether the scheme described matches, and innocent providers accused.
+        Run with <code>python ladder.py</code>; click a row to replay its trace.</p>
+      <table className="history">
+        <thead>
+          <tr><th>Level</th><th>Agent</th><th>Guilty found</th><th>Schemes described</th><th>False accusations</th>
+            <th>Tool calls</th><th>Time</th><th>Tokens in / out</th><th>Run</th></tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr key={r.run_id} onClick={() => onOpen(r.run_id)}>
+              <td><strong>{r.level}</strong> {r.title}</td>
+              <td>{r.agent}</td>
+              <td className="num">{r.error ? <span className="err-text">error</span> : r.guilty ? `${r.found}/${r.guilty}` : "n/a"}</td>
+              <td className="num">{r.schemes_total ? `${r.schemes_described}/${r.schemes_total}` : "n/a"}</td>
+              <td className={`num ${r.false_positive_providers ? "err-text" : ""}`}>{r.false_positive_providers}</td>
+              <td className="num">{r.tool_calls ?? "–"}</td>
+              <td className="num">{r.seconds != null ? `${r.seconds}s` : "–"}</td>
+              <td className="num">{r.input_tokens != null ? `${r.input_tokens.toLocaleString()} / ${r.output_tokens?.toLocaleString()}` : "–"}</td>
+              <td><code>{r.run_id}</code></td>
+            </tr>
+          ))}
+          {!rows.length && <tr><td colSpan={9} className="muted">No ladder runs yet.</td></tr>}
         </tbody>
       </table>
     </section>

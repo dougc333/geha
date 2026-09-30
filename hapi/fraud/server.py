@@ -28,6 +28,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from agent import QUESTION, investigate
+from scoring import score
 
 HERE = Path(__file__).resolve().parent
 TRACES = HERE / "traces"
@@ -50,17 +51,22 @@ async def execute(run_id: str) -> None:
         run["events"].append(event)
         run["changed"].set()
 
+    key = load_key()
     try:
         await investigate(run["question"], emit)
     except Exception as exc:  # the UI shows the error; the trace is still saved
         await emit({"type": "error", "message": f"{type(exc).__name__}: {exc}",
                     "detail": traceback.format_exc()[-2000:]})
     finally:
+        final = next((e for e in run["events"] if e["type"] == "final"), None)
+        if key and final:
+            await emit({"type": "score", **score(final.get("findings"), key)})
         run["done"] = True
         run["changed"].set()
         (TRACES / f"{run_id}.json").write_text(json.dumps({
             "run_id": run_id, "question": run["question"], "started": run["started"].isoformat(),
-            "events": run["events"]}, indent=1, default=str))
+            "level": key.get("level") if key else None, "level_title": key.get("title") if key else None,
+            "agent": "graph", "events": run["events"]}, indent=1, default=str))
 
 
 @app.post("/api/runs")
@@ -72,34 +78,36 @@ async def start_run(request: RunRequest) -> dict:
     return {"run_id": run_id}
 
 
-def summarize(data: dict, key: dict | None) -> dict:
-    """One row of the run history: outcome, effort, and score against the answer key."""
+def load_key() -> dict | None:
+    path = HERE / "answer_key.json"
+    key = json.loads(path.read_text()) if path.exists() else None
+    return key if key and "guilty" in key else None
+
+
+def summarize(data: dict) -> dict:
+    """One row of the run history: outcome, effort, and the score saved with the run."""
     events = data["events"]
     done = next((e for e in events if e["type"] == "done"), {})
     error = next((e for e in events if e["type"] == "error"), None)
     final = next((e for e in events if e["type"] == "final"), None)
-    calls = [e for e in events if e["type"] == "tool_call"]
-    findings = (final or {}).get("findings") or []
-    score = None
-    if key and final:
-        score = sum(any(f.get("provider") == s["provider"] and f.get("scheme") == name for f in findings)
-                    for name, s in key["schemes"].items())
+    scored = next((e for e in events if e["type"] == "score"), None)
     return {"run_id": data["run_id"], "started": data.get("started"), "question": data["question"][:160],
+            "level": data.get("level"), "level_title": data.get("level_title"), "agent": data.get("agent"),
             "status": "error" if error else ("done" if done else "incomplete"),
             "error": error["message"][:300] if error else None,
             "model_steps": done.get("model_steps") or max((e.get("step", 0) for e in events), default=0),
-            "tool_calls": len(calls), "seconds": done.get("seconds") or (events[-1]["t"] if events else None),
+            "tool_calls": sum(1 for e in events if e["type"] == "tool_call"),
+            "seconds": done.get("seconds") or (events[-1]["t"] if events else None),
             "input_tokens": (done.get("usage") or {}).get("input_tokens"),
             "output_tokens": (done.get("usage") or {}).get("output_tokens"),
-            "findings": len(findings), "score": score,
-            "score_of": len(key["schemes"]) if key else None}
+            "findings": len((final or {}).get("findings") or []),
+            "found": scored["found"] if scored else None, "guilty": scored["guilty"] if scored else None,
+            "false_positive_providers": scored["false_positive_providers"] if scored else None}
 
 
 @app.get("/api/runs")
 def list_runs() -> list[dict]:
-    key_path = HERE / "answer_key.json"
-    key = json.loads(key_path.read_text()) if key_path.exists() else None
-    return [summarize(json.loads(p.read_text()), key) for p in sorted(TRACES.glob("*.json"), reverse=True)]
+    return [summarize(json.loads(p.read_text())) for p in sorted(TRACES.glob("*.json"), reverse=True)]
 
 
 @app.get("/api/runs/{run_id}/events")
@@ -133,8 +141,16 @@ async def stream_events(run_id: str) -> StreamingResponse:
 
 @app.get("/api/answer_key")
 def answer_key() -> dict:
-    key = json.loads((HERE / "answer_key.json").read_text())
-    return {"providers": key["providers"], "schemes": key["schemes"]}
+    key = load_key()
+    if not key:
+        raise HTTPException(404, "no answer key; run seed_fraud.py")
+    return {k: key[k] for k in ("level", "title", "description", "guilty")}
+
+
+@app.get("/api/ladder")
+def ladder() -> list[dict]:
+    path = HERE / "ladder_results.json"
+    return json.loads(path.read_text()) if path.exists() else []
 
 
 @app.get("/api/default_question")

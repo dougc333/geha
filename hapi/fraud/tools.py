@@ -22,7 +22,9 @@ FHIR = "http://localhost:8080/fhir"
 def _search_all(query: str) -> list[dict]:
     out, url = [], f"{FHIR}/{query}"
     while url:
-        with urllib.request.urlopen(url, timeout=120) as resp:
+        # no-cache: HAPI otherwise reuses a search result for 60 s, which hid newly planted claims
+        req = urllib.request.Request(url, headers={"Cache-Control": "no-cache"})
+        with urllib.request.urlopen(req, timeout=120) as resp:
             bundle = json.load(resp)
         out += [e["resource"] for e in bundle.get("entry", [])]
         url = next((l["url"] for l in bundle.get("link", []) if l["relation"] == "next"), None)

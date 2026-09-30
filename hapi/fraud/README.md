@@ -17,7 +17,7 @@ React UI (ui/)  ──SSE──►  server.py (FastAPI :8765)  ──►  agent.
 ```bash
 cd /Users/dc/geha/hapi && docker compose up -d        # HAPI with the Synthea data (see ../README.md)
 cd fraud
-python3 seed_fraud.py                                 # plant the fraud; writes answer_key.json
+python3 seed_fraud.py --level 1                       # plant level 1 (see the ladder below); writes answer_key.json
 (cd ui && npm install && npm run build)               # React app -> ui/dist
 ./run_server.sh                                       # http://localhost:8765  (needs ANTHROPIC_API_KEY)
 ```
@@ -40,6 +40,53 @@ data marks them; `answer_key.json` (git-ignored, ids differ per server) has the 
 | | impossible day | 26 one-hour visits between 07:00 and 20:00 on 2026-03-12 |
 | Dr. Lena Moravec, Heartland Home Health | billing after death | 12 home visits for 3 deceased patients, 1-10 months after death |
 | | duplicate billing | 10 visits each submitted twice (same patient, day, service, amount) |
+
+## Difficulty ladder (`seed_fraud.py --level N`, `ladder.py`)
+
+`seed_fraud.py --level 1-5` plants one level (removing any earlier planting);
+`ladder.py` plants each level, runs the agent, scores it and saves the trace
+(`ladder_results.json`/`.md`, and the app's **Difficulty ladder** tab).
+
+| Level | What's planted |
+|---|---|
+| 1 Obvious | upcoding at ~6x peers, a 26-visit day, visits after death, exact duplicates (2 providers) |
+| 2 Subtle | upcoding at 1.6x on half of one provider's claims, 14 visits in a 10-hour window, duplicates re-billed **one day later**, visits 2-3 weeks after death |
+| 3 Spread thin | six **existing** Synthea providers: one exact duplicate each (3) or three claims at 2.5x their own price (3) |
+| 4 Unnamed | schemes no tool covers: unbundling (one blood count billed as 4 tests), weekly therapy for 26 weeks, 12 **phantom patients** (no other history, one address) |
+| 5 Clean | nothing |
+
+For the ladder the agent describes schemes in its own words (the scheme names were
+removed from its output format) and may report nothing. Scoring (`scoring.py`) is by
+provider: guilty providers named, whether the description matches the scheme (keyword
+check), and innocent providers accused.
+
+**Results, one run per level (2026-09-30):**
+
+| Level | Guilty found | Schemes described | Innocent accused | Tool calls | Time |
+|---|---:|---:|---:|---:|---:|
+| 1 Obvious | 2/2 | 4/4 | 0 | 25 | 71 s |
+| 2 Subtle | 2/2 | 3/4 | 0 | 21 | 80 s |
+| 3 Spread thin | 5/6 | 5/6 | 0 | 24 | 77 s |
+| 4 Unnamed | 2/3 | 2/3 | 0 | 31 | 86 s |
+| 5 Clean | n/a | n/a | **0** | 33 | 70 s |
+
+- **Level 2:** missed the next-day re-billing (the duplicate tool matches exact dates);
+  it did find that provider's visits after death.
+- **Level 3:** missed one provider's three 2.5x claims. It flagged the three single
+  duplicates at low confidence ("isolated"). It caught one upcoding provider partly
+  through a seeding artifact: a cloned claim of a patient who died in 2019, moved to
+  2026, also became a claim after death.
+- **Level 4:** found unbundling and the weekly therapy with no tool built for either;
+  missed the phantom patients.
+- **Level 5:** accused no one.
+
+One run per level: treat these as indicative, not rates. Levels 1-3 still map onto the
+analytics tools; levels 4-5 are the fairer tests.
+
+The first ladder attempt was invalid: HAPI reuses search results for 60 seconds by
+default, so the tools loaded the claims from before the planting and the agent (correctly)
+found nothing at level 1. HAPI's search cache is now off (`docker-compose.yml`) and the
+tools send `Cache-Control: no-cache`.
 
 ## Tools the agent chooses from
 
