@@ -59,6 +59,20 @@ median and he looked normal (1.15x instead of 6.08x).
 
 ## Results (2026-09-29)
 
+Planted vs found, latest run (`20260930T030348Z-c12551`; the other two completed runs match):
+
+| Planted scheme | Planted | Agent found | Match |
+|---|---|---|---|
+| **Upcoding** · Dr. Grayle | 45 claims, $28,051.75 paid, ~6x peers | 45 claims at **6.08x** the peer median; **$23,435.55** at risk | ✓ Claim count exact; the dollar figure is the overpayment above the peer rate, not total paid |
+| **Impossible day** · Dr. Grayle | 26 one-hour visits on 2026-03-12 | **27** claims, 1,620 minutes (27 hours) that day | ✓ 27 is correct: one randomly dated upcoded claim also fell on that day, so the answer key's 26 was off by one |
+| **Billing after death** · Dr. Moravec | 12 home visits for 3 deceased patients, $1,381.53 | 12 claims, **$1,381.53** | ✓ Exact |
+| **Duplicate billing** · Dr. Moravec | 10 pairs, $1,129.25 overpaid | 10 pairs, **$1,129.25** | ✓ Exact; the first run listed all 10 pairs by claim id |
+
+It also avoided false positives: Synthea's own claims dated after death (6 death-certificate
+claims from other providers) were treated as normal paperwork, and high-dollar providers
+with one or two patients were checked and dismissed. The comparison is by provider, scheme,
+counts and dollars; not every one of the 77 planted claim ids appears in each report.
+
 Three runs, each 24-26 tool calls and 67-79 s, found all four schemes with the planted
 dollar amounts: after-death $1,381.53 and duplicates $1,129.25 exactly; upcoding
 45 claims at 6.08x peers ($23,435.55 above the peer rate). The agent reported 27 claims on
