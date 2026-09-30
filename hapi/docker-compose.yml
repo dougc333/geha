@@ -19,6 +19,8 @@ services:
       # URLs and are loaded as transactions; allow large bundles and external refs.
       hapi.fhir.allow_external_references: "true"
       hapi.fhir.bulk_export_enabled: "false"
+      # No search-result caching: the fraud ladder plants data and searches it seconds later.
+      hapi.fhir.reuse_cached_search_results_millis: "0"
     depends_on:
       db:
         condition: service_healthy
