@@ -1,5 +1,14 @@
 # Claims fraud investigation: agent + live trace
 
+> **This folder is a copy of `../fraud` for the self-improving agent work.** The original is
+> unchanged. New here: `improve.py` (the loop), `lessons.md` (the lessons the agent has
+> learned and that passed the test), `learned.py` and `learned_tools/` (tools the agent writes
+> for itself, held for approval), `seed_fraud.py --variant N` (same schemes, different
+> providers, patients and dates), and `lessons` / `variant` arguments in `agent.py` and
+> `ladder.py`. See "Self-improvement" below. Both folders plant into the same HAPI server:
+> run `python3 ../fraud/seed_fraud.py --reset` before planting from here, and
+> `python3 ../fraud/seed_fraud.py --level 1` afterwards to restore the original demo.
+
 A LangGraph agent (Claude Opus 5.5) investigates the local HAPI claims data for billing
 fraud, choosing among raw FHIR tools (via the langcare MCP server) and claims-analytics
 tools. Every step streams to a React app: Claude's reasoning summary, the tool it picked
@@ -134,6 +143,124 @@ false-accusation gap is the consistent difference.
 
 HIPAA may prevent outside LLMs from accessing the data. Anonymizing the data may remove
 the evidence signals needed for fraud analysis.
+
+## Self-improvement
+
+The agent's model never changes. What improves is what it is given: its prompt, and
+(optionally) its tools. Both are learned from graded runs: every planted case has an answer
+key, so after each investigation the loop knows which providers were missed and which
+innocent ones were accused.
+
+### Strategy 1: a lessons file added to the prompt (built, run)
+
+```bash
+python improve.py --model nous              # DeepSeek V4 Pro: train on variant 1, test on variant 2, levels 1-5
+python improve.py --model claude --train 2:1,4:1 --test 2:2,4:2
+python ladder.py --lessons --model nous     # use the accepted lessons in an ordinary ladder run
+```
+
+1. **Baseline:** the test cases (level:variant) with no lessons.
+2. **Train:** each train case is run with the lessons so far and graded. A reflector model
+   (Claude Opus 5.5) reads the tool calls, the report and the grading, and rewrites the
+   lessons: at most 10, general, with no names, ids, dates or amounts (lessons containing any
+   are dropped in code).
+3. **Test:** the test cases again, with the lessons appended to the system prompt under
+   "Lessons from earlier investigations".
+4. **Keep or reject:** score = guilty providers found minus innocent providers accused, so
+   accusing everyone does not pay. The lessons are written to `lessons.md` only if the test
+   score beats the baseline, otherwise to `lessons_rejected.md`.
+
+A lesson is plain text: a person can read, edit or delete any line, and the base prompt in
+`agent.py` is untouched. Advice to call an existing tool differently ("also search a few
+days apart") is a lesson and needs no approval.
+
+### Strategy 2: tool creation (built, not run)
+
+```bash
+python improve.py --model nous --tools      # the loop above, plus tool writing during training
+python improve.py --toolsmith <run id>      # write a tool from one saved run in traces/
+python learned.py list                      # pending / approved / rejected tools
+python learned.py show <name>               # read the code and its check result
+python learned.py approve <name>            # only now can the agent call it
+```
+
+When a graded run missed a scheme that no existing tool could have surfaced (for example
+duplicates re-billed a day later, which the exact-date duplicate tool cannot see), the
+reflector writes one new analytics function over the claims table:
+
+1. **Validate** (`learned.validate`): one function `name(rows, names, deaths, ...)` with a
+   docstring and typed defaults; imports only from `collections`, `datetime`, `itertools`,
+   `json`, `math`, `re`, `statistics`; no `open`, `eval`, underscore attributes, classes,
+   `try` or `while`.
+2. **Run in isolation** (`learned.run`): a separate Python process with an empty
+   environment, a temporary working directory, a reduced set of builtins, an import filter,
+   and CPU and 20-second time limits.
+3. **Check against the miss:** run with its defaults on the case it was written for, it must
+   surface the missed provider, or it is discarded. The number of providers it lists with the
+   planted claims removed is recorded, so a reviewer can see how noisy it is.
+4. **Stop for approval:** it is saved to `learned_tools/` as **pending**. The agent loads
+   only approved tools; a person reads the code (`learned.py show`) and approves or rejects it.
+
+The guard in steps 1-2 is a basic check, not a security boundary, which is why step 4 is
+required. A learned tool sees only the claims table (patient, provider, service, date,
+minutes, amount); it cannot use patient addresses, so it could not catch phantom patients
+who share one. Status: the validator and the isolated runner were tested offline (a valid
+near-duplicate tool passed; six unsafe snippets and a network import, a file read and a
+runaway loop were refused). No tool has been written by the reflector yet.
+
+### Benchmark (2026-09-30)
+
+Train cases: levels 1-5, variant 1. Test cases: levels 1-5, variant 2 (different providers,
+patients and dates from training). One run per case. Each cell: guilty providers found,
+innocent providers accused.
+
+| Test case | Opus 5.5, no lessons | Opus 5.5, with lessons | DeepSeek V4 Pro, no lessons | DeepSeek V4 Pro, with lessons |
+|---|---|---|---|---|
+| 1 Obvious | 2/2, 0 | 2/2, 0 | 1/2, 0 | 2/2, 0 |
+| 2 Subtle | 2/2, 0 | 2/2, 0 | 0/2, 5 | 2/2, 0 |
+| 3 Spread thin | 6/6, 0 | 5/6, 0 | 2/6, 2 | 6/6, 0 |
+| 4 Unnamed | 3/3, 0 | 3/3, 0 | 0/3, 5 | 1/3, 0 |
+| 5 Clean | 0 accused | 0 accused | 2 accused | 0 accused |
+| **Score** (found − accused) | **13** | **12** | **−11** | **11** |
+| Found / accused, all levels | 13/13, 0 | 12/13, 0 | 3/13, 14 | 11/13, 0 |
+| Tool calls per case | 19-40 | 19-35 | 26-43 | 82-173 |
+| Input tokens, 5 cases | 1.7 M | 2.7 M | 2.1 M | 20.8 M |
+| Decision | | rejected | | **kept** (`lessons.md`) |
+
+- **DeepSeek V4 Pro improved from −11 to 11:** 3 → 11 of 13 guilty providers found, and
+  14 → 0 innocent providers accused, on cases it had not trained on. Its ten lessons are in
+  `lessons.md`; most push it to run every screen on every provider and to rule out
+  legitimate explanations (fee schedules, expensive ongoing care, post-death certification)
+  before accusing.
+- **Opus 5.5 had nothing to gain:** its baseline was already perfect, so the lessons were
+  rejected (one provider missed at level 3, within run-to-run noise).
+- **The gain is paid for in effort:** with lessons, DeepSeek made 3-4 times as many tool
+  calls and read about 10 times as many input tokens.
+
+**Cost.** Same five held-out cases, at list prices without prompt caching: Opus 5.5 at
+$4 / $20 per million input / output tokens, DeepSeek V4 Pro on Nous at $0.94 / $1.89.
+
+| | Guilty found | Innocent accused | Score | Cost, 5 cases | Cost per case | Time per case |
+|---|---:|---:|---:|---:|---:|---:|
+| Opus 5.5, no lessons | 13/13 | 0 | **13** | $7.36 | $1.47 | 1-2 min |
+| Opus 5.5, with lessons | 12/13 | 0 | 12 | $11.42 | $2.28 | 1-2 min |
+| DeepSeek V4 Pro, no lessons | 3/13 | 14 | −11 | $2.14 | $0.43 | 4-11 min |
+| DeepSeek V4 Pro, with lessons | 11/13 | 0 | **11** | $19.91 | $3.98 | 5-8 min |
+
+The lessons brought DeepSeek close to Opus on accuracy but not on cost: they make it run
+every screen on every provider (82-173 tool calls per case), and each call re-sends the whole
+conversation, so input grew from 2.1 M to 20.8 M tokens. With lessons it cost about 2.7 times
+as much as plain Opus for a slightly lower score. Prompt caching would lower both bills, since
+most input is the re-sent conversation. The reflector (five Opus calls, under $1, paid once at
+training time) is not included. Ways to keep the accuracy for less: cap tool calls, have the
+reflector write targeted lessons rather than "check everything", or add a cost term to the
+loop's score so a lesson has to pay for itself.
+
+How far this goes: one run per case, so single cells can be luck (DeepSeek's baseline swings
+between runs). The test variants reuse the training scheme types with new actors, so this
+shows learning from feedback on recurring schemes, not discovery of new ones; some lessons
+name the schemes (weekly schedules, shared addresses). The next step is repeated runs and a
+held-out level of new schemes, such as decoys and patients shared across providers.
 
 ## Tools the agent chooses from
 

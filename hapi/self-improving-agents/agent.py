@@ -86,6 +86,13 @@ dollars at risk, confidence), then this block, filled in:
   "claims": 0, "amount_at_risk": 0.0, "confidence": "high | medium | low", "evidence": "..."}]}
 ```"""
 
+LESSONS_HEADER = """
+
+Lessons from earlier investigations. Each was written after a past investigation was
+graded against confirmed outcomes. Apply them where they fit; they are general guidance,
+not facts about the current data:
+"""
+
 Emit = Callable[[dict], Awaitable[None]]
 MAX_RESULT_CHARS = 30_000  # ~8k tokens; one unbounded fhir_search returned 3.8 MB and overflowed the context
 
@@ -129,13 +136,16 @@ def fhir_client() -> MultiServerMCPClient:
         "args": ["-config", str(HAPI / "langcare-config.yaml")]}})
 
 
-async def load_tools(limit: int = MAX_RESULT_CHARS) -> list:
+async def load_tools(limit: int = MAX_RESULT_CHARS, learned_statuses: tuple[str, ...] = ("approved",)) -> list:
+    """FHIR MCP tools, the analytics tools, and the learned tools a person has approved
+    (learned.py; improve.py --auto-approve also passes "trial" for its own test runs)."""
+    import learned  # here, not at the top: learned.py imports tools, which agent.py also imports
     fhir = [t for t in await fhir_client().get_tools() if t.name in {"fhir_search", "fhir_read"}]
-    return [capped(t, limit) for t in fhir + ANALYTIC_TOOLS]
+    return [capped(t, limit) for t in fhir + ANALYTIC_TOOLS + learned.langchain_tools(learned_statuses)]
 
 
 def tool_source(name: str) -> str:
-    return "fhir-mcp" if name.startswith("fhir_") else "analytics"
+    return "fhir-mcp" if name.startswith("fhir_") else "analytics"  # learned tools show with the analytics tools
 
 
 def chat_model(name: str):
@@ -151,11 +161,12 @@ def chat_model(name: str):
                       **spec["kwargs"])
 
 
-def build(tools: list, model_name: str = DEFAULT_MODEL):
+def build(tools: list, model_name: str = DEFAULT_MODEL, lessons: str = ""):
     model = chat_model(model_name).bind_tools(tools)
+    system = SYSTEM + (LESSONS_HEADER + lessons.strip() if lessons.strip() else "")
 
     async def agent(state: MessagesState):
-        return {"messages": [await model.ainvoke([SystemMessage(SYSTEM), *state["messages"]])]}
+        return {"messages": [await model.ainvoke([SystemMessage(system), *state["messages"]])]}
 
     graph = StateGraph(MessagesState)
     graph.add_node("agent", agent)
@@ -183,14 +194,16 @@ def parse_findings(text: str) -> list[dict] | None:
     return None
 
 
-async def investigate(question: str, emit: Emit, model_name: str = DEFAULT_MODEL) -> None:
+async def investigate(question: str, emit: Emit, model_name: str = DEFAULT_MODEL, lessons: str = "",
+                      learned_statuses: tuple[str, ...] = ("approved",)) -> None:
     started = time.perf_counter()
     spec = MODELS[model_name]
-    tools = await load_tools(spec["result_chars"])
+    tools = await load_tools(spec["result_chars"], learned_statuses)
     await emit({"type": "run_start", "question": question, "model": spec["model"], "model_option": model_name,
+                "lessons": lessons.strip(),
                 "tools": [{"name": t.name, "source": tool_source(t.name),
                            "description": (t.description or "").split("\n")[0][:200]} for t in tools]})
-    app = build(tools, model_name)
+    app = build(tools, model_name, lessons)
     step, calls, tool_started, final_text = 0, 0, {}, ""
     usage = {"input_tokens": 0, "output_tokens": 0}
     async for event in app.astream_events({"messages": [("user", question)]}, version="v2",
