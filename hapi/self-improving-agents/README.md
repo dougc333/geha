@@ -212,7 +212,7 @@ Lines 2, 4 and 5 describe scheme types that also appear in the test cases (split
 schedules, shared addresses): this is why the benchmark shows learning on recurring schemes,
 not discovery of new ones.
 
-### Strategy 2: tool creation (built, run; tools pending approval)
+### Strategy 2: tool creation (built, run; one tool approved, two rejected)
 
 ```bash
 python improve.py --model nous --tools      # the loop above, plus tool writing during training
@@ -250,14 +250,15 @@ runaway loop were refused.
 
 `improve.py --toolsmith` on the four DeepSeek V4 Pro training runs that missed schemes
 (levels 1-4, variant 1), with Claude Opus 5.5 as the reflector. The code is in
-`learned_tools/`; nothing is approved, so the agent cannot use any of it yet.
+`learned_tools/`. After review on 2026-09-30, `find_next_day_rebills` was approved (the
+agent now loads it) and the other two were rejected (kept for reference, never loaded).
 
-| Tool | Written for | Check | Providers listed with the planted fraud removed | Review |
+| Tool | Written for | Check | Providers listed with the planted fraud removed | Status and review |
 |---|---|---|---:|---|
-| `find_next_day_rebills` | Level 2: duplicates re-billed one day later | Passed (1 of 2 missed providers surfaced) | 5 | Approve: pairs 1 day apart, reports each provider's rate against all others |
-| `split_same_day_claims` | Level 4: one lab visit billed as 4 separate claims | Passed (1 of 3) | 23 | Tighten first: noisy, as Synthea bills pharmacy and procedures as separate same-day claims; output of about 72,000 characters is cut to 30,000 |
-| `provider_price_outliers` | Level 3: 3 claims at 2.5x the provider's own usual price | Passed (1 of 1) | 23 | Reject or tighten: at 2x with a single claim it flags many innocent providers |
-| (discarded) | Level 1: a 26-visit day | Failed: did not surface the provider | 2 | – |
+| `find_next_day_rebills` | Level 2: duplicates re-billed one day later | Passed (1 of 2 missed providers surfaced) | 5 | **Approved 2026-09-30.** Pairs 1 day apart, reports each provider's rate against all others |
+| `split_same_day_claims` | Level 4: one lab visit billed as 4 separate claims | Passed (1 of 3) | 23 | **Rejected.** Noisy: noisy, as Synthea bills pharmacy and procedures as separate same-day claims; output of about 72,000 characters is cut to 30,000 |
+| `provider_price_outliers` | Level 3: 3 claims at 2.5x the provider's own usual price | Passed (1 of 1) | 23 | **Rejected.** Noisy: at 2x with a single claim it flags many innocent providers |
+| (discarded) | Level 1: a 26-visit day | Failed: did not surface the provider | 2 | Discarded automatically |
 
 - Each tool targets the one scheme in its run that no existing tool covered. The other
   misses (busy days, overpricing against peers) already have tools that DeepSeek did not use
@@ -265,8 +266,39 @@ runaway loop were refused.
 - The check shows a tool finds the planted fraud. The last number column shows how many
   providers it would put in front of the agent on data without it. A noisy tool could bring
   back the false accusations the lessons removed, so that column matters most when deciding.
-- Next: approve or reject, then run DeepSeek with `lessons.md` plus the approved tools on the
-  held-out variant to see whether the tools add anything.
+- Next: run DeepSeek with `lessons.md` plus the approved tool on the held-out variant to see
+  whether the tool adds anything beyond the lessons.
+
+**Why each tool was approved or rejected**
+
+- **`find_next_day_rebills`: approved.**
+  - **Fills a real gap:** `find_duplicate_claims` matches exact dates only, so a claim
+    re-billed the next day slips past it.
+  - **Checks exactly that:** the same provider, patient, service and amount, 1 day apart.
+    Same-day repeats are left to the existing tool.
+  - **Low noise:** 5 providers listed on data without the planted fraud, and each is shown
+    with its own re-bill rate against the rate of all other providers, so the agent can
+    tell a pattern from an isolated pair.
+  - **Safe code:** one function using standard-library modules, reading the claims table
+    only.
+- **`split_same_day_claims`: rejected.**
+  - **Too noisy:** it lists 23 providers on clean data. Synthea bills pharmacy, lab and
+    procedure lines as separate same-day claims for ordinary visits, so "3 or more claims
+    for one patient on one day" is normal here.
+  - **Too long:** its output, about 72,000 characters, would be cut to 30,000 before the
+    agent sees it.
+  - **Risk:** it would put many innocent providers in front of the agent, which is what the
+    lessons worked to stop. The unbundling it was written for is already covered by a lesson
+    (group claims by provider, patient and date).
+- **`provider_price_outliers`: rejected.**
+  - **The idea is sound:** it compares a provider to its own usual price, which the peer
+    comparison misses.
+  - **Too noisy:** with its defaults (2x the provider's median, one claim enough) it lists
+    23 providers on clean data. Synthetic prices vary widely within a provider (dose and unit
+    tiers), so single claims at 2x are common and innocent.
+  - **Risk:** it would bring back the false accusations DeepSeek made before the lessons.
+  - **Next time:** a version requiring several claims at 2.5x or more, checked again for
+    noise, could be reconsidered.
 
 ### Benchmark (2026-09-30)
 
