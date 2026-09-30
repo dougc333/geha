@@ -212,7 +212,7 @@ Lines 2, 4 and 5 describe scheme types that also appear in the test cases (split
 schedules, shared addresses): this is why the benchmark shows learning on recurring schemes,
 not discovery of new ones.
 
-### Strategy 2: tool creation (built, not run)
+### Strategy 2: tool creation (built, run; tools pending approval)
 
 ```bash
 python improve.py --model nous --tools      # the loop above, plus tool writing during training
@@ -242,9 +242,31 @@ reflector writes one new analytics function over the claims table:
 The guard in steps 1-2 is a basic check, not a security boundary, which is why step 4 is
 required. A learned tool sees only the claims table (patient, provider, service, date,
 minutes, amount); it cannot use patient addresses, so it could not catch phantom patients
-who share one. Status: the validator and the isolated runner were tested offline (a valid
-near-duplicate tool passed; six unsafe snippets and a network import, a file read and a
-runaway loop were refused). No tool has been written by the reflector yet.
+who share one. The validator and the isolated runner were also tested offline: a valid
+near-duplicate tool passed, and six unsafe snippets, a network import, a file read and a
+runaway loop were refused.
+
+#### First tool-writing run (2026-09-30)
+
+`improve.py --toolsmith` on the four DeepSeek V4 Pro training runs that missed schemes
+(levels 1-4, variant 1), with Claude Opus 5.5 as the reflector. The code is in
+`learned_tools/`; nothing is approved, so the agent cannot use any of it yet.
+
+| Tool | Written for | Check | Providers listed with the planted fraud removed | Review |
+|---|---|---|---:|---|
+| `find_next_day_rebills` | Level 2: duplicates re-billed one day later | Passed (1 of 2 missed providers surfaced) | 5 | Approve: pairs 1 day apart, reports each provider's rate against all others |
+| `split_same_day_claims` | Level 4: one lab visit billed as 4 separate claims | Passed (1 of 3) | 23 | Tighten first: noisy, as Synthea bills pharmacy and procedures as separate same-day claims; output of about 72,000 characters is cut to 30,000 |
+| `provider_price_outliers` | Level 3: 3 claims at 2.5x the provider's own usual price | Passed (1 of 1) | 23 | Reject or tighten: at 2x with a single claim it flags many innocent providers |
+| (discarded) | Level 1: a 26-visit day | Failed: did not surface the provider | 2 | – |
+
+- Each tool targets the one scheme in its run that no existing tool covered. The other
+  misses (busy days, overpricing against peers) already have tools that DeepSeek did not use
+  well; that is a job for lessons, not new code.
+- The check shows a tool finds the planted fraud. The last number column shows how many
+  providers it would put in front of the agent on data without it. A noisy tool could bring
+  back the false accusations the lessons removed, so that column matters most when deciding.
+- Next: approve or reject, then run DeepSeek with `lessons.md` plus the approved tools on the
+  held-out variant to see whether the tools add anything.
 
 ### Benchmark (2026-09-30)
 
