@@ -1,0 +1,91 @@
+{
+ "provider_price_outliers": {
+  "status": "pending",
+  "created_utc": "2026-09-30T18:12:38+00:00",
+  "description": "Find claims paid far above the SAME provider's usual price for the same service.\n\nFor every (provider, service code) pair with at least min_claims paid claims, the\nprovider's own median paid amount is the baseline. Claims paid at ratio times that\nmedian or more are flagged. This catches a provider who occasionally inflates the\nprice of a service they normally bill at a normal rate. Such claims hide in averages\nand in peer comparisons. The tool scans all services at once, so no service code is\nneeded.\n\nUse same_line_count=True to build baselines only from claims with the same number of\nlines, so multi-service claims don't distort the comparison.\n\nResults are grouped by provider and service. They are ranked by number of flagged\nclaims, then by excess paid over the baseline. Each group lists the claim ids, the\namounts paid, the baseline median and the ratios.",
+  "params": {
+   "ratio": [
+    "float",
+    2.0
+   ],
+   "min_claims": [
+    "int",
+    4
+   ],
+   "min_flagged": [
+    "int",
+    1
+   ],
+   "same_line_count": [
+    "bool",
+    false
+   ]
+  },
+  "written_for": "three claims billed at 2.5x the provider's usual price for service 448337001",
+  "check": {
+   "passed": true,
+   "surfaced_missed_providers": 1,
+   "missed_providers": 1,
+   "providers_listed_with_planted_claims_removed": 23,
+   "output_chars": 21102
+  }
+ },
+ "find_next_day_rebills": {
+  "status": "pending",
+  "created_utc": "2026-09-30T18:13:47+00:00",
+  "description": "Find claims re-billed shortly after an identical claim.\n\nA match is the same provider, same patient, same service code and same paid amount, with\nservice dates 1 to max_gap_days apart. Same-day repeats are excluded, because\nfind_duplicate_claims already covers them. Use this to catch duplicate billing that is\nshifted by a day so that exact-date duplicate checks miss it.\n\nProviders need at least min_pairs such pairs to be listed. They are ranked by the number\nof re-billed claims, then by the amount paid on them. Each provider lists its pairs\n(original eob, re-billed eob, dates, amount), its re-bill rate over all claims, and the\nrate across all other providers for comparison.",
+  "params": {
+   "max_gap_days": [
+    "int",
+    1
+   ],
+   "min_pairs": [
+    "int",
+    2
+   ],
+   "min_paid": [
+    "float",
+    0.01
+   ]
+  },
+  "written_for": "14 one-hour visits between 07:00 and 17:00 on 2026-05-24; 20 of 40 Consultation for treatment (procedure) claims paid 1.6x the peer median; 6 visits re-billed one day later (same patient, service, amount)",
+  "check": {
+   "passed": true,
+   "surfaced_missed_providers": 1,
+   "missed_providers": 2,
+   "providers_listed_with_planted_claims_removed": 5,
+   "output_chars": 25078
+  }
+ },
+ "split_same_day_claims": {
+  "status": "pending",
+  "created_utc": "2026-09-30T18:14:33+00:00",
+  "description": "Find visits split into several separate claims (possible unbundling or claim splitting).\nA visit is one provider, one patient and one service date. A visit is flagged when it is\nbilled as min_claims or more separate claims. Providers need at least min_visits flagged\nvisits to be listed. For each provider the tool reports: flagged visits, all visits, the\nflagged share, the flagged share across all other providers (peer rate), the average\nclaims per flagged visit, the share of single-line claims and the total paid on flagged\nvisits. Each flagged visit lists the patient, date, claim ids (eob), distinct service\ncodes, amount paid and the minutes between the first and last start time. Providers are\nranked by number of flagged visits, then by how far their rate exceeds the peer rate.\nUse this when one encounter (for example a lab draw) may have been billed as several\nsame-day claims. find_duplicate_claims misses this because the split claims have\ndifferent codes or amounts.",
+  "params": {
+   "min_claims": [
+    "int",
+    3
+   ],
+   "min_visits": [
+    "int",
+    3
+   ],
+   "max_visits_listed": [
+    "int",
+    15
+   ],
+   "top_n": [
+    "int",
+    25
+   ]
+  },
+  "written_for": "12 lab visits each billed as 4 separate same-day claims; 5 patients billed physical therapy every week for 26 weeks; 12 patients with no other history, all at one address, 3 visits each",
+  "check": {
+   "passed": true,
+   "surfaced_missed_providers": 1,
+   "missed_providers": 3,
+   "providers_listed_with_planted_claims_removed": 23,
+   "output_chars": 71695
+  }
+ }
+}

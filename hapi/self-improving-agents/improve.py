@@ -173,6 +173,11 @@ async def toolsmith(run_id: str, reflector: str) -> None:
     try:
         key = seed_fraud.plant(trace["level"], trace.get("variant", 0))
         analytics.claims.cache_clear()
+        # Re-planting creates new Practitioner resources: point the run's score at the new
+        # references (same names, since a variant always draws the same identities).
+        by_name = {g["name"]: ref for ref, g in key["guilty"].items()}
+        for p in next(e for e in trace["events"] if e["type"] == "score")["providers"]:
+            p["provider"] = p["provider"] if p["provider"] in key["guilty"] else by_name.get(p["name"], p["provider"])
         name = await write_tool(trace, key, reflector)
     finally:
         seed_fraud.reset()
