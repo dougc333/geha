@@ -174,6 +174,44 @@ A lesson is plain text: a person can read, edit or delete any line, and the base
 `agent.py` is untouched. Advice to call an existing tool differently ("also search a few
 days apart") is a lesson and needs no approval.
 
+#### The lessons as the agent sees them
+
+The base system prompt in `agent.py` is never edited. On a run with lessons, this block is
+appended to its end: a fixed header from `agent.py` (`LESSONS_HEADER`), then the lines of
+`lessons.md`. These are the lessons the DeepSeek V4 Pro loop kept on 2026-09-30 (test score
+−11 → 11):
+
+```
+Lessons from earlier investigations. Each was written after a past investigation was
+graded against confirmed outcomes. Apply them where they fit; they are general guidance,
+not facts about the current data:
+
+- Finding one suspicious provider is not a reason to stop. Run every screen on all providers, including low-volume and low-total ones and those already flagged, since one provider may run several schemes. Screens: exact and near duplicates, same-day claim splitting, post-death claims, daily load, price versus peers and versus the provider's own usual price, repetitive schedules, and patient-roster anomalies. Favor breadth over paging through one provider's claims.
+- Treat duplicates as confirmed double billing: the same patient, service code and amount submitted more than once on the same day or a few days apart. Also look for claim splitting, where one encounter is billed as several separate paid claims by the same provider on the same day. An exact-duplicate tool will not catch splitting, so group claims by provider, patient and date and report it as its own scheme. Several zero-paid medication or pharmacy lines alongside one paid professional claim are not splitting.
+- Do not dismiss an impossible daily workload as a data artifact, but first exclude claims whose long billing periods inflate daily totals and zero-paid ancillary lines that inflate claim counts. Then check encounters with real start and end times on a single day and flag many hour-long paid visits packed into one day. Run this on every provider.
+- Look for rigid repetitive schedules: several patients receiving the same service from one provider at a fixed interval (for example weekly) for many months with identical cadence. Real care varies in timing and tapers off, so this suggests billing for services not rendered.
+- Look for phantom patients: groups of patients who appear only with one provider, have no other clinical history, share an address, and each have a similar small number of visits. Check patient demographics and whether these patients were seen by any other provider.
+- A cluster of claims at a multiple of a provider's usual price for a code is a flag only if that elevated price is unusual among peers. When unrelated providers show the same discrete set of price tiers or identical amounts for a code, treat it as a legitimate fee schedule or dose/unit tiering. Do not accuse on it, even if the EOB shows no quantity field.
+- Distinguish legitimate post-death services, such as a death certification filed shortly after death, from visits or treatments billed long after death, and flag only the second kind. For any claim that is anomalous for one reason, also check its price against the provider's usual price and peers for that code, and describe every scheme it shows.
+- High total paid concentrated on a single patient is not fraud by itself; expensive ongoing care such as immunotherapy or prenatal care naturally looks like this. Before accusing, confirm that this provider's line prices exceed what other providers are paid for the same codes.
+- Do not use identifier formats, facility names or claim dates to decide which providers are suspicious or ordinary. Judge every provider by billing behavior.
+- If every screen comes back clean after exclusions, with prices at peer levels, no true duplicates or splitting, only legitimate post-death claims and normal rosters, report no findings rather than forcing a weak accusation.
+```
+
+The lines do three jobs:
+
+- **Search wider (lines 1-5):** run every screen on every provider, and look for specific
+  patterns (near duplicates, same-day splitting, packed days, rigid weekly schedules, phantom
+  patients). This is why DeepSeek's tool calls rose from about 30 to 80-170 per case.
+- **Don't accuse on innocent explanations (lines 6-9):** shared fee schedules, expensive
+  ongoing care, death certification after death, and identifiers or dates. These target the
+  false accusations, which fell from 14 to 0.
+- **Permission to find nothing (line 10):** report no findings when every screen is clean.
+
+Lines 2, 4 and 5 describe scheme types that also appear in the test cases (splitting, weekly
+schedules, shared addresses): this is why the benchmark shows learning on recurring schemes,
+not discovery of new ones.
+
 ### Strategy 2: tool creation (built, not run)
 
 ```bash
