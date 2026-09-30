@@ -62,10 +62,13 @@ export default function App() {
   const [key, setKey] = useState<AnswerKey | null>(null);
   const [showKey, setShowKey] = useState(false);
   const [tab, setTab] = useState<"investigate" | "choices" | "history" | "ladder">("investigate");
+  const [models, setModels] = useState<{ id: string; model: string; available: boolean }[]>([]);
+  const [model, setModel] = useState("claude");
   const bottom = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetch("/api/default_question").then((r) => r.json()).then((d) => setQuestion(d.question));
+    fetch("/api/models").then((r) => r.json()).then((d) => { setModels(d.models); setModel(d.default); }).catch(() => setModels([]));
     fetch("/api/answer_key").then((r) => r.json()).then(setKey).catch(() => setKey(null));
     refreshRuns();
   }, []);
@@ -102,7 +105,7 @@ export default function App() {
     const r = await fetch("/api/runs", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ question }),
+      body: JSON.stringify({ question, model }),
     });
     const d = await r.json();
     setRunId(d.run_id);
@@ -136,6 +139,13 @@ export default function App() {
             <button className="primary" onClick={start} disabled={status === "running" || question.length < 5}>
               {status === "running" ? "Investigating…" : "Run investigation"}
             </button>
+            <select value={model} onChange={(e) => setModel(e.target.value)} title="Model the agent runs on">
+              {models.map((m) => (
+                <option key={m.id} value={m.id} disabled={!m.available}>
+                  {m.model}{m.available ? "" : " (no API key)"}
+                </option>
+              ))}
+            </select>
             <select value={runId ?? ""} onChange={(e) => e.target.value && setRunId(e.target.value)}>
               <option value="">Replay a saved run…</option>
               {runs.map((r) => (
@@ -148,6 +158,7 @@ export default function App() {
         </div>
         <div className="stats">
           <Stat label="status" value={status} />
+          {startEvent && <Stat label="model" value={startEvent.model} />}
           <Stat label="model steps" value={String(steps.length)} />
           <Stat label="tool calls" value={String(Object.values(counts).reduce((a, b) => a + b, 0))} />
           <Stat label="elapsed" value={`${(done?.seconds ?? elapsed).toFixed(1)}s`} />

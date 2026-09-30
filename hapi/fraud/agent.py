@@ -16,6 +16,7 @@ providers or schemes to look for. Events (dicts) are passed to `emit` as they ha
 from __future__ import annotations
 
 import json
+import os
 import re
 import time
 from pathlib import Path
@@ -31,7 +32,16 @@ from langgraph.prebuilt import ToolNode, tools_condition
 from tools import ANALYTIC_TOOLS
 
 HAPI = Path(__file__).resolve().parent.parent
-MODEL = "claude-opus-5-5"
+# Models the agent can run on. "nous" is Nous Research's Portal (OpenAI-compatible; Hermes
+# models): set NOUS_API_KEY, and optionally NOUS_MODEL / NOUS_BASE_URL. result_chars is the
+# cap on each tool result, smaller where the context window is smaller.
+MODELS = {
+    "claude": {"provider": "anthropic", "model": "claude-opus-5-5", "result_chars": 30_000},
+    "nous": {"provider": "openai-compatible", "model": os.getenv("NOUS_MODEL", "Hermes-4-405B"),
+             "base_url": os.getenv("NOUS_BASE_URL", "https://inference-api.nousresearch.com/v1"),
+             "api_key_env": "NOUS_API_KEY", "result_chars": 8_000},
+}
+DEFAULT_MODEL = "claude"
 QUESTION = ("Investigate our claims (ExplanationOfBenefit) for billing fraud, waste or abuse. "
             "Identify the providers most likely involved, the schemes, the evidence (claim ids, "
             "dates, amounts) and the dollars at risk. Check your suspicions against the raw "
@@ -95,18 +105,30 @@ def fhir_client() -> MultiServerMCPClient:
         "args": ["-config", str(HAPI / "langcare-config.yaml")]}})
 
 
-async def load_tools() -> list:
+async def load_tools(limit: int = MAX_RESULT_CHARS) -> list:
     fhir = [t for t in await fhir_client().get_tools() if t.name in {"fhir_search", "fhir_read"}]
-    return [capped(t) for t in fhir + ANALYTIC_TOOLS]
+    return [capped(t, limit) for t in fhir + ANALYTIC_TOOLS]
 
 
 def tool_source(name: str) -> str:
     return "fhir-mcp" if name.startswith("fhir_") else "analytics"
 
 
-def build(tools: list):
-    model = ChatAnthropic(model=MODEL, max_tokens=16000,
-                          thinking={"type": "adaptive", "display": "summarized"}).bind_tools(tools)
+def chat_model(name: str):
+    """The chat model for a MODELS entry."""
+    spec = MODELS[name]
+    if spec["provider"] == "anthropic":
+        return ChatAnthropic(model=spec["model"], max_tokens=16000,
+                             thinking={"type": "adaptive", "display": "summarized"})
+    from langchain_openai import ChatOpenAI  # only needed for OpenAI-compatible providers
+    key = os.getenv(spec["api_key_env"])
+    if not key:
+        raise RuntimeError(f"{spec['api_key_env']} is not set (needed for model '{name}')")
+    return ChatOpenAI(model=spec["model"], base_url=spec["base_url"], api_key=key, max_tokens=8000, temperature=0)
+
+
+def build(tools: list, model_name: str = DEFAULT_MODEL):
+    model = chat_model(model_name).bind_tools(tools)
 
     async def agent(state: MessagesState):
         return {"messages": [await model.ainvoke([SystemMessage(SYSTEM), *state["messages"]])]}
@@ -121,22 +143,30 @@ def build(tools: list):
 
 
 def parse_findings(text: str) -> list[dict] | None:
-    match = re.search(r"```json\s*(\{.*?\})\s*```", text, re.S)
-    if not match:
-        return None
-    try:
-        return json.loads(match.group(1)).get("findings")
-    except json.JSONDecodeError:
-        return None
+    """The findings list from the report: a ```json block, or a bare {"findings": ...} object
+    (not every model fences its JSON)."""
+    candidates = re.findall(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.S)
+    bare = text.rfind('{"findings"')
+    if bare >= 0:
+        candidates.append(text[bare:text.rfind("}") + 1])
+    for candidate in candidates:
+        try:
+            findings = json.loads(candidate).get("findings")
+        except (json.JSONDecodeError, AttributeError):
+            continue
+        if isinstance(findings, list):
+            return findings
+    return None
 
 
-async def investigate(question: str, emit: Emit) -> None:
+async def investigate(question: str, emit: Emit, model_name: str = DEFAULT_MODEL) -> None:
     started = time.perf_counter()
-    tools = await load_tools()
-    await emit({"type": "run_start", "question": question, "model": MODEL,
+    spec = MODELS[model_name]
+    tools = await load_tools(spec["result_chars"])
+    await emit({"type": "run_start", "question": question, "model": spec["model"], "model_option": model_name,
                 "tools": [{"name": t.name, "source": tool_source(t.name),
                            "description": (t.description or "").split("\n")[0][:200]} for t in tools]})
-    app = build(tools)
+    app = build(tools, model_name)
     step, calls, tool_started, final_text = 0, 0, {}, ""
     usage = {"input_tokens": 0, "output_tokens": 0}
     async for event in app.astream_events({"messages": [("user", question)]}, version="v2",
@@ -149,6 +179,9 @@ async def investigate(question: str, emit: Emit) -> None:
             usage["input_tokens"] += meta.get("input_tokens", 0)
             usage["output_tokens"] += meta.get("output_tokens", 0)
             content = message.content if isinstance(message.content, list) else [{"type": "text", "text": message.content}]
+            reasoning = (getattr(message, "additional_kwargs", None) or {}).get("reasoning_content")
+            if isinstance(reasoning, str) and reasoning.strip():  # OpenAI-compatible reasoning models
+                await emit({"type": "thinking", "step": step, "text": reasoning.strip()[:4000]})
             for block in content:
                 if block.get("type") == "thinking" and block.get("thinking", "").strip():
                     await emit({"type": "thinking", "step": step, "text": block["thinking"].strip()})

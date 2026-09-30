@@ -27,7 +27,7 @@ from fastapi.responses import FileResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
-from agent import QUESTION, investigate
+from agent import DEFAULT_MODEL, MODELS, QUESTION, investigate
 from scoring import score
 
 HERE = Path(__file__).resolve().parent
@@ -41,6 +41,7 @@ runs: dict[str, dict] = {}
 
 class RunRequest(BaseModel):
     question: str = Field(default=QUESTION, min_length=5, max_length=2000)
+    model: str = Field(default=DEFAULT_MODEL, pattern="^[a-z0-9_-]{1,32}$")
 
 
 async def execute(run_id: str) -> None:
@@ -53,7 +54,7 @@ async def execute(run_id: str) -> None:
 
     key = load_key()
     try:
-        await investigate(run["question"], emit)
+        await investigate(run["question"], emit, run["model"])
     except Exception as exc:  # the UI shows the error; the trace is still saved
         await emit({"type": "error", "message": f"{type(exc).__name__}: {exc}",
                     "detail": traceback.format_exc()[-2000:]})
@@ -66,13 +67,16 @@ async def execute(run_id: str) -> None:
         (TRACES / f"{run_id}.json").write_text(json.dumps({
             "run_id": run_id, "question": run["question"], "started": run["started"].isoformat(),
             "level": key.get("level") if key else None, "level_title": key.get("title") if key else None,
-            "agent": "graph", "events": run["events"]}, indent=1, default=str))
+            "agent": "graph" if run["model"] == DEFAULT_MODEL else f"graph/{MODELS[run['model']]['model']}",
+            "model": MODELS[run["model"]]["model"], "events": run["events"]}, indent=1, default=str))
 
 
 @app.post("/api/runs")
 async def start_run(request: RunRequest) -> dict:
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid.uuid4().hex[:6]
-    runs[run_id] = {"question": request.question, "events": [], "done": False,
+    if request.model not in MODELS:
+        raise HTTPException(422, f"unknown model '{request.model}'; choose one of {sorted(MODELS)}")
+    runs[run_id] = {"question": request.question, "model": request.model, "events": [], "done": False,
                     "changed": asyncio.Event(), "started": datetime.now(timezone.utc)}
     asyncio.create_task(execute(run_id))
     return {"run_id": run_id}
@@ -117,7 +121,7 @@ async def stream_events(run_id: str) -> StreamingResponse:
         if not path.exists():
             raise HTTPException(404, "unknown run")
         saved = json.loads(path.read_text())
-        runs[run_id] = {"question": saved["question"], "events": saved["events"], "done": True,
+        runs[run_id] = {"question": saved["question"], "model": DEFAULT_MODEL, "events": saved["events"], "done": True,
                         "changed": asyncio.Event(), "started": datetime.fromisoformat(saved["started"])}
 
     async def events():
@@ -156,6 +160,16 @@ def ladder() -> list[dict]:
 @app.get("/api/default_question")
 def default_question() -> dict:
     return {"question": QUESTION}
+
+
+@app.get("/api/models")
+def models() -> dict:
+    """Model options for the UI, and whether each one's API key is configured."""
+    import os
+    return {"default": DEFAULT_MODEL, "models": [
+        {"id": name, "model": spec["model"],
+         "available": bool(os.getenv(spec.get("api_key_env", "ANTHROPIC_API_KEY")))}
+        for name, spec in MODELS.items()]}
 
 
 if DIST.exists():
