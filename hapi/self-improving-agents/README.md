@@ -227,6 +227,26 @@ innocent providers accused.
 | Input tokens, 5 cases | 1.7 M | 2.7 M | 2.1 M | 20.8 M |
 | Decision | | rejected | | **kept** (`lessons.md`) |
 
+**How the score works.** Score = guilty providers found − innocent providers accused,
+summed over the five test cases. The best possible is 13 (all 13 guilty providers found, no
+one wrongly accused); there is no floor. A negative score means more innocent providers were
+accused than guilty ones found. DeepSeek's −11 without lessons, case by case:
+
+| Test case | Found | Innocent accused | Contribution |
+|---|---:|---:|---:|
+| 1 Obvious | 1 | 0 | +1 |
+| 2 Subtle | 0 | 5 | −5 |
+| 3 Spread thin | 2 | 2 | 0 |
+| 4 Unnamed | 0 | 5 | −5 |
+| 5 Clean | 0 | 2 | −2 |
+| **Total** | **3** | **14** | **3 − 14 = −11** |
+
+A false accusation costs a full point so that accusing everyone cannot score well; in
+practice it also means an investigation, delayed payment and possibly a dispute with an
+honest provider. Weighting it the same as a miss is a choice made here, not a standard.
+Change the weight (`net()` in `improve.py`) if a team values the two differently; the
+ranking of the four results above holds unless the weight is cut a long way.
+
 - **DeepSeek V4 Pro improved from −11 to 11:** 3 → 11 of 13 guilty providers found, and
   14 → 0 innocent providers accused, on cases it had not trained on. Its ten lessons are in
   `lessons.md`; most push it to run every screen on every provider and to rule out
