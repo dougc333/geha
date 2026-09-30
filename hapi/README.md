@@ -102,3 +102,39 @@ providers billed the most encounters".
 This setup has no authentication, no TLS and no audit trail. Use only synthetic
 data. Real member or patient data needs a BAA with the AI provider, a security
 review, audit logging, and minimum-necessary access scopes.
+
+## LangGraph agents
+
+Both use LangGraph (`StateGraph`: `agent` node where Claude picks tools, `tools_condition`
+router, `ToolNode` that runs them over MCP) and `langchain-mcp-adapters` to load MCP tools.
+
+```bash
+pip install langgraph langchain-anthropic langchain-mcp-adapters   # Python 3.12
+export ANTHROPIC_API_KEY=...
+```
+
+- **`langgraph_agent.py`**: the FHIR demo above as a graph (read-only FHIR tools).
+- **`pharmacy_agent.py`**: pharmacy review over three MCP servers, all local stdio:
+
+| Server | How it's started | Tools given to Claude |
+|---|---|---|
+| FHIR (langcare) | `bin/langcare-mcp-fhir -config langcare-config.yaml` | `fhir_search`, `fhir_read` |
+| RxNorm ([pipeworx-io/mcp-rxnorm](https://github.com/pipeworx-io/mcp-rxnorm)) → NLM RxNav | `npx -y @pipeworx/mcp-rxnorm@0.1.2` | `rxnorm_search`, `rxnorm_get_properties`, `rxnorm_related`, `rxnorm_ndc` |
+| openFDA ([cyanheads/openfda-mcp-server](https://github.com/cyanheads/openfda-mcp-server)) → api.fda.gov | `npx -y @cyanheads/openfda-mcp-server@0.7.9` with `MCP_TRANSPORT_TYPE=stdio` | `openfda_drug_profile`, `openfda_search_recalls`, `openfda_search_drug_shortages`, `openfda_get_drug_label`, `openfda_lookup_ndc` |
+
+The drug servers need Node (`npx`), no API keys. Versions are pinned: an unpinned
+`npx` picked up a cached openFDA 0.7.6 with only 7 tools (no shortages or
+drug_profile); 0.7.9 has 14 and warns it wants Node 24 but runs on Node 22. RxNorm
+runs locally rather than through the Pipeworx hosted gateway, so drug look-ups go
+straight to NLM and FDA.
+
+```bash
+python pharmacy_agent.py            # default: diabetic members' drugs, shortages, recalls since 2025
+```
+
+On 2026-09-29 (17 tool calls): 2 members, 3 active drugs (metformin ER 500 mg,
+simvastatin 10 mg, acetaminophen 325 mg), no current shortages, and one recall
+matching each member's exact RxCUI: D-0292-2025 (metformin ER 500 mg, lot 4260340,
+foreign tablets) and D-0471-2025 (acetaminophen 325 mg, lot AEF124004A, cGMP). Both
+checked against api.fda.gov. Synthea prescriptions have no NDC or lot, so whether a
+member got the recalled lot needs pharmacy claims.
