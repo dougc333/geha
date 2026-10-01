@@ -89,7 +89,7 @@
   }
  },
  "isolated_next_day_rebills": {
-  "status": "pending",
+  "status": "approved",
   "created_utc": "2026-10-01T05:23:40+00:00",
   "description": "Find likely re-billed visits: a claim copied onto the following day (same provider, patient, service code\nand amount paid) as an ISOLATED pair. Neither claim may have another identical claim within isolation_days\nbefore or after it, so daily treatment series (radiation, home health, telemedicine runs) are not counted.\nRanks providers by number of isolated re-bill pairs, then by the share of their claims involved.\nlong_series_claims shows how much of the provider's billing sits in runs of min_series_len or more\nconsecutive-day identical claims, which is context for legitimate daily care.\nUse this to catch duplicate billing shifted by a day, which same-date duplicate checks miss.",
   "params": {
