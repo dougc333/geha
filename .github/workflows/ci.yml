@@ -4,6 +4,8 @@ on:
   pull_request:
   push:
     branches: [main]
+  schedule:
+    - cron: "17 10 * * 1"
   workflow_dispatch:
 
 permissions:
@@ -28,6 +30,10 @@ jobs:
         run: uv run --no-sync python -m unittest discover -s highlevel_simulation -p 'test_*.py'
       - name: Run table-aware RAG tests
         run: uv run --no-sync python -m unittest discover -s chunking_benchmarks_RAG -p 'test_*.py'
+      - name: Run e2e_RAG retrieval metric tests
+        run: uv run --no-sync python -m unittest discover -s e2e_RAG/src -p 'test_retrieval_benchmark.py' -v
+      - name: Run e2e_RAG class tests
+        run: uv run --no-sync python -m unittest discover -s e2e_RAG/src -p 'test_class_refactor.py' -v
 
   table-rag:
     name: Standalone table RAG tests
@@ -63,3 +69,95 @@ jobs:
           uv run --no-project --python 3.12 \
             --with-requirements aws_rag/query/requirements.txt --with boto3 --with httpx --with pymupdf \
             python -m unittest discover -s aws_rag/tests -v
+
+  aws-rag-retrieval-benchmark:
+    name: aws_rag 62-question retrieval benchmark
+    # Weekly and on demand only: this job logs into AWS and reads the database URL, so it
+    # does not run on every push to main.
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.28"
+          enable-cache: true
+      - uses: aws-actions/configure-aws-credentials@v5
+        with:
+          role-to-assume: ${{ secrets.AWS_RAG_CI_ROLE_ARN }}
+          aws-region: us-west-2
+      - name: Install Python
+        run: uv python install 3.12
+      - name: Run production retrieval path without reranking
+        run: |
+          uv run --no-project --python 3.12 \
+            --with-requirements aws_rag/query/requirements.txt --with boto3 \
+            python aws_rag/evals/run_eval.py \
+              --no-rerank \
+              --no-weaviate \
+              --setups pg-hybrid-bm25 \
+              --representation ci-current \
+              --out ci_retrieval
+      - name: Enforce retrieval quality and latency budgets
+        run: |
+          python aws_rag/evals/check_thresholds.py \
+            aws_rag/evals/ci_retrieval.json
+      - name: Publish benchmark table
+        if: always()
+        run: cat aws_rag/evals/ci_retrieval.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload benchmark evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aws-rag-retrieval-results
+          path: |
+            aws_rag/evals/ci_retrieval.json
+            aws_rag/evals/ci_retrieval.md
+            aws_rag/evals/ci_retrieval_cost.json
+
+  e2e-rag-retrieval-benchmark:
+    name: e2e_RAG dense retrieval benchmark
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.28"
+          enable-cache: true
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: huggingface-bge-large-en-v1.5-v1
+      - name: Install Python
+        run: uv python install 3.12
+      - name: Run the seven-PDF dense parent-document benchmark
+        env:
+          HF_HUB_DISABLE_TELEMETRY: "1"
+          PYTHONPATH: e2e_RAG/src
+        run: |
+          uv run --no-project --python 3.12 \
+            --with-requirements e2e_RAG/evals/requirements.txt \
+            python e2e_RAG/evals/retrieval_benchmark.py \
+              --embedding-model BAAI/bge-large-en-v1.5 \
+              --out e2e_RAG/evals/ci_retrieval
+      - name: Enforce retrieval quality and latency budgets
+        run: |
+          python e2e_RAG/evals/check_retrieval_thresholds.py \
+            e2e_RAG/evals/ci_retrieval.json
+      - name: Publish benchmark table
+        if: always()
+        run: cat e2e_RAG/evals/ci_retrieval.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload benchmark evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-rag-retrieval-results
+          path: |
+            e2e_RAG/evals/ci_retrieval.json
+            e2e_RAG/evals/ci_retrieval.md

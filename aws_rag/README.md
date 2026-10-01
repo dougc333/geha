@@ -17,6 +17,11 @@ top k chunks, MRR@10 = mean of 1/rank of that page):
 | Vector alone (pgvector) | 0.55 | 0.80 | 0.65 | ~0.19 s |
 | Full-text alone (Postgres `ts_rank_cd`) | 0.30 | 0.50 | 0.39 | ~0.31 s |
 
+The table separates the retrievers, but it is not yet a complete attribution of
+the hybrid result: the eval includes vector → rerank and hybrid → rerank, but
+not BM25 → rerank. Run that missing condition with the same 50-candidate budget
+before claiming that fusion, rather than the reranker, causes the full gain.
+
 These are with 103 papers. With 202 papers (10,167 chunks) the chatbot scores
 0.78 / 0.93 / 0.84 and Weaviate + rerank 0.78 / 0.95 / 0.85; see
 [Scaling from 103 to 202 papers](#retrieval-eval).
@@ -44,6 +49,27 @@ chunk with its caption, so the value sits next to its row and column labels. A
 first Docling version dropped figure captions and footnotes and cost ordinary
 questions some rank-1 hits (hit@1 0.72); keeping them restored it to 0.75 (one
 question from flat's 0.78). Details: [Tables: Docling pilot](#tables-docling-pilot).
+
+### Document-awareness benchmark summary
+
+All rows below use the chatbot retrieval path (BM25 + vector → RRF → rerank).
+The table consolidates the table and figure experiments described later in this
+README; it is a summary, not an additional eval run.
+
+| Document representation | Eval subset | Answer accuracy | hit@1 | hit@5 | MRR@10 |
+|---|---|---:|---:|---:|---:|
+| Flat PDF text, not table-aware | Table questions (n=13) | 8/13 = 0.62 | 0.54 | 0.85 | 0.65 |
+| Table-aware Docling chunks | Table questions (n=13) | **11/13 = 0.85** | **0.85** | **1.00** | **0.90** |
+| Text-only, not figure-aware | Figure questions (n=9) | 0/9 = 0.00 | 0.78 | 1.00 | 0.87 |
+| Figure-aware image descriptions | Figure questions (n=9) | **7/9 = 0.78** | **1.00** | **1.00** | **1.00** |
+| Table + figure aware | Full mixed suite (n=62) | See per-type rows | 0.77 | 0.95 | 0.85 |
+
+The table and figure rows are different question subsets and come from separate
+rollout phases; they are not a full factorial comparison. In particular, the
+text-only figure system often retrieved the correct page but could not answer
+because the required value existed only inside the image. A future controlled
+matrix should run BM25, vector, and hybrid retrieval—with and without the same
+reranker—against flat-text, table-aware, figure-aware, and combined indexes.
 
 A serverless RAG demo on AWS. When a PDF is uploaded to S3, it is split into
 page-aware text chunks (one JSONL file per document), and those chunks are
@@ -321,6 +347,19 @@ per 1M tokens), so add one there if you change `GenerationModel`. A follow-up
 chat message comes to about $0.0012, mostly rerank. Prices apply to traces
 received after they're set.
 
+#### AWS account cost snapshot
+
+The AWS console showed **$4.10 month-to-date** and a **$4.11 month-end
+forecast** on September 30, 2026:
+
+![AWS Cost and Usage dashboard for September 2026](docs/aws-cost-september-2026.png)
+
+This is an account-level screenshot, not an isolated `aws_rag` benchmark. It
+includes Bedrock plus activity from EKS, EC2, S3, Lambda, and other services;
+the chart does not provide exact per-service values. Use the request-level
+Langfuse instrumentation above when reporting per-query embedding, reranking,
+and generation costs.
+
 Traces contain questions, retrieved passages and answers. That's fine for
 public arXiv papers; think twice before tracing sensitive documents.
 
@@ -443,6 +482,15 @@ the answer (~1–1.8 s), not retrieval.
 ### Retrieval eval
 
 `evals/` measures how often retrieval finds the page that answers a question.
+
+The live CI quality gate runs the production retrieval path (Postgres BM25 + pgvector,
+fused with RRF) over all 62 questions without reranking, every Monday at 10:17 UTC and on
+demand (`gh workflow run ci.yml`). It does not run on pushes or pull requests, since it logs
+into AWS (a GitHub OIDC role allowed to read the `/rag-demo/` SSM parameters and call Titan
+embeddings) and queries the production database. It requires Recall@5 >= 0.88,
+MRR@10 >= 0.71, nDCG@10 >= 0.76, and median retrieval latency <= 2,000 ms. Because each
+question has one gold page, Recall@5 is equivalent to page hit@5. The workflow publishes the
+complete JSON, Markdown summary, and cost-evidence JSON as build artifacts.
 
 - `evals/generate_questions.py` builds `evals/questions.jsonl`: 40 questions
   (20 about specific facts, 20 paraphrasing a concept), each from a different

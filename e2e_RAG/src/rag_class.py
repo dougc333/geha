@@ -6,8 +6,6 @@ import re
 from pathlib import Path
 from typing import Any, Iterable
 
-from httpx2 import query
-
 import pymupdf
 import torch
 from langchain_chroma import Chroma
@@ -102,6 +100,7 @@ class Rag:
         collection_name: str = "split_documents",
         parent_chunk_size: int = 512,
         child_chunk_size: int = 256,
+        top_k: int = 10,
         persist_directory: str | None = None,
     ) -> Any:
         parent_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
@@ -128,7 +127,7 @@ class Rag:
             docstore=InMemoryStore(),
             child_splitter=child_splitter,
             parent_splitter=parent_splitter,
-            k=10,
+            search_kwargs={"k": top_k},
         )
         retriever.add_documents(docs)
         return retriever
