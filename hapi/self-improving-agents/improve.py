@@ -51,6 +51,7 @@ REJECTED = HERE / "lessons_rejected.md"
 RESULTS = HERE / "improve_results.json"
 SUMMARY = HERE / "improve_results.md"
 MAX_LESSONS = 10
+TOP_RANK = 3  # a learned tool must list a missed provider among its first 3 providers
 
 REFLECT_SYSTEM = f"""You maintain the lessons file of a fraud-investigation agent at a health plan.
 After each investigation the agent's findings are graded against confirmed outcomes. You
@@ -113,18 +114,22 @@ def check_tool(code: str, spec: dict, key: dict, missed: list[dict]) -> dict:
         out = learned.run(code, spec["name"], rows, names, deaths)
     except RuntimeError as exc:
         return {"passed": False, "error": str(exc)}
-    hit = sorted({m["name"] for m in missed if m["provider"] in out or m["name"] in out})
+    # The missed provider must be near the top, not merely somewhere in the output: the first
+    # next-day tool listed its target 5th of 6, behind daily treatments, and the agent
+    # dismissed the whole list.
+    ranked = list(dict.fromkeys(re.findall(r"Practitioner/\d+", out)))[:TOP_RANK]
+    hit = sorted({m["name"] for m in missed if m["provider"] in ranked})
     planted = set(key["planted_resources"])
     try:
         clean = learned.run(code, spec["name"], [r for r in rows if r["eob"] not in planted], names, deaths)
         flagged_clean = len(set(re.findall(r"Practitioner/\d+", clean)))
     except RuntimeError:
         flagged_clean = None
-    return {"passed": bool(hit), "surfaced_missed_providers": len(hit), "missed_providers": len({m["provider"] for m in missed}),
+    return {"passed": bool(hit), "surfaced_missed_providers": len(hit), "required_rank": TOP_RANK, "missed_providers": len({m["provider"] for m in missed}),
             "providers_listed_with_planted_claims_removed": flagged_clean, "output_chars": len(out)}
 
 
-async def write_tool(trace: dict, key: dict, reflector: str) -> str | None:
+async def write_tool(trace: dict, key: dict, reflector: str, feedback: str = "") -> str | None:
     """Asks the reflector for a tool covering what this run missed. Returns the name of the
     pending tool, or None. HAPI must still hold the planting the run was made on."""
     missed = misses(trace, key)
@@ -136,6 +141,7 @@ async def write_tool(trace: dict, key: dict, reflector: str) -> str | None:
     human = ("WHAT THE AGENT MISSED\n" + "\n".join(f"- {m['detail']}" for m in missed)
              + "\n\nEXISTING TOOLS\n" + "\n".join(f"- {n}: {' '.join(d.split())}" for n, d in existing)
              + "\n\nCLAIM ROW FIELDS (two sample rows)\n" + json.dumps(rows[:2], indent=1)
+             + (f"\n\nFEEDBACK ON AN EARLIER TOOL FOR THIS MISS\n{feedback}" if feedback else "")
              + "\n\nTOOL CALLS THE AGENT MADE\n"
              + "\n".join(f"{e['step']}. {e['name']} {json.dumps(e['args'])[:160]}" for e in trace["events"] if e["type"] == "tool_call")[:6000])
     messages = [SystemMessage(TOOLSMITH_SYSTEM), HumanMessage(human)]
@@ -158,6 +164,10 @@ async def write_tool(trace: dict, key: dict, reflector: str) -> str | None:
     if spec["name"] in {n for n, _ in existing}:
         print(f"    tool {spec['name']} already exists; not replaced", flush=True)
         return None
+    if spec["name"] in learned.registry():  # a rejected tool of that name: keep its record, rename this one
+        new = next(f"{spec['name']}_v{i}" for i in range(2, 100) if f"{spec['name']}_v{i}" not in learned.registry())
+        code = re.sub(rf"\bdef {spec['name']}\(", f"def {new}(", code, count=1)
+        spec = learned.validate(code)
     check = check_tool(code, spec, key, missed)
     if not check["passed"]:
         print(f"    tool {spec['name']} did not surface the missed provider; discarded ({check})", flush=True)
@@ -167,7 +177,7 @@ async def write_tool(trace: dict, key: dict, reflector: str) -> str | None:
     return spec["name"]
 
 
-async def toolsmith(run_id: str, reflector: str) -> None:
+async def toolsmith(run_id: str, reflector: str, feedback: str = "") -> None:
     """Writes a tool from one saved run: re-plants its case, asks the reflector, checks the tool."""
     trace = json.loads((TRACES / f"{run_id}.json").read_text())
     try:
@@ -178,7 +188,7 @@ async def toolsmith(run_id: str, reflector: str) -> None:
         by_name = {g["name"]: ref for ref, g in key["guilty"].items()}
         for p in next(e for e in trace["events"] if e["type"] == "score")["providers"]:
             p["provider"] = p["provider"] if p["provider"] in key["guilty"] else by_name.get(p["name"], p["provider"])
-        name = await write_tool(trace, key, reflector)
+        name = await write_tool(trace, key, reflector, feedback)
     finally:
         seed_fraud.reset()
     print(f"pending tool: {name}. Read it with: python learned.py show {name}" if name else "no tool was written")
@@ -313,9 +323,10 @@ async def main() -> None:
     parser.add_argument("--skip-baseline", action="store_true", help="reuse the last baseline with the same model and test cases")
     parser.add_argument("--tools", action="store_true", help="also let the reflector write new tools during training (saved as pending)")
     parser.add_argument("--toolsmith", metavar="RUN_ID", help="only write a tool from one saved run in traces/, then stop")
+    parser.add_argument("--feedback", default="", help="with --toolsmith: what went wrong with an earlier tool for this miss")
     args = parser.parse_args()
     if args.toolsmith:
-        await toolsmith(args.toolsmith, args.reflector)
+        await toolsmith(args.toolsmith, args.reflector, args.feedback)
         return
     train, test = parse_cases(args.train), parse_cases(args.test)
     if set(train) & set(test):
