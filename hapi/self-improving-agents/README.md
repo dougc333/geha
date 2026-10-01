@@ -141,6 +141,16 @@ guilty providers found, then innocent providers accused.
 One run per level, so single cells (MiMo's 3/3 at level 4, for one) may be luck; the
 false-accusation gap is the consistent difference.
 
+**Speed.** Minutes per investigation on the same ladder runs:
+
+![Minutes per investigation by level: Opus 5.5 averages 1.3, DeepSeek V4 Pro 5.5, MiMo 2.6 Pro 14.5](docs/time_per_investigation.png)
+
+Opus 5.5 took 1.2-1.4 minutes on every level. DeepSeek V4 Pro took 4.4-6.6 minutes, about 4
+times as long. MiMo 2.6 Pro averaged 14.5 minutes, about 11 times Opus, and up to 27.7 minutes
+at level 4. Tool time was about 30 seconds per investigation for every model; the rest is
+the model generating. MiMo writes up to 64,000 output tokens per investigation, about ten
+times Opus, at about 40 tokens per second through Nous. One run per level.
+
 HIPAA may prevent outside LLMs from accessing the data. Anonymizing the data may remove
 the evidence signals needed for fraud analysis.
 
