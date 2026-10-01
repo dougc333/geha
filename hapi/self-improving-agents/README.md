@@ -448,6 +448,26 @@ time) is not included. Ways to keep the accuracy for less: cap tool calls, have 
 write targeted lessons rather than "check everything", or add a cost term to the loop's score
 so a lesson has to pay for itself.
 
+**Is DeepSeek cheaper?** Per token, much cheaper: $0.94 / $1.89 per million input / output
+tokens against $4 / $20 for Opus 5.5 (about a quarter and a tenth), and Nous billed re-sent
+conversation at its cached rate, so the actual bill was 16-19% of even that list price. Per
+case, the gap shrinks:
+
+| Five test cases | Input tokens | Cost per case |
+|---|---:|---:|
+| Opus 5.5, no lessons | 1.7 M | ~$1.47 (list-price estimate) |
+| DeepSeek V4 Pro, no lessons | 2.1 M | ~$0.08 (billed) |
+| DeepSeek V4 Pro, with lessons | 20.8 M | ~$0.62 (billed) |
+
+Without lessons, DeepSeek is about 18 times cheaper per case, but it scored −11. The lessons
+that made it accurate also made it check far more and read about 10 times as many tokens, so
+it ends up at roughly 40% of Opus's cost. That is still cheaper, but not dramatically.
+
+Two caveats: the Opus figure is list price without prompt caching (this setup does not use
+Anthropic's caching; with it, Opus could come much closer to DeepSeek), and cost per guilty
+provider found is a fairer comparison than cost per run (Opus found 13 of 13, DeepSeek with
+lessons 11 of 13).
+
 How far this goes: one run per case, so single cells can be luck (DeepSeek's baseline swings
 between runs). The test variants reuse the training scheme types with new actors, so this
 shows learning from feedback on recurring schemes, not discovery of new ones; some lessons
