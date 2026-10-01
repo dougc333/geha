@@ -157,8 +157,41 @@ def chat_model(name: str):
     key = os.getenv(spec["api_key_env"]) or os.getenv(spec.get("api_key_alt", ""))
     if not key:
         raise RuntimeError(f"{spec['api_key_env']} is not set (needed for model '{name}')")
-    return ChatOpenAI(model=spec["model"], base_url=spec.get("base_url"), api_key=key, max_tokens=8000,
+    # 32k: reasoning tokens count toward the limit, and MiMo 2.6 Pro used up 8k on reasoning alone,
+    # leaving an empty or cut-off answer.
+    return ChatOpenAI(model=spec["model"], base_url=spec.get("base_url"), api_key=key, max_tokens=32000,
                       **spec["kwargs"])
+
+
+MODEL_ATTEMPTS = 3
+TRANSIENT = {"RemoteProtocolError", "APIConnectionError", "APITimeoutError", "ReadTimeout", "ReadError",
+             "StreamChunkTimeoutError", "InternalServerError"}
+
+
+def transient(exc: BaseException) -> bool:
+    """A dropped or stalled connection (Nous closed long MiMo responses mid-transfer)."""
+    seen = set()
+    while exc is not None and id(exc) not in seen:
+        seen.add(id(exc))
+        if type(exc).__name__ in TRANSIENT:
+            return True
+        exc = exc.__cause__ or exc.__context__
+    return False
+
+
+def unusable(reply) -> str:
+    """Why a model reply can't be used, or "" if it can: cut off at the output limit, or
+    empty (no text and no tool calls), which would otherwise end the run with no report."""
+    meta = getattr(reply, "response_metadata", None) or {}
+    if meta.get("finish_reason") == "length" or meta.get("stop_reason") == "max_tokens":
+        return "cut off at the output-token limit"
+    if not reply.tool_calls and not as_text(reply.content).strip():
+        return "empty reply"
+    return ""
+
+
+class NoReport(RuntimeError):
+    """The run ended without a findings block, so it cannot be scored."""
 
 
 def build(tools: list, model_name: str = DEFAULT_MODEL, lessons: str = ""):
@@ -166,7 +199,18 @@ def build(tools: list, model_name: str = DEFAULT_MODEL, lessons: str = ""):
     system = SYSTEM + (LESSONS_HEADER + lessons.strip() if lessons.strip() else "")
 
     async def agent(state: MessagesState):
-        return {"messages": [await model.ainvoke([SystemMessage(system), *state["messages"]])]}
+        messages = [SystemMessage(system), *state["messages"]]
+        for attempt in range(1, MODEL_ATTEMPTS + 1):
+            try:
+                reply = await model.ainvoke(messages)
+            except Exception as exc:
+                if attempt == MODEL_ATTEMPTS or not transient(exc):
+                    raise
+                await asyncio.sleep(5 * attempt)
+                continue
+            if not unusable(reply) or attempt == MODEL_ATTEMPTS:
+                return {"messages": [reply]}
+        raise AssertionError("unreachable")
 
     graph = StateGraph(MessagesState)
     graph.add_node("agent", agent)
@@ -245,6 +289,9 @@ async def investigate(question: str, emit: Emit, model_name: str = DEFAULT_MODEL
                         "ms": round((time.perf_counter() - tool_started.pop(event["run_id"], time.perf_counter())) * 1000),
                         "is_error": status == "error", "size": len(text), "preview": text[:1500],
                         "truncated": "[TRUNCATED: the result was" in text})
-    await emit({"type": "final", "text": final_text, "findings": parse_findings(final_text)})
+    findings = parse_findings(final_text)
+    await emit({"type": "final", "text": final_text, "findings": findings})
     await emit({"type": "done", "tool_calls": calls, "model_steps": step,
                 "seconds": round(time.perf_counter() - started, 1), "usage": usage})
+    if findings is None:  # an error, not a score of zero: the agent may have found the fraud
+        raise NoReport("the run ended without a findings block (report empty or cut off)")

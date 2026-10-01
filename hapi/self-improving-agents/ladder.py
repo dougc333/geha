@@ -88,6 +88,7 @@ async def main() -> None:
     parser.add_argument("--repeat", type=int, default=1)
     parser.add_argument("--variant", type=int, default=0, help="planting variant (seed_fraud.py --variant)")
     parser.add_argument("--lessons", action="store_true", help="run with the accepted lessons in lessons.md")
+    parser.add_argument("--no-learned-tools", action="store_true", help="leave out approved learned tools (a baseline)")
     parser.add_argument("--model", default=DEFAULT_MODEL, choices=sorted(MODELS),
                         help="claude (Opus 5.5) or nous (Nous Portal; needs NOUS_API_KEY)")
     parser.add_argument("--agent", default=None, help="label stored with the results (default: graph/<model>)")
@@ -100,7 +101,8 @@ async def main() -> None:
                 print(f"level {level} run {i + 1}/{args.repeat}", flush=True)
                 lessons = (HERE / "lessons.md").read_text() if args.lessons and (HERE / "lessons.md").exists() else ""
                 row = await run_level(level, args.agent, args.model, args.variant,
-                                      "\n".join(l for l in lessons.splitlines() if l.startswith("- ")))
+                                      "\n".join(l for l in lessons.splitlines() if l.startswith("- ")),
+                                      () if args.no_learned_tools else ("approved",))
                 rows.append(row)
                 RESULTS.write_text(json.dumps(rows, indent=1))
                 write_summary(rows)
