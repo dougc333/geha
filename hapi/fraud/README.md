@@ -96,12 +96,12 @@ The agent's model is a small registry in `agent.py` (`MODELS`), selectable in th
 | Option | Model | Notes |
 |---|---|---|
 | `claude` (default) | Claude Opus 5.5 (Anthropic API) | summarized reasoning in the trace; tool results capped at 30,000 characters |
-| `nous` | `deepseek/deepseek-v4-pro` on [Nous Portal](https://portal.nousresearch.com) (OpenAI-compatible gateway, `https://inference-api.nousresearch.com/v1`) | needs `NOUS_API_KEY` (or `NOUS_KEY`); pick any portal model with `NOUS_MODEL`, e.g. `xiaomi/mimo-v2.6-pro`; override the URL with `NOUS_BASE_URL` |
+| `nous` | `deepseek/deepseek-v4-pro` on [Nous Portal](https://portal.nousresearch.com) (OpenAI-compatible gateway, `https://inference-api.nousresearch.com/v1`) | needs `NOUS_API_KEY` (or `NOUS_KEY`); pick any portal model with `NOUS_MODEL`; override the URL with `NOUS_BASE_URL` |
 | `sonnet`, `haiku`, `gpt-4o`, `gpt-5` | Claude Sonnet 5.5, Claude Haiku 4.5, OpenAI | wired but not run on the ladder; the OpenAI options need `OPENAI_API_KEY` |
 
 ```bash
 python ladder.py --model nous                                      # DeepSeek V4 Pro
-NOUS_MODEL=xiaomi/mimo-v2.6-pro python ladder.py --model nous      # any other portal model
+NOUS_MODEL=<portal model id> python ladder.py --model nous       # any other portal model
 ```
 
 Everything else is shared: graph, tools, MCP server, prompt, trace, scoring. The portal
@@ -113,24 +113,22 @@ slow to answer, raise `LANGCHAIN_OPENAI_STREAM_CHUNK_TIMEOUT_S` (default 120 sec
 Same prompt, tools and planted data for every model; one run per level. Each cell is
 guilty providers found, then innocent providers accused.
 
-| Level | Claude Opus 5.5 | DeepSeek V4 Pro (Nous) | MiMo 2.6 Pro (Nous) |
-|---|---|---|---|
-| 1 Obvious | 2/2, 0 accused | 2/2, 0 accused | 1/2, 0 accused |
-| 2 Subtle | 2/2, 0 accused | 1/2, 6 accused | 1/2, 2 accused |
-| 3 Spread thin | 5/6, 0 accused | 4/6, 1 accused | 2/6, 2 accused |
-| 4 Unnamed | 2/3, 0 accused | 0/3, 6 accused | 3/3, 0 accused |
-| 5 Clean | 0 accused | 8 accused | 2 accused |
-| Tool calls per level | 21-33 | 47-90 | 15-74 |
-| Time per level | 70-86 s | 4.5-6.5 min | 3-28 min |
+| Level | Claude Opus 5.5 | DeepSeek V4 Pro (Nous) |
+|---|---|---|
+| 1 Obvious | 2/2, 0 accused | 2/2, 0 accused |
+| 2 Subtle | 2/2, 0 accused | 1/2, 6 accused |
+| 3 Spread thin | 5/6, 0 accused | 4/6, 1 accused |
+| 4 Unnamed | 2/3, 0 accused | 0/3, 6 accused |
+| 5 Clean | 0 accused | 8 accused |
+| Tool calls per level | 21-33 | 47-90 |
+| Time per level | 70-86 s | 4.5-6.5 min |
 
 - **Claude Opus 5.5** found 11 of 13 planted providers and accused no innocent one.
 - **DeepSeek V4 Pro** found 7 of 13 and accused 21 innocent providers, 8 of them on the
   clean level, where the prompt says there may be no fraud at all.
-- **MiMo 2.6 Pro** found 7 of 13 and accused 6 innocent providers, 2 of them on the clean
-  level. It was the only model to find all three unnamed schemes at level 4, and the weakest on levels 1-3.
 
-One run per level, so single cells (MiMo's 3/3 at level 4, for one) may be luck; the
-false-accusation gap is the consistent difference.
+One run per level, so single cells may be luck; the false-accusation gap is the consistent
+difference.
 
 HIPAA may prevent outside LLMs from accessing the data. Anonymizing the data may remove
 the evidence signals needed for fraud analysis.
