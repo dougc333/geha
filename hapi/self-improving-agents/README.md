@@ -468,6 +468,25 @@ Anthropic's caching; with it, Opus could come much closer to DeepSeek), and cost
 provider found is a fairer comparison than cost per run (Opus found 13 of 13, DeepSeek with
 lessons 11 of 13).
 
+**Self-hosted on premises.** DeepSeek's token costs could be much lower if it were run on the
+plan's own hardware rather than through a hosted API: there is no per-token fee, only the
+hardware, power and staff. That assumes the weights of the model are available to download;
+DeepSeek has published open weights for earlier models, which should be checked for V4 Pro.
+It is also the setup that fits the HIPAA concern above, since claims data would never leave
+the plan's network. How much lower depends on volume:
+
+- **Fixed cost, not per token:** a model of this size needs a multi-GPU server (several
+  high-memory data-center GPUs), bought or leased whether it is busy or idle.
+- **Cheap at high volume:** with steady, large workloads, such as screening every claim
+  batch, the cost per token can fall well below API prices.
+- **Expensive at low volume:** for occasional investigations like these runs, idle hardware
+  makes each token cost more than the API.
+- **The tenfold token increase still matters:** self-hosting lowers the price per token, not
+  the number of tokens. The lessons' extra checking needs more GPU time per case, so fewer
+  cases per server.
+
+No self-hosted runs were made here; this is a cost consideration, not a measured result.
+
 How far this goes: one run per case, so single cells can be luck (DeepSeek's baseline swings
 between runs). The test variants reuse the training scheme types with new actors, so this
 shows learning from feedback on recurring schemes, not discovery of new ones; some lessons
