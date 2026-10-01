@@ -57,22 +57,6 @@ data marks them; `answer_key.json` (git-ignored, ids differ per server) has the 
 | Dr. Lena Moravec, Heartland Home Health | billing after death | 12 home visits for 3 deceased patients, 1-10 months after death |
 | | duplicate billing | 10 visits each submitted twice (same patient, day, service, amount) |
 
-## Difficulty ladder (`seed_fraud.py --level N`, `ladder.py`)
-The difficulty ladder is created by Claude. 
-
-
-`seed_fraud.py --level 1-5` plants one level (removing any earlier planting);
-`ladder.py` plants each level, runs the agent, scores it and saves the trace
-(`ladder_results.json`/`.md`, and the app's **Difficulty ladder** tab).
-
-| Level | What's planted |
-|---|---|
-| 1 Obvious | upcoding at ~6x peers, a 26-visit day, visits after death, exact duplicates (2 providers) |
-| 2 Subtle | upcoding at 1.6x on half of one provider's claims, 14 visits in a 10-hour window, duplicates re-billed **one day later**, visits 2-3 weeks after death |
-| 3 Spread thin | six **existing** Synthea providers: one exact duplicate each (3) or three claims at 2.5x their own price (3) |
-| 4 Unnamed | schemes no tool covers: unbundling (one blood count billed as 4 tests), weekly therapy for 26 weeks, 12 **phantom patients** (no other history, one address) |
-| 5 Clean | nothing |
-
 **Why each level is harder.** The amount of data barely changes: every level searches the same
 4,073 genuine Synthea claims plus whatever is planted. What changes is how small the fraud is
 against that background, and how many kinds of fraud the agent has to think of.
@@ -100,6 +84,22 @@ against that background, and how many kinds of fraud the agent has to think of.
 So the search space of claims stays the same; what grows is the space of possible
 explanations and the difficulty of telling fraud from normal variation. The levels are not
 strictly harder for every model, because levels 4 and 5 test different skills.
+
+## Difficulty ladder (`seed_fraud.py --level N`, `ladder.py`)
+The difficulty ladder is created by Claude. 
+
+
+`seed_fraud.py --level 1-5` plants one level (removing any earlier planting);
+`ladder.py` plants each level, runs the agent, scores it and saves the trace
+(`ladder_results.json`/`.md`, and the app's **Difficulty ladder** tab).
+
+| Level | What's planted |
+|---|---|
+| 1 Obvious | upcoding at ~6x peers, a 26-visit day, visits after death, exact duplicates (2 providers) |
+| 2 Subtle | upcoding at 1.6x on half of one provider's claims, 14 visits in a 10-hour window, duplicates re-billed **one day later**, visits 2-3 weeks after death |
+| 3 Spread thin | six **existing** Synthea providers: one exact duplicate each (3) or three claims at 2.5x their own price (3) |
+| 4 Unnamed | schemes no tool covers: unbundling (one blood count billed as 4 tests), weekly therapy for 26 weeks, 12 **phantom patients** (no other history, one address) |
+| 5 Clean | nothing |
 
 For the ladder the agent describes schemes in its own words (the scheme names were
 removed from its output format) and may report nothing. Scoring (`scoring.py`) is by
