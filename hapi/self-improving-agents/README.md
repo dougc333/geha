@@ -1,15 +1,22 @@
 # Claims fraud investigation: agent + live trace
 
-> **This folder is a copy of `../fraud` for the self-improving agent work.** The original is
-> unchanged. New here: `improve.py` (the loop), `lessons.md` (the lessons the agent has
-> learned and that passed the test), `learned.py` and `learned_tools/` (tools the agent writes
-> for itself, held for approval), `seed_fraud.py --variant N` (same schemes, different
-> providers, patients and dates), and `lessons` / `variant` arguments in `agent.py` and
-> `ladder.py`. See "Self-improvement" below. Both folders plant into the same HAPI server:
-> run `python3 ../fraud/seed_fraud.py --reset` before planting from here, and
+> **Self-improving agent.** 
+First Step: Start with a teacher agent, a stronger model, no prompot, no toolcalls. let it explore and develop a policy. Record a baseline on data which has been seeded wiht fraud cases. This is not teacher student distillation. 
+
+Second Step: Take the weaker and much cheaper model, Deepseek and use RSI to maek perf of DS close to Opus. Use Opus to control the prompt writing for DS and tool calling synthesis. 
+
+> Files: `improve.py` (the loop), 
+> Files: `lessons.md` (the lessons the agent has learned and that passed the test), 
+> Files: `learned.py` and 
+> Files: `learned_tools/` (tools the agent writes for itself, held for approval), 
+> Files: `seed_fraud.py --variant N` (same schemes, different providers, patients and dates) 
+> Files: `lessons` / `variant` arguments in `agent.py` and
+> Files: `ladder.py`. 
+> run `python3 ../fraud/seed_fraud.py --reset`
 > `python3 ../fraud/seed_fraud.py --level 1` afterwards to restore the original demo.
 
-A LangGraph agent (Claude Opus 5.5) investigates the local HAPI claims data for billing
+Step 1: Run the stronger model for a benchmark and where to get the weaker model to improve to. 
+A LangGraph agent (Claude Opus 5.5) investigates  HAPI claims data for billing
 fraud, choosing among raw FHIR tools (via the langcare MCP server) and claims-analytics
 tools. Every step streams to a React app: Claude's reasoning summary, the tool it picked
 and its arguments, the result, timings, and the final findings scored against a planted
@@ -50,7 +57,37 @@ data marks them; `answer_key.json` (git-ignored, ids differ per server) has the 
 | Dr. Lena Moravec, Heartland Home Health | billing after death | 12 home visits for 3 deceased patients, 1-10 months after death |
 | | duplicate billing | 10 visits each submitted twice (same patient, day, service, amount) |
 
+**Why each level is harder.** The amount of data barely changes: every level searches the same
+4,073 genuine Synthea claims plus whatever is planted. What changes is how small the fraud is
+against that background, and how many kinds of fraud the agent has to think of.
+
+| Level | Planted claims | Share of all claims |
+|---|---:|---:|
+| 1 Obvious | 77 | about 1.9% |
+| 2 Subtle | 65 | about 1.6% |
+| 3 Spread thin | 12 | about 0.3% |
+| 4 Unnamed | 214 | about 5% |
+| 5 Clean | 0 | 0% |
+
+- **The signal weakens (level 2):** the fraud is still there in volume, but each claim is only
+  slightly abnormal (1.6x instead of 6x pricing; one day apart instead of the same day, which
+  the exact-date duplicate tool misses).
+- **The needle shrinks (level 3):** 12 claims spread across six real providers, two or three
+  each, inside genuine billing histories, with no new suspicious-looking providers.
+- **The hypothesis space grows (level 4):** the most claims are planted, but no tool matches
+  the schemes. At levels 1-3 the agent only has to run the right checks; at level 4 it must
+  first imagine what unbundling or a phantom patient would look like, then build that check
+  from raw searches.
+- **The answer can be "nothing" (level 5):** the agent must search everything and still
+  conclude there is no fraud, which tests restraint rather than detection.
+
+So the search space of claims stays the same; what grows is the space of possible
+explanations and the difficulty of telling fraud from normal variation. The levels are not
+strictly harder for every model, because levels 4 and 5 test different skills.
+
 ## Difficulty ladder (`seed_fraud.py --level N`, `ladder.py`)
+The difficulty ladder is created by Claude. 
+
 
 `seed_fraud.py --level 1-5` plants one level (removing any earlier planting);
 `ladder.py` plants each level, runs the agent, scores it and saves the trace
@@ -69,7 +106,7 @@ removed from its output format) and may report nothing. Scoring (`scoring.py`) i
 provider: guilty providers named, whether the description matches the scheme (keyword
 check), and innocent providers accused.
 
-**Results, one run per level (2026-09-30):**
+**Opus Results, one run per level (2026-09-30):**
 
 | Level | Guilty found | Schemes described | Innocent accused | Tool calls | Time |
 |---|---:|---:|---:|---:|---:|
