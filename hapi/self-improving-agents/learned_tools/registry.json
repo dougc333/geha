@@ -31,7 +31,7 @@
   }
  },
  "find_next_day_rebills": {
-  "status": "approved",
+  "status": "rejected",
   "created_utc": "2026-09-30T18:13:47+00:00",
   "description": "Find claims re-billed shortly after an identical claim.\n\nA match is the same provider, same patient, same service code and same paid amount, with\nservice dates 1 to max_gap_days apart. Same-day repeats are excluded, because\nfind_duplicate_claims already covers them. Use this to catch duplicate billing that is\nshifted by a day so that exact-date duplicate checks miss it.\n\nProviders need at least min_pairs such pairs to be listed. They are ranked by the number\nof re-billed claims, then by the amount paid on them. Each provider lists its pairs\n(original eob, re-billed eob, dates, amount), its re-bill rate over all claims, and the\nrate across all other providers for comparison.",
   "params": {
@@ -86,6 +86,38 @@
    "missed_providers": 3,
    "providers_listed_with_planted_claims_removed": 23,
    "output_chars": 71695
+  }
+ },
+ "isolated_next_day_rebills": {
+  "status": "approved",
+  "created_utc": "2026-10-01T05:23:40+00:00",
+  "description": "Find likely re-billed visits: a claim copied onto the following day (same provider, patient, service code\nand amount paid) as an ISOLATED pair. Neither claim may have another identical claim within isolation_days\nbefore or after it, so daily treatment series (radiation, home health, telemedicine runs) are not counted.\nRanks providers by number of isolated re-bill pairs, then by the share of their claims involved.\nlong_series_claims shows how much of the provider's billing sits in runs of min_series_len or more\nconsecutive-day identical claims, which is context for legitimate daily care.\nUse this to catch duplicate billing shifted by a day, which same-date duplicate checks miss.",
+  "params": {
+   "max_gap_days": [
+    "int",
+    1
+   ],
+   "isolation_days": [
+    "int",
+    7
+   ],
+   "min_pairs": [
+    "int",
+    2
+   ],
+   "min_series_len": [
+    "int",
+    3
+   ]
+  },
+  "written_for": "14 one-hour visits between 07:00 and 17:00 on 2026-05-24; 20 of 40 Consultation for treatment (procedure) claims paid 1.6x the peer median; 6 visits re-billed one day later (same patient, service, amount)",
+  "check": {
+   "passed": true,
+   "surfaced_missed_providers": 1,
+   "required_rank": 3,
+   "missed_providers": 2,
+   "providers_listed_with_planted_claims_removed": 0,
+   "output_chars": 2134
   }
  }
 }

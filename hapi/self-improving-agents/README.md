@@ -212,7 +212,7 @@ Lines 2, 4 and 5 describe scheme types that also appear in the test cases (split
 schedules, shared addresses): this is why the benchmark shows learning on recurring schemes,
 not discovery of new ones.
 
-### Strategy 2: tool creation (built, run; one tool approved, two rejected)
+### Strategy 2: tool creation (built, run; one revised tool approved)
 
 ```bash
 python improve.py --model nous --tools      # the loop above, plus tool writing during training
@@ -250,12 +250,14 @@ runaway loop were refused.
 
 `improve.py --toolsmith` on the four DeepSeek V4 Pro training runs that missed schemes
 (levels 1-4, variant 1), with Claude Opus 5.5 as the reflector. The code is in
-`learned_tools/`. After review on 2026-09-30, `find_next_day_rebills` was approved (the
-agent now loads it) and the other two were rejected (kept for reference, never loaded).
+`learned_tools/`. After review on 2026-09-30, `find_next_day_rebills` was approved and the
+other two were rejected. `find_next_day_rebills` was then revoked after a test run (below),
+and a revised tool, `isolated_next_day_rebills`, was approved and tested. Rejected tools stay in
+`learned_tools/` for reference and are never loaded.
 
 | Tool | Written for | Check | Providers listed with the planted fraud removed | Status and review |
 |---|---|---|---:|---|
-| `find_next_day_rebills` | Level 2: duplicates re-billed one day later | Passed (1 of 2 missed providers surfaced) | 5 | **Approved 2026-09-30.** Pairs 1 day apart, reports each provider's rate against all others |
+| `find_next_day_rebills` | Level 2: duplicates re-billed one day later | Passed (1 of 2 missed providers surfaced) | 5 | **Approved, then revoked 2026-09-30** after the test run below |
 | `split_same_day_claims` | Level 4: one lab visit billed as 4 separate claims | Passed (1 of 3) | 23 | **Rejected.** Noisy: noisy, as Synthea bills pharmacy and procedures as separate same-day claims; output of about 72,000 characters is cut to 30,000 |
 | `provider_price_outliers` | Level 3: 3 claims at 2.5x the provider's own usual price | Passed (1 of 1) | 23 | **Rejected.** Noisy: at 2x with a single claim it flags many innocent providers |
 | (discarded) | Level 1: a 26-visit day | Failed: did not surface the provider | 2 | Discarded automatically |
@@ -271,7 +273,7 @@ agent now loads it) and the other two were rejected (kept for reference, never l
 
 **Why each tool was approved or rejected**
 
-- **`find_next_day_rebills`: approved.**
+- **`find_next_day_rebills`: approved, then revoked (see the test run below).**
   - **Fills a real gap:** `find_duplicate_claims` matches exact dates only, so a claim
     re-billed the next day slips past it.
   - **Checks exactly that:** the same provider, patient, service and amount, 1 day apart.
@@ -299,6 +301,78 @@ agent now loads it) and the other two were rejected (kept for reference, never l
   - **Risk:** it would bring back the false accusations DeepSeek made before the lessons.
   - **Next time:** a version requiring several claims at 2.5x or more, checked again for
     noise, could be reconsidered.
+
+#### Testing the approved tool, and revoking it
+
+DeepSeek V4 Pro was rerun on the level 2 test case (variant 2) with `lessons.md` plus the
+approved `find_next_day_rebills` (`ladder.py --model nous --levels 2 --variant 2 --lessons`):
+
+| Level 2 test case | Lessons, no tool | Lessons + `find_next_day_rebills` |
+|---|---|---|
+| Guilty providers found | 2/2 | 1/2 |
+| Next-day re-billing described | No | No |
+| Innocent accused | 0 | 0 |
+| Tool calls | 173 | 81 |
+| Time | 411 s | 362 s |
+| Input tokens | 6.7 M | 2.3 M |
+
+DeepSeek called the tool first. It listed 6 providers: the top ones were legitimate daily care
+(radiation therapy, home health, telemedicine, with up to 24 consecutive-day "re-bills"), and
+the provider who actually re-billed was 4th. DeepSeek read the raw records, concluded all the
+chains were daily care, and dismissed the real re-billing too. It also missed the busy-day
+provider it had caught without the tool (one run each, so this may be noise). The drop in tool
+calls and tokens came mostly from fewer `provider_daily_load` calls (21 against 86).
+
+The tool's check had passed because the missed provider appeared somewhere in its output, not
+because it stood out. So, on 2026-09-30:
+
+- **`find_next_day_rebills` was revoked** (`learned.py reject`): in its current form it can
+  argue the agent out of real fraud.
+- **The check was tightened:** a learned tool must now list a missed provider among its first
+  3 providers (`TOP_RANK` in `improve.py`), not just mention it.
+- **A revised tool was written** with `improve.py --toolsmith RUN_ID --feedback "..."`, where
+  the feedback explained the failure. `isolated_next_day_rebills` counts a next-day copy only
+  when neither claim has another identical claim within 7 days, so daily treatment series are
+  left out:
+
+| | `find_next_day_rebills` (revoked) | `isolated_next_day_rebills` (approved) |
+|---|---|---|
+| Level 2 training case: missed provider in the top 3 | not checked (old rule) | yes, 1st |
+| Level 2 test case: providers listed | 6, the re-biller 4th | 1, the re-biller |
+| Providers listed with the planted fraud removed | 5 | 0 |
+| Output size | about 25,000 characters | about 2,100 characters |
+
+#### Testing the revised tool
+
+`isolated_next_day_rebills` was approved and the same level 2 test case was run again
+(DeepSeek V4 Pro, `lessons.md` plus the tool), one run each:
+
+| Level 2 test case | Lessons, no tool | + `find_next_day_rebills` (revoked) | + `isolated_next_day_rebills` (approved) |
+|---|---|---|---|
+| Next-day re-billing described | No | No (dismissed as daily care) | **Yes** |
+| Re-billing provider | Found, for billing after death only | Found, for billing after death only | **Found, for both re-billing and billing after death** |
+| Busy-day / upcoding provider | Found | Missed | Missed |
+| Guilty providers found | 2/2 | 1/2 | 1/2 |
+| Schemes described | 2/4 | 1/4 | 2/4 |
+| Innocent accused | 0 | 0 | 0 |
+| Tool calls | 173 | 81 | 129 |
+| Time | 411 s | 362 s | 371 s |
+| Input tokens | 6.7 M | 2.3 M | 4.8 M |
+
+- **The targeted improvement worked:** for the first time, DeepSeek found and described the
+  next-day re-billing ("isolated next-day duplicate home visits, same patient, same service
+  code, same amount, consecutive days", high confidence). It called the tool first and
+  again at step 10 to confirm, and accused no one innocent.
+- **The case as a whole did not improve:** both runs with a tool missed the provider with
+  the 14-visit day and 1.6x pricing, which the run without a tool found. With one run each
+  this may be noise, or the tool may draw attention to one scheme at the expense of others.
+  Repeated runs are needed to tell.
+- **Cost:** fewer tool calls and tokens than without a tool (129 against 173, 4.8 M against
+  6.7 M input tokens).
+
+Zero providers on clean data may partly reflect how clean the synthetic data is; real claims
+have more isolated next-day repeats (corrections, split billing), so a real deployment would
+need its own noise check.
 
 ### Benchmark (2026-09-30)
 

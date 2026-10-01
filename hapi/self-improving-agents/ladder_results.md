@@ -18,3 +18,5 @@
 | `20260930T133710Z-fb444b` | graph/xiaomi/mimo-v2.6-pro | 3 Spread thin | 2/6 | 1/6 | 2 | 45 | 575.4s | 1,011,669 / 23,965 |
 | `20260930T134655Z-6594aa` | graph/xiaomi/mimo-v2.6-pro | 4 Unnamed schemes | 3/3 | 3/3 | 0 | 74 | 1660.6s | 3,429,702 / 63,849 |
 | `20260930T142107Z-ddd1f5` | graph/xiaomi/mimo-v2.6-pro | 5 Clean | n/a (none planted) | n/a | 2 | 48 | 1247.2s | 1,158,672 / 50,100 |
+| `20260930T183451Z-ad1649` | lessons+tool/deepseek/deepseek-v4-pro | 2 Subtle | 1/2 | 1/4 | 0 | 81 | 361.9s | 2,256,929 / 30,574 |
+| `20261001T052819Z-4bfd7e` | lessons+tool2/deepseek/deepseek-v4-pro | 2 Subtle | 1/2 | 2/4 | 0 | 129 | 370.8s | 4,761,440 / 26,716 |
