@@ -88,7 +88,7 @@ removed from its output format) and may report nothing. Scoring (`scoring.py`) i
 provider: guilty providers named, whether the description matches the scheme (keyword
 check), and innocent providers accused.
 
-**Results, one run per level (2026-09-30):**
+**Opus Results, one run per level (2026-09-30):**
 
 | Level | Guilty found | Schemes described | Innocent accused | Tool calls | Time |
 |---|---:|---:|---:|---:|---:|
