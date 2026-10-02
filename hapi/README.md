@@ -11,6 +11,53 @@ MCP server without real patient data.
   (`Agnes294 Muller251`) so they can't be mistaken for real people; some values are
   clinically odd (e.g. an HbA1c of 2.86%).
 
+## Claim insights: conflicting reports and new comorbidities
+
+[`claim_insights/`](claim_insights/) finds two claim-review insights in this server
+(start it first, see [Start](#start)):
+
+- **Conflicting report**: a condition the claimant reports that provider records
+  disagree with (recorded as resolved, ruled out, or not recorded at all).
+- **New comorbidity**: an active disorder that began after the claimant's primary
+  condition.
+
+Each insight names its source documents: the claimant statement and the provider
+note from the condition's encounter.
+
+| Insight field | FHIR |
+|---|---|
+| condition | `Condition.code` |
+| who reported it | `Condition.asserter` (claimant) or the encounter's practitioner (provider) |
+| claimant statement | `DocumentReference` authored by the patient, linked by `Condition.evidence` |
+| provider note | `DocumentReference?encounter=<Condition.encounter>` |
+| new since the primary condition | `Condition?subject=...&clinical-status=active&onset-date=gt<primary onset>` |
+
+Synthea writes only the provider side: no condition is asserted by a patient and there
+is no claimant correspondence. `seed_claimant.py` plants claimant statements for four
+patients, one per case: a condition the provider recorded as resolved, one the
+provider ruled out (it also plants that refuted provider Condition), one with no
+provider record, and a control that agrees with the provider. Planted resources are
+tagged `urn:geha:claim-insights|seed`, and the expected conflicts go to
+`answer_key.json`.
+
+```bash
+cd /Users/dc/geha/hapi/claim_insights
+python3 seed_claimant.py                        # plant (replaces an earlier planting)
+python3 find_insights.py --check                # insights for the seeded claimants, scored
+python3 find_insights.py --patient Patient/<id> # any patient (comorbidities only, if no statements)
+python3 find_insights.py --since 2020-01-01     # only comorbidities with onset since 2020
+python3 find_insights.py --json
+python3 seed_claimant.py --reset                # remove the planted resources
+```
+
+On 2026-10-01: 3/3 planted conflicts found, no false positive on the control, and 4
+new comorbidities across the four patients (e.g. malignant neoplasm of breast after
+essential hypertension). The primary condition is the first active one in a fixed
+list of chronic conditions (heart failure, ischemic heart disease, migraine, asthma,
+diabetes, hypertension, ...), or `--primary <SNOMED code>`. Synthea's dental
+conditions are left out of comorbidities. The insight text is a template, not an
+assessment of disability or return to work.
+
 ## Start
 
 ```bash
