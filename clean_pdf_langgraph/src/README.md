@@ -70,14 +70,23 @@ compares raw Markdown against source PDF page images. The HTML programs read
 the PDFs directly rather than transforming a Markdown file, so compare their
 cells with the corresponding raw Markdown when investigating parser output.
 
-## Batch LangGraph: both extractors and HTML-vs-PDF review
+## Batch LangGraph: bounded HTML-vs-PDF correction
 
 `batch_review_graph.py` loops over all top-level PDFs in the shared coverage-policy
 directory. For each PDF it creates a new subdirectory in a unique local `review_runs` run directory,
 so older extractions are not overwritten. Its nodes are:
 
-`pdfplumber_extract → docling_extract → build_combined_html → render_pdf_pages
-→ human_review → vision_compare → write_extractor_reports`.
+`docling_extract → build_combined_html → render_pdf_pages → cycle_html_tables
+→ human_review → initialize_review → prepare_table → render_html_candidate
+→ compare_html_candidate`.
+
+A mismatch conditionally routes to `correct_html_candidate`, then loops through
+`render_html_candidate → compare_html_candidate` again. A match, uncertainty,
+or exhausted correction budget routes through `finalize_table`; the graph then
+prepares the next table or continues to `finish_review → corrected_slideshow
+→ write_extractor_reports → END`. The default is one correction attempt per
+table. Change the explicit bound with `--max-correction-attempts N`; zero makes
+the graph comparison-only.
 
 The `human_review` node interrupts before any data is sent to OpenAI. Its
 payload lists the local Markdown, HTML, and page-image paths for inspection.
@@ -86,14 +95,12 @@ resume without repeating extraction. Approval runs the vision comparison;
 rejection skips the model call and writes unverified reports. This is one
 approval per PDF, not one per extraction step.
 
-The combined files `<stem>_pdfplumber_tables.html` and
-`<stem>_docling_tables.html` each contain every raw table from that extractor.
-They reuse the same captured rows as the Markdown output, with no header or
-page-boundary repair. The model receives the HTML table markup as text and the
-corresponding source PDF page PNGs as images. It checks table-data fidelity,
-not pixel-perfect CSS styling. Results go to `<stem>_pdfplumber_errors.md` and
-`<stem>_docling_errors.md` separately. Any failed model call is marked
-unverified; it is never treated as a match.
+The combined file `<stem>_docling_tables.html` contains every raw Docling table.
+It reuses the same captured rows as the Markdown output, with no header or
+page-boundary repair. The model receives the HTML table markup, its rendered
+PNG, and the corresponding source PDF page PNG. It checks table-data fidelity,
+not pixel-perfect CSS styling. Results go to `<stem>_docling_errors.md`. Any
+failed model call is marked unverified; it is never treated as a match.
 
 ```bash
 cd /Users/dc/geha/clean_pdf_langgraph
