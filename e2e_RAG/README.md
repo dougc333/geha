@@ -52,6 +52,97 @@ cd /Users/dc/geha/e2e_RAG/src
 python -m unittest test_class_refactor test_ragas_evaluator
 ```
 
+## Agentic RAG
+
+![Agentic RAG](docs/agentic_rag.png)
+
+`src/agentic_rag.py` wraps `RagClient` in a LangGraph loop in the style of Corrective
+RAG (`data/2401.15884v3.pdf`) and Self-RAG (`data/2310.11511v1.pdf`). It reuses the
+client's parent-document retriever, reranker and answer chain; no existing file changes.
+
+1. **Retrieve** with the parent-document retriever, then the reranker (`none` or `gpt`).
+2. **Grade** each passage with a structured-output call (`relevant: bool`) and keep the relevant ones.
+3. **Rewrite** the search query if none is relevant and retrieve again, at most twice;
+   after that, **give up** with "I could not find this in the documents." rather than
+   answer from weak passages.
+4. **Generate** with the existing answer chain, always from the original question.
+5. **Check** that every claim is supported by the passages; if not, regenerate (at most two
+   generations in total).
+
+`AgenticRag.generate()` returns the same keys as `RagClient.generate()` (`response`,
+`contexts`, `retrieved_contexts`) plus `grounded` and a `trace` of the steps taken.
+
+```bash
+cd /Users/dc/geha/e2e_RAG/src
+python agentic_rag.py --pdf ../data/2310.11511v1.pdf "What reflection tokens does Self-RAG use?"
+python -m unittest test_agentic_rag      # fakes only: no API key, model download or PDF
+python evaluate_agentic.py --pdf ../data/2306.02707.pdf \
+  --dataset ../evals/questions.example.jsonl --output ../evals/results_agentic.json
+```
+
+The unit tests cover: answering once when the first retrieval is relevant, rewriting
+when nothing is relevant, giving up after two rewrites, regenerating an ungrounded
+answer, bounding regeneration, and answering the original question rather than the
+rewritten query. `evaluate_agentic.py` produces the same Ragas report as
+`evaluate_ragas.py`, plus `agent_steps` (how often it retrieved, rewrote, regenerated or
+gave up), so the two pipelines can be compared on one dataset. Add vaguely worded and
+unanswerable questions to the dataset to exercise the rewrite and give-up paths.
+
+Cost: grading makes one LLM call per retrieved passage, plus the answer and the check, so a
+question costs several times the plain pipeline. Pass a cheaper model for those calls with
+`AgenticRag(client, llm=ChatOpenAI(model_name="gpt-4o-mini"))`.
+
+## Dental enrollment chatbot (structured RAG, state machine)
+
+![Dental enrollment state machine](docs/dental_state_machine.png)
+
+`src/dental_enrollment.py` quotes 2026 G.E.H.A FEDVIP dental premiums and answers
+benefit questions from `/Users/dc/geha/downloads/dental/fedvip/2026-geha-dental-benefits-guide.pdf`
+(override with `DENTAL_GUIDE`). It is structured RAG: the answers come from tables, not
+from passages found by similarity search.
+
+- **Tables** (`src/dental_tables.py`): page 10 (state and first three ZIP digits ->
+  rate code 1-5) and page 11 (plan, employed biweekly or retired monthly, enrollment
+  type, rate code -> premium) are parsed from the PDF at start-up. The page 5 benefits
+  grid is a dict whose every value the tests find in the PDF text.
+- **State machine** (LangGraph, one pass per message, slots kept per thread by a
+  checkpointer): `understand` fills slots from the message, then the router goes to the
+  first missing step, following the guide's own steps: ZIP -> rate code -> employed or
+  retired -> enrollment type -> plan -> quote. A benefit question is answered from the
+  table and the conversation continues. Changing any slot re-quotes; "start over" resets.
+- **ZIP to state**: the PDF keys rows by state, so the ZIP prefix is mapped to its
+  state(s) with the USPS prefix ranges, plus any state whose row lists that prefix (for
+  example 205 appears under DC, MD and VA). If those states share a rate code, no question
+  is asked; if they differ, the bot asks which state.
+- **Models**: none by default; replies are parsed by rules. `--llm` adds an OpenAI
+  structured-output call to parse free-form replies (needs `OPENAI_API_KEY`). The model
+  only fills slots; it never writes a rate code, premium or benefit.
+
+```bash
+cd /Users/dc/geha/e2e_RAG/src
+python dental_enrollment.py          # chat in the terminal, rules only
+python dental_enrollment.py --llm    # OpenAI parses replies
+python -m unittest test_dental_enrollment
+```
+
+```text
+you> my zip is 20500
+ZIP 20500 (DC/MD/VA) is rate code 4 (guide page 10: DC | Entire state | 4).
+Are you an active federal employee (biweekly premiums) or a retiree (monthly premiums)?
+you> I'm retired, me and my wife, compare both
+2026 premiums for a retiree, Self Plus One, rate code 4 (guide page 11):
+  High: $112.84 monthly
+  Standard: $64.13 monthly
+```
+
+The tests check the PDF-parsed tables against the earlier CSV extraction in
+`downloads/dental/fedvip/` (90 rate-code rows, 60 premiums), that every benefit value is
+printed in the guide, rate-code look-ups (including shared and unknown ZIP prefixes), and
+the conversation: slot order, a one-message quote, a benefit question mid-flow, a bad ZIP,
+re-quoting after a change, a new ZIP, and start over. The guide's enrollment dates (Open
+Season November 10 to December 8, 2025) are quoted as printed; check current dates
+before using this with members.
+
 ## Retrieval benchmark
 
 The retrieval-only benchmark exercises the actual dense parent-document path:
