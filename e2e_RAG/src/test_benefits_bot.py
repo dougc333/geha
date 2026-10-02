@@ -71,6 +71,45 @@ class ExtractTests(unittest.TestCase):
         self.assertIn("dental:orthodontics", rule_extract("braces?", "", [], {})["topics"])
 
 
+class RuleFixTests(unittest.TestCase):
+    """Rules added for the conversation test set's misses, and words they must not misread."""
+
+    def x(self, message, stage="", slots=None):
+        return rule_extract(message, stage, [], slots or {})
+
+    def test_family_size(self):
+        self.assertEqual(self.x("me and my daughter")["enrollment"], "Self Plus One")
+        self.assertEqual(self.x("my husband and son")["enrollment"], "Self and Family")
+        self.assertEqual(self.x("me and my 3 kids")["enrollment"], "Self and Family")
+        self.assertEqual(self.x("individual coverage")["enrollment"], "Self Only")
+
+    def test_status_wording_and_typos(self):
+        for text, want in [("I'm a postal worker", "EMPLOYED"), ("still working", "EMPLOYED"),
+                           ("USPS letter carrier", "EMPLOYED"), ("retierd", "RETIRED"), ("retird", "RETIRED")]:
+            with self.subTest(text=text):
+                self.assertEqual(self.x(text)["status"], want)
+
+    def test_line_wording(self):
+        self.assertEqual(self.x("both")["line"], "both")                       # before the bot asks
+        self.assertEqual(self.x("FEHB and FEDVIP")["line"], "both")
+        self.assertEqual(self.x("dentl and medcal")["line"], "both")
+        self.assertNotIn("line", self.x("compare both", "ask_dental_plan", {"line": "dental"}))
+
+    def test_plan_wording(self):
+        got = self.x("high dental and standard medical", "ask_dental_plan", {"line": "both"})
+        self.assertEqual((got["dental_plan"], got["medical_plan"]), ("HIGH", "Standard"))
+        self.assertEqual(self.x("the cheaper one", "ask_dental_plan", {"line": "dental"})["dental_plan"], "STANDARD")
+        self.assertEqual(self.x("elevat plus")["medical_plan"], "Elevate Plus")
+        self.assertEqual(self.x("standrad", "ask_dental_plan", {"line": "dental"})["dental_plan"], "STANDARD")
+
+    def test_words_that_must_not_be_misread(self):
+        self.assertNotIn("enrollment", self.x("I'm familiar with HDHP"))
+        self.assertNotIn("line", self.x("I have Medicare"))
+        self.assertNotIn("line", self.x("good oral health matters"))
+        self.assertNotIn("state", self.x("ok, I'm employed", "ask_status"))
+        self.assertNotIn("medical_plan", self.x("cheapest please", "ask_medical_plan", {"line": "medical"}))
+
+
 class StateMachineTests(unittest.TestCase):
     def chat(self, *messages):
         bot = BenefitsBot(DENTAL, MEDICAL)

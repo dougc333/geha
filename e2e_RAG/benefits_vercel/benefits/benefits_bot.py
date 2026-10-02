@@ -16,6 +16,7 @@ fills slots.
 
 from __future__ import annotations
 
+import difflib
 import re
 from typing import Any, Callable, TypedDict
 
@@ -71,26 +72,50 @@ class Chat(TypedDict, total=False):
     stage: str
 
 
+# Words the rules key on; a near miss ("retierd", "standrad", "dentl") is corrected to one of these.
+VOCAB = ("dental", "medical", "retired", "retiree", "standard", "elevate", "plus", "family", "employed",
+         "employee", "annuitant")
+NOT_TYPOS = {"medicare", "medicaid", "employer", "standards", "families", "retiring"}
+SPOUSE = r"spouse|wife|husband|partner"
+ONE_CHILD = r"\b(son|daughter|child|kid|stepson|stepdaughter)\b"
+CHILDREN = r"\b(kids|children|sons|daughters|stepkids)\b"
+
+
+def fix_typos(text: str) -> str:
+    def fix(m: re.Match) -> str:
+        word = m.group(0)
+        if word in VOCAB or word in NOT_TYPOS:
+            return word
+        near = [v for v in VOCAB if abs(len(v) - len(word)) <= 1]
+        hit = difflib.get_close_matches(word, near, n=1, cutoff=0.8)
+        return hit[0] if hit else word
+    return re.sub(r"[a-z]{4,}", fix, text)
+
+
 def rule_extract(message: str, stage: str, candidates: list[str], slots: dict) -> dict[str, Any]:
-    text, out = message.lower(), {}
+    text, out = fix_typos(message.lower()), {}
     if m := re.search(r"\b(\d{5})(?:-\d{4})?\b", message):
         out["zip"] = m.group(1)
     if stage == "ask_state" and (hits := [s for s in candidates if s.lower() in set(re.findall(r"[a-z]{2}", text))]):
         out["state"] = hits[0]
-    if re.search(r"retire|annuitant", text):
+    if re.search(r"\breti|annuitant", text):
         out["status"] = "RETIRED"
-    elif re.search(r"employ|active|work for|federal worker|\bfed\b", text):
+    elif re.search(r"employ|active|work for|working|federal worker|\bfed\b|postal|usps|letter carrier|mail carrier", text):
         out["status"] = "EMPLOYED"
-    if re.search(r"family|kids|children|son|daughter", text):
+
+    # One family member (a spouse, or one child) is Self Plus One; more than one is Self and Family.
+    spouse, one_child = bool(re.search(SPOUSE, text)), bool(re.search(ONE_CHILD, text))
+    if re.search(r"family", text) or re.search(CHILDREN, text) or (spouse and one_child):
         out["enrollment"] = "Self and Family"
-    elif re.search(r"plus one|\+ ?1|spouse|partner|wife|husband", text):
+    elif re.search(r"plus one|\+ ?1\b|plus 1", text) or spouse or one_child:
         out["enrollment"] = "Self Plus One"
-    elif re.search(r"self only|just me|only me|myself|single", text):
+    elif re.search(r"self only|just me|only me|me only|myself|single|individual|just for me", text):
         out["enrollment"] = "Self Only"
 
-    dental = bool(re.search(r"dental|dentist|teeth|tooth", text))
-    medical = bool(re.search(r"medical|health plan|health insurance|fehb|elevate|hdhp", text))
-    if stage == "ask_line" and re.search(r"\bboth\b|\beach\b|all of", text) or (dental and medical):
+    dental = bool(re.search(r"dental|dentist|teeth|tooth|fedvip", text))
+    medical = bool(re.search(r"medical|health plan|health insurance|fehb|elevate|hdhp|(?<!oral )(?<!dental )\bhealth\b", text))
+    if (dental and medical) or (re.search(r"\bboth\b|\beach\b|all of", text)
+                                and (stage == "ask_line" or not slots.get("line"))):
         out["line"] = "both"
     elif dental:
         out["line"] = "dental"
@@ -98,20 +123,35 @@ def rule_extract(message: str, stage: str, candidates: list[str], slots: dict) -
         out["line"] = "medical"
 
     # Plan names: Elevate / Elevate Plus / HDHP are medical only; High and Standard exist in both lines,
-    # so they go to the line being asked about, the line named in the message, or the only line chosen.
+    # so they go to the line named next to them, the line being asked about, the line named in the
+    # message, or the only line chosen.
     compare = bool(re.search(r"\bboth\b|compare|either|not sure|don't know|all\b", text))
-    if m := re.search(r"elevate plus|elevate\+|elevate|hdhp|high deductible", text):
-        out["medical_plan"] = {"elevate plus": "Elevate Plus", "elevate+": "Elevate Plus", "elevate": "Elevate",
-                               "hdhp": "HDHP", "high deductible": "HDHP"}[m.group(0)]
+    if m := re.search(r"elevate plus|elevate ?\+|elevate|hdhp|high deductible", text):
+        out["medical_plan"] = "Elevate Plus" if "plus" in m.group(0) or "+" in m.group(0) else \
+            "Elevate" if m.group(0) == "elevate" else "HDHP"
+    paired = {}
+    for a, b in re.findall(r"\b(high|standard)\s+(?:option\s+|plan\s+)?(dental|medical)\b", text):
+        paired[b] = a
+    for b, a in re.findall(r"\b(dental|medical)\s+(?:plan\s+|option\s+)?(?:is\s+)?(high|standard)\b", text):
+        paired.setdefault(b, a)
+    if "dental" in paired:
+        out["dental_plan"] = paired["dental"].upper()
+    if "medical" in paired and "medical_plan" not in out:
+        out["medical_plan"] = paired["medical"].title()
     shared = "HIGH" if re.search(r"\bhigh\b(?! deductible)", text) else "STANDARD" if re.search(r"\bstandard\b", text) else None
+    cheapest = bool(re.search(r"cheap|lowest premium|lower premium|least expensive|lowest cost", text))
     line = slots.get("line")
     target = ("dental" if stage == "ask_dental_plan" else "medical" if stage == "ask_medical_plan"
               else "dental" if dental and not medical else "medical" if medical and not dental
               else line if line in ("dental", "medical") else None)
-    if shared and target == "dental":
+    if paired:
+        pass
+    elif shared and target == "dental":
         out["dental_plan"] = shared
     elif shared and target == "medical" and "medical_plan" not in out:
         out["medical_plan"] = shared.title()
+    elif cheapest and target == "dental":
+        out["dental_plan"] = "STANDARD"     # the guide calls Standard G.E.H.A's lowest premium dental plan
     elif compare and target == "dental" and stage != "ask_line":
         out["dental_plan"] = "BOTH"
     elif compare and target == "medical" and stage != "ask_line" and "medical_plan" not in out:
