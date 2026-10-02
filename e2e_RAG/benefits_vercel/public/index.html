@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Benefits quote demo</title>
+<style>
+:root{--bg:#f7f6f2;--card:#fff;--ink:#2c2c2a;--muted:#6b6a65;--line:#d3d1c7;--member:#e6f1fb;--member-ink:#0c447c;--accent:#185fa5;--accent-ink:#fff;--note:#faeeda;--note-ink:#633806}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c1b19;--card:#262522;--ink:#f1efe8;--muted:#b4b2a9;--line:#444441;--member:#0c447c;--member-ink:#e6f1fb;--accent:#85b7eb;--accent-ink:#042c53;--note:#412402;--note-ink:#fac775}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:20px 16px 24px;display:grid;grid-template-columns:1fr 260px;gap:16px}
+@media (max-width:760px){.wrap{grid-template-columns:1fr}.chat{height:60vh}}
+h1{font-size:22px;font-weight:600;margin:0}
+.sub{color:var(--muted);font-size:13px;margin:4px 0 12px}
+.note{background:var(--note);color:var(--note-ink);border-radius:8px;padding:8px 12px;font-size:13px;margin-bottom:12px}
+.chat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;height:min(62vh,640px);overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:88%;padding:9px 13px;border-radius:12px;white-space:pre-wrap;overflow-wrap:anywhere}
+.member{align-self:flex-end;background:var(--member);color:var(--member-ink);border-bottom-right-radius:4px}
+.bot{align-self:flex-start;border:1px solid var(--line);border-bottom-left-radius:4px}
+.typing{align-self:flex-start;color:var(--muted);font-size:13px}
+form{display:flex;gap:8px;margin-top:10px}
+input{flex:1;min-width:0;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+input:focus{outline:2px solid var(--accent);outline-offset:1px}
+button{font:inherit;font-size:14px;border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:var(--card);color:var(--ink);cursor:pointer;text-align:left}
+button:hover{border-color:var(--accent)}
+button.send{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);text-align:center}
+aside .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px}
+aside h2{font-size:14px;font-weight:600;margin:0 0 8px}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:13px}
+dt{color:var(--muted)}dd{margin:0;font-weight:500;overflow-wrap:anywhere}
+.examples{display:flex;flex-direction:column;gap:6px}.examples button{font-size:13px}
+.error{color:#a32d2d;font-size:13px;margin-top:6px;min-height:1em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <main>
+    <h1>Benefits quote demo</h1>
+    <p class="sub">FEDVIP dental and FEHB medical, 2026. Premiums and benefits are read from tables in G.E.H.A's published 2026 benefits guides and Summaries of Benefits and Coverage.</p>
+    <div class="note">Demo only, not affiliated with or endorsed by G.E.H.A. Check rates and enroll through official channels.</div>
+    <div class="chat" id="chat" aria-live="polite"></div>
+    <form id="form" autocomplete="off">
+      <input id="input" maxlength="500" placeholder="Type your answer or a benefits question" aria-label="Message">
+      <button class="send" type="submit">Send</button>
+    </form>
+    <div class="error" id="error"></div>
+  </main>
+  <aside>
+    <div class="panel">
+      <h2>Slot state</h2>
+      <dl id="slots"></dl>
+    </div>
+    <div class="panel">
+      <h2>Try</h2>
+      <div class="examples" id="examples"></div>
+    </div>
+    <button id="reset" type="button" style="width:100%;text-align:center">Start over</button>
+  </aside>
+</div>
+<script>
+const SLOTS = [["line","Coverage"],["status","Employed or retired"],["enrollment","Enrollment type"],["zip","ZIP"],
+               ["rate_code","Dental rate code"],["dental_plan","Dental plan"],["medical_plan","Medical plan"]];
+const EXAMPLES = ["dental and medical, zip 94105, I'm retired, me and my wife", "medical, active employee, self only, compare",
+                  "does Elevate Plus cover an MRI?", "do you cover braces?"];
+const KEY = "benefits-chat-v1";
+let state = {}, transcript = [];
+const $ = id => document.getElementById(id);
+
+function save(){ try { sessionStorage.setItem(KEY, JSON.stringify({state, transcript})); } catch (e) {} }
+function load(){ try { const s = JSON.parse(sessionStorage.getItem(KEY) || "null"); if (s) { state = s.state || {}; transcript = s.transcript || []; } } catch (e) {} }
+
+function bubble(who, text){
+  const el = document.createElement("div");
+  el.className = "msg " + who; el.textContent = text;
+  $("chat").appendChild(el); $("chat").scrollTop = $("chat").scrollHeight;
+}
+function renderSlots(){
+  const slots = state.slots || {}, dl = $("slots"); dl.replaceChildren();
+  for (const [k, label] of SLOTS){
+    const dt = document.createElement("dt"), dd = document.createElement("dd");
+    dt.textContent = label; dd.textContent = slots[k] ?? "—"; dl.append(dt, dd);
+  }
+}
+async function send(text, show = true){
+  $("error").textContent = "";
+  if (show){ bubble("member", text); transcript.push(["member", text]); }
+  const typing = document.createElement("div"); typing.className = "typing"; typing.textContent = "…";
+  $("chat").appendChild(typing);
+  try {
+    const res = await fetch("/api/chat", {method: "POST", headers: {"Content-Type": "application/json"},
+                                          body: JSON.stringify({message: text, state})});
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || res.statusText);
+    state = data.state; bubble("bot", data.reply); transcript.push(["bot", data.reply]);
+    renderSlots(); save();
+  } catch (e) {
+    $("error").textContent = "Could not reach the chat service: " + e.message;
+  } finally { typing.remove(); }
+}
+function reset(){ state = {}; transcript = []; $("chat").replaceChildren(); renderSlots(); save(); send("hi", false); }
+
+$("form").addEventListener("submit", e => { e.preventDefault(); const t = $("input").value.trim(); if (!t) return; $("input").value = ""; send(t); });
+$("reset").addEventListener("click", reset);
+for (const ex of EXAMPLES){ const b = document.createElement("button"); b.type = "button"; b.textContent = ex; b.onclick = () => send(ex); $("examples").appendChild(b); }
+
+load(); renderSlots();
+if (transcript.length) transcript.forEach(([who, text]) => bubble(who, text)); else send("hi", false);
+</script>
+</body>
+</html>
