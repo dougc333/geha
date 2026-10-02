@@ -19,7 +19,7 @@ class StreamlitApplication:
     def __init__(
         self,
         client_factory: Callable[..., Any] = RagClient,
-        rag_service_factory: Callable[[], Rag] = Rag,
+        rag_service_factoryinit: Callable[[], Rag] = Rag,
     ) -> None:
         self.client_factory = client_factory
         self.rag_service_factory = rag_service_factory
