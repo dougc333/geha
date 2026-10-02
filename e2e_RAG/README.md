@@ -143,6 +143,100 @@ re-quoting after a change, a new ZIP, and start over. The guide's enrollment dat
 Season November 10 to December 8, 2025) are quoted as printed; check current dates
 before using this with members.
 
+## Dental + medical chatbot
+
+![Dental + medical state machine](docs/rag_state_machine_dental_medical.png)
+
+`src/benefits_bot.py` extends the dental state machine to FEHB medical, with a chat
+interface in `src/benefits_chat_app.py` (Streamlit; the sidebar shows the slot state).
+
+- **Shared slots**, asked once: which line (dental, medical or both), employed or
+  retired, enrollment type. Dental adds ZIP -> rate code -> dental plan; medical adds the
+  plan option. FEHB premiums are national, so medical never asks for a ZIP.
+- **Medical tables** (`src/medical_tables.py`, PDFs in
+  `/Users/dc/geha/downloads/medical/fehb`, override with `FEHB_DIR`):
+  - premiums and enrollment codes for the five plan options (Elevate, Elevate Plus, HDHP,
+    Standard, High) from the FEHB medical benefits guide, e.g. "Self Only CODE 251
+    Elevate Plus $205.13 $444.45" (employed biweekly, retired monthly);
+  - each plan's Summary of Benefits and Coverage grid. The SBC is a federal form, so one
+    parser reads all five by position: the drawn row rules give the rows, the column
+    headings give in-network / out-of-network / limitations. Each SBC yields the same 30
+    services. Deductible and out-of-pocket limit come from page 1.
+- **Coexistence rules**: High and Standard exist in both lines, so they go to the plan
+  question being asked, the line named in the message, or the only line chosen; Elevate,
+  Elevate Plus and HDHP are medical only. "Deductible" and "x-ray" exist in both, so if the
+  line is unknown the bot asks which. A quote for both lines adds a total for the same
+  pay period (biweekly employed, monthly retired) when one plan of each is chosen.
+- Parsing the PDFs is deterministic (PyMuPDF text and drawing positions, no model);
+  parsing messages is rules, like the dental bot.
+
+```bash
+cd /Users/dc/geha/e2e_RAG/src
+streamlit run benefits_chat_app.py      # web chat
+python benefits_bot.py                  # terminal chat
+python -m unittest test_benefits_bot
+```
+
+The tests check the 15 premiums, that all five SBCs give the federal form's 30 rows, that
+every parsed cell is printed in its SBC, spot values (e.g. Elevate Plus specialist
+$50* / visit, HDHP emergency room 5% coinsurance), how High/Standard and shared topics are
+routed, the conversations (both lines with one total, medical without a ZIP, adding a
+line later, a deductible question before the line is known), that every dollar in a
+quote is a table value, and the Streamlit app through `streamlit.testing`.
+
+### On Vercel
+
+[`benefits_vercel/`](benefits_vercel/README.md) is the same bot as a Vercel app: a static
+chat page plus one Python function (`POST /api/chat`). The page carries the conversation
+state, the PDF tables ship as `tables.json`, and the only runtime dependency is LangGraph.
+Run it locally with `benefits_vercel/local_server.py`; deploy with Root Directory
+`e2e_RAG/benefits_vercel`.
+
+### Conversation test set
+
+`evals/benefits_conversations.jsonl` has 52 conversations written the way members talk
+("I'm an annuitant", "my husband and two kids", "the high deductible plan", typos,
+changing their mind, adding a line later, benefit questions mid-flow), each with the
+slots a careful human would fill. Rate codes in the expectations come from the page 10
+table. `evals/run_benefits_conversations.py` plays each one through a fresh bot thread
+and scores:
+
+- **joint goal accuracy**: every expected slot right (one wrong slot means a wrong premium);
+- **quote accuracy**: the last reply holds every premium the expected slots imply;
+- **expected phrases**: benefit answers given mid-flow.
+
+```bash
+cd /Users/dc/geha
+PYTHONPATH=e2e_RAG/src .venv/bin/python e2e_RAG/evals/run_benefits_conversations.py
+```
+
+It writes `evals/benefits_conversations_results.json` and `.md` (scores, per-slot and
+per-category tables, and every failure with what the member said).
+
+Baseline with the rules parser (2026-10-02): **37/52 conversations fully right (71%)**.
+Slots: ZIP 100%, status 94%, enrollment 94%, line 90%, medical plan 88%, rate code 83%,
+dental plan 72%. Every benefit answer expected mid-flow was given. The misses:
+
+- "both" as the first message is not read as dental and medical (it only counts after the
+  bot asks), which breaks 4 conversations;
+- "FEHB and FEDVIP" is read as medical only;
+- wording the rules lack: "postal worker", "still working", "individual coverage",
+  "the cheaper one", "high dental and standard medical";
+- "me and my daughter" / "me and my son" is read as Self and Family; one family member
+  is Self Plus One;
+- typos: "retierd", "elevat plus", "standrad".
+
+`docs/conversation_replay.html` replays the test set with the bot's actual replies: one
+message every 5 seconds, a pass/fail badge and the wrong slots for each conversation,
+looping through all 52 (Pause, Prev and Next buttons). It is built from
+`benefits_conversations_results.json`, so re-run the runner and rebuild it after changes.
+Open it through a local server, e.g. `python3 -m http.server -d docs 8512`, then
+http://localhost:8512/conversation_replay.html.
+
+Fix these by changing the rules or adding the `--llm` parser, then re-run; keep the set
+fixed so the score is comparable, and add new conversations from real member wording as
+a separate set so the bot is not tuned to the test.
+
 ## Retrieval benchmark
 
 The retrieval-only benchmark exercises the actual dense parent-document path:

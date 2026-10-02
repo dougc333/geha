@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="560" viewBox="0 0 980 560" role="img" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Dental and medical state machine RAG</title>
+  <desc>One shared slot state and extractor feed a router. If the line of coverage is unknown, the bot asks dental, medical or both. The dental sub-machine asks ZIP, finds the rate code, asks the dental plan and quotes; the medical sub-machine asks the medical plan option and quotes with no ZIP. Shared slots, employed or retired and enrollment type, are asked once for both. A combined quote adds premiums for the same pay period. Each sub-machine reads its own tables: the dental benefits guide pages 5, 10 and 11; the medical benefits guide premiums and enrollment codes; and the five SBC benefit grids.</desc>
+  <style>
+    .bg { fill: #ffffff; }
+    .teal rect { fill: #E1F5EE; stroke: #0F6E56; }
+    .teal text { fill: #085041; }
+    .coral rect { fill: #FAECE7; stroke: #993C1D; }
+    .coral text { fill: #712B13; }
+    .gray rect { fill: #F1EFE8; stroke: #5F5E5A; }
+    .gray text { fill: #444441; }
+    .purple rect { fill: #EEEDFE; stroke: #534AB7; }
+    .purple text { fill: #3C3489; }
+    .purple .ts2 { font-size: 12px; fill: #534AB7; }
+    .amber rect { fill: #FAEEDA; stroke: #854F0B; }
+    .amber text { fill: #633806; }
+    .blue rect { fill: #E6F1FB; stroke: #185FA5; }
+    .blue text { fill: #0C447C; }
+    .it { font-size: 12px; font-style: italic; }
+    .tq { font-size: 13px; font-weight: 500; }
+    .sn { font-size: 12px; }
+    .blue polygon { fill: #E6F1FB; stroke: #185FA5; }
+    .fig { stroke: #2C2C2A; stroke-width: 1.5; fill: none; stroke-linecap: round; }
+    .th { font-size: 14px; font-weight: 500; }
+    .ts { font-size: 12px; fill: #5F5E5A; }
+    .arr, .fig { stroke: #5F5E5A; stroke-width: 1.5; fill: none; }
+    .fig { stroke: #2C2C2A; stroke-linecap: round; }
+    .group { stroke: #888780; stroke-width: 0.75; fill: none; stroke-dasharray: 4 3; }
+    .label { font-size: 24px; font-weight: 700; fill: #2C2C2A; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #1f1e1c; }
+      .teal rect { fill: #085041; stroke: #5DCAA5; }
+      .teal text { fill: #E1F5EE; }
+      .coral rect { fill: #712B13; stroke: #F0997B; }
+      .coral text { fill: #FAECE7; }
+      .gray rect { fill: #444441; stroke: #B4B2A9; }
+      .gray text { fill: #F1EFE8; }
+      .purple rect { fill: #3C3489; stroke: #AFA9EC; }
+      .purple text { fill: #EEEDFE; }
+      .purple .ts2 { fill: #CECBF6; }
+      .amber rect { fill: #633806; stroke: #EF9F27; }
+      .amber text { fill: #FAEEDA; }
+      .blue rect { fill: #0C447C; stroke: #85B7EB; }
+      .blue text { fill: #E6F1FB; }
+      .blue polygon { fill: #0C447C; stroke: #85B7EB; }
+      .fig { stroke: #F1EFE8; }
+      .ts { fill: #B4B2A9; }
+      .arr { stroke: #B4B2A9; }
+      .fig { stroke: #F1EFE8; }
+      .label { fill: #F1EFE8; }
+    }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="0" y="0" width="980" height="560"/>
+  <g class="gray"><rect x="16" y="150" width="90" height="44" rx="8" stroke-width="0.5"/><text class="th" x="61" y="172" text-anchor="middle" dominant-baseline="central">Message</text></g>
+  <g class="purple"><rect x="126" y="144" width="130" height="56" rx="8" stroke-width="0.5"/><text class="th" x="191" y="163" text-anchor="middle" dominant-baseline="central">understand</text><text class="ts" x="191" y="182" text-anchor="middle" dominant-baseline="central">one extractor</text></g>
+  <path d="M108 172 L122 172" class="arr" marker-end="url(#arrow)"/>
+  <g class="gray"><rect x="276" y="70" width="214" height="174" rx="8" stroke-width="0.5"/><text class="th" x="383.0" y="86" text-anchor="middle" dominant-baseline="central">Slot state</text><text class="ts" x="288" y="106" dominant-baseline="central" xml:space="preserve" style="font-family: ui-monospace, Menlo, monospace">shared:</text><text class="ts" x="288" y="124" dominant-baseline="central" xml:space="preserve" style="font-family: ui-monospace, Menlo, monospace">  status, enrollment</text><text class="ts" x="288" y="142" dominant-baseline="central" xml:space="preserve" style="font-family: ui-monospace, Menlo, monospace">  line: dental|medical|both</text><text class="ts" x="288" y="160" dominant-baseline="central" xml:space="preserve" style="font-family: ui-monospace, Menlo, monospace">dental:</text><text class="ts" x="288" y="178" dominant-baseline="central" xml:space="preserve" style="font-family: ui-monospace, Menlo, monospace">  zip, rate_code, plan</text><text class="ts" x="288" y="196" dominant-baseline="central" xml:space="preserve" style="font-family: ui-monospace, Menlo, monospace">medical:</text><text class="ts" x="288" y="214" dominant-baseline="central" xml:space="preserve" style="font-family: ui-monospace, Menlo, monospace">  plan_option</text><text class="ts" x="288" y="232" dominant-baseline="central" xml:space="preserve" style="font-family: ui-monospace, Menlo, monospace">topics: service, line</text></g>
+  <text class="ts" x="383" y="262" text-anchor="middle" dominant-baseline="central">status and enrollment are asked</text>
+  <text class="ts" x="383" y="278" text-anchor="middle" dominant-baseline="central">once and used by both lines</text>
+  <path d="M258 172 L272 172" class="arr" marker-end="url(#arrow)"/>
+  <g class="blue"><polygon points="512,172 552,134 592,172 552,210" stroke-width="0.5"/><text class="th" x="552" y="172" text-anchor="middle" dominant-baseline="central">route</text></g>
+  <path d="M492 172 L508 172" class="arr" marker-end="url(#arrow)"/>
+  <g class="gray"><rect x="630" y="30" width="190" height="44" rx="8" stroke-width="0.5"/><text class="th" x="725" y="43" text-anchor="middle" dominant-baseline="central">ask_line</text><text class="ts" x="725" y="62" text-anchor="middle" dominant-baseline="central">dental, medical or both?</text></g>
+  <path d="M552 132 L552 52 L626 52" class="arr" marker-end="url(#arrow)"/>
+  <text class="ts" x="558" y="100" text-anchor="start" dominant-baseline="central">line unknown</text>
+  <g class="teal"><rect x="630" y="96" width="190" height="102" rx="8" stroke-width="0.5"/><text class="th" x="725.0" y="112" text-anchor="middle" dominant-baseline="central">Dental sub-machine</text><text class="ts" x="642" y="132" dominant-baseline="central" xml:space="preserve">ask_zip → find_rate_code</text><text class="ts" x="642" y="150" dominant-baseline="central" xml:space="preserve">ask_state (if needed)</text><text class="ts" x="642" y="168" dominant-baseline="central" xml:space="preserve">ask_dental_plan</text><text class="ts" x="642" y="186" dominant-baseline="central" xml:space="preserve">quote_dental</text></g>
+  <g class="purple"><rect x="630" y="212" width="190" height="84" rx="8" stroke-width="0.5"/><text class="th" x="725.0" y="228" text-anchor="middle" dominant-baseline="central">Medical sub-machine</text><text class="ts" x="642" y="248" dominant-baseline="central" xml:space="preserve">ask_medical_plan (5 options)</text><text class="ts" x="642" y="266" dominant-baseline="central" xml:space="preserve">no ZIP: one national rate</text><text class="ts" x="642" y="284" dominant-baseline="central" xml:space="preserve">quote_medical + code</text></g>
+  <path d="M594 172 L626 140" class="arr" marker-end="url(#arrow)"/>
+  <path d="M594 172 L626 250" class="arr" marker-end="url(#arrow)"/>
+  <g class="coral"><rect x="842" y="150" width="124" height="56" rx="8" stroke-width="0.5"/><text class="th" x="904" y="169" text-anchor="middle" dominant-baseline="central">Combined quote</text><text class="ts" x="904" y="188" text-anchor="middle" dominant-baseline="central">same pay period</text></g>
+  <path d="M822 140 L838 166" class="arr" marker-end="url(#arrow)"/>
+  <path d="M822 250 L838 190" class="arr" marker-end="url(#arrow)"/>
+  <g class="gray"><rect x="630" y="316" width="190" height="44" rx="8" stroke-width="0.5"/><text class="th" x="725" y="329" text-anchor="middle" dominant-baseline="central">answer benefits</text><text class="ts" x="725" y="348" text-anchor="middle" dominant-baseline="central">line from slot, else ask</text></g>
+  <path d="M552 212 L552 338 L626 338" class="arr" marker-end="url(#arrow)"/>
+  <text class="ts" x="546" y="300" text-anchor="end" dominant-baseline="central">benefit question</text>
+  <text class="ts" x="490" y="392" text-anchor="middle" dominant-baseline="central">structured tables, parsed from the PDFs at start-up</text>
+  <g class="teal"><rect x="150" y="410" width="220" height="84" rx="8" stroke-width="0.5"/><text class="th" x="260.0" y="426" text-anchor="middle" dominant-baseline="central">Dental benefits guide</text><text class="ts" x="162" y="446" dominant-baseline="central" xml:space="preserve">p.10 ZIP → rate code</text><text class="ts" x="162" y="464" dominant-baseline="central" xml:space="preserve">p.11 premiums</text><text class="ts" x="162" y="482" dominant-baseline="central" xml:space="preserve">p.5 benefits grid</text></g>
+  <g class="purple"><rect x="390" y="410" width="220" height="84" rx="8" stroke-width="0.5"/><text class="th" x="500.0" y="426" text-anchor="middle" dominant-baseline="central">Medical benefits guide</text><text class="ts" x="402" y="446" dominant-baseline="central" xml:space="preserve">plan option × enrollment</text><text class="ts" x="402" y="464" dominant-baseline="central" xml:space="preserve">→ enrollment code, premium</text><text class="ts" x="402" y="482" dominant-baseline="central" xml:space="preserve">employed biweekly, retired monthly</text></g>
+  <g class="purple"><rect x="630" y="410" width="220" height="84" rx="8" stroke-width="0.5"/><text class="th" x="740.0" y="426" text-anchor="middle" dominant-baseline="central">5 SBCs (same federal form)</text><text class="ts" x="642" y="446" dominant-baseline="central" xml:space="preserve">service × network → you pay</text><text class="ts" x="642" y="464" dominant-baseline="central" xml:space="preserve">deductible, out-of-pocket limit</text><text class="ts" x="642" y="482" dominant-baseline="central" xml:space="preserve">limits and exclusions</text></g>
+  <text class="label" x="16" y="545">Dental + medical state machine RAG</text>
+</svg>
