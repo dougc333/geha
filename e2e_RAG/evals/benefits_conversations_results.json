@@ -1,14 +1,14 @@
 {
   "conversations": 52,
-  "joint_goal_accuracy": 0.7115384615384616,
-  "quote_accuracy": 0.7115384615384616,
+  "joint_goal_accuracy": 1.0,
+  "quote_accuracy": 1.0,
   "phrase_accuracy": 1.0,
-  "all_correct": 0.7115384615384616,
+  "all_correct": 1.0,
   "per_slot": {
     "line": {
-      "correct": 47,
+      "correct": 52,
       "total": 52,
-      "accuracy": 0.9038461538461539
+      "accuracy": 1.0
     },
     "zip": {
       "correct": 29,
@@ -16,29 +16,29 @@
       "accuracy": 1.0
     },
     "rate_code": {
-      "correct": 24,
+      "correct": 29,
       "total": 29,
-      "accuracy": 0.8275862068965517
+      "accuracy": 1.0
     },
     "status": {
-      "correct": 49,
+      "correct": 52,
       "total": 52,
-      "accuracy": 0.9423076923076923
+      "accuracy": 1.0
     },
     "enrollment": {
-      "correct": 49,
+      "correct": 52,
       "total": 52,
-      "accuracy": 0.9423076923076923
+      "accuracy": 1.0
     },
     "dental_plan": {
-      "correct": 21,
+      "correct": 29,
       "total": 29,
-      "accuracy": 0.7241379310344828
+      "accuracy": 1.0
     },
     "medical_plan": {
-      "correct": 30,
+      "correct": 34,
       "total": 34,
-      "accuracy": 0.8823529411764706
+      "accuracy": 1.0
     }
   },
   "by_category": {
@@ -51,11 +51,11 @@
       "total": 4
     },
     "direct": {
-      "correct": 5,
+      "correct": 6,
       "total": 6
     },
     "enrollment wording": {
-      "correct": 4,
+      "correct": 8,
       "total": 8
     },
     "line added later": {
@@ -63,7 +63,7 @@
       "total": 2
     },
     "line wording": {
-      "correct": 2,
+      "correct": 3,
       "total": 3
     },
     "one message": {
@@ -71,7 +71,7 @@
       "total": 4
     },
     "plan wording": {
-      "correct": 4,
+      "correct": 7,
       "total": 7
     },
     "reset": {
@@ -79,11 +79,11 @@
       "total": 1
     },
     "status wording": {
-      "correct": 4,
+      "correct": 7,
       "total": 7
     },
     "typos": {
-      "correct": 0,
+      "correct": 3,
       "total": 3
     },
     "zip": {
@@ -91,60 +91,40 @@
       "total": 3
     }
   },
-  "wrong_slots": {
-    "line": 5,
-    "rate_code": 5,
-    "dental_plan": 8,
-    "status": 3,
-    "medical_plan": 4,
-    "enrollment": 3
-  },
+  "wrong_slots": {},
   "results": [
     {
       "id": "both-direct",
       "category": "direct",
-      "joint": false,
-      "quote": false,
+      "joint": true,
+      "quote": true,
       "phrases": true,
-      "wrong": {
-        "line": {
-          "expected": "both",
-          "got": "medical"
-        },
-        "rate_code": {
-          "expected": 5,
-          "got": null
-        },
-        "dental_plan": {
-          "expected": "STANDARD",
-          "got": null
-        }
-      },
+      "wrong": {},
       "missing_phrases": [],
       "transcript": [
         {
           "member": "both",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "What's your ZIP code? Your dental premium depends on your rate code, which comes from your ZIP."
         },
         {
           "member": "94105",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "ZIP 94105 (CA) is dental rate code 5 (dental guide page 10).\nAre you an active federal employee (biweekly premiums) or a retiree (monthly premiums)?"
         },
         {
           "member": "retired",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "Who will be covered: Self Only, Self Plus One or Self and Family?"
         },
         {
           "member": "me and my wife",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "Which dental plan: High (annual maximum unlimited per person) or Standard (lowest premium, $2,500 per person in-network maximum)? Say 'both' to compare."
         },
         {
           "member": "standard",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "Which medical plan option: Elevate, Elevate Plus, HDHP, Standard, High? Say 'compare' to see all five."
         },
         {
           "member": "HDHP",
-          "bot": "2026 premiums for a retiree, Self Plus One:\n  Medical HDHP (enrollment code 343): $380.18 monthly\nMedical: enroll through your agency's HR or benefits system, or your retirement system if retired, using the enrollment code above.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
+          "bot": "2026 premiums for a retiree, Self Plus One:\n  Dental Standard (rate code 5): $69.33 monthly\n  Medical HDHP (enrollment code 343): $380.18 monthly\n  Total: $449.51 monthly\nDental: enroll at BENEFEDS.gov (G.E.H.A Connection Dental Federal) or call BENEFEDS at 1-877-888-3337.\nMedical: enroll through your agency's HR or benefits system, or your retirement system if retired, using the enrollment code above.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
         }
       ]
     },
@@ -420,15 +400,10 @@
     {
       "id": "status-postal",
       "category": "status wording",
-      "joint": false,
-      "quote": false,
+      "joint": true,
+      "quote": true,
       "phrases": true,
-      "wrong": {
-        "status": {
-          "expected": "EMPLOYED",
-          "got": null
-        }
-      },
+      "wrong": {},
       "missing_phrases": [],
       "transcript": [
         {
@@ -441,30 +416,25 @@
         },
         {
           "member": "I'm a postal worker",
-          "bot": "Are you an active federal employee (biweekly premiums) or a retiree (monthly premiums)?"
+          "bot": "Who will be covered: Self Only, Self Plus One or Self and Family?"
         },
         {
           "member": "self only",
-          "bot": "Are you an active federal employee (biweekly premiums) or a retiree (monthly premiums)?"
+          "bot": "Which dental plan: High (annual maximum unlimited per person) or Standard (lowest premium, $2,500 per person in-network maximum)? Say 'both' to compare."
         },
         {
           "member": "standard",
-          "bot": "Are you an active federal employee (biweekly premiums) or a retiree (monthly premiums)?"
+          "bot": "2026 premiums for an active federal employee, Self Only:\n  Dental Standard (rate code 4): $14.81 biweekly\nDental: enroll at BENEFEDS.gov (G.E.H.A Connection Dental Federal) or call BENEFEDS at 1-877-888-3337.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
         }
       ]
     },
     {
       "id": "status-still-working",
       "category": "status wording",
-      "joint": false,
-      "quote": false,
+      "joint": true,
+      "quote": true,
       "phrases": true,
-      "wrong": {
-        "status": {
-          "expected": "EMPLOYED",
-          "got": null
-        }
-      },
+      "wrong": {},
       "missing_phrases": [],
       "transcript": [
         {
@@ -477,15 +447,15 @@
         },
         {
           "member": "still working",
-          "bot": "Are you an active federal employee (biweekly premiums) or a retiree (monthly premiums)?"
+          "bot": "Who will be covered: Self Only, Self Plus One or Self and Family?"
         },
         {
           "member": "self only",
-          "bot": "Are you an active federal employee (biweekly premiums) or a retiree (monthly premiums)?"
+          "bot": "Which dental plan: High (annual maximum unlimited per person) or Standard (lowest premium, $2,500 per person in-network maximum)? Say 'both' to compare."
         },
         {
           "member": "high",
-          "bot": "Are you an active federal employee (biweekly premiums) or a retiree (monthly premiums)?"
+          "bot": "2026 premiums for an active federal employee, Self Only:\n  Dental High (rate code 3): $23.26 biweekly\nDental: enroll at BENEFEDS.gov (G.E.H.A Connection Dental Federal) or call BENEFEDS at 1-877-888-3337.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
         }
       ]
     },
@@ -519,67 +489,45 @@
     {
       "id": "status-federal-retiree",
       "category": "status wording",
-      "joint": false,
-      "quote": false,
+      "joint": true,
+      "quote": true,
       "phrases": true,
-      "wrong": {
-        "line": {
-          "expected": "both",
-          "got": null
-        },
-        "rate_code": {
-          "expected": 3,
-          "got": null
-        },
-        "dental_plan": {
-          "expected": "STANDARD",
-          "got": null
-        },
-        "medical_plan": {
-          "expected": "Standard",
-          "got": null
-        }
-      },
+      "wrong": {},
       "missing_phrases": [],
       "transcript": [
         {
           "member": "both",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "What's your ZIP code? Your dental premium depends on your rate code, which comes from your ZIP."
         },
         {
           "member": "60601",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "ZIP 60601 (IL) is dental rate code 3 (dental guide page 10).\nAre you an active federal employee (biweekly premiums) or a retiree (monthly premiums)?"
         },
         {
           "member": "federal retiree",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "Who will be covered: Self Only, Self Plus One or Self and Family?"
         },
         {
           "member": "just me",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "Which dental plan: High (annual maximum unlimited per person) or Standard (lowest premium, $2,500 per person in-network maximum)? Say 'both' to compare."
         },
         {
           "member": "standard",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "Which medical plan option: Elevate, Elevate Plus, HDHP, Standard, High? Say 'compare' to see all five."
         },
         {
           "member": "standard",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "2026 premiums for a retiree, Self Only:\n  Dental Standard (rate code 3): $28.75 monthly\n  Medical Standard (enrollment code 314): $187.95 monthly\n  Total: $216.70 monthly\nDental: enroll at BENEFEDS.gov (G.E.H.A Connection Dental Federal) or call BENEFEDS at 1-877-888-3337.\nMedical: enroll through your agency's HR or benefits system, or your retirement system if retired, using the enrollment code above.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
         }
       ]
     },
     {
       "id": "status-typo",
       "category": "typos",
-      "joint": false,
-      "quote": false,
+      "joint": true,
+      "quote": true,
       "phrases": true,
-      "wrong": {
-        "status": {
-          "expected": "RETIRED",
-          "got": null
-        }
-      },
+      "wrong": {},
       "missing_phrases": [],
       "transcript": [
         {
@@ -588,15 +536,15 @@
         },
         {
           "member": "retierd",
-          "bot": "Are you an active federal employee (biweekly premiums) or a retiree (monthly premiums)?"
+          "bot": "Who will be covered: Self Only, Self Plus One or Self and Family?"
         },
         {
           "member": "self only",
-          "bot": "Are you an active federal employee (biweekly premiums) or a retiree (monthly premiums)?"
+          "bot": "Which medical plan option: Elevate, Elevate Plus, HDHP, Standard, High? Say 'compare' to see all five."
         },
         {
           "member": "elevate",
-          "bot": "Are you an active federal employee (biweekly premiums) or a retiree (monthly premiums)?"
+          "bot": "2026 premiums for a retiree, Self Only:\n  Medical Elevate (enrollment code 254): $168.83 monthly\nMedical: enroll through your agency's HR or benefits system, or your retirement system if retired, using the enrollment code above.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
         }
       ]
     },
@@ -692,15 +640,10 @@
     {
       "id": "enroll-daughter",
       "category": "enrollment wording",
-      "joint": false,
-      "quote": false,
+      "joint": true,
+      "quote": true,
       "phrases": true,
-      "wrong": {
-        "enrollment": {
-          "expected": "Self Plus One",
-          "got": "Self and Family"
-        }
-      },
+      "wrong": {},
       "missing_phrases": [],
       "transcript": [
         {
@@ -717,7 +660,7 @@
         },
         {
           "member": "elevate",
-          "bot": "2026 premiums for an active federal employee, Self and Family:\n  Medical Elevate (enrollment code 255): $228.85 biweekly\nMedical: enroll through your agency's HR or benefits system, or your retirement system if retired, using the enrollment code above.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
+          "bot": "2026 premiums for an active federal employee, Self Plus One:\n  Medical Elevate (enrollment code 256): $187.99 biweekly\nMedical: enroll through your agency's HR or benefits system, or your retirement system if retired, using the enrollment code above.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
         }
       ]
     },
@@ -755,15 +698,10 @@
     {
       "id": "enroll-individual",
       "category": "enrollment wording",
-      "joint": false,
-      "quote": false,
+      "joint": true,
+      "quote": true,
       "phrases": true,
-      "wrong": {
-        "enrollment": {
-          "expected": "Self Only",
-          "got": null
-        }
-      },
+      "wrong": {},
       "missing_phrases": [],
       "transcript": [
         {
@@ -776,78 +714,56 @@
         },
         {
           "member": "individual coverage",
-          "bot": "Who will be covered: Self Only, Self Plus One or Self and Family?"
+          "bot": "Which medical plan option: Elevate, Elevate Plus, HDHP, Standard, High? Say 'compare' to see all five."
         },
         {
           "member": "hdhp",
-          "bot": "Who will be covered: Self Only, Self Plus One or Self and Family?"
+          "bot": "2026 premiums for a retiree, Self Only:\n  Medical HDHP (enrollment code 341): $176.84 monthly\nMedical: enroll through your agency's HR or benefits system, or your retirement system if retired, using the enrollment code above.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
         }
       ]
     },
     {
       "id": "enroll-wife-and-kids",
       "category": "enrollment wording",
-      "joint": false,
-      "quote": false,
+      "joint": true,
+      "quote": true,
       "phrases": true,
-      "wrong": {
-        "line": {
-          "expected": "both",
-          "got": null
-        },
-        "rate_code": {
-          "expected": 3,
-          "got": null
-        },
-        "dental_plan": {
-          "expected": "HIGH",
-          "got": null
-        },
-        "medical_plan": {
-          "expected": "High",
-          "got": null
-        }
-      },
+      "wrong": {},
       "missing_phrases": [],
       "transcript": [
         {
           "member": "both",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "What's your ZIP code? Your dental premium depends on your rate code, which comes from your ZIP."
         },
         {
           "member": "85001",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "ZIP 85001 (AZ) is dental rate code 3 (dental guide page 10).\nAre you an active federal employee (biweekly premiums) or a retiree (monthly premiums)?"
         },
         {
           "member": "employed",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "Who will be covered: Self Only, Self Plus One or Self and Family?"
         },
         {
           "member": "my wife and kids",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "Which dental plan: High (annual maximum unlimited per person) or Standard (lowest premium, $2,500 per person in-network maximum)? Say 'both' to compare."
         },
         {
           "member": "high",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "Which medical plan option: Elevate, Elevate Plus, HDHP, Standard, High? Say 'compare' to see all five."
         },
         {
           "member": "high",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "2026 premiums for an active federal employee, Self and Family:\n  Dental High (rate code 3): $69.79 biweekly\n  Medical High (enrollment code 312): $525.18 biweekly\n  Total: $594.97 biweekly\nDental: enroll at BENEFEDS.gov (G.E.H.A Connection Dental Federal) or call BENEFEDS at 1-877-888-3337.\nMedical: enroll through your agency's HR or benefits system, or your retirement system if retired, using the enrollment code above.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
         }
       ]
     },
     {
       "id": "enroll-me-and-son",
       "category": "enrollment wording",
-      "joint": false,
-      "quote": false,
+      "joint": true,
+      "quote": true,
       "phrases": true,
-      "wrong": {
-        "enrollment": {
-          "expected": "Self Plus One",
-          "got": "Self and Family"
-        }
-      },
+      "wrong": {},
       "missing_phrases": [],
       "transcript": [
         {
@@ -868,7 +784,7 @@
         },
         {
           "member": "high",
-          "bot": "2026 premiums for a retiree, Self and Family:\n  Dental High (rate code 3): $151.21 monthly\nDental: enroll at BENEFEDS.gov (G.E.H.A Connection Dental Federal) or call BENEFEDS at 1-877-888-3337.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
+          "bot": "2026 premiums for a retiree, Self Plus One:\n  Dental High (rate code 3): $100.82 monthly\nDental: enroll at BENEFEDS.gov (G.E.H.A Connection Dental Federal) or call BENEFEDS at 1-877-888-3337.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
         }
       ]
     },
@@ -956,15 +872,10 @@
     {
       "id": "plan-cheaper-dental",
       "category": "plan wording",
-      "joint": false,
-      "quote": false,
+      "joint": true,
+      "quote": true,
       "phrases": true,
-      "wrong": {
-        "dental_plan": {
-          "expected": "STANDARD",
-          "got": null
-        }
-      },
+      "wrong": {},
       "missing_phrases": [],
       "transcript": [
         {
@@ -985,22 +896,17 @@
         },
         {
           "member": "the cheaper one",
-          "bot": "Which dental plan: High (annual maximum unlimited per person) or Standard (lowest premium, $2,500 per person in-network maximum)? Say 'both' to compare."
+          "bot": "2026 premiums for an active federal employee, Self Only:\n  Dental Standard (rate code 5): $16.00 biweekly\nDental: enroll at BENEFEDS.gov (G.E.H.A Connection Dental Federal) or call BENEFEDS at 1-877-888-3337.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
         }
       ]
     },
     {
       "id": "plan-typo",
       "category": "typos",
-      "joint": false,
-      "quote": false,
+      "joint": true,
+      "quote": true,
       "phrases": true,
-      "wrong": {
-        "medical_plan": {
-          "expected": "Elevate Plus",
-          "got": null
-        }
-      },
+      "wrong": {},
       "missing_phrases": [],
       "transcript": [
         {
@@ -1017,22 +923,17 @@
         },
         {
           "member": "elevat plus",
-          "bot": "Which medical plan option: Elevate, Elevate Plus, HDHP, Standard, High? Say 'compare' to see all five."
+          "bot": "2026 premiums for an active federal employee, Self Only:\n  Medical Elevate Plus (enrollment code 251): $205.13 biweekly\nMedical: enroll through your agency's HR or benefits system, or your retirement system if retired, using the enrollment code above.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
         }
       ]
     },
     {
       "id": "plan-standrad-typo",
       "category": "typos",
-      "joint": false,
-      "quote": false,
+      "joint": true,
+      "quote": true,
       "phrases": true,
-      "wrong": {
-        "dental_plan": {
-          "expected": "STANDARD",
-          "got": null
-        }
-      },
+      "wrong": {},
       "missing_phrases": [],
       "transcript": [
         {
@@ -1053,7 +954,7 @@
         },
         {
           "member": "standrad",
-          "bot": "Which dental plan: High (annual maximum unlimited per person) or Standard (lowest premium, $2,500 per person in-network maximum)? Say 'both' to compare."
+          "bot": "2026 premiums for a retiree, Self Only:\n  Dental Standard (rate code 3): $28.75 monthly\nDental: enroll at BENEFEDS.gov (G.E.H.A Connection Dental Federal) or call BENEFEDS at 1-877-888-3337.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
         }
       ]
     },
@@ -1091,88 +992,66 @@
     {
       "id": "plan-dental-high-in-both",
       "category": "plan wording",
-      "joint": false,
-      "quote": false,
+      "joint": true,
+      "quote": true,
       "phrases": true,
-      "wrong": {
-        "line": {
-          "expected": "both",
-          "got": "medical"
-        },
-        "rate_code": {
-          "expected": 3,
-          "got": null
-        },
-        "dental_plan": {
-          "expected": "HIGH",
-          "got": null
-        }
-      },
+      "wrong": {},
       "missing_phrases": [],
       "transcript": [
         {
           "member": "both",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "What's your ZIP code? Your dental premium depends on your rate code, which comes from your ZIP."
         },
         {
           "member": "48201",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "ZIP 48201 (MI) is dental rate code 3 (dental guide page 10).\nAre you an active federal employee (biweekly premiums) or a retiree (monthly premiums)?"
         },
         {
           "member": "employed",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "Who will be covered: Self Only, Self Plus One or Self and Family?"
         },
         {
           "member": "self only",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "Which dental plan: High (annual maximum unlimited per person) or Standard (lowest premium, $2,500 per person in-network maximum)? Say 'both' to compare."
         },
         {
           "member": "high",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "Which medical plan option: Elevate, Elevate Plus, HDHP, Standard, High? Say 'compare' to see all five."
         },
         {
           "member": "elevate",
-          "bot": "2026 premiums for an active federal employee, Self Only:\n  Medical Elevate (enrollment code 254): $77.92 biweekly\nMedical: enroll through your agency's HR or benefits system, or your retirement system if retired, using the enrollment code above.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
+          "bot": "2026 premiums for an active federal employee, Self Only:\n  Dental High (rate code 3): $23.26 biweekly\n  Medical Elevate (enrollment code 254): $77.92 biweekly\n  Total: $101.18 biweekly\nDental: enroll at BENEFEDS.gov (G.E.H.A Connection Dental Federal) or call BENEFEDS at 1-877-888-3337.\nMedical: enroll through your agency's HR or benefits system, or your retirement system if retired, using the enrollment code above.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
         }
       ]
     },
     {
       "id": "plan-named-lines",
       "category": "plan wording",
-      "joint": false,
-      "quote": false,
+      "joint": true,
+      "quote": true,
       "phrases": true,
-      "wrong": {
-        "dental_plan": {
-          "expected": "HIGH",
-          "got": null
-        },
-        "medical_plan": {
-          "expected": "Standard",
-          "got": null
-        }
-      },
+      "wrong": {},
       "missing_phrases": [],
       "transcript": [
         {
           "member": "both",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "What's your ZIP code? Your dental premium depends on your rate code, which comes from your ZIP."
         },
         {
           "member": "37201",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "ZIP 37201 (TN) is dental rate code 2 (dental guide page 10).\nAre you an active federal employee (biweekly premiums) or a retiree (monthly premiums)?"
         },
         {
           "member": "retired",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "Who will be covered: Self Only, Self Plus One or Self and Family?"
         },
         {
           "member": "self only",
-          "bot": "Do you want a quote for dental, medical, or both?"
+          "bot": "Which dental plan: High (annual maximum unlimited per person) or Standard (lowest premium, $2,500 per person in-network maximum)? Say 'both' to compare."
         },
         {
           "member": "high dental and standard medical",
-          "bot": "ZIP 37201 (TN) is dental rate code 2 (dental guide page 10).\nWhich dental plan: High (annual maximum unlimited per person) or Standard (lowest premium, $2,500 per person in-network maximum)? Say 'both' to compare."
+          "bot": "2026 premiums for a retiree, Self Only:\n  Dental High (rate code 2): $46.19 monthly\n  Medical Standard (enrollment code 314): $187.95 monthly\n  Total: $234.14 monthly\nDental: enroll at BENEFEDS.gov (G.E.H.A Connection Dental Federal) or call BENEFEDS at 1-877-888-3337.\nMedical: enroll through your agency's HR or benefits system, or your retirement system if retired, using the enrollment code above.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
         }
       ]
     },
@@ -1650,32 +1529,19 @@
     {
       "id": "fehb-and-fedvip",
       "category": "line wording",
-      "joint": false,
-      "quote": false,
+      "joint": true,
+      "quote": true,
       "phrases": true,
-      "wrong": {
-        "line": {
-          "expected": "both",
-          "got": "medical"
-        },
-        "rate_code": {
-          "expected": 2,
-          "got": null
-        },
-        "dental_plan": {
-          "expected": "HIGH",
-          "got": null
-        }
-      },
+      "wrong": {},
       "missing_phrases": [],
       "transcript": [
         {
           "member": "FEHB and FEDVIP",
-          "bot": "Are you an active federal employee (biweekly premiums) or a retiree (monthly premiums)?"
+          "bot": "What's your ZIP code? Your dental premium depends on your rate code, which comes from your ZIP."
         },
         {
           "member": "27601",
-          "bot": "Are you an active federal employee (biweekly premiums) or a retiree (monthly premiums)?"
+          "bot": "ZIP 27601 (NC) is dental rate code 2 (dental guide page 10).\nAre you an active federal employee (biweekly premiums) or a retiree (monthly premiums)?"
         },
         {
           "member": "retired",
@@ -1683,15 +1549,15 @@
         },
         {
           "member": "self only",
-          "bot": "Which medical plan option: Elevate, Elevate Plus, HDHP, Standard, High? Say 'compare' to see all five."
+          "bot": "Which dental plan: High (annual maximum unlimited per person) or Standard (lowest premium, $2,500 per person in-network maximum)? Say 'both' to compare."
         },
         {
           "member": "high",
-          "bot": "2026 premiums for a retiree, Self Only:\n  Medical High (enrollment code 311): $423.13 monthly\nMedical: enroll through your agency's HR or benefits system, or your retirement system if retired, using the enrollment code above.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
+          "bot": "Which medical plan option: Elevate, Elevate Plus, HDHP, Standard, High? Say 'compare' to see all five."
         },
         {
           "member": "hdhp",
-          "bot": "2026 premiums for a retiree, Self Only:\n  Medical HDHP (enrollment code 341): $176.84 monthly\nMedical: enroll through your agency's HR or benefits system, or your retirement system if retired, using the enrollment code above.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
+          "bot": "2026 premiums for a retiree, Self Only:\n  Dental High (rate code 2): $46.19 monthly\n  Medical HDHP (enrollment code 341): $176.84 monthly\n  Total: $223.03 monthly\nDental: enroll at BENEFEDS.gov (G.E.H.A Connection Dental Federal) or call BENEFEDS at 1-877-888-3337.\nMedical: enroll through your agency's HR or benefits system, or your retirement system if retired, using the enrollment code above.\nThe guides list Open Season for 2026 benefits as November 10 to December 8, 2025; check current dates."
         }
       ]
     }

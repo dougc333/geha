@@ -213,29 +213,43 @@ PYTHONPATH=e2e_RAG/src .venv/bin/python e2e_RAG/evals/run_benefits_conversations
 It writes `evals/benefits_conversations_results.json` and `.md` (scores, per-slot and
 per-category tables, and every failure with what the member said).
 
-Baseline with the rules parser (2026-10-02): **37/52 conversations fully right (71%)**.
-Slots: ZIP 100%, status 94%, enrollment 94%, line 90%, medical plan 88%, rate code 83%,
-dental plan 72%. Every benefit answer expected mid-flow was given. The misses:
+| Run (2026-10-02) | Test set (52) | Holdout (15) |
+|---|---:|---:|
+| First rules parser | 37/52 (71%) | not yet written |
+| After the rule fixes | **52/52 (100%)** | **15/15 (100%)** |
 
-- "both" as the first message is not read as dental and medical (it only counts after the
-  bot asks), which breaks 4 conversations;
-- "FEHB and FEDVIP" is read as medical only;
-- wording the rules lack: "postal worker", "still working", "individual coverage",
-  "the cheaper one", "high dental and standard medical";
-- "me and my daughter" / "me and my son" is read as Self and Family; one family member
-  is Self Plus One;
-- typos: "retierd", "elevat plus", "standrad".
+The first run's misses and the general rules that fixed them (in `rule_extract` in
+`src/benefits_bot.py`, each with a unit test in `RuleFixTests`):
+
+- "both" only counted right after the bot asked; it now counts whenever no line is chosen
+  yet (this broke 4 conversations);
+- "FEHB and FEDVIP" was read as medical only; FEDVIP now means dental, and "health" or
+  "health plan" means medical (but not "oral health");
+- "me and my daughter" was read as Self and Family. One family member (a spouse or one
+  child) is now Self Plus One; a spouse plus a child, or several children, is Self and
+  Family;
+- missing wording: "postal worker", "USPS", "still working" (employed), "individual"
+  (Self Only), "the cheaper one" (the Standard dental plan, which the guide calls the lowest
+  premium), "high dental and standard medical" (each plan paired with the line next to it);
+- typos ("retierd", "elevat plus", "standrad", "dentl"): a word within about one letter of
+  a word the rules use is corrected, except real words such as Medicare or employer.
+
+`evals/benefits_conversations_holdout.jsonl` has 15 conversations with wording the rules
+were not written against ("me and my 3 kids", "USPS letter carrier", "self + family",
+"the lowest premium plan", "dentl and medcal"). It was written before the fixes were run,
+but by the same author who chose them, so it is a weaker check than real member wording.
+Score it with `--dataset evals/benefits_conversations_holdout.jsonl --out
+evals/benefits_conversations_holdout_results`.
 
 `docs/conversation_replay.html` replays the test set with the bot's actual replies: one
 message every 5 seconds, a pass/fail badge and the wrong slots for each conversation,
-looping through all 52 (Pause, Prev and Next buttons). It is built from
-`benefits_conversations_results.json`, so re-run the runner and rebuild it after changes.
-Open it through a local server, e.g. `python3 -m http.server -d docs 8512`, then
-http://localhost:8512/conversation_replay.html.
+looping through all 52 (Pause, Prev and Next buttons). Rebuild it after a run with
+`.venv/bin/python e2e_RAG/evals/build_replay.py`. Open it through a local server, e.g.
+`python3 -m http.server -d docs 8512`, then http://localhost:8512/conversation_replay.html.
 
-Fix these by changing the rules or adding the `--llm` parser, then re-run; keep the set
-fixed so the score is comparable, and add new conversations from real member wording as
-a separate set so the bot is not tuned to the test.
+Keep both sets fixed so the scores stay comparable, and add conversations from real
+member wording as a new set before changing the rules again, so the bot is not tuned to
+the test.
 
 ## Retrieval benchmark
 

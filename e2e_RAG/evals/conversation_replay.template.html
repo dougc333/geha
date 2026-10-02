@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conversation test replay</title>
+<style>
+:root{--bg:#f7f6f2;--card:#ffffff;--ink:#2c2c2a;--muted:#6b6a65;--line:#d3d1c7;--member:#e6f1fb;--member-ink:#0c447c;--bot:#ffffff;--ok:#3b6d11;--ok-bg:#eaf3de;--bad:#a32d2d;--bad-bg:#fcebeb;--accent:#185fa5}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c1b19;--card:#262522;--ink:#f1efe8;--muted:#b4b2a9;--line:#444441;--member:#0c447c;--member-ink:#e6f1fb;--bot:#2c2c2a;--ok:#97c459;--ok-bg:#27500a;--bad:#f09595;--bad-bg:#501313;--accent:#85b7eb}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+main{max-width:760px;margin:0 auto;padding:24px 16px 40px}
+h1{font-size:22px;font-weight:600;margin:0 0 4px}.sub{color:var(--muted);font-size:13px;margin:0 0 18px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:12px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-width:0}
+.id{font-family:ui-monospace,Menlo,monospace;font-size:13px;overflow-wrap:anywhere}.cat{color:var(--muted);font-size:13px}
+.badge{font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px}.badge.ok{background:var(--ok-bg);color:var(--ok)}.badge.bad{background:var(--bad-bg);color:var(--bad)}
+.controls{display:flex;gap:6px}button{font:inherit;font-size:13px;background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:5px 11px;cursor:pointer}button:hover{border-color:var(--accent)}
+.wrong{color:var(--bad);font-size:13px;margin:0 0 10px;min-height:0}
+.chat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;min-height:380px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:88%;padding:9px 13px;border-radius:12px;white-space:pre-wrap;overflow-wrap:anywhere;animation:in .35s ease-out}
+.member{align-self:flex-end;background:var(--member);color:var(--member-ink);border-bottom-right-radius:4px}
+.bot{align-self:flex-start;background:var(--bot);border:1px solid var(--line);border-bottom-left-radius:4px}
+.who{display:block;font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--muted);margin-bottom:2px}.member .who{color:inherit;opacity:.8}
+.typing{align-self:flex-start;color:var(--muted);font-size:13px;padding:4px 2px}
+.progress{height:4px;background:var(--line);border-radius:4px;margin-top:12px;overflow:hidden}.progress div{height:100%;background:var(--accent);width:0;transition:width .3s}
+.foot{color:var(--muted);font-size:12px;margin-top:8px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.msg{animation:none}}
+</style></head><body><main>
+<h1>Conversation test replay</h1>
+<p class="sub">Each conversation in the benefits chatbot test set, replayed with the bot's actual replies. A new message appears every 5 seconds; the set loops. __SUMMARY__.</p>
+<div class="bar"><div class="meta"><span class="badge" id="badge"></span><span class="id" id="cid"></span><span class="cat" id="cat"></span></div>
+<div class="controls"><button id="prev" aria-label="Previous conversation">◀ Prev</button><button id="play">Pause</button><button id="next" aria-label="Next conversation">Next ▶</button></div></div>
+<p class="wrong" id="wrong"></p>
+<div class="chat" id="chat" aria-live="polite"></div>
+<div class="progress"><div id="prog"></div></div>
+<div class="foot"><span id="count"></span><span>Member messages from evals/benefits_conversations.jsonl · replies from benefits_bot.py</span></div>
+</main>
+<script>
+const DATA = __DATA__;
+const STEP = 5000;
+let c = 0, i = 0, timer = null, playing = true;
+const $ = id => document.getElementById(id);
+function steps(conv){ const s=[]; conv.turns.forEach(t=>{s.push(["member",t.member]);s.push(["bot",t.bot]);}); return s; }
+function show(){
+  const conv = DATA[c];
+  $("cid").textContent = conv.id; $("cat").textContent = conv.category;
+  $("badge").textContent = conv.ok ? "pass" : "fail"; $("badge").className = "badge " + (conv.ok ? "ok" : "bad");
+  $("wrong").textContent = conv.ok ? "" : conv.wrong.join(" · ");
+  $("count").textContent = `Conversation ${c+1} of ${DATA.length}`;
+  $("chat").innerHTML = ""; i = 0;
+}
+function add(){
+  const s = steps(DATA[c]);
+  if (i >= s.length){ c = (c+1) % DATA.length; show(); }
+  const [who, text] = steps(DATA[c])[i];
+  const el = document.createElement("div"); el.className = "msg " + who;
+  const w = document.createElement("span"); w.className = "who"; w.textContent = who === "member" ? "Member" : "Bot";
+  el.appendChild(w); el.appendChild(document.createTextNode(text));
+  $("chat").appendChild(el); el.scrollIntoView({block:"nearest", behavior:"smooth"});
+  i++; $("prog").style.width = (100 * i / steps(DATA[c]).length) + "%";
+}
+function start(){ stop(); timer = setInterval(add, STEP); }
+function stop(){ if (timer) clearInterval(timer); timer = null; }
+function jump(d){ c = (c + d + DATA.length) % DATA.length; show(); add(); if (playing) start(); }
+$("play").onclick = () => { playing = !playing; $("play").textContent = playing ? "Pause" : "Play"; playing ? start() : stop(); };
+$("next").onclick = () => jump(1); $("prev").onclick = () => jump(-1);
+show(); add(); start();
+</script></body></html>
