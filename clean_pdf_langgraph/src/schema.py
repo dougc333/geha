@@ -39,6 +39,7 @@ class CleaningState(TypedDict, total=False):
     use_vision: bool
     iteration: int
     max_iterations: int
+    max_correction_attempts: int
 
     # Source document and extraction outputs.
     source_sha256: str

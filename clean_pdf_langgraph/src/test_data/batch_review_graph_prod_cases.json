@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "description": "Labeled production-review error cases. Case IDs are repeated in test method names and assertion messages.",
+  "cases": [
+    {
+      "id": "VAL-001",
+      "test_method": "test_runtime_table_validation_cases",
+      "condition": "required columns field is missing",
+      "operation": "remove",
+      "field": "columns",
+      "expected_code": "MISSING_COLUMNS"
+    },
+    {
+      "id": "VAL-002",
+      "test_method": "test_runtime_table_validation_cases",
+      "condition": "table number is duplicated",
+      "operation": "duplicate_table_number",
+      "expected_code": "DUPLICATE_TABLE_NUMBER"
+    },
+    {
+      "id": "VAL-003",
+      "test_method": "test_runtime_table_validation_cases",
+      "condition": "table page is outside the PDF page range",
+      "operation": "set",
+      "field": "page",
+      "value": 3,
+      "page_count": 2,
+      "expected_code": "INVALID_PAGE_NUMBER"
+    },
+    {
+      "id": "VAL-005",
+      "test_method": "test_runtime_table_validation_cases",
+      "condition": "row cell count differs from column count",
+      "operation": "set",
+      "field": "rows",
+      "value": [["only one cell"]],
+      "expected_code": "ROW_WIDTH_MISMATCH"
+    },
+    {
+      "id": "VAL-006",
+      "test_method": "test_runtime_table_validation_cases",
+      "condition": "row contains a non-string cell",
+      "operation": "set",
+      "field": "rows",
+      "value": [["Drug", 9276]],
+      "expected_code": "NON_STRING_CELL"
+    },
+    {
+      "id": "GLOBAL-001",
+      "test_method": "test_GLOBAL_001_missing_extraction_artifact_is_fatal",
+      "condition": "required extraction artifact does not exist",
+      "expected_exception": "ReviewStateError"
+    },
+    {
+      "id": "IMAGE-001",
+      "test_method": "test_IMAGE_001_and_IMAGE_002_page_image_validation",
+      "condition": "referenced page image is missing",
+      "expected_code": "MISSING_PAGE_IMAGE"
+    },
+    {
+      "id": "IMAGE-002",
+      "test_method": "test_IMAGE_001_and_IMAGE_002_page_image_validation",
+      "condition": "referenced page image is not a PNG",
+      "expected_code": "INVALID_PAGE_IMAGE"
+    },
+    {
+      "id": "RENDER-001",
+      "test_method": "test_RENDER_001_render_warning_does_not_skip_comparison",
+      "condition": "HTML screenshot renderer raises an exception",
+      "injected_exception": "RuntimeError",
+      "expected_code": "HTML_RENDER_FAILED",
+      "expected_severity": "warning"
+    },
+    {
+      "id": "COMPARE-001",
+      "test_method": "test_COMPARE_001_failure_is_scoped_and_next_table_runs",
+      "condition": "vision comparison raises an exception for table 1",
+      "injected_exception": "TimeoutError",
+      "expected_code": "VISION_COMPARE_FAILED",
+      "expected_verdict": "uncertain"
+    },
+    {
+      "id": "COMPARE-002",
+      "test_method": "test_COMPARE_002_oversized_html_skips_model_call",
+      "condition": "HTML exceeds the review character limit",
+      "markup_length": 20001,
+      "expected_code": "HTML_REVIEW_LIMIT",
+      "expected_verdict": "uncertain"
+    },
+    {
+      "id": "CORRECT-001",
+      "test_method": "test_CORRECT_001_failure_preserves_mismatch",
+      "condition": "HTML correction raises an exception",
+      "injected_exception": "RuntimeError",
+      "expected_code": "HTML_CORRECTION_FAILED",
+      "expected_verdict": "mismatch"
+    },
+    {
+      "id": "CORRECT-002",
+      "test_method": "test_CORRECT_002_attempt_limit_is_visible",
+      "condition": "mismatch remains when correction limit is reached",
+      "attempts": 2,
+      "limit": 2,
+      "expected_code": "CORRECTION_LIMIT_REACHED",
+      "expected_verdict": "mismatch"
+    },
+    {
+      "id": "TEXT-001",
+      "test_method": "test_TEXT_001_to_TEXT_004_content_corruption",
+      "condition": "cell contains a Unicode replacement character",
+      "input": "�/1/2025",
+      "expected_code": "TEXT_REPLACEMENT_CHARACTER",
+      "expected_severity": "error"
+    },
+    {
+      "id": "TEXT-002",
+      "test_method": "test_TEXT_001_to_TEXT_004_content_corruption",
+      "condition": "column header begins with suspicious OCR punctuation",
+      "input": "!Updates",
+      "expected_code": "SUSPICIOUS_HEADER_PREFIX",
+      "expected_severity": "warning"
+    },
+    {
+      "id": "TEXT-003",
+      "test_method": "test_TEXT_001_to_TEXT_004_content_corruption",
+      "condition": "acronym is joined to the following word",
+      "input": "Approved at P&Twith minor updates",
+      "expected_code": "MISSING_WHITESPACE_AFTER_ACRONYM",
+      "expected_severity": "warning"
+    },
+    {
+      "id": "TEXT-004",
+      "test_method": "test_TEXT_001_to_TEXT_004_content_corruption",
+      "condition": "likely OCR substitution uses bv instead of by",
+      "input": "reviewed and approved bv OH P&T",
+      "expected_code": "POSSIBLE_OCR_SUBSTITUTION",
+      "expected_severity": "warning"
+    },
+    {
+      "id": "HTML-001",
+      "test_method": "test_HTML_001_verdicts_and_failures_are_visible",
+      "condition": "match, mismatch, and uncertain results are rendered",
+      "expected_classes": ["verdict-match", "verdict-mismatch", "verdict-uncertain"]
+    },
+    {
+      "id": "SAFE-001",
+      "test_method": "test_SAFE_001_raw_exception_body_is_not_persisted",
+      "condition": "exception body contains a credential-like secret",
+      "secret": "api-key-super-secret",
+      "expected_absent": true
+    }
+  ]
+}

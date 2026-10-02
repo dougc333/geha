@@ -8,7 +8,14 @@ import json
 from pathlib import Path
 from unittest.mock import patch
 
-from .batch_review_graph import report_node, resume_pdf, run_batch, run_pdf, vision_node
+from .batch_review_graph import (
+    comparison_route,
+    prepare_table_node,
+    report_node,
+    resume_pdf,
+    run_batch,
+    run_pdf,
+)
 from .html_vision_review import compare_html_table
 from .raw_table_html import combined_raw_html
 
@@ -22,6 +29,31 @@ def artifact(extractor: str, number: int, page: int = 1) -> dict:
 
 
 class BatchReviewTests(unittest.TestCase):
+    def test_prepare_table_clears_previous_service_failure(self) -> None:
+        state = {
+            "docling_tables": [artifact("docling", 1), artifact("docling", 2, 2)],
+            "review_table_index": 1,
+            "review_service_failure": "TimeoutError",
+        }
+
+        prepared = prepare_table_node(state)
+
+        self.assertEqual(prepared["review_service_failure"], "")
+        self.assertEqual(prepared["review_current_verdict"], "uncertain")
+        self.assertEqual(prepared["review_correction_attempts"], 0)
+
+    def test_correction_route_honors_attempt_limit(self) -> None:
+        self.assertEqual(comparison_route({
+            "review_current_verdict": "mismatch",
+            "review_correction_attempts": 0,
+            "max_correction_attempts": 1,
+        }), "correct")
+        self.assertEqual(comparison_route({
+            "review_current_verdict": "mismatch",
+            "review_correction_attempts": 1,
+            "max_correction_attempts": 1,
+        }), "finalize")
+
     def test_combined_html_has_all_raw_tables(self) -> None:
         source = combined_raw_html(
             "policy.pdf", "pdfplumber",
@@ -33,35 +65,61 @@ class BatchReviewTests(unittest.TestCase):
         self.assertIn("<td>Drug Name</td>", source)
         self.assertIn('data-page="2"', source)
 
-    def test_vision_results_are_separate_by_extractor(self) -> None:
-        state = {
-            "docling_tables": [artifact("docling", 1)],
-            "page_images": ["page.png"], "vision_model": "gpt-4o",
-            "use_vision": True,
-        }
-        mismatch = ({"artifact": "pdfplumber table 1", "page": 1,
-                     "kind": "numeric_header", "pdf_evidence": "Drug Name",
-                     "extracted_evidence": "0", "explanation": "Wrong header"})
-        with patch("src.batch_review_graph.images_for_pages", return_value=[Path("page.png")]), \
-                patch("src.batch_review_graph.compare_html_table",
-                      side_effect=[("mismatch", [mismatch])]):
-            reviews = vision_node(state)["extractor_reviews"]
-        self.assertEqual(reviews["docling"]["status"], "needs_human_review")
-        self.assertEqual(reviews["docling"]["issues"][0]["kind"], "numeric_header")
+    def test_mismatch_is_corrected_once_and_recompared(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            pdf = root / "sample.pdf"
+            pdf.write_bytes(b"sample")
+            output = root / "review" / "sample"
+            mismatch = {"artifact": "docling table 1", "page": 1,
+                        "kind": "numeric_header", "pdf_evidence": "Drug Name",
+                        "extracted_evidence": "0", "explanation": "Wrong header"}
+            with patch("src.batch_review_graph.docling_extract", return_value={
+                    "page_count": 1, "docling_markdown": "docling.md",
+                    "docling_chunks_markdown": "chunks.md",
+                    "docling_tables_markdown": "tables.md",
+                    "docling_tables": [artifact("docling", 1)],
+                }), patch("src.batch_review_graph.render_pdf_pages", return_value=["page.png"]), \
+                    patch("src.batch_review_graph.webbrowser.open"), \
+                    patch("src.batch_review_graph.time.sleep"), \
+                    patch("src.batch_review_graph.images_for_pages", return_value=[Path("page.png")]), \
+                    patch("src.batch_review_graph.render_html_table_screenshot"), \
+                    patch("src.batch_review_graph.compare_html_table",
+                          side_effect=[("mismatch", [mismatch]), ("match", [])]) as compare, \
+                    patch("src.batch_review_graph.correct_html_table",
+                          return_value="<table><tr><th>Drug Name</th></tr></table>") as correct:
+                self.assertIn("__interrupt__", run_pdf(pdf, output))
+                result = resume_pdf(output, approve=True)
+            review = result["extractor_reviews"]["docling"]
+            self.assertEqual(compare.call_count, 2)
+            self.assertEqual(correct.call_count, 1)
+            self.assertEqual(review["status"], "passed")
+            self.assertEqual(review["initial_results"][0]["correction_attempts"], 1)
 
     def test_api_failure_does_not_leak_error_body_or_repeat_calls(self) -> None:
-        state = {
-            "docling_tables": [artifact("docling", 1)],
-            "page_images": ["page.png"], "vision_model": "gpt-4o",
-            "use_vision": True,
-        }
-        with patch("src.batch_review_graph.images_for_pages", return_value=[Path("page.png")]), \
-                patch("src.batch_review_graph.compare_html_table",
-                      side_effect=ValueError("secret key")) as compare:
-            reviews = vision_node(state)["extractor_reviews"]
-        self.assertEqual(compare.call_count, 1)
-        self.assertEqual(reviews["docling"]["counts"]["uncertain"], 1)
-        self.assertNotIn("secret key", str(reviews))
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            pdf = root / "sample.pdf"
+            pdf.write_bytes(b"sample")
+            output = root / "review" / "sample"
+            with patch("src.batch_review_graph.docling_extract", return_value={
+                    "page_count": 1, "docling_markdown": "docling.md",
+                    "docling_chunks_markdown": "chunks.md",
+                    "docling_tables_markdown": "tables.md",
+                    "docling_tables": [artifact("docling", 1)],
+                }), patch("src.batch_review_graph.render_pdf_pages", return_value=["page.png"]), \
+                    patch("src.batch_review_graph.webbrowser.open"), \
+                    patch("src.batch_review_graph.time.sleep"), \
+                    patch("src.batch_review_graph.images_for_pages", return_value=[Path("page.png")]), \
+                    patch("src.batch_review_graph.render_html_table_screenshot"), \
+                    patch("src.batch_review_graph.compare_html_table",
+                          side_effect=ValueError("secret key")) as compare:
+                self.assertIn("__interrupt__", run_pdf(pdf, output))
+                result = resume_pdf(output, approve=True)
+            reviews = result["extractor_reviews"]
+            self.assertEqual(compare.call_count, 1)
+            self.assertEqual(reviews["docling"]["counts"]["uncertain"], 1)
+            self.assertNotIn("secret key", str(reviews))
 
     def test_vision_request_contains_pdf_image_and_html(self) -> None:
         answer = json.dumps({"verdict": "match", "issues": []})

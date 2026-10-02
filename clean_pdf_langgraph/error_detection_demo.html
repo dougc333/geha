@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Error detection demo · Production batch review</title>
+<style>
+:root{--ink:#08233c;--muted:#5f6f7f;--surface:#fff;--canvas:#eaf0f5;--green:#16803c;--red:#c62828;--amber:#b26a00}
+*{box-sizing:border-box} body{margin:0;background:var(--canvas);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header.hero{padding:34px max(24px,calc((100vw - 1440px)/2));background:#06233d;color:#fff}
+.hero h1{margin:0 0 8px;font-size:clamp(2rem,4vw,3.4rem)} .hero p{max-width:900px;margin:0;color:#d8e5ef;font-size:1.05rem;line-height:1.5}
+main{width:min(1440px,calc(100% - 32px));margin:24px auto 60px}
+.summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}
+.metric{background:#fff;border-radius:12px;padding:16px;box-shadow:0 4px 16px #08233c12} .metric strong{display:block;font-size:1.75rem} .metric span{color:var(--muted)}
+.toolbar{position:sticky;top:0;z-index:3;display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:#eaf0f5ee;backdrop-filter:blur(8px);padding:12px 0}
+.toolbar input{flex:1;min-width:260px;border:1px solid #9badbc;border-radius:8px;padding:10px 12px;font:inherit}
+.filter{border:1px solid #163a63;border-radius:999px;background:#fff;color:#163a63;padding:8px 14px;font:inherit;font-weight:700;cursor:pointer} .filter.active{background:#163a63;color:#fff}
+.case-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.case-card{border:4px solid #64748b;border-radius:14px;background:var(--surface);padding:18px;box-shadow:0 8px 25px #08233c12}
+.case-card.status-error{border-color:var(--red);background:#fff8f8} .case-card.status-warning{border-color:var(--amber);background:#fffbf2} .case-card.status-passed{border-color:var(--green);background:#f7fff9}
+.case-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.case-id{font:800 1.05rem ui-monospace,SFMono-Regular,Menlo,monospace} .category{margin-left:8px;color:var(--muted);font-size:.78rem}
+.status-badge{border:2px solid currentColor;border-radius:999px;padding:4px 9px;font-weight:800;font-size:.78rem}
+.status-error .status-badge{color:#9f1d20} .status-warning .status-badge{color:#8a5200} .status-passed .status-badge{color:#116530}
+.case-card h2{font-size:1.15rem;line-height:1.35;margin:15px 0 7px} .expected{color:var(--muted);min-height:2.7em;margin:0 0 14px}
+.sample-table{border:1px solid #b8c5d1;border-radius:9px;overflow:hidden;background:#fff;margin:12px 0}
+.sample-head,.sample-row{display:grid;grid-template-columns:1fr 1fr} .sample-head{background:#082f51;color:#fff;font-weight:800} .sample-head span,.sample-row span{padding:9px 11px} .sample-row span+span{border-left:1px solid #d7e0e7}
+.sample-alert{padding:9px 11px;font-weight:750;border-top:1px solid #d7e0e7} .status-error .sample-alert{color:#9f1d20;background:#fff0f0} .status-warning .sample-alert{color:#8a5200;background:#fff8df} .status-passed .sample-alert{color:#116530;background:#edfff2}
+.mini-grid{display:grid;gap:8px;margin:12px 0} .mini{display:flex;justify-content:space-between;gap:10px;border:3px solid;border-radius:8px;padding:10px;background:#fff} .mini span{color:var(--muted);text-align:right} .verdict-match{border-color:var(--green)} .verdict-mismatch{border-color:var(--red)} .verdict-uncertain{border-color:var(--amber)}
+details{margin-top:12px;border-top:1px solid #cbd6df;padding-top:10px} summary{cursor:pointer;font-weight:750} dl{display:grid;grid-template-columns:max-content 1fr;gap:7px 12px;margin-bottom:0} dt{color:var(--muted)} dd{margin:0;overflow-wrap:anywhere}
+.empty{display:none;background:#fff;border-radius:12px;padding:24px;text-align:center;color:var(--muted)}
+@media(max-width:850px){.case-grid{grid-template-columns:1fr}.summary{grid-template-columns:repeat(2,1fr)}}
+</style></head><body>
+<header class="hero"><h1>Production error-detection demo</h1>
+<p>Permanent visual catalog of every simulated runtime-validation, rendering, comparison, correction, HTML-cue, and safety case. The case IDs map directly to the fixture and regression tests.</p></header>
+<main>
+  <section class="summary" aria-label="Case summary">
+    <div class="metric"><strong>19</strong><span>Total simulated cases</span></div>
+    <div class="metric"><strong>16</strong><span>Detected errors</span></div>
+    <div class="metric"><strong>1</strong><span>Warnings</span></div>
+    <div class="metric"><strong>2</strong><span>Protection/UI checks</span></div>
+  </section>
+  <div class="toolbar">
+    <input id="search" type="search" placeholder="Search case ID, condition, code, or test…" aria-label="Search simulated cases">
+    <button class="filter active" data-filter="all">All</button>
+    <button class="filter" data-filter="error">Errors</button>
+    <button class="filter" data-filter="warning">Warnings</button>
+    <button class="filter" data-filter="passed">Passed checks</button>
+  </div>
+  <section class="case-grid" id="cases">
+    <article class="case-card status-error" data-status="error"
+      data-search="val-001 required columns field is missing test_runtime_table_validation_cases code: missing_columns">
+      <header class="case-header">
+        <div><span class="case-id">VAL-001</span>
+          <span class="category">VAL</span></div>
+        <span class="status-badge">Detected error</span>
+      </header>
+      <h2>required columns field is missing</h2>
+      <p class="expected">Code: MISSING_COLUMNS</p>
+      
+      <div class="sample-table" role="img" aria-label="Affected table requires review">
+        <div class="sample-head"><span>Field</span><span>Extracted value</span></div>
+        <div class="sample-row"><span>Example</span><span>VAL-001</span></div>
+        <div class="sample-alert">Affected table requires review</div>
+      </div>
+      <details>
+        <summary>Regression-test mapping</summary>
+        <dl>
+          <dt>Case ID</dt><dd><code>VAL-001</code></dd>
+          <dt>Test method</dt><dd><code>test_runtime_table_validation_cases</code></dd>
+          <dt>Fixture source</dt><dd><code>batch_review_graph_prod_cases.json</code></dd>
+        </dl>
+      </details>
+    </article>
+
+    <article class="case-card status-error" data-status="error"
+      data-search="val-002 table number is duplicated test_runtime_table_validation_cases code: duplicate_table_number">
+      <header class="case-header">
+        <div><span class="case-id">VAL-002</span>
+          <span class="category">VAL</span></div>
+        <span class="status-badge">Detected error</span>
+      </header>
+      <h2>table number is duplicated</h2>
+      <p class="expected">Code: DUPLICATE_TABLE_NUMBER</p>
+      
+      <div class="sample-table" role="img" aria-label="Affected table requires review">
+        <div class="sample-head"><span>Field</span><span>Extracted value</span></div>
+        <div class="sample-row"><span>Example</span><span>VAL-002</span></div>
+        <div class="sample-alert">Affected table requires review</div>
+      </div>
+      <details>
+        <summary>Regression-test mapping</summary>
+        <dl>
+          <dt>Case ID</dt><dd><code>VAL-002</code></dd>
+          <dt>Test method</dt><dd><code>test_runtime_table_validation_cases</code></dd>
+          <dt>Fixture source</dt><dd><code>batch_review_graph_prod_cases.json</code></dd>
+        </dl>
+      </details>
+    </article>
+
+    <article class="case-card status-error" data-status="error"
+      data-search="val-003 table page is outside the pdf page range test_runtime_table_validation_cases code: invalid_page_number">
+      <header class="case-header">
+        <div><span class="case-id">VAL-003</span>
+          <span class="category">VAL</span></div>
+        <span class="status-badge">Detected error</span>
+      </header>
+      <h2>table page is outside the PDF page range</h2>
+      <p class="expected">Code: INVALID_PAGE_NUMBER</p>
+      
+      <div class="sample-table" role="img" aria-label="Affected table requires review">
+        <div class="sample-head"><span>Field</span><span>Extracted value</span></div>
+        <div class="sample-row"><span>Example</span><span>VAL-003</span></div>
+        <div class="sample-alert">Affected table requires review</div>
+      </div>
+      <details>
+        <summary>Regression-test mapping</summary>
+        <dl>
+          <dt>Case ID</dt><dd><code>VAL-003</code></dd>
+          <dt>Test method</dt><dd><code>test_runtime_table_validation_cases</code></dd>
+          <dt>Fixture source</dt><dd><code>batch_review_graph_prod_cases.json</code></dd>
+        </dl>
+      </details>
+    </article>
+
+    <article class="case-card status-error" data-status="error"
+      data-search="val-005 row cell count differs from column count test_runtime_table_validation_cases code: row_width_mismatch">
+      <header class="case-header">
+        <div><span class="case-id">VAL-005</span>
+          <span class="category">VAL</span></div>
+        <span class="status-badge">Detected error</span>
+      </header>
+      <h2>row cell count differs from column count</h2>
+      <p class="expected">Code: ROW_WIDTH_MISMATCH</p>
+      
+      <div class="sample-table" role="img" aria-label="Affected table requires review">
+        <div class="sample-head"><span>Field</span><span>Extracted value</span></div>
+        <div class="sample-row"><span>Example</span><span>VAL-005</span></div>
+        <div class="sample-alert">Affected table requires review</div>
+      </div>
+      <details>
+        <summary>Regression-test mapping</summary>
+        <dl>
+          <dt>Case ID</dt><dd><code>VAL-005</code></dd>
+          <dt>Test method</dt><dd><code>test_runtime_table_validation_cases</code></dd>
+          <dt>Fixture source</dt><dd><code>batch_review_graph_prod_cases.json</code></dd>
+        </dl>
+      </details>
+    </article>
+
+    <article class="case-card status-error" data-status="error"
+      data-search="val-006 row contains a non-string cell test_runtime_table_validation_cases code: non_string_cell">
+      <header class="case-header">
+        <div><span class="case-id">VAL-006</span>
+          <span class="category">VAL</span></div>
+        <span class="status-badge">Detected error</span>
+      </header>
+      <h2>row contains a non-string cell</h2>
+      <p class="expected">Code: NON_STRING_CELL</p>
+      
+      <div class="sample-table" role="img" aria-label="Affected table requires review">
+        <div class="sample-head"><span>Field</span><span>Extracted value</span></div>
+        <div class="sample-row"><span>Example</span><span>VAL-006</span></div>
+        <div class="sample-alert">Affected table requires review</div>
+      </div>
+      <details>
+        <summary>Regression-test mapping</summary>
+        <dl>
+          <dt>Case ID</dt><dd><code>VAL-006</code></dd>
+          <dt>Test method</dt><dd><code>test_runtime_table_validation_cases</code></dd>
+          <dt>Fixture source</dt><dd><code>batch_review_graph_prod_cases.json</code></dd>
+        </dl>
+      </details>
+    </article>
+
+    <article class="case-card status-error" data-status="error"
+      data-search="global-001 required extraction artifact does not exist test_global_001_missing_extraction_artifact_is_fatal exception: reviewstateerror">
+      <header class="case-header">
+        <div><span class="case-id">GLOBAL-001</span>
+          <span class="category">GLOBAL</span></div>
+        <span class="status-badge">Detected error</span>
+      </header>
+      <h2>required extraction artifact does not exist</h2>
+      <p class="expected">Exception: ReviewStateError</p>
+      
+      <div class="sample-table" role="img" aria-label="Affected table requires review">
+        <div class="sample-head"><span>Field</span><span>Extracted value</span></div>
+        <div class="sample-row"><span>Example</span><span>GLOBAL-001</span></div>
+        <div class="sample-alert">Affected table requires review</div>
+      </div>
+      <details>
+        <summary>Regression-test mapping</summary>
+        <dl>
+          <dt>Case ID</dt><dd><code>GLOBAL-001</code></dd>
+          <dt>Test method</dt><dd><code>test_GLOBAL_001_missing_extraction_artifact_is_fatal</code></dd>
+          <dt>Fixture source</dt><dd><code>batch_review_graph_prod_cases.json</code></dd>
+        </dl>
+      </details>
+    </article>
+
+    <article class="case-card status-error" data-status="error"
+      data-search="image-001 referenced page image is missing test_image_001_and_image_002_page_image_validation code: missing_page_image">
+      <header class="case-header">
+        <div><span class="case-id">IMAGE-001</span>
+          <span class="category">IMAGE</span></div>
+        <span class="status-badge">Detected error</span>
+      </header>
+      <h2>referenced page image is missing</h2>
+      <p class="expected">Code: MISSING_PAGE_IMAGE</p>
+      
+      <div class="sample-table" role="img" aria-label="Affected table requires review">
+        <div class="sample-head"><span>Field</span><span>Extracted value</span></div>
+        <div class="sample-row"><span>Example</span><span>IMAGE-001</span></div>
+        <div class="sample-alert">Affected table requires review</div>
+      </div>
+      <details>
+        <summary>Regression-test mapping</summary>
+        <dl>
+          <dt>Case ID</dt><dd><code>IMAGE-001</code></dd>
+          <dt>Test method</dt><dd><code>test_IMAGE_001_and_IMAGE_002_page_image_validation</code></dd>
+          <dt>Fixture source</dt><dd><code>batch_review_graph_prod_cases.json</code></dd>
+        </dl>
+      </details>
+    </article>
+
+    <article class="case-card status-error" data-status="error"
+      data-search="image-002 referenced page image is not a png test_image_001_and_image_002_page_image_validation code: invalid_page_image">
+      <header class="case-header">
+        <div><span class="case-id">IMAGE-002</span>
+          <span class="category">IMAGE</span></div>
+        <span class="status-badge">Detected error</span>
+      </header>
+      <h2>referenced page image is not a PNG</h2>
+      <p class="expected">Code: INVALID_PAGE_IMAGE</p>
+      
+      <div class="sample-table" role="img" aria-label="Affected table requires review">
+        <div class="sample-head"><span>Field</span><span>Extracted value</span></div>
+        <div class="sample-row"><span>Example</span><span>IMAGE-002</span></div>
+        <div class="sample-alert">Affected table requires review</div>
+      </div>
+      <details>
+        <summary>Regression-test mapping</summary>
+        <dl>
+          <dt>Case ID</dt><dd><code>IMAGE-002</code></dd>
+          <dt>Test method</dt><dd><code>test_IMAGE_001_and_IMAGE_002_page_image_validation</code></dd>
+          <dt>Fixture source</dt><dd><code>batch_review_graph_prod_cases.json</code></dd>
+        </dl>
+      </details>
+    </article>
+
+    <article class="case-card status-warning" data-status="warning"
+      data-search="render-001 html screenshot renderer raises an exception test_render_001_render_warning_does_not_skip_comparison code: html_render_failed · severity: warning">
+      <header class="case-header">
+        <div><span class="case-id">RENDER-001</span>
+          <span class="category">RENDER</span></div>
+        <span class="status-badge">Warning</span>
+      </header>
+      <h2>HTML screenshot renderer raises an exception</h2>
+      <p class="expected">Code: HTML_RENDER_FAILED · Severity: warning</p>
+      
+      <div class="sample-table" role="img" aria-label="Comparison continues without screenshot">
+        <div class="sample-head"><span>Field</span><span>Extracted value</span></div>
+        <div class="sample-row"><span>Example</span><span>RENDER-001</span></div>
+        <div class="sample-alert">Comparison continues without screenshot</div>
+      </div>
+      <details>
+        <summary>Regression-test mapping</summary>
+        <dl>
+          <dt>Case ID</dt><dd><code>RENDER-001</code></dd>
+          <dt>Test method</dt><dd><code>test_RENDER_001_render_warning_does_not_skip_comparison</code></dd>
+          <dt>Fixture source</dt><dd><code>batch_review_graph_prod_cases.json</code></dd>
+        </dl>
+      </details>
+    </article>
+
+    <article class="case-card status-error" data-status="error"
+      data-search="compare-001 vision comparison raises an exception for table 1 test_compare_001_failure_is_scoped_and_next_table_runs code: vision_compare_failed · verdict: uncertain">
+      <header class="case-header">
+        <div><span class="case-id">COMPARE-001</span>
+          <span class="category">COMPARE</span></div>
+        <span class="status-badge">Detected error</span>
+      </header>
+      <h2>vision comparison raises an exception for table 1</h2>
+      <p class="expected">Code: VISION_COMPARE_FAILED · Verdict: uncertain</p>
+      
+      <div class="sample-table" role="img" aria-label="Affected table requires review">
+        <div class="sample-head"><span>Field</span><span>Extracted value</span></div>
+        <div class="sample-row"><span>Example</span><span>COMPARE-001</span></div>
+        <div class="sample-alert">Affected table requires review</div>
+      </div>
+      <details>
+        <summary>Regression-test mapping</summary>
+        <dl>
+          <dt>Case ID</dt><dd><code>COMPARE-001</code></dd>
+          <dt>Test method</dt><dd><code>test_COMPARE_001_failure_is_scoped_and_next_table_runs</code></dd>
+          <dt>Fixture source</dt><dd><code>batch_review_graph_prod_cases.json</code></dd>
+        </dl>
+      </details>
+    </article>
+
+    <article class="case-card status-error" data-status="error"
+      data-search="compare-002 html exceeds the review character limit test_compare_002_oversized_html_skips_model_call code: html_review_limit · verdict: uncertain">
+      <header class="case-header">
+        <div><span class="case-id">COMPARE-002</span>
+          <span class="category">COMPARE</span></div>
+        <span class="status-badge">Detected error</span>
+      </header>
+      <h2>HTML exceeds the review character limit</h2>
+      <p class="expected">Code: HTML_REVIEW_LIMIT · Verdict: uncertain</p>
+      
+      <div class="sample-table" role="img" aria-label="Affected table requires review">
+        <div class="sample-head"><span>Field</span><span>Extracted value</span></div>
+        <div class="sample-row"><span>Example</span><span>COMPARE-002</span></div>
+        <div class="sample-alert">Affected table requires review</div>
+      </div>
+      <details>
+        <summary>Regression-test mapping</summary>
+        <dl>
+          <dt>Case ID</dt><dd><code>COMPARE-002</code></dd>
+          <dt>Test method</dt><dd><code>test_COMPARE_002_oversized_html_skips_model_call</code></dd>
+          <dt>Fixture source</dt><dd><code>batch_review_graph_prod_cases.json</code></dd>
+        </dl>
+      </details>
+    </article>
+
+    <article class="case-card status-error" data-status="error"
+      data-search="correct-001 html correction raises an exception test_correct_001_failure_preserves_mismatch code: html_correction_failed · verdict: mismatch">
+      <header class="case-header">
+        <div><span class="case-id">CORRECT-001</span>
+          <span class="category">CORRECT</span></div>
+        <span class="status-badge">Detected error</span>
+      </header>
+      <h2>HTML correction raises an exception</h2>
+      <p class="expected">Code: HTML_CORRECTION_FAILED · Verdict: mismatch</p>
+      
+      <div class="sample-table" role="img" aria-label="Affected table requires review">
+        <div class="sample-head"><span>Field</span><span>Extracted value</span></div>
+        <div class="sample-row"><span>Example</span><span>CORRECT-001</span></div>
+        <div class="sample-alert">Affected table requires review</div>
+      </div>
+      <details>
+        <summary>Regression-test mapping</summary>
+        <dl>
+          <dt>Case ID</dt><dd><code>CORRECT-001</code></dd>
+          <dt>Test method</dt><dd><code>test_CORRECT_001_failure_preserves_mismatch</code></dd>
+          <dt>Fixture source</dt><dd><code>batch_review_graph_prod_cases.json</code></dd>
+        </dl>
+      </details>
+    </article>
+
+    <article class="case-card status-error" data-status="error"
+      data-search="correct-002 mismatch remains when correction limit is reached test_correct_002_attempt_limit_is_visible code: correction_limit_reached · verdict: mismatch">
+      <header class="case-header">
+        <div><span class="case-id">CORRECT-002</span>
+          <span class="category">CORRECT</span></div>
+        <span class="status-badge">Detected error</span>
+      </header>
+      <h2>mismatch remains when correction limit is reached</h2>
+      <p class="expected">Code: CORRECTION_LIMIT_REACHED · Verdict: mismatch</p>
+      
+      <div class="sample-table" role="img" aria-label="Affected table requires review">
+        <div class="sample-head"><span>Field</span><span>Extracted value</span></div>
+        <div class="sample-row"><span>Example</span><span>CORRECT-002</span></div>
+        <div class="sample-alert">Affected table requires review</div>
+      </div>
+      <details>
+        <summary>Regression-test mapping</summary>
+        <dl>
+          <dt>Case ID</dt><dd><code>CORRECT-002</code></dd>
+          <dt>Test method</dt><dd><code>test_CORRECT_002_attempt_limit_is_visible</code></dd>
+          <dt>Fixture source</dt><dd><code>batch_review_graph_prod_cases.json</code></dd>
+        </dl>
+      </details>
+    </article>
+
+    <article class="case-card status-error" data-status="error"
+      data-search="text-001 cell contains a unicode replacement character test_text_001_to_text_004_content_corruption code: text_replacement_character · severity: error">
+      <header class="case-header">
+        <div><span class="case-id">TEXT-001</span>
+          <span class="category">TEXT</span></div>
+        <span class="status-badge">Detected error</span>
+      </header>
+      <h2>cell contains a Unicode replacement character</h2>
+      <p class="expected">Code: TEXT_REPLACEMENT_CHARACTER · Severity: error</p>
+      
+      <div class="sample-table" role="img" aria-label="Affected table requires review">
+        <div class="sample-head"><span>Field</span><span>Extracted value</span></div>
+        <div class="sample-row"><span>Example</span><span>TEXT-001</span></div>
+        <div class="sample-alert">Affected table requires review</div>
+      </div>
+      <details>
+        <summary>Regression-test mapping</summary>
+        <dl>
+          <dt>Case ID</dt><dd><code>TEXT-001</code></dd>
+          <dt>Test method</dt><dd><code>test_TEXT_001_to_TEXT_004_content_corruption</code></dd>
+          <dt>Fixture source</dt><dd><code>batch_review_graph_prod_cases.json</code></dd>
+        </dl>
+      </details>
+    </article>
+
+    <article class="case-card status-error" data-status="error"
+      data-search="text-002 column header begins with suspicious ocr punctuation test_text_001_to_text_004_content_corruption code: suspicious_header_prefix · severity: warning">
+      <header class="case-header">
+        <div><span class="case-id">TEXT-002</span>
+          <span class="category">TEXT</span></div>
+        <span class="status-badge">Detected error</span>
+      </header>
+      <h2>column header begins with suspicious OCR punctuation</h2>
+      <p class="expected">Code: SUSPICIOUS_HEADER_PREFIX · Severity: warning</p>
+      
+      <div class="sample-table" role="img" aria-label="Affected table requires review">
+        <div class="sample-head"><span>Field</span><span>Extracted value</span></div>
+        <div class="sample-row"><span>Example</span><span>TEXT-002</span></div>
+        <div class="sample-alert">Affected table requires review</div>
+      </div>
+      <details>
+        <summary>Regression-test mapping</summary>
+        <dl>
+          <dt>Case ID</dt><dd><code>TEXT-002</code></dd>
+          <dt>Test method</dt><dd><code>test_TEXT_001_to_TEXT_004_content_corruption</code></dd>
+          <dt>Fixture source</dt><dd><code>batch_review_graph_prod_cases.json</code></dd>
+        </dl>
+      </details>
+    </article>
+
+    <article class="case-card status-error" data-status="error"
+      data-search="text-003 acronym is joined to the following word test_text_001_to_text_004_content_corruption code: missing_whitespace_after_acronym · severity: warning">
+      <header class="case-header">
+        <div><span class="case-id">TEXT-003</span>
+          <span class="category">TEXT</span></div>
+        <span class="status-badge">Detected error</span>
+      </header>
+      <h2>acronym is joined to the following word</h2>
+      <p class="expected">Code: MISSING_WHITESPACE_AFTER_ACRONYM · Severity: warning</p>
+      
+      <div class="sample-table" role="img" aria-label="Affected table requires review">
+        <div class="sample-head"><span>Field</span><span>Extracted value</span></div>
+        <div class="sample-row"><span>Example</span><span>TEXT-003</span></div>
+        <div class="sample-alert">Affected table requires review</div>
+      </div>
+      <details>
+        <summary>Regression-test mapping</summary>
+        <dl>
+          <dt>Case ID</dt><dd><code>TEXT-003</code></dd>
+          <dt>Test method</dt><dd><code>test_TEXT_001_to_TEXT_004_content_corruption</code></dd>
+          <dt>Fixture source</dt><dd><code>batch_review_graph_prod_cases.json</code></dd>
+        </dl>
+      </details>
+    </article>
+
+    <article class="case-card status-error" data-status="error"
+      data-search="text-004 likely ocr substitution uses bv instead of by test_text_001_to_text_004_content_corruption code: possible_ocr_substitution · severity: warning">
+      <header class="case-header">
+        <div><span class="case-id">TEXT-004</span>
+          <span class="category">TEXT</span></div>
+        <span class="status-badge">Detected error</span>
+      </header>
+      <h2>likely OCR substitution uses bv instead of by</h2>
+      <p class="expected">Code: POSSIBLE_OCR_SUBSTITUTION · Severity: warning</p>
+      
+      <div class="sample-table" role="img" aria-label="Affected table requires review">
+        <div class="sample-head"><span>Field</span><span>Extracted value</span></div>
+        <div class="sample-row"><span>Example</span><span>TEXT-004</span></div>
+        <div class="sample-alert">Affected table requires review</div>
+      </div>
+      <details>
+        <summary>Regression-test mapping</summary>
+        <dl>
+          <dt>Case ID</dt><dd><code>TEXT-004</code></dd>
+          <dt>Test method</dt><dd><code>test_TEXT_001_to_TEXT_004_content_corruption</code></dd>
+          <dt>Fixture source</dt><dd><code>batch_review_graph_prod_cases.json</code></dd>
+        </dl>
+      </details>
+    </article>
+
+    <article class="case-card status-passed" data-status="passed"
+      data-search="html-001 match, mismatch, and uncertain results are rendered test_html_001_verdicts_and_failures_are_visible classes: verdict-match, verdict-mismatch, verdict-uncertain">
+      <header class="case-header">
+        <div><span class="case-id">HTML-001</span>
+          <span class="category">HTML</span></div>
+        <span class="status-badge">Protection verified</span>
+      </header>
+      <h2>match, mismatch, and uncertain results are rendered</h2>
+      <p class="expected">Classes: verdict-match, verdict-mismatch, verdict-uncertain</p>
+      
+        <div class="mini-grid" aria-label="Verdict style examples">
+          <div class="mini verdict-match"><strong>Verified</strong><span>PDF and HTML match</span></div>
+          <div class="mini verdict-mismatch"><strong>Mismatch</strong><span>Correction or review required</span></div>
+          <div class="mini verdict-uncertain"><strong>Human review required</strong><span>Comparison was inconclusive</span></div>
+        </div>
+      <details>
+        <summary>Regression-test mapping</summary>
+        <dl>
+          <dt>Case ID</dt><dd><code>HTML-001</code></dd>
+          <dt>Test method</dt><dd><code>test_HTML_001_verdicts_and_failures_are_visible</code></dd>
+          <dt>Fixture source</dt><dd><code>batch_review_graph_prod_cases.json</code></dd>
+        </dl>
+      </details>
+    </article>
+
+    <article class="case-card status-passed" data-status="passed"
+      data-search="safe-001 exception body contains a credential-like secret test_safe_001_raw_exception_body_is_not_persisted raw exception body: suppressed">
+      <header class="case-header">
+        <div><span class="case-id">SAFE-001</span>
+          <span class="category">SAFE</span></div>
+        <span class="status-badge">Protection verified</span>
+      </header>
+      <h2>exception body contains a credential-like secret</h2>
+      <p class="expected">Raw exception body: suppressed</p>
+      
+      <div class="sample-table" role="img" aria-label="Sensitive exception detail removed">
+        <div class="sample-head"><span>Field</span><span>Extracted value</span></div>
+        <div class="sample-row"><span>Example</span><span>SAFE-001</span></div>
+        <div class="sample-alert">Sensitive exception detail removed</div>
+      </div>
+      <details>
+        <summary>Regression-test mapping</summary>
+        <dl>
+          <dt>Case ID</dt><dd><code>SAFE-001</code></dd>
+          <dt>Test method</dt><dd><code>test_SAFE_001_raw_exception_body_is_not_persisted</code></dd>
+          <dt>Fixture source</dt><dd><code>batch_review_graph_prod_cases.json</code></dd>
+        </dl>
+      </details>
+    </article></section>
+  <p class="empty" id="empty">No cases match the current filters.</p>
+</main>
+<script>
+const cards=[...document.querySelectorAll('.case-card')];
+const search=document.getElementById('search');
+const empty=document.getElementById('empty');
+let filter='all';
+function applyFilters(){
+  const query=search.value.trim().toLowerCase(); let visible=0;
+  cards.forEach(card=>{
+    const show=(filter==='all'||card.dataset.status===filter)&&card.dataset.search.includes(query);
+    card.hidden=!show; if(show) visible+=1;
+  });
+  empty.style.display=visible?'none':'block';
+}
+search.addEventListener('input',applyFilters);
+document.querySelectorAll('.filter').forEach(button=>button.addEventListener('click',()=>{
+  filter=button.dataset.filter;
+  document.querySelectorAll('.filter').forEach(item=>item.classList.toggle('active',item===button));
+  applyFilters();
+}));
+</script></body></html>
