@@ -303,11 +303,43 @@ same. One-pass and agentic runs use the same answer prompt. Query/answer text an
 public documents are the only data sent. Evidence completeness is not a routing
 condition in the current agent, so a missing rule need not cause a rewrite.
 
-[Example queries](evals/queries.jsonl) contain manually selected evidence pages.
+### JSONL retrieval test cases
+
+[`evals/queries.jsonl`](evals/queries.jsonl) is the executable retrieval-test
+fixture. Each JSONL record contains a stable test ID, the query, and the manually
+selected corpus pages expected to contain the evidence:
+
+| ID | Query | Expected evidence pages |
+|---|---|---|
+| `cleanings` | How many adult cleanings does High cover compared with Standard, including D1110? | Benefits guide p. 5; plan brochure p. 21 |
+| `extraction` | Is D7140 tooth extraction listed as covered, and what percentage do High and Standard members pay? | Benefits guide p. 5; plan brochure p. 26 |
+| `rootcanal` | What do I pay for a root canal under High versus Standard, and what lifetime restriction applies to D3310? | Benefits guide p. 5; plan brochure p. 29 |
+| `deductible` | Compare High and Standard out-of-network deductibles and explain whether I owe charges above the plan allowance. | Benefits guide p. 5; plan brochure p. 17 |
+| `marriage` | I got married. Can I enroll, increase coverage, cancel, or switch plans, and what is the request window? | Plan brochure pp. 10–11 |
+| `lossfamily` | After losing a covered family member can I decrease coverage or cancel my dental plan? | Plan brochure p. 10 |
+| `va` | How does becoming eligible for VA dental benefits affect cancellation when premiums are paid pre-tax versus post-tax? | Plan brochure p. 11 |
+| `enroll` | I am a new federal employee. How long do I have to enroll and does enrollment carry over automatically? | Plan brochure p. 9 |
+| `specialist` | Do I need a referral or a primary dentist before visiting an in-network dental specialist? | Plan brochure p. 13 |
+| `family` | Can my 23-year-old dependent child remain covered and is there an exception for disability? | Plan brochure p. 8 |
+| `vision` | Does the included vision discount pay for glasses, and what do I pay for an eye exam and frames? | Benefits guide p. 7 |
+| `hearing` | What hearing aid discount is offered through TruHearing? | Benefits guide p. 9 |
+| `braces` | Compare adult orthodontic coinsurance and lifetime maximums for High and Standard in and out of network. | Benefits guide p. 5 |
+| `implant` | Does unlimited annual coverage on High mean implants have no separate annual limit? | Benefits guide p. 5 |
+| `maximum` | What are the calendar year maximum benefits on High and Standard for Class A, B, and C services? | Benefits guide p. 5 |
+
+The expected pages are curated retrieval labels, not complete reference answers.
+Alternative pages may also contain valid evidence. The benchmark evaluates whether
+BM25, vector, and hybrid retrieval return these pages; it does not by itself test
+answer correctness or prove that the agentic loop improves answers.
+
+The remaining JSONL files are results rather than test definitions:
+
+- `evals/gemma4_answers.jsonl`: saved Gemma benchmark answers and judgments.
+- `evals/mimo_nous_answers.jsonl`: saved MiMo benchmark answers and judgments.
+- `evals/marriage_workflow_comparison.jsonl`: the two saved GPT-4o marriage-workflow runs.
+
 [Measured results](evals/results.md) and [per-query rankings](evals/results.json)
 compare BM25-only, vector-only, and hybrid over identical corpus pages.
-These scores measure retrieval; they do not prove the agentic loop improves answers.
-The labels are curated and alternative relevant pages may be omitted.
 
 Measured local results (2026-10-04), 15 questions over 68 pages:
 
