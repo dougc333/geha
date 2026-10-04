@@ -28,10 +28,10 @@ jobs:
           uv sync --locked --python 3.12
       - name: Run table-aware RAG tests
         run: uv run --no-sync python -m unittest discover -s chunking_benchmarks_RAG -p 'test_*.py'
-      - name: Run e2e_RAG retrieval metric tests
-        run: uv run --no-sync python -m unittest discover -s e2e_RAG/src -p 'test_retrieval_benchmark.py' -v
-      - name: Run e2e_RAG class tests
-        run: uv run --no-sync python -m unittest discover -s e2e_RAG/src -p 'test_class_refactor.py' -v
+      - name: Run agentic_search retrieval metric tests
+        run: uv run --no-sync python -m unittest discover -s agentic_search/src -p 'test_retrieval_benchmark.py' -v
+      - name: Run agentic_search class tests
+        run: uv run --no-sync python -m unittest discover -s agentic_search/src -p 'test_class_refactor.py' -v
 
   table-rag:
     name: Standalone table RAG tests
@@ -117,8 +117,8 @@ jobs:
             aws_rag/evals/ci_retrieval.md
             aws_rag/evals/ci_retrieval_cost.json
 
-  e2e-rag-retrieval-benchmark:
-    name: e2e_RAG dense retrieval benchmark
+  agentic-search-retrieval-benchmark:
+    name: agentic_search dense retrieval benchmark
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -137,25 +137,25 @@ jobs:
       - name: Run the seven-PDF dense parent-document benchmark
         env:
           HF_HUB_DISABLE_TELEMETRY: "1"
-          PYTHONPATH: e2e_RAG/src
+          PYTHONPATH: agentic_search/src
         run: |
           uv run --no-project --python 3.12 \
-            --with-requirements e2e_RAG/evals/requirements.txt \
-            python e2e_RAG/evals/retrieval_benchmark.py \
+            --with-requirements agentic_search/evals/requirements.txt \
+            python agentic_search/evals/retrieval_benchmark.py \
               --embedding-model BAAI/bge-large-en-v1.5 \
-              --out e2e_RAG/evals/ci_retrieval
+              --out agentic_search/evals/ci_retrieval
       - name: Enforce retrieval quality and latency budgets
         run: |
-          python e2e_RAG/evals/check_retrieval_thresholds.py \
-            e2e_RAG/evals/ci_retrieval.json
+          python agentic_search/evals/check_retrieval_thresholds.py \
+            agentic_search/evals/ci_retrieval.json
       - name: Publish benchmark table
         if: always()
-        run: cat e2e_RAG/evals/ci_retrieval.md >> "$GITHUB_STEP_SUMMARY"
+        run: cat agentic_search/evals/ci_retrieval.md >> "$GITHUB_STEP_SUMMARY"
       - name: Upload benchmark evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: e2e-rag-retrieval-results
+          name: agentic-search-retrieval-results
           path: |
-            e2e_RAG/evals/ci_retrieval.json
-            e2e_RAG/evals/ci_retrieval.md
+            agentic_search/evals/ci_retrieval.json
+            agentic_search/evals/ci_retrieval.md

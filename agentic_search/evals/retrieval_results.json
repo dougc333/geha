@@ -1,0 +1,262 @@
+{
+  "embedding_model": "BAAI/bge-large-en-v1.5",
+  "retrieval_k": 40,
+  "summary": {
+    "questions": 14,
+    "Recall@5": 1.0,
+    "MRR@10": 1.0,
+    "nDCG@10": 1.0,
+    "median_latency_ms": 25.030000018887222,
+    "p95_latency_ms": 99.26133300177753
+  },
+  "results": [
+    {
+      "query": "What architecture dispenses with recurrence and convolutions and relies entirely on attention?",
+      "relevant_sources": [
+        "1706.03762v7.pdf"
+      ],
+      "retrieved_sources": [
+        "1706.03762v7.pdf",
+        "2607.24653v2.pdf",
+        "2609.26368v1.pdf",
+        "2412.19437v2.pdf",
+        "2310.11511v1.pdf"
+      ],
+      "first_relevant_rank": 1,
+      "recall_at_5": 1.0,
+      "reciprocal_rank_at_10": 1.0,
+      "ndcg_at_10": 1.0,
+      "latency_ms": 42.897457955405116
+    },
+    {
+      "query": "Which paper introduced the Transformer architecture using multi-head self-attention?",
+      "relevant_sources": [
+        "1706.03762v7.pdf"
+      ],
+      "retrieved_sources": [
+        "1706.03762v7.pdf",
+        "2412.19437v2.pdf",
+        "2607.24653v2.pdf",
+        "2609.26368v1.pdf",
+        "2306.02707.pdf",
+        "2310.11511v1.pdf"
+      ],
+      "first_relevant_rank": 1,
+      "recall_at_5": 1.0,
+      "reciprocal_rank_at_10": 1.0,
+      "ndcg_at_10": 1.0,
+      "latency_ms": 24.57329200115055
+    },
+    {
+      "query": "Which 13-billion-parameter model learns explanation traces from GPT-4?",
+      "relevant_sources": [
+        "2306.02707.pdf"
+      ],
+      "retrieved_sources": [
+        "2306.02707.pdf",
+        "2412.19437v2.pdf",
+        "2607.24653v2.pdf",
+        "2310.11511v1.pdf",
+        "1706.03762v7.pdf",
+        "2609.26368v1.pdf",
+        "2401.15884v3.pdf"
+      ],
+      "first_relevant_rank": 1,
+      "recall_at_5": 1.0,
+      "reciprocal_rank_at_10": 1.0,
+      "ndcg_at_10": 1.0,
+      "latency_ms": 25.39754193276167
+    },
+    {
+      "query": "What model uses progressive learning from complex explanation traces of GPT-4?",
+      "relevant_sources": [
+        "2306.02707.pdf"
+      ],
+      "retrieved_sources": [
+        "2306.02707.pdf",
+        "2310.11511v1.pdf",
+        "2412.19437v2.pdf",
+        "2609.26368v1.pdf",
+        "1706.03762v7.pdf",
+        "2607.24653v2.pdf",
+        "2401.15884v3.pdf"
+      ],
+      "first_relevant_rank": 1,
+      "recall_at_5": 1.0,
+      "reciprocal_rank_at_10": 1.0,
+      "ndcg_at_10": 1.0,
+      "latency_ms": 25.717207929119468
+    },
+    {
+      "query": "Which framework retrieves, generates, and critiques through self-reflection using reflection tokens?",
+      "relevant_sources": [
+        "2310.11511v1.pdf"
+      ],
+      "retrieved_sources": [
+        "2310.11511v1.pdf",
+        "2401.15884v3.pdf",
+        "2306.02707.pdf",
+        "2412.19437v2.pdf",
+        "2607.24653v2.pdf",
+        "2609.26368v1.pdf"
+      ],
+      "first_relevant_rank": 1,
+      "recall_at_5": 1.0,
+      "reciprocal_rank_at_10": 1.0,
+      "ndcg_at_10": 1.0,
+      "latency_ms": 25.038624997250736
+    },
+    {
+      "query": "What method trains a language model to adaptively retrieve passages and critique its own generations?",
+      "relevant_sources": [
+        "2310.11511v1.pdf"
+      ],
+      "retrieved_sources": [
+        "2310.11511v1.pdf",
+        "2401.15884v3.pdf",
+        "1706.03762v7.pdf",
+        "2609.26368v1.pdf"
+      ],
+      "first_relevant_rank": 1,
+      "recall_at_5": 1.0,
+      "reciprocal_rank_at_10": 1.0,
+      "ndcg_at_10": 1.0,
+      "latency_ms": 24.46924999821931
+    },
+    {
+      "query": "Which method uses a lightweight retrieval evaluator to trigger corrective actions for retrieved documents?",
+      "relevant_sources": [
+        "2401.15884v3.pdf"
+      ],
+      "retrieved_sources": [
+        "2401.15884v3.pdf",
+        "2310.11511v1.pdf",
+        "2609.26368v1.pdf"
+      ],
+      "first_relevant_rank": 1,
+      "recall_at_5": 1.0,
+      "reciprocal_rank_at_10": 1.0,
+      "ndcg_at_10": 1.0,
+      "latency_ms": 24.545707972720265
+    },
+    {
+      "query": "What retrieval-augmented generation approach performs web searches when retrieved documents are incorrect?",
+      "relevant_sources": [
+        "2401.15884v3.pdf"
+      ],
+      "retrieved_sources": [
+        "2401.15884v3.pdf",
+        "2310.11511v1.pdf",
+        "2412.19437v2.pdf"
+      ],
+      "first_relevant_rank": 1,
+      "recall_at_5": 1.0,
+      "reciprocal_rank_at_10": 1.0,
+      "ndcg_at_10": 1.0,
+      "latency_ms": 24.881792021915317
+    },
+    {
+      "query": "Which 671-billion-parameter mixture-of-experts model activates 37 billion parameters per token and uses MLA?",
+      "relevant_sources": [
+        "2412.19437v2.pdf"
+      ],
+      "retrieved_sources": [
+        "2412.19437v2.pdf",
+        "2607.24653v2.pdf",
+        "2306.02707.pdf",
+        "2310.11511v1.pdf",
+        "2609.26368v1.pdf"
+      ],
+      "first_relevant_rank": 1,
+      "recall_at_5": 1.0,
+      "reciprocal_rank_at_10": 1.0,
+      "ndcg_at_10": 1.0,
+      "latency_ms": 99.26133300177753
+    },
+    {
+      "query": "What model uses an auxiliary-loss-free load-balancing strategy and a multi-token prediction objective?",
+      "relevant_sources": [
+        "2412.19437v2.pdf"
+      ],
+      "retrieved_sources": [
+        "2412.19437v2.pdf",
+        "2607.24653v2.pdf"
+      ],
+      "first_relevant_rank": 1,
+      "recall_at_5": 1.0,
+      "reciprocal_rank_at_10": 1.0,
+      "ndcg_at_10": 1.0,
+      "latency_ms": 25.021375040523708
+    },
+    {
+      "query": "Which 2.8-trillion-parameter mixture-of-experts model has 104 billion activated parameters and a one-million-token context window?",
+      "relevant_sources": [
+        "2607.24653v2.pdf"
+      ],
+      "retrieved_sources": [
+        "2607.24653v2.pdf",
+        "2412.19437v2.pdf",
+        "2306.02707.pdf",
+        "2609.26368v1.pdf",
+        "2310.11511v1.pdf"
+      ],
+      "first_relevant_rank": 1,
+      "recall_at_5": 1.0,
+      "reciprocal_rank_at_10": 1.0,
+      "ndcg_at_10": 1.0,
+      "latency_ms": 26.47587493993342
+    },
+    {
+      "query": "What model introduces Stable LatentMoE and uses Kimi Delta Attention?",
+      "relevant_sources": [
+        "2607.24653v2.pdf"
+      ],
+      "retrieved_sources": [
+        "2607.24653v2.pdf",
+        "2412.19437v2.pdf",
+        "2310.11511v1.pdf",
+        "1706.03762v7.pdf",
+        "2609.26368v1.pdf"
+      ],
+      "first_relevant_rank": 1,
+      "recall_at_5": 1.0,
+      "reciprocal_rank_at_10": 1.0,
+      "ndcg_at_10": 1.0,
+      "latency_ms": 24.61041696369648
+    },
+    {
+      "query": "Which architecture combines hybrid sparse attention with two-level KV sharing?",
+      "relevant_sources": [
+        "2609.26368v1.pdf"
+      ],
+      "retrieved_sources": [
+        "2609.26368v1.pdf",
+        "2607.24653v2.pdf",
+        "1706.03762v7.pdf",
+        "2412.19437v2.pdf"
+      ],
+      "first_relevant_rank": 1,
+      "recall_at_5": 1.0,
+      "reciprocal_rank_at_10": 1.0,
+      "ndcg_at_10": 1.0,
+      "latency_ms": 24.054583045654
+    },
+    {
+      "query": "What method introduces KV Bridging with a YOCO-style self-decoder and cross-decoder?",
+      "relevant_sources": [
+        "2609.26368v1.pdf"
+      ],
+      "retrieved_sources": [
+        "2609.26368v1.pdf",
+        "1706.03762v7.pdf",
+        "2607.24653v2.pdf",
+        "2412.19437v2.pdf"
+      ],
+      "first_relevant_rank": 1,
+      "recall_at_5": 1.0,
+      "reciprocal_rank_at_10": 1.0,
+      "ndcg_at_10": 1.0,
+      "latency_ms": 26.029208092950284
+    }
+  ]
+}
