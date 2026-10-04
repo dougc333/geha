@@ -438,7 +438,7 @@ def load_environment() -> None:
     for candidate in (
         Path.cwd() / ".env",
         Path("/Users/dc/geha/.env"),
-        Path("/Users/dc/geha/e2e_RAG/.env"),
+        Path("/Users/dc/geha/agentic_search/.env"),
         Path("/Users/dc/geha/PDF_processing/clean_pdf_langgraph/.env"),
     ):
         if candidate.is_file():

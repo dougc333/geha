@@ -329,17 +329,26 @@ def corrected_tables(page_name: str, tables: list[MarkdownTable], directory: Pat
     return tables
 
 
-def render_cell(text: str) -> str:
+def render_cell(text: str, page_name: str = "") -> str:
     escaped = html.escape(text, quote=True)
-    return escaped.replace("&lt;br&gt;", "<br>")
+    escaped = escaped.replace("&lt;br&gt;", "<br>")
+    if page_name in {"page-003", "page-004"} and re.fullmatch(r"\d+", text.strip()):
+        target = f"page-{int(text):03d}.html"
+        return f'<a class="page-link" href="{target}">{escaped}</a>'
+    return escaped
 
 
 def render_html(page_name: str, source_pdf: str, tables: list[MarkdownTable]) -> str:
     sections: list[str] = []
     for table_number, table in enumerate(tables, 1):
-        header = "".join(f"<th scope=\"col\">{render_cell(cell)}</th>" for cell in table.header)
+        header = "".join(
+            f"<th scope=\"col\">{render_cell(cell, page_name)}</th>"
+            for cell in table.header
+        )
         body = "\n".join(
-            "<tr>" + "".join(f"<td>{render_cell(cell)}</td>" for cell in row) + "</tr>"
+            "<tr>" + "".join(
+                f"<td>{render_cell(cell, page_name)}</td>" for cell in row
+            ) + "</tr>"
             for row in table.rows
         )
         sections.append(
@@ -371,6 +380,8 @@ def render_html(page_name: str, source_pdf: str, tables: list[MarkdownTable]) ->
   th, td {{ border: 1px solid #66717c; padding: 7px 9px; text-align: left; vertical-align: top; line-height: 1.25; }}
   th {{ background: #d9dde1; font-weight: 700; }}
   tbody tr:nth-child(even) {{ background: #f5f6f7; }}
+  .page-link {{ color: #005ea8; font-weight: 700; text-decoration: underline; }}
+  .page-link:hover {{ color: #003e73; }}
 </style>
 </head>
 <body data-qa-iteration="3" data-qa-status="passed">
