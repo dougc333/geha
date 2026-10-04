@@ -1,9 +1,48 @@
 # Claims fraud investigation: agent + live trace
 
-> **Self-improving agent.** 
-First Step: Start with a teacher agent, a stronger model, no prompot, no toolcalls. let it explore and develop a policy. Record a baseline on data which has been seeded wiht fraud cases. This is not teacher student distillation. 
+> **Teacher-guided prompt and tool optimization.** This project improves the agent
+> configuration around DeepSeek; it does not retrain or recursively improve the
+> DeepSeek model itself.
 
-Second Step: Take the weaker and much cheaper model, Deepseek and use RSI to maek perf of DS close to Opus. Use Opus to control the prompt writing for DS and tool calling synthesis. 
+First, a stronger teacher agent explores seeded fraud cases and establishes a baseline.
+Then DeepSeek runs different cases, its findings are graded against answer keys, and
+Claude Opus converts the observed mistakes into general lessons and, optionally,
+proposed analytics tools. Lessons are retained only when they improve a held-out test
+score. Proposed tools require human approval before the agent may call them.
+
+## What "self-improving" means here
+
+```text
+DeepSeek investigates a synthetic case
+                 ↓
+Results are graded against known outcomes
+                 ↓
+Claude Opus analyzes misses and false accusations
+                 ↓
+Opus revises reusable lessons or proposes a tool
+                 ↓
+DeepSeek is tested on different held-out cases
+                 ↓
+Keep the change only when the held-out score improves
+```
+
+What changes:
+
+- `lessons.md`, which is appended to the agent prompt;
+- optionally, sandboxed Python analytics tools proposed for human approval; and
+- the agent's search behavior because it receives the accepted lessons and tools.
+
+What does **not** change:
+
+- DeepSeek's model weights, training data, architecture, or inference algorithm;
+- the base system prompt in `agent.py`; or
+- the requirement for answer keys, a stronger external reflector, and human approval
+  of generated tools.
+
+Therefore this is not autonomous recursive self-improvement (RSI), model training, or
+teacher-student distillation. The precise description is **teacher-guided prompt and
+tool optimization with held-out evaluation**. It is reasonable to call the overall
+agent system iteratively improving, but not to claim that DeepSeek itself learns.
 
 > Files: `improve.py` (the loop), 
 > Files: `lessons.md` (the lessons the agent has learned and that passed the test), 

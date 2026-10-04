@@ -9,11 +9,11 @@ Dates: 2026-09-28 to 2026-09-29. Account/region: AWS `669059827483`, stack
 
 ## 1. Starting point
 
-Before `aws_rag`, the RAG demo lived in `e2e_RAG/vercel_app`: a Vercel app with
+Before `aws_rag`, the RAG demo lived in `e2e_bm25vector`: a Vercel app with
 a FastAPI search API (BM25 in Python, OpenAI embeddings in pgvector, hybrid
 RRF, an LLM reranker and grounded answers) over a few pre-indexed PDFs in a
 Neon Postgres database. An architecture figure was drawn for it
-(`vercel_app/rag_architecture.svg`).
+(`e2e_bm25vector/rag_architecture.svg`).
 
 ## 2. The chunker (S3 → SQS → Lambda)
 
@@ -200,7 +200,7 @@ reads it from SSM. The key was pasted into the chat later; rotation declined.
 
 ## 16. Table-aware parsing with Docling
 
-- **Test** (`e2e_RAG/pymupdf_docling_test/`): on the Attention paper, Docling
+- **Test** (`agentic_search/pymupdf_docling_test/`): on the Attention paper, Docling
   found all 4 tables with captions and correct structure. PyMuPDF
   `find_tables` found 2 of 4 (none of the booktabs tables), scrambled them, and
   reported figures as tables; its text mode turned every page into a "table".
@@ -261,7 +261,7 @@ reads it from SSM. The key was pasted into the chat later; rotation declined.
   white); answers' Markdown tables now render as HTML tables.
 - Thumbnails: PNGs in `s3://…chunks…/figures/`, `rag_chunks.image`, presigned
   `image_url` on chat sources, figure strip under the answer.
-- Rollout to all 203 papers (incl. Orca and Self-RAG from `e2e_RAG/data/`):
+- Rollout to all 203 papers (incl. Orca and Self-RAG from `agentic_search/data/`):
   1,886 figures, $0.24. Llama 3 failed to embed repeatedly on a Titan
   `ModelErrorException`; added a per-chunk retry in the embedder.
 - Final: all 62 questions 0.77 / 0.95 / 0.85; figures 7/9; tables 11/13.
@@ -297,6 +297,6 @@ reads it from SSM. The key was pasted into the chat later; rotation declined.
   loaded with an OpenAI key.
 - Delete the old Vercel project (keep the Neon database). Remove secrets from
   `~/.zshrc` (they're all in SSM). Decide on the untracked Keynote file and
-  `e2e_RAG/pymupdf_docling_test/`.
+  `agentic_search/pymupdf_docling_test/`.
 - Credentials pasted into chat (database password, OpenAI key, API key) were
   not rotated, by choice.

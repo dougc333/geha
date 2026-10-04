@@ -1,7 +1,7 @@
 """Lambda entry point for the RAG query API, the lab UI (/) and the chatbot (/chat).
 
 app.py, rag_core.py and index.html started as copies of the retired Vercel app
-(../e2e_RAG/vercel_app); this module only adapts them to Lambda.
+(../e2e_bm25vector); this module only adapts them to Lambda.
 """
 
 import os
