@@ -44,18 +44,21 @@ bedrock_agent = boto3.client("bedrock-agent-runtime", region_name=REGION)
 langfuse = get_client()
 
 
-def converse(name: str, **kwargs) -> dict:
+def converse(name: str, *, trace_input: bool = True, trace_output: bool = True, **kwargs) -> dict:
     """bedrock.converse, recorded as a Langfuse generation with token usage."""
     with langfuse.start_as_current_observation(
         as_type="generation",
         name=name,
         model=kwargs["modelId"],
-        input={"system": kwargs.get("system"), "messages": kwargs.get("messages")},
+        input=(
+            {"system": kwargs.get("system"), "messages": kwargs.get("messages")}
+            if trace_input else {"redacted": True}
+        ),
         model_parameters=kwargs.get("inferenceConfig"),
     ) as generation:
         response = bedrock.converse(**kwargs)
         generation.update(
-            output=response["output"]["message"]["content"],
+            output=(response["output"]["message"]["content"] if trace_output else {"redacted": True}),
             usage_details={
                 "input": response["usage"]["inputTokens"],
                 "output": response["usage"]["outputTokens"],
@@ -167,7 +170,7 @@ def _all_chunks(connection, document_id: str) -> list[dict]:
         ]
 
 
-@observe(name="embed-query", as_type="embedding", capture_output=False)
+@observe(name="embed-query", as_type="embedding", capture_input=False, capture_output=False)
 def _embed_query(query: str) -> list[float]:
     # Same model and settings as the embedder, or cosine scores are meaningless.
     response = bedrock.invoke_model(
@@ -210,7 +213,7 @@ def _vector_rank(connection, document_id: str, query: str, limit: int) -> list[d
 
 
 @observe(name="rerank", as_type="generation", capture_input=False, capture_output=False)
-def _rerank(query: str, rows: list[dict]) -> list[dict]:
+def _rerank(query: str, rows: list[dict], trace_query: bool = True) -> list[dict]:
     """Reorder candidates with a Bedrock reranking model (cross-encoder scores)."""
     if not rows:
         return []
@@ -218,7 +221,7 @@ def _rerank(query: str, rows: list[dict]) -> list[dict]:
     # (Documents over 512 tokens count extra; our ~450-token chunks don't.)
     units = -(-len(rows) // 100)
     langfuse.update_current_generation(
-        input={"query": query, "candidates": len(rows)},
+        input={"query": query, "candidates": len(rows)} if trace_query else {"candidates": len(rows)},
         model=RERANK_MODEL,
         usage_details={"search_units": units},
         cost_details={"total": units * RERANK_PRICE_PER_UNIT},  # "total" is what Langfuse sums

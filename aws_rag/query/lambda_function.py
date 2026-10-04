@@ -17,6 +17,7 @@ _SECRETS = {
     "DATABASE_URL": os.environ["DATABASE_URL_PARAMETER"],
     "LANGFUSE_PUBLIC_KEY": os.getenv("LANGFUSE_PUBLIC_KEY_PARAMETER"),
     "LANGFUSE_SECRET_KEY": os.getenv("LANGFUSE_SECRET_KEY_PARAMETER"),
+    "SIGNUP_HASH_KEY": os.getenv("SIGNUP_HASH_KEY_PARAMETER"),
     "WEAVIATE_URL": os.getenv("WEAVIATE_URL_PARAMETER"),  # optional: Weaviate comparison
     "WEAVIATE_API_KEY": os.getenv("WEAVIATE_API_KEY_PARAMETER"),
     "API_KEY": os.getenv("API_KEY_PARAMETER"),  # shared access key for /api/*
@@ -41,12 +42,15 @@ from mangum import Mangum  # noqa: E402
 
 from app import app, langfuse  # noqa: E402
 from chat import router as chat_router  # noqa: E402
+from signup.router import router as signup_router  # noqa: E402
 
 app.include_router(chat_router)
+app.include_router(signup_router)
 
 INDEX_HTML = (Path(__file__).parent / "index.html").read_text()
 CHAT_HTML = (Path(__file__).parent / "chat.html").read_text()
 BACKENDS_HTML = (Path(__file__).parent / "backends.html").read_text()
+SIGNUP_HTML = (Path(__file__).parent / "signup.html").read_text()
 
 
 # no-cache: browsers revalidate, so a deploy's UI changes show on the next load.
@@ -66,6 +70,11 @@ def chat_page() -> HTMLResponse:
 @app.get("/backends", response_class=HTMLResponse, include_in_schema=False)
 def backends_page() -> HTMLResponse:
     return HTMLResponse(BACKENDS_HTML, headers=NO_CACHE)
+
+
+@app.get("/signup", response_class=HTMLResponse, include_in_schema=False)
+def signup_page() -> HTMLResponse:
+    return HTMLResponse(SIGNUP_HTML, headers=NO_CACHE)
 
 
 _asgi = Mangum(app, lifespan="off")

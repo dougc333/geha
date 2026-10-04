@@ -1,0 +1,28 @@
+{
+  "iteration": 3,
+  "reviewed_at": "2026-10-03T00:28:18.631647+00:00",
+  "verdict": "mismatch",
+  "error_count": 3,
+  "errors": [
+    {
+      "category": "image",
+      "source_evidence": "Left side logo above year 2026 is present in PDF but shows a broken image icon in HTML",
+      "html_evidence": "<img class=\"gea-logo\" src=\"data:image/jpeg;base64,...\" alt=\"Government Employees Health Association logo\">",
+      "correction": "Render the left side 'G.E.H.A' logo image fully and ensure it appears without error, matching the source PDF logo."
+    },
+    {
+      "category": "layout",
+      "source_evidence": "Enrollment codes are listed with bold text groupings for text and icons below them and are left aligned in the PDF's left bottom area.",
+      "html_evidence": "<ul class=\"enrollment-list\" aria-label=\"Enrollment codes for plans\">...</ul>\n<img class=\"fea-logo\" src=\"data:image/png;base64,...\" alt=\"Federal Employees Health Benefits Program logo\">",
+      "correction": "Correct the enrollment codes section layout so that the FEHB logo is positioned appropriately below or beside the text as in the PDF, and text bold styling matches source for '251 Elevate Plus Option - Self Only' through '255 Elevate Option - Self and Family'. The current line-break and icon placement differs from PDF."
+    },
+    {
+      "category": "layout",
+      "source_evidence": "Authorized for distribution by the: United States Office of Personnel Management block including logo and text is located right bottom corner in PDF.",
+      "html_evidence": "<p class=\"opm-authorized\">...<img class=\"opm-logo\" src=\"data:image/jpeg;base64,...\" alt=\"United States Office of Personnel Management logo\">",
+      "correction": "Adjust the layout of the OPM authorization section so that the text and OPM logo appear as in source PDF on the lower right area with proper alignment and spacing, avoiding text overlay or wrapping issues."
+    }
+  ],
+  "html_file": "iteration-03.html",
+  "render_file": "iteration-03.png"
+}

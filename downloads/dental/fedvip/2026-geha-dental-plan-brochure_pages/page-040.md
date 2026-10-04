@@ -1,0 +1,32 @@
+<!-- source: 2026-geha-dental-plan-brochure.pdf; source_page: 40 -->
+
+- Crowns, inlays and onlays performed to restore tooth structure lost due to attrition, erosion or abrasion.
+- Any procedure, appliance, restoration or treatment as a result of mail order or online orthodontic services.
+- Services or treatment started or performed prior to the effective date of your current coverage.
+- Services rendered after the termination of coverage.
+- Diagnosis and/or treatment of jaw joint problems, including temporomandibular joint (TMJ) syndrome, craniomandibular disorders, or other conditions of the joint linking the jawbone and skull or the complex of muscles, nerves and other tissue related to that joint.
+- General anesthesia provided in connection with services that are not covered.
+- Oral sedation.
+- Precision dentures, characterization or personalization of crowns, dentures or restorations.
+- Gold foil restorations.
+- Services or treatments that are necessary due to patient failure to follow the dental practitioner's instructions.
+- Services or treatments that are not the least costly alternative that accomplishes a result that meets accepted standards of professional dental care as determined by us.
+- Any service or treatment that is part of the complete dental procedure is considered a component of, and is included in, the fee for the complete procedure.
+- Services received from a dental or medical department maintained by or on behalf of any employer, mutual benefit association, labor union, trust or similar person or group.
+- Services performed by a dentist who is compensated by a facility for similar covered services performed for members.
+- Treatment or services for injuries resulting from the maintenance or use of a motor vehicle if such treatment or service is paid or payable under a plan or policy of motor vehicle insurance, including a certified self-insurance plan.
+- Service or care required as a result of complications from a treatment or service not covered under the dental plan.
+- Fraudulent claims for service.
+- Claims submitted later than December 31 of the calendar year following the one in which the expense was incurred, except when the member was legally incapable.
+- State or territorial taxes on dental services performed.
+- Adjunctive dental services as defined by applicable Federal regulations.  The Federal dental program does not cover adjunctive dental care services.  These are medical services that are covered by other medical insurance even when provided by a general dentist or oral surgeon.   The following diagnoses or conditions may fall under this category:
+-  Treatment for relief of myofacial pain dysfunction syndrome or temporomandibular joint dysfunction (TMJD).
+- Orthodontic treatment for cleft lip or cleft palate, or when required in preparation for, or as a result of, trauma to teeth and supporting structures caused by medically necessary treatment of an injury or disease.
+- Procedures associated with preventative and restorative dental care when associated with radiation therapy to the head or neck unless otherwise covered as a routine preventative procedure under this plan.
+- Total or complete ankyloglossia.
+- Intraoral abscesses that extend beyond the dental alveolus.
+- Extraoral abscesses.
+- Cellulitis and osteitis, which is clearly exacerbating and directly affecting a medical condition currently under treatment.
+- Removal of teeth and tooth fragments in order to treat and repair facial trauma resulting from an accidental injury.
+- Prosthetic replacement of either the maxilla or mandible due to reduction of body tissues associated with traumatic injury (such as a gun shot wound) in addition to services related to treating neoplasms or iatrogenic dental trauma.
+- Diagnosis and/or treatment of Sleep Apnea.

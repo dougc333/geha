@@ -53,6 +53,12 @@ class MedicalTableTests(unittest.TestCase):
         self.assertIn("$200 / Self Only", MEDICAL.questions["Elevate Plus"]["deductible"])
         self.assertIn("$7,000 / Self Only", MEDICAL.questions["Elevate Plus"]["out_of_pocket_limit"])
 
+    def test_brochure_markdown_is_ingested_with_page_citations(self):
+        self.assertGreaterEqual(len(MEDICAL.brochure_chunks), 132)
+        hits = MEDICAL.search_brochure("overseas claims emergency care")
+        self.assertTrue(hits)
+        self.assertTrue(all(hit.page >= 1 and hit.content for hit in hits))
+
 
 class ExtractTests(unittest.TestCase):
     def test_high_and_standard_go_to_the_line_being_asked(self):
@@ -137,6 +143,29 @@ class StateMachineTests(unittest.TestCase):
         _, r = self.chat("dental 94105 employed self only standard")
         self.assertIn("Dental Standard (rate code 5): $16.00 biweekly", r[0])
 
+    def test_dental_vision_discount_does_not_route_to_medical_vision(self):
+        _, r = self.chat("What vision benefits do the High and Standard dental plans include?")
+        self.assertIn("annual routine eye exam is $20", r[0])
+        self.assertIn("frames are 60% of retail price", r[0])
+        self.assertNotIn("Children's routine eye exam", r[0])
+        self.assertNotIn("Basic, Class A", r[0])
+
+    def test_high_versus_standard_benefits_preserves_both_plans(self):
+        _, r = self.chat("Compare the High and Standard dental plan benefits")
+        self.assertIn("unlimited annual maximum", r[0])
+        self.assertIn("$2,500 in-network annual maximum", r[0])
+
+    def test_dental_membership_discounts(self):
+        _, r = self.chat("What are the hearing aid and fitness discounts?")
+        self.assertIn("30%-60% off TruHearing", r[0])
+        self.assertIn("12,700 Active&Fit Direct locations", r[0])
+        self.assertIn("not a benefit offered or guaranteed under the FEDVIP contract", r[0])
+
+    def test_example_procedure_costs(self):
+        _, r = self.chat("What does a root canal and crown cost with High versus Standard dental?")
+        self.assertIn("$472 with High and $613 with Standard", r[0])
+        self.assertIn("$422 with High and $548 with Standard", r[0])
+
     def test_ambiguous_deductible_waits_for_the_line(self):
         _, r = self.chat("what's the deductible?", "dental")
         self.assertIn("which one did you mean", r[0])
@@ -147,6 +176,11 @@ class StateMachineTests(unittest.TestCase):
         _, r = self.chat("medical, elevate plus", "does it cover an mri?")
         self.assertIn("$175 total per test", r[1])
         self.assertNotIn("HDHP", r[1])
+
+    def test_general_medical_question_routes_to_brochure_retrieval(self):
+        _, r = self.chat("medical, elevate plus", "what does the brochure say about overseas care?")
+        self.assertIn("Elevate and Elevate Plus brochure", r[1])
+        self.assertRegex(r[1], r"Page \d+")
 
     def test_adding_a_line_later_asks_only_what_is_new(self):
         _, r = self.chat("medical, retired, self only, standard", "add dental too, zip 64101", "high")

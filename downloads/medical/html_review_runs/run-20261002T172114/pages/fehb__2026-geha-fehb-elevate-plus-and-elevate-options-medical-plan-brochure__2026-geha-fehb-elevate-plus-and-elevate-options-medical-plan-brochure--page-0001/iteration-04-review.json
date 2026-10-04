@@ -1,0 +1,46 @@
+{
+  "iteration": 4,
+  "reviewed_at": "2026-10-03T00:29:55.479224+00:00",
+  "verdict": "mismatch",
+  "error_count": 6,
+  "errors": [
+    {
+      "category": "reading_order",
+      "source_evidence": "Enrollment codes for these Plans:\\n\\n  251 Elevate Plus Option - Self Only\\n  253 Elevate Plus Option - Self Plus One\\n  252 Elevate Plus Option - Self and Family\\n  254 Elevate Option - Self Only\\n  256 Elevate Option - Self Plus One\\n  255 Elevate Option - Self and Family",
+      "html_evidence": "Postal Employees and Annuitants are no longer eligible for this\\nplan, unless currently under Temporary Continuation of\\nCoverage.\\nEnrollment codes for these Plans:\\n\\n    251 Elevate Plus Option - Self Only\\n    253 Elevate Plus Option - Self Plus One\\n    252 Elevate Plus Option - Self and",
+      "correction": "The enrollment codes list must appear wholly and in proper order without breaks or mixing with other text, ensuring all items are fully present in sequence."
+    },
+    {
+      "category": "layout",
+      "source_evidence": "IMPORTANT\\n\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\\n\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+      "html_evidence": "<div class=\"important-box\">\\n    <b>\\n    </b>\\n    <ul>\\n      <li>Rates: Back Cover</li>\\n      <li>Changes for 2026: Page 14</li>\\n      <li>Summary of Benefits: Page 123</li>\\n    </ul>\\n  </div>",
+      "correction": "The IMPORTANT box containing rates, changes, and summary references present in the source is missing entirely from the HTML, which impacts layout and critical information presentation."
+    },
+    {
+      "category": "image",
+      "source_evidence": "The G.E.H.A logo with text 'G.E.H.A Government Employees Health Association' appears on the left of 2026 and above the horizontal line",
+      "html_evidence": "<img class=\"gea-logo\" src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAvCAIAAAClhjJyAA...\" alt=\"Government Employees Health Association logo\">",
+      "correction": "The G.E.H.A logo present in the source appears incorrectly rendered as a missing image icon or replaced with a placeholder in the HTML, causing image content to be lost."
+    },
+    {
+      "category": "image",
+      "source_evidence": "FEHB Federal Employees Health Benefits Program logo appears above the OPM logo at bottom left",
+      "html_evidence": "<img class=\"fea-logo\" src=\"data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAANcAAACZCAIAAAAzTTj+AAAACXBIWXMAAA7EAAAOxAGVKw4bAA...\" alt=\"Federal Employees Health Benefits Program logo\">",
+      "correction": "The FEHB logo appears distorted and overlaps with the subsequent text in the HTML, resulting in improper reading order and layout issues."
+    },
+    {
+      "category": "image",
+      "source_evidence": "United States Office of Personnel Management logo lower right corner near authorized text",
+      "html_evidence": "<img class=\"opm-logo\" src=\"data:image/jpeg;base64,/9j/4AA...\" alt=\"United States Office of Personnel Management logo\">",
+      "correction": "The OPM logo image is broken or rendered as missing images icons in the HTML, indicated by incomplete base64 or placeholder icons."
+    },
+    {
+      "category": "reading_order",
+      "source_evidence": "Postal Employees and Annuitants are no longer eligible for this plan, unless currently under Temporary Continuation of Coverage.",
+      "html_evidence": "Postal Employees and Annuitants are no longer eligible for this\\nplan, unless currently under Temporary Continuation of\\nCoverage.\\nEnrollment codes for these Plans:",
+      "correction": "Text 'Postal Employees and Annuitants...' should appear as a standalone paragraph without interruption or merging into other paragraphs or lists."
+    }
+  ],
+  "html_file": "iteration-04.html",
+  "render_file": "iteration-04.png"
+}

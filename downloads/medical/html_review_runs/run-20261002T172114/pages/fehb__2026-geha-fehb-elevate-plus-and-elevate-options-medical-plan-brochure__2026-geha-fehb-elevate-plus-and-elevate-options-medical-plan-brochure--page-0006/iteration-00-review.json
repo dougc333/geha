@@ -1,0 +1,34 @@
+{
+  "iteration": 0,
+  "reviewed_at": "2026-10-03T00:35:06.694481+00:00",
+  "verdict": "mismatch",
+  "error_count": 4,
+  "errors": [
+    {
+      "category": "wrong_text",
+      "source_evidence": "CALL THE HEALTHCARE FRAUD HOTLINE\\n877-499-7295 \\nOR go to www. opm.gov/our-inspector-general/hotline-to-report-fraud-waste-or-abuse/complaint-form",
+      "html_evidence": "CALL THE HEALTHCARE FRAUD HOTLINE </span></b></p>\\n<p style=\"top:153.0pt;left:277.6pt;line-height:10.0pt\"><b><span style=\"font-family:Times New Roman,serif;font-size:10.0pt;color:#000000\">877-499-7295 </span></b></p>\\n<p style=\"top:165.0pt;left:87.1pt;line-height:10.0pt\"><b><span style=\"font-family:Times New Roman,serif;font-size:10.0pt;color:#000000\">OR go to www. opm.gov/our-inspector-general/hotline-to-report-fraud-waste-or-abuse/complaint-form</span></b>",
+      "correction": "The phone number is 877-499-7295 (in PDF) but is incorrectly given as 877-499-7295 in HTML with a different glyph for dash or with an extra space after www."
+    },
+    {
+      "category": "wrong_text",
+      "source_evidence": "- Your child over age 26 (unless they were disabled and incapable of self-support prior to age 26).",
+      "html_evidence": "- Your child over age 26 (unless they were disabled and incapable of self-support prior to age 26).",
+      "correction": "This text matches."
+    },
+    {
+      "category": "extra_text",
+      "source_evidence": "(No corresponding text)",
+      "html_evidence": "<span style=\"font-family:Times New Roman,serif;font-size:10.0pt;color:#000000\"> </span>",
+      "correction": "Extra trailing space span after address in HTML not present in source PDF."
+    },
+    {
+      "category": "other",
+      "source_evidence": "Page footer lines: \"2026 G.E.H.A Indemnity Benefit Plan 4 Government Employees Health Association\" and \"Introduction/Plain Language/Advisory\"",
+      "html_evidence": "<p style=\"top:758.0pt;left:303.5pt;line-height:10.0pt\"><span style=\"font-family:Times New Roman,serif;font-size:10.0pt;color:#000000\">4 </span></p>\\n<p style=\"top:758.0pt;left:50.4pt;line-height:10.0pt\"><span style=\"font-family:Times New Roman,serif;font-size:10.0pt;color:#000000\">2026 G.E.H.A Indemnity Benefit Plan </span></p>\\n<p style=\"top:768.1pt;left:50.4pt;line-height:10.0pt\"><span style=\"font-family:Times New Roman,serif;font-size:10.0pt;color:#000000\">Government Employees Health Association </span></p>\\n<p style=\"top:758.0pt;left:403.0pt;line-height:10.0pt\"><span style=\"font-family:Times New Roman,serif;font-size:10.0pt;color:#000000\">Introduction/Plain Language/Advisory </span></p>",
+      "correction": "The footer is broken in HTML: the line \"Introduction/Plain Language/Advisory\" is vertically misaligned relative to the other footer text and appears on a separate line at left 403.0pt, unlike the PDF where left and bottom lines are well aligned in one horizontal line."
+    }
+  ],
+  "html_file": "iteration-00.html",
+  "render_file": "iteration-00.png"
+}

@@ -1,0 +1,58 @@
+{
+  "iteration": 1,
+  "reviewed_at": "2026-10-03T00:23:49.547185+00:00",
+  "verdict": "mismatch",
+  "error_count": 8,
+  "errors": [
+    {
+      "category": "image",
+      "source_evidence": "GEHA logo to the left of 2026 is visible and positioned near top of page",
+      "html_evidence": "<img class=\"gea-logo\" alt=\"GEHA logo\"> renders at top left, but missing textual alt content and smaller placeholder in render",
+      "correction": "Ensure logo is fully visible and alt text is meaningful"
+    },
+    {
+      "category": "reading_order",
+      "source_evidence": "'geha.com/Get-Support' and 'Customer Care: 800-821-6136' appear beneath heading G.E.H.A Indemnity Benefit Plan and Government Employees Health Association",
+      "html_evidence": "'<p class=\"gea-text-2\">Government Employees Health Association</p> <p class=\"gea-contact\"><b>geha.com/Get-Support</b></p> <p class=\"gea-contact2\"><b>Customer Care: 800-821-6136</b></p>' appear at similar but not exact vertical order, with spacing and font differences",
+      "correction": "Match the textual order and font weights closely to source, keeping 'Customer Care' line directly below support url"
+    },
+    {
+      "category": "reading_order",
+      "source_evidence": "Title lines 'A Fee-for-Service Plan (Elevate Plus and Elevate Options) with a Preferred Provider Organization' appear centered and bold on two lines",
+      "html_evidence": "Title split over two separate <p> blocks with 'Preferred Provider Organization' on new line below, slightly different alignment and bold tags",
+      "correction": "Combine or preserve line break but ensure font sizes and bolding consistent with source"
+    },
+    {
+      "category": "layout",
+      "source_evidence": "Important box on right side with bold 'IMPORTANT' and three bullet lines with text 'Rates: Back Cover', etc.",
+      "html_evidence": "Important box appears but uses different bullet character and line spacing, with no exact vertical alignment, and formatted as a separate block",
+      "correction": "Match box bullet style and text locations precisely to source"
+    },
+    {
+      "category": "reading_order",
+      "source_evidence": "Enrollment codes appear as labeled list with spaced and indented lines beginning with '251 Elevate Plus Option - Self Only', etc.",
+      "html_evidence": "Enrollment codes are literal bullet list but with visible overlapping text artifacts at bottom: 'Federal Employees Health Benefits Program' text inverted and overlapping with last list item",
+      "correction": "Remove overlapping text artifacts, render properly the 'Federal Employees Health Benefits Program' text below and separate from list"
+    },
+    {
+      "category": "image",
+      "source_evidence": "FEHB logo near bottom left",
+      "html_evidence": "FEHB logo present but rotated or flipped upside down overlapping bullet text in rendered HTML",
+      "correction": "Ensure FEHB logo is correctly oriented and placed below enrollment codes without overlap"
+    },
+    {
+      "category": "image",
+      "source_evidence": "United States Office of Personnel Management logo to bottom right with text",
+      "html_evidence": "OPM logo present but logo and text positioning inconsistent and truncated with 'OPM logo' text overlapping preceding paragraphs, some question marks seen",
+      "correction": "Correct OPM logo placement and text flow to match source, ensure all text is visible"
+    },
+    {
+      "category": "reading_order",
+      "source_evidence": "Footer text 'RI 71-018' centered at bottom right",
+      "html_evidence": "'<p class=\"footer-ri\">RI 71-018</p>' is present but positioned slightly differently and uses different font styling in render",
+      "correction": "Align footer text placement and style to source."
+    }
+  ],
+  "html_file": "iteration-01.html",
+  "render_file": "iteration-01.png"
+}

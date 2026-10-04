@@ -55,7 +55,8 @@ dt{color:var(--muted)}dd{margin:0;font-weight:500;overflow-wrap:anywhere}
       <h2>Try</h2>
       <div class="examples" id="examples"></div>
     </div>
-    <button id="reset" type="button" style="width:100%;text-align:center">Start over</button>
+    <button id="new-policy-search" type="button" style="width:100%;text-align:center"
+            title="Clear the current answers and begin a new policy search">New policy search</button>
   </aside>
 </div>
 <script>
@@ -98,10 +99,18 @@ async function send(text, show = true){
     $("error").textContent = "Could not reach the chat service: " + e.message;
   } finally { typing.remove(); }
 }
-function reset(){ state = {}; transcript = []; $("chat").replaceChildren(); renderSlots(); save(); send("hi", false); }
+function newPolicySearch(){
+  state = {};
+  transcript = [];
+  $("chat").replaceChildren();
+  renderSlots();
+  save();
+  send("hi", false);
+  $("input").focus();
+}
 
 $("form").addEventListener("submit", e => { e.preventDefault(); const t = $("input").value.trim(); if (!t) return; $("input").value = ""; send(t); });
-$("reset").addEventListener("click", reset);
+$("new-policy-search").addEventListener("click", newPolicySearch);
 for (const ex of EXAMPLES){ const b = document.createElement("button"); b.type = "button"; b.textContent = ex; b.onclick = () => send(ex); $("examples").appendChild(b); }
 
 load(); renderSlots();

@@ -85,3 +85,63 @@ INSERT INTO rag_terms (lexeme, chunk_id, tf)
 SELECT u.lexeme, c.id, coalesce(array_length(u.positions, 1), 1)
 FROM rag_chunks c, unnest(c.tsv) AS u
 ON CONFLICT DO NOTHING;
+
+-- Guided member signup is transactional application data, kept logically
+-- separate from the retrieval corpus. Langfuse receives only redacted telemetry;
+-- these tables are the authoritative, resumable signup record.
+CREATE SCHEMA IF NOT EXISTS signup;
+
+CREATE TABLE IF NOT EXISTS signup.applications (
+    id uuid PRIMARY KEY,
+    member_ref text NOT NULL,
+    product text NOT NULL CHECK (product IN ('dental')),
+    coverage_year integer NOT NULL CHECK (coverage_year BETWEEN 2026 AND 2100),
+    stage text NOT NULL CHECK (stage IN (
+        'eligibility', 'household', 'plan_selection', 'contact',
+        'review', 'completed', 'handoff'
+    )),
+    status text NOT NULL CHECK (status IN ('active', 'completed', 'handoff')),
+    slots jsonb NOT NULL DEFAULT '{}'::jsonb,
+    version integer NOT NULL DEFAULT 0 CHECK (version >= 0),
+    created_at timestamptz NOT NULL DEFAULT now(),
+    updated_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS signup_applications_member_idx
+    ON signup.applications (member_ref, updated_at DESC);
+
+CREATE TABLE IF NOT EXISTS signup.messages (
+    id bigserial PRIMARY KEY,
+    application_id uuid NOT NULL REFERENCES signup.applications(id) ON DELETE CASCADE,
+    client_message_id uuid NOT NULL,
+    role text NOT NULL CHECK (role IN ('user', 'assistant')),
+    content text NOT NULL,
+    metadata jsonb NOT NULL DEFAULT '{}'::jsonb,
+    created_at timestamptz NOT NULL DEFAULT now(),
+    UNIQUE (application_id, client_message_id, role)
+);
+CREATE INDEX IF NOT EXISTS signup_messages_application_idx
+    ON signup.messages (application_id, created_at);
+
+CREATE TABLE IF NOT EXISTS signup.events (
+    id bigserial PRIMARY KEY,
+    application_id uuid NOT NULL REFERENCES signup.applications(id) ON DELETE CASCADE,
+    event_type text NOT NULL,
+    from_version integer NOT NULL,
+    to_version integer NOT NULL,
+    payload jsonb NOT NULL DEFAULT '{}'::jsonb,
+    created_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS signup_events_application_idx
+    ON signup.events (application_id, id);
+
+-- A coverage-year/plan release explicitly selects the RAG documents that are
+-- allowed to answer signup questions. Use plan_code='all' for shared brochures.
+CREATE TABLE IF NOT EXISTS signup.plan_versions (
+    product text NOT NULL,
+    coverage_year integer NOT NULL,
+    plan_code text NOT NULL CHECK (plan_code IN ('all', 'high', 'standard')),
+    document_ids text[] NOT NULL,
+    active boolean NOT NULL DEFAULT true,
+    created_at timestamptz NOT NULL DEFAULT now(),
+    PRIMARY KEY (product, coverage_year, plan_code)
+);

@@ -1,0 +1,52 @@
+{
+  "iteration": 6,
+  "reviewed_at": "2026-10-03T00:31:00.013003+00:00",
+  "verdict": "mismatch",
+  "error_count": 7,
+  "errors": [
+    {
+      "category": "image",
+      "source_evidence": "G.E.H.A logo is displayed as a missing image icon in the HTML candidate, it appears as a proper logo in the source PDF.",
+      "html_evidence": "<img class=\"gea-logo\" src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFYAAABLCAYAAABmfyMOAAAABGdBTUEAALGPC/xhBQAAAaRJREFUWMPt1cENgDAYBNBff/T7p5FWSuR3XbBpE6b2z7TpPQAIcX15MS+vURM0gQ9cfU5F4CKATMUsNaPrmAxIvV/gzBo7BRfF3SGAO6+Z+ZpKnXfJuANDWgrQWo9fD0KzJxZHrX0YUccvAMeWriggJW3XX0+Bgj9D36VzBHBaD1JgP11AK6BqOwwDeP6IdKRbB05l9gpwNc9zHWnbs5/JhyqnMMF13Rp5TyWc3Q9YoxxCz0fnzEqQ0un7NYr1hXAAtkP46/BuHgV9DjMhbTyBWj5tv4VpkcioDrTwwlRqD2F0DcPf9XR2Qvw4A5gMgWHXRtdigAAAABJRU5ErkJggg==\" alt=\"Government Employees Health Association logo\" />",
+      "correction": "Add the G.E.H.A logo image from source to HTML or fix image source to correctly load it."
+    },
+    {
+      "category": "image",
+      "source_evidence": "FEHB logo appears clearly in the source PDF near the bottom left.",
+      "html_evidence": "<img class=\"fea-logo\" src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQwAAACACAYAAAD7xSM9AAAABHNCSVQICAgIfAhkiAAAAGBJREFUeJztwQENAAAAwqD3T20PBxQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4GyAZAAEsJiY1AAAAAElFTkSuQmCC\" alt=\"Federal Employees Health Benefits Program logo\" />",
+      "correction": "Replace or fix FEHB logo image to properly display the logo as seen in source PDF."
+    },
+    {
+      "category": "image",
+      "source_evidence": "OPM logo appears clearly in the lower right area of the source PDF.",
+      "html_evidence": "<img class=\"opm-logo\" src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAABACAYAAACIThSCAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABLklEQVRoge2TPQ7CMAxFv3//2c64MDIZAacZpY3Rn9NSyTpL0ZyPM8s85HpDvQ6nXarVK5Hr9RPQs5ENLQuB6PDUOc/59wPOB3D6P6GfL6yf0jq4hxhWCfyVkQ+qM8dEAfKzBROPwqYLdK+2L+BkEhrYmSnVrKBBMIEDathOtFjAgnHKAfCHol9FV+KCSAuKaBE1KmGAXq9yy7Zh4VxDdiUC5cH7vtc36Hy7CEatmwA3gDYcOgA5sQZvPtcAANEIvS06YCJTwA4CSRu6eas/J8MSGZO5EYKXfw3FBuR0yKPXS3N9CGV9RpF4ozP4wwveJuk8yoJ3s2nI8AmrxCq+cpcMo7OiZElZjyuJkQ8WPkcAAAAAAAAAAAAgH9YD7oWSRD5+LMgAAAABJRU5ErkJggg==\" alt=\"United States Office of Personnel Management logo\" />",
+      "correction": "Replace or fix OPM logo image to properly display the logo as seen in source PDF."
+    },
+    {
+      "category": "wrong_text",
+      "source_evidence": "Enrollment codes list: Numbers appear in the order 251, 253, 252, 254, 256, 255",
+      "html_evidence": "Enrollment codes list order and text differ: '252 Elevate Plus Option - Self and' is line broken and interrupted by a missing image icon, making it inconsistent with source.\nMissing words or line break errors present.",
+      "correction": "Fix the enrollment codes list to ensure each code and label are fully and correctly rendered without interruptions or misplaced line breaks."
+    },
+    {
+      "category": "image",
+      "source_evidence": "Source PDF includes distinctive bullet points (dots) in the IMPORTANT box.",
+      "html_evidence": "IMPORTANT box bullets are rendered as black squares (■) and one bullet partially overlaps with a missing image icon in the Enrollment codes list.",
+      "correction": "Replace black square bullets with properly styled bullet points consistent with source (possibly round dots)."
+    },
+    {
+      "category": "image",
+      "source_evidence": "Source PDF shows U.S. Office of Personnel Management seal and logo as a graphic near bottom right.",
+      "html_evidence": "The HTML candidate has no seal, and the OPM section text shows missing images (placeholder '?') and some text overlapping or inconsistent spacing.",
+      "correction": "Add the OPM seal and fix text wrapping and image links in the Authorized for distribution by section to match the source."
+    },
+    {
+      "category": "reading_order",
+      "source_evidence": "Enrollment codes are presented as a vertical list without icons or images before the numbers.",
+      "html_evidence": "Enrollment codes have icons preceding each item which are small black squares (representing bullets), partially overlapping plus some missing images '?' inside the list items, affecting reading clarity.",
+      "correction": "Remove or fix extraneous bullet icons before enrollment codes to match the source list style and to prevent overlap or confusion."
+    }
+  ],
+  "html_file": "iteration-06.html",
+  "render_file": "iteration-06.png"
+}

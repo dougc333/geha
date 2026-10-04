@@ -10,11 +10,18 @@ static chat page (`public/index.html`) and one Python function (`api/chat.py`,
 |---|---|---|
 | UI | Streamlit chat | `public/index.html`, plain HTML and JS |
 | Conversation state | kept in server memory per thread | sent by the page with every message (`BenefitsBot.step`), cleaned by `clean_state` before use |
-| Tables | parsed from the PDFs at start-up | `tables.json`, exported from the PDFs by `scripts/build.py` |
+| Tables and brochure corpus | parsed from the PDFs/Markdown at start-up | `tables.json`, exported by `scripts/build.py` |
 | Runtime dependencies | PyMuPDF, Streamlit, LangGraph | LangGraph only |
 
 `benefits/` holds unchanged copies of the bot modules from `../src`; the function imports
 them from there. A test fails if they or `tables.json` go stale.
+
+The medical state machine also contains a local BM25 retrieval node over the 132-page
+2026 Elevate and Elevate Plus brochure. `scripts/build.py` ingests the page-numbered
+Docling Markdown from `downloads/medical/fehb/single_pages/` into 336 page-cited chunks
+in `tables.json`. Known premiums, deductibles, and benefit topics continue to use the
+deterministic structured tables; other medical questions route to the brochure corpus.
+No vector database or model call is required at runtime.
 
 ## Build, run, test
 
@@ -29,8 +36,18 @@ The tests check that the module copies and `tables.json` match `../src` and the 
 that the function runs with PyMuPDF blocked and no PDFs present, a full conversation
 through the state round trip ($1,086.93 monthly total), that all 52 conversations in
 `../evals/benefits_conversations.jsonl` get exactly the same replies as the stateful
-bot, that bad requests are rejected and untrusted state is cleaned, and the page and API
-over HTTP through `local_server.py`.
+bot, that the screenshot-derived benefit queries in `../evals/benefits_questions.jsonl`
+contain every expected phrase and no rejected phrase, that bad requests are rejected
+and untrusted state is cleaned, and the page and API over HTTP through `local_server.py`.
+
+Each line of `benefits_questions.jsonl` is one independent query:
+
+```json
+{"id":"hearing-discount","category":"member discounts","query":"What hearing aid discount is included with my dental plan?","expect_in_reply":["30%-60% off TruHearing"],"reject_in_reply":["not found"]}
+```
+
+`reject_in_reply` is optional. Add a new JSON object on its own line to extend the
+benefit regression set without changing Python test code.
 
 ## Deploy
 

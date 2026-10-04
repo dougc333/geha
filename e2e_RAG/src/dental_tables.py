@@ -175,6 +175,58 @@ BENEFITS = {
                   "Standard in-network": "Two preventive cleanings per year included",
                   "Standard out-of-network": "Two preventive cleanings per year included"},
 }
+
+# Pages 6-9 contain plan-comparison examples and membership discounts rather than
+# FEDVIP contract benefits. Keep them separate from BENEFITS so replies can state
+# that distinction and the Class A-D table remains a direct page-5 transcription.
+SUPPLEMENTAL_BENEFITS = {
+    "plan_comparison": {
+        "label": "High versus Standard plan features",
+        "page": "6-7",
+        "answer": ("High is G.E.H.A's most comprehensive dental plan, with an unlimited annual maximum and three "
+                   "adult preventive cleanings per year. Standard is G.E.H.A's lowest-premium dental plan, with a "
+                   "$2,500 in-network annual maximum and two preventive cleanings per year. Both include orthodontic "
+                   "coverage for children and adults with no waiting period, plus the same vision discount."),
+    },
+    "vision": {
+        "label": "Vision discount included with High and Standard at no additional premium",
+        "page": 7,
+        "answer": ("In network, an annual routine eye exam is $20; frames are 60% of retail price; lenses are $50 "
+                   "to $135 depending on the option; and conventional contact lenses are 85% of retail price."),
+    },
+    "procedure_costs": {
+        "label": "Estimated in-network procedure costs",
+        "page": 8,
+        "answer": ("A molar root canal is estimated at $472 with High and $613 with Standard. One porcelain or "
+                   "ceramic crown is estimated at $422 with High and $548 with Standard. These are estimates, not "
+                   "guaranteed prices."),
+    },
+    "whitening": {
+        "label": "Teeth-whitening member discount",
+        "page": 9,
+        "answer": "20% off the lowest listed price on Smile Brilliant products.",
+    },
+    "toothbrush": {
+        "label": "Electric-toothbrush member discount",
+        "page": 9,
+        "answer": "70% off a cariPRO premium electric toothbrush.",
+    },
+    "hearing": {
+        "label": "Hearing-aid member discount",
+        "page": 9,
+        "answer": ("30%-60% off TruHearing hearing aids, with average savings of more than $2,600 per pair."),
+    },
+    "medical_alert": {
+        "label": "Medical-alert-system member discount",
+        "page": 9,
+        "answer": "Free activation plus a 10% monthly discount on Life Alert services for you and your extended family.",
+    },
+    "fitness": {
+        "label": "Fitness member discount",
+        "page": 9,
+        "answer": "Access to 12,700 Active&Fit Direct locations nationwide at reduced rates.",
+    },
+}
 BENEFIT_NOTES = [
     "No in-network deductibles and no waiting periods (page 5).",
     "Bitewing X-rays: two sets per year for members 22 and under, one set for ages 23+ (page 5).",

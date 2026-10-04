@@ -9,9 +9,7 @@ strictly ordered review stages:
 2. visual fidelity, block-by-block in reading order (at most ten passes).
 
 Every HTML/PNG version and every model verdict is retained in a fresh run
-directory.  LangGraph node runs and wrapped OpenAI calls appear in LangSmith
-when ``LANGSMITH_TRACING=true``.  Numeric feedback is added to the review-node
-runs so error reduction can be graphed in a LangSmith dashboard.
+directory.
 """
 
 from __future__ import annotations
@@ -22,16 +20,12 @@ import html
 import json
 import os
 import re
-import time
 from datetime import datetime, timezone
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, Literal, TypedDict
 
 from langgraph.graph import END, START, StateGraph
-from langsmith import Client, traceable
-from langsmith.run_helpers import get_current_run_tree
-from langsmith.wrappers import wrap_openai
 from openai import OpenAI
 from PIL import Image
 
@@ -92,25 +86,8 @@ def image_part(path: Path) -> dict[str, str]:
     }
 
 
-def tracing_enabled() -> bool:
-    return os.getenv("LANGSMITH_TRACING", "").lower() in {"1", "true", "yes"}
-
-
 def openai_client() -> OpenAI:
-    client = OpenAI(max_retries=2, timeout=180)
-    return wrap_openai(client) if tracing_enabled() else client
-
-
-def add_feedback(**scores: int | float | bool) -> None:
-    """Attach stage metrics to the current LangSmith run when tracing is active."""
-    if not tracing_enabled() or not os.getenv("LANGSMITH_API_KEY"):
-        return
-    run = get_current_run_tree()
-    if run is None:
-        return
-    client = Client()
-    for key, score in scores.items():
-        client.create_feedback(run_id=run.id, key=key, score=score)
+    return OpenAI(max_retries=2, timeout=180)
 
 
 def decode_structured_output(response: Any) -> dict[str, Any]:
@@ -302,13 +279,11 @@ def visual_review_schema() -> dict[str, Any]:
     }
 
 
-@traceable(name="review_bill_of_lading_cell", run_type="chain")
 def review_cell(
     *, client: OpenAI, model: str, block: int, cell: str,
     source_png: Path, extracted_text: str, iteration: int,
     progress_index: int, progress_total: int,
 ) -> dict[str, Any]:
-    started = time.perf_counter()
     parse_errors: list[str] = []
     result: dict[str, Any] | None = None
     for attempt in range(1, STRUCTURED_OUTPUT_RETRIES + 2):
@@ -355,19 +330,9 @@ def review_cell(
             ],
             "corrected_text": extracted_text,
         }
-    verdict = result["verdict"]
-    add_feedback(
-        text_cell_match=verdict == "match",
-        text_cell_error=verdict != "match",
-        text_cell_uncertain=verdict == "uncertain",
-        text_cell_latency_seconds=round(time.perf_counter() - started, 3),
-        text_cell_progress=progress_index / progress_total,
-        text_cell_response_retries=min(len(parse_errors), STRUCTURED_OUTPUT_RETRIES),
-    )
     return result
 
 
-@traceable(name="review_bill_of_lading_block_visual", run_type="chain")
 def review_visual(
     *, client: OpenAI, model: str, block: int,
     source_png: Path, rendered_png: Path,
@@ -395,7 +360,6 @@ def review_visual(
     return json.loads(response.output_text)
 
 
-@traceable(name="repair_bill_of_lading_block_visual", run_type="chain")
 def repair_visual_html(
     *, client: OpenAI, model: str, block: int, source_png: Path,
     rendered_png: Path, current_html: str, errors: list[str],
@@ -509,10 +473,6 @@ def data_review_node(state: ReconstructionState) -> ReconstructionState:
         "stage": "data", "iteration": state["data_iteration"],
         "num_errors": count, "issues": issues,
     }]
-    add_feedback(
-        data_error_count=count,
-        data_accuracy=max(0.0, 1.0 - count / sum(len(cells) for cells in CELLS.values())),
-    )
     uncertain = any(issue["kind"] == "uncertain" for issue in issues)
     status = (
         "needs_human_review" if uncertain
@@ -574,10 +534,6 @@ def visual_review_node(state: ReconstructionState) -> ReconstructionState:
         "stage": "visual", "iteration": iteration,
         "num_errors": count, "issues": issues,
     }]
-    add_feedback(
-        visual_error_count=count,
-        visual_accuracy=max(0.0, 1.0 - count / len(BLOCKS)),
-    )
     return {
         "visual_issues": issues, "visual_error_count": count,
         "visual_passed": count == 0, "iterations": records,
@@ -668,12 +624,6 @@ def finalize_node(state: ReconstructionState) -> ReconstructionState:
     }
     report = output_dir / "reconstruction_report.json"
     report.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    add_feedback(
-        reconstruction_passed=status == "passed",
-        needs_human_review=status == "needs_human_review",
-        data_iterations=state["data_iteration"],
-        visual_iterations=state.get("visual_iteration", 0),
-    )
     return {
         "status": status, "report_path": str(report),
         "reconstructed_html": str(reconstructed),
@@ -719,13 +669,6 @@ def main() -> None:
         raise RuntimeError("OPENAI_API_KEY is not set")
     if args.max_data_iterations < 1 or args.max_visual_iterations < 1:
         raise ValueError("Iteration limits must be positive")
-    print(
-        "LangSmith tracing: "
-        f"{'enabled' if tracing_enabled() else 'disabled'} | "
-        f"project={os.getenv('LANGSMITH_PROJECT', 'default')} | "
-        f"api_key={'set' if os.getenv('LANGSMITH_API_KEY') else 'missing'}",
-        flush=True,
-    )
     initial: ReconstructionState = {
         "ocr_results_path": str(args.ocr_results), "output_root": str(args.output_root),
         "model": args.model, "use_vision": not args.no_vision,

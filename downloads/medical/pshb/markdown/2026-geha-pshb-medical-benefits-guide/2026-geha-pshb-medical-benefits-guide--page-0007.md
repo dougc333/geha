@@ -1,0 +1,28 @@
+## Network benefits 3
+
+## You pay
+
+| Yearly deductible (in-network)                                                   | Self Only $1,800 ; G.E.H.A HSA contribution of $1,000 ; You pay $800 4 Self Plus One or Self and Family $3,600 ; G.E.H.A HSA contribution of $2,000 ; You pay $1,600 4   |
+|----------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Out-of-pocket maximum 5 (in-network)                                             | $6,000 for Self Only $12,000 for Self Plus One or Self and Family                                                                                                        |
+| Preventive care                                                                  |                                                                                                                                                                          |
+| Annual physical exam, routine screenings, immunizations and more                 | $0                                                                                                                                                                       |
+| Primary care office visits                                                       | 5% 6                                                                                                                                                                     |
+| Mental health office visits                                                      | 5% 6                                                                                                                                                                     |
+| Specialist office visit                                                          | 5% 6                                                                                                                                                                     |
+| MinuteClinic / Urgent care facility visit                                        | 5% 6 / 5% 6                                                                                                                                                              |
+| Unlimited telehealth visits, including mental health, with MDLIVE                | $0 6,7                                                                                                                                                                   |
+| Emergency room visit                                                             | 5% 6                                                                                                                                                                     |
+| Hospital care; outpatient / inpatient                                            | 5% 6 / 5% 6                                                                                                                                                              |
+| Lab services                                                                     | 5% 6                                                                                                                                                                     |
+| X-rays and other diagnostic services                                             | 5% 6                                                                                                                                                                     |
+| Maternity; preventive & childbirth / delivery professional and facility services | $0 6                                                                                                                                                                     |
+| Chiropractic care (up to 20 visits per year)                                     | 5% 6                                                                                                                                                                     |
+| Acupuncture (up to 20 visits per year)                                           | 5% 6                                                                                                                                                                     |
+| Preventive dental care, twice yearly                                             | $0                                                                                                                                                                       |
+
+| Prescription drug benefits 3,6,8   | Retail (30-day)   | Mail service (90-day)   | Specialty CVS exclusive (30-day)   |
+|------------------------------------|-------------------|-------------------------|------------------------------------|
+| Generic                            | 25%               | 25%                     | 25%                                |
+| Preferred brand-name               | 25% 9             | 25% 9                   | 25% 9                              |
+| Non-preferred brand-name           | 40% 9             | 40% 9                   | 40% 9                              |

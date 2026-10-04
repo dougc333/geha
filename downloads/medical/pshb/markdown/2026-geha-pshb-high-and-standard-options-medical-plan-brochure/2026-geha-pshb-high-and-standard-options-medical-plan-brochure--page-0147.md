@@ -1,0 +1,18 @@
+## Summary of Benefits for the Standard Option of the Government Employees Health Association, Inc. - 2026
+
+Do not rely on this chart alone. All benefits are subject to the definitions, limitations, and exclusions in this brochure. You can obtain a copy of our Summary of Benefits and Coverage as required by the Affordable Care Act at geha.com/PlanSummaries. On this page we summarize specific expenses we cover; for more detail, look inside.
+
+If you want to enroll or change your enrollment in this Plan, be sure to put the correct enrollment code from the cover on your enrollment form.
+
+Below, an asterisk (*) means the item is subject to the $350 Self Only or $700 Self Plus One or Self and Family calendar year deductible when you use in-network providers; or subject to $1,050 Self Only or $2,100 Self Plus one or Self and Family calendar year deductible when you use out-of-network providers. And, after we pay, you generally pay any difference between our allowance and the billed amount if you use an out-of-network physician or other healthcare professional.
+
+| Standard Option Benefits                                                                          | You pay                                                                                                                                           |   Page |
+|---------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+| Medical services provided by physicians: Diagnostic and treatment services provided in the office | In-network: $20 copay primary care provider; $35 copay specialist for covered office visits Out-of-network: 40%* of covered professional services |     36 |
+| Services provided by a hospital: Inpatient                                                        | In-network: 15%* of covered hospital charges Out-of-network: 40%* of covered hospital charges                                                     |     70 |
+| Services provided by a hospital: Outpatient                                                       | In-network: 15%* of covered hospital charges Out-of-network: 40%* of covered hospital charges                                                     |     72 |
+| Emergency benefits: Medical emergency                                                             | In Network: 30%* of the Plan allowance Out of Network: 30%* of the Plan allowance and any difference between our allowance and the billed amount  |     78 |
+| Mental health and substance misuse disorder treatment:                                            | Regular cost-sharing                                                                                                                              |     79 |
+| Prescription drugs: Retail pharmacy                                                               | Network pharmacy, 30 day supply: • Generic - $10 copay • Preferred Brand - 40% up to $350 • Non-Preferred Brand - 60% up to $450                  |     92 |
+| Prescription drugs: Mail order                                                                    | Mail order pharmacy, 90 day supply: • Generic - $25 copay • Preferred Brand - 40% up to $700 • Non-Preferred Brand - 60% up to $900               |     94 |
+| Prescription drugs: Medicare PDP EGWP                                                             | Network preferred pharmacy, 30 day supply: • Generic - $9 copay • Preferred Brand - 25% up to $200 • Non-Preferred Brand - 50% up to $300         |    103 |

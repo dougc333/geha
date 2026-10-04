@@ -1,0 +1,43 @@
+<!-- source: 2026-geha-dental-plan-brochure.pdf; source_page: 33 -->
+
+| Implant services (cont.) |
+| --- |
+| *D6063 Abutment supported cast metal crown (predominantly base metal) |
+| *D6064 Abutment supported cast metal crown (noble metal) |
+| *D6065 Implant supported porcelain/ceramic crown |
+| *D6066 Implant supported crown - porcelain fused to high noble alloys |
+| *D6067 Implant supported crown - high noble alloys |
+| *D6068 Abutment supported retainer for porcelain/ceramic FPD |
+| *D6069 Abutment supported retainer for porcelain fused to metal FPD (high noble metal) |
+| *D6070 Abutment supported retainer for porcelain fused to metal FPD (predominantly base metal) |
+| *D6071 Abutment supported retainer for porcelain fused to metal FPD (noble metal) |
+| *D6072 Abutment supported retainer for cast metal FPD (high noble metal) |
+| *D6073 Abutment supported retainer for cast metal FPD (predominantly base metal) |
+| *D6074 Abutment supported retainer for cast metal FPD (noble metal) |
+| *D6075 Implant supported retainer for ceramic FPD |
+| *D6076 Implant supported retainer for FPD - porcelain fused to high noble alloys |
+| *D6077 Implant supported retainer for metal FPD - high noble alloys |
+| D6080 Implant maintenance procedures when a full arch fixed hybrid prosthesis is removed and reinserted, including cleansing of prosthesis and abutments |
+| D6081 Scaling and debridement of a single implant in the presence of mucositis, including inflammation, bleeding upon probing and increased pocket depths; includes cleaning of the implant surfaces, without flap entry and closure - Limited to a maximum of once every 2 Calendar Years. Coverage determined by report. |
+| *D6082 Implant supported crown - porcelain fused to predominantly base alloys |
+| *D6083 Implant supported crown - porcelain fused to noble alloys |
+| *D6084 Implant supported crown - porcelain fused to titanium and titanium alloys |
+| *D6086 Implant supported crown - predominantly base alloys |
+| *D6087 Implant supported crown - noble alloys |
+| *D6088 Implant supported crown - titanium and titanium alloys |
+| D6089 Accessing and retorquing loose implant screw - per screw |
+| D6090 Repair of implant/abutment supported prosthesis |
+| D6091 Replacement of replaceable part of semi-precision or precision attachment of implant/abutment supported prosthesis, per attachment |
+| D6092 Re-cement or re-bond implant/abutment supported crown |
+| D6093 Re-cement or re-bond implant/abutment supported fixed partial denture |
+| *D6094 Abutment supported crown - titanium and titanium alloys |
+| D6096 Remove broken implant retaining screw |
+| *D6097 Abutment supported crown - porcelain fused to titanium and titanium alloys |
+| *D6098 Implant supported retainer - porcelain fused to predominantly base alloys |
+| *D6099 Implant supported retainer for FPD - porcelain fused to noble alloys |
+| D6100 Surgical removal of implant body |
+| D6102 Debridement and osseous contouring of a peri-implant defect or defects surrounding a single implant and includes surface cleaning of the exposed implant surfaces, including flap entry and closure - Limited to once per implant, per lifetime. |
+| D6104 Bone graft at time of implant placement |
+| *D6110 Implant /abutment supported removable denture for edentulous arch - maxillary |
+| *D6111 Implant /abutment supported removable denture for edentulous arch - mandibular |
+| Current Dental Terminology © American Dental Association |

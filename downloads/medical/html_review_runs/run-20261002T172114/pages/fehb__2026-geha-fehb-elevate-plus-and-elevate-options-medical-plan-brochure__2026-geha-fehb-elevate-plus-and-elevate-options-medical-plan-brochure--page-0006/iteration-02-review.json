@@ -1,0 +1,58 @@
+{
+  "iteration": 2,
+  "reviewed_at": "2026-10-03T00:36:08.556483+00:00",
+  "verdict": "mismatch",
+  "error_count": 8,
+  "errors": [
+    {
+      "category": "missing_text",
+      "source_evidence": "CALL THE HEALTHCARE FRAUD HOTLINE 877-499-7295 OR go to www. opm.gov/our-inspector-general/hotline-to-report-fraud-waste-or-abuse/complaint-form",
+      "html_evidence": "<p style=\"top:165.0pt;left:50.4pt;line-height:14.0pt;position:absolute;\"><b><span style=\"font-family:Times New Roman,serif;font-size:10.0pt;color:#000000;text-align:center;display:block;width:100%;\">OR go to <u>www.opm.gov/our-inspector-general/hotline-to-report-fraud-waste-or-abuse/complaint-form</u></span></b></p>",
+      "correction": "The candidate HTML is missing the exact formatting for '877-499-7295' including the dash between 4 and 9 (rendered as 877-499-7295 in PDF and 877-499-7295 in HTML). Also literal spacing difference in the URL (PDF has 'www. opm.gov', HTML has 'www.opm.gov'). The candidate incorrectly splits the phone number and URL on separate lines with different bold formatting. The PDF shows them on same line in bold. Correct the formatting to match the PDF exactly."
+    },
+    {
+      "category": "wrong_text",
+      "source_evidence": "877-499-7295",
+      "html_evidence": "877-499-7295",
+      "correction": "The phone number should be '877-499-7295' not '877-499-7295'. The candidate HTML has a dash instead of a hyphen or no dash difference. Confirm correct dash usage."
+    },
+    {
+      "category": "wrong_text",
+      "source_evidence": "CALL THE HEALTHCARE FRAUD HOTLINE",
+      "html_evidence": "CALL THE HEALTHCARE FRAUD HOTLINE",
+      "correction": "Candidate HTML has this line centered and block displayed differently from PDF which centers the entire line. Verify exact text alignment and spacing to match PDF."
+    },
+    {
+      "category": "missing_text",
+      "source_evidence": "You can also write to: United States Office of Personnel Management Office of the Inspector General Fraud Hotline 1900 E Street NW Room 6400 Washington, DC 20415-1100",
+      "html_evidence": "<p style=\"top:217.0pt;left:50.4pt;line-height:10.0pt;position:absolute;\"><b><span style=\"font-family:Times New Roman,serif;font-size:10.0pt;color:#000000;display:block;\">United States Office of Personnel Management</span></b></p>",
+      "correction": "The candidate splits the multi-line address into multiple separate bold paragraphs with block display. The PDF has the address as a whole paragraph without extra spacing or blocks. Correct layout to match."
+    },
+    {
+      "category": "missing_text",
+      "source_evidence": "- Your child over age 26 (unless they were disabled and incapable of self-support prior to age 26).",
+      "html_evidence": "<p style=\"top:303.6pt;left:60.4pt;line-height:10.0pt;position:absolute;\"><span style=\"font-family:Times New Roman,serif;font-size:10.0pt;color:#000000\">- Your child over age 26 (unless they were disabled and incapable of self-support prior to age 26). </span></p>",
+      "correction": "The candidate includes this line but with an extra trailing space at the end; this is acceptable and not a substantive error."
+    },
+    {
+      "category": "extra_text",
+      "source_evidence": "",
+      "html_evidence": "<hr style=\"position:absolute;top:525.0pt;width:512pt;left:50.4pt;\"/>",
+      "correction": "Candidate HTML includes a horizontal rule which is not present in the source PDF on this page. Remove it."
+    },
+    {
+      "category": "missing_text",
+      "source_evidence": "Discrimination is Against the Law",
+      "html_evidence": "<p style=\"top:535.0pt;left:50.4pt;line-height:14.0pt;position:absolute;\"><b><span style=\"font-family:Times New Roman,serif;font-size:14.0pt;color:#000000\">Discrimination is Against the Law</span></b></p>",
+      "correction": "Candidate uses bigger font (14 pt) than source PDF for the heading which is consistent with the source but confirm exact font size and weight for match."
+    },
+    {
+      "category": "missing_text",
+      "source_evidence": "We comply with applicable Federal nondiscrimination laws and do not discriminate on the basis of race, color, national origin, age, disability, religion, sex, pregnancy, or genetic information.",
+      "html_evidence": "<p style=\"top:564.2pt;left:50.4pt;line-height:10.0pt;position:absolute;\">\n<span style=\"font-family:Times New Roman,serif;font-size:10.0pt;color:#000000\">We comply with applicable Federal nondiscrimination laws and do not discriminate on the basis of race, color, national origin, </span></p>",
+      "correction": "Candidate splits paragraphs into multiple lines with partial sentences. Confirm the line breaks do not alter intended reading order and meaning. The PDF has continuous paragraphs."
+    }
+  ],
+  "html_file": "iteration-02.html",
+  "render_file": "iteration-02.png"
+}

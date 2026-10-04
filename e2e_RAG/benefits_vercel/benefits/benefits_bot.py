@@ -25,6 +25,7 @@ from langgraph.graph import END, START, StateGraph
 
 from dental_enrollment import TOPICS as DENTAL_TOPICS
 from dental_tables import BENEFITS as DENTAL_BENEFITS
+from dental_tables import SUPPLEMENTAL_BENEFITS as DENTAL_SUPPLEMENTAL_BENEFITS
 from dental_tables import DentalTables
 from medical_tables import PLANS as MEDICAL_PLANS
 from medical_tables import MedicalTables
@@ -70,6 +71,7 @@ class Chat(TypedDict, total=False):
     parts: list[str]
     quoted: str
     stage: str
+    brochure_query: str
 
 
 # Words the rules key on; a near miss ("retierd", "standrad", "dentl") is corrected to one of these.
@@ -157,13 +159,37 @@ def rule_extract(message: str, stage: str, candidates: list[str], slots: dict) -
     elif compare and target == "medical" and stage != "ask_line" and "medical_plan" not in out:
         out["medical_plan"] = "ALL"
 
+    # A benefits question that names both dental plans is a comparison, not a
+    # request to silently select whichever plan name appeared last.
+    both_dental_plans = bool(
+        dental and not medical and re.search(r"\bhigh\b.*\bstandard\b|\bstandard\b.*\bhigh\b", text)
+    )
+    if both_dental_plans and target == "dental":
+        out["dental_plan"] = "BOTH"
+
     topics = [f"dental:{t}" for t, p in DENTAL_TOPICS.items() if re.search(p, text) and t != "deductible"]
-    topics += [f"medical:{t}" for t, (p, _) in MEDICAL_TOPICS.items() if re.search(p, text) and t not in SHARED_TOPICS]
-    topics += [f"medical:{q}" for q, p in MEDICAL_QUESTIONS.items() if q != "deductible" and re.search(p, text)]
+    if "dental:vision" in topics and not re.search(r"oral exam|dental exam|cleaning|bitewing|x-?ray", text):
+        topics = [t for t in topics if t != "dental:preventive"]
+    if not (dental and not medical):
+        topics += [f"medical:{t}" for t, (p, _) in MEDICAL_TOPICS.items() if re.search(p, text) and t not in SHARED_TOPICS]
+        topics += [f"medical:{q}" for q, p in MEDICAL_QUESTIONS.items() if q != "deductible" and re.search(p, text)]
     for shared_topic, pattern in (("deductible", r"deductible"), ("lab and x-ray", MEDICAL_TOPICS["lab and x-ray"][0])):
         if re.search(pattern, text):
-            topics.append(f"either:{shared_topic}")
-    out["topics"] = topics
+            if dental and not medical:
+                if shared_topic == "deductible":
+                    topics.append("dental:deductible")
+            elif medical and not dental:
+                topics.append(f"medical:{shared_topic}")
+            else:
+                topics.append(f"either:{shared_topic}")
+    out["topics"] = list(dict.fromkeys(topics))
+    questionish = bool(re.search(r"\?|\b(?:what|which|when|where|why|how|does|do|is|are|can|tell|explain)\b", text))
+    medical_context = medical or slots.get("line") in ("medical", "both") or bool(out.get("medical_plan"))
+    slot_change = any(key in out for key in (
+        "line", "status", "enrollment", "zip", "state", "dental_plan", "medical_plan"
+    ))
+    if questionish and medical_context and not topics and not slot_change:
+        out["brochure_query"] = message.strip()
     out["reset"] = bool(re.search(r"start over|restart|reset", text))
     return out
 
@@ -203,7 +229,8 @@ class BenefitsBot:
                 slots[key] = got[key]
         pending = [] if reset else s.get("topics", [])
         return {"slots": slots, "candidates": candidates, "topics": pending + got.get("topics", []), "parts": [],
-                "quoted": "" if reset else s.get("quoted", "")}
+                "quoted": "" if reset else s.get("quoted", ""),
+                "brochure_query": "" if reset else got.get("brochure_query", "")}
 
     def answer_benefits(self, s: Chat) -> Chat:
         sl, lines, waiting = s["slots"], [], []
@@ -219,8 +246,25 @@ class BenefitsBot:
                 lines += self._dental(name, sl) if line == "dental" else self._medical(name, sl)
         return {"parts": s["parts"] + lines, "topics": waiting}
 
+    def answer_brochure(self, s: Chat) -> Chat:
+        query = s.get("brochure_query", "")
+        hits = self.medical.search_brochure(query, limit=3)
+        if not hits:
+            lines = ["I could not find that in the 2026 Elevate and Elevate Plus brochure."]
+        else:
+            lines = ["From the 2026 Elevate and Elevate Plus brochure:"]
+            for hit in hits:
+                excerpt = hit.content if len(hit.content) <= 700 else hit.content[:697].rsplit(" ", 1)[0] + "..."
+                lines.append(f"- Page {hit.page}: {excerpt}")
+        return {"parts": s["parts"] + lines, "brochure_query": ""}
+
     def _dental(self, topic: str, sl: dict) -> list[str]:
         topic = "deductible" if topic == "deductible" else "preventive" if topic == "lab and x-ray" else topic
+        if row := DENTAL_SUPPLEMENTAL_BENEFITS.get(topic):
+            note = (" This is a G.E.H.A membership discount, not a benefit offered or guaranteed under the FEDVIP "
+                    "contract." if topic in {"vision", "whitening", "toothbrush", "hearing", "medical_alert", "fitness"}
+                    else "")
+            return [f"Dental, {row['label']} (dental guide page {row['page']}): {row['answer']}{note}"]
         row = DENTAL_BENEFITS.get(topic)
         if not row:
             return []
@@ -291,6 +335,8 @@ class BenefitsBot:
         ready = [t for t in s.get("topics", []) if not t.startswith("either:") or sl.get("line")]
         if ready:
             return "answer_benefits"
+        if s.get("brochure_query"):
+            return "answer_brochure"
         if not sl.get("line"):
             return "ask_line"
         if self.needs(sl, "dental"):
@@ -326,14 +372,15 @@ class BenefitsBot:
         g = StateGraph(Chat)
         g.add_node("understand", self.understand)
         g.add_node("answer_benefits", self.answer_benefits)
+        g.add_node("answer_brochure", self.answer_brochure)
         g.add_node("find_rate_code", self.find_rate_code)
         g.add_node("quote", self.quote)
         for stage, text in asks.items():
             g.add_node(stage, (lambda st, fn: lambda s: {"stage": st, "parts": s["parts"] + [fn(s)]})(stage, text))
             g.add_edge(stage, END)
-        nexts = ["answer_benefits", "find_rate_code", "quote", END, *asks]
+        nexts = ["answer_benefits", "answer_brochure", "find_rate_code", "quote", END, *asks]
         g.add_edge(START, "understand")
-        for node in ("understand", "answer_benefits", "find_rate_code"):
+        for node in ("understand", "answer_benefits", "answer_brochure", "find_rate_code"):
             g.add_conditional_edges(node, self.route, [n for n in nexts if n != node])
         g.add_edge("quote", END)
         return g.compile(checkpointer=checkpointer)

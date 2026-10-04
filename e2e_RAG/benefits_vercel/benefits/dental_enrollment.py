@@ -31,6 +31,15 @@ from langgraph.graph import END, START, StateGraph
 from dental_tables import BENEFIT_NOTES, BENEFITS, ENROLLMENT, PHONE, DentalTables
 
 TOPICS = {
+    "plan_comparison": (r"(?:high.*standard|standard.*high).*(?:benefit|coverage|feature)|"
+                        r"(?:benefit|coverage|feature).*(?:high.*standard|standard.*high)"),
+    "vision": r"vision|eye exam|frames|lenses|contact lenses?|lasik",
+    "procedure_costs": r"(?:cost|price|pay).*(?:root canal|crown)|(?:root canal|crown).*(?:cost|price)",
+    "whitening": r"whitening|smile brilliant",
+    "toothbrush": r"electric toothbrush|caripro",
+    "hearing": r"hearing aid|truhearing",
+    "medical_alert": r"medical alert|life alert",
+    "fitness": r"fitness|active\s*&\s*fit",
     "cleanings": r"cleaning",
     "preventive": r"exam|x-?ray|bitewing|preventive|check-?up",
     "teledentistry": r"teledent|virtual|video visit",

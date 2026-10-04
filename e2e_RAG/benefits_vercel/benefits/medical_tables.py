@@ -12,12 +12,18 @@ from __future__ import annotations
 
 import os
 import re
+import math
+from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 
 
 FEHB_DIR = Path(os.environ.get("FEHB_DIR", "/Users/dc/geha/downloads/medical/fehb"))
 GUIDE = FEHB_DIR / "2026-geha-fehb-medical-benefits-guide.pdf"
+BROCHURE_MD_DIR = Path(os.environ.get(
+    "FEHB_BROCHURE_MD_DIR",
+    str(FEHB_DIR / "single_pages" / "2026-geha-fehb-elevate-plus-and-elevate-options-medical-plan-brochure"),
+))
 SBC_FILES = {
     "Elevate": "2026-geha-fehb-elevate-summary-of-benefits-and-coverage.pdf",
     "Elevate Plus": "2026-geha-fehb-elevate-plus-summary-of-benefits-and-coverage.pdf",
@@ -48,6 +54,44 @@ class SbcRow:
     network: str        # "$50* / visit"
     out_of_network: str
     limits: str
+
+
+@dataclass(frozen=True)
+class BrochureChunk:
+    page: int
+    content: str
+
+
+def _plain_markdown(value: str) -> str:
+    """Flatten Markdown while retaining table cell boundaries and link labels."""
+    value = re.sub(r"<!--.*?-->", " ", value, flags=re.DOTALL)
+    value = re.sub(r"!\[([^]]*)\]\([^)]*\)", r"\1", value)
+    value = re.sub(r"\[([^]]+)\]\([^)]*\)", r"\1", value)
+    value = re.sub(r"^\s*\|?(?:\s*:?-{3,}:?\s*\|)+\s*$", " ", value, flags=re.MULTILINE)
+    value = re.sub(r"^\s{0,3}#{1,6}\s*", "", value, flags=re.MULTILINE)
+    value = value.replace("|", " | ").replace("`", "")
+    return " ".join(value.split())
+
+
+def parse_brochure_chunks(folder: Path = BROCHURE_MD_DIR, size: int = 260,
+                          overlap: int = 40) -> list[BrochureChunk]:
+    """Load page-numbered Docling Markdown into bounded page-cited chunks."""
+    chunks: list[BrochureChunk] = []
+    for path in sorted(folder.glob("*.md")):
+        match = re.search(r"--page-(\d+)\.md$", path.name)
+        if not match:
+            continue
+        page, words = int(match.group(1)), _plain_markdown(path.read_text(encoding="utf-8")).split()
+        step = size - overlap
+        chunks.extend(
+            BrochureChunk(page, " ".join(words[start:start + size]))
+            for start in range(0, len(words), step) if words[start:start + size]
+        )
+    return chunks
+
+
+def _tokens(value: str) -> list[str]:
+    return re.findall(r"[a-z0-9]+(?:[-'][a-z0-9]+)*", value.casefold())
 
 
 def parse_premiums(pdf: Path = GUIDE) -> dict[tuple[str, str], Premium]:
@@ -161,16 +205,19 @@ class MedicalTables:
             self.premiums = parse_premiums(guide)
             self.grid = {plan: parse_sbc_grid(plan, folder / name) for plan, name in SBC_FILES.items()}
             self.questions = {plan: parse_important_questions(folder / name) for plan, name in SBC_FILES.items()}
+            self.brochure_chunks = parse_brochure_chunks()
         else:
             self.premiums = {(p["plan"], p["enrollment"]): Premium(**p) for p in data["premiums"]}
             self.grid = {plan: [SbcRow(**row) for row in rows] for plan, rows in data["grid"].items()}
             self.questions = data["questions"]
+            self.brochure_chunks = [BrochureChunk(**row) for row in data.get("brochure_chunks", [])]
 
     def to_dict(self) -> dict:
         from dataclasses import asdict
         return {"premiums": [asdict(p) for p in self.premiums.values()],
                 "grid": {plan: [asdict(r) for r in rows] for plan, rows in self.grid.items()},
-                "questions": self.questions}
+                "questions": self.questions,
+                "brochure_chunks": [asdict(row) for row in self.brochure_chunks]}
 
     def premium(self, plan: str, status: str, enrollment: str) -> dict:
         p = self.premiums.get((plan, enrollment))
@@ -189,3 +236,27 @@ class MedicalTables:
             if any(w in text for w in words):
                 hits.append(row)
         return hits
+
+    def search_brochure(self, query: str, limit: int = 3) -> list[BrochureChunk]:
+        """BM25 retrieval over the ingested Elevate/Elevate Plus brochure."""
+        if not self.brochure_chunks or not _tokens(query):
+            return []
+        documents = [_tokens(row.content) for row in self.brochure_chunks]
+        average_length = sum(map(len, documents)) / len(documents) or 1.0
+        frequencies = Counter(term for document in documents for term in set(document))
+        query_terms = _tokens(query)
+        scored = []
+        for row, tokens in zip(self.brochure_chunks, documents):
+            counts, score = Counter(tokens), 0.0
+            for term in query_terms:
+                frequency = counts[term]
+                if not frequency:
+                    continue
+                inverse = math.log(1.0 + (len(documents) - frequencies[term] + 0.5) /
+                                   (frequencies[term] + 0.5))
+                score += inverse * frequency * 2.5 / (
+                    frequency + 1.5 * (0.25 + 0.75 * len(tokens) / average_length)
+                )
+            if score:
+                scored.append((score, row))
+        return [row for _score, row in sorted(scored, key=lambda item: (-item[0], item[1].page))[:limit]]

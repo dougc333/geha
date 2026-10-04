@@ -60,6 +60,17 @@ class ApiTests(unittest.TestCase):
         self.assertIn("Total: $1,086.93 monthly", out["reply"])
         self.assertEqual(out["slots"]["medical_plan"], "Elevate Plus")
 
+    def test_dental_screenshot_queries(self):
+        cases = [json.loads(line) for line in (EVALS / "benefits_questions.jsonl").read_text().splitlines()
+                 if line.strip()]
+        for case in cases:
+            reply = chat({"message": case["query"], "state": {}})["reply"]
+            with self.subTest(case=case["id"]):
+                for value in case["expect_in_reply"]:
+                    self.assertIn(value, reply)
+                for value in case.get("reject_in_reply", []):
+                    self.assertNotIn(value, reply)
+
     def test_conversation_test_set_matches_the_stateful_bot(self):
         results = json.loads((EVALS / "benefits_conversations_results.json").read_text())["results"]
         for case in results:

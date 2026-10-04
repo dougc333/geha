@@ -119,6 +119,10 @@ Each JSONL line looks like:
 
 ## Layout
 
+The query Lambda also contains a persistent guided dental signup workflow. See
+[`docs/signup-refactor.md`](docs/signup-refactor.md) for its 11-part design,
+database migration, API lifecycle, security boundary, and plan-document mapping.
+
 | Path | Purpose |
 |---|---|
 | `template.yaml` | AWS SAM stack: both buckets, both queues + DLQs, queue policies, S3 notifications, both Lambdas |

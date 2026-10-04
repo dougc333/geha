@@ -29,6 +29,7 @@ os.environ.update({
     "DATABASE_URL_PARAMETER": "/test/database-url",
     "DATABASE_URL": "postgresql://test:test@localhost:1/test",  # never connected to
     "API_KEY": "test-key",
+    "SIGNUP_AUTH_REQUIRED": "false",
 })
 for name in ("AWS_PROFILE", "AWS_SESSION_TOKEN", "LANGFUSE_PUBLIC_KEY", "LANGFUSE_SECRET_KEY",
              "WEAVIATE_URL", "WEAVIATE_API_KEY"):

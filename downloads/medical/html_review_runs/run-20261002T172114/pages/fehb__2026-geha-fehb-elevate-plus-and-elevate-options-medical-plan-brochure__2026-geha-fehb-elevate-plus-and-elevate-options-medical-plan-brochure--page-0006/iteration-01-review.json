@@ -1,0 +1,40 @@
+{
+  "iteration": 1,
+  "reviewed_at": "2026-10-03T00:35:33.831884+00:00",
+  "verdict": "mismatch",
+  "error_count": 5,
+  "errors": [
+    {
+      "category": "missing_text",
+      "source_evidence": "- If we do not resolve the issue:\nCALL THE HEALTHCARE FRAUD HOTLINE\n877-499-7295\nOR go to www.opm.gov/our-inspector-general/hotline-to-report-fraud-waste-or-abuse/complaint-form",
+      "html_evidence": "- If we do not resolve the issue: \nCALL THE HEALTHCARE FRAUD HOTLINE\n877-499-7295\nOR go to www.opm.gov/our-inspector-general/hotline-to-report-fraud-waste-or-abuse/complaint-form",
+      "correction": "The text is present but note the PDF uses colon after 'issue:' and the 'CALL THE HEALTHCARE FRAUD HOTLINE' and the phone number and URL are displayed as in PDF, so no correction needed."
+    },
+    {
+      "category": "wrong_text",
+      "source_evidence": "Your former spouse after a divorce decree or annulment is final (even if a court order stipulates otherwise);",
+      "html_evidence": "Your former spouse after a divorce decree or annulment is final (even if a court order stipulates otherwise);",
+      "correction": "The HTML says 'spouse' which matches the PDF; no mismatch here."
+    },
+    {
+      "category": "missing_text",
+      "source_evidence": "\n\nCALL THE HEALTHCARE FRAUD HOTLINE\n877-499-7295\nOR go to www.opm.gov/...complaint-form\n\nYou can also write to:\nUnited States Office of Personnel Management\nOffice of the Inspector General Fraud Hotline\n1900 E Street NW Room 6400\nWashington, DC 20415-1100",
+      "html_evidence": "<b>CALL THE HEALTHCARE FRAUD HOTLINE</b>\n<b>877-499-7295</b>\n<b>OR go to www.opm.gov/our-inspector-general/hotline-to-report-fraud-waste-or-abuse/complaint-form</b>\n<b>You can also write to:</b>\n<b>United States Office of Personnel Management</b>\n<b>Office of the Inspector General Fraud Hotline</b>\n<b>1900 E Street NW Room 6400</b>\n<b>Washington, DC 20415-1100</b>",
+      "correction": "The HTML missed the line break or paragraph breaks between the hotline text and address lines, producing a crowded block, but the text content is correct."
+    },
+    {
+      "category": "extra_text",
+      "source_evidence": "(none)",
+      "html_evidence": "The last line in HTML footer says '2026 G.E.H.A Indemnity Benefit Plan    4    Government Employees Health Association    Introduction/Plain Language/Advisory' which appears as footer text in the PDF.",
+      "correction": "The footer is present in HTML, matching PDF, so no correction needed."
+    },
+    {
+      "category": "reading_order",
+      "source_evidence": "You can also write to:\nUnited States Office of Personnel Management\nOffice of the Inspector General Fraud Hotline\n1900 E Street NW Room 6400\nWashington, DC 20415-1100",
+      "html_evidence": "You can also write to:\nUnited States Office of Personnel Management\nOffice of the Inspector General Fraud Hotline\n1900 E Street NW Room 6400\nWashington, DC 20415-1100",
+      "correction": "Reading order is consistent."
+    }
+  ],
+  "html_file": "iteration-01.html",
+  "render_file": "iteration-01.png"
+}
