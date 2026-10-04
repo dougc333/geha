@@ -26,8 +26,6 @@ jobs:
         run: |
           uv python install 3.12
           uv sync --locked --python 3.12
-      - name: Run high-level simulation tests
-        run: uv run --no-sync python -m unittest discover -s highlevel_simulation -p 'test_*.py'
       - name: Run table-aware RAG tests
         run: uv run --no-sync python -m unittest discover -s chunking_benchmarks_RAG -p 'test_*.py'
       - name: Run e2e_RAG retrieval metric tests

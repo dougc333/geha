@@ -7,11 +7,29 @@ vector_db/*.faiss
 clean_pdf_langgraph/pdf_inventory_results.json
 clean_pdf_langgraph/pdf_inventory_results.json.tmp
 
+# Pipeline run outputs: HTML/PNG/Markdown reports and LangGraph checkpoints, one
+# directory per run. Regenerate by re-running the pipeline; never commit them.
+review_runs/
+html_review_runs/
+checkpoint.sqlite
+*.sqlite-wal
+*.sqlite-shm
+
+# Local vector stores and embedding caches (rebuilt from the source documents)
+chroma_db/
+index_cache/
+
+# Downloaded corpora too large for git (fetch with the download scripts)
+agentic_search/data/arxiv_top300/
+
+# Jupyter
+.ipynb_checkpoints/
+
 # Environment files and local secrets
 .env
 .env.*
 !.env.example
-e2e_RAG/.env
+agentic_search/.env
 .streamlit/secrets.toml
 
 # macOS
