@@ -46,6 +46,47 @@ To use it from an MCP client such as Claude Code, register the server command wi
 deployment's environment, e.g. `MCP_ENV=production`, running
 `uv run --no-project --python 3.12 --with mcp python /Users/dc/geha/mcp_benefits_server/src/server.py`.
 
+## Agent
+
+`agent/benefits_agent.py` is a LangGraph agent whose only tools are the ones the MCP
+deployment offers. It asks a human before any write call with `confirm=true`.
+
+```bash
+cd /Users/dc/geha/mcp_benefits_server/agent
+uv run --no-project --python 3.12 --with langchain-mcp-adapters --with langgraph \
+  --with langchain-anthropic python benefits_agent.py --model claude \
+  "What would High Option Self and Family cost me in 64063, MO, and what class is D2740?"
+```
+
+`--model` also takes `openai` or `ollama:<model>`; `--env` picks the local deployment;
+`--server-url` points at a deployed one. Tests drive it with a scripted model (no LLM).
+
+## Deploy to AWS
+
+Lambda behind a Function URL with `AuthType: AWS_IAM`, one stack per tier
+(`aws/template.yaml`). The server runs in stateless Streamable HTTP mode; audit records go
+to CloudWatch Logs with configurable retention. The agent signs requests with SigV4 using
+your AWS credentials, so the endpoint is never public.
+
+```bash
+cd /Users/dc/geha/mcp_benefits_server/aws
+./build.sh                                   # code + only the plan pages the tools read
+sam build --region us-west-2                 # Linux arm64 dependencies
+sam deploy --stack-name geha-benefits-mcp-sandbox --parameter-overrides McpEnv=sandbox \
+  --region us-west-2 --capabilities CAPABILITY_IAM --resolve-s3
+```
+
+Repeat with `McpEnv=pilot` / `production` for the other tiers. Then point the agent at
+the `McpUrl` output (your IAM user or role needs the `AgentPolicyArn` output attached, or
+equivalent `lambda:InvokeFunctionUrl` + `lambda:InvokeFunction` permissions):
+
+```bash
+python benefits_agent.py --model claude --server-url https://<id>.lambda-url.us-west-2.on.aws/mcp "..."
+```
+
+Cost at demo traffic is a few cents a month (Lambda and CloudWatch); the tools make no
+model calls. `sam delete --stack-name geha-benefits-mcp-sandbox` removes everything.
+
 ## What the demo shows
 
 - **Production deployment:** 3 read-only tools. The agent cannot call the policy search

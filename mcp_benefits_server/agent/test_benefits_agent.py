@@ -77,5 +77,25 @@ class AgentTests(unittest.TestCase):
         self.assertIn("not listed", str(error.content))
 
 
+class DeployedServerConfigTests(unittest.TestCase):
+    def test_lambda_function_url_requests_are_sigv4_signed(self):
+        import httpx
+        from botocore.credentials import Credentials
+
+        from benefits_agent import AwsSigV4Auth, server_config
+
+        url = "https://abc123.lambda-url.us-west-2.on.aws/mcp"
+        self.assertEqual(lambda_url_region(url), "us-west-2")
+        auth = AwsSigV4Auth("us-west-2", credentials=Credentials("AKIDEXAMPLE", "secret"))
+        request = httpx.Request("POST", url, content=b'{"jsonrpc":"2.0"}', headers={"content-type": "application/json"})
+        signed = next(auth.auth_flow(request))
+        self.assertTrue(signed.headers["authorization"].startswith("AWS4-HMAC-SHA256 Credential=AKIDEXAMPLE/"))
+        self.assertIn("/us-west-2/lambda/aws4_request", signed.headers["authorization"])
+        self.assertIn("x-amz-date", signed.headers)
+        self.assertNotIn("auth", server_config("production", "https://example.com/mcp")["benefits"])
+
+
+from benefits_agent import lambda_url_region  # noqa: E402
+
 if __name__ == "__main__":
     unittest.main()

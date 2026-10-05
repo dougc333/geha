@@ -1,0 +1,65 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  GEHA benefits MCP server (demo) on Lambda behind an IAM-authenticated Function URL.
+  Deploy one stack per tier: McpEnv decides which promoted tools the deployment exposes.
+
+Parameters:
+  McpEnv:
+    Type: String
+    AllowedValues: [sandbox, pilot, production]
+    Default: sandbox
+    Description: Promotion tier this deployment serves (see docs/mcp-promotion-standard.md).
+  LogRetentionDays:
+    Type: Number
+    Default: 90
+    AllowedValues: [7, 14, 30, 60, 90, 180, 365]
+    Description: CloudWatch retention for the function log, which holds the audit trail.
+
+Resources:
+  McpLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/geha-benefits-mcp-${McpEnv}"
+      RetentionInDays: !Ref LogRetentionDays
+
+  McpFunction:
+    Type: AWS::Serverless::Function
+    DependsOn: McpLogGroup
+    Properties:
+      FunctionName: !Sub "geha-benefits-mcp-${McpEnv}"
+      CodeUri: .build/
+      Handler: handler.handler
+      Runtime: python3.12
+      Architectures: [arm64]
+      MemorySize: 512
+      Timeout: 30
+      Environment:
+        Variables:
+          MCP_ENV: !Ref McpEnv
+          LOG_LEVEL: WARNING
+      FunctionUrlConfig:
+        AuthType: AWS_IAM          # only SigV4-signed callers with the policy below
+
+  # Attach to the IAM role or user an agent runs as, to let it call this deployment.
+  AgentInvokePolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      Description: !Sub "Lets an agent call the ${McpEnv} GEHA benefits MCP server."
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action: [lambda:InvokeFunctionUrl, lambda:InvokeFunction]
+            Resource: !GetAtt McpFunction.Arn
+
+Outputs:
+  McpUrl:
+    Description: MCP endpoint (Streamable HTTP); pass to benefits_agent.py --server-url
+    Value: !Sub "${McpFunctionUrl.FunctionUrl}mcp"
+  AgentPolicyArn:
+    Description: Managed policy to attach to the agent's IAM role or user
+    Value: !Ref AgentInvokePolicy
+  AuditLogGroup:
+    Description: CloudWatch log group with the audit trail
+    Value: !Ref McpLogGroup

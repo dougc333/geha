@@ -23,10 +23,12 @@ import argparse
 import asyncio
 import json
 import os
+import re
 import sys
 from pathlib import Path
 from typing import Any, Callable
 
+import httpx
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from langgraph.graph import START, MessagesState, StateGraph
@@ -43,12 +45,45 @@ WRITE_TOOLS = {"submit_enrollment_change"}
 Approve = Callable[[str, dict], bool]
 
 
+class AwsSigV4Auth(httpx.Auth):
+    """httpx auth that signs each request with the caller's AWS credentials (SigV4, service
+    "lambda"), as an IAM-authenticated Lambda Function URL requires. Credentials come from the
+    usual AWS chain: environment, ~/.aws profile, or the agent's IAM role."""
+
+    requires_request_body = True
+
+    def __init__(self, region: str, credentials=None):
+        import boto3
+        self.region = region
+        self.credentials = credentials or boto3.Session().get_credentials()
+        if self.credentials is None:
+            raise RuntimeError("No AWS credentials found for signing MCP requests")
+
+    def auth_flow(self, request):
+        from botocore.auth import SigV4Auth
+        from botocore.awsrequest import AWSRequest
+        signed = AWSRequest(method=request.method, url=str(request.url), data=request.content,
+                            headers={k: v for k, v in request.headers.items() if k.lower() != "connection"})
+        SigV4Auth(self.credentials.get_frozen_credentials(), "lambda", self.region).add_auth(signed)
+        request.headers.update(dict(signed.headers))
+        yield request
+
+
+def lambda_url_region(url: str) -> str | None:
+    match = re.search(r"\.lambda-url\.([a-z0-9-]+)\.on\.aws", url)
+    return match.group(1) if match else None
+
+
 def server_config(environment: str, server_url: str | None) -> dict[str, Any]:
-    """Local stdio subprocess (the server runs in its own uv env with mcp 2.x), or a remote URL."""
+    """Local stdio subprocess (the server runs in its own uv env with mcp 2.x), or a remote URL:
+    a Lambda Function URL is called with SigV4-signed requests; other URLs may use MCP_TOKEN."""
     if server_url:
-        return {"benefits": {"transport": "streamable_http", "url": server_url,
-                             "headers": {"Authorization": f"Bearer {os.environ['MCP_TOKEN']}"}
-                             if os.environ.get("MCP_TOKEN") else {}}}
+        connection: dict[str, Any] = {"transport": "streamable_http", "url": server_url}
+        if region := lambda_url_region(server_url):
+            connection["auth"] = AwsSigV4Auth(region)
+        elif os.environ.get("MCP_TOKEN"):
+            connection["headers"] = {"Authorization": f"Bearer {os.environ['MCP_TOKEN']}"}
+        return {"benefits": connection}
     return {"benefits": {"transport": "stdio", "command": "uv",
                          "args": ["run", "-q", "--no-project", "--python", "3.12", "--with", "mcp>=2,<3",
                                   "python", str(SERVER)],

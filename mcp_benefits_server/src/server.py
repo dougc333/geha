@@ -35,8 +35,10 @@ def _redact(spec: ToolSpec, arguments: dict[str, Any]) -> dict[str, Any]:
     return {k: "sha256:" + hashlib.sha256(str(v).encode()).hexdigest()[:12] for k, v in arguments.items()}
 
 
-def audited(spec: ToolSpec, environment: str, log_path: Path):
-    """Wrap a tool so every call, success or failure, appends one audit record."""
+def audited(spec: ToolSpec, environment: str, log_path: Path | None):
+    """Wrap a tool so every call, success or failure, appends one audit record.
+    log_path=None writes JSON lines to stdout (Lambda: CloudWatch Logs). Never use that with
+    the stdio transport, where stdout carries the MCP protocol."""
     @functools.wraps(spec.func)
     def call(*args, **kwargs):
         started, outcome = time.perf_counter(), "ok"
@@ -55,18 +57,23 @@ def audited(spec: ToolSpec, environment: str, log_path: Path):
                       "tool": spec.name, "version": spec.version, "tier": spec.tier,
                       "data_class": spec.data_class, "args": _redact(spec, kwargs), "outcome": outcome,
                       "ms": round((time.perf_counter() - started) * 1000, 1)}
-            log_path.parent.mkdir(parents=True, exist_ok=True)
-            with log_path.open("a", encoding="utf-8") as stream:
-                stream.write(json.dumps(record) + "\n")
+            if log_path is None:
+                print(json.dumps({"audit": record}), flush=True)
+            else:
+                log_path.parent.mkdir(parents=True, exist_ok=True)
+                with log_path.open("a", encoding="utf-8") as stream:
+                    stream.write(json.dumps(record) + "\n")
     return call
 
 
-def build_server(environment: str, log_path: Path = DEFAULT_AUDIT_LOG) -> MCPServer:
+def build_server(environment: str, log_path: Path | None = DEFAULT_AUDIT_LOG,
+                 log_level: str = "INFO") -> MCPServer:
     server = MCPServer(
         name="geha-benefits",
         instructions=("GEHA 2026 dental and coverage-policy tools. Answers come from GEHA's published "
                       "plan documents; cite the source each tool returns. Demo, not affiliated with GEHA."),
         version="0.1.0",
+        log_level=log_level,
     )
     for spec in exposed(SPECS, environment):
         server.tool(
