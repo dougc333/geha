@@ -72,14 +72,13 @@ class BillOfLadingHtmlGraphTests(unittest.TestCase):
             visual_route({**base, "visual_issues": [{"kind": "uncertain"}]}), "finish"
         )
 
-    def test_each_completed_cell_emits_incremental_feedback(self):
+    def test_matching_cell_returns_match(self):
         client = Mock()
         client.responses.create.return_value.output_text = (
             '{"verdict":"match","errors":[],"corrected_text":"SHIPPER"}'
         )
-        with (
-            patch("bill_of_lading_html_graph.image_part", return_value={"type": "input_image"}),
-            patch("bill_of_lading_html_graph.add_feedback") as feedback,
+        with patch(
+            "bill_of_lading_html_graph.image_part", return_value={"type": "input_image"}
         ):
             result = review_cell(
                 client=client,
@@ -94,13 +93,7 @@ class BillOfLadingHtmlGraphTests(unittest.TestCase):
             )
 
         self.assertEqual(result["verdict"], "match")
-        scores = feedback.call_args.kwargs
-        self.assertTrue(scores["text_cell_match"])
-        self.assertFalse(scores["text_cell_error"])
-        self.assertFalse(scores["text_cell_uncertain"])
-        self.assertEqual(scores["text_cell_progress"], 0.25)
-        self.assertEqual(scores["text_cell_response_retries"], 0)
-        self.assertGreaterEqual(scores["text_cell_latency_seconds"], 0)
+        self.assertEqual(result["corrected_text"], "SHIPPER")
 
     def test_empty_cell_responses_retry_then_become_uncertain(self):
         client = Mock()
@@ -109,7 +102,6 @@ class BillOfLadingHtmlGraphTests(unittest.TestCase):
         client.responses.create.return_value.incomplete_details = None
         with (
             patch("bill_of_lading_html_graph.image_part", return_value={"type": "input_image"}),
-            patch("bill_of_lading_html_graph.add_feedback") as feedback,
             patch("builtins.print"),
         ):
             result = review_cell(
@@ -127,10 +119,6 @@ class BillOfLadingHtmlGraphTests(unittest.TestCase):
         self.assertEqual(client.responses.create.call_count, 3)
         self.assertEqual(result["verdict"], "uncertain")
         self.assertEqual(result["corrected_text"], "SHIPPER")
-        scores = feedback.call_args.kwargs
-        self.assertTrue(scores["text_cell_error"])
-        self.assertTrue(scores["text_cell_uncertain"])
-        self.assertEqual(scores["text_cell_response_retries"], 2)
 
 
 if __name__ == "__main__":

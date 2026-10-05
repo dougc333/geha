@@ -46,6 +46,19 @@ Parameters:
     Type: String
     Default: /rag-demo/api-key
     Description: SSM SecureString with the shared access key required on /api/* (X-API-Key)
+  SignupHashKeyParameter:
+    Type: String
+    Default: /rag-demo/signup-hash-key
+    Description: SSM SecureString used only to pseudonymize member subjects in Langfuse
+  SignupDocumentIds:
+    Type: String
+    Default: ""
+    Description: Comma-separated fallback RAG document IDs for signup benefits questions
+  SignupAuthRequired:
+    Type: String
+    Default: "false"
+    AllowedValues: ["true", "false"]
+    Description: Require JWT claims from an upstream API Gateway authorizer for signup APIs
   WeaviateApiKeyParameter:
     Type: String
     Default: /rag-demo/weaviate-api-key
@@ -229,6 +242,9 @@ Resources:
           LANGFUSE_BASE_URL: !Ref LangfuseBaseUrl
           LANGFUSE_PUBLIC_KEY_PARAMETER: !Ref LangfusePublicKeyParameter
           LANGFUSE_SECRET_KEY_PARAMETER: !Ref LangfuseSecretKeyParameter
+          SIGNUP_HASH_KEY_PARAMETER: !Ref SignupHashKeyParameter
+          SIGNUP_DOCUMENT_IDS: !Ref SignupDocumentIds
+          SIGNUP_AUTH_REQUIRED: !Ref SignupAuthRequired
           WEAVIATE_URL_PARAMETER: !Ref WeaviateUrlParameter
           WEAVIATE_API_KEY_PARAMETER: !Ref WeaviateApiKeyParameter
           API_KEY_PARAMETER: !Ref ApiKeyParameter
@@ -244,6 +260,7 @@ Resources:
                 - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${WeaviateUrlParameter}"
                 - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${WeaviateApiKeyParameter}"
                 - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${ApiKeyParameter}"
+                - !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter${SignupHashKeyParameter}"
             - Effect: Allow
               Action: bedrock:InvokeModel
               Resource:
@@ -284,6 +301,9 @@ Outputs:
   ChatUrl:
     Description: Open in a browser for the paper chatbot
     Value: !Sub "${QueryApiUrl.FunctionUrl}chat"
+  SignupUrl:
+    Description: Open in a browser for the guided dental signup chatbot
+    Value: !Sub "${QueryApiUrl.FunctionUrl}signup"
   QueryUrl:
     Description: Open in a browser for the RAG UI
     Value: !GetAtt QueryApiUrl.FunctionUrl

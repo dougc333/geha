@@ -87,9 +87,7 @@ geometry as a versioned DOM schema. It first verifies literal cell data in
 left-to-right, top-to-bottom order (maximum five passes), then renders and
 visually verifies each HTML block (maximum ten passes). Every HTML version,
 rendered PNG, issue, coordinate, and iteration count is retained in a fresh run
-directory. Set `LANGSMITH_TRACING=true`, `LANGSMITH_API_KEY`, and optionally
-`LANGSMITH_PROJECT` to see the graph, model calls, and fidelity scores in
-LangSmith.
+directory.
 
 Text fidelity is the hard gate. Visual review does not begin until every named
 cell passes, and a visual repair is rejected if it changes, removes, duplicates,
@@ -97,15 +95,9 @@ or moves any verified cell text. Visual similarity is therefore an additional
 review signal and can never compensate for incorrect extracted data.
 
 During text review the command prints a start and completion line for every
-schema cell. Each completed cell also becomes its own LangSmith child run with
-the feedback keys `text_cell_match`, `text_cell_error`,
-`text_cell_uncertain`, `text_cell_latency_seconds`, and
-`text_cell_progress`. `text_cell_response_retries` counts empty or malformed
-structured responses. Such responses are retried twice; if all three attempts
-fail, the cell is recorded as uncertain and the graph finishes with
-`needs_human_review` instead of crashing. Aggregate `data_error_count` and
-`data_accuracy` feedback is still recorded after the full text-review iteration
-finishes.
+schema cell. Empty or malformed structured responses are retried twice; if all
+three attempts fail, the cell is recorded as uncertain and the graph finishes
+with `needs_human_review` instead of crashing.
 
 Build the HTML without making vision calls:
 
@@ -115,12 +107,9 @@ Build the HTML without making vision calls:
   --no-vision
 ```
 
-Run both correction stages with tracing:
+Run both correction stages:
 
 ```sh
-export LANGSMITH_TRACING=true
-export LANGSMITH_PROJECT=bill-of-lading-html-reconstruction
-
 /Users/dc/geha/.venv/bin/python bill_of_lading_html_graph.py \
   --ocr-results gpt4o_only_run_20260927T183545Z/gpt4o_only_results.json \
   --model gpt-4o

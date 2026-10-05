@@ -1,0 +1,11 @@
+- 4 OPM will review your disputed claim request and will use the information it collects from you and us to decide whether our decision is correct. OPM will send you a final decision or notify you of the status of OPM's review within 60 days. There are no other administrative appeals.
+
+If you do not agree with OPM's decision, your only recourse is to file a lawsuit. If you decide to sue, you must file the suit against OPM in Federal court by December 31 of the third year after the year in which you received the disputed services, drugs, or supplies or from the year in which you were denied precertification or preauthorization. This is the only deadline that may not be extended.
+
+OPM may disclose the information it collects during the review process to support their disputed claim decision. This information will become part of the court record.
+
+You may not file a lawsuit until you have completed the disputed claims process. Further, Federal law governs your lawsuit, benefits, and payment of benefits. The Federal court will base its review on the record that was before OPM when OPM decided to uphold or overturn our decision. You may recover only the amount of benefits in dispute.
+
+Note: If you have a serious or life-threatening condition (one that may cause permanent loss of bodily functions or death if not treated as soon as possible), and you did not indicate that your claim was a claim for urgent care, then call us at 800-821-6136. We will expedite our review (if we have not yet responded to your claim); or we will inform OPM so they can quickly review your claim on appeal. You may call OPM's FEHB 2 at 202-606-3818.
+
+Please remember that we do not make decisions about plan eligibility issues. For example, we do not determine whether you or a family member is covered under this plan. You must raise eligibility issues with your Agency personnel/payroll office if you are an employee, your retirement system if you are an annuitant or the Office of Workers' Compensation Programs if you are receiving Workers' Compensation benefits.

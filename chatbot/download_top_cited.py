@@ -43,7 +43,7 @@ QUERIES = [  # each query returns up to 1,000 papers per page, most-cited first
 ]
 ML_CATEGORIES = {"cs.LG", "cs.AI", "cs.CL", "cs.CV", "cs.NE", "cs.IR", "cs.RO", "cs.MA",
                  "cs.SD", "eess.AS", "eess.IV", "stat.ML"}
-DEFAULT_OUT = Path(__file__).resolve().parents[1] / "e2e_RAG" / "data" / "arxiv_top300"
+DEFAULT_OUT = Path(__file__).resolve().parents[1] / "agentic_search" / "data" / "arxiv_top300"
 
 
 def get_json(url: str) -> dict:

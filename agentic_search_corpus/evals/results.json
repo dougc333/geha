@@ -1,0 +1,1121 @@
+{
+  "pages": 68,
+  "setup_seconds": 21.567871666979045,
+  "summary": {
+    "bm25": {
+      "recall@5": 0.9333333333333333,
+      "all_evidence@5": 0.8666666666666667,
+      "mrr@10": 0.85,
+      "median_latency_ms": 0.32112502958625555
+    },
+    "vector": {
+      "recall@5": 0.7,
+      "all_evidence@5": 0.6,
+      "mrr@10": 0.6511904761904762,
+      "median_latency_ms": 30.025584041140974
+    },
+    "hybrid": {
+      "recall@5": 0.9,
+      "all_evidence@5": 0.8666666666666667,
+      "mrr@10": 0.7611111111111111,
+      "median_latency_ms": 29.580374946817756
+    }
+  },
+  "rows": [
+    {
+      "id": "cleanings",
+      "query": "How many adult cleanings does High cover compared with Standard, including D1110?",
+      "mode": "bm25",
+      "recall@5": 0.5,
+      "all_evidence@5": false,
+      "mrr@10": 0.5,
+      "latency_ms": 0.7935420144349337,
+      "retrieved": [
+        "2026-geha-dental-benefits-guide_pages/page-008.md",
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-035.md",
+        "2026-geha-dental-plan-brochure_pages/page-001.md",
+        "2026-geha-dental-benefits-guide_pages/page-004.md",
+        "2026-geha-dental-plan-brochure_pages/page-039.md",
+        "2026-geha-dental-benefits-guide_pages/page-007.md",
+        "2026-geha-dental-plan-brochure_pages/page-021.md",
+        "2026-geha-dental-plan-brochure_pages/page-004.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-021.md"
+      ]
+    },
+    {
+      "id": "cleanings",
+      "query": "How many adult cleanings does High cover compared with Standard, including D1110?",
+      "mode": "vector",
+      "recall@5": 0.5,
+      "all_evidence@5": false,
+      "mrr@10": 0.5,
+      "latency_ms": 40.725708939135075,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-035.md",
+        "2026-geha-dental-plan-brochure_pages/page-021.md",
+        "2026-geha-dental-plan-brochure_pages/page-033.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-plan-brochure_pages/page-022.md",
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-056.md",
+        "2026-geha-dental-plan-brochure_pages/page-025.md",
+        "2026-geha-dental-plan-brochure_pages/page-051.md",
+        "2026-geha-dental-benefits-guide_pages/page-006.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-021.md"
+      ]
+    },
+    {
+      "id": "cleanings",
+      "query": "How many adult cleanings does High cover compared with Standard, including D1110?",
+      "mode": "hybrid",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 0.5,
+      "latency_ms": 32.95612498186529,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-035.md",
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-021.md",
+        "2026-geha-dental-benefits-guide_pages/page-008.md",
+        "2026-geha-dental-benefits-guide_pages/page-004.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-benefits-guide_pages/page-006.md",
+        "2026-geha-dental-benefits-guide_pages/page-007.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-021.md"
+      ]
+    },
+    {
+      "id": "extraction",
+      "query": "Is D7140 tooth extraction listed as covered, and what percentage do High and Standard members pay?",
+      "mode": "bm25",
+      "recall@5": 0.5,
+      "all_evidence@5": false,
+      "mrr@10": 1.0,
+      "latency_ms": 0.317332916893065,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-026.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md",
+        "2026-geha-dental-plan-brochure_pages/page-015.md",
+        "2026-geha-dental-plan-brochure_pages/page-046.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md",
+        "2026-geha-dental-plan-brochure_pages/page-016.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-014.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-026.md"
+      ]
+    },
+    {
+      "id": "extraction",
+      "query": "Is D7140 tooth extraction listed as covered, and what percentage do High and Standard members pay?",
+      "mode": "vector",
+      "recall@5": 0.0,
+      "all_evidence@5": false,
+      "mrr@10": 0.125,
+      "latency_ms": 28.511750046163797,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-028.md",
+        "2026-geha-dental-plan-brochure_pages/page-020.md",
+        "2026-geha-dental-plan-brochure_pages/page-035.md",
+        "2026-geha-dental-plan-brochure_pages/page-051.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md",
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-015.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-026.md"
+      ]
+    },
+    {
+      "id": "extraction",
+      "query": "Is D7140 tooth extraction listed as covered, and what percentage do High and Standard members pay?",
+      "mode": "hybrid",
+      "recall@5": 0.5,
+      "all_evidence@5": false,
+      "mrr@10": 0.25,
+      "latency_ms": 28.31037505529821,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md",
+        "2026-geha-dental-plan-brochure_pages/page-015.md",
+        "2026-geha-dental-plan-brochure_pages/page-026.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-035.md",
+        "2026-geha-dental-plan-brochure_pages/page-020.md",
+        "2026-geha-dental-plan-brochure_pages/page-014.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-026.md"
+      ]
+    },
+    {
+      "id": "rootcanal",
+      "query": "What do I pay for a root canal under High versus Standard, and what lifetime restriction applies to D3310?",
+      "mode": "bm25",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 0.32112502958625555,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-029.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-047.md",
+        "2026-geha-dental-benefits-guide_pages/page-008.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md",
+        "2026-geha-dental-plan-brochure_pages/page-013.md",
+        "2026-geha-dental-plan-brochure_pages/page-051.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-029.md"
+      ]
+    },
+    {
+      "id": "rootcanal",
+      "query": "What do I pay for a root canal under High versus Standard, and what lifetime restriction applies to D3310?",
+      "mode": "vector",
+      "recall@5": 0.5,
+      "all_evidence@5": false,
+      "mrr@10": 1.0,
+      "latency_ms": 32.619584002532065,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-029.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-plan-brochure_pages/page-024.md",
+        "2026-geha-dental-plan-brochure_pages/page-028.md",
+        "2026-geha-dental-plan-brochure_pages/page-051.md",
+        "2026-geha-dental-plan-brochure_pages/page-032.md",
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-025.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-029.md"
+      ]
+    },
+    {
+      "id": "rootcanal",
+      "query": "What do I pay for a root canal under High versus Standard, and what lifetime restriction applies to D3310?",
+      "mode": "hybrid",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 32.111166045069695,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-029.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-051.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md",
+        "2026-geha-dental-plan-brochure_pages/page-024.md",
+        "2026-geha-dental-plan-brochure_pages/page-030.md",
+        "2026-geha-dental-plan-brochure_pages/page-025.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-029.md"
+      ]
+    },
+    {
+      "id": "deductible",
+      "query": "Compare High and Standard out-of-network deductibles and explain whether I owe charges above the plan allowance.",
+      "mode": "bm25",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 0.32300001475960016,
+      "retrieved": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-051.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md",
+        "2026-geha-dental-plan-brochure_pages/page-014.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md",
+        "2026-geha-dental-benefits-guide_pages/page-004.md",
+        "2026-geha-dental-plan-brochure_pages/page-015.md",
+        "2026-geha-dental-plan-brochure_pages/page-028.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md"
+      ]
+    },
+    {
+      "id": "deductible",
+      "query": "Compare High and Standard out-of-network deductibles and explain whether I owe charges above the plan allowance.",
+      "mode": "vector",
+      "recall@5": 0.5,
+      "all_evidence@5": false,
+      "mrr@10": 0.5,
+      "latency_ms": 32.98966703005135,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md",
+        "2026-geha-dental-plan-brochure_pages/page-028.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-051.md",
+        "2026-geha-dental-plan-brochure_pages/page-020.md",
+        "2026-geha-dental-plan-brochure_pages/page-015.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md",
+        "2026-geha-dental-benefits-guide_pages/page-005.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md"
+      ]
+    },
+    {
+      "id": "deductible",
+      "query": "Compare High and Standard out-of-network deductibles and explain whether I owe charges above the plan allowance.",
+      "mode": "hybrid",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 0.5,
+      "latency_ms": 30.653416994027793,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-051.md",
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-028.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md",
+        "2026-geha-dental-plan-brochure_pages/page-015.md",
+        "2026-geha-dental-plan-brochure_pages/page-020.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md"
+      ]
+    },
+    {
+      "id": "marriage",
+      "query": "I got married. Can I enroll, increase coverage, cancel, or switch plans, and what is the request window?",
+      "mode": "bm25",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 0.3451670054346323,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-011.md",
+        "2026-geha-dental-plan-brochure_pages/page-009.md",
+        "2026-geha-dental-plan-brochure_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-012.md",
+        "2026-geha-dental-plan-brochure_pages/page-010.md",
+        "2026-geha-dental-plan-brochure_pages/page-013.md",
+        "2026-geha-dental-plan-brochure_pages/page-016.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-plan-brochure_pages/page-010.md",
+        "2026-geha-dental-plan-brochure_pages/page-011.md"
+      ]
+    },
+    {
+      "id": "marriage",
+      "query": "I got married. Can I enroll, increase coverage, cancel, or switch plans, and what is the request window?",
+      "mode": "vector",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 29.128374997526407,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-010.md",
+        "2026-geha-dental-plan-brochure_pages/page-011.md",
+        "2026-geha-dental-plan-brochure_pages/page-009.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-plan-brochure_pages/page-051.md",
+        "2026-geha-dental-plan-brochure_pages/page-050.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md",
+        "2026-geha-dental-plan-brochure_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-plan-brochure_pages/page-010.md",
+        "2026-geha-dental-plan-brochure_pages/page-011.md"
+      ]
+    },
+    {
+      "id": "marriage",
+      "query": "I got married. Can I enroll, increase coverage, cancel, or switch plans, and what is the request window?",
+      "mode": "hybrid",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 30.786250019446015,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-011.md",
+        "2026-geha-dental-plan-brochure_pages/page-009.md",
+        "2026-geha-dental-plan-brochure_pages/page-010.md",
+        "2026-geha-dental-plan-brochure_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-plan-brochure_pages/page-012.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-050.md",
+        "2026-geha-dental-plan-brochure_pages/page-002.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-plan-brochure_pages/page-010.md",
+        "2026-geha-dental-plan-brochure_pages/page-011.md"
+      ]
+    },
+    {
+      "id": "lossfamily",
+      "query": "After losing a covered family member can I decrease coverage or cancel my dental plan?",
+      "mode": "bm25",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 0.2803750103339553,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-010.md",
+        "2026-geha-dental-plan-brochure_pages/page-011.md",
+        "2026-geha-dental-plan-brochure_pages/page-009.md",
+        "2026-geha-dental-plan-brochure_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-038.md",
+        "2026-geha-dental-plan-brochure_pages/page-012.md",
+        "2026-geha-dental-plan-brochure_pages/page-050.md",
+        "2026-geha-dental-plan-brochure_pages/page-013.md",
+        "2026-geha-dental-plan-brochure_pages/page-042.md",
+        "2026-geha-dental-plan-brochure_pages/page-049.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-plan-brochure_pages/page-010.md"
+      ]
+    },
+    {
+      "id": "lossfamily",
+      "query": "After losing a covered family member can I decrease coverage or cancel my dental plan?",
+      "mode": "vector",
+      "recall@5": 0.0,
+      "all_evidence@5": false,
+      "mrr@10": 0.16666666666666666,
+      "latency_ms": 29.2697079712525,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-012.md",
+        "2026-geha-dental-plan-brochure_pages/page-039.md",
+        "2026-geha-dental-plan-brochure_pages/page-011.md",
+        "2026-geha-dental-plan-brochure_pages/page-008.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-010.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-050.md",
+        "2026-geha-dental-plan-brochure_pages/page-009.md",
+        "2026-geha-dental-plan-brochure_pages/page-016.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-plan-brochure_pages/page-010.md"
+      ]
+    },
+    {
+      "id": "lossfamily",
+      "query": "After losing a covered family member can I decrease coverage or cancel my dental plan?",
+      "mode": "hybrid",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 0.5,
+      "latency_ms": 28.986208024434745,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-011.md",
+        "2026-geha-dental-plan-brochure_pages/page-010.md",
+        "2026-geha-dental-plan-brochure_pages/page-012.md",
+        "2026-geha-dental-plan-brochure_pages/page-009.md",
+        "2026-geha-dental-plan-brochure_pages/page-050.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-008.md",
+        "2026-geha-dental-plan-brochure_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-016.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-plan-brochure_pages/page-010.md"
+      ]
+    },
+    {
+      "id": "va",
+      "query": "How does becoming eligible for VA dental benefits affect cancellation when premiums are paid pre-tax versus post-tax?",
+      "mode": "bm25",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 0.360167003236711,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-011.md",
+        "2026-geha-dental-plan-brochure_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-012.md",
+        "2026-geha-dental-plan-brochure_pages/page-003.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md",
+        "2026-geha-dental-plan-brochure_pages/page-013.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-050.md",
+        "2026-geha-dental-plan-brochure_pages/page-002.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-plan-brochure_pages/page-011.md"
+      ]
+    },
+    {
+      "id": "va",
+      "query": "How does becoming eligible for VA dental benefits affect cancellation when premiums are paid pre-tax versus post-tax?",
+      "mode": "vector",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 29.922583024017513,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-011.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-019.md",
+        "2026-geha-dental-plan-brochure_pages/page-013.md",
+        "2026-geha-dental-plan-brochure_pages/page-047.md",
+        "2026-geha-dental-plan-brochure_pages/page-016.md",
+        "2026-geha-dental-plan-brochure_pages/page-012.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-plan-brochure_pages/page-011.md"
+      ]
+    },
+    {
+      "id": "va",
+      "query": "How does becoming eligible for VA dental benefits affect cancellation when premiums are paid pre-tax versus post-tax?",
+      "mode": "hybrid",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 28.411250095814466,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-011.md",
+        "2026-geha-dental-plan-brochure_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-012.md",
+        "2026-geha-dental-plan-brochure_pages/page-013.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md",
+        "2026-geha-dental-plan-brochure_pages/page-047.md",
+        "2026-geha-dental-plan-brochure_pages/page-016.md",
+        "2026-geha-dental-plan-brochure_pages/page-003.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-plan-brochure_pages/page-011.md"
+      ]
+    },
+    {
+      "id": "enroll",
+      "query": "I am a new federal employee. How long do I have to enroll and does enrollment carry over automatically?",
+      "mode": "bm25",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 0.4938329802826047,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-009.md",
+        "2026-geha-dental-plan-brochure_pages/page-012.md",
+        "2026-geha-dental-plan-brochure_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-050.md",
+        "2026-geha-dental-plan-brochure_pages/page-007.md",
+        "2026-geha-dental-plan-brochure_pages/page-013.md",
+        "2026-geha-dental-plan-brochure_pages/page-011.md",
+        "2026-geha-dental-plan-brochure_pages/page-003.md",
+        "2026-geha-dental-plan-brochure_pages/page-002.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-plan-brochure_pages/page-009.md"
+      ]
+    },
+    {
+      "id": "enroll",
+      "query": "I am a new federal employee. How long do I have to enroll and does enrollment carry over automatically?",
+      "mode": "vector",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 0.5,
+      "latency_ms": 26.92529105115682,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-007.md",
+        "2026-geha-dental-plan-brochure_pages/page-009.md",
+        "2026-geha-dental-plan-brochure_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-011.md",
+        "2026-geha-dental-plan-brochure_pages/page-012.md",
+        "2026-geha-dental-plan-brochure_pages/page-003.md",
+        "2026-geha-dental-benefits-guide_pages/page-012.md",
+        "2026-geha-dental-benefits-guide_pages/page-003.md",
+        "2026-geha-dental-plan-brochure_pages/page-002.md",
+        "2026-geha-dental-benefits-guide_pages/page-011.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-plan-brochure_pages/page-009.md"
+      ]
+    },
+    {
+      "id": "enroll",
+      "query": "I am a new federal employee. How long do I have to enroll and does enrollment carry over automatically?",
+      "mode": "hybrid",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 28.646124992519617,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-009.md",
+        "2026-geha-dental-plan-brochure_pages/page-007.md",
+        "2026-geha-dental-plan-brochure_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-012.md",
+        "2026-geha-dental-plan-brochure_pages/page-011.md",
+        "2026-geha-dental-plan-brochure_pages/page-003.md",
+        "2026-geha-dental-plan-brochure_pages/page-013.md",
+        "2026-geha-dental-plan-brochure_pages/page-002.md",
+        "2026-geha-dental-plan-brochure_pages/page-050.md",
+        "2026-geha-dental-benefits-guide_pages/page-012.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-plan-brochure_pages/page-009.md"
+      ]
+    },
+    {
+      "id": "specialist",
+      "query": "Do I need a referral or a primary dentist before visiting an in-network dental specialist?",
+      "mode": "bm25",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 0.2892500488087535,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-013.md",
+        "2026-geha-dental-plan-brochure_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-015.md",
+        "2026-geha-dental-plan-brochure_pages/page-002.md",
+        "2026-geha-dental-plan-brochure_pages/page-038.md",
+        "2026-geha-dental-plan-brochure_pages/page-009.md",
+        "2026-geha-dental-plan-brochure_pages/page-014.md",
+        "2026-geha-dental-plan-brochure_pages/page-020.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-plan-brochure_pages/page-013.md"
+      ]
+    },
+    {
+      "id": "specialist",
+      "query": "Do I need a referral or a primary dentist before visiting an in-network dental specialist?",
+      "mode": "vector",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 30.025584041140974,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-013.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-020.md",
+        "2026-geha-dental-plan-brochure_pages/page-016.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-015.md",
+        "2026-geha-dental-plan-brochure_pages/page-028.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-plan-brochure_pages/page-025.md",
+        "2026-geha-dental-plan-brochure_pages/page-014.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-plan-brochure_pages/page-013.md"
+      ]
+    },
+    {
+      "id": "specialist",
+      "query": "Do I need a referral or a primary dentist before visiting an in-network dental specialist?",
+      "mode": "hybrid",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 29.91037501487881,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-013.md",
+        "2026-geha-dental-plan-brochure_pages/page-015.md",
+        "2026-geha-dental-plan-brochure_pages/page-020.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-016.md",
+        "2026-geha-dental-plan-brochure_pages/page-014.md",
+        "2026-geha-dental-plan-brochure_pages/page-002.md",
+        "2026-geha-dental-plan-brochure_pages/page-038.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-plan-brochure_pages/page-013.md"
+      ]
+    },
+    {
+      "id": "family",
+      "query": "Can my 23-year-old dependent child remain covered and is there an exception for disability?",
+      "mode": "bm25",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 0.5,
+      "latency_ms": 0.4177920054644346,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-050.md",
+        "2026-geha-dental-plan-brochure_pages/page-008.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-plan-brochure_pages/page-047.md",
+        "2026-geha-dental-plan-brochure_pages/page-019.md",
+        "2026-geha-dental-plan-brochure_pages/page-048.md",
+        "2026-geha-dental-plan-brochure_pages/page-007.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md",
+        "2026-geha-dental-plan-brochure_pages/page-038.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-plan-brochure_pages/page-008.md"
+      ]
+    },
+    {
+      "id": "family",
+      "query": "Can my 23-year-old dependent child remain covered and is there an exception for disability?",
+      "mode": "vector",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 31.105375033803284,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-008.md",
+        "2026-geha-dental-plan-brochure_pages/page-012.md",
+        "2026-geha-dental-plan-brochure_pages/page-047.md",
+        "2026-geha-dental-plan-brochure_pages/page-019.md",
+        "2026-geha-dental-plan-brochure_pages/page-048.md",
+        "2026-geha-dental-plan-brochure_pages/page-050.md",
+        "2026-geha-dental-plan-brochure_pages/page-007.md",
+        "2026-geha-dental-plan-brochure_pages/page-009.md",
+        "2026-geha-dental-plan-brochure_pages/page-002.md",
+        "2026-geha-dental-plan-brochure_pages/page-043.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-plan-brochure_pages/page-008.md"
+      ]
+    },
+    {
+      "id": "family",
+      "query": "Can my 23-year-old dependent child remain covered and is there an exception for disability?",
+      "mode": "hybrid",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 34.31820799596608,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-008.md",
+        "2026-geha-dental-plan-brochure_pages/page-050.md",
+        "2026-geha-dental-plan-brochure_pages/page-047.md",
+        "2026-geha-dental-plan-brochure_pages/page-019.md",
+        "2026-geha-dental-plan-brochure_pages/page-048.md",
+        "2026-geha-dental-plan-brochure_pages/page-007.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-012.md",
+        "2026-geha-dental-plan-brochure_pages/page-002.md",
+        "2026-geha-dental-plan-brochure_pages/page-011.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-plan-brochure_pages/page-008.md"
+      ]
+    },
+    {
+      "id": "vision",
+      "query": "Does the included vision discount pay for glasses, and what do I pay for an eye exam and frames?",
+      "mode": "bm25",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 0.32729096710681915,
+      "retrieved": [
+        "2026-geha-dental-benefits-guide_pages/page-007.md",
+        "2026-geha-dental-benefits-guide_pages/page-006.md",
+        "2026-geha-dental-plan-brochure_pages/page-049.md",
+        "2026-geha-dental-plan-brochure_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-050.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-benefits-guide_pages/page-009.md",
+        "2026-geha-dental-plan-brochure_pages/page-013.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-012.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-007.md"
+      ]
+    },
+    {
+      "id": "vision",
+      "query": "Does the included vision discount pay for glasses, and what do I pay for an eye exam and frames?",
+      "mode": "vector",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 35.55116604547948,
+      "retrieved": [
+        "2026-geha-dental-benefits-guide_pages/page-007.md",
+        "2026-geha-dental-plan-brochure_pages/page-049.md",
+        "2026-geha-dental-plan-brochure_pages/page-005.md",
+        "2026-geha-dental-benefits-guide_pages/page-006.md",
+        "2026-geha-dental-plan-brochure_pages/page-012.md",
+        "2026-geha-dental-plan-brochure_pages/page-040.md",
+        "2026-geha-dental-benefits-guide_pages/page-009.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-plan-brochure_pages/page-020.md",
+        "2026-geha-dental-plan-brochure_pages/page-050.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-007.md"
+      ]
+    },
+    {
+      "id": "vision",
+      "query": "Does the included vision discount pay for glasses, and what do I pay for an eye exam and frames?",
+      "mode": "hybrid",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 37.73404110688716,
+      "retrieved": [
+        "2026-geha-dental-benefits-guide_pages/page-007.md",
+        "2026-geha-dental-plan-brochure_pages/page-049.md",
+        "2026-geha-dental-benefits-guide_pages/page-006.md",
+        "2026-geha-dental-plan-brochure_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-benefits-guide_pages/page-009.md",
+        "2026-geha-dental-plan-brochure_pages/page-012.md",
+        "2026-geha-dental-plan-brochure_pages/page-050.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-007.md"
+      ]
+    },
+    {
+      "id": "hearing",
+      "query": "What hearing aid discount is offered through TruHearing?",
+      "mode": "bm25",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 0.1711250515654683,
+      "retrieved": [
+        "2026-geha-dental-benefits-guide_pages/page-009.md",
+        "2026-geha-dental-plan-brochure_pages/page-049.md",
+        "2026-geha-dental-benefits-guide_pages/page-006.md",
+        "2026-geha-dental-plan-brochure_pages/page-013.md",
+        "2026-geha-dental-plan-brochure_pages/page-005.md",
+        "2026-geha-dental-benefits-guide_pages/page-007.md",
+        "2026-geha-dental-plan-brochure_pages/page-015.md",
+        "2026-geha-dental-plan-brochure_pages/page-009.md",
+        "2026-geha-dental-plan-brochure_pages/page-012.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-009.md"
+      ]
+    },
+    {
+      "id": "hearing",
+      "query": "What hearing aid discount is offered through TruHearing?",
+      "mode": "vector",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 0.5,
+      "latency_ms": 31.291999970562756,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-049.md",
+        "2026-geha-dental-benefits-guide_pages/page-009.md",
+        "2026-geha-dental-benefits-guide_pages/page-007.md",
+        "2026-geha-dental-plan-brochure_pages/page-001.md",
+        "2026-geha-dental-plan-brochure_pages/page-051.md",
+        "2026-geha-dental-benefits-guide_pages/page-006.md",
+        "2026-geha-dental-plan-brochure_pages/page-056.md",
+        "2026-geha-dental-plan-brochure_pages/page-050.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-002.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-009.md"
+      ]
+    },
+    {
+      "id": "hearing",
+      "query": "What hearing aid discount is offered through TruHearing?",
+      "mode": "hybrid",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 29.580374946817756,
+      "retrieved": [
+        "2026-geha-dental-benefits-guide_pages/page-009.md",
+        "2026-geha-dental-plan-brochure_pages/page-049.md",
+        "2026-geha-dental-benefits-guide_pages/page-006.md",
+        "2026-geha-dental-benefits-guide_pages/page-007.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md",
+        "2026-geha-dental-plan-brochure_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-047.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-009.md"
+      ]
+    },
+    {
+      "id": "braces",
+      "query": "Compare adult orthodontic coinsurance and lifetime maximums for High and Standard in and out of network.",
+      "mode": "bm25",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 0.2847500145435333,
+      "retrieved": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-plan-brochure_pages/page-051.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md",
+        "2026-geha-dental-plan-brochure_pages/page-037.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-benefits-guide_pages/page-004.md",
+        "2026-geha-dental-plan-brochure_pages/page-020.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md"
+      ]
+    },
+    {
+      "id": "braces",
+      "query": "Compare adult orthodontic coinsurance and lifetime maximums for High and Standard in and out of network.",
+      "mode": "vector",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 0.3333333333333333,
+      "latency_ms": 97.72087505552918,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-plan-brochure_pages/page-051.md",
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md",
+        "2026-geha-dental-plan-brochure_pages/page-020.md",
+        "2026-geha-dental-plan-brochure_pages/page-028.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md",
+        "2026-geha-dental-plan-brochure_pages/page-037.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md"
+      ]
+    },
+    {
+      "id": "braces",
+      "query": "Compare adult orthodontic coinsurance and lifetime maximums for High and Standard in and out of network.",
+      "mode": "hybrid",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 0.5,
+      "latency_ms": 25.96366696525365,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-051.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-037.md",
+        "2026-geha-dental-plan-brochure_pages/page-020.md",
+        "2026-geha-dental-plan-brochure_pages/page-028.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md"
+      ]
+    },
+    {
+      "id": "implant",
+      "query": "Does unlimited annual coverage on High mean implants have no separate annual limit?",
+      "mode": "bm25",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 0.5,
+      "latency_ms": 0.24954206310212612,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-benefits-guide_pages/page-006.md",
+        "2026-geha-dental-plan-brochure_pages/page-013.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-051.md",
+        "2026-geha-dental-plan-brochure_pages/page-011.md",
+        "2026-geha-dental-benefits-guide_pages/page-007.md",
+        "2026-geha-dental-plan-brochure_pages/page-020.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md"
+      ]
+    },
+    {
+      "id": "implant",
+      "query": "Does unlimited annual coverage on High mean implants have no separate annual limit?",
+      "mode": "vector",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 25.071792071685195,
+      "retrieved": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-051.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-020.md",
+        "2026-geha-dental-benefits-guide_pages/page-006.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md",
+        "2026-geha-dental-benefits-guide_pages/page-004.md",
+        "2026-geha-dental-plan-brochure_pages/page-024.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md"
+      ]
+    },
+    {
+      "id": "implant",
+      "query": "Does unlimited annual coverage on High mean implants have no separate annual limit?",
+      "mode": "hybrid",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 1.0,
+      "latency_ms": 25.117583922110498,
+      "retrieved": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-benefits-guide_pages/page-006.md",
+        "2026-geha-dental-plan-brochure_pages/page-051.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-020.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md",
+        "2026-geha-dental-plan-brochure_pages/page-030.md",
+        "2026-geha-dental-plan-brochure_pages/page-015.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md"
+      ]
+    },
+    {
+      "id": "maximum",
+      "query": "What are the calendar year maximum benefits on High and Standard for Class A B and C services?",
+      "mode": "bm25",
+      "recall@5": 1.0,
+      "all_evidence@5": true,
+      "mrr@10": 0.25,
+      "latency_ms": 0.31508400570601225,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-051.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-020.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md",
+        "2026-geha-dental-plan-brochure_pages/page-046.md",
+        "2026-geha-dental-plan-brochure_pages/page-006.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md"
+      ]
+    },
+    {
+      "id": "maximum",
+      "query": "What are the calendar year maximum benefits on High and Standard for Class A B and C services?",
+      "mode": "vector",
+      "recall@5": 0.0,
+      "all_evidence@5": false,
+      "mrr@10": 0.14285714285714285,
+      "latency_ms": 24.74608295597136,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-051.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-plan-brochure_pages/page-020.md",
+        "2026-geha-dental-plan-brochure_pages/page-046.md",
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md",
+        "2026-geha-dental-plan-brochure_pages/page-003.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md"
+      ]
+    },
+    {
+      "id": "maximum",
+      "query": "What are the calendar year maximum benefits on High and Standard for Class A B and C services?",
+      "mode": "hybrid",
+      "recall@5": 0.0,
+      "all_evidence@5": false,
+      "mrr@10": 0.16666666666666666,
+      "latency_ms": 24.77241598535329,
+      "retrieved": [
+        "2026-geha-dental-plan-brochure_pages/page-051.md",
+        "2026-geha-dental-plan-brochure_pages/page-018.md",
+        "2026-geha-dental-plan-brochure_pages/page-027.md",
+        "2026-geha-dental-plan-brochure_pages/page-017.md",
+        "2026-geha-dental-plan-brochure_pages/page-023.md",
+        "2026-geha-dental-benefits-guide_pages/page-005.md",
+        "2026-geha-dental-plan-brochure_pages/page-020.md",
+        "2026-geha-dental-plan-brochure_pages/page-046.md",
+        "2026-geha-dental-plan-brochure_pages/page-036.md",
+        "2026-geha-dental-plan-brochure_pages/page-003.md"
+      ],
+      "evidence": [
+        "2026-geha-dental-benefits-guide_pages/page-005.md"
+      ]
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Upload downloaded papers (<id>.pdf + <id>.json sidecar) into the pipeline.
 
-    python scripts/upload_papers.py ../e2e_RAG/data/arxiv_top300 --top 100 [--dry-run]
+    python scripts/upload_papers.py ../agentic_search/data/arxiv_top300 --top 100 [--dry-run]
 
 Takes papers in manifest.json rank order (or every PDF with a sidecar if there
 is no manifest), skips arXiv IDs already in rag_documents, and uploads each

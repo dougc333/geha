@@ -1,0 +1,3 @@
+If you have questions about the processing of overseas claims, contact us at 800-821-6136. Covered providers outside the United States will be paid at the in-network level of benefits, subject to deductible and coinsurance. We will provide translation and currency conversion for claims for overseas (foreign) services. The conversion rate will be based on the date services were rendered.
+
+When members living abroad are stateside and seeking medical care, contact us at 800-821-6136, or visit geha.com/Health-Overseas-Access to locate an in-network provider. If you utilize an out-of-network provider, out-of-network benefits would apply.

@@ -1,0 +1,4 @@
+The Medicare Income-Related Monthly Adjustment Amount (IRMAA) is an amount you pay in addition to your Part B and D premium if your income is above a certain level. Social Security makes this determination based on your income. In the case of those with higher incomes, you may have a separate premium payment for your PDP EGWP benefit.
+
+-  The plan does not collect the Part D-IRMAA as part of its premium. Failure to pay an assessed IRMAA amount, could result in automatic disenrollment by Medicare from PDP EGWP. As noted, you will have the option to opt out of the EGWP and receive regular G.E.H.A FEHB Health Benefit Plan prescription drug coverage, which would not be subject to IRMAA.
+-  Please refer to the Part D-IRMAA section of the Medicare website: https://www. medicare.gov/drug-coverage-part-d/costs-for-medicare-drug-coverage/monthlypremium-for-drug-plans to see if you would be subject to an additional premium.

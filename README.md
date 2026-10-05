@@ -4,9 +4,13 @@ aws_rag
 https://pdh62b4ddxm6mw7aokdbtwream0nupph.lambda-url.us-west-2.on.aws/chat
 
 
-e2e_RAG:
+agentic_search:
 Code References: The chat UI and PDF viewer comes from Lightning AI which is a chat assistant: 
 https://lightning.ai/lightning-ai/templates/document-chat-assistant-using-rag?section=featured
+
+e2e_bm25vector:
+Deployable Vercel comparison app for BM25, vector, and hybrid retrieval with
+optional reranking and grounded answer generation.
 
 
 Code References: 

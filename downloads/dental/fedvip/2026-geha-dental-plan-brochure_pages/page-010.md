@@ -1,0 +1,9 @@
+<!-- source: 2026-geha-dental-plan-brochure.pdf; source_page: 10 -->
+
+## Qualifying Life Event: Marriage
+
+```
+From Not Enrolled to Enrolled: Yes Increase Enrollment Type: Yes Decrease Enrollment Type: No Cancel: No Change from One Plan to Another: Yes Qualifying Life Event: Acquiring an eligible family member (non-spouse) From Not Enrolled to Enrolled: No Increase Enrollment Type: Yes Decrease Enrollment Type: No Cancel: No Change from One Plan to Another: No Qualifying Life Event: Losing a covered family member From Not Enrolled to Enrolled: No Increase Enrollment Type: No Decrease Enrollment Type: Yes Cancel: No Change from One Plan to Another: No Qualifying Life Event: Losing other dental/vision coverage (eligible or covered person) From Not Enrolled to Enrolled: Yes Increase Enrollment Type: Yes Decrease Enrollment Type: No Cancel: No Change from One Plan to Another: No Qualifying Life Event: Moving out of regional plan's service area From Not Enrolled to Enrolled: No Increase Enrollment Type: No Decrease Enrollment Type: No Cancel: No Change from One Plan to Another: Yes Qualifying Life Event: Going on active military duty, non-pay status (enrollee or spouse) From Not Enrolled to Enrolled: No Increase Enrollment Type: No Decrease Enrollment Type: No Cancel: Yes Change from One Plan to Another: No Qualifying Life Event: Returning to pay status from active military duty (enrollee or spouse) From Not Enrolled to Enrolled: Yes Increase Enrollment Type: No Decrease Enrollment Type: No Cancel: No Change from One Plan to Another: No Qualifying Life Event: Returning to pay status from Leave without pay From Not Enrolled to Enrolled: Yes (if enrollment cancelled during LWOP) Increase Enrollment Type: No Decrease Enrollment Type: No Cancel: No Change from One Plan to Another: Yes (if enrollment cancelled during LWOP)
+```
+
+8

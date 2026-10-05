@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dental signup guide</title>
+  <style>
+    :root { font-family: system-ui, sans-serif; color: #08213b; background: #eef4f7; }
+    body { margin: 0; }
+    main { max-width: 760px; margin: 3rem auto; padding: 0 1rem; }
+    section { background: white; border-radius: 16px; padding: 1.25rem; box-shadow: 0 8px 30px #08213b18; }
+    #messages { min-height: 18rem; display: grid; gap: .75rem; align-content: start; }
+    .message { padding: .8rem 1rem; border-radius: 12px; white-space: pre-wrap; }
+    .assistant { background: #e8f1f5; }
+    .user { background: #08213b; color: white; margin-left: 15%; }
+    form { display: flex; gap: .5rem; margin-top: 1rem; }
+    input { flex: 1; padding: .8rem; border: 1px solid #9db0bd; border-radius: 9px; }
+    button { border: 0; border-radius: 9px; background: #086f83; color: white; padding: .8rem 1rem; }
+    small { display: block; margin-top: .75rem; color: #526778; }
+  </style>
+</head>
+<body><main>
+  <h1>Dental signup guide</h1>
+  <section>
+    <div id="messages" aria-live="polite"></div>
+    <form id="form"><input id="input" autocomplete="off" maxlength="4000" required><button>Send</button></form>
+    <small>This guide does not submit a carrier enrollment. Do not enter an SSN or date of birth.</small>
+  </section>
+</main>
+<script>
+const messages = document.querySelector('#messages');
+const form = document.querySelector('#form');
+const input = document.querySelector('#input');
+const apiKey = sessionStorage.getItem('rag-api-key') || prompt('API key') || '';
+if (apiKey) sessionStorage.setItem('rag-api-key', apiKey);
+let application;
+const add = (role, text) => {
+  const node = document.createElement('div');
+  node.className = `message ${role}`;
+  node.textContent = text;
+  messages.append(node);
+};
+const call = async (path, body, method = 'POST') => {
+  const response = await fetch(path, {
+    method, headers: {'Content-Type': 'application/json', 'X-API-Key': apiKey},
+    body: body ? JSON.stringify(body) : undefined
+  });
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.detail || 'Request failed');
+  return data;
+};
+(async () => {
+  try {
+    const saved = localStorage.getItem('signup-application-id');
+    let data;
+    if (saved) {
+      try { data = await call(`/api/signup/${saved}`, null, 'GET'); }
+      catch (_) { localStorage.removeItem('signup-application-id'); }
+    }
+    if (!data) data = await call('/api/signup/sessions', {product: 'dental', coverage_year: 2026});
+    application = data.application;
+    localStorage.setItem('signup-application-id', application.id);
+    add('assistant', data.reply);
+  } catch (error) { add('assistant', error.message); }
+})();
+form.addEventListener('submit', async event => {
+  event.preventDefault();
+  const text = input.value.trim();
+  if (!text || !application) return;
+  input.value = ''; add('user', text);
+  try {
+    const data = await call(`/api/signup/${application.id}/messages`, {
+      client_message_id: crypto.randomUUID(), message: text, expected_version: application.version
+    });
+    application = data.application;
+    localStorage.setItem('signup-application-id', application.id);
+    add('assistant', data.reply);
+  } catch (error) { add('assistant', error.message); }
+});
+</script></body></html>

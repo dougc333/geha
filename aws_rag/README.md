@@ -80,7 +80,7 @@ The query side, the UI plus the search API with BM25, vector, hybrid, the LLM
 reranker and grounded answers, is a FastAPI app in a Lambda behind a public
 Function URL.
 
-This project started as a port of `../e2e_RAG/vercel_app`, and that Vercel
+This project started as a port of `../e2e_bm25vector`, and that Vercel
 deployment has been retired. The code here is now the source of truth.
 
 ```
@@ -118,6 +118,10 @@ Each JSONL line looks like:
 ```
 
 ## Layout
+
+The query Lambda also contains a persistent guided dental signup workflow. See
+[`docs/signup-refactor.md`](docs/signup-refactor.md) for its 11-part design,
+database migration, API lifecycle, security boundary, and plan-document mapping.
 
 | Path | Purpose |
 |---|---|
@@ -228,7 +232,7 @@ CHUNKS=$STACK-chunks-$ACCOUNT
 Upload a PDF (any key ending in `.pdf` triggers the chunker):
 
 ```bash
-aws s3 cp ../e2e_RAG/data/1706.03762v7.pdf s3://$RAW/papers/
+aws s3 cp ../agentic_search/data/1706.03762v7.pdf s3://$RAW/papers/
 ```
 
 Within a few seconds a chunk file appears:

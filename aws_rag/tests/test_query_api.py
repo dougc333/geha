@@ -14,6 +14,7 @@ from support import load
 
 lambda_function = load("lambda_function", "query/lambda_function.py")
 import chat  # noqa: E402  (query/ is on sys.path via support)
+import signup.router as signup_router  # noqa: E402
 
 KEY = {"X-API-Key": "test-key"}
 
@@ -34,7 +35,7 @@ class AccessKeyTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_pages_need_no_key_and_are_not_cached(self):
-        for path in ("/", "/chat", "/backends"):
+        for path in ("/", "/chat", "/backends", "/signup"):
             response = self.client.get(path)
             self.assertEqual(response.status_code, 200, path)
             self.assertIn("text/html", response.headers["content-type"])
@@ -58,6 +59,56 @@ class HistoryTest(unittest.TestCase):
     def test_long_user_message_is_still_rejected(self):
         with self.assertRaises(ValueError):
             chat.ChatMessage(role="user", content="x" * 12000)
+
+
+class SignupApiTest(unittest.TestCase):
+    client = TestClient(lambda_function.app)
+    application_id = "11111111-1111-1111-1111-111111111111"
+
+    def application(self, version=0):
+        return {
+            "id": self.application_id,
+            "member_ref": "local-demo-member",
+            "product": "dental",
+            "coverage_year": 2026,
+            "stage": "eligibility",
+            "status": "active",
+            "slots": {},
+            "version": version,
+        }
+
+    def test_create_signup_session(self):
+        database = mock.MagicMock()
+        database.return_value.__enter__.return_value = object()
+        with (
+            mock.patch.object(signup_router, "database", database),
+            mock.patch.object(
+                signup_router.repository,
+                "create_application",
+                return_value=self.application(),
+            ),
+        ):
+            response = self.client.post(
+                "/api/signup/sessions",
+                headers=KEY,
+                json={"product": "dental", "coverage_year": 2026},
+            )
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(response.json()["application"]["stage"], "eligibility")
+        self.assertIn("FEDVIP", response.json()["reply"])
+
+    def test_stale_signup_message_returns_conflict_before_rag(self):
+        with mock.patch.object(signup_router, "_load", return_value=self.application(version=2)):
+            response = self.client.post(
+                f"/api/signup/{self.application_id}/messages",
+                headers=KEY,
+                json={
+                    "client_message_id": "22222222-2222-2222-2222-222222222222",
+                    "message": "yes",
+                    "expected_version": 1,
+                },
+            )
+        self.assertEqual(response.status_code, 409)
 
 
 class RouterTest(unittest.TestCase):
