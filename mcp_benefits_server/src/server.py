@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Any
 
 from mcp.server.mcpserver import MCPServer
+from mcp.server.mcpserver.exceptions import ToolError
 from mcp.types import ToolAnnotations
 
 from registry import ToolSpec, exposed
@@ -41,6 +42,11 @@ def audited(spec: ToolSpec, environment: str, log_path: Path):
         started, outcome = time.perf_counter(), "ok"
         try:
             return spec.func(*args, **kwargs)
+        except ValueError as error:
+            # Expected input problems: the message is safe and helps the agent recover, so it is
+            # passed to the client. Any other exception is a crash, whose detail the SDK hides.
+            outcome = "error: ValueError"
+            raise ToolError(str(error)) from error
         except Exception as error:
             outcome = f"error: {type(error).__name__}"
             raise
