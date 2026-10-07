@@ -25,6 +25,7 @@ from app import (
     GENERATION_MODEL, RERANK_CANDIDATES, _embed_query, _rerank, converse, database, langfuse
 )
 import arxiv_meta
+import guard
 import library
 import weaviate_store
 from retrieval import (
@@ -290,9 +291,28 @@ def chat(request: ChatRequest) -> dict:
 
 @observe(name="chat-turn", capture_input=False, capture_output=False)
 def _chat_turn(request: ChatRequest) -> dict:
-    langfuse.update_current_span(input=request.messages[-1].content)
     started = time.perf_counter()
     timings: dict[str, float] = {}
+    # Safety guard: the newest message can be refused before any model, database or trace
+    # sees it; earlier messages (resent by the page as history) are scrubbed, not refused.
+    latest, input_verdict = guard.apply(request.messages[-1].content, "input")
+    langfuse.update_current_span(input=guard.scrub(request.messages[-1].content))
+    if input_verdict and not input_verdict.allowed and guard.MODE == "enforce":
+        langfuse.update_current_span(output=latest, metadata={"guard": {"input": input_verdict.category}})
+        return {"answer": latest, "route": "blocked", "trace_id": langfuse.get_current_trace_id(),
+                "standalone_question": "", "sources": [], "timings": timings,
+                "guard": {"input": input_verdict.category}}
+    request = request.model_copy(update={"messages": [
+        *[m.model_copy(update={"content": guard.scrub(m.content)}) for m in request.messages[:-1]],
+        request.messages[-1].model_copy(update={"content": latest}),
+    ]})
+    guard_info = {"input": input_verdict.category if input_verdict else "off"}
+
+    def checked(answer: str) -> str:
+        text, verdict = guard.apply(answer, "output")
+        guard_info["output"] = verdict.category if verdict else "off"
+        return text
+
     try:
         step = time.perf_counter()
         decision = _route(request.messages)
@@ -304,10 +324,12 @@ def _chat_turn(request: ChatRequest) -> dict:
             step = time.perf_counter()
             with database() as connection:
                 answer, papers = _answer_library(connection, decision)
+            answer = checked(answer)
             timings["library_ms"] = round((time.perf_counter() - step) * 1000, 1)
             timings["total_ms"] = round((time.perf_counter() - started) * 1000, 1)
-            langfuse.update_current_span(output=answer)
+            langfuse.update_current_span(output=answer, metadata={"guard": guard_info})
             return {
+                "guard": guard_info,
                 "answer": answer,
                 "route": decision["route"],
                 "papers": [{k: p[k] for k in ("title", "arxiv_id", "authors", "published", "primary_category")}
@@ -355,12 +377,14 @@ def _chat_turn(request: ChatRequest) -> dict:
             timings["generation_ms"] = round((time.perf_counter() - step) * 1000, 1)
         else:
             answer = "No papers are indexed yet. Add one by arXiv ID to get started."
+        answer = checked(answer)
 
         timings["total_ms"] = round((time.perf_counter() - started) * 1000, 1)
         langfuse.update_current_span(
-            output=answer, metadata={"standalone_question": query, "timings": timings}
+            output=answer, metadata={"standalone_question": query, "timings": timings, "guard": guard_info}
         )
         return {
+            "guard": guard_info,
             "answer": answer,
             "route": "content",
             "trace_id": langfuse.get_current_trace_id(),  # for /api/feedback
