@@ -107,9 +107,10 @@ class ParserTraps(unittest.TestCase):
         bot.reply("", "who")
         reply, state = bot.reply("my spouse is a federal employee", "who")
         self.assertEqual(state["stage"], "member_type")
-        self.assertIn("1. Active federal employee", reply)
-        self.assertIn("4. Eligible family member of an eligible enrollee", reply)
-        self.assertNotIn("2. Federal retiree", reply)
+        self.assertIn("Reply with 1 (Active federal employee) or 4 (Eligible family member", reply)
+        self.assertNotIn("Federal retiree", reply)
+        # A numbered Markdown list would be renumbered 1, 2 by the chat UI.
+        self.assertNotIn("\n4.", reply)
         reply, state = bot.reply("4", "who")
         self.assertEqual(state["stage"], "family_sponsor")
 
@@ -119,7 +120,7 @@ class ParserTraps(unittest.TestCase):
         bot.reply("4", "sponsor")
         reply, state = bot.reply("retired, no longer active", "sponsor")
         self.assertEqual(state["stage"], "family_sponsor")
-        self.assertIn("2. Retired", reply)
+        self.assertIn("Reply with 1 (Active federal employee (still working)) or 2 (Retired)", reply)
         _, state = bot.reply("2", "sponsor")
         self.assertEqual(state["status"], "Retired")
 
@@ -148,8 +149,7 @@ class ParserTraps(unittest.TestCase):
         bot = qle_bot("two-events")
         reply, state = bot.reply("we got married and had a baby", "two-events")
         self.assertEqual(state["stage"], "qle_event")
-        self.assertIn("1. Marriage", reply)
-        self.assertIn("2. Acquiring an eligible family member", reply)
+        self.assertIn("Reply with 1 (Marriage) or 2 (Acquiring an eligible family member", reply)
         reply, state = bot.reply("1", "two-events")
         self.assertTrue(state["complete"])
         self.assertIn("QLE policy table for **Marriage**", reply)

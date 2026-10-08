@@ -201,10 +201,9 @@ MENUS: dict[str, tuple[dict[str, str], dict[str, str]]] = {
 }
 
 
-def _menu(stage: str, only: tuple[str, ...] | None = None) -> str:
+def _menu(stage: str) -> str:
     numbering, labels = MENUS[stage]
-    return "\n".join(f"{number}. {labels[value]}" for number, value in numbering.items()
-                     if only is None or value in only)
+    return "\n".join(f"{number}. {labels[value]}" for number, value in numbering.items())
 
 
 def _numbered_prompt(title: str, rows: dict[str, tuple[str, str]]) -> str:
@@ -283,8 +282,15 @@ class DentalEnrollmentGraph:
 
     @staticmethod
     def _clarify(stage: str, candidates: Ambiguous) -> str:
-        """Ask only between the readings that matched, numbered as in the full menu."""
-        return "Your answer could mean more than one of these. Which one applies?\n" + _menu(stage, candidates)
+        """Ask only between the readings that matched, keeping their numbers from the full menu.
+
+        Written as a sentence: the chat UI renders a numbered list as Markdown, which would
+        renumber options 1 and 4 as 1 and 2, so a reply of "2" would pick the wrong option.
+        """
+        numbering, labels = MENUS[stage]
+        options = [f"{number} ({labels[value]})" for number, value in numbering.items() if value in candidates]
+        return ("Your answer could mean more than one thing. Reply with "
+                + ", ".join(options[:-1]) + " or " + options[-1] + ".")
 
     def start(self, _: EnrollmentState) -> EnrollmentState:
         return {"stage": "member_type", "response": self._prompt("member_type"), "complete": False}
