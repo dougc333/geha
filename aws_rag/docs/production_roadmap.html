@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>aws_rag Production Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single reading column of phase sections, each a list of status rows; summary strip on top. */
+:root {
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --ink: #18212e;
+  --muted: #5b6676;
+  --line: #dde2e8;
+  --accent: #2b6a8a;
+  --accent-soft: #e3eef4;
+  --todo: #8a94a3;
+  --doing: #b06d12;
+  --doing-soft: #fbf0de;
+  --done: #2c7a4f;
+  --done-soft: #e2f2e8;
+  --display: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11161d; --surface: #18202a; --ink: #e6ebf1; --muted: #9aa6b5; --line: #2a3542;
+    --accent: #7db8d6; --accent-soft: #1d3240; --todo: #7c8796;
+    --doing: #e5a54a; --doing-soft: #3a2b14; --done: #6cc794; --done-soft: #17321f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11161d; --surface: #18202a; --ink: #e6ebf1; --muted: #9aa6b5; --line: #2a3542;
+  --accent: #7db8d6; --accent-soft: #1d3240; --todo: #7c8796;
+  --doing: #e5a54a; --doing-soft: #3a2b14; --done: #6cc794; --done-soft: #17321f;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 860px; margin: 0 auto; padding-inline: 20px; padding-block: 36px 64px; display: grid; gap: 28px; }
+header { display: grid; gap: 10px; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { font-family: var(--display); font-weight: 800; font-size: clamp(28px, 5vw, 40px); line-height: 1.1; margin: 0; text-wrap: balance; }
+.lede { margin: 0; max-width: 65ch; color: var(--muted); }
+.state { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-family: var(--mono); font-size: 12px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); }
+.chip b { color: var(--ink); font-weight: 500; }
+.summary { display: grid; gap: 12px; padding: 18px 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+.summary-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 16px; }
+.big { font-family: var(--display); font-weight: 700; font-size: 26px; font-variant-numeric: tabular-nums; }
+.big small { font-family: var(--body); font-weight: 400; font-size: 14px; color: var(--muted); margin-left: 6px; }
+.filters { display: flex; gap: 4px; }
+.filters button { font: 500 13px var(--body); padding: 5px 12px; border-radius: 6px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }
+.filters button[aria-pressed="true"] { background: var(--accent-soft); color: var(--ink); border-color: var(--accent); }
+.bars { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px 16px; }
+.bar { display: grid; gap: 4px; min-width: 0; }
+.bar-label { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; color: var(--muted); }
+.bar-label span:last-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.track { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; display: flex; }
+.track i { display: block; height: 100%; }
+.track .d { background: var(--done); }
+.track .p { background: var(--doing); }
+.notice { padding: 12px 16px; border-radius: 8px; background: var(--accent-soft); color: var(--ink); font-size: 14px; }
+.phase { display: grid; gap: 10px; }
+.phase-head { display: grid; gap: 2px; }
+.phase-head h2 { font-family: var(--display); font-weight: 700; font-size: 21px; margin: 0; display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.phase-head h2 .n { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--accent); }
+.phase-head p { margin: 0; color: var(--muted); font-size: 14px; max-width: 65ch; }
+.items { display: grid; gap: 8px; }
+.item { display: grid; grid-template-columns: 4px 1fr; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.item .stripe { background: var(--todo); }
+.item[data-status="doing"] .stripe { background: var(--doing); }
+.item[data-status="done"] .stripe { background: var(--done); }
+.item-body { padding: 12px 14px; display: grid; gap: 8px; min-width: 0; }
+.item-top { display: flex; flex-wrap: wrap; gap: 8px 14px; justify-content: space-between; align-items: flex-start; }
+.item-title { font-weight: 600; margin: 0; min-width: 0; flex: 1 1 260px; }
+.item[data-status="done"] .item-title { color: var(--muted); }
+.item-detail { margin: 0; color: var(--muted); font-size: 14px; max-width: 70ch; }
+.item-detail code { font-family: var(--mono); font-size: 12.5px; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; flex: none; }
+.seg button { font: 500 12px var(--body); padding: 4px 10px; border: 0; background: transparent; color: var(--muted); cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"][data-v="todo"] { background: var(--line); color: var(--ink); }
+.seg button[aria-pressed="true"][data-v="doing"] { background: var(--doing-soft); color: var(--doing); }
+.seg button[aria-pressed="true"][data-v="done"] { background: var(--done-soft); color: var(--done); }
+.seg button:disabled { cursor: default; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; font-size: 12px; color: var(--muted); font-family: var(--mono); }
+.note { width: 100%; font: 14px var(--body); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; resize: vertical; min-height: 36px; }
+.note:disabled { opacity: .8; }
+button:focus-visible, .note:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.empty { padding: 28px 20px; text-align: center; color: var(--muted); border: 1px dashed var(--line); border-radius: 10px; }
+footer { font-size: 13px; color: var(--muted); }
+@media (prefers-reduced-motion: no-preference) { .track i { transition: width .3s ease; } }
+body { margin: 0; }
+</style>
+</head>
+<body>
+<script id="snapshot" type="application/json">{"exported_at": "2026-10-08", "source": "https://claude.ai/artifact/D5qmJVk8bPJsuKx2e4c1Ne", "items": [{"id": "p1-00", "detail": "The live bot answered “1e-4”; the paper uses a 4000-step warmup then inverse-square-root decay. Gold evidence: page 7, chunk 88990.", "note": "PR #56", "order": 0, "phase": 1, "status": "done", "title": "Add the Transformer learning-rate question (q41) to the eval", "updated": "2026-10-08"}, {"id": "p1-01", "detail": "Today `evals/run_eval.py` scores whether the right page comes back (hit@5). Add answer scoring against the gold answer: exact match for facts, an LLM judge for paraphrases, reported per question type and run in CI.", "note": "", "order": 1, "phase": 1, "status": "todo", "title": "Score answers, not just retrieval"}, {"id": "p1-02", "detail": "When retrieved passages don't support an answer, say so instead of guessing. Ship only if the answer eval shows fewer wrong answers without losing correct ones.", "note": "", "order": 2, "phase": 1, "status": "todo", "title": "Say “not in the papers” when evidence is thin"}, {"id": "p1-03", "detail": "Verify every [n] against the passage it cites; model-written citations can be hallucinated too.", "note": "", "order": 3, "phase": 1, "status": "todo", "title": "Check that each citation supports its sentence"}, {"id": "p1-04", "detail": "Chunk 88990 reads “according to the formula:” with the formula missing. Use Docling's formula output or keep the page image for equation-heavy pages, and count how many chunks have the same gap.", "note": "", "order": 4, "phase": 1, "status": "todo", "title": "Recover equations lost in PDF extraction"}, {"id": "p1-05", "detail": "A few scripted conversations (“what is orca?” then “how was it trained?”) to cover history handling after the Oct 3 `chat.py` refactor.", "note": "", "order": 5, "phase": 1, "status": "todo", "title": "Test follow-up questions"}, {"id": "p2-00", "detail": "Checks every message and answer for prompt injection, SSNs, cards and secrets; verdicts are recorded in Langfuse under `metadata.guard`, nothing is blocked yet.", "note": "PRs #54, #55", "order": 0, "phase": 2, "status": "done", "title": "Deploy the safety guard in monitor mode", "updated": "2026-10-08"}, {"id": "p2-01", "detail": "API Gateway with a Cognito or OIDC JWT authorizer instead of one `x-api-key` for everyone. The template already has `SignupAuthRequired` for an upstream authorizer.", "note": "", "order": 1, "phase": 2, "status": "todo", "title": "Replace the shared access key with sign-in"}, {"id": "p2-02", "detail": "API Gateway usage plans or a WAF rate rule, and per-user Bedrock cost in Langfuse.", "note": "", "order": 2, "phase": 2, "status": "todo", "title": "Per-user rate limits and cost tracking"}, {"id": "p2-03", "detail": "After reviewing real traffic in Langfuse for false blocks: `sam deploy --parameter-overrides GuardMode=enforce`. Add a model classifier only if the patterns miss real attacks.", "note": "", "order": 3, "phase": 2, "status": "todo", "title": "Switch the guard to enforce mode"}, {"id": "p2-04", "detail": "Traces hold users' questions and answers. Set a retention period; member data would need a BAA or self-hosted Langfuse.", "note": "", "order": 4, "phase": 2, "status": "todo", "title": "Decide what Langfuse may store"}, {"id": "p2-05", "detail": "Live since 2026-10-08 but unverified: check the `signup.*` tables from `schema.sql` exist in Neon, decide on `/rag-demo/signup-hash-key`, and add database tests. Otherwise disable it.", "note": "", "order": 5, "phase": 2, "status": "todo", "title": "Finish or switch off signup"}, {"id": "p3-00", "detail": "7 CloudWatch alarms emailing an SNS topic, a $10/month budget, QueryApi capped at 10 concurrent requests, 30-day logs.", "note": "PR #57", "order": 0, "phase": 3, "status": "done", "title": "Alarms, budget, concurrency cap and log retention", "updated": "2026-10-08"}, {"id": "p3-01", "detail": "Click the link in AWS's “Subscription Confirmation” email; alarm emails aren't delivered until then (budget emails are).", "note": "", "order": 1, "phase": 3, "status": "todo", "title": "Confirm the alarm email subscription"}, {"id": "p3-02", "detail": "GitHub Actions with an OIDC role instead of `sam deploy` from a laptop; deploy to a staging stack first and gate production on the retrieval, answer and guard evals.", "note": "", "order": 2, "phase": 3, "status": "todo", "title": "Deploy from CI with a staging stack"}, {"id": "p3-03", "detail": "Lambda aliases with SAM `DeploymentPreference`, rolling back on the alarms that now exist.", "note": "", "order": 3, "phase": 3, "status": "todo", "title": "Roll out gradually with automatic rollback"}, {"id": "p3-04", "detail": "A CloudWatch dashboard (requests, errors, latency, cost, guard verdicts) and JSON logs with a request ID shared with Langfuse traces.", "note": "", "order": 4, "phase": 3, "status": "todo", "title": "Dashboard and structured logs"}, {"id": "p3-05", "detail": "Use Neon's connection pooler for Lambda, confirm backups and retention, and schedule `scripts/backup_db.sh`.", "note": "", "order": 5, "phase": 3, "status": "todo", "title": "Harden the Neon database"}, {"id": "p3-06", "detail": "`DeletionPolicy: Retain` and versioning, so a stack change can't wipe the 390 MB of chunks and figure thumbnails.", "note": "", "order": 6, "phase": 3, "status": "todo", "title": "Protect the chunks bucket"}, {"id": "p4-01", "detail": "Show the answer as it is written instead of waiting up to the 120 s timeout.", "note": "", "order": 1, "phase": 4, "status": "todo", "title": "Stream answers"}, {"id": "p4-02", "detail": "Store feedback in Langfuse; every thumbs-down becomes a candidate eval question, the way q41 should have been caught.", "note": "", "order": 2, "phase": 4, "status": "todo", "title": "Thumbs up / down on answers"}, {"id": "p4-03", "detail": "Retire the Weaviate comparison backend from production and keep one path the evals justify; test whether the Bedrock rerank step still earns its cost.", "note": "", "order": 3, "phase": 4, "status": "todo", "title": "Simplify the retrieval stack"}, {"id": "p4-04", "detail": "Distinct small collections the router chooses between, instead of one large index with long chunk lists.", "note": "", "order": 4, "phase": 4, "status": "todo", "title": "Split into scoped indexes as the library grows"}, {"id": "p4-05", "detail": "Users add arXiv papers with visible status; failures surface through the dead-letter-queue alarms.", "note": "", "order": 5, "phase": 4, "status": "todo", "title": "Paper ingestion as a feature"}]}</script>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">geha · aws_rag · sam-app, us-west-2</div>
+    <h1>aws_rag Production Roadmap</h1>
+    <p class="lede">The steps to take the research-paper chatbot from a working demo to a production service, grouped into four phases. Set each item's status as work moves; notes are shared with everyone who opens this page.</p>
+    <div class="state" aria-label="Current state">
+      <span class="chip">Chatbot <b>paused</b> since 2026-10-08</span>
+      <span class="chip">Safety guard <b>monitor mode</b></span>
+      <span class="chip">Retrieval eval <b>63 questions</b></span>
+      <span class="chip">Budget <b>$10/month</b></span>
+    </div>
+  </header>
+
+  <section class="summary" aria-label="Progress">
+    <div class="summary-top">
+      <div class="big" id="overall">–<small>items done</small></div>
+      <div class="filters" role="group" aria-label="Show">
+        <button type="button" data-f="all" aria-pressed="true">All</button>
+        <button type="button" data-f="open" aria-pressed="false">Open</button>
+        <button type="button" data-f="done" aria-pressed="false">Done</button>
+      </div>
+    </div>
+    <div class="bars" id="bars"></div>
+  </section>
+
+  <div class="notice" id="notice" hidden></div>
+  <main id="phases" class="wrap" style="padding:0;gap:30px"></main>
+
+  <footer>Backup copy in the geha repo (<code>aws_rag/docs/production_roadmap.html</code>, data in <code>production_roadmap.json</code>). Statuses: To do, In progress, Done.</footer>
+</div>
+
+<script>
+const PHASES = [
+  { n: 1, name: "Trust the answers", why: "A confident wrong answer (q41: “1e-4” for the Transformer learning rate) went unmeasured. Fix answer quality first; none of it needs the chatbot running." },
+  { n: 2, name: "Secure and multi-user", why: "Needed before anyone besides you uses it: one shared access key, a public URL, and a half-shipped signup feature." },
+  { n: 3, name: "Operate it safely", why: "Deploys from a laptop, no staging, no rollback. Alarms and the budget are already in place." },
+  { n: 4, name: "Better product", why: "Speed, feedback, and a simpler retrieval stack once the basics hold." },
+];
+const LABELS = { todo: "To do", doing: "In progress", done: "Done" };
+
+let items = [];
+let db = null;
+let canWrite = true;
+let filter = "all";
+try { filter = localStorage.getItem("roadmap-filter") || "all"; } catch (e) {}
+
+const $ = (s, r = document) => r.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const codeify = (s) => esc(s).replace(/`([^`]+)`/g, "<code>$1</code>");
+
+function notice(text) {
+  const n = $("#notice");
+  n.textContent = text || "";
+  n.hidden = !text;
+}
+
+function renderSummary() {
+  const total = items.length;
+  const done = items.filter((i) => i.status === "done").length;
+  $("#overall").innerHTML = total ? `${done} / ${total}<small>items done</small>` : `–<small>items done</small>`;
+  $("#bars").innerHTML = PHASES.map((p) => {
+    const ps = items.filter((i) => i.phase === p.n);
+    const d = ps.filter((i) => i.status === "done").length;
+    const g = ps.filter((i) => i.status === "doing").length;
+    const pct = (x) => (ps.length ? (100 * x) / ps.length : 0);
+    return `<div class="bar"><div class="bar-label"><span>${p.n}. ${esc(p.name)}</span><span>${d}/${ps.length}</span></div>
+      <div class="track" role="img" aria-label="${d} done, ${g} in progress, of ${ps.length}"><i class="d" style="width:${pct(d)}%"></i><i class="p" style="width:${pct(g)}%"></i></div></div>`;
+  }).join("");
+  document.querySelectorAll(".filters button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.f === filter)));
+}
+
+function itemHTML(it) {
+  const seg = ["todo", "doing", "done"].map((v) =>
+    `<button type="button" data-v="${v}" aria-pressed="${it.status === v}" ${canWrite ? "" : "disabled"}>${LABELS[v]}</button>`).join("");
+  return `<article class="item" data-id="${esc(it.id)}" data-status="${esc(it.status)}">
+    <div class="stripe"></div>
+    <div class="item-body">
+      <div class="item-top"><h3 class="item-title">${esc(it.title)}</h3><div class="seg" role="group" aria-label="Status">${seg}</div></div>
+      <p class="item-detail">${codeify(it.detail)}</p>
+      <textarea class="note" id="note-${esc(it.id)}" rows="1" placeholder="${canWrite ? "Add a note: PR link, decision, blocker" : "No note"}" ${canWrite ? "" : "disabled"}>${esc(it.note)}</textarea>
+      ${it.updated ? `<div class="meta">Updated ${esc(it.updated)}</div>` : ""}
+    </div></article>`;
+}
+
+function render() {
+  renderSummary();
+  const host = $("#phases");
+  if (!items.length) {
+    host.innerHTML = `<div class="empty">No roadmap items yet. They appear here once they are added to this page's data.</div>`;
+    return;
+  }
+  // Keep a note that is being typed in: skip re-rendering while it has focus.
+  const active = document.activeElement && document.activeElement.classList.contains("note") ? document.activeElement.id : null;
+  if (active) { renderSummary(); return; }
+  host.innerHTML = PHASES.map((p) => {
+    const ps = items.filter((i) => i.phase === p.n)
+      .filter((i) => filter === "all" || (filter === "done" ? i.status === "done" : i.status !== "done"))
+      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+    if (!ps.length) return "";
+    return `<section class="phase"><div class="phase-head"><h2><span class="n">Phase ${p.n}</span>${esc(p.name)}</h2><p>${esc(p.why)}</p></div>
+      <div class="items">${ps.map(itemHTML).join("")}</div></section>`;
+  }).join("") || `<div class="empty">Nothing matches this filter.</div>`;
+}
+
+async function save(id, patch) {
+  if (!db) return;
+  try {
+    await db.doc("items/" + id).update({ ...patch, updated: new Date().toISOString().slice(0, 10) });
+  } catch (e) {
+    if (e && e.code === "invalid_argument") { canWrite = false; notice("You can view this roadmap but not change it."); render(); }
+    else if (e && e.code === "unavailable") { notice("Couldn't save just now. Try again in a moment."); }
+    else { notice("Couldn't save that change."); }
+  }
+}
+
+document.addEventListener("click", (ev) => {
+  const f = ev.target.closest(".filters button");
+  if (f) {
+    filter = f.dataset.f;
+    try { localStorage.setItem("roadmap-filter", filter); } catch (e) {}
+    render();
+    return;
+  }
+  const b = ev.target.closest(".seg button");
+  if (b && canWrite) {
+    const id = b.closest(".item").dataset.id;
+    const it = items.find((i) => i.id === id);
+    if (it && it.status !== b.dataset.v) save(id, { status: b.dataset.v });
+  }
+});
+
+document.addEventListener("change", (ev) => {
+  const t = ev.target;
+  if (!t.classList || !t.classList.contains("note") || !canWrite) return;
+  const id = t.closest(".item").dataset.id;
+  const it = items.find((i) => i.id === id);
+  if (it && (it.note || "") !== t.value) save(id, { note: t.value });
+});
+document.addEventListener("focusout", (ev) => {
+  if (ev.target.classList && ev.target.classList.contains("note")) setTimeout(render, 0);
+});
+
+render();
+
+const SNAPSHOT = JSON.parse(document.getElementById("snapshot").textContent);
+canWrite = false;
+items = SNAPSHOT.items;
+render();
+const n = document.getElementById("notice");
+n.innerHTML = 'Read-only snapshot exported ' + SNAPSHOT.exported_at + '. The live, editable roadmap is at <a href="' + SNAPSHOT.source + '">' + SNAPSHOT.source + '</a>.';
+n.hidden = false;
+</script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+{
+  "exported_at": "2026-10-08",
+  "source": "https://claude.ai/artifact/D5qmJVk8bPJsuKx2e4c1Ne",
+  "items": [
+    {
+      "id": "p1-00",
+      "detail": "The live bot answered “1e-4”; the paper uses a 4000-step warmup then inverse-square-root decay. Gold evidence: page 7, chunk 88990.",
+      "note": "PR #56",
+      "order": 0,
+      "phase": 1,
+      "status": "done",
+      "title": "Add the Transformer learning-rate question (q41) to the eval",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "p1-01",
+      "detail": "Today `evals/run_eval.py` scores whether the right page comes back (hit@5). Add answer scoring against the gold answer: exact match for facts, an LLM judge for paraphrases, reported per question type and run in CI.",
+      "note": "",
+      "order": 1,
+      "phase": 1,
+      "status": "todo",
+      "title": "Score answers, not just retrieval"
+    },
+    {
+      "id": "p1-02",
+      "detail": "When retrieved passages don't support an answer, say so instead of guessing. Ship only if the answer eval shows fewer wrong answers without losing correct ones.",
+      "note": "",
+      "order": 2,
+      "phase": 1,
+      "status": "todo",
+      "title": "Say “not in the papers” when evidence is thin"
+    },
+    {
+      "id": "p1-03",
+      "detail": "Verify every [n] against the passage it cites; model-written citations can be hallucinated too.",
+      "note": "",
+      "order": 3,
+      "phase": 1,
+      "status": "todo",
+      "title": "Check that each citation supports its sentence"
+    },
+    {
+      "id": "p1-04",
+      "detail": "Chunk 88990 reads “according to the formula:” with the formula missing. Use Docling's formula output or keep the page image for equation-heavy pages, and count how many chunks have the same gap.",
+      "note": "",
+      "order": 4,
+      "phase": 1,
+      "status": "todo",
+      "title": "Recover equations lost in PDF extraction"
+    },
+    {
+      "id": "p1-05",
+      "detail": "A few scripted conversations (“what is orca?” then “how was it trained?”) to cover history handling after the Oct 3 `chat.py` refactor.",
+      "note": "",
+      "order": 5,
+      "phase": 1,
+      "status": "todo",
+      "title": "Test follow-up questions"
+    },
+    {
+      "id": "p2-00",
+      "detail": "Checks every message and answer for prompt injection, SSNs, cards and secrets; verdicts are recorded in Langfuse under `metadata.guard`, nothing is blocked yet.",
+      "note": "PRs #54, #55",
+      "order": 0,
+      "phase": 2,
+      "status": "done",
+      "title": "Deploy the safety guard in monitor mode",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "p2-01",
+      "detail": "API Gateway with a Cognito or OIDC JWT authorizer instead of one `x-api-key` for everyone. The template already has `SignupAuthRequired` for an upstream authorizer.",
+      "note": "",
+      "order": 1,
+      "phase": 2,
+      "status": "todo",
+      "title": "Replace the shared access key with sign-in"
+    },
+    {
+      "id": "p2-02",
+      "detail": "API Gateway usage plans or a WAF rate rule, and per-user Bedrock cost in Langfuse.",
+      "note": "",
+      "order": 2,
+      "phase": 2,
+      "status": "todo",
+      "title": "Per-user rate limits and cost tracking"
+    },
+    {
+      "id": "p2-03",
+      "detail": "After reviewing real traffic in Langfuse for false blocks: `sam deploy --parameter-overrides GuardMode=enforce`. Add a model classifier only if the patterns miss real attacks.",
+      "note": "",
+      "order": 3,
+      "phase": 2,
+      "status": "todo",
+      "title": "Switch the guard to enforce mode"
+    },
+    {
+      "id": "p2-04",
+      "detail": "Traces hold users' questions and answers. Set a retention period; member data would need a BAA or self-hosted Langfuse.",
+      "note": "",
+      "order": 4,
+      "phase": 2,
+      "status": "todo",
+      "title": "Decide what Langfuse may store"
+    },
+    {
+      "id": "p2-05",
+      "detail": "Live since 2026-10-08 but unverified: check the `signup.*` tables from `schema.sql` exist in Neon, decide on `/rag-demo/signup-hash-key`, and add database tests. Otherwise disable it.",
+      "note": "",
+      "order": 5,
+      "phase": 2,
+      "status": "todo",
+      "title": "Finish or switch off signup"
+    },
+    {
+      "id": "p3-00",
+      "detail": "7 CloudWatch alarms emailing an SNS topic, a $10/month budget, QueryApi capped at 10 concurrent requests, 30-day logs.",
+      "note": "PR #57",
+      "order": 0,
+      "phase": 3,
+      "status": "done",
+      "title": "Alarms, budget, concurrency cap and log retention",
+      "updated": "2026-10-08"
+    },
+    {
+      "id": "p3-01",
+      "detail": "Click the link in AWS's “Subscription Confirmation” email; alarm emails aren't delivered until then (budget emails are).",
+      "note": "",
+      "order": 1,
+      "phase": 3,
+      "status": "todo",
+      "title": "Confirm the alarm email subscription"
+    },
+    {
+      "id": "p3-02",
+      "detail": "GitHub Actions with an OIDC role instead of `sam deploy` from a laptop; deploy to a staging stack first and gate production on the retrieval, answer and guard evals.",
+      "note": "",
+      "order": 2,
+      "phase": 3,
+      "status": "todo",
+      "title": "Deploy from CI with a staging stack"
+    },
+    {
+      "id": "p3-03",
+      "detail": "Lambda aliases with SAM `DeploymentPreference`, rolling back on the alarms that now exist.",
+      "note": "",
+      "order": 3,
+      "phase": 3,
+      "status": "todo",
+      "title": "Roll out gradually with automatic rollback"
+    },
+    {
+      "id": "p3-04",
+      "detail": "A CloudWatch dashboard (requests, errors, latency, cost, guard verdicts) and JSON logs with a request ID shared with Langfuse traces.",
+      "note": "",
+      "order": 4,
+      "phase": 3,
+      "status": "todo",
+      "title": "Dashboard and structured logs"
+    },
+    {
+      "id": "p3-05",
+      "detail": "Use Neon's connection pooler for Lambda, confirm backups and retention, and schedule `scripts/backup_db.sh`.",
+      "note": "",
+      "order": 5,
+      "phase": 3,
+      "status": "todo",
+      "title": "Harden the Neon database"
+    },
+    {
+      "id": "p3-06",
+      "detail": "`DeletionPolicy: Retain` and versioning, so a stack change can't wipe the 390 MB of chunks and figure thumbnails.",
+      "note": "",
+      "order": 6,
+      "phase": 3,
+      "status": "todo",
+      "title": "Protect the chunks bucket"
+    },
+    {
+      "id": "p4-01",
+      "detail": "Show the answer as it is written instead of waiting up to the 120 s timeout.",
+      "note": "",
+      "order": 1,
+      "phase": 4,
+      "status": "todo",
+      "title": "Stream answers"
+    },
+    {
+      "id": "p4-02",
+      "detail": "Store feedback in Langfuse; every thumbs-down becomes a candidate eval question, the way q41 should have been caught.",
+      "note": "",
+      "order": 2,
+      "phase": 4,
+      "status": "todo",
+      "title": "Thumbs up / down on answers"
+    },
+    {
+      "id": "p4-03",
+      "detail": "Retire the Weaviate comparison backend from production and keep one path the evals justify; test whether the Bedrock rerank step still earns its cost.",
+      "note": "",
+      "order": 3,
+      "phase": 4,
+      "status": "todo",
+      "title": "Simplify the retrieval stack"
+    },
+    {
+      "id": "p4-04",
+      "detail": "Distinct small collections the router chooses between, instead of one large index with long chunk lists.",
+      "note": "",
+      "order": 4,
+      "phase": 4,
+      "status": "todo",
+      "title": "Split into scoped indexes as the library grows"
+    },
+    {
+      "id": "p4-05",
+      "detail": "Users add arXiv papers with visible status; failures surface through the dead-letter-queue alarms.",
+      "note": "",
+      "order": 5,
+      "phase": 4,
+      "status": "todo",
+      "title": "Paper ingestion as a feature"
+    }
+  ]
+}
