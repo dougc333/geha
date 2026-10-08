@@ -47,6 +47,28 @@ OPPORTUNITY_DETAILS = {"1": "newly_eligible", "2": "qle"}
 ENROLLMENTS = {"1": "Self Only", "2": "Self Plus One", "3": "Self and Family"}
 NEEDS = {"1": "routine", "2": "major", "3": "orthodontia", "4": "maximum", "5": "unsure"}
 PLANS = {"1": "High", "2": "Standard"}
+SPONSOR_STATUSES = {"1": "Employed", "2": "Retired"}
+MEMBER_LABELS = {
+    "active_employee": "Active federal employee",
+    "federal_retiree": "Federal retiree or annuitant",
+    "retired_uniformed": "Retired uniformed service member",
+    "eligible_family": "Eligible family member of an eligible enrollee",
+    "unclear": "Other or not sure",
+}
+OPPORTUNITY_LABELS = {
+    "open_season": "2026 Open Season (November 10–December 8, 2025)",
+    "newly_eligible_or_qle": "Newly eligible or a qualifying life event",
+    "unsure": "Not sure",
+}
+OPPORTUNITY_DETAIL_LABELS = {"newly_eligible": "New hire or newly eligible", "qle": "Qualifying life event"}
+NEED_LABELS = {
+    "routine": "Preventive/routine care and the lowest premium",
+    "major": "Upcoming major dental work",
+    "orthodontia": "Orthodontia",
+    "maximum": "Maximum coverage, unlimited annual maximum, or three adult cleanings",
+    "unsure": "Not sure",
+}
+SPONSOR_LABELS = {"Employed": "Active federal employee (still working)", "Retired": "Retired"}
 QLE_EVENTS = {
     "1": ("marriage", "Marriage"),
     "2": ("acquire_family_member", "Acquiring an eligible family member (non-spouse)"),
@@ -92,30 +114,57 @@ QLE_MATRIX: dict[str, dict[str, bool | str]] = {
 }
 
 
-def _number_or_alias(message: str, options: dict[str, str], aliases: dict[str, tuple[str, ...]]) -> str:
-    text = re.sub(r"[^a-z0-9]+", " ", message.lower()).strip()
+class Ambiguous(tuple):
+    """Several categories matched one answer, so the member is asked which one applies."""
+
+
+# Relationship words: "my spouse is a federal employee" names a category but may describe
+# someone other than the person seeking coverage.
+RELATIONS = ("spouse", "husband", "wife", "partner", "mother", "father", "parent", "son",
+             "daughter", "child", "dependent", "brother", "sister")
+
+
+def _words(message: str) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", message.lower()).strip()
+
+
+def _alias_spans(text: str, alias: str) -> list[tuple[int, int]]:
+    # Aliases match at the start of a word: "other" is not in "mother", "active" not in "inactive".
+    return [match.span() for match in re.finditer(rf"(?<![a-z0-9]){re.escape(alias)}", text)]
+
+
+def _number_or_alias(message: str, options: dict[str, str],
+                     aliases: dict[str, tuple[str, ...]]) -> str | Ambiguous:
+    """One label, "" for no match, or Ambiguous when aliases of different labels match."""
+    text = _words(message)
     if text in options:
         return options[text]
-    matches = [
-        (len(alias), value)
-        for value, phrases in aliases.items()
-        for alias in phrases
-        if alias in text
-    ]
-    return max(matches)[1] if matches else ""
+    spans = [(start, end, value) for value, phrases in aliases.items()
+             for alias in phrases for start, end in _alias_spans(text, alias)]
+    # A match inside a longer match is part of that phrase, not a competing reading.
+    found = {value for start, end, value in spans
+             if not any(s <= start and end <= e and e - s > end - start for s, e, _ in spans)}
+    if len(found) > 1:
+        return Ambiguous(sorted(found))
+    return found.pop() if found else ""
 
 
-def parse_member_type(message: str) -> str:
-    return _number_or_alias(message, MEMBER_TYPES, {
+def parse_member_type(message: str) -> str | Ambiguous:
+    value = _number_or_alias(message, MEMBER_TYPES, {
         "active_employee": ("active federal employee", "federal employee", "active employee"),
         "federal_retiree": ("federal retiree", "annuitant", "retired federal"),
         "retired_uniformed": ("retired uniformed", "military retiree", "retired military"),
         "eligible_family": ("eligible family", "family member", "spouse", "dependent"),
         "unclear": ("not sure", "other", "none"),
     })
+    text = _words(message)
+    if value in {"active_employee", "federal_retiree", "retired_uniformed"} and any(
+            _alias_spans(text, word) for word in RELATIONS):
+        return Ambiguous((value, "eligible_family"))
+    return value
 
 
-def parse_opportunity(message: str) -> str:
+def parse_opportunity(message: str) -> str | Ambiguous:
     return _number_or_alias(message, OPPORTUNITIES, {
         "open_season": ("open season",),
         "newly_eligible_or_qle": ("newly eligible", "new hire", "qualifying life event", "qle"),
@@ -123,14 +172,14 @@ def parse_opportunity(message: str) -> str:
     })
 
 
-def parse_opportunity_detail(message: str) -> str:
+def parse_opportunity_detail(message: str) -> str | Ambiguous:
     return _number_or_alias(message, OPPORTUNITY_DETAILS, {
         "newly_eligible": ("newly eligible", "new hire", "became eligible"),
         "qle": ("qualifying life event", "qle", "life event"),
     })
 
 
-def parse_need(message: str) -> str:
+def parse_need(message: str) -> str | Ambiguous:
     return _number_or_alias(message, NEEDS, {
         "routine": ("routine", "preventive", "cleaning", "lowest premium"),
         "major": ("major", "root canal", "crown", "bridge", "dentures", "surgery", "extraction"),
@@ -140,28 +189,44 @@ def parse_need(message: str) -> str:
     })
 
 
+MENUS: dict[str, tuple[dict[str, str], dict[str, str]]] = {
+    "member_type": (MEMBER_TYPES, MEMBER_LABELS),
+    "family_sponsor": (SPONSOR_STATUSES, SPONSOR_LABELS),
+    "opportunity": (OPPORTUNITIES, OPPORTUNITY_LABELS),
+    "opportunity_detail": (OPPORTUNITY_DETAILS, OPPORTUNITY_DETAIL_LABELS),
+    "enrollment": (ENROLLMENTS, {value: value for value in ENROLLMENTS.values()}),
+    "need": (NEEDS, NEED_LABELS),
+    "plan": (PLANS, {value: value for value in PLANS.values()}),
+    "qle_event": ({number: event for number, (event, _) in QLE_EVENTS.items()}, dict(QLE_EVENTS.values())),
+}
+
+
+def _menu(stage: str) -> str:
+    numbering, labels = MENUS[stage]
+    return "\n".join(f"{number}. {labels[value]}" for number, value in numbering.items())
+
+
 def _numbered_prompt(title: str, rows: dict[str, tuple[str, str]]) -> str:
     return title + "\n" + "\n".join(f"{number}. {label}" for number, (_, label) in rows.items())
 
 
-def parse_qle_event(message: str) -> str:
-    text = re.sub(r"[^a-z0-9]+", " ", message.lower()).strip()
-    if text in QLE_EVENTS:
-        return QLE_EVENTS[text][0]
-    aliases = {
-        "marriage": ("marriage", "married"),
-        "acquire_family_member": ("acquiring", "new family member", "birth", "adoption"),
-        "lose_family_member": ("losing a covered family member", "divorce", "death"),
-        "lose_other_coverage": ("losing other coverage", "lost other coverage", "loss of coverage"),
+def parse_qle_event(message: str) -> str | Ambiguous:
+    return _number_or_alias(message, {number: event for number, (event, _) in QLE_EVENTS.items()}, {
+        "marriage": ("marriage", "married", "wedding"),
+        "acquire_family_member": ("acquiring", "new family member", "birth", "adopt", "baby", "newborn"),
+        "lose_family_member": ("losing a covered family member", "divorce", "death", "died",
+                               "passed away", "deceased"),
+        "lose_other_coverage": ("losing other coverage", "lost other coverage", "loss of coverage",
+                                "lost my dental", "lost my vision", "lost my coverage", "lost coverage"),
         "move_service_area": ("moving out", "service area"),
-        "active_military_nonpay": ("going on active military", "non pay status"),
-        "return_active_military": ("returning from active military", "return to pay from active"),
+        "active_military_nonpay": ("going on active military", "non pay status", "deployed",
+                                   "active duty without pay"),
+        "return_active_military": ("returning from active military", "return to pay from active",
+                                   "returning from active duty"),
         "return_lwop": ("returning from lwop", "leave without pay", "lwop"),
-        "annuity_restored": ("annuity restored", "compensation restored"),
+        "annuity_restored": ("annuity", "compensation restored"),
         "transfer_eligible_position": ("eligible position", "transferring"),
-    }
-    matches = [(len(alias), event) for event, phrases in aliases.items() for alias in phrases if alias in text]
-    return max(matches)[1] if matches else ""
+    })
 
 
 def format_qle_action_table(event: str) -> str:
@@ -203,35 +268,29 @@ class DentalEnrollmentGraph:
     @staticmethod
     def _prompt(stage: str) -> str:
         prompts = {
-            "member_type": (
-                "First, which describes the person seeking coverage?\n"
-                "1. Active federal employee\n2. Federal retiree or annuitant\n"
-                "3. Retired uniformed service member\n"
-                "4. Eligible family member of an eligible enrollee\n5. Other or not sure"
-            ),
+            "member_type": "First, which describes the person seeking coverage?\n" + _menu("member_type"),
             "family_sponsor": "Is the sponsoring enrollee an active federal employee or retired?",
-            "opportunity": (
-                "What enrollment opportunity applies?\n"
-                "1. 2026 Open Season (November 10–December 8, 2025)\n"
-                "2. Newly eligible or a qualifying life event\n3. Not sure"
-            ),
-            "opportunity_detail": (
-                "Which applies to you?\n"
-                "1. New hire or newly eligible\n"
-                "2. Qualifying life event"
-            ),
-            "enrollment": "Who will be covered?\n1. Self Only\n2. Self Plus One\n3. Self and Family",
+            "opportunity": "What enrollment opportunity applies?\n" + _menu("opportunity"),
+            "opportunity_detail": "Which applies to you?\n" + _menu("opportunity_detail"),
+            "enrollment": "Who will be covered?\n" + _menu("enrollment"),
             "state": "Enter your two-letter state or territory abbreviation.",
             "zip": "Enter your five-digit ZIP code so I can determine the dental rate code.",
-            "need": (
-                "What best describes your dental needs?\n"
-                "1. Preventive/routine care and the lowest premium\n"
-                "2. Upcoming major dental work\n3. Orthodontia\n"
-                "4. Maximum coverage, unlimited annual maximum, or three adult cleanings\n5. Not sure"
-            ),
+            "need": "What best describes your dental needs?\n" + _menu("need"),
             "plan": "Choose a plan: 1. High or 2. Standard.",
         }
         return prompts[stage]
+
+    @staticmethod
+    def _clarify(stage: str, candidates: Ambiguous) -> str:
+        """Ask only between the readings that matched, keeping their numbers from the full menu.
+
+        Written as a sentence: the chat UI renders a numbered list as Markdown, which would
+        renumber options 1 and 4 as 1 and 2, so a reply of "2" would pick the wrong option.
+        """
+        numbering, labels = MENUS[stage]
+        options = [f"{number} ({labels[value]})" for number, value in numbering.items() if value in candidates]
+        return ("Your answer could mean more than one thing. Reply with "
+                + ", ".join(options[:-1]) + " or " + options[-1] + ".")
 
     def start(self, _: EnrollmentState) -> EnrollmentState:
         return {"stage": "member_type", "response": self._prompt("member_type"), "complete": False}
@@ -244,6 +303,8 @@ class DentalEnrollmentGraph:
 
         if stage == "member_type":
             value = parse_member_type(message)
+            if isinstance(value, Ambiguous):
+                return {**update, "response": self._clarify(stage, value)}
             if not value and (result := self.jev(message, "member_type")):
                 value, update["jev_diagnostic"] = result["value"], result
             if not value:
@@ -265,17 +326,19 @@ class DentalEnrollmentGraph:
             return update
 
         if stage == "family_sponsor":
-            text = message.lower()
-            if "active" in text or "employ" in text:
-                update["status"] = "Employed"
-            elif "retir" in text or "annuit" in text:
-                update["status"] = "Retired"
-            else:
+            value = _number_or_alias(message, SPONSOR_STATUSES, {
+                "Employed": ("active", "employ", "working"), "Retired": ("retir", "annuit"),
+            })
+            if isinstance(value, Ambiguous):
+                return {**update, "response": self._clarify(stage, value)}
+            if not value:
                 return {**update, "response": "Please answer active employee or retired. " + self._prompt(stage)}
-            return {**update, "stage": "opportunity", "response": self._prompt("opportunity")}
+            return {**update, "status": value, "stage": "opportunity", "response": self._prompt("opportunity")}
 
         if stage == "opportunity":
             value = parse_opportunity(message)
+            if isinstance(value, Ambiguous):
+                return {**update, "response": self._clarify(stage, value)}
             if not value and (result := self.jev(message, "opportunity")):
                 value, update["jev_diagnostic"] = result["value"], result
             if not value:
@@ -294,6 +357,8 @@ class DentalEnrollmentGraph:
 
         if stage == "opportunity_detail":
             value = parse_opportunity_detail(message)
+            if isinstance(value, Ambiguous):
+                return {**update, "response": self._clarify(stage, value)}
             if not value and (result := self.jev(message, "opportunity_detail")):
                 value, update["jev_diagnostic"] = result["value"], result
             if not value:
@@ -318,6 +383,8 @@ class DentalEnrollmentGraph:
                 "Self Only": ("self only",), "Self Plus One": ("self plus one", "self 1"),
                 "Self and Family": ("self and family", "family"),
             })
+            if isinstance(value, Ambiguous):
+                return {**update, "response": self._clarify(stage, value)}
             if not value:
                 return {**update, "response": self._prompt(stage)}
             return {**update, "enrollment": value, "stage": "state", "response": self._prompt("state")}
@@ -341,6 +408,8 @@ class DentalEnrollmentGraph:
 
         if stage == "need":
             value = parse_need(message)
+            if isinstance(value, Ambiguous):
+                return {**update, "response": self._clarify(stage, value)}
             if not value and (result := self.jev(message, "need")):
                 value, update["jev_diagnostic"] = result["value"], result
             if not value:
@@ -368,6 +437,8 @@ class DentalEnrollmentGraph:
 
         if stage == "plan":
             value = _number_or_alias(message, PLANS, {"High": ("high",), "Standard": ("standard", "std")})
+            if isinstance(value, Ambiguous):
+                return {**update, "response": self._clarify(stage, value)}
             if not value:
                 return {**update, "response": self._prompt(stage)}
             premium = self.tables.premium(value, state["status"], state["enrollment"], state["rate_code"])
@@ -390,6 +461,8 @@ class DentalEnrollmentGraph:
     # QLE node 1: normalize the event. Jev is a fail-closed fallback only.
     def qle_route_event(self, state: EnrollmentState) -> EnrollmentState:
         event = parse_qle_event(state.get("message", ""))
+        if isinstance(event, Ambiguous):
+            return {"stage": "qle_event", "jev_diagnostic": {}, "response": self._clarify("qle_event", event)}
         diagnostic: dict[str, Any] = {}
         if not event and (result := self.jev(state.get("message", ""), "qle_event")):
             event, diagnostic = result["value"], result
@@ -465,7 +538,12 @@ class DentalEnrollmentGraph:
         )
         graph.add_edge("start", END)
         graph.add_edge("process_answer", END)
-        graph.add_edge("qle_route_event", "qle_complete")
+        # Re-asking for the event (unrecognised or ambiguous) ends the turn; only a known event completes.
+        graph.add_conditional_edges(
+            "qle_route_event",
+            lambda state: "qle_complete" if state.get("stage") == "qle_information_complete" else END,
+            {"qle_complete": "qle_complete", END: END},
+        )
         graph.add_edge("qle_complete", END)
         return graph.compile(checkpointer=MemorySaver())
 
