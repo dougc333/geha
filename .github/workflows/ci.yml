@@ -68,6 +68,24 @@ jobs:
             --with-requirements aws_rag/query/requirements.txt --with boto3 --with httpx --with pymupdf \
             python -m unittest discover -s aws_rag/tests -v
 
+  gcp-vertex-rag:
+    name: gcp_vertex_rag unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.28"
+          enable-cache: true
+      - name: Run tests without GCP credentials or network
+        working-directory: gcp_vertex_rag
+        run: |
+          uv python install 3.12
+          uv run --no-project --python 3.12 \
+            --with-requirements requirements-dev.txt \
+            python -m unittest discover -s tests -v
+
   aws-rag-retrieval-benchmark:
     name: aws_rag 62-question retrieval benchmark
     # Weekly and on demand only: this job logs into AWS and reads the database URL, so it

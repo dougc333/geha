@@ -54,6 +54,11 @@ Parameters:
     Type: String
     Default: ""
     Description: Comma-separated fallback RAG document IDs for signup benefits questions
+  RequireValidatedSidecar:
+    Type: String
+    Default: "true"
+    AllowedValues: ["true", "false"]
+    Description: Reject newly uploaded PDFs unless a SHA-bound, visually matched text sidecar exists
   SignupAuthRequired:
     Type: String
     Default: "false"
@@ -147,6 +152,7 @@ Resources:
       Environment:
         Variables:
           OUT_BUCKET: !Ref ChunkBucket
+          REQUIRE_VALIDATED_SIDECAR: !Ref RequireValidatedSidecar
       Policies:
         - S3ReadPolicy: { BucketName: !Sub "${AWS::StackName}-raw-${AWS::AccountId}" }
         - S3CrudPolicy: { BucketName: !Ref ChunkBucket }

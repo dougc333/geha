@@ -1,0 +1,20 @@
+## Docling table 1 (page 2)
+
+Nearest heading: Billing
+
+| Drug Name   | HCPCS Code   | Description                         |
+|:------------|:-------------|:------------------------------------|
+| Romiplostim | J2802        | Injection, romiplostim, 1 microgram |
+
+## Docling table 2 (page 3)
+
+Nearest heading: Disclaimer
+
+| Date       | Updates                                                                                                                                                                                                 |
+|:-----------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 5/1/2022   | Policy approved at P&T                                                                                                                                                                                  |
+| 10/4/2023  | Updated references to align with most up to date version of NCCN. Additional verbiage added under universal criteria and approval criteria. Headings updated for indication specific approval criteria. |
+| 4/25/2024  | Annual Review. Updated Universal Criteria and References                                                                                                                                                |
+| 11/22/2024 | For 1/1/2025 - Update to HCPCS code for 1/1/2025; template update; universal criteria update                                                                                                            |
+| 10/1/2025  | OH P&T Annual Review - minor changes; approved by OH P&T                                                                                                                                                |
+| 10/22/25   | Policy adopted by GEHA; document reviewed for universal accessibility.                                                                                                                                  |

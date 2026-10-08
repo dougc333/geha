@@ -1,0 +1,3 @@
+| Elevate Plus Benefits                                                                       | You pay                                                                                                      |   Page |
+|---------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|--------|
+| Protection against catastrophic costs (your catastrophic protection out-of-pocket maximum): | Nothing after $7,000 Self Only ($14,000 Self Plus One or Self and Family) per year for in-network providers. |     28 |

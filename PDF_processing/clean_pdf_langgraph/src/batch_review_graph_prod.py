@@ -19,13 +19,11 @@ from typing import Any, Literal, NotRequired, TypedDict
 from uuid import uuid4
 
 from langgraph.graph import END, START, StateGraph
-from langgraph.types import Command
 
 from .batch_review_graph import (
     EXTRACTORS,
     cycle_html_tables_node,
     docling_node,
-    human_review_node,
     html_node,
     render_pages_node,
 )
@@ -803,7 +801,10 @@ def build_graph(checkpointer=None):
     graph.add_node("render_pdf_pages", render_pages_node)
     graph.add_node("validate_review_inputs", validate_review_inputs_node)
     graph.add_node("cycle_html_tables", cycle_html_tables_node)
-    graph.add_node("human_review", human_review_node)
+    graph.add_node(
+        "vision_gate",
+        lambda state: {"vision_approved": bool(state["use_vision"])},
+    )
     graph.add_node("initialize_review", initialize_review_node)
     graph.add_node("prepare_table", prepare_table_node)
     graph.add_node("render_html_candidate", render_html_candidate_node)
@@ -819,9 +820,9 @@ def build_graph(checkpointer=None):
     graph.add_edge("build_combined_html", "render_pdf_pages")
     graph.add_edge("render_pdf_pages", "validate_review_inputs")
     graph.add_edge("validate_review_inputs", "cycle_html_tables")
-    graph.add_edge("cycle_html_tables", "human_review")
+    graph.add_edge("cycle_html_tables", "vision_gate")
     graph.add_conditional_edges(
-        "human_review", lambda state: "approved" if state["vision_approved"] else "declined",
+        "vision_gate", lambda state: "approved" if state["vision_approved"] else "declined",
         {"approved": "initialize_review", "declined": "vision_declined"},
     )
     graph.add_conditional_edges(
@@ -853,7 +854,7 @@ def build_graph(checkpointer=None):
 
 def run_pdf(
     pdf_path: Path, output_dir: Path, *, vision_model: str = "gpt-4o",
-    use_vision: bool = True, max_correction_attempts: int = 1,
+    use_vision: bool = False, max_correction_attempts: int = 1,
 ) -> ProdBatchReviewState:
     if not pdf_path.is_file() or pdf_path.suffix.lower() != ".pdf":
         raise FileNotFoundError(f"PDF not found: {pdf_path}")
@@ -878,24 +879,9 @@ def run_pdf(
         return graph.invoke(initial, config=config)
 
 
-def resume_pdf(output_dir: Path, *, approve: bool) -> ProdBatchReviewState:
-    output_dir = output_dir.expanduser().resolve()
-    checkpoint = output_dir / "checkpoint.sqlite"
-    if not checkpoint.is_file():
-        raise FileNotFoundError(f"No saved review checkpoint: {checkpoint}")
-    from langgraph.checkpoint.sqlite import SqliteSaver
-    with SqliteSaver.from_conn_string(str(checkpoint)) as saver:
-        graph = build_graph(checkpointer=saver)
-        config = {"configurable": {"thread_id": output_dir.name}}
-        snapshot = graph.get_state(config)
-        if not any(task.interrupts for task in snapshot.tasks):
-            raise ValueError(f"No pending human review in {output_dir}")
-        return graph.invoke(Command(resume=approve), config=config)
-
-
 def run_batch(
     input_dir: Path, run_dir: Path, *, pdf_name: str | None = None,
-    vision_model: str = "gpt-4o", use_vision: bool = True,
+    vision_model: str = "gpt-4o", use_vision: bool = False,
     limit: int | None = None, max_correction_attempts: int = 1,
 ) -> dict[str, Any]:
     input_dir = input_dir.expanduser().resolve()
@@ -927,24 +913,15 @@ def run_batch(
                 use_vision=use_vision,
                 max_correction_attempts=max_correction_attempts,
             )
-            if "__interrupt__" in state:
-                item = {
-                    "pdf": pdf_path.name,
-                    "status": "awaiting_human_approval",
-                    "output_dir": str(output_dir),
-                    "docling_html": state["docling_html"],
-                    "page_images": state["page_images"],
-                }
-            else:
-                review_status = state["extractor_reviews"]["docling"]["status"]
-                item = {
-                    "pdf": pdf_path.name,
-                    "status": "vision_declined" if state.get("vision_approved") is False
-                    else review_status,
-                    "docling_tables": len(state["docling_tables"]),
-                    "output_dir": str(output_dir),
-                    "error_reports": state["error_reports"],
-                }
+            review_status = state["extractor_reviews"]["docling"]["status"]
+            item = {
+                "pdf": pdf_path.name,
+                "status": "local_only_unverified" if state.get("vision_approved") is False
+                else review_status,
+                "docling_tables": len(state["docling_tables"]),
+                "output_dir": str(output_dir),
+                "error_reports": state["error_reports"],
+            }
         except Exception as error:
             output_dir.mkdir(parents=True, exist_ok=True)
             failure_path = output_dir / f"{pdf_path.stem}_processing_errors.md"
@@ -980,30 +957,18 @@ def main() -> None:
     parser.add_argument("--limit", type=int)
     parser.add_argument("--vision-model", default="gpt-4o")
     parser.add_argument("--max-correction-attempts", type=int, default=1)
-    parser.add_argument("--resume", type=Path)
-    decision = parser.add_mutually_exclusive_group()
-    decision.add_argument("--approve", action="store_true")
-    decision.add_argument("--reject", action="store_true")
+    parser.add_argument(
+        "--allow-external-model", action="store_true",
+        help="Permit sending relevant PDF page images and extracted HTML to the configured vision model.",
+    )
     args = parser.parse_args()
-    if args.resume:
-        if not (args.approve or args.reject):
-            parser.error("--resume requires --approve or --reject")
-        state = resume_pdf(args.resume, approve=args.approve)
-        print(json.dumps({
-            "pdf": Path(state["pdf_path"]).name,
-            "status": state["extractor_reviews"]["docling"]["status"],
-            "error_reports": state["error_reports"],
-        }, indent=2), flush=True)
-        return
-    if args.approve or args.reject:
-        parser.error("--approve and --reject require --resume")
     run_dir = args.output_dir or (
         BATCH_RUNS_DIR /
         f"prod-{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}-{uuid4().hex[:8]}"
     )
     summary = run_batch(
         args.input_dir, run_dir, pdf_name=args.pdf,
-        vision_model=args.vision_model, use_vision=True,
+        vision_model=args.vision_model, use_vision=args.allow_external_model,
         limit=args.limit, max_correction_attempts=args.max_correction_attempts,
     )
     print(json.dumps({
