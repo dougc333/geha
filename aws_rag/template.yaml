@@ -59,6 +59,11 @@ Parameters:
     Default: "false"
     AllowedValues: ["true", "false"]
     Description: Require JWT claims from an upstream API Gateway authorizer for signup APIs
+  GuardMode:
+    Type: String
+    Default: "monitor"
+    AllowedValues: ["enforce", "monitor", "off"]
+    Description: /api/chat safety guard (query/guard.py). monitor records verdicts in Langfuse without blocking
   WeaviateApiKeyParameter:
     Type: String
     Default: /rag-demo/weaviate-api-key
@@ -248,6 +253,7 @@ Resources:
           WEAVIATE_URL_PARAMETER: !Ref WeaviateUrlParameter
           WEAVIATE_API_KEY_PARAMETER: !Ref WeaviateApiKeyParameter
           API_KEY_PARAMETER: !Ref ApiKeyParameter
+          GUARD_MODE: !Ref GuardMode
           ARXIV_MAX_MB: "25"
       Policies:
         - Statement:
