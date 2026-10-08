@@ -68,6 +68,23 @@ Parameters:
     Type: String
     Default: /rag-demo/weaviate-api-key
     Description: SSM SecureString with the Weaviate API key
+  AlertEmailParameter:
+    Type: String
+    Default: /rag-demo/alert-email
+    Description: SSM String with the email for alarm and budget alerts (kept out of this public repo)
+  MonthlyBudgetUsd:
+    Type: Number
+    Default: 10
+    Description: Monthly AWS cost budget; email at 80% of actual and 100% of forecast spend
+  QueryConcurrency:
+    Type: Number
+    Default: 10
+    Description: Reserved (maximum) concurrent QueryApi executions; caps Bedrock spend if the API key leaks
+  LogRetentionDays:
+    Type: Number
+    Default: 30
+    AllowedValues: [7, 14, 30, 60, 90, 180, 365]
+    Description: CloudWatch Logs retention for the three functions
 
 Resources:
   # Names are fixed (not generated) so the queue policy can reference the raw
@@ -143,6 +160,8 @@ Resources:
   Chunker:
     Type: AWS::Serverless::Function
     Properties:
+      LoggingConfig:
+        LogGroup: !Ref ChunkerLogs
       Runtime: python3.12
       Handler: handler.handler
       CodeUri: chunker/                 # handler.py, rag_core.py, requirements.txt (pymupdf)
@@ -196,6 +215,8 @@ Resources:
   Embedder:
     Type: AWS::Serverless::Function
     Properties:
+      LoggingConfig:
+        LogGroup: !Ref EmbedderLogs
       Runtime: python3.12
       Handler: handler.handler
       CodeUri: embedder/                # handler.py, requirements.txt (psycopg, pgvector)
@@ -230,11 +251,14 @@ Resources:
   QueryApi:
     Type: AWS::Serverless::Function
     Properties:
+      LoggingConfig:
+        LogGroup: !Ref QueryApiLogs
       Runtime: python3.12
       Handler: lambda_function.handler
       CodeUri: query/                   # lambda_function.py, app.py, rag_core.py, index.html
       MemorySize: 1024
       Timeout: 120                      # embed + rerank + answer are three Bedrock calls
+      ReservedConcurrentExecutions: !Ref QueryConcurrency  # hard cap on parallel requests
       Environment:
         Variables:
           DATABASE_URL_PARAMETER: !Ref DatabaseUrlParameter
@@ -287,6 +311,145 @@ Resources:
       FunctionUrlConfig:
         AuthType: NONE                  # public
 
+  # ---- Monitoring and cost controls ----
+  ChunkerLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${AWS::StackName}/chunker"
+      RetentionInDays: !Ref LogRetentionDays
+  EmbedderLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${AWS::StackName}/embedder"
+      RetentionInDays: !Ref LogRetentionDays
+  QueryApiLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${AWS::StackName}/query-api"
+      RetentionInDays: !Ref LogRetentionDays
+
+  AlertTopic:
+    Type: AWS::SNS::Topic
+  AlertEmailSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      TopicArn: !Ref AlertTopic
+      Protocol: email                   # AWS emails a confirmation link; alarms deliver once it is clicked
+      Endpoint: !Sub "{{resolve:ssm:${AlertEmailParameter}}}"
+
+  QueryApiErrorsAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: QueryApi returned unhandled errors (5xx) in the last 5 minutes
+      Namespace: AWS/Lambda
+      MetricName: Errors
+      Dimensions: [{ Name: FunctionName, Value: !Ref QueryApi }]
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions: [!Ref AlertTopic]
+  QueryApiThrottlesAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: QueryApi hit its reserved concurrency (QueryConcurrency) and rejected requests
+      Namespace: AWS/Lambda
+      MetricName: Throttles
+      Dimensions: [{ Name: FunctionName, Value: !Ref QueryApi }]
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions: [!Ref AlertTopic]
+  QueryApiSlowAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: QueryApi p95 duration above 60 s (timeout is 120 s) for 10 minutes
+      Namespace: AWS/Lambda
+      MetricName: Duration
+      Dimensions: [{ Name: FunctionName, Value: !Ref QueryApi }]
+      ExtendedStatistic: p95
+      Period: 300
+      EvaluationPeriods: 2
+      Threshold: 60000
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions: [!Ref AlertTopic]
+  ChunkerErrorsAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: Chunker invocations failed (messages are retried, then go to ChunkDLQ)
+      Namespace: AWS/Lambda
+      MetricName: Errors
+      Dimensions: [{ Name: FunctionName, Value: !Ref Chunker }]
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions: [!Ref AlertTopic]
+  EmbedderErrorsAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: Embedder invocations failed (messages are retried, then go to EmbedDLQ)
+      Namespace: AWS/Lambda
+      MetricName: Errors
+      Dimensions: [{ Name: FunctionName, Value: !Ref Embedder }]
+      Statistic: Sum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions: [!Ref AlertTopic]
+  ChunkDLQAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: A PDF failed chunking 3 times and is in ChunkDLQ (see README "Failures")
+      Namespace: AWS/SQS
+      MetricName: ApproximateNumberOfMessagesVisible
+      Dimensions: [{ Name: QueueName, Value: !GetAtt ChunkDLQ.QueueName }]
+      Statistic: Maximum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions: [!Ref AlertTopic]
+  EmbedDLQAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmDescription: A chunk file failed embedding 3 times and is in EmbedDLQ (see README "Failures")
+      Namespace: AWS/SQS
+      MetricName: ApproximateNumberOfMessagesVisible
+      Dimensions: [{ Name: QueueName, Value: !GetAtt EmbedDLQ.QueueName }]
+      Statistic: Maximum
+      Period: 300
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      TreatMissingData: notBreaching
+      AlarmActions: [!Ref AlertTopic]
+
+  CostBudget:
+    Type: AWS::Budgets::Budget      # account-wide: covers all AWS spend, not only this stack
+    Properties:
+      Budget:
+        BudgetName: !Sub "${AWS::StackName}-monthly"
+        BudgetType: COST
+        TimeUnit: MONTHLY
+        BudgetLimit: { Amount: !Ref MonthlyBudgetUsd, Unit: USD }
+      NotificationsWithSubscribers:
+        - Notification: { NotificationType: ACTUAL, ComparisonOperator: GREATER_THAN, Threshold: 80, ThresholdType: PERCENTAGE }
+          Subscribers: [{ SubscriptionType: EMAIL, Address: !Sub "{{resolve:ssm:${AlertEmailParameter}}}" }]
+        - Notification: { NotificationType: FORECASTED, ComparisonOperator: GREATER_THAN, Threshold: 100, ThresholdType: PERCENTAGE }
+          Subscribers: [{ SubscriptionType: EMAIL, Address: !Sub "{{resolve:ssm:${AlertEmailParameter}}}" }]
+
 Outputs:
   RawBucketName:
     Value: !Ref RawBucket
@@ -313,5 +476,7 @@ Outputs:
   QueryUrl:
     Description: Open in a browser for the RAG UI
     Value: !GetAtt QueryApiUrl.FunctionUrl
+  AlertTopicArn:
+    Value: !Ref AlertTopic
   QueryFunctionName:
     Value: !Ref QueryApi

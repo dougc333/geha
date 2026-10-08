@@ -771,6 +771,95 @@ aws s3 cp s3://$CHUNKS/chunks/ s3://$CHUNKS/chunks/ --recursive \
   --metadata-directive REPLACE
 ```
 
+## Monitoring and cost controls
+
+The stack defines its own alarms, budget, concurrency cap and log retention
+(`template.yaml`, "Monitoring and cost controls"):
+
+| Control | Setting | Parameter |
+|---|---|---|
+| Email alerts | SNS topic `AlertTopic`, one email subscription | `AlertEmailParameter` (SSM name, default `/rag-demo/alert-email`) |
+| Monthly budget | email at 80% of actual and 100% of forecast spend; **account-wide**, not just this stack | `MonthlyBudgetUsd` (default 10) |
+| QueryApi concurrency | at most 10 requests in parallel; the rest are throttled, which caps Bedrock spend if the API key leaks | `QueryConcurrency` (default 10) |
+| Log retention | 30 days for `/aws/lambda/<stack>/chunker`, `/embedder`, `/query-api` | `LogRetentionDays` (default 30) |
+
+Alarms (all email `AlertTopic`; 5-minute periods; no data counts as OK):
+
+| Alarm | Fires when |
+|---|---|
+| `QueryApiErrorsAlarm` | QueryApi has ≥ 1 unhandled error |
+| `QueryApiThrottlesAlarm` | a request is rejected by the concurrency cap |
+| `QueryApiSlowAlarm` | p95 duration ≥ 60 s for 10 minutes (timeout is 120 s) |
+| `ChunkerErrorsAlarm`, `EmbedderErrorsAlarm` | an invocation fails (it is retried, then dead-lettered) |
+| `ChunkDLQAlarm`, `EmbedDLQAlarm` | a message reaches a dead-letter queue (see "Failures") |
+
+The alert email lives in SSM because this repository is public. Create it
+once before the first deploy:
+
+```bash
+aws ssm put-parameter --region us-west-2 --name /rag-demo/alert-email --type String --value you@example.com
+```
+
+AWS then emails a confirmation link: **alarms are not delivered until it is
+clicked** (budget emails don't need it). Check with
+`aws sns list-subscriptions-by-topic --topic-arn <AlertTopicArn output>`; the
+status changes from `PendingConfirmation` to a subscription ARN.
+
+New alarms show `INSUFFICIENT_DATA` until their metric reports, then `OK`.
+The functions logged to `/aws/lambda/sam-app-<Function>-<id>` before
+2026-10-08; those groups were set to 30-day retention by hand and expire on their own.
+
+## Pausing and archiving
+
+Idle, the stack costs about $0.01/month (S3 storage; Lambda, SQS and Bedrock
+bill per request) and Neon is billed separately. To stop all chat traffic
+without deleting anything, set QueryApi's concurrency to 0. The URL, data and
+configuration stay, and undoing it is one command:
+
+```bash
+FN=$(aws cloudformation describe-stacks --stack-name sam-app --region us-west-2 \
+  --query "Stacks[0].Outputs[?OutputKey=='QueryFunctionName'].OutputValue" --output text)
+aws lambda put-function-concurrency --region us-west-2 --function-name $FN --reserved-concurrent-executions 0
+# resume: the next `sam deploy` restores QueryConcurrency, or
+aws lambda put-function-concurrency --region us-west-2 --function-name $FN --reserved-concurrent-executions 10
+```
+
+This is the recommended way to set the project aside. Deleting the stack saves
+almost nothing, changes the Function URL on redeploy, and needs the buckets
+emptied first. If you do want it gone:
+
+1. `scripts/backup_db.sh`, then copy the chunks bucket somewhere outside the
+   stack (`aws s3 sync s3://sam-app-chunks-<account> s3://<archive-bucket>/aws_rag/`).
+   Its `chunks/*.jsonl` and `figures/` are enough to rebuild without Docling or Nova.
+2. Follow "Tear down".
+3. To come back: deploy, sync the archive into the new chunks bucket, and restore
+   the dump (or let the embedder re-embed `chunks/*.jsonl`).
+
+## Path to production
+
+This is a demo. Before real users:
+
+1. **Access:** replace the shared `x-api-key` with per-user auth (API Gateway
+   with a Cognito or OIDC JWT authorizer; `SignupAuthRequired` already expects
+   one), plus per-user rate limits or a WAF rate rule. The Function URL is
+   public (`AuthType: NONE`).
+2. **Monitoring:** done for errors, throttles, latency, DLQs, budget and log
+   retention (above). Still to add: a dashboard, structured logs with a request
+   ID shared with Langfuse, and a guard-verdict metric.
+3. **Data and privacy:** Langfuse stores questions and answers (the safety
+   guard scrubs SSNs, cards and secrets); member data needs a BAA or
+   self-hosted Langfuse and a retention policy. Verify the `signup.*` tables
+   exist in the database before using `/signup`. Move the guard from
+   `GuardMode=monitor` to `enforce` after reviewing its verdicts.
+4. **Deployment:** deploy from CI (GitHub Actions with an OIDC role) instead of
+   laptops, with a staging stack, retrieval and guard evals as a gate, and
+   Lambda aliases with `DeploymentPreference` for automatic rollback.
+5. **Reliability and quality:** check Bedrock quotas and add backoff on
+   throttling; consider streaming responses instead of a 120 s timeout;
+   measure answer accuracy, not only retrieval hit@5 (e.g. `q41`: the extracted
+   chunk lost the learning-rate formula); add `DeletionPolicy: Retain` and
+   versioning to the chunks bucket.
+
 ## Backup and restore
 
 **Neon is the only store that matters.** Weaviate is rebuilt from it by
@@ -908,7 +997,12 @@ aws s3 rm s3://$RAW --recursive
 aws s3 rm s3://$CHUNKS --recursive
 sam delete --stack-name $STACK
 aws ssm delete-parameter --name /rag-demo/database-url --region us-west-2
+aws ssm delete-parameter --name /rag-demo/alert-email --region us-west-2
 ```
+
+`sam delete` also removes the alarms, alert topic, budget and the stack's log
+groups. Log groups created before 2026-10-08 (`/aws/lambda/sam-app-<Function>-<id>`)
+expire after 30 days, or delete them with `aws logs delete-log-group`.
 
 `sam delete` leaves the rows in Postgres. Remove them with
 `DELETE FROM rag_documents WHERE source LIKE 's3://%'`; chunks cascade.
