@@ -1,0 +1,5 @@
+## Elevate Plus and Elevate Options
+
+| Benefits Description - Ambulance                                                                                                                                                                    | You pay After the calendar year deductible... - Elevate Plus   | You pay After the calendar year deductible... - Elevate   |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|-----------------------------------------------------------|
+| Ambulance (Local and Air): Please see Section 5(d), Ambulance for complete ambulance benefit coverage information. Note: Medical Necessity review is required for all air ambulance transportation. | Services are paid at the regular Plan benefits.                | Services are paid at the regular Plan benefits.           |

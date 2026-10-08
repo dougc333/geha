@@ -1,0 +1,19 @@
+steps:
+  - name: python:3.12-slim
+    entrypoint: bash
+    args:
+      - -ceu
+      - |
+        pip install --quiet -r requirements-dev.txt
+        python -m unittest discover -s tests -v
+  - name: gcr.io/cloud-builders/docker
+    args: ["build", "-t", "${_IMAGE}:${_TAG}", "."]
+  - name: gcr.io/cloud-builders/docker
+    args: ["push", "${_IMAGE}:${_TAG}"]
+images:
+  - "${_IMAGE}:${_TAG}"
+substitutions:
+  _IMAGE: us-central1-docker.pkg.dev/${PROJECT_ID}/vertex-rag/api
+  _TAG: latest
+options:
+  logging: CLOUD_LOGGING_ONLY

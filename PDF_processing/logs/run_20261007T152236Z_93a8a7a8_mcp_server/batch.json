@@ -1,0 +1,159 @@
+{
+  "run_id": "run_20261007T152236Z_93a8a7a8_mcp_server",
+  "status": "completed",
+  "generated_at": "2026-10-07T15:27:52.113717+00:00",
+  "source_pdf": "coverage-policies/geha-coverage-policy-bendamustine.pdf",
+  "source_sha256": "1f6c02199c2417cf1aa80a55aea1242b012c419a3352bb66e9032dd8964da233",
+  "model": "gpt-4o",
+  "external_model_allowed": true,
+  "max_correction_passes": 7,
+  "page_count": 3,
+  "pages_passed": 3,
+  "pages_needing_review": 0,
+  "pages_failed": 0,
+  "native_docling_pages": 3,
+  "vision_ocr_pages": 0,
+  "pages_modified": 3,
+  "error_counts_by_pass": [
+    {
+      "pass": 1,
+      "pages_reviewed": 3,
+      "error_count": 6
+    },
+    {
+      "pass": 2,
+      "pages_reviewed": 3,
+      "error_count": 4
+    },
+    {
+      "pass": 3,
+      "pages_reviewed": 1,
+      "error_count": 0
+    }
+  ],
+  "pages": [
+    {
+      "page": 1,
+      "status": "matched",
+      "extraction_method": "docling_native",
+      "text_metrics": {
+        "characters": 2375,
+        "alphanumeric_characters": 1891,
+        "words": 338,
+        "printable_ratio": 0.9701,
+        "replacement_characters": 0
+      },
+      "passes": [
+        {
+          "pass": 1,
+          "verdict": "mismatch",
+          "error_count": 2,
+          "issues": [
+            "Formatting of bullet points in the list under 'Universal Approval Criteria' is incorrect in both HTML and Markdown.",
+            "Table cell content 'Non-Preferred' in HTML does not match 'Non-preferred' in PDF."
+          ]
+        },
+        {
+          "pass": 2,
+          "verdict": "match",
+          "error_count": 0,
+          "issues": []
+        }
+      ],
+      "initial_error_count": 2,
+      "final_error_count": 0,
+      "content_changed": true,
+      "initial_html": "page_0001.initial.html",
+      "initial_markdown": "page_0001.initial.md",
+      "final_html": "page_0001.final.html",
+      "final_markdown": "page_0001.final.md",
+      "modified_markdown": "page_0001.modified.md"
+    },
+    {
+      "page": 2,
+      "status": "matched",
+      "extraction_method": "docling_native",
+      "text_metrics": {
+        "characters": 2886,
+        "alphanumeric_characters": 2329,
+        "words": 400,
+        "printable_ratio": 0.9785,
+        "replacement_characters": 0
+      },
+      "passes": [
+        {
+          "pass": 1,
+          "verdict": "mismatch",
+          "error_count": 3,
+          "issues": [
+            "List bullet points are inconsistent (· vs o).",
+            "List items contain incorrect bullet formatting for sub-items.",
+            "Improper alignment and indentation in Markdown reference links."
+          ]
+        },
+        {
+          "pass": 2,
+          "verdict": "match",
+          "error_count": 0,
+          "issues": []
+        }
+      ],
+      "initial_error_count": 3,
+      "final_error_count": 0,
+      "content_changed": true,
+      "initial_html": "page_0002.initial.html",
+      "initial_markdown": "page_0002.initial.md",
+      "final_html": "page_0002.final.html",
+      "final_markdown": "page_0002.final.md",
+      "modified_markdown": "page_0002.modified.md"
+    },
+    {
+      "page": 3,
+      "status": "matched",
+      "extraction_method": "docling_native",
+      "text_metrics": {
+        "characters": 1687,
+        "alphanumeric_characters": 1354,
+        "words": 255,
+        "printable_ratio": 0.9798,
+        "replacement_characters": 0
+      },
+      "passes": [
+        {
+          "pass": 1,
+          "verdict": "mismatch",
+          "error_count": 1,
+          "issues": [
+            "The list numbering in the HTML and Markdown does not match the PDF image, which starts at '5' in continuing order."
+          ]
+        },
+        {
+          "pass": 2,
+          "verdict": "mismatch",
+          "error_count": 4,
+          "issues": [
+            "Incorrect number list for item 5, should be '6.'",
+            "Missing header images (G.E.H.A and OncoHealth)",
+            "Inconsistent date format in table (e.g., missing zero in '10/22/25')",
+            "Missing footer text: 'Bendamustine: Belrapzo, Bendeka, Treanda, Vivimusta'"
+          ]
+        },
+        {
+          "pass": 3,
+          "verdict": "match",
+          "error_count": 0,
+          "issues": []
+        }
+      ],
+      "initial_error_count": 1,
+      "final_error_count": 0,
+      "content_changed": true,
+      "initial_html": "page_0003.initial.html",
+      "initial_markdown": "page_0003.initial.md",
+      "final_html": "page_0003.final.html",
+      "final_markdown": "page_0003.final.md",
+      "modified_markdown": "page_0003.modified.md"
+    }
+  ],
+  "modified_extracted_text": "modified_extracted_text.md"
+}

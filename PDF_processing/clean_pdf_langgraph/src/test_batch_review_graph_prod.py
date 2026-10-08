@@ -12,6 +12,7 @@ from unittest.mock import patch
 from .error_detection_demo import build_demo_document, load_cases
 from .batch_review_graph_prod import (
     ReviewStateError,
+    build_graph,
     compare_html_candidate_node,
     correct_html_candidate_node,
     cycle_html_tables_node,
@@ -74,6 +75,11 @@ def prepared_state(tables: list[dict], temporary: Path) -> dict:
 
 
 class ProductionBatchReviewTests(unittest.TestCase):
+    def test_production_graph_has_no_human_approval_interrupt(self) -> None:
+        nodes = build_graph().get_graph().nodes
+        self.assertIn("vision_gate", nodes)
+        self.assertNotIn("human_review", nodes)
+
     def test_permanent_demo_contains_every_labeled_case(self) -> None:
         cases = load_cases()
         document = build_demo_document(cases)

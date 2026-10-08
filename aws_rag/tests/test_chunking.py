@@ -1,5 +1,7 @@
 """Text chunking (chunker/rag_core.py) and Docling table chunks (local_ingest/docling_chunks.py)."""
 
+import hashlib
+import json
 import unittest
 
 from support import load
@@ -22,6 +24,53 @@ class ChunkTextTest(unittest.TestCase):
     def test_rejects_bad_sizes(self):
         with self.assertRaises(ValueError):
             rag_core.chunk_text("x", size=50, overlap=50)
+
+
+class ValidatedSidecarTest(unittest.TestCase):
+    SOURCE_SHA = "a" * 64
+
+    @staticmethod
+    def page(number, content, status="matched"):
+        return {
+            "page_number": number,
+            "validation_status": status,
+            "content": content,
+            "content_sha256": hashlib.sha256(content.encode("utf-8")).hexdigest(),
+        }
+
+    def payload(self):
+        return {
+            "schema_version": 1,
+            "source_sha256": self.SOURCE_SHA,
+            "validation_status": "validated",
+            "page_count": 2,
+            "pages": [self.page(1, "alpha beta"), self.page(2, "gamma delta")],
+        }
+
+    def test_validates_and_chunks_page_text(self):
+        pages, evidence = rag_core.validated_pages(
+            json.dumps(self.payload()).encode(), source_sha256=self.SOURCE_SHA
+        )
+        chunks = rag_core.chunk_validated_pages(pages, size=2, overlap=0)
+        self.assertEqual(evidence["validation_status"], "validated")
+        self.assertEqual([c["page_number"] for c in chunks], [1, 2])
+        self.assertEqual([c["chunk_index"] for c in chunks], [0, 1])
+
+    def test_rejects_sidecar_for_another_pdf(self):
+        with self.assertRaisesRegex(ValueError, "source PDF SHA-256"):
+            rag_core.validated_pages(self.payload(), source_sha256="b" * 64)
+
+    def test_rejects_page_that_did_not_match(self):
+        payload = self.payload()
+        payload["pages"][1] = self.page(2, "gamma delta", status="needs_human_review")
+        with self.assertRaisesRegex(ValueError, "not visually matched"):
+            rag_core.validated_pages(payload, source_sha256=self.SOURCE_SHA)
+
+    def test_rejects_changed_page_content(self):
+        payload = self.payload()
+        payload["pages"][0]["content"] = "tampered"
+        with self.assertRaisesRegex(ValueError, "content SHA-256"):
+            rag_core.validated_pages(payload, source_sha256=self.SOURCE_SHA)
 
 
 def table(rows: int, row_text: str = "value") -> str:

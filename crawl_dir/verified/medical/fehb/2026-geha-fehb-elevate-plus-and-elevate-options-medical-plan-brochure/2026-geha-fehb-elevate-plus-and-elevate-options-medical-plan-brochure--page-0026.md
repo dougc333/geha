@@ -1,0 +1,22 @@
+## Section 4. Your Costs for Covered Services
+
+This is what you will pay out-of-pocket for your covered care:
+
+| Cost-sharing   | Cost-sharing is the general term used to refer to your out-of-pocket costs (e.g., deductible, coinsurance, and copayments) for the covered care you receive.                                                                                                                                                                                                                                                                                 |
+|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Copayments     | A copayment is a fixed amount of money you pay to the provider, facility, pharmacy, etc., when you receive certain services. Example: When you see your in-network Primary Care Provider (PCP), under Elevate Plus, you pay a copayment of $30 per visit. Note: If the billed amount (or the Plan allowance that providers we contract with have agreed to accept as payment in full) is less than your copayment, you pay the lower amount. |
+| Deductible     | A deductible is a fixed amount of covered expenses you must incur for certain covered services and supplies before we start paying benefits for them. Copayments and coinsurance amounts do not count toward any deductible. When a covered service or supply is subject to deductible, only the Plan allowance for the service or supply counts toward the deductible.                                                                      |
+
+## Elevate Plus Option
+
+In-Network: Under a Self Only enrollment, the deductible is considered satisfied, and benefits are payable for you when your covered expenses applied to the calendar year deductible for your enrollment reach $200. Under the Self Plus One and the Self and Family enrollments, once the calendar year deductible amount of $200 is satisfied for an individual, covered benefits are payable for that individual; the calendar year deductible is met for all family members when the covered expenses accumulated to the calendar year deductible for any combination of family members reaches the Self Plus One or the Self and Family limit of $400. Only plan allowance paid for services or supplies from in-network providers counts toward this amount.
+
+Out-of-Network: Elevate Plus does not provide out-of-network benefits.
+
+## Elevate Option
+
+In-Network: Under a Self Only enrollment, the deductible is considered satisfied, and benefits are payable for you when your covered expenses applied to the calendar year deductible for your enrollment reaches $750. Under the Self Plus One and the Self and Family enrollments, once the calendar year deductible amount of $750 is satisfied for an individual, covered benefits are payable for that individual; the calendar year deductible is met for all family members when the covered expenses accumulated to the calendar year deductible for any combination of family members reaches the Self Plus One or the Self and Family limit of $1,500. Only plan allowance paid for services or supplies from in-network providers counts toward this amount.
+
+Out-of-Network: Under a Self Only enrollment, the deductible is considered satisfied, and benefits are payable for you when your covered expenses applied to the calendar year deductible for your enrollment reach $2,000. Under the Self Plus One and the Self and Family enrollments, once the calendar year deductible amount of $2,000 is satisfied for an individual, covered benefits are payable for that individual; the calendar year deductible is met for all family members when the covered expenses accumulated to the calendar year deductible for any combination of family members reaches the Self Plus One or the Self and Family limit of $4,000. Only plan allowance paid for services or supplies from out-of-network providers counts toward this amount.
+
+If the billed amount (or the Plan allowance that providers we contract with have agreed to accept as payment in full) is less than the remaining portion of your deductible, you pay the lower amount.

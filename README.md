@@ -3,6 +3,15 @@
 aws_rag
 https://pdh62b4ddxm6mw7aokdbtwream0nupph.lambda-url.us-west-2.on.aws/chat
 
+## GCP Vertex AI RAG
+
+[`gcp_vertex_rag`](gcp_vertex_rag/README.md) is the Google Cloud counterpart to
+`aws_rag`. It uploads the coverage-policy PDFs in `downloads` to a private,
+versioned Cloud Storage bucket, imports them into Vertex AI RAG Engine, and
+serves grounded Gemini answers with citations through an authenticated Cloud
+Run service. The sample includes Terraform, Cloud Build, a browser UI, and
+offline tests.
+
 
 agentic_search:
 Code References: The chat UI and PDF viewer comes from Lightning AI which is a chat assistant: 

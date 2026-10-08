@@ -2,6 +2,11 @@
 
 ![aws_rag architecture](docs/architecture.svg)
 
+Serverless AWS RAG platform for 203 public ML papers and 12,000+ text, table, and figure chunks using hybrid BM25/pgvector retrieval, reciprocal-rank fusion, Bedrock reranking, cited generation, and Langfuse tracing; achieved 95% retrieval hit@5 and 0.85 MRR@10 across 62 grounded evaluation questions.
+
+Docling-based table extraction and Bedrock vision descriptions for figures, improving retrieval from 0/9 to 7/9 on figure-only questions and answering 11/13 table-grounded questions.
+
+
 *Current architecture (2026-09-29): Docling ingestion with table and figure chunks, Nova Lite figure descriptions, figure thumbnails in the chat, Weaviate as a copy of Neon, and backups. Source: `docs/architecture.svg` (a PNG copy is in `docs/architecture.png`).*
 
 **Retrieval quality and speed** (40-question eval over 103 papers, see
@@ -220,6 +225,40 @@ aws cloudformation describe-stacks --stack-name pdf-chunker \
 
 ## Run it
 
+### GEHA validated-document ingestion
+
+Production GEHA ingestion uses locally validated per-page text rather than
+re-extracting text from the PDF in Lambda. The PDF remains the immutable source
+and citation artifact. Its companion object is named
+`<pdf-key>.validated.json` and is cryptographically bound to the PDF SHA-256.
+
+Build a sidecar only after every MCP page has completed visual comparison:
+
+```bash
+/Users/dc/geha/.venv/bin/python scripts/build_validated_sidecar.py \
+  --pdf /Users/dc/geha/crawl_dir/downloads/coverage-policies/geha-coverage-policy-bendamustine.pdf \
+  --run-dir /Users/dc/geha/PDF_processing/logs/<run_id> \
+  --output /Users/dc/geha/crawl_dir/validated_sidecars/coverage-policies/geha-coverage-policy-bendamustine.pdf.validated.json
+```
+
+The builder refuses incomplete runs, mismatched source hashes, missing page
+artifacts, and any page whose final status is not `matched`. After all 54
+sidecars exist, validate the corpus without changing AWS:
+
+```bash
+/Users/dc/geha/.venv/bin/python scripts/upload_validated_geha.py \
+  --corpus-dir /Users/dc/geha/crawl_dir/downloads \
+  --validated-dir /Users/dc/geha/crawl_dir/validated_sidecars \
+  --bucket "$RAW" --dry-run
+```
+
+Remove `--dry-run` to upload. The uploader writes each sidecar first and its PDF
+second, so the PDF-created S3 event always finds validated text. The stack
+defaults `RequireValidatedSidecar=true`; a missing, altered, incomplete, or
+non-matching sidecar sends the PDF event through the normal retry and DLQ path
+instead of silently falling back to native extraction. Set the parameter to
+`false` only for legacy research-paper ingestion.
+
 Set variables from the stack outputs:
 
 ```bash
@@ -229,7 +268,8 @@ RAW=$STACK-raw-$ACCOUNT
 CHUNKS=$STACK-chunks-$ACCOUNT
 ```
 
-Upload a PDF (any key ending in `.pdf` triggers the chunker):
+Legacy upload without a validated sidecar (only when
+`RequireValidatedSidecar=false`):
 
 ```bash
 aws s3 cp ../agentic_search/data/1706.03762v7.pdf s3://$RAW/papers/
@@ -263,7 +303,7 @@ Every `/api/*` call except `/api/health` needs a shared access key in the
 `X-API-Key` header; without it the API returns 401. The pages themselves (`/`,
 `/chat`, `/backends`, `/docs`) load without it: on the first API call they ask
 for the key once and remember it in the browser (localStorage). In Swagger
-(`/docs`), click **Authorize** and paste the key. `chatbot/add_arxiv.py` reads it
+(`/docs`), click **Authorize** and paste the key. `scripts/add_arxiv.py` reads it
 from `CHATBOT_API_KEY` or SSM.
 
 The key is an SSM SecureString, `/rag-demo/api-key`. Show it, or replace it:
@@ -316,8 +356,87 @@ each search with rerank or answer generation costs Bedrock usage. Switch to
 indexed papers, with cited answers and an "add an arXiv paper" box. It's served
 by `query/chat.py` (`POST /api/chat`, `POST /api/arxiv`) and `query/chat.html`.
 Papers added by arXiv ID land in `s3://<raw>/arxiv/`, with their title passed
-through S3 metadata → chunker → embedder. See [`../chatbot`](../chatbot) for
-the design, the `add_arxiv.py` command-line loader, cost and limits.
+through S3 metadata → chunker → embedder.
+
+### Corpus bootstrap and arXiv utility scripts
+
+These scripts are operational utilities. They are not imported by the deployed
+Lambda functions and are not required to answer chatbot requests. They are kept
+with `aws_rag` so the paper corpus can be reproduced and administered from one
+project.
+
+#### How the bulk paper corpus was created
+
+```text
+Semantic Scholar citation ranking
+               |
+               v
+scripts/download_top_cited.py
+  - searches core ML/AI terms
+  - filters to ML/AI arXiv categories
+  - downloads 300 ranked PDFs
+  - writes one metadata JSON sidecar per PDF
+               |
+               v
+agentic_search/data/arxiv_top300/
+  - <arxiv-id>.pdf
+  - <arxiv-id>.json
+  - manifest.json
+               |
+               v
+scripts/upload_papers.py
+  - selects the requested top N papers
+  - skips papers already stored
+  - uploads PDF and JSON pairs to raw S3
+               |
+               v
+S3 -> chunker -> embedder -> Neon/pgvector
+               |
+               v
+202-paper indexed corpus
+  + Orca and Self-RAG rollout -> 203 papers
+```
+
+Here, "top" means ranked primarily by Semantic Scholar citation count and then
+filtered to relevant arXiv categories. It is an automated popularity proxy, not
+a manually curated judgment of scientific importance. The local manifest
+contains 300 papers; deployment happened in stages (the top 100, then 99 more,
+plus papers already present), producing the documented 202-paper corpus. The
+later Orca and Self-RAG figure-processing rollout covered 203 papers.
+
+| Script | What it adds | When to use it |
+|---|---|---|
+| `scripts/download_top_cited.py` | A reproducible local collection of ranked arXiv PDFs, metadata sidecars, citation counts and `manifest.json` | Rebuild or refresh the bulk benchmark corpus; not during normal serving |
+| `scripts/upload_papers.py` | Selected local PDF/JSON pairs in raw S3, which starts the chunker and embedder pipeline | Initially populate AWS or add another bulk range |
+| `scripts/add_arxiv.py` | One or more papers through the deployed `POST /api/arxiv` endpoint | Add individual papers from a terminal and optionally wait for indexing |
+| `scripts/backfill_arxiv_metadata.py` | Missing title, author, date, abstract and category fields in existing database rows and S3 sidecars | Repair papers indexed before metadata support |
+
+Download or refresh the ranked local corpus:
+
+```bash
+cd /Users/dc/geha/aws_rag
+python scripts/download_top_cited.py
+# Development sample:
+python scripts/download_top_cited.py --count 50 --out /tmp/papers
+```
+
+Upload a selected portion of that corpus:
+
+```bash
+python scripts/upload_papers.py ../agentic_search/data/arxiv_top300 --top 100 --dry-run
+python scripts/upload_papers.py ../agentic_search/data/arxiv_top300 --top 100
+```
+
+Add individual papers through the deployed API:
+
+```bash
+python scripts/add_arxiv.py 2305.14314 https://arxiv.org/abs/2310.11511
+```
+
+`add_arxiv.py` uses only the Python standard library. It obtains the API URL
+from `--url`, `CHATBOT_URL`, or the CloudFormation stack, and obtains the access
+key from `CHATBOT_API_KEY` or SSM. Unless `--no-wait` is supplied, it polls until
+the paper appears in the index.
 
 ### Tracing with Langfuse
 

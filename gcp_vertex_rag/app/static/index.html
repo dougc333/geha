@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vertex AI coverage-policy RAG</title>
+  <style>
+    :root { font-family: Inter, system-ui, sans-serif; color: #10233f; background: #edf3f8; }
+    body { margin: 0; }
+    main { max-width: 880px; margin: 48px auto; padding: 36px; background: white; border-radius: 18px; box-shadow: 0 12px 36px #17324d1c; }
+    h1 { margin-top: 0; font-size: clamp(2rem, 5vw, 3.5rem); }
+    .notice { padding: 14px; border-left: 5px solid #d97706; background: #fff8e8; }
+    label { display: block; margin-top: 28px; font-weight: 700; }
+    textarea { box-sizing: border-box; width: 100%; min-height: 110px; margin: 8px 0 12px; padding: 14px; font: inherit; border: 1px solid #9fb0c2; border-radius: 10px; }
+    button { padding: 12px 22px; color: white; background: #174a7e; border: 0; border-radius: 9px; font-weight: 700; cursor: pointer; }
+    button:disabled { opacity: .55; cursor: wait; }
+    #result { margin-top: 28px; white-space: pre-wrap; line-height: 1.55; }
+    #sources li { margin: 8px 0; overflow-wrap: anywhere; }
+    .error { color: #9b1c1c; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Coverage-policy search</h1>
+  <p class="notice">Demonstration only. Answers summarize indexed policy documents and are not coverage determinations or medical advice.</p>
+  <form id="chat-form">
+    <label for="question">Question</label>
+    <textarea id="question" minlength="3" maxlength="2000" required placeholder="What are the coverage criteria for…?"></textarea>
+    <button id="submit" type="submit">Search policies</button>
+  </form>
+  <section aria-live="polite">
+    <div id="result"></div>
+    <ol id="sources"></ol>
+  </section>
+</main>
+<script>
+  const form = document.querySelector('#chat-form');
+  const button = document.querySelector('#submit');
+  const result = document.querySelector('#result');
+  const sources = document.querySelector('#sources');
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    button.disabled = true;
+    result.className = '';
+    result.textContent = 'Searching…';
+    sources.replaceChildren();
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST', headers: {'content-type': 'application/json'},
+        body: JSON.stringify({question: document.querySelector('#question').value})
+      });
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.detail || 'Request failed');
+      result.textContent = payload.answer;
+      for (const citation of payload.citations) {
+        const item = document.createElement('li');
+        item.textContent = citation.source_uri;
+        sources.appendChild(item);
+      }
+    } catch (error) {
+      result.className = 'error';
+      result.textContent = error.message;
+    } finally { button.disabled = false; }
+  });
+</script>
+</body>
+</html>
+

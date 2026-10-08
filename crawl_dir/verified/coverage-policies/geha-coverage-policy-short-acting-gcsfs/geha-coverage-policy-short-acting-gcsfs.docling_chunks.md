@@ -1,0 +1,99 @@
+## Chunk 1
+
+Pages: 1
+
+Headings: Short-Acting GCSFs
+
+Short-Acting GCSFs
+Original Effective Date:
+5/2/2022
+Revision Date(s):
+5/2/2022; 3/18/2023;  1/16/2024;  2/10/2025; 2/17/2025;  3/16/2026
+Review Date:
+3/16/2026
+Policy type:
+Medical Necessity
+Line of Business:
+All G.E.H.A Medical Plans
+Authorizations are issued for 6 (six) months, unless the ordering physician requests a different timespan or the patients' unique circumstance or condition supports the medical necessity for a different authorization timeframe. Reauthorization requests are reviewed for efficacy, safety and tolerability.
+Non - Preferred, Requires Prior Auth = Yes. Non - Preferred, Drug Name = Zarxio (filgrastim-sndz). Non - Preferred, HCPCS Code = Q5101. Non - Preferred, Description = Injection, filgrastim-sndz, biosimilar, (Zarxio), 1 microgram. Preferred, Requires Prior Auth = Yes. Preferred, Drug Name = Nivestym (filgrastim- aafi). Preferred, HCPCS Code = Q5110. Preferred, Description = Injection, filgrastim-aafi, biosimilar, (Nivestym), 1 microgram. Non- Preferred, Requires Prior Auth = Yes. Non- Preferred, Drug Name = Neupogen (filgrastim). Non- Preferred, HCPCS Code = J1442. Non- Preferred, Description = Injection, filgrastim (g-csf), excludes biosimilars, 1 microgram. Non- Preferred, Requires Prior Auth = Yes. Non- Preferred, Drug Name = Granix (tbo-filgrastim). Non- Preferred, HCPCS Code = J1447. Non- Preferred, Description = Injection, tbo-filgrastim, 1 microgram. Non- Preferred, Requires Prior Auth = Yes. Non- Preferred, Drug Name = Nypozi (filgrastim-txid). Non- Preferred, HCPCS Code = Q5148. Non- Preferred, Description = Injection, filgrastim-txid (nypozi), biosimilar, 1 microgram
+- Members must have documentation of a contraindication, failure, or intolerance to any of the preferred agents prior to approval of a non-preferred product.
+- Preferred product requirements apply to all requests, both new starts and reauthorizations.
+- Step Therapy applies to all overlapping compendia supported indications/regimens.
+
+## Chunk 2
+
+Pages: 1, 2
+
+Headings: Universal Approval Criteria:
+
+Universal Approval Criteria:
+Unless otherwise noted, the review criteria used by OncoHealth to determine medical necessity for anticancer treatments and supportive agents include, but is not limited to:
+- National Comprehensive Cancer Network® (NCCN) - used  consistently with NCCN recommendations carrying a Category 1 or 2A level of evidence; OR
+- United States Food and Drug Administration (FDA) labeling - new drugs or regimens (combinations of drugs) consistent with the product labeling; OR
+- Indications not included in the official FDA labeling or recommended by NCCN (Category 1 or 2A level of evidence) may be considered if determined to be medically necessary per one or more of the following compendia:
+- o Clinical Pharmacology (Strong For); OR
+- o Wolters Kluwer Lexi-Drugs® (Level A); OR
+- Other uses of drugs and biologics may be considered medically necessary if supported as safe and effective according to peer-reviewed articles from one of the following journals:
+- o American Journal of Medicine; Annals of Internal Medicine; Annals of Oncology; Annals of Surgical Oncology; Biology of Blood and Marrow Transplantation; Blood; Bone Marrow Transplantation; British Journal of Cancer; British Journal of Hematology; British Medical Journal; Cancer; Clinical Cancer Research; Drugs; European Journal of Cancer (formerly the European Journal of Cancer and Clinical Oncology); Gynecologic Oncology; International Journal of Radiation, Oncology, Biology, and Physics; The Journal of the American Medical Association, Journal of Clinical Oncology; Journal of the National Cancer Institute; Journal of the National Comprehensive Cancer Network (NCCN); Journal of Urology; Lancet; Lancet Oncology; Leukemia; The New England Journal of Medicine; Radiation Oncology;
+- o Meeting abstracts and case reports are excluded from  consideration.
+- Non-standard protocols may be approved based on unique clinical circumstances;
+- Dose and frequency should be consistent with United States Food and Drug Administration (FDA) labeling, National Comprehensive Cancer Network® (NCCN), or indication specific peer-reviewed literature;
+- In the instance that a request is made for drug(s) that was (were) previously tried (including in the same pharmacologic class or with the same mechanism of action) and such drug(s) was (were) discontinued due to a lack of efficacy the request may be subject to an off-label review for medical necessity unless supported by the NCCN or high quality literature (prospective phase 2 or 3 studies published as full manuscripts in a CMS-supported journal).
+
+## Chunk 3
+
+Pages: 2
+
+Headings: Billing Codes
+
+Billing Codes
+Neupogen, HCPCS Code = J1442. Neupogen, Description = Injection, filgrastim (g-csf), excludes biosimilars, 1 microgram. Granix, HCPCS Code = J1447. Granix, Description = Injection, tbo-filgrastim, 1 microgram. Filkri, HCPCS Code = J3590. Filkri, Description = Unclassified biologic. Nypozi, HCPCS Code = Q5148. Nypozi, Description = Injection, filgrastim-txid (nypozi), biosimilar, 1 microgram. Releuko, HCPCS Code = Q5125. Releuko, Description = Injection, filgrastim-ayow, biosimilar, (Releuko), 1 microgram. Zarxio, HCPCS Code = Q5101. Zarxio, Description = Injection, filgrastim-sndz, biosimilar, (Zarxio), 1 microgram. Nivestym, HCPCS Code = Q5110. Nivestym, Description = Injection, filgrastim-aafi, biosimilar, (Nivestym), 1 microgram
+
+## Chunk 4
+
+Pages: 2
+
+Headings: References
+
+References
+1. Granix [package insert]. Teva Pharmaceuticals USA, Inc., North Wales, PA.  Available at: https://www.granixhcp.com/globalassets/granix-hcp/prescribing-information.pdf
+2. Granix. NCCN Cancer Guidelines and Drugs and Biologics Compendium. Available at: https://www.nccn.org/professionals/drug_compendium/content/
+3. Filkri [package insert]. Accord BioPharma, Inc. Raleigh, NC. Available at: https://www.accessdata.fda.gov/drugsatfda_docs/label/2026/761027s000lbl.pdf
+
+## Chunk 5
+
+Pages: 3
+
+Headings: References
+
+References
+4. Neupogen [package insert]. Amgen Inc., Thousand Oaks, CA.  Available at: https://www.pi.amgen.com/~/media/amgen/repositorysites/pi-amgencom/neupogen/neupogen_pi_hcp_english.pdf
+5. Neupogen. NCCN Cancer Guidelines and Drugs and Biologics Compendium. Available at: https://www.nccn.org/professionals/drug_compendium/content/
+6. Nivestym [package insert]. Hospira, Inc., Lake Forest, IL.  Available at: http://labeling.pfizer.com/ShowLabeling.aspx?id=10899
+7. Nivestym. NCCN Cancer Guidelines and Drugs and Biologics Compendium. Available at: https://www.nccn.org/professionals/drug_compendium/content/
+8. Nypozi [package insert]. Tanvex BioPharma USA, Inc., San Diego, CA. Available at: https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/761126s000lbl.pdf
+9. Nypozi. NCCN Cancer Guidelines and Drugs and Biologics Compendium. Available at: https://www.nccn.org/professionals/drug_compendium/content
+10. Releuko [package insert]. Kashiv BioSciences, LLC.  Piscataway, NJ.  Available at: https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/761082s000lbl.pdf
+11. Releuko. NCCN Cancer Guidelines and Drugs and Biologics Compendium. Available at: https://www.nccn.org/professionals/drug_compendium/content /
+12. Zarxio [package insert]. Sandoz, Inc., Princeton, NJ.  Available at: https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c0d1c22b-566b-4776-bdbf00f96dad0cae
+13. Zarxio. NCCN Cancer Guidelines and Drugs and Biologics Compendium. Available at: https://www.nccn.org/professionals/drug_compendium/content /
+14. Referenced with permission from the NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines®).  National Comprehensive Cancer Network, Inc. 2026 . All rights reserved. Accessed March 10, 2026. To view the most recent and complete version of the guideline, go online to NCCN.org.
+
+## Chunk 6
+
+Pages: 3
+
+Headings: Disclaimer
+
+Disclaimer
+Drug Coverage Policies are developed as needed, reviewed and updated at least annually, and are subject to change. Other policies and coverage determination guidelines may apply. Federal and state regulatory requirements and member specific benefit plan documents, if applicable, must be reviewed prior to utilizing this Drug Coverage Policy.  This Drug Coverage Policy is for informational purposes only and does not constitute medical advice nor dictate how providers should practice medicine. This policy should not be reproduced, stored in a retrieval system, or altered from its original form without written permission from OncoHealth, Inc.
+
+## Chunk 7
+
+Pages: 4
+
+Headings: For Internal Use ONLY
+
+For Internal Use ONLY
+5/2/2022, Updates = Added preferred products and recommended step-therapy options. Added Wilms tumor per NCCN, added H-ARS per PI/NCCN, Updated MDS criteria per NCCN, updated AML per NCCN. Added Releuko per FDA approval. Removed stem cell transplant and H-ARS indications (out of scope for OH). 1/16/2024, Updates = Updated Step Therapy to Table; Addition of Universal Criteria and Approval Criteria; updated Releuko HCPCS; Updated references. 2/10/2025, Updates = Annual Review, added Nypozi, template update. 2/17/2025, Updates = Medical necessity criteria removed from policy - Approved by P&T; update to preferred product requirements. 3/16/2026, Updates = Annual review at OH P&T; added Nivestym as preferred agent; added Filkri. 3/16/2026, Updates = Policy adopted by G.E.H.A; document updated for universal accessibility.

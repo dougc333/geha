@@ -1,5 +1,9 @@
 # Table-Aware Coverage Policy RAG
 
+## This example iilustrates several points with structured vs unstructured data, context in structured data, how a MCP server/tool call can't accept tables but humans can. 
+1. There are different types of text documents. A fiction book is unstructured text. A axriv paper or policy coverage pdf has tables in it. Any tables define a structure. The naive implementation is to return an individual row with some included context information like the table title or row headers. This results in lower performance RAG systems. One solution is to return a table to the user and return a limited number of rows to the agent.  For a simple table: A 200-row, 8-column table is roughly 5,000–10,000 tokens, while 3 rows are about 200. You can test this using autotokenizer. 
+2. This is where text gets garbled because of legacy OCR pipelines. LLMs can correct these errors.
+
 ## Evaluation coverage: 11 case families
 
 The project currently tracks eleven evaluation case families. Nine have

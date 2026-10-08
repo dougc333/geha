@@ -86,7 +86,7 @@ A hybrid + rerank + answer query took ~8.7 s.
   follow-up rewriting, hybrid retrieval, rerank and cited answers, plus
   **"Add an arXiv paper"** (`/api/arxiv`). The first version answered "what is
   orca?" about killer whales; the answer prompt was tightened to stay within
-  the sources. `chatbot/add_arxiv.py` is a CLI loader.
+  the sources. `scripts/add_arxiv.py` is a CLI loader.
 - MCP was discussed: not needed for our own chatbot; only for exposing the
   papers to Claude Desktop/Code etc.
 
@@ -110,7 +110,7 @@ embedding and rerank costs itself (a follow-up message ≈ $0.0012, mostly reran
 
 ## 9. Scaling to ~100 papers
 
-- `chatbot/download_top_cited.py` downloaded the **300 most-cited ML/AI arXiv
+- `scripts/download_top_cited.py` downloaded the **300 most-cited ML/AI arXiv
   papers**, ranked by Semantic Scholar citation counts. OpenAlex was rejected
   for mismatched titles and duplicates. Each PDF has a metadata sidecar; 1.3 GB
   locally, git-ignored.
