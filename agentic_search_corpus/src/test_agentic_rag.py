@@ -4,7 +4,6 @@ import unittest
 from types import SimpleNamespace
 
 from agentic_rag import NOT_FOUND, AgenticRag
-from reranking_models_class import RerankingModels
 
 
 class FakeRetriever:
@@ -25,8 +24,14 @@ class FakeChain:
         return f"answer {self.calls} to {values['question']}"
 
 
+class FakeReranker:
+    @staticmethod
+    def rerank(documents, query, model='none'):
+        return [document.page_content for document in documents]
+
+
 def client():
-    return SimpleNamespace(retriever=FakeRetriever(), reranker=RerankingModels(), chain=FakeChain(),
+    return SimpleNamespace(retriever=FakeRetriever(), reranker=FakeReranker(), chain=FakeChain(),
                            format_context=lambda contexts, limit=3: "\n".join(list(contexts)[:limit]), llm=None)
 
 

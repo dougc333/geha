@@ -11,14 +11,12 @@ A LangGraph loop in the style of Corrective RAG (2401.15884) and Self-RAG (2310.
 from __future__ import annotations
 
 import argparse
-from typing import Any, Callable, TypedDict
+from typing import Any, Callable, Protocol, TypedDict
 
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langgraph.graph import END, START, StateGraph
 from pydantic import BaseModel, Field
-
-from rag_client_class import RagClient
 
 NOT_FOUND = "I could not find this in the documents."
 GRADE = ChatPromptTemplate.from_template(
@@ -42,6 +40,17 @@ class Completeness(BaseModel):
     complete: bool
     missing: list[str] = Field(default_factory=list)
     next_query: str = ''
+
+
+class RagClientLike(Protocol):
+    """Minimal interface required by the agentic workflow."""
+
+    retriever: Any
+    reranker: Any
+    chain: Any
+    llm: Any
+
+    def format_context(self, contexts: list[str], limit: int = 3) -> str: ...
 
 
 COMPLETENESS = ChatPromptTemplate.from_template(
@@ -70,9 +79,9 @@ class State(TypedDict, total=False):
 
 
 class AgenticRag:
-    """Wraps a RagClient; grade, rewrite and check can be injected for tests."""
+    """Wraps a compatible retrieval client; checks can be injected for tests."""
 
-    def __init__(self, client: RagClient, *, reranker_model: str = "none", max_rewrites: int = 1,
+    def __init__(self, client: RagClientLike, *, reranker_model: str = "none", max_rewrites: int = 1,
                  max_generations: int = 2, llm: Any = None,
                  grade: Callable[[str, str], bool] | None = None,
                  rewrite: Callable[[str, str], str] | None = None,
@@ -183,6 +192,8 @@ class AgenticRag:
 
 
 def main() -> None:
+    from rag_client_class import RagClient
+
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("question")
     parser.add_argument("--pdf", nargs="+", default=["../data/2306.02707.pdf"])
