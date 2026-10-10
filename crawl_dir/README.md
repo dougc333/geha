@@ -184,6 +184,22 @@ uv run python -m crawl_dir.src.pipeline.figure_specs \
   --specs crawl_dir/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs
 ```
 
+#### Performance on the EY/LIMRA report (29 pages)
+
+Measured from saved runs under `runs/research/ey-limra-workforce-benefits-study-final-2025/`
+(wall time = input snapshot to `qc-report.json`, on a MacBook):
+
+| Approach | Model calls | Wall time | Figure verification | Result |
+|---|---|---|---|---|
+| Whole-page semantic HTML (gpt-4.1-mini generate/review/correct) | every visual page, up to 6 passes | 521–803 s for 14 visual pages | model reviewer only | 2 of 3 runs failed QC (2 and 11 errors left) |
+| Chart/figure crop loop (`figure_segmentation`, gpt-4.1-mini) | every figure, up to 6 passes | 878 s for 16 of 29 pages, then stopped | model reviewer; 3 of 16 figures failed | Never finished; invented labels (Figure 2) |
+| **Authored figure specs (no model)** | **0** | **56–68 s for all 29 pages** | **every printed value and label checked against PDF text** | **26 figures, 0 verifier errors, 20/20 pages passed** |
+
+The spec path is about 10× faster than the model loops, costs $0 in model calls,
+and is deterministic: the same specs always produce the same HTML. The time that
+remains is mostly local Docling text export for the 9 pages without charts. The
+Claude version of the model loops has not been benchmarked.
+
 ## Artifact layout
 
 ```text
