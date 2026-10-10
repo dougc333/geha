@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import asyncio
+import functools
 import json
 import uuid
 from dataclasses import asdict
@@ -19,6 +21,7 @@ from .pipeline.scanned_ingestion import (
     process_scanned_document,
 )
 from .pipeline.claude_client import CLAUDE_MODEL
+from .pipeline.figure_specs import process_document_with_figure_specs, spec_pages
 from .pipeline.page_segmentation import segment_page_with_claude
 from .pipeline.artifact_io import run_id
 
@@ -31,6 +34,15 @@ server = FastMCP(
                   "is required before writing files or calling Claude."),
 )
 
+
+
+async def _off_loop(function, /, **kwargs):
+    """Run a blocking pipeline call in a worker thread.
+
+    MCP tools execute inside an asyncio loop, and the pipeline renders HTML with
+    Playwright's sync API, which refuses to run while a loop is active.
+    """
+    return await asyncio.to_thread(functools.partial(function, **kwargs))
 
 def _manifest_entry(selector: str) -> dict:
     """Resolve an exact canonical path or a unique PDF filename from the manifest."""
@@ -112,7 +124,7 @@ def download_public_pdf(document: str, confirm: bool = False) -> dict:
     annotations=ToolAnnotations(read_only_hint=False, destructive_hint=False,
                                 idempotent_hint=False, open_world_hint=True),
 )
-def ingest_scanned_pdf(
+async def ingest_scanned_pdf(
     family: str,
     document: str,
     document_version: str,
@@ -136,7 +148,8 @@ def ingest_scanned_pdf(
         return {"status": "approval_required", **plan,
                 "external_processing": "Claude receives source-page PNGs and candidate HTML.",
                 "next_step": "Review this plan, then call again with confirm=true."}
-    output = process_scanned_document(
+    output = await _off_loop(
+        process_scanned_document,
         root=ROOT, family=family, document=document,
         document_version=document_version, plan_year=plan_year,
         model=model, max_corrections=max_corrections,
@@ -154,7 +167,7 @@ def ingest_scanned_pdf(
     annotations=ToolAnnotations(read_only_hint=False, destructive_hint=False,
                                 idempotent_hint=False, open_world_hint=True),
 )
-def ingest_native_pdf_with_visual_figures(
+async def ingest_native_pdf_with_visual_figures(
     family: str,
     document: str,
     document_version: str,
@@ -196,7 +209,8 @@ def ingest_native_pdf_with_visual_figures(
             ),
             "next_step": "Review the detected figure pages, then call again with confirm=true.",
         }
-    output = process_scanned_document(
+    output = await _off_loop(
+        process_scanned_document,
         root=ROOT,
         family=family,
         document=document,
@@ -208,6 +222,85 @@ def ingest_native_pdf_with_visual_figures(
     )
     qc = json.loads((output / "qc-report.json").read_text(encoding="utf-8"))
     return {"status": "candidate_created", **plan, "run": str(output), "qc": qc}
+
+
+def _figure_spec_dir(family: str, document: str) -> Path:
+    return ROOT / "annotations" / family / Path(document).stem / "figure-specs"
+
+
+@server.tool(
+    name="ingest_pdf_with_figure_specs",
+    description=("Demo-only: ingest one public PDF under crawl_dir/raw using authored figure "
+                 "specs (annotations/<family>/<document>/figure-specs/page-NNN.json) for its "
+                 "charts. Every printed value and label in each spec is checked against the "
+                 "native PDF text inside the figure box, and semantic HTML is rendered without "
+                 "a model; pages without specs use local native-text extraction. No model or "
+                 "network call. Fails if the document has no specs."),
+    annotations=ToolAnnotations(read_only_hint=False, destructive_hint=False,
+                                idempotent_hint=False, open_world_hint=False),
+)
+async def ingest_pdf_with_figure_specs(
+    family: str,
+    document: str,
+    document_version: str,
+    data_classification: str,
+    plan_year: int | None = None,
+    confirm: bool = False,
+) -> dict:
+    """Run the no-model figure-spec pipeline and report per-figure verification."""
+    if data_classification != "public":
+        raise ValueError("This demo tool accepts only data_classification='public'")
+    source = resolve_raw_document(ROOT, family, document)
+    specs_dir = _figure_spec_dir(family, document)
+    pages = spec_pages(specs_dir) if specs_dir.is_dir() else []
+    if not pages:
+        raise ValueError(
+            f"No figure specs found at {specs_dir}. Write page-NNN.json specs for this "
+            "document's charts, or use ingest_native_pdf_with_semantic_html_charts."
+        )
+    figure_pages = detect_visual_figure_pages(source)
+    plan = {
+        "demo_only": True,
+        "family": family,
+        "document": document,
+        "source": str(source),
+        "data_classification": "public",
+        "page_count": pdf_page_count(source),
+        "specs_dir": str(specs_dir),
+        "spec_pages": pages,
+        # Pages that print "Figure N" but have no spec fall back to native text only.
+        "figure_pages_without_specs": sorted(set(figure_pages) - set(pages)),
+        "model": None,
+        "routing": "Authored figure specs verified against native PDF text + Docling native pages",
+    }
+    if not confirm:
+        return {
+            "status": "approval_required",
+            **plan,
+            "external_processing": "None; everything runs locally.",
+            "next_step": "Review the spec pages, then call again with confirm=true.",
+        }
+    output = await _off_loop(
+        process_document_with_figure_specs,
+        root=ROOT, family=family, document=document,
+        document_version=document_version, specs_dir=specs_dir, plan_year=plan_year,
+    )
+    qc = json.loads((output / "qc-report.json").read_text(encoding="utf-8"))
+    figures = []
+    for batch_path in sorted((output / "pages").glob("page-*/segments/batch.json")):
+        batch = json.loads(batch_path.read_text(encoding="utf-8"))
+        page = int(batch_path.parts[-3].split("-")[1])
+        figures.extend({
+            "page": page, "id": figure["id"], "status": figure["status"],
+            "verifier_errors": figure["selected_error_count"],
+            "value_evidence": figure.get("value_evidence"),
+            "html": str(batch_path.parent / figure["final_html"]),
+        } for figure in batch["figures"])
+    return {
+        "status": "candidate_created", **plan, "run": str(output), "qc": qc,
+        "figures": figures,
+        "verifier_errors": sum(figure["verifier_errors"] for figure in figures),
+    }
 
 
 @server.tool(
