@@ -25,6 +25,7 @@ from .artifact_io import atomic_json, run_id
 TOOL_ID = "authored_figure_spec_html"
 WORKFLOW = "authored_figure_spec_semantic_html"
 BAND_GAP_PT = 18
+BULLET_GLYPHS = r"[■▪●•◦]"
 PERCENT = re.compile(r"\d+(?:\.\d+)?%")
 QUOTES = str.maketrans({"’": "'", "‘": "'", "“": '"', "”": '"', "–": "-", "—": "-"})
 
@@ -94,6 +95,11 @@ table.heat td { text-align: center; }
           font-size: 12px; text-align: center; }
 svg.cycle { display: block; width: 280px; max-width: 100%; margin: 8px auto; }
 .cycle-list { font-size: 14px; }
+ol.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px 28px;
+           padding-left: 1.4em; }
+ol.steps > li::marker { font-weight: bold; color: #b8a400; }
+ol.steps h4 { margin: 0 0 4px; font-size: 16px; }
+ol.steps ul { margin: 0; padding-left: 1.1em; }
 .quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
 .quotes blockquote { margin: 0; padding: 8px 14px; border-left: 4px solid #FFE600; font-family: Georgia, serif; }
 """
@@ -144,6 +150,7 @@ def _figure_texts(figure: dict[str, Any]) -> list[str]:
     texts += [row["label"] for row in chart.get("rows", [])]
     texts += [chart.get("heading", ""), *chart.get("scale_labels", [])]
     texts += [item["label"] for item in chart.get("items", [])]
+    texts += [bullet for item in chart.get("items", []) for bullet in item.get("bullets", [])]
     return [text for text in texts if text]
 
 
@@ -182,7 +189,8 @@ def native_box_evidence(page_pdf: Path, box_pt: list[float]) -> dict[str, Any]:
 
 
 def _words(text: str) -> list[str]:
-    cleaned = text.translate(QUOTES).casefold()
+    # The PDF text layer glues list bullet glyphs onto the first word ("■Ability").
+    cleaned = re.sub(BULLET_GLYPHS, " ", text.translate(QUOTES)).casefold()
     return [word for word in (part.strip(".,:;()\"'?!") for part in cleaned.split()) if word]
 
 
@@ -518,6 +526,16 @@ def _render_cycle(figure: dict[str, Any]) -> str:
     return f'{svg}<ul class="cycle-list">{items}</ul>'
 
 
+def _render_steps(figure: dict[str, Any]) -> str:
+    """Numbered steps/stages, each with a heading and bullet points."""
+    steps = []
+    for item in figure["chart"]["items"]:
+        bullets = "".join(f"<li>{_e(bullet)}</li>" for bullet in item.get("bullets", []))
+        steps.append(f'<li value="{int(item["number"])}"><h4>{_e(item["label"])}</h4>'
+                     f'<ul>{bullets}</ul></li>')
+    return f'<ol class="steps">{"".join(steps)}</ol>'
+
+
 def _render_quotes(figure: dict[str, Any]) -> str:
     """Pull-quote panel whose PDF text blocks overlap and cannot be read in order."""
     quotes = "".join(f'<blockquote><p>{_e(item["label"])}</p></blockquote>'
@@ -528,7 +546,7 @@ def _render_quotes(figure: dict[str, Any]) -> str:
 RENDERERS: dict[str, Callable[[dict[str, Any]], str]] = {
     "pie": _render_pie, "hbar": _render_hbar, "vbar": _render_vbar,
     "heatmap": _render_heatmap, "stats": _render_stats, "harvey": _render_harvey,
-    "cycle": _render_cycle, "quotes": _render_quotes,
+    "cycle": _render_cycle, "quotes": _render_quotes, "steps": _render_steps,
 }
 
 

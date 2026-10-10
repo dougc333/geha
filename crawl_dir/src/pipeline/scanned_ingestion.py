@@ -394,14 +394,32 @@ def html_to_markdown(document: str) -> str:
             content = "".join(convert(child) for child in node.children)
             return f"\n## {heading}\n{content}\n"
         if name == "li":
-            return "\n- " + " ".join(node.get_text(" ", strip=True).split())
+            depth = len(node.find_parents(["ul", "ol"])) - 1
+            parent = node.find_parent(["ul", "ol"])
+            if parent is not None and parent.name == "ol":
+                siblings = parent.find_all("li", recursive=False)
+                marker = f"{node.get('value') or siblings.index(node) + 1}."
+            else:
+                marker = "-"
+            nested = node.find_all(["ul", "ol"], recursive=False)
+            if not nested:
+                return f"\n{'   ' * depth}{marker} " + " ".join(node.get_text(" ", strip=True).split())
+            # Keep a list item's own heading/text, then its nested list on indented lines.
+            own = " ".join(" ".join(child.get_text(" ", strip=True).split())
+                           for child in node.children
+                           if not (isinstance(child, Tag) and child.name in {"ul", "ol"})
+                           and str(child.get_text(" ", strip=True) if isinstance(child, Tag)
+                                   else child).strip())
+            return (f"\n{'   ' * depth}{marker} {own}" +
+                    "".join(convert(child) for child in nested))
         if name == "br":
             return "\n"
         content = "".join(convert(child) for child in node.children)
         return f"\n{content}\n" if name in {"p", "div", "section", "article"} else content
 
     markdown = convert(soup.body or soup)
-    markdown = re.sub(r"[ \t]+", " ", markdown)
+    markdown = re.sub(r"(?<=\S)[ \t]+", " ", markdown)  # keep list indentation
+    markdown = re.sub(r"(?m)^[ \t]+(?![ \t]|(?:[-*+]|\d+\.) )", "", markdown)
     markdown = re.sub(r"\n{3,}", "\n\n", markdown)
     return markdown.strip() + "\n"
 
@@ -415,9 +433,25 @@ def _native_page_exports(source: Path) -> tuple[str, str]:
     """Export one embedded-text PDF page to standalone HTML and Markdown once."""
     from .pdf_conversion import native_text_converter
     document = native_text_converter().convert(source).document
-    html_document = _clean_html(document.export_to_html())
+    html_document = _strip_list_bullet_glyphs(_clean_html(document.export_to_html()))
     markdown = document.export_to_markdown().strip() + "\n"
+    markdown = re.sub(r"(?m)^(\s*(?:[-*+]|\d+\.)\s+)" + BULLET_GLYPHS + r"\s*", r"\1", markdown)
     return html_document, markdown
+
+
+# Docling keeps the PDF's own bullet glyph as list-item text, duplicating the list marker.
+BULLET_GLYPHS = r"[■▪●•◦]"
+
+
+def _strip_list_bullet_glyphs(document: str) -> str:
+    soup = BeautifulSoup(document, "lxml")
+    changed = False
+    for item in soup.find_all("li"):
+        node = next((text for text in item.find_all(string=True) if text.strip()), None)
+        if node is not None and re.match(r"\s*" + BULLET_GLYPHS, node):
+            node.replace_with(re.sub(r"^\s*" + BULLET_GLYPHS + r"\s*", "", node))
+            changed = True
+    return str(soup) if changed else document
 
 
 def _raw_chunks(pages: list[tuple[int, str]], table_ids: dict[int, list[str]]) -> list[dict[str, Any]]:

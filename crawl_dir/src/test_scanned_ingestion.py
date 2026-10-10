@@ -321,6 +321,14 @@ class ScannedIngestionTests(unittest.TestCase):
         self.assertEqual(content[1]["type"], "image")
         self.assertEqual(content[1]["source"]["media_type"], "image/png")
 
+    def test_native_export_strips_pdf_bullet_glyphs_from_list_items(self):
+        from .pipeline.scanned_ingestion import _strip_list_bullet_glyphs
+
+        html_in = "<html><body><ul><li>\u25a0 Immersive experiences</li><li>Plain</li></ul></body></html>"
+        cleaned = _strip_list_bullet_glyphs(html_in)
+        self.assertIn("<li>Immersive experiences</li>", cleaned)
+        self.assertNotIn("\u25a0", cleaned)
+
     def test_external_resources_are_removed_without_losing_semantic_text(self):
         unsafe = (
             "<html><head><link rel='stylesheet' href='https://example.com/a.css'></head>"

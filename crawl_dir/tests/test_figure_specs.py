@@ -104,6 +104,23 @@ class FigureSpecRenderingTests(unittest.TestCase):
         self.assertIn("<li>Mental</li>", render_figure(cycle))
         self.assertIn("<blockquote><p>AI should serve people.</p></blockquote>", render_figure(quotes))
 
+    def test_steps_render_numbered_items_with_bullets(self):
+        steps = {"id": "s", "title": "Uses", "chart": {"type": "steps", "items": [
+            {"number": 1, "label": "Product", "bullets": ["Offerings"]},
+            {"number": 2, "label": "Distribution", "bullets": ["Tools", "Quoting"]}]}}
+        markup = render_figure(steps)
+        self.assertIn('<li value="1"><h4>Product</h4><ul><li>Offerings</li></ul></li>', markup)
+        self.assertLess(markup.index("Product"), markup.index("Distribution"))
+
+    def test_bullet_glyphs_in_pdf_text_do_not_fail_verification(self):
+        figure = {"id": "s", "title": "Uses", "box_pt": [0, 0, 612, 792], "chart": {
+            "type": "steps", "items": [{"number": 1, "label": "Product",
+                                        "bullets": ["Ability to quickly create"]}]}}
+        evidence = {"literal_text": "Uses 1 Product \u25a0Ability to quickly create",
+                    "percent_tokens": []}
+        errors, _ = verify_figure(figure, evidence)
+        self.assertEqual(errors, [])
+
     def test_page_assembly_replaces_figure_text_and_drops_footer(self):
         with tempfile.TemporaryDirectory() as directory:
             pdf = _page(Path(directory) / "source.pdf")
