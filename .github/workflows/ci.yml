@@ -33,7 +33,7 @@ jobs:
       - name: Run agentic_search class tests
         run: uv run --no-sync python -m unittest discover -s agentic_search/src -p 'test_class_refactor.py' -v
       - name: Run ingestion MCP server smoke test (stdio; no network, model or raw PDFs)
-        run: uv run --no-sync --with mcp python -m unittest crawl_dir.tests.test_mcp_server -v
+        run: uv run --no-sync --with 'mcp>=1.2,<2' python -m unittest crawl_dir.tests.test_mcp_server -v
 
   table-rag:
     name: Standalone table RAG tests
