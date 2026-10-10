@@ -27,7 +27,7 @@ is pending. The legacy top-level `downloads/` tree is not the source of truth.
 
 ```bash
 cd /Users/dc/geha
-uv run --no-project --python 3.12 --with mcp \
+uv run --no-project --python 3.12 --with 'mcp>=1.2,<2' \
   python -m crawl_dir.src.ingestion_mcp
 ```
 
