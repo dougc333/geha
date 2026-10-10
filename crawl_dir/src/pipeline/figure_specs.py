@@ -790,8 +790,12 @@ def _render_png(html_path: Path, png_path: Path) -> float:
     return round((time.perf_counter() - started) * 1000, 1)
 
 
-def make_spec_generator(specs_dir: Path) -> Callable[[Path, dict[str, Any], Path, str], str]:
+def make_spec_generator(
+    specs_dir: Path,
+    event_sink: Callable[[dict[str, Any]], None] | None = None,
+) -> Callable[[Path, dict[str, Any], Path, str], str]:
     """segmented_generator hook: verify + render each figure, then assemble the page."""
+    emit = event_sink or (lambda _event: None)
 
     def generate(source_png: Path, segmentation: dict[str, Any], segment_dir: Path, _model: str) -> str:
         page = _page_number(source_png)
@@ -856,9 +860,16 @@ def make_spec_generator(specs_dir: Path) -> Callable[[Path, dict[str, Any], Path
             batch["summary"]["total_iterations"] += 1
             batch["summary"]["remaining_errors"] += len(errors)
             atomic_json(batch_path, batch)
+            emit({"type": "figure_segment_review", "page": page, "figure": index,
+                  "title": region["title"], "iteration": 1,
+                  "verdict": "mismatch" if errors else "match", "errors": errors,
+                  "warnings": warnings})
         batch["status"] = "passed" if batch["summary"]["failed"] == 0 else "failed"
         batch["completed_at"] = datetime.now(timezone.utc).isoformat()
         atomic_json(batch_path, batch)
+        emit({"type": "figure_segments_complete", "page": page, "status": batch["status"],
+              "figure_count": batch["summary"]["figure_count"],
+              "iterations": batch["summary"]["total_iterations"], "batch": str(batch_path)})
         return assemble_page_html(page_pdf, spec, figure_html)
 
     return generate

@@ -95,7 +95,9 @@ class ArtifactPanel extends DemoComponent<{ label: string; kind: string; url: st
           <span className="font-mono text-[10px] uppercase tracking-widest text-slate-500">{kind}</span>
         </div>
         <div className="h-[590px] bg-[#e8eaec] p-2">
-          <iframe title={label} src={url} sandbox={html ? '' : undefined} className="h-full w-full rounded bg-white" />
+          {/* Fully empty sandbox renders served artifact HTML blank in Chrome. Scripts stay
+              blocked (no allow-scripts, and the artifact CSP is default-src 'none'). */}
+          <iframe title={label} src={url} sandbox={html ? 'allow-same-origin' : undefined} className="h-full w-full rounded bg-white" />
         </div>
       </article>
     )

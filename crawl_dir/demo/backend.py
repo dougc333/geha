@@ -27,6 +27,13 @@ from crawl_dir.src.pipeline.scanned_ingestion import (
     review_chart_html_with_claude,
 )
 from crawl_dir.src.pipeline.claude_client import CLAUDE_MODEL, claude_credentials_available
+from crawl_dir.src.pipeline.figure_specs import (
+    TOOL_ID as FIGURE_SPEC_TOOL_ID,
+    make_spec_generator,
+    make_spec_segmenter,
+    spec_pages,
+    spec_reviewer,
+)
 from crawl_dir.src.pipeline.figure_segmentation import (
     generate_page_html_with_corrected_figures,
     segment_charts_and_figures,
@@ -85,6 +92,7 @@ DEMO_DOCUMENTS = {
         "layout_kind": "hybrid_figure_report",
         "local_fixture": True,
         "source_status": "Local public research report",
+        "figure_specs": "annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs",
     },
 }
 UI_DIST = Path(__file__).parent / "ui" / "dist"
@@ -216,12 +224,23 @@ class LayoutToolRouter:
             "strength": "Literal named-cell records drive deterministic HTML assembly",
             "program": str(BILL_OF_LADING_GRAPH_PROGRAM),
         },
+        {
+            "id": FIGURE_SPEC_TOOL_ID,
+            "name": "Authored figure specs (no model)",
+            "estimated_latency": "local render + native-text verification",
+            "incremental_cost": "$0 model cost",
+            "strength": "Spec values/labels checked against PDF text; deterministic semantic HTML",
+        },
     ]
 
-    def __init__(self, run: DemoRun, layout_kind: str, workflow: str | None = None) -> None:
+    def __init__(self, run: DemoRun, layout_kind: str, workflow: str | None = None,
+                 specs_dir: Path | None = None) -> None:
         self.run = run
         self.layout_kind = layout_kind
         self.workflow = workflow
+        self.specs_dir = specs_dir
+        self.spec_pages = spec_pages(specs_dir) if specs_dir and specs_dir.is_dir() else []
+        self.selected: str | None = None
 
     def choose(self) -> tuple[Any | None, Any | None]:
         self.run.emit({
@@ -236,13 +255,25 @@ class LayoutToolRouter:
                     if profile["id"] == "chart_figure_crop_html_correction"
                     else self.workflow == "bill_of_lading_schema_graph"
                     if profile["id"] == "bill_of_lading_named_cell_ocr"
+                    else bool(self.spec_pages)
+                    if profile["id"] == FIGURE_SPEC_TOOL_ID
                     else True
                 )}
                 for profile in self.PROFILES
             ],
             "observed_layout": self.layout_kind,
         })
-        if self.layout_kind == "hybrid_figure_report":
+        if self.layout_kind == "hybrid_figure_report" and self.spec_pages:
+            selected = FIGURE_SPEC_TOOL_ID
+            reason = (
+                f"Authored figure specs exist for {len(self.spec_pages)} pages "
+                f"({self.specs_dir.name}). Verify every printed value and label against native "
+                "PDF text inside each figure box and render semantic HTML without a model; "
+                "pages without specs use native PDF text."
+            )
+            callbacks = (make_spec_segmenter(self.specs_dir),
+                         make_spec_generator(self.specs_dir, event_sink=self.run.emit))
+        elif self.layout_kind == "hybrid_figure_report":
             selected = "chart_figure_crop_html_correction"
             reason = (
                 "The EY report uses designed layouts, findings grids, infographics, photography, "
@@ -282,6 +313,7 @@ class LayoutToolRouter:
             selected = "whole_page_semantic_html"
             reason = "The page is primarily policy content; whole-page context is more useful."
             callbacks = None, None
+        self.selected = selected
         self.run.emit({"type": "layout_tool_selected", "tool": selected, "reason": reason})
         return callbacks
 
@@ -313,13 +345,15 @@ class IngestionDemoAgent:
                 self.run.emit({"type": "download_complete", **download})
             native_figure_report = self.config["layout_kind"] == "hybrid_figure_report"
             native_text_report = self.config["layout_kind"] == "native_text_report"
+            specs_dir = (ROOT / self.config["figure_specs"]
+                         if self.config.get("figure_specs") else None)
             self.run.emit({
                 "type": "tool_selected",
-                "tool": ("chart_figure_crop_html_correction"
+                "tool": ("ingest_native_pdf_with_visual_figures"
                          if native_figure_report else "ingest_scanned_pdf"),
                 "reason": (
-                    "Rebuild every designed report page as semantic HTML and run "
-                    "render-review-correct until strict visual QA passes."
+                    "Rebuild the designed report's figure pages as semantic HTML and verify "
+                    "them before assembling the candidate."
                     if native_figure_report else
                     "Use embedded PDF text and deterministic Docling table extraction; no "
                     "LLM generation call is required."
@@ -328,12 +362,19 @@ class IngestionDemoAgent:
                 ),
             })
             renderer_name, renderer = ScreenshotToolRouter(self.run).choose()
-            page_segmenter, segmented_generator = LayoutToolRouter(
-                self.run, self.config["layout_kind"], self.config.get("workflow")
-            ).choose()
+            router = LayoutToolRouter(
+                self.run, self.config["layout_kind"], self.config.get("workflow"), specs_dir
+            )
+            page_segmenter, segmented_generator = router.choose()
             is_bill_of_lading = self.config.get("workflow") == "bill_of_lading_schema_graph"
+            authored_specs = router.selected == FIGURE_SPEC_TOOL_ID
             visual_pages: list[int] = []
-            if self.config["layout_kind"] == "hybrid_figure_report":
+            if authored_specs:
+                visual_pages = router.spec_pages
+                self.run.emit({"type": "visual_pages_selected", "pages": visual_pages,
+                               "count": len(visual_pages),
+                               "method": "pages with authored figure specs"})
+            elif self.config["layout_kind"] == "hybrid_figure_report":
                 visual_pages = list(range(1, pdf_page_count(source) + 1))
                 self.run.emit({"type": "visual_pages_selected", "pages": visual_pages,
                                "count": len(visual_pages),
@@ -344,10 +385,12 @@ class IngestionDemoAgent:
                 document=self.config["filename"],
                 document_version=self.config["document_version"],
                 # Bill-of-lading cell extraction/correction still run on OpenAI.
-                model=(OPENAI_MODEL if is_bill_of_lading else CLAUDE_MODEL),
-                max_corrections=(3 if is_bill_of_lading else 6),
+                model=(OPENAI_MODEL if is_bill_of_lading else
+                       FIGURE_SPEC_TOOL_ID if authored_specs else CLAUDE_MODEL),
+                max_corrections=(3 if is_bill_of_lading else 0 if authored_specs else 6),
                 corrector=(correct_bill_of_lading_cells if is_bill_of_lading else None),
                 reviewer=(review_bill_of_lading if is_bill_of_lading else
+                          spec_reviewer if authored_specs else
                           review_chart_html_with_claude if native_figure_report else None),
                 source_renderer=renderer,
                 source_renderer_name=renderer_name,

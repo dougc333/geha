@@ -39,6 +39,13 @@ const DEFAULT_TOOLS: LayoutToolProfile[] = [
     incremental_cost: '8 vision OCR calls; no layout-generation call',
     strength: 'Literal named-cell records drive deterministic HTML assembly',
   },
+  {
+    id: 'authored_figure_spec_html',
+    name: 'Authored figure specs (no model)',
+    estimated_latency: 'local render + native-text verification',
+    incremental_cost: '$0 model cost',
+    strength: 'Spec values/labels checked against PDF text; deterministic semantic HTML',
+  },
 ]
 
 export class LayoutToolStats extends DemoComponent {
@@ -50,7 +57,7 @@ export class LayoutToolStats extends DemoComponent {
     const tools = (considered?.tools as LayoutToolProfile[] | undefined) ?? DEFAULT_TOOLS
     return (
       <section className="mx-auto max-w-[1600px] px-6 pt-3 lg:px-10">
-        <div className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 lg:grid-cols-[190px_repeat(4,minmax(0,1fr))]">
+        <div className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 lg:grid-cols-[190px_repeat(5,minmax(0,1fr))]">
           <div className="bg-slate-900/90 px-5 py-4">
             <div className="text-[10px] font-bold uppercase tracking-[.2em] text-cyan-300">Extraction tool router</div>
             <div className="mt-1 flex items-center justify-between gap-3">

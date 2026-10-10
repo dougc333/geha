@@ -71,7 +71,7 @@ class DemoBackendTests(unittest.TestCase):
         )
         self.assertTrue(specialist["available"])
         self.assertEqual(Path(specialist["program"]), GRAPH_PROGRAM)
-        self.assertEqual(len(considered), 4)
+        self.assertEqual(len(considered), 5)
         self.assertNotIn("bill_of_lading_schema_graph", {tool["id"] for tool in considered})
 
     def test_router_selects_native_pdf_text_for_ey_report(self):
@@ -103,6 +103,23 @@ class DemoBackendTests(unittest.TestCase):
         hybrid = next(tool for tool in considered
                       if tool["id"] == "chart_figure_crop_html_correction")
         self.assertTrue(hybrid["available"])
+
+    def test_router_prefers_authored_figure_specs_when_present(self):
+        run = DemoRun("test-spec-run")
+        with TemporaryDirectory() as temporary:
+            specs = Path(temporary)
+            (specs / "page-004.json").write_text('{"page": 4, "figures": []}')
+            router = LayoutToolRouter(run, "hybrid_figure_report", None, specs)
+            segmenter, generator = router.choose()
+
+        self.assertIsNotNone(segmenter)
+        self.assertIsNotNone(generator)
+        self.assertEqual(router.selected, "authored_figure_spec_html")
+        self.assertEqual(router.spec_pages, [4])
+        self.assertEqual(run.events[-1]["tool"], "authored_figure_spec_html")
+        spec_tool = next(tool for tool in run.events[0]["tools"]
+                         if tool["id"] == "authored_figure_spec_html")
+        self.assertTrue(spec_tool["available"])
 
     def test_bill_of_lading_schema_creates_eight_named_blocks(self):
         with TemporaryDirectory() as temporary:
