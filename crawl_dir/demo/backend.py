@@ -201,6 +201,7 @@ class LayoutToolRouter:
             "estimated_latency": "local parsing; no generation call",
             "incremental_cost": "$0 model cost",
             "strength": "Uses embedded PDF text plus deterministic table extraction",
+            "runs": "Docling native export (scanned_ingestion._native_page_exports); no model",
         },
         {
             "id": "whole_page_semantic_html",
@@ -208,13 +209,16 @@ class LayoutToolRouter:
             "estimated_latency": "HTML generation + bounded visual correction loop",
             "incremental_cost": "vision generation/review/correction calls",
             "strength": "Preserves complete page composition, charts, tables, and reading order",
+            "runs": f"scanned_ingestion.py: generate/review/correct with {CLAUDE_MODEL}",
         },
         {
             "id": "chart_figure_crop_html_correction",
-            "name": "Chart/figure crop HTML correction",
+            "name": "Chart/figure crop HTML correction (figure_segmentation)",
             "estimated_latency": "bounding boxes + up to 6 correction passes per visual",
             "incremental_cost": "vision segmentation, generation, review, and correction calls",
             "strength": "Auditable crop PNGs and per-figure attempts/errors before page assembly",
+            "runs": (f"figure_segmentation.py: {CLAUDE_MODEL} finds figure boxes, writes HTML, "
+                     "reviews and corrects it; fallback when a figure report has no specs"),
         },
         {
             "id": "bill_of_lading_named_cell_ocr",
@@ -223,6 +227,7 @@ class LayoutToolRouter:
             "incremental_cost": "8 vision OCR calls; no layout-generation call",
             "strength": "Literal named-cell records drive deterministic HTML assembly",
             "program": str(BILL_OF_LADING_GRAPH_PROGRAM),
+            "runs": f"bill_of_lading_workflow.py: cell OCR with {OPENAI_MODEL}",
         },
         {
             "id": FIGURE_SPEC_TOOL_ID,
@@ -230,6 +235,7 @@ class LayoutToolRouter:
             "estimated_latency": "local render + native-text verification",
             "incremental_cost": "$0 model cost",
             "strength": "Spec values/labels checked against PDF text; deterministic semantic HTML",
+            "runs": "figure_specs.py: annotations/<doc>/figure-specs/page-NNN.json; no model",
         },
     ]
 

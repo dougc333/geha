@@ -8,6 +8,7 @@ interface LayoutToolProfile {
   strength: string
   available?: boolean
   program?: string
+  runs?: string
 }
 
 const DEFAULT_TOOLS: LayoutToolProfile[] = [
@@ -27,7 +28,7 @@ const DEFAULT_TOOLS: LayoutToolProfile[] = [
   },
   {
     id: 'chart_figure_crop_html_correction',
-    name: 'Chart/figure crop HTML correction',
+    name: 'Chart/figure crop HTML correction (figure_segmentation)',
     estimated_latency: 'bounding boxes + up to 6 correction passes per visual',
     incremental_cost: 'vision segmentation, generation, review, and correction calls',
     strength: 'Auditable crop PNGs and per-figure attempts/errors before page assembly',
@@ -77,6 +78,7 @@ export class LayoutToolStats extends DemoComponent {
                   <span className="text-slate-300">{tool.estimated_latency}</span>
                   <span className="text-slate-500">{tool.incremental_cost}</span>
                   <span className="truncate text-slate-500">{tool.strength}</span>
+                  {tool.runs && <span className="basis-full truncate text-violet-300">runs: {tool.runs}</span>}
                   {segmented && tool.id === segmented.tool && (
                     <span className="flex gap-2 text-cyan-300">
                       <span>{String(segmented.region_count)} boxes · {String(segmented.latency_ms)} ms</span>
