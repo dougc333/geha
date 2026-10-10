@@ -31,7 +31,7 @@ uv run --no-project --python 3.12 --with mcp \
   python -m crawl_dir.src.ingestion_mcp
 ```
 
-The server exposes four demo tools:
+The server exposes six demo tools:
 
 - `list_public_pdfs` searches the 54-document curated manifest and returns the
   canonical document selectors available to agents.
@@ -42,7 +42,7 @@ The server exposes four demo tools:
 - `ingest_scanned_pdf` accepts a PDF path relative to
 `crawl_dir/raw/<family>`. Call it first with `data_classification="public"` and
 `confirm=false` to inspect the page count and image-only pages. Call it again
-with `confirm=true` to permit OpenAI visual processing and create an immutable,
+with `confirm=true` to permit Claude visual processing and create an immutable,
 unpromoted candidate run. Image-only pages are converted to HTML, compared with
 their source page, corrected up to six times, converted deterministically to
 Markdown, and included in the candidate chunks. The tool never promotes output.
@@ -51,6 +51,18 @@ Markdown, and included in the candidate chunks. The tool never promotes output.
   detects embedded `Figure N` labels, and sends only those complete figure pages
   through bounded visual semantic-HTML verification. Call with `confirm=false`
   to preview the routed pages and `confirm=true` to create the candidate run.
+- `ingest_pdf_with_figure_specs` runs the no-model figure-spec path (see
+  "Authored figure specs"). The preview lists the spec pages and any `Figure N`
+  pages that lack specs; the confirmed run returns each figure's verifier result.
+  It makes no model or network call and fails for documents without specs.
+- `segment_document_page` detects semantic regions on one page with Claude.
+
+Register the server with Claude Code (it must start from `/Users/dc/geha`, and
+sourcing `~/.zshrc` supplies `ANTHROPIC_API_KEY`):
+
+```bash
+claude mcp add geha-ingestion -- /bin/zsh -c 'source ~/.zshrc >/dev/null 2>&1; cd /Users/dc/geha && exec .venv/bin/python -m crawl_dir.src.ingestion_mcp'
+```
 
 ### React agent demo
 

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import json
 import tempfile
 import unittest
@@ -289,14 +290,14 @@ class ScannedIngestionTests(unittest.TestCase):
              patch("crawl_dir.src.ingestion_mcp.detect_visual_figure_pages",
                    return_value=[4, 5, 24]), \
              patch("crawl_dir.src.ingestion_mcp.process_scanned_document") as process:
-            result = ingest_native_pdf_with_visual_figures(
+            result = asyncio.run(ingest_native_pdf_with_visual_figures(
                 family="research",
                 document="ey-report.pdf",
                 document_version="2025",
                 data_classification="public",
                 plan_year=2025,
                 confirm=False,
-            )
+            ))
 
         process.assert_not_called()
         self.assertEqual(result["status"], "approval_required")
@@ -328,6 +329,21 @@ class ScannedIngestionTests(unittest.TestCase):
         cleaned = _strip_list_bullet_glyphs(html_in)
         self.assertIn("<li>Immersive experiences</li>", cleaned)
         self.assertNotIn("\u25a0", cleaned)
+
+    def test_figure_spec_tool_previews_spec_pages_and_rejects_documents_without_specs(self):
+        from .ingestion_mcp import ingest_pdf_with_figure_specs
+
+        args = {"family": "research", "document_version": "2025",
+                "data_classification": "public"}
+        preview = asyncio.run(ingest_pdf_with_figure_specs(
+            document="ey-limra-workforce-benefits-study-final-2025.pdf", **args))
+        self.assertEqual(preview["status"], "approval_required")
+        self.assertIn(24, preview["spec_pages"])
+        self.assertIsNone(preview["model"])
+        with patch("crawl_dir.src.ingestion_mcp.resolve_raw_document",
+                   return_value=Path("unused.pdf")):
+            with self.assertRaisesRegex(ValueError, "No figure specs"):
+                asyncio.run(ingest_pdf_with_figure_specs(document="no-specs.pdf", **args))
 
     def test_external_resources_are_removed_without_losing_semantic_text(self):
         unsafe = (
