@@ -41,7 +41,7 @@ export class AgentTrace extends DemoComponent {
     return (
       <aside className="rounded-2xl border border-white/10 bg-slate-900/70">
         <div className="border-b border-white/10 px-5 py-4">
-          <div className="text-[10px] font-bold uppercase tracking-[.2em] text-violet-300">Agent trace</div>
+          <div className="text-[10px] font-bold uppercase tracking-[.2em] text-violet-300">Pipeline trace</div>
           <div className="mt-1 flex items-center justify-between">
             <h2 className="text-lg font-semibold text-white">Tool decisions</h2>
             <span className="font-mono text-xs text-slate-500">{events.length} events</span>

@@ -1,4 +1,6 @@
-# Scanned PDF agent demo
+# Document ingestion pipeline
+
+A deterministic workflow, not an agent: code chooses the extraction tool and the verify/correct steps. Agents call it as a tool through the `geha-ingestion` MCP server (`crawl_dir/src/ingestion_mcp.py`), which exposes the same pipeline, including `ingest_pdf_with_figure_specs`. This app visualizes one run.
 
 This demo streams the Datroway, Elrexfio, Bendamustine, Bill of Lading, or 2025 EY/LIMRA
 Workforce Benefits Study ingestion workflow into a React UI. It shows the
@@ -187,14 +189,14 @@ the public page image to OpenAI and writes immutable artifacts under
 ## Run
 
 ```bash
-cd /Users/dc/geha/crawl_dir/demo/ui
+cd /Users/dc/geha/document_ingestion_pipeline/ui
 npm install
 npm run build
 
 cd /Users/dc/geha
 source .venv/bin/activate
 export OPENAI_API_KEY="..."
-python -m crawl_dir.demo.backend
+python -m document_ingestion_pipeline.backend
 ```
 
 Open <http://127.0.0.1:8510>. The workflow calls OpenAI and creates a new immutable,

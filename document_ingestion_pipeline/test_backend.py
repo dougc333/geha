@@ -232,11 +232,11 @@ class DemoBackendTests(unittest.TestCase):
             events = []
             with (
                 unittest.mock.patch(
-                    "crawl_dir.demo.bill_of_lading_workflow._graph_module",
+                    "document_ingestion_pipeline.bill_of_lading_workflow._graph_module",
                     return_value=fake_graph,
                 ),
                 unittest.mock.patch(
-                    "crawl_dir.demo.bill_of_lading_workflow._extract_block_cells",
+                    "document_ingestion_pipeline.bill_of_lading_workflow._extract_block_cells",
                     return_value={"shipper": "value"},
                 ),
             ):
@@ -297,11 +297,11 @@ class DemoBackendTests(unittest.TestCase):
             }
             with (
                 unittest.mock.patch(
-                    "crawl_dir.demo.bill_of_lading_workflow._graph_module",
+                    "document_ingestion_pipeline.bill_of_lading_workflow._graph_module",
                     return_value=AlwaysMismatchGraph(),
                 ),
                 unittest.mock.patch(
-                    "crawl_dir.demo.bill_of_lading_workflow._extract_block_cells",
+                    "document_ingestion_pipeline.bill_of_lading_workflow._extract_block_cells",
                     return_value={"shipper": "value"},
                 ),
             ):

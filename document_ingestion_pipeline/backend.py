@@ -38,7 +38,7 @@ from crawl_dir.src.pipeline.figure_segmentation import (
     generate_page_html_with_corrected_figures,
     segment_charts_and_figures,
 )
-from crawl_dir.demo.bill_of_lading_workflow import (
+from document_ingestion_pipeline.bill_of_lading_workflow import (
     GRAPH_PROGRAM as BILL_OF_LADING_GRAPH_PROGRAM,
     correct_bill_of_lading_cells,
     generate_bill_of_lading_html_from_schema,

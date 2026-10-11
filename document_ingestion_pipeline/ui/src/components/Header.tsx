@@ -14,7 +14,7 @@ export class Header extends DemoComponent {
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="font-display text-lg font-semibold tracking-tight text-white">Document Reconstruction Agent</h1>
+                <h1 className="font-display text-lg font-semibold tracking-tight text-white">Document Ingestion Pipeline</h1>
                 <span className="rounded-full border border-cyan-300/30 bg-cyan-300/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[.18em] text-cyan-200">Live</span>
               </div>
               <p className="text-sm text-slate-400">{title} coverage policy · public document workflow</p>
@@ -25,7 +25,7 @@ export class Header extends DemoComponent {
             disabled={!ready || running}
             className="group rounded-xl bg-cyan-300 px-5 py-3 text-sm font-bold text-slate-950 transition hover:bg-cyan-200 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-400"
           >
-            {running ? 'Agent running…' : status === 'complete' ? 'Run again' : 'Start live run'}
+            {running ? 'Pipeline running…' : status === 'complete' ? 'Run again' : 'Start live run'}
             <span className="ml-2 inline-block transition group-hover:translate-x-0.5">→</span>
           </button>
         </div>

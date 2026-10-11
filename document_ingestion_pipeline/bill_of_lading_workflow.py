@@ -19,7 +19,7 @@ from PIL import Image, ImageDraw, ImageFont
 from crawl_dir.src.pipeline.artifact_io import atomic_json
 
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]  # repository root
 GRAPH_PROGRAM = ROOT / "PDF_processing" / "bill_lading" / "bill_of_lading_html_graph.py"
 SEGMENT_MAX_ITERATIONS = 6
 BLOCK_LABELS = {
