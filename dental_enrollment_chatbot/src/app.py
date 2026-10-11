@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import uuid
 
 import streamlit as st
@@ -16,6 +17,20 @@ st.set_page_config(page_title="GEHA dental enrollment guide", page_icon="🦷", 
 
 @st.cache_resource
 def build_graph() -> DentalEnrollmentGraph:
+    mode = os.getenv("LLM_EXTRACT", "")  # "1"/"jev", "bedrock", or "compare" (Jev, checked by Bedrock)
+    if mode in ("1", "jev"):
+        from jev_router import JevExtractor
+        # Jev already reads every free-text answer, so skip the old Jev fallback (no double calls).
+        return DentalEnrollmentGraph(jev=lambda *_: None, extractor=JevExtractor())
+    if mode == "bedrock":
+        from llm_extract import BedrockExtractor
+        return DentalEnrollmentGraph(extractor=BedrockExtractor())
+    if mode == "compare":
+        from dual_extract import DualExtractor
+        from jev_router import JevExtractor
+        from llm_extract import BedrockExtractor
+        return DentalEnrollmentGraph(jev=lambda *_: None,
+                                     extractor=DualExtractor(JevExtractor(), BedrockExtractor()))
     return DentalEnrollmentGraph()
 
 
@@ -37,9 +52,9 @@ with st.sidebar:
         st.code(bot.mermaid(), language="mermaid")
     st.markdown(
         "**TypeSafe Jev integration points**\n\n"
-        "Jev is used only when deterministic parsing cannot understand natural-language answers for "
-        "member category, enrollment opportunity, or dental needs. Rules still decide eligibility status, "
-        "plan recommendation, rate code, and premium."
+        "Jev classifies free-text answers—including state descriptions—into the choices for each "
+        "conversation stage. Exact menu selections, state codes, and state names stay local. Rules still "
+        "decide eligibility status, ZIP/rate code validation, plan recommendation, and premium."
     )
     if st.button("Start over", use_container_width=True):
         st.session_state.thread_id = str(uuid.uuid4())
@@ -49,6 +64,9 @@ with st.sidebar:
         st.rerun()
 
 for item in st.session_state.messages:
+    if item["role"] == "warning":  # reviewer notes, e.g. extractors disagreeing
+        st.warning(item["content"], icon="⚠️")
+        continue
     with st.chat_message(item["role"]):
         st.markdown(item["content"])
 
@@ -61,6 +79,9 @@ if message := st.chat_input(
     with st.chat_message("user"):
         st.markdown(message)
     response, state = bot.reply(message, st.session_state.thread_id)
+    for warning in state.get("warnings") or []:
+        st.session_state.messages.append({"role": "warning", "content": warning})
+        st.warning(warning, icon="⚠️")
     st.session_state.flow_complete = bool(state.get("complete"))
     st.session_state.messages.append({"role": "assistant", "content": response})
     with st.chat_message("assistant"):

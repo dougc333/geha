@@ -26,11 +26,58 @@ source /Users/dc/geha/.venv/bin/activate
 streamlit run src/app.py
 ```
 
-The deterministic chatbot works without an API key. To enable TypeSafe Jev as
-an optional natural-language normalizer, set `TYPESAFE_API_KEY` before starting
-Streamlit. Jev is called only when local parsing cannot understand the member's
-answer. It never decides eligibility, chooses a rate code, recommends a plan,
-or generates a premium.
+The deterministic chatbot works without an API key. With `LLM_EXTRACT=jev` and
+`TYPESAFE_API_KEY` configured, exact menu selections remain local and JEV
+classifies other free-text answers into the choices for the current stage. If
+JEV is unavailable, the graph fails back to its conservative local parser. JEV
+never decides eligibility, chooses a rate code, recommends a plan, or generates
+a premium.
+
+## JEV versus DSPy comparison
+
+On October 8, 2026, both classifiers were run without DSPy response caching on
+the same held-out answers and the same four scripted, guarded trajectories.
+Neither classifier was allowed to change the deterministic policy rules.
+
+### Held-out routing cases
+
+| Metric | JEV | DSPy |
+|---|---:|---:|
+| Correct | 23/26 | 23/26 |
+| Clarifications | 0 | 2 |
+| No match | 1 | 3 |
+| Median latency | **0.10 seconds** | 0.78 seconds |
+| Maximum latency | **0.28 seconds** | 2.15 seconds |
+| Tokens | Not exposed | 15,345 |
+| Cost | Not exposed | $0.0026 |
+
+### End-to-end guarded trajectories
+
+| Metric | JEV | DSPy |
+|---|---:|---:|
+| Personas passed | **4/4** | **4/4** |
+| Total turns | 25 | 25 |
+| Clarifications | 1 | 1 |
+| Reprompts | 1 | 1 |
+| Model calls | 22 | 22 |
+| Median persona latency | **0.74 seconds** | 4.76 seconds |
+| Tokens | Not exposed | 11,788 |
+| Cost | Not exposed | $0.0021 |
+
+The four passing personas were routine retiree, widow QLE, new-baby QLE, and
+the rambling braces/new-hire case. JEV was substantially faster. DSPy was more
+conservative on some multi-intent answers: it correctly requested clarification
+for “we got married and had a baby,” where JEV selected marriage. JEV correctly
+recognized “we're expecting twins” as acquiring a family member, while DSPy
+returned no match. Overall held-out accuracy was tied, so this run does not show
+that DSPy is more accurate; it shows a different ambiguity/safety tradeoff.
+
+Raw results:
+
+- [Held-out routing results](../dspy_dental_chatbot/runs/jev-vs-dspy-20261009T020616Z/results.json)
+- [End-to-end trajectory results](../dspy_dental_chatbot/runs/trajectory-jev-vs-dspy-20261009T020640Z/results.json)
+- [Routing comparison runner](../dspy_dental_chatbot/src/compare_jev_dspy.py)
+- [Trajectory comparison runner](../dspy_dental_chatbot/src/compare_trajectories.py)
 
 ## Enrollment state machine
 

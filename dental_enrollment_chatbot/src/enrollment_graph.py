@@ -2,14 +2,17 @@
 
 from __future__ import annotations
 
+import contextvars
+import logging
 import re
 from typing import Any, TypedDict
 
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import END, START, StateGraph
 
+import tracing
 from guide_tables import GuideTables
-from jev_router import classify as jev_classify
+from jev_router import CHOICES as OPTION_HINTS, classify as jev_classify
 
 
 class EnrollmentState(TypedDict, total=False):
@@ -33,6 +36,7 @@ class EnrollmentState(TypedDict, total=False):
     response: str
     complete: bool
     jev_diagnostic: dict[str, Any]
+    newly_eligible_signal: bool
 
 
 MEMBER_TYPES = {
@@ -69,6 +73,23 @@ NEED_LABELS = {
     "unsure": "Not sure",
 }
 SPONSOR_LABELS = {"Employed": "Active federal employee (still working)", "Retired": "Retired"}
+STATE_NAMES = {
+    "AL": "Alabama", "AK": "Alaska", "AZ": "Arizona", "AR": "Arkansas",
+    "CA": "California", "CO": "Colorado", "CT": "Connecticut", "DE": "Delaware",
+    "DC": "District of Columbia", "FL": "Florida", "GA": "Georgia", "HI": "Hawaii",
+    "ID": "Idaho", "IL": "Illinois", "IN": "Indiana", "IA": "Iowa", "KS": "Kansas",
+    "KY": "Kentucky", "LA": "Louisiana", "ME": "Maine", "MD": "Maryland",
+    "MA": "Massachusetts", "MI": "Michigan", "MN": "Minnesota", "MS": "Mississippi",
+    "MO": "Missouri", "MT": "Montana", "NE": "Nebraska", "NV": "Nevada",
+    "NH": "New Hampshire", "NJ": "New Jersey", "NM": "New Mexico", "NY": "New York",
+    "NC": "North Carolina", "ND": "North Dakota", "OH": "Ohio", "OK": "Oklahoma",
+    "OR": "Oregon", "PA": "Pennsylvania", "RI": "Rhode Island",
+    "SC": "South Carolina", "SD": "South Dakota", "TN": "Tennessee", "TX": "Texas",
+    "UT": "Utah", "VT": "Vermont", "VA": "Virginia", "WA": "Washington",
+    "WV": "West Virginia", "WI": "Wisconsin", "WY": "Wyoming",
+    "AS": "American Samoa", "GU": "Guam", "MP": "Northern Mariana Islands",
+    "PR": "Puerto Rico", "VI": "U.S. Virgin Islands",
+}
 QLE_EVENTS = {
     "1": ("marriage", "Marriage"),
     "2": ("acquire_family_member", "Acquiring an eligible family member (non-spouse)"),
@@ -112,6 +133,10 @@ QLE_MATRIX: dict[str, dict[str, bool | str]] = {
                                    "decrease_enrollment": False, "cancel_enrollment": True,
                                    "change_plan": False},
 }
+
+
+# Reviewer warnings raised while handling one turn (e.g. extractors disagreeing).
+_turn_warnings: contextvars.ContextVar[list | None] = contextvars.ContextVar("turn_warnings", default=None)
 
 
 class Ambiguous(tuple):
@@ -179,6 +204,30 @@ def parse_opportunity_detail(message: str) -> str | Ambiguous:
     })
 
 
+def mentions_new_hire(message: str) -> bool:
+    """Detect a stated new-job fact that should survive across conversation turns."""
+    text = _words(message)
+    return bool(re.search(
+        r"\b(new hire|newly hired|just hired)\b|"
+        r"\b(started|starting|began)\b.{0,35}"
+        r"\b(federal |government )?(job|position|employment|work)\b|"
+        r"\b(federal |government )?(job|position|employment|work)\b.{0,20}"
+        r"\b(last week|recently|just started|new)\b",
+        text,
+    ))
+
+
+def mentions_specific_qle(message: str) -> bool:
+    """True only for an actual event, not the generic phrase 'qualifying life event'."""
+    text = _words(message)
+    return bool(re.search(
+        r"\b(marri|wedding|divorc|birth|newborn|adopt|died|death|passed away|"
+        r"lost coverage|loss of coverage|moving out|military duty|active duty|lwop|"
+        r"leave without pay|annuity restored|compensation restored|transferr?ing)\b",
+        text,
+    ))
+
+
 def parse_need(message: str) -> str | Ambiguous:
     return _number_or_alias(message, NEEDS, {
         "routine": ("routine", "preventive", "cleaning", "lowest premium"),
@@ -187,6 +236,28 @@ def parse_need(message: str) -> str | Ambiguous:
         "maximum": ("maximum", "unlimited", "third cleaning", "most coverage"),
         "unsure": ("not sure", "unsure", "compare"),
     })
+
+
+def parse_state_local(message: str) -> str:
+    """Conservative fallback when JEV is unavailable.
+
+    Exact codes and names are safe to normalize locally. In prose, only an
+    explicitly capitalized code is accepted so ordinary words such as IN and
+    OR are not mistaken for states.
+    """
+    stripped = message.strip()
+    if stripped.upper() in STATE_NAMES and re.fullmatch(r"[A-Za-z]{2}", stripped):
+        return stripped.upper()
+    exact_name = next(
+        (code for code, name in STATE_NAMES.items() if _words(name) == _words(stripped)),
+        "",
+    )
+    if exact_name:
+        return exact_name
+    candidates = {
+        word for word in re.findall(r"\b[A-Z]{2}\b", message) if word in STATE_NAMES
+    }
+    return candidates.pop() if len(candidates) == 1 else ""
 
 
 MENUS: dict[str, tuple[dict[str, str], dict[str, str]]] = {
@@ -198,6 +269,7 @@ MENUS: dict[str, tuple[dict[str, str], dict[str, str]]] = {
     "need": (NEEDS, NEED_LABELS),
     "plan": (PLANS, {value: value for value in PLANS.values()}),
     "qle_event": ({number: event for number, (event, _) in QLE_EVENTS.items()}, dict(QLE_EVENTS.values())),
+    "state": ({code: code for code in STATE_NAMES}, STATE_NAMES),
 }
 
 
@@ -260,9 +332,10 @@ def format_qle_action_table(event: str) -> str:
 class DentalEnrollmentGraph:
     """Conversation wrapper around the auditable enrollment state machine."""
 
-    def __init__(self, tables: GuideTables | None = None, jev=jev_classify):
+    def __init__(self, tables: GuideTables | None = None, jev=jev_classify, extractor=None):
         self.tables = tables or GuideTables()
         self.jev = jev
+        self.extractor = extractor  # optional model reading of free text (llm_extract.BedrockExtractor)
         self.graph = self._build()
 
     @staticmethod
@@ -279,6 +352,49 @@ class DentalEnrollmentGraph:
             "plan": "Choose a plan: 1. High or 2. Standard.",
         }
         return prompts[stage]
+
+    def _parse(self, stage: str, message: str, keyword) -> str | Ambiguous:
+        """Map an answer onto the stage's options: keywords by default, or the extractor when set.
+
+        With an extractor, menu numbers and exact option text still skip the model, and a
+        failed model call falls back to the keyword parser.
+        """
+        if self.extractor is None:
+            value = keyword(message)
+            tracing.note_parse(stage, "keyword", list(value) if isinstance(value, Ambiguous) else value)
+            return value
+        numbering, labels = MENUS[stage]
+        text = _words(message)
+        exact = numbering.get(text) or next((v for v, label in labels.items() if _words(label) == text), None)
+        if stage == "state" and not exact:
+            exact = keyword(message)
+        if exact:
+            tracing.note_parse(stage, "menu", exact)
+            return exact
+        question = ("Which qualifying life event applies?" if stage == "qle_event"
+                    else self._prompt(stage).split("\n")[0])
+        hints = OPTION_HINTS.get(stage, {})
+        options = {v: f"{labels[v]}. {hints[v]}" if v in hints else labels[v] for v in numbering.values()}
+        try:
+            result = self.extractor(question, options, message)
+        except Exception as error:  # Bedrock unavailable, throttled or misconfigured
+            logging.warning("LLM extraction failed (%s); using the keyword parser", error)
+            value = keyword(message)
+            tracing.note_parse(stage, "fallback", list(value) if isinstance(value, Ambiguous) else value)
+            return value
+        tracing.note_parse(stage, getattr(self.extractor, "name", "llm"), result)
+        if result.get("disagreement"):
+            from dual_extract import describe
+            readings = ", ".join(f"{name}: {describe(r)}" for name, r in result["disagreement"].items())
+            warnings = _turn_warnings.get()
+            if warnings is not None:
+                warnings.append(f"Extractors disagree on {stage.replace('_', ' ')} ({readings}). "
+                                f"Using {self.extractor.primary.name}.")
+        if result["decision"] == "one":
+            return result["label"]
+        if result["decision"] == "ambiguous":
+            return Ambiguous(tuple(result["candidates"]))
+        return ""
 
     @staticmethod
     def _clarify(stage: str, candidates: Ambiguous) -> str:
@@ -299,10 +415,15 @@ class DentalEnrollmentGraph:
         stage, message = state.get("stage", "member_type"), state.get("message", "")
         if message.strip().lower() in {"restart", "start over", "reset"}:
             return self.start({})
-        update: EnrollmentState = {"jev_diagnostic": {}}
+        update: EnrollmentState = {
+            "jev_diagnostic": {},
+            "newly_eligible_signal": bool(
+                state.get("newly_eligible_signal") or mentions_new_hire(message)
+            ),
+        }
 
         if stage == "member_type":
-            value = parse_member_type(message)
+            value = self._parse(stage, message, parse_member_type)
             if isinstance(value, Ambiguous):
                 return {**update, "response": self._clarify(stage, value)}
             if not value and (result := self.jev(message, "member_type")):
@@ -326,9 +447,9 @@ class DentalEnrollmentGraph:
             return update
 
         if stage == "family_sponsor":
-            value = _number_or_alias(message, SPONSOR_STATUSES, {
+            value = self._parse(stage, message, lambda m: _number_or_alias(m, SPONSOR_STATUSES, {
                 "Employed": ("active", "employ", "working"), "Retired": ("retir", "annuit"),
-            })
+            }))
             if isinstance(value, Ambiguous):
                 return {**update, "response": self._clarify(stage, value)}
             if not value:
@@ -336,7 +457,7 @@ class DentalEnrollmentGraph:
             return {**update, "status": value, "stage": "opportunity", "response": self._prompt("opportunity")}
 
         if stage == "opportunity":
-            value = parse_opportunity(message)
+            value = self._parse(stage, message, parse_opportunity)
             if isinstance(value, Ambiguous):
                 return {**update, "response": self._clarify(stage, value)}
             if not value and (result := self.jev(message, "opportunity")):
@@ -356,20 +477,31 @@ class DentalEnrollmentGraph:
             return {**update, "stage": "enrollment", "response": note + self._prompt("enrollment")}
 
         if stage == "opportunity_detail":
-            value = parse_opportunity_detail(message)
+            value = self._parse(stage, message, parse_opportunity_detail)
             if isinstance(value, Ambiguous):
                 return {**update, "response": self._clarify(stage, value)}
             if not value and (result := self.jev(message, "opportunity_detail")):
                 value, update["jev_diagnostic"] = result["value"], result
             if not value:
                 return {**update, "response": self._prompt(stage)}
+            corrected_new_hire = (
+                value == "qle"
+                and update["newly_eligible_signal"]
+            )
+            if corrected_new_hire:
+                value = "newly_eligible"
             if value == "qle":
                 return {
                     **update, "enrollment_reason": value, "eligibility_status": "needs_benefeds_verification",
                     "stage": "qle_event",
                     "response": _numbered_prompt("Which qualifying life event applies?", QLE_EVENTS),
                 }
-            note = (
+            correction = (
+                "You identified yourself as newly hired, so the new-hire/newly-eligible route "
+                "takes priority over the QLE selection.\n\n"
+                if corrected_new_hire else ""
+            )
+            note = correction + (
                 "New-hire/newly-eligible route selected. The brochure says enrollment is available within "
                 "60 days after becoming eligible; BENEFEDS must verify that condition (brochure page 9)."
             )
@@ -379,10 +511,10 @@ class DentalEnrollmentGraph:
             }
 
         if stage == "enrollment":
-            value = _number_or_alias(message, ENROLLMENTS, {
+            value = self._parse(stage, message, lambda m: _number_or_alias(m, ENROLLMENTS, {
                 "Self Only": ("self only",), "Self Plus One": ("self plus one", "self 1"),
                 "Self and Family": ("self and family", "family"),
-            })
+            }))
             if isinstance(value, Ambiguous):
                 return {**update, "response": self._clarify(stage, value)}
             if not value:
@@ -390,13 +522,18 @@ class DentalEnrollmentGraph:
             return {**update, "enrollment": value, "stage": "state", "response": self._prompt("state")}
 
         if stage == "state":
-            value = message.strip().upper()
-            if not re.fullmatch(r"[A-Z]{2}", value):
+            value = self._parse(stage, message, parse_state_local)
+            if isinstance(value, Ambiguous):
+                return {**update, "response": self._clarify(stage, value)}
+            if not value:
                 return {**update, "response": self._prompt(stage)}
             return {**update, "state_code": value, "stage": "zip", "response": self._prompt("zip")}
 
         if stage == "zip":
-            zip_code = message.strip()
+            match = re.search(r"\b\d{5}(?:-\d{4})?\b", message)
+            zip_code = match.group() if match else ""
+            if not zip_code:
+                return {**update, "response": self._prompt(stage)}
             try:
                 rate_code = self.tables.rate_code(state["state_code"], zip_code)
             except ValueError as error:
@@ -407,7 +544,7 @@ class DentalEnrollmentGraph:
             }
 
         if stage == "need":
-            value = parse_need(message)
+            value = self._parse(stage, message, parse_need)
             if isinstance(value, Ambiguous):
                 return {**update, "response": self._clarify(stage, value)}
             if not value and (result := self.jev(message, "need")):
@@ -436,7 +573,8 @@ class DentalEnrollmentGraph:
             }
 
         if stage == "plan":
-            value = _number_or_alias(message, PLANS, {"High": ("high",), "Standard": ("standard", "std")})
+            value = self._parse(stage, message, lambda m: _number_or_alias(
+                m, PLANS, {"High": ("high",), "Standard": ("standard", "std")}))
             if isinstance(value, Ambiguous):
                 return {**update, "response": self._clarify(stage, value)}
             if not value:
@@ -460,7 +598,7 @@ class DentalEnrollmentGraph:
 
     # QLE node 1: normalize the event. Jev is a fail-closed fallback only.
     def qle_route_event(self, state: EnrollmentState) -> EnrollmentState:
-        event = parse_qle_event(state.get("message", ""))
+        event = self._parse("qle_event", state.get("message", ""), parse_qle_event)
         if isinstance(event, Ambiguous):
             return {"stage": "qle_event", "jev_diagnostic": {}, "response": self._clarify("qle_event", event)}
         diagnostic: dict[str, Any] = {}
@@ -548,10 +686,18 @@ class DentalEnrollmentGraph:
         return graph.compile(checkpointer=MemorySaver())
 
     def reply(self, message: str, thread_id: str = "default") -> tuple[str, dict[str, Any]]:
-        result = self.graph.invoke(
-            {"message": message}, {"configurable": {"thread_id": thread_id}}
-        )
-        return result["response"], dict(result)
+        config = {"configurable": {"thread_id": thread_id}}
+        stage = (self.graph.get_state(config).values or {}).get("stage", "")
+        mode = getattr(self.extractor, "name", "llm") if self.extractor is not None else "keyword"
+        token = _turn_warnings.set([])
+        try:
+            with tracing.turn(thread_id, stage, message, mode) as finish:
+                result = self.graph.invoke({"message": message}, config)
+                finish(result)
+            warnings = _turn_warnings.get()
+        finally:
+            _turn_warnings.reset(token)
+        return result["response"], {**dict(result), "warnings": warnings}
 
     def mermaid(self) -> str:
         return self.graph.get_graph().draw_mermaid()

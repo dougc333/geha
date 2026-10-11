@@ -145,6 +145,111 @@ class EnrollmentFlowTests(unittest.TestCase):
         self.assertEqual(state["status"], "Employed")
         self.assertIn("enrollment opportunity", reply.lower())
 
+    def test_new_job_fact_corrects_mistaken_qle_route(self):
+        bot = DentalEnrollmentGraph(jev=lambda *_: None)
+        thread = "rambling-new-hire"
+        bot.reply("", thread)
+        bot.reply(
+            "I am an active federal employee, and I just started my federal job last week.",
+            thread,
+        )
+        bot.reply("Newly eligible or a qualifying life event", thread)
+        reply, state = bot.reply(
+            "Qualifying life event, because I just started my job and need to cover my child.",
+            thread,
+        )
+
+        self.assertEqual(state["enrollment_reason"], "newly_eligible")
+        self.assertEqual(state["stage"], "enrollment")
+        self.assertIn("takes priority over the QLE selection", reply)
+
+    def test_explicit_new_hire_takes_priority_when_jev_selects_qle(self):
+        def extractor(question, options, message):
+            self.assertIn("qle", options)
+            return {"decision": "one", "label": "qle", "candidates": []}
+
+        bot = DentalEnrollmentGraph(jev=lambda *_: None, extractor=extractor)
+        thread = "new-hire-priority"
+        bot.reply("", thread)
+        bot.reply("1", thread)
+        bot.reply("2", thread)
+        reply, state = bot.reply(
+            "Qualifying life event, that's me! New hire and need coverage ASAP.",
+            thread,
+        )
+
+        self.assertEqual(state["enrollment_reason"], "newly_eligible")
+        self.assertEqual(state["stage"], "enrollment")
+        self.assertIn("takes priority over the QLE selection", reply)
+
+    def test_combined_opportunity_label_does_not_claim_member_is_new_hire(self):
+        bot = DentalEnrollmentGraph(jev=lambda *_: None)
+        thread = "generic-opportunity-is-not-new-hire"
+        bot.reply("", thread)
+        bot.reply("1", thread)
+        bot.reply("Newly eligible or a qualifying life event", thread)
+        reply, state = bot.reply("Qualifying life event", thread)
+
+        self.assertEqual(state["enrollment_reason"], "qle")
+        self.assertEqual(state["stage"], "qle_event")
+        self.assertIn("Which qualifying life event applies?", reply)
+
+    def test_state_and_zip_are_extracted_from_rambling_answers(self):
+        bot = DentalEnrollmentGraph(jev=lambda *_: None)
+        thread = "rambling-location"
+        bot.reply("", thread)
+        for message in ["1", "1", "2"]:
+            bot.reply(message, thread)
+
+        _, state = bot.reply(
+            "CA, for California. We live in Modesto, ZIP 95350.",
+            thread,
+        )
+        self.assertEqual(state["state_code"], "CA")
+        self.assertEqual(state["stage"], "zip")
+
+        _, state = bot.reply(
+            "Our ZIP is 95350, close to my child's orthodontist.",
+            thread,
+        )
+        self.assertEqual(state["zip_code"], "95350")
+        self.assertEqual(state["stage"], "need")
+
+    def test_free_form_state_uses_configured_extractor(self):
+        calls = []
+
+        def extractor(question, options, message):
+            calls.append((question, options, message))
+            return {"decision": "one", "label": "CA", "candidates": []}
+
+        bot = DentalEnrollmentGraph(jev=lambda *_: None, extractor=extractor)
+        thread = "jev-state"
+        bot.reply("", thread)
+        for message in ["1", "1", "2"]:
+            bot.reply(message, thread)
+
+        _, state = bot.reply("I live near Modesto in California.", thread)
+
+        self.assertEqual(state["state_code"], "CA")
+        self.assertEqual(state["stage"], "zip")
+        self.assertEqual(calls[-1][2], "I live near Modesto in California.")
+        self.assertEqual(calls[-1][1]["CA"], "California")
+
+    def test_exact_state_code_does_not_call_extractor(self):
+        def extractor(*_):
+            self.fail("Exact state codes should be normalized locally")
+
+        bot = DentalEnrollmentGraph(jev=lambda *_: None, extractor=extractor)
+        thread = "local-state-code"
+        bot.reply("", thread)
+        for message in ["1", "1", "2"]:
+            bot.reply(message, thread)
+
+        _, state = bot.reply("ca", thread)
+
+        self.assertEqual(state["state_code"], "CA")
+        self.assertEqual(state["stage"], "zip")
+
 
 if __name__ == "__main__":
     unittest.main()

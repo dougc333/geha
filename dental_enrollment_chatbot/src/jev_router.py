@@ -10,6 +10,8 @@ import os
 from functools import lru_cache
 from typing import Any
 
+import tracing
+
 try:
     from typesafe_sdk import Choice, TypeSafeClient
 except ImportError:  # The deterministic flow remains usable without the SDK.
@@ -87,3 +89,42 @@ def classify(message: str, field: str) -> dict[str, Any] | None:
         }
     except Exception:
         return None
+
+
+class JevExtractor:
+    """Map a free-text answer onto a stage's options with Jev's Choice probabilities.
+
+    Drop-in replacement for llm_extract.BedrockExtractor. Two close top options
+    become a clarifying question; low confidence or "unsure" becomes "none".
+    Raises when Jev is unavailable, so the graph falls back to the keyword parser.
+    """
+    name = "jev"
+
+    def __init__(self, min_confidence: float = 0.5, ask_margin: float = 0.25):
+        self.min_confidence = min_confidence  # tune on a dev set, not the test set
+        self.ask_margin = ask_margin
+
+    def __call__(self, question: str, options: dict[str, str], message: str) -> dict:
+        if Choice is None or not os.environ.get("TYPESAFE_API_KEY"):
+            raise RuntimeError("Jev unavailable: typesafe-sdk or TYPESAFE_API_KEY missing")
+        criteria = {**options, "unsure": "None of the options is explicit in the reply."}
+        choice = Choice(
+            instructions=f"{question} Classify only what the member explicitly states. "
+                         "Do not infer eligibility.",
+            criteria=criteria,
+        )
+        with tracing.generation("extract-answer", "jev", message) as generation:
+            response = _client().system_one(state={"member_answer": message}, questions={"q": choice})
+            ranked = sorted(((k, float(v)) for k, v in response.choices["q"].probabilities.items()),
+                            key=lambda kv: -kv[1])
+            (top, p1), (second, p2) = ranked[0], ranked[1]
+            if top == "unsure" or p1 < self.min_confidence:
+                result = {"decision": "none", "label": None, "candidates": []}
+            elif p1 - p2 < self.ask_margin and second != "unsure":
+                result = {"decision": "ambiguous", "label": None, "candidates": [top, second]}
+            else:
+                result = {"decision": "one", "label": top, "candidates": []}
+            result["reason"] = f"top {top}={p1:.2f}, next {second}={p2:.2f}"
+            if generation is not None:
+                generation.update(model=response.model, output={**result, "probabilities": dict(ranked)})
+        return result
