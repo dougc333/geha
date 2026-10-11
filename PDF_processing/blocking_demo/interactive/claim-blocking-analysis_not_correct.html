@@ -1,0 +1,396 @@
+<div id="claim-blocking-analysis">
+  <style>
+    #claim-blocking-analysis {
+      --cba-bg: light-dark(#eef1f5, #10151d);
+      --cba-panel: light-dark(#ffffff, #19212d);
+      --cba-paper: light-dark(#fffefb, #f8f6f0);
+      --cba-ink: light-dark(#17202d, #edf3fb);
+      --cba-muted: light-dark(#657184, #9eabbc);
+      --cba-line: light-dark(#d9dee7, #303b4b);
+      --cba-red: #ed2f3c;
+      --cba-green: #19a66a;
+      --cba-blue: #3978f6;
+      color-scheme: light dark;
+      color: var(--cba-ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--cba-bg);
+      border: 1px solid var(--cba-line);
+      border-radius: 16px;
+      overflow: hidden;
+      min-height: 590px;
+    }
+
+    #claim-blocking-analysis * { box-sizing: border-box; }
+
+    #claim-blocking-analysis .cba-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--cba-panel);
+      border-bottom: 1px solid var(--cba-line);
+    }
+
+    #claim-blocking-analysis .cba-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+      font-size: 14px;
+      font-weight: 720;
+      letter-spacing: -0.01em;
+    }
+
+    #claim-blocking-analysis .cba-live-dot {
+      width: 9px;
+      height: 9px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--cba-red);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--cba-red) 16%, transparent);
+    }
+
+    #claim-blocking-analysis .cba-controls {
+      display: flex;
+      gap: 7px;
+    }
+
+    #claim-blocking-analysis button {
+      appearance: none;
+      border: 1px solid var(--cba-line);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--cba-ink);
+      padding: 6px 10px;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 650;
+      cursor: pointer;
+    }
+
+    #claim-blocking-analysis button:hover { border-color: var(--cba-blue); }
+    #claim-blocking-analysis button:focus-visible { outline: 2px solid var(--cba-blue); outline-offset: 2px; }
+
+    #claim-blocking-analysis .cba-stage {
+      display: grid;
+      grid-template-columns: minmax(330px, 1.25fr) minmax(250px, .75fr);
+      min-height: 540px;
+    }
+
+    #claim-blocking-analysis .cba-document-area {
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background-image: radial-gradient(color-mix(in srgb, var(--cba-muted) 15%, transparent) 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+
+    #claim-blocking-analysis .cba-paper {
+      position: relative;
+      width: min(100%, 430px);
+      aspect-ratio: 0.772;
+      overflow: hidden;
+      background: var(--cba-paper);
+      color: #1e2630;
+      border: 1px solid #d7d3c9;
+      box-shadow: 0 14px 34px rgba(17, 26, 41, .16);
+      padding: 5.5% 6%;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #claim-blocking-analysis .cba-doc-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid #26354b;
+      padding-bottom: 3%;
+    }
+
+    #claim-blocking-analysis .cba-mark { font-weight: 800; font-size: clamp(12px, 2.5vw, 18px); color: #263f68; }
+    #claim-blocking-analysis .cba-form-id { font-size: clamp(6px, 1.4vw, 9px); color: #657184; text-align: right; line-height: 1.45; }
+    #claim-blocking-analysis .cba-section { margin-top: 3.8%; }
+    #claim-blocking-analysis .cba-section-title { font-size: clamp(6px, 1.35vw, 9px); font-weight: 800; color: #36517c; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 1.5%; }
+
+    #claim-blocking-analysis .cba-fields {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 3px 10px;
+      font-size: clamp(6px, 1.35vw, 9px);
+      line-height: 1.5;
+    }
+
+    #claim-blocking-analysis .cba-fields b { color: #536175; font-size: .9em; text-transform: uppercase; }
+    #claim-blocking-analysis .cba-table { width: 100%; border-collapse: collapse; font-size: clamp(5.5px, 1.22vw, 8px); }
+    #claim-blocking-analysis .cba-table th { background: #e9edf3; color: #35435a; font-weight: 750; }
+    #claim-blocking-analysis .cba-table th,
+    #claim-blocking-analysis .cba-table td { border: 1px solid #b9c1cc; padding: 1.8% 1.2%; text-align: left; }
+    #claim-blocking-analysis .cba-total { margin-left: auto; margin-top: 3%; width: 45%; font-size: clamp(6px, 1.35vw, 9px); }
+    #claim-blocking-analysis .cba-total div { display: flex; justify-content: space-between; padding: 2.5%; border-bottom: 1px solid #c8ced6; }
+    #claim-blocking-analysis .cba-note { margin-top: 4%; padding: 3%; border: 1px solid #c8ced6; min-height: 11%; font-size: clamp(5.5px, 1.2vw, 8px); line-height: 1.45; color: #455266; }
+
+    #claim-blocking-analysis .cba-scan-box {
+      position: absolute;
+      z-index: 4;
+      left: 5%;
+      top: 4%;
+      width: 90%;
+      height: 10%;
+      border: 3px solid var(--cba-red);
+      background: color-mix(in srgb, var(--cba-red) 8%, transparent);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.8), 0 0 18px rgba(237,47,60,.24);
+      pointer-events: none;
+      transition-property: left, top, width, height;
+      transition-timing-function: cubic-bezier(.35,.05,.15,1);
+      transition-duration: 750ms;
+    }
+
+    #claim-blocking-analysis .cba-scan-label {
+      position: absolute;
+      left: -3px;
+      top: -22px;
+      padding: 3px 6px;
+      background: var(--cba-red);
+      color: white;
+      font: 700 8px/1.2 Inter, sans-serif;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    #claim-blocking-analysis .cba-analysis {
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      background: var(--cba-panel);
+      border-left: 1px solid var(--cba-line);
+    }
+
+    #claim-blocking-analysis .cba-kicker { color: var(--cba-red); font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    #claim-blocking-analysis .cba-step-title { margin: 8px 0 5px; font-size: 21px; line-height: 1.12; letter-spacing: -.03em; }
+    #claim-blocking-analysis .cba-step-detail { min-height: 40px; margin: 0; color: var(--cba-muted); font-size: 12px; line-height: 1.55; }
+
+    #claim-blocking-analysis .cba-readout {
+      margin-top: 18px;
+      padding: 12px;
+      border: 1px solid var(--cba-line);
+      border-radius: 10px;
+      background: color-mix(in srgb, var(--cba-bg) 60%, transparent);
+    }
+
+    #claim-blocking-analysis .cba-readout-label { color: var(--cba-muted); font-size: 9px; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
+    #claim-blocking-analysis .cba-ocr-text { min-height: 50px; margin-top: 7px; font: 600 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+    #claim-blocking-analysis .cba-metrics { display: grid; gap: 12px; margin-top: 18px; }
+    #claim-blocking-analysis .cba-metric-head { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 5px; font-size: 11px; }
+    #claim-blocking-analysis .cba-metric-head span:first-child { color: var(--cba-muted); }
+    #claim-blocking-analysis .cba-track { height: 5px; overflow: hidden; border-radius: 99px; background: var(--cba-line); }
+    #claim-blocking-analysis .cba-fill { width: 0; height: 100%; border-radius: inherit; background: var(--cba-blue); transition: width 550ms ease; }
+    #claim-blocking-analysis .cba-metric:last-child .cba-fill { background: var(--cba-green); }
+
+    #claim-blocking-analysis .cba-verdict {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: auto;
+      padding-top: 18px;
+      border-top: 1px solid var(--cba-line);
+    }
+
+    #claim-blocking-analysis .cba-verdict-label { color: var(--cba-muted); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; }
+    #claim-blocking-analysis .cba-verdict-value { margin-top: 3px; font-size: 13px; font-weight: 760; }
+    #claim-blocking-analysis .cba-score { font-size: 27px; font-weight: 800; letter-spacing: -.04em; color: var(--cba-green); }
+    #claim-blocking-analysis .cba-progress { height: 3px; background: var(--cba-line); }
+    #claim-blocking-analysis .cba-progress-fill { height: 100%; width: 0; background: var(--cba-red); transition: width 300ms ease; }
+
+    @media (max-width: 650px) {
+      #claim-blocking-analysis .cba-stage { grid-template-columns: 1fr; }
+      #claim-blocking-analysis .cba-document-area { padding: 16px; }
+      #claim-blocking-analysis .cba-paper { max-width: 390px; }
+      #claim-blocking-analysis .cba-analysis { border-left: 0; border-top: 1px solid var(--cba-line); min-height: 390px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #claim-blocking-analysis .cba-scan-box,
+      #claim-blocking-analysis .cba-fill,
+      #claim-blocking-analysis .cba-progress-fill { transition-duration: 1ms !important; }
+    }
+  </style>
+
+  <div class="cba-toolbar">
+    <div class="cba-title"><span class="cba-live-dot"></span><span>Claim blocking analysis</span></div>
+    <div class="cba-controls">
+      <button type="button" data-action="toggle" aria-label="Pause analysis">Pause</button>
+      <button type="button" data-action="restart">Restart</button>
+    </div>
+  </div>
+  <div class="cba-progress"><div class="cba-progress-fill"></div></div>
+
+  <div class="cba-stage">
+    <section class="cba-document-area" aria-label="Synthetic medical claim under analysis">
+      <div class="cba-paper">
+        <div class="cba-doc-head">
+          <div class="cba-mark">HEALTH CLAIM</div>
+          <div class="cba-form-id">SYNTHETIC SAMPLE<br>CLAIM M-3002</div>
+        </div>
+
+        <div class="cba-section">
+          <div class="cba-section-title">Patient information</div>
+          <div class="cba-fields">
+            <div><b>Member ID</b><br>P300</div>
+            <div><b>Date of birth</b><br>04/18/1978</div>
+            <div><b>Name</b><br>Sample Patient</div>
+            <div><b>Service date</b><br>08/22/2026</div>
+          </div>
+        </div>
+
+        <div class="cba-section">
+          <div class="cba-section-title">Billing provider</div>
+          <div class="cba-fields">
+            <div><b>Provider</b><br>Example Family Medicine</div>
+            <div><b>NPI</b><br>NPI300</div>
+            <div><b>Location</b><br>Los Angeles, CA</div>
+            <div><b>Tax ID</b><br>XX-XXX0300</div>
+          </div>
+        </div>
+
+        <div class="cba-section">
+          <div class="cba-section-title">Services</div>
+          <table class="cba-table">
+            <thead><tr><th>Date</th><th>Code</th><th>Description</th><th>Charge</th></tr></thead>
+            <tbody>
+              <tr><td>08/22/26</td><td>99213</td><td>Est. patient visit — HTN follow-up</td><td>$165.00</td></tr>
+              <tr><td>08/22/26</td><td>80048</td><td>Basic metabolic panel</td><td>$80.00</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="cba-total">
+          <div><span>Total charge</span><b>$245.00</b></div>
+          <div><span>Lines</span><b>2</b></div>
+        </div>
+
+        <div class="cba-note"><b>Supporting narrative</b><br>Corrected submission. Established-patient evaluation for high blood pressure follow-up; basic blood chemistry panel performed.</div>
+
+        <div class="cba-scan-box" aria-hidden="true"><span class="cba-scan-label">detecting layout</span></div>
+      </div>
+    </section>
+
+    <aside class="cba-analysis" aria-live="polite">
+      <div class="cba-kicker">Step 1 of 7</div>
+      <h2 class="cba-step-title">Detecting page layout</h2>
+      <p class="cba-step-detail">Locating stable regions before OCR and duplicate comparison.</p>
+
+      <div class="cba-readout">
+        <div class="cba-readout-label">Extracted block</div>
+        <div class="cba-ocr-text">Document boundary · 1 page · upright orientation</div>
+      </div>
+
+      <div class="cba-metrics">
+        <div class="cba-metric">
+          <div class="cba-metric-head"><span>OCR confidence</span><strong data-metric-value="ocr">—</strong></div>
+          <div class="cba-track"><div class="cba-fill" data-metric-fill="ocr"></div></div>
+        </div>
+        <div class="cba-metric">
+          <div class="cba-metric-head"><span>Pixel similarity</span><strong data-metric-value="pixel">—</strong></div>
+          <div class="cba-track"><div class="cba-fill" data-metric-fill="pixel"></div></div>
+        </div>
+        <div class="cba-metric">
+          <div class="cba-metric-head"><span>Semantic similarity</span><strong data-metric-value="semantic">—</strong></div>
+          <div class="cba-track"><div class="cba-fill" data-metric-fill="semantic"></div></div>
+        </div>
+      </div>
+
+      <div class="cba-verdict">
+        <div><div class="cba-verdict-label">Current decision</div><div class="cba-verdict-value">Building evidence…</div></div>
+        <div class="cba-score">—</div>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    (() => {
+      const root = document.getElementById('claim-blocking-analysis');
+      const scanBox = root.querySelector('.cba-scan-box');
+      const scanLabel = root.querySelector('.cba-scan-label');
+      const kicker = root.querySelector('.cba-kicker');
+      const title = root.querySelector('.cba-step-title');
+      const detail = root.querySelector('.cba-step-detail');
+      const ocrText = root.querySelector('.cba-ocr-text');
+      const verdict = root.querySelector('.cba-verdict-value');
+      const score = root.querySelector('.cba-score');
+      const progress = root.querySelector('.cba-progress-fill');
+      const toggle = root.querySelector('[data-action="toggle"]');
+      const restart = root.querySelector('[data-action="restart"]');
+
+      const steps = [
+        { box:[5,4,90,10], label:'detecting layout', title:'Detecting page layout', detail:'Locating stable regions before OCR and duplicate comparison.', text:'Document boundary · 1 page · upright orientation', ocr:0, pixel:0, semantic:0, verdict:'Building evidence…', score:null },
+        { box:[5,14,90,17], label:'patient block', title:'Matching patient identity', detail:'OCR values are normalized, then compared with candidate claim M-3001.', text:'Member P300 · DOB 04/18/1978 · DOS 08/22/2026', ocr:98, pixel:94, semantic:99, verdict:'Identity fields agree', score:27 },
+        { box:[5,32,90,15], label:'provider block', title:'Resolving billing provider', detail:'NPI and normalized organization name agree with the candidate claim.', text:'Example Family Medicine · NPI300 · Los Angeles, CA', ocr:97, pixel:91, semantic:98, verdict:'Provider fields agree', score:45 },
+        { box:[5,48,90,21], label:'service lines', title:'Comparing service lines', detail:'Codes match; descriptions are evaluated line-by-line despite changed order and wording.', text:'99213 ↔ established-patient visit · 80048 ↔ chemistry panel', ocr:96, pixel:82, semantic:96, verdict:'Two matching service lines', score:72 },
+        { box:[52,70,43,11], label:'totals block', title:'Checking amount variance', detail:'The corrected submission differs by $5.00, within the review tolerance.', text:'Prior total $240.00 · current total $245.00 · Δ $5.00', ocr:99, pixel:86, semantic:94, verdict:'Small corrected amount variance', score:81 },
+        { box:[5,82,90,13], label:'narrative block', title:'Reading supporting narrative', detail:'The narrative explicitly identifies a corrected submission and preserves the same clinical meaning.', text:'“Corrected submission … high blood pressure follow-up … chemistry panel”', ocr:94, pixel:77, semantic:97, verdict:'Correction context confirmed', score:94 },
+        { box:[4,13,92,82], label:'analysis complete', title:'Duplicate candidate found', detail:'Deterministic identifiers, service-line transport, OCR, and semantics all support review as a corrected duplicate.', text:'Candidate M-3001 · no critical field conflicts', ocr:97, pixel:86, semantic:97, verdict:'Likely duplicate · route to review', score:96 }
+      ];
+
+      let index = 0;
+      let timer = null;
+      let playing = true;
+
+      function metric(name, value) {
+        root.querySelector(`[data-metric-value="${name}"]`).textContent = value ? `${value}%` : '—';
+        root.querySelector(`[data-metric-fill="${name}"]`).style.width = `${value}%`;
+      }
+
+      function renderStep() {
+        const step = steps[index];
+        const [left, top, width, height] = step.box;
+        scanBox.style.left = `${left}%`;
+        scanBox.style.top = `${top}%`;
+        scanBox.style.width = `${width}%`;
+        scanBox.style.height = `${height}%`;
+        scanLabel.textContent = step.label;
+        kicker.textContent = `Step ${index + 1} of ${steps.length}`;
+        title.textContent = step.title;
+        detail.textContent = step.detail;
+        ocrText.textContent = step.text;
+        verdict.textContent = step.verdict;
+        score.textContent = step.score === null ? '—' : `${step.score}%`;
+        metric('ocr', step.ocr);
+        metric('pixel', step.pixel);
+        metric('semantic', step.semantic);
+        progress.style.width = `${((index + 1) / steps.length) * 100}%`;
+      }
+
+      function schedule() {
+        clearTimeout(timer);
+        if (!playing) return;
+        timer = setTimeout(() => {
+          index = (index + 1) % steps.length;
+          renderStep();
+          schedule();
+        }, index === steps.length - 1 ? 3000 : 2100);
+      }
+
+      toggle.addEventListener('click', () => {
+        playing = !playing;
+        toggle.textContent = playing ? 'Pause' : 'Play';
+        toggle.setAttribute('aria-label', playing ? 'Pause analysis' : 'Play analysis');
+        schedule();
+      });
+
+      restart.addEventListener('click', () => {
+        index = 0;
+        playing = true;
+        toggle.textContent = 'Pause';
+        toggle.setAttribute('aria-label', 'Pause analysis');
+        renderStep();
+        schedule();
+      });
+
+      renderStep();
+      schedule();
+    })();
+  </script>
+</div>
