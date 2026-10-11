@@ -51,7 +51,7 @@ class ToolTests(unittest.TestCase):
     def test_coverage_policy_search(self):
         results = tools.coverage_policy_search("romiplostim authorization", 3)["results"]
         self.assertEqual(results[0]["policy"], "nplate")
-        self.assertTrue(all(r["source"].startswith("downloads/coverage-policies/") for r in results))
+        self.assertTrue(all(r["source"].startswith("crawl_dir/raw/coverage-policies/") for r in results))
 
     def test_member_claims_summary(self):
         summary = tools.member_claims_summary("M-100001")

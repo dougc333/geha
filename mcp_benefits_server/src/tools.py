@@ -8,6 +8,7 @@ which reads a small synthetic member file. Nothing here calls a model.
 from __future__ import annotations
 
 import math
+import json
 import re
 import sys
 from collections import Counter
@@ -18,9 +19,15 @@ from typing import Any
 from registry import ToolSpec
 
 REPO = Path(__file__).resolve().parents[2]
-DENTAL = REPO / "downloads" / "dental" / "fedvip"
-BROCHURE_PAGES = DENTAL / "2026-geha-dental-plan-brochure_pages"
-POLICY_DIR = REPO / "downloads" / "coverage-policies"
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
+from crawl_dir.src.consumer_paths import document_artifacts, page_markdown, page_root, raw_dir
+
+DENTAL = raw_dir("dental", "fedvip")
+GUIDE_DOCUMENT = "fedvip/2026-geha-dental-benefits-guide.pdf"
+BROCHURE_DOCUMENT = "fedvip/2026-geha-dental-plan-brochure.pdf"
+BROCHURE_PAGES = page_root("dental", BROCHURE_DOCUMENT, allow_candidate=True)
+POLICY_DIR = raw_dir("coverage-policies")
 
 # Reuse the enrollment chatbot's parser for guide pages 10-11 rather than copying it.
 sys.path.insert(0, str(REPO / "dental_enrollment_chatbot" / "src"))
@@ -29,7 +36,7 @@ from guide_tables import GuideTables  # noqa: E402
 
 @lru_cache(maxsize=1)
 def _guide() -> GuideTables:
-    return GuideTables(DENTAL / "2026-geha-dental-benefits-guide_pages")
+    return GuideTables(page_root("dental", GUIDE_DOCUMENT, allow_candidate=True))
 
 
 # --- production: deterministic lookups ------------------------------------------------
@@ -71,7 +78,9 @@ def _cdt_index() -> dict[str, dict[str, Any]]:
     """Each CDT code at its first listing on brochure pages 20-37 (later mentions are limits)."""
     index: dict[str, dict[str, Any]] = {}
     for page, benefit_class in CDT_CLASSES.items():
-        for raw in (BROCHURE_PAGES / f"page-{page:03d}.md").read_text(encoding="utf-8").splitlines():
+        for raw in page_markdown(
+            "dental", BROCHURE_DOCUMENT, page, allow_candidate=True
+        ).read_text(encoding="utf-8").splitlines():
             line = re.sub(r"\s+", " ", re.sub(r"\s*\|\s*", " ", raw.strip().strip("|"))).strip()
             for match in CDT_RE.finditer(line):
                 description = re.split(r"\s+-\s+(?:Limited|Coverage determined|When covered|Not covered)",
@@ -98,18 +107,28 @@ TOKEN = re.compile(r"[a-z0-9]+")
 @lru_cache(maxsize=1)
 def _policy_sections() -> list[dict[str, Any]]:
     sections = []
-    for path in sorted(POLICY_DIR.glob("geha-coverage-policy-*.docling.md")):
-        policy = path.name.removeprefix("geha-coverage-policy-").removesuffix(".docling.md")
-        heading, body = "Overview", []
-        for line in path.read_text(encoding="utf-8").splitlines() + ["## END"]:
-            if line.startswith("## "):
-                text = re.sub(r"<!--.*?-->", "", " ".join(body)).strip()
-                if text:
-                    sections.append({"policy": policy, "section": heading, "text": text,
-                                     "tokens": TOKEN.findall(f"{heading} {text}".lower()), "file": path.name})
-                heading, body = line[3:].strip(), []
-            else:
-                body.append(line.strip())
+    for pdf in sorted(POLICY_DIR.rglob("geha-coverage-policy-*.pdf")):
+        relative = pdf.relative_to(POLICY_DIR)
+        artifacts = document_artifacts(
+            "coverage-policies", relative, allow_candidate=True
+        )
+        chunks_path = (
+            artifacts / "chunks.jsonl"
+            if (artifacts / "chunks.jsonl").is_file()
+            else artifacts / "candidate" / "chunks.jsonl"
+        )
+        policy = pdf.stem.removeprefix("geha-coverage-policy-")
+        for line in chunks_path.read_text(encoding="utf-8").splitlines():
+            chunk = json.loads(line)
+            text = str(chunk["text"])
+            heading = str(chunk["section"])
+            sections.append({
+                "policy": policy,
+                "section": heading,
+                "text": text,
+                "tokens": TOKEN.findall(f"{heading} {text}".lower()),
+                "file": str(relative),
+            })
     return sections
 
 
@@ -132,7 +151,7 @@ def coverage_policy_search(query: str, limit: int = 3) -> dict[str, Any]:
     scored.sort(key=lambda pair: -pair[0])
     return {"query": query, "results": [
         {"policy": s["policy"], "section": s["section"], "score": round(score, 2),
-         "snippet": s["text"][:400], "source": f"downloads/coverage-policies/{s['file']}"}
+         "snippet": s["text"][:400], "source": f"crawl_dir/raw/coverage-policies/{s['file']}"}
         for score, s in scored[:max(1, min(limit, 10))]]}
 
 
