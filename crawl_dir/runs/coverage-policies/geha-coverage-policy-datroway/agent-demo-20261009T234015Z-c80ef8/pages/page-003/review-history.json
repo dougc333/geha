@@ -1,0 +1,73 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "missing_text",
+        "source_evidence": "G.E.H.A logo at the top left and OncoHealth logo at the top right on the source PDF page.",
+        "html_evidence": "No logos are included in the candidate HTML render.",
+        "correction": "Add G.E.H.A and OncoHealth logos at the top of the HTML page as in the source PDF."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Trodelvy, J9317, Injection, sacituzumab govitecan-hziy, 2.5 mg",
+        "html_evidence": "Matches text but HTML uses <h2><strong>Billing:</strong></h2> for heading, source uses 'Billing:' as a bold heading with underline style",
+        "correction": "Consider formatting the 'Billing:' heading with underline style as in the source for an exact match."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "References heading is underlined and bold on source PDF page.",
+        "html_evidence": "References heading in candidate is <h2><strong>References</strong></h2> but no underline.",
+        "correction": "Add underline styling to the 'References' heading to match the source."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Reference 5 text: \"Referenced with permission from the NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines®). National Comprehensive Cancer Network, Inc. 2025. All rights reserved. Accessed February 10, 2026. To view the most recent and complete version of the guideline, go online to NCCN.org.\"",
+        "html_evidence": "Reference 5 text is similar but missing a line break before 'National Comprehensive Cancer Network, Inc. 2025.' and the parentheses content in source is \"(NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines®). National Comprehensive Cancer Network\", here it is \"(NCCN Guidelines®). National Comprehensive Cancer Network\"",
+        "correction": "Ensure punctuation and line breaks match source exactly in reference 5."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Disclaimer heading is bold and italicized on source PDF (Disclaimer in bold, followed by italicized text)",
+        "html_evidence": "In HTML, Disclaimer heading is <h3><strong>Disclaimer</strong></h3> and all body text is italicized but should only the paragraph body be italic, heading is bold only",
+        "correction": "Make the Disclaimer heading bold but not italicized, and body text italicized only as per source."
+      },
+      {
+        "category": "extra_text",
+        "source_evidence": "Footer on source: '3 | P a g e' and below on same line 'Datroway (datopotamab deruxtecan-dlnk)'",
+        "html_evidence": "Footer uses <p>3 | P a g e<br/>Datroway (datopotamab deruxtecan-dlnk)</p> which adds a line break not in source which keeps both on a single line.",
+        "correction": "Remove <br/> in footer so '3 | P a g e Datroway (datopotamab deruxtecan-dlnk)' is on a single line to match source."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "missing_text",
+        "source_evidence": "The authoritative PDF page has two logos at the top: G.E.H.A logo and OncoHealth logo.",
+        "html_evidence": "<div id=\"header-logos\">\n\n\n</div>",
+        "correction": "Add the two logos present in the authoritative PDF page at the top within the header-logos div."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Trodelvy, J9317, Injection, sacituzumab govitecan-hziy, 2.5 mg",
+        "html_evidence": "<td>Injection, sacituzumab govitecan-hziy, 2.5 mg</td>",
+        "correction": "Change 'govitecan-hziy' to 'govitecan-hziy' (verify spelling in authoritative source); actually the authoritative PDF reads 'govitecan-hziy' (typo noted in candidate as 'govitecan-hziy'). Candidate has 'govitecan-hziy' matches PDF; no error here."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "3 | P a g e",
+        "html_evidence": "<p>3 | P a g e Datroway (datopotamab deruxtecan-dlnk)</p>",
+        "correction": "The PDF shows '3 | P a g e' on separate line and 'Datroway (datopotamab deruxtecan-dlnk)' on its own separate line below. Split into two separate lines or paragraphs."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "match",
+    "errors": []
+  }
+]

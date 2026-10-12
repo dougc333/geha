@@ -1,0 +1,193 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Pfizer link: https://labeling.pfizer.com/ShowLabeling.aspx?id=19669",
+        "html_evidence": "Elrexfio [package insert]. Pfizer Inc., New York, NY. Available at: https://labeling.pfizer.com/ShowLabeling.aspx?id=19669",
+        "correction": "The correct Pfizer link is https://labeling.pfizer.com/ShowLabeling.aspx?id=19669"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Drug name: Elrexfio",
+        "html_evidence": "Drug name is spelled 'Elrexfio'",
+        "correction": "Correct spelling is 'Elrexfio' for the drug name throughout."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Pfizer link URL is https://labeling.pfizer.com/ShowLabeling.aspx?id=19669",
+        "html_evidence": "Pfizer link URL is https://labeling.pfizer.com/ShowLabeling.aspx?id=19669",
+        "correction": "Fix the Pfizer URL link to https://labeling.pfizer.com/ShowLabeling.aspx?id=19669"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "List item: \"National Comprehensive Cancer Network (NCCN);\"",
+        "html_evidence": "List item: \"National Comprehensive Cancer Network (NCCN);\"",
+        "correction": "Remove extra spacing in 'National Comprehensive Cancer Network (NCCN)' string, ensuring no special character difference."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "The last sentence in the Disclaimer is truncated in the candidate: \"This policy\"",
+        "html_evidence": "The last sentence in the Disclaimer: \"This policy\" (incomplete)",
+        "correction": "Include the full continuation or appropriately mark end of disclaimer. The source PDF cuts off, so consult full text for completion or indicate truncation."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Elrexfio [package insert].Pfizer Inc., New York, NY. Available at: https://labeling.pfizer.com/ShowLabeling.aspx?id=19669",
+        "html_evidence": "Elrexfio [package insert]. Pfizer Inc., New York, NY. Available at: https://labeling.pfizer.com/ShowLabeling.aspx?id=19669",
+        "correction": "Add space after period in 'insert].Pfizer' to match 'insert]. Pfizer' as in HTML"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "https://labeling.pfizer.com/ShowLabeling.aspx?id=19669",
+        "html_evidence": "https://labeling.pfizer.com/ShowLabeling.aspx?id=19696",
+        "correction": "Correct URL id from '19669' in source to '19696' in HTML to match the source"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Injection, elranatamab-bcmm, 1 mg",
+        "html_evidence": "Injection, elranatamab-bcmm, 1 mg",
+        "correction": "No difference, correct text in HTML"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "National Comprehensive Cancer Network (NCCN)",
+        "html_evidence": "National Comprehensive Cancer Network® (NCCN)",
+        "correction": "Add ® symbol to 'National Comprehensive Cancer Network' to match source text"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Dose and frequency should be consistent with United States Food and Drug Administration (FDA) labeling, National Comprehensive Cancer Network® (NCCN), or indication specific peer-reviewed literature;",
+        "html_evidence": "Dose and frequency should be consistent with United States Food and Drug Administration (FDA) labeling, National Comprehensive Cancer Network® (NCCN), or indication specific peer-reviewed literature;",
+        "correction": "No difference; text present in both"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Elrexfio [package insert]. Pfizer Inc., New York, NY. Available at: https://labeling.pfizer.com/ShowLabeling.aspx?id=19669",
+        "html_evidence": "Elrexfio [package insert]. Pfizer Inc., New York, NY. Available at: https://labeling.pfizer.com/ShowLabeling.aspx?id=19696",
+        "correction": "Fix URL from 19669 to 19696 to match source"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "  2 | P a g e\nElrexfio (elranatamab-bcmm)",
+        "html_evidence": "  2 | P a g e\nElrexfio (elranatamab-bcmm)",
+        "correction": "No difference; correct placement and text in HTML"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Journal of the American Medical Association, Journal of Clinical Oncology",
+        "html_evidence": "Journal of the American Medical Association; Journal of Clinical Oncology",
+        "correction": "Replace commas with semicolons after journal names to exactly match source text"
+      },
+      {
+        "category": "other",
+        "source_evidence": "Drug Coverage Policies are developed as needed, reviewed and updated at least annually, and are subject to change. Other policies and coverage determination guidelines may apply. Federal and state regulatory requirements and member specific benefit plan documents, if applicable, must be reviewed prior to utilizing this Drug Coverage Policy. This Drug Coverage Policy is for informational purposes only and does not constitute medical advice nor dictate how providers should practice medicine. This policy",
+        "html_evidence": "Drug Coverage Policies are developed as needed, reviewed and updated at least annually, and are subject to change. Other policies and coverage determination guidelines may apply. Federal and state regulatory requirements and member specific benefit plan documents, if applicable, must be reviewed prior to utilizing this Drug Coverage Policy. This Drug Coverage Policy is for informational purposes only and does not constitute medical advice nor dictate how providers should practice medicine. This policy",
+        "correction": "Text is incomplete in both source and HTML (cut off mid-sentence); this is possibly an OCR or extraction issue."
+      }
+    ]
+  },
+  {
+    "iteration": 3,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Elrexfio [package insert].Pfizer Inc., New York, NY. Available at: https://labeling.pfizer.com/ShowLabeling.aspx?id=19669",
+        "html_evidence": "Elrexfio [package insert]. Pfizer Inc., New York, NY. Available at: https://labeling.pfizer.com/ShowLabeling.aspx?id=19669",
+        "correction": "Add missing space after period in 'insert]. Pfizer' in HTML"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "2. Elrexfio. NCCN Drugs and Biologics Compendium. Available at: https://www.nccn.org/professionals/drug_compendium/content/",
+        "html_evidence": "2. Elrexfio. NCCN Drugs and Biologics Compendium. Available at: https://www.nccn.org/professionals/drug_compendium/content/",
+        "correction": "No correction needed, text matches"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Pfizer Inc., New York, NY. Available at: https://labeling.pfizer.com/ShowLabeling.aspx?id=19669",
+        "html_evidence": "Pfizer Inc., New York, NY. Available at: https://labeling.pfizer.com/ShowLabeling.aspx?id=19669",
+        "correction": "The authoritative source URL is 'id=19669' but the candidate uses 'id=19669' so matches; however, candidate is missing the link wrapper with href attribute so fix link markup"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "https://labeling.pfizer.com/ShowLabeling.aspx?id=19669",
+        "html_evidence": "<a rel=\"noopener noreferrer\" target=\"_blank\">https://labeling.pfizer.com/ShowLabeling.aspx?id=19669</a>",
+        "correction": "Add missing href attribute to <a> tag around Pfizer URL to enable proper linking"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "https://www.nccn.org/professionals/drug_compendium/content/",
+        "html_evidence": "<a rel=\"noopener noreferrer\" target=\"_blank\">https://www.nccn.org/professionals/drug_compendium/content/</a>",
+        "correction": "Add missing href attribute to <a> tag around NCCN URL to enable proper linking"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Drug Coverage Policies are developed as needed, reviewed and updated at least annually, and are subject to change. Other policies and coverage determination guidelines may apply. Federal and state regulatory requirements and member specific benefit plan documents, if applicable, must be reviewed prior to utilizing this Drug Coverage Policy. This Drug Coverage Policy is for informational purposes only and does not constitute medical advice nor dictate how providers should practice medicine. This policy",
+        "html_evidence": "Drug Coverage Policies are developed as needed, reviewed and updated at least annually, and are subject to change. Other policies and coverage determination guidelines may apply. Federal and state regulatory requirements and member specific benefit plan documents, if applicable, must be reviewed prior to utilizing this Drug Coverage Policy. This Drug Coverage Policy is for informational purposes only and does not constitute medical advice nor dictate how providers should practice medicine. This policy",
+        "correction": "No correction needed, text matches"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "J1323",
+        "html_evidence": "J1323",
+        "correction": "No correction needed, text matches"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Injection, elranatamab-bcmm, 1 mg",
+        "html_evidence": "Injection, elranatamab-bcmm, 1 mg",
+        "correction": "No correction needed, text matches"
+      }
+    ]
+  },
+  {
+    "iteration": 4,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Pfizer URL: https://labeling.pfizer.com/ShowLabeling.aspx?id=19669",
+        "html_evidence": "https://labeling.pfizer.com/ShowLabeling.aspx?id=19669",
+        "correction": "Correct Pfizer URL to https://labeling.pfizer.com/ShowLabeling.aspx?id=19669"
+      },
+      {
+        "category": "other",
+        "source_evidence": "Table header text is bold and cell text color in Description cell is gray",
+        "html_evidence": "Table header text is bold and white on blue background; Description cell text is standard black",
+        "correction": "Adjust Description cell text color to gray to match source PDF formatting"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "The \"Disclaimer\" section includes the last phrase 'This policy' hanging without continuation on the visible page.",
+        "html_evidence": "The \"Disclaimer\" section text ends at 'This policy' without continuation as in PDF.",
+        "correction": "Include full text continuation if available or mark partial text as present"
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "In source, bullet list includes item 'Meeting abstracts and case reports are excluded from consideration;' placed as a sub-listelement (circle bullet) under a numbered or bulleted list. The line 'Meeting abstracts...' is slightly separated as a sub-bullet item after long first bullet.",
+        "html_evidence": "All bullet points are placed in two separate <ul> lists, with 'Meeting abstracts and case reports...' in second bullet of the first list distinctly, not visually nested as in PDF.",
+        "correction": "Adjust HTML to properly reflect that 'Meeting abstracts and case reports are excluded...' is a sub-bullet or visually distinct according to PDF bullet style."
+      }
+    ]
+  },
+  {
+    "iteration": 5,
+    "verdict": "match",
+    "errors": []
+  }
+]

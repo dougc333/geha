@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "page": 4,
+  "figure": 1,
+  "automated_verdict": "match",
+  "manual_verdict": "mismatch",
+  "accepted": false,
+  "reason": "Automated reviewer false positive: the selected HTML render uses a large mostly empty canvas, materially changes the source chart scale and composition, and retains crowded legend/category/percentage labeling. The semantic values are present, but the visual reconstruction is not acceptable.",
+  "source_crop": "figure-01-page-004-region-bcb07a18.png",
+  "rejected_render": "figure-01/iteration-04.png",
+  "rejected_html": "figure-01/final.html",
+  "next_action": "Tighten deterministic render dimensions and strengthen geometric review before processing another page."
+}

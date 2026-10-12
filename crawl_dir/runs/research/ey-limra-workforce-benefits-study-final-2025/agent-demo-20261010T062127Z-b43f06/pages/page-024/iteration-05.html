@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Digital misalignment is most prevalent in claims, quote and implementation processes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.4;
+      color: #1b1b1b;
+      margin: 1rem;
+    }
+    h2 {
+      border-bottom: 1px solid #9999a0;
+      padding-bottom: 0.2em;
+      margin-top: 2rem;
+    }
+    .legend-bar {
+      display: flex;
+      font-size: 0.85rem;
+      max-width: 100%;
+      border: 1px solid #c8cbd3;
+      background: #f9f9fa;
+      margin: 1rem 0 2rem 0;
+      border-radius: 0.2em;
+      overflow: hidden;
+      user-select: none;
+      height: 1.8em;
+      align-items: center;
+    }
+    .legend-segment {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      white-space: nowrap;
+      padding-left: 0.4em;
+      border-right: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    .legend-have-use {
+      background: #004d40;
+      color: #fff;
+      flex-basis: 31.4%;
+    }
+    .legend-have-no-use {
+      background: #216969;
+      color: #fff;
+      flex-basis: 6.8%;
+    }
+    .legend-do-want {
+      background: #f58422;
+      color: #000;
+      flex-basis: 21.7%;
+    }
+    .legend-do-not-have {
+      background: #66a3a3;
+      color: #000;
+      flex-basis: 13.1%;
+      border-right: 1px solid #ccc;
+    }
+    .legend-dont-know {
+      background: #b5dcdb;
+      color: #000;
+      flex-basis: 4.9%;
+      border-right: none;
+    }
+    section {
+      margin-bottom: 2rem;
+    }
+    .bar-chart-container {
+      margin-top: 0.6em;
+    }
+    .bar-chart-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.7em;
+      font-size: 0.9rem;
+    }
+    .bar-chart-label {
+      flex-basis: 30%;
+      min-width: 200px;
+      padding-right: 0.5em;
+      white-space: nowrap;
+      font-weight: 600;
+    }
+    .bar-chart-segment {
+      height: 1.6em;
+      position: relative;
+      color: white;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+    .have-use {
+      background-color: #004d40;
+      width: 0;
+      flex-grow: 1;
+      min-width: 0;
+    }
+    .have-no-use {
+      background-color: #216969;
+      width: 0;
+      flex-grow: 1;
+      min-width: 0;
+      color: white;
+    }
+    .do-want {
+      background-color: #f58422;
+      width: 0;
+      flex-grow: 1;
+      min-width: 0;
+      color: black;
+    }
+    .do-not-have {
+      background-color: #66a3a3;
+      width: 0;
+      flex-grow: 1;
+      min-width: 0;
+      color: black;
+    }
+    .dont-know {
+      background-color: #b5dcdb;
+      width: 0;
+      flex-grow: 1;
+      min-width: 0;
+      color: black;
+    }
+    .percent-label {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      font-weight: 600;
+      text-align: center;
+      font-size: 0.85rem;
+      line-height: 1.6em;
+      pointer-events: none;
+    }
+    .section-divider {
+      height: 1px;
+      background: #cccccc;
+      margin-top: 1em;
+      margin-bottom: 1em;
+      border: none;
+    }
+    .footnote {
+      margin-top: 2rem;
+      border-left: 4px solid #ffcc00;
+      padding-left: 1em;
+      font-size: 0.9rem;
+    }
+    strong {
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <figure>
+    <figcaption>
+      <p><strong>Figure 18</strong></p>
+      <h1>Digital misalignment is most prevalent in claims, quote and implementation processes.</h1>
+      <p><strong>QUESTION:</strong> Indicate whether the benefit technology tool is available to you and whether you currently use it or would use it if it were available.</p>
+    </figcaption>
+  </figure>
+
+  <div class="legend-bar" role="region" aria-label="Legend for benefit technology tool availability and usage categories">
+    <div class="legend-segment legend-have-use">Already have and use</div>
+    <div class="legend-segment legend-have-no-use">Already have but do not use</div>
+    <div class="legend-segment legend-do-want">Do not have but want</div>
+    <div class="legend-segment legend-do-not-have">Do not have and do not want</div>
+    <div class="legend-segment legend-dont-know">Don't know</div>
+  </div>
+
+  <section aria-labelledby="quote-implementation-title">
+    <h2 id="quote-implementation-title">Quote and implementation</h2>
+    <hr class="section-divider" />
+    <div class="bar-chart-container" role="table" aria-label="Benefit technology tool availability and usage for Quote and implementation">
+      <div class="bar-chart-row" role="row">
+        <div class="bar-chart-label" role="rowheader">Self-service/real-time quoting</div>
+        <div class="bar-chart-segment have-use" role="cell" style="flex-grow:48;">
+          <span class="percent-label">48%</span>
+        </div>
+        <div class="bar-chart-segment have-no-use" role="cell" style="flex-grow:7;">
+          <span class="percent-label">7%</span>
+        </div>
+        <div class="bar-chart-segment do-want" role="cell" style="flex-grow:35; color:black;">
+          <span class="percent-label">35%</span>
+        </div>
+        <div class="bar-chart-segment do-not-have" role="cell" style="flex-grow:4; color:black;">
+          <span class="percent-label">4%</span>
+        </div>
+        <div class="bar-chart-segment dont-know" role="cell" style="flex-grow:5; color:black;">
+          <span class="percent-label">5%</span>
+        </div>
+      </div>
+      <div class="bar-chart-row" role="row">
+        <div class="bar-chart-label" role="rowheader">Automated data exchange</div>
+        <div class="bar-chart-segment have-use" role="cell" style="flex-grow:57;">
+          <span class="percent-label">57%</span>
+        </div>
+        <div class="bar-chart-segment have-no-use" role="cell" style="flex-grow:8;">
+          <span class="percent-label">8%</span>
+        </div>
+        <div class="bar-chart-segment do-want" role="cell" style="flex-grow:24; color:black;">
+          <span class="percent-label">24%</span>
+        </div>
+        <div class="bar-chart-segment do-not-have" role="cell" style="flex-grow:6; color:black;">
+          <span class="percent-label">6%</span>
+        </div>
+        <div class="bar-chart-segment dont-know" role="cell" style="flex-grow:5; color:black;">
+          <span class="percent-label">5%</span>
+        </div>
+      </div>
+      <div class="bar-chart-row" role="row">
+        <div class="bar-chart-label" role="rowheader">Digital implementation of a new carrier or benefit</div>
+        <div class="bar-chart-segment have-use" role="cell" style="flex-grow:63;">
+          <span class="percent-label">63%</span>
+        </div>
+        <div class="bar-chart-segment have-no-use" role="cell" style="flex-grow:9;">
+          <span class="percent-label">9%</span>
+        </div>
+        <div class="bar-chart-segment do-want" role="cell" style="flex-grow:23; color:black;">
+          <span class="percent-label">23%</span>
+        </div>
+        <div class="bar-chart-segment do-not-have" role="cell" style="flex-grow:4; color:black;">
+          <span class="percent-label">4%</span>
+        </div>
+        <div class="bar-chart-segment dont-know" role="cell" style="flex-grow:5; color:black;">
+          <span class="percent-label">5%</span>
+        </div>
+      </div>
+      <div class="bar-chart-row" role="row">
+        <div class="bar-chart-label" role="rowheader">Digital submission for evidence of insurability</div>
+        <div class="bar-chart-segment have-use" role="cell" style="flex-grow:65;">
+          <span class="percent-label">65%</span>
+        </div>
+        <div class="bar-chart-segment have-no-use" role="cell" style="flex-grow:9;">
+          <span class="percent-label">9%</span>
+        </div>
+        <div class="bar-chart-segment do-want" role="cell" style="flex-grow:20; color:black;">
+          <span class="percent-label">20%</span>
+        </div>
+        <div class="bar-chart-segment do-not-have" role="cell" style="flex-grow:5; color:black;">
+          <span class="percent-label">5%</span>
+        </div>
+        <div class="bar-chart-segment dont-know" role="cell" style="flex-grow:5; color:black;">
+          <span class="percent-label">5%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="enrollment-title">
+    <h2 id="enrollment-title">Enrollment</h2>
+    <hr class="section-divider" />
+    <div class="bar-chart-container" role="table" aria-label="Benefit technology tool availability and usage for Enrollment">
+      <div class="bar-chart-row" role="row">
+        <div class="bar-chart-label" role="rowheader">Decision support tools for employees</div>
+        <div class="bar-chart-segment have-use" role="cell" style="flex-grow:66;">
+          <span class="percent-label">66%</span>
+        </div>
+        <div class="bar-chart-segment have-no-use" role="cell" style="flex-grow:9;">
+          <span class="percent-label">9%</span>
+        </div>
+        <div class="bar-chart-segment do-want" role="cell" style="flex-grow:21; color:black;">
+          <span class="percent-label">21%</span>
+        </div>
+        <div class="bar-chart-segment do-not-have" role="cell" style="flex-grow:4; color:black;">
+          <span class="percent-label">4%</span>
+        </div>
+        <div class="bar-chart-segment dont-know" role="cell" style="flex-grow:1; color:black;">
+          <span class="percent-label">1%</span>
+        </div>
+      </div>
+      <div class="bar-chart-row" role="row">
+        <div class="bar-chart-label" role="rowheader">Personalized enrollment materials</div>
+        <div class="bar-chart-segment have-use" role="cell" style="flex-grow:74;">
+          <span class="percent-label">74%</span>
+        </div>
+        <div class="bar-chart-segment have-no-use" role="cell" style="flex-grow:7;">
+          <span class="percent-label">7%</span>
+        </div>
+        <div class="bar-chart-segment do-want" role="cell" style="flex-grow:16; color:black;">
+          <span class="percent-label">16%</span>
+        </div>
+        <div class="bar-chart-segment do-not-have" role="cell" style="flex-grow:3; color:black;">
+          <span class="percent-label">3%</span>
+        </div>
+        <div class="bar-chart-segment dont-know" role="cell" style="flex-grow:1; color:black;">
+          <span class="percent-label">1%</span>
+        </div>
+      </div>
+      <div class="bar-chart-row" role="row">
+        <div class="bar-chart-label" role="rowheader">Digital employee communications on new benefits offerings</div>
+        <div class="bar-chart-segment have-use" role="cell" style="flex-grow:76;">
+          <span class="percent-label">76%</span>
+        </div>
+        <div class="bar-chart-segment have-no-use" role="cell" style="flex-grow:8;">
+          <span class="percent-label">8%</span>
+        </div>
+        <div class="bar-chart-segment do-want" role="cell" style="flex-grow:13; color:black;">
+          <span class="percent-label">13%</span>
+        </div>
+        <div class="bar-chart-segment do-not-have" role="cell" style="flex-grow:3; color:black;">
+          <span class="percent-label">3%</span>
+        </div>
+        <div class="bar-chart-segment dont-know" role="cell" style="flex-grow:1; color:black;">
+          <span class="percent-label">1%</span>
+        </div>
+      </div>
+      <div class="bar-chart-row" role="row">
+        <div class="bar-chart-label" role="rowheader">E-signature capabilities</div>
+        <div class="bar-chart-segment have-use" role="cell" style="flex-grow:84;">
+          <span class="percent-label">84%</span>
+        </div>
+        <div class="bar-chart-segment have-no-use" role="cell" style="flex-grow:5;">
+          <span class="percent-label">5%</span>
+        </div>
+        <div class="bar-chart-segment do-want" role="cell" style="flex-grow:9; color:black;">
+          <span class="percent-label">9%</span>
+        </div>
+        <div class="bar-chart-segment do-not-have" role="cell" style="flex-grow:2; color:black;">
+          <span class="percent-label">2%</span>
+        </div>
+        <div class="bar-chart-segment dont-know" role="cell" style="flex-grow:1; color:black;">
+          <span class="percent-label">1%</span>
+        </div>
+      </div>
+      <div class="bar-chart-row" role="row">
+        <div class="bar-chart-label" role="rowheader">Online enrollment</div>
+        <div class="bar-chart-segment have-use" role="cell" style="flex-grow:86;">
+          <span class="percent-label">86%</span>
+        </div>
+        <div class="bar-chart-segment have-no-use" role="cell" style="flex-grow:7;">
+          <span class="percent-label">7%</span>
+        </div>
+        <div class="bar-chart-segment do-want" role="cell" style="flex-grow:4; color:black;">
+          <span class="percent-label">4%</span>
+        </div>
+        <div class="bar-chart-segment do-not-have" role="cell" style="flex-grow:3; color:black;">
+          <span class="percent-label">3%</span>
+        </div>
+        <div class="bar-chart-segment dont-know" role="cell" style="flex-grow:1; color:black;">
+          <span class="percent-label">1%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="ongoing-service-title">
+    <h2 id="ongoing-service-title">Ongoing service</h2>
+    <hr class="section-divider" />
+    <div class="bar-chart-container" role="table" aria-label="Benefit technology tool availability and usage for Ongoing service">
+      <div class="bar-chart-row" role="row">
+        <div class="bar-chart-label" role="rowheader">Live chat/chatbot</div>
+        <div class="bar-chart-segment have-use" role="cell" style="flex-grow:54;">
+          <span class="percent-label">54%</span>
+        </div>
+        <div class="bar-chart-segment have-no-use" role="cell" style="flex-grow:12;">
+          <span class="percent-label">12%</span>
+        </div>
+        <div class="bar-chart-segment do-want" role="cell" style="flex-grow:23; color:black;">
+          <span class="percent-label">23%</span>
+        </div>
+        <div class="bar-chart-segment do-not-have" role="cell" style="flex-grow:7; color:black;">
+          <span class="percent-label">7%</span>
+        </div>
+        <div class="bar-chart-segment dont-know" role="cell" style="flex-grow:4; color:black;">
+          <span class="percent-label">4%</span>
+        </div>
+      </div>
+      <div class="bar-chart-row" role="row">
+        <div class="bar-chart-label" role="rowheader">Mobile app (for employer or employees)</div>
+        <div class="bar-chart-segment have-use" role="cell" style="flex-grow:68;">
+          <span class="percent-label">68%</span>
+        </div>
+        <div class="bar-chart-segment have-no-use" role="cell" style="flex-grow:6;">
+          <span class="percent-label">6%</span>
+        </div>
+        <div class="bar-chart-segment do-want" role="cell" style="flex-grow:20; color:black;">
+          <span class="percent-label">20%</span>
+        </div>
+        <div class="bar-chart-segment do-not-have" role="cell" style="flex-grow:4; color:black;">
+          <span class="percent-label">4%</span>
+        </div>
+        <div class="bar-chart-segment dont-know" role="cell" style="flex-grow:2; color:black;">
+          <span class="percent-label">2%</span>
+        </div>
+      </div>
+      <div class="bar-chart-row" role="row">
+        <div class="bar-chart-label" role="rowheader">Online eligibility updates</div>
+        <div class="bar-chart-segment have-use" role="cell" style="flex-grow:79;">
+          <span class="percent-label">79%</span>
+        </div>
+        <div class="bar-chart-segment have-no-use" role="cell" style="flex-grow:5;">
+          <span class="percent-label">5%</span>
+        </div>
+        <div class="bar-chart-segment do-want" role="cell" style="flex-grow:13; color:black;">
+          <span class="percent-label">13%</span>
+        </div>
+        <div class="bar-chart-segment do-not-have" role="cell" style="flex-grow:3; color:black;">
+          <span class="percent-label">3%</span>
+        </div>
+        <div class="bar-chart-segment dont-know" role="cell" style="flex-grow:1; color:black;">
+          <span class="percent-label">1%</span>
+        </div>
+      </div>
+      <div class="bar-chart-row" role="row">
+        <div class="bar-chart-label" role="rowheader">Online billing and payment</div>
+        <div class="bar-chart-segment have-use" role="cell" style="flex-grow:89;">
+          <span class="percent-label">89%</span>
+        </div>
+        <div class="bar-chart-segment have-no-use" role="cell" style="flex-grow:5;">
+          <span class="percent-label">5%</span>
+        </div>
+        <div class="bar-chart-segment do-want" role="cell" style="flex-grow:4; color:black;">
+          <span class="percent-label">4%</span>
+        </div>
+        <div class="bar-chart-segment do-not-have" role="cell" style="flex-grow:2; color:black;">
+          <span class="percent-label">2%</span>
+        </div>
+        <div class="bar-chart-segment dont-know" role="cell" style="flex-grow:0.3; color:black;">
+          <!-- Very small don't know for visual balance if any -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="claims-title">
+    <h2 id="claims-title">Claims</h2>
+    <hr class="section-divider" />
+    <div class="bar-chart-container" role="table" aria-label="Benefit technology tool availability and usage for Claims">
+      <div class="bar-chart-row" role="row">
+        <div class="bar-chart-label" role="rowheader">Same-day claims decisions</div>
+        <div class="bar-chart-segment have-use" role="cell" style="flex-grow:32;">
+          <span class="percent-label">32%</span>
+        </div>
+        <div class="bar-chart-segment have-no-use" role="cell" style="flex-grow:6;">
+          <span class="percent-label">6%</span>
+        </div>
+        <div class="bar-chart-segment do-want" role="cell" style="flex-grow:52; color:black;">
+          <span class="percent-label">52%</span>
+        </div>
+        <div class="bar-chart-segment do-not-have" role="cell" style="flex-grow:2; color:black;">
+          <span class="percent-label">2%</span>
+        </div>
+        <div class="bar-chart-segment dont-know" role="cell" style="flex-grow:8; color:black;">
+          <span class="percent-label">8%</span>
+        </div>
+      </div>
+      <div class="bar-chart-row" role="row">
+        <div class="bar-chart-label" role="rowheader">Proactively trigger claims based on medical data</div>
+        <div class="bar-chart-segment have-use" role="cell" style="flex-grow:42;">
+          <span class="percent-label">42%</span>
+        </div>
+        <div class="bar-chart-segment have-no-use" role="cell" style="flex-grow:7;">
+          <span class="percent-label">7%</span>
+        </div>
+        <div class="bar-chart-segment do-want" role="cell" style="flex-grow:41; color:black;">
+          <span class="percent-label">41%</span>
+        </div>
+        <div class="bar-chart-segment do-not-have" role="cell" style="flex-grow:4; color:black;">
+          <span class="percent-label">4%</span>
+        </div>
+        <div class="bar-chart-segment dont-know" role="cell" style="flex-grow:6; color:black;">
+          <span class="percent-label">6%</span>
+        </div>
+      </div>
+      <div class="bar-chart-row" role="row">
+        <div class="bar-chart-label" role="rowheader">Real-time integration for claims management with HRIS systems</div>
+        <div class="bar-chart-segment have-use" role="cell" style="flex-grow:51;">
+          <span class="percent-label">51%</span>
+        </div>
+        <div class="bar-chart-segment have-no-use" role="cell" style="flex-grow:8;">
+          <span class="percent-label">8%</span>
+        </div>
+        <div class="bar-chart-segment do-want" role="cell" style="flex-grow:31; color:black;">
+          <span class="percent-label">31%</span>
+        </div>
+        <div class="bar-chart-segment do-not-have" role="cell" style="flex-grow:10; color:black;">
+          <span class="percent-label">10%</span>
+        </div>
+        <div class="bar-chart-segment dont-know" role="cell" style="flex-grow:0; color:black;">
+          <!-- no visible don't know segment -->
+        </div>
+      </div>
+      <div class="bar-chart-row" role="row">
+        <div class="bar-chart-label" role="rowheader">Integrated claims experience based on singular event</div>
+        <div class="bar-chart-segment have-use" role="cell" style="flex-grow:58;">
+          <span class="percent-label">58%</span>
+        </div>
+        <div class="bar-chart-segment have-no-use" role="cell" style="flex-grow:8;">
+          <span class="percent-label">8%</span>
+        </div>
+        <div class="bar-chart-segment do-want" role="cell" style="flex-grow:28; color:black;">
+          <span class="percent-label">28%</span>
+        </div>
+        <div class="bar-chart-segment do-not-have" role="cell" style="flex-grow:6; color:black;">
+          <span class="percent-label">6%</span>
+        </div>
+        <div class="bar-chart-segment dont-know" role="cell" style="flex-grow:0; color:black;">
+          <!-- no visible don't know segment -->
+        </div>
+      </div>
+      <div class="bar-chart-row" role="row">
+        <div class="bar-chart-label" role="rowheader">Text messaging to employees regarding claims status</div>
+        <div class="bar-chart-segment have-use" role="cell" style="flex-grow:55;">
+          <span class="percent-label">55%</span>
+        </div>
+        <div class="bar-chart-segment have-no-use" role="cell" style="flex-grow:7;">
+          <span class="percent-label">7%</span>
+        </div>
+        <div class="bar-chart-segment do-want" role="cell" style="flex-grow:26; color:black;">
+          <span class="percent-label">26%</span>
+        </div>
+        <div class="bar-chart-segment do-not-have" role="cell" style="flex-grow:12; color:black;">
+          <span class="percent-label">12%</span>
+        </div>
+        <div class="bar-chart-segment dont-know" role="cell" style="flex-grow:0; color:black;">
+          <!-- no visible don't know segment -->
+        </div>
+      </div>
+      <div class="bar-chart-row" role="row">
+        <div class="bar-chart-label" role="rowheader">Digital claims submission</div>
+        <div class="bar-chart-segment have-use" role="cell" style="flex-grow:78;">
+          <span class="percent-label">78%</span>
+        </div>
+        <div class="bar-chart-segment have-no-use" role="cell" style="flex-grow:6;">
+          <span class="percent-label">6%</span>
+        </div>
+        <div class="bar-chart-segment do-want" role="cell" style="flex-grow:12; color:black;">
+          <span class="percent-label">12%</span>
+        </div>
+        <div class="bar-chart-segment do-not-have" role="cell" style="flex-grow:4; color:black;">
+          <span class="percent-label">4%</span>
+        </div>
+        <div class="bar-chart-segment dont-know" role="cell" style="flex-grow:0; color:black;">
+          <!-- no visible don't know segment -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <aside class="footnote" aria-label="Additional notes about AI and the future of benefits">
+    <p><strong>AI and the future of benefits:</strong> Our broker interviews confirmed that AI will likely be the primary driver of disruption, particularly relative to enrollment. Specifically, AI will drive more personalized recommendations and education. Brokers also recognize the transformative possibilities of AI in underwriting, claims and client service. The rise of agentic AI coupled with new data sources (e.g., genetics, biometrics) will make it easier to more accurately predict outcomes and enable automated decisioning once concerns related to data privacy are resolved.</p>
+  </aside>
+
+  <footer>
+    <p><small>24 | <strong>Harnessing growth in workforce benefits:</strong> the next horizon | 2025 Workforce Benefits Study</small></p>
+  </footer>
+</body>
+</html>

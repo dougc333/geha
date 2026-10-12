@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>Bill of lading block 7</title>
+<style>
+*{box-sizing:border-box} html,body{margin:0;width:1999px;height:256px;overflow:hidden;background:#fff}
+body{font-family:Arial,Helvetica,sans-serif;color:#111}
+.block{position:relative;width:1999px;height:256px}
+.cell{position:absolute;border:1px solid #222;padding:16px 18px;overflow:hidden;background:#fff}
+.cell-text{white-space:pre-wrap;font-size:22px;line-height:1.3}
+</style><style data-segment-repair="7">
+.block, .cell, .cell-text, [data-cell] {font-weight: bold; text-transform: uppercase;}
+
+[data-cell="charges_header"] {width: 1999px !important;}
+[data-cell="charges_values"] {
+  left: 0 !important;
+  top: 78px !important;
+  width: 1198px !important;
+  height: 178px !important;
+  border-top: none !important;
+  border-left-width: 1px !important;
+  border-right-width: 1px !important;
+  border-bottom-width: 1px !important;
+  padding: 16px 18px !important;
+}
+[data-cell="total_packages"] {
+  left: 1198px !important;
+  top: 0 !important;
+  width: 801px !important;
+  height: 256px !important;
+  border-left: 1px solid #222 !important;
+  text-align: center !important;
+  font-size: 72px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  padding: 30px 0 0 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+}
+[data-cell="total_packages"] .cell-text {
+  text-transform: uppercase !important;
+  font-weight: 900 !important;
+}
+[data-cell="charges_values"] .cell-text {
+  white-space: normal !important;
+  text-align: right !important;
+  letter-spacing: normal !important;
+}
+
+[data-cell="charges_values"] .cell-text::after {
+  content: '';
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  vertical-align: middle;
+}
+
+/* Fix spacing between "Ocean Freight" and "Collect" to align right edge properly */
+[data-cell="charges_values"] .cell-text {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+  line-height: 1.3 !important;
+}
+[data-cell="charges_values"] .cell-text::before {
+  content: 'OCEAN FREIGHT';
+  flex: 1 1 auto;
+  text-align: left;
+}
+[data-cell="charges_values"] .cell-text::after {
+  content: 'COLLECT';
+  flex: 1 1 auto;
+  text-align: right;
+  margin-left: 20px;
+}
+
+[data-cell="charges_values"] .cell-text span {
+  display: block;
+  flex-basis: 100%;
+  text-align: left;
+  margin-top: 4px;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+}
+
+/* Hide original text in charges_values to reconstruct correct layout */
+[data-cell="charges_values"] .cell-text {
+  color: transparent !important;
+  position: relative !important;
+}
+[data-cell="charges_values"] .cell-text span,
+[data-cell="charges_values"] .cell-text::before,
+[data-cell="charges_values"] .cell-text::after {
+  color: black !important;
+  position: static !important;
+}
+
+/* Add THC on line below Ocean Freight left aligned */
+[data-cell="charges_values"] .cell-text span {
+  content: 'THC';
+  position: static !important;
+  color: black !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+}
+
+/* Remove extra vertical space after THC */
+[data-cell="charges_values"] {padding-bottom: 10px !important;}
+
+/* Remove border-right on charges_header to visually merge cells */
+[data-cell="charges_header"] {border-right: none !important;}
+[data-cell="charges_values"] {border-top: none !important;}
+</style><style data-segment-repair="7">
+.block, [data-cell="total_packages"] > .cell-text:first-child { font-weight: 700 !important; }
+[data-cell="total_packages"] { text-align: right !important; justify-content: flex-start !important; align-items: flex-end !important; padding-top: 30px !important; padding-right: 18px !important; }
+[data-cell="total_packages"] .cell-text { font-weight: 700 !important; font-size: 72px !important; line-height: 1 !important; text-transform: uppercase !important; }
+[data-cell="charges_header"] .cell-text { padding-bottom: 6px !important; }
+[data-cell="charges_values"] .cell-text { display: block !important; color: black !important; position: static !important; font-weight: 700 !important; line-height: 1.3 !important; padding: 0 18px !important; }
+[data-cell="charges_values"] .cell-text::before, [data-cell="charges_values"] .cell-text::after, [data-cell="charges_values"] .cell-text span { content: none !important; }
+[data-cell="charges_values"] .cell-text { white-space: pre-wrap; text-align: left; }
+[data-cell="charges_values"] { padding-bottom: 16px !important; }
+[data-cell="charges_values"] .cell-text::after {
+  content: "\A THC";
+  white-space: pre;
+  display: block;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  margin-top: 0 !important;
+}
+</style><style data-segment-repair="7">
+.block, .cell, .cell-text, [data-cell] { font-weight: 900 !important; text-transform: uppercase !important; }
+[data-cell="charges_header"] .cell-text { font-weight: 900 !important; line-height: 1.2 !important; }
+[data-cell="charges_values"] {
+  padding: 16px 18px !important;
+  display: block !important;
+  height: 178px !important;
+}
+[data-cell="charges_values"] .cell-text {
+  white-space: pre-wrap !important;
+  color: black !important;
+  position: static !important;
+  font-weight: 700 !important;
+  text-align: left !important;
+  line-height: 1.5 !important;
+  letter-spacing: normal !important;
+  font-size: 22px !important;
+  padding: 0 !important;
+}
+[data-cell="charges_values"] .cell-text::before,
+[data-cell="charges_values"] .cell-text::after,
+[data-cell="charges_values"] .cell-text span { content: none !important; }
+
+[data-cell="total_packages"] {
+  left: 1198px !important;
+  top: 0 !important;
+  width: 801px !important;
+  height: 256px !important;
+  border-left: 1px solid #222 !important;
+  padding: 40px 18px 0 18px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+[data-cell="total_packages"] .cell-text {
+  font-weight: 900 !important;
+  font-size: 72px !important;
+  line-height: 1 !important;
+  margin-top: 16px !important;
+  white-space: nowrap !important;
+}
+[data-cell="total_packages"] .cell-text::first-line {
+  font-weight: 700 !important;
+}
+
+/* Adjust layout for charges_values to separate lines with correct alignment */
+[data-cell="charges_values"] .cell-text {
+  display: block !important;
+  white-space: pre-wrap !important;
+  text-align: left !important;
+  font-weight: 700 !important;
+  line-height: 1.5 !important;
+}
+
+[data-cell="charges_values"] .cell-text {
+  padding-left: 0 !important;
+}
+
+/* Use :nth-child for line spacing to separate lines and align COLLECT right */
+[data-cell="charges_values"] .cell-text {
+  position: relative !important;
+}
+[data-cell="charges_values"] .cell-text {
+  white-space: pre !important;
+}
+
+/* Emulate the vertical arrangement with explicit lines and right alignment */
+[data-cell="charges_values"] .cell-text {
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
+[data-cell="charges_values"] .cell-text {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+[data-cell="charges_values"] .cell-text { line-height: 1.3 !important; }
+[data-cell="charges_values"] .cell-text {
+  white-space: pre-wrap !important;
+}
+[data-cell="charges_values"] .cell-text {
+  display: block !important;
+  width: 100% !important;
+  padding-right: 100px !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  font-weight: 700 !important;
+}
+[data-cell="charges_values"] .cell-text::after {
+  content: 'COLLECT';
+  position: absolute !important;
+  right: 18px !important;
+  top: 0 !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+
+[data-cell="charges_values"] .cell-text::before {
+  content: '';
+  display: block;
+  height: 16px;
+}
+
+[data-cell="charges_values"] .cell-text {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+</style><style data-segment-repair="7">
+/* Fix font size and overflow for total_packages header text */
+[data-cell="total_packages"] {
+  font-size: 22px !important;
+  padding: 16px 18px !important;
+  display: block !important;
+  text-align: left !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+}
+[data-cell="total_packages"] .cell-text {
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  white-space: normal !important;
+  margin-top: 0 !important;
+  padding: 0 !important;
+}
+
+/* Show and style the '40' value centered and bold on next line */
+[data-cell="total_packages"] .cell-text::after {
+  content: '40';
+  display: block;
+  font-weight: 900 !important;
+  font-size: 72px !important;
+  line-height: 1 !important;
+  margin-top: 12px !important;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Fix cell height and border for charges_header to keep row boundary */
+[data-cell="charges_header"] {
+  height: 78px !important;
+  border-bottom: 1px solid #222 !important;
+  border-right: 1px solid #222 !important;
+}
+
+/* Separate right half cells visually with distinct borders */
+[data-cell="charges_values"] {
+  left: 0 !important;
+  top: 78px !important;
+  width: 1198px !important;
+  height: 178px !important;
+  border-top: none !important;
+  border-left: 1px solid #222 !important;
+  border-right: 1px solid #222 !important;
+  border-bottom: 1px solid #222 !important;
+  padding: 16px 18px !important;
+}
+
+/* Remove overlap or merging between rightmost columns in charges_values cell */
+[data-cell="charges_values"] .cell-text {
+  position: static !important;
+  color: black !important;
+  font-size: 22px !important;
+  line-height: 1.3 !important;
+  font-weight: 700 !important;
+  white-space: pre-wrap !important;
+  text-align: left !important;
+  padding: 0 !important;
+  display: block !important;
+}
+
+/* Align 'OCEAN FREIGHT' and 'THC' left and 'COLLECT' right with consistent vertical alignment and spacing */
+[data-cell="charges_values"] .cell-text {
+  white-space: pre-wrap !important;
+}
+[data-cell="charges_values"] .cell-text::before {
+  content: 'OCEAN FREIGHT';
+  display: inline-block;
+  width: auto;
+  text-align: left;
+  font-weight: 700 !important;
+  vertical-align: top;
+  margin-right: 20px;
+}
+[data-cell="charges_values"] .cell-text::after {
+  content: 'COLLECT';
+  display: inline-block;
+  width: auto;
+  text-align: right;
+  font-weight: 700 !important;
+  vertical-align: top;
+  margin-left: 20px;
+}
+[data-cell="charges_values"] .cell-text span {
+  display: block !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  margin-top: 4px;
+}
+
+/* Insert THC as a separate line below OCEAN FREIGHT aligned left */
+[data-cell="charges_values"] .cell-text span:nth-of-type(1) {
+  content: 'THC';
+  display: block;
+  margin-top: 10px;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  text-align: left;
+}
+
+/* Restore normal borders for charges_header and charges_values cells */
+[data-cell="charges_header"] { border-right: 1px solid #222 !important; }
+[data-cell="charges_values"] { border-top: none !important; }
+</style><style data-segment-repair="7">
+.block, .cell, .cell-text, [data-cell] { font-weight: 900 !important; text-transform: uppercase !important; border-color: #222 !important; }
+[data-cell="total_packages"] {
+  text-align: center !important;
+  padding: 24px 0 0 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+  border-left: 1px solid #222 !important;
+  border-top: 1px solid #222 !important;
+  border-bottom: 1px solid #222 !important;
+  border-right: 1px solid #222 !important;
+}
+[data-cell="total_packages"] .cell-text {
+  font-weight: 700 !important;
+  font-size: 22px !important;
+  line-height: 1.3 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  white-space: normal !important;
+  width: 100% !important;
+}
+[data-cell="total_packages"] .cell-text::after {
+  content: '40';
+  display: block;
+  font-weight: 900 !important;
+  font-size: 72px !important;
+  line-height: 1 !important;
+  margin-top: 20px !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+[data-cell="charges_values"] {
+  left: 0 !important;
+  top: 78px !important;
+  width: 1198px !important;
+  height: 178px !important;
+  border-left: 1px solid #222 !important;
+  border-right: 1px solid #222 !important;
+  border-bottom: 1px solid #222 !important;
+  padding: 16px 18px !important;
+  box-sizing: border-box !important;
+}
+[data-cell="charges_values"] .cell-text {
+  white-space: pre !important;
+  font-weight: 700 !important;
+  line-height: 1.5 !important;
+  font-size: 22px !important;
+  color: black !important;
+  position: static !important;
+  padding: 0 !important;
+  display: block !important;
+  text-align: left !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+[data-cell="charges_values"] .cell-text::before {
+  content: 'OCEAN FREIGHT';
+  display: block !important;
+  margin-bottom: 8px !important;
+  font-weight: 700 !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+}
+[data-cell="charges_values"] .cell-text span {
+  display: block !important;
+  margin-top: 8px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  text-align: left !important;
+  white-space: nowrap !important;
+}
+[data-cell="charges_values"] .cell-text::after {
+  content: 'COLLECT';
+  position: absolute !important;
+  top: 16px !important;
+  right: 18px !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important;
+  text-align: right !important;
+}
+[data-cell="charges_values"] { position: relative !important; }
+
+/* Adjust border thickness and continuity for clearer boundaries */
+.cell { border: 1px solid #222 !important; }
+[data-cell="charges_header"] { border-bottom: 1px solid #222 !important; border-right: 1px solid #222 !important; }
+</style></head><body><main class="block" data-block="7"><section class="cell" data-cell="charges_header" data-reading-order="1" style="left:0px;top:0px;width:1198px;height:78px"><div class="cell-text">FREIGHT &amp; CHARGES</div></section><section class="cell" data-cell="charges_values" data-reading-order="2" style="left:0px;top:78px;width:1198px;height:178px"><div class="cell-text">OCEAN FREIGHT           COLLECT
+THC</div></section><section class="cell" data-cell="total_packages" data-reading-order="3" style="left:1198px;top:0px;width:801px;height:256px"><div class="cell-text">TOTAL NUMBER OF PACKAGES
+
+40</div></section></main></body></html>

@@ -1,0 +1,45 @@
+About our 2025 Workforce Benefits Study: To explore the current state and future evolution of the workforce benefits market, LIMRA and Ernst & Young LLP (EY US) surveyed 800 US employers representing a cross section of industries, geographies and organizational sizes. The sample was weighted to represent the total population of US employers with at least 10 employees and that offer insurance benefits. We also surveyed approximately 2,000 US workers, with balanced representation across age, gender, income, race and region, weighted to represent the demographics of the US working population. Additionally, we interviewed 12 leaders from large brokerage houses and general agencies.
+
+## What’s new this year
+
+Every year, our results are subject to broader macroeconomic conditions and employment trends. This year is no exception. Just as the COVID-19 pandemic and shift to remote working shaped our 2021 and 2023 studies, the latest edition reflects broader questions about the economy and employment landscape. Current conditions have only become more uncertain since the research was completed in early 2025. The long-awaited generational tipping point has also arrived and is reshaping the labor force: There are now more Gen Z employees than baby boomers in the workforce, and millennials comprise the largest proportion of the overall employee base.
+
+Technology advancement and disruption are perennial themes. But AI has dramatically raised the stakes for all stakeholders, who are waiting for major impacts in the future. Concerns about data privacy, regulation and cost appear to be the primary barriers to faster and broader adoption. While this year’s findings represent a continuation of some trends from the past, the rapidly changing distribution landscape and the increased complexity of absence and leave management benefits have emerged as major pain points impacting and further complicating the benefits landscape. There is clear demand for new approaches and solutions in these areas.
+
+ Verified Infographic Section 
+
+# THIS YEAR’S KEY FINDINGS:
+
+01
+
+### Workforce benefits remain at the heart of the employee value proposition – and expectations continue to rise.
+
+Holistic solutions, curated benefits programs and AI tools for hyper-personalization will win the future.
+
+02
+
+### The generational tipping point has made wellness benefits a must-have.
+
+Gen Z and millennials are now a larger proportion of the workforce. Lifestyle bundles and connected experiences are key to unlocking value and satisfying workers with diverse needs, particularly younger employees.
+
+03
+
+### Employer focus on economic value of benefits programs is driving fundamental changes in brokers’ roles.
+
+Brokers increasingly serve as strategic advisors and providers of data-driven insights. But talent availability and capability are becoming critical constraints. Additionally, ongoing consolidation may have unintended consequences, including less innovation and new competition for underserved segments.
+
+04
+
+### The market is ready for the next generation of absence/leave management services.
+
+The combination of expanding leave benefits with increasingly complex regulation, compliance challenges, process inefficiencies and a lack of key capabilities creates the potential for “absence and leave mismanagement.” There is, however, significant opportunity for reliable, scalable plug-and-play solutions.
+
+05
+
+### There’s no stopping the digital revolution – especially as AI gains traction and further evolves.
+
+Claims journeys are the top priority for further digitization. With AI still in exploratory and experimentation modes, firms will take a “crawl-walk-run” approach.
+
+ | Harnessing growth in workforce benefits: the next horizon | 2025 Workforce Benefits Study
+
+ 3

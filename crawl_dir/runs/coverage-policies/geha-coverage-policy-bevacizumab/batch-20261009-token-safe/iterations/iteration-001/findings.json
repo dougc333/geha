@@ -1,0 +1,52 @@
+{
+  "table_extraction": {
+    "pdf": "source.pdf",
+    "status": "ok",
+    "ocr_used": false,
+    "tables_detected": 4,
+    "tables_written": 3,
+    "tables_excluded": 1,
+    "outputs": [
+      {
+        "table_number": 1,
+        "heading": "Bevacizumab and Zaltrap:",
+        "page": 1,
+        "rows": 8,
+        "columns": 5,
+        "header_promoted": false,
+        "header_inherited_from_table": null,
+        "html": "source_bevacizumab-and-zaltrap.html"
+      },
+      {
+        "table_number": 2,
+        "heading": "Billing",
+        "page": 2,
+        "rows": 5,
+        "columns": 3,
+        "header_promoted": false,
+        "header_inherited_from_table": null,
+        "html": "source_billing.html"
+      },
+      {
+        "table_number": 3,
+        "heading": "Billing",
+        "page": 3,
+        "rows": 3,
+        "columns": 3,
+        "header_promoted": false,
+        "header_inherited_from_table": 2,
+        "html": "source_billing_2.html"
+      }
+    ],
+    "excluded": [
+      {
+        "table_number": 4,
+        "heading": "Extracted table",
+        "page": 4,
+        "reason": "revision_history"
+      }
+    ]
+  },
+  "chunk_errors": [],
+  "chunk_warnings": []
+}

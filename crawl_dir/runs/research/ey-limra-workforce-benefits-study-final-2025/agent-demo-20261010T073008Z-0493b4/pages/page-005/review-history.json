@@ -1,0 +1,73 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "chart_data",
+        "source_evidence": "Figure 3 'In five years' bar segments (in pixels): green(23%), turquoise(39%), blue(23%), red(11%), orange(6%) but vertical positioning overlaps, with orange starting at y=-6 and height=16, overlapping above chart top; inconsistent stacking and overlap with missing values above.",
+        "html_evidence": "<rect x=\"100\" y=\"-6\" width=\"9\" height=\"16\" fill=\"#f76707\"></rect>",
+        "correction": "Adjust the vertical positions and heights of stacked bar segments to properly stack without overlap or extending above chart area, for 'In five years' column in Figure 3."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Figure 3 bar chart's bar labels ('Today' and 'In five years') are overlapped by stacked bars and partly clipped in the top bar’s region.",
+        "html_evidence": "<text x=\"50\" y=\"100\" font-size=\"10\" text-anchor=\"middle\">Today</text>\n<text x=\"130\" y=\"100\" font-size=\"10\" text-anchor=\"middle\">In five years</text>",
+        "correction": "Move bar label text below the bars so it is clearly visible and not overlapped or clipped by the bars or chart area."
+      },
+      {
+        "category": "chart_relationship",
+        "source_evidence": "Figure 3 chart rectangles and their heights and vertical positions do not correctly correspond to the percentage values shown in the table and source PDF, causing misrepresentation of data proportions and stacking order issues.",
+        "html_evidence": "All rect elements for 'In five years' bar with y values -6, 0, 14, 40, 65 and heights 16 to 43.",
+        "correction": "Correct the stacking heights and y coordinates in Figure 3's SVG so the bars visually represent the percentages without overlap and match data table values exactly."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "chart_data",
+        "source_evidence": "Figure 3 chart segments with height differences and y-coordinates indicating incorrect stacking compared to the source: the blue 10% to 24% segment height is 20 in the candidate chart (y from -10 to 10) but the source shows a larger segment with value 16%; similarly, the other segments' vertical positioning and stacking appear incorrect causing misleading visual representation of the data.",
+        "html_evidence": "<svg width=\"160\" height=\"130\" aria-hidden=\"true\" style=\"overflow: visible;\">...<rect x=\"20\" y=\"-10\" width=\"56\" height=\"20\" fill=\"#4dabf7\"></rect> <!-- 10% to 24% 16% -->...<rect x=\"20\" y=\"-38\" width=\"56\" height=\"10\" fill=\"#fa5252\"></rect> <!-- 25% to 49% 8% -->...</svg>",
+        "correction": "Adjust the vertical stacking and exact dimensions of each bar segment in the Figure 3 stacked bar chart so the heights and positions correctly represent the exact percentage values shown in the source chart: 35%, 37%, 16%, 8%, 4% for Today and 23%, 39%, 23%, 11%, 6% for In five years, with proper stacking and no negative y-values that cause confusion."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "chart_data",
+        "source_evidence": "In Figure 3 bar chart, the colored stacked bars heights do not visually correspond to the percentages labeled in the source (e.g., the 50% or more segment for 'Today' is drawn smaller than the 25% to 49% segment, which is inconsistent)",
+        "html_evidence": "<rect x=\"20\" y=\"23\" width=\"56\" height=\"8\" fill=\"#fa5252\"></rect> <!-- 25% to 49% 8% -->",
+        "correction": "Adjust the height values of the stacked bar rectangles in Figure 3 to correctly represent the respective percentages according to source values. For 'Today', 50% or more should be smallest segment (4%), followed by 25% to 49% (8%), 10% to 24% (16%), Less than 10% (37%), None (35%). For 'In five years', the segment heights should follow the same logic for percentages: 6%, 11%, 23%, 39%, 23%. Heights must visually represent the percentage accurately and be in correct stacked order."
+      }
+    ]
+  },
+  {
+    "iteration": 3,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "chart_data",
+        "source_evidence": "Figure 3 chart segments and labels show 4% for '50% or more' and 6% as bar heights but the stacking order and exact positioning in the first SVG are incorrect and overlapping.",
+        "html_evidence": "<rect x=\"20\" y=\"(-2)\" width=\"56\" height=\"16\" fill=\"#4dabf7\"></rect> <!-- 10% to 24% 16% -->",
+        "correction": "Remove the erroneous first Figure 3 SVG with incorrect stacking and negative y positions. Keep only the properly stacked second SVG with correct y positions and heights for all categories to match the source chart and improve readability."
+      },
+      {
+        "category": "chart_data",
+        "source_evidence": "The first stacked bar chart in Figure 3 is misplaced small bars with negative y coordinates overlapping and misrepresenting data proportions.",
+        "html_evidence": "<div role=\"img\" aria-label=\"Stacked bar chart showing employer expectations for freelance worker usage today and in five years. Legends: 50% or more (orange), 25% to 49% (red), 10% to 24% (blue), Less than 10% (turquoise), None (dark green). Today: None 35%, Less than 10% 37%, 10% to 24% 16%, 25% to 49% 8%, 50% or more 4%. In five years: None 23%, Less than 10% 39%, 10% to 24% 23%, 25% to 49% 11%, 50% or more 6%.\">\n        <svg width=\"160\" height=\"130\" aria-hidden=\"true\" style=\"overflow: visible;\">\n          <!-- Today bar stack from bottom to top with corrected heights and positions -->\n          <rect x=\"20\" y=\"51\" width=\"56\" height=\"35\" fill=\"#228b22\"></rect> <!-- None 35% -->\n          <rect x=\"20\" y=\"14\" width=\"56\" height=\"37\" fill=\"#40c057\"></rect> <!-- Less than 10% 37% -->\n          <rect x=\"20\" y=\"(-2)\" width=\"56\" height=\"16\" fill=\"#4dabf7\"></rect> <!-- 10% to 24% 16% -->\n          <rect x=\"20\" y=\"(-10)\" width=\"56\" height=\"8\" fill=\"#fa5252\"></rect> <!-- 25% to 49% 8% -->\n          <rect x=\"20\" y=\"(-15)\" width=\"56\" height=\"5\" fill=\"#f76707\"></rect> <!-- 50% or more 4% -->\n          <text x=\"48\" y=\"80\" font-size=\"10\" text-anchor=\"middle\">Today</text>\n          <!-- Adjust coordinate for stacking so that smaller segments are on top -->\n          <!-- Actually to correct: stacking from bottom: height sum=35+37+16+8+4=100 -->\n          <!-- Total svg height is 130; Let's start bottom y = 105 (130-25) for bar bottom -->\n          <!-- Correct calculation below -->\n\n        </svg>\n      </div>",
+        "correction": "Remove this first Figure 3 bar chart block entirely because the negative y-values cause overlap and unreadable bars, leaving only the correct and well-formed second SVG block for Figure 3."
+      }
+    ]
+  },
+  {
+    "iteration": 4,
+    "verdict": "match",
+    "errors": []
+  }
+]

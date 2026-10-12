@@ -1,0 +1,25 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "legend text 'A carrier that works well with your benefit technology platform, even if its product is a little more expensive'",
+        "html_evidence": "legend text 'A carrier that works well with your benefit technology platform, even if its product is a little more'",
+        "correction": "Change HTML legend text to exactly: 'A carrier that works well with your benefit technology platform, even if its product is a little more expensive'"
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Pie charts 2021 and 2025 show percentages 66%, 34% and 74%, 26% respectively without overlapping text or distortion",
+        "html_evidence": "Pie charts numeric percentages '66' and '74' displayed overlapped and partially clipped, large font overflowing pie charts",
+        "correction": "Adjust pie chart text size and positioning so that percentages '66%' and '74%' are clearly visible within pie charts without overlap or clipping"
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

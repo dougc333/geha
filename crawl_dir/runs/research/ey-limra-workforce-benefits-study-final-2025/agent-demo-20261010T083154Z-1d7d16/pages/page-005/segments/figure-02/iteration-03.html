@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>More freelance workers in the future</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  .chart-legend {
+    font-size: 0.9em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+  .legend-item {
+    margin: 0.2em 0;
+  }
+  .legend-color-box {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+    margin-right: 0.5em;
+  }
+  .color-50plus { background-color: #FF8000; }
+  .color-25to49 { background-color: #FF4C4C; }
+  .color-10to24 { background-color: #3399FF; }
+  .color-less10 { background-color: #4DC0B0; }
+  .color-none   { background-color: #2E8B57; }
+  table.data {
+    border-collapse: collapse;
+    margin-top: 1em;
+    width: 100%;
+    max-width: 400px;
+  }
+  table.data caption {
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 0.5em;
+  }
+  table.data th, table.data td {
+    border: 1px solid #999;
+    padding: 0.25em 0.5em;
+    text-align: center;
+  }
+  table.data th {
+    background-color: #eee;
+  }
+  .chart-container {
+    display: flex;
+    gap: 3em;
+    margin-top: 1em;
+    align-items: flex-end;
+    max-width: 420px;
+  }
+  .bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.85em;
+  }
+  .bars {
+    width: 70px;
+    border-left: 2px solid #999;
+    border-bottom: 2px solid #999;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+  }
+  .bar {
+    width: 100%;
+    text-align: right;
+    font-weight: bold;
+    color: white;
+    box-sizing: border-box;
+    padding-right: 0.25em;
+  }
+  .bar-50plus {
+    background-color: #FF8000;
+  }
+  .bar-25to49 {
+    background-color: #FF4C4C;
+  }
+  .bar-10to24 {
+    background-color: #3399FF;
+  }
+  .bar-less10 {
+    background-color: #4DC0B0;
+  }
+  .bar-none {
+    background-color: #2E8B57;
+  }
+  .bar-label {
+    margin-top: 0.3em;
+    font-weight: bold;
+  }
+  .y-axis-labels {
+    position: relative;
+    width: 30px;
+    height: 180px;
+    border-bottom: 2px solid #999;
+    border-right: 2px solid #999;
+    margin-right: 5px;
+    font-size: 0.85em;
+    color: #555;
+  }
+  .y-axis-labels span {
+    position: absolute;
+    right: 5px;
+    transform: translateY(50%);
+  }
+  .y0 { bottom: 0; }
+  .y20 { bottom: 36px; }
+  .y40 { bottom: 72px; }
+  .y60 { bottom: 108px; }
+  .y80 { bottom: 144px; }
+  .y100 { bottom: 180px; }
+</style>
+</head>
+<body>
+
+<h1>more freelance workers in the future.</h1>
+
+<p><strong>QUESTION:</strong> Approximately what percent of your company’s workers are currently contract/freelance workers? In five years, what percent of your company’s workers will be contract/freelance workers?</p>
+
+<div class="chart-legend" aria-label="Legend for chart color codes">
+  <div class="legend-item"><span class="legend-color-box color-50plus"></span>50% or more</div>
+  <div class="legend-item"><span class="legend-color-box color-25to49"></span>25% to 49%</div>
+  <div class="legend-item"><span class="legend-color-box color-10to24"></span>10% to 24%</div>
+  <div class="legend-item"><span class="legend-color-box color-less10"></span>Less than 10%</div>
+  <div class="legend-item"><span class="legend-color-box color-none"></span>None</div>
+</div>
+
+<div style="display:flex; align-items:center; gap: 0.5em; font-size:0.85em; color:#555; margin-bottom: 0.3em;">
+  <div class="y-axis-labels" aria-hidden="true">
+    <span class="y100">100%</span>
+    <span class="y80">80%</span>
+    <span class="y60">60%</span>
+    <span class="y40">40%</span>
+    <span class="y20">20%</span>
+    <span class="y0">0%</span>
+  </div>
+
+  <div class="chart-container" role="img" aria-label="Bar chart showing percentage of company workers as contract or freelance workers currently and in five years by category">
+
+    <div class="bar-group">
+      <div class="bars" aria-label="Currently">
+        <div class="bar bar-none" style="height:0%;" aria-hidden="true"></div>
+        <div class="bar bar-less10" style="height:37%;">37%</div>
+        <div class="bar bar-10to24" style="height:16%;">16%</div>
+        <div class="bar bar-25to49" style="height:8%;">8%</div>
+        <div class="bar bar-50plus" style="height:4%;">4%</div>
+      </div>
+      <div class="bar-label">Currently</div>
+    </div>
+
+    <div class="bar-group" aria-label="In Five Years">
+      <!-- Stacked bars ordered cumulatively bottom to top and bars separate since 'None' means 0% freelance -->
+      <div class="bars" style="height:180px; position: relative;">
+        <!-- Bar for 'None' 77% is actually the percentage of companies expecting no freelance workers,
+             so it can't visually stack with the freelance categories that sum to 105% if summed.
+             We show 'None' bar as independent full-height bar behind with label. -->
+        <div class="bar bar-none" style="height:77%; position: absolute; bottom: 0; left: 0; right: 0; opacity: 0.4; text-align: left; padding-left: 4px; font-weight: normal;">
+          77% None
+        </div>
+        <!-- The following bars represent the combined freelance category percentages,
+             stacked cumulatively from bottom to top excluding 'None' -->
+        <div style="height: 0;"></div> <!-- spacer to contain absolute bar-none -->
+        <div class="bar bar-less10" style="height:65%; position: relative; z-index: 1;">65%</div>
+        <div class="bar bar-10to24" style="height:23%; position: relative; z-index: 1;">23%</div>
+        <div class="bar bar-25to49" style="height:11%; position: relative; z-index: 1;">11%</div>
+        <div class="bar bar-50plus" style="height:6%; position: relative; z-index: 1;">6%</div>
+      </div>
+      <div class="bar-label">In Five Years</div>
+    </div>
+
+  </div>
+</div>
+
+<table class="data" summary="Percentages of current and future freelance workers by category">
+  <caption>Percent of Company’s Workers as Contract/Freelance Workers</caption>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Currently</th>
+      <th>In Five Years</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">50% or more</th>
+      <td>4%</td>
+      <td>6%</td>
+    </tr>
+    <tr>
+      <th scope="row">25% to 49%</th>
+      <td>8%</td>
+      <td>11%</td>
+    </tr>
+    <tr>
+      <th scope="row">10% to 24%</th>
+      <td>16%</td>
+      <td>23%</td>
+    </tr>
+    <tr>
+      <th scope="row">Less than 10%</th>
+      <td>37%</td>
+      <td>65%</td>
+    </tr>
+    <tr>
+      <th scope="row">None</th>
+      <td>—</td>
+      <td>77%</td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

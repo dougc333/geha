@@ -1,0 +1,260 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "gpt-4.1-mini",
+  "created_at": "2026-10-10T08:34:24.320105+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "failed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "fig2",
+      "kind": "figure",
+      "title": "Figure 2 Worker participation in the gig economy is trending downward.",
+      "source_png": "figure-01-fig2.png",
+      "bounding_box": [
+        46,
+        1129,
+        734,
+        1604
+      ],
+      "output_directory": "figure-01",
+      "native_evidence": "figure-01/native-evidence.json",
+      "native_evidence_word_count": 41,
+      "status": "failed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 2,
+          "errors": [
+            {
+              "category": "chart_data",
+              "source_evidence": "Authoritative PDF data shows three numeric values related to work arrangements: 66%, 77%, and 34%, but the chart visually places 34% in the middle bar which is larger than either 66% or 77%, which is illogical, and the bars are all the same height (150), not reflecting different percentage values visually as a stacked or separated bar chart should.",
+              "html_evidence": "<rect x=\"0\" y=\"0\" width=\"100\" height=\"150\" fill=\"#78787f\"></rect> <text x=\"50\" y=\"75\" fill=\"#fff\" font-size=\"16\" text-anchor=\"middle\" dominant-baseline=\"middle\">66%</text> <rect x=\"100\" y=\"0\" width=\"100\" height=\"150\" fill=\"#fdda0d\"></rect> <text x=\"150\" y=\"75\" fill=\"#000\" font-size=\"16\" text-anchor=\"middle\" dominant-baseline=\"middle\">34%</text> <rect x=\"200\" y=\"0\" width=\"100\" height=\"150\" fill=\"#78787f\"></rect> <text x=\"250\" y=\"75\" fill=\"#fff\" font-size=\"16\" text-anchor=\"middle\" dominant-baseline=\"middle\">77%</text>",
+              "correction": "Visual chart bars need to be drawn with heights proportional to their values: 66%, 34%, and 77%, not all equal height 150. Also, the order and visual representation should reflect a meaningful distribution, e.g., bar heights scaled to values or a stacked bar with proper segment heights."
+            },
+            {
+              "category": "table_structure",
+              "source_evidence": "No category names are given in the authoritative PDF excerpt; only percentages 66%, 77%, and 34% appear.",
+              "html_evidence": "<tbody> <tr> <td>Category 1</td> <td>66%</td> </tr> <tr> <td>Category 2</td> <td>34%</td> </tr> <tr> <td>Category 3</td> <td>77%</td> </tr> </tbody>",
+              "correction": "The table's 'Work Arrangement' categories must reflect the actual category names or labels from the source. If those are missing in the source, the placeholders 'Category 1, 2, 3' should be corrected or removed if misleading."
+            }
+          ],
+          "render_latency_ms": 436.1,
+          "candidate_sha256": "458cde0d66ac08d04e5910763704bc3a3e59ecf3d2031771faf6cbd24c071452"
+        },
+        {
+          "iteration": 2,
+          "html": "figure-01/iteration-02.html",
+          "rendered_png": "figure-01/iteration-02.png",
+          "verdict": "mismatch",
+          "error_count": 2,
+          "errors": [
+            {
+              "category": "missing_text",
+              "source_evidence": "Source PDF text shows percentages only (66%, 77%, 34%) with no actual Work Arrangement category text labels in the figure or table.",
+              "html_evidence": "<table> <thead> <tr> <th>Work Arrangement</th> <th>Percentage</th> </tr> </thead> <tbody> <tr> <td>66%</td> <td>66%</td> </tr> <tr> <td>34%</td> <td>34%</td> </tr> <tr> <td>77%</td> <td>77%</td> </tr> </tbody> </table>",
+              "correction": "Remove 'Work Arrangement' category labels from the table and replace with appropriate textual labels or leave as numeric percentages only. Also clarify or add meaningful work arrangement descriptions matching the source if known, or omit the category column if the source has no labels."
+            },
+            {
+              "category": "chart_relationship",
+              "source_evidence": "PDF shows percentages 66%, 77%, 34% in a question about current work arrangement distribution with no color legend or category labels.",
+              "html_evidence": "SVG bars with colors and percentages but no legend or category labels tied to bars.",
+              "correction": "Add explicit category or legend labels for each bar illustrating what each percentage corresponds to, to clarify the chart relationship. The bars have colors but no meaning attributed in the candidate chart."
+            }
+          ],
+          "render_latency_ms": 488.1,
+          "candidate_sha256": "0ef38ebd01636e5a278c0ff25d012e448ce3379a8d1c88915fef4d85034bdb68"
+        },
+        {
+          "iteration": 3,
+          "html": "figure-01/iteration-03.html",
+          "rendered_png": "figure-01/iteration-03.png",
+          "verdict": "mismatch",
+          "error_count": 3,
+          "errors": [
+            {
+              "category": "chart_data",
+              "source_evidence": "66%, 77%, 34% from the PDF text and numbers arranged with 66% and 34% shown on the left bar and 77% on the right bar in the chart.",
+              "html_evidence": "The bar chart places 66% and 34% as two separate bars on the left side with 66% bar taller and 34% shorter, while 77% is on the right side as the tallest bar. However, the 66% bar, with height 128.6, has label '66%' placed at y=120 which is near mid-height and somewhat unclear. The 77% bar with height 150 has '77%' label placed at y=75 which is not vertically centered, and the 34% bar has '34%' label placed at y=120 which overlaps the 66% bar's label horizontally, causing confusion and visual clutter.",
+              "correction": "Adjust text label placement so numerical percentage labels appear visually centered inside or just above the corresponding bars without overlapping each other or other bars. For example, place each label vertically centered within its respective bar horizontally aligned with the bar's center x-coordinate."
+            },
+            {
+              "category": "chart_relationship",
+              "source_evidence": "Figure caption states 'Distribution of Work Arrangements (categories not specified)' and the question is about freelance or gig work, yet the bars have no category labels.",
+              "html_evidence": "The chart does not include any category labels or legends to specify what 66%, 34%, and 77% represent, though the question implies work arrangement categories should be present.",
+              "correction": "Include category labels or a legend aligned with each bar explaining what the percentages correspond to, ensuring the semantic relationship between the data and its meaning is maintained."
+            },
+            {
+              "category": "table_structure",
+              "source_evidence": "Data in the table: '66%', '34%', '77%' with no category labels.",
+              "html_evidence": "The table lists percentages only, without any category or descriptor columns to clarify the data context.",
+              "correction": "Add a column of category labels matching the chart's work arrangement categories so the table clearly conveys which percentage corresponds to which category."
+            }
+          ],
+          "render_latency_ms": 449.9,
+          "candidate_sha256": "13debae09691e6724286b90865cbad761f97b8d2e817160ddff9d65e0103ab13"
+        },
+        {
+          "iteration": 4,
+          "html": "figure-01/iteration-04.html",
+          "rendered_png": "figure-01/iteration-04.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "chart_data",
+              "source_evidence": "Lines in PDF show 66%, 77%, and 34% but chart bar heights correspond to 66%, 34%, and 77% respectively in left to right order.",
+              "html_evidence": "<rect x=\"10\" y=\"21.4\" width=\"80\" height=\"138.6\" fill=\"#78787f\"></rect>\n<rect x=\"110\" y=\"91.8\" width=\"80\" height=\"58.2\" fill=\"#fdda0d\"></rect>\n<rect x=\"210\" y=\"10\" width=\"80\" height=\"150\" fill=\"#78787f\"></rect>\n\n<text x=\"50\" y=\"90\" fill=\"#fff\" font-size=\"16\" text-anchor=\"middle\" dominant-baseline=\"middle\">66%</text>\n<text x=\"150\" y=\"120\" fill=\"#000\" font-size=\"16\" text-anchor=\"middle\" dominant-baseline=\"middle\">34%</text>\n<text x=\"250\" y=\"85\" fill=\"#fff\" font-size=\"16\" text-anchor=\"middle\" dominant-baseline=\"middle\">77%</text>",
+              "correction": "Swap the positions of the second (34%) and third (77%) bars and their labels so their horizontal order matches the numerical evidence in the PDF and the categories. The order should be 66% Traditional Employer, 77% Other/Multiple, 34% Freelance/Gig Work."
+            }
+          ],
+          "render_latency_ms": 454.4,
+          "candidate_sha256": "01a93ff3213e1ff154d046738aa67a56193606f8b15100f4ad3a3b907eca1bd4"
+        },
+        {
+          "iteration": 5,
+          "html": "figure-01/iteration-05.html",
+          "rendered_png": "figure-01/iteration-05.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "chart_data",
+              "source_evidence": "Box scores show 66%, 77%, and 34% but their order associates 66% with 'Traditional Employer', 77% with 'Other/Multiple', 34% with 'Freelance/Gig Work'.",
+              "html_evidence": "<rect x=\"10\" y=\"21.4\" width=\"80\" height=\"138.6\" fill=\"#78787f\"></rect> <text x=\"50\" y=\"90\" fill=\"#fff\" font-size=\"16\" text-anchor=\"middle\" dominant-baseline=\"middle\">66%</text> <text x=\"150\" y=\"85\" fill=\"#fff\" font-size=\"16\" text-anchor=\"middle\" dominant-baseline=\"middle\">77%</text> <text x=\"250\" y=\"120\" fill=\"#000\" font-size=\"16\" text-anchor=\"middle\" dominant-baseline=\"middle\">34%</text> <text x=\"50\" y=\"160\" fill=\"#000\" font-size=\"14\" text-anchor=\"middle\" dominant-baseline=\"hanging\">Traditional Employer</text> <text x=\"150\" y=\"160\" fill=\"#000\" font-size=\"14\" text-anchor=\"middle\" dominant-baseline=\"hanging\">Other/Multiple</text> <text x=\"250\" y=\"160\" fill=\"#000\" font-size=\"14\" text-anchor=\"middle\" dominant-baseline=\"hanging\">Freelance/Gig Work</text>",
+              "correction": "The chart bars and labels have the incorrect horizontal order: 66% is leftmost but labeled 'Traditional Employer,' 77% is center labeled as 'Other/Multiple,' 34% is rightmost labeled 'Freelance/Gig Work'. In the PDF source, 77% should be the leftmost bar, 66% the middle, and 34% the rightmost. Correct the horizontal positioning so the bar with 77% is first from left, 66% second, and 34% last, matching the original authoritative PDF layout and value-to-category assignment."
+            }
+          ],
+          "render_latency_ms": 465.3,
+          "candidate_sha256": "4092b1e58d3fc780de491943e9eb9b0768f56ad87f4336243533ea50f9d8680d"
+        },
+        {
+          "iteration": 6,
+          "html": "figure-01/iteration-06.html",
+          "rendered_png": "figure-01/iteration-06.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "chart_relationship",
+              "source_evidence": "From PDF: 66% associated with Traditional Employer, 77% with Other/Multiple, and 34% with Freelance/Gig Work.",
+              "html_evidence": "SVG bar order is Other/Multiple (77%) first at x=10, Traditional Employer (66%) second at x=110, Freelance/Gig Work (34%) third at x=210.",
+              "correction": "Reorder the bars in the SVG to match the data categories and values in the PDF and table: Traditional Employer 66% first, Other/Multiple 77% second, Freelance/Gig Work 34% third. Adjust their horizontal positions and labels accordingly."
+            }
+          ],
+          "render_latency_ms": 463.6,
+          "candidate_sha256": "c0eaa181e062f468562e3dead59b4fbfddb13fcdc8ee155e8e1d8beef8c49cdf"
+        }
+      ],
+      "remaining_errors": [
+        {
+          "category": "chart_relationship",
+          "source_evidence": "From PDF: 66% associated with Traditional Employer, 77% with Other/Multiple, and 34% with Freelance/Gig Work.",
+          "html_evidence": "SVG bar order is Other/Multiple (77%) first at x=10, Traditional Employer (66%) second at x=110, Freelance/Gig Work (34%) third at x=210.",
+          "correction": "Reorder the bars in the SVG to match the data categories and values in the PDF and table: Traditional Employer 66% first, Other/Multiple 77% second, Freelance/Gig Work 34% third. Adjust their horizontal positions and labels accordingly."
+        }
+      ],
+      "selected_iteration": 4,
+      "selected_error_count": 1,
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-04.png"
+    },
+    {
+      "figure": 2,
+      "id": "fig3",
+      "kind": "figure",
+      "title": "Figure 3 Employers expect to use more freelance workers in the future.",
+      "source_png": "figure-02-fig3.png",
+      "bounding_box": [
+        780,
+        1129,
+        1499,
+        1604
+      ],
+      "output_directory": "figure-02",
+      "native_evidence": "figure-02/native-evidence.json",
+      "native_evidence_word_count": 53,
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-02/iteration-01.html",
+          "rendered_png": "figure-02/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "chart_relationship",
+              "source_evidence": "Numeric tokens and table data show 'None' currently must have a specific value or at least a consistent placeholder. The authoritative PDF shows the table's last row 'None' currently has a value of '—' meaning no data or zero, but in the candidate HTML it is represented as '—', which is okay in text, but visually the chart must show the 'None' category for 'Currently' with a zero or placeholder bar or a note. The candidate HTML provides only a table and legend but no chart visually representing these percentages, including the 'None' category as zero currently.",
+              "html_evidence": "No visual bar chart or graphical representation for 'None' category under 'Currently' or 'In Five Years' present in candidate HTML, only a table and legend.",
+              "correction": "Include a visual bar chart representing all categories including 'None' for both 'Currently' and 'In Five Years' to match the PDF source chart representation."
+            }
+          ],
+          "render_latency_ms": 464.6,
+          "candidate_sha256": "bae26da144556cb10f1fd328d26a6d91b2ff689c5a50340c5d0db9853b01516a"
+        },
+        {
+          "iteration": 2,
+          "html": "figure-02/iteration-02.html",
+          "rendered_png": "figure-02/iteration-02.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "chart_data",
+              "source_evidence": "Bar heights and labels for 'Currently' stacked bars sum visually to over 100% if scaled as percentages (4% + 8% + 16% + 37% + None 0%) but 'None' is shown as 0 height, which is correct; however, the bar for 'Less than 10%' is 37% height but is placed below the 0 height 'None' which is zero height. In the 'In Five Years' group, the stacking order places 'None' at 77% height, but below it the 'Less than 10%' bar is 65% height, positioned above the 'None' bar, making stacking visually confused and impossible (65% above 77% stacked bar). This leads to a visual error of stacking and bar ordering inconsistent with a stacked bar chart where segments are cumulative from bottom to top.",
+              "html_evidence": "<div class=\"bars\" aria-label=\"In Five Years\">\n        <div class=\"bar bar-none\" style=\"height:77%;\">77%</div>\n        <div class=\"bar bar-less10\" style=\"height:65%;\">65%</div>\n        <div class=\"bar bar-10to24\" style=\"height:23%;\">23%</div>\n        <div class=\"bar bar-25to49\" style=\"height:11%;\">11%</div>\n        <div class=\"bar bar-50plus\" style=\"height:6%;\">6%</div>\n      </div>",
+              "correction": "Bars in the stacked bar groups must be ordered correctly and stacked cumulatively from bottom to top so that smaller percentages appear near the bottom and bars stack on top cumulatively. The current 'In Five Years' stacked bar order is reversed and visually incorrect, requiring reorder so that 'None' with 77% height is at bottom, 'Less than 10%' with 65% would not be stacked above it but would be below smaller segments; however, since these are mutually exclusive categories, 'None' and 'Less than 10%' cannot both reflect percentages of the whole and must be separate bars or reinterpreted visually as side-by-side bars."
+            }
+          ],
+          "render_latency_ms": 459.3,
+          "candidate_sha256": "478166b90a1597c9628a5d7b198c0f2800a836a9d8539692e6b22b9ce7e606bc"
+        },
+        {
+          "iteration": 3,
+          "html": "figure-02/iteration-03.html",
+          "rendered_png": "figure-02/iteration-03.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "chart_relationship",
+              "source_evidence": "'None' category values: currently is missing (—) and in five years is 77%. Chart bars show currently 'None' as zero height bar with no label, matching the table. But the 'In Five Years' bar chart shows 'None' as a separate semi-transparent bar behind the stacked freelance bars, which is visually confusing and incorrect: the stacked bars sum to more than 100% (6% + 11% + 23% + 65% = 105%), which is impossible as 'None' 77% means zero freelance workers. This breaks the visual chart-data relationship and is not a proper stack or representation.",
+              "html_evidence": "<div class=\"bar-group\" aria-label=\"In Five Years\">\n      <!-- Stacked bars ordered cumulatively bottom to top and bars separate since 'None' means 0% freelance -->\n      <div class=\"bars\" style=\"height:180px; position: relative;\">\n        <!-- Bar for 'None' 77% is actually the percentage of companies expecting no freelance workers,\n             so it can't visually stack with the freelance categories that sum to 105% if summed.\n             We show 'None' bar as independent full-height bar behind with label. -->\n        <div class=\"bar bar-none\" style=\"height:77%; position: absolute; bottom: 0; left: 0; right: 0; opacity: 0.4; text-align: left; padding-left: 4px; font-weight: normal;\">\n          77% None\n        </div>\n        <!-- The following bars represent the combined freelance category percentages,\n             stacked cumulatively from bottom to top excluding 'None' -->\n        <div style=\"height: 0;\"></div> <!-- spacer to contain absolute bar-none -->\n        <div class=\"bar bar-less10\" style=\"height:65%; position: relative; z-index: 1;\">65%</div>\n        <div class=\"bar bar-10to24\" style=\"height:23%; position: relative; z-index: 1;\">23%</div>\n        <div class=\"bar bar-25to49\" style=\"height:11%; position: relative; z-index: 1;\">11%</div>\n        <div class=\"bar bar-50plus\" style=\"height:6%; position: relative; z-index: 1;\">6%</div>\n      </div>\n      <div class=\"bar-label\">In Five Years</div>\n    </div>",
+              "correction": "Correct the 'In Five Years' chart to separate 'None' from the stacked freelance categories visually and semantically. Since 'None' means zero freelance workers, it cannot stack on top of any freelance percentages. Represent 'None' as a separate bar or separate category outside the stacked freelance bars. The stacked bars for freelance workers should sum to less or equal to 100% minus the 'None' category percentage (i.e., 23% freelance max). Alternatively, remove the 'None' 77% bar from the stacked area and place it separately with a clear label that it's exclusive from freelance categories. Ensure the total stacked bar height does not exceed 100% visually and that the chart accurately and clearly maps to the data table values."
+            }
+          ],
+          "render_latency_ms": 468.6,
+          "candidate_sha256": "1420ce79f2385345faa729a14f2319c150af757b2e977c384d2cd3e9fce001dd"
+        },
+        {
+          "iteration": 4,
+          "html": "figure-02/iteration-04.html",
+          "rendered_png": "figure-02/iteration-04.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 467.8,
+          "candidate_sha256": "cefddfd5ed8fa662f324d32458a499d0753cb64d5d9380373fa09471b5d0d66e"
+        }
+      ],
+      "selected_iteration": 4,
+      "selected_error_count": 0,
+      "final_html": "figure-02/final.html",
+      "final_rendered_png": "figure-02/iteration-04.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 2,
+    "passed": 1,
+    "failed": 1,
+    "total_iterations": 10,
+    "remaining_errors": 1
+  },
+  "completed_at": "2026-10-10T08:36:21.320139+00:00"
+}

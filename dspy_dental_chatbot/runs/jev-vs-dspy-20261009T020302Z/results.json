@@ -1,0 +1,712 @@
+[
+  {
+    "name": "jev",
+    "cases": 26,
+    "correct": 23,
+    "clarifications": 0,
+    "no_match": 1,
+    "errors": 0,
+    "median_latency_seconds": 0.1512,
+    "max_latency_seconds": 0.639,
+    "total_tokens": null,
+    "total_cost_usd": null,
+    "rows": [
+      {
+        "stage": "member_type",
+        "message": "I retired from the Postal Service in 2019",
+        "accepted": [
+          "federal_retiree"
+        ],
+        "result": "federal_retiree",
+        "correct": true,
+        "latency_seconds": 0.5442,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "member_type",
+        "message": "my wife works at the VA and I'm on her plan",
+        "accepted": [
+          "eligible_family"
+        ],
+        "result": "eligible_family",
+        "correct": true,
+        "latency_seconds": 0.2174,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "member_type",
+        "message": "my spouse is a federal employee",
+        "accepted": [
+          "ASK:active_employee+eligible_family",
+          "eligible_family"
+        ],
+        "result": "eligible_family",
+        "correct": true,
+        "latency_seconds": 0.1761,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "member_type",
+        "message": "I'm an annuitant",
+        "accepted": [
+          "federal_retiree"
+        ],
+        "result": "federal_retiree",
+        "correct": true,
+        "latency_seconds": 0.1477,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "member_type",
+        "message": "I spent 22 years in the Navy and I'm retired now",
+        "accepted": [
+          "retired_uniformed"
+        ],
+        "result": "retired_uniformed",
+        "correct": true,
+        "latency_seconds": 0.639,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "member_type",
+        "message": "I'm a contractor at NASA",
+        "accepted": [
+          "unclear"
+        ],
+        "result": "unclear",
+        "correct": true,
+        "latency_seconds": 0.1359,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "opportunity",
+        "message": "it's open season right now isn't it",
+        "accepted": [
+          "open_season"
+        ],
+        "result": "open_season",
+        "correct": true,
+        "latency_seconds": 0.1365,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "opportunity",
+        "message": "I just got hired by the FAA last week",
+        "accepted": [
+          "newly_eligible_or_qle"
+        ],
+        "result": "newly_eligible_or_qle",
+        "correct": true,
+        "latency_seconds": 0.1268,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "opportunity_detail",
+        "message": "I just started my federal job",
+        "accepted": [
+          "newly_eligible"
+        ],
+        "result": "newly_eligible",
+        "correct": true,
+        "latency_seconds": 0.1517,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "opportunity_detail",
+        "message": "Qualifying life event, because I started my federal job but my child needs braces which is a qualifying life event",
+        "accepted": [
+          "ASK:newly_eligible+qle",
+          "newly_eligible"
+        ],
+        "result": "qle",
+        "correct": false,
+        "latency_seconds": 0.1288,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "opportunity_detail",
+        "message": "we had a baby",
+        "accepted": [
+          "qle"
+        ],
+        "result": "qle",
+        "correct": true,
+        "latency_seconds": 0.1621,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "qle_event",
+        "message": "my husband passed away in August",
+        "accepted": [
+          "lose_family_member"
+        ],
+        "result": "lose_family_member",
+        "correct": true,
+        "latency_seconds": 0.1966,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "qle_event",
+        "message": "we're expecting twins next month",
+        "accepted": [
+          "acquire_family_member"
+        ],
+        "result": "acquire_family_member",
+        "correct": true,
+        "latency_seconds": 0.1507,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "qle_event",
+        "message": "we just adopted our son",
+        "accepted": [
+          "acquire_family_member"
+        ],
+        "result": "acquire_family_member",
+        "correct": true,
+        "latency_seconds": 0.0914,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "qle_event",
+        "message": "my employer dropped our dental benefits",
+        "accepted": [
+          "lose_other_coverage"
+        ],
+        "result": "lose_other_coverage",
+        "correct": true,
+        "latency_seconds": 0.1385,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "qle_event",
+        "message": "I got called up for active duty and won't be paid by my agency",
+        "accepted": [
+          "active_military_nonpay"
+        ],
+        "result": "active_military_nonpay",
+        "correct": true,
+        "latency_seconds": 0.1371,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "qle_event",
+        "message": "I'm back at work after a year of unpaid leave",
+        "accepted": [
+          "return_lwop"
+        ],
+        "result": "return_lwop",
+        "correct": true,
+        "latency_seconds": 0.1779,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "qle_event",
+        "message": "we got married and had a baby",
+        "accepted": [
+          "ASK:acquire_family_member+marriage"
+        ],
+        "result": "marriage",
+        "correct": false,
+        "latency_seconds": 0.0915,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "qle_event",
+        "message": "my kid needs braces",
+        "accepted": [
+          ""
+        ],
+        "result": "",
+        "correct": true,
+        "latency_seconds": 0.1132,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "need",
+        "message": "my teenager needs braces",
+        "accepted": [
+          "orthodontia"
+        ],
+        "result": "orthodontia",
+        "correct": true,
+        "latency_seconds": 0.2278,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "need",
+        "message": "I think I need a root canal soon",
+        "accepted": [
+          "major"
+        ],
+        "result": "major",
+        "correct": true,
+        "latency_seconds": 0.107,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "need",
+        "message": "just cleanings, cheapest possible",
+        "accepted": [
+          "routine"
+        ],
+        "result": "routine",
+        "correct": true,
+        "latency_seconds": 0.2149,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "state",
+        "message": "I live near Modesto in california and love the farmers market.",
+        "accepted": [
+          "CA"
+        ],
+        "result": "CA",
+        "correct": true,
+        "latency_seconds": 0.3017,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "state",
+        "message": "Austin texas is home, but I travel constantly for work.",
+        "accepted": [
+          "TX"
+        ],
+        "result": "TX",
+        "correct": true,
+        "latency_seconds": 0.1162,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "state",
+        "message": "I split my time between California and Texas.",
+        "accepted": [
+          "ASK:CA+TX"
+        ],
+        "result": "CA",
+        "correct": false,
+        "latency_seconds": 0.1857,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      },
+      {
+        "stage": "need",
+        "message": "We mostly need ordinary checkups, though my kid may want braces someday.",
+        "accepted": [
+          "ASK:orthodontia+routine",
+          "routine"
+        ],
+        "result": "routine",
+        "correct": true,
+        "latency_seconds": 0.1574,
+        "tokens": null,
+        "cost_usd": null,
+        "error": null
+      }
+    ]
+  },
+  {
+    "name": "dspy",
+    "cases": 26,
+    "correct": 23,
+    "clarifications": 2,
+    "no_match": 3,
+    "errors": 0,
+    "median_latency_seconds": 0.7656,
+    "max_latency_seconds": 2.4907,
+    "total_tokens": 15346,
+    "total_cost_usd": 0.002643,
+    "rows": [
+      {
+        "stage": "member_type",
+        "message": "I retired from the Postal Service in 2019",
+        "accepted": [
+          "federal_retiree"
+        ],
+        "result": "federal_retiree",
+        "correct": true,
+        "latency_seconds": 2.4907,
+        "tokens": 530,
+        "cost_usd": 9.345e-05,
+        "error": null
+      },
+      {
+        "stage": "member_type",
+        "message": "my wife works at the VA and I'm on her plan",
+        "accepted": [
+          "eligible_family"
+        ],
+        "result": "eligible_family",
+        "correct": true,
+        "latency_seconds": 0.7454,
+        "tokens": 529,
+        "cost_usd": 9.24e-05,
+        "error": null
+      },
+      {
+        "stage": "member_type",
+        "message": "my spouse is a federal employee",
+        "accepted": [
+          "ASK:active_employee+eligible_family",
+          "eligible_family"
+        ],
+        "result": "eligible_family",
+        "correct": true,
+        "latency_seconds": 0.7578,
+        "tokens": 523,
+        "cost_usd": 9.105e-05,
+        "error": null
+      },
+      {
+        "stage": "member_type",
+        "message": "I'm an annuitant",
+        "accepted": [
+          "federal_retiree"
+        ],
+        "result": "federal_retiree",
+        "correct": true,
+        "latency_seconds": 1.0268,
+        "tokens": 525,
+        "cost_usd": 9.27e-05,
+        "error": null
+      },
+      {
+        "stage": "member_type",
+        "message": "I spent 22 years in the Navy and I'm retired now",
+        "accepted": [
+          "retired_uniformed"
+        ],
+        "result": "retired_uniformed",
+        "correct": true,
+        "latency_seconds": 1.0605,
+        "tokens": 531,
+        "cost_usd": 9.315e-05,
+        "error": null
+      },
+      {
+        "stage": "member_type",
+        "message": "I'm a contractor at NASA",
+        "accepted": [
+          "unclear"
+        ],
+        "result": "unclear",
+        "correct": true,
+        "latency_seconds": 0.6937,
+        "tokens": 522,
+        "cost_usd": 9.09e-05,
+        "error": null
+      },
+      {
+        "stage": "opportunity",
+        "message": "it's open season right now isn't it",
+        "accepted": [
+          "open_season"
+        ],
+        "result": "open_season",
+        "correct": true,
+        "latency_seconds": 1.5812,
+        "tokens": 500,
+        "cost_usd": 8.805e-05,
+        "error": null
+      },
+      {
+        "stage": "opportunity",
+        "message": "I just got hired by the FAA last week",
+        "accepted": [
+          "newly_eligible_or_qle"
+        ],
+        "result": "newly_eligible_or_qle",
+        "correct": true,
+        "latency_seconds": 0.9486,
+        "tokens": 506,
+        "cost_usd": 9.075000000000001e-05,
+        "error": null
+      },
+      {
+        "stage": "opportunity_detail",
+        "message": "I just started my federal job",
+        "accepted": [
+          "newly_eligible"
+        ],
+        "result": "newly_eligible",
+        "correct": true,
+        "latency_seconds": 0.7047,
+        "tokens": 465,
+        "cost_usd": 8.325e-05,
+        "error": null
+      },
+      {
+        "stage": "opportunity_detail",
+        "message": "Qualifying life event, because I started my federal job but my child needs braces which is a qualifying life event",
+        "accepted": [
+          "ASK:newly_eligible+qle",
+          "newly_eligible"
+        ],
+        "result": "qle",
+        "correct": false,
+        "latency_seconds": 0.7735,
+        "tokens": 479,
+        "cost_usd": 8.444999999999999e-05,
+        "error": null
+      },
+      {
+        "stage": "opportunity_detail",
+        "message": "we had a baby",
+        "accepted": [
+          "qle"
+        ],
+        "result": "qle",
+        "correct": true,
+        "latency_seconds": 0.7999,
+        "tokens": 461,
+        "cost_usd": 8.175e-05,
+        "error": null
+      },
+      {
+        "stage": "qle_event",
+        "message": "my husband passed away in August",
+        "accepted": [
+          "lose_family_member"
+        ],
+        "result": "lose_family_member",
+        "correct": true,
+        "latency_seconds": 1.0273,
+        "tokens": 649,
+        "cost_usd": 0.00011085,
+        "error": null
+      },
+      {
+        "stage": "qle_event",
+        "message": "we're expecting twins next month",
+        "accepted": [
+          "acquire_family_member"
+        ],
+        "result": "",
+        "correct": false,
+        "latency_seconds": 1.0598,
+        "tokens": 647,
+        "cost_usd": 0.00010965,
+        "error": null
+      },
+      {
+        "stage": "qle_event",
+        "message": "we just adopted our son",
+        "accepted": [
+          "acquire_family_member"
+        ],
+        "result": "acquire_family_member",
+        "correct": true,
+        "latency_seconds": 1.0199,
+        "tokens": 648,
+        "cost_usd": 0.0001107,
+        "error": null
+      },
+      {
+        "stage": "qle_event",
+        "message": "my employer dropped our dental benefits",
+        "accepted": [
+          "lose_other_coverage"
+        ],
+        "result": "lose_other_coverage",
+        "correct": true,
+        "latency_seconds": 0.8365,
+        "tokens": 650,
+        "cost_usd": 0.00011145,
+        "error": null
+      },
+      {
+        "stage": "qle_event",
+        "message": "I got called up for active duty and won't be paid by my agency",
+        "accepted": [
+          "active_military_nonpay"
+        ],
+        "result": "active_military_nonpay",
+        "correct": true,
+        "latency_seconds": 1.4096,
+        "tokens": 658,
+        "cost_usd": 0.00011265,
+        "error": null
+      },
+      {
+        "stage": "qle_event",
+        "message": "I'm back at work after a year of unpaid leave",
+        "accepted": [
+          "return_lwop"
+        ],
+        "result": "return_lwop",
+        "correct": true,
+        "latency_seconds": 0.7417,
+        "tokens": 653,
+        "cost_usd": 0.00011145,
+        "error": null
+      },
+      {
+        "stage": "qle_event",
+        "message": "we got married and had a baby",
+        "accepted": [
+          "ASK:acquire_family_member+marriage"
+        ],
+        "result": "ASK:acquire_family_member+marriage",
+        "correct": true,
+        "latency_seconds": 0.6932,
+        "tokens": 651,
+        "cost_usd": 0.0001116,
+        "error": null
+      },
+      {
+        "stage": "qle_event",
+        "message": "my kid needs braces",
+        "accepted": [
+          ""
+        ],
+        "result": "",
+        "correct": true,
+        "latency_seconds": 0.6394,
+        "tokens": 645,
+        "cost_usd": 0.00010935,
+        "error": null
+      },
+      {
+        "stage": "need",
+        "message": "my teenager needs braces",
+        "accepted": [
+          "orthodontia"
+        ],
+        "result": "orthodontia",
+        "correct": true,
+        "latency_seconds": 1.0754,
+        "tokens": 533,
+        "cost_usd": 9.3e-05,
+        "error": null
+      },
+      {
+        "stage": "need",
+        "message": "I think I need a root canal soon",
+        "accepted": [
+          "major"
+        ],
+        "result": "major",
+        "correct": true,
+        "latency_seconds": 0.6561,
+        "tokens": 535,
+        "cost_usd": 9.24e-05,
+        "error": null
+      },
+      {
+        "stage": "need",
+        "message": "just cleanings, cheapest possible",
+        "accepted": [
+          "routine"
+        ],
+        "result": "routine",
+        "correct": true,
+        "latency_seconds": 0.7185,
+        "tokens": 533,
+        "cost_usd": 9.21e-05,
+        "error": null
+      },
+      {
+        "stage": "state",
+        "message": "I live near Modesto in california and love the farmers market.",
+        "accepted": [
+          "CA"
+        ],
+        "result": "CA",
+        "correct": true,
+        "latency_seconds": 0.7034,
+        "tokens": 811,
+        "cost_usd": 0.0001338,
+        "error": null
+      },
+      {
+        "stage": "state",
+        "message": "Austin texas is home, but I travel constantly for work.",
+        "accepted": [
+          "TX"
+        ],
+        "result": "TX",
+        "correct": true,
+        "latency_seconds": 0.7164,
+        "tokens": 811,
+        "cost_usd": 0.00013424999999999998,
+        "error": null
+      },
+      {
+        "stage": "state",
+        "message": "I split my time between California and Texas.",
+        "accepted": [
+          "ASK:CA+TX"
+        ],
+        "result": "",
+        "correct": false,
+        "latency_seconds": 0.6169,
+        "tokens": 808,
+        "cost_usd": 0.0001338,
+        "error": null
+      },
+      {
+        "stage": "need",
+        "message": "We mostly need ordinary checkups, though my kid may want braces someday.",
+        "accepted": [
+          "ASK:orthodontia+routine",
+          "routine"
+        ],
+        "result": "ASK:orthodontia+routine",
+        "correct": true,
+        "latency_seconds": 0.7133,
+        "tokens": 543,
+        "cost_usd": 9.449999999999999e-05,
+        "error": null
+      }
+    ]
+  }
+]

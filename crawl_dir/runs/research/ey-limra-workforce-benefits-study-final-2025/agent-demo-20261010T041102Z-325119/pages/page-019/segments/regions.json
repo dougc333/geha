@@ -1,0 +1,95 @@
+{
+  "page_type": "mixed",
+  "segmentation_recommended": true,
+  "reason": "The page contains distinct sections: a large image on top, a paragraph of text below it, followed by a figure caption and a table/chart with horizontal bar data. These elements have different reading and layout roles and should be segmented separately.",
+  "regions": [
+    {
+      "id": "r1",
+      "label": "image",
+      "kind": "other",
+      "reading_order": 1,
+      "x1": 0,
+      "y1": 0,
+      "x2": 1000,
+      "y2": 460,
+      "pixel_box": [
+        0,
+        0,
+        1530,
+        911
+      ],
+      "image": "region-01-r1.png"
+    },
+    {
+      "id": "r2",
+      "label": "paragraph",
+      "kind": "paragraph",
+      "reading_order": 2,
+      "x1": 30,
+      "y1": 460,
+      "x2": 970,
+      "y2": 570,
+      "pixel_box": [
+        46,
+        911,
+        1484,
+        1129
+      ],
+      "image": "region-02-r2.png"
+    },
+    {
+      "id": "r3",
+      "label": "figure caption",
+      "kind": "paragraph",
+      "reading_order": 3,
+      "x1": 30,
+      "y1": 570,
+      "x2": 970,
+      "y2": 600,
+      "pixel_box": [
+        46,
+        1129,
+        1484,
+        1188
+      ],
+      "image": "region-03-r3.png"
+    },
+    {
+      "id": "r4",
+      "label": "bar chart table",
+      "kind": "table",
+      "reading_order": 4,
+      "x1": 30,
+      "y1": 600,
+      "x2": 970,
+      "y2": 940,
+      "pixel_box": [
+        46,
+        1188,
+        1484,
+        1861
+      ],
+      "image": "region-04-r4.png"
+    },
+    {
+      "id": "r5",
+      "label": "footer",
+      "kind": "footer",
+      "reading_order": 5,
+      "x1": 30,
+      "y1": 940,
+      "x2": 970,
+      "y2": 980,
+      "pixel_box": [
+        46,
+        1861,
+        1484,
+        1940
+      ],
+      "image": "region-05-r5.png"
+    }
+  ],
+  "coordinate_system": "normalized_0_1000",
+  "source_image": "/Users/dc/geha/crawl_dir/runs/research/ey-limra-workforce-benefits-study-final-2025/agent-demo-20261010T041102Z-325119/pages/page-019/source.png",
+  "overlay": "regions-overlay.png"
+}

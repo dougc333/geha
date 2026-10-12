@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Verified Tailwind/SVG chart comparison</title>
+  <style>
+    body { margin: 0; padding: 24px; background: #07101e; color: #eaf3ff; font: 15px system-ui; }
+    main { max-width: 1800px; margin: auto; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    section { padding: 14px; border: 1px solid #2b3d57; border-radius: 12px; background: #101c2d; }
+    img { display: block; width: 100%; background: white; }
+    a { color: #66e7f7; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Page 4 · Figure 1 · Tailwind + inline SVG</h1>
+    <p>The six-pass automated run is retained as failed. This view shows the manually corrected artifact produced from the locked values and source coordinates.</p>
+    <div class="grid">
+      <section><h2>Authoritative Chromium crop</h2><img src="../figure-01-playwright-chromium.png" alt="Authoritative chart crop"></section>
+      <section><h2>Verified HTML render</h2><img src="verified.png" alt="Chromium rendering of verified HTML"><p><a href="verified.html">Open live HTML</a></p></section>
+    </div>
+  </main>
+</body>
+</html>

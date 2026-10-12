@@ -1,0 +1,61 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "The PDF page has a visual chart with bars representing benefit data but no data table.",
+        "html_evidence": "<table> with full detailed data about company size, fewer benefits, about the same, more benefits, and change from 2023.",
+        "correction": "Remove the detailed data table present in the HTML; replicate only the bar chart and legend as shown in the PDF."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The figure in the PDF is mainly a bar chart on the left side and a photo on the right side without a detailed data table.",
+        "html_evidence": "The HTML includes a detailed table below the chart bars and legend, which is not in the PDF. Also, the layout is a flexible two column for chart and photo",
+        "correction": "Do not include a detailed table inside the figure; keep the layout to replicate the PDF's chart and photo arrangement only."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "missing_text",
+        "source_evidence": "Figure 1 Companies plan to offer more benefits in five years. QUESTION: In five years, do you think your company will be offering fewer, the same or more benefits than it does now? +7% change from 2023 57% 40% 3% Small (10-99 employees) +6% change from 2023 64% 35% 1% Midsize (100-999 employees) +5% change from 2023 67% 30% 3% Large (1,000 or more employees) Fewer benefits About the same More benefits",
+        "html_evidence": "<div class=\"bar-fewer bar-segment\" style=\"height:40%\"></div> <div class=\"bar-same bar-segment\" style=\"height:3%\"></div> <div class=\"bar-more bar-segment\" style=\"height:57%\"></div>",
+        "correction": "The candidate HTML bar chart segments for 'Small' company percentages have the 'About the same' and 'More benefits' segments reversed in height and value compared to the source. Correct heights for Small should be 40% (Fewer), 3% (About the same), 57% (More benefits). The candidate shows 40%, 3%, 57% but the alt texts and visual ranking in candidate are inconsistent, the source shows these percentages as part of the chart with clear labeling, ensure consistent order in styling and labeling."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Figure 1 Companies plan to offer more benefits in five years. QUESTION: In five years, do you think your company will be offering fewer, the same or more benefits than it does now? +7% change from 2023 57% 40% 3% Small (10-99 employees) +6% change from 2023 64% 35% 1% Midsize (100-999 employees) +5% change from 2023 67% 30% 3% Large (1,000 or more employees) Fewer benefits About the same More benefits",
+        "html_evidence": "<div class=\"bar-fewer bar-segment\" style=\"height:35%\"></div> <div class=\"bar-same bar-segment\" style=\"height:1%\"></div> <div class=\"bar-more bar-segment\" style=\"height:64%\"></div>",
+        "correction": "The candidate HTML bar chart segments for 'Midsize' companies correctly reflect source percentages: 35% Fewer, 1% About the same, 64% More benefits."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Figure 1 Companies plan to offer more benefits in five years. QUESTION: In five years, do you think your company will be offering fewer, the same or more benefits than it does now? +7% change from 2023 57% 40% 3% Small (10-99 employees) +6% change from 2023 64% 35% 1% Midsize (100-999 employees) +5% change from 2023 67% 30% 3% Large (1,000 or more employees) Fewer benefits About the same More benefits",
+        "html_evidence": "<div class=\"bar-fewer bar-segment\" style=\"height:30%\"></div> <div class=\"bar-same bar-segment\" style=\"height:3%\"></div> <div class=\"bar-more bar-segment\" style=\"height:67%\"></div>",
+        "correction": "The candidate HTML bar chart segments for 'Large' companies correctly reflect source percentages: 30% Fewer, 3% About the same, 67% More benefits."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Right side: Color chart with segmented bars and percentage labels, left side: photo of a bright modern office space with plants and chairs around a small table",
+        "html_evidence": "<figure class=\"chart-and-photo\" ...>...<div class=\"chart\">...</div><div class=\"photo\">...</div></figure>",
+        "correction": "Layout is consistent with source, showing chart on left and photo on right."
+      },
+      {
+        "category": "image",
+        "source_evidence": "Photo: bright modern office space with plants and chairs around a small table",
+        "html_evidence": "<img src=\"#\" alt=\"Bright modern office space with large plants and chairs around a small table\" />",
+        "correction": "Image is present with alt text describing the photo, but actual image src is '#' which likely is a placeholder and not the real image source."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "match",
+    "errors": []
+  }
+]

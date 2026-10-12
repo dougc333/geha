@@ -1,0 +1,7 @@
+GEHA.COM/ELEVATEFEHB
+6 This plan does not include mail-order prescriptions or out-of-network pharmacy coverage, and it has a limited pharmacy network. Find a pharmacy at geha.com/FindCare
+Yearly deductible (in-network), You pay = $750 for Self Only $1,500 for Self Plus One or Self and Family. Out-of-pocket maximum 3 (in-network), You pay = $10,600 for Self Only $21,200 for Self Plus One or Self and Family. Preventive care Annual physical exam, routine screenings, well-child care, maternity care, immunizations and more, You pay = $0. Primary care office visits, You pay = $10. Mental health office visits, You pay = $10. Specialist office visit, You pay = $30. MinuteClinic ® / Urgent care facility visit, You pay = $10 / $50. Unlimited telehealth visits, including mental health, with MDLIVE, You pay = $0. Emergency room visit, You pay = 35% 4. Hospital care; outpatient / inpatient (including maternity), You pay = 25% 4 / 25% 4. Lab services, You pay = 25% 4. X-rays and other diagnostic services, You pay = 25% 4. Chiropractic care (up to 12 visits per year), You pay = $10. Acupuncture (up to 20 visits per year), You pay = $10
+
+GEHA.COM/ELEVATEFEHB
+Generic, Retail (30-day) = $10. Generic, Specialty CVS exclusive (30-day) = 50% ( $500 max). Preferred brand-name, Retail (30-day) = 50% ( $500 max). Preferred brand-name, Specialty CVS exclusive (30-day) = 50% ( $500 max). Non-preferred brand-name, Retail (30-day) = 100%. Non-preferred brand-name, Specialty CVS exclusive (30-day) = 100%
+HDHP

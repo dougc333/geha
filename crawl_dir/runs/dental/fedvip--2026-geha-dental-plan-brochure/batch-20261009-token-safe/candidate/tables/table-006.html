@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coinsurance - source.pdf</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #071f36;
+      --muted: #5f6f7f;
+      --line: #d6dee6;
+      --header: #06233d;
+      --header-ink: #ffffff;
+      --stripe: #f4f7f9;
+      --canvas: #edf2f6;
+      --paper: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+    main {
+      width: min(1440px, calc(100% - 32px));
+      margin: 32px auto;
+      padding: clamp(24px, 4vw, 56px);
+      background: var(--paper);
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(7, 31, 54, 0.10);
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+    .metadata { margin: 0 0 28px; color: var(--muted); }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+    .policy-table { width: 100%; border-collapse: collapse; min-width: 680px; }
+    .policy-table th {
+      padding: 14px 16px;
+      background: var(--header);
+      color: var(--header-ink);
+      text-align: left;
+      vertical-align: top;
+      font-weight: 700;
+    }
+    .policy-table td {
+      padding: 13px 16px;
+      border-top: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+    .policy-table tbody tr:nth-child(even) { background: var(--stripe); }
+    .note { margin: 24px 0 0; color: var(--muted); font-size: 0.9rem; }
+    @media print {
+      body { background: #fff; }
+      main { width: 100%; margin: 0; padding: 0; box-shadow: none; }
+      .table-wrap { overflow: visible; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Coinsurance</h1>
+    <p class="metadata">Source: source.pdf &middot; Table 6 &middot; Page 19</p>
+    <div class="table-wrap">
+      <table class="dataframe policy-table">
+  <thead>
+    <tr style="text-align: left;">
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>If We Overpay You</td>
+      <td>We will make diligent efforts to recover benefit payments we made in error but in good faith. We may reduce subsequent benefit payments to offset overpayments. G.E.H.A may collect the overpayment from the member if G.E.H.A has exhausted every effort to recover an overpayment made to a provider. Federal Laws supersede State Laws regarding our right to recovery of overpayments.</td>
+    </tr>
+    <tr>
+      <td>Subrogation</td>
+      <td>If G.E.H.A pays benefits for an illness or injury for which you or your dependent are later compensated or reimbursed from another source, you must refund G.E.H.A from any recovery you or your dependent obtain. All G.E.H.A benefit payments in these circumstances are conditional, and remain subject to our contractual benefit limitations, exclusions and maximums.</td>
+    </tr>
+    <tr>
+      <td>Federal Laws</td>
+      <td>Federal Laws supersede State Laws including, but not limited to; coordination of benefits, subrogation, claim processing, provider filing and provider processing.</td>
+    </tr>
+    <tr>
+      <td>In-Progress Treatment</td>
+      <td>In-progress treatment for dependents of retiring active-duty service members who were enrolled in the TRICARE Dental Program (TDP) will be covered for the 2026 plan year, regardless of any current plan exclusion for care initiated prior to the enrollee's effective date. This requirement includes assumption of payments for covered orthodontia services up to the FEDVIP policy limits, and full payment where applicable up to the terms of FEDVIP policy for covered services completed (but not initiated) in the 2026 plan year such as crowns and implants.</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+    <p class="note">Extracted directly from the source PDF using embedded text with targeted OCR fallback where needed. Verify against the source policy before operational use.</p>
+  </main>
+</body>
+</html>

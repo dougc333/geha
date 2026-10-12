@@ -1,0 +1,112 @@
+{
+  "page_type": "mixed",
+  "segmentation_recommended": true,
+  "reason": "The page contains a chart with legend and notes, and multiple paragraphs of text. Different reading orders and local structures should be preserved in separate regions.",
+  "regions": [
+    {
+      "id": "r1",
+      "label": "header",
+      "kind": "header",
+      "reading_order": 1,
+      "x1": 50,
+      "y1": 20,
+      "x2": 950,
+      "y2": 80,
+      "pixel_box": [
+        76,
+        40,
+        1454,
+        158
+      ],
+      "image": "region-01-r1.png"
+    },
+    {
+      "id": "r2",
+      "label": "chart",
+      "kind": "table",
+      "reading_order": 2,
+      "x1": 50,
+      "y1": 90,
+      "x2": 550,
+      "y2": 480,
+      "pixel_box": [
+        76,
+        178,
+        842,
+        950
+      ],
+      "image": "region-02-r2.png"
+    },
+    {
+      "id": "r3",
+      "label": "chart_legend",
+      "kind": "other",
+      "reading_order": 3,
+      "x1": 560,
+      "y1": 330,
+      "x2": 800,
+      "y2": 440,
+      "pixel_box": [
+        857,
+        653,
+        1224,
+        871
+      ],
+      "image": "region-03-r3.png"
+    },
+    {
+      "id": "r4",
+      "label": "chart_note",
+      "kind": "other",
+      "reading_order": 4,
+      "x1": 560,
+      "y1": 440,
+      "x2": 800,
+      "y2": 480,
+      "pixel_box": [
+        857,
+        871,
+        1224,
+        950
+      ],
+      "image": "region-04-r4.png"
+    },
+    {
+      "id": "r5",
+      "label": "paragraph_column_1",
+      "kind": "paragraph",
+      "reading_order": 5,
+      "x1": 50,
+      "y1": 480,
+      "x2": 480,
+      "y2": 980,
+      "pixel_box": [
+        76,
+        950,
+        734,
+        1940
+      ],
+      "image": "region-05-r5.png"
+    },
+    {
+      "id": "r6",
+      "label": "paragraph_column_2",
+      "kind": "paragraph",
+      "reading_order": 6,
+      "x1": 510,
+      "y1": 480,
+      "x2": 950,
+      "y2": 980,
+      "pixel_box": [
+        780,
+        950,
+        1454,
+        1940
+      ],
+      "image": "region-06-r6.png"
+    }
+  ],
+  "coordinate_system": "normalized_0_1000",
+  "source_image": "/Users/dc/geha/crawl_dir/runs/research/ey-limra-workforce-benefits-study-final-2025/agent-demo-20261010T041102Z-325119/pages/page-009/source.png",
+  "overlay": "regions-overlay.png"
+}

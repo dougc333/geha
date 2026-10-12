@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Employee interest in benefits across generations</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 1rem 2rem;
+      color: #222;
+      line-height: 1.4;
+    }
+    h2 {
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-top: 0;
+    }
+    p {
+      margin: 0.25rem 0 1rem 0;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 780px;
+      margin-bottom: 1rem;
+      font-family: monospace, monospace;
+      font-size: 0.8rem;
+    }
+    caption {
+      caption-side: top;
+      font-size: 1rem;
+      font-weight: 700;
+      text-align: left;
+      margin-bottom: 0.5rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 0.25em 0.75em;
+      border: none;
+      min-width: 90px;
+    }
+    th {
+      background: #e6ece6;
+      font-weight: 600;
+    }
+    td:first-child {
+      min-width: 240px;
+    }
+    /* Heat map backgrounds based on percentage ranges */
+    .heat-green-80 { background-color: #1a6625; color: #fff; }
+    .heat-green-70 { background-color: #329a4c; color: #fff; }
+    .heat-green-60 { background-color: #71c77f; color: #000; }
+    .heat-green-50 { background-color: #a3dbad; color: #000; }
+    .heat-green-40 { background-color: #d3ecce; color: #000; }
+    .heat-green-30 { background-color: #e4f3e4; color: #000; }
+    .heat-white { background-color: #fff; color: #000; }
+    .heat-red-20 { background-color: #ffe0e6; color: #800; }
+    .heat-red-10 { background-color: #fab4ba; color: #700; }
+    .heat-red-5 { background-color: #f16e7f; color: #fff; }
+    .heat-red-3 { background-color: #d53c49; color: #fff; }
+    
+    /* Legend styling */
+    .legend {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      margin: 1.5rem 0 1rem 0;
+      max-width: 300px;
+      user-select: none;
+    }
+    .legend .bar {
+      width: 120px;
+      height: 15px;
+      border: 1px solid #ccc;
+      background: linear-gradient(to right, #f16e7f 0%, #ffe0e6 40%, #e4f3e4 60%, #329a4c 100%);
+      border-radius: 2px;
+    }
+    .legend span {
+      white-space: nowrap;
+    }
+
+    /* Caption italic style */
+    .table-note {
+      font-style: italic;
+      font-size: 0.75rem;
+      margin-top: 0;
+      max-width: 780px;
+      line-height: 1.2;
+    }
+
+    /* Footer */
+    footer {
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-top: 2rem;
+      border-top: 1px solid #ccc;
+      padding-top: 0.75rem;
+      max-width: 780px;
+    }
+  </style>
+</head>
+<body>
+  <figure>
+    <figcaption>
+      <p><strong>Figure 6</strong><br />
+      <strong>Employee interest in benefits varies across generations.</strong><br />
+      <strong>QUESTION:</strong> Regardless of whether the benefit is currently available to you at work, how interested would you be in having your employer offer it in the future?</p>
+    </figcaption>
+    <table aria-describedby="table-note">
+      <thead>
+        <tr>
+          <th scope="col">Benefit</th>
+          <th scope="col">Gen Z</th>
+          <th scope="col">Millennials</th>
+          <th scope="col">Gen X</th>
+          <th scope="col">Baby boomers</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Medical insurance</th><td class="heat-green-60">67%</td><td class="heat-green-70">75%</td><td class="heat-green-80">86%</td><td class="heat-green-80">80%</td></tr>
+        <tr><th scope="row">Dental insurance</th><td class="heat-green-50">61%</td><td class="heat-green-60">72%</td><td class="heat-green-70">76%</td><td class="heat-green-70">74%</td></tr>
+        <tr><th scope="row">Vision insurance</th><td class="heat-green-40">50%</td><td class="heat-green-50">61%</td><td class="heat-green-60">69%</td><td class="heat-green-50">63%</td></tr>
+        <tr><th scope="row">Paid family or medical leave</th><td class="heat-green-40">54%</td><td class="heat-green-40">57%</td><td class="heat-green-40">54%</td><td class="heat-green-30">43%</td></tr>
+        <tr><th scope="row">Life insurance</th><td class="heat-green-30">48%</td><td class="heat-green-40">52%</td><td class="heat-green-40">53%</td><td class="heat-green-30">40%</td></tr>
+        <tr><th scope="row">Career development</th><td class="heat-green-20">40%</td><td class="heat-green-30">46%</td><td class="heat-green-20">37%</td><td class="heat-red-5">25%</td></tr>
+        <tr><th scope="row">Physical health wellness programs</th><td class="heat-green-20">39%</td><td class="heat-green-20">39%</td><td class="heat-green-10">34%</td><td class="heat-green-10">32%</td></tr>
+        <tr><th scope="row">Short-term disability insurance</th><td class="heat-red-3">24%</td><td class="heat-green-10">35%</td><td class="heat-green-20">41%</td><td class="heat-green-10">37%</td></tr>
+        <tr><th scope="row">Long-term disability insurance</th><td class="heat-red-5">22%</td><td class="heat-green-10">35%</td><td class="heat-green-20">40%</td><td class="heat-green-20">41%</td></tr>
+        <tr><th scope="row">Long-term care insurance</th><td class="heat-green-10">30%</td><td class="heat-green-10">31%</td><td class="heat-green-20">36%</td><td class="heat-green-30">42%</td></tr>
+        <tr><th scope="row">Accident insurance</th><td class="heat-green-20">39%</td><td class="heat-green-10">34%</td><td class="heat-green-10">33%</td><td class="heat-green-10">32%</td></tr>
+        <tr><th scope="row">Critical illness insurance</th><td class="heat-red-10">29%</td><td class="heat-green-10">33%</td><td class="heat-green-10">34%</td><td class="heat-green-10">33%</td></tr>
+        <tr><th scope="row">Emergency savings benefit</th><td class="heat-green-20">41%</td><td class="heat-green-10">34%</td><td class="heat-green-10">30%</td><td class="heat-red-5">18%</td></tr>
+        <tr><th scope="row">Identity theft protection</th><td class="heat-green-10">37%</td><td class="heat-green-10">31%</td><td class="heat-red-10">27%</td><td class="heat-green-10">32%</td></tr>
+        <tr><th scope="row">Mental health or substance abuse treatment benefits</th><td class="heat-green-30">45%</td><td class="heat-green-10">33%</td><td class="heat-red-20">24%</td><td class="heat-red-10">19%</td></tr>
+        <tr><th scope="row">Employee assistance programs</th><td class="heat-red-10">28%</td><td class="heat-green-10">36%</td><td class="heat-red-10">28%</td><td class="heat-red-10">19%</td></tr>
+        <tr><th scope="row">Financial wellness programs</th><td class="heat-green-10">36%</td><td class="heat-green-10">33%</td><td class="heat-red-20">26%</td><td class="heat-red-20">17%</td></tr>
+        <tr><th scope="row">Telemedicine benefits</th><td class="heat-green-10">31%</td><td class="heat-white">29%</td><td class="heat-green-10">30%</td><td class="heat-red-10">20%</td></tr>
+        <tr><th scope="row">Tuition assistance</th><td class="heat-green-20">40%</td><td class="heat-white">32%</td><td class="heat-red-20">24%</td><td class="heat-red-5">11%</td></tr>
+        <tr><th scope="row">Student loan assistance/repayment</th><td class="heat-green-20">41%</td><td class="heat-white">32%</td><td class="heat-red-30">19%</td><td class="heat-red-3">7%</td></tr>
+        <tr><th scope="row">Hospital indemnity insurance</th><td class="heat-green-10">30%</td><td class="heat-red-5">24%</td><td class="heat-red-10">27%</td><td class="heat-red-10">24%</td></tr>
+        <tr><th scope="row">Caregiving benefits</th><td class="heat-green-10">30%</td><td class="heat-white">27%</td><td class="heat-red-20">20%</td><td class="heat-red-20">22%</td></tr>
+        <tr><th scope="row">Legal services plan</th><td class="heat-red-3">24%</td><td class="heat-white">26%</td><td class="heat-red-30">21%</td><td class="heat-red-10">19%</td></tr>
+        <tr><th scope="row">Debt management counseling</th><td class="heat-green-10">34%</td><td class="heat-red-5">24%</td><td class="heat-red-40">17%</td><td class="heat-red-30">9%</td></tr>
+        <tr><th scope="row">Pet insurance</th><td class="heat-red-10">23%</td><td class="heat-red-20">19%</td><td class="heat-red-50">12%</td><td class="heat-red-30">9%</td></tr>
+        <tr><th scope="row">Societal benefits</th><td class="heat-red-10">22%</td><td class="heat-red-40">15%</td><td class="heat-red-60">9%</td><td class="heat-red-70">4%</td></tr>
+      </tbody>
+    </table>
+
+    <div class="legend" aria-label="Heat map legend">
+      <strong>Heat map:</strong>
+      <div class="bar" aria-hidden="true"></div>
+      <span>Least interest</span>
+      <span style="flex-grow:1"></span>
+      <span>Most interest</span>
+    </div>
+
+    <p id="table-note" class="table-note">Note: Percent of employees who are “very” or “extremely” interested in having their employer offer the benefit in the future.</p>
+  </figure>
+
+  <footer>
+    10 | <strong>Harnessing growth in workforce benefits:</strong> the next horizon | 2025 Workforce Benefits Study
+  </footer>
+</body>
+</html>

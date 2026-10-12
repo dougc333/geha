@@ -1,0 +1,95 @@
+{
+  "page_type": "mixed",
+  "segmentation_recommended": true,
+  "reason": "The page contains multiple semantic regions including two main text sections at the top, a table/graph in the middle, and two text columns below the table. Segmenting preserves reading order and distinguishes sections and data visualization.",
+  "regions": [
+    {
+      "id": "r1",
+      "label": "paragraph",
+      "kind": "paragraph",
+      "reading_order": 1,
+      "x1": 40,
+      "y1": 40,
+      "x2": 495,
+      "y2": 190,
+      "pixel_box": [
+        61,
+        79,
+        757,
+        376
+      ],
+      "image": "region-01-r1.png"
+    },
+    {
+      "id": "r2",
+      "label": "paragraph",
+      "kind": "paragraph",
+      "reading_order": 2,
+      "x1": 505,
+      "y1": 40,
+      "x2": 960,
+      "y2": 190,
+      "pixel_box": [
+        773,
+        79,
+        1469,
+        376
+      ],
+      "image": "region-02-r2.png"
+    },
+    {
+      "id": "r3",
+      "label": "table",
+      "kind": "table",
+      "reading_order": 3,
+      "x1": 40,
+      "y1": 210,
+      "x2": 960,
+      "y2": 500,
+      "pixel_box": [
+        61,
+        416,
+        1469,
+        990
+      ],
+      "image": "region-03-r3.png"
+    },
+    {
+      "id": "r4",
+      "label": "paragraph",
+      "kind": "paragraph",
+      "reading_order": 4,
+      "x1": 40,
+      "y1": 520,
+      "x2": 490,
+      "y2": 620,
+      "pixel_box": [
+        61,
+        1030,
+        750,
+        1228
+      ],
+      "image": "region-04-r4.png"
+    },
+    {
+      "id": "r5",
+      "label": "paragraph",
+      "kind": "paragraph",
+      "reading_order": 5,
+      "x1": 505,
+      "y1": 520,
+      "x2": 960,
+      "y2": 620,
+      "pixel_box": [
+        773,
+        1030,
+        1469,
+        1228
+      ],
+      "image": "region-05-r5.png"
+    }
+  ],
+  "coordinate_system": "normalized_0_1000",
+  "source_image": "/Users/dc/geha/crawl_dir/runs/research/ey-limra-workforce-benefits-study-final-2025/agent-demo-20261010T041102Z-325119/pages/page-017/source.png",
+  "overlay": "regions-overlay.png"
+}

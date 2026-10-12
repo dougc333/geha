@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "gpt-4.1-mini",
+  "created_at": "2026-10-10T09:34:02.850082+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "page-004-region-bcb07a18",
+      "kind": "figure",
+      "title": "Figure 1",
+      "source_png": "figure-01-page-004-region-bcb07a18.png",
+      "bounding_box": [
+        4,
+        920,
+        872,
+        1804
+      ],
+      "output_directory": "figure-01",
+      "native_evidence": "figure-01/native-evidence.json",
+      "native_evidence_word_count": 72,
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "chart_relationship",
+              "source_evidence": "Table rows show change from 2023 column second after Company Size: small +7%, midsize +6%, large +5%. Corresponding bar groups have change labels placed but visually the order of bars is incorrect: 'Fewer benefits' is the bottom bar (grey shade), 'About the same' in middle (darker gray), 'More benefits' top (yellow). The semantic HTML bar order top to bottom is 'more', 'same', 'fewer' visually correct but the percentage labels overlap and cluster of labels on the bars is crowded and partially overlaps, and the 'About the same' bar's 40% label for Small is drawn through the bar's midpoint but shading is dark and the black text is not clearly fully visible - the label on the middle bar is partially visually interfered with by the adjacent bars' labels and bar caps leading to some overlap and less clarity than the PDF. The text labeling of percentages on the bars is not consistently fully readable or distinct as in the PDF and some labels visually overlap edges slightly.",
+              "html_evidence": "<div class=\"bar more\" style=\"height: 57%;\" aria-label=\"More benefits 57%\">\n<span class=\"percentage-label\">57%</span>\n</div>\n<div class=\"bar same\" style=\"height: 40%;\" aria-label=\"About the same 40%\">\n<span class=\"percentage-label\">40%</span>\n</div>\n<div class=\"bar fewer\" style=\"height: 3%;\" aria-label=\"Fewer benefits 3%\">\n<span class=\"percentage-label\">3%</span>\n</div>",
+              "correction": "Improve the legibility of percentage labels for the middle (same) bars by avoiding text overlap with the bar or adjacent labels. Increase spacing or adjust label positioning or font color to fully contrast on the dark bar. Ensure no label is clipped or partially hidden. Consider separate line placement or callouts above bars for clarity."
+            }
+          ],
+          "render_latency_ms": 907.2,
+          "candidate_sha256": "14c598d5a77c6c2b2127ed55e63688bfb259b1819ce357253a179d2161ce2312"
+        },
+        {
+          "iteration": 2,
+          "html": "figure-01/iteration-02.html",
+          "rendered_png": "figure-01/iteration-02.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "chart_data",
+              "source_evidence": "Small: Fewer benefits = 3%, About the same = 40%, More benefits = 57%, Change from 2023 = +7%; Midsize: Fewer benefits = 1%, About the same = 35%, More benefits = 64%, Change from 2023 = +6%; Large: Fewer benefits = 3%, About the same = 30%, More benefits = 67%, Change from 2023 = +5%",
+              "html_evidence": "<div class=\"bar-group\" aria-labelledby=\"small-label small-sub-label small-change-label\">\n      <div class=\"label-change\" id=\"small-change-label\"><span>+7%</span><br />change<br />from<br />2023</div>\n      <div class=\"bar more\" style=\"height: 57%;\" aria-label=\"More benefits 57%\">\n        <span class=\"percentage-label\">57%</span>\n      </div>\n      <div class=\"bar same\" style=\"height: 40%;\" aria-label=\"About the same 40%\">\n        <span class=\"percentage-label\">40%</span>\n      </div>\n      <div class=\"bar fewer\" style=\"height: 3%;\" aria-label=\"Fewer benefits 3%\">\n        <span class=\"percentage-label\">3%</span>\n      </div>\n      <div class=\"category-label\" id=\"small-label\">Small</div>\n      <div class=\"category-sub-label\" id=\"small-sub-label\">(10–99 employees)</div>\n    </div>",
+              "correction": "The numeric values in the bars and the table for small, midsize, and large companies exactly match the source PDF figures and percentages for 'Fewer benefits', 'About the same', 'More benefits' and 'Change from 2023'. However, the layout of the chart bars in the HTML is incorrect: the bars are stacked vertically in order 'More benefits' at bottom, then 'About the same', then 'Fewer benefits' at top, which is opposite the source visual and thus misleading. Correct the stacking order so 'Fewer benefits' is at the bottom, 'About the same' in the middle, and 'More benefits' on top, matching the source's visual stacking order and tooltip reading."
+            }
+          ],
+          "render_latency_ms": 469.2,
+          "candidate_sha256": "ef314b86bc03118f96da903f6d7dedef1cb278261389d2b316fce090b97fe730"
+        },
+        {
+          "iteration": 3,
+          "html": "figure-01/iteration-03.html",
+          "rendered_png": "figure-01/iteration-03.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "chart_relationship",
+              "source_evidence": "The chart bars and labels are correct by category and percentage: Small: Fewer 3%, Same 40%, More 57%, Change +7%; Midsize: Fewer 1%, Same 35%, More 64%, Change +6%; Large: Fewer 3%, Same 30%, More 67%, Change +5%. The table values match exactly these percentages.",
+              "html_evidence": "Table with correct values: Small (10–99 employees) +7% 57% 40% 3%; Midsize (100–999 employees) +6% 64% 35% 1%; Large (1,000 or more employees) +5% 67% 30% 3%.",
+              "correction": "The chart order visually is reversed from source: the vertical stack order in the HTML bars is fewer benefits on bottom, about the same in middle, more benefits on top, but the displayed bar segments show fewer benefits bottom, same above it, and more benefits as the top segment. This matches the source. The problem is that the vertical stacked bar rectangles are displayed but the labels for percentages overlap and are incorrect in vertical placement: The 'About the same' label is positioned 'above' the bar visually and overlaps with the '+X%' text above, causing reading order issues. The labels for the 'About the same' bar should be inside or properly positioned so they do not overlay the chart title or the '+X%' change label above. Also, the 'Fewer benefits' label is at bottom but the absolute vertical 'height' styling on the bars might cause the thinner segments to be less visible or labels hard to read, especially at 1%. The semantic grouping and legend are correct, but the visual vertical layout of text labels for percentages must be improved to avoid overlap and reading order confusion. The HTML candidate's bar labels for 'About the same' are rendered above the bar and partially overlap with the '+X%' change text, causing a technical reading order and clarity issue that undermines clarity despite correct data. This should be corrected for clarity and accessibility."
+            }
+          ],
+          "render_latency_ms": 459.0,
+          "candidate_sha256": "11c902ffce904a4ccd51c07f4b99239c136359a28de09bfcabae09f38a75799f"
+        },
+        {
+          "iteration": 4,
+          "html": "figure-01/iteration-04.html",
+          "rendered_png": "figure-01/iteration-04.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 469.8,
+          "candidate_sha256": "187c6f6bdc878e10139be8bc3eee5a8a9e8a8f8b0dbb4044cff4386a4b31dc37"
+        }
+      ],
+      "selected_iteration": 4,
+      "selected_error_count": 0,
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-04.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 1,
+    "failed": 0,
+    "total_iterations": 4,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-10-10T09:35:15.052899+00:00"
+}

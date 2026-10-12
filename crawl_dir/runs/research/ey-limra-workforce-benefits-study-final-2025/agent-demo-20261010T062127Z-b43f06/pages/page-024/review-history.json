@@ -1,0 +1,308 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Legend includes 'Don't know' category with a 5% value in Quote and implementation but in HTML 'Don't know' is missing in some tables or has inconsistent percentages (5% in source, 5% in candidate)",
+        "html_evidence": "<td></td><td>5%</td> in tables under 'Quote and implementation'",
+        "correction": "Add 'Don't know' percentages consistently as in the source PDF, e.g. 5% for 'Digital submission for evidence of insurability' and others."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Enrollment section shows 'Do not have and do not want' percentages with values (e.g. 4%, 3%) but in HTML these cells are empty",
+        "html_evidence": "<td></td> in Enrollment tables under 'Do not have and do not want' column",
+        "correction": "Populate 'Do not have and do not want' column in Enrollment table with correct percentages as in source PDF."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Ongoing service section's 'Do not have but want' and 'Already have but do not use' columns and 'Don't know' percentages differ from source PDF in HTML: the PDF includes percentages for both columns but HTML has some empty cells (e.g. 'Already have but do not use' is empty) and differs in 'Don't know' values",
+        "html_evidence": "<td></td> for some 'Already have but do not use' values and varying 'Don't know' percentages in Ongoing service table",
+        "correction": "Include all percentage values from source accurately in all columns for Ongoing service, including 'Already have but do not use' and 'Don't know' columns."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "In Claims section, the source PDF has 'Do not have and do not want' column completely empty for all rows but HTML uses empty cells as well, which is correct; however, the source has a 4% 'Don't know' for 'Digital claims submission' while HTML matches this",
+        "html_evidence": "Cells are empty for 'Do not have and do not want' in Claims and 'Don't know' percentages match those in source PDF",
+        "correction": "No correction needed here; this matches."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "In Ongoing service, 'Do not have but want' for 'Live chat/chatbot' is 12% in PDF but HTML has 12% in that cell; however, 'Already have but do not use' is missing in HTML but present in PDF (12% is recorded under 'Already have but do not use' in PDF's bar, but HTML has empty cells)",
+        "html_evidence": "Empty cells for 'Already have but do not use' in Ongoing service",
+        "correction": "Add values to 'Already have but do not use' cells in Ongoing service as per source PDF."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Claims section last 6 rows show 'Do not have and do not want' as blank in candidate HTML but contain non-zero percents in PDF: 1st row 1%, 2nd row 1%, 3rd row 1%, 4th row 1%, 5th row 1%, 6th row 1%",
+        "html_evidence": "<td></td>",
+        "correction": "Replace empty 'Do not have and do not want' cells in claims table rows with '0%' as in PDF (all are 0% in PDF except 'Claims' which have values shown as zero in legend bar) or verify correct values from PDF visual bar."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "Legend contains no percentage 0% for 'Do not have and do not want' category",
+        "html_evidence": "<td>0%</td> in tables under 'Do not have and do not want' different from source legend's color coding bar only, but source legend shows no mention of 0%, this extra percentage number is not in the source chart legend",
+        "correction": "Remove '0%' values from 'Do not have and do not want' column in Quote and implementation section to match source legend which does not specify percentages for this category"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "In Claims section, 'Same-day claims decisions' row shows Do not have and do not want as blank (implying 0%) in source chart but candidate HTML has 1%",
+        "html_evidence": "<td>1%</td> for Do not have and do not want in claims > Same-day claims decisions row",
+        "correction": "Change 'Do not have and do not want' for 'Same-day claims decisions' from 1% to 0%"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "In Claims section, 'Proactively trigger claims based on medical data' row Do not have and do not want is blank (0%) in source chart but candidate HTML has 1%",
+        "html_evidence": "<td>1%</td> for Do not have and do not want in claims > Proactively trigger claims based on medical data row",
+        "correction": "Change 'Do not have and do not want' for 'Proactively trigger claims based on medical data' from 1% to 0%"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "In Claims section, 'Real-time integration for claims management with HRIS systems' row Do not have and do not want is blank (0%) in source chart but candidate HTML has 1%",
+        "html_evidence": "<td>1%</td> for Do not have and do not want in claims > Real-time integration for claims management with HRIS systems row",
+        "correction": "Change 'Do not have and do not want' for 'Real-time integration for claims management with HRIS systems' from 1% to 0%"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "In Claims section, 'Integrated claims experience based on singular event' row Do not have and do not want is blank (0%) in source chart but candidate HTML has 1%",
+        "html_evidence": "<td>1%</td> for Do not have and do not want in claims > Integrated claims experience based on singular event row",
+        "correction": "Change 'Do not have and do not want' for 'Integrated claims experience based on singular event' from 1% to 0%"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "In Claims section, 'Text messaging to employees regarding claims status' row Do not have and do not want is blank (0%) in source chart but candidate HTML has 1%",
+        "html_evidence": "<td>1%</td> for Do not have and do not want in claims > Text messaging to employees regarding claims status row",
+        "correction": "Change 'Do not have and do not want' for 'Text messaging to employees regarding claims status' from 1% to 0%"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "In Claims section, 'Digital claims submission' row Do not have and do not want is blank (0%) in source chart but candidate HTML has 1%",
+        "html_evidence": "<td>1%</td> for Do not have and do not want in claims > Digital claims submission row",
+        "correction": "Change 'Do not have and do not want' for 'Digital claims submission' from 1% to 0%"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Source shows color-coded horizontal bar for the legend above all data sections, confirming specific legend text and coloring for each category",
+        "html_evidence": "Candidate HTML uses text legend with color background for each portion but differs slightly in style and does not replicate bar as a single unified horizontal bar with segments and no integrated percentage text",
+        "correction": "Render legend as a single horizontal bar with the five colored segments labeled exactly as in source or keep candidate legend with consistent style but note difference from source's bar style"
+      },
+      {
+        "category": "table_structure",
+        "source_evidence": "Each section in source PDF is visually separated with two horizontal lines above and below the section header and data, without a full bordered table for all sections",
+        "html_evidence": "Candidate uses separate <table> with full column headers for each section which is correct but headers repeat 'Technology tool' and column headers in all tables unlike source which visually does not show explicit row for column headers within each section's blocks (source uses horizontal bars but candidate uses actual table column headers)",
+        "correction": "Candidate HTML table structure acceptable but introducing repeated column headers in all tables is a layout difference from source which uses horizontal lines instead"
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Source vertical lines delimiting data rows are not visible and numeric data is inside stacked bars with colored segments, no separate numeric column separation in source",
+        "html_evidence": "Candidate HTML uses separate numeric columns for each category, no bar visualization in tables as in source (source uses stacked bar charts with numeric labels inside)",
+        "correction": "Add bar charts with segments inside tables or clarify layout difference as conversion from bar chart to tabular numeric data"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Footer text reads '24 | Harnessing growth in workforce benefits: the next horizon | 2025 Workforce Benefits Study'",
+        "html_evidence": "Footer text in candidate HTML reads '24 | Harnessing growth in workforce benefits: the next horizon | 2025 Workforce Benefits Study' correctly",
+        "correction": "No correction needed for footer text"
+      }
+    ]
+  },
+  {
+    "iteration": 3,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Legend: 'Already have but do not use', 'Do not have but want', 'Do not have and do not want', 'Don't know'",
+        "html_evidence": "Legend shows: 'Already have but do not use', 'Do not have but want', 'Don't know' only; missing 'Do not have and do not want' which is in PDF legend and has a color block with no label in HTML legend.",
+        "correction": "Add 'Do not have and do not want' label and color segment in the legend to match PDF."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Enrollment - Online enrollment: '86% 7% 4% 3% 1%'",
+        "html_evidence": "Enrollment - Online enrollment: '86% 7% 4% 3% 0%' (last value is 0% instead of 1%)",
+        "correction": "Change last value in Online enrollment row from '0%' to '1%' to match PDF."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Ongoing service - Live chat/chatbot: '54% 12% 23% 5% (no 6%)'",
+        "html_evidence": "Ongoing service - Live chat/chatbot: '54% 12% 23% 5% 6%' (extra percentage category added)",
+        "correction": "Remove extra percentage column from Ongoing service rows; the PDF only has four columns for percentages."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Claims - Same-day claims decisions: '32% 6% 52% (no 10%)'",
+        "html_evidence": "Claims - Same-day claims decisions: '32% 6% 52% 10%' (extra percentage value)",
+        "correction": "Remove fifth percentage value from Claims rows to match PDF's four data columns."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Claims - Proactively trigger claims based on medical data: '42% 7% 41% (no 10%)'",
+        "html_evidence": "Claims - Proactively trigger claims based on medical data: '42% 7% 41% 10%'",
+        "correction": "Remove the extra fifth percentage value in the Claims section rows."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Claims - Real-time integration for claims management with HRIS systems: '51% 8% 31%'",
+        "html_evidence": "Claims - Real-time integration for claims management with HRIS systems: includes extra fifth percentage value",
+        "correction": "Remove fifth percentage value to align with PDF."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Claims - Integrated claims experience based on singular event: '58% 8% 28%'",
+        "html_evidence": "Claims - Integrated claims experience based on singular event: includes extra 6% after main percentages",
+        "correction": "Remove extra fifth percentage value."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Claims - Text messaging to employees regarding claims status: '55% 7% 26%'",
+        "html_evidence": "Claims - Text messaging row includes extra fifth percentage value (12%)",
+        "correction": "Remove extra fifth percentage value from Claims section."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Claims - Digital claims submission: '78% 6% 12%'",
+        "html_evidence": "Claims - Digital claims submission row contains extra fifth percentage (4%)",
+        "correction": "Remove extra fifth percentage value from table row in Claims."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "PDF legend has 'Do not have and do not want' category between 'Do not have but want' and 'Don't know'",
+        "html_evidence": "HTML legend omits 'Do not have and do not want' category entirely and no color block with text in that segment",
+        "correction": "Add missing 'Do not have and do not want' legend category and label with correct color block."
+      }
+    ]
+  },
+  {
+    "iteration": 4,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Legend text: 'Don't know' in the source is shown as 'Don't kn ow' with space error",
+        "html_evidence": "<div class=\"legend-segment legend-dont-know\">Don't know</div>",
+        "correction": "Fix the spacing in the legend text to match exactly 'Don't know' as in source PDF."
+      },
+      {
+        "category": "extra_text",
+        "source_evidence": "The source PDF legend is shown as a color-coded horizontal bar with 5 categories: Already have and use, Already have but do not use, Do not have but want, Do not have and do not want, Don't know, with no extra numeric percentages shown inside bar segments.",
+        "html_evidence": "The candidate HTML includes the legend with segment text but no percentages as numbers inside the legend segments, which is consistent, however the exact spacing and formatting in the legend differs slightly visually from source.",
+        "correction": "Legend styling is acceptable, but ensure text exactly as in source including spacing and no extra segments."
+      },
+      {
+        "category": "table_structure",
+        "source_evidence": "Tables in the source are visually horizontal bars with color-coded segments and % values printed over the bars, not a textual numerical-only table with columns representing the % categories.",
+        "html_evidence": "Candidate uses numeric-only tables with columns for each % value but the source is presented as horizontal bar charts with segment color blocks and % on top of the bars, not separated columns of numeric data.",
+        "correction": "Present tables as horizontal bar charts with color-coded segments and embedded percentage labels rather than multi-column numeric tables."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "In 'Ongoing service' table, the source shows % for all 5 categories (including 'Don't know' last category), but the candidate HTML tables for Ongoing service and Claims show only 4 columns of percentages, missing the last 'Don't know' column and percent values.",
+        "html_evidence": "The tables for 'Ongoing service' and 'Claims' only have 4 numeric columns, omitting the last 'Don't know' percentages (e.g. 5%, 5%, 5%, 5%, 5% in source vs only 4 columns in candidate).",
+        "correction": "Add the missing 'Don't know' percentage column to the 'Ongoing service' and 'Claims' tables to fully match the source percentages."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "Source uses section subdivision with each section's heading followed by the horizontal bar chart with color-coded data segments horizontally aligned visually.",
+        "html_evidence": "The candidate uses HTML tables with separated columns for percent values after row labels, changing the reading flow compared to the source's integrated horizontal color-coded bar charts that combine label, color-coded segments, and % inside the bars visually.",
+        "correction": "Rearrange content presentation to better represent integrated bar charts within each row for improved reading order and semantic alignment with source rather than multi-column numeric tables."
+      }
+    ]
+  },
+  {
+    "iteration": 5,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Figure 18 Digital misalignment is most prevalent in claims, quote and implementation processes. QUESTION: Indicate whether the benefit technology tool is available to you and whether you currently use it or would use it if it were available. Legend: Already have and use; Already have but do not use; Do not have but want; Do not have and do not want; Don't know",
+        "html_evidence": "<div class=\"legend-bar\">...<div class=\"legend-segment legend-have-use\">Already have and use</div>...<div class=\"legend-segment legend-have-no-use\">Already have but do not use</div> ... <div class=\"legend-segment legend-do-want\">Do not have but want</div>...<div class=\"legend-segment legend-do-not-have\">Do not have and do not want</div>...<div class=\"legend-segment legend-dont-know\">Don't know</div></div>",
+        "correction": "The legend is presented as a color bar with labeled segments rather than as a textual line '▮ Already have and use ▮ Already have but do not use ▮ Do not have but want ▮ Do not have and do not want ▮ Don't know'. Acceptable as a color swatch but this is a layout difference with loss of the explicit short text inline wording as in the source."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Quote and implementation Self-service/real-time quoting 48% 7% 35% 4% (missing) Enrollment Decision support tools for employees 66% 9% 21% (missing) 1%... Ongoing service Online billing and payment 89% 5% 4% (missing) Claims Real-time integration for claims management with HRIS systems 51% 8% 31% (missing)",
+        "html_evidence": "The candidate HTML shows additional 'Don't know' percentages for all rows, e.g. 'Self-service/real-time quoting' includes 5% don't know in HTML, but the source PDF legend and bars have only 4% do not have and do not want and no mention of 5% don't know here; similarly many bar labels in candidate show five segments including 'Don't know' percentages (often 1-5%), but the source PDF bars only show four segments without 'Don't know' percentages except in some cases there's no explicit percentage for the fifth category or it is visually merged/not present.",
+        "correction": "Align bar charts exactly to the source. The source PDF bars omit or visually exclude the 'Don't know' segments or the 'Do not have and do not want' percentages appear to be combined or different. Candidate includes extra 'Don't know' percentages for almost all entries, which do not match the source. The exact percentage divisions and segments for 'Do not have and do not want' and 'Don't know' do not match PDF."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Claims Text messaging to employees regarding claims status 55% 7% 26% (missing) Digital claims submission 78% 6% 12% (missing)",
+        "html_evidence": "HTML bars include additional 'Do not have and do not want' and 'Don't know' segments for these rows that the source PDF bars lack or display very differently.",
+        "correction": "Remove or adjust extra small segments to match source bar color segments and percentages exactly per each claims row."
+      },
+      {
+        "category": "other",
+        "source_evidence": "Legend is presented as an inline text line with colored squares in the PDF.",
+        "html_evidence": "Legend is presented as a horizontal colored bar with labeled segments in HTML.",
+        "correction": "The legend layout is changed from inline text with color squares to a segmented colored bar with text labels inside. While not a textual error, it is a substantive layout difference that may impact user understanding and accessibility."
+      }
+    ]
+  },
+  {
+    "iteration": 6,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Quote and implementation section, 'Digital employee communications on new benefits offerings' is 'Digital employee communications on new benefits offerings' in HTML, but PDF shows 'Digital employee communications on new benefits offerings' spelled as 'Digital employee communications on new benefits offerings' (correct)",
+        "html_evidence": "<div class=\"bar-chart-label\" role=\"rowheader\">Digital employee communications on new benefits offerings</div>",
+        "correction": "No correction needed, text matches exactly."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "In Enrollment section, PDF uses 'Digital employee communications on new benefits offerings' but HTML shows 'Digital employee communications on new benefits offerings'",
+        "html_evidence": "<div class=\"bar-chart-label\" role=\"rowheader\">Digital employee communications on new benefits offerings</div>",
+        "correction": "Text matches, no correction needed."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "In Enrollment section, the PDF shows 'Digital employee communications on new benefits offerings' but HTML shows 'Digital employee communications on new benefits offerings'",
+        "html_evidence": "<div class=\"bar-chart-label\" role=\"rowheader\">Digital employee communications on new benefits offerings</div>",
+        "correction": "No correction needed."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "In Enrollment section, PDF text 'Digital employee communications on new benefits offerings' but HTML is identical (no error)",
+        "html_evidence": "<div class=\"bar-chart-label\" role=\"rowheader\">Digital employee communications on new benefits offerings</div>",
+        "correction": "No change needed."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "The Footer text in PDF footer is '24 | Harnessing growth in workforce benefits: the next horizon | 2025 Workforce Benefits Study', but in HTML it is '24 | Harnessing growth in workforce benefits: the next horizon | 2025 Workforce Benefits Study'. The styles differ but text matches exactly.",
+        "html_evidence": "<p><small>24 | <strong>Harnessing growth in workforce benefits:</strong> the next horizon | 2025 Workforce Benefits Study</small></p>",
+        "correction": "No correction needed, text matches."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "PDF legend includes category 'Don't know' but some bars in HTML have zero flex-grow and thus no visible segment (e.g. Online billing and payment shows no 'Don't know' segment)",
+        "html_evidence": "<div class=\"bar-chart-segment dont-know\" role=\"cell\" style=\"flex-grow:0; color:black;\"><!-- no visible don't know segment --></div>",
+        "correction": "Ensure all categories are represented visually even if percentage is 0 or clarify in text that zero values are omitted visually."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "In Claims section, row 'Real-time integration for claims management with HRIS systems' the categories and corresponding values in PDF are 51% (have use), 8% (have no use), 31% (do want), 10% (do not want), 0% (don't know). In HTML the last 'don't know' segment is empty (flex-grow:0). This matches the PDF, so no error.",
+        "html_evidence": "<div class=\"bar-chart-segment dont-know\" role=\"cell\" style=\"flex-grow:0; color:black;\"><!-- no visible don't know segment --></div>",
+        "correction": "No correction needed, it matches the PDF."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "In Claims section, rows 'Integrated claims experience based on singular event' and 'Text messaging to employees regarding claims status' the 'don't know' segment is also flex-grow:0 in HTML, matching no segment in PDF. This is correct.",
+        "html_evidence": "<div class=\"bar-chart-segment dont-know\" role=\"cell\" style=\"flex-grow:0; color:black;\"><!-- no visible don't know segment --></div>",
+        "correction": "No change needed."
+      }
+    ]
+  }
+]

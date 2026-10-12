@@ -1,0 +1,86 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "(10–99 employees) 1% 35% 64% +6% change from 2023 Midsize (100–999 employees) 3% 30% 67% +5% change from 2023 Large (1,000 or more employees)",
+        "html_evidence": "<p>(10–99 employees) 1% 35% 64% +6% change from 2023 Midsize (100–999 employees) 3% 30% 67% +5% change from 2023 Large (1,000 or more employees)</p>",
+        "correction": "Remove this incorrect concatenated inline text that appears just below chart area and above legend and table."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "More than half (57%) of small employers and 67% of large organizations expect to offer more benefits in the future. See Figure 1.",
+        "html_evidence": "More than half (57%) of small employers and 67% of large organizations expect to offer more benefits in the future. See Figure 1.",
+        "correction": "Fix 'See Figure 1.' to be consistently italicized as in source: See Figure 1."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "sidebar",
+        "html_evidence": "See <em>sidebar</em>.",
+        "correction": "The candidate HTML correctly includes 'See sidebar.' in italics as in source, so this is not missing."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "Figure 1 Companies plan to offer more benefits in five years. QUESTION: In five years, do you think your company will be offering fewer, the same or more benefits than it does now? [Bar chart with 3 grouped bars with percentages and labels]",
+        "html_evidence": "Figure 1 Companies plan to offer more benefits in five years. QUESTION: In five years, do you think your company will be offering fewer, the same or more benefits than it does now? [Bar chart but then incorrect inline text placement, legend and table]",
+        "correction": "The candidate HTML incorrectly places some inline text with groupings and percentages below the SVG chart, disrupting the reading order and clarity. The bars and labels should be presented clearly with no misplaced inline text. Remove incorrect inline text and rely on chart labels and table."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The chart and photo are side-by-side on the right side of the page with the chart on left and photo on right.",
+        "html_evidence": "The candidate HTML places chart and photo side-by-side in a flexible container as well, matching source layout.",
+        "correction": "Layout of chart and photo is matched correctly."
+      },
+      {
+        "category": "image",
+        "source_evidence": "Photo on right side: plants in an office interior.",
+        "html_evidence": "<img alt=\"An office interior with modern furnishings and large green plants.\" src=\"\" /> with aria-label describing photo similarly.",
+        "correction": "The candidate HTML includes the photo with alt text and aria-label consistent with source, but the src is empty indicating missing actual image file source."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "The bar chart in the PDF shows three bars side-by-side for Small, Midsize, and Large companies with percentages and respective labels below the bars, and a clear legend beneath. The candidate HTML presents the bar chart but with different visual ordering and layout: The first bar chart only shows the Small group data to the left with the textual percentages for Midsize and Large incorrectly placed as inline text below, which is not consistent with the figure layout in the source. Moreover, the legend and table appear misaligned relative to the bars that are all grouped only for Small company data visually, not separate bars for all three sizes clearly visible side by side as in the source PDF.",
+        "html_evidence": "<svg viewBox=\"0 0 480 280\" role=\"img\" aria-labelledby=\"chartTitle chartDesc\">...</svg> with textual percentages and bar labels misplaced and only Small bar shown distinctly; Midsize and Large data are only textual below chart, not shown as separate bars alongside Small.",
+        "correction": "Bar chart bars for Small, Midsize, and Large companies must be side-by-side horizontally, each with correct stacked bar representation, labels, and change text as shown in the PDF figure. The textual percentages for Midsize and Large should be part of the chart bars, not standalone text below the chart. This improves clarity and matches source figure layout."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "The figure's bar chart and its data show three distinct groups each with three percentage bars and '+x% change from 2023' text positioned correctly relative to each group, plus legend below the chart. The candidate HTML includes textual percentages for Midsize and Large embedded in one line below the Small bar as plain text: \"(10–99 employees) 1% 35% 64% +6% change from 2023 Midsize (100–999 employees) 3% 30% 67% +5% change from 2023 Large (1,000 or more employees)\" which is an incorrect representation and reading order error.",
+        "html_evidence": "<p>(10–99 employees) 1% 35% 64% +6% change from 2023 Midsize (100–999 employees) 3% 30% 67% +5% change from 2023 Large (1,000 or more employees)</p>",
+        "correction": "Remove the inline plain text percentages and labels for Midsize and Large from below the Small bar. Instead, present all three employer size groups clearly and separately in the bar chart as stacked bars with their percentage labels and change text visually distinct, just as in the source figure."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "The source figure's bar chart and legend include the category labels \"Fewer benefits\", \"About the same\", \"More benefits\" distinctly with color-coded small squares in the legend.",
+        "html_evidence": "No distinct legend items with color-coded squares shown in the HTML aside from generic legend div with span but color squares not visually distinct as separate labeled block.",
+        "correction": "Include a clear legend showing the squares with their respective colors and category labels (Fewer benefits, About the same, More benefits) distinctly as in the source figure."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Source figure caption: \"Figure 1\\nCompanies plan to offer more benefits in five years.\\nQUESTION: In five years, do you think your company will be offering fewer, the same or more benefits than it does now?\"",
+        "html_evidence": "Figure 1\\nCompanies plan to offer more benefits in five years.\\nQUESTION: In five years, do you think your company will be offering fewer, the same or more benefits than it does now?",
+        "correction": "The caption text is present but the HTML structure uses a figcaption with id labels and question paragraphs, which is acceptable as long as semantic grouping is maintained. No correction needed here."
+      },
+      {
+        "category": "extra_text",
+        "source_evidence": "The PDF contains no textual inline percentages outside the bar chart for Midsize and Large other than within the bar chart area and below axis labels.",
+        "html_evidence": "Inline plain text inside paragraph or near chart showing all percentages as raw text referenced to Midsize, Large and Small together as one run-on line.",
+        "correction": "Remove this extra plain text line of percentages and put all data visually in the chart and/or the data table as in the source."
+      },
+      {
+        "category": "image",
+        "source_evidence": "The PDF shows a photo to the right of the bar chart, described as an office interior with plants and chairs.",
+        "html_evidence": "<img alt=\"An office interior with modern furnishings and large green plants.\" />",
+        "correction": "The photo is included with alt text consistent with source, so no error here."
+      }
+    ]
+  }
+]

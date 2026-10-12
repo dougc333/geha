@@ -1,0 +1,61 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "- **Workforce benefits remain at the heart of the employee value proposition – and expectations continue to rise.** (bolded in the PDF)",
+        "html_evidence": "<strong>Workforce benefits remain at the heart of the employee value proposition – and expectations continue to rise.</strong>",
+        "correction": "This text is correct in HTML but it should be visually separate after the heading with a horizontal line as in the PDF."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The bold heading is separated from 'Key finding 1' by some spacing with a horizontal yellow line and grey horizontal line below that line.",
+        "html_evidence": "<h1>Key finding 1</h1><strong>Workforce benefits remain ...</strong><hr />",
+        "correction": "The HTML places the horizontal yellow line using hr styled with border-top yellow. This matches the PDF. This is a minor style/layout difference but seems acceptable."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Sidebar mention: 'See sidebar.'",
+        "html_evidence": "See <em>sidebar</em>.",
+        "correction": "Sidebar content is missing. The PDF mentions 'sidebar' with emphasis but no further content; HTML only italicizes the word. Without the sidebar content, this is missing."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Figure 1 caption: 'Figure 1\\nCompanies plan to offer more benefits in five years.'\\nQUESTION: In five years, do you think your company will be offering fewer, the same or more benefits than it does now?",
+        "html_evidence": "<p><strong>Figure 1</strong></p>\n      <h2>Companies plan to offer more benefits in five years.</h2>\n      <p class=\"question\"><strong>QUESTION:</strong> In five years, do you think your company will be offering fewer, the same or more benefits than it does now?</p>",
+        "correction": "This is correctly included in HTML."
+      },
+      {
+        "category": "table_structure",
+        "source_evidence": "No visible table in PDF but shows bar chart with legend.",
+        "html_evidence": "<table><caption>Companies planning to offer benefits in five years by company size</caption> ... </table>",
+        "correction": "HTML includes a detailed table not shown in the PDF page image. The PDF does not show a table. This is extra text/data, so extra_text error."
+      },
+      {
+        "category": "image",
+        "source_evidence": "Image of office interior with greenery and chairs near a window on right side.",
+        "html_evidence": "<img src=\"\" alt=\"Office interior with greenery and chairs near a window\" />",
+        "correction": "The image is included with alt text but the src attribute is empty, so the image is missing from HTML."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "image",
+        "source_evidence": "Image on right side is visible in PDF, but in HTML it's missing the source URL and is a broken image (alt text is present but image does not display).",
+        "html_evidence": "<img alt=\"Office interior with greenery and chairs near a window\" />",
+        "correction": "Add the correct image source URL or embed the image so that it displays properly in HTML."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "match",
+    "errors": []
+  }
+]

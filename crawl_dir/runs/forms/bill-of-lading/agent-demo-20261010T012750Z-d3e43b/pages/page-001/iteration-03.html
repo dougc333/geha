@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bill of Lading - Meridian Shipping</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    margin: 2rem;
+    color: #000;
+  }
+  h1, h2, h3, h4, h5 {
+    margin: 0;
+  }
+  strong {
+    font-weight: 700;
+  }
+  .header, .parties-grid, .voyage-ports, .cargo-table, .footer, .carrier-legal {
+    border: 1px solid #000;
+    border-collapse: collapse;
+    margin-bottom: 0.5rem;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
+  .logo {
+    border: 2px solid #000;
+    width: 3.5rem;
+    height: 3.5rem;
+    font-weight: 700;
+    font-size: 2.5rem;
+    text-align: center;
+    line-height: 3.5rem;
+    margin-right: 1rem;
+  }
+  .header-left {
+    display: flex;
+    align-items: center;
+  }
+  .carrier-name {
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  .carrier-subtitle {
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 0.15rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .bill-lading-block {
+    border: 1px solid #000;
+    padding: 0.5rem;
+    min-width: 12rem;
+    text-transform: uppercase;
+    font-weight: 900;
+  }
+  .bill-lading-block > h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.1rem;
+    border-bottom: 1.5px solid #000;
+    padding-bottom: 0.15rem;
+  }
+  .bill-lading-id {
+    margin-top: 0.6rem;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 900;
+  }
+
+  /* Grid table for parties and references */
+  .parties-grid {
+    width: 100%;
+    border-collapse: collapse;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  .parties-grid td, .parties-grid th {
+    border: 1px solid #000;
+    padding: 0.5rem;
+    vertical-align: top;
+  }
+  .parties-grid .label-cell {
+    font-weight: 900;
+    font-size: 0.75rem;
+    background: #fff;
+    width: 22%;
+  }
+  .parties-grid .value-cell {
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: none;
+    width: 28%;
+  }
+  .parties-grid .value-cell strong {
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+  .contact-info {
+    font-weight: 400;
+    text-transform: none;
+  }
+  .contact-info .tel, .contact-info .email {
+    white-space: nowrap;
+    font-weight: 400;
+  }
+  .contact-info a.tel {
+    color: #0000ee;
+    text-decoration: underline;
+  }
+  .contact-info a.email {
+    color: #0000ee;
+    text-decoration: underline;
+  }
+  .grid-row-small {
+    height: 6rem;
+  }
+  .grid-row-large {
+    height: 7.5rem;
+  }
+
+  /* Vessel and loading info */
+  .voyage-ports {
+    width: 100%;
+    border: 1px solid #000;
+    border-collapse: collapse;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+  }
+  .voyage-ports th, .voyage-ports td {
+    border: 1px solid #000;
+    padding: 0.5rem 0.75rem;
+    text-align: center;
+  }
+
+  /* Cargo particulars header */
+  .cargo-header {
+    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0.5rem 0;
+    letter-spacing: 0.1em;
+    font-size: 0.9rem;
+  }
+
+  /* Cargo Table */
+  .cargo-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.85rem;
+  }
+  .cargo-table thead th {
+    border: 1px solid #000;
+    border-bottom: 2px solid #000;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    padding: 0.5rem 0.6rem;
+    vertical-align: middle;
+    text-align: center;
+  }
+  .cargo-table tbody td {
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    padding: 0.3rem 0.5rem;
+    vertical-align: top;
+    font-weight: 700;
+  }
+  .cargo-table tbody tr + tr td {
+    border-top: 1px solid #000;
+  }
+  .seal, .marks, .description, .gross, .measurement, .pkgs {
+    font-weight: 900;
+  }
+  .cargo-table td.description {
+    font-weight: 700;
+    font-size: 0.79rem;
+    white-space: pre-wrap;
+    text-transform: uppercase;
+  }
+  .cargo-table td.description strong {
+    font-weight: 900;
+  }
+  .small-caps {
+    font-variant: small-caps;
+    font-weight: 700;
+  }
+  .cargo-hscode {
+    white-space: nowrap;
+    font-size: 0.79rem;
+    font-weight: 700;
+  }
+  .blue-text {
+    color: #1545d7;
+    font-weight: 700;
+    font-family: monospace;
+    font-size: 0.79rem;
+    text-transform: uppercase;
+  }
+  .inline-italic {
+    font-style: italic;
+    font-weight: 700;
+    font-size: 0.79rem;
+    text-transform: none;
+  }
+  .gross, .measurement, .pkgs {
+    text-align: right;
+  }
+  .cargo-table sup {
+    font-weight: 400;
+  }
+  .freight-collect-block {
+    text-align: center;
+    font-weight: 900;
+    font-size: 1rem;
+    border-top: 1.5px solid #000;
+    border-bottom: 1.5px solid #000;
+    margin: 0.9rem 0 0.8rem 0;
+    padding-top: 0.15rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: Arial Black, Arial, sans-serif;
+  }
+
+  /* Freight & Charges and totals */
+  .freight-charges {
+    display: flex;
+    border: 1px solid #000;
+    border-top: none;
+    margin-bottom: 0.5rem;
+    font-family: Arial Black, Arial, sans-serif;
+  }
+  .freight-charges > div {
+    border-right: 1px solid #000;
+    padding: 0.6rem 0.75rem;
+    flex: 1 1 50%;
+    font-weight: 900;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+  }
+  .freight-charges > div:last-child {
+    border-right: none;
+    font-weight: 900;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .freight-charges .description strong {
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .freight-charges .right-align {
+    text-align: right;
+  }
+
+  /* Legal text */
+  .legal-text {
+    border: 1px solid #000;
+    border-top: none;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.1;
+    white-space: pre-wrap;
+    font-family: Arial Black, Arial, sans-serif;
+  }
+
+  /* Issue details and signatures */
+  .issue-sig {
+    display: flex;
+    border: 1px solid #000;
+    border-top: none;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-family: Arial Black, Arial, sans-serif;
+  }
+  .issue-sig > div {
+    flex: 1 1 33.3333%;
+    border-right: 1px solid #000;
+    padding: 0.65rem 0.8rem;
+    font-size: 0.85rem;
+  }
+  .issue-sig > div:last-child {
+    border-right: none;
+    font-size: 1.8rem;
+    font-weight: 400;
+    text-transform: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 2rem;
+    font-family: Arial, sans-serif;
+  }
+  .issue-sig-label {
+    margin-bottom: 0.3rem;
+  }
+
+  .original-bls {
+    border-top: 1px solid #000;
+    font-weight: 900;
+    font-size: 0.8rem;
+    text-align: center;
+    margin-top: 1rem;
+    padding-top: 0.6rem;
+    letter-spacing: 0.07em;
+    font-family: Arial Black, Arial, sans-serif;
+  }
+
+  /* Footer info */
+  .footer {
+    margin-top: 4rem;
+    font-size: 0.9rem;
+    color: #7f8284;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    font-family: Arial, sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<header class="header" role="banner">
+  <div class="header-left" aria-label="Carrier logo and name">
+    <div class="logo" aria-hidden="true">M</div>
+    <div>
+      <h1 class="carrier-name">MERIDIAN SHIPPING</h1>
+      <div class="carrier-subtitle">GLOBAL SHIPPING &amp; LOGISTICS</div>
+    </div>
+  </div>
+  <aside aria-label="Bill of Lading identifiers">
+    <section class="bill-lading-block" role="complementary" aria-labelledby="bill-lading-title">
+      <h2 id="bill-lading-title">BILL OF LADING</h2>
+      <div class="bill-lading-id" style="margin-top:0.6rem; display:grid; grid-template-columns:auto auto; gap:1rem;">
+        <div><span>B/L NO.</span><br /><strong>BL232472785</strong></div>
+        <div><span>SCAC</span><br /><strong>MRDN</strong></div>
+      </div>
+    </section>
+  </aside>
+</header>
+
+<main>
+<table class="parties-grid" role="grid" aria-label="Shipping details and references" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr class="grid-row-large">
+      <td class="label-cell" scope="row" aria-label="SHIPPER">SHIPPER</td>
+      <td class="value-cell" aria-labelledby="SHIPPER">
+        <strong>FRUTAS DEL SOL S.A.</strong><br />
+        Av. de los Incas 456, Buenos Aires, Argentina<br />
+        <span class="contact-info">
+          TEL: <a href="tel:+541147891234" class="tel">+54 11 4789 1234</a> | EMAIL: <a href="mailto:logistica@frutasdelsol.com.ar" class="email">logistica@frutasdelsol.com.ar</a>
+        </span>
+      </td>
+      <td class="label-cell" scope="row" aria-label="BOOKING REF.">BOOKING REF.</td>
+      <td class="value-cell" aria-labelledby="BOOKING REF."><strong>BKG5917532</strong></td>
+      <td class="label-cell" scope="row" aria-label="SHIPPER'S REF.">SHIPPER'S REF.</td>
+      <td class="value-cell" aria-labelledby="SHIPPER'S REF.">EXP-35782</td>
+    </tr>
+    <tr class="grid-row-large">
+      <td class="label-cell" scope="row" aria-label="CONSIGNEE (NEGOTIABLE ONLY IF CONSIGNED 'TO ORDER')">CONSIGNEE (NEGOTIABLE ONLY IF CONSIGNED "TO ORDER")</td>
+      <td class="value-cell" aria-labelledby="CONSIGNEE">
+        <strong>FRESH FRUIT IMPORTERS B.V.</strong><br />
+        Handelsweg 12, 2988 DB, Ridderkerk, Netherlands<br />
+        <span class="contact-info">
+          TEL: <a href="tel:+15551234567" class="tel">+1 (555) 123-4567</a> | EMAIL: <a href="mailto:billing@techcorp.com" class="email">billing@techcorp.com</a>
+        </span>
+      </td>
+      <td class="label-cell" scope="row" aria-label="PRE-CARRIAGE BY">PRE-CARRIAGE BY</td>
+      <td class="value-cell" aria-labelledby="PRE-CARRIAGE BY" colspan="3" style="font-weight: 700; text-transform: none;">
+        Oceanic Meridian Lines
+      </td>
+    </tr>
+    <tr class="grid-row-large">
+      <td class="label-cell" scope="row" aria-label="NOTIFY PARTY (NO RESPONSIBILITY FOR FAILURE TO NOTIFY)">NOTIFY PARTY (NO RESPONSIBILITY FOR FAILURE TO NOTIFY)</td>
+      <td class="value-cell" aria-labelledby="NOTIFY PARTY">
+        <strong>FRESH FRUIT IMPORTERS B.V.</strong><br />
+        Handelsweg 12, 2988 DB, Ridderkerk, Netherlands<br />
+        <span class="contact-info">
+          TEL: <a href="tel:+31101234567" class="tel">+31 10 123 4567</a> | EMAIL: <a href="mailto:dispatch@logitrans.com" class="email">dispatch@logitrans.com</a>
+        </span>
+      </td>
+      <td class="label-cell" scope="row" aria-label="DELIVERY AGENT">DELIVERY AGENT</td>
+      <td class="value-cell" aria-labelledby="DELIVERY AGENT" colspan="3" style="font-weight: 700; text-transform: none;">
+        LogiTrans Global<br />
+        88 Harbor Road, Rotterdam, 3011 AA<br />
+        Tel: <a href="tel:+31101234567" class="tel">+31 10 123 4567</a><br />
+        Email: <a href="mailto:dispatch@logitrans.com" class="email">dispatch@logitrans.com</a>
+      </td>
+    </tr>
+    <tr class="grid-row-small">
+      <td class="label-cell" scope="row" aria-label="PLACE OF RECEIPT">PLACE OF RECEIPT</td>
+      <td class="value-cell" aria-labelledby="PLACE OF RECEIPT" colspan="3" style="font-weight: 700; text-transform: uppercase;">BUENOS AIRES, ARGENTINA</td>
+      <td class="label-cell" scope="row" aria-label="(blank)"></td>
+      <td class="value-cell" aria-labelledby="(blank)"></td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="voyage-ports" aria-label="Ocean vessel, voyage and ports" cellspacing="0" cellpadding="0">
+  <thead>
+    <tr>
+      <th scope="col">OCEAN VESSEL / VOYAGE</th>
+      <th scope="col">PORT OF LOADING</th>
+      <th scope="col">PORT OF DISCHARGE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MERIDIAN LABREA / 124N</td>
+      <td>BUENOS AIRES, ARGENTINA</td>
+      <td>ROTTERDAM, NETHERLANDS</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 class="cargo-header" aria-level="3" role="heading">PARTICULARS FURNISHED BY SHIPPER - CARRIER NOT RESPONSIBLE</h3>
+
+<table class="cargo-table" aria-label="Cargo particulars table" cellspacing="0" cellpadding="0">
+  <thead>
+    <tr>
+      <th scope="col">CONTAINER NO. / SEAL NO.</th>
+      <th scope="col">NO. PKGS</th>
+      <th scope="col">DESCRIPTION OF GOODS</th>
+      <th scope="col">GROSS WT.</th>
+      <th scope="col">MEASUREMENT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <strong>MRDN4455667</strong><br />
+        SEAL: <strong>MSK112233</strong><br /><br />
+        MARKS:<br />
+        PALLETIZED
+      </td>
+      <td style="text-align:center; font-weight: 900; font-size:1.2rem;">20</td>
+      <td rowspan="2" class="description" style="white-space: pre-wrap; font-weight: 700; text-transform: uppercase;">
+        20 PALLETS STC:<br />
+        FRESH FRUIT<br /><br />
+        <strong>FRESH APPLES</strong><br />
+        <strong>STOWAGE AT +2.0 DEGREES CELSIUS</strong><br />
+        <span class="inline-italic">Packaging: PALLETS</span><br /><br />
+        <span class="cargo-hscode">HS CODE: 08081080</span><br />
+        <span class="blue-text">SET TEMP: +2°C</span><br /><br />
+        <hr style="border:0.8px solid #000; margin: 1.2rem 0;" />
+        20 PALLETS STC:<br />
+        FRESH FRUIT<br /><br />
+        <strong>FRESH PEARS</strong><br />
+        <strong>STOWAGE AT +1.0 DEGREES CELSIUS</strong><br />
+        <span class="inline-italic">Packaging: PALLETS</span><br /><br />
+        <span class="cargo-hscode">HS CODE: 08083090</span><br />
+        <span class="blue-text">SET TEMP: +1°C</span>
+      </td>
+      <td rowspan="2" class="gross" style="text-align:right; font-weight: 900;">
+        18,500<br />KGS<br /><br /><br />
+        19,200<br />KGS
+      </td>
+      <td rowspan="2" class="measurement" style="text-align:right; font-weight: 900;">
+        28.00<br />CBM<br /><br /><br />
+        28.00<br />CBM
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <strong>MRDN7788990</strong><br />
+        SEAL: <strong>MSK445566</strong><br /><br />
+        MARKS:<br />
+        PALLETIZED
+      </td>
+      <td style="text-align:center; font-weight: 900; font-size:1.2rem;">20</td>
+    </tr>
+    <tr>
+      <td colspan="5" class="freight-collect-block" aria-label="Freight collect notice">
+        FREIGHT COLLECT
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="freight-charges" aria-label="Freight charges and total number of packages">
+  <div aria-label="Freight and charges details" style="display:flex; flex-direction: column; justify-content: center;">
+    <div><strong>OCEAN FREIGHT</strong></div>
+    <div><strong>THC</strong></div>
+    <div>COLLECT</div>
+  </div>
+  <div aria-label="Total number of packages" style="font-size: 2.1rem; font-weight: 900; display: flex; justify-content: center; align-items: center;">
+    40
+  </div>
+</div>
+
+<section class="legal-text" aria-label="Carrier conditions and terms">
+RECEIVED BY THE CARRIER IN APPARENT GOOD ORDER AND CONDITION (UNLESS OTHERWISE STATED HEREIN) THE TOTAL NUMBER OR QUANTITY OF CONTAINERS OR OTHER PACKAGES OR UNITS INDICATED IN THE BOX ENTITLED "TOTAL NUMBER OF PACKAGES" FOR CARRIAGE SUBJECT TO ALL THE TERMS AND CONDITIONS HEREOF FROM THE PLACE OF RECEIPT OR PORT OF LOADING TO THE PORT OF DISCHARGE OR PLACE OF DELIVERY, WHICHEVER IS APPLICABLE.
+
+IN ACCEPTING THIS BILL OF LADING THE MERCHANT EXPRESSLY ACCEPTS AND AGREES TO ALL THE TERMS AND CONDITIONS, WHETHER PRINTED, STAMPED OR OTHERWISE INCORPORATED ON THIS SIDE AND ON THE REVERSE SIDE OF THIS BILL OF LADING AND THE TERMS AND CONDITIONS OF THE CARRIER'S APPLICABLE TARIFF AS IF THEY WERE ALL SIGNED BY THE MERCHANT.
+</section>
+
+<div class="issue-sig" role="contentinfo" aria-label="Issue details and authorized signature">
+  <div>
+    <div class="issue-sig-label">PLACE OF ISSUE</div>
+    Antwerp
+  </div>
+  <div>
+    <div class="issue-sig-label">DATE OF ISSUE</div>
+    2026-03-13
+  </div>
+  <div style="padding-right: 2rem; font-weight: 700; font-size: 1.3rem;">
+    <div class="issue-sig-label" style="margin-bottom: 0.2rem; white-space: nowrap;">SIGNED FOR<br />THE CARRIER</div>
+    Authorized Signature
+  </div>
+</div>
+
+<div class="original-bls" aria-label="Number of original Bills of Lading">
+  NUMBER OF ORIGINAL B/L'S: THREE (3)
+</div>
+</main>
+
+<footer class="footer" role="contentinfo" aria-label="Carrier footer contact information">
+  FRUTAS DEL SOL S.A. &middot; +54 11 4789 1234 &middot; logistica@frutasdelsol.com.ar
+</footer>
+
+</body>
+</html>

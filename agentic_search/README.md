@@ -1,4 +1,4 @@
-# Agentic search
+# Agentic RAG search
 
 This project includes PDF loading, chunking, Chroma retrieval, bounded agentic
 query rewriting, optional reranking, grounded answer generation, and a
@@ -23,7 +23,7 @@ python -m unittest test_agentic_rag test_react_rag test_class_refactor test_retr
 
 ## Agentic RAG
 
-![Agentic RAG](docs/agentic_rag.png)
+[![Agentic RAG workflow diagram](docs/agentic_rag.png)](docs/agentic_rag.png)
 
 `src/agentic_rag.py` wraps `RagClient` in a LangGraph loop inspired by
 [Corrective Retrieval Augmented Generation (CRAG)](https://arxiv.org/abs/2401.15884)
@@ -87,6 +87,11 @@ python -m unittest test_react_rag       # fakes only: no API key, model download
 
 
 ## Retrieval benchmark
+
+/Users/dc/geha/agentic_search/evals/answer_questions.jsonl
+/Users/dc/geha/agentic_search/evals/multipaper_retrieval_questions.jsonl for queries across several docs
+
+multi query and agentic search react loop for multi paper queries. created by llm. Need human to read them. Dont reaklly know if queries useful. Could be optimizing to noise. 
 
 The retrieval-only benchmark exercises the actual dense parent-document path:
 PDF extraction, token-aware parent/child chunking, BGE embeddings, Chroma

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Employees value a range of benefit offerings</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.4;
+    margin: 24px;
+    color: #2a2a2a;
+  }
+  h2 {
+    font-weight: 700;
+    margin-top: 0;
+  }
+  strong {
+    font-weight: 700;
+  }
+  figure {
+    margin: 20px 0;
+  }
+  figcaption {
+    font-size: 0.875rem;
+    font-style: italic;
+    margin-top: 8px;
+  }
+  .bar-chart {
+    font-size: 0.75rem;
+    font-family: Arial, sans-serif;
+  }
+  .bars {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  .bar-label {
+    width: 160px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .bar {
+    display: inline-block;
+    height: 16px;
+    vertical-align: middle;
+  }
+  .bar-value {
+    display: inline-block;
+    padding-left: 6px;
+    vertical-align: middle;
+  }
+  .bar.green {
+    background-color: #3e9731;
+  }
+  .bar.grey {
+    background-color: #b1b1bb;
+  }
+  .bar.red {
+    background-color: #f54844;
+  }
+  table.legend {
+    border-collapse: collapse;
+    margin-top: 0;
+    margin-left: 16px;
+    vertical-align: top;
+  }
+  table.legend th,
+  table.legend td {
+    border: none;
+    padding: 4px 8px;
+    vertical-align: middle;
+  }
+  .legend-color {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-right: 6px;
+  }
+  .legend-green {
+    background-color: #3e9731;
+  }
+  .legend-red {
+    background-color: #f54844;
+  }
+  table.data-table {
+    border-collapse: collapse;
+    margin-top: 16px;
+    width: 100%;
+    max-width: 600px;
+  }
+  table.data-table th,
+  table.data-table td {
+    border: 1px solid #ccc;
+    padding: 6px 8px;
+    text-align: left;
+  }
+  table.data-table th {
+    background-color: #f0f0f0;
+  }
+  .footnote {
+    font-size: 0.875rem;
+    font-style: italic;
+    margin-top: 12px;
+  }
+  .two-columns {
+    display: flex;
+    gap: 48px;
+    margin-top: 24px;
+  }
+  .column {
+    flex: 1;
+  }
+</style>
+</head>
+<body>
+
+<figure aria-labelledby="fig5title" class="bar-chart">
+  <figcaption id="fig5title"><strong>Figure 5</strong><br /><strong>Employees value a range of benefit offerings.</strong></figcaption>
+  <p><strong>QUESTION:</strong> Regardless of whether the benefit is currently available to you at work, how interested would you be in having your employer offer it in the future?</p>
+
+  <div class="bars" role="list" aria-label="Benefit interest percentages">
+    <div role="listitem">
+      <span class="bar-label">Medical insurance</span>
+      <span class="bar green" style="width:78%;"></span>
+      <span class="bar-value">78%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Dental insurance</span>
+      <span class="bar green" style="width:72%;"></span>
+      <span class="bar-value">72%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Vision insurance</span>
+      <span class="bar green" style="width:62%;"></span>
+      <span class="bar-value">62%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Paid family or medical leave</span>
+      <span class="bar green" style="width:54%;"></span>
+      <span class="bar-value">54%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Life insurance</span>
+      <span class="bar grey" style="width:50%;"></span>
+      <span class="bar-value">50%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Career development</span>
+      <span class="bar grey" style="width:39%;"></span>
+      <span class="bar-value">39%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Physical health wellness programs</span>
+      <span class="bar grey" style="width:36%;"></span>
+      <span class="bar-value">36%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Short-term disability insurance</span>
+      <span class="bar grey" style="width:36%;"></span>
+      <span class="bar-value">36%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Long-term disability insurance</span>
+      <span class="bar grey" style="width:35%;"></span>
+      <span class="bar-value">35%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Long-term care insurance</span>
+      <span class="bar grey" style="width:34%;"></span>
+      <span class="bar-value">34%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Accident insurance</span>
+      <span class="bar grey" style="width:34%;"></span>
+      <span class="bar-value">34%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Critical illness insurance</span>
+      <span class="bar grey" style="width:33%;"></span>
+      <span class="bar-value">33%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Emergency savings benefit</span>
+      <span class="bar grey" style="width:32%;"></span>
+      <span class="bar-value">32%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Identity theft protection</span>
+      <span class="bar grey" style="width:31%;"></span>
+      <span class="bar-value">31%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Mental health/substance abuse treatment benefits</span>
+      <span class="bar grey" style="width:30%;"></span>
+      <span class="bar-value">30%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Employee assistance programs</span>
+      <span class="bar grey" style="width:30%;"></span>
+      <span class="bar-value">30%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Financial wellness programs</span>
+      <span class="bar red" style="width:29%;"></span>
+      <span class="bar-value">29%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Tuition assistance</span>
+      <span class="bar grey" style="width:28%;"></span>
+      <span class="bar-value">28%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Telemedicine benefits</span>
+      <span class="bar grey" style="width:28%;"></span>
+      <span class="bar-value">28%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Student loan assistance/repayment</span>
+      <span class="bar grey" style="width:26%;"></span>
+      <span class="bar-value">26%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Hospital indemnity insurance</span>
+      <span class="bar grey" style="width:26%;"></span>
+      <span class="bar-value">26%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Caregiving benefits</span>
+      <span class="bar grey" style="width:25%;"></span>
+      <span class="bar-value">25%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Legal services plan</span>
+      <span class="bar grey" style="width:23%;"></span>
+      <span class="bar-value">23%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Debt management counseling</span>
+      <span class="bar grey" style="width:21%;"></span>
+      <span class="bar-value">21%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Pet insurance</span>
+      <span class="bar grey" style="width:16%;"></span>
+      <span class="bar-value">16%</span>
+    </div>
+    <div role="listitem">
+      <span class="bar-label">Societal benefits</span>
+      <span class="bar red" style="width:12%;"></span>
+      <span class="bar-value">12%</span>
+    </div>
+  </div>
+
+  <table class="legend" role="presentation" aria-hidden="true">
+    <tbody>
+      <tr>
+        <td><span class="legend-color legend-green"></span></td>
+        <td>Up 5 percentage points or more vs. 2023 study</td>
+      </tr>
+      <tr>
+        <td><span class="legend-color legend-red"></span></td>
+        <td>Down 5 percentage points or more vs. 2023 study</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="footnote">Note: Percent of employees who are “very” or “extremely” interested in having their employer offer the benefit in the future.</p>
+
+  <table class="data-table" summary="Benefit offerings with employee interest percentages and change vs 2023 study">
+    <thead>
+      <tr>
+        <th>Benefit Offering</th>
+        <th>Interest %</th>
+        <th>Change vs 2023 Study</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Medical insurance</td><td>78%</td><td>Up 5+ pp</td></tr>
+      <tr><td>Dental insurance</td><td>72%</td><td>Up 5+ pp</td></tr>
+      <tr><td>Vision insurance</td><td>62%</td><td>Up 5+ pp</td></tr>
+      <tr><td>Paid family or medical leave</td><td>54%</td><td>Up 5+ pp</td></tr>
+      <tr><td>Life insurance</td><td>50%</td><td>—</td></tr>
+      <tr><td>Career development</td><td>39%</td><td>—</td></tr>
+      <tr><td>Physical health wellness programs</td><td>36%</td><td>—</td></tr>
+      <tr><td>Short-term disability insurance</td><td>36%</td><td>—</td></tr>
+      <tr><td>Long-term disability insurance</td><td>35%</td><td>—</td></tr>
+      <tr><td>Long-term care insurance</td><td>34%</td><td>—</td></tr>
+      <tr><td>Accident insurance</td><td>34%</td><td>—</td></tr>
+      <tr><td>Critical illness insurance</td><td>33%</td><td>—</td></tr>
+      <tr><td>Emergency savings benefit</td><td>32%</td><td>—</td></tr>
+      <tr><td>Identity theft protection</td><td>31%</td><td>—</td></tr>
+      <tr><td>Mental health/substance abuse treatment benefits</td><td>30%</td><td>—</td></tr>
+      <tr><td>Employee assistance programs</td><td>30%</td><td>—</td></tr>
+      <tr><td>Financial wellness programs</td><td>29%</td><td>Down 5+ pp</td></tr>
+      <tr><td>Tuition assistance</td><td>28%</td><td>—</td></tr>
+      <tr><td>Telemedicine benefits</td><td>28%</td><td>—</td></tr>
+      <tr><td>Student loan assistance/repayment</td><td>26%</td><td>—</td></tr>
+      <tr><td>Hospital indemnity insurance</td><td>26%</td><td>—</td></tr>
+      <tr><td>Caregiving benefits</td><td>25%</td><td>—</td></tr>
+      <tr><td>Legal services plan</td><td>23%</td><td>—</td></tr>
+      <tr><td>Debt management counseling</td><td>21%</td><td>—</td></tr>
+      <tr><td>Pet insurance</td><td>16%</td><td>—</td></tr>
+      <tr><td>Societal benefits</td><td>12%</td><td>Down 5+ pp</td></tr>
+    </tbody>
+  </table>
+</figure>
+
+<div class="two-columns">
+  <div class="column">
+    <p><strong>Paid family or medical leave now in the “core four”:</strong> More interesting, however, is that paid family or medical leave is the next most important benefit in employers’ minds beyond medical, dental and vision insurance: 71% of all employers (and 80% of large employers) view it as a critical benefit in the future, nearly on par with dental and vision insurance and above life, disability and supplemental health insurance. Paid family or medical leave is now clearly in the core four of benefits in the eyes of both employers and employees. <em>See Key finding 4 for more on leave benefits.</em></p>
+
+    <p><strong>Prioritizing wellness:</strong> Mental health and substance abuse programs are of considerable interest to employees, especially the younger generations that are coming to dominate the workforce. Career development services that promote professional wellbeing are also of high interest to younger workers. Clear majorities of employers are expressing interest in mental health (60%) and career development (59%) benefits, while nearly as many see a need for programs focused on physical health and financial wellness. As employers take a more holistic view of individual needs across a multigenerational workforce, wellness benefits can help attract and retain top talent. They can be especially valuable for individuals facing personal challenges in a time of great uncertainty.</p>
+  </div>
+  <div class="column">
+    <p>Interest in long-term care insurance remains relevant, with the growing retirement-eligible population ranking it as important as critical illness and more important than hospital indemnity insurance. Long-term care can be provided as a stand-alone insurance benefit, a life insurance accelerated benefit or a long-term care rider added to a workplace life insurance product.</p>
+
+    <p><strong>Differing generational priorities:</strong> The dramatic differences in benefits interest across generations highlight the challenges faced by employers and the need for future portfolio refinements. <em>See Figure 6.</em> Today’s products and services are largely curated for Gen X and baby boomers, though Gen Z and millennials now make up the greater percentage of the workforce.</p>
+  </div>
+</div>
+
+<footer>
+  <p style="font-weight:700;margin-top:48px;font-size:0.75rem;">9 | <strong>Harnessing growth in workforce benefits:</strong> the next horizon | 2025 Workforce Benefits Study</p>
+</footer>
+
+</body>
+</html>

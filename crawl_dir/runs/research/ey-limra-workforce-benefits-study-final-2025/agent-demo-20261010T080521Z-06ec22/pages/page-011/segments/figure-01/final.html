@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The LIMRA-EY Wheel of Wellness</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    color: #222;
+    margin: 1em;
+  }
+  h2 {
+    margin-bottom: 0.3em;
+  }
+  p {
+    max-width: 400px;
+  }
+  .wheel-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+  }
+  text {
+    pointer-events: none;
+    user-select: none;
+  }
+  footer {
+    margin-top: 4em;
+    font-weight: 700;
+    font-size: 0.9em;
+  }
+</style>
+</head>
+<body>
+<main>
+  <h2>The LIMRA-EY Wheel of Wellness</h2>
+  <p>Focused on five key dimensions of health, the LIMRA-EY Wheel of Wellness can help organizations build a happier, healthier, more productive and financially secure workforce.</p>
+  <div class="wheel-container" aria-label="The LIMRA-EY Wheel of Wellness focused on five key dimensions">
+    <svg role="img" aria-labelledby="wheelTitle" width="320" height="320" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" >
+      <title id="wheelTitle">The LIMRA-EY Wheel of Wellness showing five dimensions: Physical, Mental, Financial, Societal, Professional</title>
+      <!-- Define the center and radius -->
+      <defs>
+        <style>
+          .segment-label {
+            font-family: Arial, sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            fill: #222;
+          }
+          .yellow-arrow {
+            fill: gold;
+          }
+          .segment-bg {
+            fill-opacity: 0.1;
+          }
+          .segment-border {
+            fill: none;
+            stroke: #fff;
+            stroke-width: 3px;
+          }
+        </style>
+      </defs>
+
+      <!-- Draw the five pie segments -->
+      <!-- Center at 160,160 -->
+      <!-- Radius 140 -->
+      <!-- Angles divided by 72 degrees each (360/5) -->
+      <!-- Labels roughly centered in each segment -->
+
+      <!-- Physical segment - top center (centered at angle -90 deg) -->
+      <path class="segment-bg" stroke="none" fill="lightsteelblue" d="
+        M160 160
+        L160 20
+        A140 140 0 0 1 241.03 64.84
+        Z" />
+      <path class="segment-border" d="
+        M160 160
+        L160 20
+        A140 140 0 0 1 241.03 64.84
+        Z" />
+
+      <!-- Mental segment -->
+      <path class="segment-bg" stroke="none" fill="lightcyan" d="
+        M160 160
+        L241.03 64.84
+        A140 140 0 0 1 266.76 147.55
+        Z" />
+      <path class="segment-border" d="
+        M160 160
+        L241.03 64.84
+        A140 140 0 0 1 266.76 147.55
+        Z" />
+
+      <!-- Financial segment -->
+      <path class="segment-bg" stroke="none" fill="lavender" d="
+        M160 160
+        L266.76 147.55
+        A140 140 0 0 1 197.56 237.55
+        Z" />
+      <path class="segment-border" d="
+        M160 160
+        L266.76 147.55
+        A140 140 0 0 1 197.56 237.55
+        Z" />
+
+      <!-- Societal segment -->
+      <path class="segment-bg" stroke="none" fill="mintcream" d="
+        M160 160
+        L197.56 237.55
+        A140 140 0 0 1 122.44 237.55
+        Z" />
+      <path class="segment-border" d="
+        M160 160
+        L197.56 237.55
+        A140 140 0 0 1 122.44 237.55
+        Z" />
+
+      <!-- Professional segment -->
+      <path class="segment-bg" stroke="none" fill="honeydew" d="
+        M160 160
+        L122.44 237.55
+        A140 140 0 0 1 80 70
+        Z" />
+      <path class="segment-border" d="
+        M160 160
+        L122.44 237.55
+        A140 140 0 0 1 80 70
+        Z" />
+
+      <!-- The center fill to cover pie center -->
+      <circle cx="160" cy="160" r="30" fill="white" />
+
+      <!-- Text labels, centered in each segment -->
+
+      <text class="segment-label" x="160" y="70" text-anchor="middle" dominant-baseline="middle">Physical</text>
+      <text class="segment-label" x="230" y="110" text-anchor="middle" dominant-baseline="middle">Mental</text>
+      <text class="segment-label" x="220" y="180" text-anchor="middle" dominant-baseline="middle">Financial</text>
+      <text class="segment-label" x="160" y="230" text-anchor="middle" dominant-baseline="middle">Societal</text>
+      <text class="segment-label" x="100" y="180" text-anchor="middle" dominant-baseline="middle">Professional</text>
+
+      <!-- Thick yellow circular arrow with 5 distinct arrowheads pointing clockwise -->
+
+      <circle cx="160" cy="160" r="140" stroke="gold" stroke-width="18" fill="none" />
+
+      <!-- Arrowheads placed at each segment boundary -->
+
+      <!-- Arrowhead 1: top center (at 12 o'clock) -->
+      <polygon class="yellow-arrow" points="160 9 175 30 160 30" />
+
+      <!-- Arrowhead 2: approx 72 degrees clockwise from top -->
+      <polygon class="yellow-arrow" points="279 68 292 83 277 90" />
+
+      <!-- Arrowhead 3: approx 144 degrees clockwise from top -->
+      <polygon class="yellow-arrow" points="287 210 273 217 276 232" />
+
+      <!-- Arrowhead 4: approx 216 degrees clockwise from top -->
+      <polygon class="yellow-arrow" points="101 267 95 252 110 253" />
+
+      <!-- Arrowhead 5: approx 288 degrees clockwise from top -->
+      <polygon class="yellow-arrow" points="46 117 55 102 65 114" />
+
+    </svg>
+  </div>
+</main>
+<footer>
+  | <strong>Harnessing growth in workforce benefits:</strong> the next horizon | 2025 Workforce Benefits Study
+</footer>
+</body>
+</html>

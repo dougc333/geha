@@ -1,0 +1,32 @@
+{
+  "table_extraction": {
+    "pdf": "source.pdf",
+    "status": "ok",
+    "ocr_used": false,
+    "tables_detected": 2,
+    "tables_written": 1,
+    "tables_excluded": 1,
+    "outputs": [
+      {
+        "table_number": 1,
+        "heading": "Billing",
+        "page": 3,
+        "rows": 12,
+        "columns": 3,
+        "header_promoted": false,
+        "header_inherited_from_table": null,
+        "html": "source_billing.html"
+      }
+    ],
+    "excluded": [
+      {
+        "table_number": 2,
+        "heading": "Extracted table",
+        "page": 5,
+        "reason": "revision_history"
+      }
+    ]
+  },
+  "chunk_errors": [],
+  "chunk_warnings": []
+}

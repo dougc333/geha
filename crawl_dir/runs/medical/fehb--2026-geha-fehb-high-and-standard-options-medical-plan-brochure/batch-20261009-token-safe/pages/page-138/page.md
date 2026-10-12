@@ -1,0 +1,3 @@
+Summary of Benefits for the Standard Option of the Government Employees Health Association, Inc. 2026
+60% up to $1,100. Prescription drugs: Mail order, Page = 93. Dental care:, You pay = 50% up to Plan allowance for diagnostic and preventive services and charges in excess of the scheduled amounts for restorations and extractions. Dental care:, Page = 99
+Protection against catastrophic costs (your catastrophic protection out-of-pocket maximum):, You pay = In-network - Self Only $8,000 ($16,000 Self Plus One or Self and Family) per year Out-of-network - Self Only $20,000 ($40,000 Self Plus One or Self and Family) per year. Protection against catastrophic costs (your catastrophic protection out-of-pocket maximum):, Page = 28

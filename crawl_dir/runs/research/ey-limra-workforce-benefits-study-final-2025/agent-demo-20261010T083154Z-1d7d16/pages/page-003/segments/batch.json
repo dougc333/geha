@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "gpt-4.1-mini",
+  "created_at": "2026-10-10T08:32:52.315603+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "1",
+      "kind": "infographic",
+      "title": "THIS YEAR'S KEY FINDINGS:",
+      "source_png": "figure-01-1.png",
+      "bounding_box": [
+        0,
+        812,
+        1530,
+        1980
+      ],
+      "output_directory": "figure-01",
+      "native_evidence": "figure-01/native-evidence.json",
+      "native_evidence_word_count": 235,
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "layout",
+              "source_evidence": "In the PDF, key findings numbers '01' to '05' and their titles appear aligned horizontally on the left with their description text block clearly offset horizontally to the right, separated by a large space, forming a two-column style layout for each finding.",
+              "html_evidence": "Each section uses inline-block spans for key-num and key-title side by side, but the description is in a separate <p> with class 'key-desc' displayed inline-block with a smaller max-width and margin-left, causing an uneven and narrower column for the description, making it look distinctly left-aligned and narrow compared to the source's more evenly spaced two-column style with the right side paragraphs extending further horizontally.",
+              "correction": "Adjust the CSS and HTML structure so that the finding title and the description form clearly horizontally separated columns with consistent spacing, replicating the source's left aligned number and title column with a separate and wider right column for the description, ensuring the full width is used as in the source."
+            }
+          ],
+          "render_latency_ms": 500.3,
+          "candidate_sha256": "6cdce6798bdb4d2f11f19c5df57ac1154b2e2644eec3b6e072a10100482c3652"
+        },
+        {
+          "iteration": 2,
+          "html": "figure-01/iteration-02.html",
+          "rendered_png": "figure-01/iteration-02.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 517.4,
+          "candidate_sha256": "33096e659d707e3962b0c194c45219bdc786e293d2d129593cb3162c85fcc680"
+        }
+      ],
+      "selected_iteration": 2,
+      "selected_error_count": 0,
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-02.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 1,
+    "failed": 0,
+    "total_iterations": 2,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-10-10T08:33:30.720532+00:00"
+}

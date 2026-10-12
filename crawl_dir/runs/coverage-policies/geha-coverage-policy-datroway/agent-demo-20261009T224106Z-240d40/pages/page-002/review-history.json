@@ -1,0 +1,49 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "The member has an ECOG performance status of 0-1 2; AND",
+        "html_evidence": "The member has an ECOG performance status of 0-1<sup>2</sup>; AND",
+        "correction": "In the candidate HTML, the space is missing between '0-1' and the superscript '2'. It should be '0-1 2' with a space as in source."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "EGFR-directed therapy (i.e. afatinib, dacomitinib, erlotinib, gefitinib, osimertinib)",
+        "html_evidence": "EGFR-directed therapy (i.e. afatinib, dacomitnib, erlotinib, gefitinib, osimertinib)",
+        "correction": "Spelling error in candidate HTML: 'dacomitnib' should be 'dacomitinib'."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Has not had prior treatment with:\n  o Any agent including antibody drug conjugate (ADC) containing a chemotherapeutic agent targeting topoisomerase I; OR\n  o TROP2-targeted therapy",
+        "html_evidence": "Has not had prior treatment with:\n  o Any agent including antibody drug conjugate (ADC) containing a chemotherapeutic agent targeting topoisomerase I; OR",
+        "correction": "Candidate HTML is missing the ';' at the end of 'TROP2-targeted therapy' bullet point which is present in source."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "o TROP2-targeted therapy",
+        "html_evidence": "o TROP2-targeted therapy</li>\n      </ul>\n    </li>",
+        "correction": "In source, 'TROP2-targeted therapy' line ends with a semicolon; candidate HTML omits the semicolon and the line break might differ."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Datroway will be used as subsequent therapy after the following:\n  o Platinum-based (i.e. carboplatin, cisplatin) systemic chemotherapy; AND\n  o EGFR-directed therapy (i.e. afatinib, dacomitinib, erlotinib, gefitinib, osimertinib)",
+        "html_evidence": "Datroway will be used as subsequent therapy after the following:\n  o Platinum-based (i.e. carboplatin, cisplatin) systemic chemotherapy; AND\n  o EGFR-directed therapy (i.e. afatinib, dacomitnib, erlotinib, gefitinib, osimertinib)",
+        "correction": "Spelling mistake in 'dacomitinib' corrected above applies here as well."
+      },
+      {
+        "category": "other",
+        "source_evidence": "G.E.H.A logo and OncoHealth logo images at top",
+        "html_evidence": "Two images with src=\"#\" and alt attributes 'G.E.H.A Logo' and 'OncoHealth Logo'; however, images are broken (not valid src) as placeholders instead of actual images.",
+        "correction": "Replace src=\"#\" with actual image paths for logos or remove placeholders if images cannot be sourced."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

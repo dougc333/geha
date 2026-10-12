@@ -1,0 +1,31 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "After 'QUESTION: Which would you prefer?' the PDF shows a simple color legend followed by two pie charts and explanatory paragraphs.",
+        "html_evidence": "<table> elements with detailed preference tables for 2021 and 2025 under each pie chart are present in the HTML but not in the PDF.",
+        "correction": "Remove the detailed preference tables under the pie charts as they do not appear in the PDF."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The PDF places the pie charts side by side with the color legend above and paragraphs below the charts.",
+        "html_evidence": "The HTML shows the same pie charts side by side but inserts preference tables directly under each pie chart, altering layout.",
+        "correction": "Remove the tables under the pie charts to match PDF's simpler layout with only color legend above and text paragraphs below."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "In the PDF, the color legend appears directly under the question, then the two pie charts side by side, then the two paragraphs side by side below the charts.",
+        "html_evidence": "In the HTML, after the question and legend, pie charts and tables appear, and then two columns for paragraphs appear separately.",
+        "correction": "Adjust reading order so no extraneous tables interrupt the flow between legend, charts, and paragraphs as seen in PDF."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

@@ -1,0 +1,61 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "The source page shows a horizontal bar chart with colored bars indicating interest percentages and changes through color; items are visually grouped and the key shows color legend with green up arrows and red down arrows next to the data.",
+        "html_evidence": "The HTML presents the benefit data as a simple vertical bulleted list with no color coding, bar chart, or graphical representation of interest levels or changes.",
+        "correction": "Add a horizontal bar chart or an accessible equivalent graphical representation to visually mimic the bar lengths and color coding from the source. Include green and red color coding next to the list items or bars to indicate changes vs 2023 as in the source."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "The source text visually places the question below the figure title, followed by the bar chart and color key side by side on the right, then image at bottom of page.",
+        "html_evidence": "The HTML lists all the benefit items as a vertical list, then includes the key, then the note, then the entire numerical data as a separate table after the list and aside sections.",
+        "correction": "Integrate the key and note more closely with the list and table to maintain context. Consider placing the note and key adjacent to or below the data rather than separate and improve order to reflect source layout logically."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "The PDF contains a colored bar chart only with no extra headings like 'Horizontal bar chart showing employer interest percentages and change vs 2023 study' or the word 'Key:'",
+        "html_evidence": "<h3 id=\"chart-title\" class=\"visually-hidden\">Horizontal bar chart showing employer interest percentages and change vs 2023 study</h3>\n    <aside class=\"key-note\" aria-label=\"Chart legend and note\">\n      <p><strong>Key:</strong></p>",
+        "correction": "Remove 'Horizontal bar chart showing employer interest percentages and change vs 2023 study' heading and 'Key:' paragraph to match PDF content."
+      },
+      {
+        "category": "extra_text",
+        "source_evidence": "PDF only shows the note: 'Note: Percent of employers that believe their company’s employees will be \"very\" or \"extremely\" interested in the benefit in the future.'",
+        "html_evidence": "<ul class=\"key-list\">\n        <li><span class=\"key-box key-up\" aria-hidden=\"true\"></span>Up 5 percentage points or more vs. 2023 study</li>\n        <li><span class=\"key-box key-down\" aria-hidden=\"true\"></span>Down 5 percentage points or more vs. 2023 study</li>\n      </ul>",
+        "correction": "Remove the key color legend listing from the HTML to match the PDF which only shows the simple note about percent employees interested."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "The PDF has the bar chart legend text in a small box on the right side under the bars with the two bullet colors and the note",
+        "html_evidence": "",
+        "correction": "Add the key color legend box with green and red boxes labeled exactly as in the PDF on the right side as part of the chart area."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The PDF layout places bars on the left side and the key legend on the right side aligned horizontally above the bottom image",
+        "html_evidence": "The HTML places bars and legend side by side within a container flex layout.",
+        "correction": "The flex layout is correct to represent the PDF layout."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "The PDF footer text: '8 | Harnessing growth in workforce benefits: the next horizon | 2025 Workforce Benefits Study' is visible at the bottom left",
+        "html_evidence": "",
+        "correction": "Add the footer text exactly as in PDF at the bottom left."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "match",
+    "errors": []
+  }
+]

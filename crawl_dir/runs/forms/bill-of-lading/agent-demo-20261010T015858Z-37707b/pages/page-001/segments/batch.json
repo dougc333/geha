@@ -1,0 +1,455 @@
+{
+  "schema_version": 1,
+  "workflow": "bill_of_lading_segment_html_visual_correction",
+  "workflow_program": "/Users/dc/geha/PDF_processing/bill_lading/bill_of_lading_html_graph.py",
+  "model": "gpt-4.1-mini",
+  "created_at": "2026-10-10T03:01:53.053486+00:00",
+  "max_iterations_per_segment": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every segment",
+  "verification_scope": "text fidelity only; CSS, typography, borders, spacing, alignment, colors, dimensions, wrapping, and decorative elements are ignored",
+  "status": "passed",
+  "segments": [
+    {
+      "segment": 1,
+      "section": "Carrier header and bill of lading identifiers",
+      "source_png": "region-01-schema-block-1.png",
+      "output_directory": "segment-01",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-01/iteration-01.html",
+          "rendered_png": "segment-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            "Missing text 'M' inside a box at the top left in the rendered block"
+          ],
+          "ignored_css_error_count": 5,
+          "ignored_css_errors": [
+            "Missing bold styling for 'MERIDIAN SHIPPING' text",
+            "Missing bold styling for 'BILL OF LADING' text",
+            "Missing bold styling for 'B/L NO.' and 'BL232472785'",
+            "Missing horizontal line under 'BILL OF LADING' heading",
+            "Missing bold styling for 'SCAC' and 'MRDN'"
+          ],
+          "repair_strategy": "named_cell_text_ocr",
+          "corrected_cells": [
+            "bill_of_lading_box",
+            "carrier_header"
+          ]
+        },
+        {
+          "iteration": 2,
+          "html": "segment-01/iteration-02.html",
+          "rendered_png": "segment-01/iteration-02.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            "The source has a large 'M' inside a box on the left; the rendered HTML shows just 'M' with no box."
+          ],
+          "ignored_css_error_count": 5,
+          "ignored_css_errors": [
+            "Source has 'MERIDIAN SHIPPING' in bold uppercase; rendered HTML has 'MERIDIAN SHIPPING' in normal font.",
+            "Source has 'GLOBAL SHIPPING & LOGISTICS' below in smaller bold uppercase; rendered has it in normal font.",
+            "Source has a boxed section on the right with 'BILL OF LADING' in bold uppercase and a horizontal line below it; rendered HTML just has 'BILL OF LADING' as normal text with no border or line.",
+            "Source has 'B/L NO.' and 'BL232472785' on the same line spaced apart; rendered HTML has them on separate lines with no spacing alignment.",
+            "Source has 'SCAC' and 'MRDN' on the same line spaced apart; rendered has 'SCAC' and 'MRDN' on separate lines without spacing alignment."
+          ],
+          "repair_strategy": "named_cell_text_ocr",
+          "corrected_cells": [
+            "bill_of_lading_box",
+            "carrier_header"
+          ]
+        },
+        {
+          "iteration": 3,
+          "html": "segment-01/iteration-03.html",
+          "rendered_png": "segment-01/iteration-03.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 5,
+          "ignored_css_errors": [
+            "Source text has 'M' inside a boxed logo on the left; rendered text shows just 'M' without a box.",
+            "Source text uses bold and larger font for 'MERIDIAN SHIPPING' and 'BILL OF LADING'; rendered text presents all text in the same plain font, missing emphasis.",
+            "The line 'BILL OF LADING' in source is separated by a horizontal line from the rest; in rendered it's plain with no line.",
+            "In source block 'BILL OF LADING' is right aligned with 'B/L NO.' and 'SCAC' fields; in rendered block these are left aligned and spaced differently.",
+            "The source shows a clear block border around the 'BILL OF LADING' info with B/L NO. and SCAC; rendered block has no border around that section."
+          ]
+        }
+      ],
+      "final_html": "segment-01/final.html",
+      "final_rendered_png": "segment-01/iteration-03.png"
+    },
+    {
+      "segment": 2,
+      "section": "Shipment parties and references",
+      "source_png": "region-02-schema-block-2.png",
+      "output_directory": "segment-02",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-02/iteration-01.html",
+          "rendered_png": "segment-02/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 2,
+          "errors": [
+            "The label 'Lateel:' is correct as 'Tel:' in both blocks except capitalization, no error here.",
+            "The double quotes around TO ORDER in the CONSIGNEE section are missing in the rendered HTML block text."
+          ],
+          "ignored_css_error_count": 3,
+          "ignored_css_errors": [
+            "Missing bold formatting for all labels and company names in the rendered HTML block that are bolded in the source block.",
+            "The text 'PLACE OF RECEIPT' is rendered as 'PLACE OF RECEIPT' in the source but as 'PLACE OF RECEIPT' in the HTML block with correct spelling, no error here.",
+            "Overall text casing is inconsistent: source block uses uppercase for labels (e.g. SHIPPER, BOOKING REF.) and some company names in bold uppercase, while the rendered block uses sentence case or normal case without bold."
+          ],
+          "repair_strategy": "named_cell_text_ocr",
+          "corrected_cells": [
+            "booking_ref",
+            "consignee",
+            "delivery_agent",
+            "notify_party",
+            "place_of_receipt",
+            "pre_carriage",
+            "shipper",
+            "shipper_ref"
+          ]
+        },
+        {
+          "iteration": 2,
+          "html": "segment-02/iteration-02.html",
+          "rendered_png": "segment-02/iteration-02.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 0,
+          "ignored_css_errors": []
+        }
+      ],
+      "final_html": "segment-02/final.html",
+      "final_rendered_png": "segment-02/iteration-02.png"
+    },
+    {
+      "segment": 3,
+      "section": "Vessel voyage and ports",
+      "source_png": "region-03-schema-block-3.png",
+      "output_directory": "segment-03",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-03/iteration-01.html",
+          "rendered_png": "segment-03/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 4,
+          "ignored_css_errors": [
+            "Text 'OCEAN VESSEL / VOYAGE' should be bold in rendered HTML but is not.",
+            "Text 'MERIDIAN LABREA / 124N' should be bold and uppercase in rendered HTML but is lowercase and not bold.",
+            "Text 'PORT OF LOADING' should be bold in rendered HTML but is not.",
+            "Text 'PORT OF DISCHARGE' should be bold in rendered HTML but is not."
+          ]
+        }
+      ],
+      "final_html": "segment-03/final.html",
+      "final_rendered_png": "segment-03/iteration-01.png"
+    },
+    {
+      "segment": 4,
+      "section": "Carrier particulars notice",
+      "source_png": "region-04-schema-block-4.png",
+      "output_directory": "segment-04",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-04/iteration-01.html",
+          "rendered_png": "segment-04/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 0,
+          "ignored_css_errors": []
+        }
+      ],
+      "final_html": "segment-04/final.html",
+      "final_rendered_png": "segment-04/iteration-01.png"
+    },
+    {
+      "segment": 5,
+      "section": "Cargo table headers",
+      "source_png": "region-05-schema-block-5.png",
+      "output_directory": "segment-05",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-05/iteration-01.html",
+          "rendered_png": "segment-05/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            "Missing text: The source has the word 'NO.' before 'PKGS', but the rendered block shows 'NO. PKGS' correctly; no error there"
+          ],
+          "ignored_css_error_count": 6,
+          "ignored_css_errors": [
+            "Missing text: 'MEASUREMENT' column full text is not visible, cut off or incomplete",
+            "The source has all header text in uppercase and bold, but since styling is ignored, no error for that",
+            "Rendered block is missing the last column header that is present in source after 'MEASUREMENT'] }  Overall, key error is the truncation or missing of the last column header text after 'MEASUREMENT' and possibly incomplete 'MEASUREMENT' heading. The content in other columns matches literally.}  However, on closer look, the MEASUREMENT header word is partial in rendered block: ",
+            " and invisible or incomplete - that is the main literal text error. The last column header in source is partially or fully missing in render. That counts as missing text. The rest matches exactly. So mismatch.  Final answer: mismatch with missing text for last column header and incomplete MEASUREMENT header text.  Conclude as above.  Sorry for verbosity, final output below only.  Note: The trailing column header in source after MEASUREMENT is ",
+            " which is not clearly rendered or visible. So counted as missing text.  If the last column header is partially visible, it counts as missing or incomplete text.  Since the user only gave partial text after MEASUREMENT (",
+            "), let's mark that as missing too.  Summary: 1) Missing last column header text after MEASUREMENT column in rendered block 2) MEASUREMENT word possibly incomplete or cut off.   Final verdict mismatch, errors as:  ["
+          ],
+          "repair_strategy": "named_cell_text_ocr",
+          "corrected_cells": [
+            "container_header",
+            "description_header",
+            "gross_weight_header",
+            "measurement_header",
+            "packages_header"
+          ]
+        },
+        {
+          "iteration": 2,
+          "html": "segment-05/iteration-02.html",
+          "rendered_png": "segment-05/iteration-02.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 1,
+          "ignored_css_errors": [
+            "Source text uses bold font for all header texts, rendered text is not bold"
+          ]
+        }
+      ],
+      "final_html": "segment-05/final.html",
+      "final_rendered_png": "segment-05/iteration-02.png"
+    },
+    {
+      "segment": 6,
+      "section": "Cargo particulars",
+      "source_png": "region-06-schema-block-6.png",
+      "output_directory": "segment-06",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-06/iteration-01.html",
+          "rendered_png": "segment-06/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 2,
+          "errors": [
+            "Missing text '20' at top of middle column",
+            "Missing text 'HS CODE:' prefixes before codes"
+          ],
+          "ignored_css_error_count": 7,
+          "ignored_css_errors": [
+            "Missing text 'FRESH APPLES' in bold in middle column",
+            "Missing text 'STOWAGE AT +2.0 DEGREES CELSIUS' in bold and all caps in middle column",
+            "Missing italic text 'Packaging: PALLETS' in middle column",
+            "Missing text 'SET TEMP:' prefixes before temperatures in blue color in middle column",
+            "Missing empty line spacing and horizontal lines around 'FREIGHT COLLECT' text",
+            "Missing 'FREIGHT COLLECT' text at bottom of middle column in bold and all caps",
+            "Missing 'MRDN7788990' and following lines before second list in left column"
+          ],
+          "repair_strategy": "named_cell_text_ocr",
+          "corrected_cells": [
+            "container_column",
+            "description_column",
+            "gross_weight_column",
+            "measurement_column",
+            "packages_column"
+          ]
+        },
+        {
+          "iteration": 2,
+          "html": "segment-06/iteration-02.html",
+          "rendered_png": "segment-06/iteration-02.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 8,
+          "ignored_css_errors": [
+            "Source block has 'MRDN4455667' and 'MRDN7788990' in bold, rendered block does not.",
+            "Source block has 'SEAL:' in normal weight with seal number in bold, rendered block has all normal weight.",
+            "Source block has 'MARKS:' with 'PALLETIZED' below it under each seal, rendered block has same but non-bold.",
+            "Source block numbers '20' in second column are in bold, rendered block has normal weight.",
+            "Source block lines in third column have bold headings (e.g. '20 PALLETS STC:', 'FRESH FRUIT', 'FRESH APPLES', 'STOWAGE AT +2.0 DEGREES CELSIUS') and italic 'Packaging: PALLETS', rendered block has these in normal text and underscores for italics (like '_Packaging: PALLETS_').",
+            "'SET TEMP:' lines are in blue in source but black in rendered (color ignored).",
+            "Source block has horizontal line above and below 'FREIGHT COLLECT' in third column, rendered block has '______________________________' lines instead; underscore lines are considered text differences as text characters, so difference noted.",
+            "The spacing between lines in third column and presence/removal of blank lines differ but this is formatting, not literal text difference."
+          ]
+        }
+      ],
+      "final_html": "segment-06/final.html",
+      "final_rendered_png": "segment-06/iteration-02.png"
+    },
+    {
+      "segment": 7,
+      "section": "Freight charges and package totals",
+      "source_png": "region-07-schema-block-7.png",
+      "output_directory": "segment-07",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-07/iteration-01.html",
+          "rendered_png": "segment-07/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 0,
+          "ignored_css_errors": []
+        }
+      ],
+      "final_html": "segment-07/final.html",
+      "final_rendered_png": "segment-07/iteration-01.png"
+    },
+    {
+      "segment": 8,
+      "section": "Legal terms issue details and signature",
+      "source_png": "region-08-schema-block-8.png",
+      "output_directory": "segment-08",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-08/iteration-01.html",
+          "rendered_png": "segment-08/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            "Text 'NUMBER OF ORIGINAL B/L'S: THREE (3)' is missing in the rendered HTML block."
+          ],
+          "ignored_css_error_count": 3,
+          "ignored_css_errors": [
+            "Text 'PLACE OF ISSUE' is in uppercase in source but in normal casing in rendered (expected uppercase).",
+            "Text 'DATE OF ISSUE' is in uppercase in source but in normal casing in rendered (expected uppercase).",
+            "The signature text 'Authorized Signature' is larger and separate in source but rendered inline and smaller under 'SIGNED FOR THE CARRIER'."
+          ],
+          "repair_strategy": "named_cell_text_ocr",
+          "corrected_cells": [
+            "carrier_signature",
+            "date_issue",
+            "legal_and_originals",
+            "place_issue"
+          ]
+        },
+        {
+          "iteration": 2,
+          "html": "segment-08/iteration-02.html",
+          "rendered_png": "segment-08/iteration-02.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            "Text 'NUMBER OF ORIGINAL B/L'S: THREE (3)' is missing in the rendered HTML block."
+          ],
+          "ignored_css_error_count": 2,
+          "ignored_css_errors": [
+            "The text 'Authorized Signature' is rendered in smaller font and in a different position than the source block, where it is large and right-aligned under 'SIGNED FOR THE CARRIER'.",
+            "'SIGNED FOR THE CARRIER' is uppercase in source but title case in rendered HTML."
+          ],
+          "repair_strategy": "named_cell_text_ocr",
+          "corrected_cells": [
+            "carrier_signature",
+            "date_issue",
+            "legal_and_originals",
+            "place_issue"
+          ]
+        },
+        {
+          "iteration": 3,
+          "html": "segment-08/iteration-03.html",
+          "rendered_png": "segment-08/iteration-03.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            "Text 'NUMBER OF ORIGINAL B/L'S: THREE (3)' is missing in the rendered HTML block."
+          ],
+          "ignored_css_error_count": 4,
+          "ignored_css_errors": [
+            "Text 'PLACE OF ISSUE', 'Antwerp', 'DATE OF ISSUE', and '2026-03-13' are not bold in the rendered HTML block while they are bold in the source block.",
+            "Text 'SIGNED FOR THE CARRIER' is bold in the source but normal in the rendered block.",
+            "Text 'Authorized Signature' is large in source but normal size in rendered block.",
+            "The rendered HTML block has 'Authorized Signature' text on a new line which differs from source where it is on the same line."
+          ],
+          "repair_strategy": "named_cell_text_ocr",
+          "corrected_cells": [
+            "carrier_signature",
+            "date_issue",
+            "legal_and_originals",
+            "place_issue"
+          ]
+        },
+        {
+          "iteration": 4,
+          "html": "segment-08/iteration-04.html",
+          "rendered_png": "segment-08/iteration-04.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            "Text 'NUMBER OF ORIGINAL B/L'S: THREE (3)' is missing in the rendered HTML block."
+          ],
+          "ignored_css_error_count": 1,
+          "ignored_css_errors": [
+            "Text 'Authorized Signature' appears twice in the rendered HTML block, once as a separate line and once under 'SIGNED FOR THE CARRIER'."
+          ],
+          "repair_strategy": "named_cell_text_ocr",
+          "corrected_cells": [
+            "carrier_signature",
+            "date_issue",
+            "legal_and_originals",
+            "place_issue"
+          ]
+        },
+        {
+          "iteration": 5,
+          "html": "segment-08/iteration-05.html",
+          "rendered_png": "segment-08/iteration-05.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            "Missing text 'NUMBER OF ORIGINAL B/L'S: THREE (3)' in rendered HTML block"
+          ],
+          "ignored_css_error_count": 1,
+          "ignored_css_errors": [
+            "'Authorized Signature' text is duplicated in rendered HTML block: once as large text and once as normal text"
+          ],
+          "repair_strategy": "named_cell_text_ocr",
+          "corrected_cells": [
+            "carrier_signature",
+            "date_issue",
+            "legal_and_originals",
+            "place_issue"
+          ]
+        },
+        {
+          "iteration": 6,
+          "html": "segment-08/iteration-06.html",
+          "rendered_png": "segment-08/iteration-06.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 4,
+          "ignored_css_errors": [
+            "The text 'Authorized Signature' appears as a printed phrase in the signature box in source but appears as a smaller regular text line in rendered HTML. This is a difference in case and formatting of the signature text.",
+            "The source block shows 'Authorized Signature' in large font, but the rendered HTML shows it in smaller line below 'SIGNED FOR THE CARRIER'.",
+            "In the rendered HTML, the headings 'PLACE OF ISSUE', 'DATE OF ISSUE', and 'SIGNED FOR THE CARRIER' are part of the text block, but in the source block they appear more bold and separated from the rest of the content. This is a presentation difference, so not an error.",
+            "The phrase 'NUMBER OF ORIGINAL B/L'S: THREE (3)' is missing in the rendered HTML block under the main text paragraph."
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "segment_count": 8,
+    "passed": 8,
+    "failed": 0,
+    "total_iterations": 18,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-10-10T03:03:10.620076+00:00"
+}

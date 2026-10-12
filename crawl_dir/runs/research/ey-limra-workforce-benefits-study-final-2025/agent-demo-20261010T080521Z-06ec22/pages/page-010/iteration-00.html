@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Employee Interest in Benefits by Generation</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 1rem;
+  }
+  header img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 2rem;
+  }
+  h2 {
+    font-weight: 700;
+    margin-top: 0;
+  }
+  strong, b {
+    font-weight: 700;
+  }
+  table {
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+  thead th {
+    border-bottom: 2px solid #000;
+    text-align: left;
+    padding: 0.25rem 0.5rem;
+  }
+  tbody td {
+    border-bottom: 1px solid #ddd;
+    padding: 0.25rem 0.5rem;
+  }
+  tbody tr td:first-child {
+    font-weight: normal;
+  }
+  .heatmap-key {
+    display: flex;
+    align-items: center;
+    max-width: 300px;
+    font-weight: bold;
+    margin-top: 2rem;
+  }
+  .heatmap-gradient {
+    flex-grow: 1;
+    height: 20px;
+    margin: 0 0.5rem;
+    background: linear-gradient(to right, #ee7567, #dff4e1, #1e8e3e);
+    border: 1px solid #ccc;
+  }
+  em {
+    font-style: italic;
+    font-weight: normal;
+    color: #555;
+  }
+  strong.heatmap-label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  section[aria-labelledby="heatmap-title"] {
+    margin-top: 2rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <img src="" alt="Office workplace scene with people working and greenery" />
+</header>
+
+<article>
+  <h2>Figure 6<br />Employee interest in benefits varies across generations.</h2>
+  <p><strong>QUESTION:</strong> Regardless of whether the benefit is currently available to you at work, how interested would you be in having your employer offer it in the future?</p>
+
+  <table summary="Percent of employees across generations very or extremely interested in having specific benefits offered by their employer in the future">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Gen Z</th>
+        <th scope="col">Millennials</th>
+        <th scope="col">Gen X</th>
+        <th scope="col">Baby boomers</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Medical insurance</td> <td style="background-color:#bce3b1">67%</td> <td style="background-color:#88d285">75%</td> <td style="background-color:#3bb134">86%</td> <td style="background-color:#52cc52">80%</td></tr>
+      <tr><td>Dental insurance</td> <td style="background-color:#a8db9d">61%</td> <td style="background-color:#7cc67a">72%</td> <td style="background-color:#61c46b">76%</td> <td style="background-color:#6ccf73">74%</td></tr>
+      <tr><td>Vision insurance</td> <td style="background-color:#d1ebd0">50%</td> <td style="background-color:#add7a8">61%</td> <td style="background-color:#7bcd7f">69%</td> <td style="background-color:#91d493">63%</td></tr>
+      <tr><td>Paid family or medical leave</td> <td style="background-color:#daeeda">54%</td> <td style="background-color:#cae7c2">57%</td> <td style="background-color:#d1ebd0">54%</td> <td style="background-color:#f0cdcd">43%</td></tr>
+      <tr><td>Life insurance</td> <td style="background-color:#def0de">48%</td> <td style="background-color:#d5e9d5">52%</td> <td style="background-color:#d8ead8">53%</td> <td style="background-color:#efcdcd">40%</td></tr>
+      <tr><td>Career development</td> <td style="background-color:#f0f5f0">40%</td> <td style="background-color:#ecf2ec">46%</td> <td style="background-color:#f5f9f5">37%</td> <td style="background-color:#f8d4d4">25%</td></tr>
+      <tr><td>Physical health wellness programs</td> <td style="background-color:#f1f7f1">39%</td> <td style="background-color:#f1f7f1">39%</td> <td style="background-color:#f5f9f5">34%</td> <td style="background-color:#f7d7d7">32%</td></tr>
+      <tr><td>Short-term disability insurance</td> <td style="background-color:#f8d4d4">24%</td> <td style="background-color:#f0f0f0">35%</td> <td style="background-color:#f2f6f2">41%</td> <td style="background-color:#f5f7f5">37%</td></tr>
+      <tr><td>Long-term disability insurance</td> <td style="background-color:#f9c3c3">22%</td> <td style="background-color:#f0f0f0">35%</td> <td style="background-color:#f3f7f3">40%</td> <td style="background-color:#f4f8f4">41%</td></tr>
+      <tr><td>Long-term care insurance</td> <td style="background-color:#f3e4e4">30%</td> <td style="background-color:#f6f7f6">31%</td> <td style="background-color:#f2f9f2">36%</td> <td style="background-color:#f8fcf8">42%</td></tr>
+      <tr><td>Accident insurance</td> <td style="background-color:#f1f9f1">39%</td> <td style="background-color:#f6f7f6">34%</td> <td style="background-color:#f8faf8">33%</td> <td style="background-color:#f9fcf9">32%</td></tr>
+      <tr><td>Critical illness insurance</td> <td style="background-color:#f6eaea">29%</td> <td style="background-color:#f9f9f9">33%</td> <td style="background-color:#fafafa">34%</td> <td style="background-color:#fdf9f9">33%</td></tr>
+      <tr><td>Emergency savings benefit</td> <td style="background-color:#f1f9f1">41%</td> <td style="background-color:#f9f9f9">34%</td> <td style="background-color:#fceded">30%</td> <td style="background-color:#fac7c7">18%</td></tr>
+      <tr><td>Identity theft protection</td> <td style="background-color:#f4f4f0">37%</td> <td style="background-color:#f9f9f9">31%</td> <td style="background-color:#fbfafa">27%</td> <td style="background-color:#f7d4d4">32%</td></tr>
+      <tr><td>Mental health or substance abuse treatment benefits</td> <td style="background-color:#e5f0e5">45%</td> <td style="background-color:#f9f9f9">33%</td> <td style="background-color:#fbdcdc">24%</td> <td style="background-color:#fbbdbd">19%</td></tr>
+      <tr><td>Employee assistance programs</td> <td style="background-color:#fbe1e1">28%</td> <td style="background-color:#f9f9f9">36%</td> <td style="background-color:#fbe1e1">28%</td> <td style="background-color:#fbbdbd">19%</td></tr>
+      <tr><td>Financial wellness programs</td> <td style="background-color:#f3f3f4">36%</td> <td style="background-color:#f9f9f9">33%</td> <td style="background-color:#fbdbdb">26%</td> <td style="background-color:#fdb0b0">17%</td></tr>
+      <tr><td>Telemedicine benefits</td> <td style="background-color:#f6e9e9">31%</td> <td style="background-color:#fcfcfc">29%</td> <td style="background-color:#f9cfcf">30%</td> <td style="background-color:#fda6a6">20%</td></tr>
+      <tr><td>Tuition assistance</td> <td style="background-color:#f1f9f1">40%</td> <td style="background-color:#f8f8f8">32%</td> <td style="background-color:#fbbdbd">24%</td> <td style="background-color:#f77d7d">11%</td></tr>
+      <tr><td>Student loan assistance/repayment</td> <td style="background-color:#f1f9f1">41%</td> <td style="background-color:#f8f8f8">32%</td> <td style="background-color:#fce3e3">19%</td> <td style="background-color:#f44848">7%</td></tr>
+      <tr><td>Hospital indemnity insurance</td> <td style="background-color:#f3e4e4">30%</td> <td style="background-color:#fbeeef">24%</td> <td style="background-color:#faebeb">27%</td> <td style="background-color:#fbecec">24%</td></tr>
+      <tr><td>Caregiving benefits</td> <td style="background-color:#f3e4e4">30%</td> <td style="background-color:#f9f3f3">27%</td> <td style="background-color:#fce6e6">20%</td> <td style="background-color:#fadee0">22%</td></tr>
+      <tr><td>Legal services plan</td> <td style="background-color:#f8d4d4">24%</td> <td style="background-color:#fbedea">26%</td> <td style="background-color:#fbdbdb">21%</td> <td style="background-color:#fbcfcf">19%</td></tr>
+      <tr><td>Debt management counseling</td> <td style="background-color:#f4f4f4">34%</td> <td style="background-color:#fbeeef">24%</td> <td style="background-color:#fae8e8">17%</td> <td style="background-color:#fac4c4">9%</td></tr>
+      <tr><td>Pet insurance</td> <td style="background-color:#fbdcdc">23%</td> <td style="background-color:#fbbdbd">19%</td> <td style="background-color:#fbbdbd">12%</td> <td style="background-color:#fac7c7">9%</td></tr>
+      <tr><td>Societal benefits</td> <td style="background-color:#f9c3c3">22%</td> <td style="background-color:#fdb0b0">15%</td> <td style="background-color:#fcabab">9%</td> <td style="background-color:#f74646">4%</td></tr>
+    </tbody>
+  </table>
+
+  <section aria-labelledby="heatmap-title">
+    <strong id="heatmap-title" class="heatmap-label">Heat map:</strong>
+    <div class="heatmap-key" aria-label="Heat map legend">
+      <span>Least interest</span>
+      <div class="heatmap-gradient" role="presentation"></div>
+      <span>Most interest</span>
+    </div>
+  </section>
+
+  <p><em>Note: Percent of employees who are “very” or “extremely” interested in having their employer offer the benefit in the future.</em></p>
+</article>
+
+</body>
+</html>

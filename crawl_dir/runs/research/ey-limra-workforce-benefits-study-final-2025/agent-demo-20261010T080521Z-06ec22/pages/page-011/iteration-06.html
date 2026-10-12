@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The LIMRA-EY Wheel of Wellness</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    color: #222;
+    margin: 1em;
+  }
+  h2 {
+    font-weight: 900;
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+    color: #000;
+  }
+  p {
+    max-width: 600px;
+    margin-bottom: 1.2em;
+  }
+  .wheel-column {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5em;
+  }
+  svg {
+    width: 320px;
+    height: 320px;
+    flex-shrink: 0;
+  }
+  text {
+    pointer-events: none;
+    user-select: none;
+    fill: #222;
+    font-weight: 700;
+    font-size: 18px;
+    font-family: Arial, sans-serif;
+  }
+  footer {
+    margin-top: 4em;
+    font-weight: 700;
+    font-size: 0.9em;
+  }
+</style>
+</head>
+<body>
+<main>
+  <h2>The LIMRA-EY Wheel of Wellness</h2>
+  <p>Focused on five key dimensions of health, the LIMRA-EY Wheel of Wellness can help organizations build a happier, healthier, more productive and financially secure workforce.</p>
+
+  <div class="wheel-column" aria-label="The LIMRA-EY Wheel of Wellness focused on five key dimensions">
+    <svg role="img" aria-labelledby="wheelTitle" width="320" height="320" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" >
+      <title id="wheelTitle">The LIMRA-EY Wheel of Wellness showing five dimensions: Physical, Mental, Financial, Societal, Professional</title>
+
+      <!-- Define clip paths with images as backgrounds for wedges -->
+      <defs>
+        <clipPath id="clipPhysical">
+          <path d="M160 160 L160 20 A140 140 0 0 1 252 80 Z" />
+        </clipPath>
+        <clipPath id="clipMental">
+          <path d="M160 160 L252 80 A140 140 0 0 1 269 165 Z" />
+        </clipPath>
+        <clipPath id="clipFinancial">
+          <path d="M160 160 L269 165 A140 140 0 0 1 197 255 Z" />
+        </clipPath>
+        <clipPath id="clipSocietal">
+          <path d="M160 160 L197 255 A140 140 0 0 1 123 255 Z" />
+        </clipPath>
+        <clipPath id="clipProfessional">
+          <path d="M160 160 L123 255 A140 140 0 0 1 160 20 Z" />
+        </clipPath>
+      </defs>
+
+      <!-- Physical wedge background image -->
+      <image clip-path="url(#clipPhysical)" x="20" y="0" width="280" height="280"
+        href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgwIiBoZWlnaHQ9IjI4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjgwIDI4MCI+PGltZyB3aWR0aD0iMjgwIiBoZWlnaHQ9IjI4MCIgeGxpbms6aHJlZj0iaHR0cHM6Ly9wbGFjZWhvbGRlci5jb20vMTI4MDAvZHVtdHkiLz48L3N2Zz4=" alt="Physical activity image" />
+      <!-- Mental wedge background image -->
+      <image clip-path="url(#clipMental)" x="20" y="0" width="280" height="280"
+        href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgwIiBoZWlnaHQ9IjI4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjgwIDI4MCI+PGltZyB3aWR0aD0iMjgwIiBoZWlnaHQ9IjI4MCIgeGxpbms6aHJlZj0iaHR0cHM6Ly9wbGFjZWhvbGRlci5jb20vMTI4MDAvZHVtdHkiLz48L3N2Zz4=" alt="Mental wellness image" />
+      <!-- Financial wedge background image -->
+      <image clip-path="url(#clipFinancial)" x="20" y="0" width="280" height="280"
+        href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgwIiBoZWlnaHQ9IjI4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjgwIDI4MCI+PGltZyB3aWR0aD0iMjgwIiBoZWlnaHQ9IjI4MCIgeGxpbms6aHJlZj0iaHR0cHM6Ly9wbGFjZWhvbGRlci5jb20vMTI4MDAvZHVtdHkiLz48L3N2Zz4=" alt="Financial image" />
+      <!-- Societal wedge background image -->
+      <image clip-path="url(#clipSocietal)" x="20" y="0" width="280" height="280"
+        href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgwIiBoZWlnaHQ9IjI4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjgwIDI4MCI+PGltZyB3aWR0aD0iMjgwIiBoZWlnaHQ9IjI4MCIgeGxpbms6aHJlZj0iaHR0cHM6Ly9wbGFjZWhvbGRlci5jb20vMTI4MDAvZHVtdHkiLz48L3N2Zz4=" alt="Societal image" />
+      <!-- Professional wedge background image -->
+      <image clip-path="url(#clipProfessional)" x="20" y="0" width="280" height="280"
+        href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgwIiBoZWlnaHQ9IjI4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgMjgwIDI4MCI+PGltZyB3aWR0aD0iMjgwIiBoZWlnaHQ9IjI4MCIgeGxpbms6aHJlZj0iaHR0cHM6Ly9wbGFjZWhvbGRlci5jb20vMTI4MDAvZHVtdHkiLz48L3N2Zz4=" alt="Professional image" />
+
+      <!-- White segments with thick white dividers -->
+      <g stroke="#fff" stroke-width="6" fill="none">
+        <path d="M160 160 L160 20 A140 140 0 0 1 252 80 Z" fill="white" />
+        <path d="M160 160 L252 80 A140 140 0 0 1 269 165 Z" fill="white" />
+        <path d="M160 160 L269 165 A140 140 0 0 1 197 255 Z" fill="white" />
+        <path d="M160 160 L197 255 A140 140 0 0 1 123 255 Z" fill="white" />
+        <path d="M160 160 L123 255 A140 140 0 0 1 160 20 Z" fill="white" />
+      </g>
+
+      <!-- Center white circle -->
+      <circle cx="160" cy="160" r="38" fill="white" />
+
+      <!-- Outer bright yellow continuous arrow ring -->
+      <circle cx="160" cy="160" r="140" fill="none" stroke="#ffde17" stroke-width="18" />
+      <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#ffde17" />
+        </marker>
+      </defs>
+      <path d="
+        M160 20
+        A140 140 0 1 1 80 70
+      " fill="none" stroke="#ffde17" stroke-width="18" marker-end="url(#arrowhead)" />
+
+      <!-- Labels placed clearly spaced outside each segment -->
+      <text x="160" y="45" text-anchor="middle" dominant-baseline="middle">Physical</text>
+      <text x="230" y="105" text-anchor="middle" dominant-baseline="middle">Mental</text>
+      <text x="230" y="190" text-anchor="middle" dominant-baseline="middle">Financial</text>
+      <text x="160" y="235" text-anchor="middle" dominant-baseline="middle">Societal</text>
+      <text x="90" y="190" text-anchor="middle" dominant-baseline="middle">Professional</text>
+    </svg>
+  </div>
+</main>
+<footer>
+  | <strong>Harnessing growth in workforce benefits:</strong> the next horizon | 2025 Workforce Benefits Study
+</footer>
+</body>
+</html>

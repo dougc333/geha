@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Digital misalignment in claims, quote and implementation processes</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.4;
+  }
+  .legend {
+    font-size: 0.9em;
+    margin-bottom: 1em;
+  }
+  .legend span {
+    display: inline-block;
+    margin-right: 1em;
+  }
+  .bar-chart {
+    margin: 1em 0 3em 10em;
+    max-width: 720px;
+  }
+  .bar-label {
+    width: 9em;
+    padding-right: 0.5em;
+    text-align: right;
+    font-size: 0.9em;
+    white-space: nowrap;
+  }
+  .bar {
+    display: inline-block;
+    height: 1.4em;
+    vertical-align: middle;
+    color: #fff;
+    font-size: 0.85em;
+    line-height: 1.4em;
+    text-align: right;
+    padding-right: 0.25em;
+    box-sizing: border-box;
+    white-space: nowrap;
+  }
+  .already-use { background-color: #004d40; }
+  .already-no-use { background-color: #357265; }
+  .do-have-want { background-color: #f29300; }
+  .do-not-have-no-want { background-color: #45a4a9; }
+  .dont-know { background-color: #7bded9; color: #000; }
+  section {
+    margin-bottom: 2em;
+  }
+  h2 {
+    font-size: 1.1em;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.3em;
+    margin-bottom: 0.5em;
+    width: fit-content;
+  }
+  footer {
+    font-size: 0.75em;
+    color: #000;
+    margin-top: 3em;
+  }
+  .note {
+    border-left: 3px solid #f9cb13;
+    padding-left: 1em;
+    margin-top: 3em;
+    margin-bottom: 3em;
+    font-weight: 600;
+  }
+  table.data-chart {
+    border-collapse: collapse;
+    margin-top: 0.5em;
+    margin-left: 10em;
+    font-size: 0.85em;
+    max-width: 720px;
+  }
+  table.data-chart th,
+  table.data-chart td {
+    border: 1px solid #ccc;
+    padding: 0.25em 0.5em;
+    text-align: center;
+  }
+  table.data-chart th {
+    background-color: #eee;
+  }
+  table.data-chart caption {
+    caption-side: bottom;
+    font-style: italic;
+    font-size: 0.8em;
+    margin-top: 0.5em;
+  }
+</style>
+</head>
+<body>
+
+<figure>
+  <figcaption>
+    <strong>Figure 18</strong><br />
+    <strong>Digital misalignment is most prevalent in claims, quote and implementation processes.</strong><br />
+    <strong>QUESTION:</strong> Indicate whether the benefit technology tool is available to you and whether you currently use it or would use it if it were available.
+  </figcaption>
+</figure>
+
+<div class="legend" aria-label="Legend for benefit technology tool availability and usage">
+  <span><span style="background:#004d40;width:10px;height:10px;display:inline-block;margin-right:0.3em;vertical-align:middle;"></span>Already have and use</span>
+  <span><span style="background:#357265;width:10px;height:10px;display:inline-block;margin-right:0.3em;vertical-align:middle;"></span>Already have but do not use</span>
+  <span><span style="background:#f29300;width:10px;height:10px;display:inline-block;margin-right:0.3em;vertical-align:middle;"></span>Do not have but want</span>
+  <span><span style="background:#45a4a9;width:10px;height:10px;display:inline-block;margin-right:0.3em;vertical-align:middle;"></span>Do not have and do not want</span>
+  <span><span style="background:#7bded9;width:10px;height:10px;display:inline-block;margin-right:0.3em;vertical-align:middle;"></span>Don't know</span>
+</div>
+
+<section aria-labelledby="quote-implementation-title">
+  <h2 id="quote-implementation-title">Quote and implementation</h2>
+  <div class="bar-chart" aria-label="Quote and implementation technology tool availability and usage percentages">
+    <div><span class="bar-label">Self-service/real-time quoting</span>
+      <span class="bar already-use" style="width:48%;">48%</span>
+      <span class="bar already-no-use" style="width:7%;">7%</span>
+      <span class="bar do-have-want" style="width:35%;">35%</span>
+      <span class="bar dont-know" style="width:5%;">5%</span>
+    </div>
+    <div><span class="bar-label">Automated data exchange</span>
+      <span class="bar already-use" style="width:57%;">57%</span>
+      <span class="bar already-no-use" style="width:8%;">8%</span>
+      <span class="bar do-have-want" style="width:24%;">24%</span>
+      <span class="bar dont-know" style="width:5%;">5%</span>
+    </div>
+    <div><span class="bar-label">Digital implementation of a new carrier or benefit</span>
+      <span class="bar already-use" style="width:63%;">63%</span>
+      <span class="bar already-no-use" style="width:9%;">9%</span>
+      <span class="bar do-have-want" style="width:23%;">23%</span>
+      <span class="bar dont-know" style="width:5%;">5%</span>
+    </div>
+    <div><span class="bar-label">Digital submission for evidence of insurability</span>
+      <span class="bar already-use" style="width:65%;">65%</span>
+      <span class="bar already-no-use" style="width:9%;">9%</span>
+      <span class="bar do-have-want" style="width:20%;">20%</span>
+      <span class="bar dont-know" style="width:6%;">6%</span>
+    </div>
+  </div>
+  <table class="data-chart" aria-label="Quote and implementation data chart">
+    <thead>
+      <tr>
+        <th>Technology Tool</th>
+        <th>Already have and use</th>
+        <th>Already have but do not use</th>
+        <th>Do not have but want</th>
+        <th>Don't know</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Self-service/real-time quoting</td>
+        <td>48%</td>
+        <td>7%</td>
+        <td>35%</td>
+        <td>5%</td>
+      </tr>
+      <tr>
+        <td>Automated data exchange</td>
+        <td>57%</td>
+        <td>8%</td>
+        <td>24%</td>
+        <td>5%</td>
+      </tr>
+      <tr>
+        <td>Digital implementation of a new carrier or benefit</td>
+        <td>63%</td>
+        <td>9%</td>
+        <td>23%</td>
+        <td>5%</td>
+      </tr>
+      <tr>
+        <td>Digital submission for evidence of insurability</td>
+        <td>65%</td>
+        <td>9%</td>
+        <td>20%</td>
+        <td>6%</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section aria-labelledby="enrollment-title">
+  <h2 id="enrollment-title">Enrollment</h2>
+  <div class="bar-chart" aria-label="Enrollment technology tool availability and usage percentages">
+    <div><span class="bar-label">Decision support tools for employees</span>
+      <span class="bar already-use" style="width:66%;">66%</span>
+      <span class="bar already-no-use" style="width:9%;">9%</span>
+      <span class="bar do-have-want" style="width:21%;">21%</span>
+      <span class="bar dont-know" style="width:4%;">4%</span>
+    </div>
+    <div><span class="bar-label">Personalized enrollment materials</span>
+      <span class="bar already-use" style="width:74%;">74%</span>
+      <span class="bar already-no-use" style="width:7%;">7%</span>
+      <span class="bar do-have-want" style="width:16%;">16%</span>
+      <span class="bar dont-know" style="width:3%;">3%</span>
+    </div>
+    <div><span class="bar-label">Digital employee communications on new benefits offerings</span>
+      <span class="bar already-use" style="width:76%;">76%</span>
+      <span class="bar already-no-use" style="width:8%;">8%</span>
+      <span class="bar do-have-want" style="width:13%;">13%</span>
+      <span class="bar dont-know" style="width:3%;">3%</span>
+    </div>
+    <div><span class="bar-label">E-signature capabilities</span>
+      <span class="bar already-use" style="width:84%;">84%</span>
+      <span class="bar already-no-use" style="width:5%;">5%</span>
+      <span class="bar do-have-want" style="width:9%;">9%</span>
+      <span class="bar dont-know" style="width:2%;">2%</span>
+    </div>
+    <div><span class="bar-label">Online enrollment</span>
+      <span class="bar already-use" style="width:86%;">86%</span>
+      <span class="bar already-no-use" style="width:7%;">7%</span>
+      <span class="bar do-have-want" style="width:4%;">4%</span>
+      <span class="bar dont-know" style="width:3%;">3%</span>
+    </div>
+  </div>
+  <table class="data-chart" aria-label="Enrollment data chart">
+    <thead>
+      <tr>
+        <th>Technology Tool</th>
+        <th>Already have and use</th>
+        <th>Already have but do not use</th>
+        <th>Do not have but want</th>
+        <th>Don't know</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Decision support tools for employees</td>
+        <td>66%</td>
+        <td>9%</td>
+        <td>21%</td>
+        <td>4%</td>
+      </tr>
+      <tr>
+        <td>Personalized enrollment materials</td>
+        <td>74%</td>
+        <td>7%</td>
+        <td>16%</td>
+        <td>3%</td>
+      </tr>
+      <tr>
+        <td>Digital employee communications on new benefits offerings</td>
+        <td>76%</td>
+        <td>8%</td>
+        <td>13%</td>
+        <td>3%</td>
+      </tr>
+      <tr>
+        <td>E-signature capabilities</td>
+        <td>84%</td>
+        <td>5%</td>
+        <td>9%</td>
+        <td>2%</td>
+      </tr>
+      <tr>
+        <td>Online enrollment</td>
+        <td>86%</td>
+        <td>7%</td>
+        <td>4%</td>
+        <td>3%</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section aria-labelledby="ongoing-service-title">
+  <h2 id="ongoing-service-title">Ongoing service</h2>
+  <div class="bar-chart" aria-label="Ongoing service technology tool availability and usage percentages">
+    <div><span class="bar-label">Live chat/chatbot</span>
+      <span class="bar already-use" style="width:54%;">54%</span>
+      <span class="bar do-not-have-no-want" style="width:12%;">12%</span>
+      <span class="bar do-have-want" style="width:23%;">23%</span>
+      <span class="bar dont-know" style="width:11%;">11%</span>
+    </div>
+    <div><span class="bar-label">Mobile app (for employer or employees)</span>
+      <span class="bar already-use" style="width:68%;">68%</span>
+      <span class="bar do-not-have-no-want" style="width:6%;">6%</span>
+      <span class="bar do-have-want" style="width:20%;">20%</span>
+      <span class="bar dont-know" style="width:6%;">6%</span>
+    </div>
+    <div><span class="bar-label">Online eligibility updates</span>
+      <span class="bar already-use" style="width:79%;">79%</span>
+      <span class="bar do-not-have-no-want" style="width:5%;">5%</span>
+      <span class="bar do-have-want" style="width:13%;">13%</span>
+      <span class="bar dont-know" style="width:3%;">3%</span>
+    </div>
+    <div><span class="bar-label">Online billing and payment</span>
+      <span class="bar already-use" style="width:89%;">89%</span>
+      <span class="bar do-not-have-no-want" style="width:5%;">5%</span>
+      <span class="bar do-have-want" style="width:4%;">4%</span>
+      <span class="bar"></span>
+    </div>
+  </div>
+  <table class="data-chart" aria-label="Ongoing service data chart">
+    <thead>
+      <tr>
+        <th>Technology Tool</th>
+        <th>Already have and use</th>
+        <th>Do not have and do not want</th>
+        <th>Do not have but want</th>
+        <th>Don't know</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Live chat/chatbot</td>
+        <td>54%</td>
+        <td>12%</td>
+        <td>23%</td>
+        <td>11%</td>
+      </tr>
+      <tr>
+        <td>Mobile app (for employer or employees)</td>
+        <td>68%</td>
+        <td>6%</td>
+        <td>20%</td>
+        <td>6%</td>
+      </tr>
+      <tr>
+        <td>Online eligibility updates</td>
+        <td>79%</td>
+        <td>5%</td>
+        <td>13%</td>
+        <td>3%</td>
+      </tr>
+      <tr>
+        <td>Online billing and payment</td>
+        <td>89%</td>
+        <td>5%</td>
+        <td>4%</td>
+        <td>0%</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section aria-labelledby="claims-title">
+  <h2 id="claims-title">Claims</h2>
+  <div class="bar-chart" aria-label="Claims technology tool availability and usage percentages">
+    <div><span class="bar-label">Same-day claims decisions</span>
+      <span class="bar already-use" style="width:32%;">32%</span>
+      <span class="bar do-not-have-no-want" style="width:6%;">6%</span>
+      <span class="bar do-have-want" style="width:52%;">52%</span>
+      <span class="bar dont-know" style="width:10%;">10%</span>
+    </div>
+    <div><span class="bar-label">Proactively trigger claims based on medical data</span>
+      <span class="bar already-use" style="width:42%;">42%</span>
+      <span class="bar do-not-have-no-want" style="width:7%;">7%</span>
+      <span class="bar do-have-want" style="width:41%;">41%</span>
+      <span class="bar dont-know" style="width:10%;">10%</span>
+    </div>
+    <div><span class="bar-label">Real-time integration for claims management with HRIS systems</span>
+      <span class="bar already-use" style="width:51%;">51%</span>
+      <span class="bar do-not-have-no-want" style="width:8%;">8%</span>
+      <span class="bar do-have-want" style="width:31%;">31%</span>
+      <span class="bar dont-know" style="width:10%;">10%</span>
+    </div>
+    <div><span class="bar-label">Integrated claims experience based on singular event</span>
+      <span class="bar already-use" style="width:58%;">58%</span>
+      <span class="bar do-not-have-no-want" style="width:8%;">8%</span>
+      <span class="bar do-have-want" style="width:28%;">28%</span>
+      <span class="bar dont-know" style="width:6%;">6%</span>
+    </div>
+    <div><span class="bar-label">Text messaging to employees regarding claims status</span>
+      <span class="bar already-use" style="width:55%;">55%</span>
+      <span class="bar do-not-have-no-want" style="width:7%;">7%</span>
+      <span class="bar do-have-want" style="width:26%;">26%</span>
+      <span class="bar dont-know" style="width:12%;">12%</span>
+    </div>
+    <div><span class="bar-label">Digital claims submission</span>
+      <span class="bar already-use" style="width:78%;">78%</span>
+      <span class="bar do-not-have-no-want" style="width:6%;">6%</span>
+      <span class="bar do-have-want" style="width:12%;">12%</span>
+      <span class="bar dont-know" style="width:4%;">4%</span>
+    </div>
+  </div>
+  <table class="data-chart" aria-label="Claims data chart">
+    <thead>
+      <tr>
+        <th>Technology Tool</th>
+        <th>Already have and use</th>
+        <th>Do not have and do not want</th>
+        <th>Do not have but want</th>
+        <th>Don't know</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Same-day claims decisions</td>
+        <td>32%</td>
+        <td>6%</td>
+        <td>52%</td>
+        <td>10%</td>
+      </tr>
+      <tr>
+        <td>Proactively trigger claims based on medical data</td>
+        <td>42%</td>
+        <td>7%</td>
+        <td>41%</td>
+        <td>10%</td>
+      </tr>
+      <tr>
+        <td>Real-time integration for claims management with HRIS systems</td>
+        <td>51%</td>
+        <td>8%</td>
+        <td>31%</td>
+        <td>10%</td>
+      </tr>
+      <tr>
+        <td>Integrated claims experience based on singular event</td>
+        <td>58%</td>
+        <td>8%</td>
+        <td>28%</td>
+        <td>6%</td>
+      </tr>
+      <tr>
+        <td>Text messaging to employees regarding claims status</td>
+        <td>55%</td>
+        <td>7%</td>
+        <td>26%</td>
+        <td>12%</td>
+      </tr>
+      <tr>
+        <td>Digital claims submission</td>
+        <td>78%</td>
+        <td>6%</td>
+        <td>12%</td>
+        <td>4%</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="note" role="note">
+  <strong>AI and the future of benefits:</strong> Our broker interviews confirmed that AI will likely be the primary driver of disruption, particularly relative to enrollment. Specifically, AI will drive more personalized recommendations and education. Brokers also recognize the transformative possibilities of AI in underwriting, claims and client service. The rise of agentic AI coupled with new data sources (e.g., genetics, biometrics) will make it easier to more accurately predict outcomes and enable automated decisioning once concerns related to data privacy are resolved.
+</div>
+
+<footer>
+  24 | <strong>Harnessing growth in workforce benefits:</strong> the next horizon | 2025 Workforce Benefits Study
+</footer>
+
+</body>
+</html>

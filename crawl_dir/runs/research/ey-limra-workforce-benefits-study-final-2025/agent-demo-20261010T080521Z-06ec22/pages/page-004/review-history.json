@@ -1,0 +1,38 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "chart_relationship",
+        "source_evidence": "Bar colors and labels correspond to employee size categories: Small (10-99 employees), Midsize (100-999 employees), Large (1,000 or more employees). The PDF shows these labels below each stacked bar.",
+        "html_evidence": "The bar chart in the candidate HTML uses year labels (2021, 2023, 2028) as aria-labels for the bars, and the change percentages are aligned vertically by year, not by employee size category. The bar categories are not labeled as Small, Midsize, Large, and the change labels reference years instead of size categories.",
+        "correction": "Update the stacked bar chart in HTML to label each bar with the proper company size category and employee range as in the PDF: Small (10-99 employees), Midsize (100-999 employees), Large (1,000 or more employees). Change labels should correspond to those categories with correct change percentages from 2023 (+7% for Small, +6% for Midsize, +5% for Large). Axis and category labeling must match the source PDF."
+      },
+      {
+        "category": "chart_data",
+        "source_evidence": "Values stacked in each bar by percent: Small: 57% (yellow), 40% (gray), 3% (light gray). Midsize: 64%, 35%, 1%. Large: 67%, 30%, 3%. Also change percentages from 2023 shown alongside each small, midsize, large category bar: +7%, +6%, +5%.",
+        "html_evidence": "The HTML tables and bar data use these same percentage values but associate them with years (2021, 2023, 2028) instead of employer sizes, which is contradictory to the PDF source.",
+        "correction": "Ensure the data displayed in the bars and the table clearly relate to employer size categories and not to years. The table heading should represent sizes, not years, or a separate table should be presented for year data if needed. The current table with years and colors is inconsistent with the visual chart from the PDF."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "chart_data",
+        "source_evidence": "Small employer bar segments: 57% more benefits, 40% about the same, 3% fewer benefits, +7% change from 2023; Midsize employer bar segments: 64% more benefits, 35% about the same, 1% fewer benefits, +6% change; Large employer bar segments: 67% more benefits, 30% about the same, 3% fewer benefits, +5% change. All data values appear correct and consistent with the source.",
+        "html_evidence": "<div class=\"yellow bar-segment\" style=\"height: 114px;\">57%</div> ... <div class=\"gray bar-segment\" style=\"height: 80px;\">40%</div> ... <div class=\"lightgray bar-segment\" style=\"height: 6px;\">3%</div> ... <div class=\"change change-small\">+7% change from 2023</div> ... <div class=\"yellow bar-segment\" style=\"height: 128px;\">64%</div> ... <div class=\"gray bar-segment\" style=\"height: 70px;\">35%</div> ... <div class=\"lightgray bar-segment\" style=\"height: 2px;\">1%</div> ... <div class=\"change change-midsize\">+6% change from 2023</div> ... <div class=\"yellow bar-segment\" style=\"height: 134px;\">67%</div> ... <div class=\"gray bar-segment\" style=\"height: 60px;\">30%</div> ... <div class=\"lightgray bar-segment\" style=\"height: 6px;\">3%</div> ... <div class=\"change change-large\">+5% change from 2023</div>",
+        "correction": "No correction needed for data values; data matches source."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Visual layout shows the yellow bar for Small is the shortest on left, then Midsize, then Large; the +7% change label is clearly aligned with Small, +6% with Midsize, +5% with Large. The vertical stacking order on the bars is correct from bottom to top: light gray, gray, yellow, with proportionate heights reflecting values.",
+        "html_evidence": "<div class=\"bar\" aria-label=\"Small employers with 57% more benefits, 40% about the same, and 3% fewer benefits\"> <div class=\"yellow bar-segment\" style=\"height: 114px;\">57%</div> <div class=\"gray bar-segment\" style=\"height: 80px;\">40%</div> <div class=\"lightgray bar-segment\" style=\"height: 6px;\">3%</div> <div class=\"change change-small\">+7% change from 2023</div> <div class=\"bar-label\">Small (10-99 employees)</div> </div> ... <div class=\"bar\" aria-label=\"Midsize employers with 64% more benefits, 35% about the same, and 1% fewer benefits\"> <div class=\"yellow bar-segment\" style=\"height: 128px;\">64%</div> <div class=\"gray bar-segment\" style=\"height: 70px;\">35%</div> <div class=\"lightgray bar-segment\" style=\"height: 2px;\">1%</div> <div class=\"change change-midsize\">+6% change from 2023</div> <div class=\"bar-label\">Midsize (100-999 employees)</div> </div> ... <div class=\"bar\" aria-label=\"Large employers with 67% more benefits, 30% about the same, and 3% fewer benefits\"> <div class=\"yellow bar-segment\" style=\"height: 134px;\">67%</div> <div class=\"gray bar-segment\" style=\"height: 60px;\">30%</div> <div class=\"lightgray bar-segment\" style=\"height: 6px;\">3%</div> <div class=\"change change-large\">+5% change from 2023</div> <div class=\"bar-label\">Large (1,000 or more employees)</div> </div>",
+        "correction": "The bars for Small, Midsize, and Large appear in the wrong horizontal order from left to right. The correct left-to-right order of employer size categories is Small, Midsize, Large as in the source PDF, but in the candidate the bars appear reversed vertically along the horizontal axis. The chart's bars and their labels must be rearranged so the left bar is Small, middle is Midsize, and right is Large with correct alignment of change percentages and labels."
+      }
+    ]
+  }
+]

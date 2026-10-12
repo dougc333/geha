@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "workflow": "authored_figure_spec_semantic_html",
+  "model": "claude-opus-5-5",
+  "spec": "/Users/dc/geha/crawl_dir/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs/page-005.json",
+  "created_at": "2026-10-10T12:36:24.973103+00:00",
+  "max_iterations_per_figure": 1,
+  "completion_requirement": "every printed percentage and label in the spec matches native PDF text inside the figure box",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "fig2",
+      "kind": "chart",
+      "title": "Figure 2 Worker participation in the gig economy is trending downward.",
+      "source_png": "figure-01-fig2.png",
+      "bounding_box": [
+        110,
+        1030,
+        750,
+        1770
+      ],
+      "output_directory": "figure-01",
+      "native_evidence": "figure-01/native-evidence.json",
+      "native_evidence_word_count": 66,
+      "value_evidence": "native_pdf_text",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "warnings": [],
+          "render_latency_ms": 439.7
+        }
+      ],
+      "selected_iteration": 1,
+      "selected_error_count": 0,
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-01.png"
+    },
+    {
+      "figure": 2,
+      "id": "fig3",
+      "kind": "chart",
+      "title": "Figure 3 Employers expect to use more freelance workers in the future.",
+      "source_png": "figure-02-fig3.png",
+      "bounding_box": [
+        765,
+        1030,
+        1415,
+        1820
+      ],
+      "output_directory": "figure-02",
+      "native_evidence": "figure-02/native-evidence.json",
+      "native_evidence_word_count": 66,
+      "value_evidence": "native_pdf_text",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-02/iteration-01.html",
+          "rendered_png": "figure-02/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "warnings": [],
+          "render_latency_ms": 443.8
+        }
+      ],
+      "selected_iteration": 1,
+      "selected_error_count": 0,
+      "final_html": "figure-02/final.html",
+      "final_rendered_png": "figure-02/iteration-01.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 2,
+    "passed": 2,
+    "failed": 0,
+    "total_iterations": 2,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-10-10T12:36:25.892499+00:00"
+}

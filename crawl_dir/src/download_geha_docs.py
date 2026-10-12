@@ -163,7 +163,7 @@ def parse_args() -> argparse.Namespace:
     project_dir = source_dir.parent
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, default=source_dir / "documents.json")
-    parser.add_argument("--output-dir", type=Path, default=project_dir / "downloads")
+    parser.add_argument("--output-dir", type=Path, default=project_dir / "raw")
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--timeout", type=float, default=60.0)
     parser.add_argument("--retries", type=int, default=3)

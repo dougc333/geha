@@ -1,0 +1,120 @@
+{
+  "status": "failed",
+  "source_sha256": "0bca64bef794a9d30e3b030755bfbe97873d391fc52728ae1baaeeb77646526d",
+  "page_count": 29,
+  "chunk_count": 98,
+  "table_count": 18,
+  "structural_errors": [
+    {
+      "page": 18,
+      "issue": "visual_verification_failed",
+      "verdict": "mismatch",
+      "errors": [
+        {
+          "category": "extra_text",
+          "source_evidence": "Figure 11 chart labels: The Candidate HTML shows 'Small (10-99 employees)', 'Midsize (100-999 employees)', and 'Large (1,000 or more employees)' clearly separated, matching source. However, in the rendered image, the 'Midsize' and 'Large' labels merge as 'Midsize (100-999 employees)Large (1.000 or more employees)' with no space or line break.",
+          "html_evidence": "<text class=\"axis-label\" x=\"290\" y=\"240\">Midsize (100-999 employees)</text> <text class=\"axis-label\" x=\"470\" y=\"240\">Large (1,000 or more employees)</text>",
+          "correction": "Correct spacing and line breaks in X-axis labels to separate 'Midsize (100-999 employees)' and 'Large (1,000 or more employees)' clearly, preventing merged text."
+        },
+        {
+          "category": "wrong_text",
+          "source_evidence": "Figure 11 chart: Source data shows for Small size, 50% gray and 50% yellow; Midsize 71% gray and 29% yellow; Large 64% gray and 36% yellow. The Candidate HTML bars seem correctly colored and sized, but the reading order and positions in the rendered candidate text are confusing and merge labels together, also the numeric values are correct but obscured by layout issues.",
+          "html_evidence": "Chart legend and bar colors match source, but bar labels for 'Midsize' and 'Large' are overlapping in rendered text: '(100-999 employees)Large (1.000 or more employees)'",
+          "correction": "Ensure clear visual separation of company size categories on labels to match source layout and readability."
+        }
+      ]
+    }
+  ],
+  "structural_warnings": [
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0002",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0008",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0016",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0019",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0024",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0032",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0043",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0044",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0055",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0081",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0083",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0084",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0085",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0086",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0087",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0088",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0090",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0091",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0092",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0093",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "ey-limra-workforce-benefits-study-final-2025-chunk-0094",
+      "issue": "context_too_short"
+    }
+  ],
+  "visual_verification": {
+    "status": "failed",
+    "required": true,
+    "passed_pages": 13,
+    "total_pages": 14
+  }
+}

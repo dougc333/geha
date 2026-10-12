@@ -1,0 +1,398 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "SHIPPER'S REF. EXP-35782",
+        "html_evidence": "<th scope=\"row\" aria-label=\"Shipper's reference\">Shipper's Ref.</th>\\n      <td>\\n        EXP-35782\\n      </td>",
+        "correction": "SHIPPER'S REF. text casing should be uppercase as in source, i.e., SHIPPER'S REF. (all caps)"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "CONSIGNEE (NEGOTIABLE ONLY IF CONSIGNED \"TO ORDER\")",
+        "html_evidence": "<th scope=\"row\" aria-label=\"Consignee (negotiable only if consigned 'to order')\">Consignee (Negotiable only if consigned \"to order\")</th>",
+        "correction": "Consignee header text should be all uppercase exactly as in source: CONSIGNEE (NEGOTIABLE ONLY IF CONSIGNED \"TO ORDER\")"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "NOTIFY PARTY (NO RESPONSIBILITY FOR FAILURE TO NOTIFY)",
+        "html_evidence": "<th scope=\"row\" aria-label=\"Notify Party (no responsibility for failure to notify)\">Notify Party (No Responsibility for Failure to Notify)</th>",
+        "correction": "Notify Party header text casing must be all uppercase exactly as in source: NOTIFY PARTY (NO RESPONSIBILITY FOR FAILURE TO NOTIFY)"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "DELIVERY AGENT",
+        "html_evidence": "<th scope=\"row\" aria-label=\"Delivery Agent\">Delivery Agent</th>",
+        "correction": "DELIVERY AGENT header should be all uppercase as in source: DELIVERY AGENT"
+      },
+      {
+        "category": "layout",
+        "source_evidence": "SHIPPER DETAILS ARE IN SEPARATE BOXES ALIGNED IN A GRID",
+        "html_evidence": "<form method=\"post\" action=\"#\" aria-label=\"Shipping details and references\" class=\"parties\" role=\"form\" autocomplete=\"off\" spellcheck=\"false\">... uses a form and table layout but combines shipper, consignee, notify, booking ref etc inline in fewer rows.",
+        "correction": "Reproduce the grid layout with distinct boxed areas for Shipper, Booking Ref, Shipper's Ref, Consignee, Pre-Carriage By, Place of Receipt, Notify Party, Delivery Agent, as separate cells as in the source PDF."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "SHIPPER FRUTAS DEL SOL S.A. block separate from Booking Ref and Shipper's Ref",
+        "html_evidence": "Shipper, Booking Ref, Shipper's Ref mixed in one row with inline bold text labels",
+        "correction": "Separate reading order for shipper info, booking ref, shipper's ref must be distinct blocks, not concatenated inline"
+      },
+      {
+        "category": "layout",
+        "source_evidence": "OCEAN VESSEL / VOYAGE, PORT OF LOADING, PORT OF DISCHARGE in aligned boxes horizontally",
+        "html_evidence": "<table class=\"voyage-ports\" aria-label=\"Ocean vessel, voyage and ports\">... uses a simple table, but content matches visually",
+        "correction": "Layout and content correct, but verify spacing matches source's equal-sized boxes"
+      },
+      {
+        "category": "layout",
+        "source_evidence": "FREIGHT COLLECT text horizontally centered in separate box under cargo details",
+        "html_evidence": "<td colspan=\"5\" class=\"freight-collect-block\" aria-label=\"Freight collect notice\">FREIGHT COLLECT</td>",
+        "correction": "Correct representation of 'FREIGHT COLLECT' with text center alignment and horizontal line above and below as in source"
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Freight & Charges and Total Number of Packages side by side with border",
+        "html_evidence": "<div class=\"freight-charges\" aria-label=\"Freight charges and total number of packages\">...</div>",
+        "correction": "Visual layout uses flex box instead of table but appears consistent in positioning and border usage"
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Section with carrier conditions in block with border and smaller font",
+        "html_evidence": "<section class=\"legal-text\" aria-label=\"Carrier conditions and terms\">...</section>",
+        "correction": "Legal text present with border and smaller font, matching source content, correct"
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Place of Issue, Date of Issue, Signed for the Carrier in separate adjacent boxes horizontally with signature aligned right",
+        "html_evidence": "<div class=\"issue-sig\" role=\"contentinfo\" aria-label=\"Issue details and authorized signature\">...</div>",
+        "correction": "Content present but 'Signed for the Carrier' and 'Authorized Signature' text run together without adequate spacing causing them to concatenate horizontally (they appear visually unseparated) - this is a reading order and spacing issue"
+      },
+      {
+        "category": "extra_text",
+        "source_evidence": "No extra text beyond source content visible",
+        "html_evidence": "N/A",
+        "correction": "No extra text found"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "NUMBER OF ORIGINAL B/L'S: THREE (3) at bottom center above footer",
+        "html_evidence": "<div class=\"original-bls\" aria-label=\"Number of original Bills of Lading\">Number of original B/L's: Three (3)</div>",
+        "correction": "Present and correct at bottom"
+      },
+      {
+        "category": "table_structure",
+        "source_evidence": "Container Nos and details are in two separate rows, description spans those two rows",
+        "html_evidence": "Cargo particulars table uses rowspan for description, gross wt, measurement columns across two container rows",
+        "correction": "Correct rowspans present matching source PDF grouping of description and measurements with containers"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "18,500 KGS with comma in weight",
+        "html_evidence": "18,500<br />KGS",
+        "correction": "Comma present in gross weight as in source, correct"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "SET TEMP: +2°C and +1°C in blue monospace font",
+        "html_evidence": "<span class=\"blue-text\">SET TEMP: +2°C</span>",
+        "correction": "Correct colored text for temperature settings in monospace and blue matching source"
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "missing_text",
+        "source_evidence": "CONSIGNEE (NEGOTIABLE ONLY IF CONSIGNED \"TO ORDER\") FRESH FRUIT IMPORTERS B.V. Handelsweg 12, 2988 DB Ridderkerk, Netherlands TEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com",
+        "html_evidence": "<td class=\"value-cell\" aria-labelledby=\"CONSIGNEE\">\n<strong>FRESH FRUIT IMPORTERS B.V.</strong><br />\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands<br />\n<span class=\"contact-info\">\nTEL: <a href=\"tel:+15551234567\" class=\"tel\">+1 (555) 123-4567</a> | EMAIL: <a href=\"mailto:billing@techcorp.com\" class=\"email\">billing@techcorp.com</a>\n</span>",
+        "correction": "Add missing commas in address: 'Handelsweg 12, 2988 DB Ridderkerk, Netherlands' present but verify exact punctuation spacing to match source."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "ROTTERDAM, NETHERLANDS",
+        "html_evidence": "ROTTERDAM, NETHERLANDS",
+        "correction": "Correct 'Netherlands' to 'Netherlands' is correct, no error here."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "MRDN4455667 SEAL: MSK112233 MARKS: PALLETIZED 20",
+        "html_evidence": "<td>\n<strong>MRDN4455667</strong><br />\nSEAL: <strong>MSK112233</strong><br /><br />\nMARKS:<br />\nPALLETIZED\n</td>\n<td style=\"text-align:center; font-weight: 900; font-size:1.2rem;\">20</td>",
+        "correction": "No error - content matches."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "FRESH APPLES STOWAGE AT +2.0 DEGREES CELSIUS Packaging: PALLETS HS CODE: 08081080 SET TEMP: +2°C",
+        "html_evidence": "<strong>FRESH APPLES</strong><br />\n<strong>STOWAGE AT +2.0 DEGREES CELSIUS</strong><br />\n<span class=\"inline-italic\">Packaging: PALLETS</span><br /><br />\n<span class=\"cargo-hscode\">HS CODE: 08081080</span><br />\n<span class=\"blue-text\">SET TEMP: +2°C</span>",
+        "correction": "No error - content visually matches source."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "FRESH PEARS STOWAGE AT +1.0 DEGREES CELSIUS Packaging: PALLETS HS CODE: 08083090 SET TEMP: +1°C",
+        "html_evidence": "<strong>FRESH PEARS</strong><br />\n<strong>STOWAGE AT +1.0 DEGREES CELSIUS</strong><br />\n<span class=\"inline-italic\">Packaging: PALLETS</span><br /><br />\n<span class=\"cargo-hscode\">HS CODE: 08083090</span><br />\n<span class=\"blue-text\">SET TEMP: +1°C</span>",
+        "correction": "No error - content visually matches source."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "FREIGHT & CHARGES OCEAN FREIGHT COLLECT THC",
+        "html_evidence": "<div class=\"freight-charges\" aria-label=\"Freight charges and total number of packages\">\n  <div aria-label=\"Freight and charges details\" style=\"display:flex; flex-direction: column; justify-content: center;\">\n    <div><strong>OCEAN FREIGHT</strong></div>\n    <div><strong>THC</strong></div>\n    <div>COLLECT</div>\n  </div>",
+        "correction": "No error - matches source content and layout."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "RECEIVED BY THE Carrier ... TERMS AND CONDITIONS OF THE CARRIER'S APPLICABLE TARIFF AS IF THEY WERE ALL SIGNED BY THE MERCHANT.",
+        "html_evidence": "<section class=\"legal-text\" aria-label=\"Carrier conditions and terms\">\nRECEIVED BY THE CARRIER IN APPARENT GOOD ORDER AND CONDITION (UNLESS OTHERWISE STATED HEREIN) ... TERMS AND CONDITIONS OF THE CARRIER'S APPLICABLE TARIFF AS IF THEY WERE ALL SIGNED BY THE MERCHANT.\n</section>",
+        "correction": "No error - fully present."
+      },
+      {
+        "category": "other",
+        "source_evidence": "FREIGHT COLLECT line and layout",
+        "html_evidence": "<tr>\n  <td colspan=\"5\" class=\"freight-collect-block\" aria-label=\"Freight collect notice\">\n    FREIGHT COLLECT\n  </td>\n</tr>",
+        "correction": "OK as semantic table row with colspan instead of separate block, acceptable layout variation."
+      },
+      {
+        "category": "extra_text",
+        "source_evidence": "Footer line 'FRUTAS DEL SOL S.A. • +54 11 4789 1234 • logist...com.ar' as plain text",
+        "html_evidence": "<footer class=\"footer\" role=\"contentinfo\" aria-label=\"Carrier footer contact information\">\n  FRUTAS DEL SOL S.A. &middot; +54 11 4789 1234 &middot; <a href=\"mailto:logistica@frutasdelsol.com.ar\">logistica@frutasdelsol.com.ar</a>\n</footer>",
+        "correction": "Footer email should be plain text as in source, not hyperlink."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "Delivery Agent email in PDF: dispatch@logitrans.com",
+        "html_evidence": "<strong style=\"text-transform:none;\">Tel: <a href=\"tel:+31101234567\" class=\"tel\">+31 10 123 4567</a> | dispatch@logitrans.com</strong>",
+        "correction": "Render the delivery agent email as a separate mailto link exactly as in source: Email: dispatch@logitrans.com"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Description of Goods: \"20 PALLETS STC:\\nFRESH FRUIT\\n\\nFRESH PEARS\\nSTOWAGE AT +1.0 DEGREES CELSIUS\\nPackaging: PALLETS\\nHS CODE: 08083090\\nSET TEMP: +1°C\"",
+        "html_evidence": "No mention of 'FRESH PEARS', stowage at +1.0 degrees Celsius section, HS code 08083090, and SET TEMP +1°C in the Description of Goods cell; only partial description shown.",
+        "correction": "Include the missing second product description for fresh pears with full details in the DESCRIPTION OF GOODS cell."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Description of Goods includes HS Code and temperature info: 'HS CODE: 08081080', 'SET TEMP: +2°C' and similarly for pears 'HS CODE: 08083090', 'SET TEMP: +1°C'",
+        "html_evidence": "The blue text temperature lines are shown as 'SET TEMP: +2°C' only for apples, but missing for pears section.",
+        "correction": "Add HS CODE and SET TEMP lines for pears as in source."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Footer text: 'FRUTAS DEL SOL S.A. • +54 11 4789 1234 • logistica@frutasdelsol.com.ar'",
+        "html_evidence": "Footer shows the same content correctly styled.",
+        "correction": "No correction needed."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "PDF shows the 'SHIPPER'S REF.' and its value in separate cells side by side, with 'EXP-35782' under 'SHIPPER'S REF.'",
+        "html_evidence": "In HTML, 'SHIPPER'S REF.' and 'EXP-35782' are split across separate cells, possibly breaking the grouping as in the source, but this is minor and consistent with a column layout.",
+        "correction": "No significant correction required."
+      }
+    ]
+  },
+  {
+    "iteration": 3,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "missing_text",
+        "source_evidence": "MRDN4455667\nSEAL: MSK112233\nMARKS: PALLETIZED\n20\n20 PALLETS STC: FRESH FRUIT\nFRESH APPLES STOWAGE AT +2.0 DEGREES CELSIUS\nPackaging: PALLETS\nHS CODE: 08081080\nSET TEMP: +2°C\nMRDN7788990\nSEAL: MSK445566\nMARKS: PALLETIZED\n20\n20 PALLETS STC: FRESH FRUIT\nFRESH PEARS STOWAGE AT +1.0 DEGREES CELSIUS\nPackaging: PALLETS\nHS CODE: 08083090\nSET TEMP: +1°C",
+        "html_evidence": "<td rowspan=\"2\" class=\"description\" style=\"white-space: pre-wrap; font-weight: 700; text-transform: uppercase;\">\n        20 PALLETS STC:<br />\n        FRESH FRUIT<br /><br />\n        <strong>FRESH APPLES</strong><br />\n        <strong>STOWAGE AT +2.0 DEGREES CELSIUS</strong><br />\n        <span class=\"inline-italic\">Packaging: PALLETS</span><br /><br />\n        <span class=\"cargo-hscode\">HS CODE: 08081080</span><br />\n        <span class=\"blue-text\">SET TEMP: +2\u00186C</span><br /><br />\n        <hr style=\"border:0.8px solid #000; margin: 1.2rem 0;\" />\n        20 PALLETS STC:<br />\n        FRESH FRUIT<br /><br />\n        <strong>FRESH PEARS</strong><br />\n        <strong>STOWAGE AT +1.0 DEGREES CELSIUS</strong><br />\n        <span class=\"inline-italic\">Packaging: PALLETS</span><br /><br />\n        <span class=\"cargo-hscode\">HS CODE: 08083090</span><br />\n        <span class=\"blue-text\">SET TEMP: +1\u00186C</span>\n      </td>",
+        "correction": "The HTML is missing the 'FRESH FRUIT' text under '20 PALLETS STC:' for both apples and pears sections inside the DESCRIPTION OF GOODS column."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "PORT OF DISCHARGE\nROTTERDAM, NETHERLANDS",
+        "html_evidence": "<th scope=\"col\">PORT OF DISCHARGE</th>\n      <td>ROTTERDAM, NETHERLANDS</td>",
+        "correction": "The correct port of discharge should be 'ROTTERDAM, NETHERLANDS' as in the source. The HTML has this correct, so no error here."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "NUMBER OF ORIGINAL B/L'S: THREE (3)",
+        "html_evidence": "<div class=\"original-bls\" aria-label=\"Number of original Bills of Lading\">\n  NUMBER OF ORIGINAL B/L'S: THREE (3)\n</div>",
+        "correction": "This text is correctly present, no error."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "SHIPPER\nFRUTAS DEL SOL S.A.\nAv. de los Incas 456, Buenos Aires, Argentina\nTEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+        "html_evidence": "<td class=\"label-cell\" scope=\"row\" aria-label=\"SHIPPER\">SHIPPER</td>\n      <td class=\"value-cell\" aria-labelledby=\"SHIPPER\">\n        <strong>FRUTAS DEL SOL S.A.</strong><br />\n        Av. de los Incas 456, Buenos Aires, Argentina<br />\n        <span class=\"contact-info\">\n          TEL: <a href=\"tel:+541147891234\" class=\"tel\">+54 11 4789 1234</a> | EMAIL: <a href=\"mailto:logistica@frutasdelsol.com.ar\" class=\"email\">logistica@frutasdelsol.com.ar</a>\n        </span>\n      </td>",
+        "correction": "The shipper column in the PDF spans horizontally only two columns. The HTML uses six columns in the first row, splitting shipper across two separate cells, but place of receipt and shipper's ref do not line up as in the PDF. The layout in HTML does not match the PDF's grid arrangement exactly, causing structural discrepancies."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "CONSIGNEE (NEGOTIABLE ONLY IF CONSIGNED \"TO ORDER\")\nFRESH FRUIT IMPORTERS B.V.\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands\nTEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com",
+        "html_evidence": "<td class=\"label-cell\" scope=\"row\" aria-label=\"CONSIGNEE (NEGOTIABLE ONLY IF CONSIGNED 'TO ORDER')\">CONSIGNEE (NEGOTIABLE ONLY IF CONSIGNED \"TO ORDER\")</td>\n      <td class=\"value-cell\" aria-labelledby=\"CONSIGNEE\">\n        <strong>FRESH FRUIT IMPORTERS B.V.</strong><br />\n        Handelsweg 12, 2988 DB, Ridderkerk, Netherlands<br />\n        <span class=\"contact-info\">\n          TEL: <a href=\"tel:+15551234567\" class=\"tel\">+1 (555) 123-4567</a> | EMAIL: <a href=\"mailto:billing@techcorp.com\" class=\"email\">billing@techcorp.com</a>\n        </span>\n      </td>\n      <td class=\"label-cell\" scope=\"row\" aria-label=\"PRE-CARRIAGE BY\">PRE-CARRIAGE BY</td>\n      <td class=\"value-cell\" aria-labelledby=\"PRE-CARRIAGE BY\" colspan=\"3\" style=\"font-weight: 700; text-transform: none;\">\n        Oceanic Meridian Lines\n      </td>",
+        "correction": "In the PDF, 'PRE-CARRIAGE BY' is the entire right column cell. The HTML correctly uses colspan=3 for pre-carriage by. No textual error but ensure the structure matches visually the PDF's two-column pairing for these cells."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "NOTIFY PARTY (NO RESPONSIBILITY FOR FAILURE TO NOTIFY)\nFRESH FRUIT IMPORTERS B.V.\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands\nTEL: +31 10 123 4567 | EMAIL: dispatch@logitrans.com",
+        "html_evidence": "<td class=\"label-cell\" scope=\"row\" aria-label=\"NOTIFY PARTY (NO RESPONSIBILITY FOR FAILURE TO NOTIFY)\">NOTIFY PARTY (NO RESPONSIBILITY FOR FAILURE TO NOTIFY)</td>\n      <td class=\"value-cell\" aria-labelledby=\"NOTIFY PARTY\">\n        <strong>FRESH FRUIT IMPORTERS B.V.</strong><br />\n        Handelsweg 12, 2988 DB, Ridderkerk, Netherlands<br />\n        <span class=\"contact-info\">\n          TEL: <a href=\"tel:+31101234567\" class=\"tel\">+31 10 123 4567</a> | EMAIL: <a href=\"mailto:dispatch@logitrans.com\" class=\"email\">dispatch@logitrans.com</a>\n        </span>\n      </td>\n      <td class=\"label-cell\" scope=\"row\" aria-label=\"DELIVERY AGENT\">DELIVERY AGENT</td>\n      <td class=\"value-cell\" aria-labelledby=\"DELIVERY AGENT\" colspan=\"3\" style=\"font-weight: 700; text-transform: none;\">\n        LogiTrans Global<br />\n        88 Harbor Road, Rotterdam, 3011 AA<br />\n        Tel: <a href=\"tel:+31101234567\" class=\"tel\">+31 10 123 4567</a><br />\n        Email: <a href=\"mailto:dispatch@logitrans.com\" class=\"email\">dispatch@logitrans.com</a>\n      </td>",
+        "correction": "Same as above, layout matches, no detected textual errors."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "FREIGHT & CHARGES\nOCEAN FREIGHT\nCOLLECT\nTHC\nTOTAL NUMBER OF PACKAGES\n40",
+        "html_evidence": "<div class=\"freight-charges\" aria-label=\"Freight charges and total number of packages\">\n  <div aria-label=\"Freight and charges details\" style=\"display:flex; flex-direction: column; justify-content: center;\">\n    <div><strong>OCEAN FREIGHT</strong></div>\n    <div><strong>THC</strong></div>\n    <div>COLLECT</div>\n  </div>\n  <div aria-label=\"Total number of packages\" style=\"font-size: 2.1rem; font-weight: 900; display: flex; justify-content: center; align-items: center;\">\n    40\n  </div>\n</div>",
+        "correction": "The HTML reverses 'COLLECT' and 'THC' labels; PDF shows 'OCEAN FREIGHT' with 'COLLECT' aligned right, then 'THC' below but no value shown. The HTML shows 'OCEAN FREIGHT', 'THC', then 'COLLECT'. 'COLLECT' meaning is unclear if for ocean freight only or both."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "FREIGHT COLLECT",
+        "html_evidence": "<tr>\n      <td colspan=\"5\" class=\"freight-collect-block\" aria-label=\"Freight collect notice\">\n        FREIGHT COLLECT\n      </td>\n    </tr>",
+        "correction": "Present in HTML, no error."
+      }
+    ]
+  },
+  {
+    "iteration": 4,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "missing_text",
+        "source_evidence": "20 PALLETS STC:\\nFRESH PEARS\\nSTOWAGE AT +1.0 DEGREES CELSIUS\\nPackaging: PALLETS\\nHS CODE: 08083090\\nSET TEMP: +1°C",
+        "html_evidence": "The description of goods for fresh pears and related details are completely missing from the candidate HTML, only fresh apples details are present.",
+        "correction": "Add the full description block for FRESH PEARS including stowage temperature +1.0 degrees Celsius, packaging, HS code 08083090, and set temp +1°C exactly as in the source."
+      }
+    ]
+  },
+  {
+    "iteration": 5,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "missing_text",
+        "source_evidence": "CONSIGNEE (NEGOTIABLE ONLY IF CONSIGNED \"TO ORDER\")\\nFRESH FRUIT IMPORTERS B.V.\\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands\\nTEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com",
+        "html_evidence": "<td class=\"value-cell\" aria-labelledby=\"CONSIGNEE\" colspan=\"2\">\\n        <strong>FRESH FRUIT IMPORTERS B.V.</strong><br />\\n        Handelsweg 12, 2988 DB, Ridderkerk, Netherlands<br />\\n        <span class=\"contact-info\">\\n          TEL: <a href=\"tel:+15551234567\" class=\"tel\">+1 (555) 123-4567</a> | EMAIL: <a href=\"mailto:billing@techcorp.com\" class=\"email\">billing@techcorp.com</a>\\n        </span>\\n      </td>",
+        "correction": "Remove the comma after '2988 DB' in address to match source exactly 'Handelsweg 12, 2988 DB Ridderkerk, Netherlands'."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "HANDLESWEG 12, 2988 DB RIDDERKERK, NETHERLANDS",
+        "html_evidence": "Handelsweg 12, 2988 DB, Ridderkerk, Netherlands",
+        "correction": "Remove the comma after '2988 DB' and capitalize 'Ridderkerk' as in source to 'Handelsweg 12, 2988 DB Ridderkerk, Netherlands'."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "SHIPPER\\nFRUTAS DEL SOL S.A.\\nAv. de los Incas 456, Buenos Aires, Argentina\\nTEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+        "html_evidence": "<td class=\"value-cell\" aria-labelledby=\"SHIPPER\" colspan=\"2\">\\n        <strong>FRUTAS DEL SOL S.A.</strong><br />\\n        Av. de los Incas 456, Buenos Aires, Argentina<br />\\n        <span class=\"contact-info\">\\n          TEL: <a href=\"tel:+541147891234\" class=\"tel\">+54 11 4789 1234</a> | EMAIL: <a href=\"mailto:logistica@frutasdelsol.com.ar\" class=\"email\">logistica@frutasdelsol.com.ar</a>\\n        </span>\\n      </td>",
+        "correction": "Remove trailing comma after Buenos Aires in address; consistent with source 'Av. de los Incas 456, Buenos Aires, Argentina'."
+      },
+      {
+        "category": "extra_text",
+        "source_evidence": "SHIPPER\\nFRUTAS DEL SOL S.A.\\nAv. de los Incas 456, Buenos Aires, Argentina",
+        "html_evidence": "Av. de los Incas 456, Buenos Aires, Argentina,",
+        "correction": "Remove extra comma after Buenos Aires in address."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "BILL OF LADING\\nB/L NO.\\nBL232472785\\nSCAC\\nMRDN",
+        "html_evidence": "<h2 id=\"bill-lading-title\">BILL OF LADING</h2>\\n      <div class=\"bill-lading-id\" style=\"margin-top:0.6rem; display:grid; grid-template-columns:auto auto; gap:1rem;\">\\n        <div><span>B/L NO.</span><br /><strong>BL232472785</strong></div>\\n        <div><span>SCAC</span><br /><strong>MRDN</strong></div>\\n      </div>",
+        "correction": "No errors, matched."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "SHIPPER\\n...\\nBOOKING REF.\\nBKG5917532\\nSHIPPER'S REF.\\nEXP-35782\\n...",
+        "html_evidence": "<tr>\\n  <td class=\"label-cell\" scope=\"row\" aria-label=\"SHIPPER\">SHIPPER</td>\\n  <td class=\"value-cell\" aria-labelledby=\"SHIPPER\" colspan=\"2\">...</td>\\n  <td class=\"label-cell\" scope=\"row\" aria-label=\"BOOKING REF.\">BOOKING REF.</td>\\n  <td class=\"value-cell\" aria-labelledby=\"BOOKING REF.\" style=\"font-weight: 900; text-transform: uppercase;\">BKG5917532</td>\\n  <td class=\"label-cell\" scope=\"row\" aria-label=\"SHIPPER'S REF.\" style=\"font-weight: 900; text-transform: uppercase;\">SHIPPER'S REF.</td>\\n  <td class=\"value-cell\" aria-labelledby=\"SHIPPER'S REF.\" style=\"font-weight: 700; text-transform: none;\">EXP-35782</td>\\n</tr>",
+        "correction": "No reading order error; matches source layout."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "HS CODE: 08083090\\nSET TEMP: +1°C",
+        "html_evidence": "<span class=\"cargo-hscode\">HS CODE: 08081080</span><br />\\n<span class=\"blue-text\">SET TEMP: +2°C</span>",
+        "correction": "Add second HS CODE and SET TEMP entries with HS CODE: 08083090 and SET TEMP: +1°C as in source, currently missing in HTML (only first HS CODE and SET TEMP shown)."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "FRESH PEARS\\nSTOWAGE AT +1.0 DEGREES CELSIUS",
+        "html_evidence": "No separate fresh pears text present, only fresh apples and fresh fruit generally.",
+        "correction": "Include fresh pears and related stowage details under second cargo in description column."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "CONTAINER NO. / SEAL NO.\\nMRDN4455667\\nSEAL: MSK112233\\nMARKS: PALLETIZED\\nMRDN7788990\\nSEAL: MSK445566\\nMARKS: PALLETIZED",
+        "html_evidence": "Two separate rows for each container, but description cell rowspan=2 combining description for both containers into single cell, and gross weight and measurement cells rowspan=2 combining values.",
+        "correction": "Layout acceptable though differs visually; no major structural issue detected."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "FREIGHT COLLECT",
+        "html_evidence": "<td colspan=\"5\" class=\"freight-collect-block\" aria-label=\"Freight collect notice\">FREIGHT COLLECT</td>",
+        "correction": "No error, matches source."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "OCEAN FREIGHT\\nCOLLECT\\nTHC",
+        "html_evidence": "<div><strong>OCEAN FREIGHT</strong></div>\\n<div>COLLECT</div>\\n<div><strong>THC</strong></div>",
+        "correction": "No error, matches."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "NUMBER OF ORIGINAL B/L'S: THREE (3)",
+        "html_evidence": "<div class=\"original-bls\" aria-label=\"Number of original Bills of Lading\">\\n  NUMBER OF ORIGINAL B/L'S: THREE (3)\\n</div>",
+        "correction": "No error."
+      }
+    ]
+  },
+  {
+    "iteration": 6,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "missing_text",
+        "source_evidence": "CONSIGNEE (NEGOTIABLE ONLY IF CONSIGNED \"TO ORDER\")\\nFRESH FRUIT IMPORTERS B.V.\\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands\\nTEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com",
+        "html_evidence": "TEL: <a href=\"tel:+15551234567\" class=\"tel\">+1 (555) 123-4567</a> | EMAIL: <a href=\"mailto:billing@techcorp.com\" class=\"email\">billing@techcorp.com</a>",
+        "correction": "The text is present but the candidate HTML misses comma after 'DB' and has 'Handelsweg 12, 2988 DB Ridderkerk, Netherlands' instead of 'Handelsweg 12, 2988 DB Ridderkerk, Netherlands'. Confirm comma placement and spacing as per original."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "NOTIFY PARTY (NO RESPONSIBILITY FOR FAILURE TO NOTIFY)\\nFRESH FRUIT IMPORTERS B.V.\\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands\\nTEL: +31 10 123 4567 | EMAIL: dispatch@logitrans.com",
+        "html_evidence": "TEL: <a href=\"tel:+31101234567\" class=\"tel\">+31 10 123 4567</a> | EMAIL: <a href=\"mailto:dispatch@logitrans.com\" class=\"email\">dispatch@logitrans.com</a>",
+        "correction": "The candidate HTML has 'Handelsweg 12, 2988 DB Ridderkerk, Netherlands' but original shows line break after each part. Confirm line break or separate address lines as original."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "DELIVERY AGENT\\nLogiTrans Global\\n88 Harbor Road, Rotterdam, 3011 AA\\nTel: +31 10 123 4567 | dispatch@logitrans.com",
+        "html_evidence": "LogiTrans Global<br />88 Harbor Road, Rotterdam, 3011 AA<br />Tel: <a href=\"tel:+31101234567\" class=\"tel\">+31 10 123 4567</a><br />Email: <a href=\"mailto:dispatch@logitrans.com\" class=\"email\">dispatch@logitrans.com</a>",
+        "correction": "Candidate HTML shows correct text but splits 'Tel:' and 'Email:' into separate lines; original has them on a single line. Adjust layout for exact matching."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "20 PALLETS STC:\\nFRESH PEARS\\nSTOWAGE AT +1.0 DEGREES CELSIUS\\nPackaging: PALLETS\\nHS CODE: 08083090\\nSET TEMP: +1°C",
+        "html_evidence": "20 PALLETS STC:<br />FRESH FRUIT<br /><br /><strong>FRESH APPLES</strong><br /><strong>STOWAGE AT +2.0 DEGREES CELSIUS</strong><br /><span class=\"inline-italic\">Packaging: PALLETS</span><br /><br /><span class=\"cargo-hscode\">HS CODE: 08081080</span><br /><span class=\"blue-text\">SET TEMP: +2°C</span><br /><br /><hr style=\"border:0.8px solid #000; margin: 1.2rem 0;\" /><br />20 PALLETS STC:<br />FRESH FRUIT<br /><br /><strong>FRESH PEARS</strong><br /><strong>STOWAGE AT +1.0 DEGREES CELSIUS</strong><br /><span class=\"inline-italic\">Packaging: PALLETS</span><br /><br /><span class=\"cargo-hscode\">HS CODE: 08083090</span><br /><span class=\"blue-text\">SET TEMP: +1°C</span>",
+        "correction": "Candidate HTML includes all description text for apples and pears but the original's '20 PALLETS STC:' and 'FRESH FRUIT' lines are separated differently. Candidate misses an empty line after the hr and may have slightly different spacing. Suggest accurately replicating line breaks as in original."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "FREIGHT & CHARGES\\nOCEAN FREIGHT\\nCOLLECT\\nTHC",
+        "html_evidence": "<div class=\"freight-charges\" aria-label=\"Freight charges and total number of packages\">\n  <div aria-label=\"Freight and charges details\" style=\"display:flex; flex-direction: column; justify-content: center;\">\n    <div><strong>OCEAN FREIGHT</strong></div>\n    <div>COLLECT</div>\n    <div><strong>THC</strong></div>\n  </div>",
+        "correction": "Original has 'FREIGHT & CHARGES' as label for section, candidate HTML omits the '& CHARGES' part as a label. This is a missing text error."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "FREIGHT & CHARGES\\nOCEAN FREIGHT\\nCOLLECT\\nTHC",
+        "html_evidence": "<div class=\"freight-charges\" aria-label=\"Freight charges and total number of packages\">\n  <div aria-label=\"Freight and charges details\" style=\"display:flex; flex-direction: column; justify-content: center;\">\n    <div><strong>OCEAN FREIGHT</strong></div>\n    <div>COLLECT</div>\n    <div><strong>THC</strong></div>\n  </div>",
+        "correction": "Candidate HTML does not visually replicate the 'OCEAN FREIGHT' and 'THC' labels horizontally aligned as per original; candidate stacks vertically. Adjust layout to horizontal alignment."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "TOTAL NUMBER OF PACKAGES\\n40",
+        "html_evidence": "<div aria-label=\"Total number of packages\" style=\"font-size: 2.1rem; font-weight: 900; display: flex; justify-content: center; align-items: center;\">\n    40\n  </div>",
+        "correction": "Candidate HTML places number 40 in right aligned separate column but original shows it in a big font in a separate right cell. Adjust layout to exactly match column spans in original."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "NUMBER OF ORIGINAL B/L'S: THREE (3)",
+        "html_evidence": "<div class=\"original-bls\" aria-label=\"Number of original Bills of Lading\">\n  NUMBER OF ORIGINAL B/L'S: THREE (3)\n</div>",
+        "correction": "Missing from candidate HTML's reading order is a strong border or distinct horizontal rule above this original text as in source."
+      }
+    ]
+  }
+]

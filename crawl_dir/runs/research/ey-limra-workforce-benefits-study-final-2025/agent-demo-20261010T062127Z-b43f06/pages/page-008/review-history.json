@@ -1,0 +1,19 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "No table present in the source PDF.",
+        "html_evidence": "<table class=\"data-table\">...</table>",
+        "correction": "Remove the entire data table from the HTML as it does not exist in the source PDF."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

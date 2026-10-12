@@ -85,7 +85,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--project", required=True)
     parser.add_argument("--location", default="us-central1")
     parser.add_argument("--bucket", required=True)
-    parser.add_argument("--source", type=Path, default=Path("../downloads/coverage-policies"))
+    parser.add_argument("--source", type=Path, default=Path("../crawl_dir/raw/coverage-policies"))
     parser.add_argument("--corpus-display-name", default="geha-coverage-policies-demo")
     parser.add_argument("--upload-only", action="store_true")
     return parser.parse_args()
@@ -105,4 +105,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

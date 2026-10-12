@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "gpt-4.1-mini",
+  "created_at": "2026-10-10T08:25:34.651706+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "failed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "fig1",
+      "kind": "figure",
+      "title": "Figure 11 In choosing carriers, employers value integrated absence management experiences more than affordability.",
+      "source_png": "figure-01-fig1.png",
+      "bounding_box": [
+        46,
+        832,
+        1438,
+        1802
+      ],
+      "output_directory": "figure-01",
+      "status": "failed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "wrong_text",
+              "source_evidence": "Yellow legend bullet is for 'A carrier with the best-value disability product even without an integrated, real-time absence management service'",
+              "html_evidence": "<li><span style=\"color:#ffde17;\">■</span> A carrier that provides an integrated absence management program along with its disability product for a higher price</li>",
+              "correction": "The first bullet's color bullet must be gray (not yellow) to match the source: 'A carrier that provides an integrated absence management program along with its disability product for a higher price' is gray, not yellow."
+            }
+          ],
+          "render_latency_ms": 440.8
+        },
+        {
+          "iteration": 2,
+          "html": "figure-01/iteration-02.html",
+          "rendered_png": "figure-01/iteration-02.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "chart_relationship",
+              "source_evidence": "More than two in three midsize and large employers chose the first scenario. Small employers, which are typically more cost conscious, were split 50-50.",
+              "html_evidence": "<div class=\"bar-yellow bar-segment\" style=\"height: 8rem;\">50%</div>\n<div class=\"bar-grey bar-segment\" style=\"height: 8rem;\">50%</div>",
+              "correction": "The yellow and grey bars for 'Small Employers' are reversed. The PDF shows 'Small Employers' are split 50% each, but the color coding is: grey for integrated service (higher price) and yellow for without integrated service. The rendered HTML shows yellow (without integrated service) at bottom and grey (with integrated service) above, which is inverted compared to the other bars. The grey bar should be on bottom and yellow on top for consistent stacking order."
+            }
+          ],
+          "render_latency_ms": 455.4
+        },
+        {
+          "iteration": 3,
+          "html": "figure-01/iteration-03.html",
+          "rendered_png": "figure-01/iteration-03.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "chart_relationship",
+              "source_evidence": "In the source PDF, yellow color represents 'A carrier with the best-value disability product even without an integrated, real-time absence management service' and gray color represents 'A carrier that provides an integrated absence management program along with its disability product for a higher price' with the gray bar always below and yellow bar on top in all three employer size groups.",
+              "html_evidence": "In the candidate HTML's bar groups for Midsize and Large Employers, the yellow bar (representing 'Without Integrated Service') is displayed below the gray bar (representing 'With Integrated Service'), reversing the stacking order from the source PDF.",
+              "correction": "The bars in the candidate HTML for Midsize and Large Employers need to be reordered so that the gray bar (With Integrated Service) is below and the yellow bar (Without Integrated Service) is above, matching the stacking order of the authoritative PDF. The linguistic color coding must match the stacking arrangement as presented in the PDF, ensuring the order is always gray on bottom and yellow on top for correct visual mapping."
+            }
+          ],
+          "render_latency_ms": 493.9
+        },
+        {
+          "iteration": 4,
+          "html": "figure-01/iteration-04.html",
+          "rendered_png": "figure-01/iteration-04.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "chart_relationship",
+              "source_evidence": "The source PDF chart is a stacked bar with the yellow segment on top representing 'a carrier with the best-value disability product even without an integrated, real-time absence management service' and the grey segment below representing 'A carrier that provides an integrated absence management program... for a higher price'. The order of the stacked bars from bottom to top is grey then yellow in the source.",
+              "html_evidence": "In the HTML candidate, the stacked bar chart divs are reversed with the grey bar segment first and then the yellow bar segment rendered below it (which would appear as below in the stack visually), flipping the order visually and contradicting the necessary stack order from the source chart.",
+              "correction": "Reverse the order of the stacked bar segments so the grey bar ('integrated program for a higher price') is visually below and the yellow bar ('best-value product without integrated') is visually above, matching the source chart's stacking order."
+            }
+          ],
+          "render_latency_ms": 465.8
+        },
+        {
+          "iteration": 5,
+          "html": "figure-01/iteration-05.html",
+          "rendered_png": "figure-01/iteration-05.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "chart_data",
+              "source_evidence": "Small Employers are split 50-50: 50% with integrated service and 50% without integrated service. Midsize Employers: 71% with integrated service and 29% without. Large Employers: 64% with integrated service and 36% without.",
+              "html_evidence": "In the HTML, for Small Employers the colors are inverted with yellow (representing 'without integrated service') at the bottom and grey (representing 'with integrated service') on top, which is opposite the source PDF which stacks grey at bottom and yellow on top for all categories.",
+              "correction": "Stack the bar segments so that for all employer sizes, the grey bar for 'with integrated service' is at the bottom and the yellow bar for 'without integrated service' is on top, matching the PDF source."
+            }
+          ],
+          "render_latency_ms": 438.8
+        },
+        {
+          "iteration": 6,
+          "html": "figure-01/iteration-06.html",
+          "rendered_png": "figure-01/iteration-06.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "chart_data",
+              "source_evidence": "In the authoritative source PDF, for each bar, the yellow section is on top and the grey section below it.",
+              "html_evidence": "In the candidate HTML, each bar shows the grey segment on top and the yellow segment below, reversing the original stacking order.",
+              "correction": "Reverse the stacking order of the bar chart segments so that the yellow bar is on top and the grey bar is below, matching the original PDF."
+            }
+          ],
+          "render_latency_ms": 448.1
+        }
+      ],
+      "remaining_errors": [
+        {
+          "category": "chart_data",
+          "source_evidence": "In the authoritative source PDF, for each bar, the yellow section is on top and the grey section below it.",
+          "html_evidence": "In the candidate HTML, each bar shows the grey segment on top and the yellow segment below, reversing the original stacking order.",
+          "correction": "Reverse the stacking order of the bar chart segments so that the yellow bar is on top and the grey bar is below, matching the original PDF."
+        }
+      ],
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-06.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 0,
+    "failed": 1,
+    "total_iterations": 6,
+    "remaining_errors": 1
+  },
+  "completed_at": "2026-10-10T08:27:01.688140+00:00"
+}

@@ -1,0 +1,61 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "chart_data",
+        "source_evidence": "Large (1,000 or more employees) bar segments show 64% integrated (grey) and 36% non-integrated (yellow) values, but yellow segment height (5.7rem) is visually larger than grey segment height (10.3rem) adjusted for stack, making visual proportions incorrect and inconsistent with data.",
+        "html_evidence": "<div class=\"bar-grey bar-segment\" style=\"height: 10.3rem;\">64%</div> <div class=\"bar-yellow bar-segment\" style=\"height: 5.7rem;\">36%</div>",
+        "correction": "Adjust height CSS styles to visually represent the percentages correctly, with the integrated (grey) segment taller than non-integrated (yellow) in the large employer bar, matching values 64% and 36% respectively."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "chart_data",
+        "source_evidence": "The PDF bar chart data shows Small: 50% integrated, 50% without integrated; Midsize: 71% integrated, 29% without integrated; Large: 64% integrated, 36% without integrated.",
+        "html_evidence": "The HTML chart shows Small: 50% integrated, 50% without integrated (correct); Midsize: 71% integrated, 29% without integrated (correct); Large: 64% integrated, 36% without integrated (correct). However, the heights of bar segments for the Large group are inverted: the yellow (without integrated) bar is on top and shows 36%, and the grey (with integrated) bar is on bottom and shows 64%, which visually contradicts the legend and data semantics in the PDF (grey = integrated, yellow = without integrated). The stacking order is incorrect for the Large group, causing misleading visual representation.",
+        "correction": "Fix the stacking order of the bar segments in the Large employer group: place the grey (integrated service) segment at the bottom and yellow (without integrated service) segment on top, consistent with the PDF's visual and legend, so the grey segment shows 64% below and yellow segment shows 36% above."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "chart_data",
+        "source_evidence": "In the source bar chart for Midsize (100-999 employees), the bottom segment (integrated service) is 71%, and the top segment (without integrated) is 29%. The segments are stacked with the integrated segment on the bottom and the without integrated segment on top.",
+        "html_evidence": "In the candidate HTML for Midsize (100-999 employees), the bar segments are reversed: the yellow (without integrated) segment is at the bottom with height 4.6rem (29%) and the grey (integrated) segment is on top with height 11.1rem (71%). This is a reversed stacking order from the source, which stacks integrated service segment below the without integrated segment.",
+        "correction": "Correct the stacking order of the Midsize bar to match the source: the grey bar segment (with integrated service) should be at the bottom and the yellow bar segment (without integrated service) should be stacked on top."
+      }
+    ]
+  },
+  {
+    "iteration": 3,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "chart_data",
+        "source_evidence": "Small (10-99 employees) bar split is grey 50% and yellow 50%, Midsize (100-999 employees) bar is grey 71% and yellow 29%, Large (1,000 or more employees) bar is grey 64% and yellow 36%",
+        "html_evidence": "<div class=\"bar-yellow bar-segment\" style=\"height: 8rem;\">50%</div>\n<div class=\"bar-grey bar-segment\" style=\"height: 8rem;\">50%</div>\n<div class=\"bar-grey bar-segment\" style=\"height: 11.1rem;\">71%</div>\n<div class=\"bar-yellow bar-segment\" style=\"height: 4.6rem;\">29%</div>\n<div class=\"bar-grey bar-segment\" style=\"height: 10.3rem;\">64%</div>\n<div class=\"bar-yellow bar-segment\" style=\"height: 5.7rem;\">36%</div>",
+        "correction": "The yellow and grey bar segment colors are reversed in the candidate. The PDF shows grey bars represent 'A carrier that provides an integrated absence management program along with its disability product — for a higher price' and yellow bars represent 'A carrier with the best-value disability product even without an integrated, real-time absence management service'. The HTML shows the yellow bars with values 50%, 29%, 36% on bottom and grey bars with 50%, 71%, 64% on top, but the PDF stacking is grey bottom and yellow top. Correct the bars so that grey is the bottom segment and yellow is the top segment in stacking to match PDF."
+      },
+      {
+        "category": "chart_relationship",
+        "source_evidence": "Figure 11 data provided shows integrated service values are higher percentages and are colored grey (bottom stacked)",
+        "html_evidence": "<table>\n<thead>\n<tr>\n<th scope=\"col\">Company Size</th>\n<th scope=\"col\">Without Integrated Service</th>\n<th scope=\"col\">With Integrated Service</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>Small Employers</td>\n<td>50%</td>\n<td>50%</td>\n</tr>\n<tr>\n<td>Midsize Employers</td>\n<td>29%</td>\n<td>71%</td>\n</tr>\n<tr>\n<td>Large Employers</td>\n<td>36%</td>\n<td>64%</td>\n</tr>\n</tbody>\n</table>",
+        "correction": "Verify the table matches the chart colors and stacking order so the integrated service corresponds to grey and without integrated service corresponds to yellow consistently in both chart and table."
+      }
+    ]
+  },
+  {
+    "iteration": 4,
+    "verdict": "match",
+    "errors": []
+  }
+]

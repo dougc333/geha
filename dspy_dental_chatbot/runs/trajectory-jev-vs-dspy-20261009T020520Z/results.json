@@ -1,0 +1,490 @@
+[
+  {
+    "name": "jev",
+    "passed": 4,
+    "personas": 4,
+    "turns": 25,
+    "clarifications": 1,
+    "reprompts": 1,
+    "model_calls": 22,
+    "median_persona_seconds": 1.0436,
+    "total_tokens": null,
+    "total_cost_usd": null,
+    "rows": [
+      {
+        "persona": "routine-retiree",
+        "passed": true,
+        "complete": true,
+        "expected": "Enrollment estimate complete: Standard, Self Only, rate code 3",
+        "final_response": "Enrollment estimate complete: Standard, Self Only, rate code 3, $28.75 monthly. To enroll, visit BENEFEDS.gov or call 1-877-888-3337 (guide pages 11\u201312). This prototype recommends and estimates; it does not enroll you.",
+        "turns": 7,
+        "clarifications": 0,
+        "reprompts": 0,
+        "model_calls": 6,
+        "model_seconds": 0.9807,
+        "elapsed_seconds": 1.0021,
+        "transcript": [
+          {
+            "stage": "start",
+            "answer": "",
+            "response": "First, which describes the person seeking coverage?\n1. Active federal employee\n2. Federal retiree or annuitant\n3. Retired uniformed service member\n4. Eligible family member of an eligible enrollee\n5. Other or not sure"
+          },
+          {
+            "stage": "member_type",
+            "answer": "After 22 years in the Army, I am now retired.",
+            "response": "What enrollment opportunity applies?\n1. 2026 Open Season (November 10\u2013December 8, 2025)\n2. Newly eligible or a qualifying life event\n3. Not sure",
+            "stage_after": "opportunity"
+          },
+          {
+            "stage": "opportunity",
+            "answer": "I am enrolling during the current Open Season.",
+            "response": "Who will be covered?\n1. Self Only\n2. Self Plus One\n3. Self and Family",
+            "stage_after": "enrollment"
+          },
+          {
+            "stage": "enrollment",
+            "answer": "Coverage is only for me: Self Only.",
+            "response": "Enter your two-letter state or territory abbreviation.",
+            "stage_after": "state"
+          },
+          {
+            "stage": "state",
+            "answer": "Austin, Texas is home.",
+            "response": "Enter your five-digit ZIP code so I can determine the dental rate code.",
+            "stage_after": "zip"
+          },
+          {
+            "stage": "zip",
+            "answer": "My ZIP code is 78701.",
+            "response": "That is 2026 dental rate code 3 (guide page 10).\n\nWhat best describes your dental needs?\n1. Preventive/routine care and the lowest premium\n2. Upcoming major dental work\n3. Orthodontia\n4. Maximum coverage, unlimited annual maximum, or three adult cleanings\n5. Not sure",
+            "stage_after": "need"
+          },
+          {
+            "stage": "need",
+            "answer": "Only cleanings and checkups; I want the cheapest premium.",
+            "response": "Recommended plan: Standard. Standard is the guide's lowest-premium plan for preventive and routine care.\n\nChoose a plan: 1. High or 2. Standard.",
+            "stage_after": "plan"
+          },
+          {
+            "stage": "plan",
+            "answer": "I accept the recommended Standard plan.",
+            "response": "Enrollment estimate complete: Standard, Self Only, rate code 3, $28.75 monthly. To enroll, visit BENEFEDS.gov or call 1-877-888-3337 (guide pages 11\u201312). This prototype recommends and estimates; it does not enroll you.",
+            "stage_after": "complete"
+          }
+        ]
+      },
+      {
+        "persona": "widow",
+        "passed": true,
+        "complete": true,
+        "expected": "Losing a covered family member",
+        "final_response": "QLE policy lookup complete. The 2026 QLE table permits decreasing the enrollment type. Select an allowed action through BENEFEDS.gov or call 1-877-888-3337.\n\nQLE policy table for **Losing a covered family member** (dental brochure page 10):\n\n| Enrollment action | Allowed |\n|---|---|\n| From Not Enrolled to Enrolled | No |\n| Increase Enrollment Type | No |\n| Decrease Enrollment Type | Yes |\n| Cancel | No |\n| Change from One Plan to Another | No |\n\nThis QLE session is complete. Click **Start over** to begin a new enrollment session.",
+        "turns": 5,
+        "clarifications": 0,
+        "reprompts": 0,
+        "model_calls": 5,
+        "model_seconds": 1.0677,
+        "elapsed_seconds": 1.0852,
+        "transcript": [
+          {
+            "stage": "start",
+            "answer": "",
+            "response": "First, which describes the person seeking coverage?\n1. Active federal employee\n2. Federal retiree or annuitant\n3. Retired uniformed service member\n4. Eligible family member of an eligible enrollee\n5. Other or not sure"
+          },
+          {
+            "stage": "member_type",
+            "answer": "I was covered as the spouse of an eligible federal enrollee.",
+            "response": "Is the sponsoring enrollee an active federal employee or retired?",
+            "stage_after": "family_sponsor"
+          },
+          {
+            "stage": "family_sponsor",
+            "answer": "My husband was a retired federal employee.",
+            "response": "What enrollment opportunity applies?\n1. 2026 Open Season (November 10\u2013December 8, 2025)\n2. Newly eligible or a qualifying life event\n3. Not sure",
+            "stage_after": "opportunity"
+          },
+          {
+            "stage": "opportunity",
+            "answer": "My covered husband died last month, so I need to change coverage.",
+            "response": "Which applies to you?\n1. New hire or newly eligible\n2. Qualifying life event",
+            "stage_after": "opportunity_detail"
+          },
+          {
+            "stage": "opportunity_detail",
+            "answer": "This is a qualifying life event because my husband died.",
+            "response": "Which qualifying life event applies?\n1. Marriage\n2. Acquiring an eligible family member (non-spouse)\n3. Losing a covered family member\n4. Losing other dental/vision coverage\n5. Moving out of a regional plan's service area\n6. Going on active military duty in non-pay status\n7. Returning to pay status from active military duty\n8. Returning to pay status from Leave Without Pay\n9. Annuity or compensation restored\n10. Transferring to an eligible position",
+            "stage_after": "qle_event"
+          },
+          {
+            "stage": "qle_event",
+            "answer": "I lost my covered family member when my husband passed away.",
+            "response": "QLE policy lookup complete. The 2026 QLE table permits decreasing the enrollment type. Select an allowed action through BENEFEDS.gov or call 1-877-888-3337.\n\nQLE policy table for **Losing a covered family member** (dental brochure page 10):\n\n| Enrollment action | Allowed |\n|---|---|\n| From Not Enrolled to Enrolled | No |\n| Increase Enrollment Type | No |\n| Decrease Enrollment Type | Yes |\n| Cancel | No |\n| Change from One Plan to Another | No |\n\nThis QLE session is complete. Click **Start over** to begin a new enrollment session.",
+            "stage_after": "complete"
+          }
+        ]
+      },
+      {
+        "persona": "new-baby",
+        "passed": true,
+        "complete": true,
+        "expected": "Acquiring an eligible family member",
+        "final_response": "QLE policy lookup complete. The 2026 QLE table permits increasing the enrollment type. Select an allowed action through BENEFEDS.gov or call 1-877-888-3337.\n\nQLE policy table for **Acquiring an eligible family member (non-spouse)** (dental brochure page 10):\n\n| Enrollment action | Allowed |\n|---|---|\n| From Not Enrolled to Enrolled | No |\n| Increase Enrollment Type | Yes |\n| Decrease Enrollment Type | No |\n| Cancel | No |\n| Change from One Plan to Another | No |\n\nThis QLE session is complete. Click **Start over** to begin a new enrollment session.",
+        "turns": 4,
+        "clarifications": 0,
+        "reprompts": 0,
+        "model_calls": 4,
+        "model_seconds": 0.6761,
+        "elapsed_seconds": 0.6956,
+        "transcript": [
+          {
+            "stage": "start",
+            "answer": "",
+            "response": "First, which describes the person seeking coverage?\n1. Active federal employee\n2. Federal retiree or annuitant\n3. Retired uniformed service member\n4. Eligible family member of an eligible enrollee\n5. Other or not sure"
+          },
+          {
+            "stage": "member_type",
+            "answer": "I am an active federal employee at the VA.",
+            "response": "What enrollment opportunity applies?\n1. 2026 Open Season (November 10\u2013December 8, 2025)\n2. Newly eligible or a qualifying life event\n3. Not sure",
+            "stage_after": "opportunity"
+          },
+          {
+            "stage": "opportunity",
+            "answer": "My wife and I had a baby two weeks ago and need to add the baby.",
+            "response": "Which applies to you?\n1. New hire or newly eligible\n2. Qualifying life event",
+            "stage_after": "opportunity_detail"
+          },
+          {
+            "stage": "opportunity_detail",
+            "answer": "The birth is a qualifying life event.",
+            "response": "Which qualifying life event applies?\n1. Marriage\n2. Acquiring an eligible family member (non-spouse)\n3. Losing a covered family member\n4. Losing other dental/vision coverage\n5. Moving out of a regional plan's service area\n6. Going on active military duty in non-pay status\n7. Returning to pay status from active military duty\n8. Returning to pay status from Leave Without Pay\n9. Annuity or compensation restored\n10. Transferring to an eligible position",
+            "stage_after": "qle_event"
+          },
+          {
+            "stage": "qle_event",
+            "answer": "We acquired an eligible family member when our baby was born.",
+            "response": "QLE policy lookup complete. The 2026 QLE table permits increasing the enrollment type. Select an allowed action through BENEFEDS.gov or call 1-877-888-3337.\n\nQLE policy table for **Acquiring an eligible family member (non-spouse)** (dental brochure page 10):\n\n| Enrollment action | Allowed |\n|---|---|\n| From Not Enrolled to Enrolled | No |\n| Increase Enrollment Type | Yes |\n| Decrease Enrollment Type | No |\n| Cancel | No |\n| Change from One Plan to Another | No |\n\nThis QLE session is complete. Click **Start over** to begin a new enrollment session.",
+            "stage_after": "complete"
+          }
+        ]
+      },
+      {
+        "persona": "braces-new-hire",
+        "passed": true,
+        "complete": true,
+        "expected": "Enrollment estimate complete: High, Self Plus One, rate code 4",
+        "final_response": "Enrollment estimate complete: High, Self Plus One, rate code 4, $52.08 biweekly. Your enrollment opportunity still requires BENEFEDS verification. To enroll, visit BENEFEDS.gov or call 1-877-888-3337 (guide pages 11\u201312). This prototype recommends and estimates; it does not enroll you.",
+        "turns": 9,
+        "clarifications": 1,
+        "reprompts": 1,
+        "model_calls": 7,
+        "model_seconds": 1.1603,
+        "elapsed_seconds": 1.1876,
+        "transcript": [
+          {
+            "stage": "start",
+            "answer": "",
+            "response": "First, which describes the person seeking coverage?\n1. Active federal employee\n2. Federal retiree or annuitant\n3. Retired uniformed service member\n4. Eligible family member of an eligible enrollee\n5. Other or not sure"
+          },
+          {
+            "stage": "member_type",
+            "answer": "I am an active federal employee and started my new federal job last week; my child also needs braces.",
+            "response": "What enrollment opportunity applies?\n1. 2026 Open Season (November 10\u2013December 8, 2025)\n2. Newly eligible or a qualifying life event\n3. Not sure",
+            "stage_after": "opportunity"
+          },
+          {
+            "stage": "opportunity",
+            "answer": "I keep calling it a QLE, but the actual reason is that I was newly hired last week.",
+            "response": "Which applies to you?\n1. New hire or newly eligible\n2. Qualifying life event",
+            "stage_after": "opportunity_detail"
+          },
+          {
+            "stage": "opportunity_detail",
+            "answer": "Both sound relevant, but I am explicitly a new hire and also said QLE.",
+            "response": "Your answer could mean more than one thing. Reply with 1 (New hire or newly eligible) or 2 (Qualifying life event).",
+            "stage_after": "opportunity_detail"
+          },
+          {
+            "stage": "opportunity_detail",
+            "answer": "New hire or newly eligible.",
+            "response": "New-hire/newly-eligible route selected. The brochure says enrollment is available within 60 days after becoming eligible; BENEFEDS must verify that condition (brochure page 9).\n\nWho will be covered?\n1. Self Only\n2. Self Plus One\n3. Self and Family",
+            "stage_after": "enrollment"
+          },
+          {
+            "stage": "enrollment",
+            "answer": "Please cover me and one child: Self Plus One.",
+            "response": "Enter your two-letter state or territory abbreviation.",
+            "stage_after": "state"
+          },
+          {
+            "stage": "state",
+            "answer": "I live near Modesto in California and love the farmers market.",
+            "response": "Enter your five-digit ZIP code so I can determine the dental rate code.",
+            "stage_after": "zip"
+          },
+          {
+            "stage": "zip",
+            "answer": "Our ZIP is 95350.",
+            "response": "That is 2026 dental rate code 4 (guide page 10).\n\nWhat best describes your dental needs?\n1. Preventive/routine care and the lowest premium\n2. Upcoming major dental work\n3. Orthodontia\n4. Maximum coverage, unlimited annual maximum, or three adult cleanings\n5. Not sure",
+            "stage_after": "need"
+          },
+          {
+            "stage": "need",
+            "answer": "My child needs braces, so our need is orthodontia.",
+            "response": "Recommended plan: High. High provides the guide's maximum coverage, unlimited annual maximum, and lower member shares for Classes B\u2013D.\n\nChoose a plan: 1. High or 2. Standard.",
+            "stage_after": "plan"
+          },
+          {
+            "stage": "plan",
+            "answer": "I accept the recommended High plan.",
+            "response": "Enrollment estimate complete: High, Self Plus One, rate code 4, $52.08 biweekly. Your enrollment opportunity still requires BENEFEDS verification. To enroll, visit BENEFEDS.gov or call 1-877-888-3337 (guide pages 11\u201312). This prototype recommends and estimates; it does not enroll you.",
+            "stage_after": "complete"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "dspy",
+    "passed": 4,
+    "personas": 4,
+    "turns": 25,
+    "clarifications": 1,
+    "reprompts": 1,
+    "model_calls": 22,
+    "median_persona_seconds": 0.0166,
+    "total_tokens": null,
+    "total_cost_usd": 0.002055,
+    "rows": [
+      {
+        "persona": "routine-retiree",
+        "passed": true,
+        "complete": true,
+        "expected": "Enrollment estimate complete: Standard, Self Only, rate code 3",
+        "final_response": "Enrollment estimate complete: Standard, Self Only, rate code 3, $28.75 monthly. To enroll, visit BENEFEDS.gov or call 1-877-888-3337 (guide pages 11\u201312). This prototype recommends and estimates; it does not enroll you.",
+        "turns": 7,
+        "clarifications": 0,
+        "reprompts": 0,
+        "model_calls": 6,
+        "model_seconds": 0.4733,
+        "elapsed_seconds": 0.4839,
+        "transcript": [
+          {
+            "stage": "start",
+            "answer": "",
+            "response": "First, which describes the person seeking coverage?\n1. Active federal employee\n2. Federal retiree or annuitant\n3. Retired uniformed service member\n4. Eligible family member of an eligible enrollee\n5. Other or not sure"
+          },
+          {
+            "stage": "member_type",
+            "answer": "After 22 years in the Army, I am now retired.",
+            "response": "What enrollment opportunity applies?\n1. 2026 Open Season (November 10\u2013December 8, 2025)\n2. Newly eligible or a qualifying life event\n3. Not sure",
+            "stage_after": "opportunity"
+          },
+          {
+            "stage": "opportunity",
+            "answer": "I am enrolling during the current Open Season.",
+            "response": "Who will be covered?\n1. Self Only\n2. Self Plus One\n3. Self and Family",
+            "stage_after": "enrollment"
+          },
+          {
+            "stage": "enrollment",
+            "answer": "Coverage is only for me: Self Only.",
+            "response": "Enter your two-letter state or territory abbreviation.",
+            "stage_after": "state"
+          },
+          {
+            "stage": "state",
+            "answer": "Austin, Texas is home.",
+            "response": "Enter your five-digit ZIP code so I can determine the dental rate code.",
+            "stage_after": "zip"
+          },
+          {
+            "stage": "zip",
+            "answer": "My ZIP code is 78701.",
+            "response": "That is 2026 dental rate code 3 (guide page 10).\n\nWhat best describes your dental needs?\n1. Preventive/routine care and the lowest premium\n2. Upcoming major dental work\n3. Orthodontia\n4. Maximum coverage, unlimited annual maximum, or three adult cleanings\n5. Not sure",
+            "stage_after": "need"
+          },
+          {
+            "stage": "need",
+            "answer": "Only cleanings and checkups; I want the cheapest premium.",
+            "response": "Recommended plan: Standard. Standard is the guide's lowest-premium plan for preventive and routine care.\n\nChoose a plan: 1. High or 2. Standard.",
+            "stage_after": "plan"
+          },
+          {
+            "stage": "plan",
+            "answer": "I accept the recommended Standard plan.",
+            "response": "Enrollment estimate complete: Standard, Self Only, rate code 3, $28.75 monthly. To enroll, visit BENEFEDS.gov or call 1-877-888-3337 (guide pages 11\u201312). This prototype recommends and estimates; it does not enroll you.",
+            "stage_after": "complete"
+          }
+        ]
+      },
+      {
+        "persona": "widow",
+        "passed": true,
+        "complete": true,
+        "expected": "Losing a covered family member",
+        "final_response": "QLE policy lookup complete. The 2026 QLE table permits decreasing the enrollment type. Select an allowed action through BENEFEDS.gov or call 1-877-888-3337.\n\nQLE policy table for **Losing a covered family member** (dental brochure page 10):\n\n| Enrollment action | Allowed |\n|---|---|\n| From Not Enrolled to Enrolled | No |\n| Increase Enrollment Type | No |\n| Decrease Enrollment Type | Yes |\n| Cancel | No |\n| Change from One Plan to Another | No |\n\nThis QLE session is complete. Click **Start over** to begin a new enrollment session.",
+        "turns": 5,
+        "clarifications": 0,
+        "reprompts": 0,
+        "model_calls": 5,
+        "model_seconds": 0.0059,
+        "elapsed_seconds": 0.0127,
+        "transcript": [
+          {
+            "stage": "start",
+            "answer": "",
+            "response": "First, which describes the person seeking coverage?\n1. Active federal employee\n2. Federal retiree or annuitant\n3. Retired uniformed service member\n4. Eligible family member of an eligible enrollee\n5. Other or not sure"
+          },
+          {
+            "stage": "member_type",
+            "answer": "I was covered as the spouse of an eligible federal enrollee.",
+            "response": "Is the sponsoring enrollee an active federal employee or retired?",
+            "stage_after": "family_sponsor"
+          },
+          {
+            "stage": "family_sponsor",
+            "answer": "My husband was a retired federal employee.",
+            "response": "What enrollment opportunity applies?\n1. 2026 Open Season (November 10\u2013December 8, 2025)\n2. Newly eligible or a qualifying life event\n3. Not sure",
+            "stage_after": "opportunity"
+          },
+          {
+            "stage": "opportunity",
+            "answer": "My covered husband died last month, so I need to change coverage.",
+            "response": "Which applies to you?\n1. New hire or newly eligible\n2. Qualifying life event",
+            "stage_after": "opportunity_detail"
+          },
+          {
+            "stage": "opportunity_detail",
+            "answer": "This is a qualifying life event because my husband died.",
+            "response": "Which qualifying life event applies?\n1. Marriage\n2. Acquiring an eligible family member (non-spouse)\n3. Losing a covered family member\n4. Losing other dental/vision coverage\n5. Moving out of a regional plan's service area\n6. Going on active military duty in non-pay status\n7. Returning to pay status from active military duty\n8. Returning to pay status from Leave Without Pay\n9. Annuity or compensation restored\n10. Transferring to an eligible position",
+            "stage_after": "qle_event"
+          },
+          {
+            "stage": "qle_event",
+            "answer": "I lost my covered family member when my husband passed away.",
+            "response": "QLE policy lookup complete. The 2026 QLE table permits decreasing the enrollment type. Select an allowed action through BENEFEDS.gov or call 1-877-888-3337.\n\nQLE policy table for **Losing a covered family member** (dental brochure page 10):\n\n| Enrollment action | Allowed |\n|---|---|\n| From Not Enrolled to Enrolled | No |\n| Increase Enrollment Type | No |\n| Decrease Enrollment Type | Yes |\n| Cancel | No |\n| Change from One Plan to Another | No |\n\nThis QLE session is complete. Click **Start over** to begin a new enrollment session.",
+            "stage_after": "complete"
+          }
+        ]
+      },
+      {
+        "persona": "new-baby",
+        "passed": true,
+        "complete": true,
+        "expected": "Acquiring an eligible family member",
+        "final_response": "QLE policy lookup complete. The 2026 QLE table permits increasing the enrollment type. Select an allowed action through BENEFEDS.gov or call 1-877-888-3337.\n\nQLE policy table for **Acquiring an eligible family member (non-spouse)** (dental brochure page 10):\n\n| Enrollment action | Allowed |\n|---|---|\n| From Not Enrolled to Enrolled | No |\n| Increase Enrollment Type | Yes |\n| Decrease Enrollment Type | No |\n| Cancel | No |\n| Change from One Plan to Another | No |\n\nThis QLE session is complete. Click **Start over** to begin a new enrollment session.",
+        "turns": 4,
+        "clarifications": 0,
+        "reprompts": 0,
+        "model_calls": 4,
+        "model_seconds": 0.0061,
+        "elapsed_seconds": 0.0122,
+        "transcript": [
+          {
+            "stage": "start",
+            "answer": "",
+            "response": "First, which describes the person seeking coverage?\n1. Active federal employee\n2. Federal retiree or annuitant\n3. Retired uniformed service member\n4. Eligible family member of an eligible enrollee\n5. Other or not sure"
+          },
+          {
+            "stage": "member_type",
+            "answer": "I am an active federal employee at the VA.",
+            "response": "What enrollment opportunity applies?\n1. 2026 Open Season (November 10\u2013December 8, 2025)\n2. Newly eligible or a qualifying life event\n3. Not sure",
+            "stage_after": "opportunity"
+          },
+          {
+            "stage": "opportunity",
+            "answer": "My wife and I had a baby two weeks ago and need to add the baby.",
+            "response": "Which applies to you?\n1. New hire or newly eligible\n2. Qualifying life event",
+            "stage_after": "opportunity_detail"
+          },
+          {
+            "stage": "opportunity_detail",
+            "answer": "The birth is a qualifying life event.",
+            "response": "Which qualifying life event applies?\n1. Marriage\n2. Acquiring an eligible family member (non-spouse)\n3. Losing a covered family member\n4. Losing other dental/vision coverage\n5. Moving out of a regional plan's service area\n6. Going on active military duty in non-pay status\n7. Returning to pay status from active military duty\n8. Returning to pay status from Leave Without Pay\n9. Annuity or compensation restored\n10. Transferring to an eligible position",
+            "stage_after": "qle_event"
+          },
+          {
+            "stage": "qle_event",
+            "answer": "We acquired an eligible family member when our baby was born.",
+            "response": "QLE policy lookup complete. The 2026 QLE table permits increasing the enrollment type. Select an allowed action through BENEFEDS.gov or call 1-877-888-3337.\n\nQLE policy table for **Acquiring an eligible family member (non-spouse)** (dental brochure page 10):\n\n| Enrollment action | Allowed |\n|---|---|\n| From Not Enrolled to Enrolled | No |\n| Increase Enrollment Type | Yes |\n| Decrease Enrollment Type | No |\n| Cancel | No |\n| Change from One Plan to Another | No |\n\nThis QLE session is complete. Click **Start over** to begin a new enrollment session.",
+            "stage_after": "complete"
+          }
+        ]
+      },
+      {
+        "persona": "braces-new-hire",
+        "passed": true,
+        "complete": true,
+        "expected": "Enrollment estimate complete: High, Self Plus One, rate code 4",
+        "final_response": "Enrollment estimate complete: High, Self Plus One, rate code 4, $52.08 biweekly. Your enrollment opportunity still requires BENEFEDS verification. To enroll, visit BENEFEDS.gov or call 1-877-888-3337 (guide pages 11\u201312). This prototype recommends and estimates; it does not enroll you.",
+        "turns": 9,
+        "clarifications": 1,
+        "reprompts": 1,
+        "model_calls": 7,
+        "model_seconds": 0.0091,
+        "elapsed_seconds": 0.0206,
+        "transcript": [
+          {
+            "stage": "start",
+            "answer": "",
+            "response": "First, which describes the person seeking coverage?\n1. Active federal employee\n2. Federal retiree or annuitant\n3. Retired uniformed service member\n4. Eligible family member of an eligible enrollee\n5. Other or not sure"
+          },
+          {
+            "stage": "member_type",
+            "answer": "I am an active federal employee and started my new federal job last week; my child also needs braces.",
+            "response": "What enrollment opportunity applies?\n1. 2026 Open Season (November 10\u2013December 8, 2025)\n2. Newly eligible or a qualifying life event\n3. Not sure",
+            "stage_after": "opportunity"
+          },
+          {
+            "stage": "opportunity",
+            "answer": "I keep calling it a QLE, but the actual reason is that I was newly hired last week.",
+            "response": "Which applies to you?\n1. New hire or newly eligible\n2. Qualifying life event",
+            "stage_after": "opportunity_detail"
+          },
+          {
+            "stage": "opportunity_detail",
+            "answer": "Both sound relevant, but I am explicitly a new hire and also said QLE.",
+            "response": "Your answer could mean more than one thing. Reply with 1 (New hire or newly eligible) or 2 (Qualifying life event).",
+            "stage_after": "opportunity_detail"
+          },
+          {
+            "stage": "opportunity_detail",
+            "answer": "New hire or newly eligible.",
+            "response": "New-hire/newly-eligible route selected. The brochure says enrollment is available within 60 days after becoming eligible; BENEFEDS must verify that condition (brochure page 9).\n\nWho will be covered?\n1. Self Only\n2. Self Plus One\n3. Self and Family",
+            "stage_after": "enrollment"
+          },
+          {
+            "stage": "enrollment",
+            "answer": "Please cover me and one child: Self Plus One.",
+            "response": "Enter your two-letter state or territory abbreviation.",
+            "stage_after": "state"
+          },
+          {
+            "stage": "state",
+            "answer": "I live near Modesto in California and love the farmers market.",
+            "response": "Enter your five-digit ZIP code so I can determine the dental rate code.",
+            "stage_after": "zip"
+          },
+          {
+            "stage": "zip",
+            "answer": "Our ZIP is 95350.",
+            "response": "That is 2026 dental rate code 4 (guide page 10).\n\nWhat best describes your dental needs?\n1. Preventive/routine care and the lowest premium\n2. Upcoming major dental work\n3. Orthodontia\n4. Maximum coverage, unlimited annual maximum, or three adult cleanings\n5. Not sure",
+            "stage_after": "need"
+          },
+          {
+            "stage": "need",
+            "answer": "My child needs braces, so our need is orthodontia.",
+            "response": "Recommended plan: High. High provides the guide's maximum coverage, unlimited annual maximum, and lower member shares for Classes B\u2013D.\n\nChoose a plan: 1. High or 2. Standard.",
+            "stage_after": "plan"
+          },
+          {
+            "stage": "plan",
+            "answer": "I accept the recommended High plan.",
+            "response": "Enrollment estimate complete: High, Self Plus One, rate code 4, $52.08 biweekly. Your enrollment opportunity still requires BENEFEDS verification. To enroll, visit BENEFEDS.gov or call 1-877-888-3337 (guide pages 11\u201312). This prototype recommends and estimates; it does not enroll you.",
+            "stage_after": "complete"
+          }
+        ]
+      }
+    ]
+  }
+]

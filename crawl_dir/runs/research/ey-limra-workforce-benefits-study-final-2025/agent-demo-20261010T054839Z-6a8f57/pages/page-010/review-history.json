@@ -1,0 +1,25 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Career development 40% (Gen Z) in source PDF",
+        "html_evidence": "Career development 40% (Gen Z) in candidate HTML is incorrect, should be 40% but colored as heat-30 indicating mismatch with source (heat-30 suggests a lower value)",
+        "correction": "Ensure the percentage value and heatmap color for Career development in Gen Z matches the source PDF's value and heat shading."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "The source PDF includes the top image of people working in an office at the top of the page.",
+        "html_evidence": "No image present at the top in candidate HTML.",
+        "correction": "Add the header image from the source PDF at the top as it is a significant design element of the page."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

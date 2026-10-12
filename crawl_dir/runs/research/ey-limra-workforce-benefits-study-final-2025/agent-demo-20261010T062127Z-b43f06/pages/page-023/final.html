@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Employers prefer carriers that effectively integrate over low-cost products</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+      margin: 1em 2em 3em;
+      color: #333;
+    }
+    strong {
+      font-weight: 700;
+    }
+    em {
+      font-style: italic;
+    }
+    .callout {
+      border-left: 4px solid #ffdd00;
+      padding-left: 1em;
+      margin-bottom: 1.5em;
+      color: #222;
+      font-size: 1rem;
+    }
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.1em;
+    }
+    h3 {
+      font-weight: 700;
+      margin-bottom: 0.25em;
+      font-size: 1rem;
+      text-transform: none;
+    }
+    .legend {
+      border: 1px solid #ccc;
+      padding: 0.5em 1em;
+      margin: 0.5em 0 1em;
+      font-size: 0.9rem;
+      display: flex;
+      gap: 1.5em;
+      flex-wrap: wrap;
+      max-width: 700px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+    .legend-color {
+      width: 1em;
+      height: 1em;
+      display: inline-block;
+    }
+    .gray {
+      background-color: #67686f;
+    }
+    .yellow {
+      background-color: #ffdd00;
+    }
+    .charts {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 2em;
+      max-width: 700px;
+      margin-bottom: 1em;
+    }
+    .chart {
+      text-align: center;
+      font-size: 0.9rem;
+      width: 250px;
+    }
+    .pie-chart {
+      margin: 0.5em auto 1em;
+      width: 220px;
+      height: 220px;
+      position: relative;
+    }
+    /* Pie slices approximation with CSS conic-gradient */
+    .pie-2021 {
+      background: conic-gradient(#67686f 0% 66%, #ffdd00 66% 100%);
+      border-radius: 50%;
+      width: 220px;
+      height: 220px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .pie-2025 {
+      background: conic-gradient(#67686f 0% 74%, #ffdd00 74% 100%);
+      border-radius: 50%;
+      width: 220px;
+      height: 220px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .pie-label {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-weight: 600;
+      color: #fff;
+      text-shadow: 0 0 2px rgba(0,0,0,0.6);
+      font-size: 1.4rem;
+      width: 50px;
+      height: 30px;
+      line-height: 30px;
+      border-radius: 0.3em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .pie-label.gray {
+      left: 25%;
+      background-color: #67686f;
+    }
+    .pie-label.yellow {
+      right: 25%;
+      background-color: #ffdd00;
+      color: #333;
+      text-shadow: none;
+    }
+    .section-paragraphs {
+      margin-top: 1em;
+      max-width: 700px;
+    }
+    .section-text {
+      margin-bottom: 1em;
+      font-size: 0.95rem;
+    }
+    footer {
+      margin-top: 3em;
+      color: #fff;
+      background: url('') no-repeat center/cover;
+      padding: 2em 0 3em;
+      font-size: 0.8rem;
+      text-align: center;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <section class="callout" aria-label="The value of integrated experiences">
+    <p><strong>The value of integrated experiences:</strong> Beyond process automation, connected and integrated experiences trump price for absence and leave management. The same is true for digital experiences generally. This most recent research shows further evidence of the importance of technology and connected experiences in particular. In 2021, 66% of employers said they preferred carriers that worked well with existing benefits technology to those that offered the best-value product. In 2025, that sentiment has risen to 74%. <em>See Figure 17</em>.</p>
+  </section>
+  <article aria-labelledby="figure17-title">
+    <p><strong>Figure 17</strong></p>
+    <h2 id="figure17-title">Employers prefer carriers that effectively integrate over low-cost products.</h2>
+    <h3>QUESTION: Which would you prefer?</h3>
+    <section class="legend" aria-label="Legend for carrier preference categories">
+      <div class="legend-item">
+        <span class="legend-color gray" aria-hidden="true"></span>
+        <span>A carrier that works well with your benefit technology platform, even if its product is a little more expensive</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-color yellow" aria-hidden="true"></span>
+        <span>A carrier with the best-value product, even if it does not work well with your benefit technology platform</span>
+      </div>
+    </section>
+    <section class="charts" aria-label="Employer preference pie charts for years 2021 and 2025">
+      <div class="chart" aria-labelledby="chart2021-label">
+        <h3 id="chart2021-label">2021</h3>
+        <div class="pie-chart pie-2021" role="img" aria-label="Employer preference in 2021: 66% prefer carrier that works well with benefit technology, 34% prefer best-value product">
+          <span class="pie-label gray" aria-hidden="true">66%</span>
+          <span class="pie-label yellow" aria-hidden="true">34%</span>
+        </div>
+      </div>
+      <div class="chart" aria-labelledby="chart2025-label">
+        <h3 id="chart2025-label">2025</h3>
+        <div class="pie-chart pie-2025" role="img" aria-label="Employer preference forecast for 2025: 74% prefer carrier that works well with benefit technology, 26% prefer best-value product">
+          <span class="pie-label gray" aria-hidden="true">74%</span>
+          <span class="pie-label yellow" aria-hidden="true">26%</span>
+        </div>
+      </div>
+    </section>
+    <section class="section-paragraphs" aria-label="Employer interest and claims digitization paragraphs">
+      <div class="section-text">
+        <p>Employer interest in integrated experiences spans the full value chain. Looking at specific capabilities, digital enrollment has matured significantly over the years with the investment in connectivity and application programming interfaces (APIs). In many ways, carriers and other benefits providers are aligned with employers in delivering tech-enabled experiences and end-to-end processes. But employers now see opportunity relative to quoting and implementation. More sophisticated connectivity via APIs can deliver the real-time quoting, self-service features and automated data exchange that many employers would like to see. <em>See Figure 18</em>.</p>
+      </div>
+      <div class="section-text">
+        <p><strong>Claims digitization is a must:</strong> Claims processes remain the top priority for increased digitization. In fact, four of the five top unmet employer needs are related to claims. Employers are seeking a claims experience that is frictionless, intuitive and fully integrated. Key priorities include enabling same-day claims decisions through enhanced auto-adjudication, proactively notifying employees of eligible benefits by monitoring medical and related claims activity, and streamlining the process by coordinating multiple coverages triggered by a single qualifying event. Claims clearly represents the largest opportunity for the next horizon of technology investment.</p>
+      </div>
+    </section>
+  </article>
+  <footer>
+    23 | <strong>Harnessing growth in workforce benefits:</strong> the next horizon | 2025 Workforce Benefits Study
+  </footer>
+</body>
+</html>

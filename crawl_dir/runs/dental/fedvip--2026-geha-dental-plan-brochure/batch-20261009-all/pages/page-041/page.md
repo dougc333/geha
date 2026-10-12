@@ -1,0 +1,14 @@
+Section 7 General Exclusions - Things We Do Not Cover
+- Adjunctive dental services as defined by applicable Federal regulations. The Federal dental program does not cover adjunctive dental care services. These are medical services that are covered by other medical insurance even when provided by a general dentist or oral surgeon. The following diagnoses or conditions may fall under this category:
+- Treatment for relief of myofacial pain dysfunction syndrome or temporomandibular joint dysfunction (TMJD).
+- Orthodontic treatment for cleft lip or cleft palate, or when required in preparation for, or as a result of, trauma to teeth and supporting structures caused by medically necessary treatment of an injury or disease.
+- Procedures associated with preventative and restorative dental care when associated with radiation therapy to the head or neck unless otherwise covered as a routine preventative procedure under this plan.
+- Total or complete ankyloglossia.
+- Intraoral abscesses that extend beyond the dental alveolus.
+- Extraoral abscesses.
+- Cellulitis and osteitis, which is clearly exacerbating and directly affecting a medical condition currently under treatment.
+- Removal of teeth and tooth fragments in order to treat and repair facial trauma resulting from an accidental injury.
+- Prosthetic replacement of either the maxilla or mandible due to reduction of body tissues associated with traumatic injury (such as a gun shot wound) in addition to services related to treating neoplasms or iatrogenic dental trauma.
+- Diagnosis and/or treatment of Sleep Apnea.
+- Services or treatment performed by debarred providers.
+- Any services that require review by report will be denied when the report is not included.

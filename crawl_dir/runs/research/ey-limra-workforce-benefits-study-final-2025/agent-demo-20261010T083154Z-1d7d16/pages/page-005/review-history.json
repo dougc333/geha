@@ -1,0 +1,25 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "chart_data",
+        "source_evidence": "Figure 2 current work arrangement percentages: 66%, 34%, 77%.",
+        "html_evidence": "SVG bars with heights and label values 66%, 34%, 77%, but category labels underneath the bars are reversed causing ambiguity whether yellow bar represents \"Freelance/Gig Work\" or \"Other/Multiple\". The text below bars says 66% Traditional Employer under a dark gray bar, 34% Freelance/Gig Work under a yellow bar, and 77% Other/Multiple under a dark gray bar, consistent with PDF. However, the vertical positioning of bars with yellow bar in middle with 34% and gray bars around with 66% and 77% makes interpretation visually confusing.",
+        "correction": "Adjust the bar order or category labels to correspond clearly and distinctly with each respective bar without ambiguity or confusion, ensuring the yellow bar labeled 34% is clearly associated with Freelance/Gig Work in the middle position."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Figure 3 legend colors and category order: Orange (50% or more), Red (25% to 49%), Blue (10% to 24%), Cyan (Less than 10%), Green (None).",
+        "html_evidence": "Stacked bar segments sorted from bottom to top with 'None' green bar height 37% (currently) and 77% (in 5 years), but green bar for 'None' has zero height currently, and a separate stacked segment height of 37% is assigned to cyan color labeled as 'Less than 10%' which appears beneath it. The chart bars currently improperly stack colors and percentages, and the 'None' category has zero height currently but appears to be missing or visually zero height despite 37% present.",
+        "correction": "Ensure correct stacking order from bottom to top, 'None' category green bar height (currently 37%) should be represented visually at bottom, then 'Less than 10%' cyan 37% stacked above it is incorrect. Correct stacking so that each category's percentage matches its visual bar height and order: 'None' at bottom with 37% height currently, above that 'Less than 10%' with 37% is contradictory and must be corrected. The 'None' category must appear as a visually meaningful segment consistent with table data."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

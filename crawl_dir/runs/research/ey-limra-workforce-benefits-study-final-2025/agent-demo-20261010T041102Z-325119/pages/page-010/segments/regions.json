@@ -1,0 +1,112 @@
+{
+  "page_type": "table",
+  "segmentation_recommended": true,
+  "reason": "The page contains a table with multiple rows and columns, with additional explanatory text around it. Segmenting into distinct regions preserves structure and reading order.",
+  "regions": [
+    {
+      "id": "r1",
+      "label": "image_header",
+      "kind": "other",
+      "reading_order": 1,
+      "x1": 0,
+      "y1": 0,
+      "x2": 1000,
+      "y2": 280,
+      "pixel_box": [
+        0,
+        0,
+        1530,
+        554
+      ],
+      "image": "region-01-r1.png"
+    },
+    {
+      "id": "r2",
+      "label": "figure_caption",
+      "kind": "paragraph",
+      "reading_order": 2,
+      "x1": 50,
+      "y1": 280,
+      "x2": 950,
+      "y2": 360,
+      "pixel_box": [
+        76,
+        554,
+        1454,
+        713
+      ],
+      "image": "region-02-r2.png"
+    },
+    {
+      "id": "r3",
+      "label": "benefits_interest_table",
+      "kind": "table",
+      "reading_order": 3,
+      "x1": 50,
+      "y1": 365,
+      "x2": 950,
+      "y2": 885,
+      "pixel_box": [
+        76,
+        723,
+        1454,
+        1752
+      ],
+      "image": "region-03-r3.png"
+    },
+    {
+      "id": "r4",
+      "label": "heat_map_legend",
+      "kind": "other",
+      "reading_order": 4,
+      "x1": 50,
+      "y1": 890,
+      "x2": 400,
+      "y2": 950,
+      "pixel_box": [
+        76,
+        1762,
+        612,
+        1881
+      ],
+      "image": "region-04-r4.png"
+    },
+    {
+      "id": "r5",
+      "label": "table_note",
+      "kind": "paragraph",
+      "reading_order": 5,
+      "x1": 410,
+      "y1": 890,
+      "x2": 950,
+      "y2": 950,
+      "pixel_box": [
+        627,
+        1762,
+        1454,
+        1881
+      ],
+      "image": "region-05-r5.png"
+    },
+    {
+      "id": "r6",
+      "label": "footer",
+      "kind": "footer",
+      "reading_order": 6,
+      "x1": 50,
+      "y1": 960,
+      "x2": 950,
+      "y2": 990,
+      "pixel_box": [
+        76,
+        1901,
+        1454,
+        1960
+      ],
+      "image": "region-06-r6.png"
+    }
+  ],
+  "coordinate_system": "normalized_0_1000",
+  "source_image": "/Users/dc/geha/crawl_dir/runs/research/ey-limra-workforce-benefits-study-final-2025/agent-demo-20261010T041102Z-325119/pages/page-010/source.png",
+  "overlay": "regions-overlay.png"
+}

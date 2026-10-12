@@ -1,0 +1,35 @@
+{
+  "table_extraction": {
+    "strategy": "verified_html",
+    "native_pdf_pages": [],
+    "verified_html": {
+      "source": "visually_verified_html",
+      "outputs": [
+        {
+          "table_id": "table-001",
+          "page": 1,
+          "page_table_number": 1,
+          "rows": 1,
+          "columns": 5,
+          "source_html": "/Users/dc/geha/crawl_dir/runs/forms/bill-of-lading/agent-demo-20261010T010738Z-aa0675/pages/page-001/final.html"
+        }
+      ],
+      "table_count": 1
+    }
+  },
+  "chunk_errors": [],
+  "chunk_warnings": [
+    {
+      "chunk_id": "bill-of-lading-chunk-0001",
+      "issue": "missing_section_heading"
+    },
+    {
+      "chunk_id": "bill-of-lading-chunk-0002",
+      "issue": "missing_section_heading"
+    }
+  ],
+  "image_only_pages": [
+    1
+  ],
+  "visual_failures": []
+}

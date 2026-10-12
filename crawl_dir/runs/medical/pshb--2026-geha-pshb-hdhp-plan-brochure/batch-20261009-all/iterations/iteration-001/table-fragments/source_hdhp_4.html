@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HDHP - source.pdf</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #071f36;
+      --muted: #5f6f7f;
+      --line: #d6dee6;
+      --header: #06233d;
+      --header-ink: #ffffff;
+      --stripe: #f4f7f9;
+      --canvas: #edf2f6;
+      --paper: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+    main {
+      width: min(1440px, calc(100% - 32px));
+      margin: 32px auto;
+      padding: clamp(24px, 4vw, 56px);
+      background: var(--paper);
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(7, 31, 54, 0.10);
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+    .metadata { margin: 0 0 28px; color: var(--muted); }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+    .policy-table { width: 100%; border-collapse: collapse; min-width: 680px; }
+    .policy-table th {
+      padding: 14px 16px;
+      background: var(--header);
+      color: var(--header-ink);
+      text-align: left;
+      vertical-align: top;
+      font-weight: 700;
+    }
+    .policy-table td {
+      padding: 13px 16px;
+      border-top: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+    .policy-table tbody tr:nth-child(even) { background: var(--stripe); }
+    .note { margin: 24px 0 0; color: var(--muted); font-size: 0.9rem; }
+    @media print {
+      body { background: #fff; }
+      main { width: 100%; margin: 0; padding: 0; box-shadow: none; }
+      .table-wrap { overflow: visible; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>HDHP</h1>
+    <p class="metadata">Source: source.pdf &middot; Table 9 &middot; Page 42</p>
+    <div class="table-wrap">
+      <table class="dataframe policy-table">
+  <thead>
+    <tr style="text-align: left;">
+      <th>Feature Comparison</th>
+      <th>Health Savings Account (HSA)</th>
+      <th>Health Reimbursement Arrangement (HRA) provided when you are ineligible for an HSA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Portable</td>
+      <td>You can take this account with you when you change plans, separate or retire from federal service. If you do not enroll in another HDHP, you can no longer contribute to your HSA. See Section 1, Health Savings Account (HSA) or the beginning of this section for HSA eligibility.</td>
+      <td>If you retire and remain in this HDHP, you may continue to use and accumulate credits in your HRA. If you terminate employment or change health plans, only eligible expenses incurred while covered under the HDHP will be eligible for reimbursement subject to timely filing requirements. Unused funds are forfeited.</td>
+    </tr>
+    <tr>
+      <td>Annual rollover</td>
+      <td>Yes, accumulates without a maximum cap.</td>
+      <td>Yes, accumulates without a maximum cap.</td>
+    </tr>
+    <tr>
+      <td>Account management</td>
+      <td>You may access your HSA on-line at geha.com/ HDHP-HSA.</td>
+      <td>Your HRA account balance will be available on- line through your Member Account at geha.com/ My-Member-Portal. To request reimbursement from your HRA account for qualified out-of- pocket medical expenses that are not submitted to G.E.H.A by your doctor, hospital, dentist or pharmacy, call G.E.H.A's Customer Care at 800-821-6136 or go to geha.com/My-Member- Portal to obtain our Health Reimbursement Arrangement Claim Form. This form is also used to request reimbursement from your HRA for Medicare premiums.</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+    <p class="note">Extracted directly from the source PDF using embedded text with targeted OCR fallback where needed. Verify against the source policy before operational use.</p>
+  </main>
+</body>
+</html>

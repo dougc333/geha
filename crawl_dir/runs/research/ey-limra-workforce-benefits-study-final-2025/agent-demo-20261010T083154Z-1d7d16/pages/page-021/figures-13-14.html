@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Figures 13 and 14</title>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; color: #2e2e38; background: #fff; margin: 0; padding: 24px 16px; }
+  section { max-width: 960px; margin: 0 auto; }
+  .kicker { font-size: 13px; font-weight: bold; margin: 0; }
+  h2 { font-size: 20px; margin: 4px 0 24px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+  figure { margin: 0; }
+  figcaption { font-size: 15px; line-height: 1.4; padding-bottom: 12px; border-bottom: 1px solid #2e2e38; min-height: 4.2em; }
+  figcaption .num { display: none; }
+  .legend { list-style: none; margin: 16px 0; padding: 8px 12px; border: 1px solid #ccc; display: inline-flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14px; }
+  .legend li { display: flex; align-items: center; gap: 4px; }
+  .sw { width: 9px; height: 9px; display: inline-block; }
+  svg { display: block; width: 100%; max-width: 280px; margin: 8px auto; font-size: 9px; }
+  table.data { border-collapse: collapse; margin: 12px auto 0; font-size: 13px; }
+  table.data caption { text-align: left; font-size: 12px; color: #666; padding-bottom: 4px; }
+  table.data th, table.data td { border: 1px solid #ddd; padding: 4px 8px; text-align: left; }
+  table.data td { text-align: right; }
+</style>
+</head>
+<body>
+<section aria-labelledby="figs-title">
+  <p class="kicker">Figures 13 and 14</p>
+  <h2 id="figs-title">Digital experiences are important, and most stakeholders are delivering a quality experience.</h2>
+  <div class="grid">
+  <figure id="fig13" class="chart">
+    <figcaption><span class="num">Figure 13</span> <strong>QUESTION:</strong> How does the digital experience with administering your company’s insurance benefits compare to your experience with other companies?</figcaption>
+    <ul class="legend"><li><span class="sw" style="background:#C4C4CD"></span>Worse</li><li><span class="sw" style="background:#FFE600"></span>About the same</li><li><span class="sw" style="background:#747480"></span>Better</li></ul>
+    <svg viewBox="0 0 200 200" role="img" aria-labelledby="fig13-t">
+      <title id="fig13-t">Figure 13: Worse 6%, About the same 28%, Better 66%</title>
+        <path d="M100,100 L100.00,4.00 A96,96 0 0 1 135.34,10.74 Z" fill="#C4C4CD"><title>Worse: 6%</title></path>
+        <text x="114.6" y="23.4" fill="#2e2e38" text-anchor="middle" dominant-baseline="central">6%</text>
+        <path d="M100,100 L135.34,10.74 A96,96 0 0 1 181.06,151.44 Z" fill="#FFE600"><title>About the same: 28%</title></path>
+        <text x="162.8" y="79.6" fill="#2e2e38" text-anchor="middle" dominant-baseline="central">28%</text>
+        <path d="M100,100 L181.06,151.44 A96,96 0 1 1 100.00,4.00 Z" fill="#747480"><title>Better: 66%</title></path>
+        <text x="42.2" y="131.8" fill="#fff" text-anchor="middle" dominant-baseline="central">66%</text>
+    </svg>
+    <table class="data">
+      <caption>Figure 13 data (percent of respondents)</caption>
+      <thead><tr><th scope="col">Response</th><th scope="col">Share</th></tr></thead>
+      <tbody><tr><th scope="row">Worse</th><td>6%</td></tr><tr><th scope="row">About the same</th><td>28%</td></tr><tr><th scope="row">Better</th><td>66%</td></tr></tbody>
+    </table>
+  </figure>
+  <figure id="fig14" class="chart">
+    <figcaption><span class="num">Figure 14</span> <strong>QUESTION:</strong> How important is it for the digital experience you have with administering your company’s insurance benefits to match your experience with other companies?</figcaption>
+    <ul class="legend"><li><span class="sw" style="background:#C4C4CD"></span>Not at all/not very important</li><li><span class="sw" style="background:#FFE600"></span>Slightly/somewhat/moderately important</li><li><span class="sw" style="background:#747480"></span>Very/extremely important</li></ul>
+    <svg viewBox="0 0 200 200" role="img" aria-labelledby="fig14-t">
+      <title id="fig14-t">Figure 14: Not at all/not very important 3%, Slightly/somewhat/moderately important 39%, Very/extremely important 58%</title>
+        <path d="M100,100 L100.00,4.00 A96,96 0 0 1 117.99,5.70 Z" fill="#C4C4CD"><title>Not at all/not very important: 3%</title></path>
+        <text x="107.3" y="22.3" fill="#2e2e38" text-anchor="middle" dominant-baseline="central">3%</text>
+        <path d="M100,100 L117.99,5.70 A96,96 0 0 1 146.25,184.13 Z" fill="#FFE600"><title>Slightly/somewhat/moderately important: 39%</title></path>
+        <text x="165.2" y="89.7" fill="#2e2e38" text-anchor="middle" dominant-baseline="central">39%</text>
+        <path d="M100,100 L146.25,184.13 A96,96 0 1 1 100.00,4.00 Z" fill="#747480"><title>Very/extremely important: 58%</title></path>
+        <text x="36.1" y="116.4" fill="#fff" text-anchor="middle" dominant-baseline="central">58%</text>
+    </svg>
+    <table class="data">
+      <caption>Figure 14 data (percent of respondents)</caption>
+      <thead><tr><th scope="col">Response</th><th scope="col">Share</th></tr></thead>
+      <tbody><tr><th scope="row">Not at all/not very important</th><td>3%</td></tr><tr><th scope="row">Slightly/somewhat/moderately important</th><td>39%</td></tr><tr><th scope="row">Very/extremely important</th><td>58%</td></tr></tbody>
+    </table>
+  </figure>
+  </div>
+</section>
+</body>
+</html>

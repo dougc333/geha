@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "gpt-4.1-mini",
+  "created_at": "2026-10-10T08:45:17.389273+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "failed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "figure_1",
+      "kind": "figure",
+      "title": "Figure 10 The number and types of leave benefits are expanding.",
+      "source_png": "figure-01-figure_1.png",
+      "bounding_box": [
+        31,
+        713,
+        1499,
+        1871
+      ],
+      "output_directory": "figure-01",
+      "native_evidence": "figure-01/native-evidence.json",
+      "native_evidence_word_count": 261,
+      "status": "failed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "table_structure",
+              "source_evidence": "Rows for 'Domestic violence/sexual abuse victims' leave', 'Divorce or family upheaval leave', 'Emergency responder leave', and 'Military service/family military leave' have the 'Plan to add/considering' and 'No plans to offer' percentages swapped compared to the locked native PDF evidence. For example, for 'Domestic violence/sexual abuse victims' leave', HTML shows 55% 'Plan to add/considering' and 29% 'No plans to offer', but PDF shows 29% 'Plan to add/considering' and 55% 'No plans to offer'. Similarly incorrect swaps appear for other rows.",
+              "html_evidence": "<tr>\n<td>Domestic violence/sexual abuse victims' leave</td>\n<td class=\"percentage\">16%</td>\n<td class=\"percentage\">55%</td>\n<td class=\"percentage\">29%</td>\n</tr>\n<tr>\n<td>Divorce or family upheaval leave</td>\n<td class=\"percentage\">11%</td>\n<td class=\"percentage\">42%</td>\n<td class=\"percentage\">47%</td>\n</tr>\n<tr>\n<td>Emergency responder leave</td>\n<td class=\"percentage\">25%</td>\n<td class=\"percentage\">40%</td>\n<td class=\"percentage\">35%</td>\n</tr>\n<tr>\n<td>Military service/family military leave</td>\n<td class=\"percentage\">36%</td>\n<td class=\"percentage\">39%</td>\n<td class=\"percentage\">25%</td>\n</tr>",
+              "correction": "Swap the percentages under 'Plan to add/considering' and 'No plans to offer' columns for the leaves: 'Domestic violence/sexual abuse victims' leave' (change to 29% Plan to add, 55% No plans), 'Divorce or family upheaval leave' (change to 47% Plan to add, 42% No plans), 'Emergency responder leave' (change to 35% Plan to add, 40% No plans), and 'Military service/family military leave' (change to 25% Plan to add, 39% No plans). The corrected rows should exactly match the locked native PDF percentages in correct columns."
+            }
+          ],
+          "render_latency_ms": 453.9,
+          "candidate_sha256": "86cc624324f06607830bad9ae659bce3fd18620b591778a9dc4f8a6c8f6c04dd"
+        },
+        {
+          "iteration": 2,
+          "html": "figure-01/iteration-02.html",
+          "rendered_png": "figure-01/iteration-02.png",
+          "verdict": "mismatch",
+          "error_count": 8,
+          "errors": [
+            {
+              "category": "chart_data",
+              "source_evidence": "For 'Domestic violence/sexual abuse victims' leave' the PDF data is: Currently offer 16%, Plan to add/considering 55%, No plans to offer 29%. The HTML table shows 16%, 29%, 55% which reverses the 'Plan to add/considering' and 'No plans to offer' percentages.",
+              "html_evidence": "<tr>\n  <td>Domestic violence/sexual abuse victims' leave</td>\n  <td class=\"percentage\">16%</td>\n  <td class=\"percentage\">29%</td>\n  <td class=\"percentage\">55%</td>\n</tr>",
+              "correction": "Swap 'Plan to add/considering' and 'No plans to offer' percentages for 'Domestic violence/sexual abuse victims' leave' to 55% and 29% respectively."
+            },
+            {
+              "category": "chart_data",
+              "source_evidence": "For 'Divorce or family upheaval leave' the PDF data is: Currently offer 11%, Plan to add/considering 42%, No plans to offer 47%. The HTML table shows 11%, 47%, 42% which reverses the 'Plan to add/considering' and 'No plans to offer' percentages.",
+              "html_evidence": "<tr>\n  <td>Divorce or family upheaval leave</td>\n  <td class=\"percentage\">11%</td>\n  <td class=\"percentage\">47%</td>\n  <td class=\"percentage\">42%</td>\n</tr>",
+              "correction": "Swap 'Plan to add/considering' and 'No plans to offer' percentages for 'Divorce or family upheaval leave' to 42% and 47% respectively."
+            },
+            {
+              "category": "chart_data",
+              "source_evidence": "For 'Emergency responder leave' the PDF data is: Currently offer 25%, Plan to add/considering 40%, No plans to offer 35%. The HTML table shows 25%, 35%, 40% which reverses 'Plan to add/considering' and 'No plans to offer'.",
+              "html_evidence": "<tr>\n  <td>Emergency responder leave</td>\n  <td class=\"percentage\">25%</td>\n  <td class=\"percentage\">35%</td>\n  <td class=\"percentage\">40%</td>\n</tr>",
+              "correction": "Swap 'Plan to add/considering' and 'No plans to offer' percentages for 'Emergency responder leave' to 40% and 35% respectively."
+            },
+            {
+              "category": "chart_data",
+              "source_evidence": "For 'Military service/family military leave' the PDF data is: Currently offer 36%, Plan to add/considering 39%, No plans to offer 25%. The HTML shows 36%, 25%, 39%, reversing 'Plan to add/considering' and 'No plans to offer'.",
+              "html_evidence": "<tr>\n  <td>Military service/family military leave</td>\n  <td class=\"percentage\">36%</td>\n  <td class=\"percentage\">25%</td>\n  <td class=\"percentage\">39%</td>\n</tr>",
+              "correction": "Swap 'Plan to add/considering' and 'No plans to offer' percentages for 'Military service/family military leave' to 39% and 25% respectively."
+            },
+            {
+              "category": "chart_data",
+              "source_evidence": "For 'Long-term disability' the PDF data is: Currently offer 58%, Plan to add/considering 35%, No plans to offer 7%. The HTML shows 58%,35%,7% matching PDF.",
+              "html_evidence": "<tr>\n  <td>Long-term disability</td>\n  <td class=\"percentage\">58%</td>\n  <td class=\"percentage\">35%</td>\n  <td class=\"percentage\">7%</td>\n</tr>",
+              "correction": ""
+            },
+            {
+              "category": "chart_data",
+              "source_evidence": "For 'Short-term disability' the PDF data is: Currently offer 61%, Plan to add/considering 33%, No plans to offer 6%. The HTML shows 61%,33%,6% matching PDF.",
+              "html_evidence": "<tr>\n  <td>Short-term disability</td>\n  <td class=\"percentage\">61%</td>\n  <td class=\"percentage\">33%</td>\n  <td class=\"percentage\">6%</td>\n</tr>",
+              "correction": ""
+            },
+            {
+              "category": "chart_data",
+              "source_evidence": "For 'Paid parental, maternity or paternity leave (company-sponsored)' the PDF data is: Currently offer 57%, Plan to add/considering 30%, No plans to offer 13%. HTML matches this exactly.",
+              "html_evidence": "<tr>\n  <td>Paid parental, maternity or paternity leave (company-sponsored)</td>\n  <td class=\"percentage\">57%</td>\n  <td class=\"percentage\">30%</td>\n  <td class=\"percentage\">13%</td>\n</tr>",
+              "correction": ""
+            },
+            {
+              "category": "chart_data",
+              "source_evidence": "For 'Paid family or medical leave (company-sponsored)' the PDF data is: Currently offer 59%, Plan to add/considering 28%, No plans to offer 13%. HTML matches this exactly.",
+              "html_evidence": "<tr>\n  <td>Paid family or medical leave (company-sponsored)</td>\n  <td class=\"percentage\">59%</td>\n  <td class=\"percentage\">28%</td>\n  <td class=\"percentage\">13%</td>\n</tr>",
+              "correction": ""
+            }
+          ],
+          "render_latency_ms": 439.1,
+          "candidate_sha256": "671e864a9422a73c9c761334d3d43fcdf515fa46f19c13bfb79d8c468bbf342b"
+        }
+      ],
+      "cycle_detected": {
+        "next_iteration": 3,
+        "repeats_iteration": 1,
+        "candidate_sha256": "86cc624324f06607830bad9ae659bce3fd18620b591778a9dc4f8a6c8f6c04dd"
+      },
+      "remaining_errors": [
+        {
+          "category": "chart_data",
+          "source_evidence": "For 'Domestic violence/sexual abuse victims' leave' the PDF data is: Currently offer 16%, Plan to add/considering 55%, No plans to offer 29%. The HTML table shows 16%, 29%, 55% which reverses the 'Plan to add/considering' and 'No plans to offer' percentages.",
+          "html_evidence": "<tr>\n  <td>Domestic violence/sexual abuse victims' leave</td>\n  <td class=\"percentage\">16%</td>\n  <td class=\"percentage\">29%</td>\n  <td class=\"percentage\">55%</td>\n</tr>",
+          "correction": "Swap 'Plan to add/considering' and 'No plans to offer' percentages for 'Domestic violence/sexual abuse victims' leave' to 55% and 29% respectively."
+        },
+        {
+          "category": "chart_data",
+          "source_evidence": "For 'Divorce or family upheaval leave' the PDF data is: Currently offer 11%, Plan to add/considering 42%, No plans to offer 47%. The HTML table shows 11%, 47%, 42% which reverses the 'Plan to add/considering' and 'No plans to offer' percentages.",
+          "html_evidence": "<tr>\n  <td>Divorce or family upheaval leave</td>\n  <td class=\"percentage\">11%</td>\n  <td class=\"percentage\">47%</td>\n  <td class=\"percentage\">42%</td>\n</tr>",
+          "correction": "Swap 'Plan to add/considering' and 'No plans to offer' percentages for 'Divorce or family upheaval leave' to 42% and 47% respectively."
+        },
+        {
+          "category": "chart_data",
+          "source_evidence": "For 'Emergency responder leave' the PDF data is: Currently offer 25%, Plan to add/considering 40%, No plans to offer 35%. The HTML table shows 25%, 35%, 40% which reverses 'Plan to add/considering' and 'No plans to offer'.",
+          "html_evidence": "<tr>\n  <td>Emergency responder leave</td>\n  <td class=\"percentage\">25%</td>\n  <td class=\"percentage\">35%</td>\n  <td class=\"percentage\">40%</td>\n</tr>",
+          "correction": "Swap 'Plan to add/considering' and 'No plans to offer' percentages for 'Emergency responder leave' to 40% and 35% respectively."
+        },
+        {
+          "category": "chart_data",
+          "source_evidence": "For 'Military service/family military leave' the PDF data is: Currently offer 36%, Plan to add/considering 39%, No plans to offer 25%. The HTML shows 36%, 25%, 39%, reversing 'Plan to add/considering' and 'No plans to offer'.",
+          "html_evidence": "<tr>\n  <td>Military service/family military leave</td>\n  <td class=\"percentage\">36%</td>\n  <td class=\"percentage\">25%</td>\n  <td class=\"percentage\">39%</td>\n</tr>",
+          "correction": "Swap 'Plan to add/considering' and 'No plans to offer' percentages for 'Military service/family military leave' to 39% and 25% respectively."
+        },
+        {
+          "category": "chart_data",
+          "source_evidence": "For 'Long-term disability' the PDF data is: Currently offer 58%, Plan to add/considering 35%, No plans to offer 7%. The HTML shows 58%,35%,7% matching PDF.",
+          "html_evidence": "<tr>\n  <td>Long-term disability</td>\n  <td class=\"percentage\">58%</td>\n  <td class=\"percentage\">35%</td>\n  <td class=\"percentage\">7%</td>\n</tr>",
+          "correction": ""
+        },
+        {
+          "category": "chart_data",
+          "source_evidence": "For 'Short-term disability' the PDF data is: Currently offer 61%, Plan to add/considering 33%, No plans to offer 6%. The HTML shows 61%,33%,6% matching PDF.",
+          "html_evidence": "<tr>\n  <td>Short-term disability</td>\n  <td class=\"percentage\">61%</td>\n  <td class=\"percentage\">33%</td>\n  <td class=\"percentage\">6%</td>\n</tr>",
+          "correction": ""
+        },
+        {
+          "category": "chart_data",
+          "source_evidence": "For 'Paid parental, maternity or paternity leave (company-sponsored)' the PDF data is: Currently offer 57%, Plan to add/considering 30%, No plans to offer 13%. HTML matches this exactly.",
+          "html_evidence": "<tr>\n  <td>Paid parental, maternity or paternity leave (company-sponsored)</td>\n  <td class=\"percentage\">57%</td>\n  <td class=\"percentage\">30%</td>\n  <td class=\"percentage\">13%</td>\n</tr>",
+          "correction": ""
+        },
+        {
+          "category": "chart_data",
+          "source_evidence": "For 'Paid family or medical leave (company-sponsored)' the PDF data is: Currently offer 59%, Plan to add/considering 28%, No plans to offer 13%. HTML matches this exactly.",
+          "html_evidence": "<tr>\n  <td>Paid family or medical leave (company-sponsored)</td>\n  <td class=\"percentage\">59%</td>\n  <td class=\"percentage\">28%</td>\n  <td class=\"percentage\">13%</td>\n</tr>",
+          "correction": ""
+        }
+      ],
+      "selected_iteration": 1,
+      "selected_error_count": 1,
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-01.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 0,
+    "failed": 1,
+    "total_iterations": 2,
+    "remaining_errors": 8
+  },
+  "completed_at": "2026-10-10T08:46:10.446107+00:00"
+}

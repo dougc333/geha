@@ -1,0 +1,10 @@
+References
+16. Moyer JA, Mi L, Nguyen MV, Durant AM, Zganjar AJ, Lyon TD, Shah PH, Boorjian SA, Tyson MD 2nd. Real-world outcomes of nadofaragene firadenovec for BCG-unresponsive non-muscle-invasive bladder cancer: A multicenter experience. Urol Oncol . 2025 Nov 17:S1078-1439(25)00442-9. doi: 10.1016/j.urolonc.2025.10.023. Epub ahead of print. PMID: 41253655.
+17. Rosa K. Nadofaragene firadenovec NDA accepted for review in Japan for BCG-unresponsive NMIBC. OncLive. Published September 15, 2025. Accessed December 23, 2025.
+https://www.onclive.com/view/nadofaragene-firadenovec-nda-accepted-for-review-in-japan-forbcg-unresponsive-nmibc
+
+Disclaimer
+Drug Coverage Policies are developed as needed, reviewed and updated at least annually, and are subject to change. Other policies and coverage determination guidelines may apply. Federal and state regulatory requirements and member specific benefit plan documents, if applicable, must be reviewed prior to utilizing this Drug Coverage Policy. This Drug Coverage Policy is for informational purposes only and does not constitute medical advice nor dictate how providers should practice medicine. This policy should not be reproduced, stored in a retrieval system, or altered from its original form without written permission from OncoHealth, Inc.
+
+For Internal Use ONLY
+7/05/2024, Updates = Policy creation. 7/15/2024, Updates = Policy adoption by P&T. 11/22/2024, Updates = For 1/1/2025 - update to permanent HCPCS Code per CMS HCPCS Code Updates. 12/15/2025, Updates = Annual Review - OH P&T - inclusion of Inlexzo as NP agent; renaming of policy from Anktiva to NMIBC (step) policy; approved at OH December P&T. 2/16/2026, Updates = Added additional RWE references; minimal updates to criteria; Added Keytruda Qlex J9999; added language Prescribed by, or in consultation with, a urologist or oncologist; Approved at OH P&T. Policy adopted by G.E.H.A; document updated for universal accessibility.. 04/01/2026, Updates = Update HCPCS for Inlexzo (from J9999 to J9183) and Keytruda Qlex (from J9999 to J9277)

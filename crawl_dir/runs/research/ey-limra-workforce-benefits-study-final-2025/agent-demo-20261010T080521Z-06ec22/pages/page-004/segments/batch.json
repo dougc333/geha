@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "gpt-4.1-mini",
+  "created_at": "2026-10-10T08:07:17.941211+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "failed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "fig1-2025-workforce-benefits",
+      "kind": "chart",
+      "title": "Figure 1 Companies plan to offer more benefits in five years.",
+      "source_png": "figure-01-fig1-2025-workforce-benefits.png",
+      "bounding_box": [
+        61,
+        851,
+        811,
+        1643
+      ],
+      "output_directory": "figure-01",
+      "status": "failed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 2,
+          "errors": [
+            {
+              "category": "chart_relationship",
+              "source_evidence": "The source chart labels the change percentages +7%, +6%, +5% above and to the right of the respective bars in landscape orientation, horizontally aligned with the bars.",
+              "html_evidence": "<p class=\"change\">+7%<br>change<br>from 2023</p> (vertically stacked text under the bars)",
+              "correction": "Position the change percentages text above and slightly right of each bar, not stacked below the bars, to match the orientation and placement in the source chart."
+            },
+            {
+              "category": "layout",
+              "source_evidence": "The source has the bars arranged with the yellow segments on top, gray in the middle, and light gray at the bottom, with values inside each segment, aligned in a vertical bar stack.",
+              "html_evidence": "Bars are stacked correctly but the change text is below the bars with line breaks, causing awkward layout and less readability compared to source.",
+              "correction": "Adjust the layout so that the change from 2023 text is placed next to each bar segment and horizontally aligned, not broken into multiple lines below the bars, to improve fidelity and readability."
+            }
+          ],
+          "render_latency_ms": 476.9
+        },
+        {
+          "iteration": 2,
+          "html": "figure-01/iteration-02.html",
+          "rendered_png": "figure-01/iteration-02.png",
+          "verdict": "mismatch",
+          "error_count": 2,
+          "errors": [
+            {
+              "category": "wrong_text",
+              "source_evidence": "+7% change from 2023 (for 2021)",
+              "html_evidence": "+7% change from 2023 shown next to 2021 bar",
+              "correction": "Change from 2023 for year 2021 should be a negative value (likely -7%), not +7%. The label '+7% change from 2023' near 2021 is incorrect and must be corrected to reflect the true change from 2023."
+            },
+            {
+              "category": "layout",
+              "source_evidence": "Stacked bar segments with percentages (57%, 40%, 3%), (64%, 35%, 1%), and (67%, 30%, 3%)",
+              "html_evidence": "+6% change from 2023 shown next to 2023 bar",
+              "correction": "The '+6% change from 2023' label shown next to the 2023 bar is incorrect and misleading as 2023 is baseline; should not have any change indicated or should show 0% change."
+            }
+          ],
+          "render_latency_ms": 474.6
+        },
+        {
+          "iteration": 3,
+          "html": "figure-01/iteration-03.html",
+          "rendered_png": "figure-01/iteration-03.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "wrong_text",
+              "source_evidence": "Text above bars in PDF: '+7% change from 2023', '+6% change from 2023', '+5% change from 2023' for 2021, 2023, 2028 respectively.",
+              "html_evidence": "In HTML: '-7% change from 2023' for 2021, '0% change from 2023' for 2023, '+5% change from 2023' for 2028.",
+              "correction": "Correct the change from 2023 labels on each bar to match the PDF: 2021 should be '+7% change from 2023', 2023 should be '+6% change from 2023', and 2028 should be '+5% change from 2023'. Adjust the values in the table similarly to reflect correct changes from 2023."
+            }
+          ],
+          "render_latency_ms": 511.4
+        },
+        {
+          "iteration": 4,
+          "html": "figure-01/iteration-04.html",
+          "rendered_png": "figure-01/iteration-04.png",
+          "verdict": "mismatch",
+          "error_count": 2,
+          "errors": [
+            {
+              "category": "wrong_text",
+              "source_evidence": "+7% change from 2023 for 2021 and +6% change from 2023 for 2023 in chart",
+              "html_evidence": "+7% change from 2023 label is next to 2021 bar, +6% change from 2023 label is next to 2023 bar, but contextually this is a confusing and incorrect placement because 2021 cannot have a future change from 2023",
+              "correction": "Change labels should reflect the correct year context. 'Change from 2023' should not be applied to past year 2021. Instead, label for 2021 bar should not say '+7% change from 2023'. The 'change from 2023' phrase should only apply to future years relative to 2023 (i.e., 2028). Alternatively, explicitly note the baseline year to eliminate confusion."
+            },
+            {
+              "category": "layout",
+              "source_evidence": "Chart bars for 2021, 2023 and 2028 show yellow segment over gray and light gray segments vertically stacked",
+              "html_evidence": "Change labels are absolutely positioned to the right with overlapping vertical alignment (top: 10px, 48px, 90px) which visually does not correspond well and appear cluttered",
+              "correction": "Position the change percentage labels closer to their respective yellow segments without overlap or confusion, with consistent horizontal and vertical alignment to clearly associate changes with the correct bars."
+            }
+          ],
+          "render_latency_ms": 497.1
+        },
+        {
+          "iteration": 5,
+          "html": "figure-01/iteration-05.html",
+          "rendered_png": "figure-01/iteration-05.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "chart_relationship",
+              "source_evidence": "PDF shows 3 change % labels: +7%, +6%, +5% from 2023 for 2021, 2023, and 2028 bars respectively, left to right.",
+              "html_evidence": "HTML only shows two change labels: 'Current year baseline' for 2023 and '+5% change from 2023' for 2028; 2021 bar has no change label.",
+              "correction": "Add a '+7% change from 2023' label for the 2021 bar as in the source PDF, and '+6% change from 2023' label for the 2023 bar. Correct the 2023 label from 'Current year baseline' to '+6% change from 2023' to match the source exactly."
+            }
+          ],
+          "render_latency_ms": 479.3
+        },
+        {
+          "iteration": 6,
+          "html": "figure-01/iteration-06.html",
+          "rendered_png": "figure-01/iteration-06.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "chart_relationship",
+              "source_evidence": "Figure 1 shows +7% change from 2023 for 2021, but 2021 should be baseline or reference, so 'change from 2023' is reversed for 2021, which is inconsistent with chart logic and table.",
+              "html_evidence": "<div class=\"change change-2021\">+7% change from 2023</div>",
+              "correction": "The label for 2021 should not say '+7% change from 2023'; it is the baseline year and cannot have a change from 2023. Either remove this label or correct the logic to show 2023 and 2028 changes only relative to 2021 or adjust wording to reflect correct reference year."
+            }
+          ],
+          "render_latency_ms": 497.5
+        }
+      ],
+      "remaining_errors": [
+        {
+          "category": "chart_relationship",
+          "source_evidence": "Figure 1 shows +7% change from 2023 for 2021, but 2021 should be baseline or reference, so 'change from 2023' is reversed for 2021, which is inconsistent with chart logic and table.",
+          "html_evidence": "<div class=\"change change-2021\">+7% change from 2023</div>",
+          "correction": "The label for 2021 should not say '+7% change from 2023'; it is the baseline year and cannot have a change from 2023. Either remove this label or correct the logic to show 2023 and 2028 changes only relative to 2021 or adjust wording to reflect correct reference year."
+        }
+      ],
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-06.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 0,
+    "failed": 1,
+    "total_iterations": 6,
+    "remaining_errors": 1
+  },
+  "completed_at": "2026-10-10T08:08:26.019964+00:00"
+}

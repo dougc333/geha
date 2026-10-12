@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page 5</title>
+<style>
+:root { color-scheme: light; }
+body { font-family: Arial, Helvetica, sans-serif; color: #2e2e38; background: #fff;
+       margin: 0; padding: 24px 16px; line-height: 1.45; }
+main { max-width: 960px; margin: 0 auto; }
+h1 { font-size: 34px; font-weight: 400; margin: 0 0 8px; }
+h2 { font-size: 22px; margin: 0 0 16px; }
+h3 { font-size: 16px; margin: 20px 0 8px; }
+p, li { font-size: 15px; }
+.fig-group > header .kicker, figure.chart .kicker { font-size: 12px; font-weight: bold; margin: 0; }
+.fig-group > header h2 { font-size: 19px; margin: 2px 0 16px; }
+.fig-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+figure.chart { margin: 28px 0; }
+figure.chart figcaption .title { font-size: 19px; font-weight: bold; margin: 2px 0 6px; }
+figure.chart .question { font-size: 14px; margin: 0 0 12px; }
+figure.chart .notes { font-size: 12px; font-style: italic; color: #555; margin: 8px 0 0; }
+.legend { list-style: none; margin: 8px 0 14px; padding: 6px 10px; border: 1px solid #ccc;
+          display: inline-flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13px; }
+.legend li { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.sw { width: 10px; height: 10px; display: inline-block; flex: none; }
+.pies { display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-around; }
+.pie { text-align: center; }
+.pie h4 { margin: 0 0 4px; font-size: 15px; }
+.pie svg { width: 220px; max-width: 100%; font-size: 9px; }
+.hbars { display: grid; grid-template-columns: minmax(120px, 42%) 1fr; gap: 4px 10px;
+         font-size: 12px; align-items: center; }
+.hbars .lab { text-align: right; }
+.hbars .grp { grid-column: 1 / -1; font-weight: bold; font-size: 14px; margin-top: 10px;
+              border-bottom: 1px solid #2e2e38; }
+.track { display: flex; height: 16px; }
+.track.multi { flex-direction: column; height: auto; gap: 2px; }
+.track .seg { display: flex; align-items: center; justify-content: center; overflow: hidden;
+              white-space: nowrap; font-size: 11px; }
+.bar-line { display: flex; align-items: center; gap: 4px; height: 12px; font-size: 11px; }
+.bar-line .seg { height: 100%; }
+.vbars { display: flex; gap: 28px; align-items: flex-end; justify-content: center;
+         padding: 0 40px; }
+.vcol { display: flex; flex-direction: column; align-items: center; width: 120px; }
+.vstack { position: relative; width: 70px; height: 220px; display: flex;
+          flex-direction: column-reverse; }
+.vstack .seg { display: flex; align-items: center; justify-content: center; font-size: 12px; }
+.vstack .out { position: absolute; left: 76px; font-size: 12px; white-space: nowrap; }
+.vstack .bracket { position: absolute; border: 1px solid #2e2e38; width: 8px; font-size: 12px; }
+.vstack .bracket.left { left: -14px; border-right: none; }
+.vstack .bracket.right { right: -14px; border-left: none; }
+.vstack .bracket span { position: absolute; top: 50%; transform: translateY(-50%); }
+.vstack .bracket.left span { right: 12px; }
+.vstack .bracket.right span { left: 12px; }
+.vcol .cat { font-size: 12px; text-align: center; margin-top: 6px; }
+.vcol .callout { font-size: 12px; margin-bottom: 4px; text-align: center; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px;
+         margin: 0; }
+.stats div { text-align: center; }
+.stats dd { font-size: 40px; font-weight: bold; margin: 0; }
+.stats dt { font-size: 14px; }
+table.data { border-collapse: collapse; margin: 14px 0 0; font-size: 12px; }
+table.data caption { text-align: left; font-size: 12px; color: #555; padding-bottom: 4px; }
+table.data th, table.data td { border: 1px solid #ddd; padding: 3px 8px; text-align: left; }
+table.data td { text-align: right; }
+table.data tbody th[scope=rowgroup] { background: #f2f2f2; }
+table.heat td { text-align: center; }
+.harveys { display: flex; flex-wrap: wrap; gap: 12px 20px; justify-content: center; }
+.harvey { display: flex; flex-direction: column; align-items: center; width: 80px;
+          font-size: 12px; text-align: center; }
+svg.cycle { display: block; width: 280px; max-width: 100%; margin: 8px auto; }
+.cycle-list { font-size: 14px; }
+ol.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px 28px;
+           padding-left: 1.4em; }
+ol.steps > li::marker { font-weight: bold; color: #b8a400; }
+ol.steps h4 { margin: 0 0 4px; font-size: 16px; }
+ol.steps ul { margin: 0; padding-left: 1.1em; }
+.quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.quotes blockquote { margin: 0; padding: 8px 14px; border-left: 4px solid #FFE600; font-family: Georgia, serif; }
+</style>
+</head>
+<body>
+<main>
+<h2>With the gig economy stabilizing post-pandemic, growth and innovation opportunities remain.</h2>
+<p>Our results reflect the ongoing evolution of the gig economy and nontraditional work arrangements, including the declining impacts of the pandemic’s major labor disruptions and related trends (e.g., quiet quitting, the Great Resignation). Fewer workers in this year’s survey (23%) say they have a freelance or gig job than said so in the last survey (34%). <em>See Figure 2.</em> Gen Z re-mains the generation most involved with the gig eco-nomy: 37% of these young workers have a gig or freel-ance job today, and many could see such work as their primary source of income in the next five years.</p>
+<p>To be clear, gig isn’t going away: 42% of those survey respondents (and 59% of Gen Z) who do not currently have freelance or gig jobs say they’d be interested in having one in the next five years.</p>
+<p>Given the current economic uncertainties, large majorities of employers — 65% of all employers and 88% of large employers — currently use freelancers and other nontraditional workers. And they plan to rely on them to a greater extent in the future as a flexible option in the continued struggle for talent: 77% of employers and 93% of large employers expect to use freelance labor in the next five years. <em>See Figure 3.</em></p>
+<p>Based on this growth, 61% of employers surveyed stated they would consider offering benefits to attract and retain this group of freelance workers. There are, however, potential risks and barriers to adoption, including regulatory oversight regarding how employers classify workers (e.g., W-2 vs. 1099). Industry observers are watching developments related to California Assembly Bill 5 and other states’ laws regarding worker classification for insights into future usage of gig and freelance workers.</p>
+<p><strong>The benefits gap for gig workers: </strong>While freelance and gig workers are largely on their own when it comes to benefits, they are certainly interested in obtaining insurance, retirement savings and other benefits offerings. For employers or carriers to bridge the gap, changes in product design and eligibility and a purpose-built digital marketplace could unlock new possibilities, assuming legal and regulatory questions are resolved.</p>
+<figure class="chart" id="fig2" data-figure="Figure 2"><figcaption><p class="kicker">Figure 2</p><p class="title">Worker participation in the gig economy is trending downward.</p><p class="question"><strong>QUESTION:</strong> Instead of (or in addition to) working for a traditional employer (also known as being a W-2 employee), some workers pursue freelance or “gig” work. Which of the following best describes your current work arrangement?</p></figcaption><ul class="legend" aria-hidden="true"><li><span class="sw" style="background:#747480"></span>Do not freelance or have a gig job(s)</li><li><span class="sw" style="background:#FFE600"></span>Freelance (full or part time)</li></ul><div class="vbars" aria-hidden="true"><div class="vcol"><div class="vstack"><span class="seg" style="height:34.00%;background:#FFE600;color:#2e2e38" title="Freelance (full or part time): 34%">34%</span><span class="seg" style="height:66.00%;background:#747480;color:#ffffff" title="Do not freelance or have a gig job(s): 66%">66%</span></div><div class="cat">2023</div></div><div class="vcol"><div class="vstack"><span class="seg" style="height:23.00%;background:#FFE600;color:#2e2e38" title="Freelance (full or part time): 23%">23%</span><span class="seg" style="height:77.00%;background:#747480;color:#ffffff" title="Do not freelance or have a gig job(s): 77%">77%</span></div><div class="cat">2025</div></div></div><table class="data"><caption>Figure 2 data</caption><thead><tr><th scope="col">Survey year</th><th scope="col">Freelance (full or part time)</th><th scope="col">Do not freelance or have a gig job(s)</th></tr></thead><tbody><tr><th scope="row">2023</th><td>34%</td><td>66%</td></tr><tr><th scope="row">2025</th><td>23%</td><td>77%</td></tr></tbody></table></figure>
+<figure class="chart" id="fig3" data-figure="Figure 3"><figcaption><p class="kicker">Figure 3</p><p class="title">Employers expect to use more freelance workers in the future.</p><p class="question"><strong>QUESTION:</strong> Approximately what percent of your company’s workers are currently contract/freelance workers? In five years, what percent of your company’s workers will be contract/freelance workers?</p></figcaption><ul class="legend" aria-hidden="true"><li><span class="sw" style="background:#FF810A"></span>50% or more</li><li><span class="sw" style="background:#F95D54"></span>25% to 49%</li><li><span class="sw" style="background:#35A4E8"></span>10% to 24%</li><li><span class="sw" style="background:#42C9C2"></span>Less than 10%</li><li><span class="sw" style="background:#34C768"></span>None</li></ul><div class="vbars" aria-hidden="true"><div class="vcol"><div class="vstack"><span class="seg" style="height:35.00%;background:#34C768;color:#2e2e38" title="None: 35%">35%</span><span class="seg" style="height:37.00%;background:#42C9C2;color:#2e2e38" title="Less than 10%: 37%">37%</span><span class="seg" style="height:16.00%;background:#35A4E8;color:#ffffff" title="10% to 24%: 16%">16%</span><span class="seg" style="height:8.00%;background:#F95D54;color:#ffffff" title="25% to 49%: 8%">8%</span><span class="seg" style="height:4.00%;background:#FF810A;color:#2e2e38" title="50% or more: 4%"></span><span class="out" style="bottom:98.0%;transform:translateY(50%)">4%</span><span class="bracket left" style="bottom:35.0%;height:65.0%"><span>65%</span></span></div><div class="cat">Today</div></div><div class="vcol"><div class="vstack"><span class="seg" style="height:23.00%;background:#34C768;color:#2e2e38" title="None: 23%">23%</span><span class="seg" style="height:39.00%;background:#42C9C2;color:#2e2e38" title="Less than 10%: 39%">39%</span><span class="seg" style="height:23.00%;background:#35A4E8;color:#ffffff" title="10% to 24%: 23%">23%</span><span class="seg" style="height:11.00%;background:#F95D54;color:#ffffff" title="25% to 49%: 11%">11%</span><span class="seg" style="height:6.00%;background:#FF810A;color:#2e2e38" title="50% or more: 6%">6%</span><span class="bracket right" style="bottom:23.0%;height:79.0%"><span>77%</span></span></div><div class="cat">In five years</div></div></div><table class="data"><caption>Figure 3 data</caption><thead><tr><th scope="col">Timeframe</th><th scope="col">None</th><th scope="col">Less than 10%</th><th scope="col">10% to 24%</th><th scope="col">25% to 49%</th><th scope="col">50% or more</th></tr></thead><tbody><tr><th scope="row">Today</th><td>35%</td><td>37%</td><td>16%</td><td>8%</td><td>4%</td></tr><tr><th scope="row">In five years</th><td>23%</td><td>39%</td><td>23%</td><td>11%</td><td>6%</td></tr></tbody></table><ul class="notes"><li>Today: 65% — employers using any contract/freelance workers</li><li>In five years: 77% — employers using any contract/freelance workers</li></ul></figure>
+</main>
+</body>
+</html>

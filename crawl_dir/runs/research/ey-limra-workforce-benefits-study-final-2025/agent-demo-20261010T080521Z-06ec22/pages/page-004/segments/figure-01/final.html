@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Companies plan to offer more benefits in five years</title>
+<style>
+  .chart-container {
+    display: flex;
+    gap: 60px;
+    align-items: flex-end;
+    position: relative;
+    margin-top: 1em;
+  }
+  .bar {
+    width: 50px;
+    display: inline-block;
+    position: relative;
+    margin-right: 40px;
+    vertical-align: bottom;
+  }
+  .yellow { background-color: #ffe600; }
+  .gray { background-color: #66666b; }
+  .lightgray { background-color: #c4c4c8; }
+  .bar-segment {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: black;
+  }
+  .gray.bar-segment {
+    color: white;
+  }
+  .change {
+    position: absolute;
+    font-weight: 700;
+    font-size: 14px;
+    color: #444;
+    left: 60px;
+    width: 120px;
+    line-height: 1.2;
+  }
+  .change-2021 {
+    top: 0;
+  }
+  .change-2023 {
+    top: 36px;
+  }
+  .change-2028 {
+    top: 80px;
+  }
+</style>
+</head>
+<body>
+<figure>
+  <figcaption>
+    <p><strong>Figure 1</strong></p>
+    <h1>Companies plan to offer more benefits in five years.</h1>
+    <p><strong>QUESTION:</strong> In five years, do you think your company will be offering fewer, the same or more benefits than it does now?</p>
+  </figcaption>
+  <div class="chart-container" aria-label="Stacked bar chart showing benefits offering data with change percentages labeled to the right of each yellow segment, indicating changes from 2023.">
+    <div class="bar" aria-label="2021 benefits data stacked bar">
+      <div class="yellow bar-segment" style="height: 114px;">57%</div>
+      <div class="gray bar-segment" style="height: 80px;">40%</div>
+      <div class="lightgray bar-segment" style="height: 6px;">3%</div>
+      <div class="change change-2021">+7% change from 2023</div>
+    </div>
+    <div class="bar" aria-label="2023 benefits data stacked bar">
+      <div class="yellow bar-segment" style="height: 128px;">64%</div>
+      <div class="gray bar-segment" style="height: 70px;">35%</div>
+      <div class="lightgray bar-segment" style="height: 2px;">1%</div>
+      <div class="change change-2023">+6% change from 2023</div>
+    </div>
+    <div class="bar" aria-label="2028 forecast benefits data stacked bar">
+      <div class="yellow bar-segment" style="height: 134px;">67%</div>
+      <div class="gray bar-segment" style="height: 60px;">30%</div>
+      <div class="lightgray bar-segment" style="height: 6px;">3%</div>
+      <div class="change change-2028">+5% change from 2023</div>
+    </div>
+  </div>
+  <table role="table" border="1" cellspacing="0" cellpadding="5" style="margin-top: 20px; border-collapse: collapse;">
+    <caption>Benefits Offering Data by Year</caption>
+    <thead>
+      <tr>
+        <th scope="col">Year</th>
+        <th scope="col">Yellow (Percent)</th>
+        <th scope="col">Gray (Percent)</th>
+        <th scope="col">Light Gray (Percent)</th>
+        <th scope="col">Change from 2023</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2021</td>
+        <td>57%</td>
+        <td>40%</td>
+        <td>3%</td>
+        <td>+7%</td>
+      </tr>
+      <tr>
+        <td>2023</td>
+        <td>64%</td>
+        <td>35%</td>
+        <td>1%</td>
+        <td>+6%</td>
+      </tr>
+      <tr>
+        <td>2028 (Forecast)</td>
+        <td>67%</td>
+        <td>30%</td>
+        <td>3%</td>
+        <td>+5%</td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+</body>
+</html>

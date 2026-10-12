@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Employee Benefit Offerings - Figure 5</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 1.5em;
+    color: #222;
+  }
+  header h2 {
+    font-weight: 700;
+  }
+  header strong {
+    font-weight: 700;
+  }
+  .chart-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3em;
+    margin-top: 1em;
+  }
+  .bar-chart {
+    flex: 1 1 480px;
+    max-width: 570px;
+  }
+  .bar {
+    font-size: 0.875rem;
+    fill-opacity: 0.9;
+  }
+  .bar-label {
+    font-size: 13px;
+    fill: #333;
+    text-anchor: end;
+    font-family: Arial, sans-serif;
+  }
+  .bar-value {
+    fill: #222;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+  }
+  .bar-color-up {
+    fill: #2c9549;
+  }
+  .bar-color-down {
+    fill: #f44336;
+  }
+  .bar-color-neutral {
+    fill: #b0afbb;
+  }
+  .legend {
+    flex: 0 0 200px;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    padding: 1em;
+    font-family: Arial, sans-serif;
+    max-width: 280px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-bottom: 0.75em;
+  }
+  .legend-color {
+    width: 20px;
+    height: 14px;
+  }
+  .note {
+    font-style: italic;
+    margin-top: 0.75em;
+    color: #444;
+  }
+  table.data-table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 570px;
+    margin-top: 1em;
+    font-size: 0.9rem;
+  }
+  table.data-table thead {
+    background: #eee;
+  }
+  table.data-table th,
+  table.data-table td {
+    border: 1px solid #ccc;
+    padding: 0.25em 0.5em;
+    text-align: left;
+  }
+  table.data-table th {
+    font-weight: 700;
+  }
+  .columns {
+    margin-top: 2em;
+    display: flex;
+    gap: 3em;
+    flex-wrap: wrap;
+  }
+  .column {
+    flex: 1 1 450px;
+    max-width: 600px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  strong {
+    font-weight: 700;
+  }
+  em {
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+<header>
+  <figure>
+    <figcaption>
+      <p><strong>Figure 5</strong><br /><strong>Employees value a range of benefit offerings.</strong></p>
+      <p><strong>QUESTION:</strong> Regardless of whether the benefit is currently available to you at work, how interested would you be in having your employer offer it in the future?</p>
+    </figcaption>
+  </figure>
+</header>
+
+<section class="chart-container" aria-label="Bar chart of employee interest in benefit offerings">
+  <svg class="bar-chart" viewBox="0 0 600 620" role="img" aria-labelledby="title desc" width="100%" height="600" preserveAspectRatio="xMinYMin meet" >
+    <title id="title">Employee Interest in Range of Benefit Offerings</title>
+    <desc id="desc">Horizontal bar chart representing percent of employees very or extremely interested in having their employer offer various benefits in the future. Green bars indicate benefits with 5 or more percentage points increase from 2023, red bars indicate decrease, grey bars no major change.</desc>
+    <g font-family="Arial, sans-serif" font-size="12" >
+      <!-- Medical insurance: 78% Up -->
+      <text class="bar-label" x="110" y="30">Medical insurance</text>
+      <rect class="bar bar-color-up" x="140" y="18" width="468" height="14" />
+      <text class="bar-value" x="615" y="30" dominant-baseline="middle">78%</text>
+
+      <!-- Dental insurance: 72% Up -->
+      <text class="bar-label" x="110" y="60">Dental insurance</text>
+      <rect class="bar bar-color-up" x="140" y="48" width="432" height="14" />
+      <text class="bar-value" x="615" y="60" dominant-baseline="middle">72%</text>
+
+      <!-- Vision insurance: 62% Up -->
+      <text class="bar-label" x="110" y="90">Vision insurance</text>
+      <rect class="bar bar-color-up" x="140" y="78" width="372" height="14" />
+      <text class="bar-value" x="615" y="90" dominant-baseline="middle">62%</text>
+
+      <!-- Paid family or medical leave: 54% Neutral -->
+      <text class="bar-label" x="110" y="120">Paid family or medical leave</text>
+      <rect class="bar bar-color-neutral" x="140" y="108" width="324" height="14" />
+      <text class="bar-value" x="615" y="120" dominant-baseline="middle">54%</text>
+
+      <!-- Life insurance: 50% Neutral -->
+      <text class="bar-label" x="110" y="150">Life insurance</text>
+      <rect class="bar bar-color-neutral" x="140" y="138" width="300" height="14" />
+      <text class="bar-value" x="615" y="150" dominant-baseline="middle">50%</text>
+
+      <!-- Career development: 39% Neutral -->
+      <text class="bar-label" x="110" y="180">Career development</text>
+      <rect class="bar bar-color-neutral" x="140" y="168" width="234" height="14" />
+      <text class="bar-value" x="615" y="180" dominant-baseline="middle">39%</text>
+
+      <!-- Physical health wellness programs: 36% Neutral -->
+      <text class="bar-label" x="110" y="210">Physical health wellness programs</text>
+      <rect class="bar bar-color-neutral" x="140" y="198" width="216" height="14" />
+      <text class="bar-value" x="615" y="210" dominant-baseline="middle">36%</text>
+
+      <!-- Short-term disability insurance: 36% Neutral -->
+      <text class="bar-label" x="110" y="240">Short-term disability insurance</text>
+      <rect class="bar bar-color-neutral" x="140" y="228" width="216" height="14" />
+      <text class="bar-value" x="615" y="240" dominant-baseline="middle">36%</text>
+
+      <!-- Long-term disability insurance: 35% Neutral -->
+      <text class="bar-label" x="110" y="270">Long-term disability insurance</text>
+      <rect class="bar bar-color-neutral" x="140" y="258" width="210" height="14" />
+      <text class="bar-value" x="615" y="270" dominant-baseline="middle">35%</text>
+
+      <!-- Long-term care insurance: 34% Neutral -->
+      <text class="bar-label" x="110" y="300">Long-term care insurance</text>
+      <rect class="bar bar-color-neutral" x="140" y="288" width="204" height="14" />
+      <text class="bar-value" x="615" y="300" dominant-baseline="middle">34%</text>
+
+      <!-- Accident insurance: 34% Neutral -->
+      <text class="bar-label" x="110" y="330">Accident insurance</text>
+      <rect class="bar bar-color-neutral" x="140" y="318" width="204" height="14" />
+      <text class="bar-value" x="615" y="330" dominant-baseline="middle">34%</text>
+
+      <!-- Critical illness insurance: 33% Neutral -->
+      <text class="bar-label" x="110" y="360">Critical illness insurance</text>
+      <rect class="bar bar-color-neutral" x="140" y="348" width="198" height="14" />
+      <text class="bar-value" x="615" y="360" dominant-baseline="middle">33%</text>
+
+      <!-- Emergency savings benefit: 32% Neutral -->
+      <text class="bar-label" x="110" y="390">Emergency savings benefit</text>
+      <rect class="bar bar-color-neutral" x="140" y="378" width="192" height="14" />
+      <text class="bar-value" x="615" y="390" dominant-baseline="middle">32%</text>
+
+      <!-- Identity theft protection: 31% Neutral -->
+      <text class="bar-label" x="110" y="420">Identity theft protection</text>
+      <rect class="bar bar-color-neutral" x="140" y="408" width="186" height="14" />
+      <text class="bar-value" x="615" y="420" dominant-baseline="middle">31%</text>
+
+      <!-- Mental health/substance abuse treatment benefits: 30% Neutral -->
+      <text class="bar-label" x="110" y="450">Mental health/substance abuse treatment benefits</text>
+      <rect class="bar bar-color-neutral" x="140" y="438" width="180" height="14" />
+      <text class="bar-value" x="615" y="450" dominant-baseline="middle">30%</text>
+
+      <!-- Employee assistance programs: 30% Neutral -->
+      <text class="bar-label" x="110" y="480">Employee assistance programs</text>
+      <rect class="bar bar-color-neutral" x="140" y="468" width="180" height="14" />
+      <text class="bar-value" x="615" y="480" dominant-baseline="middle">30%</text>
+
+      <!-- Financial wellness programs: 29% Down -->
+      <text class="bar-label" x="110" y="510">Financial wellness programs</text>
+      <rect class="bar bar-color-down" x="140" y="498" width="174" height="14" />
+      <text class="bar-value" x="615" y="510" dominant-baseline="middle">29%</text>
+
+      <!-- Tuition assistance: 28% Neutral -->
+      <text class="bar-label" x="110" y="540">Tuition assistance</text>
+      <rect class="bar bar-color-neutral" x="140" y="528" width="168" height="14" />
+      <text class="bar-value" x="615" y="540" dominant-baseline="middle">28%</text>
+
+      <!-- Telemedicine benefits: 28% Neutral -->
+      <text class="bar-label" x="110" y="570">Telemedicine benefits</text>
+      <rect class="bar bar-color-neutral" x="140" y="558" width="168" height="14" />
+      <text class="bar-value" x="615" y="570" dominant-baseline="middle">28%</text>
+
+      <!-- Student loan assistance/repayment: 26% Neutral -->
+      <text class="bar-label" x="110" y="600">Student loan assistance/repayment</text>
+      <rect class="bar bar-color-neutral" x="140" y="588" width="156" height="14" />
+      <text class="bar-value" x="615" y="600" dominant-baseline="middle">26%</text>
+
+      <!-- Hospital indemnity insurance: 26% Neutral -->
+      <text class="bar-label" x="110" y="630">Hospital indemnity insurance</text>
+      <rect class="bar bar-color-neutral" x="140" y="618" width="156" height="14" />
+      <text class="bar-value" x="615" y="630" dominant-baseline="middle">26%</text>
+
+      <!-- Caregiving benefits: 25% Neutral -->
+      <text class="bar-label" x="110" y="660">Caregiving benefits</text>
+      <rect class="bar bar-color-neutral" x="140" y="648" width="150" height="14" />
+      <text class="bar-value" x="615" y="660" dominant-baseline="middle">25%</text>
+
+      <!-- Legal services plan: 23% Neutral -->
+      <text class="bar-label" x="110" y="690">Legal services plan</text>
+      <rect class="bar bar-color-neutral" x="140" y="678" width="138" height="14" />
+      <text class="bar-value" x="615" y="690" dominant-baseline="middle">23%</text>
+
+      <!-- Debt management counseling: 21% Neutral -->
+      <text class="bar-label" x="110" y="720">Debt management counseling</text>
+      <rect class="bar bar-color-neutral" x="140" y="708" width="126" height="14" />
+      <text class="bar-value" x="615" y="720" dominant-baseline="middle">21%</text>
+
+      <!-- Pet insurance: 16% Neutral -->
+      <text class="bar-label" x="110" y="750">Pet insurance</text>
+      <rect class="bar bar-color-neutral" x="140" y="738" width="96" height="14" />
+      <text class="bar-value" x="615" y="750" dominant-baseline="middle">16%</text>
+
+      <!-- Societal benefits: 12% Down -->
+      <text class="bar-label" x="110" y="780">Societal benefits</text>
+      <rect class="bar bar-color-down" x="140" y="768" width="72" height="14" />
+      <text class="bar-value" x="615" y="780" dominant-baseline="middle">12%</text>
+    </g>
+  </svg>
+
+  <aside class="legend" aria-label="Chart legend explaining bar colors">
+    <div class="legend-item">
+      <svg class="legend-color" viewBox="0 0 20 14" aria-hidden="true">
+        <rect width="20" height="14" fill="#2c9549"></rect>
+      </svg>
+      <p>Up 5 percentage points or more vs. 2023 study</p>
+    </div>
+    <div class="legend-item">
+      <svg class="legend-color" viewBox="0 0 20 14" aria-hidden="true">
+        <rect width="20" height="14" fill="#f44336"></rect>
+      </svg>
+      <p>Down 5 percentage points or more vs. 2023 study</p>
+    </div>
+  </aside>
+</section>
+
+<p class="note">Note: Percent of employees who are “very” or “extremely” interested in having their employer offer the benefit in the future.</p>
+
+<table class="data-table" aria-label="Data table showing percent employee interest in each benefit">
+  <thead>
+    <tr>
+      <th scope="col">Benefit Offering</th>
+      <th scope="col">Percent Interested</th>
+      <th scope="col">Change from 2023</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Medical insurance</td><td>78%</td><td>Up 5+ pts</td></tr>
+    <tr><td>Dental insurance</td><td>72%</td><td>Up 5+ pts</td></tr>
+    <tr><td>Vision insurance</td><td>62%</td><td>Up 5+ pts</td></tr>
+    <tr><td>Paid family or medical leave</td><td>54%</td><td>Neutral</td></tr>
+    <tr><td>Life insurance</td><td>50%</td><td>Neutral</td></tr>
+    <tr><td>Career development</td><td>39%</td><td>Neutral</td></tr>
+    <tr><td>Physical health wellness programs</td><td>36%</td><td>Neutral</td></tr>
+    <tr><td>Short-term disability insurance</td><td>36%</td><td>Neutral</td></tr>
+    <tr><td>Long-term disability insurance</td><td>35%</td><td>Neutral</td></tr>
+    <tr><td>Long-term care insurance</td><td>34%</td><td>Neutral</td></tr>
+    <tr><td>Accident insurance</td><td>34%</td><td>Neutral</td></tr>
+    <tr><td>Critical illness insurance</td><td>33%</td><td>Neutral</td></tr>
+    <tr><td>Emergency savings benefit</td><td>32%</td><td>Neutral</td></tr>
+    <tr><td>Identity theft protection</td><td>31%</td><td>Neutral</td></tr>
+    <tr><td>Mental health/substance abuse treatment benefits</td><td>30%</td><td>Neutral</td></tr>
+    <tr><td>Employee assistance programs</td><td>30%</td><td>Neutral</td></tr>
+    <tr><td>Financial wellness programs</td><td>29%</td><td>Down 5+ pts</td></tr>
+    <tr><td>Tuition assistance</td><td>28%</td><td>Neutral</td></tr>
+    <tr><td>Telemedicine benefits</td><td>28%</td><td>Neutral</td></tr>
+    <tr><td>Student loan assistance/repayment</td><td>26%</td><td>Neutral</td></tr>
+    <tr><td>Hospital indemnity insurance</td><td>26%</td><td>Neutral</td></tr>
+    <tr><td>Caregiving benefits</td><td>25%</td><td>Neutral</td></tr>
+    <tr><td>Legal services plan</td><td>23%</td><td>Neutral</td></tr>
+    <tr><td>Debt management counseling</td><td>21%</td><td>Neutral</td></tr>
+    <tr><td>Pet insurance</td><td>16%</td><td>Neutral</td></tr>
+    <tr><td>Societal benefits</td><td>12%</td><td>Down 5+ pts</td></tr>
+  </tbody>
+</table>
+
+<section class="columns" aria-label="Contextual paragraphs about study findings">
+  <article class="column">
+    <p><strong>Paid family or medical leave now in the “core four”:</strong> More interesting, however, is that paid family or medical leave is the next most important benefit in employers’ minds beyond medical, dental and vision insurance: 71% of all employers (and 80% of large employers) view it as a critical benefit in the future, nearly on par with dental and vision insurance and above life, disability and supplemental health insurance. Paid family or medical leave is now clearly in the core four of benefits in the eyes of both employers and employees. <em>See Key finding 4 for more on leave benefits.</em></p>
+
+    <p><strong>Prioritizing wellness:</strong> Mental health and substance abuse programs are of considerable interest to employees, especially the younger generations that are coming to dominate the workforce. Career development services that promote professional wellbeing are also of high interest to younger workers. Clear majorities of employers are expressing interest in mental health (60%) and career development (59%) benefits, while nearly as many see a need for programs focused on physical health and</p>
+  </article>
+
+  <article class="column">
+    <p>financial wellness. As employers take a more holistic view of individual needs across a multigenerational workforce, wellness benefits can help attract and retain top talent. They can be especially valuable for individuals facing personal challenges in a time of great uncertainty.</p>
+
+    <p>Interest in long-term care insurance remains relevant, with the growing retirement-eligible population ranking it as important as critical illness and more important than hospital indemnity insurance. Long-term care can be provided as a stand-alone insurance benefit, a life insurance accelerated benefit or a long-term care rider added to a workplace life insurance product.</p>
+
+    <p><strong>Differing generational priorities:</strong> The dramatic differences in benefits interest across generations highlight the challenges faced by employers and the need for future portfolio refinements. <em>See Figure 6.</em> Today’s products and services are largely curated for Gen X and baby boomers, though Gen Z and millennials now make up the greater percentage of the workforce.</p>
+  </article>
+</section>
+</body>
+</html>

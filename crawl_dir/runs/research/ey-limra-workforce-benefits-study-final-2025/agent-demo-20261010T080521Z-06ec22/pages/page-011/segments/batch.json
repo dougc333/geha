@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "gpt-4.1-mini",
+  "created_at": "2026-10-10T08:17:33.826195+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "figure1",
+      "kind": "figure",
+      "title": "The LIMRA-EY Wheel of Wellness",
+      "source_png": "figure-01-figure1.png",
+      "bounding_box": [
+        107,
+        1000,
+        1423,
+        1956
+      ],
+      "output_directory": "figure-01",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "layout",
+              "source_evidence": "The source page's wheel is a segmented circle with five distinct pie-like sectors, each sector contains a background image and a clear label centrally positioned within that sector. There is a thick yellow circular arrow around the pie with five arrowheads in a clockwise sequence.",
+              "html_evidence": "The candidate's SVG uses a single large yellow circle instead of distinct segments, and approximates arrows as polygons placed at four points. The text labels are clustered near the circle center but do not appear within distinct segmented sectors or positions that replicate the source's layout. The visual segmentation and background images per sector are completely missing.",
+              "correction": "Recreate the wheel as five clearly separated segments (like pie wedges) arranged uniformly around the circle, each with the respective label (Physical, Mental, Financial, Societal, Professional) centered in the segment, and a thick yellow circular arrow with five distinct arrows pointing clockwise around the perimeter. Maintain the approximate positions and sector divisions visible in the source."
+            }
+          ],
+          "render_latency_ms": 479.6
+        },
+        {
+          "iteration": 2,
+          "html": "figure-01/iteration-02.html",
+          "rendered_png": "figure-01/iteration-02.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 484.8
+        }
+      ],
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-02.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 1,
+    "failed": 0,
+    "total_iterations": 2,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-10-10T08:17:56.406841+00:00"
+}

@@ -1,0 +1,314 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "TELEPHONE number in 'SHIPPER' section is '+54 11 4789 1234'",
+        "html_evidence": "TEL: +54 11 4789 1234",
+        "correction": "Correct as in source: TEL: +54 11 4789 1234"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "SHIPPER section includes 'Av. de los Incas 456, Buenos Aires, Argentina'",
+        "html_evidence": "Av. de los Incas 456, Buenos Aires, Argentina",
+        "correction": "Match"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "SHIPPER email 'logistica@frutasdelsol.com.ar'",
+        "html_evidence": "EMAIL: logistica@frutasdelsol.com.ar",
+        "correction": "Match"
+      },
+      {
+        "category": "extra_text",
+        "source_evidence": "SHIPPER phone '+54 11 4789 1234'",
+        "html_evidence": "TEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+        "correction": "Remove extra '|' and ensure no added text"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "CONSIGNEE phone is '+1 (555) 123-4567'",
+        "html_evidence": "TEL: +1 (555) 123-4567",
+        "correction": "Correct as in source"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "SHIPPER'S REF. 'EXP-35782' is present",
+        "html_evidence": "SHIPPER'S REF.\nEXP-35782",
+        "correction": "Match"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "DELIVERY AGENT tel is 'Tel: +31 10 123 4567 | dispatch@logitrans.com'",
+        "html_evidence": "Tel: +31 10 123 4567 | dispatch@logitrans.com",
+        "correction": "Correct casing for 'Tel' and add missing period if any"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Table container 'MRDN4455667' and 'MRDN7788990' with seals and marks",
+        "html_evidence": "MRDN4455667\\n\\nSEAL: MSK112233\\n\\nMARKS:\\nPALLETIZED\\n\\nMRDN7788990\\n\\nSEAL: MSK445566\\n\\nMARKS:\\nPALLETIZED",
+        "correction": "Match"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "No. PKGS column has '20' twice",
+        "html_evidence": "20\\n\\n20",
+        "correction": "Correct placement: first '20' for MRDN4455667, second '20' for MRDN7788990"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Descriptions detail '20 PALLETS STC: FRESH FRUIT' and specifics for apples and pears with HS codes and temp.",
+        "html_evidence": "20 PALLETS STC:\\nFRESH FRUIT\\n\\nFRESH APPLES\\nSTOWAGE AT +2.0 DEGREES CELSIUS\\n_Packaging: PALLETS_\\n\\nHS CODE: 08081080\\nSET TEMP: +2°C\\n\\n20 PALLETS STC:\\nFRESH FRUIT\\n\\nFRESH PEARS\\nSTOWAGE AT +1.0 DEGREES CELSIUS\\n_Packaging: PALLETS_\\n\\nHS CODE: 08083090\\nSET TEMP: +1°C",
+        "correction": "Match"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Gross weight first 18,500 KGS, second 19,200 KGS",
+        "html_evidence": "18,500\\nKGS\\n\\n19,200\\nKGS",
+        "correction": "Match"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Measurement columns 28.00 CBM twice",
+        "html_evidence": "28.00\\nCBM\\n\\n28.00\\nCBM",
+        "correction": "Match"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Freight & Charges 'OCEAN FREIGHT COLLECT' and 'THC'",
+        "html_evidence": "OCEAN FREIGHT           COLLECT\\nTHC",
+        "correction": "Match"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Total number of packages '40' bold",
+        "html_evidence": "TOTAL NUMBER OF PACKAGES\\n\\n40",
+        "correction": "Match except font bold missing"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Legal terms block includes full text in uppercase with number original b/l's 'THREE (3)'",
+        "html_evidence": "RECEIVED by the Carrier in apparent good order and condition ... NUMBER OF ORIGINAL B/L'S: THREE (3)",
+        "correction": "Match except uppercase style differs"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Place of issue: Antwerp",
+        "html_evidence": "PLACE OF ISSUE\\nAntwerp",
+        "correction": "Match"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Date of Issue: 2026-03-13",
+        "html_evidence": "DATE OF ISSUE\\n2026-03-13",
+        "correction": "Match"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "SIGNATURE 'Authorized Signature'",
+        "html_evidence": "SIGNED FOR THE CARRIER\\nAuthorized Signature",
+        "correction": "Match"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Full logo with letter 'M' in box on left top and footer with 'FRUTAS DEL SOL S.A. • +54 11 4789 1234 • logistica@frutasdelsol.com.ar'",
+        "html_evidence": "No logo box and no footer text present",
+        "correction": "Add 'M' logo box top-left and add footer text exactly as in source"
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "missing_text",
+        "source_evidence": "BILL OF LADING header includes B/L No. 'BL232472785' and SCAC 'MRDN' in a distinct box on top right.",
+        "html_evidence": "<div class=\"cell\" data-cell=\"bill_of_lading_box\" style=\"left:1100px;top:0px;width:899px;height:363px\"><pre>BILL OF LADING\n\nB/L NO.               BL232472785\n\nSCAC                      MRDN</pre></div>",
+        "correction": "Add full bill of lading header block with B/L No. and SCAC in a boxed area at top right as in source PDF."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Shipper section contains full address, telephone, and email: 'Av. de los Incas 456, Buenos Aires, Argentina\\nTEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar'",
+        "html_evidence": "<div class=\"cell\" data-cell=\"shipper\" style=\"left:0px;top:0px;width:999px;height:298px\"><pre>SHIPPER\nFRUTAS DEL SOL S.A.\nAv. de los Incas 456, Buenos Aires, Argentina\nTEL: +54 11 4789 1234 EMAIL: logistica@frutasdelsol.com.ar</pre></div>",
+        "correction": "Preserve shipper full details including telephone and email exactly, ensure 'TEL:' and 'EMAIL:' labels are followed by colon and space consistently."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Notify party section includes 'TEL: +31 10 123 4567 | EMAIL: dispatch@logitrans.com'",
+        "html_evidence": "<div class=\"cell\" data-cell=\"notify_party\" style=\"left:0px;top:597px;width:999px;height:302px\"><pre>NOTIFY PARTY (NO RESPONSIBILITY FOR FAILURE TO NOTIFY)\nFRESH FRUIT IMPORTERS B.V.\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands\nTEL: +31 10 123 4567 | EMAIL: dispatch@logitrans.com</pre></div>",
+        "correction": "Ensure Notify Party telephone and email details are included exactly as in source."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Booking Ref. is 'BKG5917532' and Shipper's Ref. is 'EXP-35782'",
+        "html_evidence": "<pre>BOOKING REF.\nBKG5917532</pre> and <pre>SHIPPER'S REF.\nEXP-35782</pre> present in HTML but location and formatting differs from source boxed layout at top right.",
+        "correction": "Place Booking Ref. and Shipper's Ref. within appropriate boxes aligned as per source, ensuring consistent label and value formatting."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Pre-Carriage entry reads 'Oceanic Meridian Lines' distinct boxed area.",
+        "html_evidence": "<pre>PRE-CARRIAGE BY\nOceanic Meridian Lines</pre>",
+        "correction": "Include Pre-Carriage section with text 'Oceanic Meridian Lines' in the same boxed style as source."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Place of Receipt: 'BUENOS AIRES, ARGENTINA' in bold uppercase, boxed area.",
+        "html_evidence": "<pre>PLACE OF RECEIPT\nBUENOS AIRES, ARGENTINA</pre>",
+        "correction": "Add Place of Receipt in a boxed area with bold uppercase text as in source."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Delivery Agent is 'LogiTrans Global\\n88 Harbor Road, Rotterdam, 3011 AA\\nTel: +31 10 123 4567 | dispatch@logitrans.com' boxed separately.",
+        "html_evidence": "<pre>DELIVERY AGENT\nLogiTrans Global\n88 Harbor Road, Rotterdam, 3011 AA\nTel: +31 10 123 4567 | dispatch@logitrans.com</pre>",
+        "correction": "Include Delivery Agent details in a distinct box matching source style and formatting."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "In goods description, 'SET TEMP: +2°C' and 'SET TEMP: +1°C' in blue text highlight in source.",
+        "html_evidence": "<pre>SET TEMP: +2°C\n...\nSET TEMP: +1°C</pre> rendered same color black.",
+        "correction": "Render 'SET TEMP: +2°C' and 'SET TEMP: +1°C' text in blue color as source PDF does."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Booking Ref and Shipper's Ref are distinct boxes side by side on top right.",
+        "html_evidence": "Booking Ref and Shipper's Ref are separated in HTML but not boxed distinctively side by side as source shows.",
+        "correction": "Group Booking Ref and Shipper's Ref in side-by-side boxes at top right as source layout."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "In Freight Charges, source has 'OCEAN FREIGHT\\nCOLLECT\\nTHC' with clear positioning and spacing.",
+        "html_evidence": "Freight charges repeated twice in separate divs with inconsistent spacing.",
+        "correction": "Present freight charges once, properly spaced, aligning with source formatting."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "At page bottom, legal terms notice with detailed wording about acceptance and terms.",
+        "html_evidence": "Legal terms are present but lack full separation from header lines and absence of underline rule seen in source.",
+        "correction": "Include horizontal line above legal terms exactly as source and ensure paragraph formatting matches."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Signature area states 'SIGNED FOR THE CARRIER\\nAuthorized Signature' in bottom right boxed area.",
+        "html_evidence": "<pre>SIGNED FOR THE CARRIER\nAuthorized Signature</pre> present but not boxed distinctly or separated as in source.",
+        "correction": "Box and position signature block exactly as in source."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Footer line with 'FRUTAS DEL SOL S.A. • +54 11 4789 1234 • logistica@frutasdelsol.com.ar' centered at bottom.",
+        "html_evidence": "No footer line present in HTML extract.",
+        "correction": "Add footer line at bottom center with shipper name, telephone, and email per source."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "missing_text",
+        "source_evidence": "SHIPPER\nFRUTAS DEL SOL S.A.\nAv. de los Incas 456, Buenos Aires, Argentina\nTEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+        "html_evidence": "SHIPPER\nFRUTAS DEL SOL S.A.\nAv. de los Incas 456, Buenos Aires, Argentina\nTEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+        "correction": "No missing text identified here; this is to confirm presence."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "FREIGHT & CHARGES\n\nOCEAN FREIGHT       COLLECT\nTHC",
+        "html_evidence": "FREIGHT & CHARGES\n\nOCEAN FREIGHT           COLLECT\nTHC\n\nOCEAN FREIGHT           COLLECT\nTHC",
+        "correction": "The candidate HTML repeats the text 'OCEAN FREIGHT COLLECT\nTHC' twice; the PDF shows it once only."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "BILL OF LADING\n\nB/L NO.\nBL232472785\n\nSCAC\nMRDN",
+        "html_evidence": "BILL OF LADING\n\nB/L NO.               BL232472785\n\nSCAC                      MRDN",
+        "correction": "No missing text; verified content but spacing differs."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "DELIVERY AGENT\nLogiTrans Global\n88 Harbor Road, Rotterdam, 3011 AA\nTel: +31 10 123 4567 | dispatch@logitrans.com",
+        "html_evidence": "DELIVERY AGENT\nLogiTrans Global\n88 Harbor Road, Rotterdam, 3011 AA\nTel: +31 10 123 4567 | dispatch@logitrans.com",
+        "correction": "No wrong text, matches exactly."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "FREIGHT COLLECT (centered, separated by lines)",
+        "html_evidence": "",
+        "correction": "The candidate HTML omits the text 'FREIGHT COLLECT' line that is centered and separated by horizontal lines in the PDF between the description of goods and gross weight columns."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Container numbers with seals, marks, and packages grouped next to descriptions and weights in columns with clear separation",
+        "html_evidence": "Container numbers and seals plus packages are grouped similarly but without visually distinct grouping and missing some inner grouping lines such as around the seal and marks text separately.",
+        "correction": "Improve grouping and layout to replicate the nested grouping of container details, seal numbers, and marks distinctly as shown in the PDF."
+      }
+    ]
+  },
+  {
+    "iteration": 3,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "The PDF has logo \"M\" in a box left of MERIDIAN SHIPPING and a horizontal line under BILL OF LADING header.",
+        "html_evidence": "<div class=\"cell\" data-cell=\"carrier_header\" style=\"left:0px;top:0px;width:1100px;height:363px\"><pre>MERIDIAN SHIPPING\nGLOBAL SHIPPING &amp; LOGISTICS</pre></div><div class=\"cell\" data-cell=\"bill_of_lading_box\" style=\"left:1100px;top:0px;width:899px;height:363px\"><pre>BILL OF LADING\n\nB/L NO.               BL232472785\n\nSCAC                      MRDN</pre></div>",
+        "correction": "Include the boxed 'M' logo left of 'MERIDIAN SHIPPING' and replicate the horizontal line under 'BILL OF LADING' header in the HTML."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "B/L NO.\\nBL232472785",
+        "html_evidence": "B/L NO.               BL232472785",
+        "correction": "Correct spacing between 'B/L NO.' and 'BL232472785' to align properly as in source."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "SHIPPER\\nFRUTAS DEL SOL S.A.\\nAv. de los Incas 456, Buenos Aires, Argentina\\nTEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+        "html_evidence": "SHIPPER\nFRUTAS DEL SOL S.A.\nAv. de los Incas 456, Buenos Aires, Argentina\nTEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+        "correction": "Correct telephone number format to '+54 11 4789 1234' instead of '+54 11 4789 1234' (match spacing), content appears correct."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "DELIVERY AGENT\\nLogiTrans Global\\n88 Harbor Road, Rotterdam, 3011 AA\\nTel: +31 10 123 4567 | dispatch@logitrans.com",
+        "html_evidence": "DELIVERY AGENT\nLogiTrans Global\n88 Harbor Road, Rotterdam, 3011 AA\nTel: +31 10 123 4567 | dispatch@logitrans.com",
+        "correction": "Capitalize 'Tel' to 'Tel:' as in source, add a period if present in source (not present here). No email marker for 'dispatch@logitrans.com' in HTML, match to 'EMAIL:' in source is needed or clarify format."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "Two container numbers appear in vertical order with seals and marks: MRDN4455667 with seal MSK112233 and MRDN7788990 with seal MSK445566; each with marks 'PALLETIZED'.",
+        "html_evidence": "MRDN4455667\n\nSEAL: MSK112233\n\nMARKS:\nPALLETIZED\n\nMRDN7788990\n\nSEAL: MSK445566\n\nMARKS:\nPALLETIZED",
+        "correction": "The reading order appears correct, but verify that 'MARKS:' and 'PALLETIZED' stay visually grouped as on source document."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "NO. PKGS as two separate '20' values for each container/mark group.",
+        "html_evidence": "20\n\n20",
+        "correction": "Add newline after each '20' for the two packages matching the two container entries; content correct."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "DESCRIPTION OF GOODS section includes blank lines before 'FREIGHT COLLECT'.",
+        "html_evidence": "DESCRIPTION OF GOODS\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFREIGHT COLLECT",
+        "correction": "Remove excessive blank lines in 'DESCRIPTION OF GOODS' cell ensuring text spacing matches source."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "FREIGHT & CHARGES\\nOCEAN FREIGHT           COLLECT\\nTHC",
+        "html_evidence": "FREIGHT &amp; CHARGES\nOCEAN FREIGHT           COLLECT\nTHC",
+        "correction": "Correct spacing between 'OCEAN FREIGHT' and 'COLLECT' to be consistent with source document."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Place of issue: Antwerp\\nDate of issue: 2026-03-13\\nSigned for the carrier: Authorized Signature",
+        "html_evidence": "PLACE OF ISSUE\nAntwerp\n\nDATE OF ISSUE\n2026-03-13\n\nSIGNED FOR THE CARRIER\n\nAuthorized Signature",
+        "correction": "No missing text here, just ensure layout and capitalization matches source."
+      },
+      {
+        "category": "extra_text",
+        "source_evidence": "Footer: 'FRUTAS DEL SOL S.A. · +54 11 4789 1234 · logistica@frutasdelsol.com.ar'",
+        "html_evidence": "",
+        "correction": "Add footer with 'FRUTAS DEL SOL S.A. · +54 11 4789 1234 · logistica@frutasdelsol.com.ar' aligned center at bottom of page as in source."
+      }
+    ]
+  }
+]

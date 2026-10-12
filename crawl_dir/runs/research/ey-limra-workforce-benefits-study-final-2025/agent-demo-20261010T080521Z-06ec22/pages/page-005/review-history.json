@@ -1,0 +1,62 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "chart_data",
+        "source_evidence": "The authoritative source's Figure 2 chart bars show 2023 at 23% freelance/gig work and 77% do not, compared to 2025 projected 34% freelance/gig work and 66% do not.",
+        "html_evidence": "Figure 2's chart bars show a downward trending bars from 25% to 13% for years 2019-2023, with no data for 2025.",
+        "correction": "Update Figure 2's chart to match the authoritative source by showing only years 2023 and 2025, with 23% freelance (yellow) and 77% do not freelance (gray) for 2023, and 34% freelance and 66% do not freelance for 2025."
+      },
+      {
+        "category": "chart_data",
+        "source_evidence": "The authoritative source Figure 2 includes two categories in the bar chart for 2023 and 2025: Do not freelance or have a gig job(s) (77% and 66%) and Freelance (full or part time) (23% and 34%).",
+        "html_evidence": "The candidate's Figure 2 chart is a 2019-2023 declining single bar set meant to represent % participating in gig economy, ranging from 25% down to 13%, with no 'Do not freelance' category or 2025 data.",
+        "correction": "Revise Figure 2 chart to a stacked bar chart for just 2023 and 2025 years with two colors: gray for 'Do not freelance' and yellow for 'Freelance (full or part time)', matching the exact percentages from the source (2023: 77% gray, 23% yellow; 2025: 66% gray, 34% yellow)."
+      },
+      {
+        "category": "chart_data",
+        "source_evidence": "The authoritative source's Figure 3 chart data legend and table show:\n- 50% or more: Currently 8%, in five years 6%\n- 25% to 49%: Currently 16%, in five years 11%\n- 10% to 24%: Currently 23%, in five years 39%\n- Less than 10%: Currently 37%, in five years 23%\n- None: Currently 35%, in five years 23%\n\nThe table below the chart is consistent with those values visually represented with color-coded bars.",
+        "html_evidence": "The candidate's Figure 3 table shows very different values:\n- 50% or more: 7% currently, 11% in five years\n- 25% to 49%: 9% currently, 13% in five years\n- 10% to 24%: 25% currently, 31% in five years\n- Less than 10%: 34% currently, 28% in five years\n- None: 26% currently, 17% in five years\n\nThe candidate chart also lacks any graphical stacked bar representation and only includes the table and legend, not the stacked bar chart seen in the authoritative source.\n",
+        "correction": "Correct Figure 3 data values to match the authoritative source's chart and legend values exactly, both in table and visual representation. Add the stacked color-coded bar chart as per the authoritative source, with the correct percentages and colors corresponding to the categories."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "chart_data",
+        "source_evidence": "Figure 3 'Currently' column data: PDF shows 8% (50%+), 16% (25-49%), 16% (10-24%), 37% (<10%), 35% (None).",
+        "html_evidence": "<table class=\"chart\"> <tbody> <tr> <td>10% to 24%</td> <td class=\"color-10to24\" headers=\"current\">23%</td> ... </tr> </tbody> </table>",
+        "correction": "Change the 'Currently' column percentage for '10% to 24%' from 23% in HTML to 16% to match the PDF source data."
+      },
+      {
+        "category": "chart_data",
+        "source_evidence": "Figure 3 'In five years' column data: PDF shows 6% (50%+), 11% (25-49%), 39% (10-24%), 23% (<10%), 23% (None).",
+        "html_evidence": "<table class=\"chart\"> <tbody> <tr> <td>25% to 49%</td> <td class=\"color-25to49\" headers=\"future\">11%</td> ... </tr> </tbody> </table>",
+        "correction": "No mismatch on 'In five years' data."
+      },
+      {
+        "category": "chart_relationship",
+        "source_evidence": "Figure 3 stacked bar chart segments from PDF: from bottom up (today): None 35%, Less than 10% 37%, 10-24% 16%, 25-49% 16%, 50%+ 8%.",
+        "html_evidence": "<div class=\"stacked-bar\"> <span class=\"segment segment-none\" style=\"height: 35%; bottom: 0;\">35%</span> <span class=\"segment segment-less10\" style=\"height: 37%; bottom: 35%;\">37%</span> <span class=\"segment segment-10to24\" style=\"height: 23%; bottom: 72%;\">23%</span> <span class=\"segment segment-25to49\" style=\"height: 16%; bottom: 95%;\">16%</span> <span class=\"segment segment-50\" style=\"height: 8%; bottom: 111%;\">8%</span> </div>",
+        "correction": "Adjust stacked bar segments for 'Currently' in HTML: change '10 to 24%' segment height and label from 23% to 16% to match PDF; recalculate 'bottom' positions accordingly to maintain correct stacking order."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "chart_data",
+        "source_evidence": "Figure 3 data from PDF: Currently: 50% or more 8%, 25% to 49% 16%, 10% to 24% 16%, Less than 10% 37%, None 35%. In five years: 50% or more 6%, 25% to 49% 11%, 10% to 24% 39%, Less than 10% 23%, None 23%.",
+        "html_evidence": "<div class=\"stacked-bar\" title=\"Currently: 50% or more 8%, 25 to 49% 16%, 10 to 24% 16%, Less than 10% 37%, None 35%\">\n            <span class=\"segment segment-none\" style=\"height: 35%; bottom: 0;\">35%</span>\n            <span class=\"segment segment-less10\" style=\"height: 37%; bottom: 35%;\">37%</span>\n            <span class=\"segment segment-10to24\" style=\"height: 16%; bottom: 72%;\">16%</span>\n            <span class=\"segment segment-25to49\" style=\"height: 16%; bottom: 88%;\">16%</span>\n            <span class=\"segment segment-50\" style=\"height: 8%; bottom: 104%;\">8%</span>",
+        "correction": "The stacked bar segments for Figure 3 currently show the '25% to 49%' bar as 16%, but the PDF data specifies it as 25% to 49% = 16%. However, mapping order is wrong in stacking: the segment with 16% for 25 to 49% is placed above the 10% to 24% segment that also shows 16%. The stacking order is inverted causing segments to overlap incorrectly and top segment bottom offsets exceed 100% causing overflow. Correct stacking bottom offsets and segment heights so they stack properly from bottom 'None' upward in correct order (None, Less than 10%, 10% to 24%, 25% to 49%, 50% or more). Also correct 'In five years' stacked bar from bottom accordingly to reflect 23%,23%,39%,11%,6% segments in order. Also verify that segment bottom offset and height styling values do not cause segments to overlap or extend beyond container height."
+      }
+    ]
+  }
+]

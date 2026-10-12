@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page 17</title>
+<style>
+:root { color-scheme: light; }
+body { font-family: Arial, Helvetica, sans-serif; color: #2e2e38; background: #fff;
+       margin: 0; padding: 24px 16px; line-height: 1.45; }
+main { max-width: 960px; margin: 0 auto; }
+h1 { font-size: 34px; font-weight: 400; margin: 0 0 8px; }
+h2 { font-size: 22px; margin: 0 0 16px; }
+h3 { font-size: 16px; margin: 20px 0 8px; }
+p, li { font-size: 15px; }
+.fig-group > header .kicker, figure.chart .kicker { font-size: 12px; font-weight: bold; margin: 0; }
+.fig-group > header h2 { font-size: 19px; margin: 2px 0 16px; }
+.fig-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+figure.chart { margin: 28px 0; }
+figure.chart figcaption .title { font-size: 19px; font-weight: bold; margin: 2px 0 6px; }
+figure.chart .question { font-size: 14px; margin: 0 0 12px; }
+figure.chart .notes { font-size: 12px; font-style: italic; color: #555; margin: 8px 0 0; }
+.legend { list-style: none; margin: 8px 0 14px; padding: 6px 10px; border: 1px solid #ccc;
+          display: inline-flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13px; }
+.legend li { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.sw { width: 10px; height: 10px; display: inline-block; flex: none; }
+.pies { display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-around; }
+.pie { text-align: center; }
+.pie h4 { margin: 0 0 4px; font-size: 15px; }
+.pie svg { width: 220px; max-width: 100%; font-size: 9px; }
+.hbars { display: grid; grid-template-columns: minmax(120px, 42%) 1fr; gap: 4px 10px;
+         font-size: 12px; align-items: center; }
+.hbars .lab { text-align: right; }
+.hbars .grp { grid-column: 1 / -1; font-weight: bold; font-size: 14px; margin-top: 10px;
+              border-bottom: 1px solid #2e2e38; }
+.track { display: flex; height: 16px; }
+.track.multi { flex-direction: column; height: auto; gap: 2px; }
+.track .seg { display: flex; align-items: center; justify-content: center; overflow: hidden;
+              white-space: nowrap; font-size: 11px; }
+.bar-line { display: flex; align-items: center; gap: 4px; height: 12px; font-size: 11px; }
+.bar-line .seg { height: 100%; }
+.vbars { display: flex; gap: 28px; align-items: flex-end; justify-content: center;
+         padding: 0 40px; }
+.vcol { display: flex; flex-direction: column; align-items: center; width: 120px; }
+.vstack { position: relative; width: 70px; height: 220px; display: flex;
+          flex-direction: column-reverse; }
+.vstack .seg { display: flex; align-items: center; justify-content: center; font-size: 12px; }
+.vstack .out { position: absolute; left: 76px; font-size: 12px; white-space: nowrap; }
+.vstack .bracket { position: absolute; border: 1px solid #2e2e38; width: 8px; font-size: 12px; }
+.vstack .bracket.left { left: -14px; border-right: none; }
+.vstack .bracket.right { right: -14px; border-left: none; }
+.vstack .bracket span { position: absolute; top: 50%; transform: translateY(-50%); }
+.vstack .bracket.left span { right: 12px; }
+.vstack .bracket.right span { left: 12px; }
+.vcol .cat { font-size: 12px; text-align: center; margin-top: 6px; }
+.vcol .callout { font-size: 12px; margin-bottom: 4px; text-align: center; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px;
+         margin: 0; }
+.stats div { text-align: center; }
+.stats dd { font-size: 40px; font-weight: bold; margin: 0; }
+.stats dt { font-size: 14px; }
+table.data { border-collapse: collapse; margin: 14px 0 0; font-size: 12px; }
+table.data caption { text-align: left; font-size: 12px; color: #555; padding-bottom: 4px; }
+table.data th, table.data td { border: 1px solid #ddd; padding: 3px 8px; text-align: left; }
+table.data td { text-align: right; }
+table.data tbody th[scope=rowgroup] { background: #f2f2f2; }
+table.heat td { text-align: center; }
+.harveys { display: flex; flex-wrap: wrap; gap: 12px 20px; justify-content: center; }
+.harvey { display: flex; flex-direction: column; align-items: center; width: 80px;
+          font-size: 12px; text-align: center; }
+svg.cycle { display: block; width: 280px; max-width: 100%; margin: 8px auto; }
+.cycle-list { font-size: 14px; }
+ol.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px 28px;
+           padding-left: 1.4em; }
+ol.steps > li::marker { font-weight: bold; color: #b8a400; }
+ol.steps h4 { margin: 0 0 4px; font-size: 16px; }
+ol.steps ul { margin: 0; padding-left: 1.1em; }
+.quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.quotes blockquote { margin: 0; padding: 8px 14px; border-left: 4px solid #FFE600; font-family: Georgia, serif; }
+</style>
+</head>
+<body>
+<main>
+<p><strong>Employees are utilizing these offerings:</strong> 38% of employers have seen increases in absences since implementing a mandated paid family/medical leave program. While interest in absence and leave benefits is high, using these programs can be difficult: Only 24% of workers who experienced a leave event found the leave experience “very easy.”</p>
+<p>Again, paid family or medical leave is top of mind for many employers. In nearly all states where paid family medical leave is mandated, employers have two options: public state-administered plans and private plans. Fifty-six percent of employers express interest in purchasing insurance to provide voluntary paid family leave coverage, where allowed, as in the model suggested by the National Council of Insurance Legislators (NCOIL).</p>
+<p><strong>The ongoing expansion of leave</strong>: As long-term disability, short-term disability, parental and maternity leave, and paid family or medical leave offerings all mature, new types of leave have emerged. Employers cited paid caregiving, domestic violence/sexual abuse, non-Family and Medical Leave Act (FMLA) medical, and divorce/family upheaval as the leave types they are most interested in providing for the future. <em>See Figure 10. </em></p>
+<p>Today, when provided with a long list of different leave types to offer, midsize and large employers typically say they are planning or considering five to seven types of leave, while 54% of small employers are considering three or more leave offerings in the future. More than a third (37%) of employers are considering changing paid medical leave policies to accommodate intermittent or reduced schedule leaves.</p>
+<figure class="chart" id="fig10" data-figure="Figure 10"><figcaption><p class="kicker">Figure 10</p><p class="title">The number and types of leave benefits are expanding.</p><p class="question"><strong>QUESTION:</strong> Does your company currently offer, or plan to offer, the following stand-alone types of leave?</p></figcaption><ul class="legend" aria-hidden="true"><li><span class="sw" style="background:#747480"></span>Currently offer</li><li><span class="sw" style="background:#FFE600"></span>Plan to add/considering</li><li><span class="sw" style="background:#C4C4CD"></span>No plans to offer</li></ul><div class="hbars" aria-hidden="true"><div class="lab">Paid caregiving leave (company-sponsored)</div><div class="track"><span class="seg" style="width:22.00%;background:#747480;color:#ffffff" title="Currently offer: 22%">22%</span><span class="seg" style="width:56.00%;background:#FFE600;color:#2e2e38" title="Plan to add/considering: 56%">56%</span><span class="seg" style="width:22.00%;background:#C4C4CD;color:#2e2e38" title="No plans to offer: 22%">22%</span></div><div class="lab">Domestic violence/sexual abuse victims&#x27; leave</div><div class="track"><span class="seg" style="width:16.00%;background:#747480;color:#ffffff" title="Currently offer: 16%">16%</span><span class="seg" style="width:55.00%;background:#FFE600;color:#2e2e38" title="Plan to add/considering: 55%">55%</span><span class="seg" style="width:29.00%;background:#C4C4CD;color:#2e2e38" title="No plans to offer: 29%">29%</span></div><div class="lab">Non-FMLA medical leave</div><div class="track"><span class="seg" style="width:20.00%;background:#747480;color:#ffffff" title="Currently offer: 20%">20%</span><span class="seg" style="width:49.00%;background:#FFE600;color:#2e2e38" title="Plan to add/considering: 49%">49%</span><span class="seg" style="width:31.00%;background:#C4C4CD;color:#2e2e38" title="No plans to offer: 31%">31%</span></div><div class="lab">Divorce or family upheaval leave</div><div class="track"><span class="seg" style="width:11.00%;background:#747480;color:#ffffff" title="Currently offer: 11%">11%</span><span class="seg" style="width:42.00%;background:#FFE600;color:#2e2e38" title="Plan to add/considering: 42%">42%</span><span class="seg" style="width:47.00%;background:#C4C4CD;color:#2e2e38" title="No plans to offer: 47%">47%</span></div><div class="lab">Sabbaticals</div><div class="track"><span class="seg" style="width:15.00%;background:#747480;color:#ffffff" title="Currently offer: 15%">15%</span><span class="seg" style="width:41.00%;background:#FFE600;color:#2e2e38" title="Plan to add/considering: 41%">41%</span><span class="seg" style="width:44.00%;background:#C4C4CD;color:#2e2e38" title="No plans to offer: 44%">44%</span></div><div class="lab">Emergency responder leave</div><div class="track"><span class="seg" style="width:25.00%;background:#747480;color:#ffffff" title="Currently offer: 25%">25%</span><span class="seg" style="width:40.00%;background:#FFE600;color:#2e2e38" title="Plan to add/considering: 40%">40%</span><span class="seg" style="width:35.00%;background:#C4C4CD;color:#2e2e38" title="No plans to offer: 35%">35%</span></div><div class="lab">Military service/family military leave</div><div class="track"><span class="seg" style="width:36.00%;background:#747480;color:#ffffff" title="Currently offer: 36%">36%</span><span class="seg" style="width:39.00%;background:#FFE600;color:#2e2e38" title="Plan to add/considering: 39%">39%</span><span class="seg" style="width:25.00%;background:#C4C4CD;color:#2e2e38" title="No plans to offer: 25%">25%</span></div><div class="lab">Long-term disability</div><div class="track"><span class="seg" style="width:58.00%;background:#747480;color:#ffffff" title="Currently offer: 58%">58%</span><span class="seg" style="width:35.00%;background:#FFE600;color:#2e2e38" title="Plan to add/considering: 35%">35%</span><span class="seg" style="width:7.00%;background:#C4C4CD;color:#2e2e38" title="No plans to offer: 7%">7%</span></div><div class="lab">Short-term disability</div><div class="track"><span class="seg" style="width:61.00%;background:#747480;color:#ffffff" title="Currently offer: 61%">61%</span><span class="seg" style="width:33.00%;background:#FFE600;color:#2e2e38" title="Plan to add/considering: 33%">33%</span><span class="seg" style="width:6.00%;background:#C4C4CD;color:#2e2e38" title="No plans to offer: 6%">6%</span></div><div class="lab">Paid parental, maternity or paternity leave (company-sponsored)</div><div class="track"><span class="seg" style="width:57.00%;background:#747480;color:#ffffff" title="Currently offer: 57%">57%</span><span class="seg" style="width:30.00%;background:#FFE600;color:#2e2e38" title="Plan to add/considering: 30%">30%</span><span class="seg" style="width:13.00%;background:#C4C4CD;color:#2e2e38" title="No plans to offer: 13%">13%</span></div><div class="lab">Paid family or medical leave (company-sponsored)</div><div class="track"><span class="seg" style="width:59.00%;background:#747480;color:#ffffff" title="Currently offer: 59%">59%</span><span class="seg" style="width:28.00%;background:#FFE600;color:#2e2e38" title="Plan to add/considering: 28%">28%</span><span class="seg" style="width:13.00%;background:#C4C4CD;color:#2e2e38" title="No plans to offer: 13%">13%</span></div></div><table class="data"><caption>Figure 10 data</caption><thead><tr><th scope="col">Leave type</th><th scope="col">Currently offer</th><th scope="col">Plan to add/considering</th><th scope="col">No plans to offer</th></tr></thead><tbody><tr><th scope="row">Paid caregiving leave (company-sponsored)</th><td>22%</td><td>56%</td><td>22%</td></tr><tr><th scope="row">Domestic violence/sexual abuse victims&#x27; leave</th><td>16%</td><td>55%</td><td>29%</td></tr><tr><th scope="row">Non-FMLA medical leave</th><td>20%</td><td>49%</td><td>31%</td></tr><tr><th scope="row">Divorce or family upheaval leave</th><td>11%</td><td>42%</td><td>47%</td></tr><tr><th scope="row">Sabbaticals</th><td>15%</td><td>41%</td><td>44%</td></tr><tr><th scope="row">Emergency responder leave</th><td>25%</td><td>40%</td><td>35%</td></tr><tr><th scope="row">Military service/family military leave</th><td>36%</td><td>39%</td><td>25%</td></tr><tr><th scope="row">Long-term disability</th><td>58%</td><td>35%</td><td>7%</td></tr><tr><th scope="row">Short-term disability</th><td>61%</td><td>33%</td><td>6%</td></tr><tr><th scope="row">Paid parental, maternity or paternity leave (company-sponsored)</th><td>57%</td><td>30%</td><td>13%</td></tr><tr><th scope="row">Paid family or medical leave (company-sponsored)</th><td>59%</td><td>28%</td><td>13%</td></tr></tbody></table></figure>
+<p><strong>Mismatched confidence levels in the face of regulatory  complexity:</strong> For all the interest in expanded leave offerings, confidence levels differ across employers and brokers. Currently, 71% of employers are very or extremely confident in their company’s ability to comply with federal, state and local regulations pertaining to employee leaves of absence. Looking ahead, three to five years from now, 76% of employers expect that administering their company’s full leave management program will <em>not</em> be a major challenge.</p>
+<p>Brokers are less optimistic and warn that employers will struggle because they don’t fully appreciate the complexity of leave administration. “If I am a decentralized employer across many states, I am scratching my head on how I can comply and limit my exposure with the rate of change,” one broker told us. Another suggested that carriers will be challenged by the uniqueness of this product class: “Carriers better have specialization in supporting absence.”</p>
+</main>
+</body>
+</html>

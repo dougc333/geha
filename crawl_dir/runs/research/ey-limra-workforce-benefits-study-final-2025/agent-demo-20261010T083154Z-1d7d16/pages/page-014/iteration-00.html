@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Insurance Broker Selection and Education Responsibility</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    margin: 2rem;
+    color: #111;
+  }
+  h1, h2, h3 {
+    margin: 0.5em 0 0.2em 0;
+  }
+  h1 {
+    font-size: 1.25rem;
+  }
+  h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  h3 {
+    font-weight: 600;
+    margin-top: 0;
+  }
+  .question {
+    font-weight: bold;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    font-size: 1rem;
+  }
+  figure, section.figure {
+    max-width: 600px;
+    margin: 1em 0 2em 0;
+  }
+  figcaption, .figure-label {
+    font-weight: bold;
+    margin-bottom: 1em;
+  }
+  /* Figure 8 styles */
+  .bar-chart {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1em 0;
+    width: 100%;
+    max-width: 600px;
+  }
+  .bar-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.3em;
+  }
+  .label {
+    flex: 0 0 320px;
+    font-size: 0.95rem;
+  }
+  .bar {
+    background-color: #ffeb3b;
+    height: 18px;
+    margin-right: 0.5em;
+  }
+  .value {
+    width: 35px;
+    text-align: right;
+    font-size: 0.9rem;
+  }
+  table {
+    max-width: 600px;
+    border-collapse: collapse;
+    margin-top: 1em;
+    font-size: 0.9rem;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #aaa;
+    padding: 0.25em 0.5em;
+    text-align: left;
+  }
+  th {
+    background-color: #eee;
+  }
+  p.note {
+    max-width: 600px;
+  }
+  /* Figure 9 styles */
+  .figure p.note, section.figure p + p {
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+  .bar-chart-2025-23 {
+    max-width: 600px;
+    margin-top: 1rem;
+  }
+  .bar-label {
+    width: 180px;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0.95rem;
+  }
+  .bars-container {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .bar-2025, .bar-2023 {
+    height: 20px;
+    margin-right: 8px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .bar-2025 {
+    background: #ffe600;
+  }
+  .bar-2023 {
+    background: #bebfc6;
+  }
+  .percentage {
+    font-weight: 600;
+    vertical-align: middle;
+    font-size: 0.9rem;
+  }
+  .percentage-2025 {
+    margin-left: 4px;
+    margin-right: 10px;
+    display: inline-block;
+    width: 28px;
+    text-align: right;
+  }
+  .percentage-2023 {
+    margin-left: 4px;
+    display: inline-block;
+    width: 28px;
+    text-align: right;
+  }
+  .chart-legend {
+    margin-top: 1rem;
+    display: flex;
+    gap: 20px;
+    font-size: 0.9rem;
+  }
+  .legend-color {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+  caption {
+    caption-side: top;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  /* Tables same style for both */
+  table th, table td {
+    text-align: center;
+  }
+  table th:first-child, table td:first-child {
+    text-align: left;
+  }
+</style>
+</head>
+<body>
+
+<p>In selecting brokers, employers focus on the quality of service provided (cited by 45% of survey respondents), brokers’ ability to provide holistic insurance coverage (39%) and enhanced benefits strategies (35%). See <em>Figure 8</em>.</p>
+
+<figure aria-labelledby="fig8-title">
+  <figcaption id="fig8-title">
+    <strong>Figure 8</strong><br />
+    Employers choose brokers based on quality service, enhanced strategies and access to benefits.<br />
+    <span style="font-weight:bold;">QUESTION:</span> What are the most important factors your company considers when choosing a broker/benefits advisor to work with for insurance benefits?
+  </figcaption>
+  <ul class="bar-chart" role="list">
+    <li class="bar-item"><span class="label">Quality of service</span><div class="bar" style="width:45%"></div><span class="value">45%</span></li>
+    <li class="bar-item"><span class="label">Can provide all the insurance benefits my company needs</span><div class="bar" style="width:39%"></div><span class="value">39%</span></li>
+    <li class="bar-item"><span class="label">Helps our company evaluate/enhance its benefits strategy</span><div class="bar" style="width:35%"></div><span class="value">35%</span></li>
+    <li class="bar-item"><span class="label">Reputation or experience</span><div class="bar" style="width:31%"></div><span class="value">31%</span></li>
+    <li class="bar-item"><span class="label">Helps communicate benefits options to employees/provides education</span><div class="bar" style="width:30%"></div><span class="value">30%</span></li>
+    <li class="bar-item"><span class="label">Range of products/services supported</span><div class="bar" style="width:27%"></div><span class="value">27%</span></li>
+    <li class="bar-item"><span class="label">Provides recommendations and guidance on benefits technology</span><div class="bar" style="width:22%"></div><span class="value">22%</span></li>
+    <li class="bar-item"><span class="label">Helps our company understand/address legal and regulatory issues</span><div class="bar" style="width:20%"></div><span class="value">20%</span></li>
+    <li class="bar-item"><span class="label">Familiarity with our company</span><div class="bar" style="width:15%"></div><span class="value">15%</span></li>
+    <li class="bar-item"><span class="label">Carriers represented</span><div class="bar" style="width:14%"></div><span class="value">14%</span></li>
+    <li class="bar-item"><span class="label">Has access to a team of specialists to address more complex needs</span><div class="bar" style="width:12%"></div><span class="value">12%</span></li>
+    <li class="bar-item"><span class="label">Able to provide benefits technology</span><div class="bar" style="width:8%"></div><span class="value">8%</span></li>
+    <li class="bar-item"><span class="label">Other</span><div class="bar" style="width:1%"></div><span class="value">1%</span></li>
+  </ul>
+
+  <table>
+    <caption>Data table showing important factors considered when choosing a broker/benefits advisor for insurance benefits</caption>
+    <thead>
+      <tr>
+        <th>Factor</th>
+        <th>Importance (%)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Quality of service</td><td>45%</td></tr>
+      <tr><td>Can provide all the insurance benefits my company needs</td><td>39%</td></tr>
+      <tr><td>Helps our company evaluate/enhance its benefits strategy</td><td>35%</td></tr>
+      <tr><td>Reputation or experience</td><td>31%</td></tr>
+      <tr><td>Helps communicate benefits options to employees/provides education</td><td>30%</td></tr>
+      <tr><td>Range of products/services supported</td><td>27%</td></tr>
+      <tr><td>Provides recommendations and guidance on benefits technology</td><td>22%</td></tr>
+      <tr><td>Helps our company understand/address legal and regulatory issues</td><td>20%</td></tr>
+      <tr><td>Familiarity with our company</td><td>15%</td></tr>
+      <tr><td>Carriers represented</td><td>14%</td></tr>
+      <tr><td>Has access to a team of specialists to address more complex needs</td><td>12%</td></tr>
+      <tr><td>Able to provide benefits technology</td><td>8%</td></tr>
+      <tr><td>Other</td><td>1%</td></tr>
+    </tbody>
+  </table>
+</figure>
+
+<p>
+With more products and services available and participation rates low for some benefits, employee education about relevant benefits grows even more important. The question of who should own benefits awareness and education is a “jump ball”; more employers are taking the lead in providing the necessary support. But larger firms are slightly more likely to say that benefits technology firms and platform providers should offer this support, with smaller and midsize firms more likely to look to carriers to handle education and awareness. Regardless, this dynamic has existed for many years, and we do not see anything changing over the planning horizon. See <em>Figure 9</em>.
+</p>
+
+<section aria-labelledby="fig9-title" class="figure">
+  <p class="figure-label"><strong>Figure 9</strong></p>
+  <h2 id="fig9-title">
+    Employer opinions are mixed about primary responsibility for education and awareness that employees need to make confident enrollment decisions.
+  </h2>
+  <h3>
+    <strong>QUESTION:</strong> Who do you think should be primarily accountable for providing the education and awareness needed for employees to make confident enrollment decisions?
+  </h3>
+
+  <div class="bar-chart-2025-23" role="img" aria-label="Bar chart representing employer opinions on accountability for providing education and awareness for confident enrollment decisions in 2025 and 2023.">
+    <div>
+      <span class="bar-label">My company</span>
+      <span class="bars-container" aria-hidden="true">
+        <span class="bar bar-2025" style="width:33%"></span><span class="percentage percentage-2025">33%</span>
+        <span class="bar bar-2023" style="width:24%"></span><span class="percentage percentage-2023">24%</span>
+      </span>
+    </div>
+    <div>
+      <span class="bar-label">Insurance carrier(s)</span>
+      <span class="bars-container" aria-hidden="true">
+        <span class="bar bar-2025" style="width:26%"></span><span class="percentage percentage-2025">26%</span>
+        <span class="bar bar-2023" style="width:26%"></span><span class="percentage percentage-2023">26%</span>
+      </span>
+    </div>
+    <div>
+      <span class="bar-label">Broker/benefits advisor</span>
+      <span class="bars-container" aria-hidden="true">
+        <span class="bar bar-2025" style="width:23%"></span><span class="percentage percentage-2025">23%</span>
+        <span class="bar bar-2023" style="width:33%"></span><span class="percentage percentage-2023">33%</span>
+      </span>
+    </div>
+    <div>
+      <span class="bar-label">Benefits technology platform</span>
+      <span class="bars-container" aria-hidden="true">
+        <span class="bar bar-2025" style="width:14%"></span><span class="percentage percentage-2025">14%</span>
+        <span class="bar bar-2023" style="width:12%"></span><span class="percentage percentage-2023">12%</span>
+      </span>
+    </div>
+    <div>
+      <span class="bar-label">No preference</span>
+      <span class="bars-container" aria-hidden="true">
+        <span class="bar bar-2025" style="width:4%"></span><span class="percentage percentage-2025">4%</span>
+        <span class="bar bar-2023" style="width:6%"></span><span class="percentage percentage-2023">6%</span>
+      </span>
+    </div>
+  </div>
+
+  <div class="chart-legend" aria-hidden="true">
+    <span><span class="legend-color" style="background:#ffe600;"></span>2025</span>
+    <span><span class="legend-color" style="background:#bebfc6;"></span>2023</span>
+  </div>
+
+  <table>
+    <caption>Employer Opinions on Accountability for Employee Education and Awareness (2025 vs 2023)</caption>
+    <thead>
+      <tr>
+        <th>Accountable Party</th>
+        <th>2025</th>
+        <th>2023</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>My company</td>
+        <td>33%</td>
+        <td>24%</td>
+      </tr>
+      <tr>
+        <td>Insurance carrier(s)</td>
+        <td>26%</td>
+        <td>26%</td>
+      </tr>
+      <tr>
+        <td>Broker/benefits advisor</td>
+        <td>23%</td>
+        <td>33%</td>
+      </tr>
+      <tr>
+        <td>Benefits technology platform</td>
+        <td>14%</td>
+        <td>12%</td>
+      </tr>
+      <tr>
+        <td>No preference</td>
+        <td>4%</td>
+        <td>6%</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+</body>
+</html>

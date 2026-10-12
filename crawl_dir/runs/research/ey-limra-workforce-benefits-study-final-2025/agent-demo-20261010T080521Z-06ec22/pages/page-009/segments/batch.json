@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "gpt-4.1-mini",
+  "created_at": "2026-10-10T08:15:18.590007+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "fig5",
+      "kind": "figure",
+      "title": "Employees value a range of benefit offerings.",
+      "source_png": "figure-01-fig5.png",
+      "bounding_box": [
+        54,
+        109,
+        1484,
+        1208
+      ],
+      "output_directory": "figure-01",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "missing_text",
+              "source_evidence": "Color coding highlights: Medical insurance (78%), Dental insurance (72%), Vision insurance (62%), and Paid family or medical leave (54%) bars are green indicating up 5 percentage points or more vs. 2023 study; Financial wellness programs (29%) and Societal benefits (12%) bars are red indicating down 5 percentage points or more vs. 2023 study.",
+              "html_evidence": "The candidate HTML uses a definition list to list benefits and percentages but has no color coding or indication of which benefits are up or down in percentage points compared to the 2023 study. The legend is present but no actual colored marks appear next to the benefits in the list.",
+              "correction": "Add visual or textual color coding or indicators in the HTML list corresponding to the green and red color coding shown in the source for the specified benefits. The candidate must reflect these distinctions to maintain the chart-to-table relationship."
+            }
+          ],
+          "render_latency_ms": 525.7
+        },
+        {
+          "iteration": 2,
+          "html": "figure-01/iteration-02.html",
+          "rendered_png": "figure-01/iteration-02.png",
+          "verdict": "mismatch",
+          "error_count": 2,
+          "errors": [
+            {
+              "category": "layout",
+              "source_evidence": "The chart in the source PDF shows a horizontal bar chart with bars and percentages clearly aligned right of each bar, with distinct colors: green for up 5 percentage points or more, gray for unchanged, and red for down 5 percentage points or more. The color coding is integral to the visual chart.",
+              "html_evidence": "The candidate HTML uses a vertical list only, with colored squares (span) preceding the text and no graphical bar representation. There is no actual bar chart, bars with lengths or visual proportion of bars. Only text and color-coded squares appear.",
+              "correction": "Include a proper horizontal bar chart visually presenting the data with bar lengths proportional to the percentages and colored bars in green, gray, or red as per the source legend. The percentage value should appear near the right end of each bar, not only as numeric text. This visual representation is required to match the source's visual chart."
+            },
+            {
+              "category": "table_structure",
+              "source_evidence": "The source presents data in a horizontal bar chart with labels on the left and percentages on the right, aligned to bar length, plus a legend and note.",
+              "html_evidence": "Candidate uses a definition list with dt/dd pairs inside divs, and color-coded spans for up/down marks before the benefit name. The structure is more a list than a table and the color-coded legend is separated as a list with colored squares.",
+              "correction": "Present the data in a semantic table or a well-structured equivalent that clearly associates each benefit with its corresponding percentage and its color coding, preserving the logical visual reading order and relationships. The definition list with inline spans is insufficient to represent a chart or data table equivalently."
+            }
+          ],
+          "render_latency_ms": 537.6
+        },
+        {
+          "iteration": 3,
+          "html": "figure-01/iteration-03.html",
+          "rendered_png": "figure-01/iteration-03.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 506.8
+        }
+      ],
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-03.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 1,
+    "failed": 0,
+    "total_iterations": 3,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-10-10T08:16:03.986187+00:00"
+}

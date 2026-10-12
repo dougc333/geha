@@ -1,0 +1,97 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "In 2021, 66% of employers said they preferred carriers that worked well with existing benefits technology to those that offered the best-value product.",
+        "html_evidence": "In 2021, 66% of employers said they preferred carriers that worked well with existing benefits technology to those that offered the best-value product.",
+        "correction": "Remove duplicate or conflicting text part to match source exactly."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "In 2021, 66% of employers said they preferred carriers that worked well with existing benefits technology to those that offered the best-value product.",
+        "html_evidence": "In 2021, 66% of employers said they preferred carriers that worked well with your benefit technology platform, even if its product is a little more expensive",
+        "correction": "Correct phrase to '...carriers that worked well with existing benefits technology to those that offered the best-value product.'"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "See Figure 17.",
+        "html_evidence": "See Figure 17.",
+        "correction": "Ensure 'See Figure 17.' is italicized as in the source."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "QUESTION: Which would you prefer?",
+        "html_evidence": "QUESTION: Which would you prefer?",
+        "correction": "The candidate HTML bolds 'QUESTION:' but the source uses all caps with colon, no bold. Adjust styling to normal text or minimal emphasis as source."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "A carrier that works well with your benefit technology platform, even if its product is a little more expensive",
+        "html_evidence": "A carrier that works well with your benefit technology platform, even if its product is a little more expensive",
+        "correction": "Replace 'your benefit technology platform' with 'existing benefits technology'. Also the legend colors are gray and yellow but the exact shades differ slightly; source gray is #66676e and candidate uses same code - acceptable."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "A carrier with the best-value product, even if it does not work well with your benefit technology platform",
+        "html_evidence": "A carrier with the best-value product, even if it does not work well with your benefit technology platform",
+        "correction": "Replace 'your benefit technology platform' with 'existing benefits technology'. Legend shape and textual content otherwise acceptable."
+      },
+      {
+        "category": "extra_text",
+        "source_evidence": "Pie charts 66% and 34%; 74% and 26%",
+        "html_evidence": "Pie charts with overlapping bolded percentages 66% and 34%; 74% and 26% but numbers are partially overlapping and not visually consistent with source",
+        "correction": "Adjust SVG text placement so percentages do not overlap and visually match source pie chart numeric placement and size."
+      },
+      {
+        "category": "extra_text",
+        "source_evidence": "No table of numerical data in source apart from visuals",
+        "html_evidence": "Table titled 'Carrier Preference Percentages by Year' with data rows for 2021 and 2025",
+        "correction": "Remove data table as it is not present in the source."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Employer interest in integrated experiences spans the full value chain... More sophisticated connectivity via APIs can deliver the real-time quoting, self-service features and automated data exchange that many employers would like to see. See Figure 18.",
+        "html_evidence": "Employer interest in integrated experiences spans the full value chain. Looking at specific capabilities, digital enrollment has matured significantly over the years with the investment in connectivity and application programming interfaces (APIs). In many ways, carriers and other benefits providers are aligned with employers in delivering tech-enabled experiences and end-to-end processes. But employers now see opportunity relative to quoting and implementation. More sophisticated connectivity via APIs can deliver the real-time quoting, self-service features and automated data exchange that many employers would like to see. See Figure 18.",
+        "correction": "Align wording exactly to source, avoid addition of phrases like 'Looking at specific capabilities' or 'digital enrollment has matured significantly' which differ in wording from source."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Claims digitization is a must: Claims processes remain the top priority for increased digitization... and technology investment.",
+        "html_evidence": "Claims digitization is a must: Claims processes remain the top priority for increased digitization. In fact, four of the five top unmet employer needs are related to claims. Employers are seeking a claims experience that is frictionless, intuitive and fully integrated. Key priorities include enabling same-day claims decisions through enhanced auto-adjudication, proactively notifying employees of eligible benefits by monitoring medical and related claims activity, and streamlining the process by coordinating multiple coverages triggered by a single qualifying event. Claims clearly represents the largest opportunity for the next horizon of technology investment.",
+        "correction": "Match text wording exactly to source without adding introductory phrases or rephrasing content."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Two equal text paragraphs side by side under the pie charts",
+        "html_evidence": "Two text columns side-by-side with paragraphs for 'Employer interest...' and 'Claims digitization...'",
+        "correction": "Layout acceptable if side-by-side columns but ensure consistent vertical alignment as source, no excess spacing or wrapping that changes reading order."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "A carrier that works well with your benefit technology platform, even if its product is a little more expensive\nA carrier with the best-value product, even if it does not work well with your benefit technology platform",
+        "html_evidence": "A carrier that works well with existing benefits technology, even if its product is a little more expensive\nA carrier with the best-value product, even if it does not work well with existing benefits technology",
+        "correction": "Correct the legend to \"A carrier that works well with your benefit technology platform, even if its product is a little more expensive\" and \"A carrier with the best-value product, even if it does not work well with your benefit technology platform\"."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "66% 34%\n74% 26%",
+        "html_evidence": "66% 34%\n74% 26% (but numbers are visually overlapping and misplaced)",
+        "correction": "Arrange percentage labels so they do not overlap and clearly correspond to the correct pie chart segment, matching the PDF style: for 2021, '66%' on the gray side and '34%' on the yellow side, and for 2025, '74%' gray and '26%' yellow."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "match",
+    "errors": []
+  }
+]

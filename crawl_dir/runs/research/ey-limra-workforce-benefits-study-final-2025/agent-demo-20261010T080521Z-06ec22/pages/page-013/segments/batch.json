@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "gpt-4.1-mini",
+  "created_at": "2026-10-10T08:21:53.908943+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "fig7_data_array",
+      "kind": "figure",
+      "title": "Figure 7 Employers are seeking a wide array of data as input into their decision-making.",
+      "source_png": "figure-01-fig7_data_array.png",
+      "bounding_box": [
+        0,
+        434,
+        156,
+        1618
+      ],
+      "output_directory": "figure-01",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "clipped_content",
+              "source_evidence": "The source shows text continuing properly with full words and sentences, including 'Brokers', 'data-driven', 'diversification program', the phrase 'A hyper-', and the complete heading 'Figure 7 Employee Benefits'.",
+              "html_evidence": "The HTML shows broken and clipped words split across lines such as 'with oth', 'data-dri', 'diversif', 'employ', 'employ', 'the num', incomplete heading 'Emplo' and 'QUESTI', missing full meaningful text and context.",
+              "correction": "Fully preserve all text without clipping or truncation. Keep words complete and ensure headings like 'Figure 7 Employee Benefits' are fully displayed."
+            }
+          ],
+          "render_latency_ms": 462.2
+        },
+        {
+          "iteration": 2,
+          "html": "figure-01/iteration-02.html",
+          "rendered_png": "figure-01/iteration-02.png",
+          "verdict": "mismatch",
+          "error_count": 2,
+          "errors": [
+            {
+              "category": "missing_text",
+              "source_evidence": "Figure 7 Employee Benefits QUESTION: benefits",
+              "html_evidence": "<p><strong>Figure 7</strong></p><h2>Employee Benefits</h2><h3>QUESTION:</h3><p>benefits</p>",
+              "correction": "Include the full question text following 'QUESTION:' as in the source PDF. The HTML currently shows only the word 'benefits' which is incomplete."
+            },
+            {
+              "category": "missing_text",
+              "source_evidence": "There is a chart and associated table visible in the source PDF page (presumed from Figure 7 label and context), presenting data related to Employee Benefits.",
+              "html_evidence": "No chart or data table present in the HTML reconstruction.",
+              "correction": "Add the chart visualization and the corresponding data table representing the employee benefits data as presented on the PDF page."
+            }
+          ],
+          "render_latency_ms": 461.3
+        },
+        {
+          "iteration": 3,
+          "html": "figure-01/iteration-03.html",
+          "rendered_png": "figure-01/iteration-03.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 491.9
+        }
+      ],
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-03.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 1,
+    "failed": 0,
+    "total_iterations": 3,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-10-10T08:22:10.968449+00:00"
+}

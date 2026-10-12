@@ -1,0 +1,12 @@
+References
+1. Lunsumio [package insert]. Genentech, South San Francisco, CA. Available at: https://www.gene.com/download/pdf/lunsumio_prescribing.pdf
+2. Lunsumio Velo [package insert]. Genentech, South San Francisco, CA. Available at: https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/761263s006lbl.pdf
+3. Lunsumio. NCCN Drugs and Biologics Compendium. Available at: https://www.nccn.org/professionals/drug_compendium/content/
+4. Referenced with permission from the NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines®). National Comprehensive Cancer Network, Inc. 2026. All rights reserved. Accessed March 16, 2026. To view the most recent and complete version of the guideline, go online to NCCN.org.
+5. Budde LE, Sehn LH, Matasar M, Schuster SJ, Assouline S, Giri P, Kuruvilla J, Canales M, Dietrich S, Fay K, Ku M, Nastoupil L, Cheah CY, Wei MC, Yin S, Li CC, Huang H, Kwan A, Penuel E, Bartlett NL. Safety and efficacy of mosunetuzumab, a bispecific antibody, in patients with relapsed or refractory follicular lymphoma: a single-arm, multicentre, phase 2 study. Lancet Oncol. 2022 Aug;23(8):10551065. doi: 10.1016/S1470-2045(22)00335-7. Epub 2022 Jul 5. PMID: 35803286.
+
+Disclaimer
+Drug Coverage Policies are developed as needed, reviewed and updated at least annually, and are subject to change. Other policies and coverage determination guidelines may apply. Federal and state regulatory requirements and member specific benefit plan documents, if applicable, must be reviewed prior to utilizing this Drug Coverage Policy. This Drug Coverage Policy is for informational purposes only and does not constitute medical advice nor dictate how providers should practice medicine. This policy should not be reproduced, stored in a retrieval system, or altered from its original form without written permission from OncoHealth, Inc.
+
+For Internal Use ONLY
+6/6/23, Updates = Policy creation. 3/14/24, Updates = Updated Universal Criteria; Updated Indication Specific Criteria; Updated References. 4/17/2025, Updates = Annual Review, update to universal criteria. 4/21/2025, Updates = Approved by P&T. 3/16/2026, Updates = Policy adopted by G.E.H.A; document updated for universal accessibility. Annual Review OH P&T; addition of Lunsumio Velo (J9350); approved by OH P&T

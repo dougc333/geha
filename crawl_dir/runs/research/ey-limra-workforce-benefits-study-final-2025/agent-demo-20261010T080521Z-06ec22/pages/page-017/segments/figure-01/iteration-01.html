@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The number and types of leave benefits are expanding</title>
+<style>
+  .bar-chart {
+    font-family: Arial, sans-serif;
+    max-width: 700px;
+  }
+  .bar {
+    display: flex;
+    font-size: 0.875rem;
+    margin: 4px 0;
+    align-items: center;
+  }
+  .label {
+    flex: 1 0 220px;
+    padding-right: 12px;
+    font-weight: 400;
+  }
+  .segment {
+    color: #fff;
+    text-align: center;
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+  .currently-offer {
+    background-color: #5a5a5a;
+  }
+  .plan-to-add {
+    background-color: #f6d114;
+    color: #000;
+  }
+  .no-plans {
+    background-color: #cfcfd2;
+    color: #333;
+  }
+  caption {
+    font-weight: bold;
+    text-align: left;
+    caption-side: top;
+    padding-bottom: 8px;
+    font-size: 1.125rem;
+  }
+  table {
+    border-collapse: collapse;
+    max-width: 700px;
+    margin-top: 12px;
+    font-family: Arial, sans-serif;
+    font-size: 0.875rem;
+  }
+  th, td {
+    border: 1px solid #bbb;
+    padding: 6px 8px;
+    text-align: left;
+  }
+  th {
+    background: #eee;
+  }
+  .legend {
+    margin: 12px 0 20px;
+    font-size: 0.875rem;
+  }
+  .legend-item {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 16px;
+  }
+  .legend-color {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 6px;
+  }
+  .legend-currently {
+    background-color: #5a5a5a;
+  }
+  .legend-plan {
+    background-color: #f6d114;
+  }
+  .legend-noplans {
+    background-color: #cfcfd2;
+  }
+  .two-columns {
+    display: flex;
+    gap: 32px;
+    max-width: 900px;
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+  }
+  .two-columns > div {
+    flex: 1;
+  }
+  strong {
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+<figure role="group" aria-label="The number and types of leave benefits are expanding.">
+<p><strong>Figure 10</strong></p>
+<h2>The number and types of leave benefits are expanding.</h2>
+<p><strong>QUESTION:</strong> Does your company currently offer, or plan to offer, the following stand-alone types of leave?</p>
+
+<div class="legend" aria-label="Chart legend">
+  <span class="legend-item"><span class="legend-color legend-currently" aria-hidden="true"></span>Currently offer</span>
+  <span class="legend-item"><span class="legend-color legend-plan" aria-hidden="true"></span>Plan to add/considering</span>
+  <span class="legend-item"><span class="legend-color legend-noplans" aria-hidden="true"></span>No plans to offer</span>
+</div>
+
+<div class="bar-chart" role="table" aria-label="Leave benefit types and company offer status">
+  <div role="row" class="bar">
+    <div role="rowheader" class="label">Paid caregiving leave (company-sponsored)</div>
+    <div role="cell" class="segment currently-offer" style="flex: 0 0 22%;">22%</div>
+    <div role="cell" class="segment plan-to-add" style="flex: 0 0 56%;">56%</div>
+    <div role="cell" class="segment no-plans" style="flex: 0 0 22%;">22%</div>
+  </div>
+  <div role="row" class="bar">
+    <div role="rowheader" class="label">Domestic violence/sexual abuse victims' leave</div>
+    <div role="cell" class="segment currently-offer" style="flex: 0 0 16%;">16%</div>
+    <div role="cell" class="segment plan-to-add" style="flex: 0 0 55%;">55%</div>
+    <div role="cell" class="segment no-plans" style="flex: 0 0 29%;">29%</div>
+  </div>
+  <div role="row" class="bar">
+    <div role="rowheader" class="label">Non-FMLA medical leave</div>
+    <div role="cell" class="segment currently-offer" style="flex: 0 0 20%;">20%</div>
+    <div role="cell" class="segment plan-to-add" style="flex: 0 0 49%;">49%</div>
+    <div role="cell" class="segment no-plans" style="flex: 0 0 31%;">31%</div>
+  </div>
+  <div role="row" class="bar">
+    <div role="rowheader" class="label">Divorce or family upheaval leave</div>
+    <div role="cell" class="segment currently-offer" style="flex: 0 0 11%;">11%</div>
+    <div role="cell" class="segment plan-to-add" style="flex: 0 0 42%;">42%</div>
+    <div role="cell" class="segment no-plans" style="flex: 0 0 47%;">47%</div>
+  </div>
+  <div role="row" class="bar">
+    <div role="rowheader" class="label">Sabbaticals</div>
+    <div role="cell" class="segment currently-offer" style="flex: 0 0 15%;">15%</div>
+    <div role="cell" class="segment plan-to-add" style="flex: 0 0 41%;">41%</div>
+    <div role="cell" class="segment no-plans" style="flex: 0 0 44%;">44%</div>
+  </div>
+  <div role="row" class="bar">
+    <div role="rowheader" class="label">Emergency responder leave</div>
+    <div role="cell" class="segment currently-offer" style="flex: 0 0 25%;">25%</div>
+    <div role="cell" class="segment plan-to-add" style="flex: 0 0 40%;">40%</div>
+    <div role="cell" class="segment no-plans" style="flex: 0 0 35%;">35%</div>
+  </div>
+  <div role="row" class="bar">
+    <div role="rowheader" class="label">Military service/family military leave</div>
+    <div role="cell" class="segment currently-offer" style="flex: 0 0 36%;">36%</div>
+    <div role="cell" class="segment plan-to-add" style="flex: 0 0 39%;">39%</div>
+    <div role="cell" class="segment no-plans" style="flex: 0 0 25%;">25%</div>
+  </div>
+  <div role="row" class="bar">
+    <div role="rowheader" class="label">Long-term disability</div>
+    <div role="cell" class="segment currently-offer" style="flex: 0 0 58%;">58%</div>
+    <div role="cell" class="segment plan-to-add" style="flex: 0 0 35%;">35%</div>
+    <div role="cell" class="segment no-plans" style="flex: 0 0 7%;">7%</div>
+  </div>
+  <div role="row" class="bar">
+    <div role="rowheader" class="label">Short-term disability</div>
+    <div role="cell" class="segment currently-offer" style="flex: 0 0 61%;">61%</div>
+    <div role="cell" class="segment plan-to-add" style="flex: 0 0 33%;">33%</div>
+    <div role="cell" class="segment no-plans" style="flex: 0 0 6%;">6%</div>
+  </div>
+  <div role="row" class="bar">
+    <div role="rowheader" class="label">Paid parental, maternity or paternity leave (company-sponsored)</div>
+    <div role="cell" class="segment currently-offer" style="flex: 0 0 57%;">57%</div>
+    <div role="cell" class="segment plan-to-add" style="flex: 0 0 30%;">30%</div>
+    <div role="cell" class="segment no-plans" style="flex: 0 0 13%;">13%</div>
+  </div>
+  <div role="row" class="bar">
+    <div role="rowheader" class="label">Paid family or medical leave (company-sponsored)</div>
+    <div role="cell" class="segment currently-offer" style="flex: 0 0 59%;">59%</div>
+    <div role="cell" class="segment plan-to-add" style="flex: 0 0 28%;">28%</div>
+    <div role="cell" class="segment no-plans" style="flex: 0 0 13%;">13%</div>
+  </div>
+</div>
+
+<table aria-label="Data representation of leave benefits and company offer status">
+  <caption>Leave Benefits Offer Status Data</caption>
+  <thead>
+    <tr>
+      <th>Leave Benefit Type</th>
+      <th>Currently offer</th>
+      <th>Plan to add/considering</th>
+      <th>No plans to offer</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Paid caregiving leave (company-sponsored)</td>
+      <td>22%</td>
+      <td>56%</td>
+      <td>22%</td>
+    </tr>
+    <tr>
+      <td>Domestic violence/sexual abuse victims' leave</td>
+      <td>16%</td>
+      <td>55%</td>
+      <td>29%</td>
+    </tr>
+    <tr>
+      <td>Non-FMLA medical leave</td>
+      <td>20%</td>
+      <td>49%</td>
+      <td>31%</td>
+    </tr>
+    <tr>
+      <td>Divorce or family upheaval leave</td>
+      <td>11%</td>
+      <td>42%</td>
+      <td>47%</td>
+    </tr>
+    <tr>
+      <td>Sabbaticals</td>
+      <td>15%</td>
+      <td>41%</td>
+      <td>44%</td>
+    </tr>
+    <tr>
+      <td>Emergency responder leave</td>
+      <td>25%</td>
+      <td>40%</td>
+      <td>35%</td>
+    </tr>
+    <tr>
+      <td>Military service/family military leave</td>
+      <td>36%</td>
+      <td>39%</td>
+      <td>25%</td>
+    </tr>
+    <tr>
+      <td>Long-term disability</td>
+      <td>58%</td>
+      <td>35%</td>
+      <td>7%</td>
+    </tr>
+    <tr>
+      <td>Short-term disability</td>
+      <td>61%</td>
+      <td>33%</td>
+      <td>6%</td>
+    </tr>
+    <tr>
+      <td>Paid parental, maternity or paternity leave (company-sponsored)</td>
+      <td>57%</td>
+      <td>30%</td>
+      <td>13%</td>
+    </tr>
+    <tr>
+      <td>Paid family or medical leave (company-sponsored)</td>
+      <td>59%</td>
+      <td>28%</td>
+      <td>13%</td>
+    </tr>
+  </tbody>
+</table>
+</figure>
+
+<div class="two-columns">
+  <div>
+    <p><strong>Mismatched confidence levels in the face of regulatory complexity:</strong> For all the interest in expanded leave offerings, confidence levels differ across employers and brokers.</p>
+  </div>
+  <div>
+    <p>Brokers are less optimistic and warn that employers will struggle because they don’t fully appreciate the complexity of leave administration. “If I am a decentralized employer</p>
+  </div>
+</div>
+</body>
+</html>
