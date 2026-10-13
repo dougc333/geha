@@ -1,0 +1,110 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "chart_data",
+        "source_evidence": "Physical, Mental, Financial, Societal, Professional are shown as five key dimensions in the wheel with visible background photos for each segment in the source PDF, with thick yellow arrows connecting segments.",
+        "html_evidence": "The semantic HTML wheel has the correct labels and yellow arrows, but the segments are filled with plain pastel colors instead of the photo backgrounds seen in the source.",
+        "correction": "Use photo backgrounds in each segment of the wheel as in the source PDF instead of flat colors to accurately represent the visual content."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The wheel in the source PDF is centered horizontally with ample surrounding white space and the text paragraphs are distributed in two columns at the top and left sides of the page.",
+        "html_evidence": "The semantic HTML places all body text paragraphs left aligned in a single narrow column at the top left, and the wheel is centered below them. The vertical white space and general layout differ from the multi-column, horizontally balanced PDF layout.",
+        "correction": "Match the source layout by using two-column text arrangement at the top and left side with the wheel placed aligned horizontally as in the source page."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "missing_text",
+        "source_evidence": "The PDF source page includes multiple paragraphs of text before the wheel chart explaining different aspects of workforce benefits and generational interests, including the paragraph starting with 'Paid family or medical leave...' and subsequent paragraphs about career development and holistic approaches.",
+        "html_evidence": "The candidate HTML includes these paragraphs but with slightly different breaks and paragraphing. The paragraph breaks appear preserved but the line breaks inside paragraphs are different due to HTML rendering. This is minor and not a substantive error.",
+        "correction": "No correction needed for the paragraph text as the content matches well."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The PDF layout places the text in two columns: text on the left half of the page and the large circular wheel on the right half with distinct images in each segment. The title 'The LIMRA-EY Wheel of Wellness' is below the wheel, bold and separated with a vertical bar, then followed by a description line paragraph.",
+        "html_evidence": "The candidate HTML uses a flex container with text in a left column and the wheel on the right as an SVG. The wheel is visually approximately correct in shape and segment division. However, the position of the title and description paragraph is below the container as a separate heading and paragraph, matching source.",
+        "correction": "Layout is consistent with source except possibly the crispness or size of the images within segments (cannot verify pixel-perfect images due to base64 truncation). Layout matches the source's two-column approach well, so no correction needed."
+      },
+      {
+        "category": "chart_relationship",
+        "source_evidence": "The PDF page explicitly shows the LIMRA-EY Wheel of Wellness with five labeled segments: Physical, Mental, Financial, Societal, Professional. The original has bright yellow circular arrows/arcs outside the wheel edges connecting each segment in a clockwise pattern around the circle.",
+        "html_evidence": "The HTML includes an SVG with five segments each filled with a pattern containing images, the labels are present: Physical, Mental, Financial, Societal, Professional. A large golden circular stroke ring exists around the segments and small yellow arrows are placed around the circle edges corresponding to the direction of flow. The arrows appear consistent and located near the edges around the circle. However, the yellow arrows in the source PDF are thick curved arrows forming a continuous ring. The candidate replaced these with small filled polygon arrows positioned around the circle, which breaks the continuous arrow flow present in source. Also, the actual curved big yellow arrow ring is missing in candidate, replaced by stroke-only ring and separate arrows.",
+        "correction": "Replace the candidate's small discrete polygon arrows and thin ring with a continuous bright yellow curved arrow ring exactly as in source PDF, visually forming one connected circular arrow around the segments to preserve the holistic concept of continuous wellness flow."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "The PDF shows the text content in a two-column layout: textual paragraphs on the left and the wheel images on the right, with a clear vertical alignment. The HTML uses a similar flex layout but the wheel is visually smaller and overly compressed horizontally, with the wheel narrower and the text column narrower than the original. The wheel image is shown but the overall alignment and spacing between text and wheel is not consistent with PDF's balanced column width and spacing, resulting in a cramped and visually unbalanced presentation.",
+        "html_evidence": "<div class=\"container\" aria-label=\"Text content and LIMRA-EY Wheel of Wellness\">\n    <section class=\"text-column\">... </section>\n    <section class=\"wheel-column\">...\n    <svg role=\"img\" aria-labelledby=\"wheelTitle\" width=\"320\" height=\"320\" viewBox=\"0 0 320 320\" ... >\n    ...\n    </svg>\n    </section>\n</div>",
+        "correction": "Adjust the flex container so that the text column and wheel column widths and spacing more closely match the PDF's distribution, ensuring the wheel is larger and vertically aligned with the text paragraphs to replicate the page's balanced two-column layout."
+      },
+      {
+        "category": "other",
+        "source_evidence": "The PDF's title of the wheel text is rendered in bold and larger font size, contrasting clearly from body text. The HTML's heading \"The LIMRA-EY Wheel of Wellness\" is an h2 but has a smaller margin bottom and is visually less prominent than the PDF's heavier, bolder black font in that heading's placement. The heading also must appear above the paragraph describing the wheel, as in the PDF, not below the side-by-side container.",
+        "html_evidence": "<h2>The LIMRA-EY Wheel of Wellness</h2>\n<p>Focused on five key dimensions of health...</p>",
+        "correction": "Move the heading and paragraph describing the wheel inside the left text column or place immediately above the two-column container as in the PDF, ensuring correct vertical ordering with heading above the explanatory paragraph prior to the wheel presence."
+      }
+    ]
+  },
+  {
+    "iteration": 3,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "The LIMRA-EY Wheel of Wellness shows a circular segmented wheel with five labeled dimensions (Physical, Mental, Financial, Societal, Professional) arranged in a visually balanced wheel with a bright yellow curved arrow ring around it.",
+        "html_evidence": "Rendered SVG shows a segmented circular wheel but with overlapping segments and labels visually garbled together in the center, making text and segment boundaries unreadable.",
+        "correction": "Correct the SVG wheel visualization so that the five segments are properly rendered as distinct slices arranged circularly with each label placed clearly outside or within each segment, spaced so all labels are individually legible without overlap. The bright yellow circular arrow ring should be fully visible and continuous around the wheel, not broken or merged with the segments. Ensure the wheel visually matches the authoritative source representation."
+      }
+    ]
+  },
+  {
+    "iteration": 4,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "The authoritative source PDF page does not include the large block of text to the left of the wheel diagram; the textual content in the candidate HTML extends well beyond the PDF content under the heading, including paragraphs about paid leaves, career development, and holistic approach that are separated in the PDF.",
+        "html_evidence": "<section class=\"text-column\">\n      <p>Paid family or medical leave or other paid leaves are notable for being of interest to all generations, albeit for different reasons. Younger workers may want leave when they are starting families, while older workers may seek leave when they need to handle caregiving responsibilities for aging parents or grandchildren.</p>\n      <p>Career development is of particular interest to Gen X, millennials and Gen Z. As AI and other technologies change the employment landscape, many workers are concerned about the impact on their jobs, which helps explain why upskilling, reskilling, and other training and development are becoming more important. Mental health and substance abuse treatment is a higher priority for younger workers, though interest remains significant as employees age. Emergency savings benefits are most relevant to Gen Z, according to our findings, and interest in student loan assistance also skews toward younger workers.</p>\n      <p><strong>The value of a holistic approach:</strong> Rising costs and limited benefits uptake are challenges for many employers, largely because employees often focus on medical, dental and vision insurance with their limited discretionary income. With demographic diversity on the rise, employers may look to generational bundles, voluntary benefits and more flexible options to meet the unique needs of different cohorts. Such offerings can also help boost benefits utilization. A holistic model for plan design, such as the LIMRA-EY Wheel of Wellness, can help employers offer benefits that satisfy the diverse needs of multiple generations of workers.</p>\n    </section>",
+        "correction": "Remove the large block of text left of the wheel that is not present in the source page. Only keep the heading 'The LIMRA-EY Wheel of Wellness' and the single descriptive sentence under it preceding the wheel diagram, as in the source."
+      }
+    ]
+  },
+  {
+    "iteration": 5,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "The source PDF shows the LIMRA-EY Wheel of Wellness as a segmented circle with five distinct wedges labeled Physical, Mental, Financial, Societal, Professional each with a background photographic image, surrounded by a continuous yellow arrow ring around the circle.",
+        "html_evidence": "The candidate HTML shows only a simple yellow circular arrow ring and five labels inside the circle. The labeled wedges with images and white backgrounds from the source are missing. The overall wheel shape and design do not match the source visually.",
+        "correction": "Recreate the LIMRA-EY Wheel of Wellness as a segmented wheel with five wedges each containing distinct images and white backgrounds, labeled clearly outside the segments as Physical, Mental, Financial, Societal, Professional, with the bright yellow continuous arrow ring around the outer perimeter as in the source. Ensure the wedge shapes and arrow style match the source's pie segment design with thick white segment dividers."
+      }
+    ]
+  },
+  {
+    "iteration": 6,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "The source image shows a wheel pie chart with five wedges that contain both background images and thick white dividing lines with an arrow ring around and wedge labels inside the wedges.",
+        "html_evidence": "The candidate shows a similar pie chart but the yellow arrow ring is incomplete and misplaced, the wedge background images are transparent placeholders without distinct images, the wedge boundaries and shapes differ slightly, and the wedge labels are outside the wedges rather than inside them.",
+        "correction": "Adjust the arrow ring to be a continuous circular arrow around the wheel as in the source. Replace placeholder wedge images with distinct meaningful images matching the source. Ensure thick white segment dividers are accurately placed as in the source. Position wedge labels inside each wedge segment aligned as in the source."
+      }
+    ]
+  }
+]

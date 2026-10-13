@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "gpt-4.1-mini",
+  "created_at": "2026-10-10T08:13:20.086214+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "fig1",
+      "kind": "figure",
+      "title": "Employers see a need for total wellbeing.",
+      "source_png": "figure-01-fig1.png",
+      "bounding_box": [
+        0,
+        0,
+        1530,
+        1485
+      ],
+      "output_directory": "figure-01",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 3,
+          "errors": [
+            {
+              "category": "wrong_text",
+              "source_evidence": "Short-term disability insurance 63%",
+              "html_evidence": "Short-term disability insurance </span><span class=\"bar grey\" style=\"width:63px;\" aria-hidden=\"true\"></span><span aria-label=\"63 percent\">63%</span>",
+              "correction": "In the HTML, 'Short-term disability insurance' is shown as 63%, which matches source. No error here."
+            },
+            {
+              "category": "wrong_text",
+              "source_evidence": "Career development 59%",
+              "html_evidence": "Career development </span><span class=\"bar grey\" style=\"width:59px;\" aria-hidden=\"true\"></span><span aria-label=\"59 percent\">59%</span>",
+              "correction": "The value is correct as 59% in the HTML. No error here."
+            },
+            {
+              "category": "wrong_text",
+              "source_evidence": "Critical illness insurance 54% (grey)",
+              "html_evidence": "Critical illness insurance </span><span class=\"bar grey\" style=\"width:54px;\" aria-hidden=\"true\"></span><span aria-label=\"54 percent\">54%</span>",
+              "correction": "This matches source; Critical illness insurance bar is grey at 54%. No error here."
+            }
+          ],
+          "render_latency_ms": 508.9
+        },
+        {
+          "iteration": 2,
+          "html": "figure-01/iteration-02.html",
+          "rendered_png": "figure-01/iteration-02.png",
+          "verdict": "mismatch",
+          "error_count": 2,
+          "errors": [
+            {
+              "category": "wrong_text",
+              "source_evidence": "Mental health/substance abuse treatment benefits 60%",
+              "html_evidence": "Mental health/substance abuse treatment benefits 60%",
+              "correction": "Correct the spelling: 'benefits' instead of 'benef its' as in the PDF source."
+            },
+            {
+              "category": "wrong_text",
+              "source_evidence": "Societal benefits 34%",
+              "html_evidence": "Societal benefits 34%",
+              "correction": "Correct the spelling: 'Societal' instead of 'Societal' with the space 'Societal benefits' should be 'Societal benefits'."
+            }
+          ],
+          "render_latency_ms": 493.5
+        },
+        {
+          "iteration": 3,
+          "html": "figure-01/iteration-03.html",
+          "rendered_png": "figure-01/iteration-03.png",
+          "verdict": "mismatch",
+          "error_count": 5,
+          "errors": [
+            {
+              "category": "wrong_text",
+              "source_evidence": "Critical illness insurance 54% (grey bar)",
+              "html_evidence": "<li><span>Critical illness insurance </span><span class=\"bar grey\" style=\"width:54px;\" aria-hidden=\"true\"></span><span aria-label=\"54 percent\">54%</span></li>",
+              "correction": "Critical illness insurance should be colored grey with 54%, which is correct in HTML, so no issue here."
+            },
+            {
+              "category": "wrong_text",
+              "source_evidence": "Emergency savings benefit 52% (grey bar)",
+              "html_evidence": "<li><span>Emergency savings benefit </span><span class=\"bar grey\" style=\"width:52px;\" aria-hidden=\"true\"></span><span aria-label=\"52 percent\">52%</span></li>",
+              "correction": "Emergency savings benefit should be grey with 52%, which matches HTML, so no issue here."
+            },
+            {
+              "category": "wrong_text",
+              "source_evidence": "Financial wellness programs 54% (red bar)",
+              "html_evidence": "<li><span>Financial wellness programs </span><span class=\"bar red\" style=\"width:54px;\" aria-hidden=\"true\"></span><span aria-label=\"54 percent\">54%</span></li>",
+              "correction": "Financial wellness programs should have a red bar at 54%, which is correct in HTML, so no issue here."
+            },
+            {
+              "category": "wrong_text",
+              "source_evidence": "Critical illness insurance 54% is grey in PDF but no explicit color mentioned for positive or negative change",
+              "html_evidence": "It is grey in HTML as well, which matches PDF, so no error.",
+              "correction": "No correction needed."
+            },
+            {
+              "category": "other",
+              "source_evidence": "The candidate's bars widths are specified as 'width:89px' etc, but the differences in width do not visually correspond to the percentage values because pixel widths directly used instead of proportional widths (e.g., 89% width)",
+              "html_evidence": "All bars have discrete pixel widths that do not scale visually in proportion to their values (e.g. 89px for 89%, 22px for 22%), but these pixel widths might not reflect accurate proportional differences visually as in source chart.",
+              "correction": "Change bar widths to proportional widths (e.g. width as percentage) to accurately reflect percentage values visually."
+            }
+          ],
+          "render_latency_ms": 500.3
+        },
+        {
+          "iteration": 4,
+          "html": "figure-01/iteration-04.html",
+          "rendered_png": "figure-01/iteration-04.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "layout",
+              "source_evidence": "The green and red bars that indicate increase or decrease vs 2023 study appear visually inconsistent with the source with possible overlap or spacing issues in the candidate's horizontal bars compared to the grouped vertical bars in source.",
+              "html_evidence": "<ul style=\"list-style:none; padding-left:0; max-width: 12em;\"> ... <li><span>Paid family or medical leave </span><span class=\"bar grey\" style=\"width:71%;\" aria-hidden=\"true\"></span><span aria-label=\"71 percent\">71%</span></li> ...</ul>",
+              "correction": "Adjust bar chart layout to recreate the vertical horizontal bar grouping with clear alignment and spacing so each bar matches source in position and color with no overlaps or visual confusion. Use vertical bars for each category as in source or fix spacing strictly."
+            }
+          ],
+          "render_latency_ms": 526.4
+        },
+        {
+          "iteration": 5,
+          "html": "figure-01/iteration-05.html",
+          "rendered_png": "figure-01/iteration-05.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 666.0
+        }
+      ],
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-05.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 1,
+    "failed": 0,
+    "total_iterations": 5,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-10-10T08:14:47.553005+00:00"
+}

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Benefits Offering Change Chart</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  .chart-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1em;
+    max-width: 600px;
+  }
+  .bar-group {
+    text-align: center;
+  }
+  .bar {
+    width: 60px;
+    margin: 0 auto;
+    border: 1px solid #aaa;
+    position: relative;
+    font-size: 0.85em;
+  }
+  .bar .segment {
+    width: 100%;
+    color: white;
+    line-height: 1.4em;
+    box-sizing: border-box;
+  }
+  .more-benefits {
+    background: #ffde17;
+    color: #000;
+  }
+  .about-same {
+    background: #6b6874;
+  }
+  .fewer-benefits {
+    background: #c7c7d2;
+  }
+  .increase-text {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+  .increase-text sup {
+    font-weight: normal;
+  }
+  figcaption {
+    max-width: 600px;
+    margin: 1em auto 2em;
+    font-size: 0.9em;
+    color: #555;
+  }
+  table {
+    max-width: 600px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    font-size: 0.9em;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 0.4em 0.8em;
+    text-align: center;
+  }
+  th {
+    background-color: #f7f7f7;
+  }
+  caption {
+    caption-side: top;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+</style>
+</head>
+<body>
+
+<h1>offering fewer, the same or more benefits than it does now?</h1>
+
+<section class="chart-container" aria-label="Change in benefits offerings by company size with percentages for 2023 and change from 2023">
+  <figure class="bar-group" aria-describedby="desc-small">
+    <div class="increase-text" aria-label="+7 percent change from 2023">+7%<br />change<br />from<br />2023</div>
+    <div class="bar" role="img" aria-label="Small companies benefits distribution">
+      <div class="more-benefits segment" style="height:57%;">57%</div>
+      <div class="about-same segment" style="height:40%;">40%</div>
+      <div class="fewer-benefits segment" style="height:3%;">3%</div>
+    </div>
+    <figcaption id="desc-small">
+      Small<br />(10–99 employees)
+    </figcaption>
+  </figure>
+
+  <figure class="bar-group" aria-describedby="desc-midsize">
+    <div class="increase-text" aria-label="+6 percent change from 2023">+6%<br />change<br />from<br />2023</div>
+    <div class="bar" role="img" aria-label="Midsize companies benefits distribution">
+      <div class="more-benefits segment" style="height:64%;">64%</div>
+      <div class="about-same segment" style="height:35%;">35%</div>
+      <div class="fewer-benefits segment" style="height:1%;">1%</div>
+    </div>
+    <figcaption id="desc-midsize">
+      Midsize<br />(100–999 employees)
+    </figcaption>
+  </figure>
+
+  <figure class="bar-group" aria-describedby="desc-large">
+    <div class="increase-text" aria-label="+5 percent change from 2023">+5%<br />change<br />from<br />2023</div>
+    <div class="bar" role="img" aria-label="Large companies benefits distribution">
+      <div class="more-benefits segment" style="height:67%;">67%</div>
+      <div class="about-same segment" style="height:30%;">30%</div>
+      <div class="fewer-benefits segment" style="height:3%;">3%</div>
+    </div>
+    <figcaption id="desc-large">
+      Large<br />(1,000 or more employees)
+    </figcaption>
+  </figure>
+</section>
+
+<table>
+  <caption>Benefits Offering Percentages by Company Size (2023) and Change</caption>
+  <thead>
+    <tr>
+      <th>Company Size</th>
+      <th>Change from 2023</th>
+      <th>More benefits</th>
+      <th>About the same</th>
+      <th>Fewer benefits</th>
+      <th>Employee Count Range</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Small</td>
+      <td>+7%</td>
+      <td>57%</td>
+      <td>40%</td>
+      <td>3%</td>
+      <td>10–99 employees</td>
+    </tr>
+    <tr>
+      <td>Midsize</td>
+      <td>+6%</td>
+      <td>64%</td>
+      <td>35%</td>
+      <td>1%</td>
+      <td>100–999 employees</td>
+    </tr>
+    <tr>
+      <td>Large</td>
+      <td>+5%</td>
+      <td>67%</td>
+      <td>30%</td>
+      <td>3%</td>
+      <td>1,000 or more employees</td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

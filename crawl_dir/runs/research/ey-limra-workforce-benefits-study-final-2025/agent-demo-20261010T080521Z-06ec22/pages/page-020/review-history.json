@@ -1,0 +1,31 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "missing_text",
+        "source_evidence": "Coordinates different leaves and benefits and tracks intermittent leaves",
+        "html_evidence": "Coordinates different leaves and benefits and tracks intermittent leaves",
+        "correction": "Change 'Coordinates different leaves and benefits and tracks intermittent leaves' to 'Coordinates different leaves and benefits and tracks intermittent leaves' (matches source; no content difference but check spacing and line breaks match exactly)."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Absence and leave management will continue to be top of mind for employers with components now part of the core four.",
+        "html_evidence": "Absence and leave management will continue to be top of mind for employers with components now part of the core four.",
+        "correction": "Verify bold style is applied to entire phrase 'Absence and leave management will continue to be top of mind for employers with components now part of the core four.' exactly as in source PDF (candidate uses <strong> but confirm length and scope)."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "\"38%\" Supports compliance and regulatory changes etc shown in large bright yellow text with correct spacing and no overlap",
+        "html_evidence": "Yellow large percentage text shown similarly but counted lines and spacing in description may not exactly match multi-line breaks as in PDF under each percentage, especially for 'Coordinates different leaves and benefits and tracks intermittent leaves' which is wrapped in candidate but visually looks condensed",
+        "correction": "Adjust text wrapping and line breaks under each percentage description to exactly replicate source's multi-line layout, ensuring readable and consistent separation like source PDF. Specifically, the phrase 'Coordinates different leaves and benefits and tracks intermittent leaves' should match source line breaks."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

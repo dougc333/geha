@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Covered medications and supplies - source.pdf</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #071f36;
+      --muted: #5f6f7f;
+      --line: #d6dee6;
+      --header: #06233d;
+      --header-ink: #ffffff;
+      --stripe: #f4f7f9;
+      --canvas: #edf2f6;
+      --paper: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+    main {
+      width: min(1440px, calc(100% - 32px));
+      margin: 32px auto;
+      padding: clamp(24px, 4vw, 56px);
+      background: var(--paper);
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(7, 31, 54, 0.10);
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+    .metadata { margin: 0 0 28px; color: var(--muted); }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+    .policy-table { width: 100%; border-collapse: collapse; min-width: 680px; }
+    .policy-table th {
+      padding: 14px 16px;
+      background: var(--header);
+      color: var(--header-ink);
+      text-align: left;
+      vertical-align: top;
+      font-weight: 700;
+    }
+    .policy-table td {
+      padding: 13px 16px;
+      border-top: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+    .policy-table tbody tr:nth-child(even) { background: var(--stripe); }
+    .note { margin: 24px 0 0; color: var(--muted); font-size: 0.9rem; }
+    @media print {
+      body { background: #fff; }
+      main { width: 100%; margin: 0; padding: 0; box-shadow: none; }
+      .table-wrap { overflow: visible; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Covered medications and supplies</h1>
+    <p class="metadata">Source: source.pdf &middot; Table 51 &middot; Page 92</p>
+    <div class="table-wrap">
+      <table class="dataframe policy-table">
+  <thead>
+    <tr style="text-align: left;">
+      <th>Benefits Description.Covered medications and supplies</th>
+      <th>You pay.High Option</th>
+      <th>You pay.Standard Option</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Network Retail Pharmacy All copayments/coinsurance are for up to a 30-day supply per prescription. Copay maximums increase for fills greater than a 30-day supply. Notes: • A generic equivalent will be dispensed unless you or your physician specifies that the prescription be dispensed as written (DAW), when an FDA approved generic drug is available. If there is no generic equivalent available, you pay the applicable plan coinsurance. • If you or your physician choose a brand name medication when a generic is available, you will be charged the generic copay plus the difference in cost between the brand name and the generic. Your physician may call 855-240-0536, if they determine there is medical necessity for the brand therapy. If approved, your copayment/coinsurance will be the applicable brand name copayment/coinsurance. • Medications to treat some complex and chronic medical conditions are only available through CVS Specialty. See CVS Caremark formulary for the categories of drugs in this program.</td>
+      <td>Generic: $10 or the retail pharmacy's usual and customary cost of the drug, whichever is less Preferred: 25% of Plan allowance up to a maximum of $200, for up to a 30-day supply Non-Preferred: 40% of Plan allowance up to a maximum of $300, for up to a 30-day supply For the third and all subsequent fills of a maintenance medication , you pay the greater of 50% of Plan allowance or the amount described above (except for Maintenance Choice).</td>
+      <td>Generic: $10 or the retail pharmacy's usual and customary cost of the drug, whichever is less Preferred: 40% of Plan allowance up to a maximum of $350, for up to a 30-day supply Non-Preferred: 60% of Plan allowance up to a maximum of $450, for up to a 30-day supply</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+    <p class="note">Extracted directly from the source PDF using embedded text with targeted OCR fallback where needed. Verify against the source policy before operational use.</p>
+  </main>
+</body>
+</html>

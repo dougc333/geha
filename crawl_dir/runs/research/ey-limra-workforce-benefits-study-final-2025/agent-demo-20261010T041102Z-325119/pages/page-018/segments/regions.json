@@ -1,0 +1,112 @@
+{
+  "page_type": "mixed",
+  "segmentation_recommended": true,
+  "reason": "The page contains distinct semantic zones including a highlighted info box, narrative paragraphs, a figure with caption, and a chart. Segmenting these helps preserve reading order and context.",
+  "regions": [
+    {
+      "id": "r1",
+      "label": "highlighted info box",
+      "kind": "other",
+      "reading_order": 1,
+      "x1": 29,
+      "y1": 40,
+      "x2": 592,
+      "y2": 255,
+      "pixel_box": [
+        44,
+        79,
+        906,
+        505
+      ],
+      "image": "region-01-r1.png"
+    },
+    {
+      "id": "r2",
+      "label": "image",
+      "kind": "other",
+      "reading_order": 2,
+      "x1": 600,
+      "y1": 40,
+      "x2": 940,
+      "y2": 255,
+      "pixel_box": [
+        918,
+        79,
+        1438,
+        505
+      ],
+      "image": "region-02-r2.png"
+    },
+    {
+      "id": "r3",
+      "label": "narrative paragraphs",
+      "kind": "paragraph",
+      "reading_order": 3,
+      "x1": 30,
+      "y1": 260,
+      "x2": 930,
+      "y2": 510,
+      "pixel_box": [
+        46,
+        515,
+        1423,
+        1010
+      ],
+      "image": "region-03-r3.png"
+    },
+    {
+      "id": "r4",
+      "label": "figure caption",
+      "kind": "other",
+      "reading_order": 4,
+      "x1": 30,
+      "y1": 520,
+      "x2": 930,
+      "y2": 590,
+      "pixel_box": [
+        46,
+        1030,
+        1423,
+        1168
+      ],
+      "image": "region-04-r4.png"
+    },
+    {
+      "id": "r5",
+      "label": "bar chart",
+      "kind": "other",
+      "reading_order": 5,
+      "x1": 150,
+      "y1": 590,
+      "x2": 920,
+      "y2": 765,
+      "pixel_box": [
+        230,
+        1168,
+        1408,
+        1515
+      ],
+      "image": "region-05-r5.png"
+    },
+    {
+      "id": "r6",
+      "label": "footer",
+      "kind": "footer",
+      "reading_order": 6,
+      "x1": 30,
+      "y1": 970,
+      "x2": 950,
+      "y2": 990,
+      "pixel_box": [
+        46,
+        1921,
+        1454,
+        1960
+      ],
+      "image": "region-06-r6.png"
+    }
+  ],
+  "coordinate_system": "normalized_0_1000",
+  "source_image": "/Users/dc/geha/crawl_dir/runs/research/ey-limra-workforce-benefits-study-final-2025/agent-demo-20261010T041102Z-325119/pages/page-018/source.png",
+  "overlay": "regions-overlay.png"
+}

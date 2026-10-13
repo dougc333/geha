@@ -1,0 +1,55 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Career development 59% (no change indicator)",
+        "html_evidence": "Career development 59% (empty change cell without em dash)",
+        "correction": "Change cell for 'Career development' should contain em dash '—' indicating no change, not empty."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Note: Percent of employers that believe their company’s employees will be “very” or “extremely” interested in the benefit in the future.",
+        "html_evidence": "<p><em>Note:</em> Percent of employers that believe their company’s employees will be “very” or “extremely” interested in the benefit in the future.</p>",
+        "correction": "Note text matches but visually, in the source it is right aligned under the chart; consideration for layout discrepancy if relevant."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "Figure 4 Employers see a need for total wellbeing. QUESTION: Five years from now, how interested do you think your employees will be in the following types of benefits? (left-aligned text above chart)",
+        "html_evidence": "<h1>Employers see a need for total wellbeing.</h1> <p><strong>QUESTION:</strong> Five years from now, how interested do you think your employees will be in the following types of benefits?</p> (present, but using larger heading and paragraph, no exact visual emphasis or line break as in source)",
+        "correction": "Match the layout of the heading and question text exactly as in the source, specifically matching the visual emphasis and line arrangement."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Benefit bars are visually colored with three distinct colors: green for 'Up 5 percentage points or more', grey for no change, red for 'Down 5 percentage points or more'",
+        "html_evidence": "Table with text 'Up 5 percentage points or more' and 'Down 5 percentage points or more' in the third column, and a legend with color blocks but no actual colored bars or rows in the table reflecting these colors.",
+        "correction": "The HTML only uses text and color-coded legend but does not graphically show colored bars or color the table rows or text to reflect the three groupings as in the source bar chart. Add color coding to the table rows or cells matching the source's green, grey, and red categories visually."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Source includes the bar chart and the green, grey, and red bar categories visually in the main content area.",
+        "html_evidence": "No bar chart or bars shown in HTML, only a text table with columns Benefit, Interest (%), Change vs. 2023.",
+        "correction": "Add the bar chart or colored proportional bars for each benefit's interest value as shown in the source, not just a textual percentage and 'Change vs. 2023' text column."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Note text aligned bottom right beneath the chart area: Note: Percent of employers that believe their company's employees will be \"very\" or \"extremely\" interested in the benefit in the future.",
+        "html_evidence": "<p style=\"text-align: right;\"><em>Note:</em> Percent of employers that believe their company’s employees will be “very” or “extremely” interested in the benefit in the future.</p>",
+        "correction": "The note is present and right aligned, consistent with the source, so no correction needed here."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "match",
+    "errors": []
+  }
+]

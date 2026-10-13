@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Workforce Benefits Study - Leave Management and Carrier Preferences</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    margin: 1rem;
+    color: #222;
+  }
+  .highlight-box {
+    background-color: #39a94e;
+    color: white;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    flex-wrap: nowrap;
+  }
+  .highlight-box-content {
+    flex: 1 1 60%;
+    min-width: 300px;
+  }
+  .highlight-box h2,
+  .highlight-box strong {
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+  }
+  .highlight-box p {
+    margin: 0 0 0.75rem 0;
+  }
+  .highlight-box ul {
+    margin: 0;
+    padding-left: 1.5rem;
+    list-style-type: square;
+  }
+  .highlight-box ul li {
+    margin-bottom: 0.5rem;
+  }
+  .highlight-box img {
+    max-width: 220px;
+    height: auto;
+    border-radius: 0.25rem;
+    flex: 0 0 auto;
+    object-fit: cover;
+  }
+  h2 {
+    font-weight: 700;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  strong {
+    font-weight: 600;
+  }
+  em {
+    font-style: italic;
+  }
+  p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+  ul {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  .chart-legend {
+    border: 1px solid #ccc;
+    padding: 0.5rem 1rem;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    max-width: 600px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  .legend-color {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+  }
+  .color-gray {
+    background-color: #66677a;
+  }
+  .color-yellow {
+    background-color: #ffdf00;
+  }
+  .bar-chart {
+    max-width: 600px;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+  .bar-chart svg {
+    width: 100%;
+    height: 240px;
+  }
+  .bar-chart .axis-label {
+    text-anchor: middle;
+    font-size: 0.8rem;
+    fill: #333;
+  }
+  .bar-chart .bar-text {
+    fill: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-anchor: middle;
+  }
+  footer {
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-top: 1px solid #ccc;
+    padding-top: 0.5rem;
+    color: #444;
+    max-width: 600px;
+  }
+</style>
+</head>
+<body>
+<section aria-labelledby="regulatory-heading" class="highlight-box">
+  <div class="highlight-box-content">
+    <p id="regulatory-heading"><strong>Regulatory fragmentation regarding leave management</strong><br/>
+      The patchwork of rules and requirements for leave management may present significant compliance challenges to many employers. Consider that:
+    </p>
+    <ul>
+      <li>Ten states (including the District of Columbia) already have paid family and medical leave programs in place.</li>
+      <li>Four states will implement such programs in 2026 (Delaware, Minnesota, Maine) or 2028 (Maryland).</li>
+      <li>Eight states have voluntary paid family leave programs (NCOIL model).</li>
+      <li>Nine states have introduced, but not enacted, legislation during the past several years.</li>
+      <li>Eighteen states have laws that mandate paid sick and safe leave programs.</li>
+    </ul>
+  </div>
+  <img alt="Photo of two people, a woman and child smiling and playing outdoors" src=""/>
+</section>
+<section>
+<p><strong>Employer willingness to pay for integrated experiences:</strong> As more state-mandated plans are implemented, employers have options: They can choose public plans administered by the state or private/voluntary plans managed by a carrier or other third parties. Employers electing private plans did so to save time and money and to access better experiences. The specific reasons cited by employer respondents were the lighter administrative burden on internal staff (57%), increased cost effectiveness (57%) and the ability to achieve better integration with other employer-sponsored benefits (55%), including disability and other paid leave benefits.</p>
+<p>Probing further on the value of integrated experiences, we asked employers whether they prefer:</p>
+<ul>
+<li>A carrier that provides an integrated absence management program along with its disability product for a higher price Or</li>
+<li>A carrier with the best-value disability product even without an integrated, real-time absence management service</li>
+</ul>
+<p>More than two in three midsize and large employers chose the first scenario. Small employers, which are typically more cost conscious, were split 50-50. See <em>Figure 11</em>.</p>
+</section>
+<section aria-labelledby="figure11-heading">
+<p><strong>Figure 11</strong></p>
+<h2 id="figure11-heading">In choosing carriers, employers value integrated absence management experiences more than affordability.</h2>
+<p><strong>QUESTION:</strong> Imagine your company was selecting a carrier for a new disability insurance benefit. Which of the following would you choose?</p>
+<div aria-label="Chart legend" class="chart-legend" role="list">
+  <div class="legend-item" role="listitem">
+    <span aria-hidden="true" class="legend-color color-gray"></span>
+    <span>A carrier that provides <strong>an integrated</strong> absence management program along with its disability product — <strong>for a higher price</strong></span>
+  </div>
+  <div class="legend-item" role="listitem">
+    <span aria-hidden="true" class="legend-color color-yellow"></span>
+    <span>A carrier with the best-value disability product even <strong>without an integrated</strong>, real-time absence management service</span>
+  </div>
+</div>
+<div aria-label="Bar chart showing employer preferences selecting disability insurance carriers by company size" class="bar-chart" role="img">
+  <svg aria-describedby="desc" aria-labelledby="title desc" role="img" viewbox="0 0 600 240">
+    <title>Employer preferences by company size for disability insurance carrier selection</title>
+    <desc>Bars show percentage choosing carrier with integrated absence management at higher price versus best-value disability product without integration</desc>
+    <!-- Bars for Small (10-99 employees) -->
+    <rect fill="#66677a" height="120" width="60" x="80" y="120"></rect>
+    <text class="bar-text" x="110" y="150">50%</text>
+    <rect fill="#ffdf00" height="60" width="60" x="80" y="60"></rect>
+    <text class="bar-text" fill="#000" x="110" y="90">50%</text>
+    <text class="axis-label" x="110" y="240">Small (10-99 employees)</text>
+    <!-- Bars for Midsize (100-999 employees) -->
+    <rect fill="#66677a" height="170.4" width="60" x="260" y="69.6"></rect>
+    <text class="bar-text" x="290" y="100">71%</text>
+    <rect fill="#ffdf00" height="87.6" width="60" x="260" y="152.4"></rect>
+    <text class="bar-text" fill="#000" x="290" y="182">29%</text>
+    <text class="axis-label" x="290" y="240">Midsize (100-999 employees)</text>
+    <!-- Bars for Large (1,000 or more employees) -->
+    <rect fill="#66677a" height="153.6" width="60" x="440" y="86.4"></rect>
+    <text class="bar-text" x="470" y="117">64%</text>
+    <rect fill="#ffdf00" height="112.8" width="60" x="440" y="127.2"></rect>
+    <text class="bar-text" fill="#000" x="470" y="157">36%</text>
+    <text class="axis-label" x="470" y="240">Large (1,000 or more employees)</text>
+  </svg>
+</div>
+</section>
+<footer>
+  18 | <strong>Harnessing growth in workforce benefits:</strong> the next horizon | 2025 Workforce Benefits Study
+</footer>
+</body>
+</html>

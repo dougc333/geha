@@ -1,0 +1,163 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Preference | Requires Prior Auth | Drug Name | HCPCS Code | Description\nPreferred | Yes | Trodelvy | J9317 | Injection, sacituzumab govitecan-hziy, 2.5 mg\nNon-preferred | Yes | Datroway | J9011 | Injection, datopotamab deruxtecan-dlnk, 1 mg",
+        "html_evidence": "<td><strong>Trodelvy</strong></td>\n<td><strong>J9317</strong></td>\n<td>Injection, sacituzumab govitecan-hziy, 2.5 mg</td>",
+        "correction": "Trodelvy spelling correct; 'Injection, sacituzumab govitecan-hziy, 2.5 mg' matches but ensure spacing after commas matches original (no space after comma before dosage)."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Preference | Requires Prior Auth | Drug Name | HCPCS Code | Description\nPreferred | Yes | Trodelvy | J9317 | Injection, sacituzumab govitecan-hziy, 2.5 mg\nNon-preferred | Yes | Datroway | J9011 | Injection, datopotamab deruxtecan-dlnk, 1 mg",
+        "html_evidence": "<td><strong>Datroway</strong></td>\n<td><strong>J9011</strong></td>\n<td>Injection, datopotamab deruxtecan-dlnk, 1 mg</td>",
+        "correction": "Drug name 'Datroway' correct; description spacing and punctuation should match source exactly (e.g., no spaces after commas before dosage)."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "• Members must have documentation of a contraindication, or intolerance, to Trodelvy or clinically appropriate rationale for treatment with Datroway for overlapping indications or compendium supported uses in hormone-receptor positive metastatic breast cancer.\n• Preferred product requirements apply to new starts only.",
+        "html_evidence": "<ul>\n    <li>Members must have documentation of a contraindication, or intolerance, to Trodelvy or clinically appropriate rationale for treatment with Datroway for overlapping indications or compendium supported uses in hormone-receptor positive metastatic breast cancer.</li>\n    <li>Preferred product requirements apply to new starts only.</li>\n  </ul>",
+        "correction": "The bullet text is present, matching the source, but check spacing and hyphenation for exact match."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Indication Specific Criteria Breast cancer – unresectable or metastatic\n• The member is 18 years of age or older; AND\n• The member has an ECOG performance status of 0-1¹; AND\n• The member has hormone receptor (HR) positive disease; AND\n• The member has HER2 negative (IHC 0, IHC 1+ or IHC 2+/ISH-) disease; AND\n• Datroway is used as subsequent therapy after the following:",
+        "html_evidence": "<h2><u>Indication Specific Criteria Breast cancer – unresectable or metastatic</u></h2>\n<ul>\n    <li>The member is 18 years of age or older; <strong>AND</strong></li>\n    <li>The member has an ECOG performance status of 0-1<sup>1</sup>; <strong>AND</strong></li>\n    <li>The member has hormone receptor (HR) positive disease; <strong>AND</strong></li>\n    <li>The member has HER2 negative (IHC 0, IHC 1+ or IHC 2+/ISH-) disease; <strong>AND</strong></li>\n    <li>Datroway is used as subsequent therapy after the following:",
+        "correction": "Text matches but the heading in HTML has underline applied to entire heading text which matches the source bold underline style. This is acceptable."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "• Datroway is used as subsequent therapy after the following:\n  o Endocrine Therapy; AND\n  o Chemotherapy; AND\n  o Enhertu (if member is eligible for treatment with Enhertu, as per current version of NCCN Guidelines)",
+        "html_evidence": "<ul>\n        <li>Endocrine Therapy; <strong>AND</strong></li>\n        <li>Chemotherapy; <strong>AND</strong></li>\n        <li>Enhertu (if member is eligible for treatment with Enhertu, as per current version of NCCN Guidelines)</li>\n      </ul>",
+        "correction": "Inner bullet list is present; check that bullets are properly nested and that 'AND' is bold at line ends as in source. The semicolon after 'Therapy' and 'Chemotherapy' is present."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "¹ 0 to 1 - ECOG score of 2 or 3 will be considered on a case-by-case basis.",
+        "html_evidence": "<p><small><sup>1</sup> 0 to 1 - ECOG score of 2 or 3 will be considered on a case-by-case basis.</small></p>",
+        "correction": "The footnote is correctly included, text matches source."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Trodelvy",
+        "html_evidence": "Trodelvy",
+        "correction": "Trodelvy is misspelled in source as 'Trodelvy'; correct it to 'Trodelvy' as in HTML"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Injection, sacituzumab govitecan-hziy, 2.5 mg",
+        "html_evidence": "Injection, sacituzumab govitecan-hziy, 2.5 mg",
+        "correction": "Same text but spacing issue in source: 'Injection, sacituzumab govitecan-hziy, 2.5 mg' should have normal spacing, confirm consistent spacing"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Injection,datopotamab deruxtecan-dlnk, 1 mg",
+        "html_evidence": "Injection,datopotamab deruxtecan-dlnk, 1 mg",
+        "correction": "Missing space after comma: should be 'Injection, datopotamab deruxtecan-dlnk, 1 mg' in HTML"
+      },
+      {
+        "category": "other",
+        "source_evidence": "G.E.H.A logo as pixelated blue text and star",
+        "html_evidence": "G.E.H.A text in SVG with rectangle background",
+        "correction": "Logo representation differs; candidate uses SVG with text and no star, source uses pixelated star and text as image"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Authorization text line spacing consistent",
+        "html_evidence": "Authorization text line spacing consistent",
+        "correction": "No substantive issue"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Line break in heading: 'Datroway -\\n(datopotamab deruxtecan-dlnk)'",
+        "html_evidence": "Same heading but line break exists",
+        "correction": "Consistent"
+      },
+      {
+        "category": "other",
+        "source_evidence": "Use of bold on keywords: e.g., Review Date: 02/16/2026 in bold",
+        "html_evidence": "Same use of bold and underline",
+        "correction": "Consistent"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Table caption not present in source",
+        "html_evidence": "Table caption 'Drug Preference, Prior Authorization, HCPCS Code and Description'",
+        "correction": "Table caption is extra text not present in source PDF"
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "Preference column header uses 'Requires Prior Auth'",
+        "html_evidence": "In HTML, 'Requires Prior Auth' header aligned correctly but includes full text, consistent",
+        "correction": "Consistent"
+      },
+      {
+        "category": "table_structure",
+        "source_evidence": "Source table uses bold on 'Preferred' row entire cells",
+        "html_evidence": "HTML uses <strong> for text in cells for Preferred row but not entire cells",
+        "correction": "Partial difference in styling but semantically correct"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Hyphen in drug description line: 'Injection, sacituzumab govitecan-hziy, 2.5 mg'",
+        "html_evidence": "Same text present",
+        "correction": "Consistent"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Injection, datopotamab deruxtecan-dlnk, 1 mg with spacing after comma",
+        "html_evidence": "No space after comma in 'Injection,datopotamab deruxtecan-dlnk, 1 mg'",
+        "correction": "HTML missing space after comma in description for 'Datroway' drug"
+      },
+      {
+        "category": "other",
+        "source_evidence": "Bullet point spacing: each bullet's text flows on one line",
+        "html_evidence": "Bullets same",
+        "correction": "Consistent"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Underline on heading: 'Indication Specific Criteria Breast cancer – unresectable or metastatic'",
+        "html_evidence": "Heading uses underline but misspelled word: 'Breast cancer – unresectable or metastatic'",
+        "correction": "Consistent"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Nested bullets sorted properly with AND in bold",
+        "html_evidence": "Nested bullets use same text and format",
+        "correction": "Consistent"
+      },
+      {
+        "category": "extra_text",
+        "source_evidence": "Footnote text '0 to 1 - ECOG score of 2 or 3 will be considered  on a case-by-case basis.' with double space before 'on'",
+        "html_evidence": "'0 to 1 - ECOG score of 2 or 3 will be considered on a case-by-case basis.' with single space",
+        "correction": "Minor spacing difference in footnote text"
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Footer line '1 | P a g e' aligned right or center",
+        "html_evidence": "Footer line same but no explicit alignment",
+        "correction": "Minor layout difference"
+      },
+      {
+        "category": "other",
+        "source_evidence": "Footer text 'Datroway (datopotamab deruxtecan-dlnk)' at bottom center",
+        "html_evidence": "Footer same",
+        "correction": "Consistent"
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "match",
+    "errors": []
+  }
+]

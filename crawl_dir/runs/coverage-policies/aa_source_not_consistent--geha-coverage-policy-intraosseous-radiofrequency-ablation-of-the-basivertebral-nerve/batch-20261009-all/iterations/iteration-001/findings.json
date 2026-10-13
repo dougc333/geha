@@ -1,0 +1,42 @@
+{
+  "table_extraction": {
+    "pdf": "source.pdf",
+    "status": "ok",
+    "ocr_used": false,
+    "tables_detected": 3,
+    "tables_written": 2,
+    "tables_excluded": 1,
+    "outputs": [
+      {
+        "table_number": 1,
+        "heading": "Table of Contents",
+        "page": 1,
+        "rows": 10,
+        "columns": 2,
+        "header_promoted": false,
+        "header_inherited_from_table": null,
+        "html": "source_table-of-contents.html"
+      },
+      {
+        "table_number": 2,
+        "heading": "Applicable Codes",
+        "page": 12,
+        "rows": 2,
+        "columns": 2,
+        "header_promoted": false,
+        "header_inherited_from_table": null,
+        "html": "source_applicable-codes.html"
+      }
+    ],
+    "excluded": [
+      {
+        "table_number": 3,
+        "heading": "Policy History/Revision Information",
+        "page": 15,
+        "reason": "revision_history"
+      }
+    ]
+  },
+  "chunk_errors": [],
+  "chunk_warnings": []
+}

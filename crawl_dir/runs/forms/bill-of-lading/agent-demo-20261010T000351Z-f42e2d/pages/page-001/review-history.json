@@ -1,0 +1,295 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "TEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+        "html_evidence": "TEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+        "correction": "TEL: +54 11 4789 1234 (correct) but HTML has +54 11 4789 1234, which is correct; no error here"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "TEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com",
+        "html_evidence": "TEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com",
+        "correction": "No difference found."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "TEL: +31 10 123 4567 | EMAIL: dispatch@logitrans.com",
+        "html_evidence": "TEL: +31 10 123 4567 | EMAIL: dispatch@logitrans.com",
+        "correction": "No difference found."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "NO. PKGS for MRDN4455667: 20 and for MRDN7788990: 20",
+        "html_evidence": "NO. PKGS only 20 in total for MRDN7788990 row, MRDN4455667 has no explicit no. pkgs cell",
+        "correction": "Add NO. PKGS '20' also for the MRDN4455667 container, matching the PDF separate entries of 20 for each container."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "GROSS WT.: 18,500 KGS and 19,200 KGS separately stacked for each container",
+        "html_evidence": "GROSS WT.: 18,500 KGS and 19,200 KGS stacked one above another without container separation clarity",
+        "correction": "Show gross weight entries aligned distinctly per container rather than stacked ambiguously."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "MEASUREMENT: 28.00 CBM for each container separately",
+        "html_evidence": "MEASUREMENT: 28.00 CBM listed stacked together for both containers without separation",
+        "correction": "Show measurement entries clearly separated per container as in source PDF."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "Tables with distinct container rows for goods and weights",
+        "html_evidence": "The HTML table merges rows for containers and packages, showing data spanning multiple rows in a way that mixes columns (e.g. package number only on one row for two containers).",
+        "correction": "Adjust table row spans or separate rows per container to correctly reflect the source PDF structure."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The header section with logo 'M' and company name horizontally aligned, Bill of Lading box to the right",
+        "html_evidence": "The candidate HTML replicates this layout well but uses float and inline-block for layout; this technically matches layout but minor differences in spacing may exist; overall acceptable.",
+        "correction": "No correction necessary."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "SHIPPER TEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+        "html_evidence": "SHIPPER TEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+        "correction": "TEL number should be +54 11 4789 1234 (correct in HTML). No error here."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "CONSIGNEE TEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com",
+        "html_evidence": "CONSIGNEE TEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com",
+        "correction": "No error in contact info."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "NOTIFY PARTY TEL: +31 10 123 4567 | EMAIL: dispatch@logitrans.com",
+        "html_evidence": "NOTIFY PARTY TEL: +31 10 123 4567 | EMAIL: dispatch@logitrans.com",
+        "correction": "No error in contact info."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "MARKS: PALLETIZED (appears twice in two container rows)",
+        "html_evidence": "MARKS: PALLETIZED (appears under MRDN4455667, but missing under MRDN7788990)",
+        "correction": "Add 'MARKS: PALLETIZED' under second container MRDN7788990 as in source."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Paragraph under table: \"RECEIVED by the Carrier... THEY WERE ALL SIGNED BY THE MERCHANT.\"",
+        "html_evidence": "No such paragraph present.",
+        "correction": "Add the legal text paragraph under the charges/packages row exactly as in source."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "'NUMBER OF ORIGINAL B/L'S: THREE (3)' text is in upper case, centered below table and above footer.",
+        "html_evidence": "'NUMBER OF ORIGINAL B/L'S: THREE (3)' text is present but separated from table and form, placed inside a separate div after issuer row; formatting slightly different.",
+        "correction": "Ensure text is uppercase and placed visually as below main form but above footer as in source. Current HTML placement is acceptable but formatting slightly differs."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Footer line: 'FRUTAS DEL SOL S.A. • +54 11 4789 1234 • logistica@frutasdelsol.com.ar' centered at page bottom with grey color text.",
+        "html_evidence": "Footer present but email link color is #7a7a87 (grey), matching source. Layout and styling is consistent.",
+        "correction": "No error; matches well."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "'FREIGHT & CHARGES' block with 'OCEAN FREIGHT' and 'THC' labels and 'COLLECT' text inside, aligned.",
+        "html_evidence": "Two labels 'OCEAN FREIGHT' and 'THC' shown with COLLECT aligned on right side. Reading order consistent.",
+        "correction": "No error."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "TEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+        "html_evidence": "TEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+        "correction": "Correct as is."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "TEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com",
+        "html_evidence": "TEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com",
+        "correction": "Correct as is."
+      },
+      {
+        "category": "other",
+        "source_evidence": "The two packages with No. PKGS as 20 appear once each (for MRDN4455667)",
+        "html_evidence": "The two packages with No. PKGS as 20 are shown as two separate rows beneath the same container with rowspan but the quantities do not completely align with the original formatting for the second '20' in the first container block.",
+        "correction": "Consolidate the quantity and marks representation exactly as in the source, ensuring the marks and package quantities visually match the source structure."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "GROSS WT. and MEASUREMENT columns for MRDN7788990 container are empty in candidate's table",
+        "html_evidence": "GROSS WT. and MEASUREMENT data cells for MRDN7788990 container are empty (no text) in candidate's table",
+        "correction": "Add missing gross weight and measurement values or confirm source has none. Source has no gross weight/measurement for MRDN7788990, so candidate correctly replicates."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Spacing and arrangement of the SET TEMP and HS CODE lines under Description of Goods",
+        "html_evidence": "SET TEMP and HS CODE are styled with monospace and blue color but line spacing and grouping not exactly same as source",
+        "correction": "Ensure line spacing and grouping of HS CODE and SET TEMP exactly match source's vertical spacing for accurate visual alignment."
+      },
+      {
+        "category": "other",
+        "source_evidence": "Marks below seal on container description (PALLETIZED)",
+        "html_evidence": "Marks text appears smaller but is separate block with margin-top:6px - consistent with source",
+        "correction": "Rendering difference is acceptable."
+      },
+      {
+        "category": "extra_text",
+        "source_evidence": "Footer text is in grey color and not linked in source",
+        "html_evidence": "Footer email is a link with gray color",
+        "correction": "Footer email text should not be a link if source doesn't have link; adjust accordingly."
+      }
+    ]
+  },
+  {
+    "iteration": 3,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "TEL: +54 11 4789 1234",
+        "html_evidence": "TEL: +54 11 4789 1234",
+        "correction": "TEL: +54 11 4789 1234 (match)"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "TEL: +54 11 4789 1234",
+        "html_evidence": "TEL: +54 11 4789 1234",
+        "correction": "No error in this TEL text; confirm text presence correctly."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "TEL: +54 11 4789 1234",
+        "html_evidence": "TEL: +54 11 4789 1234",
+        "correction": "The phone number is correctly extracted as +54 11 4789 1234, no error."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "TEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+        "html_evidence": "TEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+        "correction": "The email is also correctly extracted, no error."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "TEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com",
+        "html_evidence": "TEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com",
+        "correction": "Telephone and email for consignee match."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "TEL: +31 10 123 4567 | EMAIL: dispatch@logitrans.com",
+        "html_evidence": "Tel: +31 10 123 4567 | dispatch@logitrans.com",
+        "correction": "Label capitalized in source as TEL:, candidate has 'Tel:' which is lowercase - mismatch"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "BUENOS AIRES, ARGENTINA",
+        "html_evidence": "BUENOS AIRES, ARGENTINA",
+        "correction": "Place of Receipt matched."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "ROTTERDAM, NETHERLANDS",
+        "html_evidence": "ROTTERDAM, NETHERLANDS",
+        "correction": "Port of Discharge matched."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "MRDN4455667 SEAL: MSK112233",
+        "html_evidence": "MRDN4455667 SEAL: MSK112233",
+        "correction": "Container and seal number correct."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "MRDN7788990 SEAL: MSK445566",
+        "html_evidence": "MRDN7788990 SEAL: MSK445566",
+        "correction": "Container and seal number correct."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "FRESH APPLES STOWAGE AT +2.0 DEGREES CELSIUS",
+        "html_evidence": "FRESH APPLES STOWAGE AT +2.0 DEGREES CELSIUS",
+        "correction": "Goods description matches."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "FRESH PEARS STOWAGE AT +1.0 DEGREES CELSIUS",
+        "html_evidence": "FRESH PEARS STOWAGE AT +1.0 DEGREES CELSIUS",
+        "correction": "Goods description matches."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "GROSS WT. 18,500 KGS / 19,200 KGS",
+        "html_evidence": "18,500 KGS / 19,200 KGS",
+        "correction": "Gross weight is correct but formatting not identical."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "MEASUREMENT 28.00 CBM",
+        "html_evidence": "28.00 CBM",
+        "correction": "Measurement matches with minor layout difference."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Number of Original B/L's: Three (3)",
+        "html_evidence": "NUMBER OF ORIGINAL B/L'S: THREE (3)",
+        "correction": "Minor capitalization difference, text semantically correct."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Freight & Charges section shows OCEAN FREIGHT - COLLECT, THC",
+        "html_evidence": "OCEAN FREIGHT COLLECT THC",
+        "correction": "In HTML 'COLLECT' is styled and on next line but content matches."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Delivery Agent contact TEL: +31 10 123 4567 | EMAIL: dispatch@logitrans.com",
+        "html_evidence": "Tel: +31 10 123 4567 | dispatch@logitrans.com",
+        "correction": "Difference in label case and missing 'EMAIL:' text."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Footer with 'logistica@frutasdelsol.com.ar' email address",
+        "html_evidence": "footer text includes \"logística@frutasdelsol.com.ar\"",
+        "correction": "Candidate footer has 'logística@frutasdelsol.com.ar' with accented i, but source PDF spelling seems 'logistica@frutasdelsol.com.ar' without accent - mismatch in email spelling."
+      }
+    ]
+  },
+  {
+    "iteration": 4,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "TEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+        "html_evidence": "TEL: +54 11 4789 1234 | EMAIL: logística@frutasdelsol.com.ar",
+        "correction": "Correct email to 'logistica@frutasdelsol.com.ar' in HTML."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "TEL: +54 11 4789 1234 • logistica@frutasdelsol.com.ar",
+        "html_evidence": "FRUTAS DEL SOL S.A. · +54 11 4789 1234 · tecnica@frutasdelsol.com.ar",
+        "correction": "Footer email should be 'logistica@frutasdelsol.com.ar' not 'tecnica@frutasdelsol.com.ar'."
+      }
+    ]
+  },
+  {
+    "iteration": 5,
+    "verdict": "match",
+    "errors": []
+  }
+]

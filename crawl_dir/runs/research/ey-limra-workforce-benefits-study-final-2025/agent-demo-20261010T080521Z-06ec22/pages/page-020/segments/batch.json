@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "gpt-4.1-mini",
+  "created_at": "2026-10-10T08:29:49.858489+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "r1",
+      "kind": "infographic",
+      "title": "What matters to employers when selecting an outsourcing provider",
+      "source_png": "figure-01-r1.png",
+      "bounding_box": [
+        18,
+        24,
+        1512,
+        832
+      ],
+      "output_directory": "figure-01",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "layout",
+              "source_evidence": "The authoritative PDF page arranges the six key points in a two-row layout (three on top, three on bottom), while the HTML renders them in two lines with four items on top row and two on bottom.",
+              "html_evidence": "The HTML section uses flex-wrap with articles arranged as 4-top/2-bottom rather than 3-top/3-bottom as in source.",
+              "correction": "Adjust CSS or HTML structure so that the six items appear in two rows with three items each, matching the PDF's symmetrical layout."
+            }
+          ],
+          "render_latency_ms": 547.8
+        },
+        {
+          "iteration": 2,
+          "html": "figure-01/iteration-02.html",
+          "rendered_png": "figure-01/iteration-02.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "layout",
+              "source_evidence": "In the source PDF, the six percentage blocks (38%, 38%, 37%, 35%, 35%, 31%) are arranged in two rows and three columns across the page with spacing and background image behind, making all text easy to read with a good visual group.",
+              "html_evidence": "In the candidate HTML, the six percentage blocks are arranged vertically in two columns but the overall layout and spacing look like a vertical stack rather than the horizontal row and column arrangement of the source PDF. The background is solid dark without the source's background building image. This layout difference reduces readability and deviates from the original visual design.",
+              "correction": "Update the HTML layout to display the six percentage blocks in two rows and three columns horizontally, replicating the spacing and visual grouping from the source PDF. Add the background image behind the text to match the source's style."
+            }
+          ],
+          "render_latency_ms": 420.8
+        },
+        {
+          "iteration": 3,
+          "html": "figure-01/iteration-03.html",
+          "rendered_png": "figure-01/iteration-03.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 1288.2
+        }
+      ],
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-03.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 1,
+    "failed": 0,
+    "total_iterations": 3,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-10-10T08:30:23.147742+00:00"
+}

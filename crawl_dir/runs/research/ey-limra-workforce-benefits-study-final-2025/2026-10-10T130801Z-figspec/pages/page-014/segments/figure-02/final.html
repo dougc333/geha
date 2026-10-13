@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Figure 9</title>
+<style>
+:root { color-scheme: light; }
+body { font-family: Arial, Helvetica, sans-serif; color: #2e2e38; background: #fff;
+       margin: 0; padding: 24px 16px; line-height: 1.45; }
+main { max-width: 960px; margin: 0 auto; }
+h1 { font-size: 34px; font-weight: 400; margin: 0 0 8px; }
+h2 { font-size: 22px; margin: 0 0 16px; }
+h3 { font-size: 16px; margin: 20px 0 8px; }
+p, li { font-size: 15px; }
+.fig-group > header .kicker, figure.chart .kicker { font-size: 12px; font-weight: bold; margin: 0; }
+.fig-group > header h2 { font-size: 19px; margin: 2px 0 16px; }
+.fig-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+figure.chart { margin: 28px 0; }
+figure.chart figcaption .title { font-size: 19px; font-weight: bold; margin: 2px 0 6px; }
+figure.chart .question { font-size: 14px; margin: 0 0 12px; }
+figure.chart .notes { font-size: 12px; font-style: italic; color: #555; margin: 8px 0 0; }
+.legend { list-style: none; margin: 8px 0 14px; padding: 6px 10px; border: 1px solid #ccc;
+          display: inline-flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13px; }
+.legend li { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.sw { width: 10px; height: 10px; display: inline-block; flex: none; }
+.pies { display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-around; }
+.pie { text-align: center; }
+.pie h4 { margin: 0 0 4px; font-size: 15px; }
+.pie svg { width: 220px; max-width: 100%; font-size: 9px; }
+.hbars { display: grid; grid-template-columns: minmax(120px, 42%) 1fr; gap: 4px 10px;
+         font-size: 12px; align-items: center; }
+.hbars .lab { text-align: right; }
+.hbars .grp { grid-column: 1 / -1; font-weight: bold; font-size: 14px; margin-top: 10px;
+              border-bottom: 1px solid #2e2e38; }
+.track { display: flex; height: 16px; }
+.track.multi { flex-direction: column; height: auto; gap: 2px; }
+.track .seg { display: flex; align-items: center; justify-content: center; overflow: hidden;
+              white-space: nowrap; font-size: 11px; }
+.bar-line { display: flex; align-items: center; gap: 4px; height: 12px; font-size: 11px; }
+.bar-line .seg { height: 100%; }
+.vbars { display: flex; gap: 28px; align-items: flex-end; justify-content: center;
+         padding: 0 40px; }
+.vcol { display: flex; flex-direction: column; align-items: center; width: 120px; }
+.vstack { position: relative; width: 70px; height: 220px; display: flex;
+          flex-direction: column-reverse; }
+.vstack .seg { display: flex; align-items: center; justify-content: center; font-size: 12px; }
+.vstack .out { position: absolute; left: 76px; font-size: 12px; white-space: nowrap; }
+.vstack .bracket { position: absolute; border: 1px solid #2e2e38; width: 8px; font-size: 12px; }
+.vstack .bracket.left { left: -14px; border-right: none; }
+.vstack .bracket.right { right: -14px; border-left: none; }
+.vstack .bracket span { position: absolute; top: 50%; transform: translateY(-50%); }
+.vstack .bracket.left span { right: 12px; }
+.vstack .bracket.right span { left: 12px; }
+.vcol .cat { font-size: 12px; text-align: center; margin-top: 6px; }
+.vcol .callout { font-size: 12px; margin-bottom: 4px; text-align: center; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px;
+         margin: 0; }
+.stats div { text-align: center; }
+.stats dd { font-size: 40px; font-weight: bold; margin: 0; }
+.stats dt { font-size: 14px; }
+table.data { border-collapse: collapse; margin: 14px 0 0; font-size: 12px; }
+table.data caption { text-align: left; font-size: 12px; color: #555; padding-bottom: 4px; }
+table.data th, table.data td { border: 1px solid #ddd; padding: 3px 8px; text-align: left; }
+table.data td { text-align: right; }
+table.data tbody th[scope=rowgroup] { background: #f2f2f2; }
+table.heat td { text-align: center; }
+.harveys { display: flex; flex-wrap: wrap; gap: 12px 20px; justify-content: center; }
+.harvey { display: flex; flex-direction: column; align-items: center; width: 80px;
+          font-size: 12px; text-align: center; }
+svg.cycle { display: block; width: 280px; max-width: 100%; margin: 8px auto; }
+.cycle-list { font-size: 14px; }
+ol.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px 28px;
+           padding-left: 1.4em; }
+ol.steps > li::marker { font-weight: bold; color: #b8a400; }
+ol.steps h4 { margin: 0 0 4px; font-size: 16px; }
+ol.steps ul { margin: 0; padding-left: 1.1em; }
+.quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.quotes blockquote { margin: 0; padding: 8px 14px; border-left: 4px solid #FFE600; font-family: Georgia, serif; }
+</style>
+</head>
+<body>
+<main>
+<figure class="chart" id="fig9" data-figure="Figure 9"><figcaption><p class="kicker">Figure 9</p><p class="title">Employer opinions are mixed about primary responsibility for education and awareness that employees need to make confident enrollment decisions.</p><p class="question"><strong>QUESTION:</strong> Who do you think should be primarily accountable for providing the education and awareness needed for employees to make confident enrollment decisions?</p></figcaption><ul class="legend" aria-hidden="true"><li><span class="sw" style="background:#FFE600"></span>2025</li><li><span class="sw" style="background:#C4C4CD"></span>2023</li></ul><div class="hbars" aria-hidden="true"><div class="lab">My company</div><div class="track multi"><div class="bar-line"><span class="seg" style="width:82.50%;background:#FFE600;color:#2e2e38" title="2025: 33%"></span><span>33%</span></div><div class="bar-line"><span class="seg" style="width:60.00%;background:#C4C4CD;color:#2e2e38" title="2023: 24%"></span><span>24%</span></div></div><div class="lab">Insurance carrier(s)</div><div class="track multi"><div class="bar-line"><span class="seg" style="width:65.00%;background:#FFE600;color:#2e2e38" title="2025: 26%"></span><span>26%</span></div><div class="bar-line"><span class="seg" style="width:65.00%;background:#C4C4CD;color:#2e2e38" title="2023: 26%"></span><span>26%</span></div></div><div class="lab">Broker/benefits advisor</div><div class="track multi"><div class="bar-line"><span class="seg" style="width:57.50%;background:#FFE600;color:#2e2e38" title="2025: 23%"></span><span>23%</span></div><div class="bar-line"><span class="seg" style="width:82.50%;background:#C4C4CD;color:#2e2e38" title="2023: 33%"></span><span>33%</span></div></div><div class="lab">Benefits technology platform</div><div class="track multi"><div class="bar-line"><span class="seg" style="width:35.00%;background:#FFE600;color:#2e2e38" title="2025: 14%"></span><span>14%</span></div><div class="bar-line"><span class="seg" style="width:30.00%;background:#C4C4CD;color:#2e2e38" title="2023: 12%"></span><span>12%</span></div></div><div class="lab">No preference</div><div class="track multi"><div class="bar-line"><span class="seg" style="width:10.00%;background:#FFE600;color:#2e2e38" title="2025: 4%"></span><span>4%</span></div><div class="bar-line"><span class="seg" style="width:15.00%;background:#C4C4CD;color:#2e2e38" title="2023: 6%"></span><span>6%</span></div></div></div><table class="data"><caption>Figure 9 data</caption><thead><tr><th scope="col">Accountable party</th><th scope="col">2025</th><th scope="col">2023</th></tr></thead><tbody><tr><th scope="row">My company</th><td>33%</td><td>24%</td></tr><tr><th scope="row">Insurance carrier(s)</th><td>26%</td><td>26%</td></tr><tr><th scope="row">Broker/benefits advisor</th><td>23%</td><td>33%</td></tr><tr><th scope="row">Benefits technology platform</th><td>14%</td><td>12%</td></tr><tr><th scope="row">No preference</th><td>4%</td><td>6%</td></tr></tbody></table></figure>
+</main>
+</body>
+</html>

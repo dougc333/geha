@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "gpt-4.1-mini",
+  "created_at": "2026-10-10T08:20:22.351157+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "running",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "fig1",
+      "kind": "figure",
+      "title": "Brokers' views on the rising demand for wellness benefits and the importance of driving utilization",
+      "source_png": "figure-01-fig1.png",
+      "bounding_box": [
+        0,
+        0,
+        1528,
+        1978
+      ],
+      "output_directory": "figure-01",
+      "status": "running",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 4,
+          "errors": [
+            {
+              "category": "missing_text",
+              "source_evidence": "The page header with the title 'Brokers' views on the rising demand for wellness benefits and the importance of driving utilization' is shown over a blurred background image of people and plants.",
+              "html_evidence": "<section class=\"quote-section\" aria-label=\"Brokers' views on wellness benefits demand and utilization\">\n  <h1>Brokers’ views on the rising demand for wellness benefits and the importance of driving utilization</h1>\n  <div class=\"quotes\">\n    <blockquote class=\"quote\">\n      Platforms that are winning are not just helping employees choose benefits but also helping them use benefits.\n    </blockquote>\n    <blockquote class=\"quote center\">\n      We need to stop adding additional coverages with low benefits utilization and shift to adding conditions that drive higher utilization.\n    </blockquote>\n    <blockquote class=\"quote\">\n      The industry needs to meet the new desire for lifestyle and wellness.\n    </blockquote>\n  </div>\n</section>",
+              "correction": "Add the background image behind the header and quotes as in the PDF. The background should be darkened behind the text to maintain readability and match the style. This is a major visual design element missing."
+            },
+            {
+              "category": "missing_text",
+              "source_evidence": "Three visual quotes shown with stylized yellow quotes marks and dividing lines between the quotes.",
+              "html_evidence": "Missing visual quote style elements and the dividing vertical line between quotes, especially around the center quote.",
+              "correction": "Add the yellow styled quote marks before each quote as in the PDF and add vertical dividing lines separating the second quote from the first and third, consistent with the source."
+            },
+            {
+              "category": "missing_text",
+              "source_evidence": "The grid layout with three quotes horizontally spaced on a colored background, each quote contained and visually balanced.",
+              "html_evidence": "Quotes rendered stacked with large side margins and no visual background or spacing consistent with the grid layout in the source.",
+              "correction": "Implement the horizontal layout with three columns for the three quotes at the top, spaced evenly with the background image to replicate the source appearance."
+            },
+            {
+              "category": "extra_text",
+              "source_evidence": "Photo of a person at a plant-filled wooden table at bottom right area of page.",
+              "html_evidence": "<figure class=\"image-container\">\n    <img src=\"\" alt=\"Person using laptop at a plant-filled desk in a bright indoor setting\" />\n  </figure>",
+              "correction": "Image container is present but the source image is missing. The candidate's image src is empty, so the person and plants photo is missing. Fill the image src attribute with the correct photo file or embed the image so it is visible as in the source."
+            }
+          ],
+          "render_latency_ms": 454.5
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 0,
+    "failed": 0,
+    "total_iterations": 1,
+    "remaining_errors": 0
+  }
+}

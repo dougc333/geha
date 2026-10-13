@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Figure 6</title>
+<style>
+:root { color-scheme: light; }
+body { font-family: Arial, Helvetica, sans-serif; color: #2e2e38; background: #fff;
+       margin: 0; padding: 24px 16px; line-height: 1.45; }
+main { max-width: 960px; margin: 0 auto; }
+h1 { font-size: 34px; font-weight: 400; margin: 0 0 8px; }
+h2 { font-size: 22px; margin: 0 0 16px; }
+h3 { font-size: 16px; margin: 20px 0 8px; }
+p, li { font-size: 15px; }
+.fig-group > header .kicker, figure.chart .kicker { font-size: 12px; font-weight: bold; margin: 0; }
+.fig-group > header h2 { font-size: 19px; margin: 2px 0 16px; }
+.fig-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+figure.chart { margin: 28px 0; }
+figure.chart figcaption .title { font-size: 19px; font-weight: bold; margin: 2px 0 6px; }
+figure.chart .question { font-size: 14px; margin: 0 0 12px; }
+figure.chart .notes { font-size: 12px; font-style: italic; color: #555; margin: 8px 0 0; }
+.legend { list-style: none; margin: 8px 0 14px; padding: 6px 10px; border: 1px solid #ccc;
+          display: inline-flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13px; }
+.legend li { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.sw { width: 10px; height: 10px; display: inline-block; flex: none; }
+.pies { display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-around; }
+.pie { text-align: center; }
+.pie h4 { margin: 0 0 4px; font-size: 15px; }
+.pie svg { width: 220px; max-width: 100%; font-size: 9px; }
+.hbars { display: grid; grid-template-columns: minmax(120px, 42%) 1fr; gap: 4px 10px;
+         font-size: 12px; align-items: center; }
+.hbars .lab { text-align: right; }
+.hbars .grp { grid-column: 1 / -1; font-weight: bold; font-size: 14px; margin-top: 10px;
+              border-bottom: 1px solid #2e2e38; }
+.track { display: flex; height: 16px; }
+.track.multi { flex-direction: column; height: auto; gap: 2px; }
+.track .seg { display: flex; align-items: center; justify-content: center; overflow: hidden;
+              white-space: nowrap; font-size: 11px; }
+.bar-line { display: flex; align-items: center; gap: 4px; height: 12px; font-size: 11px; }
+.bar-line .seg { height: 100%; }
+.vbars { display: flex; gap: 28px; align-items: flex-end; justify-content: center;
+         padding: 0 40px; }
+.vcol { display: flex; flex-direction: column; align-items: center; width: 120px; }
+.vstack { position: relative; width: 70px; height: 220px; display: flex;
+          flex-direction: column-reverse; }
+.vstack .seg { display: flex; align-items: center; justify-content: center; font-size: 12px; }
+.vstack .out { position: absolute; left: 76px; font-size: 12px; white-space: nowrap; }
+.vstack .bracket { position: absolute; border: 1px solid #2e2e38; width: 8px; font-size: 12px; }
+.vstack .bracket.left { left: -14px; border-right: none; }
+.vstack .bracket.right { right: -14px; border-left: none; }
+.vstack .bracket span { position: absolute; top: 50%; transform: translateY(-50%); }
+.vstack .bracket.left span { right: 12px; }
+.vstack .bracket.right span { left: 12px; }
+.vcol .cat { font-size: 12px; text-align: center; margin-top: 6px; }
+.vcol .callout { font-size: 12px; margin-bottom: 4px; text-align: center; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px;
+         margin: 0; }
+.stats div { text-align: center; }
+.stats dd { font-size: 40px; font-weight: bold; margin: 0; }
+.stats dt { font-size: 14px; }
+table.data { border-collapse: collapse; margin: 14px 0 0; font-size: 12px; }
+table.data caption { text-align: left; font-size: 12px; color: #555; padding-bottom: 4px; }
+table.data th, table.data td { border: 1px solid #ddd; padding: 3px 8px; text-align: left; }
+table.data td { text-align: right; }
+table.data tbody th[scope=rowgroup] { background: #f2f2f2; }
+table.heat td { text-align: center; }
+.harveys { display: flex; flex-wrap: wrap; gap: 12px 20px; justify-content: center; }
+.harvey { display: flex; flex-direction: column; align-items: center; width: 80px;
+          font-size: 12px; text-align: center; }
+svg.cycle { display: block; width: 280px; max-width: 100%; margin: 8px auto; }
+.cycle-list { font-size: 14px; }
+ol.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px 28px;
+           padding-left: 1.4em; }
+ol.steps > li::marker { font-weight: bold; color: #b8a400; }
+ol.steps h4 { margin: 0 0 4px; font-size: 16px; }
+ol.steps ul { margin: 0; padding-left: 1.1em; }
+.quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.quotes blockquote { margin: 0; padding: 8px 14px; border-left: 4px solid #FFE600; font-family: Georgia, serif; }
+</style>
+</head>
+<body>
+<main>
+<figure class="chart" id="fig6" data-figure="Figure 6"><figcaption><p class="kicker">Figure 6</p><p class="title">Employee interest in benefits varies across generations.</p><p class="question"><strong>QUESTION:</strong> Regardless of whether the benefit is currently available to you at work, how interested would you be in having your employer offer it in the future?</p></figcaption><table class="data heat"><caption>Figure 6 (heat map: Least interest → Most interest)</caption><thead><tr><th scope="col">Benefit</th><th scope="col">Gen Z</th><th scope="col">Millennials</th><th scope="col">Gen X</th><th scope="col">Baby boomers</th></tr></thead><tbody><tr><th scope="row">Medical insurance</th><td style="background:#A1DCB7">67%</td><td style="background:#7FCF9C">75%</td><td style="background:#50BE78">86%</td><td style="background:#6AC88C">80%</td></tr><tr><th scope="row">Dental insurance</th><td style="background:#BBE6CA">61%</td><td style="background:#8CD4A6">72%</td><td style="background:#7BCE99">76%</td><td style="background:#83D1A0">74%</td></tr><tr><th scope="row">Vision insurance</th><td style="background:#EAF7EF">50%</td><td style="background:#BBE6CA">61%</td><td style="background:#99D9B0">69%</td><td style="background:#B2E2C4">63%</td></tr><tr><th scope="row">Paid family or medical leave</th><td style="background:#D9F1E1">54%</td><td style="background:#CCECD7">57%</td><td style="background:#D9F1E1">54%</td><td style="background:#FEF8F8">43%</td></tr><tr><th scope="row">Life insurance</th><td style="background:#F2FAF5">48%</td><td style="background:#E1F4E8">52%</td><td style="background:#DDF2E5">53%</td><td style="background:#FDEDED">40%</td></tr><tr><th scope="row">Career development</th><td style="background:#FDEDED">40%</td><td style="background:#FBFDFC">46%</td><td style="background:#FCE3E3">37%</td><td style="background:#F8B8B8">25%</td></tr><tr><th scope="row">Physical health wellness programs</th><td style="background:#FDEAEA">39%</td><td style="background:#FDEAEA">39%</td><td style="background:#FBD8D8">34%</td><td style="background:#FAD1D1">32%</td></tr><tr><th scope="row">Short-term disability insurance</th><td style="background:#F7B5B5">24%</td><td style="background:#FBDCDC">35%</td><td style="background:#FEF1F1">41%</td><td style="background:#FCE3E3">37%</td></tr><tr><th scope="row">Long-term disability insurance</th><td style="background:#F7AEAE">22%</td><td style="background:#FBDCDC">35%</td><td style="background:#FDEDED">40%</td><td style="background:#FEF1F1">41%</td></tr><tr><th scope="row">Long-term care insurance</th><td style="background:#FACACA">30%</td><td style="background:#FACDCD">31%</td><td style="background:#FCDFDF">36%</td><td style="background:#FEF4F4">42%</td></tr><tr><th scope="row">Accident insurance</th><td style="background:#FDEAEA">39%</td><td style="background:#FBD8D8">34%</td><td style="background:#FBD5D5">33%</td><td style="background:#FAD1D1">32%</td></tr><tr><th scope="row">Critical illness insurance</th><td style="background:#F9C6C6">29%</td><td style="background:#FBD5D5">33%</td><td style="background:#FBD8D8">34%</td><td style="background:#FBD5D5">33%</td></tr><tr><th scope="row">Emergency savings benefit</th><td style="background:#FEF1F1">41%</td><td style="background:#FBD8D8">34%</td><td style="background:#FACACA">30%</td><td style="background:#F5A0A0">18%</td></tr><tr><th scope="row">Identity theft protection</th><td style="background:#FCE3E3">37%</td><td style="background:#FACDCD">31%</td><td style="background:#F8BFBF">27%</td><td style="background:#FAD1D1">32%</td></tr><tr><th scope="row">Mental health or substance abuse treatment benefits</th><td style="background:#FFFFFF">45%</td><td style="background:#FBD5D5">33%</td><td style="background:#F7B5B5">24%</td><td style="background:#F5A3A3">19%</td></tr><tr><th scope="row">Employee assistance programs</th><td style="background:#F9C3C3">28%</td><td style="background:#FCDFDF">36%</td><td style="background:#F9C3C3">28%</td><td style="background:#F5A3A3">19%</td></tr><tr><th scope="row">Financial wellness programs</th><td style="background:#FCDFDF">36%</td><td style="background:#FBD5D5">33%</td><td style="background:#F8BCBC">26%</td><td style="background:#F59C9C">17%</td></tr><tr><th scope="row">Telemedicine benefits</th><td style="background:#FACDCD">31%</td><td style="background:#F9C6C6">29%</td><td style="background:#FACACA">30%</td><td style="background:#F6A7A7">20%</td></tr><tr><th scope="row">Tuition assistance</th><td style="background:#FDEDED">40%</td><td style="background:#FAD1D1">32%</td><td style="background:#F7B5B5">24%</td><td style="background:#F38787">11%</td></tr><tr><th scope="row">Student loan assistance/repayment</th><td style="background:#FEF1F1">41%</td><td style="background:#FAD1D1">32%</td><td style="background:#F5A3A3">19%</td><td style="background:#F17979">7%</td></tr><tr><th scope="row">Hospital indemnity insurance</th><td style="background:#FACACA">30%</td><td style="background:#F7B5B5">24%</td><td style="background:#F8BFBF">27%</td><td style="background:#F7B5B5">24%</td></tr><tr><th scope="row">Caregiving benefits</th><td style="background:#FACACA">30%</td><td style="background:#F8BFBF">27%</td><td style="background:#F6A7A7">20%</td><td style="background:#F7AEAE">22%</td></tr><tr><th scope="row">Legal services plan</th><td style="background:#F7B5B5">24%</td><td style="background:#F8BCBC">26%</td><td style="background:#F6AAAA">21%</td><td style="background:#F5A3A3">19%</td></tr><tr><th scope="row">Debt management counseling</th><td style="background:#FBD8D8">34%</td><td style="background:#F7B5B5">24%</td><td style="background:#F59C9C">17%</td><td style="background:#F28080">9%</td></tr><tr><th scope="row">Pet insurance</th><td style="background:#F7B1B1">23%</td><td style="background:#F5A3A3">19%</td><td style="background:#F38A8A">12%</td><td style="background:#F28080">9%</td></tr><tr><th scope="row">Societal benefits</th><td style="background:#F7AEAE">22%</td><td style="background:#F49595">15%</td><td style="background:#F28080">9%</td><td style="background:#F06E6E">4%</td></tr></tbody></table><p class="notes">Note: Percent of employees who are “very” or “extremely” interested in having their employer offer the benefit in the future.</p></figure>
+</main>
+</body>
+</html>

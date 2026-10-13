@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Figure 8</title>
+<style>
+:root { color-scheme: light; }
+body { font-family: Arial, Helvetica, sans-serif; color: #2e2e38; background: #fff;
+       margin: 0; padding: 24px 16px; line-height: 1.45; }
+main { max-width: 960px; margin: 0 auto; }
+h1 { font-size: 34px; font-weight: 400; margin: 0 0 8px; }
+h2 { font-size: 22px; margin: 0 0 16px; }
+h3 { font-size: 16px; margin: 20px 0 8px; }
+p, li { font-size: 15px; }
+.fig-group > header .kicker, figure.chart .kicker { font-size: 12px; font-weight: bold; margin: 0; }
+.fig-group > header h2 { font-size: 19px; margin: 2px 0 16px; }
+.fig-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+figure.chart { margin: 28px 0; }
+figure.chart figcaption .title { font-size: 19px; font-weight: bold; margin: 2px 0 6px; }
+figure.chart .question { font-size: 14px; margin: 0 0 12px; }
+figure.chart .notes { font-size: 12px; font-style: italic; color: #555; margin: 8px 0 0; }
+.legend { list-style: none; margin: 8px 0 14px; padding: 6px 10px; border: 1px solid #ccc;
+          display: inline-flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13px; }
+.legend li { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.sw { width: 10px; height: 10px; display: inline-block; flex: none; }
+.pies { display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-around; }
+.pie { text-align: center; }
+.pie h4 { margin: 0 0 4px; font-size: 15px; }
+.pie svg { width: 220px; max-width: 100%; font-size: 9px; }
+.hbars { display: grid; grid-template-columns: minmax(120px, 42%) 1fr; gap: 4px 10px;
+         font-size: 12px; align-items: center; }
+.hbars .lab { text-align: right; }
+.hbars .grp { grid-column: 1 / -1; font-weight: bold; font-size: 14px; margin-top: 10px;
+              border-bottom: 1px solid #2e2e38; }
+.track { display: flex; height: 16px; }
+.track.multi { flex-direction: column; height: auto; gap: 2px; }
+.track .seg { display: flex; align-items: center; justify-content: center; overflow: hidden;
+              white-space: nowrap; font-size: 11px; }
+.bar-line { display: flex; align-items: center; gap: 4px; height: 12px; font-size: 11px; }
+.bar-line .seg { height: 100%; }
+.vbars { display: flex; gap: 28px; align-items: flex-end; justify-content: center;
+         padding: 0 40px; }
+.vcol { display: flex; flex-direction: column; align-items: center; width: 120px; }
+.vstack { position: relative; width: 70px; height: 220px; display: flex;
+          flex-direction: column-reverse; }
+.vstack .seg { display: flex; align-items: center; justify-content: center; font-size: 12px; }
+.vstack .out { position: absolute; left: 76px; font-size: 12px; white-space: nowrap; }
+.vstack .bracket { position: absolute; border: 1px solid #2e2e38; width: 8px; font-size: 12px; }
+.vstack .bracket.left { left: -14px; border-right: none; }
+.vstack .bracket.right { right: -14px; border-left: none; }
+.vstack .bracket span { position: absolute; top: 50%; transform: translateY(-50%); }
+.vstack .bracket.left span { right: 12px; }
+.vstack .bracket.right span { left: 12px; }
+.vcol .cat { font-size: 12px; text-align: center; margin-top: 6px; }
+.vcol .callout { font-size: 12px; margin-bottom: 4px; text-align: center; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px;
+         margin: 0; }
+.stats div { text-align: center; }
+.stats dd { font-size: 40px; font-weight: bold; margin: 0; }
+.stats dt { font-size: 14px; }
+table.data { border-collapse: collapse; margin: 14px 0 0; font-size: 12px; }
+table.data caption { text-align: left; font-size: 12px; color: #555; padding-bottom: 4px; }
+table.data th, table.data td { border: 1px solid #ddd; padding: 3px 8px; text-align: left; }
+table.data td { text-align: right; }
+table.data tbody th[scope=rowgroup] { background: #f2f2f2; }
+table.heat td { text-align: center; }
+.harveys { display: flex; flex-wrap: wrap; gap: 12px 20px; justify-content: center; }
+.harvey { display: flex; flex-direction: column; align-items: center; width: 80px;
+          font-size: 12px; text-align: center; }
+svg.cycle { display: block; width: 280px; max-width: 100%; margin: 8px auto; }
+.cycle-list { font-size: 14px; }
+ol.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px 28px;
+           padding-left: 1.4em; }
+ol.steps > li::marker { font-weight: bold; color: #b8a400; }
+ol.steps h4 { margin: 0 0 4px; font-size: 16px; }
+ol.steps ul { margin: 0; padding-left: 1.1em; }
+.quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.quotes blockquote { margin: 0; padding: 8px 14px; border-left: 4px solid #FFE600; font-family: Georgia, serif; }
+</style>
+</head>
+<body>
+<main>
+<figure class="chart" id="fig8" data-figure="Figure 8"><figcaption><p class="kicker">Figure 8</p><p class="title">Employers choose brokers based on quality service, enhanced strategies and access to benefits.</p><p class="question"><strong>QUESTION:</strong> What are the most important factors your company considers when choosing a broker/benefits advisor to work with for insurance benefits?</p></figcaption><div class="hbars" aria-hidden="true"><div class="lab">Quality of service</div><div class="track multi"><div class="bar-line"><span class="seg" style="width:81.82%;background:#FFE600;color:#2e2e38" title="Employers: 45%"></span><span>45%</span></div></div><div class="lab">Can provide all the insurance benefits my company needs</div><div class="track multi"><div class="bar-line"><span class="seg" style="width:70.91%;background:#FFE600;color:#2e2e38" title="Employers: 39%"></span><span>39%</span></div></div><div class="lab">Helps our company evaluate/enhance its benefits strategy</div><div class="track multi"><div class="bar-line"><span class="seg" style="width:63.64%;background:#FFE600;color:#2e2e38" title="Employers: 35%"></span><span>35%</span></div></div><div class="lab">Reputation or experience</div><div class="track multi"><div class="bar-line"><span class="seg" style="width:56.36%;background:#FFE600;color:#2e2e38" title="Employers: 31%"></span><span>31%</span></div></div><div class="lab">Helps communicate benefits options to employees/provides education</div><div class="track multi"><div class="bar-line"><span class="seg" style="width:54.55%;background:#FFE600;color:#2e2e38" title="Employers: 30%"></span><span>30%</span></div></div><div class="lab">Range of products/services supported</div><div class="track multi"><div class="bar-line"><span class="seg" style="width:49.09%;background:#FFE600;color:#2e2e38" title="Employers: 27%"></span><span>27%</span></div></div><div class="lab">Provides recommendations and guidance on benefits technology</div><div class="track multi"><div class="bar-line"><span class="seg" style="width:40.00%;background:#FFE600;color:#2e2e38" title="Employers: 22%"></span><span>22%</span></div></div><div class="lab">Helps our company understand/address legal and regulatory issues</div><div class="track multi"><div class="bar-line"><span class="seg" style="width:36.36%;background:#FFE600;color:#2e2e38" title="Employers: 20%"></span><span>20%</span></div></div><div class="lab">Familiarity with our company</div><div class="track multi"><div class="bar-line"><span class="seg" style="width:27.27%;background:#FFE600;color:#2e2e38" title="Employers: 15%"></span><span>15%</span></div></div><div class="lab">Carriers represented</div><div class="track multi"><div class="bar-line"><span class="seg" style="width:25.45%;background:#FFE600;color:#2e2e38" title="Employers: 14%"></span><span>14%</span></div></div><div class="lab">Has access to a team of specialists to address more complex needs</div><div class="track multi"><div class="bar-line"><span class="seg" style="width:21.82%;background:#FFE600;color:#2e2e38" title="Employers: 12%"></span><span>12%</span></div></div><div class="lab">Able to provide benefits technology</div><div class="track multi"><div class="bar-line"><span class="seg" style="width:14.55%;background:#FFE600;color:#2e2e38" title="Employers: 8%"></span><span>8%</span></div></div><div class="lab">Other</div><div class="track multi"><div class="bar-line"><span class="seg" style="width:1.82%;background:#FFE600;color:#2e2e38" title="Employers: 1%"></span><span>1%</span></div></div></div><table class="data"><caption>Figure 8 data</caption><thead><tr><th scope="col">Factor</th><th scope="col">Employers</th></tr></thead><tbody><tr><th scope="row">Quality of service</th><td>45%</td></tr><tr><th scope="row">Can provide all the insurance benefits my company needs</th><td>39%</td></tr><tr><th scope="row">Helps our company evaluate/enhance its benefits strategy</th><td>35%</td></tr><tr><th scope="row">Reputation or experience</th><td>31%</td></tr><tr><th scope="row">Helps communicate benefits options to employees/provides education</th><td>30%</td></tr><tr><th scope="row">Range of products/services supported</th><td>27%</td></tr><tr><th scope="row">Provides recommendations and guidance on benefits technology</th><td>22%</td></tr><tr><th scope="row">Helps our company understand/address legal and regulatory issues</th><td>20%</td></tr><tr><th scope="row">Familiarity with our company</th><td>15%</td></tr><tr><th scope="row">Carriers represented</th><td>14%</td></tr><tr><th scope="row">Has access to a team of specialists to address more complex needs</th><td>12%</td></tr><tr><th scope="row">Able to provide benefits technology</th><td>8%</td></tr><tr><th scope="row">Other</th><td>1%</td></tr></tbody></table></figure>
+</main>
+</body>
+</html>

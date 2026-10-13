@@ -1,0 +1,80 @@
+{
+  "status": "failed",
+  "source_sha256": "bb69da6f9072e0c2c16a675bc38e535adff1cbdc2c33c2042eb2d1d7021f16ef",
+  "page_count": 1,
+  "chunk_count": 4,
+  "table_count": 3,
+  "structural_errors": [
+    {
+      "page": 1,
+      "issue": "visual_verification_failed",
+      "verdict": "mismatch",
+      "errors": [
+        {
+          "category": "missing_text",
+          "source_evidence": "CONSIGNEE (NEGOTIABLE ONLY IF CONSIGNED \"TO ORDER\")\\nFRESH FRUIT IMPORTERS B.V.\\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands\\nTEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com",
+          "html_evidence": "TEL: <a href=\"tel:+15551234567\" class=\"tel\">+1 (555) 123-4567</a> | EMAIL: <a href=\"mailto:billing@techcorp.com\" class=\"email\">billing@techcorp.com</a>",
+          "correction": "The text is present but the candidate HTML misses comma after 'DB' and has 'Handelsweg 12, 2988 DB Ridderkerk, Netherlands' instead of 'Handelsweg 12, 2988 DB Ridderkerk, Netherlands'. Confirm comma placement and spacing as per original."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "NOTIFY PARTY (NO RESPONSIBILITY FOR FAILURE TO NOTIFY)\\nFRESH FRUIT IMPORTERS B.V.\\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands\\nTEL: +31 10 123 4567 | EMAIL: dispatch@logitrans.com",
+          "html_evidence": "TEL: <a href=\"tel:+31101234567\" class=\"tel\">+31 10 123 4567</a> | EMAIL: <a href=\"mailto:dispatch@logitrans.com\" class=\"email\">dispatch@logitrans.com</a>",
+          "correction": "The candidate HTML has 'Handelsweg 12, 2988 DB Ridderkerk, Netherlands' but original shows line break after each part. Confirm line break or separate address lines as original."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "DELIVERY AGENT\\nLogiTrans Global\\n88 Harbor Road, Rotterdam, 3011 AA\\nTel: +31 10 123 4567 | dispatch@logitrans.com",
+          "html_evidence": "LogiTrans Global<br />88 Harbor Road, Rotterdam, 3011 AA<br />Tel: <a href=\"tel:+31101234567\" class=\"tel\">+31 10 123 4567</a><br />Email: <a href=\"mailto:dispatch@logitrans.com\" class=\"email\">dispatch@logitrans.com</a>",
+          "correction": "Candidate HTML shows correct text but splits 'Tel:' and 'Email:' into separate lines; original has them on a single line. Adjust layout for exact matching."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "20 PALLETS STC:\\nFRESH PEARS\\nSTOWAGE AT +1.0 DEGREES CELSIUS\\nPackaging: PALLETS\\nHS CODE: 08083090\\nSET TEMP: +1°C",
+          "html_evidence": "20 PALLETS STC:<br />FRESH FRUIT<br /><br /><strong>FRESH APPLES</strong><br /><strong>STOWAGE AT +2.0 DEGREES CELSIUS</strong><br /><span class=\"inline-italic\">Packaging: PALLETS</span><br /><br /><span class=\"cargo-hscode\">HS CODE: 08081080</span><br /><span class=\"blue-text\">SET TEMP: +2°C</span><br /><br /><hr style=\"border:0.8px solid #000; margin: 1.2rem 0;\" /><br />20 PALLETS STC:<br />FRESH FRUIT<br /><br /><strong>FRESH PEARS</strong><br /><strong>STOWAGE AT +1.0 DEGREES CELSIUS</strong><br /><span class=\"inline-italic\">Packaging: PALLETS</span><br /><br /><span class=\"cargo-hscode\">HS CODE: 08083090</span><br /><span class=\"blue-text\">SET TEMP: +1°C</span>",
+          "correction": "Candidate HTML includes all description text for apples and pears but the original's '20 PALLETS STC:' and 'FRESH FRUIT' lines are separated differently. Candidate misses an empty line after the hr and may have slightly different spacing. Suggest accurately replicating line breaks as in original."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "FREIGHT & CHARGES\\nOCEAN FREIGHT\\nCOLLECT\\nTHC",
+          "html_evidence": "<div class=\"freight-charges\" aria-label=\"Freight charges and total number of packages\">\n  <div aria-label=\"Freight and charges details\" style=\"display:flex; flex-direction: column; justify-content: center;\">\n    <div><strong>OCEAN FREIGHT</strong></div>\n    <div>COLLECT</div>\n    <div><strong>THC</strong></div>\n  </div>",
+          "correction": "Original has 'FREIGHT & CHARGES' as label for section, candidate HTML omits the '& CHARGES' part as a label. This is a missing text error."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "FREIGHT & CHARGES\\nOCEAN FREIGHT\\nCOLLECT\\nTHC",
+          "html_evidence": "<div class=\"freight-charges\" aria-label=\"Freight charges and total number of packages\">\n  <div aria-label=\"Freight and charges details\" style=\"display:flex; flex-direction: column; justify-content: center;\">\n    <div><strong>OCEAN FREIGHT</strong></div>\n    <div>COLLECT</div>\n    <div><strong>THC</strong></div>\n  </div>",
+          "correction": "Candidate HTML does not visually replicate the 'OCEAN FREIGHT' and 'THC' labels horizontally aligned as per original; candidate stacks vertically. Adjust layout to horizontal alignment."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "TOTAL NUMBER OF PACKAGES\\n40",
+          "html_evidence": "<div aria-label=\"Total number of packages\" style=\"font-size: 2.1rem; font-weight: 900; display: flex; justify-content: center; align-items: center;\">\n    40\n  </div>",
+          "correction": "Candidate HTML places number 40 in right aligned separate column but original shows it in a big font in a separate right cell. Adjust layout to exactly match column spans in original."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "NUMBER OF ORIGINAL B/L'S: THREE (3)",
+          "html_evidence": "<div class=\"original-bls\" aria-label=\"Number of original Bills of Lading\">\n  NUMBER OF ORIGINAL B/L'S: THREE (3)\n</div>",
+          "correction": "Missing from candidate HTML's reading order is a strong border or distinct horizontal rule above this original text as in source."
+        }
+      ]
+    }
+  ],
+  "structural_warnings": [
+    {
+      "chunk_id": "bill-of-lading-chunk-0001",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "bill-of-lading-chunk-0002",
+      "issue": "context_too_short"
+    }
+  ],
+  "visual_verification": {
+    "status": "failed",
+    "required": true,
+    "passed_pages": 0,
+    "total_pages": 1
+  }
+}

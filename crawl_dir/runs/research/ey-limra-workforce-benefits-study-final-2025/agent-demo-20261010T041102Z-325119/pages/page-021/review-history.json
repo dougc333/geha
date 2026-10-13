@@ -1,0 +1,55 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "QUESTION: How does the digital experience with administering your company's insurance benefits compare to your experience with other companies? (source)",
+        "html_evidence": "QUESTION: How does the digital experience with administering your company’s insurance benefits compare to your experience with other companies? (candidate)",
+        "correction": "The HTML contains curly apostrophes in 'company’s' instead of straight apostrophes. The source uses straight apostrophes everywhere. All apostrophes should match the source and use straight apostrophes."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "QUESTION: How important is it for the digital experience you have with administering your company's insurance benefits to match your experience with other companies? (source)",
+        "html_evidence": "QUESTION: How important is it for the digital experience you have with administering your company’s insurance benefits to match your experience with other companies? (candidate)",
+        "correction": "The HTML contains curly apostrophes in 'company’s' instead of straight apostrophes. The source uses straight apostrophes everywhere. All apostrophes should match the source and use straight apostrophes."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Pie chart percentages in the first chart's legend and pie slices: Worse 6%, About the same 28%, Better 66%",
+        "html_evidence": "In the first pie chart, the percentages shown are Worse 6%, About the same 28%, Better 66%, but the segment color percentages and distribution do not match these values correctly (the pie slice angles and labels are inconsistent: the grey slice label shows 66% but the position of the grey slice and yellow slice are reversed compared to the source).",
+        "correction": "Adjust the pie chart slice distribution and labels to properly correspond to Worse 6%, About the same 28%, Better 66% as in source."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Pie chart percentages in second chart's legend and pie slices: Not at all/not very important 3%, Slightly/somewhat/moderately important 39%, Very/extremely important 58%",
+        "html_evidence": "In the second pie chart, the percentage labels and slices are incorrectly distributed with grey slice (should be Very/extremely important 58%) colored as the bottom slice but numeric label positions and proportions do not exactly replicate the source.",
+        "correction": "Correct the pie chart slice position, colors and numeric labels to match source exactly: 58% very/extremely important, 39% slightly/somewhat/moderately important, 3% not at all/not very important."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Legend order and colors under each chart in source PDF: For chart 1 - Worse (gray), About the same (yellow), Better (dark gray). For chart 2 - Not at all/not very important (gray), Slightly/somewhat/moderately important (yellow), Very/extremely important (dark gray).",
+        "html_evidence": "In the first legend, color boxes order and labels correspond correctly. In second legend, color boxes order and labels correspond correctly but the visual alignment and grouping of legend items differ slightly from source which has compact stacked style.",
+        "correction": "Match legend layout and spacing to source for clarity and exact reading experience."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Two pie charts and their questions side-by-side with legends, labels, descriptive paragraphs, and data tables below each chart, side by side in the source PDF.",
+        "html_evidence": "The HTML uses flexible container with two figure elements side-by-side with svg charts, legends, figcaptions, and tables correctly grouped but the pie chart label placement and numeric data overlays do not precisely replicate positions in source which results in different reading visually.",
+        "correction": "Adjust the pie chart numeric labels' placement and styling to exactly match the source PDF's position and alignment for clarity."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "match",
+    "errors": []
+  }
+]

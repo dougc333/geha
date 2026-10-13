@@ -1,0 +1,73 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "Text in chart labels appears overlaid and corrupt: \"what employees want Cost trends Participation rates Utilization rates Employee demographics What similar companies offer\" repeated incorrectly and overlapping.",
+        "html_evidence": "<div class=\"chart-container\" role=\"img\" aria-label=\"Bar chart titled Percent of employers and the data they seek showing six types of data considered by employers with percentages.\">\n      <svg...>...</svg>\n      <div class=\"data-grid\" aria-hidden=\"true\">\n        <div class=\"data-item\"><strong>71%</strong><span>Information on what employees want</span></div>\n        ...\n      </div>\n    </div>",
+        "correction": "Remove duplicated, jumbled text overlay above the chart and ensure only the clean readable bar chart with its axis labels appear."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "Percent of employers and the data they seek 71% Information on what employees want 61% Cost trends 59% Participation rates 43% Utilization rates 36% Employee demographics 30% What similar companies offer Represents the percent of employers ranking items among their top three most important types of data considered when making decisions about the design of benefits programs.",
+        "html_evidence": "<div class=\"data-grid\" aria-hidden=\"true\">\n        <div class=\"data-item\"><strong>71%</strong><span>Information on what employees want</span></div>\n        <div class=\"data-item\"><strong>61%</strong><span>Cost trends</span></div>\n        <div class=\"data-item\"><strong>59%</strong><span>Participation rates</span></div>\n        <div class=\"data-item\"><strong>43%</strong><span>Utilization rates</span></div>\n        <div class=\"data-item\"><strong>36%</strong><span>Employee demographics</span></div>\n        <div class=\"data-item\"><strong>30%</strong><span>What similar companies offer</span></div>\n      </div>",
+        "correction": "Remove this duplicate data grid block as it does not appear in the source PDF and duplicates information in the SVG and table"
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "Figure 7 Employers are seeking a wide array of data as input into their decision-making. QUESTION: What are the top three most important types of data considered when making decisions about the design of your benefits program? (followed by large visual presentation of percentages and labels and footnote)",
+        "html_evidence": "<figure aria-labelledby=\"fig7title\">\n    <figcaption><strong>Figure 7</strong><br /><strong>Employers are seeking a wide array of data as input into their decision-making.</strong><br /><strong>QUESTION:</strong> What are the top three most important types of data considered when making decisions about the design of your benefits program?</figcaption>\n    <div class=\"chart-container\" role=\"img\" aria-label=\"Bar chart titled Percent of employers and the data they seek showing six types of data considered by employers with percentages.\">\n      <svg ... ></svg>\n      <div class=\"data-grid\" aria-hidden=\"true\">...duplicate items...</div>\n    </div>\n    <div class=\"data-table-container\">\n      <table>...</table>\n    </div>\n    <p class=\"small-text\">Represents the percent of employers ranking items among their top three most important types of data considered when making decisions about the design of benefits programs.</p>\n  </figure>",
+        "correction": "The additional yellow text in the SVG's chart area reading \"what employees want Cost trends Participation rates Utilization rates Employee demographics What similar companies offer\" as separate words disconnected from the bars is incorrect and not present in the source. These words appear disorganized and clutter the reading order and should be removed to match the source's clear bar chart labels only."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "The PDF contains no data table after the figure and no text block listing the data types and percentages in text form.",
+        "html_evidence": "<table> with six rows showing data types and percentages after the figure.",
+        "correction": "Remove the entire data table from the HTML since it is not present in the source PDF."
+      },
+      {
+        "category": "extra_text",
+        "source_evidence": "The PDF contains no separate text beyond the paragraph and figure with the chart. The chart is an image with data embedded visually.",
+        "html_evidence": "Separate text lines in HTML below the chart including: \"what employees want Cost trends Participation rates Utilization rates Employee demographics What similar companies offer\" displayed as text in yellow.",
+        "correction": "Remove the separate text below the chart showing the data types in yellow, since the source only shows this as part of the visual chart, not separate textual content."
+      }
+    ]
+  },
+  {
+    "iteration": 3,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Figure 7\nEmployers are seeking a wide array of data as input into their decision-making.\nQUESTION: What are the top three most important types of data considered when making decisions about the design of your benefits program?",
+        "html_evidence": "<figcaption id=\"fig7title\"><strong>Figure 7</strong><br /><strong>Employers are seeking a wide array of data as input into their decision-making.</strong><br /><strong>QUESTION:</strong> What are the top three most important types of data considered when making decisions about the design of your benefits program?</figcaption>",
+        "correction": "Correct figure caption text is present and matches the source."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Percent of employers and the data they seek\n71% Information on what employees want\n61% Cost trends\n59% Participation rates\n43% Utilization rates\n36% Employee demographics\n30% What similar companies offer\nRepresents the percent of employers ranking items among their top three most important types of data considered when making decisions about the design of benefits programs.",
+        "html_evidence": "SVG bar chart with bars labeled 71%, 61%, 59%, 43%, 36%, and 30%. Data category labels are rendered below bars but rendered as a graphical SVG chart rather than text: \"Information on what employees want\" text is clipped as \"Information on\", and the rest of the data category labels (Cost trends, Participation rates, Utilization rates, Employee demographics, What similar companies offer) are missing from text form. After the figure, textual data categories are disordered and fragmented: \"what employees want Cost trends Participation rates Utilization rates Employee demographics What similar companies offer\" is incorrectly displayed as fragmented text, losing order and separation.",
+        "correction": "The six data categories with their percentages should be presented as semantic text or a fully accessible HTML table or list, not embedded in a broken or clipped SVG or fragmented text. The categories and percentages must appear fully and clearly as in the source, preserving order and grouping with percentages exactly as \"71% Information on what employees want\", \"61% Cost trends\", etc. The explanatory note 'Represents the percent...' should also be included below the figure as italic text."
+      }
+    ]
+  },
+  {
+    "iteration": 4,
+    "verdict": "match",
+    "errors": []
+  }
+]

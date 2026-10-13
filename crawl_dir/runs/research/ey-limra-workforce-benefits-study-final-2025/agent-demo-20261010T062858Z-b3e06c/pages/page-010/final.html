@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Employee interest in benefits varies across generations</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 1em 2em;
+    color: #222;
+  }
+  h2 {
+    font-weight: 700;
+  }
+  strong {
+    font-weight: 700;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 0.5em;
+    margin-bottom: 2em;
+  }
+  th, td {
+    border: 1px solid #bbb;
+    padding: 0.4em 0.6em;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  th:first-child, td:first-child {
+    text-align: left;
+    font-variant-numeric: normal;
+  }
+  .heatmap-legend {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+    margin-bottom: 2em;
+  }
+  .heatmap-gradient {
+    flex-grow: 1;
+    height: 1em;
+    background: linear-gradient(to right, #ef3b2c, #f7f7f7, #31a354);
+    margin: 0 0.5em;
+    border: 1px solid #999;
+    border-radius: 2px;
+  }
+  .note {
+    font-style: italic;
+    font-size: 0.9em;
+    max-width: 38em;
+  }
+  .footnote {
+    font-weight: 700;
+    margin-bottom: 0.4em;
+  }
+</style>
+</head>
+<body>
+<figure>
+  <figcaption>
+    <p><span class="footnote">Figure 6</span></p>
+    <h2>Employee interest in benefits varies across generations.</h2>
+    <p><strong>QUESTION:</strong> Regardless of whether the benefit is currently available to you at work, how interested would you be in having your employer offer it in the future?</p>
+  </figcaption>
+  <table aria-describedby="note-benefits-interest">
+    <thead>
+      <tr>
+        <th scope="col"> </th>
+        <th scope="col">Gen Z</th>
+        <th scope="col">Millennials</th>
+        <th scope="col">Gen X</th>
+        <th scope="col">Baby boomers</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><th scope="row">Medical insurance</th><td style="background-color:#a6dba0">67%</td><td style="background-color:#70ad47">75%</td><td style="background-color:#238b45">86%</td><td style="background-color:#1a7134">80%</td></tr>
+      <tr><th scope="row">Dental insurance</th><td style="background-color:#b2d8a7">61%</td><td style="background-color:#86b75c">72%</td><td style="background-color:#4c913f">76%</td><td style="background-color:#3d864f">74%</td></tr>
+      <tr><th scope="row">Vision insurance</th><td style="background-color:#c4dcb5">50%</td><td style="background-color:#a0ca8d">61%</td><td style="background-color:#84bf7d">69%</td><td style="background-color:#94be9c">63%</td></tr>
+      <tr><th scope="row">Paid family or medical leave</th><td style="background-color:#d4e4cd">54%</td><td style="background-color:#cae0ca">57%</td><td style="background-color:#d4e4cd">54%</td><td style="background-color:#eeeee3">43%</td></tr>
+      <tr><th scope="row">Life insurance</th><td style="background-color:#e0e7d9">48%</td><td style="background-color:#d6dfd1">52%</td><td style="background-color:#d2dfcf">53%</td><td style="background-color:#f7f4f5">40%</td></tr>
+      <tr><th scope="row">Career development</th><td>40%</td><td style="background-color:#e3e7df">46%</td><td>37%</td><td style="background-color:#f7d4d7">25%</td></tr>
+      <tr><th scope="row">Physical health wellness programs</th><td>39%</td><td>39%</td><td>34%</td><td>32%</td></tr>
+      <tr><th scope="row">Short-term disability insurance</th><td style="background-color:#f8cbca">24%</td><td>35%</td><td>41%</td><td>37%</td></tr>
+      <tr><th scope="row">Long-term disability insurance</th><td style="background-color:#f8bbba">22%</td><td>35%</td><td>40%</td><td>41%</td></tr>
+      <tr><th scope="row">Long-term care insurance</th><td>30%</td><td>31%</td><td>36%</td><td>42%</td></tr>
+      <tr><th scope="row">Accident insurance</th><td>39%</td><td>34%</td><td>33%</td><td>32%</td></tr>
+      <tr><th scope="row">Critical illness insurance</th><td style="background-color:#f9e3e3">29%</td><td>33%</td><td>34%</td><td>33%</td></tr>
+      <tr><th scope="row">Emergency savings benefit</th><td>41%</td><td>34%</td><td>30%</td><td style="background-color:#fabdbe">18%</td></tr>
+      <tr><th scope="row">Identity theft protection</th><td>37%</td><td>31%</td><td style="background-color:#f5c4c4">27%</td><td>32%</td></tr>
+      <tr><th scope="row">Mental health or substance abuse treatment benefits</th><td style="background-color:#a5d499">45%</td><td>33%</td><td style="background-color:#f6c4c4">24%</td><td style="background-color:#f8bfc2">19%</td></tr>
+      <tr><th scope="row">Employee assistance programs</th><td style="background-color:#f7b4b6">28%</td><td>36%</td><td>28%</td><td style="background-color:#f8bfc3">19%</td></tr>
+      <tr><th scope="row">Financial wellness programs</th><td>36%</td><td>33%</td><td style="background-color:#f4bebf">26%</td><td style="background-color:#f7a3a7">17%</td></tr>
+      <tr><th scope="row">Telemedicine benefits</th><td>31%</td><td>29%</td><td>30%</td><td style="background-color:#fbbfbf">20%</td></tr>
+      <tr><th scope="row">Tuition assistance</th><td>40%</td><td>32%</td><td style="background-color:#f8c5c5">24%</td><td style="background-color:#f36a6d">11%</td></tr>
+      <tr><th scope="row">Student loan assistance/repayment</th><td>41%</td><td>32%</td><td style="background-color:#fbb7b7">19%</td><td style="background-color:#e64c50">7%</td></tr>
+      <tr><th scope="row">Hospital indemnity insurance</th><td>30%</td><td>24%</td><td>27%</td><td>24%</td></tr>
+      <tr><th scope="row">Caregiving benefits</th><td>30%</td><td>27%</td><td>20%</td><td>22%</td></tr>
+      <tr><th scope="row">Legal services plan</th><td style="background-color:#fbb6b6">24%</td><td>26%</td><td>21%</td><td>19%</td></tr>
+      <tr><th scope="row">Debt management counseling</th><td>34%</td><td>24%</td><td>17%</td><td>9%</td></tr>
+      <tr><th scope="row">Pet insurance</th><td style="background-color:#f6a7a8">23%</td><td>19%</td><td>12%</td><td>9%</td></tr>
+      <tr><th scope="row">Societal benefits</th><td style="background-color:#f59c9d">22%</td><td style="background-color:#fbb7b7">15%</td><td style="background-color:#f87e7f">9%</td><td style="background-color:#ea4145">4%</td></tr>
+    </tbody>
+  </table>
+</figure>
+
+<div class="heatmap-legend" aria-label="Heat map legend indicating least interest to most interest">
+  <span>Heat map:</span>
+  <div class="heatmap-gradient" role="img" aria-hidden="true"></div>
+  <span>Least interest</span>
+  <span style="margin-left:auto;">Most interest</span>
+</div>
+
+<p id="note-benefits-interest" class="note">
+  <strong>Note:</strong> Percent of employees who are “very” or “extremely” interested in having their employer offer the benefit in the future.
+</p>
+
+<footer>
+  <p><strong>10 | Harnessing growth in workforce benefits:</strong> the next horizon | 2025 Workforce Benefits Study</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,157 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "SHIPPER\\nFRUTAS DEL SOL S.A.\\nAv. de los Incas 456, Buenos Aires, Argentina\\nTEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+        "html_evidence": "<strong>Frutas del Sol S.A.</strong><br />\\nAv. de los Incas 456, Buenos Aires, Argentina<br />\\n<small>Tel: +54 11 4789 1234 | Email: <a href=\"mailto:logistica@frutasdelsol.com.ar\">logistica@frutasdelsol.com.ar</a></small>",
+        "correction": "Tel: +54 11 4789 1234"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "CONSIGNEE (NEGOTIABLE ONLY IF CONSIGNED \"TO ORDER\")\\nFRESH FRUIT IMPORTERS B.V.\\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands\\nTEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com",
+        "html_evidence": "<strong>Fresh Fruit Importers B.V.</strong><br />\\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands<br />\\n<small>Tel: +1 (555) 123-4567 | Email: <a href=\"mailto:billing@techcorp.com\">billing@techcorp.com</a></small>",
+        "correction": "Tel: +1 (555) 123-4567"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "MARKS:\\nPALLETIZED",
+        "html_evidence": "<p class=\"bold-900 mb-0\">MRDN4455667</p>\\n<p><strong>Seal:</strong> MSK112233</p>",
+        "correction": "Add 'MARKS:\\nPALLETIZED' below the seal number for each container"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "DESCRIPTION OF GOODS\\n20 PALLETS STC:\\nFRESH FRUIT\\nFRESH APPLES\\nSTOWAGE AT +2.0 DEGREES CELSIUS\\nPackaging: PALLETS\\nHS CODE: 08081080\\nSET TEMP: +2°C\\n20 PALLETS STC:\\nFRESH FRUIT\\nFRESH PEARS\\nSTOWAGE AT +1.0 DEGREES CELSIUS\\nPackaging: PALLETS\\nHS CODE: 08083090\\nSET TEMP: +1°C",
+        "html_evidence": "20 Pallets STC:<br />\\n<strong>Fresh Fruit</strong><br /><br />\\n<strong>Fresh Apples</strong><br />\\n<strong>Stowage at +2.0 Degrees Celsius</strong><br />\\n<small><em>Packaging: Pallets</em></small><br /><br />\\nHS Code: 08081080<br />\\n<span class=\"blue-text\">Set Temp: +2°C</span><br /><br />\\n20 Pallets STC:<br />\\n<strong>Fresh Fruit</strong><br /><br />\\n<strong>Fresh Pears</strong><br />\\n<strong>Stowage at +1.0 Degrees Celsius</strong><br />\\n<small><em>Packaging: Pallets</em></small><br /><br />\\nHS Code: 08083090<br />\\n<span class=\"blue-text\">Set Temp: +1°C</span>",
+        "correction": "Match capitalization exactly as 'FRESH FRUIT', 'FRESH APPLES', 'STOWAGE AT +2.0 DEGREES CELSIUS', 'Packaging: PALLETS', 'HS CODE: 08081080', 'SET TEMP: +2°C', 'FRESH PEARS', 'STOWAGE AT +1.0 DEGREES CELSIUS', 'HS CODE: 08083090', 'SET TEMP: +1°C'"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "FREIGHT COLLECT",
+        "html_evidence": "Freight Collect",
+        "correction": "Text should be uppercase and bold as 'FREIGHT COLLECT'"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "NUMBER OF ORIGINAL B/L'S: THREE (3)",
+        "html_evidence": "Number of Original B/L's: Three (3)",
+        "correction": "Text formatting should match uppercase and colon spacing as 'NUMBER OF ORIGINAL B/L'S: THREE (3)'"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "TEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+        "html_evidence": "+54 11 4789 1234 • <a href=\"mailto:logistica@frutasdelsol.com.ar\">logistica@frutasdelsol.com.ar</a>",
+        "correction": "Prefix phone number with 'Tel:' in footer as 'Tel: +54 11 4789 1234 |'"
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "SHIPPER\nFRUTAS DEL SOL S.A.\nAv. de los Incas 456, Buenos Aires, Argentina\nTEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+        "html_evidence": "Shipper\nFrutas del Sol S.A.\nAv. de los Incas 456, Buenos Aires, Argentina\nTel: +54 11 4789 1234 | Email: logistica@frutasdelsol.com.ar",
+        "correction": "SHIPPER\nFRUTAS DEL SOL S.A.\nAv. de los Incas 456, Buenos Aires, Argentina\nTEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "CONSIGNEE (NEGOTIABLE ONLY IF CONSIGNED \"TO ORDER\")\nFRESH FRUIT IMPORTERS B.V.\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands\nTEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com",
+        "html_evidence": "Consignee (Negotiable only if consigned \"to order\")\nFresh Fruit Importers B.V.\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands\nTel: +1 (555) 123-4567 | Email: billing@techcorp.com",
+        "correction": "CONSIGNEE (NEGOTIABLE ONLY IF CONSIGNED \"TO ORDER\")\nFRESH FRUIT IMPORTERS B.V.\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands\nTEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "NOTIFY PARTY (NO RESPONSIBILITY FOR FAILURE TO NOTIFY)\nFRESH FRUIT IMPORTERS B.V.\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands\nTEL: +31 10 123 4567 | EMAIL: dispatch@logitrans.com",
+        "html_evidence": "Notify Party (No responsibility for failure to notify)\nFresh Fruit Importers B.V.\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands\nTel: +31 10 123 4567 | Email: dispatch@logitrans.com",
+        "correction": "NOTIFY PARTY (NO RESPONSIBILITY FOR FAILURE TO NOTIFY)\nFRESH FRUIT IMPORTERS B.V.\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands\nTEL: +31 10 123 4567 | EMAIL: dispatch@logitrans.com"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "DELIVERY AGENT\nLogiTrans Global\n88 Harbor Road, Rotterdam, 3011 AA\nTel: +31 10 123 4567 | dispatch@logitrans.com",
+        "html_evidence": "Delivery Agent\nLogiTrans Global\n88 Harbor Road, Rotterdam, 3011 AA\nTel: +31 10 123 4567 | Email: dispatch@logitrans.com",
+        "correction": "DELIVERY AGENT\nLogiTrans Global\n88 Harbor Road, Rotterdam, 3011 AA\nTel: +31 10 123 4567 | dispatch@logitrans.com"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "OCEAN VESSEL / VOYAGE\nMERIDIAN LABREA / 124N",
+        "html_evidence": "Ocean Vessel / Voyage\nMeridian Labrea / 124N",
+        "correction": "OCEAN VESSEL / VOYAGE\nMERIDIAN LABREA / 124N"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "PORT OF LOADING\nBUENOS AIRES, ARGENTINA",
+        "html_evidence": "Port of Loading\nBuenos Aires, Argentina",
+        "correction": "PORT OF LOADING\nBUENOS AIRES, ARGENTINA"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "PORT OF DISCHARGE\nROTTERDAM, NETHERLANDS",
+        "html_evidence": "Port of Discharge\nRotterdam, Netherlands",
+        "correction": "PORT OF DISCHARGE\nROTTERDAM, NETHERLANDS"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "CONTAINER NO. / SEAL NO.\nMRDN4455667\nSEAL: MSK112233\nMARKS:\nPALLETIZED\nMRDN7788990\nSEAL: MSK445566\nMARKS:\nPALLETIZED",
+        "html_evidence": "Container No. / Seal No.\nMRDN4455667\nSeal: MSK112233\nMARKS:\nPALLETIZED\nMRDN7788990\nSeal: MSK445566\nMARKS:\nPALLETIZED",
+        "correction": "CONTAINER NO. / SEAL NO.\nMRDN4455667\nSEAL: MSK112233\nMARKS:\nPALLETIZED\nMRDN7788990\nSEAL: MSK445566\nMARKS:\nPALLETIZED"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "NO. PKGS\n20\n20",
+        "html_evidence": "No. Pkgs\n20\n\n20",
+        "correction": "NO. PKGS\n20\n20"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "20 PALLETS STC:\nFRESH FRUIT\nFRESH APPLES\nSTOWAGE AT +2.0 DEGREES CELSIUS\nPackaging: PALLETS\nHS CODE: 08081080\nSET TEMP: +2°C\n20 PALLETS STC:\nFRESH FRUIT\nFRESH PEARS\nSTOWAGE AT +1.0 DEGREES CELSIUS\nPackaging: PALLETS\nHS CODE: 08083090\nSET TEMP: +1°C",
+        "html_evidence": "20 PALLETS STC:\nFRESH FRUIT\n\nFRESH APPLES\nSTOWAGE AT +2.0 DEGREES CELSIUS\nPackaging: PALLETS\nHS CODE: 08081080\nSET TEMP: +2°C\n\n20 PALLETS STC:\nFRESH FRUIT\n\nFRESH PEARS\nSTOWAGE AT +1.0 DEGREES CELSIUS\nPackaging: PALLETS\nHS CODE: 08083090\nSET TEMP: +1°C",
+        "correction": "20 PALLETS STC:\nFRESH FRUIT\nFRESH APPLES\nSTOWAGE AT +2.0 DEGREES CELSIUS\nPackaging: PALLETS\nHS CODE: 08081080\nSET TEMP: +2°C\n20 PALLETS STC:\nFRESH FRUIT\nFRESH PEARS\nSTOWAGE AT +1.0 DEGREES CELSIUS\nPackaging: PALLETS\nHS CODE: 08083090\nSET TEMP: +1°C"
+      },
+      {
+        "category": "extra_text",
+        "source_evidence": "(No text below 'FREIGHT COLLECT' line)",
+        "html_evidence": "<p class=\"text-center bold-900 uppercase mb-0\" style=\"padding-top: 1rem; border-top: 1px solid #000;\">FREIGHT COLLECT</p>",
+        "correction": "No correction needed, this matches the source."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "FREIGHT & CHARGES\nOCEAN FREIGHT\nCOLLECT\nTHC",
+        "html_evidence": "<fieldset class=\"w-2-3\" style=\"min-width: 20rem; border-right: 1.5px solid #000; border-bottom: none; padding: 0.5rem;\">\n      <legend><h4>Freight & Charges</h4></legend>\n      <p class=\"mb-0\"><strong>Ocean Freight</strong><span style=\"float:right;\">Collect</span></p>\n      <p class=\"mb-0\"><strong>THC</strong></p>\n    </fieldset>",
+        "correction": "No missing text; present but layout difference."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "SINGLE LINE: RECEIVED by the Carrier in apparent good order and condition (unless otherwise stated herein) the total number or quantity of Containers or other packages or units indicated in the box entitled \"Total Number of Packages\" for carriage subject to all the terms and conditions hereof from the Place of Receipt or Port of Loading to the Port of Discharge or Place of Delivery, whichever is applicable.\n\nIN ACCEPTING THIS BILL OF LADING THE MERCHANT EXPRESSLY ACCEPTS AND AGREES TO ALL THE TERMS AND CONDITIONS, WHETHER PRINTED, STAMPED OR OTHERWISE INCORPORATED ON THIS SIDE AND ON THE REVERSE SIDE OF THIS BILL OF LADING AND THE TERMS AND CONDITIONS OF THE CARRIER'S APPLICABLE TARIFF AS IF THEY WERE ALL SIGNED BY THE MERCHANT.",
+        "html_evidence": "<p style=\"font-size: 0.6rem; margin: 0;\">\n      RECEIVED by the Carrier in apparent good order and condition (unless otherwise stated herein) the total number or quantity of containers or other packages or units indicated in the box entitled \"Total Number of Packages\" for carriage subject to all the terms and conditions hereof from the Place of Receipt or Port of Loading to the Port of Discharge or Place of Delivery, whichever is applicable.\n    </p>\n    <p style=\"font-size: 0.6rem;\">\n      IN ACCEPTING THIS BILL OF LADING THE MERCHANT EXPRESSLY ACCEPTS AND AGREES TO ALL THE TERMS AND CONDITIONS, WHETHER PRINTED, STAMPED OR OTHERWISE INCORPORATED ON THIS SIDE AND ON THE REVERSE SIDE OF THIS BILL OF LADING AND THE TERMS AND CONDITIONS OF THE CARRIER'S APPLICABLE TARIFF AS IF THEY WERE ALL SIGNED BY THE MERCHANT.\n    </p>",
+        "correction": "No correction needed, content matches source though split into two paragraphs."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "PLACE OF ISSUE\nAntwerp\nDATE OF ISSUE\n2026-03-13\nSIGNED FOR THE CARRIER\nAuthorized Signature",
+        "html_evidence": "Place of Issue\nAntwerp\nDate of Issue\n2026-03-13\nSigned for the Carrier\nAuthorized Signature",
+        "correction": "PLACE OF ISSUE\nAntwerp\nDATE OF ISSUE\n2026-03-13\nSIGNED FOR THE CARRIER\nAuthorized Signature"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "NUMBER OF ORIGINAL B/L'S: THREE (3)",
+        "html_evidence": "<section aria-label=\"Number of Original Bills of Lading\" class=\"text-center border-top uppercase bold-900\" style=\"margin-top: 1rem;\">\n    NUMBER OF ORIGINAL B/L'S: THREE (3)\n  </section>",
+        "correction": "No correction needed, content is present and correct."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "FRUTAS DEL SOL S.A. • +54 11 4789 1234 • logistica@frutasdelsol.com.ar",
+        "html_evidence": "FRUTAS DEL SOL S.A. - Tel: +54 11 4789 1234 | logistica@frutasdelsol.com.ar",
+        "correction": "FRUTAS DEL SOL S.A. • +54 11 4789 1234 • logistica@frutasdelsol.com.ar"
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "match",
+    "errors": []
+  }
+]

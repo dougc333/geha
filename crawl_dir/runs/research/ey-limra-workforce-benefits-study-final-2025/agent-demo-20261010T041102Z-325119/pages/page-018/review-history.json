@@ -1,0 +1,43 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "The green highlight box text is to the left with a photo of a woman and child piggyback on the right side occupying the same horizontal area.",
+        "html_evidence": "The green highlight box is at top left, but the photo is shown full width below the box rather than side by side.",
+        "correction": "Layout the image and the green highlight box side by side horizontally near the top as in the source PDF."
+      },
+      {
+        "category": "table_structure",
+        "source_evidence": "No table present in the source PDF page.",
+        "html_evidence": "A table titled 'Employer Choices for Disability Insurance Carrier by Company Size' is included beneath the chart that is not present in the source PDF page.",
+        "correction": "Remove the added table since it is not present in the original PDF."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "Bulleted list after 'Probing further on the value of integrated experiences, we asked employers whether they prefer:' contains two bullet points.",
+        "html_evidence": "Bullets are included but the second bullet is not logically split from the first. The words 'Or' are included inline in the first bullet rather than on their own line above the second bullet.",
+        "correction": "Separate 'Or' visually on its own line or after the first bullet to match the PDF reading order."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Gray bar labeled '50%' for Small employers is below the yellow bar labeled '50%'.",
+        "html_evidence": "In the bar chart, for Small employers, the gray bar is drawn above the yellow bar, reversing their layering order.",
+        "correction": "Render gray bar below the yellow bar for Small employer bar chart segment as in source PDF."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar coordinates for midsize data show first bar at y=82 (top) height=198 and second bar y=140 height=69.",
+        "html_evidence": "SVG bar for midsize has y coordinate '82) ' containing an unmatched parenthesis causing a possible rendering issue.",
+        "correction": "Correct the incorrect coordinate syntax for the midsize bar's y attribute by removing extraneous parenthesis."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Employees Value a Range of Benefit Offerings</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.4;
+    margin: 2em;
+    color: #212121;
+  }
+  h1, h2, h3 {
+    font-weight: bold;
+  }
+  h1 {
+    font-size: 1.25rem;
+  }
+  h2 {
+    font-size: 1rem;
+  }
+  .figure-title {
+    font-weight: 700;
+    margin-bottom: 0.25em;
+  }
+  .question {
+    font-weight: bold;
+    margin-bottom: 1em;
+  }
+  .note {
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 1em;
+  }
+  .legend {
+    border: 1px solid #ccc;
+    padding: 0.5em 1em 0.5em 0.5em;
+    font-size: 0.875rem;
+    margin-top: 1em;
+    max-width: 280px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.25em;
+  }
+  .legend-color {
+    width: 1em;
+    height: 1em;
+    margin-right: 0.5em;
+    flex-shrink: 0;
+    border: 1px solid #999;
+  }
+  .green {
+    background-color: #27ae60;
+  }
+  .red {
+    background-color: #ef4b3c;
+  }
+  .chart-and-legend {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 0.5em;
+    gap: 2em;
+    max-width: 720px;
+  }
+  .chart-container {
+    flex-grow: 1;
+    max-width: 420px;
+  }
+  .bar-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.25em;
+    font-size: 0.875rem;
+  }
+  .bar-label {
+    width: 180px;
+    white-space: nowrap;
+    padding-right: 0.5em;
+  }
+  .bar {
+    height: 1em;
+    border-radius: 0.25em;
+    margin-right: 0.5em;
+    flex-shrink: 0;
+  }
+  .bar.green { background-color: #27ae60; }
+  .bar.grey  { background-color: #bbb; }
+  .bar.red   { background-color: #ef4b3c; }
+  .bar-value {
+    min-width: 30px;
+    text-align: right;
+  }
+  .content-columns {
+    display: flex;
+    gap: 3em;
+    margin-top: 2em;
+    max-width: 960px;
+  }
+  .content-column {
+    flex: 1;
+  }
+  strong {
+    font-weight: 700;
+  }
+  footer p {
+    margin-top: 3em;
+    font-size: 0.8rem;
+    color: #444;
+  }
+  table {
+    border-collapse: collapse;
+    margin-top: 1em;
+    width: 100%;
+    max-width: 720px;
+  }
+  th, td {
+    border: 1px solid #aaa;
+    text-align: left;
+    padding: 0.25em 0.5em;
+  }
+  th {
+    background: #f4f4f4;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<figure>
+  <figcaption>
+    <p class="figure-title">Figure 5<br />Employees value a range of benefit offerings.</p>
+    <p class="question"><strong>QUESTION:</strong> Regardless of whether the benefit is currently available to you at work, how interested would you be in having your employer offer it in the future?</p>
+  </figcaption>
+
+  <div class="chart-and-legend" aria-label="Chart showing interest percentages for benefit offerings with legend for percentage changes since 2023 study">
+    <section class="chart-container" aria-label="Interest in various benefit offerings with percentage values">
+      <div class="bar-wrapper">
+        <div class="bar-label">Medical insurance</div>
+        <div class="bar green" style="width: 78%;"></div>
+        <div class="bar-value">78%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Dental insurance</div>
+        <div class="bar green" style="width: 72%;"></div>
+        <div class="bar-value">72%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Vision insurance</div>
+        <div class="bar green" style="width: 62%;"></div>
+        <div class="bar-value">62%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Paid family or medical leave</div>
+        <div class="bar grey" style="width: 54%;"></div>
+        <div class="bar-value">54%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Life insurance</div>
+        <div class="bar grey" style="width: 50%;"></div>
+        <div class="bar-value">50%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Career development</div>
+        <div class="bar grey" style="width: 39%;"></div>
+        <div class="bar-value">39%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Physical health wellness programs</div>
+        <div class="bar grey" style="width: 36%;"></div>
+        <div class="bar-value">36%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Short-term disability insurance</div>
+        <div class="bar grey" style="width: 36%;"></div>
+        <div class="bar-value">36%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Long-term disability insurance</div>
+        <div class="bar grey" style="width: 35%;"></div>
+        <div class="bar-value">35%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Long-term care insurance</div>
+        <div class="bar grey" style="width: 34%;"></div>
+        <div class="bar-value">34%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Accident insurance</div>
+        <div class="bar grey" style="width: 34%;"></div>
+        <div class="bar-value">34%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Critical illness insurance</div>
+        <div class="bar grey" style="width: 33%;"></div>
+        <div class="bar-value">33%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Emergency savings benefit</div>
+        <div class="bar grey" style="width: 32%;"></div>
+        <div class="bar-value">32%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Identity theft protection</div>
+        <div class="bar grey" style="width: 31%;"></div>
+        <div class="bar-value">31%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Mental health/substance abuse treatment benefits</div>
+        <div class="bar grey" style="width: 30%;"></div>
+        <div class="bar-value">30%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Employee assistance programs</div>
+        <div class="bar grey" style="width: 30%;"></div>
+        <div class="bar-value">30%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Financial wellness programs</div>
+        <div class="bar red" style="width: 29%;"></div>
+        <div class="bar-value">29%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Tuition assistance</div>
+        <div class="bar grey" style="width: 28%;"></div>
+        <div class="bar-value">28%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Telemedicine benefits</div>
+        <div class="bar grey" style="width: 28%;"></div>
+        <div class="bar-value">28%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Student loan assistance/repayment</div>
+        <div class="bar grey" style="width: 26%;"></div>
+        <div class="bar-value">26%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Hospital indemnity insurance</div>
+        <div class="bar grey" style="width: 26%;"></div>
+        <div class="bar-value">26%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Caregiving benefits</div>
+        <div class="bar grey" style="width: 25%;"></div>
+        <div class="bar-value">25%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Legal services plan</div>
+        <div class="bar grey" style="width: 23%;"></div>
+        <div class="bar-value">23%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Debt management counseling</div>
+        <div class="bar grey" style="width: 21%;"></div>
+        <div class="bar-value">21%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Pet insurance</div>
+        <div class="bar grey" style="width: 16%;"></div>
+        <div class="bar-value">16%</div>
+      </div>
+      <div class="bar-wrapper">
+        <div class="bar-label">Societal benefits</div>
+        <div class="bar red" style="width: 12%;"></div>
+        <div class="bar-value">12%</div>
+      </div>
+    </section>
+
+    <aside class="legend" aria-label="Legend for percentage changes since 2023 study">
+      <div class="legend-item"><span class="legend-color green" aria-hidden="true"></span>Up 5 percentage points or more vs. 2023 study</div>
+      <div class="legend-item"><span class="legend-color red" aria-hidden="true"></span>Down 5 percentage points or more vs. 2023 study</div>
+    </aside>
+  </div>
+
+  <p class="note">Note: Percent of employees who are “very” or “extremely” interested in having their employer offer the benefit in the future.</p>
+
+  <table aria-label="Table showing benefit offerings, interest percentages, and change since 2023 study">
+    <thead>
+      <tr>
+        <th scope="col">Benefit</th>
+        <th scope="col">Interest %</th>
+        <th scope="col">Change vs. 2023 study</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Medical insurance</td><td>78%</td><td>Up 5+ points</td></tr>
+      <tr><td>Dental insurance</td><td>72%</td><td>Up 5+ points</td></tr>
+      <tr><td>Vision insurance</td><td>62%</td><td>Up 5+ points</td></tr>
+      <tr><td>Paid family or medical leave</td><td>54%</td><td></td></tr>
+      <tr><td>Life insurance</td><td>50%</td><td></td></tr>
+      <tr><td>Career development</td><td>39%</td><td></td></tr>
+      <tr><td>Physical health wellness programs</td><td>36%</td><td></td></tr>
+      <tr><td>Short-term disability insurance</td><td>36%</td><td></td></tr>
+      <tr><td>Long-term disability insurance</td><td>35%</td><td></td></tr>
+      <tr><td>Long-term care insurance</td><td>34%</td><td></td></tr>
+      <tr><td>Accident insurance</td><td>34%</td><td></td></tr>
+      <tr><td>Critical illness insurance</td><td>33%</td><td></td></tr>
+      <tr><td>Emergency savings benefit</td><td>32%</td><td></td></tr>
+      <tr><td>Identity theft protection</td><td>31%</td><td></td></tr>
+      <tr><td>Mental health/substance abuse treatment benefits</td><td>30%</td><td></td></tr>
+      <tr><td>Employee assistance programs</td><td>30%</td><td></td></tr>
+      <tr><td>Financial wellness programs</td><td>29%</td><td>Down 5+ points</td></tr>
+      <tr><td>Tuition assistance</td><td>28%</td><td></td></tr>
+      <tr><td>Telemedicine benefits</td><td>28%</td><td></td></tr>
+      <tr><td>Student loan assistance/repayment</td><td>26%</td><td></td></tr>
+      <tr><td>Hospital indemnity insurance</td><td>26%</td><td></td></tr>
+      <tr><td>Caregiving benefits</td><td>25%</td><td></td></tr>
+      <tr><td>Legal services plan</td><td>23%</td><td></td></tr>
+      <tr><td>Debt management counseling</td><td>21%</td><td></td></tr>
+      <tr><td>Pet insurance</td><td>16%</td><td></td></tr>
+      <tr><td>Societal benefits</td><td>12%</td><td>Down 5+ points</td></tr>
+    </tbody>
+  </table>
+</figure>
+
+<section class="content-columns" aria-label="Detailed analysis text content">
+  <article class="content-column">
+    <p><strong>Paid family or medical leave now in the “core four”:</strong> More interesting, however, is that paid family or medical leave is the next most important benefit in employers’ minds beyond medical, dental and vision insurance: 71% of all employers (and 80% of large employers) view it as a critical benefit in the future, nearly on par with dental and vision insurance and above life, disability and supplemental health insurance. Paid family or medical leave is now clearly in the core four of benefits in the eyes of both employers and employees. <em>See Key finding 4 for more on leave benefits.</em></p>
+
+    <p><strong>Prioritizing wellness:</strong> Mental health and substance abuse programs are of considerable interest to employees, especially the younger generations that are coming to dominate the workforce. Career development services that promote professional wellbeing are also of high interest to younger workers. Clear majorities of employers are expressing interest in mental health (60%) and career development (59%) benefits, while nearly as many see a need for programs focused on physical health and financial wellness. As employers take a more holistic view of individual needs across a multigenerational workforce, wellness benefits can help attract and retain top talent. They can be especially valuable for individuals facing personal challenges in a time of great uncertainty.</p>
+  </article>
+
+  <article class="content-column">
+    <p>Interest in long-term care insurance remains relevant, with the growing retirement-eligible population ranking it as important as critical illness and more important than hospital indemnity insurance. Long-term care can be provided as a stand-alone insurance benefit, a life insurance accelerated benefit or a long-term care rider added to a workplace life insurance product.</p>
+
+    <p><strong>Differing generational priorities:</strong> The dramatic differences in benefits interest across generations highlight the challenges faced by employers and the need for future portfolio refinements. <em>See Figure 6.</em> Today’s products and services are largely curated for Gen X and baby boomers, though Gen Z and millennials now make up the greater percentage of the workforce.</p>
+  </article>
+</section>
+
+<footer>
+  <p>9 | <strong>Harnessing growth in workforce benefits: the next horizon</strong> | 2025 Workforce Benefits Study</p>
+</footer>
+
+</body>
+</html>

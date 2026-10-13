@@ -1,82 +1,84 @@
 # GEHA
 
-aws_rag
-https://pdh62b4ddxm6mw7aokdbtwream0nupph.lambda-url.us-west-2.on.aws/chat
+Experiments in retrieval, document ingestion and agent design over GEHA's public
+plan documents: 2026 dental benefits, the FEDVIP dental brochure, and medical
+coverage policies. Not affiliated with G.E.H.A. Everything here uses public
+documents or synthetic data; nothing is production- or HIPAA-ready.
 
-## GCP Vertex AI RAG
+Most projects are **workflows**, not free-running agents: code owns the control
+flow, and the LLM extracts, grades, rewrites or corrects inside bounded loops.
+Each subfolder has its own README with setup and results.
 
-[`gcp_vertex_rag`](gcp_vertex_rag/README.md) is the Google Cloud counterpart to
-`aws_rag`. It uploads the coverage-policy PDFs in `downloads` to a private,
-versioned Cloud Storage bucket, imports them into Vertex AI RAG Engine, and
-serves grounded Gemini answers with citations through an authenticated Cloud
-Run service. The sample includes Terraform, Cloud Build, a browser UI, and
-offline tests.
+## Repository map
 
+| Folder | What it is | Pattern |
+|---|---|---|
+| [`crawl_dir`](crawl_dir/README.md) | Canonical document corpus (54 public PDFs) and the `geha-ingestion` MCP server | Ingestion workflow behind MCP tools |
+| [`document_ingestion_pipeline`](document_ingestion_pipeline/README.md) | React UI that streams one ingestion run: source page, vision HTML, visual correction, verified HTML | Deterministic workflow |
+| [`PDF_processing`](PDF_processing/) | Page blocking and bill-of-lading OCR benchmarks | Evaluator-optimizer loops |
+| [`chunking_benchmarks_RAG`](chunking_benchmarks_RAG/README.md) | Table-aware coverage-policy RAG, billing-code lookup, 11 eval families | Routing + parent-document retrieval |
+| [`agentic_search`](agentic_search/README.md) | Chroma RAG with a CRAG/Self-RAG LangGraph loop and a ReAct variant | Evaluator-optimizer, ReAct |
+| [`agentic_search_corpus`](agentic_search_corpus/README.md) | The agentic search code over canonical dental page Markdown | BM25 / vector / hybrid + agentic answers |
+| [`e2e_bm25vector`](e2e_bm25vector/README.md) | Deployable Vercel app comparing BM25, vector and hybrid retrieval | Retrieval comparison |
+| [`dental_enrollment_chatbot`](dental_enrollment_chatbot/README.md) | FEDVIP dental enrollment assistant | Deterministic state machine; LLM only classifies free text |
+| [`dspy_dental_chatbot`](dspy_dental_chatbot/README.md) | DSPy normalizer for the enrollment engine, plus a cited dental policy Q&A | Workflow + DSPy programs |
+| [`mcp_benefits_server`](mcp_benefits_server/README.md) | MCP server for dental and coverage-policy tools with a promotion standard | Deterministic tools, tiered by deployment |
+| [`aws_rag`](aws_rag/README.md) | Serverless AWS RAG over 203 ML papers | Hybrid BM25/pgvector + RRF + rerank |
+| [`aws_geha_rag`](aws_geha_rag/README.md) | AWS RAG over GEHA documents that indexes only visually validated text | Step Functions ingestion workflow |
+| [`gcp_vertex_rag`](gcp_vertex_rag/README.md) | Google Cloud counterpart: Vertex AI RAG Engine + Gemini on private Cloud Run | Managed RAG |
+| [`hapi`](hapi/README.md) | Local HAPI FHIR server with Synthea patients; claim insights, fraud and agent demos | FHIR tools, tool-calling agents |
+| [`avoid_failed_rag`](avoid_failed_rag/README.md) | Notes on why RAG proofs of concept fail, plus a standalone table RAG | Lessons learned |
+| [`agentic_RAG`](agentic_RAG/README.MD) | Placeholder for agentic-loop chatbot experiments | — |
+| `finetuning` | Slides: fine-tuning EmbeddingGemma for insurance retrieval | — |
+| `docs` | Shared diagrams (RAG variants, agent loop vs harness, context window) and slide decks | — |
 
-agentic_search:
-Code References: The chat UI and PDF viewer comes from Lightning AI which is a chat assistant: 
-https://lightning.ai/lightning-ai/templates/document-chat-assistant-using-rag?section=featured
+## Documents and ingestion
 
-e2e_bm25vector:
-Deployable Vercel comparison app for BM25, vector, and hybrid retrieval with
-optional reranking and grounded answer generation.
+### `crawl_dir`: the source of truth
 
+All projects read documents from `crawl_dir` through
+`crawl_dir.src.consumer_paths`. Its layers are `raw` (original PDFs), `runs`
+(immutable candidate extractions) and `reviewed` (promoted artifacts).
+Production code must use `reviewed`. Demos may request the newest structurally
+valid candidate while visual review is pending.
 
-Code References: 
+Two of the 31 original policy PDFs had no text layer. Running LLM OCR on those
+image-only pages improved retrieval by about 6%.
 
-## Download and the ground truth
-Download the documents from the website. These serve as a reference to the ground truth. These are policy documents, membership details for the public API. 
-2/31 documents dont have text im the pdf. LLM OCR on pdf image only files. 6% improment in performance (2/31).
+The `geha-ingestion` MCP server (`python -m crawl_dir.src.ingestion_mcp`) lets an
+agent list and download manifest-pinned public PDFs and ingest them. Every tool
+previews first and needs `confirm=true` before it writes files or calls Claude.
 
-Folder: `downloads`
+### Page-level visual correction
 
-## chunking_benchmarks_RAG
-Docling preserves the context and seems to be the default chunking setting for most docs
+Sending a 200-page PDF to an LLM for OCR produces errors. The pipeline splits
+it into single pages, converts each to Markdown and HTML, renders the HTML, and
+has a LangGraph loop compare it with the page image and correct it, bounded to
+2–7 passes. This reaches zero visible errors but is slow for large batches.
+`document_ingestion_pipeline` visualizes these runs, including the EY/LIMRA
+report, where pages with figures go through whole-page semantic HTML instead
+of bounding-box segmentation.
 
-200page pdf sent to LLM for OCR produces errors. Segment 200 pages to 200 individual pages, convert to markdown and html. Use single page pdf as image source. Langgraph program in loop; compare html w pdf and have agent correct html w to pdf with no visible errors or zero text errors. 
+### `PDF_processing`
 
-Zero errors but slow for large batches. Might be ok for small num errors per page. 
+- `blocking_demo`: segmenting a page into blocks before vision OCR. Whole-page
+  submission fails on dense forms; blocks plus a 4+-pass correction loop work.
+  Claude reproduces chart detail that GPT does not.
+- `bill_lading`: no public medical claim forms exist, so a bill of lading
+  stands in. GPT-4o, GPT-5, Claude and PaddleOCR-VL 1.6 all reach 79/79 fields
+  on the 8-block benchmark; PaddleOCR-VL is about 6× faster than GPT-4o.
 
-Tables don't parse well. The naive approach is to copy each row with column headings and a couple title blocks or captions and insert as an embedding. This doesn't work because the semantic meaning of the table unit is lost. Demo of Treanada approved with unapproved tables. A query returns the table. The point is to shw the mismatch between specific keywords and vector search. BM25 better here or even better yet include structured search from DB tables. 
+## Retrieval
 
-## PDF Processing flow
-Problem: how to recognize forms. Different than tables. 
-Blockiung demo 
+### Table-aware RAG (`chunking_benchmarks_RAG`)
 
-
-Folder: `PDF_processing/clean_pdf_langgraph`
-
-## Bounding Box Medical Form Processing Flow
-There are no medical claim forms which are public because of privacy violations. Create processing flow for bill of lading. Extract to md and html, correct html w single page PDF until no errors. Max loops 2-6.  
-
-Folder `/Users/dc/geha/PDF_processing/blocking_demo`
-
-## RAG Architecture
-The table-aware RAG system embeds individual table rows for retrieval while preserving each complete table as the parent context returned to local search or the configured language model.
+Embedding table rows with their headers loses the table's meaning. This
+system embeds rows for retrieval but returns the whole table as parent context,
+and sends the agent only a few rows (a 200-row table is 5,000–10,000 tokens;
+3 rows are about 200). Exact keyword queries such as billing codes do better
+with BM25 or structured lookup than with vector search.
 
 ![Table-aware RAG architecture](chunking_benchmarks_RAG/table_rag_architecture.png)
-
-See [Table-Aware Coverage Policy RAG](chunking_benchmarks_RAG/README.md) for setup, ingestion, search, evaluation, and testing instructions.
-
-![MCP Server from workflow simulations](mcp_server_architecture.png)
-
-Folder: `chunking_benchmarks_RAG`
-
-## Runnable demos
-
-This repository contains focused LangGraph, table-RAG, MCP, and web demos that
-share a small set of fabricated fixtures in `demo_data/`. Run the Python
-applications through `uv` or Streamlit and the TypeScript application through
-npm.
-
-
-
-See [MCP_server/README.md](MCP_server/README.md) for the tools, safeguards, and
-generated run artifacts.
-
-### Table-aware RAG command line
-
-Run these commands from the repository root:
 
 ```bash
 cd /Users/dc/geha
@@ -85,40 +87,51 @@ docker compose -f chunking_benchmarks_RAG/docker-compose.pgvector.yml up -d
 uv run python chunking_benchmarks_RAG/table_rag.py init-db
 ```
 
-The same program provides the `ingest`, `search`, and optional `ask` commands.
-Their required arguments and database configuration are documented in
-[chunking_benchmarks_RAG/README.md](chunking_benchmarks_RAG/README.md).
+The same program provides `ingest`, `search` and `ask`; see its README.
 
-### Shared synthetic fixtures
+### Agentic search (`agentic_search`, `agentic_search_corpus`)
 
-`langgraph_python_review_claims/demo_data/` contains the fabricated claim records, recorded claim outcomes,
-and curated public-reference snippets used by LangGraph and MCP. These files
-are read-only demo inputs, not real claims, live coverage rules, or production
-systems of record.
+A LangGraph loop based on CRAG and Self-RAG: retrieve and rerank, grade each
+passage, rewrite the query at most twice or abstain, generate from the original
+question, then check every claim is supported (at most two generations). The
+corpus variant runs the same loop over the canonical dental page Markdown with
+BM25, vector or hybrid retrieval. The chat UI and PDF viewer come from the
+[Lightning AI document chat template](https://lightning.ai/lightning-ai/templates/document-chat-assistant-using-rag?section=featured).
 
-### LangGraph TypeScript web application
+### Cloud RAG
 
-```bash
-cd /Users/dc/geha/langgraph_web
-npm ci
-npm run dev
-```
+- `aws_rag`: hybrid BM25 + pgvector, RRF and Bedrock reranking reach hit@5 0.95
+  and MRR@10 0.88. Chat endpoint:
+  https://pdh62b4ddxm6mw7aokdbtwream0nupph.lambda-url.us-west-2.on.aws/chat
+- `aws_geha_rag`: indexes only pages that pass visual comparison; failures are
+  quarantined.
+- `gcp_vertex_rag`: private, versioned Cloud Storage, Vertex AI RAG Engine and
+  Gemini with citations, behind IAM-authenticated Cloud Run.
+- `e2e_bm25vector`: Vercel + Neon app for side-by-side retrieval experiments.
 
-For a production build:
+## Chatbots and tools
 
-```bash
-npm run build
-npm start
-```
-
-See [langgraph_web/README.md](langgraph_web/README.md) for configuration details.
+- **Enrollment** (`dental_enrollment_chatbot`): matching a member to a plan is a
+  process, not a similarity search, so enrollment is a state machine. Plan
+  recommendations and premiums come deterministically from benefits-guide pages
+  4–11. JEV or DSPy may classify free-text answers but never decide eligibility,
+  rate codes, plans or premiums. It is kept separate from benefit Q&A because
+  the combined graph became too hard to follow.
+- **Dental policy Q&A** (`dspy_dental_chatbot`): page-aware local retrieval with
+  cited DSPy answers and persona tests.
+- **MCP benefits server** (`mcp_benefits_server`): rate codes, premiums, CDT
+  classes and coverage-policy search as tools. Each deployment (production,
+  pilot, sandbox) lists only the tools promoted to its tier; PHI arguments are
+  hashed in the audit log, and CI fails when a tool claims a tier it does not meet.
+- **FHIR sandbox** (`hapi`): synthetic patients for testing FHIR MCP tools,
+  claim-insight queries and fraud-detection agents.
 
 ## Continuous integration
 
-[GEHA CI](.github/workflows/ci.yml) runs on pull requests and pushes to `main`.
-It checks focused policy-RAG and PDF-extraction unit tests, the LangGraph
-workflow smoke tests, and MCP server contracts in their locked Python
-environments. These checks use local fixtures and do not require an API key,
-live PostgreSQL, or model downloads. Database-backed retrieval evaluations,
-vision review, and deployment tests remain separate manual checks; CI does not
-certify clinical correctness or HIPAA compliance.
+[GEHA CI](.github/workflows/ci.yml) runs on pull requests and pushes to `main`:
+`chunking_benchmarks_RAG` and `agentic_search` unit tests, the `crawl_dir` MCP
+server tests, the standalone table RAG, `aws_rag` and `gcp_vertex_rag` unit
+tests, and retrieval benchmarks for `aws_rag` (62 questions) and
+`agentic_search`. Tests use local fixtures and need no API key, live database or
+model download. Database-backed evaluations, vision review and deployment
+tests stay manual. CI does not certify clinical correctness or HIPAA compliance.

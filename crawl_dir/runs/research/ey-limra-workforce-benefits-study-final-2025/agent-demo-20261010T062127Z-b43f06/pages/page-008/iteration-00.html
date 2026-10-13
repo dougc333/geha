@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Employers see a need for total wellbeing</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.4;
+    margin: 2rem;
+    color: #000;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+  }
+  .bar-chart {
+    max-width: 600px;
+  }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.2rem;
+  }
+  .label {
+    flex: 1 0 150px;
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
+  .bar {
+    height: 16px;
+    margin-right: 0.5rem;
+  }
+  .bar-green {
+    background-color: #2c9c2c;
+  }
+  .bar-grey {
+    background-color: #bcbcbc;
+  }
+  .bar-red {
+    background-color: #d5413e;
+  }
+  .percent {
+    width: 30px;
+    text-align: right;
+    font-size: 0.875rem;
+  }
+  .legend {
+    border: 1px solid #ccc;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    width: 280px;
+    font-size: 0.875rem;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.25rem;
+  }
+  .color-box {
+    width: 16px;
+    height: 16px;
+    margin-right: 0.5rem;
+  }
+  .note {
+    font-style: italic;
+    font-size: 0.875rem;
+    margin-top: 1rem;
+    max-width: 280px;
+  }
+  table.data-table {
+    border-collapse: collapse;
+    margin-top: 2rem;
+    max-width: 600px;
+    width: 100%;
+  }
+  table.data-table th, table.data-table td {
+    border: 1px solid #ccc;
+    padding: 0.25rem 0.5rem;
+    text-align: left;
+  }
+  table.data-table th {
+    background-color: #eee;
+  }
+</style>
+</head>
+<body>
+<figure>
+  <figcaption>
+    <p><strong>Figure 4</strong></p>
+    <h2>Employers see a need for total wellbeing.</h2>
+    <p><strong>QUESTION:</strong> Five years from now, how interested do you think your employees will be in the following types of benefits?</p>
+  </figcaption>
+  <section class="bar-chart" aria-label="Employer interest in different employee benefits in five years">
+    <div class="bar-row">
+      <div class="label">Medical insurance</div>
+      <div class="bar bar-green" style="width: 89%;"></div>
+      <div class="percent">89%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Dental insurance</div>
+      <div class="bar bar-green" style="width: 79%;"></div>
+      <div class="percent">79%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Vision insurance</div>
+      <div class="bar bar-green" style="width: 74%;"></div>
+      <div class="percent">74%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Paid family or medical leave</div>
+      <div class="bar bar-grey" style="width: 71%;"></div>
+      <div class="percent">71%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Life insurance</div>
+      <div class="bar bar-grey" style="width: 67%;"></div>
+      <div class="percent">67%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Short-term disability insurance</div>
+      <div class="bar bar-grey" style="width: 63%;"></div>
+      <div class="percent">63%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Mental health/substance abuse treatment benefits</div>
+      <div class="bar bar-green" style="width: 60%;"></div>
+      <div class="percent">60%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Career development</div>
+      <div class="bar bar-grey" style="width: 59%;"></div>
+      <div class="percent">59%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Physical health wellness programs</div>
+      <div class="bar bar-grey" style="width: 58%;"></div>
+      <div class="percent">58%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Long-term disability insurance</div>
+      <div class="bar bar-grey" style="width: 58%;"></div>
+      <div class="percent">58%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Accident insurance</div>
+      <div class="bar bar-grey" style="width: 58%;"></div>
+      <div class="percent">58%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Telemedicine benefits</div>
+      <div class="bar bar-grey" style="width: 57%;"></div>
+      <div class="percent">57%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Long-term care insurance</div>
+      <div class="bar bar-red" style="width: 54%;"></div>
+      <div class="percent">54%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Critical illness insurance</div>
+      <div class="bar bar-grey" style="width: 54%;"></div>
+      <div class="percent">54%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Employee assistance programs</div>
+      <div class="bar bar-grey" style="width: 54%;"></div>
+      <div class="percent">54%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Financial wellness programs</div>
+      <div class="bar bar-red" style="width: 54%;"></div>
+      <div class="percent">54%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Emergency savings benefit</div>
+      <div class="bar bar-grey" style="width: 52%;"></div>
+      <div class="percent">52%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Hospital indemnity insurance</div>
+      <div class="bar bar-red" style="width: 45%;"></div>
+      <div class="percent">45%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Caregiving benefits</div>
+      <div class="bar bar-grey" style="width: 45%;"></div>
+      <div class="percent">45%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Identity theft protection</div>
+      <div class="bar bar-red" style="width: 44%;"></div>
+      <div class="percent">44%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Tuition assistance</div>
+      <div class="bar bar-red" style="width: 40%;"></div>
+      <div class="percent">40%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Debt management counseling</div>
+      <div class="bar bar-red" style="width: 38%;"></div>
+      <div class="percent">38%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Student loan assistance/repayment</div>
+      <div class="bar bar-red" style="width: 36%;"></div>
+      <div class="percent">36%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Legal services plan</div>
+      <div class="bar bar-red" style="width: 35%;"></div>
+      <div class="percent">35%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Societal benefits</div>
+      <div class="bar bar-red" style="width: 34%;"></div>
+      <div class="percent">34%</div>
+    </div>
+    <div class="bar-row">
+      <div class="label">Pet insurance</div>
+      <div class="bar bar-red" style="width: 22%;"></div>
+      <div class="percent">22%</div>
+    </div>
+  </section>
+  <aside class="legend" aria-label="Legend for bar chart colors">
+    <div class="legend-item">
+      <div class="color-box" style="background-color:#2c9c2c;"></div>
+      <div>Up 5 percentage points or more vs. 2023 study</div>
+    </div>
+    <div class="legend-item">
+      <div class="color-box" style="background-color:#d5413e;"></div>
+      <div>Down 5 percentage points or more vs. 2023 study</div>
+    </div>
+  </aside>
+  <p class="note">Note: Percent of employers that believe their company’s employees will be “very” or “extremely” interested in the benefit in the future.</p>
+</figure>
+
+<table class="data-table" summary="Percent of employers' anticipated interest in employee benefits in 5 years with color indication of change from 2023 study">
+  <thead>
+    <tr>
+      <th>Benefit</th>
+      <th>Percent Interested</th>
+      <th>Change vs 2023 Study</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Medical insurance</td><td>89%</td><td>Up 5 percentage points or more</td></tr>
+    <tr><td>Dental insurance</td><td>79%</td><td>Up 5 percentage points or more</td></tr>
+    <tr><td>Vision insurance</td><td>74%</td><td>Up 5 percentage points or more</td></tr>
+    <tr><td>Paid family or medical leave</td><td>71%</td><td>No significant change</td></tr>
+    <tr><td>Life insurance</td><td>67%</td><td>No significant change</td></tr>
+    <tr><td>Short-term disability insurance</td><td>63%</td><td>No significant change</td></tr>
+    <tr><td>Mental health/substance abuse treatment benefits</td><td>60%</td><td>No significant change</td></tr>
+    <tr><td>Career development</td><td>59%</td><td>No significant change</td></tr>
+    <tr><td>Physical health wellness programs</td><td>58%</td><td>No significant change</td></tr>
+    <tr><td>Long-term disability insurance</td><td>58%</td><td>No significant change</td></tr>
+    <tr><td>Accident insurance</td><td>58%</td><td>No significant change</td></tr>
+    <tr><td>Telemedicine benefits</td><td>57%</td><td>No significant change</td></tr>
+    <tr><td>Long-term care insurance</td><td>54%</td><td>Down 5 percentage points or more</td></tr>
+    <tr><td>Critical illness insurance</td><td>54%</td><td>No significant change</td></tr>
+    <tr><td>Employee assistance programs</td><td>54%</td><td>No significant change</td></tr>
+    <tr><td>Financial wellness programs</td><td>54%</td><td>Down 5 percentage points or more</td></tr>
+    <tr><td>Emergency savings benefit</td><td>52%</td><td>No significant change</td></tr>
+    <tr><td>Hospital indemnity insurance</td><td>45%</td><td>Down 5 percentage points or more</td></tr>
+    <tr><td>Caregiving benefits</td><td>45%</td><td>No significant change</td></tr>
+    <tr><td>Identity theft protection</td><td>44%</td><td>Down 5 percentage points or more</td></tr>
+    <tr><td>Tuition assistance</td><td>40%</td><td>Down 5 percentage points or more</td></tr>
+    <tr><td>Debt management counseling</td><td>38%</td><td>Down 5 percentage points or more</td></tr>
+    <tr><td>Student loan assistance/repayment</td><td>36%</td><td>Down 5 percentage points or more</td></tr>
+    <tr><td>Legal services plan</td><td>35%</td><td>Down 5 percentage points or more</td></tr>
+    <tr><td>Societal benefits</td><td>34%</td><td>Down 5 percentage points or more</td></tr>
+    <tr><td>Pet insurance</td><td>22%</td><td>Down 5 percentage points or more</td></tr>
+  </tbody>
+</table>
+</body>
+</html>

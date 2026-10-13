@@ -1,23 +1,9 @@
-This fits the standard pattern of LLM instrution following. If the one-shot approach does not work break down the problem into smaller verifiable steps. This feature is not available in open source Tesseract.  
 
-# Claim Blocking Analysis Demo
+Blocking Demo
 
-An animated synthetic claim-processing example showing OCR block detection, positional pixel comparison, semantic similarity, and duplicate-candidate scoring.
+This is one of the core methods for resolving non ocrable content or improvintg the quality of full page OCR. 
 
-![Animated claim blocking analysis](outputs/claim-blocking-analysis.png)
+Submitting /Users/dc/geha/PDF_processing/bill_lading/bill_of_lading_alt_1_red_block_layout.png to chatGPT won't work
 
-The red box advances through patient, provider, service-line, total, and narrative blocks. The example is for candidate review and does not make payment or denial decisions.
+Have to segment the page into blocks for chatGPT to work. Take screenshot with playwright/Chrome send to LLM to make html. loop 4x or more unitl no errors. Claude works better than chagGPT. Claude can reproduce the visual details from graphs from E&Y borchure on united health group site. chatGPT cant. 
 
-## Block embeddings
-
-Each of the five document blocks has a reproducible 1,024-dimensional, L2-normalized character n-gram embedding. This matches the repository's OCR-noise-tolerant approach while using stable hashing across processes.
-
-```bash
-python work/calculate_block_embeddings.py
-```
-
-Generated files:
-
-- `outputs/block_embeddings.json` — dense vectors, block text, normalized coordinates, and checksums
-- `outputs/block_embedding_summary.csv` — one summary row per block
-- `outputs/block_embedding_cosine.csv` — block-to-block cosine similarity matrix

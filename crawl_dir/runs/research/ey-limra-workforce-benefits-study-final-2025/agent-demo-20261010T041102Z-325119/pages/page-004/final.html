@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Workforce benefits key finding</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    margin: 40px;
+    color: #222;
+  }
+  h1 {
+    font-weight: 300;
+    font-size: 2.5rem;
+    margin-bottom: 0;
+  }
+  h2 {
+    font-weight: 700;
+    margin-top: 5px;
+    margin-bottom: 20px;
+  }
+  hr {
+    border: none;
+    border-bottom: 2px solid #ccc;
+    margin-top: 10px;
+    margin-bottom: 40px;
+  }
+  .highlight-border {
+    border-left: 5px solid #ffde00;
+    padding-left: 15px;
+    margin-bottom: 27px;
+  }
+  p {
+    margin-bottom: 1em;
+  }
+  strong {
+    font-weight: 700;
+  }
+  em {
+    font-style: italic;
+  }
+  figure {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin: 40px 0;
+  }
+  figcaption {
+    width: 100%;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  figcaption .question {
+    font-weight: 600;
+    font-size: 0.95rem;
+    font-style: normal;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+  .chart-and-photo {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .bar-chart {
+    max-width: 480px;
+    flex: 1;
+  }
+  svg {
+    width: 100%;
+    height: 300px;
+    font-family: Arial, sans-serif;
+  }
+  .bar {
+    cursor: pointer;
+    transition: fill 0.2s ease-in-out;
+  }
+  .bar:hover {
+    filter: brightness(0.85);
+  }
+  .chart-label {
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  .series-label {
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  .legend {
+    margin-top: 15px;
+    border: 1px solid #ccc;
+    background-color: #f7f7f7;
+    display: inline-block;
+    padding: 7px 12px;
+    font-size: 0.85rem;
+    font-family: Arial, sans-serif;
+  }
+  .legend span {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 16px;
+  }
+  .legend-square {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    display: inline-block;
+  }
+  .legend-fewer {
+    background-color: #d1d3d4;
+  }
+  .legend-same {
+    background-color: #65656c;
+  }
+  .legend-more {
+    background-color: #ffde00;
+  }
+  table {
+    border-collapse: collapse;
+    margin-top: 24px;
+    width: 100%;
+    max-width: 480px;
+    font-size: 0.9rem;
+  }
+  th, td {
+    border: 1px solid #bbb;
+    padding: 8px 10px;
+    text-align: center;
+  }
+  th {
+    background-color: #f0f0f0;
+    font-weight: 700;
+  }
+  td.series-name {
+    text-align: left;
+  }
+  figcaption small {
+    display: block;
+    margin-top: 6px;
+    font-weight: normal;
+    font-style: italic;
+  }
+  .photo {
+    flex: 1 1 320px;
+    max-width: 480px;
+  }
+  .photo img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  footer {
+    margin-top: 50px;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+</style>
+</head>
+<body>
+<header role="banner">
+  <h1>Key finding 1</h1>
+  <h2>Workforce benefits remain at the heart of the employee value proposition – and expectations continue to rise.</h2>
+  <hr />
+</header>
+
+<main role="main" id="content">
+  <p>All industry stakeholders recognize the value of benefits and their power to attract and retain workers in what remains a tight labor market. Similarly, the value of a fully engaged, happy, healthy and productive workforce is well understood. So, it’s no surprise that most employers expect to offer more benefits in the future, according to our findings.</p>
+
+  <p><strong>Expanding benefits for workers:</strong> In a time of widespread economic uncertainty and high inflation combined with a workforce that features five generations, workers’ continued reliance on benefits and their rising interest in more options is to be expected. Much like the experiences offered by other sectors, employees are looking for more flexibility and control in choosing the benefits that are right for their unique lifestyles and situations. Thus, there’s every reason to believe benefits will only get more important to companies looking to attract and retain the workers they need to succeed. Our results show that the future workforce will require more freelance and gig workers, who are also increasingly interested in accessing benefits. See <em>sidebar</em>.</p>
+
+  <p>An overwhelming majority of employers – 84% overall and 95% of large employers – feel that benefits are necessary to attract key talent. More than half (57%) of small employers and 67% of large organizations expect to offer more benefits in the future. See <em>Figure 1</em>.</p>
+
+  <figure aria-labelledby="fig1title fig1desc" role="region">
+    <figcaption>
+      <div id="fig1title">Figure 1<br />Companies plan to offer more benefits in five years.</div>
+      <p id="fig1desc" class="question"><strong>QUESTION:</strong> In five years, do you think your company will be offering fewer, the same or more benefits than it does now?</p>
+    </figcaption>
+    <div class="chart-and-photo">
+      <section aria-label="Bar chart showing companies planning to offer more benefits in five years by employer size" class="bar-chart">
+        <svg viewBox="0 0 480 280" role="img" aria-labelledby="chartTitle chartDesc">
+          <title id="chartTitle">Companies planning to offer more benefits in five years by employer size</title>
+          <desc id="chartDesc">Stacked bar chart showing percentages of employers who expect to offer fewer benefits, about the same, or more benefits for small, midsize, and large companies with change from 2023 noted for more benefits.</desc>
+          <style>
+            .fewer { fill: #d1d3d4; }
+            .same { fill: #65656c; }
+            .more { fill: #ffde00; }
+            .label { font-size: 12px; fill: black; font-weight: 600; }
+            .change-label { font-size: 14px; font-weight: 700; fill: black; }
+            .axis-label { font-size: 14px; fill: black; font-weight: 600; }
+          </style>
+
+          <!-- Axes bottom line -->
+          <line x1="40" y1="250" x2="440" y2="250" stroke="#000" stroke-width="1" />
+
+          <!-- Bars for Small (10-99 employees) at x=80 -->
+          <!-- Fewer benefits 3% -->
+          <rect class="fewer bar" x="65" y="243.5" width="30" height="6.5" />
+          <text class="label" x="80" y="260" text-anchor="middle">3%</text>
+          <!-- About the same 40% -->
+          <rect class="same bar" x="65" y="103" width="30" height="140" />
+          <text class="label" x="80" y="95" text-anchor="middle">40%</text>
+          <!-- More benefits 57% -->
+          <rect class="more bar" x="65" y="10" width="30" height="90" />
+          <text class="label" x="80" y="40" text-anchor="middle">57%</text>
+          <!-- +7% change from 2023 text -->
+          <text class="change-label" x="125" y="40" text-anchor="start">+7%</text>
+          <text class="label" x="125" y="60" text-anchor="start">change from</text>
+          <text class="label" x="125" y="75" text-anchor="start">2023</text>
+          <!-- Label below bar -->
+          <text class="axis-label" x="80" y="270" text-anchor="middle">Small<br />(10–99 employees)</text>
+
+          <!-- Bars for Midsize (100-999 employees) at x=215 -->
+          <!-- Fewer benefits 1% -->
+          <rect class="fewer bar" x="200" y="247" width="30" height="3" />
+          <text class="label" x="215" y="260" text-anchor="middle">1%</text>
+          <!-- About the same 35% -->
+          <rect class="same bar" x="200" y="118" width="30" height="129" />
+          <text class="label" x="215" y="110" text-anchor="middle">35%</text>
+          <!-- More benefits 64% -->
+          <rect class="more bar" x="200" y="10" width="30" height="108" />
+          <text class="label" x="215" y="40" text-anchor="middle">64%</text>
+          <!-- +6% change from 2023 text -->
+          <text class="change-label" x="275" y="40" text-anchor="start">+6%</text>
+          <text class="label" x="275" y="60" text-anchor="start">change from</text>
+          <text class="label" x="275" y="75" text-anchor="start">2023</text>
+          <!-- Label below bar -->
+          <text class="axis-label" x="215" y="270" text-anchor="middle">Midsize<br />(100–999 employees)</text>
+
+          <!-- Bars for Large (1,000 or more employees) at x=350 -->
+          <!-- Fewer benefits 3% -->
+          <rect class="fewer bar" x="335" y="243.5" width="30" height="6.5" />
+          <text class="label" x="350" y="260" text-anchor="middle">3%</text>
+          <!-- About the same 30% -->
+          <rect class="same bar" x="335" y="173" width="30" height="70" />
+          <text class="label" x="350" y="165" text-anchor="middle">30%</text>
+          <!-- More benefits 67% -->
+          <rect class="more bar" x="335" y="10" width="30" height="120" />
+          <text class="label" x="350" y="40" text-anchor="middle">67%</text>
+          <!-- +5% change from 2023 text -->
+          <text class="change-label" x="410" y="40" text-anchor="start">+5%</text>
+          <text class="label" x="410" y="60" text-anchor="start">change from</text>
+          <text class="label" x="410" y="75" text-anchor="start">2023</text>
+          <!-- Label below bar -->
+          <text class="axis-label" x="350" y="270" text-anchor="middle">Large<br />(1,000 or more employees)</text>
+        </svg>
+
+        <div class="legend" aria-label="Chart legend">
+          <span><span class="legend-square legend-fewer" aria-hidden="true"></span>Fewer benefits</span>
+          <span><span class="legend-square legend-same" aria-hidden="true"></span>About the same</span>
+          <span><span class="legend-square legend-more" aria-hidden="true"></span>More benefits</span>
+        </div>
+
+        <table aria-label="Data table of employer size and their expected benefits offering in five years">
+          <caption>Data Table: Companies plan to offer more benefits in five years by employer size</caption>
+          <thead>
+            <tr>
+              <th scope="col">Employer Size</th>
+              <th scope="col">Fewer Benefits (%)</th>
+              <th scope="col">About the Same (%)</th>
+              <th scope="col">More Benefits (%)</th>
+              <th scope="col">Change from 2023 (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" class="series-name">Small (10–99 employees)</th>
+              <td>3</td>
+              <td>40</td>
+              <td>57</td>
+              <td>+7</td>
+            </tr>
+            <tr>
+              <th scope="row" class="series-name">Midsize (100–999 employees)</th>
+              <td>1</td>
+              <td>35</td>
+              <td>64</td>
+              <td>+6</td>
+            </tr>
+            <tr>
+              <th scope="row" class="series-name">Large (1,000 or more employees)</th>
+              <td>3</td>
+              <td>30</td>
+              <td>67</td>
+              <td>+5</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <picture class="photo" aria-label="Photo of bright and green office space with plants and chairs visible through window">
+        <img alt="An office interior with modern furnishings and large green plants." />
+      </picture>
+    </div>
+  </figure>
+</main>
+
+<footer>
+  4 | <strong>Harnessing growth in workforce benefits:</strong> the next horizon | 2025 Workforce Benefits Study
+</footer>
+</body>
+</html>

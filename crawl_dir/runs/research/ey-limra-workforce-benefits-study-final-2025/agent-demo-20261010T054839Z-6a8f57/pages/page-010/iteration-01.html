@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Employee interest in benefits varies across generations</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.4;
+    margin: 1em;
+    color: #111;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 0.5em;
+  }
+  th, td {
+    border: 1px solid #bbb;
+    padding: 0.3em 0.5em;
+    text-align: center;
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
+    font-size: 0.9em;
+  }
+  th:first-child, td:first-child {
+    text-align: left;
+    white-space: nowrap;
+    font-family: monospace;
+    font-size: 0.88em;
+  }
+  caption {
+    caption-side: top;
+    text-align: left;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  thead th {
+    background: #eee;
+  }
+  /* Heat map cell coloring */
+  .heat-100 {background-color: #2a7a2a; color: #fff;}
+  .heat-95  {background-color: #3b8c3b; color: #fff;}
+  .heat-90  {background-color: #4a9f4a; color: #fff;}
+  .heat-85  {background-color: #58b058; color: #fff;}
+  .heat-80  {background-color: #7ec57e;}
+  .heat-75  {background-color: #89cc89;}
+  .heat-70  {background-color: #abd1ab;}
+  .heat-60  {background-color: #c6dfc6;}
+  .heat-50  {background-color: #e4efe4;}
+  .heat-45  {background-color: #f0f5f0;}
+  .heat-40  {background-color: #f7e9e9;}
+  .heat-30  {background-color: #fbd4d4;}
+  .heat-28  {background-color: #fddcdc;}
+  .heat-27  {background-color: #fddbdb;}
+  .heat-25  {background-color: #fec3c3; color: #fff;}
+  .heat-24  {background-color: #fdabab; color: #fff;}
+  .heat-23  {background-color: #fda2a2; color: #fff;}
+  .heat-22  {background-color: #fe9a9a; color: #fff;}
+  .heat-20  {background-color: #eb6d6d; color: #fff;}
+  .heat-18  {background-color: #f27272; color: #fff;}
+  .heat-17  {background-color: #f16767; color: #fff;}
+  .heat-15  {background-color: #ec5b5b; color: #fff;}
+  .heat-14  {background-color: #ea5656; color: #fff;}
+  .heat-13  {background-color: #e54d4d; color: #fff;}
+  .heat-12  {background-color: #da4141; color: #fff;}
+  .heat-11  {background-color: #d73c3c; color: #fff;}
+  .heat-10  {background-color: #dd4242; color: #fff;}
+  .heat-9   {background-color: #cd1919; color: #fff;}
+  .heat-8   {background-color: #c71515; color: #fff;}
+  .heat-6   {background-color: #b21313; color: #fff;}
+  .heat-4   {background-color: #a11010; color: #fff;}
+  .heat-3   {background-color: #920f0f; color: #fff;}
+  figure {
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+  figcaption {
+    font-size: 0.85em;
+    font-style: italic;
+    max-width: 900px;
+    margin-top: 0.5em;
+  }
+  .heatmap-key {
+    display: flex;
+    align-items: center;
+    font-size: 0.85em;
+    max-width: 300px;
+    margin-top: 1em;
+    border: 1px solid #ddd;
+    padding: 0.6em 0.8em;
+    gap: 0.5em;
+  }
+  .heatmap-bar {
+    flex-grow: 1;
+    height: 1.2em;
+    background: linear-gradient(to right, #cd1919, #e4efe4, #2a7a2a);
+    border: 1px solid #bbb;
+  }
+  .heatmap-label {
+    width: 4.5em;
+  }
+  .footer {
+    font-weight: 700;
+    font-size: 0.85em;
+    margin-top: 3em;
+  }
+  .question {
+    font-weight: 700;
+  }
+  .header-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1em;
+  }
+</style>
+</head>
+<body>
+<!-- Header image from source PDF at top -->
+<img 
+  alt="People working in an office setting" 
+  class="header-image" 
+  src="data:image/jpeg;base64,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" />
+<figure>
+ <figcaption>
+  <p><strong>Figure 6</strong><br />
+  <strong>Employee interest in benefits varies across generations.</strong><br />
+  <span class="question">QUESTION:</span> Regardless of whether the benefit is currently available to you at work, how interested would you be in having your employer offer it in the future?</p>
+ </figcaption>
+ <table>
+  <thead>
+   <tr>
+    <th scope="col"></th>
+    <th scope="col">Gen Z</th>
+    <th scope="col">Millennials</th>
+    <th scope="col">Gen X</th>
+    <th scope="col">Baby boomers</th>
+   </tr>
+  </thead>
+  <tbody>
+   <tr><th scope="row">Medical insurance</th><td class="heat-80">67%</td><td class="heat-90">75%</td><td class="heat-100">86%</td><td class="heat-95">80%</td></tr>
+   <tr><th scope="row">Dental insurance</th><td class="heat-70">61%</td><td class="heat-85">72%</td><td class="heat-90">76%</td><td class="heat-85">74%</td></tr>
+   <tr><th scope="row">Vision insurance</th><td class="heat-50">50%</td><td class="heat-70">61%</td><td class="heat-80">69%</td><td class="heat-75">63%</td></tr>
+   <tr><th scope="row">Paid family or medical leave</th><td class="heat-45">54%</td><td class="heat-50">57%</td><td class="heat-45">54%</td><td class="heat-35">43%</td></tr>
+   <tr><th scope="row">Life insurance</th><td class="heat-40">48%</td><td class="heat-42">52%</td><td class="heat-43">53%</td><td class="heat-40">40%</td></tr>
+   <tr><th scope="row">Career development</th><td class="heat-40">40%</td><td class="heat-38">46%</td><td class="heat-28">37%</td><td class="heat-20">25%</td></tr>
+   <tr><th scope="row">Physical health wellness programs</th><td class="heat-28">39%</td><td class="heat-28">39%</td><td class="heat-25">34%</td><td class="heat-27">32%</td></tr>
+   <tr><th scope="row">Short-term disability insurance</th><td class="heat-10">24%</td><td class="heat-25">35%</td><td class="heat-35">41%</td><td class="heat-30">37%</td></tr>
+   <tr><th scope="row">Long-term disability insurance</th><td class="heat-8">22%</td><td class="heat-25">35%</td><td class="heat-38">40%</td><td class="heat-40">41%</td></tr>
+   <tr><th scope="row">Long-term care insurance</th><td class="heat-18">30%</td><td class="heat-18">31%</td><td class="heat-22">36%</td><td class="heat-32">42%</td></tr>
+   <tr><th scope="row">Accident insurance</th><td class="heat-27">39%</td><td class="heat-23">34%</td><td class="heat-20">33%</td><td class="heat-18">32%</td></tr>
+   <tr><th scope="row">Critical illness insurance</th><td class="heat-15">29%</td><td class="heat-17">33%</td><td class="heat-18">34%</td><td class="heat-17">33%</td></tr>
+   <tr><th scope="row">Emergency savings benefit</th><td class="heat-30">41%</td><td class="heat-23">34%</td><td class="heat-20">30%</td><td class="heat-10">18%</td></tr>
+   <tr><th scope="row">Identity theft protection</th><td class="heat-25">37%</td><td class="heat-18">31%</td><td class="heat-15">27%</td><td class="heat-18">32%</td></tr>
+   <tr><th scope="row">Mental health or substance abuse treatment benefits</th><td class="heat-40">45%</td><td class="heat-17">33%</td><td class="heat-12">24%</td><td class="heat-11">19%</td></tr>
+   <tr><th scope="row">Employee assistance programs</th><td class="heat-13">28%</td><td class="heat-20">36%</td><td class="heat-13">28%</td><td class="heat-11">19%</td></tr>
+   <tr><th scope="row">Financial wellness programs</th><td class="heat-19">36%</td><td class="heat-17">33%</td><td class="heat-11">26%</td><td class="heat-9">17%</td></tr>
+   <tr><th scope="row">Telemedicine benefits</th><td class="heat-15">31%</td><td class="heat-14">29%</td><td class="heat-15">30%</td><td class="heat-12">20%</td></tr>
+   <tr><th scope="row">Tuition assistance</th><td class="heat-30">40%</td><td class="heat-22">32%</td><td class="heat-12">24%</td><td class="heat-6">11%</td></tr>
+   <tr><th scope="row">Student loan assistance/repayment</th><td class="heat-30">41%</td><td class="heat-22">32%</td><td class="heat-9">19%</td><td class="heat-4">7%</td></tr>
+   <tr><th scope="row">Hospital indemnity insurance</th><td class="heat-18">30%</td><td class="heat-12">24%</td><td class="heat-15">27%</td><td class="heat-15">24%</td></tr>
+   <tr><th scope="row">Caregiving benefits</th><td class="heat-18">30%</td><td class="heat-14">27%</td><td class="heat-10">20%</td><td class="heat-11">22%</td></tr>
+   <tr><th scope="row">Legal services plan</th><td class="heat-10">24%</td><td class="heat-13">26%</td><td class="heat-9">21%</td><td class="heat-11">19%</td></tr>
+   <tr><th scope="row">Debt management counseling</th><td class="heat-25">34%</td><td class="heat-12">24%</td><td class="heat-6">17%</td><td class="heat-7">9%</td></tr>
+   <tr><th scope="row">Pet insurance</th><td class="heat-9">23%</td><td class="heat-5">19%</td><td class="heat-3">12%</td><td class="heat-3">9%</td></tr>
+   <tr><th scope="row">Societal benefits</th><td class="heat-8">22%</td><td class="heat-2">15%</td><td class="heat-1">9%</td><td class="heat-0">4%</td></tr>
+  </tbody>
+ </table>
+ <aside class="heatmap-key" aria-label="Heat map legend for interest levels">
+  <div><strong>Heat map:</strong></div>
+  <div class="heatmap-bar" role="presentation" aria-hidden="true"></div>
+  <div class="heatmap-label" aria-hidden="true">Least interest</div>
+  <div class="heatmap-label" aria-hidden="true">Most interest</div>
+ </aside>
+ <figcaption><em>Note: Percent of employees who are “very” or “extremely” interested in having their employer offer the benefit in the future.</em></figcaption>
+</figure>
+<div class="footer">
+ 10 | <strong>Harnessing growth in workforce benefits:</strong> the next horizon | 2025 Workforce Benefits Study
+</div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+{
+  "page_type": "mixed",
+  "segmentation_recommended": true,
+  "reason": "The page contains distinct narrative text sections above and a data visualization section (chart) below, requiring precise segmentation for clarity.",
+  "regions": [
+    {
+      "id": "r1",
+      "label": "header",
+      "kind": "header",
+      "reading_order": 1,
+      "x1": 48,
+      "y1": 31,
+      "x2": 555,
+      "y2": 86,
+      "pixel_box": [
+        73,
+        61,
+        849,
+        170
+      ],
+      "image": "region-01-r1.png"
+    },
+    {
+      "id": "r2",
+      "label": "paragraph",
+      "kind": "paragraph",
+      "reading_order": 2,
+      "x1": 48,
+      "y1": 107,
+      "x2": 940,
+      "y2": 334,
+      "pixel_box": [
+        73,
+        212,
+        1438,
+        661
+      ],
+      "image": "region-02-r2.png"
+    },
+    {
+      "id": "r3",
+      "label": "data_visualization",
+      "kind": "other",
+      "reading_order": 3,
+      "x1": 0,
+      "y1": 344,
+      "x2": 1000,
+      "y2": 704,
+      "pixel_box": [
+        0,
+        681,
+        1530,
+        1394
+      ],
+      "image": "region-03-r3.png"
+    },
+    {
+      "id": "r4",
+      "label": "footer",
+      "kind": "footer",
+      "reading_order": 4,
+      "x1": 48,
+      "y1": 842,
+      "x2": 438,
+      "y2": 864,
+      "pixel_box": [
+        73,
+        1667,
+        670,
+        1711
+      ],
+      "image": "region-04-r4.png"
+    }
+  ],
+  "coordinate_system": "normalized_0_1000",
+  "source_image": "/Users/dc/geha/crawl_dir/runs/research/ey-limra-workforce-benefits-study-final-2025/agent-demo-20261010T041102Z-325119/pages/page-013/source.png",
+  "overlay": "regions-overlay.png"
+}

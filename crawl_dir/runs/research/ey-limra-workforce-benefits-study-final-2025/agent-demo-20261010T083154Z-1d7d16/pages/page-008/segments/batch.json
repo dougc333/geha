@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "gpt-4.1-mini",
+  "created_at": "2026-10-10T08:38:10.845697+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "chart1",
+      "kind": "chart",
+      "title": "Employers see a need for total wellbeing.",
+      "source_png": "figure-01-chart1.png",
+      "bounding_box": [
+        57,
+        83,
+        1490,
+        1467
+      ],
+      "output_directory": "figure-01",
+      "native_evidence": "figure-01/native-evidence.json",
+      "native_evidence_word_count": 166,
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 493.1,
+          "candidate_sha256": "d5400685cc90ae54c6f2c1b1dd0bbbe003080b2db61fbe3af76a1b15c38c49dc"
+        }
+      ],
+      "selected_iteration": 1,
+      "selected_error_count": 0,
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-01.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 1,
+    "failed": 0,
+    "total_iterations": 1,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-10-10T08:38:24.818920+00:00"
+}

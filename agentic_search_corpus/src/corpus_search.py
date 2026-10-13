@@ -4,14 +4,38 @@ import argparse
 import hashlib
 import json
 import re
+import sys
 import time
 import numpy as np
 from rank_bm25 import BM25Okapi
 from langchain_core.documents import Document
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = Path('/Users/dc/geha/downloads/dental/fedvip')
-DEFAULT_DIRS = [BASE / '2026-geha-dental-benefits-guide_pages', BASE / '2026-geha-dental-plan-brochure_pages']
+REPO = Path(__file__).resolve().parents[2]
+if str(REPO) not in sys.path:
+    sys.path.insert(0, str(REPO))
+from crawl_dir.src.consumer_paths import page_root
+
+DEFAULT_DIRS = [
+    page_root('dental', 'fedvip/2026-geha-dental-benefits-guide.pdf', allow_candidate=True),
+    page_root('dental', 'fedvip/2026-geha-dental-plan-brochure.pdf', allow_candidate=True),
+]
+
+
+def _page_markdown_files(directory):
+    directory = Path(directory)
+    flat = sorted(directory.glob('page-*.md'))
+    return flat or sorted(directory.glob('page-*/page.md'))
+
+
+def _page_number(path):
+    name = path.parent.name if path.name == 'page.md' else path.stem
+    return int(name.split('-')[1])
+
+
+def _document_name(directory):
+    directory = Path(directory)
+    return directory.parents[1].name if directory.name == 'pages' else directory.name
 
 def tokenize(text):
     return re.findall(r'[a-z0-9]+', text.lower())
@@ -27,11 +51,12 @@ class CorpusSearch:
         # One source page per evidence unit preserves complete extracted tables.
         for directory in directories:
             directory = Path(directory)
-            for path in sorted(directory.glob('page-*.md')):
+            for path in _page_markdown_files(directory):
                 text = path.read_text()
                 self.docs.append(Document(page_content=text, metadata={
-                    'source': str(path), 'page': int(path.stem.split('-')[1]),
-                    'document': directory.name, 'chunk_id': directory.name + '/' + path.name}))
+                    'source': str(path), 'page': _page_number(path),
+                    'document': _document_name(directory),
+                    'chunk_id': _document_name(directory) + '/' + path.parent.name}))
         if not self.docs:
             raise ValueError('No page Markdown found in corpus directories')
         self.bm25 = BM25Okapi([tokenize(d.page_content) for d in self.docs])

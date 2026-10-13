@@ -1,0 +1,23 @@
+<!-- image -->
+
+## Disclaimer
+
+Drug Coverage Policies are developed as needed, reviewed and updated at least annually, and are subject to change. Other policies and coverage determination guidelines may apply. Federal and state regulatory requirements and member specific benefit plan documents, if applicable, must be reviewed prior to utilizing this Drug Coverage Policy.  This Drug Coverage Policy is for informational purposes only and does not constitute medical advice nor dictate how providers should practice medicine. This policy should not be reproduced, stored in a retrieval system, or altered from its original form without written permission from OncoHealth, Inc.
+
+## For Internal Use ONLY
+
+| Date       | Updates                                                                                                                                    |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| 11/7/2023  | Updated Step Therapy; Addition of HCPCS; Addition of Universal Criteria; Updated references                                                |
+| 12/29/23   | Added J9324                                                                                                                                |
+| 5/23/24    | Annual Review. Universal Criteria updated.                                                                                                 |
+| 8/5/2024   | Added pemetrexed Apotex 505 (b)(2), Updated Universal Criteria, Disclaimer, approval timeframe per compliance 7.2024                       |
+| 9/19/2024  | Policy adopted by GEHA; document updated for universal accessibility.                                                                      |
+| 11/10/2024 | Updated GEHA logo                                                                                                                          |
+| 11/14/2024 | Addition of new HCPCS effective 1/1/2025 pemetrexed avyxa 505 (b) (2); included Alimta brand as PA exempt under J9305 entry for pemetrexed |
+| 1/17/2025  | Updated status of Hospira, Sandoz and Teva to non-preferred; accessibility updates to format                                               |
+| 07/01/2025 | Updated HCPCS Description for J9292; Updated ST Criteria related to trial of 505(b)(2) generics                                            |
+| 10/1/2025  | Annual Review - removed J9999 - approved by OH P&T                                                                                         |
+| 10/23/25   | Corrected status of Hospira to non-preferred to align with the change made 1/17/25.                                                        |
+
+<!-- image -->

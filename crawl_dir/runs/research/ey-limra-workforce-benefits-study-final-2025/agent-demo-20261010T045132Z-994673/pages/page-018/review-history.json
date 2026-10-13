@@ -1,0 +1,242 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "section with green background filled with text and bullet points only, and a photo to the right",
+        "html_evidence": "<section aria-label=\"Regulatory fragmentation regarding leave management\" class=\"green-box\"> ... </section> without the photo image",
+        "correction": "Add the right side photo of a woman and child next to the green box content as in the PDF, or remove photo references from the HTML if image is not needed."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "A carrier that provides an integrated absence management program along with its disability product for a higher price Or",
+        "html_evidence": "<ul><li>A carrier that provides an integrated absence management program along with its disability product for a higher price Or</li>",
+        "correction": "Text on first bullet should be 'A carrier that provides an integrated absence management program along with its disability product for a higher price' with 'Or' on a separate line or separate paragraph as in the PDF."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "A carrier with the best-value disability product even without an integrated, real-time absence management service",
+        "html_evidence": "<ul><li>A carrier with the best-value disability product even without an integrated, real-time absence management service</li>",
+        "correction": "This bullet text is correct, no change needed here."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Legend text in Figure 11: 'A carrier that provides an integrated absence management program along with its disability product — for a higher price' and 'A carrier with the best-value disability product even without an integrated, real-time absence management service'",
+        "html_evidence": "Legend text broken incorrectly with words scattered such as 'integrated' superscripted or out of place and 'for a higher price' on separate lines",
+        "correction": "Fix legend text to be in correct order with properly grouped words and no mid-word breaks as found in the PDF."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Bar chart labeled with 'Small (10-99 employees)', 'Midsize (100-999 employees)', 'Large (1,000 or more employees)' and percentages arranged accurately beneath legend",
+        "html_evidence": "Bar chart with some percentage labels misplaced: '50%' above grey bar, '29%' and '36%' places interchanged with yellow and grey bar values not consistent with source PDF",
+        "correction": "Adjust SVG bar chart bars and text labels to correctly represent percentage values and colors in alignment with the source chart."
+      },
+      {
+        "category": "table_structure",
+        "source_evidence": "Table caption: 'Employer preferences for integrated absence management vs best-value disability product by company size' with 3 columns: Company Size, A carrier that provides an integrated absence management program for a higher price (%), A carrier with the best-value disability product without an integrated service (%)",
+        "html_evidence": "Table structure is correct with matching columns and data",
+        "correction": "No correction needed for table structure or content."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "The patchwork of rules and requirements for leave management may present significant compliance challenges to many employers. Consider that:",
+        "html_evidence": "The patchwork of rules and requirements for leave management may present significant compliance challenges to many\\nemployers. Consider that:",
+        "correction": "Remove unintended line break in 'Consider that:' sentence."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "A carrier that provides an integrated absence management program along with its disability product for a higher price Or A carrier with the best-value disability product even without an integrated, real-time absence management service",
+        "html_evidence": "A carrier that provides an integrated absence management program along with its disability product for a higher price Or A carrier with the best-value disability product even without an integrated, real-time absence management service",
+        "correction": "'Or' should be on its own line between the two bullet points as in source PDF; bullet points structure should be maintained."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Figure 11 In choosing carriers, employers value integrated absence management experiences more than affordability. QUESTION: Imagine your company was selecting a carrier for a new disability insurance benefit. Which of the following would you choose?",
+        "html_evidence": "Figure 11 In choosing carriers, employers value integrated absence management experiences more than affordability. QUESTION: Imagine your company was selecting a carrier for a new disability insurance benefit. Which of the following would you choose?",
+        "correction": "Remove unintended line breaks and preserve continuous text in the legend and figcaption area."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "■ A carrier that provides an integrated absence management program along with its disability product — for a higher price ■ A carrier with the best-value disability product even without an integrated, real-time absence management service",
+        "html_evidence": "■ A carrier that provides an integrated absence management program along with its disability product — for a higher price ■ A carrier with the best-value disability product even without an integrated, real-time absence management service",
+        "correction": "Legend text in candidate HTML is broken awkwardly and does not maintain correct reading order. It should read continuously and clearly as in source PDF."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Small (10-99 employees) Midsize (100-999 employees) Large (1,000 or more employees)",
+        "html_evidence": "Small (10-99 employees)Midsize (100-999 employees)Large (1,000 or more employees)",
+        "correction": "Category labels under bar chart are overlapping without spacing; they should be spaced correctly as in source PDF."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "The green box and the image of a woman carrying a child are side by side in the HTML, but in the PDF the green box is separate with the image aligned to the right distinctly.",
+        "html_evidence": "<section aria-label=\"Regulatory fragmentation regarding leave management\" class=\"green-box\">...</section> styled with flex and an image side by side",
+        "correction": "Separate the green box and image layout to match the PDF presentation, with the image distinctly positioned to the right, not tightly integrated in a flex container."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "The paragraph states: 'As more state-mandated plans are implemented, employers have options: They can choose public plans... The specific reasons cited by employer respondents were the lighter administrative burden on internal staff (57%), increased cost effectiveness (57%) and the ability to achieve better integration with other employer-sponsored benefits (55%)...",
+        "html_evidence": "Employers electing private plans did so to save time and money and to access better experiences. The specific reasons cited by employer respondents were the lighter administrative burden on internal staff (57%), increased cost effectiveness (57%) and the ability to achieve better integration with other employer-sponsored benefits (55%), including disability and other paid leave benefits.",
+        "correction": "Correct percentage of lighter administrative burden on internal staff to 57% and cost effectiveness to 57% as in source; confirm correct percentages."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "The bullet format: 'A carrier that provides an integrated absence management program along with its disability product for a higher price\\nOr\\nA carrier with the best-value disability product even without an integrated, real-time absence management service'",
+        "html_evidence": "Two separate <ul> with 'Or' in a centered paragraph in between",
+        "correction": "Convert the two options to a single list with 'Or' as a separate line between them, matching reading order in the source PDF."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar chart legend text: 'A carrier that provides an integrated absence management program along with its disability product — for a higher price' and 'A carrier with the best-value disability product even without an integrated, real-time absence management service'",
+        "html_evidence": "Legend is broken into multiple lines and words are disjointed across lines in the table under the chart causing unclear text flow and missing emphasis: 'integrated', 'for a higher price', 'without an integrated' are separated awkwardly in the legend and table.",
+        "correction": "Ensure legend and table text are presented as continuous, clear sentences with the bold emphasis phrases intact and no awkward line breaks splitting important phrases."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "In the PDF, the bar chart categories are spaced evenly and aligned horizontally below the bars: 'Small (10-99 employees)', 'Midsize (100-999 employees)', 'Large (1,000 or more employees)'",
+        "html_evidence": "Category labels in chart overlap partially e.g. 'Small (10-99 employees)Midsize (100-999 employees)Large (1,000 or more employees)' with no spacing between them below the bars.",
+        "correction": "Adjust horizontal spacing of category labels below the bar chart to avoid overlap and match the neat spacing in the PDF."
+      }
+    ]
+  },
+  {
+    "iteration": 3,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "image",
+        "source_evidence": "Image of a woman carrying a child on her back, both smiling, is clearly visible on the right side of the green box in the source PDF.",
+        "html_evidence": "<img alt=\"Woman carrying child on back, both smiling\" src=\"\"/> inside green box with no image loaded.",
+        "correction": "Include the actual image file or a valid src URL to the image so it displays properly as in the source PDF."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "The legend text in the source PDF is: 'A carrier that provides an integrated absence management program along with its disability product — for a higher price' and 'A carrier with the best-value disability product even without an integrated, real-time absence management service'.",
+        "html_evidence": "\"A carrier that provides an integratedabsence management program along with its disability product — for a higher price\" and \"A carrier with the best-value without an integrated , real-time absence management service\" with fragmented and incorrectly placed bold text inside the legend box.",
+        "correction": "Correctly format the legend text with proper spacing and bold emphasis exactly as in the source: 'A carrier that provides an integrated absence management program along with its disability product — for a higher price' and 'A carrier with the best-value disability product even without an integrated, real-time absence management service'."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "The phrase 'Or' is displayed centered between two bulleted list items in the source PDF, visually separating the choices as an intermediate line.",
+        "html_evidence": "A paragraph with class 'or-line' containing 'Or' is displayed after the first list and before the second.",
+        "correction": "No issue here, reading order of 'Or' between lists is preserved."
+      },
+      {
+        "category": "table_structure",
+        "source_evidence": "The source PDF includes a table titled 'Employer preferences for integrated absence management vs best-value disability product by company size' with 3 rows and 3 columns including percentages for each category.",
+        "html_evidence": "The candidate HTML includes a semantically correct table with caption, header row, and matching data rows and columns identical to the PDF.",
+        "correction": "No issue, table is correctly included and structured."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "The source PDF text in the regulatory box and other paragraphs is fully present and matches the candidate HTML well.",
+        "html_evidence": "No major missing text found in main paragraphs or list items apart from the image missing and corrupted legend text.",
+        "correction": "No text missing except the corrupted legend text as noted."
+      }
+    ]
+  },
+  {
+    "iteration": 4,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "image",
+        "source_evidence": "Image showing a woman carrying a child on her back, both smiling, is displayed on the right side of the green box with text 'Regulatory fragmentation regarding leave management'.",
+        "html_evidence": "<img alt=\"Woman carrying child on back, both smiling\" src=\"cid:image001.jpg\"/> is inside the green box but layout details such as image being floated and smaller in width differ.",
+        "correction": "Adjust image placement and size to better match the PDF layout where image is shown on the right side, roughly one-third of width, with text filling the left part."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "In the legend under Figure 11, the text reads: 'A carrier that provides an integrated absence management program along with its disability product — for a higher price' and 'A carrier with the best-value disability product even without an integrated, real-time absence management service'.",
+        "html_evidence": "Legend text in HTML is broken and disordered, e.g. 'integratedabsence management program along withfor a its disability product —higher price' with words split and misaligned.",
+        "correction": "Fix legend text so that it reads continuously and matches PDF exactly, without broken words or misplaced parts."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "Figure 11 legend items are presented in a single continuous sentence each.",
+        "html_evidence": "Legend text is split into disjoint parts with words in incorrect order and parts displayed disjointedly, breaking reading flow.",
+        "correction": "Ensure legend text is presented as continuous sentences preserving correct reading order."
+      },
+      {
+        "category": "table_structure",
+        "source_evidence": "Table columns have captions: 'Company Size', 'A carrier that provides an integrated absence management program for a higher price (%)', and 'A carrier with the best-value disability product without an integrated service (%)'.",
+        "html_evidence": "Table headers in HTML match PDF but the third header line breaks 'without an integrated service (%)' over two lines.",
+        "correction": "Adjust table header text for the third column so it appears as a single coherent heading, matching PDF phrasing."
+      }
+    ]
+  },
+  {
+    "iteration": 5,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "image",
+        "source_evidence": "Image of 'Woman carrying child on back, both smiling' present on the right side within the green box in the PDF.",
+        "html_evidence": "<img alt=\"Woman carrying child on back, both smiling\" src=\"cid:image001.jpg\"/> missing actual visible image; appears to be broken or not rendered as in the PDF.",
+        "correction": "Ensure the image is properly embedded or rendered with visible content, not a broken or placeholder src."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Legend text in PDF reads: 'A carrier that provides an integrated absence management program along with its disability product — for a higher price' and 'A carrier with the best-value disability product even without an integrated, real-time absence management service'.",
+        "html_evidence": "Legend text in HTML is broken with words split improperly and poorly formatted: first item fragmented as 'integratedabsence management program along withfor a higher price' and second item fragmented as 'without an integrated , real-time absence management service'.",
+        "correction": "Correct the legend text layout to keep the phrases intact as in the PDF with correct spacing and formatting."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "In the PDF, the line 'Or' is separated on its own line between bullet points describing employer preferences.",
+        "html_evidence": "In HTML, 'Or' is centered as a separate paragraph but placed between two unordered list bullet points, which interrupts proper reading order and bullet list flow.",
+        "correction": "Use a semantically correct approach for inserting 'Or' between paragraphs instead of separating the list or breaking bullet structure."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "PDF shows bullet items fully rendered on one line with no text overlapping or awkward line breaks inside the legend box.",
+        "html_evidence": "The text in the legend box is fragmented with words split across lines causing awkward overlapping and readability issues.",
+        "correction": "Fix CSS or HTML structure so that legend text flows naturally and does not break or overlap, matching PDF's clean presentation."
+      }
+    ]
+  },
+  {
+    "iteration": 6,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "image",
+        "source_evidence": "Image of a woman carrying a child on her back, both smiling, displayed to the right of the green box.",
+        "html_evidence": "<img alt=\"Woman carrying child on back, both smiling\" style=\"background: #ccc;\" />",
+        "correction": "Add the actual image file or correct image source attribute to display the photo as in the PDF instead of a blank placeholder with grey background."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "For a higher price Or A carrier with the best-value disability product even without an integrated, real-time absence management service",
+        "html_evidence": "Probing further on the value of integrated experiences, we asked employers whether they prefer:\n<ul>\n<li>A carrier that provides an <strong>integrated</strong> absence management program along with its disability product — <strong>for a higher price</strong></li>\n</ul>\n<p class=\"or-line\">Or</p>\n<ul>\n<li>A carrier with the best-value disability product even <strong>without an integrated</strong>, real-time absence management service</li>\n</ul>",
+        "correction": "Use a single bullet list with nested bullet for 'Or' as in source, or at least remove excessive line breaks so reading order reflects the source's single bullet list with 'Or' inbetween. Keep the text flow exactly as in source."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Legend:\n A carrier that provides an integrated absence management program along with its disability product — for a higher price\n A carrier with the best-value disability product even without an integrated, real-time absence management service",
+        "html_evidence": "<div aria-label=\"Legend for the chart\" class=\"legend\">\n<div><span aria-hidden=\"true\" class=\"color-box gray\"></span>A carrier that provides an <strong>integrated</strong> absence management program along with its disability product — <strong>for a higher price</strong></div>\n<div><span aria-hidden=\"true\" class=\"color-box yellow\"></span>A carrier with the best-value disability product even <strong>without an integrated</strong>, real-time absence management service</div>\n</div>",
+        "correction": "Fix spacing and line breaks in each legend item so text does not break awkwardly or with big gaps; more consistent with source line breaks."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "A carrier that provides an integrated absence management program along with its disability product — for a higher price\nA carrier with the best-value disability product even without an integrated, real-time absence management service",
+        "html_evidence": "In legend and figure caption, the text is split unevenly into multiple lines with gaps: e.g. 'integrated' with extra line breaks and fragment spacing different from the source.",
+        "correction": "Reflow legend and caption text to preserve horizontal text continuity as in source, avoiding multi-line breaks within phrases."
+      }
+    ]
+  }
+]

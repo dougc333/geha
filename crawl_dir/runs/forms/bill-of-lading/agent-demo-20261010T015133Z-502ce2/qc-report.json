@@ -1,0 +1,161 @@
+{
+  "status": "failed",
+  "source_sha256": "bb69da6f9072e0c2c16a675bc38e535adff1cbdc2c33c2042eb2d1d7021f16ef",
+  "page_count": 1,
+  "chunk_count": 8,
+  "table_count": 0,
+  "structural_errors": [
+    {
+      "page": 1,
+      "issue": "visual_verification_failed",
+      "verdict": "mismatch",
+      "errors": [
+        {
+          "category": "missing_text",
+          "source_evidence": "SHIPPER\nFRUTAS DEL SOL S.A.\nAv. de los Incas 456, Buenos Aires, Argentina\nTEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+          "html_evidence": "<pre>FRUTAS DEL SOL S.A.\nAv. de los Incas 456, Buenos Aires, Argentina\nTEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar</pre>",
+          "correction": "Keep as is, but verify placement; no header label for SHIPPER in HTML."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "BOOKING REF.\nBKG5917532",
+          "html_evidence": "<pre>BKG5917532</pre>",
+          "correction": "Add label \"BOOKING REF.\" before BKG5917532 as in source."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "SHIPPER'S REF.\nEXP-35782",
+          "html_evidence": "<pre>EXP-35782</pre>",
+          "correction": "Add label \"SHIPPER'S REF.\" before EXP-35782 as in source."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "PRE-CARRIAGE BY\nOceanic Meridian Lines",
+          "html_evidence": "<pre>Oceanic Meridian Lines</pre>",
+          "correction": "Add label \"PRE-CARRIAGE BY\" before Oceanic Meridian Lines."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "PLACE OF RECEIPT\nBUENOS AIRES, ARGENTINA",
+          "html_evidence": "<pre>BUENOS AIRES, ARGENTINA</pre>",
+          "correction": "Add label \"PLACE OF RECEIPT\" before BUENOS AIRES, ARGENTINA."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "DELIVERY AGENT\nLogiTrans Global\n88 Harbor Road, Rotterdam, 3011 AA\nTel: +31 10 123 4567 | dispatch@logitrans.com",
+          "html_evidence": "<pre>LogiTrans Global\n88 Harbor Road, Rotterdam, 3011 AA\nTel: +31 10 123 4567 | dispatch@logitrans.com</pre>",
+          "correction": "Add label \"DELIVERY AGENT\" before the delivery agent details."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "OCEAN VESSEL / VOYAGE\nMERIDIAN LABREA / 124N",
+          "html_evidence": "<pre>MERIDIAN LABREA / 124N</pre>",
+          "correction": "Add label \"OCEAN VESSEL / VOYAGE\" before \"MERIDIAN LABREA / 124N\"."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "PORT OF LOADING\nBUENOS AIRES, ARGENTINA",
+          "html_evidence": "<pre>BUENOS AIRES, ARGENTINA</pre>",
+          "correction": "Add label \"PORT OF LOADING\" before \"BUENOS AIRES, ARGENTINA.\""
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "PORT OF DISCHARGE\nROTTERDAM, NETHERLANDS",
+          "html_evidence": "<pre>ROTTERDAM, NETHERLANDS</pre>",
+          "correction": "Add label \"PORT OF DISCHARGE\" before \"ROTTERDAM, NETHERLANDS.\""
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "PARTICULARS FURNISHED BY SHIPPER - CARRIER NOT RESPONSIBLE",
+          "html_evidence": "",
+          "correction": "Add the header \"PARTICULARS FURNISHED BY SHIPPER - CARRIER NOT RESPONSIBLE\" above the cargo table."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "CONTAINER NO. / SEAL NO.\nNO. PKGS\nDESCRIPTION OF GOODS\nGROSS WT.\nMEASUREMENT",
+          "html_evidence": "",
+          "correction": "Add column headers: \"CONTAINER NO. / SEAL NO.\", \"NO. PKGS\", \"DESCRIPTION OF GOODS\", \"GROSS WT.\", and \"MEASUREMENT\" above the cargo details."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "MRDN4455667\nSEAL: MSK112233\nMARKS:\nPALLETIZED",
+          "html_evidence": "<pre>MRDN4455667</pre>",
+          "correction": "Add details \"SEAL: MSK112233\" and \"MARKS: PALLETIZED\" under MRDN4455667."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "20\n20",
+          "html_evidence": "<pre>20</pre>",
+          "correction": "Include the second '20' packages count under the marks section for the first container as in the source."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "MRDN7788990\nSEAL: MSK445566\nMARKS:\nPALLETIZED",
+          "html_evidence": "<pre>MRDN7788990\nSEAL: MSK445566\nMARKS:\nPALLETIZED</pre>",
+          "correction": "This block is present but lacks bold formatting and grouping like in source."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "DESCRIPTION OF GOODS with multiple lines including FRESH APPLES, STOWAGE AT +2.0 DEGREES CELSIUS, Packaging: PALLETS, HS CODE, SET TEMP, then 20 PALLETS STC:, FRESH PEARS, STOWAGE AT +1.0 DEGREES CELSIUS, Packaging: PALLETS, HS CODE, SET TEMP, and then FREIGHT COLLECT",
+          "html_evidence": "<pre>FRESH APPLES\nSTOWAGE AT +2.0 DEGREES CELSIUS\nPackaging: PALLETS\n\nHS CODE: 08081080\nSET TEMP: +2°C\n\n20 PALLETS STC:\nFRESH FRUIT\n\nFRESH PEARS\nSTOWAGE AT +1.0 DEGREES CELSIUS\nPackaging: PALLETS\n\nHS CODE: 08083090\nSET TEMP: +1°C\n\n_______________________________\n\n       FREIGHT COLLECT\n_______________________________</pre>",
+          "correction": "The HTML misses the first line '20 PALLETS STC:\nFRESH FRUIT' before 'FRESH APPLES'. Also remove the extra '20 PALLETS STC:\nFRESH FRUIT' line appearing before 'FRESH PEARS'. It should be consistent with source ordering."
+        },
+        {
+          "category": "wrong_text",
+          "source_evidence": "GROSS WT.\n18,500 KGS\n19,200 KGS",
+          "html_evidence": "<pre>18,500\nKGS</pre>",
+          "correction": "Use comma as thousand separators per source (18,500 and 19,200) instead of 18500 and 19200."
+        },
+        {
+          "category": "wrong_text",
+          "source_evidence": "MEASUREMENTS\n28.00 CBM\n28.00 CBM",
+          "html_evidence": "<pre>28.00\nCBM</pre>",
+          "correction": "Keep consistent formatting as in source, but correct vertical alignment if applicable."
+        },
+        {
+          "category": "wrong_text",
+          "source_evidence": "FREIGHT & CHARGES\nOCEAN FREIGHT\nCOLLECT\nTHC",
+          "html_evidence": "<pre>RECEIVED by the Carrier in apparent good order and condition (unless otherwise stated herein) the total number or quantity of Containers or other packages or units indicated in the box entitled \"Total Number of Packages\" for carriage subject to all the terms and conditions hereof from the Place of Receipt or Port of Loading to the Port of Discharge or Place of Delivery, whichever is applicable.\n\nIN ACCEPTING THIS BILL OF LADING THE MERCHANT EXPRESSLY ACCEPTS AND AGREES TO ALL THE TERMS AND CONDITIONS, WHETHER PRINTED, STAMPED OR OTHERWISE INCORPORATED ON THIS SIDE AND ON THE REVERSE SIDE OF THIS BILL OF LADING AND THE TERMS AND CONDITIONS OF THE CARRIER'S APPLICABLE TARIFF AS IF THEY WERE ALL SIGNED BY THE MERCHANT.</pre>",
+          "correction": "Separate Freight & Charges heading from legal text. Add freight details: 'OCEAN FREIGHT\nCOLLECT\nTHC' as in source."
+        },
+        {
+          "category": "wrong_text",
+          "source_evidence": "TOTAL NUMBER OF PACKAGES\n40",
+          "html_evidence": "<pre>2026-03-13</pre>",
+          "correction": "Replace '2026-03-13' in total packages box with '40' as per source."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "PLACE OF ISSUE\nAntwerp",
+          "html_evidence": "<pre>FRUTAS DEL SOL S.A.</pre>",
+          "correction": "Replace 'FRUTAS DEL SOL S.A.' cell with 'Antwerp' and label as 'PLACE OF ISSUE'."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "DATE OF ISSUE\n2026-03-13",
+          "html_evidence": "<pre>+54 11 4789 1234</pre>",
+          "correction": "Add label 'DATE OF ISSUE' with value '2026-03-13' instead of '+54 11 4789 1234'."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "SIGNED FOR THE CARRIER\nAuthorized Signature",
+          "html_evidence": "<pre>logistica@frutasdelsol.com.ar</pre>",
+          "correction": "Replace 'logistica@frutasdelsol.com.ar' with 'Authorized Signature' and add label 'SIGNED FOR THE CARRIER'."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "Footer text: FRUTAS DEL SOL S.A. • +54 11 4789 1234 • logistica@frutasdelsol.com.ar",
+          "html_evidence": "",
+          "correction": "Add footer text as in source page."
+        }
+      ]
+    }
+  ],
+  "structural_warnings": [],
+  "visual_verification": {
+    "status": "failed",
+    "required": true,
+    "passed_pages": 0,
+    "total_pages": 1
+  }
+}

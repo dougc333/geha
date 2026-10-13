@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>prompt.md effect on Bill of Lading</title>
+  <style>
+    :root { color-scheme: dark; --bg:#07111f; --panel:#0f1b2d; --line:#26364c; --ink:#e9f1fb; --muted:#9fb0c7; --red:#ff344d; --cyan:#54d8ef; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:linear-gradient(145deg,#050b14,#0b1728 60%,#07111f); color:var(--ink); font:15px/1.45 Inter,ui-sans-serif,system-ui,sans-serif; }
+    header { position:sticky; top:0; z-index:10; display:flex; justify-content:space-between; gap:24px; align-items:center; padding:18px 28px; border-bottom:1px solid var(--line); background:rgba(7,17,31,.94); backdrop-filter:blur(14px); }
+    h1,h2,h3,p { margin-top:0; }
+    h1 { margin-bottom:4px; font-size:22px; }
+    header p { margin:0; color:var(--muted); }
+    .badge { flex:none; padding:7px 11px; border:1px solid rgba(84,216,239,.4); border-radius:999px; color:var(--cyan); font:700 11px/1 ui-monospace,monospace; letter-spacing:.12em; text-transform:uppercase; }
+    main { display:grid; grid-template-columns:minmax(560px,1.35fr) minmax(360px,.65fr); gap:18px; max-width:1700px; margin:auto; padding:20px; }
+    .panel { overflow:hidden; border:1px solid var(--line); border-radius:18px; background:rgba(15,27,45,.92); box-shadow:0 18px 55px rgba(0,0,0,.24); }
+    .panel-head { display:flex; justify-content:space-between; align-items:center; gap:18px; padding:16px 18px; border-bottom:1px solid var(--line); }
+    .panel-head h2 { margin:0; font-size:16px; }
+    .controls { display:flex; flex-wrap:wrap; gap:12px; color:var(--muted); font-size:12px; }
+    label { display:flex; gap:6px; align-items:center; }
+    .stage { position:relative; margin:18px; overflow:hidden; border-radius:10px; background:#fff; box-shadow:0 12px 30px rgba(0,0,0,.35); }
+    .stage img { display:block; width:100%; height:auto; }
+    .stage svg { position:absolute; inset:0; width:100%; height:100%; }
+    .block { fill:rgba(255,52,77,.035); stroke:var(--red); stroke-width:8; vector-effect:non-scaling-stroke; cursor:pointer; transition:.15s; }
+    .block:hover,.block.active { fill:rgba(255,52,77,.18); stroke-width:13; }
+    .cell { fill:none; stroke:#ff6679; stroke-width:3; vector-effect:non-scaling-stroke; opacity:.8; }
+    .block-label { fill:#fff; stroke:#8f071a; stroke-width:9; paint-order:stroke; font:700 34px/1 ui-sans-serif,system-ui,sans-serif; pointer-events:none; }
+    .content { padding:18px; }
+    .summary { display:grid; gap:9px; }
+    button.block-card { width:100%; border:1px solid var(--line); border-radius:12px; padding:12px 13px; color:var(--ink); background:#0b1627; text-align:left; cursor:pointer; }
+    button.block-card:hover,button.block-card.active { border-color:var(--red); background:rgba(255,52,77,.09); }
+    .block-card strong { display:block; margin-bottom:3px; }
+    .block-card span { color:var(--muted); font-size:12px; }
+    .notes { margin-top:18px; padding:14px; border:1px solid #6b5121; border-radius:12px; background:#241c0f; }
+    .notes h3 { margin-bottom:8px; color:#ffd477; font-size:13px; }
+    .notes ul { margin:0; padding-left:18px; color:#dcc99d; }
+    details { margin-top:18px; border-top:1px solid var(--line); padding-top:14px; }
+    summary { cursor:pointer; color:var(--cyan); font-weight:700; }
+    pre { max-height:330px; overflow:auto; padding:13px; border-radius:10px; white-space:pre-wrap; background:#07101d; color:#bed0e6; font:11px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace; }
+    .legend { display:flex; gap:14px; color:var(--muted); font-size:11px; }
+    .swatch { display:inline-block; width:17px; height:10px; margin-right:5px; border:2px solid var(--red); vertical-align:-1px; }
+    .swatch.cell-swatch { border-width:1px; border-color:#ff6679; }
+    @media(max-width:1000px) { main { grid-template-columns:1fr; padding:10px; } header { position:static; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div><h1>prompt.md effect on the Bill of Lading</h1><p>The prompt is interpreted as eight horizontal blocks with nested cell boundaries.</p></div>
+    <div class="badge">Prompt-derived overlay</div>
+  </header>
+  <main>
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Authoritative source with requested red segmentation</h2>
+        <div class="controls">
+          <label><input id="cells" type="checkbox" checked> Cell lines</label>
+          <label><input id="labels" type="checkbox" checked> Block labels</label>
+        </div>
+      </div>
+      <div class="stage">
+        <img src="bill-of-lading-source.png" alt="Bill of Lading source page">
+        <svg id="overlay" viewBox="0 0 2136 3584" preserveAspectRatio="none" aria-label="Prompt-derived block overlay"></svg>
+      </div>
+    </section>
+    <aside class="panel">
+      <div class="panel-head"><h2>Prompt interpretation</h2><div class="legend"><span><i class="swatch"></i>block</span><span><i class="swatch cell-swatch"></i>cell</span></div></div>
+      <div class="content">
+        <div id="summary" class="summary"></div>
+        <div class="notes">
+          <h3>Interpretation decisions</h3>
+          <ul>
+            <li>The prompt says “7 horizontal blocks” but enumerates blocks 1 through 8; the visualization uses eight.</li>
+            <li>The stray “C” between PLACE OF RECEIPT and DELIVERY AGENT is treated as a typo, not a field.</li>
+            <li>“GOSS WT” is interpreted as the visible GROSS WT. header.</li>
+            <li>FREIGHT COLLECT remains content inside the description column, not a separate cell.</li>
+          </ul>
+        </div>
+        <details>
+          <summary>Show original prompt.md</summary>
+          <pre id="prompt">create a png using red lines to divide the blocks. The lines should be horisontal or vertical. The horizontal sholuld span the width of the page following the black lines.  Create 7 horizontal blocks 1) includes teh logo and MERIDIAN SHIPPING title page and the sqaure BILL OF LADING square on right hand side of the page. This block starts at top and ends wiht the first horizongal line spanning the page, 2) the second block is a 3 cell horiziongally in the left column and 5 cell on teh right hand column.  The left hand columnbegins  with the cell SHIPPER and ends with the cell NOTIFY PARTY. The second column starts with 2 horizontal cells of teh same hieght vertically, BOOKING REF, SHIPPER'S REF and are aligned in the horizontal direction this block ends with 3 cells aligned vertically named from teh top down, PRE-CARRIAGE BY, PLACE OF RECEIPT, C and DELIVERY AGENT. The 3rd block consists of 3 cells all aligned horizontally of the same height vertically, first cell OCEAN VESSEL/VOYAGE, second cell PORT OF LOADING, third cell PORT OF DISCHARGE 4) one cell extending width of page named PARTICULARS FURNISHED BY SHIPPER - CARRIER NOT RESPONSIBLE, 5)the 5th block is aligned horizontally with 5 cells all of which are the same height vertically, first cell CONTAINER NO/SEAL_NO, second cell NO. PKGS, third cell DESCRIPTION OF GOODS, 4th cell: GOSS WT, 5th cell MEASUREMENT. 6) The 6th block consists of 1 cell horizontally and 5 columns. Column 1 has MRDN4455667 as the first value in the column and MARKS;palletized as the last value in teh column. The MARKS: PALLETIZEd is in much smaller font. Teh 2nd column as 20 20 vertically align, the 3rd column starts with 20 PALLETS STC, ends in FREIGHT COLLECT. FREIGHT COLLECT is not. a cell. 7) the seventh block consists of 2 columns, the left colum is 2 rows, first row is FREIGHT &amp; CHARGES, the second row is OCEAN FREIGHT, the rigth column is 1 row with TOTAL NUMBER OF PACKAGES and the number 40. 8) the 8th block is 2 columns. The left column is 1 cell. The right column is 2 rows, first row is 2 horizontal cells; the second cell is 1 cell below the 2 cells above.
+
+BILL OF LADING_1</pre>
+        </details>
+      </div>
+    </aside>
+  </main>
+  <script>
+    const blocks = [
+      {n:1,y:0,h:363,title:'Carrier identity and Bill of Lading identifiers',cells:[[67,0,1100,363],[1167,0,899,363]]},
+      {n:2,y:363,h:899,title:'Parties, references and delivery details',cells:[[67,363,999,298],[67,661,999,299],[67,960,999,302],[1066,363,498,170],[1564,363,502,170],[1066,533,1000,214],[1066,747,1000,213],[1066,960,1000,302]]},
+      {n:3,y:1262,h:149,title:'Vessel, loading port and discharge port',cells:[[67,1262,666,149],[733,1262,665,149],[1398,1262,668,149]]},
+      {n:4,y:1411,h:71,title:'Carrier responsibility notice',cells:[[67,1411,1999,71]]},
+      {n:5,y:1482,h:77,title:'Cargo table column headers',cells:[[67,1482,500,77],[567,1482,200,77],[767,1482,897,77],[1664,1482,199,77],[1863,1482,203,77]]},
+      {n:6,y:1559,h:1185,title:'Cargo particulars in five columns',cells:[[67,1559,500,1185],[567,1559,200,1185],[767,1559,897,1185],[1664,1559,199,1185],[1863,1559,203,1185]]},
+      {n:7,y:2744,h:256,title:'Freight charges and package total',cells:[[67,2744,1198,78],[67,2822,1198,178],[1265,2744,801,256]]},
+      {n:8,y:3000,h:341,title:'Terms, issue details and carrier signature',cells:[[67,3000,999,341],[1066,3000,498,169],[1564,3000,502,169],[1066,3169,1000,172]]}
+    ];
+    const svg = document.querySelector('#overlay');
+    const summary = document.querySelector('#summary');
+    const NS = 'http://www.w3.org/2000/svg';
+    function el(name,attrs){const node=document.createElementNS(NS,name);Object.entries(attrs).forEach(([k,v])=>node.setAttribute(k,v));return node}
+    function selectBlock(n){document.querySelectorAll('.block,.block-card').forEach(x=>x.classList.toggle('active',Number(x.dataset.block)===n));}
+    blocks.forEach(block=>{
+      const group=el('g',{});
+      const outer=el('rect',{x:67,y:block.y,width:1999,height:block.h,class:'block','data-block':block.n});
+      outer.addEventListener('click',()=>selectBlock(block.n)); group.append(outer);
+      block.cells.forEach(([x,y,w,h])=>group.append(el('rect',{x,y,width:w,height:h,class:'cell'})));
+      const label=el('text',{x:82,y:block.y+44,class:'block-label'}); label.textContent=`${block.n} · ${block.title}`; group.append(label);
+      svg.append(group);
+      const card=document.createElement('button'); card.className='block-card'; card.dataset.block=block.n;
+      card.innerHTML=`<strong>Block ${block.n}: ${block.title}</strong><span>${block.cells.length} prompt-derived cell${block.cells.length===1?'':'s'} · y=${block.y}-${block.y+block.h}</span>`;
+      card.addEventListener('click',()=>selectBlock(block.n)); summary.append(card);
+    });
+    document.querySelector('#cells').addEventListener('change',e=>document.querySelectorAll('.cell').forEach(x=>x.style.display=e.target.checked?'':'none'));
+    document.querySelector('#labels').addEventListener('change',e=>document.querySelectorAll('.block-label').forEach(x=>x.style.display=e.target.checked?'':'none'));
+  </script>
+</body>
+</html>

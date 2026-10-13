@@ -1,0 +1,83 @@
+{
+  "status": "failed",
+  "source_sha256": "bb69da6f9072e0c2c16a675bc38e535adff1cbdc2c33c2042eb2d1d7021f16ef",
+  "page_count": 1,
+  "chunk_count": 8,
+  "table_count": 0,
+  "structural_errors": [
+    {
+      "page": 1,
+      "issue": "visual_verification_failed",
+      "verdict": "mismatch",
+      "errors": [
+        {
+          "category": "layout",
+          "source_evidence": "The PDF has logo \"M\" in a box left of MERIDIAN SHIPPING and a horizontal line under BILL OF LADING header.",
+          "html_evidence": "<div class=\"cell\" data-cell=\"carrier_header\" style=\"left:0px;top:0px;width:1100px;height:363px\"><pre>MERIDIAN SHIPPING\nGLOBAL SHIPPING &amp; LOGISTICS</pre></div><div class=\"cell\" data-cell=\"bill_of_lading_box\" style=\"left:1100px;top:0px;width:899px;height:363px\"><pre>BILL OF LADING\n\nB/L NO.               BL232472785\n\nSCAC                      MRDN</pre></div>",
+          "correction": "Include the boxed 'M' logo left of 'MERIDIAN SHIPPING' and replicate the horizontal line under 'BILL OF LADING' header in the HTML."
+        },
+        {
+          "category": "wrong_text",
+          "source_evidence": "B/L NO.\\nBL232472785",
+          "html_evidence": "B/L NO.               BL232472785",
+          "correction": "Correct spacing between 'B/L NO.' and 'BL232472785' to align properly as in source."
+        },
+        {
+          "category": "wrong_text",
+          "source_evidence": "SHIPPER\\nFRUTAS DEL SOL S.A.\\nAv. de los Incas 456, Buenos Aires, Argentina\\nTEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+          "html_evidence": "SHIPPER\nFRUTAS DEL SOL S.A.\nAv. de los Incas 456, Buenos Aires, Argentina\nTEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+          "correction": "Correct telephone number format to '+54 11 4789 1234' instead of '+54 11 4789 1234' (match spacing), content appears correct."
+        },
+        {
+          "category": "wrong_text",
+          "source_evidence": "DELIVERY AGENT\\nLogiTrans Global\\n88 Harbor Road, Rotterdam, 3011 AA\\nTel: +31 10 123 4567 | dispatch@logitrans.com",
+          "html_evidence": "DELIVERY AGENT\nLogiTrans Global\n88 Harbor Road, Rotterdam, 3011 AA\nTel: +31 10 123 4567 | dispatch@logitrans.com",
+          "correction": "Capitalize 'Tel' to 'Tel:' as in source, add a period if present in source (not present here). No email marker for 'dispatch@logitrans.com' in HTML, match to 'EMAIL:' in source is needed or clarify format."
+        },
+        {
+          "category": "reading_order",
+          "source_evidence": "Two container numbers appear in vertical order with seals and marks: MRDN4455667 with seal MSK112233 and MRDN7788990 with seal MSK445566; each with marks 'PALLETIZED'.",
+          "html_evidence": "MRDN4455667\n\nSEAL: MSK112233\n\nMARKS:\nPALLETIZED\n\nMRDN7788990\n\nSEAL: MSK445566\n\nMARKS:\nPALLETIZED",
+          "correction": "The reading order appears correct, but verify that 'MARKS:' and 'PALLETIZED' stay visually grouped as on source document."
+        },
+        {
+          "category": "wrong_text",
+          "source_evidence": "NO. PKGS as two separate '20' values for each container/mark group.",
+          "html_evidence": "20\n\n20",
+          "correction": "Add newline after each '20' for the two packages matching the two container entries; content correct."
+        },
+        {
+          "category": "wrong_text",
+          "source_evidence": "DESCRIPTION OF GOODS section includes blank lines before 'FREIGHT COLLECT'.",
+          "html_evidence": "DESCRIPTION OF GOODS\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFREIGHT COLLECT",
+          "correction": "Remove excessive blank lines in 'DESCRIPTION OF GOODS' cell ensuring text spacing matches source."
+        },
+        {
+          "category": "wrong_text",
+          "source_evidence": "FREIGHT & CHARGES\\nOCEAN FREIGHT           COLLECT\\nTHC",
+          "html_evidence": "FREIGHT &amp; CHARGES\nOCEAN FREIGHT           COLLECT\nTHC",
+          "correction": "Correct spacing between 'OCEAN FREIGHT' and 'COLLECT' to be consistent with source document."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "Place of issue: Antwerp\\nDate of issue: 2026-03-13\\nSigned for the carrier: Authorized Signature",
+          "html_evidence": "PLACE OF ISSUE\nAntwerp\n\nDATE OF ISSUE\n2026-03-13\n\nSIGNED FOR THE CARRIER\n\nAuthorized Signature",
+          "correction": "No missing text here, just ensure layout and capitalization matches source."
+        },
+        {
+          "category": "extra_text",
+          "source_evidence": "Footer: 'FRUTAS DEL SOL S.A. · +54 11 4789 1234 · logistica@frutasdelsol.com.ar'",
+          "html_evidence": "",
+          "correction": "Add footer with 'FRUTAS DEL SOL S.A. · +54 11 4789 1234 · logistica@frutasdelsol.com.ar' aligned center at bottom of page as in source."
+        }
+      ]
+    }
+  ],
+  "structural_warnings": [],
+  "visual_verification": {
+    "status": "failed",
+    "required": true,
+    "passed_pages": 0,
+    "total_pages": 1
+  }
+}

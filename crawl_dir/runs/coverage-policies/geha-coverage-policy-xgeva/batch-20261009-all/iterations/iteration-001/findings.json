@@ -1,0 +1,42 @@
+{
+  "table_extraction": {
+    "pdf": "source.pdf",
+    "status": "ok",
+    "ocr_used": false,
+    "tables_detected": 3,
+    "tables_written": 2,
+    "tables_excluded": 1,
+    "outputs": [
+      {
+        "table_number": 1,
+        "heading": "Xgeva (denosumab)",
+        "page": 1,
+        "rows": 13,
+        "columns": 5,
+        "header_promoted": false,
+        "header_inherited_from_table": null,
+        "html": "source_xgeva-denosumab.html"
+      },
+      {
+        "table_number": 2,
+        "heading": "Billing",
+        "page": 3,
+        "rows": 13,
+        "columns": 3,
+        "header_promoted": false,
+        "header_inherited_from_table": null,
+        "html": "source_billing.html"
+      }
+    ],
+    "excluded": [
+      {
+        "table_number": 3,
+        "heading": "Revision History",
+        "page": 5,
+        "reason": "revision_history"
+      }
+    ]
+  },
+  "chunk_errors": [],
+  "chunk_warnings": []
+}

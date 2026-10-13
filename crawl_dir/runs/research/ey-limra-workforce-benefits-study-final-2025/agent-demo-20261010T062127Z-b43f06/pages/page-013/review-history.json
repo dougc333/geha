@@ -1,0 +1,25 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "There is no table of 'Percent of employers seeking different data types' in the source PDF.",
+        "html_evidence": "<table summary=\"Table displaying the percent of employers seeking various types of data in their decision-making about benefits programs\" style=\"margin: 2rem auto; max-width: 700px; width: 100%; border-collapse: collapse;\">...</table>",
+        "correction": "Remove the entire table element from the HTML as it is not present in the PDF."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The source has the data percentages arranged visually in two rows of three columns with spacing and highlight over a background image (dark background) but no actual table structure.",
+        "html_evidence": "The HTML uses a grid layout with six items displayed in two rows, matching the reading order and content, but the source uses a background image behind the chart which is missing in the HTML.",
+        "correction": "Add or reference the background image behind the 'Percent of employers and the data they seek' data grid for visual layout consistency or note that it is missing if no image is provided."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

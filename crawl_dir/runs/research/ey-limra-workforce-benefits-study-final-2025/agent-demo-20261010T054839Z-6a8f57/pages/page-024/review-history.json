@@ -1,0 +1,145 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar for 'Self-service/real-time quoting' in Quote and implementation section: PDF shows percentages 48%, 7%, 35%, and small percentages for others with no exact mention of “5%” for 'Don't know'.",
+        "html_evidence": "<div class=\"dont-know\" style=\"width:5%;\"></div>",
+        "correction": "Remove or adjust 'Don't know' width for the bar to align with PDF which shows a smaller value, closer to 4%. Exact value from PDF is unclear but visually less than 5%."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar for 'Digital implementation of a new carrier or benefit': PDF shows 'Do not have and do not want' is approximately 4%.",
+        "html_evidence": "<div class=\"dont-know\" style=\"width:5%;\"></div>",
+        "correction": "Change 'Don't know' bar width from 5% to 3% or exactly as PDF suggests since PDF shows low percentages."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar for 'Digital submission for evidence of insurability': PDF shows 'Don't know' approximately 5%.",
+        "html_evidence": "<div class=\"dont-know\" style=\"width:6%;\"></div>",
+        "correction": "Adjust 'Don't know' bar width to 3% as indicated by PDF which shows smaller percentage."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar for 'Decision support tools for employees': PDF shows 'Don't know' approximately 4%.",
+        "html_evidence": "<div class=\"dont-know\" style=\"width:4%;\"></div>",
+        "correction": "Adjust 'Don't know' bar width to 2% as per PDF visual."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar for 'Personalized enrollment materials': PDF shows 'Don't know' approximately 2%.",
+        "html_evidence": "<div class=\"dont-know\" style=\"width:3%;\"></div>",
+        "correction": "Change 'Don't know' bar to 2% to match PDF."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar for 'Digital employee communications on new benefits offerings': PDF shows 'Don't know' approximately 2%.",
+        "html_evidence": "<div class=\"dont-know\" style=\"width:3%;\"></div>",
+        "correction": "Adjust to 2% as per PDF."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar for 'E-signature capabilities': PDF shows 'Don't know' about 1%.",
+        "html_evidence": "<div class=\"dont-know\" style=\"width:2%;\"></div>",
+        "correction": "Reduce to 1%."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar for 'Online enrollment': PDF shows 'Don't know' about 2%.",
+        "html_evidence": "<div class=\"dont-know\" style=\"width:3%;\"></div>",
+        "correction": "Change to 2%."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar for 'Live chat/chatbot': PDF shows 'Already have but do not use' 12%, but in HTML it uses no-have-no-want class for 12%, which is a wrong color/category compared to PDF.",
+        "html_evidence": "<div class=\"no-have-no-want\" style=\"width:12%;\">12%</div>",
+        "correction": "Change class to 'have-no-use' as PDF legend uses second color for 'Already have but do not use', not 'Do not have and do not want'"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar for 'Live chat/chatbot': PDF shows 'Don't know' approximately 7%.",
+        "html_evidence": "<div class=\"dont-know\" style=\"width:11%;\"></div>",
+        "correction": "Change to 7%."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar for 'Mobile app (for employer or employees)': PDF shows 'Don't know' 4%.",
+        "html_evidence": "<div class=\"dont-know\" style=\"width:6%;\"></div>",
+        "correction": "Adjust to 4%."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar for 'Online eligibility updates': PDF shows 'Don't know' 2%.",
+        "html_evidence": "<div class=\"dont-know\" style=\"width:3%;\"></div>",
+        "correction": "Adjust to 2%."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar for 'Online billing and payment': PDF shows 'Don't know' 2%.",
+        "html_evidence": "<div class=\"dont-know\" style=\"width:2%;\"></div>",
+        "correction": "This is correct, no change needed."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar for 'Same-day claims decisions': PDF shows 'Don't know' 2%.",
+        "html_evidence": "<div class=\"dont-know\" style=\"width:10%;\"></div>",
+        "correction": "Adjust to 2%."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar for 'Proactively trigger claims based on medical data': PDF shows 'Don't know' 2%.",
+        "html_evidence": "<div class=\"dont-know\" style=\"width:10%;\"></div>",
+        "correction": "Adjust to 2%."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar for 'Real-time integration for claims management with HRIS systems': PDF shows 'Don't know' around 2%.",
+        "html_evidence": "<div class=\"dont-know\" style=\"width:10%;\"></div>",
+        "correction": "Adjust to 2%."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar for 'Integrated claims experience based on singular event': PDF shows 'Don't know' about 6%.",
+        "html_evidence": "<div class=\"dont-know\" style=\"width:6%;\"></div>",
+        "correction": "The HTML and PDF bar appear consistent here."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar for 'Text messaging to employees regarding claims status': PDF shows 'Don't know' about 6%.",
+        "html_evidence": "<div class=\"dont-know\" style=\"width:8%;\"></div>",
+        "correction": "Adjust to 6%."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar for 'Digital claims submission': PDF shows 'Don't know' about 3%.",
+        "html_evidence": "<div class=\"dont-know\" style=\"width:4%;\"></div>",
+        "correction": "Adjust to 3%."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "PDF footer: '24 | Harnessing growth in workforce benefits: the next horizon | 2025 Workforce Benefits Study'",
+        "html_evidence": "<footer><p><small>24 | <strong>Harnessing growth in workforce benefits:</strong> the next horizon | 2025 Workforce Benefits Study</small></p></footer>",
+        "correction": "Footer text matches PDF, no correction needed."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "PDF shows legend colored boxes with full texts in a single line with spacing.",
+        "html_evidence": "Legend uses colored squares with text: 'Already have and use   Already have but do not use   Do not have but want   Do not have and do not want   Don't know'",
+        "correction": "Legend order correct but fix spacing and color coding consistent with PDF."
+      },
+      {
+        "category": "table_structure",
+        "source_evidence": "PDF does not show an explicit table but data values correspond exactly to those in the HTML table.",
+        "html_evidence": "HTML includes a detailed table with categories, tools, and percentage values for each usage category.",
+        "correction": "No issue; the table is an added enhancement consistent with PDF data."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

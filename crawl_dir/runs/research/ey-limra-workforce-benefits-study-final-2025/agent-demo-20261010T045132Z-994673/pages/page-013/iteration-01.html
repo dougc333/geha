@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Key Finding 3 - Workforce Benefits Study</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 1rem;
+    color: #222;
+  }
+  article {
+    max-width: 900px;
+    margin: auto;
+  }
+  header h1 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 0.2rem;
+  }
+  header h2 {
+    font-weight: 900;
+    font-size: 1.25rem;
+    margin-top: 0;
+    padding-bottom: 0.25rem;
+    border-bottom: 4px solid #f0d700; /* bright yellow underline */
+    max-width: fit-content;
+  }
+  p {
+    line-height: 1.4;
+    margin: 0.75rem 0;
+  }
+  p strong {
+    font-weight: bold;
+  }
+  figure {
+    margin: 2rem 0;
+  }
+  figcaption {
+    font-weight: bold;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+  figcaption strong {
+    font-weight: 900;
+  }
+  section.data-points {
+    position: relative;
+    color: white;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA3kAAAKrCAYAAABy/HUwAAAACXBIWXMAAAsTAAALEwEAmpwYAAALP0lEQVR4nO3dQW6DMBRA0b9ZndHkYmcRfGnRJxD3q+I/XT20Uz2u5g29nVUuRGw6Bw5kWtjOABATAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAXGdMp1/bnpG7es+Mk/CfQi5bwl/FuDIKyqT0aOggjSz6Y61cUNRmuBNaJQ5F14Xj0/2U+DUUmjxgfXDO7mQgliTyA0nX1ILXk7GDZXxA2KsBj6Xwu3ysHgObf+lePjqqyV+BzcPe0/g8u08aJlBeAnGro/yqowATxtmv8NxI3B1yULZLnMiBLbdGdwEge/s6vtNhkpCUuCRKIClr1NMKDRg8+8IrPzF7IwnX7PJbAx1lPtksdztr9WtY4ZyJtBpxVg0CEtAa3aoZwEQUGkLgBSaUHpAdMyPZQxn1n8t+BU4s/KoJo3vmcTyRKHX/K86BLgXp6Ubv+7KpqHxIotY+hc8BaNOWQdeSeGtSKVZjlxmVIo+blErAqNWvnEHY1+PTWPyKXTbiWhTECy7fZ5Nrp0w7Gwy9QrMfuqXRoSLtjwNCFj06KN0glmFUl7KVMJpA+CqZMDJcNQyqUpwkKoBLodTokuWqpUzwNdKVB8q6SVKUin0nMg7jQ9KiNQCxJFCUoakNSP/8PAwMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAYMDAXG/x/H13Ft4Xq94AAAAAElFTkSuQmCC') no-repeat center/cover;
+    padding: 2rem 1rem 2.5rem 1rem;
+    border-radius: 0.25rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+  section.data-points::before {
+    content: 'Percent of employers and the data they seek';
+    grid-column: 1 / -1;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .data-point {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .data-point .percent {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: #f0d700;
+    line-height: 1;
+  }
+  .data-point .label {
+    margin-top: 0.3rem;
+    font-size: 1rem;
+    max-width: 140px;
+    line-height: 1.3;
+  }
+  .data-point .underline {
+    margin-top: 0.5rem;
+    height: 2px;
+    width: 36px;
+    background-color: #f0d700;
+  }
+  figcaption em {
+    font-style: italic;
+    font-weight: normal;
+    font-size: 0.9rem;
+    display: block;
+    margin-top: 1rem;
+    color: #555;
+  }
+  footer p {
+    font-size: 0.8rem;
+    color: #555;
+    margin-top: 3rem;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<article>
+  <header>
+    <h1>Key finding 3</h1>
+    <h2>Employer focus on economic value is driving fundamental changes in brokers’ roles.</h2>
+  </header>
+  <p>
+    Brokers have long played an essential role in the workforce benefits sector, but the nature of the work they do is evolving.
+    Still, brokers will remain the backbone of workforce benefits distribution, even as market forces reshape their relationships with other influential players.
+  </p>
+  <p>
+    Brokers are increasingly being relied on more as strategic advisors and consultants. Those that can facilitate and support data-driven,
+    ROI-based decisions in the face of higher costs, intensifying regulation, rising employee expectations and diversifying product portfolios will be best positioned for future success,
+    particularly in terms of designing holistic benefits programs.
+  </p>
+  <p>
+    <strong>A hyper-focus on value and data:</strong> Nearly three-quarters (71%) of employers are looking for data and information on what employees want.
+    Cost trends, benefits participation rates and utilization trends are the next most critical information that employers are seeking.
+    <em>See Figure 7.</em> Brokers are interested in delivering this data to clients but may be reliant on carriers to provide it.
+    As one told us, “Brokers are hungry and desperate for data. And the carriers have it, and they’re not using it.
+    So, the number one thing a carrier can do to differentiate themselves is create a reporting package that is fully transparent.”
+  </p>
+
+  <figure aria-label="Figure 7: Employers are seeking a wide array of data as input into their decision-making">
+    <figcaption>
+      <strong>Figure 7</strong><br />
+      <strong>Employers are seeking a wide array of data as input into their decision-making.</strong><br />
+      <strong>QUESTION:</strong> What are the top three most important types of data considered when making decisions about the design of your benefits program?
+    </figcaption>
+
+    <section class="data-points" aria-label="Percent of employers and the data they seek">
+      <div class="data-point">
+        <div class="percent">71%</div>
+        <div class="label">Information on what employees want</div>
+        <div class="underline" aria-hidden="true"></div>
+      </div>
+      <div class="data-point">
+        <div class="percent">61%</div>
+        <div class="label">Cost trends</div>
+        <div class="underline" aria-hidden="true"></div>
+      </div>
+      <div class="data-point">
+        <div class="percent">59%</div>
+        <div class="label">Participation rates</div>
+        <div class="underline" aria-hidden="true"></div>
+      </div>
+      <div class="data-point">
+        <div class="percent">43%</div>
+        <div class="label">Utilization rates</div>
+        <div class="underline" aria-hidden="true"></div>
+      </div>
+      <div class="data-point">
+        <div class="percent">36%</div>
+        <div class="label">Employee demographics</div>
+        <div class="underline" aria-hidden="true"></div>
+      </div>
+      <div class="data-point">
+        <div class="percent">30%</div>
+        <div class="label">What similar companies offer</div>
+        <div class="underline" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <figcaption>
+      <em>
+        Represents the percent of employers ranking items among their top three most important types of data considered when making decisions about the design of benefits programs.
+      </em>
+    </figcaption>
+  </figure>
+
+  <footer>
+    <p>
+      <small>13 | <strong>Harnessing growth in workforce benefits:</strong> the next horizon | 2025 Workforce Benefits Study</small>
+    </p>
+  </footer>
+</article>
+</body>
+</html>

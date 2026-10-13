@@ -48,9 +48,9 @@ jobs:
       - name: Install Python and locked dependencies
         run: |
           uv python install 3.12
-          uv sync --project table_RAG --locked --python 3.12
+          uv sync --project avoid_failed_rag/table_RAG --locked --python 3.12
       - name: Run tests
-        working-directory: table_RAG
+        working-directory: avoid_failed_rag/table_RAG
         run: uv run --no-sync pytest -q
 
   aws-rag:

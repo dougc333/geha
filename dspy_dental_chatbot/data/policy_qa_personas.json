@@ -1,0 +1,109 @@
+[
+  {
+    "id": "budget-parent-glasses",
+    "name": "Budget-conscious parent",
+    "description": "Uses a familiar retailer name and asks whether a general vision discount applies.",
+    "query": "My daughter needs new glasses and we normally buy them at Walmart. Does our dental plan help pay for the frames?",
+    "expected_page": 7,
+    "required_facts": [["60%", "60 percent"], ["retail price"]]
+  },
+  {
+    "id": "retiree-hearing-aids",
+    "name": "Retiree comparing hearing aids",
+    "description": "Asks for the discount range, partner name, and advertised average savings.",
+    "query": "I'm retired and shopping for hearing aids. What exactly is the member discount, who provides it, and how much do people usually save?",
+    "expected_page": 9,
+    "required_facts": [["30%-60%", "30%–60%", "30 to 60 percent"], ["TruHearing"], ["$2,600", "2600"]]
+  },
+  {
+    "id": "caregiver-medical-alert",
+    "name": "Caregiver asking about Life Alert",
+    "description": "Checks activation cost, monthly discount, and extended-family eligibility.",
+    "query": "I'm helping my mother choose a medical alert service. Is there a Life Alert deal, does activation cost anything, and can extended family use it?",
+    "expected_page": 9,
+    "required_facts": [["free activation"], ["10%", "10 percent"], ["extended family"]]
+  },
+  {
+    "id": "bargain-shopper-oral-care",
+    "name": "Bargain shopper",
+    "description": "Combines two oral-care discounts in one natural-language question.",
+    "query": "Before I buy anything, can you compare the teeth-whitening and electric-toothbrush discounts and tell me which brands they apply to?",
+    "expected_page": 9,
+    "required_facts": [["20%", "20 percent"], ["Smile Brilliant"], ["70%", "70 percent"], ["cariPRO"]]
+  },
+  {
+    "id": "fitness-new-benefit",
+    "name": "Fitness-focused member",
+    "description": "Asks about the newly advertised fitness access in conversational wording.",
+    "query": "I want to get back to the gym this year. Is there a fitness membership perk and how many locations can I use?",
+    "expected_page": 9,
+    "required_facts": [["12,700", "12700"], ["Active&Fit Direct", "Active and Fit Direct"], ["reduced rates"]]
+  },
+  {
+    "id": "rambling-multi-benefit",
+    "name": "Rambling family planner",
+    "description": "Mixes family context and two benefits to test multi-part evidence synthesis.",
+    "query": "We're trying to plan expenses for my dad and also get healthier as a family, so I was wondering—does GEHA have anything for hearing aids, and is there some kind of gym discount too?",
+    "expected_page": 9,
+    "required_facts": [["30%-60%", "30%–60%", "30 to 60 percent"], ["TruHearing"], ["12,700", "12700"], ["Active&Fit Direct", "Active and Fit Direct"]]
+  },
+  {
+    "id": "code-adult-cleaning-d1110",
+    "name": "Member asking about D1110",
+    "description": "Requires the plan brochure for the CDT definition and the benefits guide for plan comparison.",
+    "query": "My dentist put CDT code D1110 on the estimate. How many adult cleanings do High and Standard cover each calendar year, and what is the in-network member cost?",
+    "expected_page_groups": [[21], [5, 20]],
+    "include_plan_brochure": true,
+    "required_facts": [["three", "3"], ["two", "2"], ["calendar year", "per year"], ["$0", "no member cost", "no cost"]]
+  },
+  {
+    "id": "code-extraction-d7140",
+    "name": "Member asking about D7140",
+    "description": "Combines the brochure's extraction-code definition with Class B member cost-sharing.",
+    "query": "The treatment plan lists D7140 for a simple extraction. Is that service covered, and what would I pay with High versus Standard in-network?",
+    "expected_page_groups": [[26], [5, 23]],
+    "include_plan_brochure": true,
+    "required_facts": [["extraction"], ["20%", "20 percent"], ["45%", "45 percent"]]
+  },
+  {
+    "id": "code-root-canal-d3310",
+    "name": "Member asking about D3310",
+    "description": "Tests a code-specific lifetime limitation plus High and Standard Class C cost-sharing.",
+    "query": "For root canal code D3310, is there a lifetime restriction and what do High and Standard members pay in-network?",
+    "expected_page_groups": [[29], [5, 28]],
+    "include_plan_brochure": true,
+    "required_facts": [["once per tooth", "one per tooth"], ["lifetime"], ["50%", "50 percent"], ["65%", "65 percent"]]
+  },
+  {
+    "id": "retired-federal-employee-orthodontics",
+    "name": "Retired federal employee",
+    "description": "A retiree asks whether adult orthodontics is covered under Standard and what the in-network cost and lifetime maximum are.",
+    "query": "I'm a retired federal employee considering braces for myself under the Standard dental plan. Are adults covered, what would I pay in-network, and what is the lifetime maximum?",
+    "expected_page": 5,
+    "required_facts": [["adult orthodontics", "adults"], ["50%", "50 percent"], ["$2,500", "2500"], ["lifetime maximum"]]
+  },
+  {
+    "id": "middle-aged-member-crown-cost",
+    "name": "Middle-aged member",
+    "description": "A middle-aged member compares the example cost of a porcelain crown under High, Standard, and no insurance.",
+    "query": "I'm 47 and my dentist says I need a porcelain crown. About what would I pay with the High plan versus Standard, and what is the average cost without insurance?",
+    "expected_page": 8,
+    "required_facts": [["$422", "422"], ["$548", "548"], ["$1,363", "1363"]]
+  },
+  {
+    "id": "parent-child-braces",
+    "name": "Parent with a child",
+    "description": "A parent compares High and Standard orthodontic costs and lifetime maximums for a child's braces.",
+    "query": "My 13-year-old needs braces. What would we pay in-network under the High plan versus Standard, and what is the lifetime maximum for each plan?",
+    "expected_page": 5,
+    "required_facts": [["30%", "30 percent"], ["$3,500", "3500"], ["50%", "50 percent"], ["$2,500", "2500"], ["lifetime maximum"]]
+  },
+  {
+    "id": "single-mom-modesto-rambling-cleanings",
+    "name": "Single mom in Modesto (rambling)",
+    "description": "A single parent buries a child-cleaning coverage question inside local, family, and scheduling details.",
+    "query": "I'm a single mom here in Modesto, and between school pickup, soccer practice, and trying to find a dentist who can see both of us on the same afternoon, I'm getting a little overwhelmed. My daughter is due for another regular cleaning, and before I rearrange everything again, can you tell me how many cleanings per calendar year High and Standard cover and whether we pay anything in-network?",
+    "expected_page": 5,
+    "required_facts": [["three", "3"], ["two", "2"], ["calendar year", "per year"], ["$0", "no member cost", "pay nothing", "no out-of-pocket payment", "no cost"]]
+  }
+]

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Medical necessity - source.pdf</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #071f36;
+      --muted: #5f6f7f;
+      --line: #d6dee6;
+      --header: #06233d;
+      --header-ink: #ffffff;
+      --stripe: #f4f7f9;
+      --canvas: #edf2f6;
+      --paper: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+    main {
+      width: min(1440px, calc(100% - 32px));
+      margin: 32px auto;
+      padding: clamp(24px, 4vw, 56px);
+      background: var(--paper);
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(7, 31, 54, 0.10);
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+    .metadata { margin: 0 0 28px; color: var(--muted); }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+    .policy-table { width: 100%; border-collapse: collapse; min-width: 680px; }
+    .policy-table th {
+      padding: 14px 16px;
+      background: var(--header);
+      color: var(--header-ink);
+      text-align: left;
+      vertical-align: top;
+      font-weight: 700;
+    }
+    .policy-table td {
+      padding: 13px 16px;
+      border-top: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+    .policy-table tbody tr:nth-child(even) { background: var(--stripe); }
+    .note { margin: 24px 0 0; color: var(--muted); font-size: 0.9rem; }
+    @media print {
+      body { background: #fff; }
+      main { width: 100%; margin: 0; padding: 0; box-shadow: none; }
+      .table-wrap { overflow: visible; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Medical necessity</h1>
+    <p class="metadata">Source: source.pdf &middot; Table 68 &middot; Page 131</p>
+    <div class="table-wrap">
+      <table class="dataframe policy-table">
+  <thead>
+    <tr style="text-align: left;">
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Medicare Part A</td>
+      <td>Part A helps cover inpatient hospital stays, skilled nursing facility care, hospice care, and some home health care.</td>
+    </tr>
+    <tr>
+      <td>Medicare Part B</td>
+      <td>Part B covers medically necessary services like doctors' services and tests, outpatient care, home health services, durable medical equipment, and other medical services.</td>
+    </tr>
+    <tr>
+      <td>Medicare Part C</td>
+      <td>Part C is a Medicare Advantage plan that combines the coverage of Medicare Part A and Part B. Part C typically also covers additional benefits like dental, vision, and hearing services. Part C plans also include Medicare Part D coverage.</td>
+    </tr>
+    <tr>
+      <td>Medicare Part D</td>
+      <td>Medicare Part D plans provide coverage for prescription drugs. Private insurers contract with CMS on an annual basis for the right to offer Part D plans. Part D can be offered as a standalone Prescription Drug Plan (PDP) or as part of a Medicare Advantage Prescription Drug Plan (MAPD).</td>
+    </tr>
+    <tr>
+      <td>Medicare Part D EGWP</td>
+      <td>A Medicare Part D Employer Group Waiver Plan (EGWP) is a type of a Medicare prescription drug plan that can be offered to employees and retirees of certain companies, unions, or government agencies, which allows for flexibility and enhanced coverage of traditional Medicare pharmacy benefits. Examples of Medicare Part D EGWPs are Medicare Advantage Prescription Drug (MAPD) plan EGWPs that include both health and drug benefits, as well as Prescription Drug Plan (PDP) EGWP's, which only cover the prescription drug benefit.</td>
+    </tr>
+    <tr>
+      <td>Mental health/ substance use disorder</td>
+      <td>Conditions and diseases listed in the most recent edition of the International Classification of Diseases (ICD) as psychoses, neurotic disorders, or personality disorders; other nonpsychotic mental disorders listed in the ICD, to be determined by the Plan; or disorders listed in the ICD requiring treatment for misuse or dependence upon substances such as alcohol, narcotics, or hallucinogens; may also be collectively referred to as Behavioral Health conditions. Precertification is required for all of the following services and must be provided by a covered facility or covered provider as defined in Section 3, How You Get Care .</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+    <p class="note">Extracted directly from the source PDF using embedded text with targeted OCR fallback where needed. Verify against the source policy before operational use.</p>
+  </main>
+</body>
+</html>

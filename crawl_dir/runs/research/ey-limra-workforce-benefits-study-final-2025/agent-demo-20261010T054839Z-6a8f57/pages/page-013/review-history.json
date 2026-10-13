@@ -1,0 +1,25 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "No table is present in the source PDF; instead, the data percentages are shown as large bold numbers in a graphic layout with a background image.",
+        "html_evidence": "A fully formatted HTML table with caption and header columns showing the percentages and types of data employers seek.",
+        "correction": "Remove the table from the HTML as there is no table in the source PDF. Represent the data only as a list or descriptive text without tabular structure."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The percentages are displayed prominently as large yellow numbers with short labels below them arranged visually in columns over a background image.",
+        "html_evidence": "The data is presented as a vertical bulleted list without visual emphasis or positioning to replicate the original visually iconic layout.",
+        "correction": "Implement a visual layout that highlights the data percentages prominently with appropriate font sizes and colors, arranged in columns to match the original, or else do not claim to fully replicate the layout if only textual representation is possible."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

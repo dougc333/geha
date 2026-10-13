@@ -1,0 +1,15 @@
+Universal Approval Criteria:
+- Other uses of drugs and biologics may be considered medically necessary if supported as safe and effective according to peer-reviewed articles from one of the following journals:
+- o American Journal of Medicine; Annals of Internal Medicine; Annals of Oncology; Annals of Surgical Oncology; Biology of Blood and Marrow Transplantation; Blood; Bone Marrow Transplantation; British Journal of Cancer; British Journal of Hematology; British Medical Journal; Cancer; Clinical Cancer Research; Drugs; European Journal of Cancer (formerly the European Journal of Cancer and Clinical Oncology); Gynecologic Oncology; International Journal of Radiation, Oncology, Biology, and Physics; The Journal of the American Medical Association, Journal of Clinical Oncology; Journal of the National Cancer Institute; Journal of the National Comprehensive Cancer Network (NCCN); Journal of Urology; Lancet; Lancet Oncology; Leukemia; The New England Journal of Medicine; Radiation Oncology;
+- o Meeting abstracts and case reports are excluded from consideration.
+- Non-standard protocols may be approved based on unique clinical circumstances;
+- Dose and frequency should be consistent with United States Food and Drug Administration (FDA) labeling, National Comprehensive Cancer Network® (NCCN), or indication specific peer-reviewed literature;
+- In the instance that a request is made for drug(s) that was (were) previously tried (including in the same pharmacologic class or with the same mechanism of action) and such drug(s) was (were) discontinued due to a lack of efficacy the request may be subject to an off-label review for medical necessity unless supported by the NCCN or high quality literature (prospective phase 2 or 3 studies published as full manuscripts in a CMS-supported journal).
+
+Billing Codes
+Neupogen, HCPCS Code = J1442. Neupogen, Description = Injection, filgrastim (g-csf), excludes biosimilars, 1 microgram. Granix, HCPCS Code = J1447. Granix, Description = Injection, tbo-filgrastim, 1 microgram. Filkri, HCPCS Code = J3590. Filkri, Description = Unclassified biologic. Nypozi, HCPCS Code = Q5148. Nypozi, Description = Injection, filgrastim-txid (nypozi), biosimilar, 1 microgram. Releuko, HCPCS Code = Q5125. Releuko, Description = Injection, filgrastim-ayow, biosimilar, (Releuko), 1 microgram. Zarxio, HCPCS Code = Q5101. Zarxio, Description = Injection, filgrastim-sndz, biosimilar, (Zarxio), 1 microgram. Nivestym, HCPCS Code = Q5110. Nivestym, Description = Injection, filgrastim-aafi, biosimilar, (Nivestym), 1 microgram
+
+References
+1. Granix [package insert]. Teva Pharmaceuticals USA, Inc., North Wales, PA. Available at: https://www.granixhcp.com/globalassets/granix-hcp/prescribing-information.pdf
+2. Granix. NCCN Cancer Guidelines and Drugs and Biologics Compendium. Available at: https://www.nccn.org/professionals/drug_compendium/content/
+3. Filkri [package insert]. Accord BioPharma, Inc. Raleigh, NC. Available at: https://www.accessdata.fda.gov/drugsatfda_docs/label/2026/761027s000lbl.pdf

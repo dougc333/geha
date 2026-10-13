@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "gpt-4.1-mini",
+  "created_at": "2026-10-10T08:42:35.457882+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "region1",
+      "kind": "figure",
+      "title": "Figure 7 Employers are seeking a wide array of data as input into their decision-making.",
+      "source_png": "figure-01-region1.png",
+      "bounding_box": [
+        0,
+        891,
+        1530,
+        1782
+      ],
+      "output_directory": "figure-01",
+      "native_evidence": "figure-01/native-evidence.json",
+      "native_evidence_word_count": 92,
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 453.1,
+          "candidate_sha256": "cc03f45c4fdfff78e88c0efeaf31bd7bc198ea6aaa4e99b795ae0cff13d40a0b"
+        }
+      ],
+      "selected_iteration": 1,
+      "selected_error_count": 0,
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-01.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 1,
+    "failed": 0,
+    "total_iterations": 1,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-10-10T08:42:43.913483+00:00"
+}

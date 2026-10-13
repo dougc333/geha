@@ -1,0 +1,182 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar chart text includes 'ily or medical leave' truncated from 'Paid family or medical leave', 'areer development' missing leading 'C', 'wellness programs' missing leading 'Physical health', 'disability insurance' repeated twice missing 'Short-term' and 'Long-term' differentiation, 'erm care insurance' missing leading 'Long-t', 'al illness insurance' missing leading 'Critic', 'ncy savings benefit' missing leading 'Emergency savi', 'tity theft protection' missing leading 'Iden', 't treatment benefits' missing leading 'Substance abuse', 'sistance programs' missing leading 'Employee ass', 'wellness programs' missing leading 'Financial ', 'emedicine benefits' missing leading 'Tel', 'istance/repayment' missing leading 'Student loan ass', 'demnity insurance' missing leading 'Hospital in','Financial wellness programs' colored red consistent but bars/labels truncation causes confusion",
+        "html_evidence": "<text class=\"bar-label\" x=\"110\" y=\"120\">Paid family or medical leave</text>\n... truncated labels visually visible\n<tr><td>Paid family or medical leave</td><td>54%</td><td>Neutral</td></tr>",
+        "correction": "Ensure all bar labels in the chart are fully visible and not truncated, e.g. 'Paid family or medical leave', 'Career development', 'Physical health wellness programs', 'Short-term disability insurance', 'Long-term disability insurance', 'Long-term care insurance', 'Critical illness insurance', 'Emergency savings benefit', 'Identity theft protection', 'Mental health/substance abuse treatment benefits', 'Employee assistance programs', 'Financial wellness programs', 'Tuition assistance', 'Telemedicine benefits', 'Student loan assistance/repayment', 'Hospital indemnity insurance' etc. appear fully and correctly."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Figure title and header lines in PDF: 'Figure 5' and 'Employees value a range of benefit offerings.' and 'QUESTION: Regardless of whether the benefit is currently available to you at work, how interested would you be in having your employer offer it in the future?'. In HTML, 'Figure 5' and 'Employees value a range of benefit offerings.' are combined in one paragraph with both bold, but 'QUESTION:' line present.",
+        "html_evidence": "<figure>\n <figcaption>\n <p><strong>Figure 5</strong><br /><strong>Employees value a range of benefit offerings.</strong></p>\n <p><strong>QUESTION:</strong> Regardless of whether the benefit is currently available to you at work, how interested would you be in having your employer offer it in the future?</p>\n </figcaption>\n</figure>",
+        "correction": "The presentation is acceptable, minor difference but acceptable."
+      },
+      {
+        "category": "extra_text",
+        "source_evidence": "No extra paragraphs or sentences introduced beyond PDF text.",
+        "html_evidence": "No extra text present beyond source.",
+        "correction": "No correction needed."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "PDF shows the bar chart to left with legend next to it on the right and below the chart the note and a data table, plus two columns of text beneath them. The HTML uses a flex layout with chart on left and legend on right, then note paragraph, table below with data, then two columns side by side for text, matching PDF visually and in logical reading order.",
+        "html_evidence": "<section class=\"chart-container\" aria-label=\"Bar chart of employee interest in benefit offerings\">... legend ...</section>\n<p class=\"note\">...</p>\n<table>...</table>\n<section class=\"columns\" aria-label=\"Contextual paragraphs about study findings\">\n<article class=\"column\"> ... </article>\n<article class=\"column\"> ... </article>\n</section>",
+        "correction": "Layout is consistent with source and reading order is logical."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "Logical reading order from figure title, question, chart, legend, note, table, then text paragraphs in two columns.",
+        "html_evidence": "HTML reading order respects figure caption first, then chart, legend, note, table, then text paragraphs in two columns.",
+        "correction": "Reading order is correct."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "QUESTION: Regardless of whether the benefit is currently available to you at work, how interested would you be in having your employer offer it in the future?",
+        "html_evidence": "<p><strong>QUESTION:</strong> Regardless of whether the benefit is currently available to you at work, how interested would you be in having your employer offer it in the future?</p>",
+        "correction": "Fix spacing such that 'QUESTION:' text matches source with correct spacing and bold styling as in the source."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Paid family or medical leave now in the “core four”: More interesting, however, is that paid family or medical leave is the next most important benefit in employers’ minds beyond medical, dental and vision insurance: 71% of all employers (and 80% of large employers) view it as a critical benefit in the future, nearly on par with dental and vision insurance and above life, disability and supplemental health insurance. Paid family or medical leave is now clearly in the core four of benefits in the eyes of both employers and employees. See Key finding 4 for more on leave benefits.",
+        "html_evidence": "<p><strong>Paid family or medical leave now in the “core four”:</strong> More interesting, however, is that paid family or medical leave is the next most important benefit in employers’ minds beyond medical, dental and vision insurance: 71% of all employers (and 80% of large employers) view it as a critical benefit in the future, nearly on par with dental and vision insurance and above life, disability and supplemental health insurance. Paid family or medical leave is now clearly in the core four of benefits in the eyes of both employers and employees. <em>See Key finding 4 for more on leave benefits.</em></p>\n\n<p><strong>Prioritizing wellness:</strong> Mental health and substance abuse programs are of considerable interest to employees, especially the younger generations that are coming to dominate the workforce. Career development services that promote professional wellbeing are also of high interest to younger workers. Clear majorities of employers are expressing interest in mental health (60%) and career development (59%) benefits, while nearly as many see a need for programs focused on physical health and</p>",
+        "correction": "The sentence ending with 'physical health and' is truncated and incomplete in the candidate HTML and must be fully included as in the source."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "... physical health and financial wellness. As employers take a more holistic view of individual needs across a multigenerational workforce, wellness benefits can help attract and retain top talent. They can be especially valuable for individuals facing personal challenges in a time of great uncertainty.",
+        "html_evidence": "<p>financial wellness. As employers take a more holistic view of individual needs across a multigenerational workforce, wellness benefits can help attract and retain top talent. They can be especially valuable for individuals facing personal challenges in a time of great uncertainty.</p>",
+        "correction": "The text starting with 'financial wellness...' should be connected properly to preceding paragraph; the break interrupts a sentence in source, which candidate splits. Combine for complete sentence as in source."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Interest in long-term care insurance remains relevant, with the growing retirement-eligible population ranking it as important as critical illness and more important than hospital indemnity insurance. Long-term care can be provided as a stand-alone insurance benefit, a life insurance accelerated benefit or a long-term care rider added to a workplace life insurance product.",
+        "html_evidence": "<p>Interest in long-term care insurance remains relevant, with the growing retirement-eligible population ranking it as important as critical illness and more important than hospital indemnity insurance. Long-term care can be provided as a stand-alone insurance benefit, a life insurance accelerated benefit or a long-term care rider added to a workplace life insurance product.</p>",
+        "correction": "This paragraph matches source text."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Differing generational priorities: The dramatic differences in benefits interest across generations highlight the challenges faced by employers and the need for future portfolio refinements. See Figure 6. Today’s products and services are largely curated for Gen X and baby boomers, though Gen Z and millennials now make up the greater percentage of the workforce.",
+        "html_evidence": "<p><strong>Differing generational priorities:</strong> The dramatic differences in benefits interest across generations highlight the challenges faced by employers and the need for future portfolio refinements. <em>See Figure 6.</em> Today’s products and services are largely curated for Gen X and baby boomers, though Gen Z and millennials now make up the greater percentage of the workforce.</p>",
+        "correction": "This paragraph matches source except italicizing 'See Figure 6' instead of normal text. This acceptable as it does not change content."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Legend box text: Up 5 percentage points or more vs. 2023 study\nDown 5 percentage points or more vs. 2023 study",
+        "html_evidence": "<p>Up 5 percentage points or more vs. 2023 study</p>\n<p>Down 5 percentage points or more vs. 2023 study</p>",
+        "correction": "Add 'percentage points or more' wording exactly as in source legend text in HTML. (This is correct in candidate.)"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Bar labels including values such as 'Medical insurance 78%' and so forth for all listed benefits with correct percentage values in the chart.",
+        "html_evidence": "Several bar labels have clipping or missing text at start such as 'amily or medical leave', 'lth wellness programs', 'rm disability insurance', 'rgency savings benefit', 'use treatment benefits', 'ancial wellness programs' etc.",
+        "correction": "Correct clipping or truncation of bar label text in SVG. All bar labels must be fully visible with no missing or truncated characters, exactly as in source PDF."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar chart label: 'Paid family or medical leave'",
+        "html_evidence": "Bar chart label displayed as 'amily or medical leave' (missing 'P')",
+        "correction": "Fix the label to 'Paid family or medical leave'."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Bar chart label: 'Short-term disability insurance'",
+        "html_evidence": "Bar chart label displayed as 'rm disability insurance' (missing 'Short-te')",
+        "correction": "Fix the label to 'Short-term disability insurance'."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Bar chart label: 'Long-term disability insurance'",
+        "html_evidence": "Bar chart label displayed as 'rm disability insurance' (likely truncated and repeated from previous)",
+        "correction": "Fix the label to 'Long-term disability insurance'."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Bar chart label: 'Long-term care insurance'",
+        "html_evidence": "Bar chart label displayed as 'g-term care insurance' (missing 'Lon')",
+        "correction": "Fix the label to 'Long-term care insurance'."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Bar chart label: 'Accident insurance'",
+        "html_evidence": "Bar chart label displayed as 'ccident insurance' (missing 'A')",
+        "correction": "Fix the label to 'Accident insurance'."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Bar chart label: 'Critical illness insurance'",
+        "html_evidence": "Bar chart label displayed as 'ritical illness insurance' (missing 'C')",
+        "correction": "Fix the label to 'Critical illness insurance'."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Bar chart label: 'Emergency savings benefit'",
+        "html_evidence": "Bar chart label displayed as 'rgency savings benefit' (missing 'Eme')",
+        "correction": "Fix the label to 'Emergency savings benefit'."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Bar chart label: 'Identity theft protection'",
+        "html_evidence": "Bar chart label displayed as 'dentity theft protection' (missing 'I')",
+        "correction": "Fix the label to 'Identity theft protection'."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Bar chart label: 'Mental health/substance abuse treatment benefits'",
+        "html_evidence": "Bar chart label displayed as 'use treatment benefits' (truncated)",
+        "correction": "Fix the label to 'Mental health/substance abuse treatment benefits'."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Bar chart label: 'Employee assistance programs'",
+        "html_evidence": "Bar chart label displayed as 'e assistance programs' (missing 'Employe')",
+        "correction": "Fix the label to 'Employee assistance programs'."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Bar chart label: 'Financial wellness programs'",
+        "html_evidence": "Bar chart label displayed as 'cial wellness programs' (missing 'Finan')",
+        "correction": "Fix the label to 'Financial wellness programs'."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Bar chart label: 'Student loan assistance/repayment'",
+        "html_evidence": "Bar chart label displayed as 'assistance/repayment' (missing 'Student loan')",
+        "correction": "Fix the label to 'Student loan assistance/repayment'."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Bar chart label: 'Hospital indemnity insurance'",
+        "html_evidence": "Bar chart label displayed as 'al indemnity insurance' (missing 'Hospit')",
+        "correction": "Fix the label to 'Hospital indemnity insurance'."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Bar chart label: 'Legal services plan'",
+        "html_evidence": "Bar chart label displayed as 'al services plan' (missing 'Leg')",
+        "correction": "Fix the label to 'Legal services plan'."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Bar chart label: 'Debt management counseling'",
+        "html_evidence": "Bar chart label displayed as 'anagement counseling' (missing 'Debt m')",
+        "correction": "Fix the label to 'Debt management counseling'."
+      }
+    ]
+  }
+]

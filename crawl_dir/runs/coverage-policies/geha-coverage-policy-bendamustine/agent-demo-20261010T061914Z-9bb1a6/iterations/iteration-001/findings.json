@@ -1,0 +1,84 @@
+{
+  "table_extraction": {
+    "strategy": "hybrid",
+    "native_pdf_pages": [
+      {
+        "page": 1,
+        "pdf": "source.pdf",
+        "status": "ok",
+        "ocr_used": false,
+        "tables_detected": 1,
+        "tables_written": 1,
+        "tables_excluded": 0,
+        "outputs": [
+          {
+            "table_number": 1,
+            "heading": "Bendamustine: Belrapzo, Bendeka, Treanda, Vivimusta",
+            "page": 1,
+            "rows": 5,
+            "columns": 5,
+            "header_promoted": false,
+            "header_inherited_from_table": null,
+            "html": "source_bendamustine-belrapzo-bendeka-treanda-vivimusta.html"
+          }
+        ],
+        "excluded": []
+      },
+      {
+        "page": 2,
+        "pdf": "source.pdf",
+        "status": "ok",
+        "ocr_used": false,
+        "tables_detected": 1,
+        "tables_written": 1,
+        "tables_excluded": 0,
+        "outputs": [
+          {
+            "table_number": 1,
+            "heading": "Billing",
+            "page": 1,
+            "rows": 5,
+            "columns": 3,
+            "header_promoted": false,
+            "header_inherited_from_table": null,
+            "html": "source_billing.html"
+          }
+        ],
+        "excluded": []
+      },
+      {
+        "page": 3,
+        "pdf": "source.pdf",
+        "status": "ok",
+        "ocr_used": false,
+        "tables_detected": 1,
+        "tables_written": 0,
+        "tables_excluded": 1,
+        "outputs": [],
+        "excluded": [
+          {
+            "table_number": 1,
+            "heading": "Extracted table",
+            "page": 1,
+            "reason": "revision_history"
+          }
+        ]
+      }
+    ],
+    "verified_html": {
+      "source": "visually_verified_html",
+      "outputs": [],
+      "table_count": 0
+    }
+  },
+  "chunk_errors": [],
+  "chunk_warnings": [
+    {
+      "chunk_id": "geha-coverage-policy-bendamustine-chunk-0001",
+      "issue": "context_too_short"
+    }
+  ],
+  "image_only_pages": [],
+  "visual_reconstruction_pages": [],
+  "visual_failures": []
+}

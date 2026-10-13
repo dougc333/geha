@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "workflow": "tailwind_chart_html_correction",
+  "tool_id": "tailwind_html_playwright_correction",
+  "model": "gpt-4.1-mini",
+  "source_crop": "/Users/dc/geha/crawl_dir/runs/research/ey-limra-workforce-benefits-study-final-2025/manual-figure-page004-checkpoint/pages/page-004/segments/figure-01-playwright-chromium.png",
+  "viewport": [
+    868,
+    884
+  ],
+  "max_iterations": 6,
+  "created_at": "2026-10-10T09:55:14.744412+00:00",
+  "status": "failed",
+  "iterations": [
+    {
+      "iteration": 1,
+      "source_html": "iteration-01.source.html",
+      "compiled_html": "iteration-01.html",
+      "tailwind_css": "iteration-01.tailwind.css",
+      "rendered_png": "iteration-01.png",
+      "render_latency_ms": 492.3,
+      "candidate_sha256": "a2833f6eeb6eb3d539f6c8ed9fb1e9e08ff862dfa6f14c2d6b2e954b79eedb14",
+      "verdict": "mismatch",
+      "error_count": 4,
+      "errors": [
+        {
+          "category": "layout",
+          "source_evidence": "The authoritative crop shows the question text on two lines ending with 'now?'. The Tailwind render has the question text in one line, causing a difference in vertical text layout and spacing around the question.",
+          "html_evidence": "<p class=\"text-[14px] leading-[18px] font-bold mb-12\">QUESTION: In five years, do you think your company will be offering fewer, the same or more benefits than it does now?</p>",
+          "correction": "Change the question text line breaking so that it matches the authoritative crop with the question split into two lines ending with 'now?'."
+        },
+        {
+          "category": "layout",
+          "source_evidence": "In the authoritative crop, the stacked bars for each category have distinct vertical segment heights matching the percentages 57%,40%,3% (Small), 64%,35%,1% (Midsize), 67%,30%,3% (Large) with the gray 'About the same' section above 'Fewer benefits'.",
+          "html_evidence": "<div aria-hidden=\"true\" class=\"bg-[#6F6F7A] text-[12px] leading-[14px] font-semibold text-white text-center\" style=\"height:88px; line-height:88px;\">40%</div> ... <div aria-hidden=\"true\" class=\"bg-[#D3D3D8]\" style=\"height:6px;\"></div> for Small, etc.",
+          "correction": "Adjust the stack heights so the 'Fewer benefits' segment (gray #D3D3D8) is the bottom segment with height corresponding to 3%, 'About the same' (darker gray #6F6F7A) above with correct height, and 'More benefits' (yellow #fee600) stacked above with correct height for each company size bar."
+        },
+        {
+          "category": "wrong_text",
+          "source_evidence": "+7% change from 2023 is aligned to the right of the Small bar in authoritative view.",
+          "html_evidence": "<div class=\"text-[14px] leading-[16px] font-semibold text-[#6F6F7A] text-center\" aria-label=\"Small company change +7% change from 2023\" style=\"width:88px;\">\n<p><span class=\"text-black\">+7%</span></p><p class=\"text-xs font-normal\">change<br />from<br />2023</p>",
+          "correction": "Move the '+7%', '+6%', '+5%' text with 'change from 2023' to be to the right of each respective bar segment, not below it as in the Tailwind render."
+        },
+        {
+          "category": "spacing",
+          "source_evidence": "The authoritative crop places the legend aligned horizontally centered below the bars under a top border line, spanning the width of all three bars.",
+          "html_evidence": "<footer aria-label=\"Chart legend\" class=\"max-w-[324px] mx-auto flex justify-between border-t border-[#D3D3D8] pt-4 text-[14px]\">...</footer>",
+          "correction": "Ensure the legend is horizontally aligned below the bars with no excessive horizontal spacing, matching the authoritative layout with a single top border and even distribution across the width of the bars."
+        }
+      ]
+    },
+    {
+      "iteration": 2,
+      "source_html": "iteration-02.source.html",
+      "compiled_html": "iteration-02.html",
+      "tailwind_css": "iteration-02.tailwind.css",
+      "rendered_png": "iteration-02.png",
+      "render_latency_ms": 464.2,
+      "candidate_sha256": "c1ca60c7cdae669846e2979fde7475073b62c78d8f2329566d92f1550861b58c",
+      "verdict": "mismatch",
+      "error_count": 3,
+      "errors": [
+        {
+          "category": "layout",
+          "source_evidence": "The authoritative crop shows the yellow (More benefits) segment stacked at the top above the gray (About the same) segment, and a small light gray (Fewer benefits) segment at the bottom in each bar, stacked vertically. The Tailwind render instead stacks the light gray at top, then gray, then yellow at bottom, reversing the stacking order.",
+          "html_evidence": "<div aria-hidden=\"true\" class=\"bg-[#D3D3D8]\" style=\"height:6px;\"></div>\n<div aria-hidden=\"true\" class=\"bg-[#6F6F7A] text-[12px] leading-[14px] font-semibold text-white text-center\" style=\"height:88px; line-height:88px;\">40%</div>\n<div aria-hidden=\"true\" class=\"bg-[#fee600] text-[12px] leading-[14px] font-semibold text-black text-center\" style=\"height:126px; line-height:126px;\">57%</div>",
+          "correction": "Reorder the bars' stacking in Tailwind: from bottom to top in authoritative order: light gray (Fewer benefits), gray (About the same), yellow (More benefits)."
+        },
+        {
+          "category": "chart_relationship",
+          "source_evidence": "+7%, +6%, +5% changes from 2023 are above their respective bars on the right side as in the authoritative crop, but in Tailwind they appear below the bars.",
+          "html_evidence": "<div class=\"text-[14px] leading-[16px] font-semibold text-[#6F6F7A]\" aria-label=\"Small company change +7% change from 2023\" style=\"width:44px; text-align: right; margin-left: 8px;\">\n          <p><span class=\"text-black\">+7%</span></p>\n          <p class=\"text-xs font-normal\">change<br />from<br />2023</p>\n        </div>",
+          "correction": "Position the '+x% change from 2023' text to the right and inline with the top of the bars, not below them."
+        },
+        {
+          "category": "chart_relationship",
+          "source_evidence": "In the authoritative version, the 'Fewer benefits' values are very small bars at the bottom of each bar (3%, 1%, 3%) and labeled inside or just next to the bottom bar portion visually. In Tailwind, they appear as a small bar but at the top, which is inconsistent.",
+          "html_evidence": "<div aria-hidden=\"true\" class=\"bg-[#D3D3D8]\" style=\"height:6px;\"></div>",
+          "correction": "Align the 'Fewer benefits' light gray segment at bottom of each stacked bar to match authoritative chart."
+        }
+      ]
+    },
+    {
+      "iteration": 3,
+      "source_html": "iteration-03.source.html",
+      "compiled_html": "iteration-03.html",
+      "tailwind_css": "iteration-03.tailwind.css",
+      "rendered_png": "iteration-03.png",
+      "render_latency_ms": 466.4,
+      "candidate_sha256": "d2d29e8217cdee5b91e760f0f53d460b1dc44b727d1b1a980dba068b2d7fa15f",
+      "verdict": "mismatch",
+      "error_count": 5,
+      "errors": [
+        {
+          "category": "chart_data",
+          "source_evidence": "Authoritative shows \nSmall: 3% fewer benefits, 40% same, 57% more benefits with +7% change.\nMidsize: 1% fewer, 35% same, 64% more with +6% change.\nLarge: 3% fewer, 30% same, 67% more with +5% change.",
+          "html_evidence": "Tailwind bars show smaller gray and yellow segments with heights not reflected accordingly, and the smallest bar heights for 'fewer benefits' differ (e.g., 6px vs 2px) indicating data mismatch in bar segment sizing.",
+          "correction": "Adjust Tailwind segment heights to match exact percentages and increments: 'Fewer benefits' Small=3%, Midsize=1%, Large=3%; 'About same' Small=40%, Midsize=35%, Large=30%; 'More benefits' Small=57%, Midsize=64%, Large=67%."
+        },
+        {
+          "category": "scale",
+          "source_evidence": "Stacked bar heights correspond closely to percentage values, showing consistent scale across bars.",
+          "html_evidence": "Tailwind bars have inconsistent scale: for example, Midsize 'fewer benefits' has only 2px height but should reflect 1%, not visually consistent with authoritative that shows 3% height as about 6px. Also, total bar heights differ significantly across categories, breaking scale consistency.",
+          "correction": "Scale all bars equally and ensure segment heights linearly correspond to percentage values shown to preserve scale fidelity."
+        },
+        {
+          "category": "layout",
+          "source_evidence": "Percentage values displayed centered inside bar segments with consistent font size and color. Change labels placed right outside top of bars.",
+          "html_evidence": "Tailwind places percentage values inside bars but uses bold for yellow segment text only and smaller for others, and places '+X% change from 2023' differently, disrupting layout. Also, the '+X%' change label's vertical alignment is inconsistent and partially overlapped by bars.",
+          "correction": "Standardize font weights and colors for all segment percentages inside bars as authoritative. Adjust '+X% change from 2023' text to be consistently placed outside right top edge of bars without overlap."
+        },
+        {
+          "category": "spacing",
+          "source_evidence": "Company size labels and employee counts placed below each bar with consistent spacing and font sizes.",
+          "html_evidence": "Tailwind labels for company size and employee range appear smaller and spaced differently, and sometimes closer or further from bars than authoritative.",
+          "correction": "Match bottom label spacing and font size exactly as authoritative crop to ensure visual consistency."
+        },
+        {
+          "category": "chart_relationship",
+          "source_evidence": "Legend positioned below bars with distinct colors and descriptive labels aligned and spaced evenly.",
+          "html_evidence": "Tailwind legend is spaced wider and has less vertical padding, with slight difference in label text (e.g., 'Fewer benefits' vs 'Fewer benefits' same, but placement etc. different). Also legend color blocks differ in alignment relative to text.",
+          "correction": "Align legend horizontally and vertically to match authoritative exactly, including spacing between color swatches and text."
+        }
+      ]
+    },
+    {
+      "iteration": 4,
+      "source_html": "iteration-04.source.html",
+      "compiled_html": "iteration-04.html",
+      "tailwind_css": "iteration-04.tailwind.css",
+      "rendered_png": "iteration-04.png",
+      "render_latency_ms": 465.7,
+      "candidate_sha256": "f12b45d038aee8d6560081ba0c7b1856132ab8cd32e6392c7a12d723a1e36f3f",
+      "verdict": "mismatch",
+      "error_count": 2,
+      "errors": [
+        {
+          "category": "layout",
+          "source_evidence": "In the authoritative crop, the bars and their associated labels are spaced wider apart with consistent alignment under each category: Small, Midsize, Large. In the Tailwind render, the bars are closer horizontally, and the category labels, especially for Large, are shifted left and overlap with the bar, making the text placement crowded and inconsistent.",
+          "html_evidence": "<div class=\"flex justify-between max-w-[324px] mb-8\" aria-label=\"Benefits change by company size\" style=\"position: relative; height: 280px;\"> ... <div class=\"flex flex-col items-center gap-2\" style=\"width:88px; position: relative;\"> ... <div class=\"text-center mt-4 text-[14px] leading-[18px] font-normal\" style=\"color:#555555; max-width:88px;\"> <span>Large</span><br /> <span class=\"text-xs\">(1,000 or more employees)</span> </div> ...</div>",
+          "correction": "Adjust the horizontal spacing between the three bars and their labels to match the authoritative crop. Ensure the Large category label is positioned without overlap to the left and is centered under its bar, consistent with Small and Midsize categories."
+        },
+        {
+          "category": "layout",
+          "source_evidence": "In the authoritative crop, the legend is centered below the chart with equal spacing for each item and placed on its own line below the bars and category labels. In the Tailwind render, the legend is horizontally shifted far to the right, leaving a large blank area to the left, resulting in uneven spacing and poor alignment.",
+          "html_evidence": "<footer aria-label=\"Chart legend\" class=\"max-w-[324px] mx-auto flex justify-between border-t border-[#D3D3D8] pt-6 text-[14px] leading-[18px] font-normal text-[#7F7F8C]\"> ... </footer>",
+          "correction": "Center the legend horizontally below the chart so that the three legend items are evenly spaced and aligned under the columns, matching the authoritative crop."
+        }
+      ]
+    },
+    {
+      "iteration": 5,
+      "source_html": "iteration-05.source.html",
+      "compiled_html": "iteration-05.html",
+      "tailwind_css": "iteration-05.tailwind.css",
+      "rendered_png": "iteration-05.png",
+      "render_latency_ms": 439.9,
+      "candidate_sha256": "4233504926a11d5572faf133333d6311dcd5b3f32a7e8f189208c3e8a5ce95e9",
+      "verdict": "mismatch",
+      "error_count": 1,
+      "errors": [
+        {
+          "category": "text_overlap",
+          "source_evidence": "Legend text at bottom has overlapping words: 'About the same employees' where category labels overlap with employee counts causing illegibility.",
+          "html_evidence": "<footer aria-label=\"Chart legend\" class=\"max-w-[348px] mx-auto flex justify-center border-t border-[#D3D3D8] pt-6 text-[14px] leading-[18px] font-normal text-[#7F7F8C] space-x-[52px]\">\n  <p class=\"flex items-center gap-2 whitespace-nowrap\">\n    <span class=\"inline-block w-[18px] h-[18px] bg-[#D3D3D8] flex-shrink-0\"></span> Fewer benefits\n  </p>\n  <p class=\"flex items-center gap-2 whitespace-nowrap\">\n    <span class=\"inline-block w-[18px] h-[18px] bg-[#6F6F7A] flex-shrink-0\"></span> About the same\n  </p>\n  <p class=\"flex items-center gap-2 whitespace-nowrap\">\n    <span class=\"inline-block w-[18px] h-[18px] bg-[#fee600] flex-shrink-0\"></span> More benefits\n  </p>\n</footer>",
+          "correction": "Fix legend text overlapping so that category labels 'Fewer benefits', 'About the same', and 'More benefits' do not overlap with employee count text beneath the bars. They should be on a separate clearly spaced line inside the legend area with no text overlap."
+        }
+      ]
+    },
+    {
+      "iteration": 6,
+      "source_html": "iteration-06.source.html",
+      "compiled_html": "iteration-06.html",
+      "tailwind_css": "iteration-06.tailwind.css",
+      "rendered_png": "iteration-06.png",
+      "render_latency_ms": 454.2,
+      "candidate_sha256": "c73a90bb3e3d871a37c6a7a5815166f763928bb078e17fd0daa1bb4b38b69b64",
+      "verdict": "mismatch",
+      "error_count": 1,
+      "errors": [
+        {
+          "category": "text_overlap",
+          "source_evidence": "Legend text 'Fewer benefits', 'About the same', 'More benefits' is clearly separated and spaced in the authoritative crop. In the Tailwind render, the legend text rows are overlapping each other at the bottom under the bars, resulting in unreadable text.",
+          "html_evidence": "<footer aria-label=\"Chart legend\" class=\"max-w-[348px] mx-auto border-t border-[#D3D3D8] pt-6 text-[14px] leading-[18px] font-normal text-[#7F7F8C]\"> <div class=\"flex justify-center gap-[52px] mb-2\"> <p class=\"flex items-center gap-2 whitespace-nowrap\"> <span class=\"inline-block w-[18px] h-[18px] bg-[#D3D3D8] flex-shrink-0\"></span> Fewer benefits </p> <p class=\"flex items-center gap-2 whitespace-nowrap\"> <span class=\"inline-block w-[18px] h-[18px] bg-[#6F6F7A] flex-shrink-0\"></span> About the same </p> <p class=\"flex items-center gap-2 whitespace-nowrap\"> <span class=\"inline-block w-[18px] h-[18px] bg-[#fee600] flex-shrink-0\"></span> More benefits </p> </div> <div class=\"flex justify-center gap-[52px] text-[12px] leading-[14px] text-[#7F7F8C]\"> <p class=\"whitespace-nowrap\">Fewer benefits</p> <p class=\"whitespace-nowrap\">About the same</p> <p class=\"whitespace-nowrap\">More benefits</p> </div> </footer>",
+          "correction": "Fix legend layout so text rows do not overlap, ensuring spacing matches authoritative crop."
+        }
+      ]
+    }
+  ],
+  "selected_iteration": 5,
+  "selected_error_count": 1,
+  "completed_at": "2026-10-10T09:57:11.923172+00:00"
+}

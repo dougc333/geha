@@ -17,6 +17,7 @@ import sys
 
 import boto3
 
+import tracing
 from enrollment_graph import DentalEnrollmentGraph
 
 MODEL = "amazon.nova-lite-v1:0"
@@ -112,6 +113,7 @@ def main() -> int:
     client = boto3.client("bedrock-runtime", region_name="us-west-2")
     names = list(PERSONAS) if args.persona == "all" else [args.persona]
     results = [run(n, PERSONAS[n], client, args.quiet) for n in names]
+    tracing.flush()
     print("\npersona            result  turns  clarify  reprompt  mismatches (got, expected)")
     for r in results:
         print(f"{r['persona']:<18} {'PASS' if r['passed'] else 'FAIL':<7} {r['turns']:>5}  {r['clarifications']:>7}"

@@ -1,0 +1,55 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "A carrier with the best-value product, even if it does not work well with your benefit technology platform",
+        "html_evidence": "A carrier with the best-value product, even if it does not work well with your benefit technology platform",
+        "correction": "No change needed; text matches but see reading order discrepancy below."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "QUESTION: Which would you prefer? [Legend with gray box text then yellow box text] [Pie charts for 2021 then 2025] [Two paragraphs: left paragraph about employer interest and APIs, right paragraph about claims digitization]",
+        "html_evidence": "QUESTION: WHICH WOULD YOU PREFER? [Legend with gray box text then yellow box text] [Pie charts for 2021 then 2025] [Table with data for 2021, 2025] [Two paragraphs: left paragraph about employer interest and APIs, right paragraph about claims digitization]",
+        "correction": "Remove the added table with years 2021 and 2025 and percentages not present in source. The paragraphs about employer interest and claims digitization appear side by side in HTML, whereas in source they appear as two vertical paragraphs under the pie charts, possibly indicating layout or reading order difference."
+      },
+      {
+        "category": "extra_text",
+        "source_evidence": "No table present in source for 2021 and 2025 data.",
+        "html_evidence": "Table with caption 'Employer Preference Data for 2021 and 2025' and rows for 2021, 2025 with percentages 66%, 34%, 74%, 26%.",
+        "correction": "Remove this table to match source document which does not include tabular presentation of data."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "QUESTION: Which would you prefer?",
+        "html_evidence": "QUESTION: WHICH WOULD YOU PREFER?",
+        "correction": "Change HTML text to 'QUESTION: Which would you prefer?' to match source."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "A carrier that works well with your benefit technology platform, even if its product is a little more expensive",
+        "html_evidence": "A carrier with the best-value product, even if it does not work well with your benefit technology platform",
+        "correction": "Swap the legend descriptions so the grey color matches 'A carrier that works well with your benefit technology platform, even if its product is a little more expensive' and yellow matches 'A carrier with the best-value product, even if it does not work well with your benefit technology platform' as in source."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "2021 66% (grey) 34% (yellow) and 2025 74% (grey) 26% (yellow)",
+        "html_evidence": "2021 pie chart colors reversed: yellow segment labeled 66%, grey segment labeled 34%; 2025 pie chart colors reversed: yellow segment labeled 74%, grey segment labeled 26%",
+        "correction": "Swap the percentages color coding in pie chart so grey is the majority percentage (66% in 2021, 74% in 2025) and yellow is minority (34% in 2021, 26% in 2025) matching source."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "match",
+    "errors": []
+  }
+]

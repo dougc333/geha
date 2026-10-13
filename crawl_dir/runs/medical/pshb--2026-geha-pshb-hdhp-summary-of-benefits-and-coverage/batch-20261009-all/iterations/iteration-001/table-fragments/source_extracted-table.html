@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Extracted table - source.pdf</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #071f36;
+      --muted: #5f6f7f;
+      --line: #d6dee6;
+      --header: #06233d;
+      --header-ink: #ffffff;
+      --stripe: #f4f7f9;
+      --canvas: #edf2f6;
+      --paper: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+    main {
+      width: min(1440px, calc(100% - 32px));
+      margin: 32px auto;
+      padding: clamp(24px, 4vw, 56px);
+      background: var(--paper);
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(7, 31, 54, 0.10);
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+    .metadata { margin: 0 0 28px; color: var(--muted); }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+    .policy-table { width: 100%; border-collapse: collapse; min-width: 680px; }
+    .policy-table th {
+      padding: 14px 16px;
+      background: var(--header);
+      color: var(--header-ink);
+      text-align: left;
+      vertical-align: top;
+      font-weight: 700;
+    }
+    .policy-table td {
+      padding: 13px 16px;
+      border-top: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+    .policy-table tbody tr:nth-child(even) { background: var(--stripe); }
+    .note { margin: 24px 0 0; color: var(--muted); font-size: 0.9rem; }
+    @media print {
+      body { background: #fff; }
+      main { width: 100%; margin: 0; padding: 0; box-shadow: none; }
+      .table-wrap { overflow: visible; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Extracted table</h1>
+    <p class="metadata">Source: source.pdf &middot; Table 1 &middot; Page 1</p>
+    <div class="table-wrap">
+      <table class="dataframe policy-table">
+  <thead>
+    <tr style="text-align: left;">
+      <th>Important Questions</th>
+      <th>Answers</th>
+      <th>Why This Matters:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>What is the overall deductible?</td>
+      <td>For in-network providers $ 1,800 / Self Only $ 3,600 / Self Plus One $ 3,600 / Self and Family For out-network providers $ 4,500 / Self Only $ 9,000 / Self Plus One $ 9,000 / Self and Family</td>
+      <td>Generally, you must pay all of the costs from providers up to the deductible amount before this plan begins to pay. Copayments and coinsurance amounts do not count toward your deductible, which generally starts over January 1. When a covered service/supply is subject to a deductible, only the Plan allowance for the service/supply counts toward the deductible. If you have other family members on the policy, the overall family deductible must be met before the plan begins to pay.</td>
+    </tr>
+    <tr>
+      <td>Are there services covered before you meet your deductible?</td>
+      <td>Yes. Preventive care.</td>
+      <td>This plan covers some items and services even if you haven't yet met the deductible amount. But a copayment or coinsurance may apply. For example, this plan covers certain preventive services without cost sharing and before you meet your deductible. See a list of covered preventive services at https://www.healthcare.gov/coverage/preventive-care-benefits/.</td>
+    </tr>
+    <tr>
+      <td>Are there other deductibles for specific services?</td>
+      <td>No.</td>
+      <td>You don't have to meet deductibles for specific services.</td>
+    </tr>
+    <tr>
+      <td>What is the out-of-pocket limit for this plan?</td>
+      <td>For in-network providers $6,000 Self Only $12,000 Self Plus One or Self and Family (one individual not to exceed $6,000) For out-of-network providers $8,500 Self Only $17,000 Self Plus One or Self and Family (one individual not to exceed $8,500)</td>
+      <td>The out-of-pocket limit, or catastrophic maximum, is the most you could pay in a year for covered services. If you have other family members in this plan, they have to meet their own out-of-pocket limits until the overall family out- of-pocket limit has been met.</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+    <p class="note">Extracted directly from the source PDF using embedded text with targeted OCR fallback where needed. Verify against the source policy before operational use.</p>
+  </main>
+</body>
+</html>

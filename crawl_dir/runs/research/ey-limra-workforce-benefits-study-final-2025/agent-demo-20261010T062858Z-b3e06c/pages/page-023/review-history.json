@@ -1,0 +1,31 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "In 2021, 66% of employers said they preferred carriers that worked well with existing benefits technology to those that offered the best-value product.",
+        "html_evidence": "In 2021, 66% of employers said they preferred carriers that worked well with existing benefits technology to those that offered the best-value product.",
+        "correction": "Text is mostly correct, but candidate HTML slightly modifies wording to: \"...preferred carriers that worked well with existing benefits technology...\" instead of \"...preferred carriers that worked well with existing benefits technology...\" - this is effectively same text, so no correction needed here."
+      },
+      {
+        "category": "extra_text",
+        "source_evidence": "No table present in source PDF page; data is displayed only as pie charts with text legend.",
+        "html_evidence": "<table class=\"data-table\"> with data representing 2021 and 2025 percentages corresponding to pie charts",
+        "correction": "Remove the data table as it does not appear in the source PDF page content."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Pie charts placed separately with percentage labels inside the charts, aligned horizontally under the legend box.",
+        "html_evidence": "Pie charts arranged horizontally with labels and a data table below legend, which alters layout emphasis and presentation compared to source PDF",
+        "correction": "Match the layout to show pie charts directly below legend and no separate data table. Labels and percentages inside pie charts are consistent but the addition of table changes layout significantly."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

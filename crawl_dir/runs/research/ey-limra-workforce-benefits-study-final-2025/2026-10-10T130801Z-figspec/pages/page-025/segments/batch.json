@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "workflow": "authored_figure_spec_semantic_html",
+  "model": "claude-opus-5-5",
+  "spec": "/Users/dc/geha/crawl_dir/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs/page-025.json",
+  "created_at": "2026-10-10T13:08:39.901904+00:00",
+  "max_iterations_per_figure": 1,
+  "completion_requirement": "every printed percentage and label in the spec matches native PDF text inside the figure box",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "broker-ai-quotes",
+      "kind": "quotes",
+      "title": "Brokers on the possibilities of AI",
+      "source_png": "figure-01-broker-ai-quotes.png",
+      "bounding_box": [
+        70,
+        62,
+        1475,
+        350
+      ],
+      "output_directory": "figure-01",
+      "native_evidence": "figure-01/native-evidence.json",
+      "native_evidence_word_count": 45,
+      "value_evidence": "native_pdf_text",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "warnings": [],
+          "render_latency_ms": 454.1
+        }
+      ],
+      "selected_iteration": 1,
+      "selected_error_count": 0,
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-01.png"
+    },
+    {
+      "figure": 2,
+      "id": "genai-carrier-survey",
+      "kind": "infographic",
+      "title": "Based on a recent EY-Parthenon workforce benefits GenAI survey",
+      "source_png": "figure-02-genai-carrier-survey.png",
+      "bounding_box": [
+        70,
+        415,
+        1475,
+        895
+      ],
+      "output_directory": "figure-02",
+      "native_evidence": "figure-02/native-evidence.json",
+      "native_evidence_word_count": 61,
+      "value_evidence": "native_pdf_text",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-02/iteration-01.html",
+          "rendered_png": "figure-02/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "warnings": [],
+          "render_latency_ms": 472.8
+        }
+      ],
+      "selected_iteration": 1,
+      "selected_error_count": 0,
+      "final_html": "figure-02/final.html",
+      "final_rendered_png": "figure-02/iteration-01.png"
+    },
+    {
+      "figure": 3,
+      "id": "ai-disruption-areas",
+      "kind": "chart",
+      "title": "Majority of brokers believe AI will drive disruption, but in targeted areas",
+      "source_png": "figure-03-ai-disruption-areas.png",
+      "bounding_box": [
+        70,
+        955,
+        1475,
+        1340
+      ],
+      "output_directory": "figure-03",
+      "native_evidence": "figure-03/native-evidence.json",
+      "native_evidence_word_count": 28,
+      "value_evidence": "native_pdf_text",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-03/iteration-01.html",
+          "rendered_png": "figure-03/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "warnings": [],
+          "render_latency_ms": 445.7
+        }
+      ],
+      "selected_iteration": 1,
+      "selected_error_count": 0,
+      "final_html": "figure-03/final.html",
+      "final_rendered_png": "figure-03/iteration-01.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 3,
+    "passed": 3,
+    "failed": 0,
+    "total_iterations": 3,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-10-10T13:08:41.323078+00:00"
+}

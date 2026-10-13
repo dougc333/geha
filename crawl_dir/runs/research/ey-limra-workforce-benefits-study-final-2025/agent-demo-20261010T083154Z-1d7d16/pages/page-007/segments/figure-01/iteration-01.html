@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Share of the U.S. Labor Force by Generation</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    color: #fff; 
+    background-color: #1e2a44; /* approximate dark background */
+    margin: 2rem;
+  }
+  h1 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #fff;
+  }
+  .intro {
+    font-weight: 700;
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+  }
+  .chart {
+    display: flex;
+    gap: 2.5rem;
+    align-items: flex-end;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #ffea00; /* bright yellow */
+    margin-bottom: 2rem;
+  }
+  .bar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+  }
+  .bar-item + .bar-item {
+    border-left: 1px solid #666;
+    padding-left: 2.5rem;
+  }
+  .label {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    color: #fafafa;
+  }
+  .source {
+    font-size: 0.875rem;
+    color: #ccc;
+    max-width: 600px;
+  }
+  .source a {
+    color: #77aaff;
+    text-decoration: none;
+  }
+  .source a:hover,
+  .source a:focus {
+    text-decoration: underline;
+  }
+  table {
+    border-collapse: collapse;
+    margin-top: 1rem;
+    color: #fff;
+    max-width: 600px;
+    font-size: 1rem;
+    background: #2a3b5c;
+  }
+  caption {
+    caption-side: top;
+    font-weight: 700;
+    text-align: left;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+  }
+  th, td {
+    padding: 0.5rem 1rem;
+    border: 1px solid #445b83;
+  }
+  th {
+    background: #3c4f78;
+  }
+</style>
+</head>
+<body>
+  <p class="intro">
+    millennials representing the largest generational cohort in the workforce. By 2030, Gen Z workers will account for more than 30% of the workforce, according to the U.S. Bureau of Labor Statistics.
+  </p>
+
+  <h1>Share of the U.S. labor force, by generation</h1>
+
+  <section class="chart" aria-label="Share of the U.S. labor force by generation">
+    <div class="bar-item">
+      <div>36%</div>
+      <div class="label">Millennials</div>
+    </div>
+    <div class="bar-item">
+      <div>31%</div>
+      <div class="label">Gen X</div>
+    </div>
+    <div class="bar-item">
+      <div>18%</div>
+      <div class="label">Gen Z</div>
+    </div>
+    <div class="bar-item">
+      <div>15%</div>
+      <div class="label">Baby boomers</div>
+    </div>
+    <div class="bar-item">
+      <div>1%</div>
+      <div class="label">Silent Generation</div>
+    </div>
+  </section>
+
+  <p class="source">
+    Source: “<a href="#" aria-describedby="sourceDesc">Changes in the U.S. Labor Supply</a>,” Trendlines, U.S. Department of Labor, Employment and Training Administration, August 2024.
+  </p>
+
+  <table>
+    <caption id="sourceDesc">Data Table: Share of the U.S. Labor Force by Generation</caption>
+    <thead>
+      <tr>
+        <th>Generation</th>
+        <th>Share of U.S. Labor Force</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Millennials</td>
+        <td>36%</td>
+      </tr>
+      <tr>
+        <td>Gen X</td>
+        <td>31%</td>
+      </tr>
+      <tr>
+        <td>Gen Z</td>
+        <td>18%</td>
+      </tr>
+      <tr>
+        <td>Baby boomers</td>
+        <td>15%</td>
+      </tr>
+      <tr>
+        <td>Silent Generation</td>
+        <td>1%</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

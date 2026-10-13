@@ -1,7 +1,7 @@
 """QLE rules against the brochure, and local-parser trap cases.
 
 QLE_BROCHURE is typed from the rendered 2026 GEHA dental plan brochure PDF
-(downloads/dental/fedvip/2026-geha-dental-plan-brochure.pdf, PDF pages 10-11,
+(crawl_dir/raw/dental/fedvip/2026-geha-dental-plan-brochure.pdf, PDF pages 10-11,
 printed pages 8-9), not copied from QLE_MATRIX, so a wrong matrix cell fails here.
 
 Parser traps exercise the local keyword parsers only (Jev disabled).

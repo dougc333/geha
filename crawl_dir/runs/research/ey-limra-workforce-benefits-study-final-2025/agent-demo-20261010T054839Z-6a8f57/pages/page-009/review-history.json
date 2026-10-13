@@ -1,0 +1,37 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "No table with the header 'Employee Interest in Benefit Offerings (Percentages)' and the specific columns is present in the PDF page.",
+        "html_evidence": "<table> ... </table>",
+        "correction": "Remove the entire table with benefit offerings, percentages, and changes from the HTML, as the table does not exist in the source PDF page."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Note text uses curved quotes: Note: Percent of employees who are “very” or “extremely” interested in having their employer offer the benefit in the future.",
+        "html_evidence": "Note: Percent of employees who are \"very\" or \"extremely\" interested in having their employer offer the benefit in the future.",
+        "correction": "Use curved quotation marks as in source: Note: Percent of employees who are “very” or “extremely” interested in having their employer offer the benefit in the future."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The source page shows the bar chart on left side and legend right side on the same horizontal level, arranged horizontally as separate blocks.",
+        "html_evidence": "The bars and legend are arranged side by side in a flexible container matching source layout, so layout correct.",
+        "correction": "No correction needed for layout of bar chart and legend."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "The source PDF page includes the footer line: '9 | Harnessing growth in workforce benefits: the next horizon | 2025 Workforce Benefits Study' centered at bottom.",
+        "html_evidence": "Footer is present with the text '9 | Harnessing growth in workforce benefits: the next horizon | 2025 Workforce Benefits Study'.",
+        "correction": "No correction needed, footer is present."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

@@ -1,0 +1,19 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "Data Types and Percent of Employers Seeking Them table with headers and rows appearing below the figure",
+        "html_evidence": "<table>...<thead><tr><th>Data Type</th><th>Percent of Employers</th></tr></thead><tbody>...</tbody></table>",
+        "correction": "Remove the entire table titled 'Data Types and Percent of Employers Seeking Them' as it does not exist in the source PDF."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

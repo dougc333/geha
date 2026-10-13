@@ -1,0 +1,43 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "missing_text",
+        "source_evidence": "The source PDF page includes a large image of a woman working at a table with plants prominently shown, below the 'THE BOTTOM LINE' text block.",
+        "html_evidence": "<figure class=\"image-container\"> </figure>",
+        "correction": "Add the large image of a woman working at a table with plants as shown in the source PDF page to the <figure> container in the HTML bottom line section."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "missing_text",
+        "source_evidence": "Image of a person at a table with laptop and plants below the 'THE BOTTOM LINE' section",
+        "html_evidence": "<figure class=\"image-container\">\n\n</figure>",
+        "correction": "Add the image of the person sitting at a table with plants and laptop below the 'THE BOTTOM LINE' section as shown in the source PDF."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "missing_text",
+        "source_evidence": "The bottom area of the page in the PDF contains a large photo of a woman at a table with plants and a laptop.",
+        "html_evidence": "<figure class=\"image-container\">\n\n</figure>",
+        "correction": "Include the photo of the woman at the table with plants and a laptop in the figure container in the bottom section."
+      }
+    ]
+  },
+  {
+    "iteration": 3,
+    "verdict": "match",
+    "errors": []
+  }
+]

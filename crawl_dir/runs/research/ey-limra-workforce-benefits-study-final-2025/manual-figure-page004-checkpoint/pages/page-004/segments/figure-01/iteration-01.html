@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Companies plan to offer more benefits in five years</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.4;
+    margin: 1rem;
+    color: #333;
+  }
+  h1, h2 {
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+  }
+  h1 {
+    font-size: 1.3rem;
+  }
+  h2 {
+    font-size: 1.1rem;
+  }
+  .question {
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  .chart {
+    display: flex;
+    justify-content: space-around;
+    max-width: 600px;
+    margin-bottom: 1rem;
+  }
+  .bar-group {
+    text-align: center;
+    width: 33%;
+  }
+  .bar {
+    width: 50px;
+    margin: 0 auto 0.5rem auto;
+    border-radius: 4px 4px 0 0;
+    position: relative;
+  }
+  .bar.fewer {
+    background-color: #cfcfd6;
+  }
+  .bar.same {
+    background-color: #686976;
+  }
+  .bar.more {
+    background-color: #ffdb00;
+  }
+  .label-change {
+    font-weight: 600;
+    color: #6e6f7a;
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+  }
+  .label-change span {
+    font-weight: bold;
+    color: #4e4e66;
+  }
+  .change-text {
+    font-size: 0.9rem;
+    color: #6e6f7a;
+    line-height: 1.2;
+  }
+  .percentage-label {
+    position: absolute;
+    width: 100%;
+    font-size: 0.85rem;
+    color: #000;
+    font-weight: 600;
+  }
+  .bar-group .fewer .percentage-label {
+    top: 2px;
+    left: 0;
+  }
+  .bar-group .same .percentage-label {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .bar-group .more .percentage-label {
+    bottom: 2px;
+    left: 0;
+  }
+  .category-label {
+    font-weight: 600;
+    margin-top: 0.5rem;
+  }
+  .category-sub-label {
+    font-size: 0.8rem;
+    color: #6e6f7a;
+    margin-top: 0.1rem;
+  }
+  .legend {
+    display: flex;
+    width: 300px;
+    justify-content: space-around;
+    font-size: 0.85rem;
+    color: #555;
+    margin-top: 1rem;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+  }
+  .legend-color {
+    width: 15px;
+    height: 15px;
+    margin-right: 0.3rem;
+    border-radius: 3px;
+  }
+  .legend-fewer { background-color: #cfcfd6; }
+  .legend-same { background-color: #686976; }
+  .legend-more { background-color: #ffdb00; }
+  table {
+    border-collapse: collapse;
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 650px;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 0.3rem 0.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  th {
+    background-color: #f5f5f5;
+  }
+  caption {
+    caption-side: bottom;
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 0.5rem;
+  }
+</style>
+</head>
+<body>
+<article>
+  <h1>Figure 1</h1>
+  <h2>Companies plan to offer more benefits in five years.</h2>
+  <p><strong>QUESTION:</strong> In five years, do you think your company will be offering fewer, the same or more benefits than it does now?</p>
+  <section class="chart" aria-label="Benefits offering change by company size chart">
+    <div class="bar-group" aria-labelledby="small-label small-sub-label small-change-label">
+      <div class="label-change" id="small-change-label"><span>+7%</span><br />change<br />from<br />2023</div>
+      <div class="bar more" style="height: 57%;" aria-label="More benefits 57%">
+        <span class="percentage-label">57%</span>
+      </div>
+      <div class="bar same" style="height: 40%;" aria-label="About the same 40%">
+        <span class="percentage-label">40%</span>
+      </div>
+      <div class="bar fewer" style="height: 3%;" aria-label="Fewer benefits 3%">
+        <span class="percentage-label">3%</span>
+      </div>
+      <div class="category-label" id="small-label">Small</div>
+      <div class="category-sub-label" id="small-sub-label">(10–99 employees)</div>
+    </div>
+    <div class="bar-group" aria-labelledby="midsize-label midsize-sub-label midsize-change-label">
+      <div class="label-change" id="midsize-change-label"><span>+6%</span><br />change<br />from<br />2023</div>
+      <div class="bar more" style="height: 64%;" aria-label="More benefits 64%">
+        <span class="percentage-label">64%</span>
+      </div>
+      <div class="bar same" style="height: 35%;" aria-label="About the same 35%">
+        <span class="percentage-label">35%</span>
+      </div>
+      <div class="bar fewer" style="height: 1%;" aria-label="Fewer benefits 1%">
+        <span class="percentage-label">1%</span>
+      </div>
+      <div class="category-label" id="midsize-label">Midsize</div>
+      <div class="category-sub-label" id="midsize-sub-label">(100–999 employees)</div>
+    </div>
+    <div class="bar-group" aria-labelledby="large-label large-sub-label large-change-label">
+      <div class="label-change" id="large-change-label"><span>+5%</span><br />change<br />from<br />2023</div>
+      <div class="bar more" style="height: 67%;" aria-label="More benefits 67%">
+        <span class="percentage-label">67%</span>
+      </div>
+      <div class="bar same" style="height: 30%;" aria-label="About the same 30%">
+        <span class="percentage-label">30%</span>
+      </div>
+      <div class="bar fewer" style="height: 3%;" aria-label="Fewer benefits 3%">
+        <span class="percentage-label">3%</span>
+      </div>
+      <div class="category-label" id="large-label">Large</div>
+      <div class="category-sub-label" id="large-sub-label">(1,000 or more employees)</div>
+    </div>
+  </section>
+  <section class="legend" aria-label="Legend for benefits offering chart">
+    <div class="legend-item"><div class="legend-color legend-fewer"></div>Fewer benefits</div>
+    <div class="legend-item"><div class="legend-color legend-same"></div>About the same</div>
+    <div class="legend-item"><div class="legend-color legend-more"></div>More benefits</div>
+  </section>
+  <table>
+    <caption>Data table for benefits offering by company size and change from 2023</caption>
+    <thead>
+      <tr>
+        <th>Company Size</th>
+        <th>Change from 2023</th>
+        <th>More benefits</th>
+        <th>About the same</th>
+        <th>Fewer benefits</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Small (10–99 employees)</td>
+        <td>+7%</td>
+        <td>57%</td>
+        <td>40%</td>
+        <td>3%</td>
+      </tr>
+      <tr>
+        <td>Midsize (100–999 employees)</td>
+        <td>+6%</td>
+        <td>64%</td>
+        <td>35%</td>
+        <td>1%</td>
+      </tr>
+      <tr>
+        <td>Large (1,000 or more employees)</td>
+        <td>+5%</td>
+        <td>67%</td>
+        <td>30%</td>
+        <td>3%</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Harnessing growth in workforce benefits: the next horizon</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    background-color: black;
+  }
+  main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background:
+      /* photograph silhouette on right half - replicate background with partial blur/dark overlay */
+      linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+      url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAa4AAAFMCAYAAAD+vYKlAAAACXBIWXMAAA7EAAAOxAGVKw4bAAACtklEQVR4nO3dus7DQBCF4Uob//+Z6NU86bEjgurE3TNTqEGt3xJ6yxjeFYEXgNUxDDHe/6PpjDcPCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwMPdbDf+czeZt+TyEx0xdjXQFZLtj7VTFVTo9BFD9brTZCzHb6cHBj1O0mMr3S/qN6vSprRr/hHbPs/qzmJ5vY3Fx487DzNS9vUbwwTv6rER7Rtnu/Q1UOonGxO9cdQGLXxtU6J6Tu/6rSHuHKUZdXOHfku0Nz7aaaqP5O1Rn6TTcXI/XjOiUzRn070UsEXvLqlH7FVsL/u4qC069CsLV68b6Fps79H2DGdO6mdnRrcmyLH8nbj0fD91MvAsMVRnH1rTIY3l7uvr+dAz7EWT9UngXjGgspvXi/lNcKnNXkjAzpDhEhQnvkhCKzHxp4N01ZTVDzG3DEMm/zjMy6xm919HEuybce7KfZ75bAGdnRHMslylYkiZPv8b2LuH5qvqE2z70iXf09r+9cmGfeN8P0kjbNMv91vwYm70aO7fgM8+/tdZ75vUAJY5bV0UnRyljl5381pVEXiLkrVJePWdyT4040ee+91CNq/mND14EbDc+i82nHjVHABX+n/3r87IrF6pN/0MmOAAAAAAAAXhxkPw6VuC3szx2qAAAAAElFTkSuQmCC') no-repeat right center / 50% auto;
+    padding: 3em 4em 3em 4em;
+    box-sizing: border-box;
+  }
+  .highlight-box {
+    position: relative;
+    max-width: 400px;
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 1.3;
+    margin-bottom: 0.8em;
+    padding: 1.5em 1.5em 1.5em 1.8em;
+    color: white;
+    background: transparent;
+  }
+  /* Distinct angled border with yellow-left border and aqua-top and right border as polygon shape */
+  .highlight-box:before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border-style: solid;
+    border-width: 5px 5px 0 5px;
+    border-color: #69D4DA #69D4DA transparent #DDD600;
+    clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 5px 100%, 0 calc(100% - 5px));
+    box-sizing: border-box;
+    z-index: -1;
+  }
+  .highlight-box h1 {
+    margin: 0 0 0.33em 0;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+    line-height: 1.2;
+  }
+  .subtitle {
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin: 0;
+  }
+
+  .footer-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+    max-width: 400px;
+    margin: 0;
+    /* place near bottom left visually as in source: bottom aligned margin with fixed bottom padding */
+    padding-bottom: 1em;
+  }
+
+  /* Container at bottom for footer text and branding aligned horizontally on left and right */
+  footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 4em 2.7em 4em;
+    max-width: 100vw;
+    box-sizing: border-box;
+  }
+  .footer-text p {
+    margin: 0;
+    color: white;
+  }
+  .branding {
+    display: flex;
+    gap: 3em;
+    align-items: flex-end;
+  }
+  .limra, .ey {
+    font-family: Arial, sans-serif;
+    text-align: left;
+    color: white;
+  }
+  .limra p, .ey p {
+    margin: 0 0 0.15em 0;
+    font-weight: 700;
+    font-size: 1.55rem;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    /* mimic LIMRA's white text with a subtle shading for impact */
+    text-shadow: 0 0 0.2em black;
+  }
+  .limra span {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.95rem;
+    line-height: 1;
+    display: block;
+    letter-spacing: 0.03em;
+    color: white;
+    text-shadow: 0 0 0.15em black;
+  }
+  .ey {
+    text-align: right;
+    font-weight: 700;
+  }
+  .ey span {
+    display: block;
+    font-weight: 600;
+    font-size: 1rem;
+    color: white;
+    text-transform: none;
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 0.15em black;
+  }
+</style>
+</head>
+<body>
+<main role="main" aria-label="Cover image and main title">
+  <section class="highlight-box" aria-label="Cover title and subtitle">
+    <h1>Harnessing growth in workforce benefits: the next horizon</h1>
+    <p class="subtitle">2025 Workforce Benefits Study</p>
+  </section>
+</main>
+<footer>
+  <section class="footer-text" aria-label="Footer slogan">
+    <p>The better the question. The better the answer. The better the world works.</p>
+  </section>
+  <section class="branding" aria-label="Branding and logos">
+    <div class="limra" aria-label="LIMRA logo and slogan">
+      <p>LIMRA</p>
+      <span>Navigate With Confidence</span>
+    </div>
+    <div class="ey" aria-label="EY logo and slogan">
+      <p>EY</p>
+      <span>Shape the future with confidence</span>
+    </div>
+  </section>
+</footer>
+</body>
+</html>

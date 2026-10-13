@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Figure 12 data - final.html</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #071f36;
+      --muted: #5f6f7f;
+      --line: #d6dee6;
+      --header: #06233d;
+      --header-ink: #ffffff;
+      --stripe: #f4f7f9;
+      --canvas: #edf2f6;
+      --paper: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+    main {
+      width: min(1440px, calc(100% - 32px));
+      margin: 32px auto;
+      padding: clamp(24px, 4vw, 56px);
+      background: var(--paper);
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(7, 31, 54, 0.10);
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+    .metadata { margin: 0 0 28px; color: var(--muted); }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+    .policy-table { width: 100%; border-collapse: collapse; min-width: 680px; }
+    .policy-table th {
+      padding: 14px 16px;
+      background: var(--header);
+      color: var(--header-ink);
+      text-align: left;
+      vertical-align: top;
+      font-weight: 700;
+    }
+    .policy-table td {
+      padding: 13px 16px;
+      border-top: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+    .policy-table tbody tr:nth-child(even) { background: var(--stripe); }
+    .note { margin: 24px 0 0; color: var(--muted); font-size: 0.9rem; }
+    @media print {
+      body { background: #fff; }
+      main { width: 100%; margin: 0; padding: 0; box-shadow: none; }
+      .table-wrap { overflow: visible; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Figure 12 data</h1>
+    <p class="metadata">Source: final.html &middot; Table 12 &middot; Page 19</p>
+    <div class="table-wrap">
+      <table class="dataframe policy-table">
+  <thead>
+    <tr style="text-align: left;">
+      <th>Leave type</th>
+      <th>Currently outsource (in full or part)</th>
+      <th>Do not outsource, but plan to outsource in the next 3-5 years</th>
+      <th>No plans to outsource</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Divorce or family upheaval leave</td>
+      <td>51%</td>
+      <td>25%</td>
+      <td>24%</td>
+    </tr>
+    <tr>
+      <td>Long-term disability</td>
+      <td>51%</td>
+      <td>23%</td>
+      <td>26%</td>
+    </tr>
+    <tr>
+      <td>Short-term disability</td>
+      <td>50%</td>
+      <td>21%</td>
+      <td>29%</td>
+    </tr>
+    <tr>
+      <td>Paid caregiving leave (company-sponsored)</td>
+      <td>42%</td>
+      <td>28%</td>
+      <td>30%</td>
+    </tr>
+    <tr>
+      <td>Emergency responder leave</td>
+      <td>34%</td>
+      <td>35%</td>
+      <td>31%</td>
+    </tr>
+    <tr>
+      <td>Domestic violence/sexual abuse victims’ leave</td>
+      <td>38%</td>
+      <td>28%</td>
+      <td>34%</td>
+    </tr>
+    <tr>
+      <td>FMLA</td>
+      <td>48%</td>
+      <td>16%</td>
+      <td>36%</td>
+    </tr>
+    <tr>
+      <td>Sabbaticals</td>
+      <td>37%</td>
+      <td>27%</td>
+      <td>36%</td>
+    </tr>
+    <tr>
+      <td>Non-FMLA medical leave</td>
+      <td>37%</td>
+      <td>27%</td>
+      <td>36%</td>
+    </tr>
+    <tr>
+      <td>Paid family or medical leave (company-sponsored)</td>
+      <td>36%</td>
+      <td>26%</td>
+      <td>38%</td>
+    </tr>
+    <tr>
+      <td>Paid parental, maternity or paternity leave (company-sponsored)</td>
+      <td>39%</td>
+      <td>20%</td>
+      <td>41%</td>
+    </tr>
+    <tr>
+      <td>Military service/family military leave</td>
+      <td>32%</td>
+      <td>23%</td>
+      <td>45%</td>
+    </tr>
+    <tr>
+      <td>Other mandated leaves</td>
+      <td>30%</td>
+      <td>23%</td>
+      <td>47%</td>
+    </tr>
+    <tr>
+      <td>Other company-sponsored leaves</td>
+      <td>25%</td>
+      <td>23%</td>
+      <td>52%</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+    <p class="note">Extracted from semantic HTML after visual verification against the source PDF page. Verify before operational use.</p>
+  </main>
+</body>
+</html>

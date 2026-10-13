@@ -1,0 +1,182 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "Green box includes text 'Regulatory fragmentation regarding leave management' as a heading and the paragraph 'The patchwork of rules and requirements for leave management may present significant compliance challenges to many employers. Consider that:' left aligned to image of two people on the right.",
+        "html_evidence": "The highlight-box uses flex with text and list on left and image missing on right. The candidate HTML is missing the image present in the source at right of this text box.",
+        "correction": "Add the missing image of the two people on the right side inside the green highlight box to match the source layout."
+      },
+      {
+        "category": "table_structure",
+        "source_evidence": "The source page includes no table beneath the bar chart.",
+        "html_evidence": "There is a table below the bar chart summarizing data by company size and preference, which is not present in the source page.",
+        "correction": "Remove the table beneath the bar chart that is not present in the source."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Green box lists 'Ten states (including the District of Columbia)...', 'Four states will implement such programs in 2026 (Delaware, Minnesota, Maine) or 2028 (Maryland).', 'Eight states have voluntary paid family leave programs (NCOIL model).', 'Nine states have introduced, but not enacted, legislation during the past several years.', 'Eighteen states have laws that mandate paid sick and safe leave programs.'",
+        "html_evidence": "The bullet points in the candidate start with a bullet and match exactly but the third bullet is 'Eight states have voluntary paid family leave programs (NCOIL model).', compared to 'Eight states have voluntary paid family leave programs (NCOIL model).' - no error here, but the third bullet is missing a bullet symbol in the source? Source uses squares for bullets, candidate uses circles but bullet shape difference is formatting and may be allowed. No visible wording error here.",
+        "correction": "No wording error found in bullet text."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bar chart x-axis label for large is 'Large (1,000 or more employees)'",
+        "html_evidence": "Bar chart label reads 'Large (1,000 or more employees)' which matches. However, inside the chart the candidate shows the text 'Larae (1.000 or more employees)' overlapped and misspelled under bar chart area.",
+        "correction": "Fix the incorrectly overlapping and misspelled text 'Larae (1.000 or more employees)' inside the chart area to match the source's correct labeling."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The green box bullet points use square bullets and are arranged in a single column next to the image on the right.",
+        "html_evidence": "The candidate uses standard round bullets and the text is left aligned in one column with no spacing from edges, with the image missing at right side, producing a different visual layout.",
+        "correction": "Use square bullets and ensure layout matches source with the textual bullet list left and image on right inside green highlight box."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "Text and image are side by side with text on left and photo on right in the source PDF's green box.",
+        "html_evidence": "The green box uses flex layout with the image on the right and text on the left but the text block's <p> wraps the heading with the first paragraph text, causing reading and styling issues.",
+        "correction": "Separate the heading and the first paragraph as distinct elements for correct semantic and visual structure, preserving the side-by-side layout with the image to the right of the text."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bullet 1: 'Ten states (including the District of Columbia) already have paid family and medical leave programs in place.'",
+        "html_evidence": "Same bullet but uses a square bullet from CSS; content matches.",
+        "correction": "No correction needed here; bullet style differs but is semantically correct."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bullet 2: 'Four states will implement such programs in 2026 (Delaware, Minnesota, Maine) or 2028 (Maryland).'",
+        "html_evidence": "Matches the source exactly.",
+        "correction": "None."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bullet 3: 'Eight states have voluntary paid family leave programs (NCOIL model).''",
+        "html_evidence": "Matches source.",
+        "correction": "None."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bullet 4: 'Nine states have introduced, but not enacted, legislation during the past several years.'",
+        "html_evidence": "Matches source.",
+        "correction": "None."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Bullet 5: 'Eighteen states have laws that mandate paid sick and safe leave programs.'",
+        "html_evidence": "Matches source.",
+        "correction": "None."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "First paragraph after green box, starting 'Employer willingness to pay for integrated experiences: As...'",
+        "html_evidence": "Matches source exactly including percentages and flow.",
+        "correction": "None."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "Bulleted list under 'Probing further on the value of integrated experiences, we asked employers whether they prefer:' with two bullets: first bullet ends with 'Or', second bullet completes thought.",
+        "html_evidence": "Two bullet points rendered as <li> elements, but the text 'Or' is included at end of first bullet, which is unusual visually for a bullet point.",
+        "correction": "Remove 'Or' from the end of the first bullet or render 'Or' on its own line between bullets, to match typical reading structure and probably the source reading experience."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Text 'More than two in three midsize and large employers chose the first scenario. Small employers, which are typically more cost conscious, were split 50-50. See Figure 11.'",
+        "html_evidence": "Matches source exactly.",
+        "correction": "None."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Heading: 'Figure 11\\nIn choosing carriers, employers value integrated absence management experiences more than affordability.'",
+        "html_evidence": "Matches source exactly, with 'Figure 11' as separate paragraph with bold and heading 2 below.",
+        "correction": "None."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "QUESTION text: 'QUESTION: Imagine your company was selecting a carrier for a new disability insurance benefit. Which of the following would you choose?'",
+        "html_evidence": "Matches source.",
+        "correction": "None."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Legend: 'A carrier that provides an integrated absence management program along with its disability product — for a higher price' (gray), and 'A carrier with the best-value disability product even without an integrated, real-time absence management service' (yellow).",
+        "html_evidence": "Matches source. The em-dash is properly used and text and bold segments match exactly.",
+        "correction": "None."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Bar chart categories spaced horizontally with clear spacing under bar stacks and distinct colors for bar segments, text labels for percentages on bars, axis label text below.",
+        "html_evidence": "Bar chart SVG matches percentages and colors, but the bottom category labels 'Small (10-99 employees)', 'Midsize (100-999 employees)', 'Large (1,000 or more employees)' are running together with no spacing between 'Midsize (100-999 employees)' and 'Large (1,000 or more employees)', forming 'Midsize (100-999 employees)Large (1,000 or more employees)' without space or line break.",
+        "correction": "Separate and properly space or line break category labels, ensuring distinct spacing and clarity as in source PDF."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "Legend items arranged vertically with distinct color squares and text.",
+        "html_evidence": "Correct vertical arrangement with color boxes and text with role=list and role=listitem used appropriately.",
+        "correction": "None."
+      },
+      {
+        "category": "image",
+        "source_evidence": "Photo of a woman and child outside, right side of green highlight box.",
+        "html_evidence": "Image present as <img> with alt text but src attribute is empty, so image content is missing.",
+        "correction": "Add the actual image source file URL or data for 'Photo of two people, a woman and child smiling and playing outdoors'. Cannot leave src empty."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "No text describing photo location in text but photo is shown on right of green text box in source PDF.",
+        "html_evidence": "<img alt=\"Photo of two people, a woman and child smiling and playing outdoors\" src=\"\"/> in .highlight-box",
+        "correction": "Photo inclusion is correct but alt text 'Photo of two people, a woman and child smiling and playing outdoors' should remain or be removed to match PDF (whose photo location is right aligned). The caption or mention of photo is not in source text, so image presence is extra."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "Green box text block followed by image on right side, then paragraph text and list below.",
+        "html_evidence": ".highlight-box uses flex row with text and image side-by-side",
+        "correction": "Reading order is acceptable but the right side image presence is extra as PDF does not label or describe it in text flow."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Bar chart segments are correctly stacked with values and labels below each group separated distinctly for Small, Midsize, and Large employer groups.",
+        "html_evidence": "Bar chart grouping categories have no spacing between 'Midsize (100-999 employees)' and 'Large (1,000 or more employees)' text labels, overlapping 'Large (1,000 or more employees)', 'Midisze' 'Small' labels are very close and visually merged.",
+        "correction": "Correct spacing needed between category labels under bar chart so each group is visually distinct, matching PDF spacing."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Labels under bars read clearly 'Small (10-99 employees)', 'Midsize (100-999 employees)', 'Large (1,000 or more employees)'",
+        "html_evidence": "<text class=\"axis-label\" x=\"290\" y=\"240\">Midsize (100-999 employees)Larae (1,000 or more employees)</text>",
+        "correction": "Remove combined and misspelled 'Midsize (100-999 employees)Larae (1,000 or more employees)' combined label. Separate 'Midsize (100-999 employees)' and 'Large (1,000 or more employees)' as distinct text labels."
+      }
+    ]
+  },
+  {
+    "iteration": 3,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "Figure 11 chart labels: The Candidate HTML shows 'Small (10-99 employees)', 'Midsize (100-999 employees)', and 'Large (1,000 or more employees)' clearly separated, matching source. However, in the rendered image, the 'Midsize' and 'Large' labels merge as 'Midsize (100-999 employees)Large (1.000 or more employees)' with no space or line break.",
+        "html_evidence": "<text class=\"axis-label\" x=\"290\" y=\"240\">Midsize (100-999 employees)</text> <text class=\"axis-label\" x=\"470\" y=\"240\">Large (1,000 or more employees)</text>",
+        "correction": "Correct spacing and line breaks in X-axis labels to separate 'Midsize (100-999 employees)' and 'Large (1,000 or more employees)' clearly, preventing merged text."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Figure 11 chart: Source data shows for Small size, 50% gray and 50% yellow; Midsize 71% gray and 29% yellow; Large 64% gray and 36% yellow. The Candidate HTML bars seem correctly colored and sized, but the reading order and positions in the rendered candidate text are confusing and merge labels together, also the numeric values are correct but obscured by layout issues.",
+        "html_evidence": "Chart legend and bar colors match source, but bar labels for 'Midsize' and 'Large' are overlapping in rendered text: '(100-999 employees)Large (1.000 or more employees)'",
+        "correction": "Ensure clear visual separation of company size categories on labels to match source layout and readability."
+      }
+    ]
+  }
+]

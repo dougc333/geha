@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The LIMRA-EY Wheel of Wellness</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    color: #222;
+    margin: 1em;
+  }
+  h2 {
+    margin-bottom: 0.3em;
+  }
+  .container {
+    display: flex;
+    gap: 2em;
+    max-width: 900px;
+    margin-bottom: 2em;
+  }
+  .text-column {
+    flex: 1;
+    max-width: 280px;
+  }
+  .text-column p {
+    margin-top: 1em;
+  }
+  .text-column p:first-child {
+    margin-top: 0;
+  }
+  .text-column p strong {
+    font-weight: 700;
+  }
+  .wheel-column {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+  }
+  svg {
+    max-width: 320px;
+    max-height: 320px;
+  }
+  text {
+    pointer-events: none;
+    user-select: none;
+  }
+  footer {
+    margin-top: 4em;
+    font-weight: 700;
+    font-size: 0.9em;
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="container" aria-label="Text content and LIMRA-EY Wheel of Wellness">
+    <section class="text-column">
+      <p>Paid family or medical leave or other paid leaves are notable for being of interest to all generations, albeit for different reasons. Younger workers may want leave when they are starting families, while older workers may seek leave when they need to handle caregiving responsibilities for aging parents or grandchildren.</p>
+      <p>Career development is of particular interest to Gen X, millennials and Gen Z. As AI and other technologies change the employment landscape, many workers are concerned about the impact on their jobs, which helps explain why upskilling, reskilling, and other training and development are becoming more important. Mental health and substance abuse treatment is a higher priority for younger workers, though interest remains significant as employees age. Emergency savings benefits are most relevant to Gen Z, according to our findings, and interest in student loan assistance also skews toward younger workers.</p>
+      <p><strong>The value of a holistic approach:</strong> Rising costs and limited benefits uptake are challenges for many employers, largely because employees often focus on medical, dental and vision insurance with their limited discretionary income. With demographic diversity on the rise, employers may look to generational bundles, voluntary benefits and more flexible options to meet the unique needs of different cohorts. Such offerings can also help boost benefits utilization. A holistic model for plan design, such as the LIMRA-EY Wheel of Wellness, can help employers offer benefits that satisfy the diverse needs of multiple generations of workers.</p>
+    </section>
+    <section class="wheel-column" aria-label="The LIMRA-EY Wheel of Wellness focused on five key dimensions">
+      <svg role="img" aria-labelledby="wheelTitle" width="320" height="320" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" >
+        <title id="wheelTitle">The LIMRA-EY Wheel of Wellness showing five dimensions: Physical, Mental, Financial, Societal, Professional</title>
+        <defs>
+          <style>
+            .segment-label {
+              font-family: Arial, sans-serif;
+              font-weight: 600;
+              font-size: 18px;
+              fill: #222;
+            }
+            .yellow-arrow {
+              fill: gold;
+            }
+            .segment-border {
+              fill: none;
+              stroke: #fff;
+              stroke-width: 3px;
+            }
+          </style>
+          <pattern id="patternPhysical" patternUnits="userSpaceOnUse" width="160" height="160" x="80" y="0">
+            <image href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD..." x="0" y="0" width="160" height="160" />
+          </pattern>
+          <pattern id="patternMental" patternUnits="userSpaceOnUse" width="160" height="160" x="160" y="0">
+            <image href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD..." x="0" y="0" width="160" height="160" />
+          </pattern>
+          <pattern id="patternFinancial" patternUnits="userSpaceOnUse" width="140" height="140" x="160" y="160">
+            <image href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD..." x="0" y="0" width="140" height="140" />
+          </pattern>
+          <pattern id="patternSocietal" patternUnits="userSpaceOnUse" width="140" height="140" x="80" y="160">
+            <image href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD..." x="0" y="0" width="140" height="140" />
+          </pattern>
+          <pattern id="patternProfessional" patternUnits="userSpaceOnUse" width="160" height="160" x="0" y="80">
+            <image href="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD..." x="0" y="0" width="160" height="160" />
+          </pattern>
+        </defs>
+      
+        <!-- Physical -->
+        <path fill="url(#patternPhysical)" stroke="none" d="M160 160 L160 20 A140 140 0 0 1 241.03 64.84 Z" />
+        <path class="segment-border" d="M160 160 L160 20 A140 140 0 0 1 241.03 64.84 Z" />
+        <!-- Mental -->
+        <path fill="url(#patternMental)" stroke="none" d="M160 160 L241.03 64.84 A140 140 0 0 1 266.76 147.55 Z" />
+        <path class="segment-border" d="M160 160 L241.03 64.84 A140 140 0 0 1 266.76 147.55 Z" />
+        <!-- Financial -->
+        <path fill="url(#patternFinancial)" stroke="none" d="M160 160 L266.76 147.55 A140 140 0 0 1 197.56 237.55 Z" />
+        <path class="segment-border" d="M160 160 L266.76 147.55 A140 140 0 0 1 197.56 237.55 Z" />
+        <!-- Societal -->
+        <path fill="url(#patternSocietal)" stroke="none" d="M160 160 L197.56 237.55 A140 140 0 0 1 122.44 237.55 Z" />
+        <path class="segment-border" d="M160 160 L197.56 237.55 A140 140 0 0 1 122.44 237.55 Z" />
+        <!-- Professional -->
+        <path fill="url(#patternProfessional)" stroke="none" d="M160 160 L122.44 237.55 A140 140 0 0 1 80 70 Z" />
+        <path class="segment-border" d="M160 160 L122.44 237.55 A140 140 0 0 1 80 70 Z" />
+      
+        <circle cx="160" cy="160" r="30" fill="white" />
+      
+        <text class="segment-label" x="160" y="70" text-anchor="middle" dominant-baseline="middle">Physical</text>
+        <text class="segment-label" x="230" y="110" text-anchor="middle" dominant-baseline="middle">Mental</text>
+        <text class="segment-label" x="220" y="180" text-anchor="middle" dominant-baseline="middle">Financial</text>
+        <text class="segment-label" x="160" y="230" text-anchor="middle" dominant-baseline="middle">Societal</text>
+        <text class="segment-label" x="100" y="180" text-anchor="middle" dominant-baseline="middle">Professional</text>
+      
+        <circle cx="160" cy="160" r="140" stroke="gold" stroke-width="18" fill="none" />
+      
+        <polygon class="yellow-arrow" points="160 9 175 30 160 30" />
+        <polygon class="yellow-arrow" points="279 68 292 83 277 90" />
+        <polygon class="yellow-arrow" points="287 210 273 217 276 232" />
+        <polygon class="yellow-arrow" points="101 267 95 252 110 253" />
+        <polygon class="yellow-arrow" points="46 117 55 102 65 114" />
+      </svg>
+    </section>
+  </div>
+
+  <h2>The LIMRA-EY Wheel of Wellness</h2>
+  <p>Focused on five key dimensions of health, the LIMRA-EY Wheel of Wellness can help organizations build a happier, healthier, more productive and financially secure workforce.</p>
+</main>
+<footer>
+  | <strong>Harnessing growth in workforce benefits:</strong> the next horizon | 2025 Workforce Benefits Study
+</footer>
+</body>
+</html>

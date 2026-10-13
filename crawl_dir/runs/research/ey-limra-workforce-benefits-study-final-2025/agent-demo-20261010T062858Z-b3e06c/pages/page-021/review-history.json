@@ -1,0 +1,31 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "Pie chart percentages for the digital experience comparison question are Worse 6%, About the same 28%, Better 66%.",
+        "html_evidence": "Table shows 28% for Worse (incorrect), 28% About the same, 66% Better",
+        "correction": "Worse should be 6%, not 28%"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Pie chart percentages for the importance of digital experience question are Not at all/not very important 3%, Slightly/somewhat/moderately important 39%, Very/extremely important 58%.",
+        "html_evidence": "Table shows 3% Not at all/not very important, 39% Slightly/somewhat/moderately important, 58% Very/extremely important correctly.",
+        "correction": "N/A for second question percentages in legend, but the table data is correct."
+      },
+      {
+        "category": "table_structure",
+        "source_evidence": "In the PDF, the pie charts with legends are separate visuals; numeric percentages are within pie only, separate from data tables below.",
+        "html_evidence": "HTML places colored percentage bars and numeric percentages in a table format that is not consistent with the pie charts but attempts a legend bar representation above data table.",
+        "correction": "Use consistent data representation, aligning legends with correct values and chart type, or represent as text plus accessible data table separately."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

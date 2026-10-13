@@ -1,0 +1,61 @@
+{
+  "page_type": "mixed",
+  "segmentation_recommended": false,
+  "reason": "The page contains distinct semantic zones: a text block at the top and two figure regions with their captions and graphics below, requiring separate regions for paragraphs and figures.",
+  "regions": [
+    {
+      "id": "r1",
+      "label": "paragraph",
+      "kind": "paragraph",
+      "reading_order": 1,
+      "x1": 40,
+      "y1": 40,
+      "x2": 960,
+      "y2": 320,
+      "pixel_box": [
+        61,
+        79,
+        1469,
+        634
+      ],
+      "image": "region-01-r1.png"
+    },
+    {
+      "id": "r2",
+      "label": "table",
+      "kind": "table",
+      "reading_order": 2,
+      "x1": 40,
+      "y1": 360,
+      "x2": 460,
+      "y2": 620,
+      "pixel_box": [
+        61,
+        713,
+        704,
+        1228
+      ],
+      "image": "region-02-r2.png"
+    },
+    {
+      "id": "r3",
+      "label": "table",
+      "kind": "table",
+      "reading_order": 3,
+      "x1": 520,
+      "y1": 360,
+      "x2": 960,
+      "y2": 620,
+      "pixel_box": [
+        796,
+        713,
+        1469,
+        1228
+      ],
+      "image": "region-03-r3.png"
+    }
+  ],
+  "coordinate_system": "normalized_0_1000",
+  "source_image": "/Users/dc/geha/crawl_dir/runs/research/ey-limra-workforce-benefits-study-final-2025/agent-demo-20261010T041102Z-325119/pages/page-005/source.png",
+  "overlay": "regions-overlay.png"
+}

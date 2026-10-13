@@ -1,0 +1,95 @@
+{
+  "page_type": "mixed",
+  "segmentation_recommended": true,
+  "reason": "The page contains distinct sections including a header image, title, subtitle, multiple paragraphs of narrative text, and two separate charts with legends and questions; these need separate region tagging to preserve structure and reading order.",
+  "regions": [
+    {
+      "id": "r1",
+      "label": "header",
+      "kind": "other",
+      "reading_order": 1,
+      "x1": 0,
+      "y1": 0,
+      "x2": 1000,
+      "y2": 220,
+      "pixel_box": [
+        0,
+        0,
+        1530,
+        436
+      ],
+      "image": "region-01-r1.png"
+    },
+    {
+      "id": "r2",
+      "label": "header",
+      "kind": "header",
+      "reading_order": 2,
+      "x1": 40,
+      "y1": 220,
+      "x2": 960,
+      "y2": 300,
+      "pixel_box": [
+        61,
+        436,
+        1469,
+        594
+      ],
+      "image": "region-02-r2.png"
+    },
+    {
+      "id": "r3",
+      "label": "paragraph",
+      "kind": "paragraph",
+      "reading_order": 3,
+      "x1": 40,
+      "y1": 300,
+      "x2": 960,
+      "y2": 460,
+      "pixel_box": [
+        61,
+        594,
+        1469,
+        911
+      ],
+      "image": "region-03-r3.png"
+    },
+    {
+      "id": "r4",
+      "label": "paragraph",
+      "kind": "paragraph",
+      "reading_order": 4,
+      "x1": 40,
+      "y1": 460,
+      "x2": 960,
+      "y2": 560,
+      "pixel_box": [
+        61,
+        911,
+        1469,
+        1109
+      ],
+      "image": "region-04-r4.png"
+    },
+    {
+      "id": "r5",
+      "label": "table",
+      "kind": "table",
+      "reading_order": 5,
+      "x1": 40,
+      "y1": 600,
+      "x2": 960,
+      "y2": 980,
+      "pixel_box": [
+        61,
+        1188,
+        1469,
+        1940
+      ],
+      "image": "region-05-r5.png"
+    }
+  ],
+  "coordinate_system": "normalized_0_1000",
+  "source_image": "/Users/dc/geha/crawl_dir/runs/research/ey-limra-workforce-benefits-study-final-2025/agent-demo-20261010T041102Z-325119/pages/page-021/source.png",
+  "overlay": "regions-overlay.png"
+}

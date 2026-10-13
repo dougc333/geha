@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The LIMRA-EY Wheel of Wellness</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    color: #222;
+    margin: 1em;
+  }
+  h2 {
+    font-weight: 900;
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+    color: #000;
+  }
+  p {
+    max-width: 600px;
+  }
+  .wheel-column {
+    margin-top: 1.5em;
+    display: flex;
+    justify-content: center;
+  }
+  svg {
+    width: 320px;
+    height: 320px;
+    flex-shrink: 0;
+  }
+  text {
+    pointer-events: none;
+    user-select: none;
+    fill: #222;
+    font-weight: 700;
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+  }
+  footer {
+    margin-top: 4em;
+    font-weight: 700;
+    font-size: 0.9em;
+  }
+</style>
+</head>
+<body>
+<main>
+  <h2>The LIMRA-EY Wheel of Wellness</h2>
+  <p>Focused on five key dimensions of health, the LIMRA-EY Wheel of Wellness can help organizations build a happier, healthier, more productive and financially secure workforce.</p>
+
+  <div class="wheel-column" aria-label="The LIMRA-EY Wheel of Wellness focused on five key dimensions">
+    <svg role="img" aria-labelledby="wheelTitle" width="320" height="320" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+      <title id="wheelTitle">The LIMRA-EY Wheel of Wellness showing five dimensions: Physical, Mental, Financial, Societal, Professional</title>
+      <!-- Outer bright yellow ring with continuous arrow -->
+      <circle cx="160" cy="160" r="140" fill="none" stroke="#ffde17" stroke-width="18" />
+      <path d="M160 20 A140 140 0 1 1 80 70" fill="none" stroke="#ffde17" stroke-width="18" />
+      <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#ffde17" />
+        </marker>
+      </defs>
+      <path d="
+        M160 20
+        A140 140 0 1 1 80 70
+      " fill="none" stroke="#ffde17" stroke-width="18" marker-end="url(#arrowhead)" />
+      <!-- Wheel segments -->
+      <g stroke="#fff" stroke-width="4">
+        <!-- Physical (top-center) -->
+        <path fill="#fff" d="M160 160 L160 20 A140 140 0 0 1 247.8 77.8 Z" />
+        <!-- Mental (top right) -->
+        <path fill="#fff" d="M160 160 L247.8 77.8 A140 140 0 0 1 266.5 167.8 Z" />
+        <!-- Financial (bottom right) -->
+        <path fill="#fff" d="M160 160 L266.5 167.8 A140 140 0 0 1 193.9 251.9 Z" />
+        <!-- Societal (bottom left) -->
+        <path fill="#fff" d="M160 160 L193.9 251.9 A140 140 0 0 1 126.1 251.9 Z" />
+        <!-- Professional (top left) -->
+        <path fill="#fff" d="M160 160 L126.1 251.9 A140 140 0 0 1 160 20 Z" />
+      </g>
+      <!-- Wheel white center circle -->
+      <circle cx="160" cy="160" r="38" fill="white" />
+      <!-- Labels placed clearly spaced outside each segment -->
+      <text x="160" y="55" text-anchor="middle" dominant-baseline="middle">Physical</text>
+      <text x="230" y="110" text-anchor="middle" dominant-baseline="middle">Mental</text>
+      <text x="230" y="195" text-anchor="middle" dominant-baseline="middle">Financial</text>
+      <text x="160" y="240" text-anchor="middle" dominant-baseline="middle">Societal</text>
+      <text x="90" y="195" text-anchor="middle" dominant-baseline="middle">Professional</text>
+    </svg>
+  </div>
+</main>
+<footer>
+  | <strong>Harnessing growth in workforce benefits:</strong> the next horizon | 2025 Workforce Benefits Study
+</footer>
+</body>
+</html>

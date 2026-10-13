@@ -1,0 +1,61 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": " Live chat/chatbot to answer questions",
+        "html_evidence": "<text x=\"10\" y=\"0\"  font-size=\"13\" text-anchor=\"end\" alignment-baseline=\"middle\" > Live chat/chatbot to answer questions</text>",
+        "correction": "The label 'Live chat/chatbot to answer questions' is incorrectly positioned with y=\"0\" which is outside chart container; it causes overlap with other labels, not matching the source vertical order."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Ability to receive text message notifications and status alerts regarding my benefits (claims status, etc.)",
+        "html_evidence": "<text x=\"10\" y=\"60\"  font-size=\"13\" text-anchor=\"end\" alignment-baseline=\"middle\" > Ability to receive text message notifications and status alerts regarding my benefits (claims status, etc.) </text>",
+        "correction": "In the source, the label for this item is above the related bars at y=60 (60 px vertical), but in the HTML SVG code the label 'Live chat/chatbot…' is placed at y=0 which mismatches the vertical order and positioning in the source chart."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Note: Data represents the percentage of respondents reporting importance as “very much.”",
+        "html_evidence": "<figcaption class=\"note\">Note: Data represents the percentage of respondents reporting importance as \u00199very much.\u00199</figcaption>",
+        "correction": "The quote marks around “very much.” use curly quotes in source but straight quotes in HTML. So the quotes style is technically different, correct to curly quotes."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Figure 15 horizontal grouped bar chart with seven bars each labeled on left, with 2023 and 2025 values on same line horizontally",
+        "html_evidence": "In the candidate HTML, textual x-axis labels for Figure 15's bar chart are incorrectly placed with y coordinates overlapping or out of visible area, causing label overlap and missing or cut off text. Bars and text alignment do not visually represent the same horizontal grouped bar chart layout as in the source.",
+        "correction": "Adjust vertical positions of textual labels and bar groups in Figure 15 for correct vertical order and non-overlapping text to match source's distinct vertical spacing for each grouped pair."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Figure 16 stacked vertical bar chart with company groups small, midsize, large horizontally labeled under bars",
+        "html_evidence": "The candidate HTML's Figure 16 stacked bar chart has horizontal axis labels small, midsize, large overlapping or merged into one blurred string visually around bottom left area, causing illegible labels.",
+        "correction": "Separate Figure 16 horizontal axis group labels, position them properly under each stacked bar without overlap, for example using appropriate y coordinates and horizontal spacing to match source."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "Figure 15 chart bars and labels are misplaced, causing overlapping text and distorted layout (e.g., labels visible with reversed order and illegible text)",
+        "html_evidence": "<svg>...<text x=\"10\" y=\"210\" ...>Ability to submit claims online</text> ... [bars and text placement inconsistent with source] ...</svg>",
+        "correction": "Adjust SVG bar chart element positions and text labels to match source PDF's clear layout and order."
+      },
+      {
+        "category": "table_structure",
+        "source_evidence": "Table under Figure 15 lists the digital capabilities and their percentages for 2023 and 2025 in two columns with seven specific entries",
+        "html_evidence": "<table class=\"data\">...<tbody>...<tr><th scope=\"row\">Ability to submit claims online</th><td>57%</td><td>65%</td></tr> ... </tbody></table>",
+        "correction": "The table content is correct but is not visually consistent with source since the chart layout is broken; verify table alignment and ensure no text overflow issues."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "match",
+    "errors": []
+  }
+]

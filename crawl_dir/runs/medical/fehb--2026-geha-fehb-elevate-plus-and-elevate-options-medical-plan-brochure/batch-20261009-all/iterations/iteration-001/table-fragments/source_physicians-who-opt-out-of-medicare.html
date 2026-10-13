@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Physicians Who Opt-Out of Medicare - source.pdf</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #071f36;
+      --muted: #5f6f7f;
+      --line: #d6dee6;
+      --header: #06233d;
+      --header-ink: #ffffff;
+      --stripe: #f4f7f9;
+      --canvas: #edf2f6;
+      --paper: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.45;
+    }
+    main {
+      width: min(1440px, calc(100% - 32px));
+      margin: 32px auto;
+      padding: clamp(24px, 4vw, 56px);
+      background: var(--paper);
+      border-radius: 14px;
+      box-shadow: 0 8px 28px rgba(7, 31, 54, 0.10);
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+    .metadata { margin: 0 0 28px; color: var(--muted); }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+    .policy-table { width: 100%; border-collapse: collapse; min-width: 680px; }
+    .policy-table th {
+      padding: 14px 16px;
+      background: var(--header);
+      color: var(--header-ink);
+      text-align: left;
+      vertical-align: top;
+      font-weight: 700;
+    }
+    .policy-table td {
+      padding: 13px 16px;
+      border-top: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      overflow-wrap: anywhere;
+    }
+    .policy-table tbody tr:nth-child(even) { background: var(--stripe); }
+    .note { margin: 24px 0 0; color: var(--muted); font-size: 0.9rem; }
+    @media print {
+      body { background: #fff; }
+      main { width: 100%; margin: 0; padding: 0; box-shadow: none; }
+      .table-wrap { overflow: visible; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Physicians Who Opt-Out of Medicare</h1>
+    <p class="metadata">Source: source.pdf &middot; Table 62 &middot; Page 114</p>
+    <div class="table-wrap">
+      <table class="dataframe policy-table">
+  <thead>
+    <tr style="text-align: left;">
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>When you have the Original Medicare Plan (Part A, Part B, or both)</td>
+      <td>We limit our payment to an amount that supplements the benefits that Medicare would pay under Medicare Part A (Hospital insurance) and Medicare Part B (Medical insurance), regardless of whether Medicare pays. Note: We pay our regular benefits for emergency services to an institutional provider, such as a hospital, that does not participate with Medicare and is not reimbursed by Medicare. We use the Department of Veterans Affairs (VA) Medicare-equivalent Remittance Advice (MRA) when the statement is submitted to determine our payment for covered services provided to you if Medicare is primary, when Medicare does not pay the VA facility. If you are covered by Medicare Part B and it is primary, your out-of-pocket costs for services that both Medicare Part B and we cover depend on whether your physician accepts Medicare assignment for the claim. For Elevate Plus, if your physician accepts Medicare assignment, we waive some of your deductibles, copayments and coinsurance for covered charges. If your physician does not accept Medicare assignment, you pay the difference between the 'limiting charge' or the physician's charge (whichever is less) and our payment combined with Medicare's payment. It is important to know that a physician who does not accept Medicare assignment may not bill you for more than 115% of the amount Medicare bases its payment on, called the 'limiting charge.' The Medicare Summary Notice (MSN) that Medicare will send you will have more information about the limiting charge. If your physician tries to collect more than allowed by law, ask the physician to reduce the charges. If the physician does not, report the physician to the Medicare carrier that sent you the MSN form. Call us if you need further assistance.</td>
+    </tr>
+  </tbody>
+</table>
+    </div>
+    <p class="note">Extracted directly from the source PDF using embedded text with targeted OCR fallback where needed. Verify against the source policy before operational use.</p>
+  </main>
+</body>
+</html>

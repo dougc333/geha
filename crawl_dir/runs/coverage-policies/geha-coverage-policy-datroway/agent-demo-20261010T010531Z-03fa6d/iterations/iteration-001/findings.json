@@ -1,0 +1,102 @@
+{
+  "table_extraction": {
+    "strategy": "hybrid",
+    "native_pdf": {
+      "pdf": "source.pdf",
+      "status": "ok",
+      "ocr_used": true,
+      "tables_detected": 3,
+      "tables_written": 2,
+      "tables_excluded": 1,
+      "outputs": [
+        {
+          "table_number": 1,
+          "heading": "Datroway - (datopotamab deruxtecan-dInk)",
+          "page": 1,
+          "rows": 2,
+          "columns": 5,
+          "header_promoted": false,
+          "header_inherited_from_table": null,
+          "html": "source_datroway-datopotamab-deruxtecan-dink.html"
+        },
+        {
+          "table_number": 2,
+          "heading": "Billing:",
+          "page": 3,
+          "rows": 2,
+          "columns": 3,
+          "header_promoted": true,
+          "header_inherited_from_table": null,
+          "html": "source_billing.html"
+        }
+      ],
+      "excluded": [
+        {
+          "table_number": 3,
+          "heading": "t .. 'i= G.E.H.A",
+          "page": 4,
+          "reason": "revision_history"
+        }
+      ]
+    },
+    "verified_html": {
+      "source": "visually_verified_html",
+      "outputs": [
+        {
+          "table_id": "table-003",
+          "page": 1,
+          "page_table_number": 1,
+          "rows": 2,
+          "columns": 5,
+          "source_html": "/Users/dc/geha/crawl_dir/runs/coverage-policies/geha-coverage-policy-datroway/agent-demo-20261010T010531Z-03fa6d/pages/page-001/final.html"
+        },
+        {
+          "table_id": "table-004",
+          "page": 3,
+          "page_table_number": 1,
+          "rows": 2,
+          "columns": 3,
+          "source_html": "/Users/dc/geha/crawl_dir/runs/coverage-policies/geha-coverage-policy-datroway/agent-demo-20261010T010531Z-03fa6d/pages/page-003/final.html"
+        }
+      ],
+      "table_count": 2
+    }
+  },
+  "chunk_errors": [],
+  "chunk_warnings": [
+    {
+      "chunk_id": "geha-coverage-policy-datroway-chunk-0001",
+      "issue": "missing_section_heading"
+    },
+    {
+      "chunk_id": "geha-coverage-policy-datroway-chunk-0002",
+      "issue": "missing_section_heading"
+    },
+    {
+      "chunk_id": "geha-coverage-policy-datroway-chunk-0003",
+      "issue": "missing_section_heading"
+    },
+    {
+      "chunk_id": "geha-coverage-policy-datroway-chunk-0004",
+      "issue": "missing_section_heading"
+    },
+    {
+      "chunk_id": "geha-coverage-policy-datroway-chunk-0005",
+      "issue": "missing_section_heading"
+    },
+    {
+      "chunk_id": "geha-coverage-policy-datroway-chunk-0006",
+      "issue": "missing_section_heading"
+    },
+    {
+      "chunk_id": "geha-coverage-policy-datroway-chunk-0007",
+      "issue": "missing_section_heading"
+    }
+  ],
+  "image_only_pages": [
+    1,
+    2,
+    3
+  ],
+  "visual_failures": []
+}

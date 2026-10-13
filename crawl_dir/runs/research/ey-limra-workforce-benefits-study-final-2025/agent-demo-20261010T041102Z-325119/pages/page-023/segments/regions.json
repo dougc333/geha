@@ -1,0 +1,180 @@
+{
+  "page_type": "mixed",
+  "segmentation_recommended": true,
+  "reason": "The page contains multiple distinct semantic regions including paragraph text, figure title, question prompt, legend, two charts, and separate text blocks under the charts, as well as a footer and a background image.",
+  "regions": [
+    {
+      "id": "r1",
+      "label": "paragraph",
+      "kind": "paragraph",
+      "reading_order": 1,
+      "x1": 66,
+      "y1": 42,
+      "x2": 947,
+      "y2": 123,
+      "pixel_box": [
+        101,
+        83,
+        1449,
+        244
+      ],
+      "image": "region-01-r1.png"
+    },
+    {
+      "id": "r2",
+      "label": "figure_title",
+      "kind": "paragraph",
+      "reading_order": 2,
+      "x1": 60,
+      "y1": 134,
+      "x2": 698,
+      "y2": 154,
+      "pixel_box": [
+        92,
+        265,
+        1068,
+        305
+      ],
+      "image": "region-02-r2.png"
+    },
+    {
+      "id": "r3",
+      "label": "question_prompt",
+      "kind": "paragraph",
+      "reading_order": 3,
+      "x1": 58,
+      "y1": 157,
+      "x2": 388,
+      "y2": 173,
+      "pixel_box": [
+        89,
+        311,
+        594,
+        343
+      ],
+      "image": "region-03-r3.png"
+    },
+    {
+      "id": "r4",
+      "label": "legend",
+      "kind": "other",
+      "reading_order": 4,
+      "x1": 58,
+      "y1": 180,
+      "x2": 928,
+      "y2": 213,
+      "pixel_box": [
+        89,
+        356,
+        1420,
+        422
+      ],
+      "image": "region-04-r4.png"
+    },
+    {
+      "id": "r5",
+      "label": "chart",
+      "kind": "other",
+      "reading_order": 5,
+      "x1": 98,
+      "y1": 236,
+      "x2": 428,
+      "y2": 430,
+      "pixel_box": [
+        150,
+        467,
+        655,
+        851
+      ],
+      "image": "region-05-r5.png"
+    },
+    {
+      "id": "r6",
+      "label": "chart",
+      "kind": "other",
+      "reading_order": 6,
+      "x1": 540,
+      "y1": 235,
+      "x2": 870,
+      "y2": 432,
+      "pixel_box": [
+        826,
+        465,
+        1331,
+        855
+      ],
+      "image": "region-06-r6.png"
+    },
+    {
+      "id": "r7",
+      "label": "paragraph",
+      "kind": "paragraph",
+      "reading_order": 7,
+      "x1": 58,
+      "y1": 444,
+      "x2": 454,
+      "y2": 555,
+      "pixel_box": [
+        89,
+        879,
+        695,
+        1099
+      ],
+      "image": "region-07-r7.png"
+    },
+    {
+      "id": "r8",
+      "label": "paragraph",
+      "kind": "paragraph",
+      "reading_order": 8,
+      "x1": 528,
+      "y1": 444,
+      "x2": 924,
+      "y2": 555,
+      "pixel_box": [
+        808,
+        879,
+        1414,
+        1099
+      ],
+      "image": "region-08-r8.png"
+    },
+    {
+      "id": "r9",
+      "label": "footer",
+      "kind": "footer",
+      "reading_order": 9,
+      "x1": 40,
+      "y1": 934,
+      "x2": 958,
+      "y2": 977,
+      "pixel_box": [
+        61,
+        1849,
+        1466,
+        1934
+      ],
+      "image": "region-09-r9.png"
+    },
+    {
+      "id": "r10",
+      "label": "other",
+      "kind": "other",
+      "reading_order": 10,
+      "x1": 0,
+      "y1": 560,
+      "x2": 1000,
+      "y2": 920,
+      "pixel_box": [
+        0,
+        1109,
+        1530,
+        1822
+      ],
+      "image": "region-10-r10.png"
+    }
+  ],
+  "coordinate_system": "normalized_0_1000",
+  "source_image": "/Users/dc/geha/crawl_dir/runs/research/ey-limra-workforce-benefits-study-final-2025/agent-demo-20261010T041102Z-325119/pages/page-023/source.png",
+  "overlay": "regions-overlay.png"
+}

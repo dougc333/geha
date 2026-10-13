@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Figure 2</title>
+<style>
+:root { color-scheme: light; }
+body { font-family: Arial, Helvetica, sans-serif; color: #2e2e38; background: #fff;
+       margin: 0; padding: 24px 16px; line-height: 1.45; }
+main { max-width: 960px; margin: 0 auto; }
+h1 { font-size: 34px; font-weight: 400; margin: 0 0 8px; }
+h2 { font-size: 22px; margin: 0 0 16px; }
+h3 { font-size: 16px; margin: 20px 0 8px; }
+p, li { font-size: 15px; }
+.fig-group > header .kicker, figure.chart .kicker { font-size: 12px; font-weight: bold; margin: 0; }
+.fig-group > header h2 { font-size: 19px; margin: 2px 0 16px; }
+.fig-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+figure.chart { margin: 28px 0; }
+figure.chart figcaption .title { font-size: 19px; font-weight: bold; margin: 2px 0 6px; }
+figure.chart .question { font-size: 14px; margin: 0 0 12px; }
+figure.chart .notes { font-size: 12px; font-style: italic; color: #555; margin: 8px 0 0; }
+.legend { list-style: none; margin: 8px 0 14px; padding: 6px 10px; border: 1px solid #ccc;
+          display: inline-flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13px; }
+.legend li { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.sw { width: 10px; height: 10px; display: inline-block; flex: none; }
+.pies { display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-around; }
+.pie { text-align: center; }
+.pie h4 { margin: 0 0 4px; font-size: 15px; }
+.pie svg { width: 220px; max-width: 100%; font-size: 9px; }
+.hbars { display: grid; grid-template-columns: minmax(120px, 42%) 1fr; gap: 4px 10px;
+         font-size: 12px; align-items: center; }
+.hbars .lab { text-align: right; }
+.hbars .grp { grid-column: 1 / -1; font-weight: bold; font-size: 14px; margin-top: 10px;
+              border-bottom: 1px solid #2e2e38; }
+.track { display: flex; height: 16px; }
+.track.multi { flex-direction: column; height: auto; gap: 2px; }
+.track .seg { display: flex; align-items: center; justify-content: center; overflow: hidden;
+              white-space: nowrap; font-size: 11px; }
+.bar-line { display: flex; align-items: center; gap: 4px; height: 12px; font-size: 11px; }
+.bar-line .seg { height: 100%; }
+.vbars { display: flex; gap: 28px; align-items: flex-end; justify-content: center;
+         padding: 0 40px; }
+.vcol { display: flex; flex-direction: column; align-items: center; width: 120px; }
+.vstack { position: relative; width: 70px; height: 220px; display: flex;
+          flex-direction: column-reverse; }
+.vstack .seg { display: flex; align-items: center; justify-content: center; font-size: 12px; }
+.vstack .out { position: absolute; left: 76px; font-size: 12px; white-space: nowrap; }
+.vstack .bracket { position: absolute; border: 1px solid #2e2e38; width: 8px; font-size: 12px; }
+.vstack .bracket.left { left: -14px; border-right: none; }
+.vstack .bracket.right { right: -14px; border-left: none; }
+.vstack .bracket span { position: absolute; top: 50%; transform: translateY(-50%); }
+.vstack .bracket.left span { right: 12px; }
+.vstack .bracket.right span { left: 12px; }
+.vcol .cat { font-size: 12px; text-align: center; margin-top: 6px; }
+.vcol .callout { font-size: 12px; margin-bottom: 4px; text-align: center; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px;
+         margin: 0; }
+.stats div { text-align: center; }
+.stats dd { font-size: 40px; font-weight: bold; margin: 0; }
+.stats dt { font-size: 14px; }
+table.data { border-collapse: collapse; margin: 14px 0 0; font-size: 12px; }
+table.data caption { text-align: left; font-size: 12px; color: #555; padding-bottom: 4px; }
+table.data th, table.data td { border: 1px solid #ddd; padding: 3px 8px; text-align: left; }
+table.data td { text-align: right; }
+table.data tbody th[scope=rowgroup] { background: #f2f2f2; }
+table.heat td { text-align: center; }
+.harveys { display: flex; flex-wrap: wrap; gap: 12px 20px; justify-content: center; }
+.harvey { display: flex; flex-direction: column; align-items: center; width: 80px;
+          font-size: 12px; text-align: center; }
+svg.cycle { display: block; width: 280px; max-width: 100%; margin: 8px auto; }
+.cycle-list { font-size: 14px; }
+.quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.quotes blockquote { margin: 0; padding: 8px 14px; border-left: 4px solid #FFE600; font-family: Georgia, serif; }
+</style>
+</head>
+<body>
+<main>
+<figure class="chart" id="fig2" data-figure="Figure 2"><figcaption><p class="kicker">Figure 2</p><p class="title">Worker participation in the gig economy is trending downward.</p><p class="question"><strong>QUESTION:</strong> Instead of (or in addition to) working for a traditional employer (also known as being a W-2 employee), some workers pursue freelance or “gig” work. Which of the following best describes your current work arrangement?</p></figcaption><ul class="legend" aria-hidden="true"><li><span class="sw" style="background:#747480"></span>Do not freelance or have a gig job(s)</li><li><span class="sw" style="background:#FFE600"></span>Freelance (full or part time)</li></ul><div class="vbars" aria-hidden="true"><div class="vcol"><div class="vstack"><span class="seg" style="height:34.00%;background:#FFE600;color:#2e2e38" title="Freelance (full or part time): 34%">34%</span><span class="seg" style="height:66.00%;background:#747480;color:#ffffff" title="Do not freelance or have a gig job(s): 66%">66%</span></div><div class="cat">2023</div></div><div class="vcol"><div class="vstack"><span class="seg" style="height:23.00%;background:#FFE600;color:#2e2e38" title="Freelance (full or part time): 23%">23%</span><span class="seg" style="height:77.00%;background:#747480;color:#ffffff" title="Do not freelance or have a gig job(s): 77%">77%</span></div><div class="cat">2025</div></div></div><table class="data"><caption>Figure 2 data</caption><thead><tr><th scope="col">Survey year</th><th scope="col">Freelance (full or part time)</th><th scope="col">Do not freelance or have a gig job(s)</th></tr></thead><tbody><tr><th scope="row">2023</th><td>34%</td><td>66%</td></tr><tr><th scope="row">2025</th><td>23%</td><td>77%</td></tr></tbody></table></figure>
+</main>
+</body>
+</html>

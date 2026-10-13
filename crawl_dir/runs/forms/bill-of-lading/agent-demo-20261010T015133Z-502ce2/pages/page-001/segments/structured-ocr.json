@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "workflow_program": "/Users/dc/geha/PDF_processing/bill_lading/bill_of_lading_html_graph.py",
+  "blocks": [
+    {
+      "block": 1,
+      "section": "Carrier header and bill of lading identifiers",
+      "cells": {
+        "carrier_header": "MERIDIAN SHIPPING\nGLOBAL SHIPPING & LOGISTICS",
+        "bill_of_lading_box": "BILL OF LADING\n\nB/L NO.\t\t\tBL232472785\nSCAC\t\t\t\tMRDN"
+      },
+      "source_region": "region-01-schema-block-1.png"
+    },
+    {
+      "block": 2,
+      "section": "Shipment parties and references",
+      "cells": {
+        "shipper": "FRUTAS DEL SOL S.A.\nAv. de los Incas 456, Buenos Aires, Argentina\nTEL: +54 11 4789 1234 | EMAIL: logistica@frutasdelsol.com.ar",
+        "consignee": "FRESH FRUIT IMPORTERS B.V.\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands\nTEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com",
+        "notify_party": "FRESH FRUIT IMPORTERS B.V.\nHandelsweg 12, 2988 DB Ridderkerk, Netherlands\nTEL: +31 10 123 4567 | EMAIL: dispatch@logitrans.com",
+        "booking_ref": "BKG5917532",
+        "shipper_ref": "EXP-35782",
+        "pre_carriage": "Oceanic Meridian Lines",
+        "place_of_receipt": "BUENOS AIRES, ARGENTINA",
+        "delivery_agent": "LogiTrans Global\n88 Harbor Road, Rotterdam, 3011 AA\nTel: +31 10 123 4567 | dispatch@logitrans.com"
+      },
+      "source_region": "region-02-schema-block-2.png"
+    },
+    {
+      "block": 3,
+      "section": "Vessel voyage and ports",
+      "cells": {
+        "vessel_voyage": "MERIDIAN LABREA / 124N",
+        "port_loading": "BUENOS AIRES, ARGENTINA",
+        "port_discharge": "ROTTERDAM, NETHERLANDS"
+      },
+      "source_region": "region-03-schema-block-3.png"
+    },
+    {
+      "block": 4,
+      "section": "Carrier particulars notice",
+      "cells": {
+        "particulars_notice": "SURFACE ONLY. Not as declared by shipper. See remarks. ISPS YES"
+      },
+      "source_region": "region-04-schema-block-4.png"
+    },
+    {
+      "block": 5,
+      "section": "Cargo table headers",
+      "cells": {
+        "container_header": "MRDN4455667",
+        "packages_header": "20",
+        "description_header": "20 PALLETS STC:\nFRESH FRUIT",
+        "gross_weight_header": "18,500\nKGS",
+        "measurement_header": "28.00\nCBM"
+      },
+      "source_region": "region-05-schema-block-5.png"
+    },
+    {
+      "block": 6,
+      "section": "Cargo particulars",
+      "cells": {
+        "container_column": "SEAL: MSK112233\n\nMARKS:\nPALLETIZED\n\nMRDN7788990\nSEAL: MSK445566\n\nMARKS:\nPALLETIZED",
+        "packages_column": "20",
+        "description_column": "FRESH APPLES\nSTOWAGE AT +2.0 DEGREES CELSIUS\nPackaging: PALLETS\n\nHS CODE: 08081080\nSET TEMP: +2°C\n\n20 PALLETS STC:\nFRESH FRUIT\n\nFRESH PEARS\nSTOWAGE AT +1.0 DEGREES CELSIUS\nPackaging: PALLETS\n\nHS CODE: 08083090\nSET TEMP: +1°C\n\n_______________________________\n\n       FREIGHT COLLECT\n_______________________________",
+        "gross_weight_column": "19,200\nKGS",
+        "measurement_column": "28.00\nCBM"
+      },
+      "source_region": "region-06-schema-block-6.png"
+    },
+    {
+      "block": 7,
+      "section": "Freight charges and package totals",
+      "cells": {
+        "charges_header": "RECEIVED by the Carrier in apparent good order and condition (unless otherwise stated herein) the total number or quantity of Containers or other packages or units indicated in the box entitled \"Total Number of Packages\" for carriage subject to all the terms and conditions hereof from the Place of Receipt or Port of Loading to the Port of Discharge or Place of Delivery, whichever is applicable.\n\nIN ACCEPTING THIS BILL OF LADING THE MERCHANT EXPRESSLY ACCEPTS AND AGREES TO ALL THE TERMS AND CONDITIONS, WHETHER PRINTED, STAMPED OR OTHERWISE INCORPORATED ON THIS SIDE AND ON THE REVERSE SIDE OF THIS BILL OF LADING AND THE TERMS AND CONDITIONS OF THE CARRIER'S APPLICABLE TARIFF AS IF THEY WERE ALL SIGNED BY THE MERCHANT.",
+        "charges_values": "RECEIVED by the Carrier in apparent good order and condition (unless otherwise stated herein) the total number or quantity of Containers or other packages or units indicated in the box entitled \"Total Number of Packages\" for carriage subject to all the terms and conditions hereof from the Place of Receipt or Port of Loading to the Port of Discharge or Place of Delivery, whichever is applicable.\n\nIN ACCEPTING THIS BILL OF LADING THE MERCHANT EXPRESSLY ACCEPTS AND AGREES TO ALL THE TERMS AND CONDITIONS, WHETHER PRINTED, STAMPED OR OTHERWISE INCORPORATED ON THIS SIDE AND ON THE REVERSE SIDE OF THIS BILL OF LADING AND THE TERMS AND CONDITIONS OF THE CARRIER'S APPLICABLE TARIFF AS IF THEY WERE ALL SIGNED BY THE MERCHANT.",
+        "total_packages": "2026-03-13"
+      },
+      "source_region": "region-07-schema-block-7.png"
+    },
+    {
+      "block": 8,
+      "section": "Legal terms issue details and signature",
+      "cells": {
+        "legal_and_originals": "NUMBER OF ORIGINAL B/L'S: THREE (3)",
+        "place_issue": "FRUTAS DEL SOL S.A.",
+        "date_issue": "+54 11 4789 1234",
+        "carrier_signature": "logistica@frutasdelsol.com.ar"
+      },
+      "source_region": "region-08-schema-block-8.png"
+    }
+  ]
+}

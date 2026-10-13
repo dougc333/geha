@@ -1,0 +1,11 @@
+References
+17. Ziextenzo [package insert]. Sandoz Inc,, Princeton, NJ. Available at: https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/761045Orig1s014lbl.pdf
+18. Ziextenzo. NCCN Cancer Guidelines and Drugs and Biologics Compendium. Available at: https://www.nccn.org/professionals/drug_compendium/content/
+19. Referenced with permission from the NCCN Clinical Practice Guidelines in Oncology (NCCN Guidelines®). National Comprehensive Cancer Network, Inc. 2026. All rights reserved. Accessed March 10, 2026. To view the most recent and complete version of the guideline, go online to NCCN.org.
+
+Disclaimer
+Drug Coverage Policies are developed as needed, reviewed and updated at least annually, and are subject to change. Other policies and coverage determination guidelines may apply. Federal and state regulatory requirements and member specific benefit plan documents, if applicable, must be reviewed prior to utilizing this Drug Coverage Policy. This Drug Coverage Policy is for informational purposes only and does not constitute medical advice nor dictate how providers should practice medicine. This policy should not be reproduced, stored in a retrieval system, or altered from its original form without written permission from OncoHealth, Inc.
+
+For Internal Use ONLY
+Revision History
+5/2/2022, Updates = Added preferred products and recommended step-therapy options. Added Wilms tumor per NCCN, added H-ARS per PI/NCCN. 06/13/2022, Updates = Added Fylnetra( pegfilgrastim-pbbk). 07/28/2022, Updates = Removed H-ARS as per scope. 10/26/2022, Updates = Added Stimufend (pegfilgrastim-fpgk), Rolvedon (eflapegrastim-xnstm). 10/27/2022, Updates = Policy approved by P&T. 12/5/23, Updates = Updated Step Therapy to Table; Added Universal Criteria; Addition of efbemalenograstim alfa; Reviewed References. 4/17/2024, Updates = Policy adopted by G.E.H.A; document updated for Universal accessibility. 7/1/2024, Updates = Ryzneuta HCPCS Updated. 2/12/2025, Updates = Annual Review (update template, Universal Criteria). 2/17/2025, Updates = Removed med nec criteria, updated preferred product requirements; approved by P&T.. 1/1/2026, Updates = Addition of Armlupeg (pegfilgrastim-unne) NTM drug (PI unavailable on 12/23/2025). 3/16/2026, Updates = Annual Review - approved by OH P&T.

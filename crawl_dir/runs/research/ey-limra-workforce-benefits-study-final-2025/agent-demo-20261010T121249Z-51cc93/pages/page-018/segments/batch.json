@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "workflow": "authored_figure_spec_semantic_html",
+  "model": "claude-opus-5-5",
+  "spec": "/Users/dc/geha/crawl_dir/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs/page-018.json",
+  "created_at": "2026-10-10T12:13:26.063239+00:00",
+  "max_iterations_per_figure": 1,
+  "completion_requirement": "every printed percentage and label in the spec matches native PDF text inside the figure box",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "fig11",
+      "kind": "chart",
+      "title": "Figure 11 In choosing carriers, employers value integrated absence management experiences more than affordability.",
+      "source_png": "figure-01-fig11.png",
+      "bounding_box": [
+        70,
+        1130,
+        1475,
+        1900
+      ],
+      "output_directory": "figure-01",
+      "native_evidence": "figure-01/native-evidence.json",
+      "native_evidence_word_count": 69,
+      "value_evidence": "raster_visual_read",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "warnings": [
+            "Content read visually from a raster image; native PDF has no text for it."
+          ],
+          "render_latency_ms": 446.2
+        }
+      ],
+      "selected_iteration": 1,
+      "selected_error_count": 0,
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-01.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 1,
+    "failed": 0,
+    "total_iterations": 1,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-10-10T12:13:26.525989+00:00"
+}
