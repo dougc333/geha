@@ -12,14 +12,16 @@ try:
     from .billing_code_data import requested_billing_codes
     from .medical_claims_advisor import retrieve_tables_for_named_condition
     from .table_rag import DEFAULT_DATABASE_URL
+    from .policy_paths import POLICY_ARTIFACT_DIR, document_file
 except ImportError:  # pragma: no cover - direct CLI execution
     from billing_code_data import requested_billing_codes
     from medical_claims_advisor import retrieve_tables_for_named_condition
     from table_rag import DEFAULT_DATABASE_URL
+    from policy_paths import POLICY_ARTIFACT_DIR, document_file
 
 
 HERE = Path(__file__).resolve().parent
-POLICY_DIR = HERE.parent / "downloads" / "coverage-policies"
+POLICY_DIR = POLICY_ARTIFACT_DIR
 DEFAULT_EVAL_FILE = HERE / "semantic_fallback_evals.json"
 
 
@@ -31,7 +33,7 @@ def run_evaluation(eval_file: Path, database_url: str) -> dict:
     app.text_input[0].set_value(database_url).run()
     results = []
     for case in cases:
-        markdown = POLICY_DIR / case["expected_source"].replace(".pdf", ".docling.md")
+        markdown = document_file(POLICY_DIR, Path(case["expected_source"]).stem, ".docling.md")
         source_lines = markdown.read_text(encoding="utf-8").splitlines()
         source_verified = case["source_anchor"].casefold() in source_lines[
             case["docling_line"] - 1

@@ -8,12 +8,11 @@ from __future__ import annotations
 import os
 import re
 import unittest
-from pathlib import Path
 
 from chunking_benchmarks_RAG.html_table_data import load_policy_html_tables
+from chunking_benchmarks_RAG.policy_paths import POLICY_ARTIFACT_DIR, POLICY_PDF_DIR
 from chunking_benchmarks_RAG.preferred_table_tool import search_preferred_policy_tables
 
-POLICY_DIR = Path(__file__).resolve().parents[1] / "downloads" / "coverage-policies"
 
 
 def _key(value: str) -> str:
@@ -39,11 +38,11 @@ def preferred_names_in_table(table: dict) -> set[str]:
 class PreferredTableIntegrationTests(unittest.TestCase):
     def test_all_17_preferred_policy_files(self):
         expected = {}
-        for table in load_policy_html_tables(POLICY_DIR):
+        for table in load_policy_html_tables(POLICY_ARTIFACT_DIR):
             names = preferred_names_in_table(table)
             if names:
                 source_pdf = table["source"]
-                self.assertTrue((POLICY_DIR / source_pdf).is_file(), source_pdf)
+                self.assertTrue((POLICY_PDF_DIR / source_pdf).is_file(), source_pdf)
                 expected.setdefault(source_pdf, set()).update(names)
         self.assertEqual(len(expected), 17, "The reviewed HTML fixture has changed")
 

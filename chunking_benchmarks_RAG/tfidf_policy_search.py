@@ -13,8 +13,13 @@ from pathlib import Path
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
+try:
+    from .policy_paths import POLICY_ARTIFACT_DIR, document_files
+except ImportError:  # pragma: no cover - direct CLI execution
+    from policy_paths import POLICY_ARTIFACT_DIR, document_files
 
-DEFAULT_POLICY_DIR = Path(__file__).resolve().parents[1] / "downloads" / "coverage-policies"
+
+DEFAULT_POLICY_DIR = POLICY_ARTIFACT_DIR
 HEADING = re.compile(r"^(#{1,6})\s+(.+?)\s*$")
 REVISION_HEADING = re.compile(r"\b(revision|change|update)\s+history\b", re.I)
 FRONTMATTER_REVISION = re.compile(r"^\s*(revision date\(s\)|review date)\s*:", re.I)
@@ -76,9 +81,10 @@ def without_revision_history(markdown: str) -> str:
 
 
 def load_policies(directory: Path) -> list[PolicyDocument]:
-    """Load only policy files directly in directory; never traverse archives."""
+    """Load one Markdown file per policy; never traverse archives."""
     documents = []
-    for path in sorted(directory.glob("geha-coverage-policy-*.docling.md")):
+    paths = document_files(directory, ".docling.md")
+    for path in (p for p in paths if p.name.startswith("geha-coverage-policy-")):
         text = without_revision_history(path.read_text(encoding="utf-8"))
         if text:
             documents.append(

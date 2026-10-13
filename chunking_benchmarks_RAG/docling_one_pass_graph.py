@@ -18,9 +18,9 @@ from typing import TypedDict
 from langgraph.graph import END, START, StateGraph
 
 try:
-    from .convert_pdf_to_docling import POLICY_DIR, convert_one
+    from .convert_pdf_to_docling import POLICY_DIR, artifact_dir, convert_one
 except ImportError:  # direct script execution
-    from convert_pdf_to_docling import POLICY_DIR, convert_one
+    from convert_pdf_to_docling import POLICY_DIR, artifact_dir, convert_one
 
 
 class ExtractionState(TypedDict, total=False):
@@ -76,7 +76,7 @@ def verify_outputs(state: ExtractionState) -> ExtractionState:
         (".docling.md", "staged_markdown"),
         (".docling_chunks.md", "staged_chunks"),
     ):
-        saved = source.with_suffix(suffix)
+        saved = artifact_dir(source) / f"{source.stem}{suffix}"
         staged = Path(state[staged_key])
         comparison[suffix] = {
             "saved_path": str(saved),
@@ -98,9 +98,11 @@ def verify_outputs(state: ExtractionState) -> ExtractionState:
 
 def publish_new(state: ExtractionState) -> ExtractionState:
     """Publish only when neither output exists; exclusive create prevents overwrite."""
+    target_dir = artifact_dir(_source_pdf(state["pdf_filename"]))
+    target_dir.mkdir(parents=True, exist_ok=True)
     paths = (
-        (Path(state["staged_markdown"]), POLICY_DIR / Path(state["staged_markdown"]).name),
-        (Path(state["staged_chunks"]), POLICY_DIR / Path(state["staged_chunks"]).name),
+        (Path(state["staged_markdown"]), target_dir / Path(state["staged_markdown"]).name),
+        (Path(state["staged_chunks"]), target_dir / Path(state["staged_chunks"]).name),
     )
     created: list[Path] = []
     try:
@@ -133,7 +135,7 @@ def build_graph():
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("pdf_filename", help="One PDF basename in downloads/coverage-policies")
+    parser.add_argument("pdf_filename", help="One PDF basename in crawl_dir/raw/coverage-policies")
     args = parser.parse_args()
     _source_pdf(args.pdf_filename)
     with tempfile.TemporaryDirectory(prefix="geha-docling-") as run_dir:
