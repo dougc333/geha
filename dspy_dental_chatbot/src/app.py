@@ -23,6 +23,13 @@ from policy_qa import (  # noqa: E402
     expand_policy_query,
 )
 from policy_personas import evaluate_persona_result, load_personas, typing_frames  # noqa: E402
+from safety_guard import (  # noqa: E402
+    GuardedAnswer,
+    GuardedPolicyQA,
+    JevInputGuard,
+    guard_lm_from_env,
+    jev_available,
+)
 from shared_graph import DentalEnrollmentGraph  # noqa: E402
 
 
@@ -45,6 +52,13 @@ def build_policy_qa() -> DentalPolicyQA:
     return DentalPolicyQA(DentalPolicyIndex.from_pdf(POLICY_PDF))
 
 
+def build_guarded_policy_qa(qa: DentalPolicyQA) -> GuardedPolicyQA:
+    # Jev classifies the question when TYPESAFE_API_KEY is set; DSPy otherwise.
+    # The output guard always uses DSPy because it must read the evidence.
+    input_guard = JevInputGuard() if jev_available() else None
+    return GuardedPolicyQA(qa, input_guard=input_guard, guard_lm=guard_lm_from_env())
+
+
 @st.cache_resource
 def build_existing_corpus(
     include_plan_brochure: bool,
@@ -60,11 +74,11 @@ def retrieve_docling_chunks(corpus, query: str, top_k: int, mode: str) -> list[P
 
 
 def answer_policy_question(
-    qa: DentalPolicyQA,
+    qa: GuardedPolicyQA,
     question: str,
     conversation: str,
     retriever_name: str,
-) -> tuple[str, list[PolicyChunk]]:
+) -> GuardedAnswer:
     code_query = bool(re.search(r"\bD\d{4}\b", question, flags=re.IGNORECASE))
     top_k = 6 if code_query else 4
     if retriever_name == "Direct PDF BM25":
@@ -93,6 +107,7 @@ st.caption("Complete an enrollment workflow or ask grounded questions about the 
 try:
     bot = build_graph()
     policy_qa = build_policy_qa()
+    guarded_policy_qa = build_guarded_policy_qa(policy_qa)
 except Exception as error:
     st.error(f"DSPy is not configured: {error}")
     st.code(
@@ -257,13 +272,17 @@ with policy_tab:
         )
         with st.chat_message("assistant"):
             with st.spinner("Retrieving policy evidence and composing a cited answer..."):
-                response, chunks = answer_policy_question(
-                    policy_qa,
+                guarded = answer_policy_question(
+                    guarded_policy_qa,
                     question,
                     conversation,
                     answer_retriever,
                 )
+            response, chunks = guarded.answer, guarded.chunks
             st.markdown(response)
+            with st.expander("Safety checks"):
+                for verdict in guarded.verdicts:
+                    st.markdown(f"**{verdict.stage}** · `{verdict.category}` · {verdict.reason}")
             with st.expander("Retrieved evidence"):
                 for chunk in chunks:
                     st.markdown(
@@ -280,6 +299,11 @@ with policy_tab:
                 "content": response,
                 "retriever": answer_retriever,
                 "persona_evaluation": persona_evaluation,
+                "blocked": guarded.blocked,
+                "guard_verdicts": [
+                    {"stage": v.stage, "category": v.category, "reason": v.reason}
+                    for v in guarded.verdicts
+                ],
                 "sources": [
                     {
                         "page": chunk.page,

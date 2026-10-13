@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="450" viewBox="0 0 940 450" role="img" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title>Guarded policy Q&amp;A</title>
+  <desc>A member question goes to two branches at once: an input guard (Jev Choice, with DSPy as fallback) and the answerer, which retrieves policy pages and drafts a cited DSPy answer. A gate releases the draft only when the input guard returns safe; otherwise the member gets a category refusal. A DSPy output guard then checks the draft against its evidence. Safe drafts are shown with their sources; unsafe drafts are refused. Guard errors, timeouts and unknown labels refuse.</desc>
+  <style>
+    .bg { fill: #ffffff; }
+    .teal rect { fill: #E1F5EE; stroke: #0F6E56; }
+    .teal text { fill: #085041; }
+    .coral rect { fill: #FAECE7; stroke: #993C1D; }
+    .coral text { fill: #712B13; }
+    .gray rect { fill: #F1EFE8; stroke: #5F5E5A; }
+    .gray text { fill: #444441; }
+    .purple rect { fill: #EEEDFE; stroke: #534AB7; }
+    .purple text { fill: #3C3489; }
+    .amber rect { fill: #FAEEDA; stroke: #854F0B; }
+    .amber text { fill: #633806; }
+    rect { stroke-width: 1.5; }
+    .tq { font-size: 14px; font-weight: 600; }
+    .sn { font-size: 12px; }
+    .edge { fill: none; stroke: #5F5E5A; stroke-width: 1.5; marker-end: url(#arrow); }
+    .lbl { font-size: 12px; fill: #444441; }
+    .bad { fill: #993C1D; }
+    .good { fill: #0F6E56; }
+    .par { fill: none; stroke: #888780; stroke-width: 1.2; stroke-dasharray: 6 4; }
+    .title { font-size: 16px; font-weight: 600; fill: #2C2C2A; }
+    .foot { font-size: 12px; font-style: italic; fill: #5F5E5A; }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#5F5E5A"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="940" height="450"/>
+
+  <text class="title" x="20" y="30">Guarded policy Q&amp;A · dspy_dental_chatbot</text>
+
+  <!-- parallel region -->
+  <rect class="par" x="195" y="62" width="380" height="325" rx="10"/>
+  <text class="lbl" x="205" y="56">runs in parallel</text>
+
+  <!-- nodes -->
+  <g class="gray">
+    <rect x="20" y="196" width="130" height="60" rx="8"/>
+    <text class="tq" x="85" y="222" text-anchor="middle">Member</text>
+    <text class="sn" x="85" y="240" text-anchor="middle">question</text>
+  </g>
+
+  <g class="purple">
+    <rect x="210" y="80" width="220" height="66" rx="8"/>
+    <text class="tq" x="320" y="102" text-anchor="middle">Input guard</text>
+    <text class="sn" x="320" y="120" text-anchor="middle">Jev Choice · DSPy fallback</text>
+    <text class="sn" x="320" y="137" text-anchor="middle">injection · other member · self-harm</text>
+  </g>
+
+  <g class="teal">
+    <rect x="210" y="306" width="150" height="66" rx="8"/>
+    <text class="tq" x="285" y="332" text-anchor="middle">Retrieve</text>
+    <text class="sn" x="285" y="350" text-anchor="middle">BM25 / Docling hybrid</text>
+  </g>
+
+  <g class="teal">
+    <rect x="390" y="306" width="170" height="66" rx="8"/>
+    <text class="tq" x="475" y="328" text-anchor="middle">Draft answer</text>
+    <text class="sn" x="475" y="346" text-anchor="middle">DSPy ChainOfThought</text>
+    <text class="sn" x="475" y="363" text-anchor="middle">[p. N] citation check</text>
+  </g>
+
+  <g class="amber">
+    <rect x="600" y="193" width="130" height="66" rx="8"/>
+    <text class="tq" x="665" y="215" text-anchor="middle">Gate</text>
+    <text class="sn" x="665" y="233" text-anchor="middle">release draft only</text>
+    <text class="sn" x="665" y="250" text-anchor="middle">if input is safe</text>
+  </g>
+
+  <g class="coral">
+    <rect x="770" y="60" width="150" height="66" rx="8"/>
+    <text class="tq" x="845" y="82" text-anchor="middle">Refusal</text>
+    <text class="sn" x="845" y="100" text-anchor="middle">message per category</text>
+    <text class="sn" x="845" y="117" text-anchor="middle">988 line for self-harm</text>
+  </g>
+
+  <g class="purple">
+    <rect x="770" y="193" width="150" height="66" rx="8"/>
+    <text class="tq" x="845" y="215" text-anchor="middle">Output guard</text>
+    <text class="sn" x="845" y="233" text-anchor="middle">DSPy · reads evidence</text>
+    <text class="sn" x="845" y="250" text-anchor="middle">advice · guarantee · PHI</text>
+  </g>
+
+  <g class="teal">
+    <rect x="770" y="330" width="150" height="66" rx="8"/>
+    <text class="tq" x="845" y="356" text-anchor="middle">Answer + sources</text>
+    <text class="sn" x="845" y="374" text-anchor="middle">"Safety checks" expander</text>
+  </g>
+
+  <!-- edges -->
+  <path class="edge" d="M150 226 H180 V113 H208"/>
+  <path class="edge" d="M180 226 V339 H208"/>
+  <path class="edge" d="M360 339 H388"/>
+  <path class="edge" d="M430 113 H665 V191"/>
+  <text class="lbl" x="520" y="106">verdict</text>
+  <path class="edge" d="M560 339 H665 V261"/>
+  <text class="lbl" x="580" y="332">draft</text>
+
+  <path class="edge" d="M730 208 H750 V93 H768"/>
+  <text class="lbl bad" x="736" y="150" transform="rotate(-90 744 150)">unsafe / error</text>
+  <path class="edge" d="M730 242 H768"/>
+  <text class="lbl good" x="736" y="270">safe</text>
+
+  <path class="edge" d="M845 193 V128"/>
+  <text class="lbl bad" x="852" y="165">unsafe / error</text>
+  <path class="edge" d="M845 259 V328"/>
+  <text class="lbl good" x="852" y="298">safe</text>
+
+  <text class="foot" x="20" y="430">Guard errors, timeouts and unrecognized labels refuse (fail closed). The enrollment tab does not use these guards.</text>
+</svg>
