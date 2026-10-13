@@ -8,18 +8,20 @@ from pathlib import Path
 
 try:
     from .billing_code_data import docling_billing_rows
+    from .policy_paths import POLICY_ARTIFACT_DIR, document_files
 except ImportError:  # pragma: no cover - direct CLI execution
     from billing_code_data import docling_billing_rows
+    from policy_paths import POLICY_ARTIFACT_DIR, document_files
 
 
-ROOT = Path(__file__).resolve().parents[1] / "downloads" / "coverage-policies"
+ROOT = POLICY_ARTIFACT_DIR
 OUTPUT = Path(__file__).with_name("billing_code_evals.json")
 
 
 def generate(root: Path = ROOT) -> dict:
     documents = []
     cases = []
-    for markdown in sorted(root.glob("*.docling.md")):
+    for markdown in document_files(root, ".docling.md"):
         source = markdown.name.removesuffix(".docling.md") + ".pdf"
         grouped = defaultdict(lambda: {"items": [], "source_lines": [], "raw_code_cells": []})
         for row in docling_billing_rows(markdown):
@@ -50,7 +52,7 @@ def generate(root: Path = ROOT) -> dict:
             })
     return {
         "purpose": "Exact billing-code search must return every matching source document and its code table, without vector ranking.",
-        "source_scope": "Top-level downloads/coverage-policies/*.docling.md only",
+        "source_scope": "One crawl_dir/verified/coverage-policies/<policy>/<policy>.docling.md per policy",
         "documents": documents,
         "cases": cases,
     }

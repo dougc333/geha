@@ -193,8 +193,9 @@ retrieval and does not affect which route or tables are selected.
 - Docker with Compose
 - [`uv`](https://docs.astral.sh/uv/)
 - An OpenAI API key for the optional `ask` command
-- Text-layer PDFs and reviewed, one-table-per-file HTML artifacts under
-  `downloads/coverage-policies/html_tables/`
+- Text-layer PDFs in `crawl_dir/raw/coverage-policies/` and reviewed,
+  one-table-per-file HTML artifacts under
+  `crawl_dir/verified/coverage-policies/html_tables/`
 
 Each HTML artifact carries its source PDF, table number, page, heading, and a
 semantic table. Ingestion stores HTML as parent evidence and parsed JSONB rows
@@ -312,9 +313,9 @@ print(html_result)     # HTML table paths, headings, and excluded revisions
 print(page_result)     # One PNG path and page number per source PDF page
 ```
 
-The tools accept a PDF filename in `downloads/coverage-policies`, not an
+The tools accept a PDF filename in `crawl_dir/raw/coverage-policies`, not an
 arbitrary path. They write new files under
-`downloads/coverage-policies/extraction_review/<policy-name>/` and never
+`crawl_dir/verified/coverage-policies/extraction_review/<policy-name>/` and never
 overwrite the existing `.docling.md`, `.docling_chunks.md`, or published HTML
 tables. The HTML tool reuses the existing closest-heading, embedded-CSS, and
 revision-history filtering logic. When Docling gives a table numeric columns
@@ -366,7 +367,7 @@ uv run python -m chunking_benchmarks_RAG.ocr_pipeline.policy_review_graph \
 ```
 
 The command prints the status and path to `qc_report.json`. Its run-specific
-HTML and report are under `downloads/coverage-policies/extraction_review/`;
+HTML and report are under `crawl_dir/verified/coverage-policies/extraction_review/`;
 the page PNGs are source-hash-specific. There are no database writes and no
 external model calls in the default mode.
 
@@ -405,8 +406,8 @@ replacing the published `html_tables/` artifacts:
 
 ```bash
 uv run python chunking_benchmarks_RAG/extract_pdf_tables_html.py \
-  /Users/dc/geha/downloads/coverage-policies \
-  --output-dir /Users/dc/geha/downloads/coverage-policies/html_tables_staging
+  /Users/dc/geha/crawl_dir/raw/coverage-policies \
+  --output-dir /Users/dc/geha/crawl_dir/verified/coverage-policies/html_tables_staging
 ```
 
 The extractor first uses embedded PDF text with OCR disabled, then uses the
@@ -416,7 +417,7 @@ Then load the extracted tables:
 
 ```bash
 uv run python chunking_benchmarks_RAG/table_rag.py ingest \
-  /Users/dc/geha/downloads/coverage-policies
+  /Users/dc/geha/crawl_dir/verified/coverage-policies
 ```
 
 Ingestion is repeatable for files present in the selected directory. Existing
@@ -445,7 +446,7 @@ rebuilding table-row embeddings, run:
 
 ```bash
 uv run python chunking_benchmarks_RAG/table_rag.py ingest-sections \
-  /Users/dc/geha/downloads/coverage-policies
+  /Users/dc/geha/crawl_dir/verified/coverage-policies
 ```
 
 `ingest-sections` creates the new tables if necessary and reloads each source's
@@ -532,8 +533,8 @@ uv run streamlit run chunking_benchmarks_RAG/medical_claims_advisor_ui.py
 ```
 
 To review policy-name search results, click **Start 3-second search cycle** in
-the sidebar. The app reads the 34 `geha-coverage-policy-*.docling_chunks.md`
-files directly under `downloads/coverage-policies`, removes the filename prefix
+the sidebar. The app reads the 32 `geha-coverage-policy-*.docling_chunks.md`
+files in `crawl_dir/verified/coverage-policies`, one per policy folder, removes the filename prefix
 and `.docling_chunks.md` suffix, and submits each resulting term through the
 normal search path. It shows one result at a time, waits 3 seconds after each
 search, then advances. Click **Stop search cycle** to end the run. The file
@@ -558,7 +559,7 @@ coverage-policy tables:
 ```bash
 uv run python chunking_benchmarks_RAG/table_rag.py init-db
 uv run python chunking_benchmarks_RAG/table_rag.py ingest \
-  /Users/dc/geha/downloads/coverage-policies
+  /Users/dc/geha/crawl_dir/verified/coverage-policies
 ```
 
 Start the Streamlit application:
@@ -702,4 +703,4 @@ This keeps the database volume. To delete the stored database as well, explicitl
 - `tables.md`: qualifying policy inventory and retrieval baseline
 - `table_rag_architecture.svg`: editable architecture figure
 - `table_rag_architecture.png`: rendered architecture figure
-- `downloads/coverage-policies/html_tables/*.html`: reviewed table inputs
+- `crawl_dir/verified/coverage-policies/html_tables/*.html`: reviewed table inputs

@@ -20,9 +20,11 @@ from sentence_transformers import SentenceTransformer
 try:  # Support module and direct-script execution.
     from .billing_code_data import docling_billing_rows
     from .html_table_data import load_policy_html_tables
+    from .policy_paths import document_file, document_files
 except ImportError:  # pragma: no cover - direct CLI execution
     from billing_code_data import docling_billing_rows
     from html_table_data import load_policy_html_tables
+    from policy_paths import document_file, document_files
 
 DEFAULT_DATABASE_URL = "postgresql://geha:geha-local@127.0.0.1:5433/geha_rag"
 DEFAULT_EMBEDDING_MODEL = "BAAI/bge-small-en-v1.5"
@@ -196,6 +198,7 @@ def extract_indication_metadata(markdown_path: Path) -> tuple[list[str], str]:
 
 
 CHUNK_HEADING_RE = re.compile(r"^## Chunk (\d+)\s*$", re.MULTILINE)
+CHUNK_METADATA_RE = re.compile(r"^(Pages|Headings):")
 
 
 def split_markdown_chunks(path: Path) -> list[tuple[int, str]]:
@@ -225,7 +228,15 @@ def classify_policy_chunks(
     current_condition: str | None = None
     used_conditions: set[str] = set()
     for number, content in chunks:
-        first_line = next((line.strip() for line in content.splitlines() if line.strip()), "")
+        # Verified chunk files start with "Pages:" and "Headings:" metadata
+        # lines; the section heading is the first line after them.
+        first_line = next(
+            (
+                line.strip() for line in content.splitlines()
+                if line.strip() and not CHUNK_METADATA_RE.match(line.strip())
+            ),
+            "",
+        )
         key = _heading_key(first_line.rstrip(":"))
         condition = condition_names.get(key)
         if not condition and key.startswith("indicationspecificcriteria"):
@@ -308,8 +319,8 @@ def policy_source_terms(
 
 
 def policy_chunk_paths(input_dir: Path) -> list[Path]:
-    """Discover only policy chunks directly inside the selected input directory."""
-    return sorted(input_dir.glob("*.docling_chunks.md"))
+    """Discover one chunk file per policy, ignoring archive subdirectories."""
+    return document_files(input_dir, ".docling_chunks.md")
 
 
 def ingest_policy_sections(
@@ -326,9 +337,7 @@ def ingest_policy_sections(
     section_count = 0
     with connect(database_url) as connection:
         for path in chunk_paths:
-            source_pdf = str(path.relative_to(input_dir)).removesuffix(
-                ".docling_chunks.md"
-            ) + ".pdf"
+            source_pdf = path.name.removesuffix(".docling_chunks.md") + ".pdf"
             markdown_path = path.with_name(
                 path.name.removesuffix(".docling_chunks.md") + ".docling.md"
             )
@@ -370,7 +379,7 @@ def ingest_policy_sections(
 
 def ingest_billing_codes(database_url: str, input_dir: Path) -> None:
     """Index exact codes from top-level Docling billing and applicable-code tables."""
-    markdown_paths = sorted(input_dir.glob("*.docling.md"))
+    markdown_paths = document_files(input_dir, DOCLING_SUFFIX)
     if not markdown_paths:
         raise FileNotFoundError(f"No *.docling.md files found in {input_dir}")
     code_count = 0
@@ -462,7 +471,7 @@ def ingest(
             "DELETE FROM policy_tables WHERE source <> ALL(%s)", (indexed_sources,)
         )
         for source, tables in sorted(tables_by_source.items()):
-            markdown_path = input_dir / f"{Path(source).stem}{DOCLING_SUFFIX}"
+            markdown_path = document_file(input_dir, Path(source).stem, DOCLING_SUFFIX)
             conditions, indication_context = extract_indication_metadata(markdown_path)
             print(
                 f"{source}: {len(tables)} table(s), {len(conditions)} condition(s)",

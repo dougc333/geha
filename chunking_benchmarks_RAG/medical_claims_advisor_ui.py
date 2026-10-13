@@ -32,6 +32,12 @@ try:  # Support Streamlit execution from the repository root or this directory.
         DEFAULT_EMBEDDING_MODEL,
         load_embedding_model,
     )
+    from .policy_paths import (
+        POLICY_ARTIFACT_DIR,
+        POLICY_PDF_DIR,
+        document_file,
+        document_files,
+    )
 except ImportError:  # pragma: no cover - Streamlit direct-script execution
     from billing_code_data import requested_billing_codes
     from medical_claims_advisor import (
@@ -55,10 +61,16 @@ except ImportError:  # pragma: no cover - Streamlit direct-script execution
         DEFAULT_EMBEDDING_MODEL,
         load_embedding_model,
     )
+    from policy_paths import (
+        POLICY_ARTIFACT_DIR,
+        POLICY_PDF_DIR,
+        document_file,
+        document_files,
+    )
 
 
 st.set_page_config(page_title="Medical Claims Policy Advisor", page_icon="🩺")
-POLICY_DIR = Path(__file__).resolve().parents[1] / "downloads" / "coverage-policies"
+POLICY_DIR = POLICY_ARTIFACT_DIR
 POLICY_CHUNK_SUFFIX = ".docling_chunks.md"
 
 
@@ -67,8 +79,8 @@ def policy_name_qc_terms() -> list[str]:
     prefix = "geha-coverage-policy-"
     return [
         path.name.removeprefix(prefix).removesuffix(POLICY_CHUNK_SUFFIX)
-        for path in sorted(POLICY_DIR.glob(f"{prefix}*{POLICY_CHUNK_SUFFIX}"))
-        if path.is_file()
+        for path in document_files(POLICY_DIR, POLICY_CHUNK_SUFFIX)
+        if path.name.startswith(prefix)
     ]
 
 
@@ -85,8 +97,8 @@ def render_policy_summary(summary: dict, key_prefix: str) -> None:
     source = summary["source"]
     stem = source.removesuffix(".pdf")
     assets = [
-        ("📕 GEHA policy PDF", POLICY_DIR / source, "application/pdf"),
-        ("📄 Extracted policy text", POLICY_DIR / f"{stem}.docling.md", "text/markdown"),
+        ("📕 GEHA policy PDF", POLICY_PDF_DIR / source, "application/pdf"),
+        ("📄 Extracted policy text", document_file(POLICY_DIR, stem, ".docling.md"), "text/markdown"),
     ]
     columns = st.columns(2)
     for index, (label, path, mime) in enumerate(assets):

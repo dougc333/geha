@@ -10,13 +10,14 @@ from chunking_benchmarks_RAG.billing_code_data import (
     requested_billing_codes,
 )
 from chunking_benchmarks_RAG.generate_billing_code_evals import generate
+from chunking_benchmarks_RAG.policy_paths import POLICY_ARTIFACT_DIR, document_file
 from chunking_benchmarks_RAG.medical_claims_advisor import (
     format_billing_code_matches,
     retrieve_billing_code_matches,
 )
 
 
-ROOT = Path(__file__).resolve().parents[1] / "downloads" / "coverage-policies"
+ROOT = POLICY_ARTIFACT_DIR
 
 
 class FakeConnection:
@@ -48,7 +49,9 @@ class BillingCodeTests(unittest.TestCase):
         self.assertEqual(code_tokens("J0881 (non-ESRD)"), ["J0881"])
 
     def test_docling_billing_rows_exclude_preference_and_revision_mentions(self):
-        rows = docling_billing_rows(ROOT / "geha-coverage-policy-bendamustine.docling.md")
+        rows = docling_billing_rows(
+            document_file(ROOT, "geha-coverage-policy-bendamustine", ".docling.md")
+        )
         self.assertEqual([row["code"] for row in rows], ["J9033", "J9034", "J9036", "J9056", "J9999"])
         self.assertTrue(all(row["table_name"] == "Billing codes" for row in rows))
 

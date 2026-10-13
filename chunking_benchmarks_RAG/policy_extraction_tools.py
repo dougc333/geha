@@ -19,13 +19,15 @@ from langchain_core.tools import tool
 try:  # Package import and direct execution from this directory.
     from .pdf_conversion import native_text_converter, require_embedded_text
     from .extract_pdf_tables_html import extract_pdf, ocr_table_converter
+    from .policy_paths import POLICY_ARTIFACT_DIR, POLICY_PDF_DIR
 except ImportError:  # pragma: no cover - direct-script execution
     from pdf_conversion import native_text_converter, require_embedded_text
     from extract_pdf_tables_html import extract_pdf, ocr_table_converter
+    from policy_paths import POLICY_ARTIFACT_DIR, POLICY_PDF_DIR
 
 
-POLICY_DIR = Path(__file__).resolve().parents[1] / "downloads" / "coverage-policies"
-REVIEW_DIR = POLICY_DIR / "extraction_review"
+POLICY_DIR = POLICY_PDF_DIR
+REVIEW_DIR = POLICY_ARTIFACT_DIR / "extraction_review"
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 
 

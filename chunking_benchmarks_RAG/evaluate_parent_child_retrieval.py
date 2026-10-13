@@ -15,6 +15,7 @@ try:
         load_embedding_model,
         retrieve_tables,
     )
+    from .policy_paths import POLICY_ARTIFACT_DIR, document_file
 except ImportError:  # pragma: no cover - direct CLI execution
     from table_rag import (
         DEFAULT_DATABASE_URL,
@@ -23,10 +24,11 @@ except ImportError:  # pragma: no cover - direct CLI execution
         load_embedding_model,
         retrieve_tables,
     )
+    from policy_paths import POLICY_ARTIFACT_DIR, document_file
 
 
 HERE = Path(__file__).resolve().parent
-POLICY_DIR = HERE.parent / "downloads" / "coverage-policies"
+POLICY_DIR = POLICY_ARTIFACT_DIR
 DEFAULT_EVALS = HERE / "parent_child_retrieval_evals.json"
 
 
@@ -46,7 +48,7 @@ def run_evaluation(
     results = []
     with connect(database_url) as connection:
         for case in cases:
-            source_path = POLICY_DIR / case["source"].replace(".pdf", ".docling.md")
+            source_path = document_file(POLICY_DIR, Path(case["source"]).stem, ".docling.md")
             lines = source_path.read_text(encoding="utf-8").splitlines()
             source_line = lines[case["docling_line"] - 1]
             source_verified = case["child_term"].casefold() in source_line.casefold()
