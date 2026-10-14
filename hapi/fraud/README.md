@@ -145,6 +145,50 @@ question ─► code steps ─► questions, p(yes) per provider ─► research
 is set, then `llm` when `ANTHROPIC_API_KEY` is set, and otherwise `rules`. Neither condition
 holds in this checkout, so every run below used `rules`.
 
+### Background: compile to workflow
+
+The source is Grep.ai's AgentRun post
+([x.com/MiguelriosEN](https://x.com/MiguelriosEN/status/2101029313906987422), Sept 2026):
+
+- **How it works:** a frontier agent does a repetitive job the expensive way and leaves traces
+  and notes. It then writes a workflow of typed steps:
+  - code for the mechanical steps;
+  - typed questions with calibrated probabilities for the decisions (Jev);
+  - small agents only where something must be looked up;
+  - escalation to the full agent.
+
+  A router sends most cases to the workflow.
+- **Their result:** on anti-money-laundering alerts the post reports $2.89 → $0.25 per alert,
+  accuracy 90% → 95%, and 98 of 100 cases handled by the workflow.
+- **The rule they give:** "Jev decides what a thing is; code decides what follows."
+
+**Is it an agent pattern?** At run time most cases are a *workflow*: code controls the flow,
+in the sense of Anthropic's "workflows vs agents" distinction. Only escalated cases run as an
+agent. The agentic part is the authoring: the agent induces the workflow from its own traces.
+
+| Related pattern | Example |
+|---|---|
+| Workflow induction | Agent Workflow Memory (Wang et al., 2024) |
+| Automated workflow generation | AFlow (2024) |
+| Skill library | Voyager (2023); this repo's `../self-improving-agents` learned tools |
+| Program compilation | DSPy; this repo's `dspy_dental_chatbot` `optimize_router.py` |
+| Cascade / router with fallback | FrugalGPT (2023) |
+| Separating decisions from actions | 12-Factor Agents |
+
+Inside the compiled workflow are the building blocks from Anthropic's "Building effective
+agents":
+
+- routing: triage of each provider by the questions;
+- parallelization: one question per flagged provider;
+- evaluator-optimizer: the research step checks uncertain answers;
+- orchestrator-workers: escalation to the full agent.
+
+**How this repo maps onto it.** `../self-improving-agents` already does the skill-library half:
+it learns tools and lessons, but the agent still runs every case. This mode adds the other
+half, induction and routing. The agent steps (research, escalation) run under
+`agent_permissions`' `PermissionMiddleware` with `fraud_policy`, which is AgentRun's "tightest
+tool grants per step": the research sub-agent is given only `fhir_search` and `fhir_read`.
+
 ### Files
 
 | File | Role |
@@ -222,6 +266,8 @@ then innocent providers accused.
   instead of five. The agent alone found 11/13.
   - The level-4 figure is the saved agent run, not a routed run: routed mode hands the agent
     the workflow's leads, and that has not been run with a real model.
+- **API spend for this evaluation: $0.00** (budget cap $5). No paid model call was made: the
+  agent column reuses saved runs, and the workflow runs used the offline classifier.
 - **Cost:** a workflow run here is 0 tokens and about 7 s, against 140k-357k tokens and 70-86 s
   for the agent. With the `llm` classifier, add roughly 5-10 short Haiku calls per run, plus
   research calls for uncertain items. That has not been measured.
