@@ -156,7 +156,7 @@ Both use LangGraph (`StateGraph`: `agent` node where Claude picks tools, `tools_
 router, `ToolNode` that runs them over MCP) and `langchain-mcp-adapters` to load MCP tools.
 
 ```bash
-pip install langgraph langchain-anthropic langchain-mcp-adapters   # Python 3.12
+pip install langchain langgraph langchain-anthropic langchain-mcp-adapters   # Python 3.12
 export ANTHROPIC_API_KEY=...
 ```
 

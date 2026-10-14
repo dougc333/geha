@@ -9,6 +9,7 @@ providers or schemes to look for. Events (dicts) are passed to `emit` as they ha
   text        text Claude writes between tool calls
   tool_call   tool chosen and its arguments
   tool_result preview of the result, size, duration, error flag
+  tool_result also sent (is_error, denied=True) for a call PermissionMiddleware refused
   final       the report, plus parsed findings JSON if present
   done / error
 """
@@ -23,16 +24,20 @@ import time
 from pathlib import Path
 from typing import Awaitable, Callable
 
+import sys
+
+from langchain.agents import create_agent
 from langchain_anthropic import ChatAnthropic
-from langchain_core.messages import SystemMessage
 from langchain_core.tools import BaseTool, StructuredTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
-from langgraph.graph import START, MessagesState, StateGraph
-from langgraph.prebuilt import ToolNode, tools_condition
 
 from tools import ANALYTIC_TOOLS
 
 HAPI = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(HAPI.parent))  # the repo root, for agent_permissions
+from agent_permissions import EVENT, PermissionMiddleware  # noqa: E402
+from agent_permissions.policies import self_improving_policy  # noqa: E402
+from langchain.agents.middleware import AgentMiddleware, ModelResponse  # noqa: E402
 # Models the agent can run on (ladder.py --model, the app's dropdown). "nous" is Nous
 # Research's Portal (OpenAI-compatible; Hermes models): set NOUS_API_KEY, and optionally
 # NOUS_MODEL / NOUS_BASE_URL. result_chars is the cap on each tool result, smaller where the
@@ -194,31 +199,43 @@ class NoReport(RuntimeError):
     """The run ended without a findings block, so it cannot be scored."""
 
 
-def build(tools: list, model_name: str = DEFAULT_MODEL, lessons: str = ""):
-    model = chat_model(model_name).bind_tools(tools)
-    system = SYSTEM + (LESSONS_HEADER + lessons.strip() if lessons.strip() else "")
+class RetryModelReplies(AgentMiddleware):
+    """Retries the model call on a dropped connection (transient()) or an unusable reply
+    (unusable()), up to MODEL_ATTEMPTS, as the hand-built agent node did. Not
+    ModelRetryMiddleware: that one only retries exceptions, and an empty or cut-off reply
+    isn't one."""
 
-    async def agent(state: MessagesState):
-        messages = [SystemMessage(system), *state["messages"]]
+    async def awrap_model_call(self, request, handler):
         for attempt in range(1, MODEL_ATTEMPTS + 1):
             try:
-                reply = await model.ainvoke(messages)
+                response = await handler(request)
             except Exception as exc:
                 if attempt == MODEL_ATTEMPTS or not transient(exc):
                     raise
                 await asyncio.sleep(5 * attempt)
                 continue
+            reply = response.result[-1] if isinstance(response, ModelResponse) else response
             if not unusable(reply) or attempt == MODEL_ATTEMPTS:
-                return {"messages": [reply]}
+                return response
         raise AssertionError("unreachable")
 
-    graph = StateGraph(MessagesState)
-    graph.add_node("agent", agent)
-    graph.add_node("tools", ToolNode(tools))
-    graph.add_edge(START, "agent")
-    graph.add_conditional_edges("agent", tools_condition)
-    graph.add_edge("tools", "agent")
-    return graph.compile()
+
+def learned_names(statuses: tuple[str, ...] = ("approved",)) -> list[str]:
+    import learned
+    return [name for name, entry in learned.registry().items() if entry["status"] in statuses]
+
+
+def build(tools: list, model_name: str = DEFAULT_MODEL, lessons: str = "",
+          learned_statuses: tuple[str, ...] = ("approved",), model=None):
+    """The model/tools loop (create_agent). Each tool call passes PermissionMiddleware first:
+    FHIR reads, the analytics and the learned tools with `learned_statuses` are allowed;
+    anything else would need a person, and these runs have none, so it is refused and the
+    agent is told why. Tool retries and result caps stay in capped(), inside each tool."""
+    system = SYSTEM + (LESSONS_HEADER + lessons.strip() if lessons.strip() else "")
+    permissions = PermissionMiddleware(self_improving_policy(learned_names(learned_statuses)),
+                                       agent_name="self-improving")
+    return create_agent(model or chat_model(model_name), tools, system_prompt=system,
+                        middleware=[RetryModelReplies(), permissions], name="self-improving")
 
 
 def parse_findings(text: str) -> list[dict] | None:
@@ -247,7 +264,7 @@ async def investigate(question: str, emit: Emit, model_name: str = DEFAULT_MODEL
                 "lessons": lessons.strip(),
                 "tools": [{"name": t.name, "source": tool_source(t.name),
                            "description": (t.description or "").split("\n")[0][:200]} for t in tools]})
-    app = build(tools, model_name, lessons)
+    app = build(tools, model_name, lessons, learned_statuses)
     step, calls, tool_started, final_text = 0, 0, {}, ""
     usage = {"input_tokens": 0, "output_tokens": 0}
     async for event in app.astream_events({"messages": [("user", question)]}, version="v2",
@@ -275,6 +292,14 @@ async def investigate(question: str, emit: Emit, model_name: str = DEFAULT_MODEL
                 calls += 1
                 await emit({"type": "tool_call", "step": step, "call_id": call["id"], "name": call["name"],
                             "source": tool_source(call["name"]), "args": call["args"]})
+        elif kind == "on_custom_event" and event["name"] == EVENT and event["data"]["decision"] != "allow":
+            # A refused call never starts the tool, so it gets no on_tool_end: report it here.
+            denied = event["data"]
+            text = f"Permission denied for {denied['tool']}: {denied['reason']}"
+            await emit({"type": "tool_result", "step": step, "call_id": denied["tool_call_id"] or "",
+                        "name": denied["tool"], "source": tool_source(denied["tool"]), "ms": 0,
+                        "is_error": True, "denied": True, "size": len(text), "preview": text[:1500],
+                        "truncated": False})
         elif kind == "on_tool_start":
             tool_started[event["run_id"]] = time.perf_counter()
         elif kind == "on_tool_end":

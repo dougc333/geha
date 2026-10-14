@@ -53,7 +53,7 @@ deployment offers. It asks a human before any write call with `confirm=true`.
 
 ```bash
 cd /Users/dc/geha/mcp_benefits_server/agent
-uv run --no-project --python 3.12 --with langchain-mcp-adapters --with langgraph \
+uv run --no-project --python 3.12 --with langchain-mcp-adapters --with langchain --with langgraph \
   --with langchain-anthropic python benefits_agent.py --model claude \
   "What would High Option Self and Family cost me in 64063, MO, and what class is D2740?"
 ```

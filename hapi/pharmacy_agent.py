@@ -24,6 +24,7 @@ from langchain_core.messages import AIMessage, ToolMessage
 from langchain_mcp_adapters.client import MultiServerMCPClient
 
 from langgraph_agent import build_graph
+from agent_permissions.policies import pharmacy_policy  # on sys.path via langgraph_agent
 
 HERE = Path(__file__).resolve().parent
 QUIET = {"PATH": os.environ["PATH"], "MCP_TRANSPORT_TYPE": "stdio", "MCP_LOG_LEVEL": "error"}
@@ -64,12 +65,12 @@ async def main() -> None:
         tools += [t for t in await client.get_tools(server_name=server) if t.name in allowed]
     print(f"Tools bound to Claude ({len(tools)}): {[t.name for t in tools]}\n\nQ: {question}\n")
 
-    app = build_graph(tools, system=SYSTEM)
+    app = build_graph(tools, system=SYSTEM, policy=pharmacy_policy(), name="pharmacy-agent")
     calls, final = 0, None
     async for update in app.astream({"messages": [("user", question)]}, stream_mode="updates",
                                     config={"recursion_limit": 100}):
         for output in update.values():
-            for message in output["messages"]:
+            for message in (output or {}).get("messages", []):
                 if isinstance(message, AIMessage) and message.tool_calls:
                     for call in message.tool_calls:
                         calls += 1

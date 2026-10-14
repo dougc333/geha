@@ -2,10 +2,11 @@
 """LangGraph version of mcp_agent_demo.py: Claude + the FHIR MCP server as a graph.
 
 The MCP server's tools are loaded with langchain-mcp-adapters (stdio) and the agent is
-an explicit LangGraph StateGraph, so the tool-selection step is visible:
+built with LangChain's create_agent, which compiles the same LangGraph loop:
 
-    START -> agent --(tools_condition)--> tools -> agent -> ... -> END
-             ^ Claude picks the tool       ^ ToolNode runs it over MCP
+    START -> model --(tool calls?)--> tools -> model -> ... -> END
+             ^ Claude picks the tool    ^ runs it over MCP, after PermissionMiddleware
+                                          checks the call against the agent's policy
 
 Only the read-only tools (fhir_search, fhir_read) are bound to the model. Synthetic
 (Synthea) data only.
@@ -19,13 +20,16 @@ import asyncio
 import sys
 from pathlib import Path
 
+from langchain.agents import create_agent
 from langchain_anthropic import ChatAnthropic
-from langchain_core.messages import AIMessage, SystemMessage, ToolMessage
+from langchain_core.messages import AIMessage, ToolMessage
 from langchain_mcp_adapters.client import MultiServerMCPClient
-from langgraph.graph import START, MessagesState, StateGraph
-from langgraph.prebuilt import ToolNode, tools_condition
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE.parent))  # the repo root, for agent_permissions
+from agent_permissions import PermissionMiddleware, Policy  # noqa: E402
+from agent_permissions.policies import fhir_agent_policy  # noqa: E402
+
 MODEL = "claude-opus-5-5"
 READ_ONLY_TOOLS = {"fhir_search", "fhir_read"}
 QUESTION = ("Which patients have type 2 diabetes? For each one, give their name, age, most "
@@ -38,22 +42,14 @@ SYSTEM = ("You answer questions about a FHIR R4 server that contains synthetic (
           "and say when something isn't in the data.")
 
 
-def build_graph(tools, system: str = SYSTEM):
-    """agent node: Claude decides (answer, or which tools to call with which arguments).
-    tools_condition: routes to the tools node if the reply has tool calls, else ends.
-    tools node: runs the chosen MCP tools and appends their results."""
-    model = ChatAnthropic(model=MODEL, max_tokens=16000).bind_tools(tools)
-
-    async def agent(state: MessagesState):
-        return {"messages": [await model.ainvoke([SystemMessage(system), *state["messages"]])]}
-
-    graph = StateGraph(MessagesState)
-    graph.add_node("agent", agent)
-    graph.add_node("tools", ToolNode(tools))
-    graph.add_edge(START, "agent")
-    graph.add_conditional_edges("agent", tools_condition)  # -> "tools" or END
-    graph.add_edge("tools", "agent")
-    return graph.compile()
+def build_graph(tools, system: str = SYSTEM, policy: Policy | None = None, model=None, name: str = "fhir-agent"):
+    """model node: Claude decides (answer, or which tools to call with which arguments).
+    If the reply has tool calls they go to the tools node, else the run ends.
+    tools node: PermissionMiddleware checks each call (policy: FHIR reads allowed, anything
+    else asks, which in this non-interactive script means denied), then runs it over MCP."""
+    model = model or ChatAnthropic(model=MODEL, max_tokens=16000)
+    permissions = PermissionMiddleware(policy or fhir_agent_policy(), agent_name=name)
+    return create_agent(model, tools, system_prompt=system, middleware=[permissions], name=name)
 
 
 async def main() -> None:
@@ -73,7 +69,7 @@ async def main() -> None:
     async for update in app.astream({"messages": [("user", question)]}, stream_mode="updates",
                                     config={"recursion_limit": 60}):
         for node, output in update.items():
-            for message in output["messages"]:
+            for message in (output or {}).get("messages", []):
                 if isinstance(message, AIMessage) and message.tool_calls:
                     for call in message.tool_calls:
                         calls += 1

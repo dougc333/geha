@@ -1,7 +1,7 @@
 """Agent tests against the real MCP server (stdio subprocess) with a scripted model: no LLM calls.
 
     cd /Users/dc/geha/mcp_benefits_server/agent
-    uv run --no-project --python 3.12 --with langchain-mcp-adapters --with langgraph \
+    uv run --no-project --python 3.12 --with langchain-mcp-adapters --with langchain --with langgraph \
         python -m unittest test_benefits_agent -v
 """
 

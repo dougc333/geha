@@ -1,0 +1,24 @@
+# Example file policy (load with agent_permissions.load_policy). First matching rule wins.
+# tool / agent / arg patterns are globs, or regexes when prefixed with "re:".
+# An arg pattern of true/false matches the argument's truth value; null matches "absent".
+default: ask
+rules:
+  - tool: "*"
+    decision: deny
+    reason: argument points at secrets
+    args: {path: "re:(^|/)(\\.env|\\.ssh)"}
+  - tool: "re:^fhir_(search|read)$"
+    decision: allow
+    reason: FHIR read
+  - tool: "re:^fhir_(create|update|patch|delete)$"
+    decision: ask
+    reason: FHIR write
+  - tool: submit_enrollment_change
+    decision: ask
+    args: {confirm: true}
+    reason: submits an enrollment change
+    message: The member declined; nothing was submitted.
+  - tool: shell
+    decision: ask
+    agent: "fraud*"
+    reason: shell from an investigator agent

@@ -11,5 +11,5 @@ for var in ANTHROPIC_API_KEY OPENAI_API_KEY NOUS_API_KEY NOUS_KEY; do
   fi
 done
 exec uv run -q --no-project --python 3.12 \
-  --with langgraph --with langchain-anthropic --with langchain-openai --with langchain-mcp-adapters --with fastapi --with uvicorn \
+  --with langchain --with langgraph --with langchain-anthropic --with langchain-openai --with langchain-mcp-adapters --with fastapi --with uvicorn \
   python server.py
