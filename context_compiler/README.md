@@ -72,6 +72,22 @@ short and a long summary, written once when the event is added.
 The scorer is a word-overlap rule that stands in for Jev or Haiku. User messages
 are always shown in full. v1 also always shows the last two events in full.
 
+## Does each event have its own prompt?
+
+No. Each event has its **own data** (full text, short summary, long summary) but goes
+through the **same prompts**. There are three steps, and each uses one shared mechanism
+for every event:
+
+| Step | What happens in the demo | In a real system |
+|---|---|---|
+| **Writing summaries** (once, when an event is added) | The short and long summaries are written by hand in the scripted scenario | One summarising prompt, given the event's raw text and returning a short and a long summary. You might have one template per event *type*, so a pytest log keeps the failures, a file read keeps the signatures, and a grep keeps the matching file and line. Not one per event. |
+| **Scoring** (every call in v1, once per event in v2) | One rule function, `score(event, query)`, based on word overlap | One shared prompt or Jev `Choice`: "given this query and this event's summary, how much does the agent need: hide, short, long or full?" The query and event go in as data. |
+| **Rendering** | One fixed template: `[id kind level]` followed by the text at that level | The same. Using one template is also what keeps blocks identical from call to call, so the KV cache keeps working. |
+
+Per-type summary templates are worth adding, because what counts as "key lines" differs
+a lot between a test log, a source file and a grep result. A prompt per individual event
+would cost a model call to write and would make the scorer's output harder to predict.
+
 ## Why the KV cache decides the result
 
 Anthropic's prompt cache is the model's KV cache, kept by the provider. When a prompt
