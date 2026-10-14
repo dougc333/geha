@@ -214,4 +214,12 @@ difficulty levels, and `fraud/ladder.py` runs the agent on each and scores it by
 - Levels 1-3 map onto the analytics tools, so 4 and 5 are the fairer tests. The agent
   describes schemes in its own words. About $6 of Claude usage per pass.
 
+**Learn, then compile.** `fraud/compile_workflow.py` turns graded agent runs and their notes
+into a fixed workflow (`fraud/workflow_spec.json`). It has code checks, typed yes/no questions
+with probabilities, a FHIR-read-only research sub-agent for uncertain cases, and a router that
+escalates to the full agent (`ladder.py --mode agent|workflow|routed`). Offline, with no model
+calls, the workflow matched or beat the agent on levels 1-3 and 5 in about 7 s. It escalated
+level 4, whose schemes it does not cover. Those results are in-sample; caveats are in the fraud
+README.
+
 Details, caveats and how to run it: [`fraud/README.md`](fraud/README.md).

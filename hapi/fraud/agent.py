@@ -11,7 +11,10 @@ providers or schemes to look for. Events (dicts) are passed to `emit` as they ha
   tool_result preview of the result, size, duration, error flag
   tool_result also sent (is_error, denied=True) for a call PermissionMiddleware refused
   final       the report, plus parsed findings JSON if present
+  note        learning mode only (ladder.py --learn): the agent's note on its own run
   done / error
+
+The workflow modes (workflow.py) emit the same events, plus workflow_node records.
 """
 
 from __future__ import annotations
@@ -182,18 +185,15 @@ def parse_findings(text: str) -> list[dict] | None:
     return None
 
 
-async def investigate(question: str, emit: Emit, model_name: str = DEFAULT_MODEL) -> None:
-    started = time.perf_counter()
-    spec = MODELS[model_name]
-    tools = await load_tools(spec["result_chars"])
-    await emit({"type": "run_start", "question": question, "model": spec["model"], "model_option": model_name,
-                "tools": [{"name": t.name, "source": tool_source(t.name),
-                           "description": (t.description or "").split("\n")[0][:200]} for t in tools]})
-    app = build(tools, model_name)
-    step, calls, tool_started, final_text = 0, 0, {}, ""
+async def stream_agent(app, question: str, emit: Emit, step0: int = 0, recursion_limit: int = 80) -> dict:
+    """Runs a create_agent app on one question and emits its thinking, text, tool calls and
+    results as trace events (steps numbered after step0). Returns the final text, model
+    steps, tool calls, token usage and the tool-call log (for the learning note)."""
+    step, calls, tool_started, final_text = step0, 0, {}, ""
     usage = {"input_tokens": 0, "output_tokens": 0}
+    log: dict[str, dict] = {}
     async for event in app.astream_events({"messages": [("user", question)]}, version="v2",
-                                          config={"recursion_limit": 80}):
+                                          config={"recursion_limit": recursion_limit}):
         kind = event["event"]
         if kind == "on_chat_model_end":
             message = event["data"]["output"]
@@ -215,6 +215,7 @@ async def investigate(question: str, emit: Emit, model_name: str = DEFAULT_MODEL
                         final_text = block["text"].strip()
             for call in message.tool_calls:
                 calls += 1
+                log[call["id"]] = {"step": step, "name": call["name"], "args": call["args"]}
                 await emit({"type": "tool_call", "step": step, "call_id": call["id"], "name": call["name"],
                             "source": tool_source(call["name"]), "args": call["args"]})
         elif kind == "on_custom_event" and event["name"] == EVENT and event["data"]["decision"] != "allow":
@@ -234,11 +235,68 @@ async def investigate(question: str, emit: Emit, model_name: str = DEFAULT_MODEL
             text = getattr(output, "content", output)
             text = text if isinstance(text, str) else json.dumps(text, default=str)
             status = getattr(output, "status", "success")
+            if output.tool_call_id in log:
+                log[output.tool_call_id].update(size=len(text), head=text[:200])
             await emit({"type": "tool_result", "step": step, "call_id": getattr(output, "tool_call_id", ""),
                         "name": event["name"], "source": tool_source(event["name"]),
                         "ms": round((time.perf_counter() - tool_started.pop(event["run_id"], time.perf_counter())) * 1000),
                         "is_error": status == "error", "size": len(text), "preview": text[:1500],
                         "truncated": "[TRUNCATED: the result was" in text})
-    await emit({"type": "final", "text": final_text, "findings": parse_findings(final_text)})
-    await emit({"type": "done", "tool_calls": calls, "model_steps": step,
+    return {"final_text": final_text, "model_steps": step - step0, "tool_calls": calls, "usage": usage,
+            "log": list(log.values())}
+
+
+NOTE_PROMPT = """You just finished the investigation below. Write a short learning note for the
+person who will turn many such investigations into a fixed workflow (code for the mechanical
+checks, yes/no questions for the decisions, small look-ups only where needed).
+
+Reply with only this JSON:
+{"evidence_tools": ["tools whose results gave the evidence you reported"],
+ "wasted": ["calls that told you nothing new, and why (one line each)"],
+ "wish_known_first": "what you wish you had known or checked first",
+ "least_sure": "the conclusion you are least sure of, and what would settle it"}"""
+
+
+async def write_note(model_name: str, question: str, run: dict, model=None) -> dict:
+    """Learning mode: one extra model call in which the agent reviews its own tool-call log
+    and report. Returns the note (dict) with the call's token usage."""
+    calls = "\n".join(f"{c['step']}. {c['name']} {json.dumps(c['args'])[:200]} -> {c.get('size', 0)} chars: "
+                       f"{c.get('head', '')[:120]!r}" for c in run["log"])
+    reply = await (model or chat_model(model_name)).ainvoke([
+        ("system", NOTE_PROMPT),
+        ("user", f"QUESTION\n{question}\n\nTOOL CALLS\n{calls[:20000]}\n\nYOUR REPORT\n{run['final_text'][:8000]}")])
+    text = as_text(reply.content if not isinstance(reply.content, list)
+                   else [b for b in reply.content if isinstance(b, dict) and b.get("type") == "text"])
+    match = re.search(r"\{.*\}", text, re.S)
+    try:
+        note = json.loads(match.group(0)) if match else {}
+    except json.JSONDecodeError:
+        note = {}
+    note = note if isinstance(note, dict) and note else {"raw": text[:2000]}
+    meta = getattr(reply, "usage_metadata", None) or {}
+    return {**note, "usage": {"input_tokens": meta.get("input_tokens", 0), "output_tokens": meta.get("output_tokens", 0)}}
+
+
+async def investigate(question: str, emit: Emit, model_name: str = DEFAULT_MODEL, learn: bool = False,
+                      announce: bool = True, step0: int = 0) -> dict:
+    """The full agent. learn=True adds a learning note (a `note` event, one more model call)
+    after the report. announce=False skips run_start, for a run handed over from the
+    workflow router, which has already announced the run."""
+    started = time.perf_counter()
+    spec = MODELS[model_name]
+    tools = await load_tools(spec["result_chars"])
+    if announce:
+        await emit({"type": "run_start", "question": question, "model": spec["model"], "model_option": model_name,
+                    "tools": [{"name": t.name, "source": tool_source(t.name),
+                               "description": (t.description or "").split("\n")[0][:200]} for t in tools]})
+    run = await stream_agent(build(tools, model_name), question, emit, step0)
+    usage = dict(run["usage"])
+    await emit({"type": "final", "text": run["final_text"], "findings": parse_findings(run["final_text"])})
+    if learn:
+        note = await write_note(model_name, question, run)
+        for k in usage:
+            usage[k] += note["usage"][k]
+        await emit({"type": "note", "source": "agent", **note})
+    await emit({"type": "done", "tool_calls": run["tool_calls"], "model_steps": run["model_steps"],
                 "seconds": round(time.perf_counter() - started, 1), "usage": usage})
+    return run

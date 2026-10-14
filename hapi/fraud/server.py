@@ -3,7 +3,9 @@
 
     python server.py            # http://localhost:8765 (serves ui/dist when built)
 
-POST /api/runs {question}        start a run, returns {run_id}
+POST /api/runs {question, model, mode}   start a run, returns {run_id}; mode is agent (default),
+                                 workflow (the compiled workflow_spec.json) or routed (workflow,
+                                 then the full agent when the workflow is unsure); see workflow.py
 GET  /api/runs                   saved runs (newest first)
 GET  /api/runs/{id}/events       Server-Sent Events: every event so far, then live ones
 GET  /api/answer_key             the planted schemes (for scoring in the UI)
@@ -16,6 +18,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 import traceback
 import uuid
 from datetime import datetime, timezone
@@ -27,7 +30,9 @@ from fastapi.responses import FileResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
+import workflow
 from agent import DEFAULT_MODEL, MODELS, QUESTION, investigate
+from questions import make_classifier
 from scoring import score
 
 HERE = Path(__file__).resolve().parent
@@ -42,6 +47,7 @@ runs: dict[str, dict] = {}
 class RunRequest(BaseModel):
     question: str = Field(default=QUESTION, min_length=5, max_length=2000)
     model: str = Field(default=DEFAULT_MODEL, pattern="^[a-z0-9_-]{1,32}$")
+    mode: str = Field(default="agent", pattern="^(agent|workflow|routed)$")
 
 
 async def execute(run_id: str) -> None:
@@ -54,7 +60,15 @@ async def execute(run_id: str) -> None:
 
     key = load_key()
     try:
-        await investigate(run["question"], emit, run["model"])
+        if run["mode"] == "agent":
+            await investigate(run["question"], emit, run["model"])
+        else:  # the research sub-agent runs on Haiku when a key is set; without one, uncertain items stay uncertain
+            research = "haiku" if os.getenv("ANTHROPIC_API_KEY") else None
+            if run["mode"] == "workflow":
+                await workflow.run_workflow(run["question"], emit, workflow.load_spec(), make_classifier(), research)
+            else:
+                await workflow.run_routed(run["question"], emit, workflow.load_spec(), make_classifier(), research,
+                                          agent_model=run["model"])
     except Exception as exc:  # the UI shows the error; the trace is still saved
         await emit({"type": "error", "message": f"{type(exc).__name__}: {exc}",
                     "detail": traceback.format_exc()[-2000:]})
@@ -67,7 +81,9 @@ async def execute(run_id: str) -> None:
         (TRACES / f"{run_id}.json").write_text(json.dumps({
             "run_id": run_id, "question": run["question"], "started": run["started"].isoformat(),
             "level": key.get("level") if key else None, "level_title": key.get("title") if key else None,
-            "agent": "graph" if run["model"] == DEFAULT_MODEL else f"graph/{MODELS[run['model']]['model']}",
+            "agent": run["mode"] if run["mode"] != "agent" else
+                     "graph" if run["model"] == DEFAULT_MODEL else f"graph/{MODELS[run['model']]['model']}",
+            "mode": run["mode"],
             "model": MODELS[run["model"]]["model"], "events": run["events"]}, indent=1, default=str))
 
 
@@ -76,7 +92,7 @@ async def start_run(request: RunRequest) -> dict:
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ") + "-" + uuid.uuid4().hex[:6]
     if request.model not in MODELS:
         raise HTTPException(422, f"unknown model '{request.model}'; choose one of {sorted(MODELS)}")
-    runs[run_id] = {"question": request.question, "model": request.model, "events": [], "done": False,
+    runs[run_id] = {"question": request.question, "model": request.model, "mode": request.mode, "events": [], "done": False,
                     "changed": asyncio.Event(), "started": datetime.now(timezone.utc)}
     asyncio.create_task(execute(run_id))
     return {"run_id": run_id}
@@ -97,6 +113,7 @@ def summarize(data: dict) -> dict:
     scored = next((e for e in events if e["type"] == "score"), None)
     return {"run_id": data["run_id"], "started": data.get("started"), "question": data["question"][:160],
             "level": data.get("level"), "level_title": data.get("level_title"), "agent": data.get("agent"),
+            "mode": data.get("mode", "agent"),
             "status": "error" if error else ("done" if done else "incomplete"),
             "error": error["message"][:300] if error else None,
             "model_steps": done.get("model_steps") or max((e.get("step", 0) for e in events), default=0),
@@ -121,7 +138,8 @@ async def stream_events(run_id: str) -> StreamingResponse:
         if not path.exists():
             raise HTTPException(404, "unknown run")
         saved = json.loads(path.read_text())
-        runs[run_id] = {"question": saved["question"], "model": DEFAULT_MODEL, "events": saved["events"], "done": True,
+        runs[run_id] = {"question": saved["question"], "model": DEFAULT_MODEL, "mode": saved.get("mode", "agent"),
+                        "events": saved["events"], "done": True,
                         "changed": asyncio.Event(), "started": datetime.fromisoformat(saved["started"])}
 
     async def events():
@@ -165,7 +183,6 @@ def default_question() -> dict:
 @app.get("/api/models")
 def models() -> dict:
     """Model options for the UI, and whether each one's API key is configured."""
-    import os
     return {"default": DEFAULT_MODEL, "models": [
         {"id": name, "model": spec["model"],
          "available": bool(os.getenv(spec.get("api_key_env", "ANTHROPIC_API_KEY"))
