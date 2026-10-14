@@ -9,6 +9,7 @@ providers or schemes to look for. Events (dicts) are passed to `emit` as they ha
   text        text Claude writes between tool calls
   tool_call   tool chosen and its arguments
   tool_result preview of the result, size, duration, error flag
+  tool_result also sent (is_error, denied=True) for a call PermissionMiddleware refused
   final       the report, plus parsed findings JSON if present
   done / error
 """
@@ -23,16 +24,19 @@ import time
 from pathlib import Path
 from typing import Awaitable, Callable
 
+import sys
+
+from langchain.agents import create_agent
 from langchain_anthropic import ChatAnthropic
-from langchain_core.messages import SystemMessage
 from langchain_core.tools import BaseTool, StructuredTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
-from langgraph.graph import START, MessagesState, StateGraph
-from langgraph.prebuilt import ToolNode, tools_condition
 
 from tools import ANALYTIC_TOOLS
 
 HAPI = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(HAPI.parent))  # the repo root, for agent_permissions
+from agent_permissions import EVENT, PermissionMiddleware  # noqa: E402
+from agent_permissions.policies import fraud_policy  # noqa: E402
 # Models the agent can run on (ladder.py --model, the app's dropdown). "nous" is Nous
 # Research's Portal (OpenAI-compatible; Hermes models): set NOUS_API_KEY, and optionally
 # NOUS_MODEL / NOUS_BASE_URL. result_chars is the cap on each tool result, smaller where the
@@ -151,19 +155,14 @@ def chat_model(name: str):
                       **spec["kwargs"])
 
 
-def build(tools: list, model_name: str = DEFAULT_MODEL):
-    model = chat_model(model_name).bind_tools(tools)
-
-    async def agent(state: MessagesState):
-        return {"messages": [await model.ainvoke([SystemMessage(SYSTEM), *state["messages"]])]}
-
-    graph = StateGraph(MessagesState)
-    graph.add_node("agent", agent)
-    graph.add_node("tools", ToolNode(tools))
-    graph.add_edge(START, "agent")
-    graph.add_conditional_edges("agent", tools_condition)
-    graph.add_edge("tools", "agent")
-    return graph.compile()
+def build(tools: list, model_name: str = DEFAULT_MODEL, model=None):
+    """The model/tools loop (create_agent). Each tool call passes PermissionMiddleware first:
+    FHIR reads and the analytics are allowed; anything else would need a person, and runs
+    from the server or ladder have none, so it is refused and the agent is told why.
+    Tool retries and result caps stay in capped(), inside each tool."""
+    permissions = PermissionMiddleware(fraud_policy(), agent_name="fraud")
+    return create_agent(model or chat_model(model_name), tools, system_prompt=SYSTEM,
+                        middleware=[permissions], name="fraud")
 
 
 def parse_findings(text: str) -> list[dict] | None:
@@ -218,6 +217,14 @@ async def investigate(question: str, emit: Emit, model_name: str = DEFAULT_MODEL
                 calls += 1
                 await emit({"type": "tool_call", "step": step, "call_id": call["id"], "name": call["name"],
                             "source": tool_source(call["name"]), "args": call["args"]})
+        elif kind == "on_custom_event" and event["name"] == EVENT and event["data"]["decision"] != "allow":
+            # A refused call never starts the tool, so it gets no on_tool_end: report it here.
+            denied = event["data"]
+            text = f"Permission denied for {denied['tool']}: {denied['reason']}"
+            await emit({"type": "tool_result", "step": step, "call_id": denied["tool_call_id"] or "",
+                        "name": denied["tool"], "source": tool_source(denied["tool"]), "ms": 0,
+                        "is_error": True, "denied": True, "size": len(text), "preview": text[:1500],
+                        "truncated": False})
         elif kind == "on_tool_start":
             tool_started[event["run_id"]] = time.perf_counter()
         elif kind == "on_tool_end":

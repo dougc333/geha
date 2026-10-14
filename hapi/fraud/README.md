@@ -22,7 +22,7 @@ python3 seed_fraud.py --level 1                       # plant level 1 (see the l
 ./run_server.sh                                       # http://localhost:8765  (needs ANTHROPIC_API_KEY)
 ```
 
-`run_server.sh` uses `uv` to run the server with langgraph, langchain-anthropic,
+`run_server.sh` uses `uv` to run the server with langchain, langgraph, langchain-anthropic,
 langchain-mcp-adapters, fastapi and uvicorn, and reads `ANTHROPIC_API_KEY` from the
 environment (or `../../bill_lading/.env`). For UI development, `cd ui && npm run dev`
 (port 5173, proxies `/api` to 8765). `python3 seed_fraud.py --reset` removes the planted

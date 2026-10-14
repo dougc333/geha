@@ -1,4 +1,4 @@
-"""A LangGraph agent that answers GEHA dental benefit questions using only the MCP server's tools.
+"""A LangChain agent (create_agent, on LangGraph) that answers GEHA dental benefit questions using only the MCP server's tools.
 
 The agent never sees tool code: it connects to one MCP deployment, lists the tools that
 deployment offers (production by default), and calls them. Locally the server runs as a
@@ -12,8 +12,12 @@ subprocess over stdio; once deployed, point --server-url at its HTTPS endpoint i
     # a deployed server
     python benefits_agent.py --server-url https://<function-url>/mcp "..."
 
+Every tool call passes PermissionMiddleware (agent_permissions/ at the repo root) with
+benefits_policy(): reads are allowed, submit_enrollment_change with confirm=true asks the
+member, and any tool the policy doesn't know is refused (there is no one else to ask).
+
 Run with uv so nothing is installed into the repo's environment:
-    uv run --no-project --python 3.12 --with langchain-mcp-adapters --with langgraph \
+    uv run --no-project --python 3.12 --with langchain-mcp-adapters --with langchain --with langgraph \
         --with langchain-ollama python benefits_agent.py ...
 """
 
@@ -29,10 +33,13 @@ from pathlib import Path
 from typing import Any, Callable
 
 import httpx
-from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
+from langchain.agents import create_agent
+from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 from langchain_mcp_adapters.client import MultiServerMCPClient
-from langgraph.graph import START, MessagesState, StateGraph
-from langgraph.prebuilt import ToolNode, tools_condition
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # the repo root, for agent_permissions
+from agent_permissions import PermissionMiddleware  # noqa: E402
+from agent_permissions.policies import benefits_policy  # noqa: E402
 
 SERVER = Path(__file__).resolve().parents[1] / "src" / "server.py"
 SYSTEM = """You are a GEHA 2026 dental benefits assistant for federal members.
@@ -41,7 +48,6 @@ only from tool results, never from memory or your own arithmetic. Cite the sourc
 returns. If no tool can answer, say so plainly. You cannot see member records unless a tool
 offers them, and you never submit an enrollment change without the member's explicit approval.
 Not affiliated with G.E.H.A; for official answers members should contact GEHA or BENEFEDS."""
-WRITE_TOOLS = {"submit_enrollment_change"}
 Approve = Callable[[str, dict], bool]
 
 
@@ -103,41 +109,14 @@ def chat_model(name: str):
     raise ValueError("--model must be ollama:<model>, claude or openai")
 
 
-def approval_gate(approve: Approve):
-    """Client-side human-in-the-loop: a write call with confirm=true runs only if a human says yes.
-    The server also refuses to act without confirm=true, so the two layers back each other up."""
-    async def gate(state: MessagesState) -> dict:
-        last = state["messages"][-1]
-        denied = []
-        for call in getattr(last, "tool_calls", []):
-            if call["name"] in WRITE_TOOLS and call["args"].get("confirm") and not approve(call["name"], call["args"]):
-                denied.append(ToolMessage("The member declined; nothing was submitted.", tool_call_id=call["id"]))
-        if denied:
-            kept = [c for c in last.tool_calls if c["id"] not in {m.tool_call_id for m in denied}]
-            return {"messages": [last.model_copy(update={"tool_calls": kept}), *denied]} if kept else {"messages": denied}
-        return {"messages": []}
-    return gate
-
-
 def build_agent(model, tools: list, approve: Approve):
-    bound = model.bind_tools(tools)
-
-    async def agent(state: MessagesState):
-        return {"messages": [await bound.ainvoke([SystemMessage(SYSTEM), *state["messages"]])]}
-
-    def after_gate(state: MessagesState) -> str:
-        last = state["messages"][-1]
-        return "tools" if getattr(last, "tool_calls", None) else "agent"
-
-    graph = StateGraph(MessagesState)
-    graph.add_node("agent", agent)
-    graph.add_node("approval", approval_gate(approve))
-    graph.add_node("tools", ToolNode(tools))
-    graph.add_edge(START, "agent")
-    graph.add_conditional_edges("agent", tools_condition, {"tools": "approval", "__end__": "__end__"})
-    graph.add_conditional_edges("approval", after_gate, ["tools", "agent"])
-    graph.add_edge("tools", "agent")
-    return graph.compile()
+    """Client-side human-in-the-loop: the policy marks a write call with confirm=true as ASK,
+    and PermissionMiddleware runs it only if `approve` says yes; otherwise the model is told
+    "The member declined; nothing was submitted." The server also refuses to act without
+    confirm=true, so the two layers back each other up."""
+    permissions = PermissionMiddleware(benefits_policy(), agent_name="benefits",
+                                       approver=lambda name, args, reason: approve(name, args))
+    return create_agent(model, tools, system_prompt=SYSTEM, middleware=[permissions], name="benefits")
 
 
 async def ask(question: str, model, *, environment: str = "production", server_url: str | None = None,
