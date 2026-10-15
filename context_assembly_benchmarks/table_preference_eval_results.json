@@ -1,0 +1,2420 @@
+{
+  "generated_at": "2026-09-14T00:01:20.689456+00:00",
+  "configuration": {
+    "eval_file": "/Users/dc/geha/chunking_benchmarks/table_preference_evals.json",
+    "embedding_model": "BAAI/bge-small-en-v1.5",
+    "top_tables": 5,
+    "candidate_rows": 20,
+    "answer_mode": "deterministic extraction from the top retrieved table"
+  },
+  "summary": {
+    "cases": 34,
+    "source_recall_at_1": 0.9117647058823529,
+    "source_recall_at_3": 0.9705882352941176,
+    "source_recall_at_5": 1.0,
+    "table_recall_at_1": 0.8235294117647058,
+    "table_recall_at_3": 0.9411764705882353,
+    "table_recall_at_5": 0.9705882352941176,
+    "answer_exact_match": 0.8235294117647058,
+    "mean_product_recall": 0.8235294117647058
+  },
+  "results": [
+    {
+      "id": "bendamustine_preferred",
+      "query": "Which bendamustine products are preferred?",
+      "preference": "preferred",
+      "expected_source": "geha-coverage-policy-bendamustine.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Treanda",
+        "Bendamustine 505(b)(2) Dr Reddy's"
+      ],
+      "top_result_source": "geha-coverage-policy-bendamustine.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.7430357405277288,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Treanda",
+        "Bendamustine 505(b)(2) Dr Reddy's"
+      ],
+      "product_score": {
+        "matched": 2,
+        "expected": 2,
+        "returned": 2,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-bendamustine.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7430357405277288
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-bendamustine.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.6938923804131862
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-rytelo.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.6522379310272902
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-bendamustine.pdf",
+          "table_number": 3,
+          "table_title": "Revision history",
+          "similarity": 0.6407654713671883
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.6270855665206909
+        }
+      ]
+    },
+    {
+      "id": "bendamustine_non_preferred",
+      "query": "Which bendamustine products are non-preferred?",
+      "preference": "non-preferred",
+      "expected_source": "geha-coverage-policy-bendamustine.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Bendeka",
+        "Belrapzo",
+        "Vivimusta"
+      ],
+      "top_result_source": "geha-coverage-policy-bendamustine.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.7477166357378255,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Bendeka",
+        "Belrapzo",
+        "Vivimusta"
+      ],
+      "product_score": {
+        "matched": 3,
+        "expected": 3,
+        "returned": 3,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-bendamustine.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7477166357378255
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-bendamustine.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.6870713233947754
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.6580667495727539
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-rytelo.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.6374887011938525
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-rituximab.pdf",
+          "table_number": 1,
+          "table_title": "Preference / Requires Prior Drug / Name / HCPCS Code / Description",
+          "similarity": 0.6256092377188578
+        }
+      ]
+    },
+    {
+      "id": "bevacizumab_preferred",
+      "query": "Which bevacizumab products are preferred?",
+      "preference": "preferred",
+      "expected_source": "geha-coverage-policy-bevacizumab.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Bevacizumab-bvzr (Zirabev)"
+      ],
+      "top_result_source": "geha-coverage-policy-bevacizumab.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.7836451788371643,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Bevacizumab-bvzr (Zirabev)"
+      ],
+      "product_score": {
+        "matched": 1,
+        "expected": 1,
+        "returned": 1,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-bevacizumab.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7836451788371643
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-bevacizumab.pdf",
+          "table_number": 3,
+          "table_title": "0 / 1 / 2",
+          "similarity": 0.759365825728681
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.7452671527862549
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-xgeva.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7299978297950144
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-bevacizumab.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.7296891808509827
+        }
+      ]
+    },
+    {
+      "id": "bevacizumab_non_preferred",
+      "query": "Which bevacizumab products are non-preferred?",
+      "preference": "non-preferred",
+      "expected_source": "geha-coverage-policy-bevacizumab.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Bevacizumab- awwb (Mvasi)",
+        "Bevacizumab (Avastin)",
+        "Bevacizumab-tnjn (Avzivi)",
+        "Bevacizumab- maly (Alymsys)",
+        "Bevacizumab- adcd (Vegzelma)",
+        "Ziv-aflibercept (Zaltrap)",
+        "Bevacizumab - nwgd (Jobevne)"
+      ],
+      "top_result_source": "geha-coverage-policy-bevacizumab.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.7890580296516418,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Bevacizumab- awwb (Mvasi)",
+        "Bevacizumab (Avastin)",
+        "Bevacizumab-tnjn (Avzivi)",
+        "Bevacizumab- maly (Alymsys)",
+        "Bevacizumab- adcd (Vegzelma)",
+        "Ziv-aflibercept (Zaltrap)",
+        "Bevacizumab - nwgd (Jobevne)"
+      ],
+      "product_score": {
+        "matched": 7,
+        "expected": 7,
+        "returned": 7,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-bevacizumab.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7890580296516418
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.7836510539054871
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-xgeva.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7502887993878855
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-bevacizumab.pdf",
+          "table_number": 3,
+          "table_title": "0 / 1 / 2",
+          "similarity": 0.7488636673851463
+        }
+      ]
+    },
+    {
+      "id": "datroway_preferred",
+      "query": "Which datroway products are preferred?",
+      "preference": "preferred",
+      "expected_source": "geha-coverage-policy-datroway.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Trodelvy"
+      ],
+      "top_result_source": "geha-coverage-policy-datroway.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.751420959576198,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Trodelvy"
+      ],
+      "product_score": {
+        "matched": 1,
+        "expected": 1,
+        "returned": 1,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-datroway.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.751420959576198
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-datroway.pdf",
+          "table_number": 2,
+          "table_title": "0 / 1 / 2",
+          "similarity": 0.7349187889743586
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-datroway.pdf",
+          "table_number": 3,
+          "table_title": "Date / !Updates",
+          "similarity": 0.6756017997502219
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-rytelo.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.6657440662384081
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-trastuzumab.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.6540333445032425
+        }
+      ]
+    },
+    {
+      "id": "datroway_non_preferred",
+      "query": "Which datroway products are non-preferred?",
+      "preference": "non-preferred",
+      "expected_source": "geha-coverage-policy-datroway.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Datroway"
+      ],
+      "top_result_source": "geha-coverage-policy-datroway.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.7622419737433332,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Datroway"
+      ],
+      "product_score": {
+        "matched": 1,
+        "expected": 1,
+        "returned": 1,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-datroway.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7622419737433332
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-datroway.pdf",
+          "table_number": 2,
+          "table_title": "0 / 1 / 2",
+          "similarity": 0.725615246630625
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-rytelo.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.7222721245613246
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.6832181622516026
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-rituximab.pdf",
+          "table_number": 1,
+          "table_title": "Preference / Requires Prior Drug / Name / HCPCS Code / Description",
+          "similarity": 0.674821198715675
+        }
+      ]
+    },
+    {
+      "id": "erythropoietin_stimulating_agents_preferred",
+      "query": "Which erythropoietin stimulating agents products are preferred?",
+      "preference": "preferred",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Retacrit",
+        "Aranesp"
+      ],
+      "top_result_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.7911208396481981,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Retacrit",
+        "Aranesp"
+      ],
+      "product_score": {
+        "matched": 2,
+        "expected": 2,
+        "returned": 2,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7911208396481981
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.7349783778190613
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+          "table_number": 3,
+          "table_title": "Revision history",
+          "similarity": 0.728769091220991
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.6986259581296543
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.6922677755355835
+        }
+      ]
+    },
+    {
+      "id": "erythropoietin_stimulating_agents_non_preferred",
+      "query": "Which erythropoietin stimulating agents products are non-preferred?",
+      "preference": "non-preferred",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Epogen",
+        "Procrit"
+      ],
+      "top_result_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.8110293971265139,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Epogen",
+        "Procrit"
+      ],
+      "product_score": {
+        "matched": 2,
+        "expected": 2,
+        "returned": 2,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.8110293971265139
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.7445527911186218
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+          "table_number": 3,
+          "table_title": "Revision history",
+          "similarity": 0.7229773668023837
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.7102134227752686
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7098869431153654
+        }
+      ]
+    },
+    {
+      "id": "gemcitabine_preferred",
+      "query": "Which gemcitabine products are preferred?",
+      "preference": "preferred",
+      "expected_source": "geha-coverage-policy-gemcitabine.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Gemcitabine (Accord)"
+      ],
+      "top_result_source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.794016420841217,
+      "expected_source_rank": 2,
+      "expected_table_rank": 2,
+      "source_match_top_1": false,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": false,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Nadofaragene firadenovec-vncg (Adstiladrin)",
+        "Pembrolizumab (Keytruda)",
+        "Pembrolizumab and berahyaluronidas e alfa-pmph (Keytruda QLEX)"
+      ],
+      "product_score": {
+        "matched": 0,
+        "expected": 1,
+        "returned": 3,
+        "recall": 0.0,
+        "precision": 0.0,
+        "exact_match": false
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.794016420841217
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-gemcitabine.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7915936708450317
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-gemcitabine.pdf",
+          "table_number": 3,
+          "table_title": "Revision history",
+          "similarity": 0.759291796768695
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.7388767004013062
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-gemcitabine.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.7344713965373412
+        }
+      ]
+    },
+    {
+      "id": "gemcitabine_non_preferred",
+      "query": "Which gemcitabine products are non-preferred?",
+      "preference": "non-preferred",
+      "expected_source": "geha-coverage-policy-gemcitabine.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Gemzar",
+        "Avgemsi"
+      ],
+      "top_result_source": "geha-coverage-policy-gemcitabine.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.8102746605873166,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Gemzar",
+        "Avgemsi"
+      ],
+      "product_score": {
+        "matched": 2,
+        "expected": 2,
+        "returned": 2,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-gemcitabine.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.8102746605873166
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.8097153192588892
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-gemcitabine.pdf",
+          "table_number": 3,
+          "table_title": "Revision history",
+          "similarity": 0.7540472296448334
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.753319844801418
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.7469108549899386
+        }
+      ]
+    },
+    {
+      "id": "gnrh_analogues_in_prostate_cancer_preferred",
+      "query": "Which gnrh analogues in prostate cancer products are preferred?",
+      "preference": "preferred",
+      "expected_source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Firmagon (degarelix)",
+        "Eligard(leuprolide acetate depot)"
+      ],
+      "top_result_source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+      "top_result_table_number": 3,
+      "top_result_table_title": "Revision history",
+      "top_result_similarity": 0.81983646991793,
+      "expected_source_rank": 1,
+      "expected_table_rank": 2,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": false,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [],
+      "product_score": {
+        "matched": 0,
+        "expected": 2,
+        "returned": 0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "exact_match": false
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+          "table_number": 3,
+          "table_title": "Revision history",
+          "similarity": 0.81983646991793
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.8094896787709204
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.7883507987825649
+        }
+      ]
+    },
+    {
+      "id": "gnrh_analogues_in_prostate_cancer_non_preferred",
+      "query": "Which gnrh analogues in prostate cancer products are non-preferred?",
+      "preference": "non-preferred",
+      "expected_source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Lupron Depot (leuprolide acetate depot)",
+        "Camcevi (leuprolide mesylate)",
+        "Lutrate Depot (leuprolide acetate depot)",
+        "Trelstar (triptorelin)",
+        "Camcevi ETM (leuprolide mesylate)",
+        "Zoladex (goserelin)",
+        "Orgovyx (relugolix)"
+      ],
+      "top_result_source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.8186815977096558,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Lupron Depot (leuprolide acetate depot)",
+        "Camcevi (leuprolide mesylate)",
+        "Lutrate Depot (leuprolide acetate depot)",
+        "Trelstar (triptorelin)",
+        "Camcevi ETM (leuprolide mesylate)",
+        "Zoladex (goserelin)",
+        "Orgovyx (relugolix)"
+      ],
+      "product_score": {
+        "matched": 7,
+        "expected": 7,
+        "returned": 7,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.8186815977096558
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+          "table_number": 3,
+          "table_title": "Revision history",
+          "similarity": 0.8157127742681738
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.77989612697936
+        }
+      ]
+    },
+    {
+      "id": "long_acting_gcsfs_preferred",
+      "query": "Which long acting gcsfs products are preferred?",
+      "preference": "preferred",
+      "expected_source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Nyvepria",
+        "Fylnetra"
+      ],
+      "top_result_source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "top_result_table_number": 3,
+      "top_result_table_title": "0 / 1 / 2",
+      "top_result_similarity": 0.7283573205790538,
+      "expected_source_rank": 1,
+      "expected_table_rank": 3,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": false,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [],
+      "product_score": {
+        "matched": 0,
+        "expected": 2,
+        "returned": 0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "exact_match": false
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 3,
+          "table_title": "0 / 1 / 2",
+          "similarity": 0.7283573205790538
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 4,
+          "table_title": "Revision history",
+          "similarity": 0.7087816211218129
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.6598594188690186
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.6491003632545471
+        }
+      ]
+    },
+    {
+      "id": "long_acting_gcsfs_non_preferred",
+      "query": "Which long acting gcsfs products are non-preferred?",
+      "preference": "non-preferred",
+      "expected_source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Neulasta",
+        "Rolvedon",
+        "Armlupeg",
+        "Ryzneuta",
+        "Fulphila",
+        "Udenyca",
+        "Ziextenzo",
+        "Stimufend"
+      ],
+      "top_result_source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "top_result_table_number": 3,
+      "top_result_table_title": "0 / 1 / 2",
+      "top_result_similarity": 0.7143765900843398,
+      "expected_source_rank": 1,
+      "expected_table_rank": 3,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": false,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [],
+      "product_score": {
+        "matched": 0,
+        "expected": 8,
+        "returned": 0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "exact_match": false
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 3,
+          "table_title": "0 / 1 / 2",
+          "similarity": 0.7143765900843398
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 4,
+          "table_title": "Revision history",
+          "similarity": 0.6901124510135543
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.6876060552831867
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.6645332378705456
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.6612062060114035
+        }
+      ]
+    },
+    {
+      "id": "non_muscle_invasive_bladder_cancer_preferred",
+      "query": "Which non muscle invasive bladder cancer products are preferred?",
+      "preference": "preferred",
+      "expected_source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Nadofaragene firadenovec-vncg (Adstiladrin)",
+        "Pembrolizumab (Keytruda)",
+        "Pembrolizumab and berahyaluronidas e alfa-pmph (Keytruda QLEX)"
+      ],
+      "top_result_source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.7500042766324992,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Nadofaragene firadenovec-vncg (Adstiladrin)",
+        "Pembrolizumab (Keytruda)",
+        "Pembrolizumab and berahyaluronidas e alfa-pmph (Keytruda QLEX)"
+      ],
+      "product_score": {
+        "matched": 3,
+        "expected": 3,
+        "returned": 3,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7500042766324992
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.7228781746102481
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+          "table_number": 3,
+          "table_title": "Revision history",
+          "similarity": 0.7130352046181229
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.6729883746511724
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.6663451989683402
+        }
+      ]
+    },
+    {
+      "id": "non_muscle_invasive_bladder_cancer_non_preferred",
+      "query": "Which non muscle invasive bladder cancer products are non-preferred?",
+      "preference": "non-preferred",
+      "expected_source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Nogapendekin alfa inbakicept- pmln (Anktiva)",
+        "Gemcitabine (Inlexzo)"
+      ],
+      "top_result_source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.7554381489753723,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Nogapendekin alfa inbakicept- pmln (Anktiva)",
+        "Gemcitabine (Inlexzo)"
+      ],
+      "product_score": {
+        "matched": 2,
+        "expected": 2,
+        "returned": 2,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7554381489753723
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.7177117466926575
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+          "table_number": 3,
+          "table_title": "Revision history",
+          "similarity": 0.7023430079919999
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.6958831548690796
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.6791423559188843
+        }
+      ]
+    },
+    {
+      "id": "paclitaxel_protein_bound_preferred",
+      "query": "Which paclitaxel protein bound products are preferred?",
+      "preference": "preferred",
+      "expected_source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Docetaxel (Taxotere)",
+        "Docetaxel (Hospira 505(b)(2))",
+        "Paclitaxel (Taxol)"
+      ],
+      "top_result_source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.8289276855544871,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Docetaxel (Taxotere)",
+        "Docetaxel (Hospira 505(b)(2))",
+        "Paclitaxel (Taxol)"
+      ],
+      "product_score": {
+        "matched": 3,
+        "expected": 3,
+        "returned": 3,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.8289276855544871
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+          "table_number": 3,
+          "table_title": "Revision history",
+          "similarity": 0.804933499995859
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.7861920722608537
+        }
+      ]
+    },
+    {
+      "id": "paclitaxel_protein_bound_non_preferred",
+      "query": "Which paclitaxel protein bound products are non-preferred?",
+      "preference": "non-preferred",
+      "expected_source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Paclitaxel Protein- Bound (Abraxane)"
+      ],
+      "top_result_source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.8324909110361896,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Paclitaxel Protein- Bound (Abraxane)"
+      ],
+      "product_score": {
+        "matched": 1,
+        "expected": 1,
+        "returned": 1,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.8324909110361896
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+          "table_number": 3,
+          "table_title": "Revision history",
+          "similarity": 0.8150842189788818
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.7793216109275818
+        }
+      ]
+    },
+    {
+      "id": "pemetrexed_preferred",
+      "query": "Which pemetrexed products are preferred?",
+      "preference": "preferred",
+      "expected_source": "geha-coverage-policy-pemetrexed.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Pemetrexed (Axtle)",
+        "Pemetrexed (Accord)",
+        "Pemetrexed (Bluepoint)"
+      ],
+      "top_result_source": "geha-coverage-policy-pemetrexed.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.7553263744128287,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Pemetrexed (Axtle)",
+        "Pemetrexed (Accord)",
+        "Pemetrexed (Bluepoint)"
+      ],
+      "product_score": {
+        "matched": 3,
+        "expected": 3,
+        "returned": 3,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-pemetrexed.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7553263744128287
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7276811924360761
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-pemetrexed.pdf",
+          "table_number": 3,
+          "table_title": "Billing codes",
+          "similarity": 0.7106700712043017
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-pemetrexed.pdf",
+          "table_number": 4,
+          "table_title": "Revision history",
+          "similarity": 0.704948239633757
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-rytelo.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.6992350816726735
+        }
+      ]
+    },
+    {
+      "id": "pemetrexed_non_preferred",
+      "query": "Which pemetrexed products are non-preferred?",
+      "preference": "non-preferred",
+      "expected_source": "geha-coverage-policy-pemetrexed.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Pemetrexed (Hospira)",
+        "Pemetrexed (Sandoz)",
+        "Pemetrexed (Alimta )",
+        "Pemetrexed (Teva)",
+        "Pemetrexed ditromethamine (Hospira)",
+        "Pemfexy",
+        "Pemrydi RTU"
+      ],
+      "top_result_source": "geha-coverage-policy-pemetrexed.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.7641163749556149,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Pemetrexed (Hospira)",
+        "Pemetrexed (Sandoz)",
+        "Pemetrexed (Alimta )",
+        "Pemetrexed (Teva)",
+        "Pemetrexed ditromethamine (Hospira)",
+        "Pemfexy",
+        "Pemrydi RTU"
+      ],
+      "product_score": {
+        "matched": 7,
+        "expected": 7,
+        "returned": 7,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-pemetrexed.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7641163749556149
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-pemetrexed.pdf",
+          "table_number": 3,
+          "table_title": "Billing codes",
+          "similarity": 0.712611198425293
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7108824425409781
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-pemetrexed.pdf",
+          "table_number": 4,
+          "table_title": "Revision history",
+          "similarity": 0.70081094493736
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.6991463303565979
+        }
+      ]
+    },
+    {
+      "id": "rituximab_preferred",
+      "query": "Which rituximab products are preferred?",
+      "preference": "preferred",
+      "expected_source": "geha-coverage-policy-rituximab.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Ruxience"
+      ],
+      "top_result_source": "geha-coverage-policy-rituximab.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Preference / Requires Prior Drug / Name / HCPCS Code / Description",
+      "top_result_similarity": 0.7847981686829978,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Ruxience"
+      ],
+      "product_score": {
+        "matched": 1,
+        "expected": 1,
+        "returned": 1,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-rituximab.pdf",
+          "table_number": 1,
+          "table_title": "Preference / Requires Prior Drug / Name / HCPCS Code / Description",
+          "similarity": 0.7847981686829978
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.7783265113830566
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-xgeva.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7237825825084808
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-rituximab.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.7236064241167067
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-trastuzumab.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7216381166412743
+        }
+      ]
+    },
+    {
+      "id": "rituximab_non_preferred",
+      "query": "Which rituximab products are non-preferred?",
+      "preference": "non-preferred",
+      "expected_source": "geha-coverage-policy-rituximab.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Truxima",
+        "Rituxan Hycela",
+        "Rituxan",
+        "Riabni"
+      ],
+      "top_result_source": "geha-coverage-policy-rituximab.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Preference / Requires Prior Drug / Name / HCPCS Code / Description",
+      "top_result_similarity": 0.7934599405414007,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Truxima",
+        "Rituxan Hycela",
+        "Rituxan",
+        "Riabni"
+      ],
+      "product_score": {
+        "matched": 4,
+        "expected": 4,
+        "returned": 4,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-rituximab.pdf",
+          "table_number": 1,
+          "table_title": "Preference / Requires Prior Drug / Name / HCPCS Code / Description",
+          "similarity": 0.7934599405414007
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.7830436488337991
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-trastuzumab.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7386485961321363
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-xgeva.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.735467421626911
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-bevacizumab.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7190455533211815
+        }
+      ]
+    },
+    {
+      "id": "rytelo_preferred",
+      "query": "Which rytelo products are preferred?",
+      "preference": "preferred",
+      "expected_source": "geha-coverage-policy-rytelo.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Reblozyl (luspatercept)"
+      ],
+      "top_result_source": "geha-coverage-policy-rytelo.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "0 / 1 / 2 / 3 / 4",
+      "top_result_similarity": 0.6805371058467427,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Reblozyl (luspatercept)"
+      ],
+      "product_score": {
+        "matched": 1,
+        "expected": 1,
+        "returned": 1,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-rytelo.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.6805371058467427
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-rytelo.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.6532445561965279
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.5898116895724878
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-rytelo.pdf",
+          "table_number": 3,
+          "table_title": "Revision history",
+          "similarity": 0.5877129014644894
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-trastuzumab.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.58227072410969
+        }
+      ]
+    },
+    {
+      "id": "rytelo_non_preferred",
+      "query": "Which rytelo products are non-preferred?",
+      "preference": "non-preferred",
+      "expected_source": "geha-coverage-policy-rytelo.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Rytelo (imetelstat)"
+      ],
+      "top_result_source": "geha-coverage-policy-rytelo.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "0 / 1 / 2 / 3 / 4",
+      "top_result_similarity": 0.7190948296132901,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Rytelo (imetelstat)"
+      ],
+      "product_score": {
+        "matched": 1,
+        "expected": 1,
+        "returned": 1,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-rytelo.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.7190948296132901
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-rytelo.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.6360980543856491
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.6202439522452455
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.603996132851569
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-rituximab.pdf",
+          "table_number": 1,
+          "table_title": "Preference / Requires Prior Drug / Name / HCPCS Code / Description",
+          "similarity": 0.5961979690613245
+        }
+      ]
+    },
+    {
+      "id": "short_acting_gcsfs_preferred",
+      "query": "Which short acting gcsfs products are preferred?",
+      "preference": "preferred",
+      "expected_source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Nivestym (filgrastim- aafi)"
+      ],
+      "top_result_source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "top_result_table_number": 3,
+      "top_result_table_title": "0 / 1 / 2",
+      "top_result_similarity": 0.6986688583692645,
+      "expected_source_rank": 3,
+      "expected_table_rank": null,
+      "source_match_top_1": false,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": false,
+      "table_match_top_3": false,
+      "table_match_top_5": false,
+      "actual_products_from_top_result": [],
+      "product_score": {
+        "matched": 0,
+        "expected": 1,
+        "returned": 0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "exact_match": false
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 3,
+          "table_title": "0 / 1 / 2",
+          "similarity": 0.6986688583692645
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 4,
+          "table_title": "Revision history",
+          "similarity": 0.6748754777051393
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.6361938714981125
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+          "table_number": 3,
+          "table_title": "Revision history",
+          "similarity": 0.6357118866272007
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.6351524647797718
+        }
+      ]
+    },
+    {
+      "id": "short_acting_gcsfs_non_preferred",
+      "query": "Which short acting gcsfs products are non-preferred?",
+      "preference": "non-preferred",
+      "expected_source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Zarxio (filgrastim-sndz)",
+        "Neupogen (filgrastim)",
+        "Granix (tbo-filgrastim)",
+        "Nypozi (filgrastim-txid)"
+      ],
+      "top_result_source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "top_result_table_number": 3,
+      "top_result_table_title": "0 / 1 / 2",
+      "top_result_similarity": 0.6888690014662473,
+      "expected_source_rank": 4,
+      "expected_table_rank": 4,
+      "source_match_top_1": false,
+      "source_match_top_3": false,
+      "source_match_top_5": true,
+      "table_match_top_1": false,
+      "table_match_top_3": false,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [],
+      "product_score": {
+        "matched": 0,
+        "expected": 4,
+        "returned": 0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "exact_match": false
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 3,
+          "table_title": "0 / 1 / 2",
+          "similarity": 0.6888690014662473
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.660563051700592
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 4,
+          "table_title": "Revision history",
+          "similarity": 0.6592762666725003
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.65919317846339
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.6518701703471058
+        }
+      ]
+    },
+    {
+      "id": "taxotere_docivyx_preferred",
+      "query": "Which taxotere docivyx products are preferred?",
+      "preference": "preferred",
+      "expected_source": "geha-coverage-policy-taxotere-docivyx.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Taxotere (docetaxel)",
+        "Docetaxel (Hospira 505(b)(2))"
+      ],
+      "top_result_source": "geha-coverage-policy-taxotere-docivyx.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.7573792853314407,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Taxotere (docetaxel)",
+        "Docetaxel (Hospira 505(b)(2))"
+      ],
+      "product_score": {
+        "matched": 2,
+        "expected": 2,
+        "returned": 2,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-taxotere-docivyx.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7573792853314407
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-taxotere-docivyx.pdf",
+          "table_number": 2,
+          "table_title": "Drug Name / HCPC S Code / Description",
+          "similarity": 0.7331459840362143
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7133676367967533
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+          "table_number": 3,
+          "table_title": "Revision history",
+          "similarity": 0.7016048787111239
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.6987635019389387
+        }
+      ]
+    },
+    {
+      "id": "taxotere_docivyx_non_preferred",
+      "query": "Which taxotere docivyx products are non-preferred?",
+      "preference": "non-preferred",
+      "expected_source": "geha-coverage-policy-taxotere-docivyx.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Docetaxel (Docivyx)"
+      ],
+      "top_result_source": "geha-coverage-policy-taxotere-docivyx.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.7378436107086088,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Docetaxel (Docivyx)"
+      ],
+      "product_score": {
+        "matched": 1,
+        "expected": 1,
+        "returned": 1,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-taxotere-docivyx.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7378436107086088
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+          "table_number": 3,
+          "table_title": "Revision history",
+          "similarity": 0.7215468453438983
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-taxotere-docivyx.pdf",
+          "table_number": 2,
+          "table_title": "Drug Name / HCPC S Code / Description",
+          "similarity": 0.704362708070118
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.6990437895344587
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.676316021147487
+        }
+      ]
+    },
+    {
+      "id": "trastuzumab_preferred",
+      "query": "Which trastuzumab products are preferred?",
+      "preference": "preferred",
+      "expected_source": "geha-coverage-policy-trastuzumab.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Trazimera",
+        "Kanjinti"
+      ],
+      "top_result_source": "geha-coverage-policy-trastuzumab.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.8029180286575553,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Trazimera",
+        "Kanjinti"
+      ],
+      "product_score": {
+        "matched": 2,
+        "expected": 2,
+        "returned": 2,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-trastuzumab.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.8029180286575553
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-trastuzumab.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.7544651852388738
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-trastuzumab.pdf",
+          "table_number": 3,
+          "table_title": "Revision history",
+          "similarity": 0.7443957481148407
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-rituximab.pdf",
+          "table_number": 1,
+          "table_title": "Preference / Requires Prior Drug / Name / HCPCS Code / Description",
+          "similarity": 0.7288825729156311
+        }
+      ]
+    },
+    {
+      "id": "trastuzumab_non_preferred",
+      "query": "Which trastuzumab products are non-preferred?",
+      "preference": "non-preferred",
+      "expected_source": "geha-coverage-policy-trastuzumab.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Herceptin",
+        "Herceptin Hylecta",
+        "Hercessi",
+        "Ontruzant",
+        "Herzuma",
+        "Ogivri"
+      ],
+      "top_result_source": "geha-coverage-policy-trastuzumab.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.7997426748735904,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Herceptin",
+        "Herceptin Hylecta",
+        "Hercessi",
+        "Ontruzant",
+        "Herzuma",
+        "Ogivri"
+      ],
+      "product_score": {
+        "matched": 6,
+        "expected": 6,
+        "returned": 6,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-trastuzumab.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7997426748735904
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.7520426063512216
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-trastuzumab.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.7486586124504453
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-rituximab.pdf",
+          "table_number": 1,
+          "table_title": "Preference / Requires Prior Drug / Name / HCPCS Code / Description",
+          "similarity": 0.7431595103991208
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-xgeva.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7379637076897969
+        }
+      ]
+    },
+    {
+      "id": "vectibix_preferred",
+      "query": "Which vectibix products are preferred?",
+      "preference": "preferred",
+      "expected_source": "geha-coverage-policy-vectibix.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Cetuximab (Erbitux)"
+      ],
+      "top_result_source": "geha-coverage-policy-vectibix.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "0 / 1 / 2 / 3 / 4",
+      "top_result_similarity": 0.7829327583312988,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Cetuximab (Erbitux)"
+      ],
+      "product_score": {
+        "matched": 1,
+        "expected": 1,
+        "returned": 1,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.7829327583312988
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.713999467253718
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-bevacizumab.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.6709416112584359
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-rytelo.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.6663732329829486
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.6629185877490897
+        }
+      ]
+    },
+    {
+      "id": "vectibix_non_preferred",
+      "query": "Which vectibix products are non-preferred?",
+      "preference": "non-preferred",
+      "expected_source": "geha-coverage-policy-vectibix.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Panitumumab (Vectibix)"
+      ],
+      "top_result_source": "geha-coverage-policy-vectibix.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "0 / 1 / 2 / 3 / 4",
+      "top_result_similarity": 0.7937209606170654,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Panitumumab (Vectibix)"
+      ],
+      "product_score": {
+        "matched": 1,
+        "expected": 1,
+        "returned": 1,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.7937209606170654
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.6965798139572144
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-bevacizumab.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.6767679654588692
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.6746804118156433
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-rituximab.pdf",
+          "table_number": 1,
+          "table_title": "Preference / Requires Prior Drug / Name / HCPCS Code / Description",
+          "similarity": 0.6689671477367627
+        }
+      ]
+    },
+    {
+      "id": "xgeva_preferred",
+      "query": "Which xgeva products are preferred?",
+      "preference": "preferred",
+      "expected_source": "geha-coverage-policy-xgeva.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Zoledronic Acid (Zometa)"
+      ],
+      "top_result_source": "geha-coverage-policy-xgeva.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.6950121703736692,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Zoledronic Acid (Zometa)"
+      ],
+      "product_score": {
+        "matched": 1,
+        "expected": 1,
+        "returned": 1,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-xgeva.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.6950121703736692
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-xgeva.pdf",
+          "table_number": 3,
+          "table_title": "Revision history",
+          "similarity": 0.6676514347687794
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-xgeva.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.6567639112472534
+        }
+      ]
+    },
+    {
+      "id": "xgeva_non_preferred",
+      "query": "Which xgeva products are non-preferred?",
+      "preference": "non-preferred",
+      "expected_source": "geha-coverage-policy-xgeva.pdf",
+      "expected_table_number": 1,
+      "expected_products": [
+        "Denosumab (Xgeva)",
+        "Denosumab-desu (Jubereq)",
+        "Denosumab-qbde (Xtrenbo)",
+        "Denosumab-bbdz (Wyost)",
+        "Denosumab-bmwo (Osenvelt)",
+        "Denosumab-bmwo (Denosumab-Celtrion)",
+        "Denosumab-bnht (Bomyntra)",
+        "Denosumab-bnht (denosumab Frensenius)",
+        "Denosumab-dssb (Xbryk)",
+        "Denosumab-dssb (Denosumab Samsung Bioepis)",
+        "Denosumab-kyqq (Aukelso)",
+        "Denosumab-nxxp (Bilprevda)"
+      ],
+      "top_result_source": "geha-coverage-policy-xgeva.pdf",
+      "top_result_table_number": 1,
+      "top_result_table_title": "Drug preference and prior authorization",
+      "top_result_similarity": 0.7117290072602638,
+      "expected_source_rank": 1,
+      "expected_table_rank": 1,
+      "source_match_top_1": true,
+      "source_match_top_3": true,
+      "source_match_top_5": true,
+      "table_match_top_1": true,
+      "table_match_top_3": true,
+      "table_match_top_5": true,
+      "actual_products_from_top_result": [
+        "Denosumab (Xgeva)",
+        "Denosumab-desu (Jubereq)",
+        "Denosumab-qbde (Xtrenbo)",
+        "Denosumab-bbdz (Wyost)",
+        "Denosumab-bmwo (Osenvelt)",
+        "Denosumab-bmwo (Denosumab-Celtrion)",
+        "Denosumab-bnht (Bomyntra)",
+        "Denosumab-bnht (denosumab Frensenius)",
+        "Denosumab-dssb (Xbryk)",
+        "Denosumab-dssb (Denosumab Samsung Bioepis)",
+        "Denosumab-kyqq (Aukelso)",
+        "Denosumab-nxxp (Bilprevda)"
+      ],
+      "product_score": {
+        "matched": 12,
+        "expected": 12,
+        "returned": 12,
+        "recall": 1.0,
+        "precision": 1.0,
+        "exact_match": true
+      },
+      "rankings": [
+        {
+          "rank": 1,
+          "source": "geha-coverage-policy-xgeva.pdf",
+          "table_number": 1,
+          "table_title": "Drug preference and prior authorization",
+          "similarity": 0.7117290072602638
+        },
+        {
+          "rank": 2,
+          "source": "geha-coverage-policy-vectibix.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.6645646691322327
+        },
+        {
+          "rank": 3,
+          "source": "geha-coverage-policy-xgeva.pdf",
+          "table_number": 2,
+          "table_title": "Billing codes",
+          "similarity": 0.6581490839630924
+        },
+        {
+          "rank": 4,
+          "source": "geha-coverage-policy-xgeva.pdf",
+          "table_number": 3,
+          "table_title": "Revision history",
+          "similarity": 0.6515640214551697
+        },
+        {
+          "rank": 5,
+          "source": "geha-coverage-policy-rytelo.pdf",
+          "table_number": 1,
+          "table_title": "0 / 1 / 2 / 3 / 4",
+          "similarity": 0.6482212929857559
+        }
+      ]
+    }
+  ]
+}
