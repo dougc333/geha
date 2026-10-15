@@ -1,0 +1,125 @@
+{
+  "schema": "hillclimb/v2",
+  "flow": "benefits-agent",
+  "description": "GEHA dental benefits agent (mcp_benefits_server/agent/benefits_agent.py), production MCP tools, claude-sonnet-5-5",
+  "metrics": [
+    {
+      "id": "pass",
+      "label": "Pass",
+      "kind": "binary"
+    },
+    {
+      "id": "correct",
+      "label": "Correct value",
+      "kind": "binary"
+    },
+    {
+      "id": "cites",
+      "label": "Cites page",
+      "kind": "binary"
+    },
+    {
+      "id": "declines_ok",
+      "label": "Declines OK",
+      "kind": "binary"
+    },
+    {
+      "id": "asks_ok",
+      "label": "Asks for info",
+      "kind": "binary"
+    }
+  ],
+  "perf_fields": [
+    {
+      "id": "cost_usd",
+      "label": "Cost $"
+    },
+    {
+      "id": "latency_s",
+      "label": "Latency s"
+    },
+    {
+      "id": "tool_calls",
+      "label": "Tool calls"
+    },
+    {
+      "id": "answer_tokens",
+      "label": "Answer tok"
+    }
+  ],
+  "judge_model": "claude-haiku-5-5",
+  "harness_paths": [
+    "mcp_benefits_server/evals/run_eval.py",
+    "mcp_benefits_server/evals/grade.py",
+    "mcp_benefits_server/evals/cases.jsonl",
+    "mcp_benefits_server/evals/make_cases.py"
+  ],
+  "variants": [
+    {
+      "id": "baseline"
+    }
+  ],
+  "train_ids": [
+    "rate-01",
+    "rate-04",
+    "rate-05",
+    "rate-06",
+    "rate-08",
+    "rate-09",
+    "rate-10",
+    "prem-01",
+    "prem-04",
+    "prem-06",
+    "prem-07",
+    "prem-08",
+    "prem-10",
+    "prem-11",
+    "prem-12",
+    "prem-14",
+    "prem-15",
+    "prem-16",
+    "cmp-01",
+    "cmp-02",
+    "cmp-04",
+    "cdt-01",
+    "cdt-03",
+    "cdt-05",
+    "cdt-06",
+    "cdt-07",
+    "cdt-09",
+    "cdt-10",
+    "unl-01",
+    "unl-02",
+    "miss-01",
+    "miss-04",
+    "miss-05",
+    "miss-06",
+    "miss-07",
+    "oos-01",
+    "oos-02",
+    "oos-05",
+    "oos-07",
+    "oos-08"
+  ],
+  "test_ids": [
+    "rate-02",
+    "rate-03",
+    "rate-07",
+    "prem-02",
+    "prem-03",
+    "prem-05",
+    "prem-09",
+    "prem-13",
+    "cmp-03",
+    "cdt-02",
+    "cdt-04",
+    "cdt-08",
+    "unl-03",
+    "miss-02",
+    "miss-03",
+    "miss-08",
+    "oos-03",
+    "oos-04",
+    "oos-06"
+  ]
+}

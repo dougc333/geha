@@ -1,0 +1,1257 @@
+{
+  "summary": {
+    "flat_semantic_chunks": {
+      "overall": {
+        "cases": 41,
+        "average_evidence_coverage": 0.8170731707317073,
+        "complete_evidence_rate": 0.5853658536585366,
+        "expected_table_present_rate": 0.975609756097561,
+        "average_estimated_tokens": 292.4634146341463,
+        "evidence_per_1k_tokens": 8.756567425569177
+      },
+      "preference": {
+        "cases": 34,
+        "average_evidence_coverage": 0.8137254901960784,
+        "complete_evidence_rate": 0.5882352941176471,
+        "expected_table_present_rate": 0.9705882352941176,
+        "average_estimated_tokens": 285.1470588235294,
+        "evidence_per_1k_tokens": 7.220216606498195
+      },
+      "relation": {
+        "cases": 7,
+        "average_evidence_coverage": 0.8333333333333333,
+        "complete_evidence_rate": 0.5714285714285714,
+        "expected_table_present_rate": 1.0,
+        "average_estimated_tokens": 328.0,
+        "evidence_per_1k_tokens": 15.24390243902439
+      }
+    },
+    "table_aware_rag": {
+      "overall": {
+        "cases": 41,
+        "average_evidence_coverage": 1.0,
+        "complete_evidence_rate": 1.0,
+        "expected_table_present_rate": 1.0,
+        "average_estimated_tokens": 431.0975609756098,
+        "evidence_per_1k_tokens": 7.920792079207921
+      },
+      "preference": {
+        "cases": 34,
+        "average_evidence_coverage": 1.0,
+        "complete_evidence_rate": 1.0,
+        "expected_table_present_rate": 1.0,
+        "average_estimated_tokens": 405.05882352941177,
+        "evidence_per_1k_tokens": 7.115887307580598
+      },
+      "relation": {
+        "cases": 7,
+        "average_evidence_coverage": 1.0,
+        "complete_evidence_rate": 1.0,
+        "expected_table_present_rate": 1.0,
+        "average_estimated_tokens": 557.5714285714286,
+        "evidence_per_1k_tokens": 10.760953112990007
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "bendamustine_preferred",
+      "kind": "Preference lookup",
+      "query": "Which bendamustine products are preferred?",
+      "expected_source": "geha-coverage-policy-bendamustine.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1274,
+        "estimated_tokens": 319,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 1409,
+        "estimated_tokens": 353,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "bendamustine_non_preferred",
+      "kind": "Preference lookup",
+      "query": "Which bendamustine products are non-preferred?",
+      "expected_source": "geha-coverage-policy-bendamustine.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1274,
+        "estimated_tokens": 319,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 1144,
+        "estimated_tokens": 286,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "bevacizumab_preferred",
+      "kind": "Preference lookup",
+      "query": "Which bevacizumab products are preferred?",
+      "expected_source": "geha-coverage-policy-bevacizumab.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1336,
+        "estimated_tokens": 334,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 1443,
+        "estimated_tokens": 361,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "bevacizumab_non_preferred",
+      "kind": "Preference lookup",
+      "query": "Which bevacizumab products are non-preferred?",
+      "expected_source": "geha-coverage-policy-bevacizumab.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1328,
+        "estimated_tokens": 332,
+        "expected_values_found": 5,
+        "expected_values_total": 7,
+        "expected_evidence_coverage": 0.7142857142857143,
+        "complete_evidence": false,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 1320,
+        "estimated_tokens": 330,
+        "expected_values_found": 7,
+        "expected_values_total": 7,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "datroway_preferred",
+      "kind": "Preference lookup",
+      "query": "Which datroway products are preferred?",
+      "expected_source": "geha-coverage-policy-datroway.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 915,
+        "estimated_tokens": 229,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 772,
+        "estimated_tokens": 193,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "datroway_non_preferred",
+      "kind": "Preference lookup",
+      "query": "Which datroway products are non-preferred?",
+      "expected_source": "geha-coverage-policy-datroway.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 2,
+        "characters": 945,
+        "estimated_tokens": 237,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 772,
+        "estimated_tokens": 193,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "erythropoietin_stimulating_agents_preferred",
+      "kind": "Preference lookup",
+      "query": "Which erythropoietin stimulating agents products are preferred?",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1297,
+        "estimated_tokens": 325,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 1283,
+        "estimated_tokens": 321,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "erythropoietin_stimulating_agents_non_preferred",
+      "kind": "Preference lookup",
+      "query": "Which erythropoietin stimulating agents products are non-preferred?",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1246,
+        "estimated_tokens": 312,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 1283,
+        "estimated_tokens": 321,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "gemcitabine_preferred",
+      "kind": "Preference lookup",
+      "query": "Which gemcitabine products are preferred?",
+      "expected_source": "geha-coverage-policy-gemcitabine.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 2,
+        "characters": 1286,
+        "estimated_tokens": 322,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 1370,
+        "estimated_tokens": 343,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "gemcitabine_non_preferred",
+      "kind": "Preference lookup",
+      "query": "Which gemcitabine products are non-preferred?",
+      "expected_source": "geha-coverage-policy-gemcitabine.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 2,
+        "characters": 1289,
+        "estimated_tokens": 323,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 1603,
+        "estimated_tokens": 401,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "gnrh_analogues_in_prostate_cancer_preferred",
+      "kind": "Preference lookup",
+      "query": "Which gnrh analogues in prostate cancer products are preferred?",
+      "expected_source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 850,
+        "estimated_tokens": 213,
+        "expected_values_found": 1,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2295,
+        "estimated_tokens": 574,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "gnrh_analogues_in_prostate_cancer_non_preferred",
+      "kind": "Preference lookup",
+      "query": "Which gnrh analogues in prostate cancer products are non-preferred?",
+      "expected_source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1256,
+        "estimated_tokens": 314,
+        "expected_values_found": 4,
+        "expected_values_total": 7,
+        "expected_evidence_coverage": 0.5714285714285714,
+        "complete_evidence": false,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2295,
+        "estimated_tokens": 574,
+        "expected_values_found": 7,
+        "expected_values_total": 7,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "long_acting_gcsfs_preferred",
+      "kind": "Preference lookup",
+      "query": "Which long acting gcsfs products are preferred?",
+      "expected_source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 834,
+        "estimated_tokens": 209,
+        "expected_values_found": 1,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": false
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2220,
+        "estimated_tokens": 555,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "long_acting_gcsfs_non_preferred",
+      "kind": "Preference lookup",
+      "query": "Which long acting gcsfs products are non-preferred?",
+      "expected_source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1212,
+        "estimated_tokens": 303,
+        "expected_values_found": 4,
+        "expected_values_total": 8,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2220,
+        "estimated_tokens": 555,
+        "expected_values_found": 8,
+        "expected_values_total": 8,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "non_muscle_invasive_bladder_cancer_preferred",
+      "kind": "Preference lookup",
+      "query": "Which non muscle invasive bladder cancer products are preferred?",
+      "expected_source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1243,
+        "estimated_tokens": 311,
+        "expected_values_found": 2,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 0.6666666666666666,
+        "complete_evidence": false,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 1895,
+        "estimated_tokens": 474,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "non_muscle_invasive_bladder_cancer_non_preferred",
+      "kind": "Preference lookup",
+      "query": "Which non muscle invasive bladder cancer products are non-preferred?",
+      "expected_source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1262,
+        "estimated_tokens": 316,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 1895,
+        "estimated_tokens": 474,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "paclitaxel_protein_bound_preferred",
+      "kind": "Preference lookup",
+      "query": "Which paclitaxel protein bound products are preferred?",
+      "expected_source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1050,
+        "estimated_tokens": 263,
+        "expected_values_found": 1,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 0.3333333333333333,
+        "complete_evidence": false,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 1912,
+        "estimated_tokens": 478,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "paclitaxel_protein_bound_non_preferred",
+      "kind": "Preference lookup",
+      "query": "Which paclitaxel protein bound products are non-preferred?",
+      "expected_source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1125,
+        "estimated_tokens": 282,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 1912,
+        "estimated_tokens": 478,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "pemetrexed_preferred",
+      "kind": "Preference lookup",
+      "query": "Which pemetrexed products are preferred?",
+      "expected_source": "geha-coverage-policy-pemetrexed.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1312,
+        "estimated_tokens": 328,
+        "expected_values_found": 2,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 0.6666666666666666,
+        "complete_evidence": false,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2078,
+        "estimated_tokens": 520,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "pemetrexed_non_preferred",
+      "kind": "Preference lookup",
+      "query": "Which pemetrexed products are non-preferred?",
+      "expected_source": "geha-coverage-policy-pemetrexed.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1299,
+        "estimated_tokens": 325,
+        "expected_values_found": 5,
+        "expected_values_total": 7,
+        "expected_evidence_coverage": 0.7142857142857143,
+        "complete_evidence": false,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2078,
+        "estimated_tokens": 520,
+        "expected_values_found": 7,
+        "expected_values_total": 7,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "rituximab_preferred",
+      "kind": "Preference lookup",
+      "query": "Which rituximab products are preferred?",
+      "expected_source": "geha-coverage-policy-rituximab.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1337,
+        "estimated_tokens": 335,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 1066,
+        "estimated_tokens": 267,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "rituximab_non_preferred",
+      "kind": "Preference lookup",
+      "query": "Which rituximab products are non-preferred?",
+      "expected_source": "geha-coverage-policy-rituximab.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1337,
+        "estimated_tokens": 335,
+        "expected_values_found": 4,
+        "expected_values_total": 4,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 1066,
+        "estimated_tokens": 267,
+        "expected_values_found": 4,
+        "expected_values_total": 4,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "rytelo_preferred",
+      "kind": "Preference lookup",
+      "query": "Which rytelo products are preferred?",
+      "expected_source": "geha-coverage-policy-rytelo.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 684,
+        "estimated_tokens": 171,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 625,
+        "estimated_tokens": 157,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "rytelo_non_preferred",
+      "kind": "Preference lookup",
+      "query": "Which rytelo products are non-preferred?",
+      "expected_source": "geha-coverage-policy-rytelo.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 2,
+        "characters": 776,
+        "estimated_tokens": 194,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 590,
+        "estimated_tokens": 148,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "short_acting_gcsfs_preferred",
+      "kind": "Preference lookup",
+      "query": "Which short acting gcsfs products are preferred?",
+      "expected_source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 2,
+        "characters": 1199,
+        "estimated_tokens": 300,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2260,
+        "estimated_tokens": 565,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "short_acting_gcsfs_non_preferred",
+      "kind": "Preference lookup",
+      "query": "Which short acting gcsfs products are non-preferred?",
+      "expected_source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 2,
+        "characters": 1305,
+        "estimated_tokens": 327,
+        "expected_values_found": 3,
+        "expected_values_total": 4,
+        "expected_evidence_coverage": 0.75,
+        "complete_evidence": false,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2427,
+        "estimated_tokens": 607,
+        "expected_values_found": 4,
+        "expected_values_total": 4,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "taxotere_docivyx_preferred",
+      "kind": "Preference lookup",
+      "query": "Which taxotere docivyx products are preferred?",
+      "expected_source": "geha-coverage-policy-taxotere-docivyx.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 982,
+        "estimated_tokens": 246,
+        "expected_values_found": 1,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 924,
+        "estimated_tokens": 231,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "taxotere_docivyx_non_preferred",
+      "kind": "Preference lookup",
+      "query": "Which taxotere docivyx products are non-preferred?",
+      "expected_source": "geha-coverage-policy-taxotere-docivyx.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 2,
+        "characters": 1006,
+        "estimated_tokens": 252,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 1726,
+        "estimated_tokens": 432,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "trastuzumab_preferred",
+      "kind": "Preference lookup",
+      "query": "Which trastuzumab products are preferred?",
+      "expected_source": "geha-coverage-policy-trastuzumab.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1278,
+        "estimated_tokens": 320,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 1669,
+        "estimated_tokens": 418,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "trastuzumab_non_preferred",
+      "kind": "Preference lookup",
+      "query": "Which trastuzumab products are non-preferred?",
+      "expected_source": "geha-coverage-policy-trastuzumab.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1289,
+        "estimated_tokens": 323,
+        "expected_values_found": 5,
+        "expected_values_total": 6,
+        "expected_evidence_coverage": 0.8333333333333334,
+        "complete_evidence": false,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 1669,
+        "estimated_tokens": 418,
+        "expected_values_found": 6,
+        "expected_values_total": 6,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "vectibix_preferred",
+      "kind": "Preference lookup",
+      "query": "Which vectibix products are preferred?",
+      "expected_source": "geha-coverage-policy-vectibix.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 764,
+        "estimated_tokens": 191,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 588,
+        "estimated_tokens": 147,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "vectibix_non_preferred",
+      "kind": "Preference lookup",
+      "query": "Which vectibix products are non-preferred?",
+      "expected_source": "geha-coverage-policy-vectibix.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 764,
+        "estimated_tokens": 191,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 802,
+        "estimated_tokens": 201,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "xgeva_preferred",
+      "kind": "Preference lookup",
+      "query": "Which xgeva products are preferred?",
+      "expected_source": "geha-coverage-policy-xgeva.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1124,
+        "estimated_tokens": 281,
+        "expected_values_found": 0,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 0.0,
+        "complete_evidence": false,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 3581,
+        "estimated_tokens": 896,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "xgeva_non_preferred",
+      "kind": "Preference lookup",
+      "query": "Which xgeva products are non-preferred?",
+      "expected_source": "geha-coverage-policy-xgeva.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1252,
+        "estimated_tokens": 313,
+        "expected_values_found": 5,
+        "expected_values_total": 12,
+        "expected_evidence_coverage": 0.4166666666666667,
+        "complete_evidence": false,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2856,
+        "estimated_tokens": 714,
+        "expected_values_found": 12,
+        "expected_values_total": 12,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "bendamustine_j9036",
+      "kind": "Row-to-column relationship",
+      "query": "For bendamustine HCPCS J9036, what drug, preference, and prior authorization are listed?",
+      "expected_source": "geha-coverage-policy-bendamustine.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1274,
+        "estimated_tokens": 319,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2052,
+        "estimated_tokens": 513,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "long_acting_gcsfs_preferred",
+      "kind": "Row-to-column relationship",
+      "query": "Which long-acting G-CSF drugs are preferred, and what HCPCS code and prior authorization does each have?",
+      "expected_source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 2,
+        "characters": 1301,
+        "estimated_tokens": 326,
+        "expected_values_found": 4,
+        "expected_values_total": 6,
+        "expected_evidence_coverage": 0.6666666666666666,
+        "complete_evidence": false,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2073,
+        "estimated_tokens": 519,
+        "expected_values_found": 6,
+        "expected_values_total": 6,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "short_acting_gcsfs_preferred",
+      "kind": "Row-to-column relationship",
+      "query": "For preferred short-acting G-CSF, give the drug name, HCPCS code, and prior authorization requirement.",
+      "expected_source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1307,
+        "estimated_tokens": 327,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2073,
+        "estimated_tokens": 519,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "gemcitabine_no_prior_auth",
+      "kind": "Row-to-column relationship",
+      "query": "Which gemcitabine products do not require prior authorization? Give each drug, HCPCS code, and preference.",
+      "expected_source": "geha-coverage-policy-gemcitabine.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 3,
+        "characters": 1356,
+        "estimated_tokens": 339,
+        "expected_values_found": 6,
+        "expected_values_total": 6,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 3,
+        "characters": 1932,
+        "estimated_tokens": 483,
+        "expected_values_found": 6,
+        "expected_values_total": 6,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "pemetrexed_preferred_codes",
+      "kind": "Row-to-column relationship",
+      "query": "Which pemetrexed products are preferred, and what is each HCPCS code?",
+      "expected_source": "geha-coverage-policy-pemetrexed.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1307,
+        "estimated_tokens": 327,
+        "expected_values_found": 2,
+        "expected_values_total": 6,
+        "expected_evidence_coverage": 0.3333333333333333,
+        "complete_evidence": false,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2078,
+        "estimated_tokens": 520,
+        "expected_values_found": 6,
+        "expected_values_total": 6,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "taxotere_docivyx_all",
+      "kind": "Row-to-column relationship",
+      "query": "In the Taxotere and Docivyx policy, list each drug with its HCPCS code, preference, and prior authorization requirement.",
+      "expected_source": "geha-coverage-policy-taxotere-docivyx.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 3,
+        "characters": 1311,
+        "estimated_tokens": 328,
+        "expected_values_found": 12,
+        "expected_values_total": 12,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 3,
+        "characters": 1883,
+        "estimated_tokens": 471,
+        "expected_values_found": 12,
+        "expected_values_total": 12,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    },
+    {
+      "id": "xgeva_q5157",
+      "kind": "Row-to-column relationship",
+      "query": "For Xgeva policy code Q5157, which denosumab drug names are listed and what are their preference and prior authorization status?",
+      "expected_source": "geha-coverage-policy-xgeva.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1318,
+        "estimated_tokens": 330,
+        "expected_values_found": 5,
+        "expected_values_total": 6,
+        "expected_evidence_coverage": 0.8333333333333334,
+        "complete_evidence": false,
+        "expected_table_present": true
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 3511,
+        "estimated_tokens": 878,
+        "expected_values_found": 6,
+        "expected_values_total": 6,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true
+      }
+    }
+  ],
+  "configuration": {
+    "embedding_model": "BAAI/bge-small-en-v1.5",
+    "retrieval": "BM25 + pgvector reciprocal-rank fusion for both cases",
+    "top_chunks": 5,
+    "top_tables": 3,
+    "candidate_rows": 30,
+    "vector_candidates": 100,
+    "parent_tables": 103,
+    "child_vectors": 691
+  }
+}

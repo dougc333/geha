@@ -134,7 +134,8 @@ async def ask(question: str, model, *, environment: str = "production", server_u
         if isinstance(message, ToolMessage):
             log(f"  <- {str(message.content)[:200]}")
     answer = next((m.content for m in reversed(state["messages"]) if isinstance(m, AIMessage) and not m.tool_calls), "")
-    return {"answer": answer, "tool_calls": calls, "tools_offered": [t.name for t in tools]}
+    return {"answer": answer, "tool_calls": calls, "tools_offered": [t.name for t in tools],
+            "messages": state["messages"]}  # full transcript, with usage, for the eval runner
 
 
 def ask_human(name: str, args: dict) -> bool:

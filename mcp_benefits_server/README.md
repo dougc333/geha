@@ -61,6 +61,11 @@ uv run --no-project --python 3.12 --with langchain-mcp-adapters --with langchain
 `--model` also takes `openai` or `ollama:<model>`; `--env` picks the local deployment;
 `--server-url` points at a deployed one. Tests drive it with a scripted model (no LLM).
 
+**Eval:** [`evals/`](evals/README.md) holds 59 cases with expected answers computed from the tools.
+It grades with code checks plus a Haiku judge, and has a resumable runner and a report shaped for
+hill-climbing. Its README covers the results so far and how the eval was built and is meant to be
+hill-climbed.
+
 ## Deploy to AWS
 
 Lambda behind a Function URL with `AuthType: AWS_IAM`, one stack per tier
