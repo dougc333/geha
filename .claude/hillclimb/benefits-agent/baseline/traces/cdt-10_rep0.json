@@ -1,0 +1,23 @@
+[
+ {
+  "role": "system",
+  "content": "You are a GEHA 2026 dental benefits assistant for federal members.\nUse the tools for every fact: rate codes, premiums, procedure classes and policy criteria come\nonly from tool results, never from memory or your own arithmetic. Cite the source each tool\nreturns. If no tool can answer, say so plainly. You cannot see member records unless a tool\noffers them, and you never submit an enrollment change without the member's explicit approval.\nNot affiliated with G.E.H.A; for official answers members should contact GEHA or BENEFEDS."
+ },
+ {
+  "role": "user",
+  "content": "What benefit class is D4341 and which page of the brochure lists it?"
+ },
+ {
+  "role": "tool_call",
+  "name": "cdt_procedure_class",
+  "content": "{\n  \"code\": \"D4341\"\n}"
+ },
+ {
+  "role": "tool_result",
+  "content": "[{'type': 'text', 'text': '{\\n  \"code\": \"D4341\",\\n  \"description\": \"Periodontal scaling and root planing - four or more teeth per quadrant\",\\n  \"benefit_class\": \"Class B (intermediate)\",\\n  \"page\": 25,\\n  \"source\": \"2026 GEHA dental plan brochure, page 25\"\\n}', 'id': 'lc_bbf6fb37-c262-43ac-adb8-2c0f13185fa2'}]"
+ },
+ {
+  "role": "assistant",
+  "content": "D4341 (periodontal scaling and root planing, four or more teeth per quadrant) is a **Class B (intermediate)** procedure. The brochure lists it on **page 25**.\n\nSource: 2026 GEHA dental plan brochure, page 25.\n\nI'm not affiliated with GEHA. For official answers, contact GEHA or BENEFEDS."
+ }
+]

@@ -1,0 +1,86 @@
+[
+  {
+    "id": "bendamustine_j9036",
+    "query": "For bendamustine HCPCS J9036, what drug, preference, and prior authorization are listed?",
+    "source": "geha-coverage-policy-bendamustine.pdf",
+    "table_number": 1,
+    "where": {"hcpcscode": "J9036"},
+    "fields": ["drugname", "preference", "requirespriorauth"],
+    "gold_rows": [
+      {"drugname": "Belrapzo", "preference": "Non-preferred", "requirespriorauth": "Yes"}
+    ]
+  },
+  {
+    "id": "long_acting_gcsfs_preferred",
+    "query": "Which long-acting G-CSF drugs are preferred, and what HCPCS code and prior authorization does each have?",
+    "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+    "table_number": 1,
+    "where": {"preference": "Preferred"},
+    "fields": ["drugname", "hcpcscode", "requirespriorauth"],
+    "gold_rows": [
+      {"drugname": "Nyvepria", "hcpcscode": "Q5122", "requirespriorauth": "Yes"},
+      {"drugname": "Fylnetra", "hcpcscode": "Q5130", "requirespriorauth": "Yes"}
+    ]
+  },
+  {
+    "id": "short_acting_gcsfs_preferred",
+    "query": "For preferred short-acting G-CSF, give the drug name, HCPCS code, and prior authorization requirement.",
+    "source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+    "table_number": 1,
+    "where": {"preference": "Preferred"},
+    "fields": ["drugname", "hcpcscode", "requirespriorauth"],
+    "gold_rows": [
+      {"drugname": "Nivestym (filgrastim- aafi)", "hcpcscode": "Q5110", "requirespriorauth": "Yes"}
+    ]
+  },
+  {
+    "id": "gemcitabine_no_prior_auth",
+    "query": "Which gemcitabine products do not require prior authorization? Give each drug, HCPCS code, and preference.",
+    "source": "geha-coverage-policy-gemcitabine.pdf",
+    "table_number": 1,
+    "where": {"requirespriorauth": "No"},
+    "fields": ["drugname", "hcpcscode", "preference"],
+    "gold_rows": [
+      {"drugname": "Gemzar", "hcpcscode": "J9201", "preference": "Non- Preferred"},
+      {"drugname": "Gemcitabine (Accord)", "hcpcscode": "J9196", "preference": "Preferred"}
+    ]
+  },
+  {
+    "id": "pemetrexed_preferred_codes",
+    "query": "Which pemetrexed products are preferred, and what is each HCPCS code?",
+    "source": "geha-coverage-policy-pemetrexed.pdf",
+    "table_number": 1,
+    "where": {"preference": "Preferred"},
+    "fields": ["drugname", "hcpcscode"],
+    "gold_rows": [
+      {"drugname": "Pemetrexed (Axtle)", "hcpcscode": "J9292"},
+      {"drugname": "Pemetrexed (Accord)", "hcpcscode": "J9296"},
+      {"drugname": "Pemetrexed (Bluepoint)", "hcpcscode": "J9322"}
+    ]
+  },
+  {
+    "id": "taxotere_docivyx_all",
+    "query": "In the Taxotere and Docivyx policy, list each drug with its HCPCS code, preference, and prior authorization requirement.",
+    "source": "geha-coverage-policy-taxotere-docivyx.pdf",
+    "table_number": 1,
+    "where": {},
+    "fields": ["drugname", "hcpcscode", "preference", "requirespriorauth"],
+    "gold_rows": [
+      {"drugname": "Taxotere (docetaxel)", "hcpcscode": "J9171", "preference": "Preferred", "requirespriorauth": "No"},
+      {"drugname": "Docetaxel (Hospira 505(b)(2))", "hcpcscode": "J9232", "preference": "Preferred", "requirespriorauth": "No"},
+      {"drugname": "Docetaxel (Docivyx)", "hcpcscode": "J9172", "preference": "Non-Preferred", "requirespriorauth": "Yes"}
+    ]
+  },
+  {
+    "id": "xgeva_q5157",
+    "query": "For Xgeva policy code Q5157, which denosumab drug names are listed and what are their preference and prior authorization status?",
+    "source": "geha-coverage-policy-xgeva.pdf",
+    "table_number": 1,
+    "where": {"hcpcscode": "Q5157"},
+    "fields": ["drugname", "preference", "requirespriorauth"],
+    "gold_rows": [
+      {"drugname": "Denosumab-bmwo (Osenvelt)", "preference": "Non- Preferred**", "requirespriorauth": "Yes"},
+      {"drugname": "Denosumab-bmwo (Denosumab-Celtrion)", "preference": "Non- Preferred**", "requirespriorauth": "Yes"}
+    ]
+  }
+]

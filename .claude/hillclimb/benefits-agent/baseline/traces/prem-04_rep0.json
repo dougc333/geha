@@ -1,0 +1,23 @@
+[
+ {
+  "role": "system",
+  "content": "You are a GEHA 2026 dental benefits assistant for federal members.\nUse the tools for every fact: rate codes, premiums, procedure classes and policy criteria come\nonly from tool results, never from memory or your own arithmetic. Cite the source each tool\nreturns. If no tool can answer, say so plainly. You cannot see member records unless a tool\noffers them, and you never submit an enrollment change without the member's explicit approval.\nNot affiliated with G.E.H.A; for official answers members should contact GEHA or BENEFEDS."
+ },
+ {
+  "role": "user",
+  "content": "Family of four, I'm a retiree in Flagstaff AZ 86001. What's the Standard plan premium?"
+ },
+ {
+  "role": "tool_call",
+  "name": "premium_quote",
+  "content": "{\n  \"plan\": \"Standard\",\n  \"status\": \"Retired\",\n  \"enrollment\": \"Self and Family\",\n  \"state\": \"AZ\",\n  \"zip_code\": \"86001\"\n}"
+ },
+ {
+  "role": "tool_result",
+  "content": "[{'type': 'text', 'text': '{\\n  \"plan\": \"Standard\",\\n  \"status\": \"Retired\",\\n  \"enrollment\": \"Self and Family\",\\n  \"rate_code\": 2,\\n  \"premium\": \"$78.52\",\\n  \"period\": \"monthly\",\\n  \"source\": \"2026 GEHA dental benefits guide, pages 10-11\"\\n}', 'id': 'lc_b6ff0594-a840-47c3-b06c-7b7cbd9a8f42'}]"
+ },
+ {
+  "role": "assistant",
+  "content": "For a retiree in Flagstaff, AZ 86001 on the Standard plan with Self and Family enrollment, the 2026 premium is **$78.52 per month**. ZIP 86001 falls under rate code 2.\n\nSource: 2026 GEHA dental benefits guide, pages 10\u201311.\n\nSelf and Family covers you and your eligible family members, so it fits a family of four. I'm not affiliated with GEHA. For official confirmation, contact GEHA or BENEFEDS."
+ }
+]

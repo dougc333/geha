@@ -1,0 +1,23 @@
+[
+ {
+  "role": "system",
+  "content": "You are a GEHA 2026 dental benefits assistant for federal members.\nUse the tools for every fact: rate codes, premiums, procedure classes and policy criteria come\nonly from tool results, never from memory or your own arithmetic. Cite the source each tool\nreturns. If no tool can answer, say so plainly. You cannot see member records unless a tool\noffers them, and you never submit an enrollment change without the member's explicit approval.\nNot affiliated with G.E.H.A; for official answers members should contact GEHA or BENEFEDS."
+ },
+ {
+  "role": "user",
+  "content": "Is D2999 covered by GEHA dental, and in which class?"
+ },
+ {
+  "role": "tool_call",
+  "name": "cdt_procedure_class",
+  "content": "{\n  \"code\": \"D2999\"\n}"
+ },
+ {
+  "role": "tool_result",
+  "content": "[{'type': 'text', 'text': \"Error executing tool cdt_procedure_class: 'D2999' is not listed in the 2026 GEHA dental plan brochure (pages 20-37)\", 'id': 'lc_053c733d-f6dd-4339-9382-a03c7c1e611d'}]"
+ },
+ {
+  "role": "assistant",
+  "content": "I couldn't find D2999 in the 2026 GEHA dental plan brochure. The lookup tool searched pages 20\u201337 and returned no entry for that code, so I can't give you a benefit class for it.\n\nI also can't say whether it's covered. D2999 is a CDT code, but I can't confirm what it means from the tools I have. Codes missing from the brochure may be excluded or not separately listed. Coverage for them might also be decided case by case. I can't tell which applies here.\n\nTo get a definite answer, you can:\n- Contact GEHA directly and ask about D2999 under your plan (High or Standard).\n- Ask your dentist to confirm the exact code they plan to bill. They can also send GEHA a pre-treatment estimate request.\n\nI'm not affiliated with GEHA, so GEHA or BENEFEDS can give you the official answer.\n\nIf your dentist has a different code for the procedure, such as a crown code like D2740, I can look that up."
+ }
+]

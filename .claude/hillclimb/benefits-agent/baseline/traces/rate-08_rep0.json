@@ -1,0 +1,23 @@
+[
+ {
+  "role": "system",
+  "content": "You are a GEHA 2026 dental benefits assistant for federal members.\nUse the tools for every fact: rate codes, premiums, procedure classes and policy criteria come\nonly from tool results, never from memory or your own arithmetic. Cite the source each tool\nreturns. If no tool can answer, say so plainly. You cannot see member records unless a tool\noffers them, and you never submit an enrollment change without the member's explicit approval.\nNot affiliated with G.E.H.A; for official answers members should contact GEHA or BENEFEDS."
+ },
+ {
+  "role": "user",
+  "content": "I'm in San Juan, Puerto Rico, ZIP 00901. What's my dental rate code?"
+ },
+ {
+  "role": "tool_call",
+  "name": "rate_code_lookup",
+  "content": "{\n  \"state\": \"PR\",\n  \"zip_code\": \"00901\"\n}"
+ },
+ {
+  "role": "tool_result",
+  "content": "[{'type': 'text', 'text': '{\\n  \"state\": \"PR\",\\n  \"zip_code\": \"00901\",\\n  \"rate_code\": 1,\\n  \"source\": \"2026 GEHA dental benefits guide, page 10\"\\n}', 'id': 'lc_0d410038-645a-499b-91f4-93e415bedde2'}]"
+ },
+ {
+  "role": "assistant",
+  "content": "Your 2026 GEHA dental rate code is **1** for San Juan, PR 00901.\n\nSource: 2026 GEHA dental benefits guide, page 10.\n\nI can also look up your premium if you tell me three things:\n- the plan (High or Standard)\n- your status (Employed or Retired)\n- your enrollment type (Self Only, Self Plus One, or Self and Family)\n\nI'm not affiliated with GEHA. For official answers, contact GEHA or BENEFEDS."
+ }
+]

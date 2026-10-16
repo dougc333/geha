@@ -13,6 +13,11 @@ from crawl_dir.src.pipeline.chunks import (
     validate_chunks,
     validate_embedding_token_lengths,
 )
+from crawl_dir.src.pipeline.contextual_retrieval import (
+    PROMPT_VERSION,
+    contextual_retrieval_prompt,
+    contextualize_candidate,
+)
 from crawl_dir.src.pipeline.promotion import promote_run
 from crawl_dir.src.pipeline.tables import merge_table_fragments
 
@@ -70,6 +75,66 @@ class ChunkContractTests(unittest.TestCase):
             max_tokens=3,
         )
         self.assertEqual(errors[0]["issue"], "embedding_token_limit_exceeded")
+
+
+class ContextualRetrievalTests(unittest.TestCase):
+    def test_prompt_contains_the_whole_document_and_target_chunk(self):
+        prompt = contextual_retrieval_prompt("Whole policy text", "Target row")
+        self.assertIn("Whole policy text", prompt["system"][1]["text"])
+        self.assertEqual(prompt["system"][1]["cache_control"], {"type": "ephemeral"})
+        self.assertIn("Target row", prompt["message"])
+
+    def test_contextual_output_is_separate_and_resumable(self):
+        with tempfile.TemporaryDirectory() as directory:
+            run = Path(directory) / "run"
+            candidate = run / "candidate"
+            candidate.mkdir(parents=True)
+            (candidate / "document.md").write_text("Full policy about Datroway.")
+            chunk = {
+                "chunk_id": "datroway-chunk-0001",
+                "document_id": "datroway",
+                "document_version": "2026",
+                "plan_year": 2026,
+                "pages": [2],
+                "section": "Coverage",
+                "content_type": "text",
+                "text": "Prior authorization is required.",
+                "contextualized_text": "datroway | pages 2 | Coverage\n\nPrior authorization is required.",
+                "table_ids": [],
+                "source_sha256": "abc",
+                "review_status": "pending",
+            }
+            (candidate / "chunks.jsonl").write_text(json.dumps(chunk) + "\n")
+            calls: list[tuple[str, str]] = []
+
+            def generate(document: str, text: str) -> str:
+                calls.append((document, text))
+                return "This is the Datroway coverage-policy authorization section."
+
+            output = contextualize_candidate(
+                run, model="test-claude", generate_context=generate
+            )
+            record = json.loads(output.read_text().strip())
+            self.assertEqual(record["text"], chunk["text"])
+            self.assertEqual(record["contextualized_text"], chunk["contextualized_text"])
+            self.assertTrue(record["contextual_retrieval_text"].endswith(chunk["text"]))
+            self.assertEqual(record["contextual_retrieval_prompt_version"], PROMPT_VERSION)
+            contextualize_candidate(run, model="test-claude", generate_context=generate)
+            self.assertEqual(len(calls), 1)
+
+    def test_empty_canonical_markdown_blocks_claude(self):
+        with tempfile.TemporaryDirectory() as directory:
+            run = Path(directory) / "run"
+            candidate = run / "candidate"
+            candidate.mkdir(parents=True)
+            (candidate / "document.md").write_text("   \n")
+            (candidate / "chunks.jsonl").write_text("{}\n")
+            with self.assertRaisesRegex(ValueError, "document.md is empty"):
+                contextualize_candidate(
+                    run,
+                    model="test-claude",
+                    generate_context=lambda _document, _chunk: "must not run",
+                )
 
 
 class SafetyTests(unittest.TestCase):
