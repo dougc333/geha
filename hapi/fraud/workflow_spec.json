@@ -1,0 +1,381 @@
+{
+ "version": 1,
+ "report_threshold": 0.5,
+ "nodes": [
+  {
+   "id": "duplicates",
+   "type": "code",
+   "op": "duplicates",
+   "params": {
+    "window_days": 1,
+    "series_gap": 7
+   },
+   "why": "find_duplicate_claims named a guilty provider in 7 of 16 graded runs"
+  },
+  {
+   "id": "after_death",
+   "type": "code",
+   "op": "after_death",
+   "params": {
+    "exclude_services": [
+     "Death Certification"
+    ]
+   },
+   "why": "claims_after_patient_death named a guilty provider in 10 of 16 graded runs"
+  },
+  {
+   "id": "peer_cost",
+   "type": "code",
+   "op": "peer_cost",
+   "params": {
+    "top_codes": 15,
+    "min_claims": 3,
+    "high_ratio": 1.3
+   },
+   "why": "service_cost_by_provider named a guilty provider in 6 of 16 graded runs"
+  },
+  {
+   "id": "daily_load",
+   "type": "code",
+   "op": "daily_load",
+   "params": {
+    "max_visit_minutes": 180,
+    "min_visits": 5
+   },
+   "why": "provider_daily_load named a guilty provider in 11 of 16 graded runs"
+  },
+  {
+   "id": "profile",
+   "type": "code",
+   "op": "profile",
+   "params": {
+    "min_claims": 10,
+    "limits": {
+     "claims_per_patient_day": 3.9,
+     "repeat_series": 2,
+     "exclusive_patient_share": 0.5
+    }
+   },
+   "why": "coverage check: providers outside these limits that no question explains go to the full agent"
+  },
+  {
+   "id": "q_duplicates",
+   "type": "question",
+   "input": "duplicates",
+   "scheme": "duplicates",
+   "label": "duplicate billing",
+   "question": "Is this consistent with duplicate billing (the same service for the same patient and amount billed more than once)?",
+   "choices": {
+    "yes": "The same service was billed again with nothing to suggest a second service.",
+    "no": "The repeats are routine (e.g. a daily treatment) or too few to matter."
+   },
+   "describe": "{exact_duplicates} exact duplicate claim(s) and {rebilled_within_window} re-billed within {window_days} day(s) (same patient, service, amount)",
+   "screen": 0.5,
+   "max_candidates": 10,
+   "prior": {
+    "feature": "score",
+    "center": 0.75,
+    "scale": 0.25,
+    "source": "clean-baseline"
+   }
+  },
+  {
+   "id": "q_after_death",
+   "type": "question",
+   "input": "after_death",
+   "scheme": "after_death",
+   "label": "billing after death",
+   "question": "Is this consistent with billing for services after the patient's death (beyond routine post-death paperwork)?",
+   "choices": {
+    "yes": "Services were billed for patients who had already died.",
+    "no": "Routine paperwork, a data-entry slip, or a single isolated claim."
+   },
+   "describe": "{claims} claims for {patients} deceased patient(s), {days_after_death_min}-{days_after_death_max} days after death",
+   "screen": 1,
+   "max_candidates": 10,
+   "prior": {
+    "feature": "score",
+    "center": 1.5,
+    "scale": 0.5,
+    "source": "clean-baseline"
+   }
+  },
+  {
+   "id": "q_upcoding",
+   "type": "question",
+   "input": "peer_cost",
+   "scheme": "upcoding",
+   "label": "upcoding",
+   "question": "Is this provider's pay for this service consistent with upcoding (billing a higher-paying level of service than was delivered)?",
+   "choices": {
+    "yes": "Paid well above other providers for the same service, on a pattern of claims.",
+    "no": "The difference is small, isolated, or explained."
+   },
+   "describe": "{service} paid {ratio_to_peer_median}x the peer median (${peer_median_paid}); {claims} claims above peer rates (inflated)",
+   "screen": 1.15,
+   "max_candidates": 10,
+   "prior": {
+    "feature": "score",
+    "center": 1.25,
+    "scale": 0.05,
+    "source": "clean-baseline"
+   }
+  },
+  {
+   "id": "q_impossible_day",
+   "type": "question",
+   "input": "daily_load",
+   "scheme": "impossible_day",
+   "label": "impossible day",
+   "question": "Is this provider's busiest day consistent with billing more visit time than one clinician can deliver in a day?",
+   "choices": {
+    "yes": "More visits or billed hours in one day than one person can deliver.",
+    "no": "A busy but plausible day."
+   },
+   "describe": "{visits} visits for {patients} patients on {date} between {first_start} and {last_end} ({billed_minutes} billed minutes in {span_hours} hours, same day)",
+   "screen": 8,
+   "max_candidates": 10,
+   "prior": {
+    "feature": "score",
+    "center": 10,
+    "scale": 1,
+    "source": "clean-baseline"
+   }
+  },
+  {
+   "id": "research",
+   "type": "research",
+   "band": [
+    0.3,
+    0.7
+   ],
+   "tools": [
+    "fhir_search",
+    "fhir_read"
+   ],
+   "max_items": 4,
+   "max_calls": 6,
+   "recursion_limit": 16
+  },
+  {
+   "id": "escalate",
+   "type": "escalate",
+   "min_confidence": 0.7,
+   "on_unexplained": true
+  }
+ ],
+ "hints": [],
+ "uncovered_schemes": {
+  "excessive_frequency": {
+   "found": 2,
+   "missed": 1
+  },
+  "phantom_patients": {
+   "found": 1,
+   "missed": 2
+  },
+  "unbundling": {
+   "found": 2,
+   "missed": 1
+  }
+ },
+ "compiled": {
+  "at": "2026-10-14T08:25:16+00:00",
+  "from_runs": [
+   "20260930T052334Z-61a53c",
+   "20260930T052454Z-bcec12",
+   "20260930T052622Z-bc82df",
+   "20260930T052747Z-58ab89",
+   "20260930T052922Z-1889f9",
+   "20260930T115651Z-3cd96a",
+   "20260930T125344Z-ed7d7e",
+   "20260930T125951Z-9e4f3f",
+   "20260930T130549Z-2ea31d",
+   "20260930T131235Z-8b1da9",
+   "20260930T131733Z-20d8ec",
+   "20260930T132225Z-a6519d",
+   "20260930T132539Z-b14210",
+   "20260930T133710Z-fb444b",
+   "20260930T134655Z-6594aa",
+   "20260930T142107Z-ddd1f5"
+  ],
+  "notes": {
+   "derived": 16
+  },
+  "scheme_outcomes": {
+   "after_death": {
+    "found": 7,
+    "missed": 0
+   },
+   "duplicates": {
+    "found": 11,
+    "missed": 5
+   },
+   "excessive_frequency": {
+    "found": 2,
+    "missed": 1
+   },
+   "impossible_day": {
+    "found": 4,
+    "missed": 3
+   },
+   "phantom_patients": {
+    "found": 1,
+    "missed": 2
+   },
+   "unbundling": {
+    "found": 2,
+    "missed": 1
+   },
+   "upcoding": {
+    "found": 6,
+    "missed": 10
+   }
+  },
+  "tool_stats": {
+   "claims_after_patient_death": {
+    "calls": 22,
+    "runs_used": 16,
+    "evidence_runs": 10,
+    "median_first_position": 3.0,
+    "common_args": [
+     {},
+     {
+      "provider": "Practitioner/1609"
+     },
+     {
+      "provider": "Practitioner/1389"
+     }
+    ]
+   },
+   "fhir_read": {
+    "calls": 142,
+    "runs_used": 16,
+    "evidence_runs": 8,
+    "median_first_position": 17.0,
+    "common_args": [
+     {
+      "id": "1389",
+      "resourceType": "Practitioner"
+     },
+     {
+      "id": "36853",
+      "resourceType": "Patient"
+     },
+     {
+      "id": "1609",
+      "resourceType": "Practitioner"
+     }
+    ]
+   },
+   "fhir_search": {
+    "calls": 219,
+    "runs_used": 16,
+    "evidence_runs": 10,
+    "median_first_position": 10.0,
+    "common_args": [
+     {
+      "queryParams": "provider=Practitioner/1609",
+      "resourceType": "ExplanationOfBenefit"
+     },
+     {
+      "queryParams": "provider=Practitioner/1389",
+      "resourceType": "ExplanationOfBenefit"
+     },
+     {
+      "queryParams": "provider=Practitioner/1603",
+      "resourceType": "ExplanationOfBenefit"
+     }
+    ]
+   },
+   "find_duplicate_claims": {
+    "calls": 20,
+    "runs_used": 16,
+    "evidence_runs": 7,
+    "median_first_position": 2.0,
+    "common_args": [
+     {},
+     {
+      "provider": "Practitioner/1609"
+     },
+     {
+      "provider": "Practitioner/1389"
+     }
+    ]
+   },
+   "provider_billing_summary": {
+    "calls": 36,
+    "runs_used": 16,
+    "evidence_runs": 5,
+    "median_first_position": 0.0,
+    "common_args": [
+     {
+      "top_n": 20
+     },
+     {
+      "min_claims": 10,
+      "sort_by": "total_paid",
+      "top_n": 15
+     },
+     {
+      "min_claims": 5,
+      "sort_by": "total_paid",
+      "top_n": 20
+     }
+    ]
+   },
+   "provider_daily_load": {
+    "calls": 83,
+    "runs_used": 16,
+    "evidence_runs": 11,
+    "median_first_position": 7.0,
+    "common_args": [
+     {
+      "provider": "Practitioner/1609",
+      "top_n": 5
+     },
+     {
+      "provider": "Practitioner/1389",
+      "top_n": 5
+     },
+     {
+      "provider": "Practitioner/1603",
+      "top_n": 5
+     }
+    ]
+   },
+   "service_cost_by_provider": {
+    "calls": 141,
+    "runs_used": 16,
+    "evidence_runs": 6,
+    "median_first_position": 4.0,
+    "common_args": [
+     {
+      "service_code": "185349003"
+     },
+     {
+      "service_code": "162673000"
+     },
+     {
+      "service_code": "185347001"
+     }
+    ]
+   },
+   "top_services": {
+    "calls": 21,
+    "runs_used": 16,
+    "evidence_runs": 0,
+    "median_first_position": 1.0,
+    "common_args": [
+     {
+      "top_n": 15
+     },
+     {},
+     {
+      "top_n": 50
+     }
+    ]
+   }
+  }
+ }
+}

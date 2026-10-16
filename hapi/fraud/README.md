@@ -4,7 +4,9 @@ A LangGraph agent (Claude Opus 5.5) investigates the local HAPI claims data for 
 fraud, choosing among raw FHIR tools (via the langcare MCP server) and claims-analytics
 tools. Every step streams to a React app: Claude's reasoning summary, the tool it picked
 and its arguments, the result, timings, and the final findings scored against a planted
-answer key. **Synthetic data only.**
+answer key. Graded runs can be compiled into a cheaper fixed workflow with a router in
+front of it; see [Learn, then compile to a workflow](#learn-then-compile-to-a-workflow---mode-agent--workflow--routed).
+**Synthetic data only.**
 
 ```
 React UI (ui/)  ──SSE──►  server.py (FastAPI :8765)  ──►  agent.py (LangGraph)
@@ -115,6 +117,188 @@ The first ladder attempt was invalid: HAPI reuses search results for 60 seconds 
 default, so the tools loaded the claims from before the planting and the agent (correctly)
 found nothing at level 1. HAPI's search cache is now off (`docker-compose.yml`) and the
 tools send `Cache-Control: no-cache`.
+
+## Learn, then compile to a workflow (`--mode agent | workflow | routed`)
+
+This follows Grep.ai's AgentRun idea. The full agent does the job the expensive way: about
+$1, 20-30 tool calls and 70-90 s per run. Its graded runs are kept with a note per run. A
+compiler turns those runs into a fixed workflow of typed steps, and a router sends each case
+to the workflow first and to the full agent only when the workflow is unsure. Each step can
+be checked on its own, and every decision is recorded so it can be replayed without a model.
+
+```
+ladder.py --learn ─► runs/traces.jsonl + runs/notes.jsonl ─► compile_workflow.py ─► workflow_spec.json
+                                                                                         │
+question ─► code steps ─► questions, p(yes) per provider ─► research (uncertain only) ─► router
+                                                                                ├─ confident: workflow findings
+                                                                                └─ unsure: full agent (agent.py)
+```
+
+| Step type | What runs | Model |
+|---|---|---|
+| `code` | the mechanical checks in `workflow_ops.py`: peer cost (upcoding), duplicates (same day, or an isolated re-bill one day later), claims after death (death certification excluded), busiest day of short visits, and a **profile** check (claims per patient-day, weekly repeat series, patients no other provider sees) | none |
+| `question` | one typed yes/no question per provider a code step flags, e.g. *"Is this consistent with billing for services after the patient's death?"*, answered with a probability (`questions.py`) | `rules` (offline logistic on the step's score), `llm` (Claude Haiku 4.5, structured output), or `jev` (TypeSafe Jev `Choice`, called as in `dental_enrollment_chatbot/src/jev_router.py`) |
+| `research` | a small `create_agent` sub-agent with only `fhir_search` / `fhir_read`, behind `PermissionMiddleware(fraud_policy())`, run only for provider-scheme pairs with p in [0.3, 0.7) | `--research-model`, default `haiku` |
+| `escalate` | the router: hand the case to the full agent when the least certain decision is below 0.7, or when a provider is outside the profile limits and no question explains it | the full agent's model |
+
+`make_classifier("auto")` picks `jev` when `typesafe-sdk` is installed and `TYPESAFE_API_KEY`
+is set, then `llm` when `ANTHROPIC_API_KEY` is set, and otherwise `rules`. Neither condition
+holds in this checkout, so every run below used `rules`.
+
+### Background: compile to workflow
+
+The source is Grep.ai's AgentRun post
+([x.com/MiguelriosEN](https://x.com/MiguelriosEN/status/2101029313906987422), Sept 2026):
+
+- **How it works:** a frontier agent does a repetitive job the expensive way and leaves traces
+  and notes. It then writes a workflow of typed steps:
+  - code for the mechanical steps;
+  - typed questions with calibrated probabilities for the decisions (Jev);
+  - small agents only where something must be looked up;
+  - escalation to the full agent.
+
+  A router sends most cases to the workflow.
+- **Their result:** on anti-money-laundering alerts the post reports $2.89 → $0.25 per alert,
+  accuracy 90% → 95%, and 98 of 100 cases handled by the workflow.
+- **The rule they give:** "Jev decides what a thing is; code decides what follows."
+
+**Is it an agent pattern?** At run time most cases are a *workflow*: code controls the flow,
+in the sense of Anthropic's "workflows vs agents" distinction. Only escalated cases run as an
+agent. The agentic part is the authoring: the agent induces the workflow from its own traces.
+
+| Related pattern | Example |
+|---|---|
+| Workflow induction | Agent Workflow Memory (Wang et al., 2024) |
+| Automated workflow generation | AFlow (2024) |
+| Skill library | Voyager (2023); this repo's `../self-improving-agents` learned tools |
+| Program compilation | DSPy; this repo's `dspy_dental_chatbot` `optimize_router.py` |
+| Cascade / router with fallback | FrugalGPT (2023) |
+| Separating decisions from actions | 12-Factor Agents |
+
+Inside the compiled workflow are the building blocks from Anthropic's "Building effective
+agents":
+
+- routing: triage of each provider by the questions;
+- parallelization: one question per flagged provider;
+- evaluator-optimizer: the research step checks uncertain answers;
+- orchestrator-workers: escalation to the full agent.
+
+**How this repo maps onto it.** `../self-improving-agents` already does the skill-library half:
+it learns tools and lessons, but the agent still runs every case. This mode adds the other
+half, induction and routing. The agent steps (research, escalation) run under
+`agent_permissions`' `PermissionMiddleware` with `fraud_policy`, which is AgentRun's "tightest
+tool grants per step": the research sub-agent is given only `fhir_search` and `fhir_read`.
+
+### Files
+
+| File | Role |
+|---|---|
+| `agent.py` | `investigate(..., learn=True)` adds one model call after the report: the agent's note on its own run (`note` event: `evidence_tools`, `wasted`, `wish_known_first`, `least_sure`). The event loop is now `stream_agent()`, which the research step reuses. |
+| `runs.py` | appends graded runs to `runs/traces.jsonl` and notes to `runs/notes.jsonl` (git-ignored). It adds a model-free **derived** note per agent run: which tools' results named a guilty provider, repeated, failed or truncated calls, misses, and false accusations. `python runs.py backfill [DIR]` imports older graded traces. |
+| `compile_workflow.py` | runs → `workflow_spec.json` (below). `--calibrate` fits each question's logistic prior on graded workflow runs. |
+| `workflow_spec.json` | the compiled spec (committed). It lists the steps, each step's `why`, `uncovered_schemes`, `hints` for the research step, and the tool statistics behind the choices. |
+| `workflow_ops.py`, `questions.py` | the code steps, and the classifiers behind one `ask(node, evidence)` interface |
+| `workflow.py` | spec loader and validator, runner, router (`run_routed`), `decide()` (records → findings and route) and `replay()` |
+| `compare.py` | agent vs workflow table per level from `runs/`, plus a leave-one-level-out calibration replayed without models |
+| `test_workflow.py` | 27 unit tests: spec loader, code steps, the three classifiers, runner, research step (scripted model; a write is refused by the policy), router, replay, compiler, notes. They use synthetic claims and need no HAPI, MCP or LLM. |
+
+**What the compiler took from the 16 graded runs in `traces/`** (Opus, DeepSeek V4 Pro and
+MiMo; backfilled with derived notes):
+
+- **Code steps:** the four analytics tools whose results named a guilty provider became
+  code steps, in the agents' usual call order: duplicates, after-death, peer cost, daily
+  load (named a guilty provider in 7, 10, 6 and 11 runs). `top_services` never did and was
+  left out.
+- **Parameters:**
+  - The duplicate window became 1 day because the notes on missed runs mention re-billing
+    "one day later".
+  - Death certification is excluded from the after-death step because the agents' reports
+    call those claims routine paperwork.
+- **Not covered:** unbundling, excessive frequency and phantom patients were found only
+  through raw FHIR searches. They are listed as `uncovered_schemes` and left to the full
+  agent; the profile check is what routes such cases there.
+
+### Run it
+
+```bash
+# shell with the agent's dependencies, as in run_server.sh
+alias py='uv run -q --no-project --python 3.12 --with "langchain==1.4.2" --with langchain-anthropic --with langchain-openai --with langchain-mcp-adapters --with fastapi --with uvicorn python'
+
+py ladder.py --learn                                  # learn: full agent + its note (~$1 per level); appends to runs/
+py runs.py backfill                                   # or import graded runs already in traces/
+py compile_workflow.py                                # compile: runs/ -> workflow_spec.json
+py ladder.py --mode workflow --questions rules --no-research          # workflow only, no model calls
+py ladder.py --mode routed --no-escalate --questions rules --no-research   # router decision recorded, agent not run
+py ladder.py --mode routed                            # workflow, then the full agent when unsure (needs keys)
+py compile_workflow.py --calibrate                    # fit question priors on the graded workflow runs
+py workflow.py replay traces/<run id>.json            # decide a saved workflow run again, no model calls
+py workflow.py replay traces/<run id>.json --spec other_spec.json --reclassify   # other thresholds / priors
+py compare.py                                         # results table
+py -m unittest test_workflow -v                       # tests
+```
+
+`POST /api/runs {"mode": "workflow" | "routed"}` runs the same modes from the server, and the
+app replays those runs: they emit the same events as the agent, and their code steps show as
+analytics calls. The UI has no mode selector yet. The server runs research only when
+`ANTHROPIC_API_KEY` is set.
+
+### Results (2026-10-14, offline, one run per level)
+
+The agent columns are the saved Opus 5.5 ladder runs from 2026-09-30. The workflow columns are
+`ladder.py --mode routed --no-escalate --questions rules --no-research`: no model calls, and
+the router's decision is recorded but not acted on. Each cell shows guilty providers found,
+then innocent providers accused.
+
+| Level | Agent (Opus 5.5) | Agent effort | Workflow | Workflow effort | Router | Workflow, priors fitted on the other 4 levels |
+|---|---|---|---|---|---|---|
+| 1 Obvious | 2/2, 0 accused | 23 calls, 140k tokens, 75 s | 2/2, 0 accused | 5 code steps, 0 tokens, 7 s | workflow | 2/2, 0 accused |
+| 2 Subtle | 2/2, 0 accused | 21 calls, 357k tokens, 80 s | 2/2, 0 accused | 5, 0, 7 s | workflow | 2/2, 0 accused |
+| 3 Spread thin | 5/6, 0 accused | 24 calls, 231k tokens, 77 s | 6/6, 0 accused | 5, 0, 7 s | workflow | 3/6, 0 accused |
+| 4 Unnamed | 2/3, 0 accused | 31 calls, 354k tokens, 86 s | 0/3, 0 accused | 5, 0, 7 s | **escalate**: the 3 guilty providers are outside the profile limits and unexplained | 0/3, 0 accused |
+| 5 Clean | 0 accused | 33 calls, 284k tokens, 70 s | 0 accused | 5, 0, 7 s | workflow | 0 accused |
+
+- **Workflow:** found all 10 guilty providers and all 14 planted schemes at levels 1-3,
+  including the next-day re-billing the agent missed at level 2. It cannot find level 4's schemes, and it
+  accused no one.
+- **Router:** kept levels 1, 2, 3 and 5 in the workflow and sent only level 4 to the agent.
+- **Routed (estimate):** the workflow's answers at levels 1-3 and 5, plus the agent's 2/3 at
+  level 4, gives 12/13 guilty providers and 0 innocent ones accused, with one agent run
+  instead of five. The agent alone found 11/13.
+  - The level-4 figure is the saved agent run, not a routed run: routed mode hands the agent
+    the workflow's leads, and that has not been run with a real model.
+- **API spend for this evaluation: $0.00** (budget cap $5). No paid model call was made: the
+  agent column reuses saved runs, and the workflow runs used the offline classifier.
+- **Cost:** a workflow run here is 0 tokens and about 7 s, against 140k-357k tokens and 70-86 s
+  for the agent. With the `llm` classifier, add roughly 5-10 short Haiku calls per run, plus
+  research calls for uncertain items. That has not been measured.
+- **Leave-one-level-out:** fitting the priors on the other four levels drops level 3 to 3/6.
+  No other level has single exact duplicates, so a fitted curve treats one duplicate as noise.
+  The hand-set priors also do well on level 3 because they were written with the level types
+  in mind (see below).
+
+### Limitations
+
+- **In-sample.** I set the question priors and profile limits by looking at the clean
+  Synthea baseline, which all five levels share, and knowing which scheme types the levels
+  plant. So the workflow's 0 accusations at level 5, and its level-3 result, are partly by
+  construction. The leave-one-level-out column is the fairer number, and it is still
+  in-domain.
+- **The compiler selects and parameterizes steps from a hand-written library** (one per
+  analytics tool). It does not write new code. `../self-improving-agents` (learned tools,
+  approved by a person) is the path to new steps.
+- **Untested against live models:**
+  - The `llm` and `jev` classifiers, the research sub-agent, `--learn` notes and routed
+    escalation were tested only with mocked or scripted models, not on the ladder. No
+    Anthropic key is set in this checkout and `typesafe-sdk` is not installed.
+  - Jev would send each provider's aggregates (synthetic) to TypeSafe's API.
+  - The LLM classifier's probability is self-reported, not calibrated. `--calibrate` fits only
+    the `rules` priors.
+- **The backfilled runs have only derived notes**, so `hints` is empty. Agent-written notes
+  appear after `ladder.py --learn` runs.
+- **Routing is per run, not per claim.** The whole claims database is one case.
+- **The router's margin is thin.** Its confidence is 0.731 on every level. The cause is one
+  Synthea provider's single next-day repeat (p = 0.27), against a threshold of 0.7.
+- **No mode selector in the UI;** `ladder_results.md` gained a Mode column.
 
 ## Running the agent on another model (`--model`)
 
@@ -248,3 +432,11 @@ reasoning), `text`, `tool_call`, `tool_result` (preview, size, ms, error and tru
 (report + parsed findings JSON) and `done` (tool calls, seconds, tokens). The server keeps
 runs in memory, streams them as Server-Sent Events, and saves each to `traces/<id>.json`
 for replay from the UI.
+
+Workflow and routed runs (`workflow.py`) emit the same events. Their code steps appear as
+`tool_call` / `tool_result` with source `analytics`, each question as a `text` line with its
+probabilities, and research calls as FHIR calls. They add `workflow_node` events: the spec
+and its hash, each code step's output, each question's evidence, probabilities, backend and
+model, each research answer, and the route. `replay()` decides a run again from those
+records alone. Learning-mode agent runs add a `note` event. `done` carries `mode`,
+`escalated` and, with `--no-escalate`, `would_escalate`.
