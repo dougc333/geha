@@ -37,10 +37,14 @@ def load_eval_queries(directory: Path = EVAL_DIRECTORY) -> list[dict[str, Any]]:
             }
         )
 
+    taken = {query["id"] for query in queries}
     for case in _read_json(directory / "table_relation_evals.json"):
+        # Two relation cases reuse preference-case ids with different questions; results are
+        # checkpointed by id, so give them a distinct one.
+        case_id = case["id"] if case["id"] not in taken else f"{case['id']}_relation"
         queries.append(
             {
-                "id": case["id"],
+                "id": case_id,
                 "kind": "Row-to-column relationship",
                 "query": case["query"],
                 "source": case["source"],
@@ -50,5 +54,21 @@ def load_eval_queries(directory: Path = EVAL_DIRECTORY) -> list[dict[str, Any]]:
                 "fields": case.get("fields", []),
             }
         )
+
+    qualifier_path = directory / "table_qualifier_evals.json"
+    if qualifier_path.exists():
+        for case in _read_json(qualifier_path):
+            queries.append(
+                {
+                    "id": case["id"],
+                    "kind": "Qualifier",
+                    "qualifier_type": case["qualifier_type"],
+                    "query": case["query"],
+                    "source": case["source"],
+                    "table_number": case["table_number"],
+                    "facts": case["facts"],
+                    "expected": [fact["text"] for fact in case["facts"]],
+                }
+            )
 
     return queries

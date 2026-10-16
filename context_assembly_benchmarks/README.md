@@ -48,6 +48,64 @@ question, chosen by hand, not the output of a retrieval run. Regenerate the SVG 
 .venv/bin/python context_assembly_benchmarks/draw_context_window.py
 ```
 
+## Measuring context completeness and answer completeness
+
+Flat chunks and table-aware RAG can both fail in two different places. A required fact can be
+**missing from the context** (an assembly error), or it can be **in the context but left out of the
+answer** (a generation drop). The two evaluations below measure each separately and join them per fact.
+
+### To measure it properly
+
+1. **Add qualifier cases to the 41:** footnotes (`**`), exceptions ("does not apply in…"), and
+   conditions on other pages. Label each case's required facts, including those qualifiers.
+2. **Run ① for flat, table-aware, and table-aware plus attached footnotes:** append text linked to the
+   table (footnotes, the preceding paragraph) to the parent table. That's a cheap structural fix to test.
+3. **Run ② once,** paying for answers and judging, and join per fact into the four-cell table below.
+4. **Report per strategy:** the share of cases with assembly errors, the share with generation drops,
+   tokens used, and sibling-row noise (how many rows sent that weren't needed).
+
+| In context? | In answer? | Outcome | Who fixes it |
+|---|---|---|---|
+| yes | yes | ✓ Correct | — |
+| yes | no | ↓ Generation drop | Prompting, the model, a completeness check |
+| no | no | ✕ Assembly error | Retrieval and context assembly (table-aware RAG, attached notes) |
+| no | yes | ! Unsupported | Groundedness check |
+
+### What's implemented
+
+- **18 qualifier cases** (`make_qualifier_cases.py` → `table_qualifier_evals.json`), bringing the set
+  to 59. There are 14 cases on whether preferred-product requirements apply to reauthorizations: it's
+  "new starts only" in 8 policies and "all requests, both new starts and reauthorizations" in 6, so the
+  table alone can't answer it. There are also 3 on the authorization period and 1 on Xgeva's `**`
+  footnote ("Does not apply in the setting of Prostate or Breast Cancer"). Every required fact is
+  read from the database or the verified docling Markdown, never typed in.
+- **A third strategy, table-aware + attached notes** (`context_attachments.py`): each parent table plus
+  the paragraph before it and the notes after it in the verified document. The pgvector store keeps
+  only table cells, so these qualifiers never reach the model otherwise.
+- **① Context completeness** (`evaluate_hybrid_contexts.py`): all three strategies, per-fact presence,
+  qualifier coverage and sibling rows. No LLM involved.
+- **② Answer completeness** (`evaluate_chunking_judge.py`, evaluation version 3): one answer, one judge
+  verdict and one qualifier fact check per strategy, then the per-fact join into the four cells. Table
+  values are matched by text; qualifiers by an LLM fact check, because answers paraphrase them.
+- **The dashboard** (`dashboard/`, React + Vite): ① and ② side by side, filterable by question type,
+  with a drawer per question showing every required fact, the answer and the judge's reason.
+
+```bash
+# from the repo root; ② needs OPENAI_API_KEY (read from ~/.zshrc via zsh -ic)
+zsh -ic '.venv/bin/python context_assembly_benchmarks/make_qualifier_cases.py'
+zsh -ic '.venv/bin/python context_assembly_benchmarks/evaluate_hybrid_contexts.py'
+zsh -ic '.venv/bin/python context_assembly_benchmarks/evaluate_chunking_judge.py --resume'
+.venv/bin/python context_assembly_benchmarks/build_dashboard_data.py
+cd context_assembly_benchmarks/dashboard && npm install && npm run dev   # http://localhost:5174
+```
+
+**Caveats:** the qualifier facts come from the same notes the third strategy attaches, so its 100%
+context score on that slice is partly by construction. ② shows whether the model actually uses them.
+"Conditions on other pages" aren't covered yet, because every qualifier here sits next to its table.
+Two relation cases reused preference-case IDs (`long_acting_gcsfs_preferred`,
+`short_acting_gcsfs_preferred`), which made the judge's checkpointing reuse one case's result for the
+other. They now get a `_relation` suffix.
+
 # Table-Aware Coverage Policy RAG
 
 This project retrieves information from tables extracted from synthetic coverage-policy PDFs. It uses a parent-child retrieval design:
@@ -142,62 +200,24 @@ must use the same reranked child list so their comparison remains fair.
 <!-- HYBRID_CONTEXT_RESULTS_START -->
 ### Hybrid retrieval context comparison
 
-Both cases use the same BM25 + pgvector RRF child ranking.
+All strategies use the same BM25 + pgvector RRF child ranking. Table-aware + attached notes adds the paragraph before and the notes after each parent table from the verified document (footnotes, exceptions, authorization period).
 
+| Question slice | Context strategy | Cases | Avg evidence coverage | Complete evidence | Qualifier coverage | Expected table present | Avg estimated tokens | Avg sibling rows | Evidence / 1k tokens |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Overall | Flat semantic chunks | 59 | 72.6% | 40.7% | 0.0% | 98.3% | 299 | 2.7 | 7.43 |
+| Overall | Table-aware RAG | 59 | 87.7% | 69.5% | 0.0% | 100.0% | 476 | 14.5 | 6.05 |
+| Overall | Table-aware + attached notes | 59 | 100.0% | 100.0% | 100.0% | 100.0% | 814 | 14.5 | 3.92 |
+| Preference | Flat semantic chunks | 34 | 81.4% | 58.8% | — | 97.1% | 285 | 2.7 | 7.22 |
+| Preference | Table-aware RAG | 34 | 100.0% | 100.0% | — | 100.0% | 407 | 12.7 | 7.08 |
+| Preference | Table-aware + attached notes | 34 | 100.0% | 100.0% | — | 100.0% | 745 | 12.7 | 3.87 |
+| Relation | Flat semantic chunks | 7 | 83.3% | 57.1% | — | 100.0% | 330 | 0.7 | 15.15 |
+| Relation | Table-aware RAG | 7 | 100.0% | 100.0% | — | 100.0% | 558 | 6.3 | 10.76 |
+| Relation | Table-aware + attached notes | 7 | 100.0% | 100.0% | — | 100.0% | 984 | 6.3 | 6.09 |
+| Qualifier | Flat semantic chunks | 18 | 51.9% | 0.0% | 0.0% | 100.0% | 313 | 3.4 | 4.62 |
+| Qualifier | Table-aware RAG | 18 | 59.7% | 0.0% | 0.0% | 100.0% | 574 | 21.0 | 2.90 |
+| Qualifier | Table-aware + attached notes | 18 | 100.0% | 100.0% | 100.0% | 100.0% | 877 | 21.0 | 3.04 |
 
-The app measures two evaluation types:
-- 34 multi-row preference queries
-- 7 row-to-column relationship queries
-Both sides use the same BM25 + pgvector RRF ranking. Only context assembly changes:
-- Flat hybrid: top 5 matching child rows
-- Table-aware hybrid: expands those matches into the top 3 complete parent tables
-Where they differ
-Table-aware RAG added evidence on 17 of 41 evaluations:
-Preference lookups:
-1. Bevacizumab non-preferred: 71% → 100%
-2. GnRH analogues preferred: 50% → 100%
-3. GnRH analogues non-preferred: 57% → 100%
-4. Long-acting G-CSFs preferred: 50% → 100%
-5. Long-acting G-CSFs non-preferred: 50% → 100%
-6. Non-muscle-invasive bladder cancer preferred: 67% → 100%
-7. Paclitaxel protein-bound preferred: 33% → 100%
-8. Pemetrexed preferred: 67% → 100%
-9. Pemetrexed non-preferred: 71% → 100%
-10. Short-acting G-CSFs non-preferred: 75% → 100%
-11. Taxotere/Docivyx preferred: 50% → 100%
-12. Trastuzumab non-preferred: 83% → 100%
-13. Xgeva preferred: 0% → 100%
-14. Xgeva non-preferred: 42% → 100%
-Row-to-column relationships:
-15. Long-acting G-CSF drugs with HCPCS and prior authorization: 67% → 100%
-16. Preferred pemetrexed products with HCPCS codes: 33% → 100%
-17. Xgeva Q5157 drug/preference/prior-authorization lookup: 83% → 100%
-Overall:
-Metric
-
-
-| Metric | Flat hybrid chunks | Table-aware hybrid RAG |
-|---|---:|---:|
-| Average evidence coverage | 81.7% | 100.0% |
-| Complete-evidence rate | 58.5% | 100.0% |
-| Average context tokens | 292 | 431 |
-
-Table-aware RAG increased average evidence coverage by **18.3 percentage
-points** and the complete-evidence rate by **41.5 percentage points**, while
-adding **139 estimated context tokens per query** on average—a **47.5% increase**
-over flat chunks.
-
-
-| Question slice | Context strategy | Cases | Avg evidence coverage | Complete evidence | Expected table present | Avg estimated tokens | Evidence / 1k tokens |
-| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Overall | Flat semantic chunks | 41 | 81.7% | 58.5% | 97.6% | 292 | 8.76 |
-| Overall | Table-aware RAG | 41 | 100.0% | 100.0% | 100.0% | 431 | 7.92 |
-| Preference | Flat semantic chunks | 34 | 81.4% | 58.8% | 97.1% | 285 | 7.22 |
-| Preference | Table-aware RAG | 34 | 100.0% | 100.0% | 100.0% | 405 | 7.12 |
-| Relation | Flat semantic chunks | 7 | 83.3% | 57.1% | 100.0% | 328 | 15.24 |
-| Relation | Table-aware RAG | 7 | 100.0% | 100.0% | 100.0% | 558 | 10.76 |
-
-Table-aware change versus flat chunks: average evidence coverage +18.3%, complete evidence +41.5%, and average context tokens +139.
+Table-aware change versus flat chunks: average evidence coverage +15.1%, complete evidence +28.8%, and average context tokens +177.
 
 This is a retrieval/context benchmark over labeled expected values. It does not use an LLM judge and does not measure generation quality.
 <!-- HYBRID_CONTEXT_RESULTS_END -->

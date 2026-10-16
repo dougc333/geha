@@ -15,6 +15,8 @@ def expected_values(case: dict[str, Any] | None) -> list[str]:
     if not case:
         return []
     expected = case.get("expected", [])
+    if case.get("kind") == "Qualifier":
+        return [str(fact["match"][0]) for fact in case["facts"]]
     if case.get("kind") == "Preference lookup":
         return [str(value) for value in expected]
     return [str(value) for row in expected for value in row.values()]
@@ -63,3 +65,34 @@ def compare_contexts(
             values,
         ),
     }
+
+
+# --- fact-level scoring (used by the context and answer completeness evaluations) -----------
+
+def required_facts(case: dict[str, Any] | None) -> list[dict[str, Any]]:
+    """Every fact a complete answer needs, as {text, type: value|qualifier, match: [phrases]}.
+
+    Preference and relation cases contribute table values; qualifier cases carry labelled facts,
+    including qualifiers stored beside the table (footnotes, exceptions, authorization periods).
+    """
+    if not case:
+        return []
+    if case.get("kind") == "Qualifier":
+        return [dict(fact) for fact in case["facts"]]
+    return [{"text": value, "type": "value", "match": [value]} for value in expected_values(case)]
+
+
+def fact_present(fact: dict[str, Any], text: str) -> bool:
+    haystack = normalized(text)
+    return any(normalized(phrase) and normalized(phrase) in haystack for phrase in fact["match"])
+
+
+def fact_presence(case: dict[str, Any] | None, text: str) -> list[bool]:
+    return [fact_present(fact, text) for fact in required_facts(case)]
+
+
+def sibling_rows(rows_text: list[str], case: dict[str, Any] | None) -> dict[str, int]:
+    """Rows sent to the model vs rows that carry a required table value (the rest is noise)."""
+    values = [fact for fact in required_facts(case) if fact["type"] == "value"]
+    needed = sum(any(fact_present(fact, row) for fact in values) for row in rows_text)
+    return {"rows_sent": len(rows_text), "rows_needed": needed, "sibling_rows": len(rows_text) - needed}

@@ -1,0 +1,5057 @@
+{
+ "generated_at": "2026-10-16T23:03:49+00:00",
+ "strategies": [
+  {
+   "id": "flat",
+   "label": "Flat row chunks"
+  },
+  {
+   "id": "table",
+   "label": "Table-aware RAG"
+  },
+  {
+   "id": "notes",
+   "label": "Table-aware + attached notes"
+  }
+ ],
+ "context": {
+  "configuration": {
+   "embedding_model": "BAAI/bge-small-en-v1.5",
+   "retrieval": "BM25 + pgvector reciprocal-rank fusion for both cases",
+   "top_chunks": 5,
+   "top_tables": 3,
+   "candidate_rows": 30,
+   "vector_candidates": 100,
+   "parent_tables": 102,
+   "child_vectors": 675
+  },
+  "summary": {
+   "flat": {
+    "overall": {
+     "cases": 59,
+     "average_evidence_coverage": 0.7259887005649718,
+     "complete_evidence_rate": 0.4067796610169492,
+     "expected_table_present_rate": 0.9830508474576272,
+     "average_estimated_tokens": 298.9491525423729,
+     "average_sibling_rows": 2.694915254237288,
+     "average_rows_sent": 5.0,
+     "qualifier_coverage": 0.0,
+     "evidence_per_1k_tokens": 7.427145934913256
+    },
+    "preference": {
+     "cases": 34,
+     "average_evidence_coverage": 0.8137254901960784,
+     "complete_evidence_rate": 0.5882352941176471,
+     "expected_table_present_rate": 0.9705882352941176,
+     "average_estimated_tokens": 285.1764705882353,
+     "average_sibling_rows": 2.7058823529411766,
+     "average_rows_sent": 5.0,
+     "qualifier_coverage": 0.0,
+     "evidence_per_1k_tokens": 7.2194719471947195
+    },
+    "relation": {
+     "cases": 7,
+     "average_evidence_coverage": 0.8333333333333333,
+     "complete_evidence_rate": 0.5714285714285714,
+     "expected_table_present_rate": 1.0,
+     "average_estimated_tokens": 330.0,
+     "average_sibling_rows": 0.7142857142857143,
+     "average_rows_sent": 5.0,
+     "qualifier_coverage": 0.0,
+     "evidence_per_1k_tokens": 15.151515151515152
+    },
+    "qualifier": {
+     "cases": 18,
+     "average_evidence_coverage": 0.5185185185185186,
+     "complete_evidence_rate": 0.0,
+     "expected_table_present_rate": 1.0,
+     "average_estimated_tokens": 312.8888888888889,
+     "average_sibling_rows": 3.4444444444444446,
+     "average_rows_sent": 5.0,
+     "qualifier_coverage": 0.0,
+     "evidence_per_1k_tokens": 4.616477272727273
+    }
+   },
+   "table": {
+    "overall": {
+     "cases": 59,
+     "average_evidence_coverage": 0.8771186440677966,
+     "complete_evidence_rate": 0.6949152542372882,
+     "expected_table_present_rate": 1.0,
+     "average_estimated_tokens": 476.135593220339,
+     "average_sibling_rows": 14.457627118644067,
+     "average_rows_sent": 20.016949152542374,
+     "qualifier_coverage": 0.0,
+     "evidence_per_1k_tokens": 6.051544923821729
+    },
+    "preference": {
+     "cases": 34,
+     "average_evidence_coverage": 1.0,
+     "complete_evidence_rate": 1.0,
+     "expected_table_present_rate": 1.0,
+     "average_estimated_tokens": 407.38235294117646,
+     "average_sibling_rows": 12.676470588235293,
+     "average_rows_sent": 17.735294117647058,
+     "qualifier_coverage": 0.0,
+     "evidence_per_1k_tokens": 7.07530142227998
+    },
+    "relation": {
+     "cases": 7,
+     "average_evidence_coverage": 1.0,
+     "complete_evidence_rate": 1.0,
+     "expected_table_present_rate": 1.0,
+     "average_estimated_tokens": 557.5714285714286,
+     "average_sibling_rows": 6.285714285714286,
+     "average_rows_sent": 21.571428571428573,
+     "qualifier_coverage": 0.0,
+     "evidence_per_1k_tokens": 10.760953112990007
+    },
+    "qualifier": {
+     "cases": 18,
+     "average_evidence_coverage": 0.5972222222222222,
+     "complete_evidence_rate": 0.0,
+     "expected_table_present_rate": 1.0,
+     "average_estimated_tokens": 574.3333333333334,
+     "average_sibling_rows": 21.0,
+     "average_rows_sent": 23.72222222222222,
+     "qualifier_coverage": 0.0,
+     "evidence_per_1k_tokens": 2.901915264074289
+    }
+   },
+   "notes": {
+    "overall": {
+     "cases": 59,
+     "average_evidence_coverage": 1.0,
+     "complete_evidence_rate": 1.0,
+     "expected_table_present_rate": 1.0,
+     "average_estimated_tokens": 813.6779661016949,
+     "average_sibling_rows": 14.457627118644067,
+     "average_rows_sent": 20.016949152542374,
+     "qualifier_coverage": 1.0,
+     "evidence_per_1k_tokens": 3.9160955693961297
+    },
+    "preference": {
+     "cases": 34,
+     "average_evidence_coverage": 1.0,
+     "complete_evidence_rate": 1.0,
+     "expected_table_present_rate": 1.0,
+     "average_estimated_tokens": 745.1176470588235,
+     "average_sibling_rows": 12.676470588235293,
+     "average_rows_sent": 17.735294117647058,
+     "qualifier_coverage": 0.0,
+     "evidence_per_1k_tokens": 3.8683192547564538
+    },
+    "relation": {
+     "cases": 7,
+     "average_evidence_coverage": 1.0,
+     "complete_evidence_rate": 1.0,
+     "expected_table_present_rate": 1.0,
+     "average_estimated_tokens": 984.4285714285714,
+     "average_sibling_rows": 6.285714285714286,
+     "average_rows_sent": 21.571428571428573,
+     "qualifier_coverage": 0.0,
+     "evidence_per_1k_tokens": 6.09490639965172
+    },
+    "qualifier": {
+     "cases": 18,
+     "average_evidence_coverage": 1.0,
+     "complete_evidence_rate": 1.0,
+     "expected_table_present_rate": 1.0,
+     "average_estimated_tokens": 876.7777777777778,
+     "average_sibling_rows": 21.0,
+     "average_rows_sent": 23.72222222222222,
+     "qualifier_coverage": 1.0,
+     "evidence_per_1k_tokens": 3.041439614750982
+    }
+   }
+  },
+  "cases": [
+   {
+    "id": "bendamustine_preferred",
+    "kind": "Preference lookup",
+    "query": "Which bendamustine products are preferred?",
+    "source": "geha-coverage-policy-bendamustine.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 319,
+      "rows_sent": 5,
+      "sibling_rows": 3,
+      "facts": [
+       {
+        "text": "Treanda",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Bendamustine 505(b)(2) Dr Reddy's",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 353,
+      "rows_sent": 16,
+      "sibling_rows": 12,
+      "facts": [
+       {
+        "text": "Treanda",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Bendamustine 505(b)(2) Dr Reddy's",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 720,
+      "rows_sent": 16,
+      "sibling_rows": 12,
+      "facts": [
+       {
+        "text": "Treanda",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Bendamustine 505(b)(2) Dr Reddy's",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "bendamustine_non_preferred",
+    "kind": "Preference lookup",
+    "query": "Which bendamustine products are non-preferred?",
+    "source": "geha-coverage-policy-bendamustine.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 319,
+      "rows_sent": 5,
+      "sibling_rows": 2,
+      "facts": [
+       {
+        "text": "Bendeka",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Belrapzo",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Vivimusta",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 286,
+      "rows_sent": 13,
+      "sibling_rows": 7,
+      "facts": [
+       {
+        "text": "Bendeka",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Belrapzo",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Vivimusta",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 820,
+      "rows_sent": 13,
+      "sibling_rows": 7,
+      "facts": [
+       {
+        "text": "Bendeka",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Belrapzo",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Vivimusta",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "bevacizumab_preferred",
+    "kind": "Preference lookup",
+    "query": "Which bevacizumab products are preferred?",
+    "source": "geha-coverage-policy-bevacizumab.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 334,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Bevacizumab-bvzr (Zirabev)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 361,
+      "rows_sent": 16,
+      "sibling_rows": 15,
+      "facts": [
+       {
+        "text": "Bevacizumab-bvzr (Zirabev)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 735,
+      "rows_sent": 16,
+      "sibling_rows": 15,
+      "facts": [
+       {
+        "text": "Bevacizumab-bvzr (Zirabev)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "bevacizumab_non_preferred",
+    "kind": "Preference lookup",
+    "query": "Which bevacizumab products are non-preferred?",
+    "source": "geha-coverage-policy-bevacizumab.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.7142857142857143,
+      "complete": false,
+      "tokens": 332,
+      "rows_sent": 5,
+      "sibling_rows": 0,
+      "facts": [
+       {
+        "text": "Bevacizumab- awwb (Mvasi)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Bevacizumab (Avastin)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Bevacizumab-tnjn (Avzivi)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Bevacizumab- maly (Alymsys)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Bevacizumab- adcd (Vegzelma)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Ziv-aflibercept (Zaltrap)",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Bevacizumab - nwgd (Jobevne)",
+        "type": "value",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 330,
+      "rows_sent": 14,
+      "sibling_rows": 5,
+      "facts": [
+       {
+        "text": "Bevacizumab- awwb (Mvasi)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Bevacizumab (Avastin)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Bevacizumab-tnjn (Avzivi)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Bevacizumab- maly (Alymsys)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Bevacizumab- adcd (Vegzelma)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Ziv-aflibercept (Zaltrap)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Bevacizumab - nwgd (Jobevne)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 683,
+      "rows_sent": 14,
+      "sibling_rows": 5,
+      "facts": [
+       {
+        "text": "Bevacizumab- awwb (Mvasi)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Bevacizumab (Avastin)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Bevacizumab-tnjn (Avzivi)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Bevacizumab- maly (Alymsys)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Bevacizumab- adcd (Vegzelma)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Ziv-aflibercept (Zaltrap)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Bevacizumab - nwgd (Jobevne)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "datroway_preferred",
+    "kind": "Preference lookup",
+    "query": "Which datroway products are preferred?",
+    "source": "geha-coverage-policy-datroway.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 229,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Trodelvy",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 193,
+      "rows_sent": 11,
+      "sibling_rows": 9,
+      "facts": [
+       {
+        "text": "Trodelvy",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 530,
+      "rows_sent": 11,
+      "sibling_rows": 9,
+      "facts": [
+       {
+        "text": "Trodelvy",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "datroway_non_preferred",
+    "kind": "Preference lookup",
+    "query": "Which datroway products are non-preferred?",
+    "source": "geha-coverage-policy-datroway.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 237,
+      "rows_sent": 5,
+      "sibling_rows": 1,
+      "facts": [
+       {
+        "text": "Datroway",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 193,
+      "rows_sent": 11,
+      "sibling_rows": 8,
+      "facts": [
+       {
+        "text": "Datroway",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 530,
+      "rows_sent": 11,
+      "sibling_rows": 8,
+      "facts": [
+       {
+        "text": "Datroway",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "erythropoietin_stimulating_agents_preferred",
+    "kind": "Preference lookup",
+    "query": "Which erythropoietin stimulating agents products are preferred?",
+    "source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 325,
+      "rows_sent": 5,
+      "sibling_rows": 3,
+      "facts": [
+       {
+        "text": "Retacrit",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Aranesp",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 321,
+      "rows_sent": 14,
+      "sibling_rows": 10,
+      "facts": [
+       {
+        "text": "Retacrit",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Aranesp",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 658,
+      "rows_sent": 14,
+      "sibling_rows": 10,
+      "facts": [
+       {
+        "text": "Retacrit",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Aranesp",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "erythropoietin_stimulating_agents_non_preferred",
+    "kind": "Preference lookup",
+    "query": "Which erythropoietin stimulating agents products are non-preferred?",
+    "source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 312,
+      "rows_sent": 5,
+      "sibling_rows": 2,
+      "facts": [
+       {
+        "text": "Epogen",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Procrit",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 321,
+      "rows_sent": 14,
+      "sibling_rows": 11,
+      "facts": [
+       {
+        "text": "Epogen",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Procrit",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 658,
+      "rows_sent": 14,
+      "sibling_rows": 11,
+      "facts": [
+       {
+        "text": "Epogen",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Procrit",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "gemcitabine_preferred",
+    "kind": "Preference lookup",
+    "query": "Which gemcitabine products are preferred?",
+    "source": "geha-coverage-policy-gemcitabine.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 323,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Gemcitabine (Accord)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 401,
+      "rows_sent": 13,
+      "sibling_rows": 12,
+      "facts": [
+       {
+        "text": "Gemcitabine (Accord)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 749,
+      "rows_sent": 13,
+      "sibling_rows": 12,
+      "facts": [
+       {
+        "text": "Gemcitabine (Accord)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "gemcitabine_non_preferred",
+    "kind": "Preference lookup",
+    "query": "Which gemcitabine products are non-preferred?",
+    "source": "geha-coverage-policy-gemcitabine.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 323,
+      "rows_sent": 5,
+      "sibling_rows": 3,
+      "facts": [
+       {
+        "text": "Gemzar",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Avgemsi",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 401,
+      "rows_sent": 13,
+      "sibling_rows": 11,
+      "facts": [
+       {
+        "text": "Gemzar",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Avgemsi",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 749,
+      "rows_sent": 13,
+      "sibling_rows": 11,
+      "facts": [
+       {
+        "text": "Gemzar",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Avgemsi",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "gnrh_analogues_in_prostate_cancer_preferred",
+    "kind": "Preference lookup",
+    "query": "Which gnrh analogues in prostate cancer products are preferred?",
+    "source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 213,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Firmagon (degarelix)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Eligard(leuprolide acetate depot)",
+        "type": "value",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 574,
+      "rows_sent": 25,
+      "sibling_rows": 21,
+      "facts": [
+       {
+        "text": "Firmagon (degarelix)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Eligard(leuprolide acetate depot)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 911,
+      "rows_sent": 25,
+      "sibling_rows": 21,
+      "facts": [
+       {
+        "text": "Firmagon (degarelix)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Eligard(leuprolide acetate depot)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "gnrh_analogues_in_prostate_cancer_non_preferred",
+    "kind": "Preference lookup",
+    "query": "Which gnrh analogues in prostate cancer products are non-preferred?",
+    "source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.5714285714285714,
+      "complete": false,
+      "tokens": 314,
+      "rows_sent": 5,
+      "sibling_rows": 1,
+      "facts": [
+       {
+        "text": "Lupron Depot (leuprolide acetate depot)",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Camcevi (leuprolide mesylate)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Lutrate Depot (leuprolide acetate depot)",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Trelstar (triptorelin)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Camcevi ETM (leuprolide mesylate)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Zoladex (goserelin)",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Orgovyx (relugolix)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 574,
+      "rows_sent": 25,
+      "sibling_rows": 9,
+      "facts": [
+       {
+        "text": "Lupron Depot (leuprolide acetate depot)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Camcevi (leuprolide mesylate)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Lutrate Depot (leuprolide acetate depot)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Trelstar (triptorelin)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Camcevi ETM (leuprolide mesylate)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Zoladex (goserelin)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Orgovyx (relugolix)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 911,
+      "rows_sent": 25,
+      "sibling_rows": 9,
+      "facts": [
+       {
+        "text": "Lupron Depot (leuprolide acetate depot)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Camcevi (leuprolide mesylate)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Lutrate Depot (leuprolide acetate depot)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Trelstar (triptorelin)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Camcevi ETM (leuprolide mesylate)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Zoladex (goserelin)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Orgovyx (relugolix)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "long_acting_gcsfs_preferred",
+    "kind": "Preference lookup",
+    "query": "Which long acting gcsfs products are preferred?",
+    "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 209,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Nyvepria",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Fylnetra",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 555,
+      "rows_sent": 27,
+      "sibling_rows": 22,
+      "facts": [
+       {
+        "text": "Nyvepria",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Fylnetra",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 735,
+      "rows_sent": 27,
+      "sibling_rows": 22,
+      "facts": [
+       {
+        "text": "Nyvepria",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Fylnetra",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "long_acting_gcsfs_non_preferred",
+    "kind": "Preference lookup",
+    "query": "Which long acting gcsfs products are non-preferred?",
+    "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 303,
+      "rows_sent": 5,
+      "sibling_rows": 1,
+      "facts": [
+       {
+        "text": "Neulasta",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Rolvedon",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Armlupeg",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Ryzneuta",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Fulphila",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Udenyca",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Ziextenzo",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Stimufend",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 555,
+      "rows_sent": 27,
+      "sibling_rows": 13,
+      "facts": [
+       {
+        "text": "Neulasta",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Rolvedon",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Armlupeg",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Ryzneuta",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Fulphila",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Udenyca",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Ziextenzo",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Stimufend",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 735,
+      "rows_sent": 27,
+      "sibling_rows": 13,
+      "facts": [
+       {
+        "text": "Neulasta",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Rolvedon",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Armlupeg",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Ryzneuta",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Fulphila",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Udenyca",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Ziextenzo",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Stimufend",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "non_muscle_invasive_bladder_cancer_preferred",
+    "kind": "Preference lookup",
+    "query": "Which non muscle invasive bladder cancer products are preferred?",
+    "source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.6666666666666666,
+      "complete": false,
+      "tokens": 311,
+      "rows_sent": 5,
+      "sibling_rows": 2,
+      "facts": [
+       {
+        "text": "Nadofaragene firadenovec-vncg (Adstiladrin)",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Pembrolizumab (Keytruda)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pembrolizumab and berahyaluronidas e alfa-pmph (Keytruda QLEX)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 474,
+      "rows_sent": 16,
+      "sibling_rows": 11,
+      "facts": [
+       {
+        "text": "Nadofaragene firadenovec-vncg (Adstiladrin)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pembrolizumab (Keytruda)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pembrolizumab and berahyaluronidas e alfa-pmph (Keytruda QLEX)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 643,
+      "rows_sent": 16,
+      "sibling_rows": 11,
+      "facts": [
+       {
+        "text": "Nadofaragene firadenovec-vncg (Adstiladrin)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pembrolizumab (Keytruda)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pembrolizumab and berahyaluronidas e alfa-pmph (Keytruda QLEX)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "non_muscle_invasive_bladder_cancer_non_preferred",
+    "kind": "Preference lookup",
+    "query": "Which non muscle invasive bladder cancer products are non-preferred?",
+    "source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 316,
+      "rows_sent": 5,
+      "sibling_rows": 2,
+      "facts": [
+       {
+        "text": "Nogapendekin alfa inbakicept- pmln (Anktiva)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Gemcitabine (Inlexzo)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 474,
+      "rows_sent": 16,
+      "sibling_rows": 12,
+      "facts": [
+       {
+        "text": "Nogapendekin alfa inbakicept- pmln (Anktiva)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Gemcitabine (Inlexzo)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 643,
+      "rows_sent": 16,
+      "sibling_rows": 12,
+      "facts": [
+       {
+        "text": "Nogapendekin alfa inbakicept- pmln (Anktiva)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Gemcitabine (Inlexzo)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "paclitaxel_protein_bound_preferred",
+    "kind": "Preference lookup",
+    "query": "Which paclitaxel protein bound products are preferred?",
+    "source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.3333333333333333,
+      "complete": false,
+      "tokens": 263,
+      "rows_sent": 5,
+      "sibling_rows": 3,
+      "facts": [
+       {
+        "text": "Docetaxel (Taxotere)",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Docetaxel (Hospira 505(b)(2))",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Paclitaxel (Taxol)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 478,
+      "rows_sent": 23,
+      "sibling_rows": 17,
+      "facts": [
+       {
+        "text": "Docetaxel (Taxotere)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Docetaxel (Hospira 505(b)(2))",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Paclitaxel (Taxol)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 831,
+      "rows_sent": 23,
+      "sibling_rows": 17,
+      "facts": [
+       {
+        "text": "Docetaxel (Taxotere)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Docetaxel (Hospira 505(b)(2))",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Paclitaxel (Taxol)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "paclitaxel_protein_bound_non_preferred",
+    "kind": "Preference lookup",
+    "query": "Which paclitaxel protein bound products are non-preferred?",
+    "source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 282,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Paclitaxel Protein- Bound (Abraxane)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 478,
+      "rows_sent": 23,
+      "sibling_rows": 22,
+      "facts": [
+       {
+        "text": "Paclitaxel Protein- Bound (Abraxane)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 831,
+      "rows_sent": 23,
+      "sibling_rows": 22,
+      "facts": [
+       {
+        "text": "Paclitaxel Protein- Bound (Abraxane)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "pemetrexed_preferred",
+    "kind": "Preference lookup",
+    "query": "Which pemetrexed products are preferred?",
+    "source": "geha-coverage-policy-pemetrexed.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.6666666666666666,
+      "complete": false,
+      "tokens": 328,
+      "rows_sent": 5,
+      "sibling_rows": 3,
+      "facts": [
+       {
+        "text": "Pemetrexed (Axtle)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Accord)",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Pemetrexed (Bluepoint)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 520,
+      "rows_sent": 20,
+      "sibling_rows": 14,
+      "facts": [
+       {
+        "text": "Pemetrexed (Axtle)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Accord)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Bluepoint)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 873,
+      "rows_sent": 20,
+      "sibling_rows": 14,
+      "facts": [
+       {
+        "text": "Pemetrexed (Axtle)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Accord)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Bluepoint)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "pemetrexed_non_preferred",
+    "kind": "Preference lookup",
+    "query": "Which pemetrexed products are non-preferred?",
+    "source": "geha-coverage-policy-pemetrexed.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.7142857142857143,
+      "complete": false,
+      "tokens": 325,
+      "rows_sent": 5,
+      "sibling_rows": 0,
+      "facts": [
+       {
+        "text": "Pemetrexed (Hospira)",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Pemetrexed (Sandoz)",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Pemetrexed (Alimta )",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Teva)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed ditromethamine (Hospira)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemfexy",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemrydi RTU",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 520,
+      "rows_sent": 20,
+      "sibling_rows": 7,
+      "facts": [
+       {
+        "text": "Pemetrexed (Hospira)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Sandoz)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Alimta )",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Teva)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed ditromethamine (Hospira)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemfexy",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemrydi RTU",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 873,
+      "rows_sent": 20,
+      "sibling_rows": 7,
+      "facts": [
+       {
+        "text": "Pemetrexed (Hospira)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Sandoz)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Alimta )",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Teva)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed ditromethamine (Hospira)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemfexy",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemrydi RTU",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "rituximab_preferred",
+    "kind": "Preference lookup",
+    "query": "Which rituximab products are preferred?",
+    "source": "geha-coverage-policy-rituximab.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 335,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Ruxience",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 267,
+      "rows_sent": 13,
+      "sibling_rows": 11,
+      "facts": [
+       {
+        "text": "Ruxience",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 755,
+      "rows_sent": 13,
+      "sibling_rows": 11,
+      "facts": [
+       {
+        "text": "Ruxience",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "rituximab_non_preferred",
+    "kind": "Preference lookup",
+    "query": "Which rituximab products are non-preferred?",
+    "source": "geha-coverage-policy-rituximab.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 335,
+      "rows_sent": 5,
+      "sibling_rows": 1,
+      "facts": [
+       {
+        "text": "Truxima",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Rituxan Hycela",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Rituxan",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Riabni",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 267,
+      "rows_sent": 13,
+      "sibling_rows": 5,
+      "facts": [
+       {
+        "text": "Truxima",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Rituxan Hycela",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Rituxan",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Riabni",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 755,
+      "rows_sent": 13,
+      "sibling_rows": 5,
+      "facts": [
+       {
+        "text": "Truxima",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Rituxan Hycela",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Rituxan",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Riabni",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "rytelo_preferred",
+    "kind": "Preference lookup",
+    "query": "Which rytelo products are preferred?",
+    "source": "geha-coverage-policy-rytelo.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 171,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Reblozyl (luspatercept)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 157,
+      "rows_sent": 10,
+      "sibling_rows": 9,
+      "facts": [
+       {
+        "text": "Reblozyl (luspatercept)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 496,
+      "rows_sent": 10,
+      "sibling_rows": 9,
+      "facts": [
+       {
+        "text": "Reblozyl (luspatercept)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "rytelo_non_preferred",
+    "kind": "Preference lookup",
+    "query": "Which rytelo products are non-preferred?",
+    "source": "geha-coverage-policy-rytelo.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 194,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Rytelo (imetelstat)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 148,
+      "rows_sent": 8,
+      "sibling_rows": 7,
+      "facts": [
+       {
+        "text": "Rytelo (imetelstat)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 654,
+      "rows_sent": 8,
+      "sibling_rows": 7,
+      "facts": [
+       {
+        "text": "Rytelo (imetelstat)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "short_acting_gcsfs_preferred",
+    "kind": "Preference lookup",
+    "query": "Which short acting gcsfs products are preferred?",
+    "source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 300,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Nivestym (filgrastim- aafi)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 565,
+      "rows_sent": 23,
+      "sibling_rows": 22,
+      "facts": [
+       {
+        "text": "Nivestym (filgrastim- aafi)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 744,
+      "rows_sent": 23,
+      "sibling_rows": 22,
+      "facts": [
+       {
+        "text": "Nivestym (filgrastim- aafi)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "short_acting_gcsfs_non_preferred",
+    "kind": "Preference lookup",
+    "query": "Which short acting gcsfs products are non-preferred?",
+    "source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.75,
+      "complete": false,
+      "tokens": 327,
+      "rows_sent": 5,
+      "sibling_rows": 2,
+      "facts": [
+       {
+        "text": "Zarxio (filgrastim-sndz)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Neupogen (filgrastim)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Granix (tbo-filgrastim)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Nypozi (filgrastim-txid)",
+        "type": "value",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 607,
+      "rows_sent": 27,
+      "sibling_rows": 23,
+      "facts": [
+       {
+        "text": "Zarxio (filgrastim-sndz)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Neupogen (filgrastim)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Granix (tbo-filgrastim)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Nypozi (filgrastim-txid)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 956,
+      "rows_sent": 27,
+      "sibling_rows": 23,
+      "facts": [
+       {
+        "text": "Zarxio (filgrastim-sndz)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Neupogen (filgrastim)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Granix (tbo-filgrastim)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Nypozi (filgrastim-txid)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "taxotere_docivyx_preferred",
+    "kind": "Preference lookup",
+    "query": "Which taxotere docivyx products are preferred?",
+    "source": "geha-coverage-policy-taxotere-docivyx.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 246,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Taxotere (docetaxel)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Docetaxel (Hospira 505(b)(2))",
+        "type": "value",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 231,
+      "rows_sent": 11,
+      "sibling_rows": 8,
+      "facts": [
+       {
+        "text": "Taxotere (docetaxel)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Docetaxel (Hospira 505(b)(2))",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 399,
+      "rows_sent": 11,
+      "sibling_rows": 8,
+      "facts": [
+       {
+        "text": "Taxotere (docetaxel)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Docetaxel (Hospira 505(b)(2))",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "taxotere_docivyx_non_preferred",
+    "kind": "Preference lookup",
+    "query": "Which taxotere docivyx products are non-preferred?",
+    "source": "geha-coverage-policy-taxotere-docivyx.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 252,
+      "rows_sent": 5,
+      "sibling_rows": 3,
+      "facts": [
+       {
+        "text": "Docetaxel (Docivyx)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 432,
+      "rows_sent": 21,
+      "sibling_rows": 19,
+      "facts": [
+       {
+        "text": "Docetaxel (Docivyx)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 591,
+      "rows_sent": 21,
+      "sibling_rows": 19,
+      "facts": [
+       {
+        "text": "Docetaxel (Docivyx)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "trastuzumab_preferred",
+    "kind": "Preference lookup",
+    "query": "Which trastuzumab products are preferred?",
+    "source": "geha-coverage-policy-trastuzumab.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 320,
+      "rows_sent": 5,
+      "sibling_rows": 3,
+      "facts": [
+       {
+        "text": "Trazimera",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Kanjinti",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 439,
+      "rows_sent": 21,
+      "sibling_rows": 17,
+      "facts": [
+       {
+        "text": "Trazimera",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Kanjinti",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 761,
+      "rows_sent": 21,
+      "sibling_rows": 17,
+      "facts": [
+       {
+        "text": "Trazimera",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Kanjinti",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "trastuzumab_non_preferred",
+    "kind": "Preference lookup",
+    "query": "Which trastuzumab products are non-preferred?",
+    "source": "geha-coverage-policy-trastuzumab.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.8333333333333334,
+      "complete": false,
+      "tokens": 323,
+      "rows_sent": 5,
+      "sibling_rows": 0,
+      "facts": [
+       {
+        "text": "Herceptin",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Herceptin Hylecta",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Hercessi",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Ontruzant",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Herzuma",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Ogivri",
+        "type": "value",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 418,
+      "rows_sent": 19,
+      "sibling_rows": 7,
+      "facts": [
+       {
+        "text": "Herceptin",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Herceptin Hylecta",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Hercessi",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Ontruzant",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Herzuma",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Ogivri",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 906,
+      "rows_sent": 19,
+      "sibling_rows": 7,
+      "facts": [
+       {
+        "text": "Herceptin",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Herceptin Hylecta",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Hercessi",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Ontruzant",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Herzuma",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Ogivri",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "vectibix_preferred",
+    "kind": "Preference lookup",
+    "query": "Which vectibix products are preferred?",
+    "source": "geha-coverage-policy-vectibix.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 191,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Cetuximab (Erbitux)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 147,
+      "rows_sent": 8,
+      "sibling_rows": 7,
+      "facts": [
+       {
+        "text": "Cetuximab (Erbitux)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 650,
+      "rows_sent": 8,
+      "sibling_rows": 7,
+      "facts": [
+       {
+        "text": "Cetuximab (Erbitux)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "vectibix_non_preferred",
+    "kind": "Preference lookup",
+    "query": "Which vectibix products are non-preferred?",
+    "source": "geha-coverage-policy-vectibix.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 191,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Panitumumab (Vectibix)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 201,
+      "rows_sent": 9,
+      "sibling_rows": 8,
+      "facts": [
+       {
+        "text": "Panitumumab (Vectibix)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 702,
+      "rows_sent": 9,
+      "sibling_rows": 8,
+      "facts": [
+       {
+        "text": "Panitumumab (Vectibix)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "xgeva_preferred",
+    "kind": "Preference lookup",
+    "query": "Which xgeva products are preferred?",
+    "source": "geha-coverage-policy-xgeva.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.0,
+      "complete": false,
+      "tokens": 281,
+      "rows_sent": 5,
+      "sibling_rows": 5,
+      "facts": [
+       {
+        "text": "Zoledronic Acid (Zometa)",
+        "type": "value",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 896,
+      "rows_sent": 34,
+      "sibling_rows": 32,
+      "facts": [
+       {
+        "text": "Zoledronic Acid (Zometa)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 1081,
+      "rows_sent": 34,
+      "sibling_rows": 32,
+      "facts": [
+       {
+        "text": "Zoledronic Acid (Zometa)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "xgeva_non_preferred",
+    "kind": "Preference lookup",
+    "query": "Which xgeva products are non-preferred?",
+    "source": "geha-coverage-policy-xgeva.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.4166666666666667,
+      "complete": false,
+      "tokens": 313,
+      "rows_sent": 5,
+      "sibling_rows": 0,
+      "facts": [
+       {
+        "text": "Denosumab (Xgeva)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-desu (Jubereq)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-qbde (Xtrenbo)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-bbdz (Wyost)",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Denosumab-bmwo (Osenvelt)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-bmwo (Denosumab-Celtrion)",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Denosumab-bnht (Bomyntra)",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Denosumab-bnht (denosumab Frensenius)",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Denosumab-dssb (Xbryk)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-dssb (Denosumab Samsung Bioepis)",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Denosumab-kyqq (Aukelso)",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Denosumab-nxxp (Bilprevda)",
+        "type": "value",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 714,
+      "rows_sent": 29,
+      "sibling_rows": 8,
+      "facts": [
+       {
+        "text": "Denosumab (Xgeva)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-desu (Jubereq)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-qbde (Xtrenbo)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-bbdz (Wyost)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-bmwo (Osenvelt)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-bmwo (Denosumab-Celtrion)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-bnht (Bomyntra)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-bnht (denosumab Frensenius)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-dssb (Xbryk)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-dssb (Denosumab Samsung Bioepis)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-kyqq (Aukelso)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-nxxp (Bilprevda)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 1066,
+      "rows_sent": 29,
+      "sibling_rows": 8,
+      "facts": [
+       {
+        "text": "Denosumab (Xgeva)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-desu (Jubereq)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-qbde (Xtrenbo)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-bbdz (Wyost)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-bmwo (Osenvelt)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-bmwo (Denosumab-Celtrion)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-bnht (Bomyntra)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-bnht (denosumab Frensenius)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-dssb (Xbryk)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-dssb (Denosumab Samsung Bioepis)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-kyqq (Aukelso)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-nxxp (Bilprevda)",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "bendamustine_j9036",
+    "kind": "Row-to-column relationship",
+    "query": "For bendamustine HCPCS J9036, what drug, preference, and prior authorization are listed?",
+    "source": "geha-coverage-policy-bendamustine.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 319,
+      "rows_sent": 5,
+      "sibling_rows": 0,
+      "facts": [
+       {
+        "text": "Belrapzo",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Non-preferred",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 513,
+      "rows_sent": 20,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Belrapzo",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Non-preferred",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 1057,
+      "rows_sent": 20,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Belrapzo",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Non-preferred",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "long_acting_gcsfs_preferred_relation",
+    "kind": "Row-to-column relationship",
+    "query": "Which long-acting G-CSF drugs are preferred, and what HCPCS code and prior authorization does each have?",
+    "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.6666666666666666,
+      "complete": false,
+      "tokens": 326,
+      "rows_sent": 5,
+      "sibling_rows": 0,
+      "facts": [
+       {
+        "text": "Nyvepria",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Q5122",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Fylnetra",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Q5130",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 519,
+      "rows_sent": 22,
+      "sibling_rows": 7,
+      "facts": [
+       {
+        "text": "Nyvepria",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Q5122",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Fylnetra",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Q5130",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 859,
+      "rows_sent": 22,
+      "sibling_rows": 7,
+      "facts": [
+       {
+        "text": "Nyvepria",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Q5122",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Fylnetra",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Q5130",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "short_acting_gcsfs_preferred_relation",
+    "kind": "Row-to-column relationship",
+    "query": "For preferred short-acting G-CSF, give the drug name, HCPCS code, and prior authorization requirement.",
+    "source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 327,
+      "rows_sent": 5,
+      "sibling_rows": 1,
+      "facts": [
+       {
+        "text": "Nivestym (filgrastim- aafi)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Q5110",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 519,
+      "rows_sent": 22,
+      "sibling_rows": 6,
+      "facts": [
+       {
+        "text": "Nivestym (filgrastim- aafi)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Q5110",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 859,
+      "rows_sent": 22,
+      "sibling_rows": 6,
+      "facts": [
+       {
+        "text": "Nivestym (filgrastim- aafi)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Q5110",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "gemcitabine_no_prior_auth",
+    "kind": "Row-to-column relationship",
+    "query": "Which gemcitabine products do not require prior authorization? Give each drug, HCPCS code, and preference.",
+    "source": "geha-coverage-policy-gemcitabine.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 339,
+      "rows_sent": 5,
+      "sibling_rows": 0,
+      "facts": [
+       {
+        "text": "Gemzar",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9201",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Non- Preferred",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Gemcitabine (Accord)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9196",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 483,
+      "rows_sent": 16,
+      "sibling_rows": 0,
+      "facts": [
+       {
+        "text": "Gemzar",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9201",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Non- Preferred",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Gemcitabine (Accord)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9196",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 1018,
+      "rows_sent": 16,
+      "sibling_rows": 0,
+      "facts": [
+       {
+        "text": "Gemzar",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9201",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Non- Preferred",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Gemcitabine (Accord)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9196",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "pemetrexed_preferred_codes",
+    "kind": "Row-to-column relationship",
+    "query": "Which pemetrexed products are preferred, and what is each HCPCS code?",
+    "source": "geha-coverage-policy-pemetrexed.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.3333333333333333,
+      "complete": false,
+      "tokens": 327,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Pemetrexed (Axtle)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9292",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Accord)",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "J9296",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Pemetrexed (Bluepoint)",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "J9322",
+        "type": "value",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 520,
+      "rows_sent": 20,
+      "sibling_rows": 14,
+      "facts": [
+       {
+        "text": "Pemetrexed (Axtle)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9292",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Accord)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9296",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Bluepoint)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9322",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 873,
+      "rows_sent": 20,
+      "sibling_rows": 14,
+      "facts": [
+       {
+        "text": "Pemetrexed (Axtle)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9292",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Accord)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9296",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Bluepoint)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9322",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "taxotere_docivyx_all",
+    "kind": "Row-to-column relationship",
+    "query": "In the Taxotere and Docivyx policy, list each drug with its HCPCS code, preference, and prior authorization requirement.",
+    "source": "geha-coverage-policy-taxotere-docivyx.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 328,
+      "rows_sent": 5,
+      "sibling_rows": 0,
+      "facts": [
+       {
+        "text": "Taxotere (docetaxel)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9171",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "No",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Docetaxel (Hospira 505(b)(2))",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9232",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "No",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Docetaxel (Docivyx)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9172",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Non-Preferred",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 471,
+      "rows_sent": 17,
+      "sibling_rows": 0,
+      "facts": [
+       {
+        "text": "Taxotere (docetaxel)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9171",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "No",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Docetaxel (Hospira 505(b)(2))",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9232",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "No",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Docetaxel (Docivyx)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9172",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Non-Preferred",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 975,
+      "rows_sent": 17,
+      "sibling_rows": 0,
+      "facts": [
+       {
+        "text": "Taxotere (docetaxel)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9171",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "No",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Docetaxel (Hospira 505(b)(2))",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9232",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "No",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Docetaxel (Docivyx)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "J9172",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Non-Preferred",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "xgeva_q5157",
+    "kind": "Row-to-column relationship",
+    "query": "For Xgeva policy code Q5157, which denosumab drug names are listed and what are their preference and prior authorization status?",
+    "source": "geha-coverage-policy-xgeva.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.8333333333333334,
+      "complete": false,
+      "tokens": 344,
+      "rows_sent": 5,
+      "sibling_rows": 0,
+      "facts": [
+       {
+        "text": "Denosumab-bmwo (Osenvelt)",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Non- Preferred**",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-bmwo (Denosumab-Celtrion)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Non- Preferred**",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "table": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 878,
+      "rows_sent": 34,
+      "sibling_rows": 13,
+      "facts": [
+       {
+        "text": "Denosumab-bmwo (Osenvelt)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Non- Preferred**",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-bmwo (Denosumab-Celtrion)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Non- Preferred**",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 1250,
+      "rows_sent": 34,
+      "sibling_rows": 13,
+      "facts": [
+       {
+        "text": "Denosumab-bmwo (Osenvelt)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Non- Preferred**",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Denosumab-bmwo (Denosumab-Celtrion)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Non- Preferred**",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Yes",
+        "type": "value",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "bendamustine_scope",
+    "kind": "Qualifier",
+    "query": "Which bendamustine products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+    "source": "geha-coverage-policy-bendamustine.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.6666666666666666,
+      "complete": false,
+      "tokens": 319,
+      "rows_sent": 5,
+      "sibling_rows": 3,
+      "facts": [
+       {
+        "text": "Treanda",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Bendamustine 505(b)(2) Dr Reddy's",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to all requests, both new and reauthorizations.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 0.6666666666666666,
+      "complete": false,
+      "tokens": 353,
+      "rows_sent": 16,
+      "sibling_rows": 12,
+      "facts": [
+       {
+        "text": "Treanda",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Bendamustine 505(b)(2) Dr Reddy's",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to all requests, both new and reauthorizations.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 720,
+      "rows_sent": 16,
+      "sibling_rows": 12,
+      "facts": [
+       {
+        "text": "Treanda",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Bendamustine 505(b)(2) Dr Reddy's",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to all requests, both new and reauthorizations.",
+        "type": "qualifier",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "bendamustine_auth_period",
+    "kind": "Qualifier",
+    "query": "Does Bendeka require prior authorization, and for how long are authorizations issued?",
+    "source": "geha-coverage-policy-bendamustine.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 286,
+      "rows_sent": 5,
+      "sibling_rows": 3,
+      "facts": [
+       {
+        "text": "Bendeka requires prior authorization",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Authorizations are issued for 6 (six) months.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 466,
+      "rows_sent": 20,
+      "sibling_rows": 18,
+      "facts": [
+       {
+        "text": "Bendeka requires prior authorization",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Authorizations are issued for 6 (six) months.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 1003,
+      "rows_sent": 20,
+      "sibling_rows": 18,
+      "facts": [
+       {
+        "text": "Bendeka requires prior authorization",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Authorizations are issued for 6 (six) months.",
+        "type": "qualifier",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "bevacizumab_scope",
+    "kind": "Qualifier",
+    "query": "Which bevacizumab products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+    "source": "geha-coverage-policy-bevacizumab.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 334,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Bevacizumab-bvzr (Zirabev)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 717,
+      "rows_sent": 29,
+      "sibling_rows": 28,
+      "facts": [
+       {
+        "text": "Bevacizumab-bvzr (Zirabev)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 1089,
+      "rows_sent": 29,
+      "sibling_rows": 28,
+      "facts": [
+       {
+        "text": "Bevacizumab-bvzr (Zirabev)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+        "type": "qualifier",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "datroway_scope",
+    "kind": "Qualifier",
+    "query": "Which datroway products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+    "source": "geha-coverage-policy-datroway.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 251,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Trodelvy",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts only.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 315,
+      "rows_sent": 17,
+      "sibling_rows": 15,
+      "facts": [
+       {
+        "text": "Trodelvy",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts only.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 656,
+      "rows_sent": 17,
+      "sibling_rows": 15,
+      "facts": [
+       {
+        "text": "Trodelvy",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts only.",
+        "type": "qualifier",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "erythropoietin-stimulating-agents_scope",
+    "kind": "Qualifier",
+    "query": "Which erythropoietin-stimulating agents products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+    "source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.6666666666666666,
+      "complete": false,
+      "tokens": 318,
+      "rows_sent": 5,
+      "sibling_rows": 3,
+      "facts": [
+       {
+        "text": "Retacrit",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Aranesp",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts only.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 0.6666666666666666,
+      "complete": false,
+      "tokens": 321,
+      "rows_sent": 14,
+      "sibling_rows": 10,
+      "facts": [
+       {
+        "text": "Retacrit",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Aranesp",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts only.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 658,
+      "rows_sent": 14,
+      "sibling_rows": 10,
+      "facts": [
+       {
+        "text": "Retacrit",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Aranesp",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts only.",
+        "type": "qualifier",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "gemcitabine_scope",
+    "kind": "Qualifier",
+    "query": "Which gemcitabine products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+    "source": "geha-coverage-policy-gemcitabine.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 332,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Gemcitabine (Accord)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 432,
+      "rows_sent": 15,
+      "sibling_rows": 14,
+      "facts": [
+       {
+        "text": "Gemcitabine (Accord)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 780,
+      "rows_sent": 15,
+      "sibling_rows": 14,
+      "facts": [
+       {
+        "text": "Gemcitabine (Accord)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+        "type": "qualifier",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "gnrh-analogues-in-prostate-cancer_scope",
+    "kind": "Qualifier",
+    "query": "Which GnRH analogues in prostate cancer products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+    "source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.3333333333333333,
+      "complete": false,
+      "tokens": 307,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Firmagon (degarelix)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Eligard(leuprolide acetate depot)",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Preferred product requirements apply to new starts only.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 0.6666666666666666,
+      "complete": false,
+      "tokens": 574,
+      "rows_sent": 25,
+      "sibling_rows": 21,
+      "facts": [
+       {
+        "text": "Firmagon (degarelix)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Eligard(leuprolide acetate depot)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts only.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 911,
+      "rows_sent": 25,
+      "sibling_rows": 21,
+      "facts": [
+       {
+        "text": "Firmagon (degarelix)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Eligard(leuprolide acetate depot)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts only.",
+        "type": "qualifier",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "long-acting-gcsfs_scope",
+    "kind": "Qualifier",
+    "query": "Which long-acting G-CSFs products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+    "source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.6666666666666666,
+      "complete": false,
+      "tokens": 299,
+      "rows_sent": 5,
+      "sibling_rows": 3,
+      "facts": [
+       {
+        "text": "Nyvepria",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Fylnetra",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 0.6666666666666666,
+      "complete": false,
+      "tokens": 648,
+      "rows_sent": 28,
+      "sibling_rows": 25,
+      "facts": [
+       {
+        "text": "Nyvepria",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Fylnetra",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 828,
+      "rows_sent": 28,
+      "sibling_rows": 25,
+      "facts": [
+       {
+        "text": "Nyvepria",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Fylnetra",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+        "type": "qualifier",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "non-muscle-invasive-bladder-cancer_scope",
+    "kind": "Qualifier",
+    "query": "Which non-muscle invasive bladder cancer products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+    "source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.75,
+      "complete": false,
+      "tokens": 333,
+      "rows_sent": 5,
+      "sibling_rows": 2,
+      "facts": [
+       {
+        "text": "Nadofaragene firadenovec-vncg (Adstiladrin)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pembrolizumab (Keytruda)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pembrolizumab and berahyaluronidas e alfa-pmph (Keytruda QLEX)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts only.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 0.75,
+      "complete": false,
+      "tokens": 474,
+      "rows_sent": 16,
+      "sibling_rows": 11,
+      "facts": [
+       {
+        "text": "Nadofaragene firadenovec-vncg (Adstiladrin)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pembrolizumab (Keytruda)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pembrolizumab and berahyaluronidas e alfa-pmph (Keytruda QLEX)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts only.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 643,
+      "rows_sent": 16,
+      "sibling_rows": 11,
+      "facts": [
+       {
+        "text": "Nadofaragene firadenovec-vncg (Adstiladrin)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pembrolizumab (Keytruda)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pembrolizumab and berahyaluronidas e alfa-pmph (Keytruda QLEX)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts only.",
+        "type": "qualifier",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "paclitaxel-protein-bound_scope",
+    "kind": "Qualifier",
+    "query": "Which protein-bound paclitaxel products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+    "source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 293,
+      "rows_sent": 5,
+      "sibling_rows": 3,
+      "facts": [
+       {
+        "text": "Docetaxel (Taxotere)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Docetaxel (Hospira 505(b)(2))",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Paclitaxel (Taxol)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts only.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 0.75,
+      "complete": false,
+      "tokens": 478,
+      "rows_sent": 23,
+      "sibling_rows": 17,
+      "facts": [
+       {
+        "text": "Docetaxel (Taxotere)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Docetaxel (Hospira 505(b)(2))",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Paclitaxel (Taxol)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts only.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 831,
+      "rows_sent": 23,
+      "sibling_rows": 17,
+      "facts": [
+       {
+        "text": "Docetaxel (Taxotere)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Docetaxel (Hospira 505(b)(2))",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Paclitaxel (Taxol)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts only.",
+        "type": "qualifier",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "pemetrexed_scope",
+    "kind": "Qualifier",
+    "query": "Which pemetrexed products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+    "source": "geha-coverage-policy-pemetrexed.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.75,
+      "complete": false,
+      "tokens": 341,
+      "rows_sent": 5,
+      "sibling_rows": 2,
+      "facts": [
+       {
+        "text": "Pemetrexed (Axtle)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Accord)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Bluepoint)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts ONLY.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 0.75,
+      "complete": false,
+      "tokens": 696,
+      "rows_sent": 28,
+      "sibling_rows": 25,
+      "facts": [
+       {
+        "text": "Pemetrexed (Axtle)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Accord)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Bluepoint)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts ONLY.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 881,
+      "rows_sent": 28,
+      "sibling_rows": 25,
+      "facts": [
+       {
+        "text": "Pemetrexed (Axtle)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Accord)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Pemetrexed (Bluepoint)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts ONLY.",
+        "type": "qualifier",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "short-acting-gcsfs_scope",
+    "kind": "Qualifier",
+    "query": "Which short-acting G-CSFs products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+    "source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 285,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Nivestym (filgrastim- aafi)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 565,
+      "rows_sent": 23,
+      "sibling_rows": 22,
+      "facts": [
+       {
+        "text": "Nivestym (filgrastim- aafi)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 744,
+      "rows_sent": 23,
+      "sibling_rows": 22,
+      "facts": [
+       {
+        "text": "Nivestym (filgrastim- aafi)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+        "type": "qualifier",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "taxotere-docivyx_scope",
+    "kind": "Qualifier",
+    "query": "Which Taxotere/Docivyx products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+    "source": "geha-coverage-policy-taxotere-docivyx.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.6666666666666666,
+      "complete": false,
+      "tokens": 291,
+      "rows_sent": 5,
+      "sibling_rows": 3,
+      "facts": [
+       {
+        "text": "Taxotere (docetaxel)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Docetaxel (Hospira 505(b)(2))",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts ONLY.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 0.6666666666666666,
+      "complete": false,
+      "tokens": 452,
+      "rows_sent": 23,
+      "sibling_rows": 21,
+      "facts": [
+       {
+        "text": "Taxotere (docetaxel)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Docetaxel (Hospira 505(b)(2))",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts ONLY.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 620,
+      "rows_sent": 23,
+      "sibling_rows": 21,
+      "facts": [
+       {
+        "text": "Taxotere (docetaxel)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Docetaxel (Hospira 505(b)(2))",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts ONLY.",
+        "type": "qualifier",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "trastuzumab_scope",
+    "kind": "Qualifier",
+    "query": "Which trastuzumab products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+    "source": "geha-coverage-policy-trastuzumab.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.3333333333333333,
+      "complete": false,
+      "tokens": 322,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Trazimera",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Kanjinti",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Preferred product requirements apply to new starts ONLY.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 0.6666666666666666,
+      "complete": false,
+      "tokens": 727,
+      "rows_sent": 29,
+      "sibling_rows": 25,
+      "facts": [
+       {
+        "text": "Trazimera",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Kanjinti",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts ONLY.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 1234,
+      "rows_sent": 29,
+      "sibling_rows": 25,
+      "facts": [
+       {
+        "text": "Trazimera",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Kanjinti",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts ONLY.",
+        "type": "qualifier",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "trastuzumab_auth_period",
+    "kind": "Qualifier",
+    "query": "Does Herceptin require prior authorization, and for how long are authorizations issued?",
+    "source": "geha-coverage-policy-trastuzumab.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 324,
+      "rows_sent": 5,
+      "sibling_rows": 3,
+      "facts": [
+       {
+        "text": "Herceptin requires prior authorization",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Authorizations are issued for 6 (six) months.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 550,
+      "rows_sent": 22,
+      "sibling_rows": 20,
+      "facts": [
+       {
+        "text": "Herceptin requires prior authorization",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Authorizations are issued for 6 (six) months.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 1050,
+      "rows_sent": 22,
+      "sibling_rows": 20,
+      "facts": [
+       {
+        "text": "Herceptin requires prior authorization",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Authorizations are issued for 6 (six) months.",
+        "type": "qualifier",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "xgeva_scope",
+    "kind": "Qualifier",
+    "query": "Which xgeva products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+    "source": "geha-coverage-policy-xgeva.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.0,
+      "complete": false,
+      "tokens": 313,
+      "rows_sent": 5,
+      "sibling_rows": 5,
+      "facts": [
+       {
+        "text": "Zoledronic Acid (Zometa)",
+        "type": "value",
+        "in_context": false
+       },
+       {
+        "text": "Preferred product requirements apply to new starts only.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 778,
+      "rows_sent": 31,
+      "sibling_rows": 30,
+      "facts": [
+       {
+        "text": "Zoledronic Acid (Zometa)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts only.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 972,
+      "rows_sent": 31,
+      "sibling_rows": 30,
+      "facts": [
+       {
+        "text": "Zoledronic Acid (Zometa)",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Preferred product requirements apply to new starts only.",
+        "type": "qualifier",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "xgeva_auth_period",
+    "kind": "Qualifier",
+    "query": "Does Denosumab (Xgeva) require prior authorization, and for how long are authorizations issued?",
+    "source": "geha-coverage-policy-xgeva.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 344,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Denosumab (Xgeva) requires prior authorization",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Authorizations are issued for 12 (twelve) months.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 896,
+      "rows_sent": 34,
+      "sibling_rows": 32,
+      "facts": [
+       {
+        "text": "Denosumab (Xgeva) requires prior authorization",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Authorizations are issued for 12 (twelve) months.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 1081,
+      "rows_sent": 34,
+      "sibling_rows": 32,
+      "facts": [
+       {
+        "text": "Denosumab (Xgeva) requires prior authorization",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Authorizations are issued for 12 (twelve) months.",
+        "type": "qualifier",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   },
+   {
+    "id": "xgeva_footnote",
+    "kind": "Qualifier",
+    "query": "Is Denosumab (Xgeva) non-preferred for a patient with breast cancer?",
+    "source": "geha-coverage-policy-xgeva.pdf",
+    "strategies": {
+     "flat": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 340,
+      "rows_sent": 5,
+      "sibling_rows": 4,
+      "facts": [
+       {
+        "text": "Denosumab (Xgeva) is listed as Non-Preferred",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Does not apply in the setting of Prostate or Breast Cancer.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "table": {
+      "coverage": 0.5,
+      "complete": false,
+      "tokens": 896,
+      "rows_sent": 34,
+      "sibling_rows": 32,
+      "facts": [
+       {
+        "text": "Denosumab (Xgeva) is listed as Non-Preferred",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Does not apply in the setting of Prostate or Breast Cancer.",
+        "type": "qualifier",
+        "in_context": false
+       }
+      ]
+     },
+     "notes": {
+      "coverage": 1.0,
+      "complete": true,
+      "tokens": 1081,
+      "rows_sent": 34,
+      "sibling_rows": 32,
+      "facts": [
+       {
+        "text": "Denosumab (Xgeva) is listed as Non-Preferred",
+        "type": "value",
+        "in_context": true
+       },
+       {
+        "text": "Does not apply in the setting of Prostate or Breast Cancer.",
+        "type": "qualifier",
+        "in_context": true
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "answers": null
+}
