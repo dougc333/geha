@@ -174,7 +174,7 @@ function AnswerView({ data, slice, strategies, bind, open }) {
         Does the answer state every required fact? Each fact is checked in the context and in the answer, which
         separates <b>assembly errors</b> (never sent to the model) from <b>generation drops</b> (sent, then left out).
         Answer, judge and fact check: {ans.configuration.answer_model} / {ans.configuration.judge_model}.
-        {ans.summary.queries_completed < ans.summary.queries_requested && ` ${ans.summary.queries_completed} of ${ans.summary.queries_requested} questions completed.`}
+        {` ${ans.summary.queries_completed} of ${ans.summary.queries_requested} questions completed.`}
       </p>
       <h2>Per strategy ({cases.length} questions)</h2>
       <div className="grid-3">
