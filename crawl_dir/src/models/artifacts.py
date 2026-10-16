@@ -48,6 +48,17 @@ class ChunkRecord(TypedDict):
     review_status: Literal["pending", "approved", "rejected"]
 
 
+class ContextualChunkRecord(ChunkRecord):
+    """A canonical chunk plus a separately auditable LLM retrieval annotation."""
+
+    retrieval_context: str
+    contextual_retrieval_text: str
+    contextual_retrieval_model: str
+    contextual_retrieval_prompt_version: str
+    contextualized_at: str
+    prompt_cache: dict[str, int]
+
+
 class QcReport(TypedDict):
     status: Literal["needs_visual_review", "passed", "failed"]
     source_sha256: str

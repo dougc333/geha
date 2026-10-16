@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "model": "claude-sonnet-5-5",
+  "document": "runs/coverage-policies/geha-coverage-policy-gemcitabine/batch-20261009-token-safe/candidate/document.md",
+  "document_chars": 8209,
+  "prompt_version": "anthropic-contextual-retrieval-v1",
+  "cache_control": {
+    "type": "ephemeral"
+  },
+  "first": {
+    "input_tokens": 658,
+    "output_tokens": 169,
+    "cache_creation_input_tokens": 2881,
+    "cache_read_input_tokens": 0
+  },
+  "second": {
+    "input_tokens": 257,
+    "output_tokens": 183,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 2881
+  },
+  "explanation": "PASS means the second request reported cache_read_input_tokens > 0. The entire <document> system block is the cache breakpoint.",
+  "tested_at": "2026-10-16T22:08:15.941778+00:00"
+}
