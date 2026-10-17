@@ -167,8 +167,11 @@ class AnswerDentalPolicyQuestion(dspy.Signature):
 
     Cite every material statement with the page marker from the evidence, using
     the exact form ``[p. N]``. If the evidence does not answer the question,
-    say that the answer was not found in the supplied document. Do not infer
-    enrollment eligibility, guarantee coverage, or give medical advice.
+    say that the answer was not found in the supplied document. You may state
+    that a service is listed as covered and report its documented copay,
+    coinsurance, limit, or exclusion when the evidence supports it. Phrase these
+    as plan terms, not as a prediction that an individual claim will be approved
+    or paid. Do not infer enrollment eligibility or give medical advice.
 
     When the question names a store, dentist, or other provider that is not
     named in the evidence, still explain any relevant general benefit found in
