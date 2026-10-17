@@ -1,0 +1,35 @@
+# The Dockerfile is built from the repository root. Only send files used by
+# the UI builder and ingestion runtime; run output remains a mounted volume.
+**
+
+!document_ingestion_workflow/
+!document_ingestion_workflow/**
+
+!crawl_dir/
+!crawl_dir/src/
+!crawl_dir/src/**
+!crawl_dir/raw/
+!crawl_dir/raw/coverage-policies/
+!crawl_dir/raw/coverage-policies/**
+!crawl_dir/raw/forms/
+!crawl_dir/raw/forms/**
+!crawl_dir/raw/research/
+!crawl_dir/raw/research/ey-limra-workforce-benefits-study-final-2025.pdf
+!crawl_dir/annotations/
+!crawl_dir/annotations/research/
+!crawl_dir/annotations/research/ey-limra-workforce-benefits-study-final-2025/
+!crawl_dir/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs/
+!crawl_dir/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs/**
+
+!PDF_processing/
+!PDF_processing/bill_lading/
+!PDF_processing/bill_lading/**
+
+document_ingestion_workflow/ui/node_modules/
+document_ingestion_workflow/ui/dist/
+document_ingestion_workflow/**/__pycache__/
+PDF_processing/bill_lading/**/__pycache__/
+**/*.py[cod]
+**/.DS_Store
+**/.env
+**/.env.*

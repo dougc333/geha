@@ -630,4 +630,8 @@ def create_app() -> web.Application:
 
 
 if __name__ == "__main__":
-    web.run_app(create_app(), host="127.0.0.1", port=8510)
+    web.run_app(
+        create_app(),
+        host=os.environ.get("HOST", "127.0.0.1"),
+        port=int(os.environ.get("PORT", "8510")),
+    )
