@@ -92,6 +92,56 @@ def _document_readiness() -> dict[str, dict[str, Any]]:
     return readiness
 
 
+def _contextual_run_history() -> list[dict[str, Any]]:
+    history: list[dict[str, Any]] = []
+    for output in RUNS_ROOT.glob(
+        "coverage-policies/*/*/candidate/contextual-chunks.jsonl"
+    ):
+        run_dir = output.parents[1]
+        manifest_path = run_dir / "run-manifest.json"
+        metadata_path = output.parent / "contextual-retrieval.json"
+        if not manifest_path.is_file():
+            continue
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            metadata = (
+                json.loads(metadata_path.read_text(encoding="utf-8"))
+                if metadata_path.is_file() else {}
+            )
+            contextual = _jsonl(output)
+            canonical = _jsonl(output.parent / "chunks.jsonl")
+        except (OSError, json.JSONDecodeError):
+            continue
+        source = str(manifest.get("source", ""))
+        prefix = "raw/coverage-policies/"
+        if not source.startswith(prefix):
+            continue
+        source_key = source[len(prefix):]
+        updated_at = str(
+            metadata.get("updated_at")
+            or manifest.get("created_at")
+            or datetime.fromtimestamp(output.stat().st_mtime, timezone.utc).isoformat()
+        )
+        history.append({
+            "source": source_key,
+            "run": str(run_dir),
+            "run_id": str(manifest.get("run_id") or run_dir.name),
+            "created_at": manifest.get("created_at"),
+            "updated_at": updated_at,
+            "document_version": manifest.get("document_version"),
+            "plan_year": manifest.get("plan_year"),
+            "completed_chunks": len(contextual),
+            "total_chunks": len(canonical),
+            "complete": bool(canonical) and len(contextual) == len(canonical),
+            "model": metadata.get("model"),
+            "prompt_version": metadata.get("prompt_version"),
+            "whole_document_chars": metadata.get("whole_document_chars"),
+            "cache_creation_input_tokens": metadata.get("cache_creation_input_tokens", 0),
+            "cache_read_input_tokens": metadata.get("cache_read_input_tokens", 0),
+        })
+    return sorted(history, key=lambda item: item["updated_at"], reverse=True)
+
+
 def _cache_test_candidate() -> tuple[Path, str, list[dict[str, Any]]]:
     """Choose the smallest existing document safely above prompt-cache minimums."""
     candidates: list[tuple[int, Path, str, list[dict[str, Any]]]] = []
@@ -327,6 +377,15 @@ async def health(_: web.Request) -> web.Response:
     })
 
 
+async def history(_: web.Request) -> web.Response:
+    runs = _contextual_run_history()
+    return web.json_response({
+        "runs": runs,
+        "total_runs": len(runs),
+        "documents": len({run["source"] for run in runs}),
+    })
+
+
 async def prompt_contract(_: web.Request) -> web.Response:
     return web.json_response({
         "prompt_version": PROMPT_VERSION,
@@ -499,6 +558,7 @@ async def index(_: web.Request) -> web.FileResponse:
 def create_app() -> web.Application:
     app = web.Application(client_max_size=1024 * 1024)
     app.router.add_get("/api/health", health)
+    app.router.add_get("/api/history", history)
     app.router.add_get("/api/prompt", prompt_contract)
     app.router.add_get("/api/prompt-cache-test", last_prompt_cache_test)
     app.router.add_post("/api/prompt-cache-test", test_prompt_cache)

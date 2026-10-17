@@ -64,6 +64,20 @@ class StructuredBenefitIndexTests(unittest.TestCase):
     def test_unknown_code_does_not_guess_a_class(self):
         self.assertIsNone(self.index.resolve("What does D9999 cost?"))
 
+    def test_resolves_plain_language_orthodontics_to_class_d(self):
+        resolved = self.index.resolve(
+            "I'm considering braces for myself under Standard. Are adults covered, "
+            "what do I pay in-network, and what is the lifetime maximum?"
+        )
+
+        self.assertIsNotNone(resolved)
+        self.assertEqual(resolved.record.benefit_class, "Class D")
+        self.assertIn("adult orthodontics", resolved.record.description)
+        self.assertEqual(
+            resolved.record.standard_in_network_cost,
+            "50% with $2,500 lifetime maximum",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

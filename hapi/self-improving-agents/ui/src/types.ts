@@ -88,3 +88,41 @@ export interface AnswerKey {
     schemes: Record<string, { claims: number; paid: number }>;
   }>;
 }
+
+export interface ImprovementRow {
+  run_id: string;
+  level: number;
+  variant: number;
+  title: string;
+  agent: string;
+  error?: string | null;
+  guilty: number;
+  found: number;
+  false_positive_providers: number;
+  tool_calls?: number;
+  seconds?: number;
+  input_tokens?: number;
+  output_tokens?: number;
+  lessons_in?: number;
+}
+
+export interface ImprovementExperiment {
+  started: string;
+  model: string;
+  reflector: string;
+  train: string;
+  test: string;
+  baseline: ImprovementRow[];
+  tested: ImprovementRow[];
+  baseline_net: number;
+  tested_net: number;
+  decision: "kept" | "rejected";
+  lessons: string[];
+}
+
+export interface ImprovementPayload {
+  experiments: ImprovementExperiment[];
+  accepted_lessons: string[];
+  source: string;
+  metric: string;
+}

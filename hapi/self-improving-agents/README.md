@@ -77,6 +77,13 @@ python3 seed_fraud.py --level 1                       # plant level 1 (see the l
 ./run_server.sh                                       # http://localhost:8765  (needs ANTHROPIC_API_KEY)
 ```
 
+Open the **Self-improvement** tab to inspect the experiments written by
+`improve.py`. The dashboard shows the baseline, train/reflect/test phases,
+held-out acceptance decision, score and false-accusation changes, token/tool-call
+tradeoffs, accepted lessons, and links back to each saved investigation trace.
+Its data comes from `GET /api/improvement`, backed by `improve_results.json` and
+`lessons.md`; the UI never invents progress that was not saved by the loop.
+
 `run_server.sh` uses `uv` to run the server with langchain, langgraph, langchain-anthropic,
 langchain-mcp-adapters, fastapi and uvicorn, and reads `ANTHROPIC_API_KEY` from the
 environment (or `../../bill_lading/.env`). For UI development, `cd ui && npm run dev`

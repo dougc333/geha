@@ -43,6 +43,32 @@ export interface DocumentProgress {
   error?: string
   markdownVerified?: boolean
   markdownChars?: number
+  savedAt?: string
+  batchId?: string
+}
+
+export interface HistoricalRun {
+  source: string
+  run: string
+  run_id: string
+  created_at?: string
+  updated_at: string
+  document_version?: string
+  plan_year?: number
+  completed_chunks: number
+  total_chunks: number
+  complete: boolean
+  model?: string
+  prompt_version?: string
+  whole_document_chars?: number
+  cache_creation_input_tokens: number
+  cache_read_input_tokens: number
+}
+
+export interface HistoryResponse {
+  runs: HistoricalRun[]
+  total_runs: number
+  documents: number
 }
 
 export interface ChunkPair {

@@ -18,6 +18,12 @@ scoped to the benefits-guide PDF; only the retrieved passages are sent to the
 configured language model. Every answer exposes those passages in the UI for
 verification.
 
+Exact benefit-table values are stored in `data/dental_benefits.sqlite`. The
+runtime performs a deterministic SQLite lookup for supported procedure codes
+and service aliases, then provides the selected row and its document/page
+provenance to the answer model. BM25 and BGE retrieval remain responsible for
+supporting prose; they do not determine authoritative costs or limits.
+
 The Policy Q&A tab also includes six persona tests. Selecting **Run persona**
 animates the persona's question character by character in the user chat bubble,
 runs the currently selected retriever and DSPy answer program, then scores the
@@ -84,6 +90,12 @@ cd /Users/dc/geha/dspy_dental_chatbot
 streamlit run src/app.py --server.port 8506
 ```
 
+By default, Streamlit starts loading the local BGE model and cached vectors in
+a background thread while the UI renders. The initialized retriever is retained
+with `st.cache_resource`, so subsequent vector and hybrid queries reuse it.
+Set `DENTAL_WARM_RETRIEVER=0` to disable startup warming and pay the cold-start
+cost on the first vector query instead.
+
 For an OpenAI-compatible Nous endpoint, set `DSPY_MODEL`, `DSPY_API_BASE`, and
 either `DSPY_API_KEY` or the existing `NOUS_KEY`. For OpenRouter, use a LiteLLM
 model identifier beginning with `openrouter/` and set `OPENROUTER_API_KEY`.
@@ -91,6 +103,20 @@ model identifier beginning with `openrouter/` and set `OPENROUTER_API_KEY`.
 ## Safety guards
 
 ![Guarded policy Q&A flow](docs/guarded_policy_qa.svg)
+
+## Structured benefit database
+
+Rebuild the small SQLite database from the canonical page-5 extraction output:
+
+```bash
+cd /Users/dc/geha/dspy_dental_chatbot
+PYTHONPATH=src python src/build_benefits_db.py
+```
+
+The database contains five extracted benefit rows plus service rules, CDT-code
+mappings, and aliases. Its records retain `document_id`, `plan_year`, page, and
+section provenance. SQLite is used only for exact structured facts; the local
+BM25 and BGE indexes continue to retrieve unstructured document evidence.
 
 Policy Q&A runs through `GuardedPolicyQA` in `src/safety_guard.py`. An input
 guard classifies the question while retrieval and DSPy draft the answer in

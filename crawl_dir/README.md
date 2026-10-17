@@ -66,20 +66,20 @@ claude mcp add geha-ingestion -- /bin/zsh -c 'source ~/.zshrc >/dev/null 2>&1; c
 
 ### Document ingestion pipeline (React demo)
 
-`document_ingestion_pipeline/` (at the repository root) contains a Vite + TypeScript + Tailwind app that visualizes this MCP
+`document_ingestion_workflow/` (at the repository root) contains a Vite + TypeScript + Tailwind app that visualizes this MCP
 workflow. It uses class components, a class-based Context provider, and an SSE
 client class so live run state is shared without prop drilling. The browser
 shows the source single-page PDF beside HTML before correction, pauses for five
 seconds, streams the review/correction events, and then shows the corrected HTML.
 
 ```bash
-cd /Users/dc/geha/document_ingestion_pipeline/ui
+cd /Users/dc/geha/document_ingestion_workflow/ui
 npm install
 npm run build
 
 cd /Users/dc/geha
 source .venv/bin/activate
-python -m document_ingestion_pipeline.backend
+python -m document_ingestion_workflow.backend
 ```
 
 Open `http://127.0.0.1:8510`. Anthropic credentials (`ANTHROPIC_API_KEY` or an

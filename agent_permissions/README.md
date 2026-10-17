@@ -1,5 +1,13 @@
 # agent_permissions
 
+Used by
+[hapi/langgraph_agent.py (line 30)](/Users/dc/geha/hapi/langgraph_agent.py:30) — general FHIR agent
+[hapi/pharmacy_agent.py (line 27)](/Users/dc/geha/hapi/pharmacy_agent.py:27) — pharmacy agent
+[hapi/fraud/agent.py (line 38)](/Users/dc/geha/hapi/fraud/agent.py:38) — fraud investigation agent
+[hapi/self-improving-agents/agent.py (line 38)](/Users/dc/geha/hapi/self-improving-agents/agent.py:38) — learned-tool agent
+[mcp_benefits_server/agent/benefits_agent.py (line 41)](/Users/dc/geha/mcp_benefits_server/agent/benefits_agent.py:41) — benefits agent
+
+
 A permission layer for the repo's tool-calling agents. `PermissionMiddleware` is a LangChain 1.x
 `create_agent` middleware (`wrap_tool_call` / `awrap_tool_call`). It checks every tool call
 before the tool runs.

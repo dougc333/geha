@@ -219,6 +219,20 @@ class JevInputGuardTests(unittest.TestCase):
         self.assertTrue(result.blocked)
         self.assertEqual(result.answer, REFUSALS["other_member_data"])
 
+    def test_benign_off_topic_label_does_not_block(self):
+        index = DentalPolicyIndex([PolicyChunk(7, "Life Alert has a discounted monthly rate.")])
+        qa = DentalPolicyQA(index, program=FakeProgram("A discount is available [p. 7]."))
+        client = FakeJevClient({"safe": 0.42, "off_topic_benign": 0.55, "off_topic_harmful": 0.03})
+        guarded = GuardedPolicyQA(qa, input_guard=JevInputGuard(client=client), output_guard=FakeGuard())
+
+        result = guarded.ask(
+            "I'm helping my mother choose a medical alert service. Is there a Life Alert deal?"
+        )
+
+        self.assertFalse(result.blocked)
+        self.assertEqual(result.verdicts[0].category, "off_topic_benign")
+        self.assertIn("[p. 7]", result.answer)
+
 
 if __name__ == "__main__":
     unittest.main()
