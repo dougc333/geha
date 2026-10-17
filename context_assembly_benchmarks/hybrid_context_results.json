@@ -2,46 +2,72 @@
   "summary": {
     "flat_semantic_chunks": {
       "overall": {
-        "cases": 41,
-        "average_evidence_coverage": 0.8170731707317073,
-        "complete_evidence_rate": 0.5853658536585366,
-        "expected_table_present_rate": 0.975609756097561,
-        "average_estimated_tokens": 292.4634146341463,
-        "evidence_per_1k_tokens": 8.756567425569177
+        "cases": 59,
+        "average_evidence_coverage": 0.7259887005649718,
+        "complete_evidence_rate": 0.4067796610169492,
+        "expected_table_present_rate": 0.9830508474576272,
+        "average_estimated_tokens": 298.9491525423729,
+        "average_sibling_rows": 2.694915254237288,
+        "average_rows_sent": 5.0,
+        "qualifier_coverage": 0.0,
+        "evidence_per_1k_tokens": 7.427145934913256
       },
       "preference": {
         "cases": 34,
         "average_evidence_coverage": 0.8137254901960784,
         "complete_evidence_rate": 0.5882352941176471,
         "expected_table_present_rate": 0.9705882352941176,
-        "average_estimated_tokens": 285.1470588235294,
-        "evidence_per_1k_tokens": 7.220216606498195
+        "average_estimated_tokens": 285.1764705882353,
+        "average_sibling_rows": 2.7058823529411766,
+        "average_rows_sent": 5.0,
+        "qualifier_coverage": 0.0,
+        "evidence_per_1k_tokens": 7.2194719471947195
       },
       "relation": {
         "cases": 7,
         "average_evidence_coverage": 0.8333333333333333,
         "complete_evidence_rate": 0.5714285714285714,
         "expected_table_present_rate": 1.0,
-        "average_estimated_tokens": 328.0,
-        "evidence_per_1k_tokens": 15.24390243902439
+        "average_estimated_tokens": 330.0,
+        "average_sibling_rows": 0.7142857142857143,
+        "average_rows_sent": 5.0,
+        "qualifier_coverage": 0.0,
+        "evidence_per_1k_tokens": 15.151515151515152
+      },
+      "qualifier": {
+        "cases": 18,
+        "average_evidence_coverage": 0.5185185185185186,
+        "complete_evidence_rate": 0.0,
+        "expected_table_present_rate": 1.0,
+        "average_estimated_tokens": 312.8888888888889,
+        "average_sibling_rows": 3.4444444444444446,
+        "average_rows_sent": 5.0,
+        "qualifier_coverage": 0.0,
+        "evidence_per_1k_tokens": 4.616477272727273
       }
     },
     "table_aware_rag": {
       "overall": {
-        "cases": 41,
-        "average_evidence_coverage": 1.0,
-        "complete_evidence_rate": 1.0,
+        "cases": 59,
+        "average_evidence_coverage": 0.8771186440677966,
+        "complete_evidence_rate": 0.6949152542372882,
         "expected_table_present_rate": 1.0,
-        "average_estimated_tokens": 431.0975609756098,
-        "evidence_per_1k_tokens": 7.920792079207921
+        "average_estimated_tokens": 476.135593220339,
+        "average_sibling_rows": 14.457627118644067,
+        "average_rows_sent": 20.016949152542374,
+        "qualifier_coverage": 0.0,
+        "evidence_per_1k_tokens": 6.051544923821729
       },
       "preference": {
         "cases": 34,
         "average_evidence_coverage": 1.0,
         "complete_evidence_rate": 1.0,
         "expected_table_present_rate": 1.0,
-        "average_estimated_tokens": 405.05882352941177,
-        "evidence_per_1k_tokens": 7.115887307580598
+        "average_estimated_tokens": 407.38235294117646,
+        "average_sibling_rows": 12.676470588235293,
+        "average_rows_sent": 17.735294117647058,
+        "qualifier_coverage": 0.0,
+        "evidence_per_1k_tokens": 7.07530142227998
       },
       "relation": {
         "cases": 7,
@@ -49,7 +75,67 @@
         "complete_evidence_rate": 1.0,
         "expected_table_present_rate": 1.0,
         "average_estimated_tokens": 557.5714285714286,
+        "average_sibling_rows": 6.285714285714286,
+        "average_rows_sent": 21.571428571428573,
+        "qualifier_coverage": 0.0,
         "evidence_per_1k_tokens": 10.760953112990007
+      },
+      "qualifier": {
+        "cases": 18,
+        "average_evidence_coverage": 0.5972222222222222,
+        "complete_evidence_rate": 0.0,
+        "expected_table_present_rate": 1.0,
+        "average_estimated_tokens": 574.3333333333334,
+        "average_sibling_rows": 21.0,
+        "average_rows_sent": 23.72222222222222,
+        "qualifier_coverage": 0.0,
+        "evidence_per_1k_tokens": 2.901915264074289
+      }
+    },
+    "table_aware_notes": {
+      "overall": {
+        "cases": 59,
+        "average_evidence_coverage": 1.0,
+        "complete_evidence_rate": 1.0,
+        "expected_table_present_rate": 1.0,
+        "average_estimated_tokens": 813.6779661016949,
+        "average_sibling_rows": 14.457627118644067,
+        "average_rows_sent": 20.016949152542374,
+        "qualifier_coverage": 1.0,
+        "evidence_per_1k_tokens": 3.9160955693961297
+      },
+      "preference": {
+        "cases": 34,
+        "average_evidence_coverage": 1.0,
+        "complete_evidence_rate": 1.0,
+        "expected_table_present_rate": 1.0,
+        "average_estimated_tokens": 745.1176470588235,
+        "average_sibling_rows": 12.676470588235293,
+        "average_rows_sent": 17.735294117647058,
+        "qualifier_coverage": 0.0,
+        "evidence_per_1k_tokens": 3.8683192547564538
+      },
+      "relation": {
+        "cases": 7,
+        "average_evidence_coverage": 1.0,
+        "complete_evidence_rate": 1.0,
+        "expected_table_present_rate": 1.0,
+        "average_estimated_tokens": 984.4285714285714,
+        "average_sibling_rows": 6.285714285714286,
+        "average_rows_sent": 21.571428571428573,
+        "qualifier_coverage": 0.0,
+        "evidence_per_1k_tokens": 6.09490639965172
+      },
+      "qualifier": {
+        "cases": 18,
+        "average_evidence_coverage": 1.0,
+        "complete_evidence_rate": 1.0,
+        "expected_table_present_rate": 1.0,
+        "average_estimated_tokens": 876.7777777777778,
+        "average_sibling_rows": 21.0,
+        "average_rows_sent": 23.72222222222222,
+        "qualifier_coverage": 1.0,
+        "evidence_per_1k_tokens": 3.041439614750982
       }
     }
   },
@@ -69,7 +155,24 @@
         "expected_values_total": 2,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Treanda",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Bendamustine 505(b)(2) Dr Reddy's",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 2,
+        "sibling_rows": 3
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -80,7 +183,52 @@
         "expected_values_total": 2,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Treanda",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Bendamustine 505(b)(2) Dr Reddy's",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 16,
+        "rows_needed": 4,
+        "sibling_rows": 12
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2877,
+        "estimated_tokens": 720,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Treanda",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Bendamustine 505(b)(2) Dr Reddy's",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 16,
+        "rows_needed": 4,
+        "sibling_rows": 12
       }
     },
     {
@@ -98,7 +246,29 @@
         "expected_values_total": 3,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Bendeka",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Belrapzo",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Vivimusta",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 3,
+        "sibling_rows": 2
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -109,7 +279,62 @@
         "expected_values_total": 3,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Bendeka",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Belrapzo",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Vivimusta",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 13,
+        "rows_needed": 6,
+        "sibling_rows": 7
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 3277,
+        "estimated_tokens": 820,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Bendeka",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Belrapzo",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Vivimusta",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 13,
+        "rows_needed": 6,
+        "sibling_rows": 7
       }
     },
     {
@@ -127,7 +352,19 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Bevacizumab-bvzr (Zirabev)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -138,7 +375,42 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Bevacizumab-bvzr (Zirabev)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 16,
+        "rows_needed": 1,
+        "sibling_rows": 15
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2937,
+        "estimated_tokens": 735,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Bevacizumab-bvzr (Zirabev)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 16,
+        "rows_needed": 1,
+        "sibling_rows": 15
       }
     },
     {
@@ -156,7 +428,49 @@
         "expected_values_total": 7,
         "expected_evidence_coverage": 0.7142857142857143,
         "complete_evidence": false,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Bevacizumab- awwb (Mvasi)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Bevacizumab (Avastin)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Bevacizumab-tnjn (Avzivi)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Bevacizumab- maly (Alymsys)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Bevacizumab- adcd (Vegzelma)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Ziv-aflibercept (Zaltrap)",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Bevacizumab - nwgd (Jobevne)",
+            "type": "value",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 5,
+        "sibling_rows": 0
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -167,7 +481,102 @@
         "expected_values_total": 7,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Bevacizumab- awwb (Mvasi)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Bevacizumab (Avastin)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Bevacizumab-tnjn (Avzivi)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Bevacizumab- maly (Alymsys)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Bevacizumab- adcd (Vegzelma)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Ziv-aflibercept (Zaltrap)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Bevacizumab - nwgd (Jobevne)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 14,
+        "rows_needed": 9,
+        "sibling_rows": 5
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2732,
+        "estimated_tokens": 683,
+        "expected_values_found": 7,
+        "expected_values_total": 7,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Bevacizumab- awwb (Mvasi)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Bevacizumab (Avastin)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Bevacizumab-tnjn (Avzivi)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Bevacizumab- maly (Alymsys)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Bevacizumab- adcd (Vegzelma)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Ziv-aflibercept (Zaltrap)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Bevacizumab - nwgd (Jobevne)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 14,
+        "rows_needed": 9,
+        "sibling_rows": 5
       }
     },
     {
@@ -185,7 +594,19 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Trodelvy",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -196,7 +617,42 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Trodelvy",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 11,
+        "rows_needed": 2,
+        "sibling_rows": 9
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2119,
+        "estimated_tokens": 530,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Trodelvy",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 11,
+        "rows_needed": 2,
+        "sibling_rows": 9
       }
     },
     {
@@ -214,7 +670,19 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Datroway",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 4,
+        "sibling_rows": 1
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -225,7 +693,42 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Datroway",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 11,
+        "rows_needed": 3,
+        "sibling_rows": 8
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2119,
+        "estimated_tokens": 530,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Datroway",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 11,
+        "rows_needed": 3,
+        "sibling_rows": 8
       }
     },
     {
@@ -243,7 +746,24 @@
         "expected_values_total": 2,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Retacrit",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Aranesp",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 2,
+        "sibling_rows": 3
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -254,7 +774,52 @@
         "expected_values_total": 2,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Retacrit",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Aranesp",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 14,
+        "rows_needed": 4,
+        "sibling_rows": 10
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2629,
+        "estimated_tokens": 658,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Retacrit",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Aranesp",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 14,
+        "rows_needed": 4,
+        "sibling_rows": 10
       }
     },
     {
@@ -272,7 +837,24 @@
         "expected_values_total": 2,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Epogen",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Procrit",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 3,
+        "sibling_rows": 2
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -283,7 +865,52 @@
         "expected_values_total": 2,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Epogen",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Procrit",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 14,
+        "rows_needed": 3,
+        "sibling_rows": 11
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2629,
+        "estimated_tokens": 658,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Epogen",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Procrit",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 14,
+        "rows_needed": 3,
+        "sibling_rows": 11
       }
     },
     {
@@ -295,24 +922,71 @@
       "flat_semantic_chunks": {
         "context_units": 5,
         "distinct_sources": 2,
-        "characters": 1286,
-        "estimated_tokens": 322,
+        "characters": 1289,
+        "estimated_tokens": 323,
         "expected_values_found": 1,
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Gemcitabine (Accord)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
       },
       "table_aware_rag": {
         "context_units": 3,
         "distinct_sources": 2,
-        "characters": 1370,
-        "estimated_tokens": 343,
+        "characters": 1603,
+        "estimated_tokens": 401,
         "expected_values_found": 1,
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Gemcitabine (Accord)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 13,
+        "rows_needed": 1,
+        "sibling_rows": 12
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2996,
+        "estimated_tokens": 749,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Gemcitabine (Accord)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 13,
+        "rows_needed": 1,
+        "sibling_rows": 12
       }
     },
     {
@@ -330,7 +1004,24 @@
         "expected_values_total": 2,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Gemzar",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Avgemsi",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 2,
+        "sibling_rows": 3
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -341,7 +1032,52 @@
         "expected_values_total": 2,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Gemzar",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Avgemsi",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 13,
+        "rows_needed": 2,
+        "sibling_rows": 11
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2996,
+        "estimated_tokens": 749,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Gemzar",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Avgemsi",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 13,
+        "rows_needed": 2,
+        "sibling_rows": 11
       }
     },
     {
@@ -359,7 +1095,24 @@
         "expected_values_total": 2,
         "expected_evidence_coverage": 0.5,
         "complete_evidence": false,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Firmagon (degarelix)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Eligard(leuprolide acetate depot)",
+            "type": "value",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -370,7 +1123,52 @@
         "expected_values_total": 2,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Firmagon (degarelix)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Eligard(leuprolide acetate depot)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 25,
+        "rows_needed": 4,
+        "sibling_rows": 21
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 3641,
+        "estimated_tokens": 911,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Firmagon (degarelix)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Eligard(leuprolide acetate depot)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 25,
+        "rows_needed": 4,
+        "sibling_rows": 21
       }
     },
     {
@@ -388,7 +1186,49 @@
         "expected_values_total": 7,
         "expected_evidence_coverage": 0.5714285714285714,
         "complete_evidence": false,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Lupron Depot (leuprolide acetate depot)",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Camcevi (leuprolide mesylate)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Lutrate Depot (leuprolide acetate depot)",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Trelstar (triptorelin)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Camcevi ETM (leuprolide mesylate)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Zoladex (goserelin)",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Orgovyx (relugolix)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 4,
+        "sibling_rows": 1
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -399,7 +1239,102 @@
         "expected_values_total": 7,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Lupron Depot (leuprolide acetate depot)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Camcevi (leuprolide mesylate)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Lutrate Depot (leuprolide acetate depot)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Trelstar (triptorelin)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Camcevi ETM (leuprolide mesylate)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Zoladex (goserelin)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Orgovyx (relugolix)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 25,
+        "rows_needed": 16,
+        "sibling_rows": 9
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 3641,
+        "estimated_tokens": 911,
+        "expected_values_found": 7,
+        "expected_values_total": 7,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Lupron Depot (leuprolide acetate depot)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Camcevi (leuprolide mesylate)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Lutrate Depot (leuprolide acetate depot)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Trelstar (triptorelin)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Camcevi ETM (leuprolide mesylate)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Zoladex (goserelin)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Orgovyx (relugolix)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 25,
+        "rows_needed": 16,
+        "sibling_rows": 9
       }
     },
     {
@@ -417,7 +1352,24 @@
         "expected_values_total": 2,
         "expected_evidence_coverage": 0.5,
         "complete_evidence": false,
-        "expected_table_present": false
+        "expected_table_present": false,
+        "facts": [
+          {
+            "text": "Nyvepria",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Fylnetra",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -428,7 +1380,52 @@
         "expected_values_total": 2,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nyvepria",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Fylnetra",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 27,
+        "rows_needed": 5,
+        "sibling_rows": 22
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2937,
+        "estimated_tokens": 735,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nyvepria",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Fylnetra",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 27,
+        "rows_needed": 5,
+        "sibling_rows": 22
       }
     },
     {
@@ -446,7 +1443,54 @@
         "expected_values_total": 8,
         "expected_evidence_coverage": 0.5,
         "complete_evidence": false,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Neulasta",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Rolvedon",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Armlupeg",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Ryzneuta",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Fulphila",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Udenyca",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Ziextenzo",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Stimufend",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 4,
+        "sibling_rows": 1
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -457,7 +1501,112 @@
         "expected_values_total": 8,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Neulasta",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Rolvedon",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Armlupeg",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Ryzneuta",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Fulphila",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Udenyca",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Ziextenzo",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Stimufend",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 27,
+        "rows_needed": 14,
+        "sibling_rows": 13
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2937,
+        "estimated_tokens": 735,
+        "expected_values_found": 8,
+        "expected_values_total": 8,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Neulasta",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Rolvedon",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Armlupeg",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Ryzneuta",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Fulphila",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Udenyca",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Ziextenzo",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Stimufend",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 27,
+        "rows_needed": 14,
+        "sibling_rows": 13
       }
     },
     {
@@ -475,7 +1624,29 @@
         "expected_values_total": 3,
         "expected_evidence_coverage": 0.6666666666666666,
         "complete_evidence": false,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nadofaragene firadenovec-vncg (Adstiladrin)",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Pembrolizumab (Keytruda)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pembrolizumab and berahyaluronidas e alfa-pmph (Keytruda QLEX)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 3,
+        "sibling_rows": 2
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -486,7 +1657,62 @@
         "expected_values_total": 3,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nadofaragene firadenovec-vncg (Adstiladrin)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pembrolizumab (Keytruda)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pembrolizumab and berahyaluronidas e alfa-pmph (Keytruda QLEX)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 16,
+        "rows_needed": 5,
+        "sibling_rows": 11
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2570,
+        "estimated_tokens": 643,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nadofaragene firadenovec-vncg (Adstiladrin)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pembrolizumab (Keytruda)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pembrolizumab and berahyaluronidas e alfa-pmph (Keytruda QLEX)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 16,
+        "rows_needed": 5,
+        "sibling_rows": 11
       }
     },
     {
@@ -504,7 +1730,24 @@
         "expected_values_total": 2,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nogapendekin alfa inbakicept- pmln (Anktiva)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Gemcitabine (Inlexzo)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 3,
+        "sibling_rows": 2
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -515,7 +1758,52 @@
         "expected_values_total": 2,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nogapendekin alfa inbakicept- pmln (Anktiva)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Gemcitabine (Inlexzo)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 16,
+        "rows_needed": 4,
+        "sibling_rows": 12
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2570,
+        "estimated_tokens": 643,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nogapendekin alfa inbakicept- pmln (Anktiva)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Gemcitabine (Inlexzo)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 16,
+        "rows_needed": 4,
+        "sibling_rows": 12
       }
     },
     {
@@ -533,7 +1821,29 @@
         "expected_values_total": 3,
         "expected_evidence_coverage": 0.3333333333333333,
         "complete_evidence": false,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Docetaxel (Taxotere)",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Docetaxel (Hospira 505(b)(2))",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Paclitaxel (Taxol)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 2,
+        "sibling_rows": 3
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -544,7 +1854,62 @@
         "expected_values_total": 3,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Docetaxel (Taxotere)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Docetaxel (Hospira 505(b)(2))",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Paclitaxel (Taxol)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 23,
+        "rows_needed": 6,
+        "sibling_rows": 17
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 3324,
+        "estimated_tokens": 831,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Docetaxel (Taxotere)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Docetaxel (Hospira 505(b)(2))",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Paclitaxel (Taxol)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 23,
+        "rows_needed": 6,
+        "sibling_rows": 17
       }
     },
     {
@@ -562,7 +1927,19 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Paclitaxel Protein- Bound (Abraxane)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -573,7 +1950,42 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Paclitaxel Protein- Bound (Abraxane)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 23,
+        "rows_needed": 1,
+        "sibling_rows": 22
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 3324,
+        "estimated_tokens": 831,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Paclitaxel Protein- Bound (Abraxane)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 23,
+        "rows_needed": 1,
+        "sibling_rows": 22
       }
     },
     {
@@ -591,7 +2003,29 @@
         "expected_values_total": 3,
         "expected_evidence_coverage": 0.6666666666666666,
         "complete_evidence": false,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Pemetrexed (Axtle)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Accord)",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Pemetrexed (Bluepoint)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 2,
+        "sibling_rows": 3
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -602,7 +2036,62 @@
         "expected_values_total": 3,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Pemetrexed (Axtle)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Accord)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Bluepoint)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 20,
+        "rows_needed": 6,
+        "sibling_rows": 14
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 3490,
+        "estimated_tokens": 873,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Pemetrexed (Axtle)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Accord)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Bluepoint)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 20,
+        "rows_needed": 6,
+        "sibling_rows": 14
       }
     },
     {
@@ -620,7 +2109,49 @@
         "expected_values_total": 7,
         "expected_evidence_coverage": 0.7142857142857143,
         "complete_evidence": false,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Pemetrexed (Hospira)",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Pemetrexed (Sandoz)",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Pemetrexed (Alimta )",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Teva)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed ditromethamine (Hospira)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemfexy",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemrydi RTU",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 5,
+        "sibling_rows": 0
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -631,7 +2162,102 @@
         "expected_values_total": 7,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Pemetrexed (Hospira)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Sandoz)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Alimta )",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Teva)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed ditromethamine (Hospira)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemfexy",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemrydi RTU",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 20,
+        "rows_needed": 13,
+        "sibling_rows": 7
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 3490,
+        "estimated_tokens": 873,
+        "expected_values_found": 7,
+        "expected_values_total": 7,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Pemetrexed (Hospira)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Sandoz)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Alimta )",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Teva)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed ditromethamine (Hospira)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemfexy",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemrydi RTU",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 20,
+        "rows_needed": 13,
+        "sibling_rows": 7
       }
     },
     {
@@ -649,7 +2275,19 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Ruxience",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -660,7 +2298,42 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Ruxience",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 13,
+        "rows_needed": 2,
+        "sibling_rows": 11
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 3019,
+        "estimated_tokens": 755,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Ruxience",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 13,
+        "rows_needed": 2,
+        "sibling_rows": 11
       }
     },
     {
@@ -678,7 +2351,34 @@
         "expected_values_total": 4,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Truxima",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Rituxan Hycela",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Rituxan",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Riabni",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 4,
+        "sibling_rows": 1
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -689,7 +2389,72 @@
         "expected_values_total": 4,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Truxima",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Rituxan Hycela",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Rituxan",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Riabni",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 13,
+        "rows_needed": 8,
+        "sibling_rows": 5
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 3019,
+        "estimated_tokens": 755,
+        "expected_values_found": 4,
+        "expected_values_total": 4,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Truxima",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Rituxan Hycela",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Rituxan",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Riabni",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 13,
+        "rows_needed": 8,
+        "sibling_rows": 5
       }
     },
     {
@@ -707,7 +2472,19 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Reblozyl (luspatercept)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -718,7 +2495,42 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Reblozyl (luspatercept)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 10,
+        "rows_needed": 1,
+        "sibling_rows": 9
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 1983,
+        "estimated_tokens": 496,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Reblozyl (luspatercept)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 10,
+        "rows_needed": 1,
+        "sibling_rows": 9
       }
     },
     {
@@ -736,7 +2548,19 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Rytelo (imetelstat)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -747,7 +2571,42 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Rytelo (imetelstat)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 8,
+        "rows_needed": 1,
+        "sibling_rows": 7
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2613,
+        "estimated_tokens": 654,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Rytelo (imetelstat)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 8,
+        "rows_needed": 1,
+        "sibling_rows": 7
       }
     },
     {
@@ -765,7 +2624,19 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nivestym (filgrastim- aafi)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -776,7 +2647,42 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nivestym (filgrastim- aafi)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 23,
+        "rows_needed": 1,
+        "sibling_rows": 22
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2975,
+        "estimated_tokens": 744,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nivestym (filgrastim- aafi)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 23,
+        "rows_needed": 1,
+        "sibling_rows": 22
       }
     },
     {
@@ -794,7 +2700,34 @@
         "expected_values_total": 4,
         "expected_evidence_coverage": 0.75,
         "complete_evidence": false,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Zarxio (filgrastim-sndz)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Neupogen (filgrastim)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Granix (tbo-filgrastim)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Nypozi (filgrastim-txid)",
+            "type": "value",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 3,
+        "sibling_rows": 2
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -805,7 +2738,72 @@
         "expected_values_total": 4,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Zarxio (filgrastim-sndz)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Neupogen (filgrastim)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Granix (tbo-filgrastim)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Nypozi (filgrastim-txid)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 27,
+        "rows_needed": 4,
+        "sibling_rows": 23
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 3823,
+        "estimated_tokens": 956,
+        "expected_values_found": 4,
+        "expected_values_total": 4,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Zarxio (filgrastim-sndz)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Neupogen (filgrastim)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Granix (tbo-filgrastim)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Nypozi (filgrastim-txid)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 27,
+        "rows_needed": 4,
+        "sibling_rows": 23
       }
     },
     {
@@ -823,7 +2821,24 @@
         "expected_values_total": 2,
         "expected_evidence_coverage": 0.5,
         "complete_evidence": false,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Taxotere (docetaxel)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Docetaxel (Hospira 505(b)(2))",
+            "type": "value",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -834,7 +2849,52 @@
         "expected_values_total": 2,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Taxotere (docetaxel)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Docetaxel (Hospira 505(b)(2))",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 11,
+        "rows_needed": 3,
+        "sibling_rows": 8
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 1596,
+        "estimated_tokens": 399,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Taxotere (docetaxel)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Docetaxel (Hospira 505(b)(2))",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 11,
+        "rows_needed": 3,
+        "sibling_rows": 8
       }
     },
     {
@@ -852,7 +2912,19 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Docetaxel (Docivyx)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 2,
+        "sibling_rows": 3
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -863,7 +2935,42 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Docetaxel (Docivyx)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 21,
+        "rows_needed": 2,
+        "sibling_rows": 19
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2362,
+        "estimated_tokens": 591,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Docetaxel (Docivyx)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 21,
+        "rows_needed": 2,
+        "sibling_rows": 19
       }
     },
     {
@@ -881,18 +2988,80 @@
         "expected_values_total": 2,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Trazimera",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Kanjinti",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 2,
+        "sibling_rows": 3
       },
       "table_aware_rag": {
         "context_units": 3,
-        "distinct_sources": 2,
-        "characters": 1669,
-        "estimated_tokens": 418,
+        "distinct_sources": 1,
+        "characters": 1754,
+        "estimated_tokens": 439,
         "expected_values_found": 2,
         "expected_values_total": 2,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Trazimera",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Kanjinti",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 21,
+        "rows_needed": 4,
+        "sibling_rows": 17
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 3042,
+        "estimated_tokens": 761,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Trazimera",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Kanjinti",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 21,
+        "rows_needed": 4,
+        "sibling_rows": 17
       }
     },
     {
@@ -910,7 +3079,44 @@
         "expected_values_total": 6,
         "expected_evidence_coverage": 0.8333333333333334,
         "complete_evidence": false,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Herceptin",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Herceptin Hylecta",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Hercessi",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Ontruzant",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Herzuma",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Ogivri",
+            "type": "value",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 5,
+        "sibling_rows": 0
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -921,7 +3127,92 @@
         "expected_values_total": 6,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Herceptin",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Herceptin Hylecta",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Hercessi",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Ontruzant",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Herzuma",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Ogivri",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 19,
+        "rows_needed": 12,
+        "sibling_rows": 7
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 3622,
+        "estimated_tokens": 906,
+        "expected_values_found": 6,
+        "expected_values_total": 6,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Herceptin",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Herceptin Hylecta",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Hercessi",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Ontruzant",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Herzuma",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Ogivri",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 19,
+        "rows_needed": 12,
+        "sibling_rows": 7
       }
     },
     {
@@ -939,7 +3230,19 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Cetuximab (Erbitux)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -950,7 +3253,42 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Cetuximab (Erbitux)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 8,
+        "rows_needed": 1,
+        "sibling_rows": 7
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2597,
+        "estimated_tokens": 650,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Cetuximab (Erbitux)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 8,
+        "rows_needed": 1,
+        "sibling_rows": 7
       }
     },
     {
@@ -968,7 +3306,19 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Panitumumab (Vectibix)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -979,7 +3329,42 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Panitumumab (Vectibix)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 9,
+        "rows_needed": 1,
+        "sibling_rows": 8
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2805,
+        "estimated_tokens": 702,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Panitumumab (Vectibix)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 9,
+        "rows_needed": 1,
+        "sibling_rows": 8
       }
     },
     {
@@ -997,7 +3382,19 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 0.0,
         "complete_evidence": false,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Zoledronic Acid (Zometa)",
+            "type": "value",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 0,
+        "sibling_rows": 5
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -1008,7 +3405,42 @@
         "expected_values_total": 1,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Zoledronic Acid (Zometa)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 34,
+        "rows_needed": 2,
+        "sibling_rows": 32
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 4322,
+        "estimated_tokens": 1081,
+        "expected_values_found": 1,
+        "expected_values_total": 1,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Zoledronic Acid (Zometa)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 34,
+        "rows_needed": 2,
+        "sibling_rows": 32
       }
     },
     {
@@ -1026,7 +3458,74 @@
         "expected_values_total": 12,
         "expected_evidence_coverage": 0.4166666666666667,
         "complete_evidence": false,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Denosumab (Xgeva)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-desu (Jubereq)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-qbde (Xtrenbo)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-bbdz (Wyost)",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Denosumab-bmwo (Osenvelt)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-bmwo (Denosumab-Celtrion)",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Denosumab-bnht (Bomyntra)",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Denosumab-bnht (denosumab Frensenius)",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Denosumab-dssb (Xbryk)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-dssb (Denosumab Samsung Bioepis)",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Denosumab-kyqq (Aukelso)",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Denosumab-nxxp (Bilprevda)",
+            "type": "value",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 5,
+        "sibling_rows": 0
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -1037,7 +3536,152 @@
         "expected_values_total": 12,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Denosumab (Xgeva)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-desu (Jubereq)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-qbde (Xtrenbo)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-bbdz (Wyost)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-bmwo (Osenvelt)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-bmwo (Denosumab-Celtrion)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-bnht (Bomyntra)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-bnht (denosumab Frensenius)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-dssb (Xbryk)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-dssb (Denosumab Samsung Bioepis)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-kyqq (Aukelso)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-nxxp (Bilprevda)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 29,
+        "rows_needed": 21,
+        "sibling_rows": 8
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 4262,
+        "estimated_tokens": 1066,
+        "expected_values_found": 12,
+        "expected_values_total": 12,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Denosumab (Xgeva)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-desu (Jubereq)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-qbde (Xtrenbo)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-bbdz (Wyost)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-bmwo (Osenvelt)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-bmwo (Denosumab-Celtrion)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-bnht (Bomyntra)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-bnht (denosumab Frensenius)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-dssb (Xbryk)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-dssb (Denosumab Samsung Bioepis)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-kyqq (Aukelso)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-nxxp (Bilprevda)",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 29,
+        "rows_needed": 21,
+        "sibling_rows": 8
       }
     },
     {
@@ -1055,7 +3699,29 @@
         "expected_values_total": 3,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Belrapzo",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Non-preferred",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 5,
+        "sibling_rows": 0
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -1066,11 +3732,66 @@
         "expected_values_total": 3,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Belrapzo",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Non-preferred",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 20,
+        "rows_needed": 16,
+        "sibling_rows": 4
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 4226,
+        "estimated_tokens": 1057,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Belrapzo",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Non-preferred",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 20,
+        "rows_needed": 16,
+        "sibling_rows": 4
       }
     },
     {
-      "id": "long_acting_gcsfs_preferred",
+      "id": "long_acting_gcsfs_preferred_relation",
       "kind": "Row-to-column relationship",
       "query": "Which long-acting G-CSF drugs are preferred, and what HCPCS code and prior authorization does each have?",
       "expected_source": "geha-coverage-policy-long-acting-gcsfs.pdf",
@@ -1084,7 +3805,44 @@
         "expected_values_total": 6,
         "expected_evidence_coverage": 0.6666666666666666,
         "complete_evidence": false,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nyvepria",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Q5122",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Fylnetra",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Q5130",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 5,
+        "sibling_rows": 0
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -1095,11 +3853,96 @@
         "expected_values_total": 6,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nyvepria",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Q5122",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Fylnetra",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Q5130",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 22,
+        "rows_needed": 15,
+        "sibling_rows": 7
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 3433,
+        "estimated_tokens": 859,
+        "expected_values_found": 6,
+        "expected_values_total": 6,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nyvepria",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Q5122",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Fylnetra",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Q5130",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 22,
+        "rows_needed": 15,
+        "sibling_rows": 7
       }
     },
     {
-      "id": "short_acting_gcsfs_preferred",
+      "id": "short_acting_gcsfs_preferred_relation",
       "kind": "Row-to-column relationship",
       "query": "For preferred short-acting G-CSF, give the drug name, HCPCS code, and prior authorization requirement.",
       "expected_source": "geha-coverage-policy-short-acting-gcsfs.pdf",
@@ -1113,7 +3956,29 @@
         "expected_values_total": 3,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nivestym (filgrastim- aafi)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Q5110",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 4,
+        "sibling_rows": 1
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -1124,7 +3989,62 @@
         "expected_values_total": 3,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nivestym (filgrastim- aafi)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Q5110",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 22,
+        "rows_needed": 16,
+        "sibling_rows": 6
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 3433,
+        "estimated_tokens": 859,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nivestym (filgrastim- aafi)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Q5110",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 22,
+        "rows_needed": 16,
+        "sibling_rows": 6
       }
     },
     {
@@ -1142,7 +4062,44 @@
         "expected_values_total": 6,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Gemzar",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9201",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Non- Preferred",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Gemcitabine (Accord)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9196",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 5,
+        "sibling_rows": 0
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -1153,7 +4110,92 @@
         "expected_values_total": 6,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Gemzar",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9201",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Non- Preferred",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Gemcitabine (Accord)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9196",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 16,
+        "rows_needed": 16,
+        "sibling_rows": 0
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 3,
+        "characters": 4072,
+        "estimated_tokens": 1018,
+        "expected_values_found": 6,
+        "expected_values_total": 6,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Gemzar",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9201",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Non- Preferred",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Gemcitabine (Accord)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9196",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 16,
+        "rows_needed": 16,
+        "sibling_rows": 0
       }
     },
     {
@@ -1171,7 +4213,44 @@
         "expected_values_total": 6,
         "expected_evidence_coverage": 0.3333333333333333,
         "complete_evidence": false,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Pemetrexed (Axtle)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9292",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Accord)",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "J9296",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Pemetrexed (Bluepoint)",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "J9322",
+            "type": "value",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -1182,7 +4261,92 @@
         "expected_values_total": 6,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Pemetrexed (Axtle)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9292",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Accord)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9296",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Bluepoint)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9322",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 20,
+        "rows_needed": 6,
+        "sibling_rows": 14
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 3490,
+        "estimated_tokens": 873,
+        "expected_values_found": 6,
+        "expected_values_total": 6,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Pemetrexed (Axtle)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9292",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Accord)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9296",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Bluepoint)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9322",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 20,
+        "rows_needed": 6,
+        "sibling_rows": 14
       }
     },
     {
@@ -1200,7 +4364,74 @@
         "expected_values_total": 12,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Taxotere (docetaxel)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9171",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "No",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Docetaxel (Hospira 505(b)(2))",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9232",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "No",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Docetaxel (Docivyx)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9172",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Non-Preferred",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 5,
+        "sibling_rows": 0
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -1211,7 +4442,152 @@
         "expected_values_total": 12,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Taxotere (docetaxel)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9171",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "No",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Docetaxel (Hospira 505(b)(2))",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9232",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "No",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Docetaxel (Docivyx)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9172",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Non-Preferred",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 17,
+        "rows_needed": 17,
+        "sibling_rows": 0
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 3,
+        "characters": 3898,
+        "estimated_tokens": 975,
+        "expected_values_found": 12,
+        "expected_values_total": 12,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Taxotere (docetaxel)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9171",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "No",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Docetaxel (Hospira 505(b)(2))",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9232",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "No",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Docetaxel (Docivyx)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "J9172",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Non-Preferred",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 17,
+        "rows_needed": 17,
+        "sibling_rows": 0
       }
     },
     {
@@ -1223,13 +4599,50 @@
       "flat_semantic_chunks": {
         "context_units": 5,
         "distinct_sources": 1,
-        "characters": 1318,
-        "estimated_tokens": 330,
+        "characters": 1373,
+        "estimated_tokens": 344,
         "expected_values_found": 5,
         "expected_values_total": 6,
         "expected_evidence_coverage": 0.8333333333333334,
         "complete_evidence": false,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Denosumab-bmwo (Osenvelt)",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Non- Preferred**",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-bmwo (Denosumab-Celtrion)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Non- Preferred**",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 5,
+        "sibling_rows": 0
       },
       "table_aware_rag": {
         "context_units": 3,
@@ -1240,7 +4653,1910 @@
         "expected_values_total": 6,
         "expected_evidence_coverage": 1.0,
         "complete_evidence": true,
-        "expected_table_present": true
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Denosumab-bmwo (Osenvelt)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Non- Preferred**",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-bmwo (Denosumab-Celtrion)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Non- Preferred**",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 34,
+        "rows_needed": 21,
+        "sibling_rows": 13
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 4999,
+        "estimated_tokens": 1250,
+        "expected_values_found": 6,
+        "expected_values_total": 6,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Denosumab-bmwo (Osenvelt)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Non- Preferred**",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Denosumab-bmwo (Denosumab-Celtrion)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Non- Preferred**",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Yes",
+            "type": "value",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 0,
+        "qualifier_facts_found": 0,
+        "rows_sent": 34,
+        "rows_needed": 21,
+        "sibling_rows": 13
+      }
+    },
+    {
+      "id": "bendamustine_scope",
+      "kind": "Qualifier",
+      "query": "Which bendamustine products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+      "expected_source": "geha-coverage-policy-bendamustine.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1274,
+        "estimated_tokens": 319,
+        "expected_values_found": 2,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 0.6666666666666666,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Treanda",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Bendamustine 505(b)(2) Dr Reddy's",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to all requests, both new and reauthorizations.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 2,
+        "sibling_rows": 3
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 1409,
+        "estimated_tokens": 353,
+        "expected_values_found": 2,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 0.6666666666666666,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Treanda",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Bendamustine 505(b)(2) Dr Reddy's",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to all requests, both new and reauthorizations.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 16,
+        "rows_needed": 4,
+        "sibling_rows": 12
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2877,
+        "estimated_tokens": 720,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Treanda",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Bendamustine 505(b)(2) Dr Reddy's",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to all requests, both new and reauthorizations.",
+            "type": "qualifier",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 1,
+        "rows_sent": 16,
+        "rows_needed": 4,
+        "sibling_rows": 12
+      }
+    },
+    {
+      "id": "bendamustine_auth_period",
+      "kind": "Qualifier",
+      "query": "Does Bendeka require prior authorization, and for how long are authorizations issued?",
+      "expected_source": "geha-coverage-policy-bendamustine.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 2,
+        "characters": 1144,
+        "estimated_tokens": 286,
+        "expected_values_found": 1,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Bendeka requires prior authorization",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Authorizations are issued for 6 (six) months.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 2,
+        "sibling_rows": 3
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 1863,
+        "estimated_tokens": 466,
+        "expected_values_found": 1,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Bendeka requires prior authorization",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Authorizations are issued for 6 (six) months.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 20,
+        "rows_needed": 2,
+        "sibling_rows": 18
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 4012,
+        "estimated_tokens": 1003,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Bendeka requires prior authorization",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Authorizations are issued for 6 (six) months.",
+            "type": "qualifier",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 1,
+        "rows_sent": 20,
+        "rows_needed": 2,
+        "sibling_rows": 18
+      }
+    },
+    {
+      "id": "bevacizumab_scope",
+      "kind": "Qualifier",
+      "query": "Which bevacizumab products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+      "expected_source": "geha-coverage-policy-bevacizumab.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1336,
+        "estimated_tokens": 334,
+        "expected_values_found": 1,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Bevacizumab-bvzr (Zirabev)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2866,
+        "estimated_tokens": 717,
+        "expected_values_found": 1,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Bevacizumab-bvzr (Zirabev)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 29,
+        "rows_needed": 1,
+        "sibling_rows": 28
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 4354,
+        "estimated_tokens": 1089,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Bevacizumab-bvzr (Zirabev)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+            "type": "qualifier",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 1,
+        "rows_sent": 29,
+        "rows_needed": 1,
+        "sibling_rows": 28
+      }
+    },
+    {
+      "id": "datroway_scope",
+      "kind": "Qualifier",
+      "query": "Which datroway products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+      "expected_source": "geha-coverage-policy-datroway.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 3,
+        "characters": 1003,
+        "estimated_tokens": 251,
+        "expected_values_found": 1,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Trodelvy",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts only.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 1260,
+        "estimated_tokens": 315,
+        "expected_values_found": 1,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Trodelvy",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts only.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 17,
+        "rows_needed": 2,
+        "sibling_rows": 15
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2622,
+        "estimated_tokens": 656,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Trodelvy",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts only.",
+            "type": "qualifier",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 1,
+        "rows_sent": 17,
+        "rows_needed": 2,
+        "sibling_rows": 15
+      }
+    },
+    {
+      "id": "erythropoietin-stimulating-agents_scope",
+      "kind": "Qualifier",
+      "query": "Which erythropoietin-stimulating agents products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+      "expected_source": "geha-coverage-policy-erythropoietin-stimulating-agents.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1272,
+        "estimated_tokens": 318,
+        "expected_values_found": 2,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 0.6666666666666666,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Retacrit",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Aranesp",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts only.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 2,
+        "sibling_rows": 3
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 1283,
+        "estimated_tokens": 321,
+        "expected_values_found": 2,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 0.6666666666666666,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Retacrit",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Aranesp",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts only.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 14,
+        "rows_needed": 4,
+        "sibling_rows": 10
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2629,
+        "estimated_tokens": 658,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Retacrit",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Aranesp",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts only.",
+            "type": "qualifier",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 1,
+        "rows_sent": 14,
+        "rows_needed": 4,
+        "sibling_rows": 10
+      }
+    },
+    {
+      "id": "gemcitabine_scope",
+      "kind": "Qualifier",
+      "query": "Which gemcitabine products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+      "expected_source": "geha-coverage-policy-gemcitabine.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 2,
+        "characters": 1328,
+        "estimated_tokens": 332,
+        "expected_values_found": 1,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Gemcitabine (Accord)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 1725,
+        "estimated_tokens": 432,
+        "expected_values_found": 1,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Gemcitabine (Accord)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 15,
+        "rows_needed": 1,
+        "sibling_rows": 14
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 3118,
+        "estimated_tokens": 780,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Gemcitabine (Accord)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+            "type": "qualifier",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 1,
+        "rows_sent": 15,
+        "rows_needed": 1,
+        "sibling_rows": 14
+      }
+    },
+    {
+      "id": "gnrh-analogues-in-prostate-cancer_scope",
+      "kind": "Qualifier",
+      "query": "Which GnRH analogues in prostate cancer products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+      "expected_source": "geha-coverage-policy-gnrh-analogues-in-prostate-cancer.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1225,
+        "estimated_tokens": 307,
+        "expected_values_found": 1,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 0.3333333333333333,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Firmagon (degarelix)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Eligard(leuprolide acetate depot)",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Preferred product requirements apply to new starts only.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2295,
+        "estimated_tokens": 574,
+        "expected_values_found": 2,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 0.6666666666666666,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Firmagon (degarelix)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Eligard(leuprolide acetate depot)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts only.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 25,
+        "rows_needed": 4,
+        "sibling_rows": 21
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 3641,
+        "estimated_tokens": 911,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Firmagon (degarelix)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Eligard(leuprolide acetate depot)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts only.",
+            "type": "qualifier",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 1,
+        "rows_sent": 25,
+        "rows_needed": 4,
+        "sibling_rows": 21
+      }
+    },
+    {
+      "id": "long-acting-gcsfs_scope",
+      "kind": "Qualifier",
+      "query": "Which long-acting G-CSFs products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+      "expected_source": "geha-coverage-policy-long-acting-gcsfs.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1195,
+        "estimated_tokens": 299,
+        "expected_values_found": 2,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 0.6666666666666666,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nyvepria",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Fylnetra",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 2,
+        "sibling_rows": 3
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2592,
+        "estimated_tokens": 648,
+        "expected_values_found": 2,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 0.6666666666666666,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nyvepria",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Fylnetra",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 28,
+        "rows_needed": 3,
+        "sibling_rows": 25
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 3309,
+        "estimated_tokens": 828,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nyvepria",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Fylnetra",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+            "type": "qualifier",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 1,
+        "rows_sent": 28,
+        "rows_needed": 3,
+        "sibling_rows": 25
+      }
+    },
+    {
+      "id": "non-muscle-invasive-bladder-cancer_scope",
+      "kind": "Qualifier",
+      "query": "Which non-muscle invasive bladder cancer products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+      "expected_source": "geha-coverage-policy-non-muscle-invasive-bladder-cancer.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1331,
+        "estimated_tokens": 333,
+        "expected_values_found": 3,
+        "expected_values_total": 4,
+        "expected_evidence_coverage": 0.75,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nadofaragene firadenovec-vncg (Adstiladrin)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pembrolizumab (Keytruda)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pembrolizumab and berahyaluronidas e alfa-pmph (Keytruda QLEX)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts only.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 3,
+        "sibling_rows": 2
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 1895,
+        "estimated_tokens": 474,
+        "expected_values_found": 3,
+        "expected_values_total": 4,
+        "expected_evidence_coverage": 0.75,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nadofaragene firadenovec-vncg (Adstiladrin)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pembrolizumab (Keytruda)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pembrolizumab and berahyaluronidas e alfa-pmph (Keytruda QLEX)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts only.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 16,
+        "rows_needed": 5,
+        "sibling_rows": 11
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 2570,
+        "estimated_tokens": 643,
+        "expected_values_found": 4,
+        "expected_values_total": 4,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nadofaragene firadenovec-vncg (Adstiladrin)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pembrolizumab (Keytruda)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pembrolizumab and berahyaluronidas e alfa-pmph (Keytruda QLEX)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts only.",
+            "type": "qualifier",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 1,
+        "rows_sent": 16,
+        "rows_needed": 5,
+        "sibling_rows": 11
+      }
+    },
+    {
+      "id": "paclitaxel-protein-bound_scope",
+      "kind": "Qualifier",
+      "query": "Which protein-bound paclitaxel products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+      "expected_source": "geha-coverage-policy-paclitaxel-protein-bound.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1171,
+        "estimated_tokens": 293,
+        "expected_values_found": 2,
+        "expected_values_total": 4,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Docetaxel (Taxotere)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Docetaxel (Hospira 505(b)(2))",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Paclitaxel (Taxol)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts only.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 2,
+        "sibling_rows": 3
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 1912,
+        "estimated_tokens": 478,
+        "expected_values_found": 3,
+        "expected_values_total": 4,
+        "expected_evidence_coverage": 0.75,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Docetaxel (Taxotere)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Docetaxel (Hospira 505(b)(2))",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Paclitaxel (Taxol)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts only.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 23,
+        "rows_needed": 6,
+        "sibling_rows": 17
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 3324,
+        "estimated_tokens": 831,
+        "expected_values_found": 4,
+        "expected_values_total": 4,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Docetaxel (Taxotere)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Docetaxel (Hospira 505(b)(2))",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Paclitaxel (Taxol)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts only.",
+            "type": "qualifier",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 1,
+        "rows_sent": 23,
+        "rows_needed": 6,
+        "sibling_rows": 17
+      }
+    },
+    {
+      "id": "pemetrexed_scope",
+      "kind": "Qualifier",
+      "query": "Which pemetrexed products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+      "expected_source": "geha-coverage-policy-pemetrexed.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1364,
+        "estimated_tokens": 341,
+        "expected_values_found": 3,
+        "expected_values_total": 4,
+        "expected_evidence_coverage": 0.75,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Pemetrexed (Axtle)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Accord)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Bluepoint)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts ONLY.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 3,
+        "sibling_rows": 2
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 3,
+        "characters": 2781,
+        "estimated_tokens": 696,
+        "expected_values_found": 3,
+        "expected_values_total": 4,
+        "expected_evidence_coverage": 0.75,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Pemetrexed (Axtle)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Accord)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Bluepoint)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts ONLY.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 28,
+        "rows_needed": 3,
+        "sibling_rows": 25
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 3,
+        "characters": 3523,
+        "estimated_tokens": 881,
+        "expected_values_found": 4,
+        "expected_values_total": 4,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Pemetrexed (Axtle)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Accord)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Pemetrexed (Bluepoint)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts ONLY.",
+            "type": "qualifier",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 1,
+        "rows_sent": 28,
+        "rows_needed": 3,
+        "sibling_rows": 25
+      }
+    },
+    {
+      "id": "short-acting-gcsfs_scope",
+      "kind": "Qualifier",
+      "query": "Which short-acting G-CSFs products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+      "expected_source": "geha-coverage-policy-short-acting-gcsfs.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 2,
+        "characters": 1139,
+        "estimated_tokens": 285,
+        "expected_values_found": 1,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nivestym (filgrastim- aafi)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2260,
+        "estimated_tokens": 565,
+        "expected_values_found": 1,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nivestym (filgrastim- aafi)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 23,
+        "rows_needed": 1,
+        "sibling_rows": 22
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2975,
+        "estimated_tokens": 744,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Nivestym (filgrastim- aafi)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to all requests, both new starts and reauthorizations.",
+            "type": "qualifier",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 1,
+        "rows_sent": 23,
+        "rows_needed": 1,
+        "sibling_rows": 22
+      }
+    },
+    {
+      "id": "taxotere-docivyx_scope",
+      "kind": "Qualifier",
+      "query": "Which Taxotere/Docivyx products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+      "expected_source": "geha-coverage-policy-taxotere-docivyx.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 2,
+        "characters": 1164,
+        "estimated_tokens": 291,
+        "expected_values_found": 2,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 0.6666666666666666,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Taxotere (docetaxel)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Docetaxel (Hospira 505(b)(2))",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts ONLY.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 2,
+        "sibling_rows": 3
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 1807,
+        "estimated_tokens": 452,
+        "expected_values_found": 2,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 0.6666666666666666,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Taxotere (docetaxel)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Docetaxel (Hospira 505(b)(2))",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts ONLY.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 23,
+        "rows_needed": 2,
+        "sibling_rows": 21
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2479,
+        "estimated_tokens": 620,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Taxotere (docetaxel)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Docetaxel (Hospira 505(b)(2))",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts ONLY.",
+            "type": "qualifier",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 1,
+        "rows_sent": 23,
+        "rows_needed": 2,
+        "sibling_rows": 21
+      }
+    },
+    {
+      "id": "trastuzumab_scope",
+      "kind": "Qualifier",
+      "query": "Which trastuzumab products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+      "expected_source": "geha-coverage-policy-trastuzumab.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1287,
+        "estimated_tokens": 322,
+        "expected_values_found": 1,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 0.3333333333333333,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Trazimera",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Kanjinti",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Preferred product requirements apply to new starts ONLY.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 2907,
+        "estimated_tokens": 727,
+        "expected_values_found": 2,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 0.6666666666666666,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Trazimera",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Kanjinti",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts ONLY.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 29,
+        "rows_needed": 4,
+        "sibling_rows": 25
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 2,
+        "characters": 4936,
+        "estimated_tokens": 1234,
+        "expected_values_found": 3,
+        "expected_values_total": 3,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Trazimera",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Kanjinti",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts ONLY.",
+            "type": "qualifier",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 1,
+        "rows_sent": 29,
+        "rows_needed": 4,
+        "sibling_rows": 25
+      }
+    },
+    {
+      "id": "trastuzumab_auth_period",
+      "kind": "Qualifier",
+      "query": "Does Herceptin require prior authorization, and for how long are authorizations issued?",
+      "expected_source": "geha-coverage-policy-trastuzumab.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 3,
+        "characters": 1294,
+        "estimated_tokens": 324,
+        "expected_values_found": 1,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Herceptin requires prior authorization",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Authorizations are issued for 6 (six) months.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 2,
+        "sibling_rows": 3
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 3,
+        "characters": 2200,
+        "estimated_tokens": 550,
+        "expected_values_found": 1,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Herceptin requires prior authorization",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Authorizations are issued for 6 (six) months.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 22,
+        "rows_needed": 2,
+        "sibling_rows": 20
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 3,
+        "characters": 4198,
+        "estimated_tokens": 1050,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Herceptin requires prior authorization",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Authorizations are issued for 6 (six) months.",
+            "type": "qualifier",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 1,
+        "rows_sent": 22,
+        "rows_needed": 2,
+        "sibling_rows": 20
+      }
+    },
+    {
+      "id": "xgeva_scope",
+      "kind": "Qualifier",
+      "query": "Which xgeva products are preferred, and do the preferred-product requirements also apply to reauthorizations?",
+      "expected_source": "geha-coverage-policy-xgeva.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1252,
+        "estimated_tokens": 313,
+        "expected_values_found": 0,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.0,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Zoledronic Acid (Zometa)",
+            "type": "value",
+            "in_context": false
+          },
+          {
+            "text": "Preferred product requirements apply to new starts only.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 0,
+        "sibling_rows": 5
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 3,
+        "characters": 3111,
+        "estimated_tokens": 778,
+        "expected_values_found": 1,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Zoledronic Acid (Zometa)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts only.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 31,
+        "rows_needed": 1,
+        "sibling_rows": 30
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 3,
+        "characters": 3888,
+        "estimated_tokens": 972,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Zoledronic Acid (Zometa)",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Preferred product requirements apply to new starts only.",
+            "type": "qualifier",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 1,
+        "rows_sent": 31,
+        "rows_needed": 1,
+        "sibling_rows": 30
+      }
+    },
+    {
+      "id": "xgeva_auth_period",
+      "kind": "Qualifier",
+      "query": "Does Denosumab (Xgeva) require prior authorization, and for how long are authorizations issued?",
+      "expected_source": "geha-coverage-policy-xgeva.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1373,
+        "estimated_tokens": 344,
+        "expected_values_found": 1,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Denosumab (Xgeva) requires prior authorization",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Authorizations are issued for 12 (twelve) months.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 3581,
+        "estimated_tokens": 896,
+        "expected_values_found": 1,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Denosumab (Xgeva) requires prior authorization",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Authorizations are issued for 12 (twelve) months.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 34,
+        "rows_needed": 2,
+        "sibling_rows": 32
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 4322,
+        "estimated_tokens": 1081,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Denosumab (Xgeva) requires prior authorization",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Authorizations are issued for 12 (twelve) months.",
+            "type": "qualifier",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 1,
+        "rows_sent": 34,
+        "rows_needed": 2,
+        "sibling_rows": 32
+      }
+    },
+    {
+      "id": "xgeva_footnote",
+      "kind": "Qualifier",
+      "query": "Is Denosumab (Xgeva) non-preferred for a patient with breast cancer?",
+      "expected_source": "geha-coverage-policy-xgeva.pdf",
+      "expected_table_number": 1,
+      "flat_semantic_chunks": {
+        "context_units": 5,
+        "distinct_sources": 1,
+        "characters": 1357,
+        "estimated_tokens": 340,
+        "expected_values_found": 1,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Denosumab (Xgeva) is listed as Non-Preferred",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Does not apply in the setting of Prostate or Breast Cancer.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 5,
+        "rows_needed": 1,
+        "sibling_rows": 4
+      },
+      "table_aware_rag": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 3581,
+        "estimated_tokens": 896,
+        "expected_values_found": 1,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 0.5,
+        "complete_evidence": false,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Denosumab (Xgeva) is listed as Non-Preferred",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Does not apply in the setting of Prostate or Breast Cancer.",
+            "type": "qualifier",
+            "in_context": false
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 0,
+        "rows_sent": 34,
+        "rows_needed": 2,
+        "sibling_rows": 32
+      },
+      "table_aware_notes": {
+        "context_units": 3,
+        "distinct_sources": 1,
+        "characters": 4322,
+        "estimated_tokens": 1081,
+        "expected_values_found": 2,
+        "expected_values_total": 2,
+        "expected_evidence_coverage": 1.0,
+        "complete_evidence": true,
+        "expected_table_present": true,
+        "facts": [
+          {
+            "text": "Denosumab (Xgeva) is listed as Non-Preferred",
+            "type": "value",
+            "in_context": true
+          },
+          {
+            "text": "Does not apply in the setting of Prostate or Breast Cancer.",
+            "type": "qualifier",
+            "in_context": true
+          }
+        ],
+        "qualifier_facts_total": 1,
+        "qualifier_facts_found": 1,
+        "rows_sent": 34,
+        "rows_needed": 2,
+        "sibling_rows": 32
       }
     }
   ],
@@ -1251,7 +6567,7 @@
     "top_tables": 3,
     "candidate_rows": 30,
     "vector_candidates": 100,
-    "parent_tables": 103,
-    "child_vectors": 691
+    "parent_tables": 102,
+    "child_vectors": 675
   }
 }

@@ -18,6 +18,10 @@ def reference_answer(case: dict[str, Any] | None) -> str | None:
     """Render the verified structured expectation as a judge-readable answer."""
     if not case:
         return None
+    if case["kind"] == "Qualifier":
+        return "A complete answer states all of: " + " ".join(
+            f"({index}) {fact['text']}" for index, fact in enumerate(case["facts"], 1)
+        )
     if case["kind"] == "Preference lookup":
         preference = case.get("preference", "requested")
         products = "; ".join(str(value) for value in case.get("expected", []))
