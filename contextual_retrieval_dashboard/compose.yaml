@@ -1,0 +1,37 @@
+services:
+  contextual-retrieval-dashboard:
+    image: geha-contextual-retrieval-dashboard:local
+    build:
+      context: ..
+      dockerfile: contextual_retrieval_dashboard/Dockerfile
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "8511"
+      BROWSER_PORT: "${CONTEXTUAL_RETRIEVAL_PORT:-8511}"
+      ANTHROPIC_API_KEY: "${ANTHROPIC_API_KEY:-}"
+      ANTHROPIC_AUTH_TOKEN: "${ANTHROPIC_AUTH_TOKEN:-}"
+    command:
+      - sh
+      - -c
+      - |
+        python -m contextual_retrieval_dashboard.backend &
+        backend_pid=$$!
+        trap 'kill -TERM "$$backend_pid" 2>/dev/null || true' INT TERM
+        until python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8511/api/health', timeout=1)" >/dev/null 2>&1; do
+          if ! kill -0 "$$backend_pid" 2>/dev/null; then
+            wait "$$backend_pid"
+            exit $$?
+          fi
+          sleep 1
+        done
+        echo ""
+        echo "Contextual Retrieval Workbench: http://127.0.0.1:$$BROWSER_PORT"
+        echo ""
+        wait "$$backend_pid"
+    ports:
+      - "${CONTEXTUAL_RETRIEVAL_PORT:-8511}:8511"
+    volumes:
+      - ../crawl_dir/raw/coverage-policies:/app/crawl_dir/raw/coverage-policies:ro
+      - ../crawl_dir/runs:/app/crawl_dir/runs
+      - ../crawl_dir/cache:/app/crawl_dir/cache
+    restart: unless-stopped

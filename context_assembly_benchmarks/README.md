@@ -3,8 +3,9 @@
 ## Run the comparison app with Docker Compose
 
 The container runs `comparison_chat_app.py` on port 8507 and includes the
-verified coverage-policy Markdown needed by the attached-notes strategy. The
-PostgreSQL/pgvector database must already be initialized and populated.
+verified coverage-policy Markdown needed by the attached-notes strategy.
+Compose starts PostgreSQL/pgvector and restores the benchmark's 102 parent
+tables and 675 child-row vectors when it creates a fresh database volume.
 
 Run from the benchmark directory:
 
@@ -19,7 +20,8 @@ comparison app at <http://127.0.0.1:8507>. It forwards `OPENAI_API_KEY`,
 `OPENAI_MODEL`, and `OPENAI_JUDGE_MODEL` from the invoking shell. The retrieval
 comparison still works without an OpenAI key; answer generation and judging do
 not. `GEHA_POSTGRES_PASSWORD` is required and must retain the same value when
-reusing the database volume.
+reusing the database volume. PostgreSQL is available only to the Compose
+network; it does not claim host port 5433.
 
 Stop both services without deleting the database volume:
 

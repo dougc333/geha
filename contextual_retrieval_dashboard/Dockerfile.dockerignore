@@ -1,0 +1,18 @@
+# Build from the repository root, but send only the dashboard and canonical
+# ingestion implementation. Raw PDFs and durable runs are bind-mounted.
+**
+
+!contextual_retrieval_dashboard/
+!contextual_retrieval_dashboard/**
+
+!crawl_dir/
+!crawl_dir/src/
+!crawl_dir/src/**
+
+contextual_retrieval_dashboard/ui/node_modules/
+contextual_retrieval_dashboard/ui/dist/
+contextual_retrieval_dashboard/**/__pycache__/
+**/*.py[cod]
+**/.DS_Store
+**/.env
+**/.env.*
