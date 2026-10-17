@@ -4,22 +4,22 @@ from pathlib import Path
 
 from pydantic import ValidationError
 
-from chunking_benchmarks.chunking_compare import (
+from context_assembly_benchmarks.chunking_compare import (
     compare_contexts,
     evidence_coverage,
     expected_values,
 )
-from chunking_benchmarks.eval_queries import load_eval_queries
-from chunking_benchmarks.generation_eval import (
+from context_assembly_benchmarks.eval_queries import load_eval_queries
+from context_assembly_benchmarks.generation_eval import (
     deterministic_generation_metrics,
     reference_answer,
 )
-from chunking_benchmarks.llm_judge import (
+from context_assembly_benchmarks.llm_judge import (
     JudgeVerdict,
     flat_context,
     hierarchical_context,
 )
-from chunking_benchmarks.table_rag import (
+from context_assembly_benchmarks.table_rag import (
     bm25_scores,
     infer_title,
     lexical_tokens,
@@ -64,8 +64,11 @@ class TableRagTests(unittest.TestCase):
         queries = load_eval_queries(Path(__file__).resolve().parent)
         kinds = {query["kind"] for query in queries}
         ids = {query["id"] for query in queries}
-        self.assertEqual(len(queries), 41)
-        self.assertEqual(kinds, {"Preference lookup", "Row-to-column relationship"})
+        self.assertEqual(len(queries), 59)
+        self.assertEqual(
+            kinds,
+            {"Preference lookup", "Row-to-column relationship", "Qualifier"},
+        )
         self.assertIn("bendamustine_non_preferred", ids)
         self.assertIn("bendamustine_j9036", ids)
         q5157 = next(query for query in queries if query["id"] == "xgeva_q5157")
