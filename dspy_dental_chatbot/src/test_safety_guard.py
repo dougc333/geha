@@ -7,9 +7,11 @@ import threading
 import time
 import types
 import unittest
+from pathlib import Path
 from types import SimpleNamespace
 from unittest import mock
 
+from policy_personas import evaluate_persona_result, load_personas
 from policy_qa import DentalPolicyIndex, DentalPolicyQA, PolicyChunk
 from safety_guard import (
     FAIL_CLOSED_REFUSAL,
@@ -162,13 +164,17 @@ class GuardedPolicyQATests(unittest.TestCase):
         self.assertEqual(result.chunks[0].page, 2)
 
     def test_unsupported_provider_claim_is_repaired_and_rechecked(self):
+        personas = load_personas(
+            Path(__file__).resolve().parents[1] / "data/policy_qa_personas.json"
+        )
+        persona = next(item for item in personas if item["id"] == "budget-parent-glasses")
         index = DentalPolicyIndex(
             [PolicyChunk(7, "Frames: member pays 60% of retail price.")]
         )
         program = SequenceProgram([
             "Frames cost 60% of retail, but Walmart may not participate [p. 7].",
             (
-                "The guide says members pay 60% of retail for frames [p. 7]. "
+                "The guide says members pay 60% of retail price for frames [p. 7]. "
                 "It does not establish whether Walmart participates."
             ),
         ])
@@ -182,17 +188,45 @@ class GuardedPolicyQATests(unittest.TestCase):
             output_guard=output_guard,
         )
 
-        result = guarded.ask("Does Walmart offer the frame discount for frames?")
+        result = guarded.ask(persona["query"])
 
         self.assertFalse(result.blocked)
-        self.assertIn("60% of retail", result.answer)
+        self.assertIn("60% of retail price", result.answer)
         self.assertNotIn("may not participate", result.answer)
+        self.assertTrue(evaluate_persona_result(persona, result.answer, result.chunks)["passed"])
         self.assertEqual(
             [verdict.stage for verdict in result.verdicts],
             ["input", "output", "output_revision"],
         )
         self.assertEqual(len(program.calls), 2)
         self.assertIn("Walmart non-participation", program.calls[1]["revision"])
+
+    def test_d7140_persona_is_generated_verified_and_accepted_without_repair(self):
+        personas = load_personas(
+            Path(__file__).resolve().parents[1] / "data/policy_qa_personas.json"
+        )
+        persona = next(item for item in personas if item["id"] == "code-extraction-d7140")
+        index = DentalPolicyIndex([
+            PolicyChunk(26, "D7140 is a simple extraction."),
+            PolicyChunk(23, "Class B in-network: High member pays 20%; Standard pays 45%."),
+        ])
+        program = FakeProgram(
+            "D7140 is a simple extraction [p. 26]. High members pay 20% and "
+            "Standard members pay 45% in-network [p. 23]."
+        )
+        output_guard = FakeGuard("safe", "Sourced plan terms are not a claim-payment guarantee.")
+        guarded = GuardedPolicyQA(
+            DentalPolicyQA(index, program=program),
+            input_guard=FakeGuard(),
+            output_guard=output_guard,
+        )
+
+        result = guarded.ask(persona["query"])
+
+        self.assertFalse(result.blocked)
+        self.assertEqual([verdict.stage for verdict in result.verdicts], ["input", "output"])
+        self.assertEqual(len(program.calls), 1)
+        self.assertTrue(evaluate_persona_result(persona, result.answer, result.chunks)["passed"])
 
     def test_failed_unsupported_claim_repair_still_refuses(self):
         program = SequenceProgram([
