@@ -79,7 +79,7 @@ the cached resource.
 ```bash
 cd /Users/dc/geha
 source .venv/bin/activate
-pip install -r dspy_dental_chatbot/requirements.txt
+uv pip install --python .venv/bin/python -r dspy_dental_chatbot/requirements.txt
 cp dspy_dental_chatbot/.env.example dspy_dental_chatbot/.env
 ```
 
@@ -87,8 +87,12 @@ Configure `DSPY_MODEL` and the provider credentials in `.env`, then:
 
 ```bash
 cd /Users/dc/geha/dspy_dental_chatbot
-streamlit run src/app.py --server.port 8506
+./startup.sh
 ```
+
+`startup.sh` uses Zsh because it loads provider keys from `~/.zshrc`. It exits
+with the exact `uv pip` installation command when DSPy is missing, rather than
+starting Streamlit and failing during application import.
 
 By default, Streamlit starts loading the local BGE model and cached vectors in
 a background thread while the UI renders. The initialized retriever is retained
