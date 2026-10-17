@@ -1,0 +1,91 @@
+{
+  "table_extraction": {
+    "strategy": "hybrid",
+    "native_pdf_pages": [
+      {
+        "page": 4,
+        "pdf": "source.pdf",
+        "status": "ok",
+        "ocr_used": false,
+        "tables_detected": 1,
+        "tables_written": 0,
+        "tables_excluded": 1,
+        "outputs": [],
+        "excluded": [
+          {
+            "table_number": 1,
+            "heading": "t .. 'i= G.E.H.A",
+            "page": 1,
+            "reason": "revision_history"
+          }
+        ]
+      }
+    ],
+    "verified_html": {
+      "source": "visually_verified_html",
+      "outputs": [
+        {
+          "table_id": "table-001",
+          "page": 1,
+          "page_table_number": 1,
+          "rows": 2,
+          "columns": 5,
+          "source_html": "/Users/dc/geha/crawl_dir/runs/coverage-policies/geha-coverage-policy-datroway/agent-demo-20261016T032051Z-4eb862/pages/page-001/final.html"
+        },
+        {
+          "table_id": "table-002",
+          "page": 3,
+          "page_table_number": 1,
+          "rows": 2,
+          "columns": 3,
+          "source_html": "/Users/dc/geha/crawl_dir/runs/coverage-policies/geha-coverage-policy-datroway/agent-demo-20261016T032051Z-4eb862/pages/page-003/final.html"
+        }
+      ],
+      "table_count": 2
+    }
+  },
+  "chunk_errors": [],
+  "chunk_warnings": [
+    {
+      "chunk_id": "geha-coverage-policy-datroway-chunk-0001",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "geha-coverage-policy-datroway-chunk-0004",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "geha-coverage-policy-datroway-chunk-0012",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "geha-coverage-policy-datroway-chunk-0013",
+      "issue": "context_too_short"
+    }
+  ],
+  "image_only_pages": [
+    1,
+    2,
+    3
+  ],
+  "visual_reconstruction_pages": [
+    1,
+    2,
+    3
+  ],
+  "visual_failures": [
+    {
+      "page": 2,
+      "issue": "visual_verification_failed",
+      "verdict": "mismatch",
+      "errors": [
+        {
+          "category": "wrong_text",
+          "source_evidence": "The member has one of the following EGFR mutations: exon 19 deletion, L858R, L861Q, exon 20 insertion, S768I, or G719X",
+          "html_evidence": "L858R, L861Q, exon 20 insertion, S7681, or G719X",
+          "correction": "Change the mutation \"S7681\" to \"S768I\" so the text matches the source (the PDF text appears as S768I, though the rendering may look like S7681). If the PDF literally prints S7681, this is not an error."
+        }
+      ]
+    }
+  ]
+}
