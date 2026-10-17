@@ -10,11 +10,10 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-ROOT = Path(__file__).resolve().parents[2]
-load_dotenv(ROOT / "dental_enrollment_chatbot" / ".env")
-load_dotenv(ROOT / "dspy_dental_chatbot" / ".env")
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+load_dotenv(PROJECT_ROOT / ".env")
 
-from shared_graph import DentalEnrollmentGraph  # noqa: E402
+from enrollment_graph import DentalEnrollmentGraph  # noqa: E402
 from compare_parsers import CASES, shown  # noqa: E402
 from enrollment_graph import (  # noqa: E402
     parse_member_type,

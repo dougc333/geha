@@ -11,7 +11,7 @@ from pathlib import Path
 import streamlit as st
 from dotenv import load_dotenv
 
-# Load tracing and model configuration before importing the shared graph.
+# Load tracing and model configuration before importing the local graph.
 load_dotenv()
 
 from corpus_retriever import ExistingDentalCorpusRetriever  # noqa: E402
@@ -30,7 +30,7 @@ from safety_guard import (  # noqa: E402
     guard_lm_from_env,
     jev_available,
 )
-from shared_graph import DentalEnrollmentGraph  # noqa: E402
+from enrollment_graph import DentalEnrollmentGraph  # noqa: E402
 
 
 st.set_page_config(page_title="DSPy dental assistant", page_icon="🦷", layout="centered")
