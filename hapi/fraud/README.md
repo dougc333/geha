@@ -137,7 +137,7 @@ question ─► code steps ─► questions, p(yes) per provider ─► research
 | Step type | What runs | Model |
 |---|---|---|
 | `code` | the mechanical checks in `workflow_ops.py`: peer cost (upcoding), duplicates (same day, or an isolated re-bill one day later), claims after death (death certification excluded), busiest day of short visits, and a **profile** check (claims per patient-day, weekly repeat series, patients no other provider sees) | none |
-| `question` | one typed yes/no question per provider a code step flags, e.g. *"Is this consistent with billing for services after the patient's death?"*, answered with a probability (`questions.py`) | `rules` (offline logistic on the step's score), `llm` (Claude Haiku 4.5, structured output), or `jev` (TypeSafe Jev `Choice`, called as in `dental_enrollment_chatbot/src/jev_router.py`) |
+| `question` | one typed yes/no question per provider a code step flags, e.g. *"Is this consistent with billing for services after the patient's death?"*, answered with a probability (`questions.py`) | `rules` (offline logistic on the step's score), `llm` (Claude Haiku 4.5, structured output), or `jev` (TypeSafe Jev `Choice`, called as in `dspy_dental_chatbot/src/jev_router.py`) |
 | `research` | a small `create_agent` sub-agent with only `fhir_search` / `fhir_read`, behind `PermissionMiddleware(fraud_policy())`, run only for provider-scheme pairs with p in [0.3, 0.7) | `--research-model`, default `haiku` |
 | `escalate` | the router: hand the case to the full agent when the least certain decision is below 0.7, or when a provider is outside the profile limits and no question explains it | the full agent's model |
 

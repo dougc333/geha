@@ -10,7 +10,7 @@ Every classifier has the same interface:
 `prior` the rules classifier uses); `evidence` is that provider's features from the code
 step (workflow_ops.py).
 
-  jev    TypeSafe Jev `Choice` probabilities, called the way dental_enrollment_chatbot/src/
+  jev    TypeSafe Jev `Choice` probabilities, called the way dspy_dental_chatbot/src/
          jev_router.py and dspy_dental_chatbot/src/safety_guard.py call it. Needs the
          typesafe-sdk package and TYPESAFE_API_KEY.
   llm    a cheap model (Claude Haiku 4.5) constrained to {"answer": "yes"|"no", "p_yes": 0..1}

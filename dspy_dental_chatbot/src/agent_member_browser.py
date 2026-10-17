@@ -6,9 +6,9 @@ the simulated member (Amazon Nova Lite on Bedrock) for a reply, types it into
 the chat box and waits for the bot to answer. Each persona gets a fresh browser
 context, so a fresh chat session.
 
-Start the app first (streamlit run src/app.py, default port 8501), then:
+Start the app first (streamlit run src/app.py --server.port 8506), then:
 
-    python src/agent_member_browser.py --url http://localhost:8504
+    python src/agent_member_browser.py --url http://localhost:8506
     python src/agent_member_browser.py --persona widow --headless
 """
 
@@ -81,7 +81,7 @@ def run(name: str, persona: dict, client, browser, url: str, pause_ms: int, type
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--url", default="http://localhost:8501")
+    parser.add_argument("--url", default="http://localhost:8506")
     parser.add_argument("--persona", default="all", choices=["all", *PERSONAS])
     parser.add_argument("--headless", action="store_true", help="don't show the Chrome window")
     parser.add_argument("--pause-ms", type=int, default=3000, help="pause after each bot answer, to watch")
