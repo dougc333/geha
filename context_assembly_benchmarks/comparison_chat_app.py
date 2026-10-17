@@ -14,7 +14,7 @@ from openai import OpenAI, OpenAIError
 try:
     from .chunking_compare import compare_contexts, expected_values
     from .eval_queries import load_eval_queries
-    from .generation_eval import reference_answer
+    from .generation_eval import reference_answer, summary_rate
     from .llm_judge import (
         evaluate_path,
         flat_context,
@@ -31,7 +31,7 @@ try:
 except ImportError:  # Streamlit adds this directory to sys.path.
     from chunking_compare import compare_contexts, expected_values
     from eval_queries import load_eval_queries
-    from generation_eval import reference_answer
+    from generation_eval import reference_answer, summary_rate
     from llm_judge import evaluate_path, flat_context, hierarchical_context
     from table_rag import (
         DEFAULT_DATABASE_URL,
@@ -473,16 +473,34 @@ batch_report = load_batch_results(APP_DIRECTORY / "chunking_judge_results.json")
 if batch_report:
     with st.expander("All suggested queries — generation evaluation", expanded=True):
         summary = batch_report["summary"]
+        flat_yes_rate = summary_rate(
+            summary,
+            path="flat",
+            metric="judge_yes_rate",
+            legacy_key="flat_answer_yes_rate",
+        )
+        hierarchical_yes_rate = summary_rate(
+            summary,
+            path="hierarchical",
+            metric="judge_yes_rate",
+            legacy_key="hierarchical_answer_yes_rate",
+        )
+        hierarchical_exact_rate = summary_rate(
+            summary,
+            path="hierarchical",
+            metric="answer_complete_rate",
+            legacy_key="hierarchical_deterministic_pass_rate",
+        )
         a, b, c, d = st.columns(4)
         a.metric("Queries completed", summary["queries_completed"])
-        b.metric("Flat judge YES", f"{summary['flat_answer_yes_rate']:.1%}")
+        b.metric("Flat judge YES", f"{flat_yes_rate:.1%}")
         c.metric(
             "Hierarchical judge YES",
-            f"{summary['hierarchical_answer_yes_rate']:.1%}",
+            f"{hierarchical_yes_rate:.1%}",
         )
         d.metric(
             "Hierarchical exact pass",
-            f"{summary.get('hierarchical_deterministic_pass_rate', 0):.1%}",
+            f"{hierarchical_exact_rate:.1%}",
         )
         st.dataframe(
             batch_rows(batch_report), use_container_width=True, hide_index=True

@@ -14,6 +14,22 @@ except ImportError:
 CODE_RE = re.compile(r"\b[A-Z]\d{4}\b", re.IGNORECASE)
 
 
+def summary_rate(
+    summary: dict[str, Any],
+    *,
+    path: str,
+    metric: str,
+    legacy_key: str,
+) -> float:
+    """Read a rate from either the current or legacy evaluation summary schema."""
+    path_summary = summary.get(path)
+    if isinstance(path_summary, dict):
+        overall = path_summary.get("overall")
+        if isinstance(overall, dict) and metric in overall:
+            return float(overall[metric])
+    return float(summary.get(legacy_key, 0.0))
+
+
 def reference_answer(case: dict[str, Any] | None) -> str | None:
     """Render the verified structured expectation as a judge-readable answer."""
     if not case:
