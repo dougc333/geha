@@ -1,5 +1,36 @@
 # Testing context assembly
 
+## Run the comparison app with Docker Compose
+
+The container runs `comparison_chat_app.py` on port 8507 and includes the
+verified coverage-policy Markdown needed by the attached-notes strategy. The
+PostgreSQL/pgvector database must already be initialized and populated.
+
+Run from the benchmark directory:
+
+```bash
+cd /Users/dc/geha/context_assembly_benchmarks
+export GEHA_POSTGRES_PASSWORD="$(openssl rand -hex 24)"  # first run only; save it securely
+docker compose up --build
+```
+
+Compose starts pgvector, waits for it to become healthy, and then starts the
+comparison app at <http://127.0.0.1:8507>. It forwards `OPENAI_API_KEY`,
+`OPENAI_MODEL`, and `OPENAI_JUDGE_MODEL` from the invoking shell. The retrieval
+comparison still works without an OpenAI key; answer generation and judging do
+not. `GEHA_POSTGRES_PASSWORD` is required and must retain the same value when
+reusing the database volume.
+
+Stop both services without deleting the database volume:
+
+```bash
+docker compose down
+```
+
+The longer manual `docker build` and `docker run` workflow is unnecessary for
+normal local use. The `Dockerfile` remains the image definition used by
+Compose.
+
 context assembly occurs after retrieval and before generation.
 Different context assembly strategies. 
 1) Flat row chunks, each row is a separate chunk with parent headings added
@@ -559,7 +590,7 @@ Error rate is `1 - accuracy`. Product answers are extracted deterministically fr
 Run the complete local comparison:
 
 ```bash
-cd /Users/dc/geha/chunking_benchmarks
+cd /Users/dc/geha/context_assembly_benchmarks
 uv run python evaluate_table_preferences.py
 ```
 

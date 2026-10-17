@@ -1,0 +1,52 @@
+services:
+  pgvector:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_DB: geha_rag
+      POSTGRES_USER: geha
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_password
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - geha_pgvector_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U geha -d geha_rag"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+
+  context-assembly:
+    build:
+      context: ..
+      dockerfile: context_assembly_benchmarks/Dockerfile
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
+      OPENAI_JUDGE_MODEL: ${OPENAI_JUDGE_MODEL:-gpt-4o-mini}
+    secrets:
+      - db_password
+    ports:
+      - "127.0.0.1:8507:8507"
+    depends_on:
+      pgvector:
+        condition: service_healthy
+    init: true
+    command:
+      - sh
+      - -c
+      - |
+        echo "Context Assembly Benchmarks: http://127.0.0.1:8507"
+        database_password="$$(cat /run/secrets/db_password)"
+        export GEHA_RAG_DATABASE_URL="postgresql://geha:$${database_password}@pgvector:5432/geha_rag"
+        exec python -m streamlit run context_assembly_benchmarks/comparison_chat_app.py \
+          --server.address=0.0.0.0 \
+          --server.port=8507
+
+volumes:
+  geha_pgvector_data:
+
+secrets:
+  db_password:
+    environment: GEHA_POSTGRES_PASSWORD

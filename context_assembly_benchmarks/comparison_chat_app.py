@@ -373,7 +373,9 @@ with st.sidebar:
         "Judge model", value=os.getenv("OPENAI_JUDGE_MODEL", "gpt-4o-mini")
     )
     if enable_llm and not os.getenv("OPENAI_API_KEY"):
-        st.warning("Set OPENAI_API_KEY in chunking_benchmarks/.env before submitting.")
+        st.warning(
+            "Set OPENAI_API_KEY in context_assembly_benchmarks/.env before submitting."
+        )
     if st.button("Clear conversation"):
         st.session_state.comparison_runs = []
 
