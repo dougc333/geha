@@ -152,6 +152,19 @@ The loop is intentionally limited to one repair. The critic decides what must
 be removed or corrected, but retrieved source evidence and the second guard
 check decide whether the revision may reach the user.
 
+Repair is conditional, not a mandatory stage for every query. The two persona
+regressions exercise different branches:
+
+| Persona | First verification | Resulting path | Why |
+|---|---|---|---|
+| Member asking about D7140 | `safe` | generate → verify → return | The answer reports the retrieved definition and documented High/Standard plan terms with valid citations. Repair would add cost and another chance for error. |
+| Budget-conscious parent asking about Walmart frames | `unsupported_claim` | generate → verify → repair once → verify → return/refuse | The first draft added a provider-participation claim that was absent from the retrieved evidence, so it must be removed before the answer can be returned. |
+
+Thus, **D7140 is the verified-success path**, while **Walmart is the
+verified-repair path**. Sourced benefit terms are not treated as a promise that
+an individual claim will be paid. A real claim-payment guarantee still refuses
+immediately rather than entering the unsupported-claim repair branch.
+
 The following October 17, 2026 Walmart persona failure motivated the repair
 path. Retrieval found the required page, but the first generated draft
 speculated that Walmart might not participate. The output guard correctly
