@@ -10,11 +10,10 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-ROOT = Path(__file__).resolve().parents[2]
-load_dotenv(ROOT / "dental_enrollment_chatbot" / ".env")
-load_dotenv(ROOT / "dspy_dental_chatbot" / ".env")
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+load_dotenv(PROJECT_ROOT / ".env")
 
-from shared_graph import DentalEnrollmentGraph  # noqa: E402
+from enrollment_graph import DentalEnrollmentGraph  # noqa: E402
 from dspy_router import DspyExtractor  # noqa: E402
 from jev_router import JevExtractor  # noqa: E402
 

@@ -2,9 +2,9 @@
 
 This DSPy app has two deliberately separate assistants:
 
-- **Enrollment chat** reuses the tested LangGraph policy engine in
-  `../dental_enrollment_chatbot` and replaces its semantic input normalizer
-  with a DSPy program.
+- **Enrollment chat** uses the tested LangGraph policy engine bundled in this
+  project under `src/`. DSPy replaces its semantic input normalizer while the
+  local Python state machine retains control of eligibility and plan rules.
 - **Dental Policy Q&A** retrieves page-aware passages locally from
   `../downloads/dental/fedvip/2026-geha-dental-benefits-guide.pdf`, then uses a
   DSPy program to produce a concise answer with page citations.
@@ -147,11 +147,14 @@ tests with the guards on to measure false refusals.
 ## Test
 
 The tests inject fake DSPy programs and a fake Jev SDK, and do not call a
-remote model:
+remote model. They also exercise the bundled enrollment graph and its QLE
+ground-truth cases, so this project can be validated on its own:
 
 ```bash
 PYTHONPATH=src /Users/dc/geha/.venv/bin/python -m unittest -v \
-  src/test_dspy_router.py src/test_policy_qa.py src/test_safety_guard.py
+  src/test_dspy_router.py src/test_enrollment_graph.py \
+  src/test_qle_ground_truth.py src/test_policy_qa.py \
+  src/test_safety_guard.py
 ```
 
 ## Policy Q&A evals

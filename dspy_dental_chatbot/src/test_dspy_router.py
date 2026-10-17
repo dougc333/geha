@@ -5,7 +5,7 @@ import unittest
 from types import SimpleNamespace
 
 from dspy_router import DspyExtractor
-from shared_graph import DentalEnrollmentGraph
+from enrollment_graph import DentalEnrollmentGraph
 
 
 class FakeProgram:
