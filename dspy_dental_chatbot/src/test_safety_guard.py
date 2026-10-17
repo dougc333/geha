@@ -11,7 +11,14 @@ from types import SimpleNamespace
 from unittest import mock
 
 from policy_qa import DentalPolicyIndex, DentalPolicyQA, PolicyChunk
-from safety_guard import FAIL_CLOSED_REFUSAL, REFUSALS, GuardedPolicyQA, JevInputGuard
+from safety_guard import (
+    FAIL_CLOSED_REFUSAL,
+    OUTPUT_CATEGORIES,
+    REFUSALS,
+    ClassifyDraftAnswer,
+    GuardedPolicyQA,
+    JevInputGuard,
+)
 
 
 class FakeProgram:
@@ -132,6 +139,15 @@ class GuardedPolicyQATests(unittest.TestCase):
         self.assertTrue(result.blocked)
         self.assertEqual(result.answer, REFUSALS["medical_advice"])
         self.assertEqual(result.chunks[0].page, 2)
+
+    def test_output_rubric_distinguishes_plan_terms_from_claim_guarantees(self):
+        rubric = ClassifyDraftAnswer.__doc__ or ""
+
+        self.assertIn("grounded description of plan terms is safe", rubric)
+        self.assertIn("D7140", rubric)
+        self.assertIn("claim_payment_guarantee", OUTPUT_CATEGORIES)
+        self.assertNotIn("coverage_guarantee", OUTPUT_CATEGORIES)
+        self.assertIn("claim_payment_guarantee", REFUSALS)
 
     def test_output_guard_error_fails_closed(self):
         guarded = GuardedPolicyQA(
