@@ -201,3 +201,22 @@ python -m document_ingestion_workflow.backend
 
 Open <http://127.0.0.1:8510>. The workflow calls OpenAI and creates a new immutable,
 unpromoted run under the selected document's directory in `crawl_dir/runs/`.
+
+## Run with Docker
+
+Build and start the React UI, Python backend, and bundled Playwright Chromium runtime:
+
+```bash
+cd /Users/dc/geha/document_ingestion_workflow
+docker compose up --build
+```
+
+Open <http://127.0.0.1:8510>. Compose passes `ANTHROPIC_API_KEY` and
+`OPENAI_API_KEY` from the current shell and mounts `../crawl_dir/runs` so generated
+artifacts and previous runs survive container replacement. To use another host port:
+
+```bash
+INGESTION_PORT=8511 docker compose up --build
+```
+
+Stop the service with `docker compose down`. This preserves `crawl_dir/runs`.

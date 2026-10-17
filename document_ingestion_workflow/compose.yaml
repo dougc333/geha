@@ -1,0 +1,16 @@
+services:
+  ingestion-workflow:
+    image: geha-document-ingestion-workflow:local
+    build:
+      context: ..
+      dockerfile: document_ingestion_workflow/Dockerfile
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "8510"
+      ANTHROPIC_API_KEY: "${ANTHROPIC_API_KEY:-}"
+      OPENAI_API_KEY: "${OPENAI_API_KEY:-}"
+    ports:
+      - "${INGESTION_PORT:-8510}:8510"
+    volumes:
+      - ../crawl_dir/runs:/app/crawl_dir/runs
+    restart: unless-stopped
