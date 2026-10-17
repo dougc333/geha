@@ -133,6 +133,49 @@ includes the guard's critique and prior draft, and the revised answer must pass
 the output guard before it is shown. Other unsafe categories still refuse
 immediately, and a failed repair remains blocked.
 
+### Evidence-grounded generate–verify–repair
+
+This is a bounded **generate–critique–revise** pattern, implemented here as an
+evidence-grounded **generate–verify–repair** loop:
+
+```text
+retrieve evidence → generate draft → verify against evidence
+                                      ├─ safe → return answer
+                                      └─ unsupported claim
+                                           → revise from the same evidence
+                                           → verify once more
+                                               ├─ safe → return revision
+                                               └─ unsafe/error → refuse
+```
+
+The loop is intentionally limited to one repair. The critic decides what must
+be removed or corrected, but retrieved source evidence and the second guard
+check decide whether the revision may reach the user.
+
+The following October 17, 2026 Walmart persona failure motivated the repair
+path. Retrieval found the required page, but the first generated draft
+speculated that Walmart might not participate. The output guard correctly
+identified that statement as unsupported, then the old behavior discarded the
+entire answer—including the supported frame discount:
+
+```text
+I couldn't verify that answer against the retrieved policy pages.
+
+Safety checks · BLOCKED
+input · safe · jev safe=0.89
+output · unsupported_claim · The answer states that Walmart may not participate
+in the network for these benefits, which is not confirmed by the evidence provided.
+
+Persona eval failed · pages [7, 5, 4, 6] · missing page groups=[] ·
+missing citation groups=[['[p. 7]']] ·
+missing facts=[['60%', '60 percent'], ['retail price']]
+```
+
+With repair enabled, the supported statement—members pay 60% of retail price
+for frames—is retained with its page-7 citation. The unsupported provider
+inference is replaced with the narrower statement that the supplied document
+does not establish whether Walmart participates.
+
 The input guard uses TypeSafe Jev when `TYPESAFE_API_KEY` is set and DSPy
 otherwise. The output guard always uses DSPy because it must read the
 evidence. Set `DSPY_GUARD_MODEL` to run the DSPy guards on a cheaper model.
