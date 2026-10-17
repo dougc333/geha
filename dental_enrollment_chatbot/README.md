@@ -4,9 +4,8 @@ source /Users/dc/geha/.venv/bin/activate
 streamlit run src/app.py
 
 
+This is an enrollment agent for a dental policy and an intro to state-machine RAG and JEV and personas?
 
-
-This is an enrollment agent for a dental policy. 
 
 The document is: 2026-geha-dental-benefits-guide_pages
 

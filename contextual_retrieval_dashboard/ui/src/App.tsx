@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import type { CacheTestResult, ChunkPair, ChunkResponse, DocumentProgress, Health, PromptContract, RunEvent } from './types'
+import type { CacheTestResult, ChunkPair, ChunkResponse, DocumentProgress, Health, HistoricalRun, HistoryResponse, PromptContract, RunEvent } from './types'
 
 const todayBatch = 'batch-20261016-contextual'
 
@@ -29,6 +29,8 @@ export function App() {
   const [status, setStatus] = useState<'loading' | 'idle' | 'starting' | 'running' | 'complete' | 'error'>('loading')
   const [error, setError] = useState<string>()
   const [events, setEvents] = useState<RunEvent[]>([])
+  const [history, setHistory] = useState<HistoricalRun[]>([])
+  const [selectedHistoryRun, setSelectedHistoryRun] = useState('')
   const [documents, setDocuments] = useState<Record<string, DocumentProgress>>({})
   const [selectedSource, setSelectedSource] = useState<string>()
   const [chunkData, setChunkData] = useState<ChunkResponse>()
@@ -45,13 +47,43 @@ export function App() {
         if (!response.ok) throw new Error(await response.text())
         return response.json() as Promise<PromptContract>
       }),
-    ]).then(([value, promptContract]) => {
+      fetch('/api/history').then(async response => {
+        if (!response.ok) throw new Error(await response.text())
+        return response.json() as Promise<HistoryResponse>
+      }),
+    ]).then(([value, promptContract, historyResponse]) => {
       setHealth(value)
       setPrompt(promptContract)
+      setHistory(historyResponse.runs)
       setBatchDocument(value.recommended_document)
-      setDocuments(Object.fromEntries(value.documents.map(source => [source, {
+      const restored = Object.fromEntries(value.documents.map(source => [source, {
         source, canonical: 'queued', contextual: 'queued', chunksDone: 0, chunksTotal: 0,
-      }])))
+      }])) as Record<string, DocumentProgress>
+      for (const run of historyResponse.runs) {
+        if (restored[run.source] && !restored[run.source].run) {
+          restored[run.source] = {
+            ...restored[run.source],
+            run: run.run,
+            canonical: 'complete',
+            contextual: run.complete ? 'complete' : 'running',
+            chunksDone: run.completed_chunks,
+            chunksTotal: run.total_chunks,
+            markdownVerified: true,
+            markdownChars: run.whole_document_chars,
+            savedAt: run.updated_at,
+            batchId: run.run_id,
+          }
+        }
+      }
+      setDocuments(restored)
+      const latest = historyResponse.runs[0]
+      if (latest) {
+        setSelectedHistoryRun(latest.run)
+        setSelectedSource(latest.source)
+        void fetch(`/api/chunks?run=${encodeURIComponent(latest.run)}`)
+          .then(response => response.json() as Promise<ChunkResponse>)
+          .then(setChunkData)
+      }
       setStatus('idle')
       void fetch('/api/prompt-cache-test')
         .then(response => response.json() as Promise<CacheTestResult>)
@@ -130,9 +162,6 @@ export function App() {
   const start = async (scope: 'one' | 'all') => {
     sourceRef.current?.close()
     setStatus('starting'); setError(undefined); setEvents([]); setChunkData(undefined)
-    setDocuments(current => Object.fromEntries(Object.keys(current).map(source => [source, {
-      source, canonical: 'queued', contextual: 'queued', chunksDone: 0, chunksTotal: 0,
-    }])))
     try {
       const response = await fetch('/api/batches', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -150,6 +179,9 @@ export function App() {
       stream.onmessage = message => updateFromEvent(JSON.parse(message.data))
       stream.addEventListener('end', () => {
         stream.close(); setStatus(current => current === 'error' ? current : 'complete')
+        void fetch('/api/history')
+          .then(response => response.json() as Promise<HistoryResponse>)
+          .then(result => setHistory(result.runs))
       })
       stream.onerror = () => {
         if (stream.readyState === EventSource.CLOSED) {
@@ -166,6 +198,16 @@ export function App() {
     const run = documents[source]?.run
     if (!run) return
     const response = await fetch(`/api/chunks?run=${encodeURIComponent(run)}`)
+    if (!response.ok) { setError(await response.text()); return }
+    setChunkData(await response.json())
+  }
+
+  const selectPastRun = async (runPath: string) => {
+    setSelectedHistoryRun(runPath); setSelectedChunk(0); setChunkData(undefined)
+    const saved = history.find(run => run.run === runPath)
+    if (!saved) return
+    setSelectedSource(saved.source)
+    const response = await fetch(`/api/chunks?run=${encodeURIComponent(saved.run)}`)
     if (!response.ok) { setError(await response.text()); return }
     setChunkData(await response.json())
   }
@@ -228,12 +270,13 @@ export function App() {
 
       <main className="workspace">
         <section className="documents-panel panel">
-          <div className="panel-heading"><div><p className="eyebrow">LIVE PROGRESS</p><h2>Coverage policies</h2></div><span className="status-pill">{status}</span></div>
+          <div className="panel-heading"><div><p className="eyebrow">RUNS + LIVE PROGRESS</p><h2>Coverage policies</h2></div><span className="status-pill">{history.length} saved · {status}</span></div>
+          <div className="history-picker"><label>Past contextual runs</label><select value={selectedHistoryRun} onChange={event => void selectPastRun(event.target.value)}><option value="">Select a saved run…</option>{history.map(run => <option key={run.run} value={run.run}>{shortName(run.source)} · {run.completed_chunks}/{run.total_chunks} chunks · {new Date(run.updated_at).toLocaleString()}</option>)}</select></div>
           <div className="document-list">
             {Object.values(documents).map(document => (
               <button className={`document-row ${selectedSource === document.source ? 'selected' : ''}`} key={document.source} onClick={() => void selectDocument(document.source)} disabled={!document.run}>
                 <span className={`state ${document.contextual === 'complete' ? 'done' : document.contextual === 'failed' || document.canonical === 'failed' ? 'failed' : document.contextual === 'running' || document.canonical === 'running' ? 'active' : ''}`} />
-                <span className="document-name"><b>{shortName(document.source)}</b><small>{document.markdownVerified ? `MD verified · ${document.markdownChars?.toLocaleString()} chars` : health?.document_readiness[document.source]?.react_converted_source ? 'ReAct-converted source · batch MD preflight ready' : document.pages ? `${document.pages} pages · ${document.tables} tables` : 'batch MD preflight ready'}</small></span>
+                <span className="document-name"><b>{shortName(document.source)}</b><small>{document.savedAt ? `Saved ${new Date(document.savedAt).toLocaleString()} · ${document.batchId}` : document.markdownVerified ? `MD verified · ${document.markdownChars?.toLocaleString()} chars` : health?.document_readiness[document.source]?.react_converted_source ? 'ReAct-converted source · batch MD preflight ready' : document.pages ? `${document.pages} pages · ${document.tables} tables` : 'batch MD preflight ready'}</small></span>
                 <span className="progress-copy">{document.chunksTotal ? `${document.chunksDone}/${document.chunksTotal}` : document.canonical}</span>
               </button>
             ))}

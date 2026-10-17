@@ -40,6 +40,18 @@ class ExistingDentalCorpusRetrieverTests(unittest.TestCase):
         self.assertEqual(chunks[0].page, 7)
         self.assertIn("Frames", chunks[0].text)
 
+    def test_plain_language_braces_query_uses_structured_class_d_row(self):
+        chunks = self.retriever.search_policy_chunks(
+            "Are adults covered for braces under Standard, and what is the lifetime maximum?",
+            mode="bm25",
+            top_k=4,
+        )
+
+        page_five = next(chunk for chunk in chunks if chunk.page == 5)
+        self.assertIn("STRUCTURED BENEFIT RECORD", page_five.text)
+        self.assertIn('"benefit_class": "Class D"', page_five.text)
+        self.assertIn('"standard_in_network_cost": "50% with $2,500 lifetime maximum"', page_five.text)
+
     def test_auto_mode_routes_dental_code_to_bm25_across_both_documents(self):
         retriever = ExistingDentalCorpusRetriever(include_plan_brochure=True)
         chunks = retriever.search_policy_chunks(

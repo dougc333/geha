@@ -76,3 +76,12 @@ Anthropic credentials must be visible to the backend through
 
 Candidates remain unpromoted and still require the repository's normal visual
 review and promotion gates.
+
+## Saved-run history
+
+The backend reconstructs history from durable
+`runs/coverage-policies/*/*/candidate/contextual-chunks.jsonl` artifacts; it
+does not depend on the in-memory SSE registry. On startup, the UI restores the
+latest contextual run for each document, opens the newest run in the chunk
+viewer, and lists every saved run in **Past contextual runs**. Backend restarts
+therefore do not hide already-paid Claude results.

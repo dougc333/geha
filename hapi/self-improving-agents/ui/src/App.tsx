@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import type { AnswerKey, Finding, LadderRow, SavedRun, ScoreResult, ToolInfo, TraceEvent } from "./types";
+import type { AnswerKey, Finding, ImprovementExperiment, ImprovementPayload, ImprovementRow, LadderRow, SavedRun, ScoreResult, ToolInfo, TraceEvent } from "./types";
 
 type CallEvent = Extract<TraceEvent, { type: "tool_call" }>;
 type ResultEvent = Extract<TraceEvent, { type: "tool_result" }>;
@@ -61,7 +61,7 @@ export default function App() {
   const [runs, setRuns] = useState<SavedRun[]>([]);
   const [key, setKey] = useState<AnswerKey | null>(null);
   const [showKey, setShowKey] = useState(false);
-  const [tab, setTab] = useState<"investigate" | "choices" | "history" | "ladder">("investigate");
+  const [tab, setTab] = useState<"investigate" | "improvement" | "choices" | "history" | "ladder">("investigate");
   const [models, setModels] = useState<{ id: string; model: string; available: boolean }[]>([]);
   const [model, setModel] = useState("claude");
   const bottom = useRef<HTMLDivElement>(null);
@@ -167,12 +167,13 @@ export default function App() {
       </header>
 
       <nav className="tabs">
-        {([["investigate", "Investigation"], ["choices", "Tool choices"], ["history", `Run history (${runs.length})`], ["ladder", "Difficulty ladder"]] as const).map(([id, label]) => (
+        {([["investigate", "Investigation"], ["improvement", "Self-improvement"], ["choices", "Tool choices"], ["history", `Run history (${runs.length})`], ["ladder", "Difficulty ladder"]] as const).map(([id, label]) => (
           <button key={id} className={tab === id ? "tab active" : "tab"} onClick={() => setTab(id)}>{label}</button>
         ))}
       </nav>
 
       {tab === "choices" && <ChoicesView steps={steps} tools={tools} counts={counts} runId={runId} />}
+      {tab === "improvement" && <ImprovementView onOpen={(id) => { setRunId(id); setTab("investigate"); }} />}
       {tab === "ladder" && <LadderView onOpen={(id) => { setRunId(id); setTab("investigate"); }} />}
       {tab === "history" && (
         <HistoryView runs={runs} current={runId} onOpen={(id) => { setRunId(id); setTab("investigate"); }} onRefresh={refreshRuns} />
@@ -491,4 +492,148 @@ function LadderView({ onOpen }: { onOpen: (id: string) => void }) {
       </table>
     </section>
   );
+}
+
+function total(rows: ImprovementRow[], field: "found" | "guilty" | "false_positive_providers" | "tool_calls" | "input_tokens") {
+  return rows.reduce((sum, row) => sum + (row[field] ?? 0), 0);
+}
+
+function ImprovementView({ onOpen }: { onOpen: (id: string) => void }) {
+  const [payload, setPayload] = useState<ImprovementPayload | null>(null);
+  const [selected, setSelected] = useState(0);
+  useEffect(() => {
+    fetch("/api/improvement").then((r) => r.json()).then((data: ImprovementPayload) => {
+      setPayload(data);
+      const deepSeek = data.experiments.findIndex((x) => x.model.toLowerCase().includes("deepseek"));
+      setSelected(deepSeek >= 0 ? deepSeek : Math.max(0, data.experiments.length - 1));
+    }).catch(() => setPayload(null));
+  }, []);
+  if (!payload) return <section className="page"><p className="muted">No improvement results available.</p></section>;
+  const experiment: ImprovementExperiment | undefined = payload.experiments[selected];
+  if (!experiment) return <section className="page"><p className="muted">Run <code>python improve.py --model nous</code> to create an experiment.</p></section>;
+
+  const baselineFound = total(experiment.baseline, "found");
+  const baselineGuilty = total(experiment.baseline, "guilty");
+  const baselineFalse = total(experiment.baseline, "false_positive_providers");
+  const testedFound = total(experiment.tested, "found");
+  const testedGuilty = total(experiment.tested, "guilty");
+  const testedFalse = total(experiment.tested, "false_positive_providers");
+  const baselineTokens = total(experiment.baseline, "input_tokens");
+  const testedTokens = total(experiment.tested, "input_tokens");
+  const scoreGain = experiment.tested_net - experiment.baseline_net;
+
+  return (
+    <section className="page improvement-page">
+      <div className="improvement-head">
+        <div>
+          <div className="eyebrow">Prompt and tool optimization · no model-weight updates</div>
+          <h1>Self-improvement progress</h1>
+          <p className="muted">DeepSeek investigates, a stronger teacher reflects, and lessons are retained only when they improve held-out performance.</p>
+        </div>
+        <select value={selected} onChange={(e) => setSelected(Number(e.target.value))}>
+          {payload.experiments.map((x, i) => <option key={x.started} value={i}>{x.model} · {new Date(x.started).toLocaleString()}</option>)}
+        </select>
+      </div>
+
+      <div className="phase-rail">
+        <Phase number="1" title="Baseline" detail={`${experiment.baseline.length} held-out cases`} state="done" />
+        <Phase number="2" title="Train + grade" detail={experiment.train} state="done" />
+        <Phase number="3" title="Teacher reflection" detail={experiment.reflector} state="done" />
+        <Phase number="4" title="Held-out test" detail={experiment.test} state="done" />
+        <Phase number="5" title="Acceptance gate" detail={`Lessons ${experiment.decision}`} state={experiment.decision} />
+      </div>
+
+      <div className="improvement-run-selectors" aria-label="Self-improvement trace replays">
+        <label>
+          <span>Baseline without lessons</span>
+          <small>Held-out variant before prompt lessons</small>
+          <select value="" onChange={(e) => e.target.value && onOpen(e.target.value)}>
+            <option value="">Replay a baseline trace…</option>
+            {experiment.baseline.map((row) => (
+              <option key={row.run_id} value={row.run_id}>
+                {`L${row.level} ${row.title} · ${row.run_id} · ${row.found}/${row.guilty} found`}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          <span>Held-out test with learned lessons</span>
+          <small>Same held-out levels after accepted prompt lessons</small>
+          <select value="" onChange={(e) => e.target.value && onOpen(e.target.value)}>
+            <option value="">Replay a held-out test trace…</option>
+            {experiment.tested.map((row) => (
+              <option key={row.run_id} value={row.run_id}>
+                {`L${row.level} ${row.title} · ${row.run_id} · ${row.found}/${row.guilty} found`}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      <div className="kpi-grid">
+        <Kpi label="Net score" value={`${experiment.baseline_net} → ${experiment.tested_net}`} detail={`+${scoreGain} points`} tone="good" />
+        <Kpi label="Guilty providers found" value={`${baselineFound}/${baselineGuilty} → ${testedFound}/${testedGuilty}`} detail="held-out cases" tone="good" />
+        <Kpi label="False accusations" value={`${baselineFalse} → ${testedFalse}`} detail="lower is better" tone={testedFalse === 0 ? "good" : "warn"} />
+        <Kpi label="Accepted lessons" value={String(experiment.lessons.length)} detail={experiment.decision === "kept" ? "written to lessons.md" : "rejected"} tone={experiment.decision === "kept" ? "good" : "warn"} />
+      </div>
+
+      <div className="improvement-grid">
+        <div className="improvement-card">
+          <h2>Measured performance</h2>
+          <ScoreBar label="Baseline" score={experiment.baseline_net} detail={`${baselineFound}/${baselineGuilty} found · ${baselineFalse} false`} />
+          <ScoreBar label="With prompt lessons" score={experiment.tested_net} detail={`${testedFound}/${testedGuilty} found · ${testedFalse} false`} improved />
+          <div className="frontier-line"><span>Frontier reference in repository</span><strong>13</strong></div>
+          <p className="muted small">ChatGPT was not directly benchmarked. The measured reference is Claude Opus 5.5. Metric: {payload.metric}.</p>
+        </div>
+        <div className="improvement-card">
+          <h2>Effort tradeoff</h2>
+          <MetricCompare label="Input tokens" before={baselineTokens} after={testedTokens} />
+          <MetricCompare label="Tool calls" before={total(experiment.baseline, "tool_calls")} after={total(experiment.tested, "tool_calls")} />
+          <MetricCompare label="Elapsed minutes" before={Math.round(experiment.baseline.reduce((s, r) => s + (r.seconds ?? 0), 0) / 60)} after={Math.round(experiment.tested.reduce((s, r) => s + (r.seconds ?? 0), 0) / 60)} />
+          <p className="muted small">The acceptance gate currently optimizes correctness, not cost. These effort metrics make that tradeoff visible.</p>
+        </div>
+      </div>
+
+      <div className="improvement-card spaced">
+        <h2>Held-out cases · click a row to replay its trace</h2>
+        <table className="history improvement-table">
+          <thead><tr><th>Case</th><th>Baseline found</th><th>With lessons</th><th>False accusations</th><th>Tool calls</th><th>Input tokens</th></tr></thead>
+          <tbody>{experiment.baseline.map((before, i) => {
+            const after = experiment.tested[i];
+            return <tr key={before.run_id} onClick={() => onOpen(after?.run_id ?? before.run_id)}>
+              <td><strong>L{before.level} {before.title}</strong><div className="muted small">variant {before.variant}</div></td>
+              <td>{before.guilty ? `${before.found}/${before.guilty}` : "clean"}</td>
+              <td className={after && after.found >= before.found ? "good-text" : ""}>{after ? (after.guilty ? `${after.found}/${after.guilty}` : "clean") : "–"}</td>
+              <td>{before.false_positive_providers} → <span className={after?.false_positive_providers === 0 ? "good-text" : "err-text"}>{after?.false_positive_providers ?? "–"}</span></td>
+              <td>{before.tool_calls ?? "–"} → {after?.tool_calls ?? "–"}</td>
+              <td>{(before.input_tokens ?? 0).toLocaleString()} → {(after?.input_tokens ?? 0).toLocaleString()}</td>
+            </tr>;
+          })}</tbody>
+        </table>
+      </div>
+
+      <div className="improvement-card spaced">
+        <div className="lesson-heading"><h2>Accepted prompt lessons</h2><code>{payload.source} → lessons.md</code></div>
+        <ol className="lessons-list">{experiment.lessons.map((lesson, i) => <li key={i}>{lesson}</li>)}</ol>
+      </div>
+    </section>
+  );
+}
+
+function Phase({ number, title, detail, state }: { number: string; title: string; detail: string; state: string }) {
+  return <div className={`phase ${state}`}><span>{number}</span><div><strong>{title}</strong><small>{detail}</small></div></div>;
+}
+
+function Kpi({ label, value, detail, tone }: { label: string; value: string; detail: string; tone: string }) {
+  return <div className={`kpi ${tone}`}><span>{label}</span><strong>{value}</strong><small>{detail}</small></div>;
+}
+
+function ScoreBar({ label, score, detail, improved = false }: { label: string; score: number; detail: string; improved?: boolean }) {
+  const extent = Math.min(100, Math.abs(score) / 13 * 50);
+  return <div className="score-bar-row"><div className="score-bar-label"><strong>{label}</strong><span>{detail}</span></div><div className="score-axis"><i className={score < 0 ? "negative" : improved ? "positive improved" : "positive"} style={{ width: `${extent}%`, left: score < 0 ? `${50 - extent}%` : "50%" }} /><b>{score}</b></div></div>;
+}
+
+function MetricCompare({ label, before, after }: { label: string; before: number; after: number }) {
+  const multiplier = before ? after / before : 0;
+  return <div className="metric-compare"><span>{label}</span><strong>{before.toLocaleString()} → {after.toLocaleString()}</strong><em>{multiplier ? `${multiplier.toFixed(1)}×` : "–"}</em></div>;
 }

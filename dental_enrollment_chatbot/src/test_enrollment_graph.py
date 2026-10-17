@@ -12,6 +12,8 @@ class GuideTableTests(unittest.TestCase):
         self.assertEqual(self.tables.rate_code("CA", "90210"), "5")
         self.assertEqual(self.tables.rate_code("CA", "95350"), "4")
         self.assertEqual(self.tables.rate_code("TX", "78701"), "3")
+        self.assertEqual(self.tables.rate_code("MO", "72601"), "1")
+        self.assertEqual(self.tables.rate_code("MO", "64063"), "2")
 
     def test_premiums(self):
         self.assertEqual(self.tables.premium("High", "Retired", "Self Plus One", "4"), "$112.84")

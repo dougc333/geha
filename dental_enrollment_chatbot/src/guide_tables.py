@@ -57,6 +57,28 @@ def _prefix_matches(spec: str, prefix: int) -> bool:
     return False
 
 
+def _split_merged_rate_row(state: str, spec: str, code: str) -> list[tuple[str, str, str]]:
+    """Recover two PDF table rows that the extractor merged into one set of cells.
+
+    The source table occasionally yields cells such as ``MO MO``, ``Rest of 726``
+    and ``2 1``. The visual order in the source is still recoverable: the ZIP
+    prefix appears before or after the ``Rest of state`` entry in the same order
+    as the two states and rate codes.
+    """
+    states = re.findall(r"\b(?:[A-Z]{2}|INTL)\b", state)
+    codes = re.findall(r"\b[1-5]\b", code)
+    prefix = re.search(r"\b\d{3}(?:-\d{3})?\b", spec)
+    rest = re.search(r"\brest\s+of(?:\s+state)?\b", spec, flags=re.I)
+    if len(states) != 2 or len(codes) != 2 or not prefix or not rest:
+        return []
+    specs = (
+        ["Rest of state", prefix.group(0)]
+        if rest.start() < prefix.start()
+        else [prefix.group(0), "Rest of state"]
+    )
+    return list(zip(states, specs, codes))
+
+
 class GuideTables:
     """Authoritative local rate-code and premium lookups from guide pages 10-11."""
 
@@ -80,7 +102,10 @@ class GuideTables:
                     code = str(row.get(f"Rate code{suffix}", "")).strip()
                     if code.endswith(".0"):
                         code = code[:-2]
-                    if state and code.isdigit():
+                    if merged := _split_merged_rate_row(state, spec, code):
+                        output.extend((row_state, row_spec, row_code) for row_state, row_spec, row_code in merged)
+                        current_state, _, current_code = merged[-1]
+                    elif state and code.isdigit():
                         output.extend((state, pending, code) for pending in pending_specs)
                         pending_specs.clear()
                         output.append((state, spec, code))

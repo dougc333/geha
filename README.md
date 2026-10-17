@@ -14,7 +14,7 @@ Each subfolder has its own README with setup and results.
 | Folder | What it is | Pattern |
 |---|---|---|
 | [`crawl_dir`](crawl_dir/README.md) | Canonical document corpus (54 public PDFs) and the `geha-ingestion` MCP server | Ingestion workflow behind MCP tools |
-| [`document_ingestion_pipeline`](document_ingestion_pipeline/README.md) | React UI that streams one ingestion run: source page, vision HTML, visual correction, verified HTML | Deterministic workflow |
+| [`document_ingestion_workflow`](document_ingestion_workflow/README.md) | React UI that streams one ingestion run: source page, vision HTML, visual correction, verified HTML | Deterministic workflow |
 | [`PDF_processing`](PDF_processing/) | Page blocking and bill-of-lading OCR benchmarks | Evaluator-optimizer loops |
 | [`chunking_benchmarks_RAG`](chunking_benchmarks_RAG/README.md) | Table-aware coverage-policy RAG, billing-code lookup, 11 eval families | Routing + parent-document retrieval |
 | [`agentic_search`](agentic_search/README.md) | Chroma RAG with a CRAG/Self-RAG LangGraph loop and a ReAct variant | Evaluator-optimizer, ReAct |
@@ -24,10 +24,7 @@ Each subfolder has its own README with setup and results.
 | [`dspy_dental_chatbot`](dspy_dental_chatbot/README.md) | DSPy normalizer for the enrollment engine, plus a cited dental policy Q&A | Workflow + DSPy programs |
 | [`mcp_benefits_server`](mcp_benefits_server/README.md) | MCP server for dental and coverage-policy tools with a promotion standard | Deterministic tools, tiered by deployment |
 | [`aws_rag`](aws_rag/README.md) | Serverless AWS RAG over 203 ML papers | Hybrid BM25/pgvector + RRF + rerank |
-| [`aws_geha_rag`](aws_geha_rag/README.md) | AWS RAG over GEHA documents that indexes only visually validated text | Step Functions ingestion workflow |
 | [`hapi`](hapi/README.md) | Local HAPI FHIR server with Synthea patients; claim insights, fraud and agent demos | FHIR tools, tool-calling agents |
-| [`avoid_failed_rag`](avoid_failed_rag/README.md) | Notes on why RAG proofs of concept fail, plus a standalone table RAG | Lessons learned |
-| [`agentic_RAG`](agentic_RAG/README.MD) | Placeholder for agentic-loop chatbot experiments | — |
 | `finetuning` | Slides: fine-tuning EmbeddingGemma for insurance retrieval | — |
 | `docs` | Shared diagrams (RAG variants, agent loop vs harness, context window) and slide decks | — |
 
@@ -54,7 +51,7 @@ Sending a 200-page PDF to an LLM for OCR produces errors. The pipeline splits
 it into single pages, converts each to Markdown and HTML, renders the HTML, and
 has a LangGraph loop compare it with the page image and correct it, bounded to
 2–7 passes. This reaches zero visible errors but is slow for large batches.
-`document_ingestion_pipeline` visualizes these runs, including the EY/LIMRA
+`document_ingestion_workflow` visualizes these runs, including the EY/LIMRA
 report, where pages with figures go through whole-page semantic HTML instead
 of bounding-box segmentation.
 
@@ -102,8 +99,6 @@ BM25, vector or hybrid retrieval. The chat UI and PDF viewer come from the
 - `aws_rag`: hybrid BM25 + pgvector, RRF and Bedrock reranking reach hit@5 0.95
   and MRR@10 0.88. Chat endpoint:
   https://pdh62b4ddxm6mw7aokdbtwream0nupph.lambda-url.us-west-2.on.aws/chat
-- `aws_geha_rag`: indexes only pages that pass visual comparison; failures are
-  quarantined.
 - `e2e_bm25vector`: Vercel + Neon app for side-by-side retrieval experiments.
 
 ## Chatbots and tools

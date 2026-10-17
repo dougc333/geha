@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 import sys
+import threading
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -15,6 +16,7 @@ from crawl_dir.src.consumer_paths import page_markdown, page_root
 
 CORPUS_PROJECT = REPO / "agentic_search_corpus"
 CORPUS_SRC = CORPUS_PROJECT / "src"
+BENEFITS_DB = Path(__file__).resolve().parents[1] / "data" / "dental_benefits.sqlite"
 GUIDE_DOCUMENT = "fedvip/2026-geha-dental-benefits-guide.pdf"
 BROCHURE_DOCUMENT = "fedvip/2026-geha-dental-plan-brochure.pdf"
 GUIDE_PAGES = page_root("dental", GUIDE_DOCUMENT, allow_candidate=True)
@@ -47,17 +49,88 @@ class ExistingDentalCorpusRetriever:
         if str(CORPUS_SRC) not in sys.path:
             sys.path.insert(0, str(CORPUS_SRC))
         from corpus_search import CorpusSearch
-        from structured_benefits import StructuredBenefitIndex
+        from structured_benefits import SQLiteBenefitStore
 
         directories = [GUIDE_PAGES]
         if include_plan_brochure:
             directories.append(BROCHURE_PAGES)
         self.search_engine = CorpusSearch(directories=directories, mode="hybrid")
-        self.structured_benefits = StructuredBenefitIndex.from_markdown(
-            page_markdown("dental", GUIDE_DOCUMENT, 5, allow_candidate=True)
+        self.structured_benefits = SQLiteBenefitStore.from_sqlite(BENEFITS_DB)
+        self._vector_lock = threading.Lock()
+        self._warm_state_lock = threading.Lock()
+        self._warm_thread: threading.Thread | None = None
+        self._warm_status = "cold"
+        self._warm_error = ""
+
+    def _vectors_ready(self) -> bool:
+        return (
+            self.search_engine.model is not None
+            and self.search_engine.vectors is not None
         )
 
+    def warm_vectors(self) -> None:
+        """Load the embedding model and cached vectors exactly once.
+
+        The lock prevents a foreground vector query from racing a background
+        warm-up and constructing the 1.2 GB BGE model twice.
+        """
+        if self._vectors_ready():
+            self._warm_status = "ready"
+            return
+        with self._vector_lock:
+            if self._vectors_ready():
+                self._warm_status = "ready"
+                return
+            self._warm_status = "warming"
+            self._warm_error = ""
+            try:
+                self.search_engine.load_vectors()
+            except Exception as error:
+                self._warm_status = "error"
+                self._warm_error = str(error)
+                raise
+            else:
+                self._warm_status = "ready"
+
+    def warm_vectors_async(self) -> str:
+        """Start a daemon warm-up without blocking Streamlit page rendering."""
+        with self._warm_state_lock:
+            if self._vectors_ready():
+                self._warm_status = "ready"
+                return self._warm_status
+            if self._warm_thread is not None and self._warm_thread.is_alive():
+                return self._warm_status
+
+            def run() -> None:
+                try:
+                    self.warm_vectors()
+                except Exception:
+                    # The status and message are exposed in the UI. A later
+                    # foreground vector query may retry and report normally.
+                    return
+
+            self._warm_status = "warming"
+            self._warm_thread = threading.Thread(
+                target=run,
+                name="dental-bge-warmup",
+                daemon=True,
+            )
+            self._warm_thread.start()
+            return self._warm_status
+
+    @property
+    def vector_status(self) -> tuple[str, str]:
+        """Return ``(status, error)`` for display and diagnostics."""
+        if self._vectors_ready():
+            return "ready", ""
+        return self._warm_status, self._warm_error
+
     def search(self, query: str, mode: str = "hybrid", top_k: int = 4) -> list[CorpusHit]:
+        needs_vectors = mode in {"vector", "hybrid"} or (
+            mode == "auto" and not re.search(r"\bD\d{4}\b", query, flags=re.IGNORECASE)
+        )
+        if needs_vectors:
+            self.warm_vectors()
         documents = self.search_engine.search(query, mode=mode, top_k=top_k)
         return [
             CorpusHit(

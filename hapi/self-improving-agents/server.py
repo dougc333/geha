@@ -7,6 +7,7 @@ POST /api/runs {question}        start a run, returns {run_id}
 GET  /api/runs                   saved runs (newest first)
 GET  /api/runs/{id}/events       Server-Sent Events: every event so far, then live ones
 GET  /api/answer_key             the planted schemes (for scoring in the UI)
+GET  /api/improvement            saved prompt-improvement experiments and accepted lessons
 
 Runs are kept in memory while the server runs and saved to traces/<id>.json when done.
 Binds to 127.0.0.1 only.
@@ -155,6 +156,25 @@ def answer_key() -> dict:
 def ladder() -> list[dict]:
     path = HERE / "ladder_results.json"
     return json.loads(path.read_text()) if path.exists() else []
+
+
+@app.get("/api/improvement")
+def improvement() -> dict:
+    """Return the auditable output of improve.py for the React progress dashboard."""
+    results_path = HERE / "improve_results.json"
+    lessons_path = HERE / "lessons.md"
+    experiments = json.loads(results_path.read_text()) if results_path.exists() else []
+    lessons = [
+        line[2:].strip()
+        for line in lessons_path.read_text().splitlines()
+        if line.startswith("- ")
+    ] if lessons_path.exists() else []
+    return {
+        "experiments": experiments,
+        "accepted_lessons": lessons,
+        "source": "improve.py",
+        "metric": "guilty providers found minus innocent providers accused",
+    }
 
 
 @app.get("/api/default_question")

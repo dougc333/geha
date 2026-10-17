@@ -263,10 +263,10 @@ uv sync
 Create the local configuration:
 
 ```bash
-cp chunking_benchmarks/.env.example chunking_benchmarks/.env
+cp context_assembly_benchmarks/.env.example context_assembly_benchmarks/.env
 ```
 
-Edit `chunking_benchmarks/.env`:
+Edit `context_assembly_benchmarks/.env`:
 
 ```dotenv
 GEHA_RAG_DATABASE_URL=postgresql://geha:geha-local@127.0.0.1:5433/geha_rag
@@ -279,13 +279,13 @@ The program loads this project file with `override=True`, so its values replace 
 ## Start PostgreSQL and pgvector
 
 ```bash
-docker compose -f chunking_benchmarks/docker-compose.pgvector.yml up -d pgvector
+docker compose -f context_assembly_benchmarks/docker-compose.pgvector.yml up -d pgvector
 ```
 
 Check its status:
 
 ```bash
-docker compose -f chunking_benchmarks/docker-compose.pgvector.yml ps
+docker compose -f context_assembly_benchmarks/docker-compose.pgvector.yml ps
 ```
 
 The database listens on `127.0.0.1:5433` and stores its data in the `geha_pgvector_data` Docker volume.
@@ -293,7 +293,7 @@ The database listens on `127.0.0.1:5433` and stores its data in the `geha_pgvect
 ## Initialize the schema
 
 ```bash
-uv run python chunking_benchmarks/table_rag.py init-db
+uv run python context_assembly_benchmarks/table_rag.py init-db
 ```
 
 This creates:
@@ -305,7 +305,7 @@ This creates:
 ## Ingest extracted tables
 
 ```bash
-uv run python chunking_benchmarks/table_rag.py ingest \
+uv run python context_assembly_benchmarks/table_rag.py ingest \
   /Users/dc/geha/downloads/coverage-policies
 ```
 
@@ -316,14 +316,14 @@ The 32 extracted CSV files in `/Users/dc/geha/downloads/coverage-policies` produ
 ## Retrieve a complete table locally
 
 ```bash
-uv run python chunking_benchmarks/table_rag.py search \
+uv run python context_assembly_benchmarks/table_rag.py search \
   "Which bendamustine products are non-preferred?"
 ```
 
 Useful retrieval controls:
 
 ```bash
-uv run python chunking_benchmarks/table_rag.py search \
+uv run python context_assembly_benchmarks/table_rag.py search \
   "Which bendamustine products are non-preferred?" \
   --top-tables 3 \
   --candidate-rows 30
@@ -342,7 +342,7 @@ After starting PostgreSQL, initializing the schema, and ingesting the CSV files,
 run:
 
 ```bash
-uv run streamlit run chunking_benchmarks/streamlit_app.py
+cd /Users/dc/geha && uv run streamlit run context_assembly_benchmarks/streamlit_app.py --server.port 8501
 ```
 
 Useful evaluation-backed queries include:
@@ -388,8 +388,8 @@ an evaluation type and use **Run selected example** to execute either a saved
 case or a custom chat question through both context paths.
 
 ```bash
-cd /Users/dc/Documents/ChatGPT/aggents/geha_cloud_reliability
-uv run streamlit run chunking_benchmarks/comparison_chat_app.py
+# zsh -ic loads OPENAI_API_KEY from ~/.zshrc (needed for the optional answer + judge calls)
+cd /Users/dc/geha && zsh -ic 'uv run streamlit run context_assembly_benchmarks/comparison_chat_app.py --server.port 8502'
 ```
 
 Ask an evaluation-backed question to compare:
@@ -418,8 +418,8 @@ against labeled, human-reviewed cases before becoming a promotion gate.
 Run every suggested query with resumable per-query checkpoints:
 
 ```bash
-zsh -lic 'cd /Users/dc/Documents/ChatGPT/aggents/geha_cloud_reliability && \
-  .venv/bin/python chunking_benchmarks/evaluate_chunking_judge.py --resume'
+zsh -lic 'cd /Users/dc/geha && \
+  .venv/bin/python context_assembly_benchmarks/evaluate_chunking_judge.py --resume'
 ```
 
 The batch writes `chunking_judge_results.json` with full answers, verified
@@ -468,7 +468,7 @@ table and expected values, then reports the rank at which that parent was retrie
 The policy documents in this demo are synthetic. The `ask` command transmits the retrieved table content to the configured OpenAI model:
 
 ```bash
-uv run python chunking_benchmarks/table_rag.py ask \
+uv run python context_assembly_benchmarks/table_rag.py ask \
   "Which bendamustine products are non-preferred?"
 ```
 
@@ -483,7 +483,7 @@ Table: Drug preference and prior authorization)
 Override the configured model for one request:
 
 ```bash
-uv run python chunking_benchmarks/table_rag.py ask \
+uv run python context_assembly_benchmarks/table_rag.py ask \
   "Which bendamustine products are non-preferred?" \
   --model gpt-3.5-turbo
 ```
@@ -491,8 +491,8 @@ uv run python chunking_benchmarks/table_rag.py ask \
 ## Run tests
 
 ```bash
-uv run python -m unittest -v chunking_benchmarks/test_table_rag.py
-uv run python -m py_compile chunking_benchmarks/table_rag.py
+uv run python -m unittest -v context_assembly_benchmarks/test_table_rag.py
+uv run python -m py_compile context_assembly_benchmarks/table_rag.py
 ```
 
 The unit tests cover table separation, uneven-row normalization, and inferred table titles.
@@ -520,17 +520,17 @@ The unit tests cover table separation, uneven-row normalization, and inferred ta
 Start PostgreSQL and ingest the extracted CSVs as above, then run:
 
 ```bash
-uv run python chunking_benchmarks/evaluate_table_ablation.py all
+uv run python context_assembly_benchmarks/evaluate_table_ablation.py all
 ```
 
 To rebuild only the full-table index or repeat the evaluation:
 
 ```bash
-uv run python chunking_benchmarks/evaluate_table_ablation.py index
-uv run python chunking_benchmarks/evaluate_table_ablation.py compare
+uv run python context_assembly_benchmarks/evaluate_table_ablation.py index
+uv run python context_assembly_benchmarks/evaluate_table_ablation.py compare
 ```
 
-The report is written to `chunking_benchmarks/table_ablation_results.json`. It scores exact-table Hit@1, Hit@3, Hit@5, and exact answer match. The 34 existing preference questions are joined by seven [`row-to-column questions`](table_relation_evals.json) with verified drug, HCPCS, preference, and prior-authorization cells. A correct answer must come from the top retrieved table and match the complete expected set of rows. This isolates retrieval representation; it does not measure PDF extraction quality or LLM answer quality. Long whole-table strings may be truncated by the embedding model, which is part of this baseline's behavior.
+The report is written to `context_assembly_benchmarks/table_ablation_results.json`. It scores exact-table Hit@1, Hit@3, Hit@5, and exact answer match. The 34 existing preference questions are joined by seven [`row-to-column questions`](table_relation_evals.json) with verified drug, HCPCS, preference, and prior-authorization cells. A correct answer must come from the top retrieved table and match the complete expected set of rows. This isolates retrieval representation; it does not measure PDF extraction quality or LLM answer quality. Long whole-table strings may be truncated by the embedding model, which is part of this baseline's behavior.
 
 On the 32 extracted CSV files available locally on September 18, 2026 (84 tables and 463 row vectors), the [`ablation report`](table_ablation_results.json) found:
 
@@ -547,9 +547,9 @@ For a repeatable run on an existing Docker volume, use a new database so older i
 
 ```bash
 docker exec geha-pgvector psql -U geha -d postgres -c 'CREATE DATABASE geha_ablation'
-uv run python chunking_benchmarks/table_rag.py --database-url postgresql://geha:geha-local@127.0.0.1:5433/geha_ablation init-db
-uv run python chunking_benchmarks/table_rag.py --database-url postgresql://geha:geha-local@127.0.0.1:5433/geha_ablation ingest /Users/dc/geha/downloads/coverage-policies
-uv run python chunking_benchmarks/evaluate_table_ablation.py all --database-url postgresql://geha:geha-local@127.0.0.1:5433/geha_ablation
+uv run python context_assembly_benchmarks/table_rag.py --database-url postgresql://geha:geha-local@127.0.0.1:5433/geha_ablation init-db
+uv run python context_assembly_benchmarks/table_rag.py --database-url postgresql://geha:geha-local@127.0.0.1:5433/geha_ablation ingest /Users/dc/geha/downloads/coverage-policies
+uv run python context_assembly_benchmarks/evaluate_table_ablation.py all --database-url postgresql://geha:geha-local@127.0.0.1:5433/geha_ablation
 ```
 
 If `geha_ablation` already exists, choose another unused database name throughout these commands to ensure a clean corpus.
@@ -571,7 +571,7 @@ The evaluator records the top-five tables and similarity scores for every query,
 ## Stop the database
 
 ```bash
-docker compose -f chunking_benchmarks/docker-compose.pgvector.yml down
+docker compose -f context_assembly_benchmarks/docker-compose.pgvector.yml down
 ```
 
 This keeps the database volume. To delete the stored database as well, explicitly remove the `geha_pgvector_data` Docker volume.

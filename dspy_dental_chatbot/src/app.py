@@ -40,6 +40,12 @@ POLICY_PDF = ROOT / "crawl_dir/raw/dental/fedvip/2026-geha-dental-benefits-guide
 POLICY_PERSONAS = load_personas(
     Path(__file__).resolve().parents[1] / "data/policy_qa_personas.json"
 )
+CORPUS_ADAPTER_VERSION = "policy-chunks-v3"
+WARM_RETRIEVER = os.getenv("DENTAL_WARM_RETRIEVER", "1").strip().lower() not in {
+    "0",
+    "false",
+    "no",
+}
 
 
 @st.cache_resource
@@ -47,6 +53,7 @@ def build_graph() -> DentalEnrollmentGraph:
     return DentalEnrollmentGraph(jev=lambda *_: None, extractor=DspyExtractor())
 
 
+@st.cache_resource
 def build_policy_qa() -> DentalPolicyQA:
     # DspyExtractor configures the shared DSPy LM before this is called.
     return DentalPolicyQA(DentalPolicyIndex.from_pdf(POLICY_PDF))
@@ -85,7 +92,7 @@ def answer_policy_question(
         retrieve = None
     else:
         mode = retriever_name.removeprefix("Docling ").lower()
-        corpus = build_existing_corpus(code_query, "policy-chunks-v2")
+        corpus = build_existing_corpus(code_query, CORPUS_ADAPTER_VERSION)
         retrieve = lambda query, top_k: retrieve_docling_chunks(
             corpus, query, top_k=top_k, mode=mode
         )
@@ -108,6 +115,9 @@ try:
     bot = build_graph()
     policy_qa = build_policy_qa()
     guarded_policy_qa = build_guarded_policy_qa(policy_qa)
+    default_corpus = build_existing_corpus(False, CORPUS_ADAPTER_VERSION)
+    if WARM_RETRIEVER:
+        default_corpus.warm_vectors_async()
 except Exception as error:
     st.error(f"DSPy is not configured: {error}")
     st.code(
@@ -121,6 +131,29 @@ except Exception as error:
 with st.sidebar:
     st.subheader("DSPy dental assistant")
     st.write(f"Model: `{os.getenv('DSPY_MODEL', 'not configured')}`")
+    input_guard_name = "TypeSafe Jev" if jev_available() else "DSPy"
+    output_guard_model = os.getenv("DSPY_GUARD_MODEL", "").strip() or os.getenv(
+        "DSPY_MODEL", "not configured"
+    )
+    st.success("Safety guards active")
+    st.caption(
+        f"Input: **{input_guard_name}** · Output: **DSPy** (`{output_guard_model}`) · "
+        "fail-closed on errors and timeouts"
+    )
+    vector_status, vector_error = default_corpus.vector_status
+    if WARM_RETRIEVER:
+        if vector_status == "ready":
+            st.caption("Vector retriever: **ready** (BGE is warm)")
+        elif vector_status == "error":
+            st.warning(f"Vector retriever warm-up failed: {vector_error}")
+        else:
+            st.caption("Vector retriever: **warming in background…**")
+    else:
+        st.caption("Vector retriever: cold start on first query")
+    st.caption(
+        "Structured lookup: **SQLite** · "
+        f"{len(default_corpus.structured_benefits.records)} authoritative benefit rows"
+    )
     st.markdown(
         "Enrollment uses a deterministic policy graph. Policy Q&A retrieves locally from only "
         "the 2026 dental benefits guide, then DSPy synthesizes a cited answer."
@@ -219,6 +252,17 @@ with policy_tab:
             if item.get("persona"):
                 st.caption(f"Persona: {item['persona']}")
             st.markdown(item["content"])
+            if verdicts := item.get("guard_verdicts"):
+                guard_label = "BLOCKED" if item.get("blocked") else "PASSED"
+                with st.expander(
+                    f"Safety checks · {guard_label}",
+                    expanded=bool(item.get("blocked")),
+                ):
+                    for verdict in verdicts:
+                        st.markdown(
+                            f"**{verdict['stage']}** · `{verdict['category']}` · "
+                            f"{verdict['reason']}"
+                        )
             if item.get("sources"):
                 with st.expander("Retrieved evidence"):
                     for source in item["sources"]:
