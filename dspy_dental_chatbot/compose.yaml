@@ -1,0 +1,14 @@
+services:
+  dental-chatbot:
+    image: geha-dspy-dental-chatbot:local
+    build:
+      context: ..
+      dockerfile: dspy_dental_chatbot/Dockerfile
+    env_file:
+      - .env
+    environment:
+      PORT: "8506"
+      DENTAL_WARM_RETRIEVER: "1"
+    ports:
+      - "${DENTAL_PORT:-8506}:8506"
+    restart: unless-stopped

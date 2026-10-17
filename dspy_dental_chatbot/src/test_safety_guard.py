@@ -20,6 +20,8 @@ from safety_guard import (
     ClassifyDraftAnswer,
     GuardedPolicyQA,
     JevInputGuard,
+    JevSessionMetrics,
+    MeteredJevInputGuard,
 )
 
 
@@ -357,6 +359,53 @@ class JevInputGuardTests(unittest.TestCase):
         self.assertFalse(result.blocked)
         self.assertEqual(result.verdicts[0].category, "off_topic_benign")
         self.assertIn("[p. 7]", result.answer)
+
+
+class JevSessionMetricsTests(unittest.TestCase):
+    def test_metered_guard_records_safe_blocked_and_latency(self):
+        predictions = iter(
+            [
+                SimpleNamespace(category="safe", reason="safe"),
+                SimpleNamespace(category="abuse", reason="blocked"),
+            ]
+        )
+        metrics = JevSessionMetrics()
+        guard = MeteredJevInputGuard(lambda _question: next(predictions), metrics)
+
+        guard("Are cleanings covered?")
+        guard("You are useless")
+        snapshot = metrics.snapshot()
+
+        self.assertEqual(snapshot["calls"], 2)
+        self.assertEqual(snapshot["safe"], 1)
+        self.assertEqual(snapshot["blocked"], 1)
+        self.assertEqual(snapshot["errors"], 0)
+        self.assertIsNotNone(snapshot["last_latency_ms"])
+        self.assertIsNotNone(snapshot["median_latency_ms"])
+
+    def test_metered_guard_records_errors_and_reset(self):
+        metrics = JevSessionMetrics()
+
+        def fail(_question):
+            raise RuntimeError("provider unavailable")
+
+        guard = MeteredJevInputGuard(fail, metrics)
+        with self.assertRaisesRegex(RuntimeError, "provider unavailable"):
+            guard("question")
+        self.assertEqual(metrics.snapshot()["errors"], 1)
+
+        metrics.reset()
+        self.assertEqual(
+            metrics.snapshot(),
+            {
+                "calls": 0,
+                "safe": 0,
+                "blocked": 0,
+                "errors": 0,
+                "last_latency_ms": None,
+                "median_latency_ms": None,
+            },
+        )
 
 
 if __name__ == "__main__":

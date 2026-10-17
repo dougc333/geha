@@ -27,6 +27,8 @@ from safety_guard import (  # noqa: E402
     GuardedAnswer,
     GuardedPolicyQA,
     JevInputGuard,
+    JevSessionMetrics,
+    MeteredJevInputGuard,
     guard_lm_from_env,
     jev_available,
 )
@@ -59,10 +61,15 @@ def build_policy_qa() -> DentalPolicyQA:
     return DentalPolicyQA(DentalPolicyIndex.from_pdf(POLICY_PDF))
 
 
-def build_guarded_policy_qa(qa: DentalPolicyQA) -> GuardedPolicyQA:
+def build_guarded_policy_qa(
+    qa: DentalPolicyQA,
+    jev_metrics: JevSessionMetrics,
+) -> GuardedPolicyQA:
     # Jev classifies the question when TYPESAFE_API_KEY is set; DSPy otherwise.
     # The output guard always uses DSPy because it must read the evidence.
-    input_guard = JevInputGuard() if jev_available() else None
+    input_guard = (
+        MeteredJevInputGuard(JevInputGuard(), jev_metrics) if jev_available() else None
+    )
     return GuardedPolicyQA(qa, input_guard=input_guard, guard_lm=guard_lm_from_env())
 
 
@@ -111,10 +118,13 @@ def answer_policy_question(
 st.title("DSPy + GEHA 2026 dental assistant")
 st.caption("Complete an enrollment workflow or ask grounded questions about the dental benefits guide.")
 
+if "jev_metrics" not in st.session_state:
+    st.session_state.jev_metrics = JevSessionMetrics()
+
 try:
     bot = build_graph()
     policy_qa = build_policy_qa()
-    guarded_policy_qa = build_guarded_policy_qa(policy_qa)
+    guarded_policy_qa = build_guarded_policy_qa(policy_qa, st.session_state.jev_metrics)
     default_corpus = build_existing_corpus(False, CORPUS_ADAPTER_VERSION)
     if WARM_RETRIEVER:
         default_corpus.warm_vectors_async()
@@ -158,6 +168,31 @@ with st.sidebar:
         "Enrollment uses a deterministic policy graph. Policy Q&A retrieves locally from only "
         "the 2026 dental benefits guide, then DSPy synthesizes a cited answer."
     )
+    st.divider()
+    st.subheader("JEV session metrics")
+    if jev_available():
+        jev_snapshot = st.session_state.jev_metrics.snapshot()
+        metric_left, metric_right = st.columns(2)
+        metric_left.metric("Calls", jev_snapshot["calls"])
+        metric_right.metric("Safe", jev_snapshot["safe"])
+        metric_left.metric("Blocked", jev_snapshot["blocked"])
+        metric_right.metric("Errors", jev_snapshot["errors"])
+        last_latency = jev_snapshot["last_latency_ms"]
+        median_latency = jev_snapshot["median_latency_ms"]
+        metric_left.metric(
+            "Last latency",
+            f"{last_latency / 1000:.2f} s" if last_latency is not None else "—",
+        )
+        metric_right.metric(
+            "Median latency",
+            f"{median_latency / 1000:.2f} s" if median_latency is not None else "—",
+        )
+        st.caption("Live for this browser session · Dental Policy Q&A input guard")
+        if st.button("Reset JEV metrics", use_container_width=True):
+            st.session_state.jev_metrics.reset()
+            st.rerun()
+    else:
+        st.caption("JEV is inactive because `TYPESAFE_API_KEY` is not configured.")
 
 enrollment_tab, policy_tab, comparison_tab = st.tabs(
     ["Enrollment chat", "Dental Policy Q&A", "Retrieval comparison"]

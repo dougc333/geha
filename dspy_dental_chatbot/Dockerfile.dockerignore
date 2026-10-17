@@ -1,0 +1,37 @@
+# This Dockerfile is built from the repository root. Send only the chatbot and
+# its canonical runtime dependencies to Docker, not the full GEHA workspace.
+**
+
+!dspy_dental_chatbot/
+!dspy_dental_chatbot/**
+
+!agentic_search_corpus/
+!agentic_search_corpus/src/
+!agentic_search_corpus/src/**
+
+!crawl_dir/
+!crawl_dir/src/
+!crawl_dir/src/**
+!crawl_dir/raw/
+!crawl_dir/raw/dental/
+!crawl_dir/raw/dental/fedvip/
+!crawl_dir/raw/dental/fedvip/*.pdf
+!crawl_dir/runs/
+!crawl_dir/runs/dental/
+!crawl_dir/runs/dental/**
+
+# The consumer path resolver needs the run/QC manifests, chunks marker, and
+# page Markdown. Extraction intermediates and per-page PDF copies are not used.
+crawl_dir/runs/dental/**/input/
+crawl_dir/runs/dental/**/iterations/
+crawl_dir/runs/dental/**/candidate/tables/
+crawl_dir/runs/dental/**/pages/**/source.pdf
+crawl_dir/runs/dental/**/pages/**/*.png
+crawl_dir/runs/dental/**/pages/**/*.jpg
+crawl_dir/runs/dental/**/pages/**/*.jpeg
+
+dspy_dental_chatbot/.env
+dspy_dental_chatbot/runs/
+**/__pycache__/
+**/*.py[cod]
+**/.DS_Store

@@ -9,6 +9,9 @@ Guard errors and timeouts refuse rather than pass content through.
 from __future__ import annotations
 
 import os
+import statistics
+import threading
+import time
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeout
 from contextlib import nullcontext
 from dataclasses import dataclass, field
@@ -190,6 +193,68 @@ class JevInputGuard:
         return SimpleNamespace(
             category=unsafe, reason=f"jev {unsafe}={probabilities[unsafe]:.2f}, safe={p_safe:.2f}"
         )
+
+
+class JevSessionMetrics:
+    """Thread-safe, in-memory telemetry for one Streamlit browser session."""
+
+    def __init__(self) -> None:
+        self._lock = threading.Lock()
+        self.reset()
+
+    def reset(self) -> None:
+        with getattr(self, "_lock", threading.Lock()):
+            self.calls = 0
+            self.safe = 0
+            self.blocked = 0
+            self.errors = 0
+            self.latencies_ms: list[float] = []
+
+    def record(self, latency_ms: float, category: str | None = None, error: bool = False) -> None:
+        with self._lock:
+            self.calls += 1
+            self.latencies_ms.append(latency_ms)
+            if error:
+                self.errors += 1
+            elif category in {"safe", "off_topic_benign"}:
+                self.safe += 1
+            else:
+                self.blocked += 1
+
+    def snapshot(self) -> dict[str, int | float | None]:
+        with self._lock:
+            latencies = list(self.latencies_ms)
+            return {
+                "calls": self.calls,
+                "safe": self.safe,
+                "blocked": self.blocked,
+                "errors": self.errors,
+                "last_latency_ms": latencies[-1] if latencies else None,
+                "median_latency_ms": statistics.median(latencies) if latencies else None,
+            }
+
+
+class MeteredJevInputGuard:
+    """Record real calls around a Jev input guard without changing its verdict."""
+
+    name = "jev"
+
+    def __init__(self, inner: JevInputGuard, metrics: JevSessionMetrics):
+        self.inner = inner
+        self.metrics = metrics
+
+    def __call__(self, question: str) -> SimpleNamespace:
+        started = time.perf_counter()
+        try:
+            result = self.inner(question)
+        except Exception:
+            self.metrics.record((time.perf_counter() - started) * 1000, error=True)
+            raise
+        self.metrics.record(
+            (time.perf_counter() - started) * 1000,
+            category=str(getattr(result, "category", "")),
+        )
+        return result
 
 
 def jev_available() -> bool:

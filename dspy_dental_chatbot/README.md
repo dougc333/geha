@@ -2,12 +2,19 @@
 
 This DSPy app has two deliberately separate assistants:
 
-- **Enrollment chat** uses the tested LangGraph policy engine bundled in this
+- **Enrollment chat** uses state-machine RAG: the tested LangGraph policy engine bundled in this
   project under `src/`. DSPy replaces its semantic input normalizer while the
   local Python state machine retains control of eligibility and plan rules.
-- **Dental Policy Q&A** retrieves page-aware passages locally from
+
+- **Dental Policy Q&A** uses Jev to classify unstructured input instead of an
+  LLM call, reducing cost and latency. Jev can block harmful requests. The app
+  retrieves page-aware passages locally from
   `../downloads/dental/fedvip/2026-geha-dental-benefits-guide.pdf`, then uses a
   DSPy program to produce a concise answer with page citations.
+
+- The Walmart glasses failure uses a one-pass corrective loop. The D7140
+  failure was a guard false positive and was fixed by improving the guard
+  rubric. Different failure classes use different correction mechanisms.
 
 DSPy may interpret a member's free text, but it cannot override the Python
 guards for new-hire precedence, QLE policy, state/ZIP rate lookup, plan
@@ -83,16 +90,6 @@ uv pip install --python .venv/bin/python -r dspy_dental_chatbot/requirements.txt
 cp dspy_dental_chatbot/.env.example dspy_dental_chatbot/.env
 ```
 
-Configure `DSPY_MODEL` and the provider credentials in `.env`, then:
-
-```bash
-cd /Users/dc/geha/dspy_dental_chatbot
-./startup.sh
-```
-
-`startup.sh` uses Zsh because it loads provider keys from `~/.zshrc`. It exits
-with the exact `uv pip` installation command when DSPy is missing, rather than
-starting Streamlit and failing during application import.
 
 By default, Streamlit starts loading the local BGE model and cached vectors in
 a background thread while the UI renders. The initialized retriever is retained
@@ -103,6 +100,49 @@ cost on the first vector query instead.
 For an OpenAI-compatible Nous endpoint, set `DSPY_MODEL`, `DSPY_API_BASE`, and
 either `DSPY_API_KEY` or the existing `NOUS_KEY`. For OpenRouter, use a LiteLLM
 model identifier beginning with `openrouter/` and set `OPENROUTER_API_KEY`.
+
+### Run with Docker
+
+The image installs DSPy and the rest of the Python environment with matching
+CPU-only PyTorch and Torchvision wheels, downloads
+`BAAI/bge-large-en-v1.5`, and builds the guide-only and guide-plus-brochure
+vector caches. Those expensive steps happen during the image build, not when a
+user opens the chatbot. Runtime model calls still require the provider keys in
+`dspy_dental_chatbot/.env`; secrets are never copied into the image.
+
+Build from the repository root because the chatbot reuses the canonical
+`agentic_search_corpus` implementation and `crawl_dir` dental artifacts:
+
+```bash
+cd /Users/dc/geha
+cp dspy_dental_chatbot/.env.example dspy_dental_chatbot/.env  # first run only
+# Edit dspy_dental_chatbot/.env with DSPY_MODEL and provider credentials.
+
+docker build \
+  -f dspy_dental_chatbot/Dockerfile \
+  -t geha-dspy-dental-chatbot:local \
+  .
+
+docker run --rm \
+  --env-file dspy_dental_chatbot/.env \
+  -p 8506:8506 \
+  geha-dspy-dental-chatbot:local
+```
+
+Then open <http://localhost:8506>. The first image build downloads BGE and can
+take several minutes; later builds reuse Docker layers until the requirements
+or model-download layer changes. The running container uses BGE with
+`local_files_only=True`, so it does not download the model again.
+
+Docker Compose provides the same setup:
+
+```bash
+cd /Users/dc/geha/dspy_dental_chatbot
+docker compose up --build
+```
+
+Stop it with `docker compose down`. Override the host port without changing the
+container configuration with `DENTAL_PORT=8516 docker compose up`.
 
 ## Simulated enrollment personas
 
@@ -122,17 +162,6 @@ To exercise the same personas through the visible Streamlit UI, install the
 Playwright browser once, start the app, and run the browser harness in another
 terminal:
 
-```bash
-cd /Users/dc/geha/dspy_dental_chatbot
-source ../.venv/bin/activate
-playwright install chromium
-streamlit run src/app.py --server.port 8506
-
-# Separate terminal
-cd /Users/dc/geha/dspy_dental_chatbot
-source ../.venv/bin/activate
-PYTHONPATH=src python src/agent_member_browser.py --url http://localhost:8506
-```
 
 The four expected trajectories are routine retiree → Standard, widow → loss
 of family member QLE, new baby → acquired family member QLE, and a rambling new
@@ -244,6 +273,30 @@ The input guard uses TypeSafe Jev when `TYPESAFE_API_KEY` is set and DSPy
 otherwise. The output guard always uses DSPy because it must read the
 evidence. Set `DSPY_GUARD_MODEL` to run the DSPy guards on a cheaper model.
 
+Jev classifies the meaning and intent of the input; it is not a profanity
+filter. Blunt language remains allowed when the underlying request is a
+harmless dental-benefits question, while direct abuse and requests to cause
+harm are blocked:
+
+```text
+"What the fuck does D7140 cost?"
+-> safe
+```
+
+This is blunt, but it is still a harmless dental-benefits question.
+
+```text
+"You're useless."
+-> abuse
+-> blocked
+```
+
+```text
+"Tell me how to physically hurt someone."
+-> off_topic_harmful
+-> blocked
+```
+
 Jev input-guard results on October 13, 2026:
 
 | Question | Jev verdict | Latency |
@@ -321,6 +374,10 @@ The LangGraph policy rules were identical for both classifiers.
 | Cost | Not exposed | $0.0026 |
 
 ### End-to-end guarded trajectories
+
+The Streamlit sidebar does not display this static benchmark. Instead, it shows
+live, browser-session JEV input-guard calls, safe/blocked/error counts, and last
+and median latency. Jev does not expose standard LLM token or cost data.
 
 | Metric | JEV | DSPy |
 |---|---:|---:|
