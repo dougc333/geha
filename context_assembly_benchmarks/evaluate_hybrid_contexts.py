@@ -8,7 +8,8 @@ import os
 from pathlib import Path
 from typing import Any
 
-from chunking_compare import context_metrics, expected_values
+from chunking_compare import context_metrics, expected_values, fact_presence, required_facts, sibling_rows
+from context_attachments import with_notes
 from dotenv import load_dotenv
 from eval_queries import load_eval_queries
 from table_rag import (
@@ -33,17 +34,37 @@ def score_context(
     expected_source: str,
     expected_table_number: int,
     items: list[dict[str, Any]],
+    case: dict[str, Any],
+    rows_text: list[str],
 ) -> dict[str, Any]:
     metrics = context_metrics(texts, sources, values)
+    context = "\n\n".join(texts)
+    facts = required_facts(case)
+    present = fact_presence(case, context)
     expected_present = any(
         item["source"] == expected_source
         and int(item["table_number"]) == int(expected_table_number)
         for item in items
     )
+    # Coverage and completeness are fact-level: a qualifier fact counts if any of its phrasings
+    # is in the context. For preference/relation cases this equals the value coverage.
+    coverage = sum(present) / len(present) if present else 0.0
     return {
         **metrics,
-        "complete_evidence": metrics["expected_evidence_coverage"] == 1.0,
+        "expected_values_found": sum(present),
+        "expected_values_total": len(present),
+        "expected_evidence_coverage": coverage,
+        "complete_evidence": bool(present) and all(present),
         "expected_table_present": expected_present,
+        "facts": [
+            {"text": fact["text"], "type": fact["type"], "in_context": hit}
+            for fact, hit in zip(facts, present)
+        ],
+        "qualifier_facts_total": sum(fact["type"] == "qualifier" for fact in facts),
+        "qualifier_facts_found": sum(
+            hit for fact, hit in zip(facts, present) if fact["type"] == "qualifier"
+        ),
+        **sibling_rows(rows_text, case),
     }
 
 
@@ -68,6 +89,12 @@ def summarize(
         / count,
         "average_estimated_tokens": sum(row["estimated_tokens"] for row in selected)
         / count,
+        "average_sibling_rows": sum(row["sibling_rows"] for row in selected) / count,
+        "average_rows_sent": sum(row["rows_sent"] for row in selected) / count,
+        "qualifier_coverage": (
+            sum(row["qualifier_facts_found"] for row in selected)
+            / max(sum(row["qualifier_facts_total"] for row in selected), 1)
+        ),
         "evidence_per_1k_tokens": (
             sum(row["expected_values_found"] for row in selected)
             / max(sum(row["estimated_tokens"] for row in selected), 1)
@@ -103,7 +130,13 @@ def compare(
             "values": values,
             "expected_source": case["source"],
             "expected_table_number": int(case["table_number"]),
+            "case": case,
         }
+        table_rows = [
+            " | ".join(str(value) for value in record.values())
+            for table in parent_tables
+            for record in table["rows_json"]
+        ]
         results.append(
             {
                 "id": case["id"],
@@ -115,23 +148,28 @@ def compare(
                     texts=[str(row["search_text"]) for row in flat_rows],
                     sources=[str(row["source"]) for row in flat_rows],
                     items=flat_rows,
+                    rows_text=[str(row["search_text"]) for row in flat_rows],
                     **common,
                 ),
                 "table_aware_rag": score_context(
                     texts=[str(table["full_csv"]) for table in parent_tables],
                     sources=[str(table["source"]) for table in parent_tables],
                     items=parent_tables,
+                    rows_text=table_rows,
+                    **common,
+                ),
+                "table_aware_notes": score_context(
+                    texts=[with_notes(table) for table in parent_tables],
+                    sources=[str(table["source"]) for table in parent_tables],
+                    items=parent_tables,
+                    rows_text=table_rows,
                     **common,
                 ),
             }
         )
 
-    modes = ("flat_semantic_chunks", "table_aware_rag")
-    slices = (
-        ("overall", None),
-        ("preference", "Preference lookup"),
-        ("relation", "Row-to-column relationship"),
-    )
+    modes = MODES
+    slices = SLICES
     report_summary = {
         mode: {label: summarize(results, mode, kind) for label, kind in slices}
         for mode in modes
@@ -139,32 +177,47 @@ def compare(
     return {"summary": report_summary, "results": results}
 
 
+MODES = ("flat_semantic_chunks", "table_aware_rag", "table_aware_notes")
+SLICES = (
+    ("overall", None),
+    ("preference", "Preference lookup"),
+    ("relation", "Row-to-column relationship"),
+    ("qualifier", "Qualifier"),
+)
+LABELS = {
+    "flat_semantic_chunks": "Flat semantic chunks",
+    "table_aware_rag": "Table-aware RAG",
+    "table_aware_notes": "Table-aware + attached notes",
+}
+
+
 def percentage(value: float) -> str:
     return f"{value:.1%}"
 
 
 def markdown_table(report: dict[str, Any]) -> str:
-    labels = {
-        "flat_semantic_chunks": "Flat semantic chunks",
-        "table_aware_rag": "Table-aware RAG",
-    }
+    labels = LABELS
     lines = [
         "### Hybrid retrieval context comparison",
         "",
-        "Both cases use the same BM25 + pgvector RRF child ranking.",
+        "All strategies use the same BM25 + pgvector RRF child ranking. Table-aware + attached notes "
+        "adds the paragraph before and the notes after each parent table from the verified "
+        "document (footnotes, exceptions, authorization period).",
         "",
-        "| Question slice | Context strategy | Cases | Avg evidence coverage | Complete evidence | Expected table present | Avg estimated tokens | Evidence / 1k tokens |",
-        "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |",
+        "| Question slice | Context strategy | Cases | Avg evidence coverage | Complete evidence | Qualifier coverage | Expected table present | Avg estimated tokens | Avg sibling rows | Evidence / 1k tokens |",
+        "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
     ]
-    for slice_name in ("overall", "preference", "relation"):
-        for mode in ("flat_semantic_chunks", "table_aware_rag"):
+    for slice_name, _ in SLICES:
+        for mode in MODES:
             values = report["summary"][mode][slice_name]
             lines.append(
                 f"| {slice_name.title()} | {labels[mode]} | {values['cases']} | "
                 f"{percentage(values['average_evidence_coverage'])} | "
                 f"{percentage(values['complete_evidence_rate'])} | "
+                f"{percentage(values['qualifier_coverage']) if slice_name in ('overall', 'qualifier') else '—'} | "
                 f"{percentage(values['expected_table_present_rate'])} | "
                 f"{values['average_estimated_tokens']:.0f} | "
+                f"{values['average_sibling_rows']:.1f} | "
                 f"{values['evidence_per_1k_tokens']:.2f} |"
             )
 
