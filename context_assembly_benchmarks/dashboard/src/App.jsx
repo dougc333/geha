@@ -301,6 +301,67 @@ function Drawer({ item, strategies, close }) {
 
 /* ---------------------------------------------------------------- method */
 
+/* ---------------------------------------------------------------- summary */
+
+function SummaryView({ data, slice, strategies, setTab }) {
+  const ctx = data.context.summary;
+  const ans = data.answers?.summary;
+  const label = SLICES.find((s) => s.id === slice).label;
+  // Columns: key, header, getter, better ("high" | "low"), source
+  const cols = [
+    { id: "retrieved", head: "Right table retrieved", get: (s) => ctx[s]?.[slice]?.expected_table_present_rate, fmt: pct, better: "high", note: "retrieval" },
+    { id: "context", head: "Every fact in context ①", get: (s) => ans ? ans[s]?.[slice]?.context_complete_rate : ctx[s]?.[slice]?.complete_evidence_rate, fmt: pct, better: "high" },
+    { id: "answer", head: "Answer has every fact ②", get: (s) => ans?.[s]?.[slice]?.answer_complete_rate, fmt: pct, better: "high" },
+    { id: "assembly", head: "Questions with an assembly error", get: (s) => ans?.[s]?.[slice]?.cases_with_assembly_error, fmt: pct, better: "low" },
+    { id: "drop", head: "Questions with a generation drop", get: (s) => ans?.[s]?.[slice]?.cases_with_generation_drop, fmt: pct, better: "low" },
+    { id: "tokens", head: "Avg context tokens", get: (s) => ans ? ans[s]?.[slice]?.average_context_tokens : ctx[s]?.[slice]?.average_estimated_tokens, fmt: (v) => num(v), better: null },
+  ];
+  const best = Object.fromEntries(cols.map((c) => {
+    if (!c.better) return [c.id, null];
+    const vals = strategies.map((s) => c.get(s.id)).filter((v) => v != null);
+    if (!vals.length) return [c.id, null];
+    return [c.id, c.better === "high" ? Math.max(...vals) : Math.min(...vals)];
+  }));
+  const n = ctx.flat?.[slice]?.cases;
+  return (
+    <>
+      <h2>Results{slice !== "overall" && ` · ${label} questions`} ({n} questions)</h2>
+      <div className="table-wrap">
+        <table className="summary">
+          <thead>
+            <tr><th>Strategy</th>{cols.map((c) => <th key={c.id} className="num">{c.head}</th>)}</tr>
+          </thead>
+          <tbody>
+            {strategies.map((s) => (
+              <tr key={s.id}>
+                <td><span className="mini"><i className="swatch" style={{ background: COLORS[s.id] }} />{s.label}</span></td>
+                {cols.map((c) => {
+                  const v = c.get(s.id);
+                  const isBest = best[c.id] != null && v === best[c.id];
+                  return <td key={c.id} className="num" style={isBest ? { fontWeight: 700 } : undefined}>{c.fmt(v)}</td>;
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="note">
+        Bold = best in column (higher is better for coverage, lower for errors). "Right table retrieved" is the retrieval
+        check: the gap between it and "Every fact in context" is facts lost after retrieval (assembly), not ranking misses.
+        {!ans && " Answer columns appear once evaluation ② has been run."}
+      </div>
+      <div className="grid-3" style={{ marginTop: 16 }}>
+        <div className="card"><h3>Assembly error</h3>A required fact never reached the model, because retrieval missed it or the context left it out. Fixed by context assembly (table-aware RAG, attached notes).</div>
+        <div className="card"><h3>Generation drop</h3>The fact was in the context, but the answer left it out. Better retrieval can't fix this; a completeness check or prompt change can.</div>
+        <div className="card"><h3>Explore</h3>
+          <button className="theme" onClick={() => setTab("context")}>① Context completeness →</button>{" "}
+          <button className="theme" onClick={() => setTab("answers")} style={{ marginTop: 6 }}>② Answer completeness →</button>
+        </div>
+      </div>
+    </>
+  );
+}
+
 function MethodView() {
   return (
     <div className="card">
@@ -342,7 +403,7 @@ function MethodView() {
 export default function App() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  const [tab, setTab] = useState("context");
+  const [tab, setTab] = useState("summary");
   const [slice, setSlice] = useState("overall");
   const [item, setItem] = useState(null);
   const [theme, setTheme] = useState(null);
@@ -384,12 +445,13 @@ export default function App() {
       </header>
       <div className="toolbar">
         <div className="tabs" role="tablist">
-          {[["context", "① Context completeness"], ["answers", "② Answer completeness"], ["method", "Method"]].map(([id, label]) => (
+          {[["summary", "Summary"], ["context", "① Context completeness"], ["answers", "② Answer completeness"], ["method", "Method"]].map(([id, label]) => (
             <button key={id} role="tab" aria-selected={tab === id} onClick={() => setTab(id)}>{label}</button>
           ))}
         </div>
         {tab !== "method" && <SliceFilter slice={slice} setSlice={setSlice} cases={cases} />}
       </div>
+      {tab === "summary" && <SummaryView data={data} slice={slice} strategies={strategies} setTab={setTab} />}
       {tab === "context" && <ContextView data={data} slice={slice} strategies={strategies} bind={bind} open={setItem} />}
       {tab === "answers" && <AnswerView data={data} slice={slice} strategies={strategies} bind={bind} open={setItem} />}
       {tab === "method" && <MethodView />}
