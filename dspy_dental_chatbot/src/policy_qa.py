@@ -183,6 +183,9 @@ class AnswerDentalPolicyQuestion(dspy.Signature):
     question: str = dspy.InputField(desc="The member's dental policy question.")
     conversation: str = dspy.InputField(desc="Recent conversation for resolving follow-up references.")
     evidence: str = dspy.InputField(desc="Retrieved passages labeled with their source PDF page.")
+    revision: str = dspy.InputField(
+        desc="Correction instructions for a prior draft, or 'No revision requested.'"
+    )
     answer: str = dspy.OutputField(desc="A concise grounded answer with inline [p. N] citations.")
 
 
@@ -216,27 +219,61 @@ class DentalPolicyQA:
         if not chunks:
             return "I couldn't find relevant information in the dental benefits guide.", []
 
+        return self._generate(
+            question,
+            conversation,
+            chunks,
+            revision="No revision requested.",
+        ), chunks
+
+    def revise(
+        self,
+        question: str,
+        prior_answer: str,
+        critique: str,
+        chunks: list[PolicyChunk],
+        conversation: str = "",
+    ) -> str:
+        """Regenerate once from the same evidence after a grounding failure."""
+        revision = (
+            "The previous draft was rejected by the grounding guard. Rewrite it using only "
+            "the supplied evidence, preserving supported facts and citations while removing "
+            f"the unsupported claim. Guard feedback: {critique}\n\n"
+            f"Previous draft:\n{prior_answer}\n\n"
+            "Do not speculate that a named provider participates or does not participate. "
+            "When the evidence does not identify that provider, say only that the supplied "
+            "document does not establish its participation."
+        )
+        return self._generate(question, conversation, chunks, revision=revision)
+
+    def _generate(
+        self,
+        question: str,
+        conversation: str,
+        chunks: list[PolicyChunk],
+        revision: str,
+    ) -> str:
+        """Generate and citation-check an answer from an already assembled context."""
+
         prediction = self.program(
             question=question,
             conversation=conversation or "No earlier conversation.",
             evidence=_evidence_text(chunks),
+            revision=revision,
         )
         answer = str(getattr(prediction, "answer", "")).strip()
         if not answer:
-            return "I couldn't produce an answer from the retrieved policy evidence.", chunks
+            return "I couldn't produce an answer from the retrieved policy evidence."
 
         allowed_pages = {chunk.page for chunk in chunks}
         cited_pages = {int(page) for page in PAGE_CITATION_RE.findall(answer)}
         invalid_pages = cited_pages - allowed_pages
         if invalid_pages:
-            return (
-                "I couldn't verify the generated answer's citations against the retrieved policy pages.",
-                chunks,
-            )
+            return "I couldn't verify the generated answer's citations against the retrieved policy pages."
         missing_retrieved_pages = allowed_pages - cited_pages
         if missing_retrieved_pages:
             pages = ", ".join(
                 f"[p. {page}]" for page in sorted(missing_retrieved_pages)
             )
             answer = f"{answer}\n\nAdditional retrieved source pages: {pages}"
-        return answer, chunks
+        return answer

@@ -34,6 +34,16 @@ class FakeProgram:
         return SimpleNamespace(answer=self.answer)
 
 
+class SequenceProgram(FakeProgram):
+    def __init__(self, answers: list[str]):
+        super().__init__(answers[0])
+        self.answers = iter(answers)
+
+    def __call__(self, **kwargs):
+        self.calls.append(kwargs)
+        return SimpleNamespace(answer=next(self.answers))
+
+
 class FakeGuard:
     def __init__(self, category: str = "safe", reason: str = "ok", delay: float = 0.0, error=None):
         self.category = category
@@ -49,6 +59,17 @@ class FakeGuard:
         if self.error:
             raise self.error
         return SimpleNamespace(category=self.category, reason=self.reason)
+
+
+class SequenceGuard(FakeGuard):
+    def __init__(self, verdicts: list[tuple[str, str]]):
+        super().__init__()
+        self.verdicts = iter(verdicts)
+
+    def __call__(self, **kwargs):
+        self.calls.append(kwargs)
+        category, reason = next(self.verdicts)
+        return SimpleNamespace(category=category, reason=reason)
 
 
 class GuardedPolicyQATests(unittest.TestCase):
@@ -139,6 +160,60 @@ class GuardedPolicyQATests(unittest.TestCase):
         self.assertTrue(result.blocked)
         self.assertEqual(result.answer, REFUSALS["medical_advice"])
         self.assertEqual(result.chunks[0].page, 2)
+
+    def test_unsupported_provider_claim_is_repaired_and_rechecked(self):
+        index = DentalPolicyIndex(
+            [PolicyChunk(7, "Frames: member pays 60% of retail price.")]
+        )
+        program = SequenceProgram([
+            "Frames cost 60% of retail, but Walmart may not participate [p. 7].",
+            (
+                "The guide says members pay 60% of retail for frames [p. 7]. "
+                "It does not establish whether Walmart participates."
+            ),
+        ])
+        output_guard = SequenceGuard([
+            ("unsupported_claim", "Walmart non-participation is not supported."),
+            ("safe", "The revision reports only supported facts and uncertainty."),
+        ])
+        guarded = GuardedPolicyQA(
+            DentalPolicyQA(index, program=program),
+            input_guard=FakeGuard(),
+            output_guard=output_guard,
+        )
+
+        result = guarded.ask("Does Walmart offer the frame discount for frames?")
+
+        self.assertFalse(result.blocked)
+        self.assertIn("60% of retail", result.answer)
+        self.assertNotIn("may not participate", result.answer)
+        self.assertEqual(
+            [verdict.stage for verdict in result.verdicts],
+            ["input", "output", "output_revision"],
+        )
+        self.assertEqual(len(program.calls), 2)
+        self.assertIn("Walmart non-participation", program.calls[1]["revision"])
+
+    def test_failed_unsupported_claim_repair_still_refuses(self):
+        program = SequenceProgram([
+            "Walmart may not participate [p. 2].",
+            "Walmart probably does not participate [p. 2].",
+        ])
+        output_guard = SequenceGuard([
+            ("unsupported_claim", "Unsupported provider claim."),
+            ("unsupported_claim", "Provider claim remains unsupported."),
+        ])
+        guarded = GuardedPolicyQA(
+            DentalPolicyQA(self.index, program=program),
+            input_guard=FakeGuard(),
+            output_guard=output_guard,
+        )
+
+        result = guarded.ask("Does Walmart participate for routine cleanings?")
+
+        self.assertTrue(result.blocked)
+        self.assertEqual(result.answer, REFUSALS["unsupported_claim"])
+        self.assertEqual(result.verdicts[-1].stage, "output_revision")
 
     def test_output_rubric_distinguishes_plan_terms_from_claim_guarantees(self):
         rubric = ClassifyDraftAnswer.__doc__ or ""

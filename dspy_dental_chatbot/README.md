@@ -127,6 +127,12 @@ information, or instructions followed from the evidence. Guard errors,
 timeouts and unrecognized labels refuse instead of answering. The "Safety
 checks" expander under each answer shows both verdicts.
 
+When the output guard finds an unsupported claim, the assistant makes one
+bounded repair attempt using the same retrieved evidence. The repair prompt
+includes the guard's critique and prior draft, and the revised answer must pass
+the output guard before it is shown. Other unsafe categories still refuse
+immediately, and a failed repair remains blocked.
+
 The input guard uses TypeSafe Jev when `TYPESAFE_API_KEY` is set and DSPy
 otherwise. The output guard always uses DSPy because it must read the
 evidence. Set `DSPY_GUARD_MODEL` to run the DSPy guards on a cheaper model.
