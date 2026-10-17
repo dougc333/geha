@@ -25,7 +25,6 @@ Each subfolder has its own README with setup and results.
 | [`mcp_benefits_server`](mcp_benefits_server/README.md) | MCP server for dental and coverage-policy tools with a promotion standard | Deterministic tools, tiered by deployment |
 | [`aws_rag`](aws_rag/README.md) | Serverless AWS RAG over 203 ML papers | Hybrid BM25/pgvector + RRF + rerank |
 | [`aws_geha_rag`](aws_geha_rag/README.md) | AWS RAG over GEHA documents that indexes only visually validated text | Step Functions ingestion workflow |
-| [`gcp_vertex_rag`](gcp_vertex_rag/README.md) | Google Cloud counterpart: Vertex AI RAG Engine + Gemini on private Cloud Run | Managed RAG |
 | [`hapi`](hapi/README.md) | Local HAPI FHIR server with Synthea patients; claim insights, fraud and agent demos | FHIR tools, tool-calling agents |
 | [`avoid_failed_rag`](avoid_failed_rag/README.md) | Notes on why RAG proofs of concept fail, plus a standalone table RAG | Lessons learned |
 | [`agentic_RAG`](agentic_RAG/README.MD) | Placeholder for agentic-loop chatbot experiments | — |
@@ -105,8 +104,6 @@ BM25, vector or hybrid retrieval. The chat UI and PDF viewer come from the
   https://pdh62b4ddxm6mw7aokdbtwream0nupph.lambda-url.us-west-2.on.aws/chat
 - `aws_geha_rag`: indexes only pages that pass visual comparison; failures are
   quarantined.
-- `gcp_vertex_rag`: private, versioned Cloud Storage, Vertex AI RAG Engine and
-  Gemini with citations, behind IAM-authenticated Cloud Run.
 - `e2e_bm25vector`: Vercel + Neon app for side-by-side retrieval experiments.
 
 ## Chatbots and tools
@@ -130,7 +127,7 @@ BM25, vector or hybrid retrieval. The chat UI and PDF viewer come from the
 
 [GEHA CI](.github/workflows/ci.yml) runs on pull requests and pushes to `main`:
 `chunking_benchmarks_RAG` and `agentic_search` unit tests, the `crawl_dir` MCP
-server tests, the standalone table RAG, `aws_rag` and `gcp_vertex_rag` unit
+server tests, the standalone table RAG and `aws_rag` unit
 tests, and retrieval benchmarks for `aws_rag` (62 questions) and
 `agentic_search`. Tests use local fixtures and need no API key, live database or
 model download. Database-backed evaluations, vision review and deployment
