@@ -36,6 +36,33 @@ read greater than zero.
 
 ## Run
 
+### Docker Compose (recommended)
+
+The image builds the React UI and preloads the BGE tokenizer used by the
+canonical Docling chunker. Source PDFs are mounted read-only; durable runs and
+the page-split cache are mounted read-write so prior runs remain visible.
+
+```bash
+cd contextual_retrieval_dashboard
+docker compose up --build
+```
+
+Compose prints the dashboard URL when the backend is ready. Open
+<http://127.0.0.1:8511>. To run in the background, use `docker compose up -d
+--build`, then inspect startup output with `docker compose logs -f`.
+
+Anthropic credentials exported by the shell are passed into the container. If
+port 8511 is occupied, choose another host port without changing the container:
+
+```bash
+CONTEXTUAL_RETRIEVAL_PORT=8512 docker compose up --build
+```
+
+Stop the service with `docker compose down`. This does not delete source PDFs,
+runs, or cache files because they remain in the repository bind mounts.
+
+### Local development
+
 ```bash
 cd /Users/dc/geha/contextual_retrieval_dashboard/ui
 npm install

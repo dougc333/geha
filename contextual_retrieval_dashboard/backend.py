@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 import re
 import threading
 import uuid
@@ -572,4 +573,8 @@ def create_app() -> web.Application:
 
 
 if __name__ == "__main__":
-    web.run_app(create_app(), host="127.0.0.1", port=8511)
+    web.run_app(
+        create_app(),
+        host=os.getenv("HOST", "127.0.0.1"),
+        port=int(os.getenv("PORT", "8511")),
+    )
