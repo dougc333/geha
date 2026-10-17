@@ -1,0 +1,101 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "SET TEMP: +2°C",
+        "html_evidence": "SET TEMP: +2 b0C (rendered \"+2b0C\")",
+        "correction": "SET TEMP: +2°C"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "SET TEMP: +1°C",
+        "html_evidence": "SET TEMP: +1 b0C (rendered \"+1b0C\")",
+        "correction": "SET TEMP: +1°C"
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The header has a large bold \"MERIDIAN SHIPPING\" title with a small tagline, and a boxed \"BILL OF LADING\" panel with a large title and right-aligned B/L NO. and SCAC values.",
+        "html_evidence": "The header text is small and uniform. The B/L NO. and SCAC values are left-aligned, and a rule crosses through the B/L number line. The title box layout is lost.",
+        "correction": "Restore the header hierarchy and right-aligned values, with the rule under the title instead of through the B/L number."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Section labels are small and spaced, with values in larger distinct styling (for example the booking ref, vessel/voyage, and total packages \"40\" are large and prominent). The total \"40\" is large and centered.",
+        "html_evidence": "Labels and values share the same small bold style. \"40\" is small and left-aligned. The value hierarchy is lost.",
+        "correction": "Apply the source label/value styling, including the large centered \"40\"."
+      }
+    ],
+    "discarded_non_errors": 1
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "SET TEMP: +2°C",
+        "html_evidence": "SET TEMP: +2 b0C (rendered \"+2b0C\")",
+        "correction": "SET TEMP: +2°C"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "SET TEMP: +1°C",
+        "html_evidence": "SET TEMP: +1 b0C (rendered \"+1b0C\")",
+        "correction": "SET TEMP: +1°C"
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Header: M logo at left with a large \"MERIDIAN SHIPPING\" title and the small \"GLOBAL SHIPPING & LOGISTICS\" tagline. The BILL OF LADING box is a bordered, shaded box with a rule beneath the title, and B/L NO. and SCAC values are right-aligned.",
+        "html_evidence": "Title and tagline are the same size and stacked at the top. The BILL OF LADING cell spans the full header height with a stray rule crossing through the B/L NO./SCAC lines, and the values are not right-aligned. The underscore line is rendered as text.",
+        "correction": "Render the header with a large title, a small tagline, a bordered B/L box, a proper rule, and right-aligned values."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Headings and field values are styled differently (small spaced labels, larger bold values such as BKG5917532, FRESH APPLES, 40, MERIDIAN LABREA / 124N). Shaded rows. Package counts are vertically aligned with each container. Centered FREIGHT COLLECT in large monospace between full-width rules. \"40\" is large and centered. COLLECT is right-aligned. Signature text is large.",
+        "html_evidence": "All text is uniform small bold Arial, with no emphasis hierarchy. Values are tiny and unshaded, and the package counts are not aligned. FREIGHT COLLECT is small and left-aligned between short rules. \"40\" is small. COLLECT sits near OCEAN FREIGHT. \"Authorized Signature\" is small.",
+        "correction": "Restore the visual hierarchy, alignments, and sizing of key values."
+      }
+    ],
+    "discarded_non_errors": 0
+  },
+  {
+    "iteration": 2,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "SET TEMP: +2°C (apples line)",
+        "html_evidence": "SET TEMP: +2 b0C (rendered \"+2b0C\")",
+        "correction": "SET TEMP: +2°C"
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "SET TEMP: +1°C (pears line)",
+        "html_evidence": "SET TEMP: +1 b0C (rendered \"+1b0C\")",
+        "correction": "SET TEMP: +1°C"
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Header has a large boxed 'BILL OF LADING' title with B/L NO. and SCAC values right-aligned; the title and carrier name are in large bold type; 'GLOBAL SHIPPING & LOGISTICS' is a small subtitle under the large 'MERIDIAN SHIPPING'",
+        "html_evidence": "Header text is small and uniform; the BILL OF LADING box is split into a plain cell with the rule drawn through/under the B/L NO. line; values are not right-aligned; the carrier name and subtitle have the same size",
+        "correction": "Preserve the header hierarchy (large title, small subtitle, boxed bill of lading title with rule beneath it, right-aligned values)"
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Source shows field labels as small spaced caps with values in larger, distinct emphasis (e.g., BKG5917532, MERIDIAN LABREA / 124N, 40 are large; FRESH APPLES/PEARS and stowage lines are large; FREIGHT COLLECT is large and centered between rules; Authorized Signature is large and right-aligned; the total 40 is centered and large)",
+        "html_evidence": "All values are rendered in the same small bold type, with FREIGHT COLLECT left-aligned in a short rule, 40 directly under the label, and Authorized Signature as small left text",
+        "correction": "Restore the visual hierarchy and alignment of values (large/centered/right-aligned where in source), and extend the FREIGHT COLLECT rules across the description column"
+      }
+    ],
+    "discarded_non_errors": 1
+  },
+  {
+    "iteration": 3,
+    "verdict": "match",
+    "errors": [],
+    "discarded_non_errors": 0
+  }
+]

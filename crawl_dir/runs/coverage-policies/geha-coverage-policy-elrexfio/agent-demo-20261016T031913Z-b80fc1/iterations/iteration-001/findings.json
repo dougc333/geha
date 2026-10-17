@@ -1,0 +1,59 @@
+{
+  "table_extraction": {
+    "strategy": "hybrid",
+    "native_pdf_pages": [
+      {
+        "page": 3,
+        "pdf": "source.pdf",
+        "status": "ok",
+        "ocr_used": false,
+        "tables_detected": 1,
+        "tables_written": 0,
+        "tables_excluded": 1,
+        "outputs": [],
+        "excluded": [
+          {
+            "table_number": 1,
+            "heading": "Extracted table",
+            "page": 1,
+            "reason": "revision_history"
+          }
+        ]
+      }
+    ],
+    "verified_html": {
+      "source": "visually_verified_html",
+      "outputs": [
+        {
+          "table_id": "table-001",
+          "page": 2,
+          "page_table_number": 1,
+          "rows": 1,
+          "columns": 3,
+          "source_html": "/Users/dc/geha/crawl_dir/runs/coverage-policies/geha-coverage-policy-elrexfio/agent-demo-20261016T031913Z-b80fc1/pages/page-002/final.html"
+        }
+      ],
+      "table_count": 1
+    }
+  },
+  "chunk_errors": [],
+  "chunk_warnings": [
+    {
+      "chunk_id": "geha-coverage-policy-elrexfio-chunk-0001",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "geha-coverage-policy-elrexfio-chunk-0003",
+      "issue": "context_too_short"
+    }
+  ],
+  "image_only_pages": [
+    1,
+    2
+  ],
+  "visual_reconstruction_pages": [
+    1,
+    2
+  ],
+  "visual_failures": []
+}

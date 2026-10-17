@@ -1,0 +1,19 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "image",
+        "source_evidence": "The page header has a graphical G.E.H.A logo, with a star emblem and stripes to the left of the lettering, and a colored-square OncoHealth logo.",
+        "html_evidence": "The logos are plain text divs, \"G.E.H.A\" and \"OncoHealth\". The emblem graphics are missing, and there are no img elements or alt text for the logos.",
+        "correction": "Include the logos as images with alt text, such as <img alt=\"G.E.H.A\"> and <img alt=\"OncoHealth\">, or otherwise preserve the graphical elements."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

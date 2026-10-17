@@ -1,0 +1,46 @@
+{
+  "status": "failed",
+  "source_sha256": "2fada993e5d40fa441ba6fa952befa658705cdba0d1756aec4d2734b0c6e6458",
+  "page_count": 4,
+  "chunk_count": 14,
+  "table_count": 2,
+  "structural_errors": [
+    {
+      "page": 2,
+      "issue": "visual_verification_failed",
+      "verdict": "mismatch",
+      "errors": [
+        {
+          "category": "wrong_text",
+          "source_evidence": "The member has one of the following EGFR mutations: exon 19 deletion, L858R, L861Q, exon 20 insertion, S768I, or G719X",
+          "html_evidence": "L858R, L861Q, exon 20 insertion, S7681, or G719X",
+          "correction": "Change the mutation \"S7681\" to \"S768I\" so the text matches the source (the PDF text appears as S768I, though the rendering may look like S7681). If the PDF literally prints S7681, this is not an error."
+        }
+      ]
+    }
+  ],
+  "structural_warnings": [
+    {
+      "chunk_id": "geha-coverage-policy-datroway-chunk-0001",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "geha-coverage-policy-datroway-chunk-0004",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "geha-coverage-policy-datroway-chunk-0012",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "geha-coverage-policy-datroway-chunk-0013",
+      "issue": "context_too_short"
+    }
+  ],
+  "visual_verification": {
+    "status": "failed",
+    "required": true,
+    "passed_pages": 2,
+    "total_pages": 3
+  }
+}
