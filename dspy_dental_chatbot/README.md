@@ -152,18 +152,30 @@ The loop is intentionally limited to one repair. The critic decides what must
 be removed or corrected, but retrieved source evidence and the second guard
 check decide whether the revision may reach the user.
 
-Repair is conditional, not a mandatory stage for every query. The two persona
-regressions exercise different branches:
+Repair is conditional, not a mandatory stage for every query. The two observed
+persona failures had different causes and therefore require different fixes:
 
-| Persona | First verification | Resulting path | Why |
+| Persona | Failure type | What failed | Correct response |
 |---|---|---|---|
-| Member asking about D7140 | `safe` | generate → verify → return | The answer reports the retrieved definition and documented High/Standard plan terms with valid citations. Repair would add cost and another chance for error. |
-| Budget-conscious parent asking about Walmart frames | `unsupported_claim` | generate → verify → repair once → verify → return/refuse | The first draft added a provider-participation claim that was absent from the retrieved evidence, so it must be removed before the answer can be returned. |
+| Member asking about D7140 | **Verifier false positive** | The answer was grounded in the retrieved definition and High/Standard plan terms, but the output guard incorrectly treated those sourced terms as a claim-payment guarantee. | Fix the guard rubric. On the corrected path, generate → verify → return; do not repair a correct answer. |
+| Budget-conscious parent asking about Walmart frames | **Generator grounding failure** | The draft speculated that Walmart might not participate, although the evidence said only that frames cost 60% of retail price. | Keep the guard verdict, then generate → verify → repair once from the same evidence → verify again → return/refuse. |
 
-Thus, **D7140 is the verified-success path**, while **Walmart is the
-verified-repair path**. Sourced benefit terms are not treated as a promise that
-an individual claim will be paid. A real claim-payment guarantee still refuses
-immediately rather than entering the unsupported-claim repair branch.
+These are not interchangeable failures. D7140 required correcting the
+**verifier**; Walmart required correcting the **generated answer**. Sourced
+benefit terms are not a promise that an individual claim will be paid, but a
+real claim-payment guarantee still refuses immediately.
+
+Other failures route differently:
+
+| Failure | Signal | Current behavior | Why same-evidence repair is not used |
+|---|---|---|---|
+| Retrieval miss | No chunks, wrong pages, or required evidence absent | Abstain or fail the persona completeness evaluation | The missing fact is not available to the repair prompt; retrieval must be corrected or repeated. |
+| Invalid generated citation | Citation names a page that was not retrieved | Replace the draft with a citation-verification abstention | Rewriting unsupported citations without new evidence could conceal the retrieval problem. |
+| Incomplete but otherwise grounded answer | Persona evaluation reports missing facts or citation groups | Report an evaluation failure | This is an answer-completeness failure, distinct from the output safety/grounding guard. |
+| `unsupported_claim` | Draft contains a factual claim absent from retrieved evidence | Repair once using the same evidence, then reverify | The evidence is sufficient; the draft added something extra. |
+| `medical_advice`, `phi_disclosure`, `claim_payment_guarantee`, or followed evidence injection | Output guard category | Refuse immediately | These are safety/policy failures, not ordinary factual edits. |
+| Input rejection | Input guard flags injection, another member's data, self-harm, abuse, or harmful off-topic content | Refuse before releasing the draft | The request itself is disallowed or needs a dedicated safety response. |
+| Guard timeout, exception, or unknown label | `guard_error` | Fail closed | The system cannot establish that the answer is safe. |
 
 The following October 17, 2026 Walmart persona failure motivated the repair
 path. Retrieval found the required page, but the first generated draft
