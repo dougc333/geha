@@ -255,7 +255,13 @@ class GuardedPolicyQA:
         with self._lm_context():
             return _verdict("input", self.input_guard(question=question), INPUT_CATEGORIES)
 
-    def _classify_output(self, question: str, answer: str, chunks: list[PolicyChunk]) -> GuardVerdict:
+    def _classify_output(
+        self,
+        question: str,
+        answer: str,
+        chunks: list[PolicyChunk],
+        stage: str = "output",
+    ) -> GuardVerdict:
         evidence = "\n\n".join(f"[p. {chunk.page}] {chunk.text}" for chunk in chunks)
         with self._lm_context():
             prediction = self.output_guard(
@@ -263,7 +269,7 @@ class GuardedPolicyQA:
                 evidence=evidence or "No evidence was retrieved.",
                 answer=answer,
             )
-        return _verdict("output", prediction, OUTPUT_CATEGORIES)
+        return _verdict(stage, prediction, OUTPUT_CATEGORIES)
 
     def ask(self, question: str, **ask_kwargs: Any) -> GuardedAnswer:
         answer_fn: Callable[[], tuple[str, list[PolicyChunk]]] = lambda: self.qa.ask(
@@ -304,6 +310,31 @@ class GuardedPolicyQA:
             except Exception as error:  # noqa: BLE001
                 output_verdict = GuardVerdict("output", "guard_error", f"Output guard failed: {error}")
             verdicts.append(output_verdict)
+            if output_verdict.category == "unsupported_claim":
+                try:
+                    answer = self.qa.revise(
+                        question=question,
+                        prior_answer=answer,
+                        critique=output_verdict.reason,
+                        chunks=chunks,
+                        conversation=str(ask_kwargs.get("conversation", "")),
+                    )
+                    revision_verdict = self._classify_output(
+                        question,
+                        answer,
+                        chunks,
+                        stage="output_revision",
+                    )
+                except Exception as error:  # noqa: BLE001 - repair must also fail closed
+                    revision_verdict = GuardVerdict(
+                        "output_revision",
+                        "guard_error",
+                        f"Answer repair failed: {error}",
+                    )
+                verdicts.append(revision_verdict)
+                if revision_verdict.safe:
+                    return GuardedAnswer(answer, chunks, verdicts=verdicts)
+                output_verdict = revision_verdict
             if not output_verdict.safe:
                 return GuardedAnswer(
                     REFUSALS.get(output_verdict.category, FAIL_CLOSED_REFUSAL),
