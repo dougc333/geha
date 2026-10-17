@@ -101,7 +101,7 @@ repo's PRs already do that ("Not run against a real model"); keep doing it.
 | AWS RAG | `aws_rag/evals/run_eval.py`; guard: `run_guard_eval.py` | see `aws_rag/tests/test_eval_runner.py` |
 | Chunking | `chunking_benchmarks_RAG/benchmark_chunkers.py`, `evaluate_*.py` | billing codes, policy sections, conditions |
 | Table RAG | `avoid_failed_rag/table_RAG/evaluate.py`, `evaluate_preference_rows.py` | |
-| Dental chatbot | `dspy_dental_chatbot/src/{compare_jev_dspy,compare_trajectories,evaluate_policy_qa}.py`, `dental_enrollment_chatbot/src/compare_parsers.py` | `dspy_dental_chatbot/runs/` |
+| Dental chatbot | `dspy_dental_chatbot/src/{compare_jev_dspy,compare_trajectories,compare_parsers,evaluate_policy_qa,agent_member,agent_member_browser}.py` | `dspy_dental_chatbot/runs/` |
 | Fraud agent | `hapi/fraud/ladder.py` (levels 1–5), `compare.py` (PR #69) | `ladder_results.md` |
 | Context compiler | `context_compiler/demo.py --episodes N` | recall + cost per call |
 | Learn-then-compile | `learn_then_compile/demo.py --seed N` | held-out + shift sets |

@@ -45,6 +45,10 @@ class ToolTests(unittest.TestCase):
         self.assertEqual(len(tools._cdt_index()), 378)
         self.assertIn("Class C", tools.cdt_procedure_class("d2740")["benefit_class"])
         self.assertIn("Class A", tools.cdt_procedure_class("D1110")["benefit_class"])
+        self.assertEqual(
+            tools.cdt_procedure_class("D6100")["description"],
+            "Surgical removal of implant body",
+        )
         with self.assertRaises(ValueError):
             tools.cdt_procedure_class("D0000")
 

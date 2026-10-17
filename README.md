@@ -20,8 +20,7 @@ Each subfolder has its own README with setup and results.
 | [`agentic_search`](agentic_search/README.md) | Chroma RAG with a CRAG/Self-RAG LangGraph loop and a ReAct variant | Evaluator-optimizer, ReAct |
 | [`agentic_search_corpus`](agentic_search_corpus/README.md) | The agentic search code over canonical dental page Markdown | BM25 / vector / hybrid + agentic answers |
 | [`e2e_bm25vector`](e2e_bm25vector/README.md) | Deployable Vercel app comparing BM25, vector and hybrid retrieval | Retrieval comparison |
-| [`dental_enrollment_chatbot`](dental_enrollment_chatbot/README.md) | FEDVIP dental enrollment assistant | Deterministic state machine; LLM only classifies free text |
-| [`dspy_dental_chatbot`](dspy_dental_chatbot/README.md) | DSPy normalizer for the enrollment engine, plus a cited dental policy Q&A | Workflow + DSPy programs |
+| [`dspy_dental_chatbot`](dspy_dental_chatbot/README.md) | FEDVIP enrollment state machine, DSPy/JEV normalizers, and cited dental policy Q&A | Deterministic workflow + DSPy programs |
 | [`mcp_benefits_server`](mcp_benefits_server/README.md) | MCP server for dental and coverage-policy tools with a promotion standard | Deterministic tools, tiered by deployment |
 | [`aws_rag`](aws_rag/README.md) | Serverless AWS RAG over 203 ML papers | Hybrid BM25/pgvector + RRF + rerank |
 | [`hapi`](hapi/README.md) | Local HAPI FHIR server with Synthea patients; claim insights, fraud and agent demos | FHIR tools, tool-calling agents |
@@ -103,14 +102,12 @@ BM25, vector or hybrid retrieval. The chat UI and PDF viewer come from the
 
 ## Chatbots and tools
 
-- **Enrollment** (`dental_enrollment_chatbot`): matching a member to a plan is a
+- **Enrollment** (`dspy_dental_chatbot`): matching a member to a plan is a
   process, not a similarity search, so enrollment is a state machine. Plan
   recommendations and premiums come deterministically from benefits-guide pages
   4–11. JEV or DSPy may classify free-text answers but never decide eligibility,
-  rate codes, plans or premiums. It is kept separate from benefit Q&A because
-  the combined graph became too hard to follow.
-- **Dental policy Q&A** (`dspy_dental_chatbot`): page-aware local retrieval with
-  cited DSPy answers and persona tests.
+  rate codes, plans or premiums. The same app keeps this workflow in a separate
+  tab from page-aware benefit Q&A, cited DSPy answers, and persona tests.
 - **MCP benefits server** (`mcp_benefits_server`): rate codes, premiums, CDT
   classes and coverage-policy search as tools. Each deployment (production,
   pilot, sandbox) lists only the tools promoted to its tier; PHI arguments are

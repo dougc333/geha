@@ -100,6 +100,41 @@ For an OpenAI-compatible Nous endpoint, set `DSPY_MODEL`, `DSPY_API_BASE`, and
 either `DSPY_API_KEY` or the existing `NOUS_KEY`. For OpenRouter, use a LiteLLM
 model identifier beginning with `openrouter/` and set `OPENROUTER_API_KEY`.
 
+## Simulated enrollment personas
+
+The enrollment workflow and its simulated-member harnesses now live together
+in this project. `agent_member.py` uses Amazon Nova Lite on Bedrock to role-play
+four members while the deterministic state machine owns eligibility routing,
+QLE handling, plan selection, and pricing:
+
+```bash
+cd /Users/dc/geha/dspy_dental_chatbot
+source ../.venv/bin/activate
+PYTHONPATH=src python src/agent_member.py
+PYTHONPATH=src python src/agent_member.py --persona widow --quiet
+```
+
+To exercise the same personas through the visible Streamlit UI, install the
+Playwright browser once, start the app, and run the browser harness in another
+terminal:
+
+```bash
+cd /Users/dc/geha/dspy_dental_chatbot
+source ../.venv/bin/activate
+playwright install chromium
+streamlit run src/app.py --server.port 8506
+
+# Separate terminal
+cd /Users/dc/geha/dspy_dental_chatbot
+source ../.venv/bin/activate
+PYTHONPATH=src python src/agent_member_browser.py --url http://localhost:8506
+```
+
+The four expected trajectories are routine retiree → Standard, widow → loss
+of family member QLE, new baby → acquired family member QLE, and a rambling new
+hire with a child needing braces → High. These are workflow evaluations, not
+free-running production enrollment agents.
+
 ## Safety guards
 
 ![Guarded policy Q&A flow](docs/guarded_policy_qa.svg)

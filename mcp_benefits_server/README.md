@@ -127,5 +127,5 @@ submit_enrollment_change   sandbox     internal  write   OK
 | `src/demo_client.py` | Scripted agent connecting to each deployment over stdio |
 | `tests/test_server.py` | Tools, gating, audit hashing, promotion rules, an end-to-end stdio test |
 
-Rate codes and premiums reuse `dental_enrollment_chatbot/src/guide_tables.py` rather
+Rate codes and premiums reuse `dspy_dental_chatbot/src/guide_tables.py` rather
 than copying it.

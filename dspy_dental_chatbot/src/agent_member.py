@@ -5,7 +5,7 @@ and the outcome the chatbot should reach. The chatbot runs locally with Jev
 disabled, so this exercises the keyword parsers and clarifying questions.
 The member is Amazon Nova Lite on Bedrock (your AWS credentials, us-west-2).
 
-    cd dental_enrollment_chatbot
+    cd dspy_dental_chatbot
     python src/agent_member.py                 # all personas
     python src/agent_member.py --persona widow --quiet
 """

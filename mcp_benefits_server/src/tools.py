@@ -29,9 +29,8 @@ BROCHURE_DOCUMENT = "fedvip/2026-geha-dental-plan-brochure.pdf"
 BROCHURE_PAGES = page_root("dental", BROCHURE_DOCUMENT, allow_candidate=True)
 POLICY_DIR = raw_dir("coverage-policies")
 
-# Reuse the enrollment chatbot's parser for guide pages 10-11 rather than copying it.
-sys.path.insert(0, str(REPO / "dental_enrollment_chatbot" / "src"))
-from guide_tables import GuideTables  # noqa: E402
+# Reuse the consolidated DSPy chatbot's parser for guide pages 10-11.
+from dspy_dental_chatbot.src.guide_tables import GuideTables  # noqa: E402
 
 
 @lru_cache(maxsize=1)
@@ -78,15 +77,29 @@ def _cdt_index() -> dict[str, dict[str, Any]]:
     """Each CDT code at its first listing on brochure pages 20-37 (later mentions are limits)."""
     index: dict[str, dict[str, Any]] = {}
     for page, benefit_class in CDT_CLASSES.items():
-        for raw in page_markdown(
+        raw_lines = page_markdown(
             "dental", BROCHURE_DOCUMENT, page, allow_candidate=True
-        ).read_text(encoding="utf-8").splitlines():
-            line = re.sub(r"\s+", " ", re.sub(r"\s*\|\s*", " ", raw.strip().strip("|"))).strip()
-            for match in CDT_RE.finditer(line):
-                description = re.split(r"\s+-\s+(?:Limited|Coverage determined|When covered|Not covered)",
-                                       match.group(2), maxsplit=1)[0].rstrip(" ,.;")
-                index.setdefault(match.group(1), {"code": match.group(1), "description": description,
-                                                  "benefit_class": benefit_class, "page": page})
+        ).read_text(encoding="utf-8").splitlines()
+        lines = [
+            re.sub(r"\s+", " ", re.sub(r"\s*\|\s*", " ", raw.strip().strip("|"))).strip()
+            for raw in raw_lines
+        ]
+        # Docling can split a code from its description at a page-layout boundary
+        # (page 33 has ``D6100`` on one line and its description on the next).
+        # Join the page before matching, omitting repeated section headers so they
+        # cannot become part of a split description.
+        line_counts = Counter(lines)
+        repeated_headers = {
+            line
+            for line in lines
+            if line and line_counts[line] > 1 and not re.search(r"\bD\d{4}\b", line)
+        }
+        text = " ".join(line for line in lines if line and line not in repeated_headers)
+        for match in CDT_RE.finditer(text):
+            description = re.split(r"\s+-\s+(?:Limited|Coverage determined|When covered|Not covered)",
+                                   match.group(2), maxsplit=1)[0].rstrip(" ,.;")
+            index.setdefault(match.group(1), {"code": match.group(1), "description": description,
+                                              "benefit_class": benefit_class, "page": page})
     return index
 
 
