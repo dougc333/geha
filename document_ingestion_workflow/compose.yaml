@@ -7,8 +7,28 @@ services:
     environment:
       HOST: "0.0.0.0"
       PORT: "8510"
+      BROWSER_PORT: "${INGESTION_PORT:-8510}"
       ANTHROPIC_API_KEY: "${ANTHROPIC_API_KEY:-}"
       OPENAI_API_KEY: "${OPENAI_API_KEY:-}"
+    command:
+      - sh
+      - -c
+      - |
+        python -m document_ingestion_workflow.backend &
+        backend_pid=$$!
+        trap 'kill -TERM "$$backend_pid" 2>/dev/null || true' INT TERM
+        until python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8510/api/health', timeout=1)" >/dev/null 2>&1; do
+          if ! kill -0 "$$backend_pid" 2>/dev/null; then
+            wait "$$backend_pid"
+            exit $$?
+          fi
+          sleep 0.25
+        done
+        echo
+        echo "Document ingestion workflow is ready:"
+        echo "  http://127.0.0.1:$${BROWSER_PORT}"
+        echo
+        wait "$$backend_pid"
     ports:
       - "${INGESTION_PORT:-8510}:8510"
     volumes:

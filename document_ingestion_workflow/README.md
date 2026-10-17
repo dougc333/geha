@@ -208,15 +208,23 @@ Build and start the React UI, Python backend, and bundled Playwright Chromium ru
 
 ```bash
 cd /Users/dc/geha/document_ingestion_workflow
-docker compose up --build
+./docker-up.sh --build
 ```
 
-Open <http://127.0.0.1:8510>. Compose passes `ANTHROPIC_API_KEY` and
+The launcher waits for the health check and prints the browser URL when the
+container is ready. Open <http://127.0.0.1:8510>. Compose passes `ANTHROPIC_API_KEY` and
 `OPENAI_API_KEY` from the current shell and mounts `../crawl_dir/runs` so generated
 artifacts and previous runs survive container replacement. To use another host port:
 
 ```bash
-INGESTION_PORT=8511 docker compose up --build
+INGESTION_PORT=8511 ./docker-up.sh --build
+```
+
+You can also use Compose directly. In foreground mode, the service prints the URL
+at the beginning of its logs:
+
+```bash
+docker compose up --build
 ```
 
 Stop the service with `docker compose down`. This preserves `crawl_dir/runs`.
