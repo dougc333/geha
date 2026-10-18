@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "document_id": "bill_of_lading_alt_1",
+  "template": "meridian_shipping_bl_v1",
+  "note": "Field-level answer key for scoring the spec parser on this one document. Values are taken verbatim from bill_of_lading_ground_truth.json; per-container values the flat ground truth lists once were confirmed against blocks/block_6.png. Not part of the spec.",
+  "fields": {
+    "bl_number": "BL232472785",
+    "scac": "MRDN",
+    "shipper": {"name": "FRUTAS DEL SOL S.A.", "address": "Av. de los Incas 456, Buenos Aires, Argentina",
+                "phone": "+54 11 4789 1234", "email": "logistica@frutasdelsol.com.ar"},
+    "booking_ref": "BKG5917532",
+    "shipper_ref": "EXP-35782",
+    "pre_carriage_by": "Oceanic Meridian Lines",
+    "consignee": {"name": "FRESH FRUIT IMPORTERS B.V.", "address": "Handelsweg 12, 2988 DB Ridderkerk, Netherlands",
+                  "phone": "+1 (555) 123-4567", "email": "billing@techcorp.com"},
+    "place_of_receipt": "BUENOS AIRES, ARGENTINA",
+    "notify_party": {"name": "FRESH FRUIT IMPORTERS B.V.", "address": "Handelsweg 12, 2988 DB Ridderkerk, Netherlands",
+                     "phone": "+31 10 123 4567", "email": "dispatch@logitrans.com"},
+    "delivery_agent": {"name": "LogiTrans Global", "address": "88 Harbor Road, Rotterdam, 3011 AA"},
+    "vessel_voyage": "MERIDIAN LABREA / 124N",
+    "port_of_loading": "BUENOS AIRES, ARGENTINA",
+    "port_of_discharge": "ROTTERDAM, NETHERLANDS",
+    "freight_terms": "FREIGHT COLLECT",
+    "total_packages": 40,
+    "place_of_issue": "Antwerp",
+    "date_of_issue": "2026-03-13",
+    "original_bls": "THREE (3)"
+  },
+  "containers": [
+    {"container_no": "MRDN4455667", "seal_no": "MSK112233", "marks": "PALLETIZED", "packages": 20,
+     "commodity": "FRESH APPLES", "hs_code": "08081080", "set_temp": "+2°C",
+     "gross_weight_kg": "18,500", "measurement_cbm": "28.00"},
+    {"container_no": "MRDN7788990", "seal_no": "MSK445566", "marks": "PALLETIZED", "packages": 20,
+     "commodity": "FRESH PEARS", "hs_code": "08083090", "set_temp": "+1°C",
+     "gross_weight_kg": "19,200", "measurement_cbm": "28.00"}
+  ]
+}

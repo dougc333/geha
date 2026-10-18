@@ -1,0 +1,948 @@
+{
+  "Claude Opus 5.5": {
+    "result": {
+      "template": "meridian_shipping_bl_v1",
+      "template_match": 1.0,
+      "fields": {
+        "bl_number": "BL232472785",
+        "scac": "MRDN",
+        "shipper": {
+          "name": "FRUTAS DEL SOL S.A.",
+          "address": "Av. de los Incas 456, Buenos Aires, Argentina",
+          "phone": "+54 11 4789 1234",
+          "email": "logistica@frutasdelsol.com.ar"
+        },
+        "booking_ref": "BKG5917532",
+        "shipper_ref": "EXP-35782",
+        "pre_carriage_by": "Oceanic Meridian Lines",
+        "consignee": {
+          "name": "FRESH FRUIT IMPORTERS B.V.",
+          "address": "Handelsweg 12, 2988 DB Ridderkerk, Netherlands",
+          "phone": "+1 (555) 123-4567",
+          "email": "billing@techcorp.com"
+        },
+        "place_of_receipt": "BUENOS AIRES, ARGENTINA",
+        "notify_party": {
+          "name": "FRESH FRUIT IMPORTERS B.V.",
+          "address": "Handelsweg 12, 2988 DB Ridderkerk, Netherlands",
+          "phone": "+31 10 123 4567",
+          "email": "dispatch@logitrans.com"
+        },
+        "delivery_agent": {
+          "name": "LogiTrans Global",
+          "address": "88 Harbor Road, Rotterdam, 3011 AA",
+          "phone": "+31 10 123 4567",
+          "email": "dispatch@logitrans.com"
+        },
+        "vessel_voyage": "MERIDIAN LABREA / 124N",
+        "port_of_loading": "BUENOS AIRES, ARGENTINA",
+        "port_of_discharge": "ROTTERDAM, NETHERLANDS",
+        "freight_terms": "FREIGHT COLLECT",
+        "total_packages": 40,
+        "place_of_issue": "Antwerp",
+        "date_of_issue": "2026-03-13",
+        "original_bls": "THREE (3)"
+      },
+      "methods": {
+        "bl_number": "label",
+        "scac": "label",
+        "shipper": "label",
+        "booking_ref": "label",
+        "shipper_ref": "label",
+        "pre_carriage_by": "label",
+        "consignee": "label",
+        "place_of_receipt": "label",
+        "notify_party": "label",
+        "delivery_agent": "label",
+        "vessel_voyage": "label",
+        "port_of_loading": "label",
+        "port_of_discharge": "label",
+        "freight_terms": "find",
+        "total_packages": "label",
+        "place_of_issue": "label",
+        "date_of_issue": "label",
+        "original_bls": "label"
+      },
+      "containers": [
+        {
+          "container_no": "MRDN4455667",
+          "seal_no": "MSK112233",
+          "marks": "PALLETIZED",
+          "packages": 20,
+          "commodity": "FRESH APPLES",
+          "hs_code": "08081080",
+          "set_temp": "+2°C",
+          "gross_weight_kg": "18,500",
+          "measurement_cbm": "28.00"
+        },
+        {
+          "container_no": "MRDN7788990",
+          "seal_no": "MSK445566",
+          "marks": "PALLETIZED",
+          "packages": 20,
+          "commodity": "FRESH PEARS",
+          "hs_code": "08083090",
+          "set_temp": "+1°C",
+          "gross_weight_kg": "19,200",
+          "measurement_cbm": "28.00"
+        }
+      ],
+      "rules": [
+        {
+          "rule": "packages_add_up",
+          "passed": true,
+          "detail": "20 + 20 vs 40",
+          "message": "sum of container package counts must equal TOTAL NUMBER OF PACKAGES"
+        },
+        {
+          "rule": "original_bls_words_match_digit",
+          "passed": true,
+          "detail": "THREE (3)",
+          "message": "number of original B/Ls in words must match the digit, e.g. THREE (3)"
+        },
+        {
+          "rule": "date_is_real",
+          "passed": true,
+          "detail": "2026-03-13",
+          "message": "DATE OF ISSUE must be a real calendar date"
+        }
+      ],
+      "errors": [
+        "containers[0].container_no MRDN4455667: category letter 'N' is not U/J/Z (not a registered ISO 6346 number) (warning)",
+        "containers[1].container_no MRDN7788990: category letter 'N' is not U/J/Z (not a registered ISO 6346 number) (warning)"
+      ],
+      "valid": true
+    },
+    "score": {
+      "correct": 46,
+      "total": 46,
+      "wrong": 0,
+      "missing": 0,
+      "flagged_by_spec": 0,
+      "silent_errors": [],
+      "rows": [
+        {
+          "field": "bl_number",
+          "expected": "BL232472785",
+          "got": "BL232472785",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "scac",
+          "expected": "MRDN",
+          "got": "MRDN",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "shipper.name",
+          "expected": "FRUTAS DEL SOL S.A.",
+          "got": "FRUTAS DEL SOL S.A.",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "shipper.address",
+          "expected": "Av. de los Incas 456, Buenos Aires, Argentina",
+          "got": "Av. de los Incas 456, Buenos Aires, Argentina",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "shipper.phone",
+          "expected": "+54 11 4789 1234",
+          "got": "+54 11 4789 1234",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "shipper.email",
+          "expected": "logistica@frutasdelsol.com.ar",
+          "got": "logistica@frutasdelsol.com.ar",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "booking_ref",
+          "expected": "BKG5917532",
+          "got": "BKG5917532",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "shipper_ref",
+          "expected": "EXP-35782",
+          "got": "EXP-35782",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "pre_carriage_by",
+          "expected": "Oceanic Meridian Lines",
+          "got": "Oceanic Meridian Lines",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "consignee.name",
+          "expected": "FRESH FRUIT IMPORTERS B.V.",
+          "got": "FRESH FRUIT IMPORTERS B.V.",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "consignee.address",
+          "expected": "Handelsweg 12, 2988 DB Ridderkerk, Netherlands",
+          "got": "Handelsweg 12, 2988 DB Ridderkerk, Netherlands",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "consignee.phone",
+          "expected": "+1 (555) 123-4567",
+          "got": "+1 (555) 123-4567",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "consignee.email",
+          "expected": "billing@techcorp.com",
+          "got": "billing@techcorp.com",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "place_of_receipt",
+          "expected": "BUENOS AIRES, ARGENTINA",
+          "got": "BUENOS AIRES, ARGENTINA",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "notify_party.name",
+          "expected": "FRESH FRUIT IMPORTERS B.V.",
+          "got": "FRESH FRUIT IMPORTERS B.V.",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "notify_party.address",
+          "expected": "Handelsweg 12, 2988 DB Ridderkerk, Netherlands",
+          "got": "Handelsweg 12, 2988 DB Ridderkerk, Netherlands",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "notify_party.phone",
+          "expected": "+31 10 123 4567",
+          "got": "+31 10 123 4567",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "notify_party.email",
+          "expected": "dispatch@logitrans.com",
+          "got": "dispatch@logitrans.com",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "delivery_agent.name",
+          "expected": "LogiTrans Global",
+          "got": "LogiTrans Global",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "delivery_agent.address",
+          "expected": "88 Harbor Road, Rotterdam, 3011 AA",
+          "got": "88 Harbor Road, Rotterdam, 3011 AA",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "vessel_voyage",
+          "expected": "MERIDIAN LABREA / 124N",
+          "got": "MERIDIAN LABREA / 124N",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "port_of_loading",
+          "expected": "BUENOS AIRES, ARGENTINA",
+          "got": "BUENOS AIRES, ARGENTINA",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "port_of_discharge",
+          "expected": "ROTTERDAM, NETHERLANDS",
+          "got": "ROTTERDAM, NETHERLANDS",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "freight_terms",
+          "expected": "FREIGHT COLLECT",
+          "got": "FREIGHT COLLECT",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "total_packages",
+          "expected": 40,
+          "got": 40,
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "place_of_issue",
+          "expected": "Antwerp",
+          "got": "Antwerp",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "date_of_issue",
+          "expected": "2026-03-13",
+          "got": "2026-03-13",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "original_bls",
+          "expected": "THREE (3)",
+          "got": "THREE (3)",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[0].container_no",
+          "expected": "MRDN4455667",
+          "got": "MRDN4455667",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[0].seal_no",
+          "expected": "MSK112233",
+          "got": "MSK112233",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[0].marks",
+          "expected": "PALLETIZED",
+          "got": "PALLETIZED",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[0].packages",
+          "expected": 20,
+          "got": 20,
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[0].commodity",
+          "expected": "FRESH APPLES",
+          "got": "FRESH APPLES",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[0].hs_code",
+          "expected": "08081080",
+          "got": "08081080",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[0].set_temp",
+          "expected": "+2°C",
+          "got": "+2°C",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[0].gross_weight_kg",
+          "expected": "18,500",
+          "got": "18,500",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[0].measurement_cbm",
+          "expected": "28.00",
+          "got": "28.00",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[1].container_no",
+          "expected": "MRDN7788990",
+          "got": "MRDN7788990",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[1].seal_no",
+          "expected": "MSK445566",
+          "got": "MSK445566",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[1].marks",
+          "expected": "PALLETIZED",
+          "got": "PALLETIZED",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[1].packages",
+          "expected": 20,
+          "got": 20,
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[1].commodity",
+          "expected": "FRESH PEARS",
+          "got": "FRESH PEARS",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[1].hs_code",
+          "expected": "08083090",
+          "got": "08083090",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[1].set_temp",
+          "expected": "+1°C",
+          "got": "+1°C",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[1].gross_weight_kg",
+          "expected": "19,200",
+          "got": "19,200",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[1].measurement_cbm",
+          "expected": "28.00",
+          "got": "28.00",
+          "status": "correct",
+          "flagged": false
+        }
+      ]
+    }
+  },
+  "Tesseract 5.5.1": {
+    "result": {
+      "template": "meridian_shipping_bl_v1",
+      "template_match": 0.6923076923076923,
+      "fields": {
+        "bl_number": null,
+        "scac": "MRDN",
+        "shipper": null,
+        "booking_ref": null,
+        "shipper_ref": "EXP-35782",
+        "pre_carriage_by": "Oceanic Meridian Lines",
+        "consignee": {
+          "name": "FRESH FRUIT IMPORTERS B.V.",
+          "address": "Handelsweg 12, 2988 DB Ridderkerk, Netherlands",
+          "phone": null,
+          "email": null
+        },
+        "place_of_receipt": "TEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com BUENOS AIRES, ARGENTINA",
+        "notify_party": null,
+        "delivery_agent": {
+          "name": "FRESH FRUIT IMPORTERS B.V. LogiTrans Global",
+          "address": "Handelsweg 12, 2988 DB Ridderkerk, Netherlands 88 Harbor Road, Rotterdam, 3011 AA",
+          "phone": "+3110 123 4567",
+          "email": "dispatch@logitrans.com"
+        },
+        "vessel_voyage": null,
+        "port_of_loading": null,
+        "port_of_discharge": "N BUENOS AIRES, ARGENTINA ROTTERDAM",
+        "freight_terms": "FREIGHT COLLECT",
+        "total_packages": 40,
+        "place_of_issue": null,
+        "date_of_issue": null,
+        "original_bls": "THREE (3)"
+      },
+      "methods": {
+        "bl_number": null,
+        "scac": "label",
+        "shipper": null,
+        "booking_ref": null,
+        "shipper_ref": "label+pattern",
+        "pre_carriage_by": "label",
+        "consignee": "label",
+        "place_of_receipt": "label",
+        "notify_party": null,
+        "delivery_agent": "label",
+        "vessel_voyage": null,
+        "port_of_loading": null,
+        "port_of_discharge": "label+pattern",
+        "freight_terms": "find",
+        "total_packages": "pattern_search",
+        "place_of_issue": null,
+        "date_of_issue": null,
+        "original_bls": "label+pattern"
+      },
+      "containers": [
+        {
+          "container_no": "MRDN4455667",
+          "seal_no": "MSK112233",
+          "marks": "PALLETIZED",
+          "packages": 20,
+          "commodity": "FRESH PEARS",
+          "hs_code": "08083090",
+          "set_temp": "+1°C",
+          "gross_weight_kg": null,
+          "measurement_cbm": null
+        },
+        {
+          "container_no": null,
+          "seal_no": "MSK445566",
+          "marks": null,
+          "packages": null,
+          "commodity": null,
+          "hs_code": null,
+          "set_temp": null,
+          "gross_weight_kg": null,
+          "measurement_cbm": null
+        }
+      ],
+      "rules": [
+        {
+          "rule": "packages_add_up",
+          "passed": null,
+          "detail": "",
+          "message": "sum of container package counts must equal TOTAL NUMBER OF PACKAGES"
+        },
+        {
+          "rule": "original_bls_words_match_digit",
+          "passed": true,
+          "detail": "THREE (3)",
+          "message": "number of original B/Ls in words must match the digit, e.g. THREE (3)"
+        },
+        {
+          "rule": "date_is_real",
+          "passed": false,
+          "detail": "None",
+          "message": "DATE OF ISSUE must be a real calendar date"
+        }
+      ],
+      "errors": [
+        "bl_number: missing",
+        "shipper: missing",
+        "booking_ref: missing",
+        "notify_party: missing",
+        "vessel_voyage: missing",
+        "port_of_loading: missing",
+        "place_of_issue: missing",
+        "date_of_issue: missing",
+        "containers: field counts differ across containers: container_no=1, seal_no=2, marks=1, packages=1, commodity=1, hs_code=1, set_temp=1, gross_weight_kg=0, measurement_cbm=0",
+        "containers[0].container_no MRDN4455667: category letter 'N' is not U/J/Z (not a registered ISO 6346 number) (warning)",
+        "containers[0].gross_weight_kg: missing",
+        "containers[0].measurement_cbm: missing",
+        "containers[1].container_no: missing",
+        "containers[1].marks: missing",
+        "containers[1].packages: missing",
+        "containers[1].commodity: missing",
+        "containers[1].hs_code: missing",
+        "containers[1].set_temp: missing",
+        "containers[1].gross_weight_kg: missing",
+        "containers[1].measurement_cbm: missing",
+        "rule date_is_real: DATE OF ISSUE must be a real calendar date (None)"
+      ],
+      "valid": false
+    },
+    "score": {
+      "correct": 13,
+      "total": 46,
+      "wrong": 7,
+      "missing": 26,
+      "flagged_by_spec": 27,
+      "silent_errors": [
+        {
+          "field": "consignee.phone",
+          "expected": "+1 (555) 123-4567",
+          "got": null,
+          "status": "missing",
+          "flagged": false
+        },
+        {
+          "field": "consignee.email",
+          "expected": "billing@techcorp.com",
+          "got": null,
+          "status": "missing",
+          "flagged": false
+        },
+        {
+          "field": "place_of_receipt",
+          "expected": "BUENOS AIRES, ARGENTINA",
+          "got": "TEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com BUENOS AIRES, ARGENTINA",
+          "status": "wrong",
+          "flagged": false
+        },
+        {
+          "field": "delivery_agent.name",
+          "expected": "LogiTrans Global",
+          "got": "FRESH FRUIT IMPORTERS B.V. LogiTrans Global",
+          "status": "wrong",
+          "flagged": false
+        },
+        {
+          "field": "delivery_agent.address",
+          "expected": "88 Harbor Road, Rotterdam, 3011 AA",
+          "got": "Handelsweg 12, 2988 DB Ridderkerk, Netherlands 88 Harbor Road, Rotterdam, 3011 AA",
+          "status": "wrong",
+          "flagged": false
+        },
+        {
+          "field": "port_of_discharge",
+          "expected": "ROTTERDAM, NETHERLANDS",
+          "got": "N BUENOS AIRES, ARGENTINA ROTTERDAM",
+          "status": "wrong",
+          "flagged": false
+        }
+      ],
+      "rows": [
+        {
+          "field": "bl_number",
+          "expected": "BL232472785",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "scac",
+          "expected": "MRDN",
+          "got": "MRDN",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "shipper.name",
+          "expected": "FRUTAS DEL SOL S.A.",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "shipper.address",
+          "expected": "Av. de los Incas 456, Buenos Aires, Argentina",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "shipper.phone",
+          "expected": "+54 11 4789 1234",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "shipper.email",
+          "expected": "logistica@frutasdelsol.com.ar",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "booking_ref",
+          "expected": "BKG5917532",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "shipper_ref",
+          "expected": "EXP-35782",
+          "got": "EXP-35782",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "pre_carriage_by",
+          "expected": "Oceanic Meridian Lines",
+          "got": "Oceanic Meridian Lines",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "consignee.name",
+          "expected": "FRESH FRUIT IMPORTERS B.V.",
+          "got": "FRESH FRUIT IMPORTERS B.V.",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "consignee.address",
+          "expected": "Handelsweg 12, 2988 DB Ridderkerk, Netherlands",
+          "got": "Handelsweg 12, 2988 DB Ridderkerk, Netherlands",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "consignee.phone",
+          "expected": "+1 (555) 123-4567",
+          "got": null,
+          "status": "missing",
+          "flagged": false
+        },
+        {
+          "field": "consignee.email",
+          "expected": "billing@techcorp.com",
+          "got": null,
+          "status": "missing",
+          "flagged": false
+        },
+        {
+          "field": "place_of_receipt",
+          "expected": "BUENOS AIRES, ARGENTINA",
+          "got": "TEL: +1 (555) 123-4567 | EMAIL: billing@techcorp.com BUENOS AIRES, ARGENTINA",
+          "status": "wrong",
+          "flagged": false
+        },
+        {
+          "field": "notify_party.name",
+          "expected": "FRESH FRUIT IMPORTERS B.V.",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "notify_party.address",
+          "expected": "Handelsweg 12, 2988 DB Ridderkerk, Netherlands",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "notify_party.phone",
+          "expected": "+31 10 123 4567",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "notify_party.email",
+          "expected": "dispatch@logitrans.com",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "delivery_agent.name",
+          "expected": "LogiTrans Global",
+          "got": "FRESH FRUIT IMPORTERS B.V. LogiTrans Global",
+          "status": "wrong",
+          "flagged": false
+        },
+        {
+          "field": "delivery_agent.address",
+          "expected": "88 Harbor Road, Rotterdam, 3011 AA",
+          "got": "Handelsweg 12, 2988 DB Ridderkerk, Netherlands 88 Harbor Road, Rotterdam, 3011 AA",
+          "status": "wrong",
+          "flagged": false
+        },
+        {
+          "field": "vessel_voyage",
+          "expected": "MERIDIAN LABREA / 124N",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "port_of_loading",
+          "expected": "BUENOS AIRES, ARGENTINA",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "port_of_discharge",
+          "expected": "ROTTERDAM, NETHERLANDS",
+          "got": "N BUENOS AIRES, ARGENTINA ROTTERDAM",
+          "status": "wrong",
+          "flagged": false
+        },
+        {
+          "field": "freight_terms",
+          "expected": "FREIGHT COLLECT",
+          "got": "FREIGHT COLLECT",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "total_packages",
+          "expected": 40,
+          "got": 40,
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "place_of_issue",
+          "expected": "Antwerp",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "date_of_issue",
+          "expected": "2026-03-13",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "original_bls",
+          "expected": "THREE (3)",
+          "got": "THREE (3)",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[0].container_no",
+          "expected": "MRDN4455667",
+          "got": "MRDN4455667",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[0].seal_no",
+          "expected": "MSK112233",
+          "got": "MSK112233",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[0].marks",
+          "expected": "PALLETIZED",
+          "got": "PALLETIZED",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[0].packages",
+          "expected": 20,
+          "got": 20,
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[0].commodity",
+          "expected": "FRESH APPLES",
+          "got": "FRESH PEARS",
+          "status": "wrong",
+          "flagged": true
+        },
+        {
+          "field": "containers[0].hs_code",
+          "expected": "08081080",
+          "got": "08083090",
+          "status": "wrong",
+          "flagged": true
+        },
+        {
+          "field": "containers[0].set_temp",
+          "expected": "+2°C",
+          "got": "+1°C",
+          "status": "wrong",
+          "flagged": true
+        },
+        {
+          "field": "containers[0].gross_weight_kg",
+          "expected": "18,500",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "containers[0].measurement_cbm",
+          "expected": "28.00",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "containers[1].container_no",
+          "expected": "MRDN7788990",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "containers[1].seal_no",
+          "expected": "MSK445566",
+          "got": "MSK445566",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "containers[1].marks",
+          "expected": "PALLETIZED",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "containers[1].packages",
+          "expected": 20,
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "containers[1].commodity",
+          "expected": "FRESH PEARS",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "containers[1].hs_code",
+          "expected": "08083090",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "containers[1].set_temp",
+          "expected": "+1°C",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "containers[1].gross_weight_kg",
+          "expected": "19,200",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        },
+        {
+          "field": "containers[1].measurement_cbm",
+          "expected": "28.00",
+          "got": null,
+          "status": "missing",
+          "flagged": true
+        }
+      ]
+    }
+  }
+}

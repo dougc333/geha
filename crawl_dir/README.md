@@ -89,7 +89,7 @@ demo-only and only accepts artifacts under `crawl_dir/raw` and `crawl_dir/runs`.
 
 **Figure specs for the source documents.** Of the five demo source documents,
 only the EY/LIMRA workforce benefits report has figure spec files
-(`annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs/`);
+(`../bounding_box/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs/`);
 the router uses them instead of a model for its charts. Datroway, Elrexfio,
 Bendamustine and the bill of lading have no charts and need no specs. Any new
 document with charts needs its own spec files (see "Authored figure specs"
@@ -181,7 +181,7 @@ cd /Users/dc/geha
 uv run python -m crawl_dir.src.pipeline.figure_specs \
   --family research --document ey-limra-workforce-benefits-study-final-2025.pdf \
   --document-version 2025 \
-  --specs crawl_dir/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs
+  --specs bounding_box/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs
 ```
 
 #### Performance on the EY/LIMRA report (29 pages)

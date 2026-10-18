@@ -11,14 +11,14 @@ import pymupdf
 
 from crawl_dir.src.pipeline.artifact_io import atomic_json
 
-from .backend import ANNOTATION_DIR, DOCUMENT_ID, SOURCE_PDF, load_annotations
+from .backend import ANNOTATION_DIR, CRAWL_DIR, DOCUMENT_ID, SOURCE_PDF, load_annotations
 
 
 PROMPTS_PATH = ANNOTATION_DIR / "figure-reconstruction-prompts.json"
 PROMPTS_DIR = ANNOTATION_DIR / "reconstruction-prompts"
 APPROVED_PROMPTS_DIR = ANNOTATION_DIR / "approved-reconstruction-prompts"
 APPROVED_PAGE_4_PROMPT = (
-    ANNOTATION_DIR.parents[2]
+    CRAWL_DIR
     / "runs/research"
     / DOCUMENT_ID
     / "manual-figure-page004-checkpoint/pages/page-004/segments/figure-01-tailwind-svg/reconstruction-prompt.md"

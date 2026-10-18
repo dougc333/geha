@@ -1,0 +1,113 @@
+{
+  "template": "meridian_shipping_bl_v1",
+  "template_match": 1.0,
+  "fields": {
+    "bl_number": "BL232472785",
+    "scac": "MRDN",
+    "shipper": {
+      "name": "FRUTAS DEL SOL S.A.",
+      "address": "Av. de los Incas 456, Buenos Aires, Argentina",
+      "phone": "+54 11 4789 1234",
+      "email": "logistica@frutasdelsol.com.ar"
+    },
+    "booking_ref": "BKG5917532",
+    "shipper_ref": "EXP-35782",
+    "pre_carriage_by": "Oceanic Meridian Lines",
+    "consignee": {
+      "name": "FRESH FRUIT IMPORTERS B.V.",
+      "address": "Handelsweg 12, 2988 DB Ridderkerk, Netherlands",
+      "phone": "+1 (555) 123-4567",
+      "email": "billing@techcorp.com"
+    },
+    "place_of_receipt": "BUENOS AIRES, ARGENTINA",
+    "notify_party": {
+      "name": "FRESH FRUIT IMPORTERS B.V.",
+      "address": "Handelsweg 12, 2988 DB Ridderkerk, Netherlands",
+      "phone": "+31 10 123 4567",
+      "email": "dispatch@logitrans.com"
+    },
+    "delivery_agent": {
+      "name": "LogiTrans Global",
+      "address": "88 Harbor Road, Rotterdam, 3011 AA",
+      "phone": "+31 10 123 4567",
+      "email": "dispatch@logitrans.com"
+    },
+    "vessel_voyage": "MERIDIAN LABREA / 124N",
+    "port_of_loading": "BUENOS AIRES, ARGENTINA",
+    "port_of_discharge": "ROTTERDAM, NETHERLANDS",
+    "freight_terms": "FREIGHT COLLECT",
+    "total_packages": 40,
+    "place_of_issue": "Antwerp",
+    "date_of_issue": "2026-03-13",
+    "original_bls": "THREE (3)"
+  },
+  "methods": {
+    "bl_number": "label",
+    "scac": "label",
+    "shipper": "label",
+    "booking_ref": "label",
+    "shipper_ref": "label",
+    "pre_carriage_by": "label",
+    "consignee": "label",
+    "place_of_receipt": "label",
+    "notify_party": "label",
+    "delivery_agent": "label",
+    "vessel_voyage": "label",
+    "port_of_loading": "label",
+    "port_of_discharge": "label",
+    "freight_terms": "find",
+    "total_packages": "label",
+    "place_of_issue": "label",
+    "date_of_issue": "label",
+    "original_bls": "label"
+  },
+  "containers": [
+    {
+      "container_no": "MRDN4455667",
+      "seal_no": "MSK112233",
+      "marks": "PALLETIZED",
+      "packages": 20,
+      "commodity": "FRESH APPLES",
+      "hs_code": "08081080",
+      "set_temp": "+2°C",
+      "gross_weight_kg": "18,500",
+      "measurement_cbm": "28.00"
+    },
+    {
+      "container_no": "MRDN7788990",
+      "seal_no": "MSK445566",
+      "marks": "PALLETIZED",
+      "packages": 20,
+      "commodity": "FRESH PEARS",
+      "hs_code": "08083090",
+      "set_temp": "+1°C",
+      "gross_weight_kg": "19,200",
+      "measurement_cbm": "28.00"
+    }
+  ],
+  "rules": [
+    {
+      "rule": "packages_add_up",
+      "passed": true,
+      "detail": "20 + 20 vs 40",
+      "message": "sum of container package counts must equal TOTAL NUMBER OF PACKAGES"
+    },
+    {
+      "rule": "original_bls_words_match_digit",
+      "passed": true,
+      "detail": "THREE (3)",
+      "message": "number of original B/Ls in words must match the digit, e.g. THREE (3)"
+    },
+    {
+      "rule": "date_is_real",
+      "passed": true,
+      "detail": "2026-03-13",
+      "message": "DATE OF ISSUE must be a real calendar date"
+    }
+  ],
+  "errors": [
+    "containers[0].container_no MRDN4455667: category letter 'N' is not U/J/Z (not a registered ISO 6346 number) (warning)",
+    "containers[1].container_no MRDN7788990: category letter 'N' is not U/J/Z (not a registered ISO 6346 number) (warning)"
+  ],
+  "valid": true
+}
