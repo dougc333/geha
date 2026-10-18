@@ -12,6 +12,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from urllib.parse import quote
 
 from aiohttp import web
 
@@ -25,6 +26,13 @@ from crawl_dir.src.pipeline.contextual_retrieval import (
     make_claude_context_generator,
 )
 from crawl_dir.src.process_all import process_all
+from contextual_retrieval_dashboard.visual_context import (
+    VISUAL_PROMPT_VERSION,
+    VISUAL_SYSTEM_PROMPT,
+    VISUAL_USER_PROMPT,
+    contextualize_visual_run,
+    discover_visual_chunks,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1] / "crawl_dir"
@@ -38,6 +46,13 @@ REACT_CONVERTED_DOCUMENTS = {
     "geha-coverage-policy-elrexfio.pdf",
 }
 RECOMMENDED_DOCUMENT = "geha-coverage-policy-gemcitabine.pdf"
+VISUAL_SOURCE = "research/ey-limra-workforce-benefits-study-final-2025.pdf"
+VISUAL_RUN = (
+    RUNS_ROOT
+    / "research"
+    / "ey-limra-workforce-benefits-study-final-2025"
+    / "agent-demo-20261010T125607Z-e93043"
+).resolve()
 
 
 def _utc_now() -> str:
@@ -141,6 +156,43 @@ def _contextual_run_history() -> list[dict[str, Any]]:
             "cache_read_input_tokens": metadata.get("cache_read_input_tokens", 0),
         })
     return sorted(history, key=lambda item: item["updated_at"], reverse=True)
+
+
+def _visual_run_history() -> list[dict[str, Any]]:
+    if not VISUAL_RUN.is_dir():
+        return []
+    chunks = discover_visual_chunks(VISUAL_RUN)
+    if not chunks:
+        return []
+    output_path = VISUAL_RUN / "visual-contextual-chunks.jsonl"
+    metadata_path = VISUAL_RUN / "visual-contextual-retrieval.json"
+    try:
+        contextual = _jsonl(output_path)
+        metadata = (
+            json.loads(metadata_path.read_text(encoding="utf-8"))
+            if metadata_path.is_file() else {}
+        )
+    except (OSError, json.JSONDecodeError):
+        contextual, metadata = [], {}
+    updated_at = str(
+        metadata.get("updated_at")
+        or datetime.fromtimestamp(VISUAL_RUN.stat().st_mtime, timezone.utc).isoformat()
+    )
+    return [{
+        "source": VISUAL_SOURCE,
+        "run": str(VISUAL_RUN),
+        "run_id": VISUAL_RUN.name,
+        "created_at": None,
+        "updated_at": updated_at,
+        "completed_chunks": len(contextual),
+        "total_chunks": len(chunks),
+        "complete": len(contextual) == len(chunks),
+        "model": metadata.get("model"),
+        "prompt_version": metadata.get("prompt_version", VISUAL_PROMPT_VERSION),
+        "cache_creation_input_tokens": metadata.get("cache_creation_input_tokens", 0),
+        "cache_read_input_tokens": metadata.get("cache_read_input_tokens", 0),
+        "artifact_mode": "visual",
+    }]
 
 
 def _cache_test_candidate() -> tuple[Path, str, list[dict[str, Any]]]:
@@ -352,10 +404,67 @@ class BatchWorker:
             self.run.finish()
 
 
+class VisualBatchWorker:
+    def __init__(self, run: DashboardRun) -> None:
+        self.run = run
+
+    def execute(self) -> None:
+        try:
+            chunks = discover_visual_chunks(VISUAL_RUN)
+            self.run.emit({
+                "type": "contextual_batch_started",
+                "source": VISUAL_SOURCE,
+                "run": str(VISUAL_RUN),
+                "total": len(chunks),
+                "model": CLAUDE_MODEL,
+                "artifact_mode": "visual",
+            })
+            self.run.emit({
+                "type": "contextual_document_started",
+                "source": VISUAL_SOURCE,
+                "run": str(VISUAL_RUN),
+                "total": len(chunks),
+                "artifact_mode": "visual",
+            })
+            output = contextualize_visual_run(
+                VISUAL_RUN, model=CLAUDE_MODEL, event_sink=self.run.emit
+            )
+            count = len(_jsonl(output))
+            self.run.emit({
+                "type": "contextual_document_finished",
+                "source": VISUAL_SOURCE,
+                "run": str(VISUAL_RUN),
+                "chunks": count,
+                "total": len(chunks),
+                "artifact_mode": "visual",
+            })
+            self.run.emit({
+                "type": "batch_finished",
+                "source": VISUAL_SOURCE,
+                "run": str(VISUAL_RUN),
+                "documents": 1,
+                "chunks": count,
+                "contextual_failures": 0,
+                "artifact_mode": "visual",
+            })
+        except Exception as exc:
+            self.run.emit({
+                "type": "batch_failed",
+                "source": VISUAL_SOURCE,
+                "run": str(VISUAL_RUN),
+                "error_type": type(exc).__name__,
+                "error": str(exc),
+                "artifact_mode": "visual",
+            })
+        finally:
+            self.run.finish()
+
+
 async def health(_: web.Request) -> web.Response:
     documents = _source_documents()
     chunk_estimates = _latest_chunk_estimates()
     readiness = _document_readiness()
+    visual_chunks = discover_visual_chunks(VISUAL_RUN) if VISUAL_RUN.is_dir() else []
     return web.json_response({
         "ready": claude_credentials_available(),
         "model": CLAUDE_MODEL,
@@ -375,11 +484,21 @@ async def health(_: web.Request) -> web.Response:
             )
         ),
         "canonical_chunker": "Docling HybridChunker / BAAI bge-small-en-v1.5 / 380-token body",
+        "visual_run": {
+            "available": bool(visual_chunks),
+            "source": VISUAL_SOURCE,
+            "run": str(VISUAL_RUN),
+            "estimated_context_calls": len(visual_chunks),
+        },
     })
 
 
 async def history(_: web.Request) -> web.Response:
-    runs = _contextual_run_history()
+    runs = sorted(
+        _contextual_run_history() + _visual_run_history(),
+        key=lambda item: item["updated_at"],
+        reverse=True,
+    )
     return web.json_response({
         "runs": runs,
         "total_runs": len(runs),
@@ -397,6 +516,14 @@ async def prompt_contract(_: web.Request) -> web.Response:
         "cache_scope": (
             "The complete document system block is reused across all chunk calls "
             "for that document; only the user chunk changes."
+        ),
+        "visual_prompt_version": VISUAL_PROMPT_VERSION,
+        "visual_system_prompt": VISUAL_SYSTEM_PROMPT,
+        "visual_document_block": (
+            '<document type="application/pdf">{{PAGE_SOURCE_PDF}}</document>'
+        ),
+        "visual_user_template": (
+            "<figure>{{LATEST_ITERATION_IMAGE}}</figure>\n" + VISUAL_USER_PROMPT
         ),
     })
 
@@ -484,6 +611,40 @@ async def start_batch(request: web.Request) -> web.Response:
     })
 
 
+async def start_visual_batch(request: web.Request) -> web.Response:
+    body = await request.json()
+    if body.get("confirm_contextualization_cost") is not True:
+        raise web.HTTPBadRequest(text=json.dumps({
+            "error": "Confirm the one-Claude-call-per-figure cost before starting."
+        }), content_type="application/json")
+    if not claude_credentials_available():
+        raise web.HTTPConflict(text=json.dumps({
+            "error": "Set ANTHROPIC_API_KEY or run `ant auth login` for the backend process."
+        }), content_type="application/json")
+    chunks = discover_visual_chunks(VISUAL_RUN) if VISUAL_RUN.is_dir() else []
+    if not chunks:
+        raise web.HTTPNotFound(text=json.dumps({
+            "error": f"No figure iterations were found in {VISUAL_RUN}"
+        }), content_type="application/json")
+    try:
+        run = REGISTRY.create()
+    except RuntimeError as exc:
+        raise web.HTTPConflict(text=json.dumps({"error": str(exc)}),
+                               content_type="application/json") from exc
+    thread = threading.Thread(
+        target=VisualBatchWorker(run).execute,
+        name=f"visual-contextual-{run.run_id}",
+        daemon=True,
+    )
+    thread.start()
+    return web.json_response({
+        "run_id": run.run_id,
+        "events": f"/api/batches/{run.run_id}/events",
+        "run": str(VISUAL_RUN),
+        "chunks": len(chunks),
+    })
+
+
 async def stream_events(request: web.Request) -> web.StreamResponse:
     run = REGISTRY.get(request.match_info["run_id"])
     response = web.StreamResponse(headers={
@@ -520,6 +681,42 @@ def _safe_run(value: str) -> Path:
 
 async def chunks(request: web.Request) -> web.Response:
     run = _safe_run(request.query.get("run", ""))
+    visual = discover_visual_chunks(run)
+    if visual:
+        contextual = {
+            row["chunk_id"]: row
+            for row in _jsonl(run / "visual-contextual-chunks.jsonl")
+        }
+        pairs = []
+        for chunk in visual:
+            enriched = contextual.get(chunk["chunk_id"], {})
+            run_query = quote(str(run), safe="")
+            pdf_query = quote(chunk["source_pdf"], safe="")
+            image_query = quote(chunk["chunk_image"], safe="")
+            pairs.append({
+                "artifact_kind": "visual",
+                "chunk_id": chunk["chunk_id"],
+                "pages": chunk.get("pages", []),
+                "section": chunk.get("section"),
+                "text": chunk.get("literal_text", ""),
+                "deterministic_contextualized_text": "",
+                "source_pdf_path": chunk["source_pdf"],
+                "chunk_image_path": chunk["chunk_image"],
+                "source_pdf_url": f"/api/artifact?run={run_query}&path={pdf_query}",
+                "chunk_image_url": f"/api/artifact?run={run_query}&path={image_query}",
+                "retrieval_context": enriched.get("retrieval_context"),
+                "contextual_retrieval_text": enriched.get("contextual_retrieval_text"),
+                "model": enriched.get("contextual_retrieval_model"),
+                "prompt_cache": enriched.get("prompt_cache"),
+            })
+        return web.json_response({
+            "run": str(run),
+            "document": VISUAL_SOURCE,
+            "artifact_mode": "visual",
+            "completed": len(contextual),
+            "total": len(visual),
+            "chunks": pairs,
+        })
     canonical = _jsonl(run / "candidate" / "chunks.jsonl")
     contextual = {
         row["chunk_id"]: row
@@ -529,6 +726,7 @@ async def chunks(request: web.Request) -> web.Response:
     for chunk in canonical:
         enriched = contextual.get(chunk["chunk_id"], {})
         pairs.append({
+            "artifact_kind": "text",
             "chunk_id": chunk["chunk_id"],
             "pages": chunk.get("pages", []),
             "section": chunk.get("section"),
@@ -548,6 +746,21 @@ async def chunks(request: web.Request) -> web.Response:
     })
 
 
+async def artifact(request: web.Request) -> web.FileResponse:
+    run = _safe_run(request.query.get("run", ""))
+    relative = Path(request.query.get("path", ""))
+    if relative.is_absolute():
+        raise web.HTTPForbidden(text="Artifact path must be relative to the run")
+    path = (run / relative).resolve()
+    if run not in path.parents or path.suffix.lower() not in {
+        ".pdf", ".png", ".jpg", ".jpeg", ".webp",
+    }:
+        raise web.HTTPForbidden(text="Artifact path is not an allowed run artifact")
+    if not path.is_file():
+        raise web.HTTPNotFound(text="Artifact does not exist")
+    return web.FileResponse(path)
+
+
 async def index(_: web.Request) -> web.FileResponse:
     if not (UI_DIST / "index.html").is_file():
         raise web.HTTPServiceUnavailable(
@@ -564,8 +777,10 @@ def create_app() -> web.Application:
     app.router.add_get("/api/prompt-cache-test", last_prompt_cache_test)
     app.router.add_post("/api/prompt-cache-test", test_prompt_cache)
     app.router.add_post("/api/batches", start_batch)
+    app.router.add_post("/api/visual-batches", start_visual_batch)
     app.router.add_get("/api/batches/{run_id}/events", stream_events)
     app.router.add_get("/api/chunks", chunks)
+    app.router.add_get("/api/artifact", artifact)
     if UI_DIST.exists():
         app.router.add_static("/assets", UI_DIST / "assets", show_index=False)
     app.router.add_get("/{tail:.*}", index)

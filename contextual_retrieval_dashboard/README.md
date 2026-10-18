@@ -4,11 +4,10 @@ This is the corpus-wide, deterministic ingestion UI. It runs the canonical
 Docling `HybridChunker`, preserves `candidate/chunks.jsonl`, and writes Claude
 annotations to the separate `candidate/contextual-chunks.jsonl` artifact.
 
-> **Separate demo:** Datroway and Elrexfio use the visual ReAct correction
-> workflow in `/Users/dc/geha/document_ingestion_workflow` (port 8510). That
-> agent demo chooses visual tools and repairs page renderings. This dashboard
-> (port 8511) monitors the canonical 35-document coverage-policy batch and does
-> not substitute the ReAct output for canonical Docling chunks.
+> **Two artifact modes:** coverage policies use canonical Docling text chunks.
+> The saved EY/LIMRA agent demo uses visual page/figure artifacts created by
+> `/Users/dc/geha/document_ingestion_workflow`. This dashboard reads those
+> durable artifacts but does not alter or rerun the visual repair workflow.
 
 ## What each Claude call receives
 
@@ -33,6 +32,28 @@ the complete document. Its live two-call diagnostic uses one real canonical
 document and reports Anthropic's `cache_creation_input_tokens` and
 `cache_read_input_tokens`. It passes only when the second call reports a cache
 read greater than zero.
+
+## EY visual figure mode
+
+The **Run EY figures** action reads the saved run at:
+
+```text
+crawl_dir/runs/research/ey-limra-workforce-benefits-study-final-2025/
+  agent-demo-20261010T125607Z-e93043/
+```
+
+It walks `pages/page-NNN/segments`, finds every `figure-NN` (or `fig-NN`)
+directory, and chooses the highest numbered `iteration-NN.png`. Each Claude
+call receives that page's `source.pdf` as the document and the selected PNG as
+the target figure chunk. The current run contains 26 figure chunks, so a fresh
+run is approximately 26 Claude calls. Matching completed outputs are reused by
+PDF hash, figure hash, model, and prompt version.
+
+The chunk inspector displays the original page PDF in panel **01**. Panel
+**02** displays the selected latest figure iteration, its Claude retrieval
+annotation, and the combined text intended for contextual BM25 and embeddings.
+Outputs are checkpointed in `visual-contextual-chunks.jsonl`; run metadata is
+stored in `visual-contextual-retrieval.json`.
 
 ## Run
 
@@ -100,6 +121,8 @@ Anthropic credentials must be visible to the backend through
 - Contextual output: `candidate/contextual-chunks.jsonl`
 - Contextual run metadata: `candidate/contextual-retrieval.json`
 - Batch progress: `crawl_dir/runs/<batch-id>.json`
+- Visual contextual output: `<saved-agent-run>/visual-contextual-chunks.jsonl`
+- Visual contextual metadata: `<saved-agent-run>/visual-contextual-retrieval.json`
 
 Candidates remain unpromoted and still require the repository's normal visual
 review and promotion gates.

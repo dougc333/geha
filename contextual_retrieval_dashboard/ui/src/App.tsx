@@ -193,6 +193,43 @@ export function App() {
     }
   }
 
+  const startVisual = async () => {
+    sourceRef.current?.close()
+    setStatus('starting'); setError(undefined); setEvents([]); setChunkData(undefined)
+    try {
+      const response = await fetch('/api/visual-batches', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ confirm_contextualization_cost: confirmed }),
+      })
+      const payload = await response.json()
+      if (!response.ok) throw new Error(payload.error ?? `Start failed (${response.status})`)
+      const stream = new EventSource(payload.events)
+      sourceRef.current = stream
+      setStatus('running')
+      stream.onmessage = message => updateFromEvent(JSON.parse(message.data))
+      stream.addEventListener('end', () => {
+        stream.close(); setStatus(current => current === 'error' ? current : 'complete')
+        setSelectedHistoryRun(payload.run)
+        setSelectedSource(health?.visual_run?.source)
+        void Promise.all([
+          fetch('/api/history').then(response => response.json() as Promise<HistoryResponse>),
+          fetch(`/api/chunks?run=${encodeURIComponent(payload.run)}`).then(response => response.json() as Promise<ChunkResponse>),
+        ]).then(([historyResult, chunksResult]) => {
+          setHistory(historyResult.runs)
+          setSelectedChunk(0)
+          setChunkData(chunksResult)
+        })
+      })
+      stream.onerror = () => {
+        if (stream.readyState === EventSource.CLOSED) {
+          setError('The event stream closed unexpectedly.'); setStatus('error')
+        }
+      }
+    } catch (reason) {
+      setError((reason as Error).message); setStatus('error')
+    }
+  }
+
   const selectDocument = async (source: string) => {
     setSelectedSource(source); setSelectedChunk(0); setChunkData(undefined)
     const run = documents[source]?.run
@@ -234,7 +271,7 @@ export function App() {
         <div>
           <p className="eyebrow">CANONICAL CORPUS INGESTION</p>
           <h1>Contextual Retrieval Workbench</h1>
-          <p className="lede">Run Docling hybrid chunking across all coverage policies, then inspect the original chunk beside Claude's whole-document retrieval context.</p>
+          <p className="lede">Run contextual retrieval for canonical policy text or saved page-and-figure artifacts, then inspect the exact evidence sent to Claude beside its retrieval context.</p>
         </div>
         <div className="hero-actions">
           <button className="prompt-toggle" onClick={() => setPromptOpen(true)}>Prompt + cache</button>
@@ -247,7 +284,7 @@ export function App() {
 
       <aside className="notice">
         <b>Two different ingestion systems</b>
-        <span>This dashboard uses the deterministic canonical Docling pipeline. Datroway and Elrexfio use a separate visual ReAct workflow in <code>document_ingestion_workflow</code> on port 8510.</span>
+        <span>Coverage policies use deterministic Docling text chunks. The EY visual mode reads an existing agent run and pairs each <code>page-NNN/source.pdf</code> with the highest numbered <code>segments/figure-NN/iteration-NN.png</code>.</span>
       </aside>
 
       <section className="control-card">
@@ -256,7 +293,7 @@ export function App() {
         <div className="field year-field"><label>Plan year</label><input type="number" value={planYear} onChange={event => setPlanYear(Number(event.target.value))} /></div>
         <div className="field document-picker"><label>One-document test · canonical Markdown required</label><select value={batchDocument} onChange={event => setBatchDocument(event.target.value)}>{health?.documents.map(document => { const readiness = health.document_readiness[document]; return <option key={document} value={document} disabled={!readiness?.batch_markdown_available}>{shortName(document)} · {readiness?.react_converted_source ? 'ReAct-converted source · ' : ''}{readiness?.batch_markdown_available ? 'MD ready' : 'no batch MD'} · ~{health.estimated_context_calls_by_document[document] ?? 0} calls</option> })}</select></div>
         <label className="confirm"><input type="checkbox" checked={confirmed} onChange={event => setConfirmed(event.target.checked)} /><span>I understand contextual retrieval makes <b>one Claude call per chunk</b>.</span></label>
-        <div className="run-actions"><button className="secondary-run" onClick={() => void start('one')} disabled={!health?.ready || !confirmed || !batchDocument || status === 'running' || status === 'starting'}>{status === 'running' ? 'Running…' : `Run 1 document · ~${health?.estimated_context_calls_by_document[batchDocument] ?? 0} calls`}</button><button onClick={() => void start('all')} disabled={!health?.ready || !confirmed || status === 'running' || status === 'starting'}>{status === 'running' ? 'Running…' : `Run all 35 · ~${health?.estimated_context_calls ?? 0} calls`}</button></div>
+        <div className="run-actions"><button className="secondary-run" onClick={() => void start('one')} disabled={!health?.ready || !confirmed || !batchDocument || status === 'running' || status === 'starting'}>{status === 'running' ? 'Running…' : `Run 1 document · ~${health?.estimated_context_calls_by_document[batchDocument] ?? 0} calls`}</button><button onClick={() => void start('all')} disabled={!health?.ready || !confirmed || status === 'running' || status === 'starting'}>{status === 'running' ? 'Running…' : `Run all 35 · ~${health?.estimated_context_calls ?? 0} calls`}</button><button className="visual-run" onClick={() => void startVisual()} disabled={!health?.ready || !health?.visual_run?.available || !confirmed || status === 'running' || status === 'starting'}>{status === 'running' ? 'Running…' : `Run EY figures · ~${health?.visual_run?.estimated_context_calls ?? 0} calls`}</button></div>
       </section>
 
       {error && <div className="error-banner">{error}</div>}
@@ -271,7 +308,7 @@ export function App() {
       <main className="workspace">
         <section className="documents-panel panel">
           <div className="panel-heading"><div><p className="eyebrow">RUNS + LIVE PROGRESS</p><h2>Coverage policies</h2></div><span className="status-pill">{history.length} saved · {status}</span></div>
-          <div className="history-picker"><label>Past contextual runs</label><select value={selectedHistoryRun} onChange={event => void selectPastRun(event.target.value)}><option value="">Select a saved run…</option>{history.map(run => <option key={run.run} value={run.run}>{shortName(run.source)} · {run.completed_chunks}/{run.total_chunks} chunks · {new Date(run.updated_at).toLocaleString()}</option>)}</select></div>
+          <div className="history-picker"><label>Past contextual runs</label><select value={selectedHistoryRun} onChange={event => void selectPastRun(event.target.value)}><option value="">Select a saved run…</option>{history.map(run => <option key={run.run} value={run.run}>{run.artifact_mode === 'visual' ? 'VISUAL · ' : ''}{shortName(run.source)} · {run.completed_chunks}/{run.total_chunks} chunks · {new Date(run.updated_at).toLocaleString()}</option>)}</select></div>
           <div className="document-list">
             {Object.values(documents).map(document => (
               <button className={`document-row ${selectedSource === document.source ? 'selected' : ''}`} key={document.source} onClick={() => void selectDocument(document.source)} disabled={!document.run}>
@@ -292,8 +329,8 @@ export function App() {
           {pair && <>
             <div className="chunk-meta"><code>{pair.chunk_id}</code><span>pages {pair.pages.join(', ')}</span><span>{pair.section}</span></div>
             <div className="compare-grid">
-              <article className="chunk-card original"><header><span>01</span><div><b>Canonical Docling chunk</b><small>Preserved evidence text</small></div></header><pre>{pair.text}</pre><details><summary>Deterministic provenance string</summary><pre>{pair.deterministic_contextualized_text}</pre></details></article>
-              <article className="chunk-card contextual"><header><span>02</span><div><b>Claude contextual annotation</b><small>Generated from the entire document</small></div></header><div className="annotation">{pair.retrieval_context ?? 'Context is still being generated.'}</div><details open><summary>Text used for contextual BM25 + embeddings</summary><pre>{pair.contextual_retrieval_text ?? pair.text}</pre></details></article>
+              <article className="chunk-card original"><header><span>01</span><div><b>{pair.artifact_kind === 'visual' ? 'Original page PDF' : 'Canonical Docling chunk'}</b><small>{pair.artifact_kind === 'visual' ? pair.source_pdf_path : 'Preserved evidence text'}</small></div></header>{pair.artifact_kind === 'visual' && pair.source_pdf_url ? <iframe className="artifact-pdf" title={`Source PDF for ${pair.chunk_id}`} src={pair.source_pdf_url} /> : <><pre>{pair.text}</pre><details><summary>Deterministic provenance string</summary><pre>{pair.deterministic_contextualized_text}</pre></details></>}</article>
+              <article className="chunk-card contextual"><header><span>02</span><div><b>{pair.artifact_kind === 'visual' ? 'Latest figure iteration + Claude context' : 'Claude contextual annotation'}</b><small>{pair.artifact_kind === 'visual' ? pair.chunk_image_path : 'Generated from the entire document'}</small></div></header>{pair.artifact_kind === 'visual' && pair.chunk_image_url && <img className="artifact-image" src={pair.chunk_image_url} alt={`Figure chunk ${pair.chunk_id}`} />}<div className="annotation">{pair.retrieval_context ?? 'Context is still being generated.'}</div><details open><summary>Text used for contextual BM25 + embeddings</summary><pre>{pair.contextual_retrieval_text ?? pair.text}</pre></details></article>
             </div>
           </>}
         </section>
@@ -319,9 +356,9 @@ export function App() {
               <div className="cache-metrics"><span>First call<b>{cacheTest.first.cache_creation_input_tokens.toLocaleString()} created</b><em>{cacheTest.first.cache_read_input_tokens.toLocaleString()} read</em></span><span>Second call<b>{cacheTest.second.cache_creation_input_tokens.toLocaleString()} created</b><em>{cacheTest.second.cache_read_input_tokens.toLocaleString()} read</em></span></div>
             </div>}
           </div>
-          <section className="prompt-section"><div className="prompt-label"><b>System block 1</b><span>instructions</span></div><pre>{prompt?.system_prompt}</pre></section>
-          <section className="prompt-section cached"><div className="prompt-label"><b>System block 2</b><span>cached · entire document</span></div><pre>{prompt?.document_block ?? '<document>\n{{WHOLE_DOCUMENT}}\n</document>'}</pre></section>
-          <section className="prompt-section"><div className="prompt-label"><b>User message</b><span>changes per chunk</span></div><pre>{prompt?.user_template.replace('{chunk}', pair?.text ?? '{{CHUNK_CONTENT}}')}</pre></section>
+          <section className="prompt-section"><div className="prompt-label"><b>System block 1</b><span>instructions</span></div><pre>{pair?.artifact_kind === 'visual' ? prompt?.visual_system_prompt : prompt?.system_prompt}</pre></section>
+          <section className="prompt-section cached"><div className="prompt-label"><b>{pair?.artifact_kind === 'visual' ? 'PDF document block' : 'System block 2'}</b><span>cached · entire document</span></div><pre>{pair?.artifact_kind === 'visual' ? prompt?.visual_document_block?.replace('{{PAGE_SOURCE_PDF}}', pair.source_pdf_path ?? '{{PAGE_SOURCE_PDF}}') : prompt?.document_block ?? '<document>\n{{WHOLE_DOCUMENT}}\n</document>'}</pre></section>
+          <section className="prompt-section"><div className="prompt-label"><b>User message</b><span>changes per chunk</span></div><pre>{pair?.artifact_kind === 'visual' ? prompt?.visual_user_template?.replace('{{LATEST_ITERATION_IMAGE}}', pair.chunk_image_path ?? '{{LATEST_ITERATION_IMAGE}}') : prompt?.user_template.replace('{chunk}', pair?.text ?? '{{CHUNK_CONTENT}}')}</pre></section>
           {pair?.prompt_cache && <section className="selected-cache"><b>Selected chunk telemetry</b><span>{pair.prompt_cache.cache_creation_input_tokens.toLocaleString()} cache-write tokens</span><span>{pair.prompt_cache.cache_read_input_tokens.toLocaleString()} cache-read tokens</span></section>}
         </aside>
       </>}
