@@ -12,6 +12,12 @@ export interface Health {
     react_converted_source: boolean
   }>
   canonical_chunker: string
+  visual_run?: {
+    available: boolean
+    source: string
+    run: string
+    estimated_context_calls: number
+  }
 }
 
 export interface RunEvent {
@@ -63,6 +69,7 @@ export interface HistoricalRun {
   whole_document_chars?: number
   cache_creation_input_tokens: number
   cache_read_input_tokens: number
+  artifact_mode?: 'text' | 'visual'
 }
 
 export interface HistoryResponse {
@@ -72,6 +79,7 @@ export interface HistoryResponse {
 }
 
 export interface ChunkPair {
+  artifact_kind?: 'text' | 'visual'
   chunk_id: string
   pages: number[]
   section: string
@@ -81,6 +89,10 @@ export interface ChunkPair {
   contextual_retrieval_text?: string
   model?: string
   prompt_cache?: CacheUsage
+  source_pdf_path?: string
+  chunk_image_path?: string
+  source_pdf_url?: string
+  chunk_image_url?: string
 }
 
 export interface ChunkResponse {
@@ -88,6 +100,7 @@ export interface ChunkResponse {
   completed: number
   total: number
   chunks: ChunkPair[]
+  artifact_mode?: 'text' | 'visual'
 }
 
 export interface CacheUsage {
@@ -104,6 +117,10 @@ export interface PromptContract {
   document_cache_control: { type: string }
   user_template: string
   cache_scope: string
+  visual_prompt_version?: string
+  visual_system_prompt?: string
+  visual_document_block?: string
+  visual_user_template?: string
 }
 
 export interface CacheTestResult {
