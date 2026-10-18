@@ -67,6 +67,50 @@ docker compose up -d            # HAPI + Postgres; FHIR base http://localhost:80
 ./load_synthea.sh 50 Missouri   # generate 50 patients (seed 42) and load them
 ```
 
+### URLs
+
+- HAPI browser UI: [http://localhost:8080](http://localhost:8080)
+- FHIR R4 base URL: [http://localhost:8080/fhir](http://localhost:8080/fhir)
+- Server metadata: [http://localhost:8080/fhir/metadata](http://localhost:8080/fhir/metadata)
+
+### React agent apps
+
+Keep the HAPI Docker Compose stack running while using either agent app. Each app
+serves its built React UI through FastAPI at
+[http://localhost:8765](http://localhost:8765).
+
+**Fraud investigation app**
+
+- Source: [`fraud/`](fraud/)
+- React UI: [`fraud/ui/`](fraud/ui/)
+- Agent: [`fraud/agent.py`](fraud/agent.py)
+
+```bash
+cd /Users/dc/geha/hapi/fraud
+(cd ui && npm install && npm run build)  # first run or after UI changes
+./run_server.sh
+```
+
+**RSI/self-improving agent app**
+
+- Source: [`self-improving-agents/`](self-improving-agents/)
+- React UI: [`self-improving-agents/ui/`](self-improving-agents/ui/)
+- Agent: [`self-improving-agents/agent.py`](self-improving-agents/agent.py)
+- Improvement loop: [`self-improving-agents/improve.py`](self-improving-agents/improve.py)
+- Learned tools: [`self-improving-agents/learned_tools/`](self-improving-agents/learned_tools/)
+
+```bash
+cd /Users/dc/geha/hapi/self-improving-agents
+(cd ui && npm install && npm run build)  # first run or after UI changes
+./run_server.sh
+```
+
+Both apps use port `8765`, so run only one at a time. Stop the running app with
+`Ctrl-C` before starting the other. The agent servers need `ANTHROPIC_API_KEY`;
+`OPENAI_API_KEY` and `NOUS_API_KEY` are optional for their corresponding model
+choices. The plain page on port `8080` is HAPI FHIR's built-in browser, not either
+React app.
+
 No local Java is needed: Synthea runs in an `eclipse-temurin:17-jre` container.
 `synthea/synthea-with-dependencies.jar` (197 MB, from the Synthea GitHub releases)
 and `synthea/output/` are git-ignored. `docker compose down` stops the server and

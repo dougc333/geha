@@ -5,12 +5,12 @@ Separate local React app for manually annotating every figure, chart, table, or 
 ## Run
 
 ```bash
-cd /Users/dc/geha/crawl_dir/figure_bbox_app/ui
+cd /Users/dc/geha/bounding_box/figure_bbox_app/ui
 npm install
 npm run build
 
 cd /Users/dc/geha
-.venv/bin/python -m crawl_dir.figure_bbox_app.backend --port 8511
+.venv/bin/python -m bounding_box.figure_bbox_app.backend --port 8511
 ```
 
 Open <http://127.0.0.1:8511/>.
@@ -18,10 +18,26 @@ Open <http://127.0.0.1:8511/>.
 Drag on a PDF page to create a region. Use the small arrow controls or page dropdown to navigate. Label and classify each region in the right panel. Every change is autosaved atomically, and **Save bounding boxes** (or `Cmd/Ctrl+S`) creates an explicit save checkpoint at:
 
 ```text
-/Users/dc/geha/crawl_dir/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-bounding-boxes.json
+/Users/dc/geha/bounding_box/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-bounding-boxes.json
 ```
 
 Coordinates use a resolution-independent `0..1000` system. Multiple regions can be stored per page. The source PDF remains unchanged.
+
+## Browser agent (automatic boxes for any PDF)
+
+`browser_bbox_agent.py` starts this app for any PDF (`backend.py --pdf ... --out-dir ...`), opens it in
+Playwright Chromium, and lets Claude draw the boxes with mouse drags. After each box it gets a fresh
+screenshot, so it can delete and redraw bad ones. Boxes autosave through the normal UI, in the same
+`figure-bounding-boxes.json` format (0..1000). A sidecar `browser-agent-run.json` adds PDF-point coordinates.
+
+```bash
+cd /Users/dc/geha
+.venv/bin/python -m bounding_box.figure_bbox_app.browser_bbox_agent \
+  --pdf /Users/dc/ocr-mini-bench/bench_documents/Invoices/medical_bill_en.pdf --headed
+```
+
+Needs `ANTHROPIC_API_KEY`. Output defaults to `bounding_box/annotations/other/<pdf stem>/`.
+Options: `--pages 1,3`, `--model`, `--port` (default 8512), `--max-turns`.
 
 ## Generate and review reconstruction prompts
 
@@ -29,7 +45,7 @@ Create one evidence-backed reconstruction prompt for every saved figure or image
 
 ```bash
 cd /Users/dc/geha
-.venv/bin/python -m crawl_dir.figure_bbox_app.generate_reconstruction_prompts
+.venv/bin/python -m bounding_box.figure_bbox_app.generate_reconstruction_prompts
 ```
 
 The generator reads each saved bounding box, extracts native PDF text and embedded font names,
@@ -44,7 +60,7 @@ Regenerating the catalog copies those approved prompts byte-for-byte instead of 
 The combined catalog is written to:
 
 ```text
-/Users/dc/geha/crawl_dir/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-reconstruction-prompts.json
+/Users/dc/geha/bounding_box/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-reconstruction-prompts.json
 ```
 
 Individual Markdown prompts are stored under `reconstruction-prompts/page-NNN/`. The React viewer
@@ -58,7 +74,7 @@ Run a single-page checkpoint before processing the rest of the document:
 
 ```bash
 cd /Users/dc/geha
-.venv/bin/python -m crawl_dir.figure_bbox_app.process_annotated_page \
+.venv/bin/python -m bounding_box.figure_bbox_app.process_annotated_page \
   --page 4 --max-iterations 6
 ```
 
@@ -76,7 +92,7 @@ Playwright visual-correction loop:
 
 ```bash
 cd /Users/dc/geha
-.venv/bin/python -m crawl_dir.figure_bbox_app.tailwind_figure_loop --max-iterations 6
+.venv/bin/python -m bounding_box.figure_bbox_app.tailwind_figure_loop --max-iterations 6
 ```
 
 The workflow uses locally compiled Tailwind and allows supplemental inline CSS plus inline SVG

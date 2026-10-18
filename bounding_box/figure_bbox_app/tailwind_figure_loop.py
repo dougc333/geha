@@ -23,11 +23,12 @@ from crawl_dir.src.pipeline.scanned_ingestion import _clean_html
 
 MAX_ITERATIONS = 6
 APP_DIR = Path(__file__).resolve().parent
+REPO_DIR = APP_DIR.parents[1]
 TAILWIND_UI = APP_DIR / "ui"
 TAILWIND_CLI = TAILWIND_UI / "node_modules" / ".bin" / "tailwindcss"
 TAILWIND_PACKAGE_CSS = TAILWIND_UI / "node_modules" / "tailwindcss" / "index.css"
 CHECKPOINT = (
-    APP_DIR.parent
+    REPO_DIR / "crawl_dir"
     / "runs/research/ey-limra-workforce-benefits-study-final-2025"
     / "manual-figure-page004-checkpoint/pages/page-004/segments"
 )

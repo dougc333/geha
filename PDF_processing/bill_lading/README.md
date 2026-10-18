@@ -114,3 +114,53 @@ Run both correction stages:
   --ocr-results gpt4o_only_run_20260927T183545Z/gpt4o_only_results.json \
   --model gpt-4o
 ```
+
+## Spec-driven parsing: OCR text to a validated bill of lading
+
+OCR gives text, not fields. `bol_parser.py` turns any engine's per-block text into **typed, validated
+fields** using a layout spec. A misread is flagged instead of passing through silently.
+
+| File | What it is |
+|---|---|
+| `bill_of_lading_spec.json` | The **layout spec** for this template (`meridian_shipping_bl_v1`): 8 blocks with pixel boxes, 18 fields (label used as an anchor, value pattern, type, required), the per-container cargo group, and 3 cross-field rules. **Structure and rules only, with no values from any document.** |
+| `bol_parser.py` | One generic interpreter: `parse` (a Claude cell dir or a plain-text dir) and `evaluate` (all saved engines vs gold) |
+| `bill_of_lading_gold_fields.json` | Field-level answer key for `bill_of_lading_alt_1`, used only for scoring (verbatim from the ground truth; per-container values checked against `blocks/block_6.png`) |
+| `test_bol_parser.py` | 6 tests: label splitting, misread rejection, rules, ISO 6346, saved runs |
+| `bol_parse_results.json`, `bol_parsed_claude.json` | Evaluation output and an example parsed B/L |
+
+How a field is extracted:
+1. Find the text after its **label**, up to the next known label. This also splits text where the label
+   and value ran together, such as PaddleOCR's `OCEAN VESSEL / VOYAGEMERIDIAN LABREA / 124N`.
+2. Keep the part that matches the field's **pattern**, or search the block for it.
+3. **Validate** the pattern and type.
+
+The cargo block is columnar, so each cargo field is collected in reading order and zipped into
+containers. A count mismatch between columns is an error. **Rules** then check the document as a whole:
+package counts add up to TOTAL NUMBER OF PACKAGES, "THREE (3)" words match the digit, and the date is real.
+Container numbers get an ISO 6346 check as a warning only (this sample's `MRDN…` numbers are synthetic).
+
+### Results on the saved runs (no new model calls)
+
+| Engine | Fields correct | Wrong | Missing | Bad fields flagged by spec | Silent errors | Valid B/L? |
+|---|---:|---:|---:|---:|---:|---|
+| Claude Opus 5.5 | **46/46** | 0 | 0 | — | 0 | **yes** (all 3 rules pass) |
+| Tesseract 5.5.1 | 13/46 | 7 | 26 | **27/33** | 6 | **no** (rejected for review) |
+
+- **Claude:** every field, both containers and all rules correct.
+- **Tesseract is rejected, which is the point of the spec.** It caught the misread B/L number
+  (`31232472785`), the broken date (`2026-03-1 3`), and a column misalignment that gave container 1
+  container 2's commodity, HS code and temperature.
+- **6 errors were silent,** all in **free-text fields with no strict pattern** (party phone and email,
+  place of receipt, delivery agent, port of discharge). Tesseract reads across columns row by row and
+  merges neighbouring boxes, for example port of discharge `N BUENOS AIRES, ARGENTINA ROTTERDAM`. Catching
+  these needs block coordinates (word boxes) or a tighter vocabulary (a UN/LOCODE port list), not a
+  looser text parser.
+- **PaddleOCR-VL** outputs weren't saved in this folder, so it isn't scored here. A test fixture in its
+  run-together format shows label anchors splitting it correctly, which is the cause of its 52/79 above.
+
+```sh
+cd PDF_processing/bill_lading
+python3 bol_parser.py evaluate                                   # score all saved engines
+python3 bol_parser.py parse --claude-dir claude_run_*/claude     # parse one run to JSON
+python3 -m unittest test_bol_parser -v
+```

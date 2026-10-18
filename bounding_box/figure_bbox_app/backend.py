@@ -13,16 +13,41 @@ from aiohttp import web
 
 
 APP_DIR = Path(__file__).resolve().parent
-CRAWL_DIR = APP_DIR.parent
+REPO_DIR = APP_DIR.parents[1]
+BOUNDING_BOX_DIR = APP_DIR.parent
+CRAWL_DIR = REPO_DIR / "crawl_dir"
 DOCUMENT_ID = "ey-limra-workforce-benefits-study-final-2025"
 SOURCE_RELATIVE = Path("raw/research") / f"{DOCUMENT_ID}.pdf"
 SOURCE_PDF = CRAWL_DIR / SOURCE_RELATIVE
-ANNOTATION_DIR = CRAWL_DIR / "annotations" / "research" / DOCUMENT_ID
+ANNOTATIONS_DIR = BOUNDING_BOX_DIR / "annotations"
+ANNOTATION_DIR = ANNOTATIONS_DIR / "research" / DOCUMENT_ID
 ANNOTATION_PATH = ANNOTATION_DIR / "figure-bounding-boxes.json"
 PROMPTS_PATH = ANNOTATION_DIR / "figure-reconstruction-prompts.json"
 CACHE_DIR = APP_DIR / ".page-cache" / DOCUMENT_ID
 UI_DIST = APP_DIR / "ui" / "dist"
 COORDINATE_MAX = 1000
+TITLE = "EY + LIMRA 2025 Workforce Benefits Study"
+EXPECTED_PAGES: int | None = 29
+
+
+def configure(pdf: Path, annotation_dir: Path | None = None) -> None:
+    """Point the app at any PDF instead of the default EY study."""
+    global DOCUMENT_ID, SOURCE_RELATIVE, SOURCE_PDF, ANNOTATION_DIR, ANNOTATION_PATH
+    global PROMPTS_PATH, CACHE_DIR, TITLE, EXPECTED_PAGES
+    SOURCE_PDF = pdf.resolve()
+    if not SOURCE_PDF.is_file():
+        raise RuntimeError(f"Source PDF not found: {SOURCE_PDF}")
+    DOCUMENT_ID = SOURCE_PDF.stem
+    try:
+        SOURCE_RELATIVE = SOURCE_PDF.relative_to(CRAWL_DIR)
+    except ValueError:
+        SOURCE_RELATIVE = SOURCE_PDF
+    ANNOTATION_DIR = (annotation_dir or ANNOTATIONS_DIR / "other" / DOCUMENT_ID).resolve()
+    ANNOTATION_PATH = ANNOTATION_DIR / "figure-bounding-boxes.json"
+    PROMPTS_PATH = ANNOTATION_DIR / "figure-reconstruction-prompts.json"
+    CACHE_DIR = APP_DIR / ".page-cache" / DOCUMENT_ID
+    TITLE = DOCUMENT_ID
+    EXPECTED_PAGES = None
 
 
 def utc_now() -> str:
@@ -161,7 +186,7 @@ async def get_document(_request: web.Request) -> web.Response:
         first = document.load_page(0)
         metadata = {
             "document_id": DOCUMENT_ID,
-            "title": "EY + LIMRA 2025 Workforce Benefits Study",
+            "title": TITLE,
             "source_pdf": str(SOURCE_PDF),
             "page_count": document.page_count,
             "page_aspect_ratio": first.rect.width / first.rect.height,
@@ -231,10 +256,14 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Manual figure bounding-box annotation app")
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8511)
+    parser.add_argument("--pdf", type=Path, help="annotate this PDF instead of the EY study")
+    parser.add_argument("--out-dir", type=Path, help="where figure-bounding-boxes.json is written (with --pdf)")
     args = parser.parse_args()
+    if args.pdf:
+        configure(args.pdf, args.out_dir)
     count = pdf_page_count()
-    if count != 29:
-        raise RuntimeError(f"Expected 29 pages for {DOCUMENT_ID}; found {count}")
+    if EXPECTED_PAGES is not None and count != EXPECTED_PAGES:
+        raise RuntimeError(f"Expected {EXPECTED_PAGES} pages for {DOCUMENT_ID}; found {count}")
     if not ANNOTATION_PATH.exists():
         save_annotations(empty_annotations())
     web.run_app(create_app(), host=args.host, port=args.port)

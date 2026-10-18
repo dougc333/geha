@@ -1,0 +1,119 @@
+{
+  "source_pdf": "/Users/dc/ocr-mini-bench/bench_documents/Invoices/medical_bill_en.pdf",
+  "model": "claude-opus-5-5",
+  "finished_at": "2026-10-18T17:07:09.577128Z",
+  "annotation_file": "/Users/dc/geha/bounding_box/annotations/other/medical_bill_en/figure-bounding-boxes.json",
+  "page_summaries": {
+    "1": "Boxed logo, patient info, insurance info, provider panel, charges table, account summary."
+  },
+  "regions": [
+    {
+      "page": 1,
+      "id": "page-001-region-40ea9369",
+      "kind": "image",
+      "label": "Hospital logo",
+      "box_normalized_0_1000": [
+        59.748,
+        51.041,
+        133.124,
+        95.063
+      ],
+      "box_pdf_pt": [
+        53.77,
+        75.47,
+        119.81,
+        140.57
+      ]
+    },
+    {
+      "page": 1,
+      "id": "page-001-region-a17536d0",
+      "kind": "table",
+      "label": "Patient information panel",
+      "box_normalized_0_1000": [
+        60.797,
+        207.353,
+        482.18,
+        354.733
+      ],
+      "box_pdf_pt": [
+        54.72,
+        306.61,
+        433.96,
+        524.53
+      ]
+    },
+    {
+      "page": 1,
+      "id": "page-001-region-bb64662f",
+      "kind": "table",
+      "label": "Insurance & visit info panel",
+      "box_normalized_0_1000": [
+        517.82,
+        207.353,
+        938.155,
+        340.696
+      ],
+      "box_pdf_pt": [
+        466.04,
+        306.61,
+        844.34,
+        503.78
+      ]
+    },
+    {
+      "page": 1,
+      "id": "page-001-region-83457428",
+      "kind": "table",
+      "label": "Provider and diagnosis panel",
+      "box_normalized_0_1000": [
+        60.797,
+        383.443,
+        938.155,
+        450.434
+      ],
+      "box_pdf_pt": [
+        54.72,
+        566.98,
+        844.34,
+        666.04
+      ]
+    },
+    {
+      "page": 1,
+      "id": "page-001-region-b6166a1f",
+      "kind": "table",
+      "label": "Itemized charges table",
+      "box_normalized_0_1000": [
+        60.797,
+        472.126,
+        938.155,
+        622.696
+      ],
+      "box_pdf_pt": [
+        54.72,
+        698.12,
+        844.34,
+        920.76
+      ]
+    },
+    {
+      "page": 1,
+      "id": "page-001-region-4dd726ff",
+      "kind": "table",
+      "label": "Account summary panel",
+      "box_normalized_0_1000": [
+        500.0,
+        652.044,
+        938.155,
+        886.832
+      ],
+      "box_pdf_pt": [
+        450.0,
+        964.16,
+        844.34,
+        1311.33
+      ]
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "template": "meridian_shipping_bl_v1",
+  "description": "Meridian Shipping ocean bill of lading, one page, eight bordered blocks (bill_of_lading_alt_1 layout). Describes structure and rules only: labels are anchors, patterns validate values. No values from any one document.",
+  "page_size_px": [2136, 3584],
+  "blocks": [
+    {
+      "block": 1, "name": "header", "box_px": [67, 0, 1999, 363],
+      "constants": ["MERIDIAN SHIPPING", "GLOBAL SHIPPING & LOGISTICS", "BILL OF LADING"],
+      "fields": [
+        {"name": "bl_number", "label": "B/L NO.", "pattern": "BL\\d{9}", "required": true},
+        {"name": "scac", "label": "SCAC", "pattern": "[A-Z]{4}", "required": true}
+      ]
+    },
+    {
+      "block": 2, "name": "parties", "box_px": [67, 363, 1999, 899],
+      "fields": [
+        {"name": "shipper", "label": "SHIPPER", "label_re": "SHIPPER(?!'S)", "kind": "party", "required": true},
+        {"name": "booking_ref", "label": "BOOKING REF.", "pattern": "BKG\\d{7}", "required": true},
+        {"name": "shipper_ref", "label": "SHIPPER'S REF.", "pattern": "[A-Z]{3}-\\d{5}"},
+        {"name": "pre_carriage_by", "label": "PRE-CARRIAGE BY", "line": true},
+        {"name": "consignee", "label": "CONSIGNEE", "label_re": "CONSIGNEE(\\s*\\(NEGOTIABLE[^)]*\\))?", "kind": "party", "required": true},
+        {"name": "place_of_receipt", "label": "PLACE OF RECEIPT", "line": true},
+        {"name": "notify_party", "label": "NOTIFY PARTY", "label_re": "NOTIFY PARTY(\\s*\\([^)]*\\))?", "kind": "party"},
+        {"name": "delivery_agent", "label": "DELIVERY AGENT", "kind": "party"}
+      ]
+    },
+    {
+      "block": 3, "name": "voyage", "box_px": [67, 1262, 1999, 149],
+      "fields": [
+        {"name": "vessel_voyage", "label": "OCEAN VESSEL / VOYAGE", "pattern": "[A-Z][A-Z ]+ / [0-9A-Z]+", "required": true},
+        {"name": "port_of_loading", "label": "PORT OF LOADING", "pattern": "[A-Z][A-Z .'-]+, [A-Z][A-Z .'-]+", "required": true},
+        {"name": "port_of_discharge", "label": "PORT OF DISCHARGE", "pattern": "[A-Z][A-Z .'-]+, [A-Z][A-Z .'-]+", "required": true}
+      ]
+    },
+    {
+      "block": 4, "name": "particulars_notice", "box_px": [67, 1411, 1999, 71],
+      "constants": ["PARTICULARS FURNISHED BY SHIPPER - CARRIER NOT RESPONSIBLE"], "fields": []
+    },
+    {
+      "block": 5, "name": "cargo_headers", "box_px": [67, 1482, 1999, 77],
+      "constants": ["CONTAINER NO. / SEAL NO.", "NO. PKGS", "DESCRIPTION OF GOODS", "GROSS WT.", "MEASUREMENT"], "fields": []
+    },
+    {
+      "block": 6, "name": "cargo", "box_px": [67, 1559, 1999, 1185],
+      "fields": [
+        {"name": "freight_terms", "find": "FREIGHT (COLLECT|PREPAID)", "required": true}
+      ]
+    },
+    {
+      "block": 7, "name": "charges", "box_px": [67, 2744, 1999, 256],
+      "constants": ["FREIGHT & CHARGES", "OCEAN FREIGHT", "THC"],
+      "fields": [
+        {"name": "total_packages", "label": "TOTAL NUMBER OF PACKAGES", "pattern": "\\d+", "type": "int", "required": true}
+      ]
+    },
+    {
+      "block": 8, "name": "issue", "box_px": [67, 3000, 1999, 341],
+      "constants": ["SIGNED FOR THE CARRIER"],
+      "fields": [
+        {"name": "place_of_issue", "label": "PLACE OF ISSUE", "pattern": "[A-Z][A-Za-z .'-]+", "required": true},
+        {"name": "date_of_issue", "label": "DATE OF ISSUE", "pattern": "\\d{4}-\\d{2}-\\d{2}", "type": "date", "required": true},
+        {"name": "original_bls", "label": "NUMBER OF ORIGINAL B/L'S:", "pattern": "[A-Z]+ \\(\\d\\)", "required": true}
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "name": "containers", "block": 6,
+      "note": "The cargo block is columnar (containers, packages, description, weight, measurement side by side), so each field is collected in reading order and the i-th match of every field belongs to container i.",
+      "fields": [
+        {"name": "container_no", "find": "\\b([A-Z]{4}\\d{7})\\b", "check": "iso6346"},
+        {"name": "seal_no", "find": "SEAL:\\s*([A-Z]{3}\\d{6})"},
+        {"name": "marks", "find": "MARKS:\\s*([A-Z]+)"},
+        {"name": "packages", "find": "(\\d+)\\s+PALLETS\\s+STC", "type": "int"},
+        {"name": "commodity", "find": "(?m)^\\s*([A-Z][A-Z ]+?)\\s*\\n\\s*STOWAGE AT"},
+        {"name": "hs_code", "find": "HS CODE:\\s*(\\d{8})"},
+        {"name": "set_temp", "find": "SET TEMP:\\s*([+-]?\\d+(?:\\.\\d+)?\\s*°C)"},
+        {"name": "gross_weight_kg", "find": "(\\d{1,3}(?:,\\d{3})+)\\s*KGS"},
+        {"name": "measurement_cbm", "find": "(\\d+\\.\\d{2})\\s*CBM"}
+      ]
+    }
+  ],
+  "rules": [
+    {"name": "packages_add_up", "check": "group_sum_equals", "group": "containers", "field": "packages", "equals": "total_packages",
+     "message": "sum of container package counts must equal TOTAL NUMBER OF PACKAGES"},
+    {"name": "original_bls_words_match_digit", "check": "words_match_digit", "field": "original_bls",
+     "message": "number of original B/Ls in words must match the digit, e.g. THREE (3)"},
+    {"name": "date_is_real", "check": "valid_date", "field": "date_of_issue", "message": "DATE OF ISSUE must be a real calendar date"}
+  ]
+}
