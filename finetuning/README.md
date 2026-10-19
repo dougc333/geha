@@ -1,5 +1,7 @@
 # GEHA retriever fine-tuning
 
+DEMO ONLY! This uses 2 pdfs. This data set is too small to get meaningful results. 
+
 This experiment fine-tunes `BAAI/bge-base-en-v1.5` for GEHA dental-policy
 retrieval with `MultipleNegativesRankingLoss`. It uses section-disjoint training
 and validation splits from the benefits guide and a separate plan brochure as
