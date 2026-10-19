@@ -25,6 +25,14 @@ agentic_search/data/arxiv_top300/
 # Jupyter
 .ipynb_checkpoints/
 
+# Retriever fine-tuning outputs (regenerate from finetuning/)
+finetuning/models/
+finetuning/checkpoints/
+finetuning/ragas/
+finetuning/data/
+finetuning/*.key
+crawl_dir/runs/*/*/*/candidate/ragas/
+
 # Environment files and local secrets
 .env
 .env.*
