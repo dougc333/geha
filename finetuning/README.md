@@ -34,7 +34,7 @@ below 2 and Rich below 15, while the main GEHA applications use newer versions.
   section-disjoint train/validation splits plus a document-disjoint test set.
 - `train_retriever.py` fine-tunes the encoder and selects the best validation
   checkpoint.
-- `Untitled.ipynb` records baseline evaluation, training, and the held-out
+- `finetuning.ipynb` records baseline evaluation, training, and the held-out
   before/after comparison.
 - `requirements.txt` pins the compatible RAGAS/LangChain dependency family.
   It also includes `rapidfuzz`, an optional package required by RAGAS's default
