@@ -141,6 +141,7 @@ source finetuning/.venv/bin/activate
 python finetuning/train_retriever.py
 ```
 
-Generated datasets, models, and evaluator checkpoints are intentionally ignored
-by Git. This prevents document-derived chunks and model weights from being
-published accidentally; regenerate them locally from the source documents.
+The compact synthetic QA JSONL files are committed as reproducible training and
+benchmark fixtures. Source chunks, native RAGAS intermediates, models, and
+evaluator checkpoints remain ignored; regenerate those locally from the source
+documents.
