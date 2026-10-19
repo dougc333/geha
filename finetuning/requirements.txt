@@ -1,0 +1,14 @@
+# Dedicated environment for the retriever-fine-tuning data generator.
+# RAGAS 0.4.3 currently depends on instructor, which requires OpenAI <2 and
+# Rich <15. Do not install this file into the repository's shared .venv.
+ragas==0.4.3
+langchain-core>=0.3.76,<1
+langchain-openai>=0.3.35,<0.4
+openai>=1.104.2,<2
+rich>=13.7,<15
+rapidfuzz>=3.14,<4
+torch>=2.4,<3
+accelerate>=1.1,<2
+sentence-transformers>=5.7,<6
+jupyter>=1.1,<2
+ipykernel>=6.29,<7

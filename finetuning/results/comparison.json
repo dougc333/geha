@@ -1,0 +1,23 @@
+{
+  "test_questions": 41,
+  "candidate_chunks": 167,
+  "base_model": "BAAI/bge-base-en-v1.5",
+  "fine_tuned_model": "geha-dental-retriever",
+  "metrics": {
+    "recall@5": {
+      "baseline": 0.6463414634146342,
+      "fine_tuned": 0.6869918699186991,
+      "absolute_change": 0.04065040650406493
+    },
+    "mrr@10": {
+      "baseline": 0.7261130468447541,
+      "fine_tuned": 0.7271680216802169,
+      "absolute_change": 0.0010549748354627964
+    },
+    "ndcg@10": {
+      "baseline": 0.6774334194266803,
+      "fine_tuned": 0.7000945347552451,
+      "absolute_change": 0.02266111532856474
+    }
+  }
+}
