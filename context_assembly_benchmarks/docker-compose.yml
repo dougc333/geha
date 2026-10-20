@@ -43,6 +43,14 @@ services:
           --server.address=0.0.0.0 \
           --server.port=8507
 
+  dashboard:
+    build:
+      context: ./dashboard
+      dockerfile: Dockerfile
+    ports:
+      - "127.0.0.1:5174:80"
+    init: true
+
 volumes:
   geha_pgvector_data:
 

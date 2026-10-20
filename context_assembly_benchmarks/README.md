@@ -132,6 +132,16 @@ zsh -ic '.venv/bin/python context_assembly_benchmarks/evaluate_chunking_judge.py
 cd context_assembly_benchmarks/dashboard && npm install && npm run dev   # http://localhost:5174
 ```
 
+Docker Compose starts both interfaces:
+
+```bash
+cd /Users/dc/geha/context_assembly_benchmarks
+docker compose up --build
+```
+
+- React benchmark dashboard: `http://127.0.0.1:5174`
+- Streamlit comparison app: `http://127.0.0.1:8507`
+
 ### Results (2026-10-16, 59 questions, `gpt-4o-mini` for answers, judge and fact check)
 
 | Strategy | Context complete ① | Answer complete ② | Questions with an assembly error | Questions with a generation drop | Avg context tokens |
