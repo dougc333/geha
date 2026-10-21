@@ -1,137 +1,313 @@
-# Contextual retrieval ingestion dashboard
+# Contextual Retrieval Workbench
 
-This is the corpus-wide, deterministic ingestion UI. It runs the canonical
-Docling `HybridChunker`, preserves `candidate/chunks.jsonl`, and writes Claude
-annotations to the separate `candidate/contextual-chunks.jsonl` artifact.
+A React dashboard for running and inspecting contextual retrieval over the canonical GEHA document corpus.
 
-> **Two artifact modes:** coverage policies use canonical Docling text chunks.
-> The saved EY/LIMRA agent demo uses visual page/figure artifacts created by
-> `/Users/dc/geha/document_ingestion_workflow`. This dashboard reads those
-> durable artifacts but does not alter or rerun the visual repair workflow.
+The workbench preserves the original evidence chunk and asks Claude to add a short retrieval-oriented description derived from the whole document. The combined text can be indexed with BM25 or embeddings without replacing the source text used for citations and faithfulness checks.
 
-## What each Claude call receives
+It supports two artifact modes:
 
-For every canonical chunk, Claude receives:
+- **Canonical policy text:** Docling Markdown and chunks produced by `crawl_dir`.
+- **Saved visual figures:** a page PDF paired with the latest rendered figure iteration from a completed ingestion run.
 
-1. the **entire extracted document** in a prompt-cacheable `<document>` block;
-2. one target Docling chunk in a `<chunk>` block; and
-3. an instruction to return only a short, retrieval-oriented context.
+> **Demo scope:** this application processes public, curated documents. It is not production- or HIPAA-ready, and it does not promote generated candidates automatically.
 
-The result is stored as `retrieval_context` and prepended to the original chunk
-in `contextual_retrieval_text`. Use that combined field for contextual BM25 and
-contextual embeddings. Keep `text` as the evidence shown to users and used by
-faithfulness checks.
+## Why contextual retrieval
 
-The dashboard requires a cost acknowledgment because this is one Claude call
-per chunk. It checkpoints after every chunk and reuses matching completed
-records when the same batch is resumed.
-
-The **Prompt + cache** sidebar shows the exact system blocks, the changing user
-chunk template, and the `cache_control: {"type": "ephemeral"}` breakpoint on
-the complete document. Its live two-call diagnostic uses one real canonical
-document and reports Anthropic's `cache_creation_input_tokens` and
-`cache_read_input_tokens`. It passes only when the second call reports a cache
-read greater than zero.
-
-## EY visual figure mode
-
-The **Run EY figures** action reads the saved run at:
+A short chunk can lose the names, dates, populations, plan options, or document section that make it retrievable. Contextual retrieval adds that missing document-level identity before indexing:
 
 ```text
-crawl_dir/runs/research/ey-limra-workforce-benefits-study-final-2025/
-  agent-demo-20261010T125607Z-e93043/
+whole document + target chunk
+              |
+              v
+       Claude annotation
+              |
+              v
+short retrieval context + original chunk text
+              |
+              +--> contextual BM25
+              +--> contextual embeddings
 ```
 
-It walks `pages/page-NNN/segments`, finds every `figure-NN` (or `fig-NN`)
-directory, and chooses the highest numbered `iteration-NN.png`. Each Claude
-call receives that page's `source.pdf` as the document and the selected PNG as
-the target figure chunk. The current run contains 26 figure chunks, so a fresh
-run is approximately 26 Claude calls. Matching completed outputs are reused by
-PDF hash, figure hash, model, and prompt version.
+The fields have intentionally different responsibilities:
 
-The chunk inspector displays the original page PDF in panel **01**. Panel
-**02** displays the selected latest figure iteration, its Claude retrieval
-annotation, and the combined text intended for contextual BM25 and embeddings.
-Outputs are checkpointed in `visual-contextual-chunks.jsonl`; run metadata is
-stored in `visual-contextual-retrieval.json`.
+| Field | Purpose |
+|---|---|
+| `text` | Preserved source evidence shown to users and used for grounding checks |
+| `retrieval_context` | Short generated description that situates the chunk within the document |
+| `contextual_retrieval_text` | `retrieval_context` followed by the original evidence text; intended for indexing |
 
-## Run
+The generated context is an indexing aid, not authoritative evidence.
 
-### Docker Compose (recommended)
+## Application architecture
 
-The image builds the React UI and preloads the BGE tokenizer used by the
-canonical Docling chunker. Source PDFs are mounted read-only; durable runs and
-the page-split cache are mounted read-write so prior runs remain visible.
+```text
+React 19 + Vite UI
+        |
+        | JSON + Server-Sent Events
+        v
+aiohttp backend
+        |
+        +--> crawl_dir canonical ingestion
+        |       Docling HybridChunker
+        |       BAAI/bge-small-en-v1.5 tokenizer
+        |       380-token chunk body
+        |
+        +--> Claude contextualization
+        |       one request per text chunk or figure
+        |       whole-document prompt caching
+        |
+        +--> durable JSONL and metadata under crawl_dir/runs
+```
+
+The backend serves the compiled React application, starts ingestion work in background threads, streams progress through SSE, and reconstructs run history from disk after restarts.
+
+## Canonical policy-text mode
+
+For each selected coverage-policy PDF, the backend:
+
+1. verifies that a prior non-empty canonical `batch-*/candidate/document.md` exists;
+2. invokes the canonical `crawl_dir.src.process_all` workflow for the requested batch;
+3. verifies the newly created run's `candidate/document.md` before any model call;
+4. reads `candidate/chunks.jsonl`;
+5. sends the complete document and one target chunk to Claude;
+6. checkpoints each result in `candidate/contextual-chunks.jsonl`; and
+7. writes aggregate model, prompt, token-cache, and completion metadata.
+
+The preflight check prevents spending money on contextualization when the source does not already have a viable canonical Markdown representation. Datroway and Elrexfio are identified in the UI as sources converted by the separate visual/ReAct workflow.
+
+### Prompt and cache contract
+
+Each text-chunk request contains:
+
+1. the complete extracted document in a cached `<document>` system block;
+2. the target canonical chunk in the changing user message; and
+3. an instruction to produce only concise retrieval context.
+
+The cache breakpoint is:
+
+```json
+{"cache_control": {"type": "ephemeral"}}
+```
+
+The **Prompt + cache** drawer shows the exact current prompt contract. Its live diagnostic makes two real Claude requests against the same document. It passes only when the second response reports `cache_read_input_tokens > 0`.
+
+## Saved visual-figure mode
+
+Visual mode reads a specific durable EY/LIMRA ingestion run configured in `backend.py`. It does not regenerate or repair figures.
+
+For each `pages/page-NNN/segments/figure-NN` or `fig-NN` directory, it:
+
+1. requires `page-NNN/source.pdf`;
+2. selects the highest numbered `iteration-NN.png`;
+3. optionally reads literal source text from `native-evidence.json`;
+4. sends the page PDF and selected figure image to Claude; and
+5. combines the generated context with the literal evidence text.
+
+The chunk inspector then displays:
+
+- **Panel 01:** the authoritative page PDF; and
+- **Panel 02:** the latest figure image, its generated retrieval context, and the combined indexing text.
+
+Visual records are reused only when the page hash, figure hash, model, and prompt version still match. Changing an artifact therefore invalidates only the affected record.
+
+## Cost and resumability
+
+Contextualization makes approximately one Claude request per canonical chunk or selected figure. The UI requires explicit cost acknowledgement before a run can start.
+
+The health endpoint reports current document and call estimates from the files mounted into the application. Treat those values as estimates, not a fixed corpus size.
+
+Both modes checkpoint after each completed item:
+
+- interrupted runs retain already written results;
+- matching results can be reused; and
+- a failure in one policy document does not discard successful documents.
+
+Only one in-memory dashboard run may be active at a time. Saved history is independent of that registry and survives backend or container restarts.
+
+## Quick start with Docker Compose
+
+Docker Compose is the recommended way to run the complete application. The image builds the React UI, installs the Python backend, and preloads the BGE tokenizer used by the canonical chunker.
 
 ```bash
-cd contextual_retrieval_dashboard
+cd /Users/dc/geha/contextual_retrieval_dashboard
+
+# The container needs one of these credentials.
+export ANTHROPIC_API_KEY=...
+# or: export ANTHROPIC_AUTH_TOKEN=...
+
 docker compose up --build
 ```
 
-Compose prints the dashboard URL when the backend is ready. Open
-<http://127.0.0.1:8511>. To run in the background, use `docker compose up -d
---build`, then inspect startup output with `docker compose logs -f`.
+Open <http://127.0.0.1:8511>.
 
-Anthropic credentials exported by the shell are passed into the container. If
-port 8511 is occupied, choose another host port without changing the container:
+Run in the background and follow startup output:
+
+```bash
+docker compose up -d --build
+docker compose logs -f
+```
+
+Override the host port without changing container port `8511`:
 
 ```bash
 CONTEXTUAL_RETRIEVAL_PORT=8512 docker compose up --build
 ```
 
-Stop the service with `docker compose down`. This does not delete source PDFs,
-runs, or cache files because they remain in the repository bind mounts.
+Then open <http://127.0.0.1:8512>.
 
-### Local development
+Stop the service with:
+
+```bash
+docker compose down
+```
+
+Compose mounts:
+
+| Host path | Container access | Purpose |
+|---|---|---|
+| `crawl_dir/raw/coverage-policies` | Read-only | Canonical source PDFs |
+| `crawl_dir/runs` | Read/write | Durable runs and contextual outputs |
+| `crawl_dir/cache` | Read/write | Page-split and ingestion caches |
+
+`docker compose down` does not remove these repository files.
+
+## Local development
+
+### Build the frontend
 
 ```bash
 cd /Users/dc/geha/contextual_retrieval_dashboard/ui
-npm install
+npm ci
 npm run build
-
-cd /Users/dc/geha
-uv run python -m contextual_retrieval_dashboard.backend
 ```
 
-Open <http://127.0.0.1:8511>. For frontend development, run `npm run dev` and
-open <http://127.0.0.1:5175>; Vite proxies `/api` to the backend.
+### Start the backend
 
-Use the **One-document test** dropdown to select any of the 35 source PDFs and
-run the complete canonical-plus-contextual workflow for only that document.
-The adjacent **Run all 35** button preserves the full-corpus option. Both modes
-use the same pipeline and durable artifact contracts; the dropdown is a source
-filter, not a simplified demo path.
+Use the GEHA Python environment with the dashboard requirements installed:
 
-Gemcitabine is the default one-document test. Datroway and Elrexfio are labeled
-as ReAct-converted sources because their original PDFs were image-oriented and
-were handled in the separate visual workflow. Before either run mode can start,
-the backend verifies that every selected source already has a non-empty
-canonical batch `candidate/document.md`. It verifies the newly generated
-run-specific Markdown again immediately before the first Claude call and emits
-a `canonical_markdown_verified` audit event. Missing or empty Markdown prevents
-Claude from being called.
+```bash
+cd /Users/dc/geha
+source .venv/bin/activate
+uv pip install --python .venv/bin/python \
+  -r contextual_retrieval_dashboard/requirements.txt
 
-Anthropic credentials must be visible to the backend through
-`ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or `ant auth login`.
+export ANTHROPIC_API_KEY=...
+python -m contextual_retrieval_dashboard.backend
+```
+
+Open <http://127.0.0.1:8511>. The backend serves `ui/dist`; if it has not been built, the root route returns an instruction to build it.
+
+For live frontend development, leave the backend on port `8511` and run:
+
+```bash
+cd /Users/dc/geha/contextual_retrieval_dashboard/ui
+npm run dev
+```
+
+Open <http://127.0.0.1:5175>. Vite proxies `/api` to the backend.
+
+Local authentication can use `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or credentials available to the backend process through `ant auth login`. Docker Compose passes only the exported environment variables shown in `compose.yaml`.
+
+## Using the workbench
+
+1. Confirm that the status bar reports a ready Claude credential and the expected model.
+2. Choose a policy marked **MD ready**, or select the saved visual run.
+3. Review the estimated call count.
+4. acknowledge the one-call-per-chunk or one-call-per-figure cost;
+5. start the run and watch the canonical/contextual event stream;
+6. select a completed or in-progress document to inspect chunks; and
+7. use **Past contextual runs** to reopen durable output after a restart.
+
+The batch ID accepts 3–80 letters, numbers, dots, underscores, or hyphens. Full-corpus execution is refused if any source lacks canonical batch Markdown.
 
 ## Durable artifacts
 
-- Canonical input: `candidate/chunks.jsonl`
-- Whole-document extraction: `candidate/document.md`
-- Contextual output: `candidate/contextual-chunks.jsonl`
-- Contextual run metadata: `candidate/contextual-retrieval.json`
-- Batch progress: `crawl_dir/runs/<batch-id>.json`
-- Visual contextual output: `<saved-agent-run>/visual-contextual-chunks.jsonl`
-- Visual contextual metadata: `<saved-agent-run>/visual-contextual-retrieval.json`
+### Canonical policy run
 
-Candidates remain unpromoted and still require the repository's normal visual
-review and promotion gates.
+```text
+crawl_dir/runs/coverage-policies/<document-id>/<run-id>/
+├── run-manifest.json
+└── candidate/
+    ├── document.md
+    ├── chunks.jsonl
+    ├── contextual-chunks.jsonl
+    └── contextual-retrieval.json
+```
 
-## Saved-run history
+### Saved visual run
 
-The backend reconstructs history from durable
-`runs/coverage-policies/*/*/candidate/contextual-chunks.jsonl` artifacts; it
-does not depend on the in-memory SSE registry. On startup, the UI restores the
-latest contextual run for each document, opens the newest run in the chunk
-viewer, and lists every saved run in **Past contextual runs**. Backend restarts
-therefore do not hide already-paid Claude results.
+```text
+crawl_dir/runs/research/<document-id>/<run-id>/
+├── pages/
+│   └── page-NNN/
+│       ├── source.pdf
+│       └── segments/
+│           └── figure-NN/
+│               ├── native-evidence.json
+│               └── iteration-NN.png
+├── visual-contextual-chunks.jsonl
+└── visual-contextual-retrieval.json
+```
+
+The cache diagnostic is saved at `crawl_dir/runs/contextual-prompt-cache-test.json`.
+
+All contextual artifacts remain candidates. They still require the repository's normal review and promotion gates before use in a promoted corpus.
+
+## Backend API
+
+| Method | Route | Purpose |
+|---|---|---|
+| `GET` | `/api/health` | Credential readiness, model, source inventory, Markdown readiness, and call estimates |
+| `GET` | `/api/history` | Reconstruct saved textual and visual contextual runs from disk |
+| `GET` | `/api/prompt` | Current text and visual prompt contracts |
+| `GET` | `/api/prompt-cache-test` | Last saved cache diagnostic |
+| `POST` | `/api/prompt-cache-test` | Execute the billable two-call cache diagnostic |
+| `POST` | `/api/batches` | Start one-policy or full-corpus canonical/contextual processing |
+| `POST` | `/api/visual-batches` | Contextualize figures in the configured saved visual run |
+| `GET` | `/api/batches/{run_id}/events` | Stream live progress as Server-Sent Events |
+| `GET` | `/api/chunks?run=...` | Return original/contextual chunk pairs for an allowed saved run |
+| `GET` | `/api/artifact?run=...&path=...` | Serve an allowed PDF or image inside that run |
+
+Run and artifact paths are resolved beneath `crawl_dir/runs`. Absolute artifact paths, directory traversal, unsupported file types, and nonexistent runs are rejected.
+
+## Tests and build checks
+
+Run the offline Python tests:
+
+```bash
+cd /Users/dc/geha
+source .venv/bin/activate
+python -m unittest contextual_retrieval_dashboard.test_visual_context -v
+```
+
+The tests verify figure discovery, highest-iteration selection, per-item checkpointing, and hash-based reuse without making Claude calls.
+
+Build and type-check the frontend:
+
+```bash
+cd /Users/dc/geha/contextual_retrieval_dashboard/ui
+npm ci
+npm run build
+```
+
+## Project map
+
+| Path | Responsibility |
+|---|---|
+| `backend.py` | aiohttp API, SSE registry, canonical batch orchestration, history, and safe artifact serving |
+| `visual_context.py` | Figure discovery, Claude PDF/image contextualization, hashes, checkpointing, and reuse |
+| `test_visual_context.py` | Offline visual-context unit tests |
+| `ui/src/App.tsx` | React workbench, run controls, inspectors, history, and cache drawer |
+| `ui/src/styles.css` | Workbench layout and visual styling |
+| `compose.yaml` | Runtime environment, credentials, ports, and bind mounts |
+| `Dockerfile` | Multi-stage React build and Python runtime image |
+| `requirements.txt` | Backend runtime dependencies |
+
+## Limitations
+
+- The dashboard is coupled to the repository's `crawl_dir` artifact contracts.
+- Visual mode currently targets the saved run configured by `VISUAL_RUN` in `backend.py`; it is not a general run picker.
+- Generated context can still be wrong or incomplete and must not replace source evidence.
+- Prompt caching reduces repeated input processing when the provider reports a cache hit, but it does not eliminate per-chunk model requests.
+- The in-memory SSE registry does not resume a live stream after a backend restart; durable results remain recoverable from run history.
+- The application has no user authentication or multi-tenant isolation.

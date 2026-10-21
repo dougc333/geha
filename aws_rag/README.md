@@ -358,6 +358,33 @@ by `query/chat.py` (`POST /api/chat`, `POST /api/arxiv`) and `query/chat.html`.
 Papers added by arXiv ID land in `s3://<raw>/arxiv/`, with their title passed
 through S3 metadata → chunker → embedder.
 
+#### Sample queries that work
+
+Checked against the live stack on 2026-10-21 (questions from
+`evals/questions.jsonl`; each answer contained the expected value):
+
+| Type | Question | Expected |
+|---|---|---|
+| Fact | What is the FID score for configuration F with 100% mixing regularization when 4 latents are mixed during testing? | 8.40 |
+| Fact | What is the default value of p used in the inverse distance weighted average interpolation in PointNet++? | 2 |
+| Fact | What is the size of the memory allocation rounding used by PyTorch's custom allocator on GPU to avoid fragmentation? | 512 bytes |
+| Table | What is the development accuracy of the BERT LARGE model in the SWAG dataset? | 86.6 |
+| Table | What is the number of classes in the Cora dataset? | 7 |
+| Table | How many selected categories are there in the Microsoft COCO dataset? | 91 |
+| Figure | In YOLO's error analysis comparing it with Fast R-CNN, what percentage of YOLO's top detections are localization errors? | 19.0 |
+| Figure | According to the YOLO error analysis chart, what percentage of YOLO's top detections are correct? | 65.5 |
+| Figure | In the BERT input representation figure, which word follows 'my dog is' in the example input? | cute |
+| Open | How does the SELF-RAG model utilize reflection tokens to enhance its text generation process? | explains retrieval and critique tokens |
+| Open | What is the role of batch normalization in enhancing the training of deep convolutional networks? | reducing internal covariate shift |
+
+Known misses on the same day, so don't demo them yet:
+
+- *What learning rate schedule does the Transformer paper use?* answers with
+  another paper's warmup + cosine schedule (the retrieval pulls Scaling Laws
+  and SGDR instead of the Transformer paper; see `q41` below).
+- *Top-1 validation error for ConvNet configuration E, multi-crop* (`t03`)
+  returns 7.1% (the top-5 figure) instead of 24.6.
+
 ### Corpus bootstrap and arXiv utility scripts
 
 These scripts are operational utilities. They are not imported by the deployed
