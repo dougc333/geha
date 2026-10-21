@@ -52,6 +52,7 @@ directory does.
 | `split_stats.py` | Split report + leakage checks → `results/data_splits.{md,json}` |
 | `train_lora.py` | LoRA training; logs every step to `results/train_log.jsonl` |
 | `plot_loss.py` | Train/validation loss + LR curves → `results/loss_curve.png` |
+| `plot_metrics.py` | 6-panel dashboard: loss, generalization gap, LR, grad norm, wall clock, base-vs-tuned eval → `results/training_dashboard.png` |
 | `eval_generator.py` | Base vs finetuned on the test split → `results/generator_comparison.json`, `results/generator_predictions.jsonl` |
 | `run_all.sh` | Runs everything above in order |
 | `colab_train.ipynb` | The same pipeline as Colab cells, with upload and download steps |
