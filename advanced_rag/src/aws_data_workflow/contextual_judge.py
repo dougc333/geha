@@ -61,41 +61,43 @@ def _write_jsonl_atomic(path: Path, records: list[dict[str, Any]]) -> None:
 
 
 def make_claude_judge(model: str = JUDGE_MODEL) -> JudgeGenerator:
-    """Create a Claude tool-call judge with a constrained output schema."""
+    """Create a Claude judge whose reply is constrained to a JSON schema.
+
+    Uses structured outputs rather than a forced tool call: current models
+    (Sonnet 5.5, Opus 5.5) reject ``tool_choice`` of type ``tool``/``any``.
+    """
     import anthropic
 
     client = anthropic.Anthropic(max_retries=2, timeout=180)
-    tool = {
-        "name": "submit_integrity_judgment",
-        "description": "Submit the quality judgment for one extracted page and its context.",
-        "input_schema": {
-            "type": "object",
-            "additionalProperties": False,
-            "required": [
-                "verdict",
-                "source_integrity",
-                "context_grounding",
-                "source_issues",
-                "context_issues",
-                "rationale",
-                "confidence",
-            ],
-            "properties": {
-                "verdict": {"type": "string", "enum": ["pass", "review", "fail"]},
-                "source_integrity": {"type": "string", "enum": ["clean", "suspect", "corrupt"]},
-                "context_grounding": {"type": "string", "enum": ["grounded", "partially_grounded", "unsupported"]},
-                "source_issues": {"type": "array", "items": {"type": "string"}},
-                "context_issues": {"type": "array", "items": {"type": "string"}},
-                "rationale": {"type": "string"},
-                "confidence": {"type": "number", "minimum": 0, "maximum": 1},
-            },
+    # Structured outputs do not accept numeric bounds; confidence is clamped below.
+    schema = {
+        "type": "object",
+        "additionalProperties": False,
+        "required": [
+            "verdict",
+            "source_integrity",
+            "context_grounding",
+            "source_issues",
+            "context_issues",
+            "rationale",
+            "confidence",
+        ],
+        "properties": {
+            "verdict": {"type": "string", "enum": ["pass", "review", "fail"]},
+            "source_integrity": {"type": "string", "enum": ["clean", "suspect", "corrupt"]},
+            "context_grounding": {"type": "string", "enum": ["grounded", "partially_grounded", "unsupported"]},
+            "source_issues": {"type": "array", "items": {"type": "string"}},
+            "context_issues": {"type": "array", "items": {"type": "string"}},
+            "rationale": {"type": "string"},
+            "confidence": {"type": "number"},
         },
     }
 
     def generate(source: str, context: str) -> Judgment:
         response = client.messages.create(
             model=model,
-            max_tokens=700,
+            # Room for adaptive thinking ahead of the JSON answer.
+            max_tokens=16000,
             system=(
                 "You are an independent retrieval-quality judge. Inspect the extracted "
                 "page for obvious corruption such as gibberish, truncation, duplicated "
@@ -106,8 +108,7 @@ def make_claude_judge(model: str = JUDGE_MODEL) -> JudgeGenerator:
                 "text-integrity and grounding check. Use fail for corrupt source text or "
                 "unsupported context, review for ambiguity, and pass only when both are sound."
             ),
-            tools=[tool],
-            tool_choice={"type": "tool", "name": tool["name"]},
+            output_config={"format": {"type": "json_schema", "schema": schema}},
             messages=[{
                 "role": "user",
                 "content": (
@@ -116,13 +117,17 @@ def make_claude_judge(model: str = JUDGE_MODEL) -> JudgeGenerator:
                 ),
             }],
         )
-        block = next(
-            (item for item in response.content if item.type == "tool_use"),
+        if response.stop_reason != "end_turn":
+            raise RuntimeError(f"Judge stopped early: {response.stop_reason}")
+        text = next(
+            (item.text for item in response.content if item.type == "text"),
             None,
         )
-        if block is None:
+        if text is None:
             raise RuntimeError("Judge returned no structured judgment")
-        return block.input  # type: ignore[return-value]
+        judgment = json.loads(text)
+        judgment["confidence"] = min(1.0, max(0.0, float(judgment["confidence"])))
+        return judgment  # type: ignore[return-value]
 
     return generate
 
