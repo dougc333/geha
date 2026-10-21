@@ -1,0 +1,27 @@
+{
+  "input": "/Users/dc/geha/aws_data_workflow/runtime/documents/doc-673098c8003e/source.pdf",
+  "tier": "agentic",
+  "version": "latest",
+  "submitted_at": "2026-10-20T17:57:29.975678+00:00",
+  "output_options": {
+    "markdown": {
+      "tables": {
+        "output_tables_as_markdown": false,
+        "merge_continued_tables": true,
+        "compact_markdown_tables": true
+      }
+    },
+    "tables_as_spreadsheet": {
+      "enable": true,
+      "guess_sheet_name": true
+    },
+    "granular_bboxes": [
+      "cell"
+    ]
+  },
+  "expand": [
+    "markdown",
+    "items",
+    "xlsx_content_metadata"
+  ]
+}

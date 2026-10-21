@@ -1,0 +1,48 @@
+{
+  "id": "v1_ChdtN1hYYXBxc0FaT1ZfdU1QOHJURWdROBIXbTdYWGFwcXNBWk9WX3VNUDhyVEVnUTg",
+  "status": "completed",
+  "usage": {
+    "total_tokens": 2894,
+    "total_input_tokens": 2117,
+    "input_tokens_by_modality": [
+      {
+        "modality": "text",
+        "tokens": 1015
+      },
+      {
+        "modality": "image",
+        "tokens": 1102
+      }
+    ],
+    "total_cached_tokens": 0,
+    "total_output_tokens": 777,
+    "output_tokens_by_modality": [
+      {
+        "modality": "text",
+        "tokens": 777
+      }
+    ],
+    "total_tool_use_tokens": 0,
+    "total_thought_tokens": 0
+  },
+  "created": "2026-10-20T18:40:27Z",
+  "updated": "2026-10-20T18:40:27Z",
+  "service_tier": "standard",
+  "steps": [
+    {
+      "signature": "ElkKVwFpFH0ThmowDode5D7DLN8eh4YOkS8ZEQYzINkhCXesueN2Bt7XYzfhgIQi9fEqQcoa7+15ITd2+I+MJ3WJiFvXyOPFR0DrJn8n4AwQnIoTcNaKB6OXYg==",
+      "type": "thought"
+    },
+    {
+      "content": [
+        {
+          "text": "{\n  \"figure_id\": \"figure_1\",\n  \"label\": \"Figure 1\",\n  \"title\": \"Companies plan to offer more benefits in five years.\",\n  \"question\": \"QUESTION: In five years, do you think your company will be offering fewer, the same or more benefits than it does now?\",\n  \"box_px\": [43, 495, 505, 912],\n  \"chart_type\": \"vbar\",\n  \"mode\": \"stacked_100\",\n  \"category_heading\": \"\",\n  \"estimate_method\": \"none\",\n  \"series\": [\n    {\n      \"name\": \"Fewer benefits\",\n      \"color\": \"#BCBDC2\"\n    },\n    {\n      \"name\": \"About the same\",\n      \"color\": \"#6E6E77\"\n    },\n    {\n      \"name\": \"More benefits\",\n      \"color\": \"#FBE500\"\n    }\n  ],\n  \"categories\": [\n    {\n      \"label\": \"Small\\n(10\u201399 employees)\",\n      \"group\": \"\",\n      \"values\": [\n        {\n          \"value\": \"3\",\n          \"printed\": true\n        },\n        {\n          \"value\": \"40\",\n          \"printed\": true\n        },\n        {\n          \"value\": \"57\",\n          \"printed\": true\n        }\n      ]\n    },\n    {\n      \"label\": \"Midsize\\n(100\u2013999 employees)\",\n      \"group\": \"\",\n      \"values\": [\n        {\n          \"value\": \"1\",\n          \"printed\": true\n        },\n        {\n          \"value\": \"35\",\n          \"printed\": true\n        },\n        {\n          \"value\": \"64\",\n          \"printed\": true\n        }\n      ]\n    },\n    {\n      \"label\": \"Large\\n(1,000 or more employees)\",\n      \"group\": \"\",\n      \"values\": [\n        {\n          \"value\": \"3\",\n          \"printed\": true\n        },\n        {\n          \"value\": \"30\",\n          \"printed\": true\n        },\n        {\n          \"value\": \"67\",\n          \"printed\": true\n        }\n      ]\n    }\n  ],\n  \"annotations\": [\n    {\n      \"type\": \"callout\",\n      \"category\": \"Small\\n(10\u201399 employees)\",\n      \"text\": \"+7% change from 2023\",\n      \"meaning\": \"Change in More benefits from 2023 for Small companies\"\n    },\n    {\n      \"type\": \"callout\",\n      \"category\": \"Midsize\\n(100\u2013999 employees)\",\n      \"text\": \"+6% change from 2023\",\n      \"meaning\": \"Change in More benefits from 2023 for Midsize companies\"\n    },\n    {\n      \"type\": \"callout\",\n      \"category\": \"Large\\n(1,000 or more employees)\",\n      \"text\": \"+5% change from 2023\",\n      \"meaning\": \"Change in More benefits from 2023 for Large companies\"\n    }\n  ]\n}",
+          "type": "text"
+        }
+      ],
+      "type": "model_output"
+    }
+  ],
+  "object": "interaction",
+  "model": "gemini-4-argon"
+}
