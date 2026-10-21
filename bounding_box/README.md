@@ -1,3 +1,10 @@
+# Spec Files
+This has been superceeded with spec files. Use chatGPT or Claude to create spec files which are bounding boxes and make a langgraph error correction loop. Much faster. 
+10x
+
+
+
+
 # PDF Figure Bounding-Box Workflow
 
 This directory contains a local annotation and reconstruction workflow for
