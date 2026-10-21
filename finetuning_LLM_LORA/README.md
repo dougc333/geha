@@ -79,6 +79,18 @@ Training runs on a Colab GPU, not the Mac (see Runtime and hardware below).
 4. The last cell downloads `colab_results.zip` (`results/` + the adapter).
    Unzip it into this folder.
 
+To clone instead of uploading a zip, run this in a Colab terminal:
+
+```bash
+cd /content
+git clone --depth 1 -b feature/generator-lora-finetuning https://github.com/dougc333/geha.git
+cd geha/finetuning_LLM_LORA
+pip install -q "transformers>=5.0,<6" "peft>=0.21,<1" "accelerate>=1.1,<2" "matplotlib>=3.9,<4"
+pip uninstall -y torchao   # Colab ships torchao 0.10; peft refuses < 0.16
+./run_all.sh
+zip -qr /content/colab_results.zip results models
+```
+
 The same steps without the notebook, on any CUDA machine:
 
 ```bash
