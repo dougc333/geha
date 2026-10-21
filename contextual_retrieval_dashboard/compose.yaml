@@ -14,6 +14,9 @@ services:
       - sh
       - -c
       - |
+        echo ""
+        echo "Contextual Retrieval Workbench: http://127.0.0.1:$$BROWSER_PORT"
+        echo ""
         python -m contextual_retrieval_dashboard.backend &
         backend_pid=$$!
         trap 'kill -TERM "$$backend_pid" 2>/dev/null || true' INT TERM
@@ -24,9 +27,6 @@ services:
           fi
           sleep 1
         done
-        echo ""
-        echo "Contextual Retrieval Workbench: http://127.0.0.1:$$BROWSER_PORT"
-        echo ""
         wait "$$backend_pid"
     ports:
       - "${CONTEXTUAL_RETRIEVAL_PORT:-8511}:8511"
