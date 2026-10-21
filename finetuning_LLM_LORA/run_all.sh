@@ -12,3 +12,4 @@ $PY split_stats.py --tokenizer        # results/data_splits.{md,json}
 $PY train_lora.py --epochs "$EPOCHS"  # adapter + results/train_log.jsonl
 $PY plot_loss.py                      # results/loss_curve.png
 $PY eval_generator.py                 # results/generator_{comparison.json,predictions.jsonl}
+$PY plot_metrics.py                   # results/training_dashboard.png (loss, gap, lr, grad norm, time, eval)
