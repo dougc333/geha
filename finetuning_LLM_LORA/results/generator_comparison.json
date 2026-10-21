@@ -1,0 +1,48 @@
+{
+  "split": "test",
+  "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "adapter": "geha-dental-generator-lora",
+  "metrics": {
+    "direct": {
+      "n": 41,
+      "answer_f1": {
+        "baseline": 0.5086042440357867,
+        "fine_tuned": 0.5651102215542945,
+        "absolute_change": 0.05650597751850772
+      },
+      "answer_words": {
+        "baseline": 61.8780487804878,
+        "fine_tuned": 87.65853658536585,
+        "absolute_change": 25.78048780487805
+      }
+    },
+    "cot": {
+      "n": 41,
+      "answer_f1": {
+        "baseline": 0.48587503841893237,
+        "fine_tuned": 0.5425678508720838,
+        "absolute_change": 0.05669281245315144
+      },
+      "answer_words": {
+        "baseline": 63.41463414634146,
+        "fine_tuned": 88.7560975609756,
+        "absolute_change": 25.34146341463414
+      },
+      "format_ok": {
+        "baseline": 1.0,
+        "fine_tuned": 1.0,
+        "absolute_change": 0.0
+      },
+      "citation_precision": {
+        "baseline": 0.7231126596980255,
+        "fine_tuned": 0.8414634146341463,
+        "absolute_change": 0.1183507549361208
+      },
+      "quote_grounded": {
+        "baseline": 0.8700348432055749,
+        "fine_tuned": 0.8678861788617886,
+        "absolute_change": -0.002148664343786244
+      }
+    }
+  }
+}

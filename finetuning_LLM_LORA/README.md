@@ -167,6 +167,40 @@ optimizer steps you take and what the held-out loss does**:
   passage rather than a distractor?) and quote grounding (does each quoted
   sentence actually appear in the passages?).
 
+### Results: Colab A100 run (21 Oct 2026, 3 epochs, seed 42)
+
+NVIDIA A100-SXM4-40GB, bf16. Training took 212 s for all 60 steps (about 71 s
+per epoch including validation); the eval took about 23 min. Full outputs are
+in `results/`; the dashboard is `results/training_dashboard.png`.
+
+**Validation loss (every 10 steps):**
+
+| Epoch | 0 | 0.5 | **1** | 1.5 | 2 | 2.5 | 3 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Val loss | 0.627 | 0.535 | **0.517** | 0.541 | 0.576 | 0.601 | 0.607 |
+
+**It overfits after epoch 1.** Validation loss is lowest at step 20, then
+rises for the remaining 40 steps while train loss falls to about 0.11. The
+validation − recent-train gap goes from −0.07 to +0.48. Best-checkpoint
+selection kept the **epoch-1 adapter**, and that is the one evaluated below.
+For this dataset, train with `--epochs 1` (or `--patience 2`).
+
+**Held-out brochure, base vs epoch-1 adapter (41 questions per format):**
+
+| Metric | Base | Tuned | Change | 95% CI (paired bootstrap) | Better / worse |
+| --- | ---: | ---: | ---: | --- | ---: |
+| Answer F1, direct | 0.509 | 0.565 | +0.057 | +0.002 to +0.109 | 27 / 14 |
+| Answer F1, CoT | 0.486 | 0.543 | +0.057 | +0.000 to +0.108 | 29 / 11 |
+| Cites gold passage (CoT) | 0.723 | 0.841 | +0.118 | −0.008 to +0.240 | 15 / 4 |
+| Quotes found in passages (CoT) | 0.870 | 0.868 | −0.002 | −0.104 to +0.097 | 7 / 7 |
+| CoT format followed | 1.00 | 1.00 | 0.00 | – | – |
+| Answer length, words | 62 | 88 | +26 | reference mean: 107 | – |
+
+The gain on an unseen document is real but modest. The intervals nearly touch
+zero, the result comes from one seed, and longer answers that are closer to
+the reference length also raise token F1. Repeat over 3–5 seeds, and grade
+correctness with an LLM judge or by hand, before relying on it.
+
 ### First attempt on the Mac (stopped; `../finetuning/train_generator.py`, per-epoch logging only)
 
 | Epoch | Train loss | Validation loss |
@@ -176,7 +210,7 @@ optimizer steps you take and what the held-out loss does**:
 | 2 | stopped partway | – |
 
 The epoch-1 adapter from this run is in
-`../finetuning/models/geha-dental-generator-lora`. The Colab run replaces it
+`../finetuning/models/geha-dental-generator-lora`. The Colab run (above) replaces it
 and is the run to report.
 
 ## Runtime and hardware
