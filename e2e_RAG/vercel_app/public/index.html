@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RAG Teaching Lab</title>
+  <style>
+    :root{--ink:#10233e;--muted:#5d6e84;--line:#dce4ec;--paper:#fff;--bg:#eef3f7;--navy:#062f4f;--cyan:#13a8a8;--amber:#f2a93b;--hl:#fff2b8}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,sans-serif}
+    header{padding:26px clamp(18px,5vw,64px) 20px;background:linear-gradient(125deg,#052c4d,#0b5270);color:#fff}
+    header h1{margin:0;font-size:clamp(26px,3.6vw,42px);letter-spacing:-.03em} header p{max-width:860px;margin:6px 0 0;color:#d8ecf2}
+    .wrap{max-width:1500px;margin:0 auto;padding:0 18px 48px}
+    .card{background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 20px rgba(24,49,75,.05)}
+    /* pipeline strip */
+    .pipeline{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:18px 0 10px}
+    .stage{border:1px solid #b9c7d4;background:#fff;border-radius:999px;padding:7px 14px;font-weight:700;font-size:13px;cursor:pointer;color:var(--ink)}
+    .stage[aria-pressed=true]{background:var(--navy);color:#fff;border-color:var(--navy)} .arrow{color:var(--muted)}
+    .explain{padding:16px 20px;margin-bottom:16px;display:none}.explain.show{display:block}.explain h3{margin:0 0 6px;font-size:16px}.explain p{margin:6px 0}.explain code{background:#eef3f7;padding:1px 5px;border-radius:5px;font-size:13px}
+    /* controls */
+    .controls{padding:18px 20px;display:grid;grid-template-columns:minmax(200px,1.1fr) minmax(260px,2fr) auto;gap:14px 18px;align-items:end}
+    label{display:block;font-weight:700;font-size:13px;margin-bottom:5px} select,input[type=text]{width:100%;border:1px solid #bcc9d5;border-radius:9px;padding:10px;background:#fff;color:var(--ink);font:inherit}
+    .suggest{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.suggest button{border:1px dashed #9fb3c5;background:#f7fafc;color:var(--ink);border-radius:999px;padding:4px 10px;font-size:12px;cursor:pointer}
+    .opts{display:flex;gap:16px;flex-wrap:wrap;align-items:center;font-size:14px;grid-column:1/-1}.opts label{display:flex;gap:6px;align-items:center;font-weight:600;margin:0}
+    .run{border:0;border-radius:10px;background:var(--cyan);color:#fff;font-weight:800;padding:11px 22px;cursor:pointer;font-size:15px}.run:disabled{opacity:.55;cursor:wait}
+    .status{margin:14px 2px;color:var(--muted);font-size:14px}.status b{color:var(--ink)} .metric{display:inline-block;background:#e4eff2;border-radius:999px;padding:2px 9px;margin:2px 4px 2px 0;font-size:12px;color:#28535d}
+    .notice{padding:14px 18px;margin-bottom:14px;border-left:5px solid var(--amber)}.notice h3{margin:0 0 4px;font-size:15px}.notice ul{margin:4px 0 0;padding-left:20px}
+    .answer{padding:16px 20px;margin-bottom:14px;border-left:5px solid var(--cyan)}.answer h3{margin:0 0 6px;font-size:15px}.answer .text{white-space:pre-wrap}
+    /* comparison columns */
+    .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}
+    .col{padding:14px}.col h2{font-size:16px;margin:0}.col .how{font-size:12.5px;color:var(--muted);margin:4px 0 10px;min-height:54px}
+    .hit{border:1px solid var(--line);border-left:6px solid var(--c);border-radius:10px;padding:9px 11px;margin-bottom:9px;cursor:pointer;transition:box-shadow .15s,opacity .15s}
+    .hit:hover,.hit.focus{box-shadow:0 0 0 2px var(--c)} .cols.focusing .hit:not(.focus){opacity:.35}
+    .hit .top{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted)} .hit .rank{font-weight:900;color:var(--ink);font-size:14px}
+    .hit .also{font-size:11.5px;margin-top:3px;color:#28535d}.hit .snip{font-size:13px;margin-top:5px;white-space:pre-wrap}.hit .snip mark{background:var(--hl);padding:0 1px}
+    .hit:not(.open) .snip{max-height:6.2em;overflow:hidden}
+    .empty{color:var(--muted);font-size:13px;padding:8px 2px}.error{color:#9b2424;background:#fff1f1;border:1px solid #efcaca;padding:12px;border-radius:9px}
+    footer{color:var(--muted);font-size:12.5px;margin-top:22px}
+    @media(max-width:760px){.controls{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>RAG Teaching Lab</h1>
+    <p>See how retrieval-augmented generation finds evidence. Ask one question about one paper and watch each retrieval method rank the same chunks differently, then how fusion, reranking and generation build on them.</p>
+  </header>
+  <div class="wrap">
+    <nav class="pipeline" aria-label="Pipeline stages (click to learn)">
+      <button class="stage" data-stage="chunk">1 · Chunk</button><span class="arrow">→</span>
+      <button class="stage" data-stage="bm25">2a · BM25</button><span class="arrow">+</span>
+      <button class="stage" data-stage="vector">2b · Vector</button><span class="arrow">→</span>
+      <button class="stage" data-stage="hybrid">3 · Fuse (RRF)</button><span class="arrow">→</span>
+      <button class="stage" data-stage="rerank">4 · Rerank</button><span class="arrow">→</span>
+      <button class="stage" data-stage="generate">5 · Generate</button>
+    </nav>
+    <section class="card explain" id="explain" aria-live="polite"></section>
+
+    <section class="card controls">
+      <div><label for="document">Document</label><select id="document"><option>Loading…</option></select></div>
+      <div><label for="question">Question</label><input type="text" id="question" maxlength="2000" placeholder="Ask about the selected paper">
+        <div class="suggest" id="suggest"></div></div>
+      <div><button class="run" id="run">Compare</button></div>
+      <div class="opts">
+        <label><input type="checkbox" id="reranker"> LLM reranker</label>
+        <label><input type="checkbox" id="generate"> Generate answer</label>
+        <label>Top <select id="topk" style="width:auto;padding:4px 6px"><option>3</option><option selected>5</option><option>8</option><option>10</option></select> chunks per method</label>
+      </div>
+    </section>
+
+    <div class="status" id="status">Pick a question, or click a suggestion, then press <b>Compare</b>. Click any stage above to learn what it does.</div>
+    <div id="notice"></div>
+    <div id="answer"></div>
+    <section class="cols" id="cols"></section>
+    <footer>Corpus: two arXiv papers split into 350-word chunks with 50-word overlap. Embeddings: OpenAI text-embedding-3-small; reranking and answers: gpt-4o-mini. Click a chunk to expand it and highlight it in every column.</footer>
+  </div>
+  <script>
+    const $=id=>document.getElementById(id);
+    const esc=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+
+    const STAGES={
+      chunk:{t:'1 · Chunking',b:`<p>Each PDF is split page by page into <b>350-word chunks that overlap by 50 words</b>, so a sentence cut at a boundary still appears whole in one of them. Every chunk remembers its page for citations.</p><p>Retrieval ranks <em>chunks</em>, not whole papers. Chunk size is a trade-off: small chunks are precise but lose context; large ones keep context but dilute the match.</p>`},
+      bm25:{t:'2a · BM25 (keyword search)',b:`<p>Scores a chunk by the <b>exact words</b> it shares with the question. Rare words count more than common ones (inverse document frequency), repeats help with diminishing returns (<code>k1=1.5</code>), and long chunks are penalised (<code>b=0.75</code>).</p><p><b>Good at:</b> names, numbers, acronyms, exact phrases. <b>Weak at:</b> synonyms and paraphrases: "car" won't match "automobile". Matched words are <mark>highlighted</mark> in the results.</p>`},
+      vector:{t:'2b · Vector search (semantic)',b:`<p>The question and every chunk are turned into <b>embeddings</b>: 1,536 numbers that capture meaning. Chunks are ranked by <b>cosine similarity</b> to the question (1 = same direction, 0 = unrelated).</p><p><b>Good at:</b> paraphrases and concepts ("why not RNNs?" finds text about recurrence). <b>Weak at:</b> exact numbers, rare names and precise terms, which can get "averaged away".</p>`},
+      hybrid:{t:'3 · Fusion with Reciprocal Rank Fusion (RRF)',b:`<p>BM25 scores and cosine scores aren't on the same scale, so RRF ignores the scores and uses <b>ranks</b>: each list gives a chunk <code>1 / (60 + rank)</code>, and the contributions are added.</p><p>A chunk ranked well by <em>both</em> methods rises to the top; one found by only one method still gets in. This is why hybrid search is a strong default.</p>`},
+      rerank:{t:'4 · Reranking',b:`<p>A reranker looks at the question and each candidate <b>together</b>, which is slower but more accurate than comparing separately made embeddings. Here an LLM (gpt-4o-mini) reorders the top 20 hybrid candidates.</p><p>Production systems often use a dedicated cross-encoder reranker (e.g. Cohere Rerank, Amazon Rerank) that returns a relevance score per chunk.</p>`},
+      generate:{t:'5 · Grounded generation',b:`<p>The top chunks are pasted into the prompt as numbered sources, and the model is told to <b>answer only from them</b> and cite them as <code>[chunk ID]</code>. If they don't contain the answer, it should say so.</p><p>This is the "augmented generation" in RAG: the model's answer can only be as good as what retrieval found, so always inspect the evidence.</p>`},
+    };
+    document.querySelectorAll('.stage').forEach(b=>b.addEventListener('click',()=>{
+      const open=b.getAttribute('aria-pressed')==='true';
+      document.querySelectorAll('.stage').forEach(x=>x.setAttribute('aria-pressed','false'));
+      if(open){$('explain').classList.remove('show');return}
+      b.setAttribute('aria-pressed','true'); const s=STAGES[b.dataset.stage];
+      $('explain').innerHTML=`<h3>${s.t}</h3>${s.b}`; $('explain').classList.add('show');
+    }));
+
+    // Suggestions chosen to show where each method shines.
+    const SUGGEST={
+      '1706.03762':[['what BLEU score did the big model get on English-to-German','numbers: BM25 tends to win'],['why use self-attention instead of recurrence','concept: vectors tend to win'],['what is multi-head attention','both agree']],
+      '2306.02707':[['what is orca','short, ambiguous: compare methods'],['how does Orca compare to Vicuna on BigBench-Hard','names + benchmark: BM25 helps'],['how do smaller models learn to reason from larger ones','paraphrase: vectors help']],
+    };
+    let docs=[];
+    const suggestionsFor=id=>{const d=docs.find(x=>x.id===id);const key=Object.keys(SUGGEST).find(k=>(d?.title+' '+d?.source).includes(k));return key?SUGGEST[key]:[]};
+    function renderSuggestions(){
+      const list=suggestionsFor($('document').value);
+      $('suggest').innerHTML=list.map(([q,why])=>`<button type="button" data-q="${esc(q)}" title="${esc(why)}">${esc(q)}</button>`).join('');
+      if(list.length&&!$('question').value)$('question').value=list[0][0];
+    }
+    $('suggest').addEventListener('click',e=>{const b=e.target.closest('button');if(b){$('question').value=b.dataset.q;run()}});
+    $('document').addEventListener('change',()=>{$('question').value='';renderSuggestions()});
+
+    async function loadDocuments(){
+      try{const r=await fetch('/api/documents');const d=await r.json();if(!r.ok)throw new Error(d.detail||r.statusText);
+        docs=d.documents;
+        $('document').innerHTML=docs.map(x=>`<option value="${esc(x.id)}">${esc(x.title)} · ${x.chunks} chunks</option>`).join('')||'<option value="">No documents indexed</option>';
+        renderSuggestions();
+      }catch(e){$('document').innerHTML='<option value="">Database unavailable</option>';$('status').innerHTML=`<div class="error">${esc(e.message)}</div>`}
+    }
+
+    const color=id=>`hsl(${(id*137.508)%360} 62% 48%)`; // stable, well-spread colour per chunk
+    function highlight(text,terms){
+      const out=esc(text); if(!terms.length)return out;
+      const re=new RegExp(`\\b(${terms.map(t=>t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')})\\b`,'gi');
+      return out.replace(re,'<mark>$1</mark>');
+    }
+    const COLS=[
+      ['bm25','BM25','Exact word overlap, weighted by rarity. Score: BM25 (higher is better, no fixed maximum).'],
+      ['vector','Vector','Meaning similarity of embeddings. Score: cosine similarity (0 to 1).'],
+      ['hybrid','Hybrid (RRF)','BM25 + Vector fused by rank. Score: sum of 1/(60+rank).'],
+      ['reranked','Reranked','Hybrid top 20 reordered by the LLM reranker. Shown by its new order.'],
+    ];
+
+    async function run(){
+      const payload={document_id:$('document').value,query:$('question').value.trim(),use_reranker:$('reranker').checked,generate_answer:$('generate').checked,top_k:Number($('topk').value)};
+      if(!payload.document_id){return} if(payload.query.length<2){$('status').textContent='Enter a question first.';return}
+      $('run').disabled=true;$('run').textContent='Comparing…';$('status').textContent='Running BM25 and vector search'+(payload.use_reranker?', then reranking':'')+(payload.generate_answer?', then generating an answer':'')+'…';
+      try{
+        const r=await fetch('/api/compare',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const d=await r.json();if(!r.ok)throw new Error(typeof d.detail==='string'?d.detail:JSON.stringify(d.detail));
+        render(d,payload);
+      }catch(e){$('status').innerHTML=`<div class="error"><b>Request failed:</b> ${esc(e.message)}</div>`}
+      finally{$('run').disabled=false;$('run').textContent='Compare'}
+    }
+
+    function render(d,p){
+      const terms=d.stats.query_terms.filter(t=>t.length>2);
+      const lists=Object.fromEntries(COLS.map(([k])=>[k,d[k]||null]));
+      const rankIn=(k,id)=>{const i=(lists[k]||[]).findIndex(h=>h.id===id);return i<0?null:i+1};
+      const ms=Object.entries(d.timings).map(([k,v])=>`<span class="metric">${esc(k.replace('_ms',''))} ${Math.round(v)} ms</span>`).join('');
+      $('status').innerHTML=`Searched <b>${d.stats.chunks_in_document}</b> chunks · BM25 found <b>${d.stats.bm25_matches}</b> containing a query word · query words: ${terms.map(t=>`<mark>${esc(t)}</mark>`).join(' ')||'(none)'}<br>${ms}`;
+
+      // What to notice: overlap between the two first-stage retrievers.
+      const b=new Set((d.bm25||[]).map(h=>h.id)), v=new Set((d.vector||[]).map(h=>h.id));
+      const both=[...b].filter(id=>v.has(id)).length, onlyB=[...b].filter(id=>!v.has(id)).length, onlyV=[...v].filter(id=>!b.has(id)).length;
+      const notes=[`BM25 and Vector agree on <b>${both}</b> of their top ${p.top_k}; <b>${onlyB}</b> only BM25 found, <b>${onlyV}</b> only Vector found.`];
+      if(d.hybrid?.[0]){const h=d.hybrid[0];notes.push(`Hybrid's #1 (chunk ${h.id}) was #${rankIn('bm25',h.id)??'–'} in BM25 and #${rankIn('vector',h.id)??'–'} in Vector (– means outside the top ${p.top_k}).`)}
+      if(d.reranked?.[0]){const t=d.reranked[0], was=rankIn('hybrid',t.id);notes.push(was===1?`The reranker kept hybrid's #1.`:`The reranker promoted chunk ${t.id} to #1 (it was ${was?'#'+was:'outside the top '+p.top_k} in hybrid).`)}
+      if(!d.stats.bm25_matches)notes.push('No chunk contains any query word, so BM25 returns nothing: only semantic search can help here.');
+      $('notice').innerHTML=`<div class="card notice"><h3>What to notice</h3><ul>${notes.map(n=>`<li>${n}</li>`).join('')}</ul></div>`;
+
+      $('answer').innerHTML=d.answer?`<div class="card answer"><h3>Grounded answer (from ${d.reranked?'reranked':'hybrid'} top ${p.top_k})</h3><div class="text">${esc(d.answer)}</div></div>`:'';
+
+      $('cols').classList.remove('focusing');
+      $('cols').innerHTML=COLS.filter(([k])=>lists[k]).map(([k,name,how])=>`<div class="card col"><h2>${name}</h2><div class="how">${how}</div>${
+        lists[k].length?lists[k].map((h,i)=>{
+          const also=COLS.filter(([o])=>o!==k&&lists[o]).map(([o,n])=>{const r=rankIn(o,h.id);return r?`${n} #${r}`:null}).filter(Boolean);
+          const score=k==='reranked'?(rankIn('hybrid',h.id)?`was hybrid #${rankIn('hybrid',h.id)}`:`was below hybrid #${p.top_k}`):`${Number(h.score).toFixed(k==='hybrid'?4:3)}`;
+          return `<div class="hit" style="--c:${color(h.id)}" data-id="${h.id}"><div class="top"><span><span class="rank">#${i+1}</span> · chunk ${h.id} · p.${esc(h.page??'?')}</span><span>${score}</span></div>${also.length?`<div class="also">also ${also.join(' · ')}</div>`:`<div class="also">not in the other columns' top ${p.top_k}</div>`}<div class="snip">${highlight(h.content,terms)}</div></div>`}).join('')
+        :`<div class="empty">${k==='bm25'?'No chunk shares a word with the question.':'No results.'}</div>`}</div>`).join('');
+    }
+
+    // Click a chunk: expand it and highlight the same chunk in every column.
+    $('cols').addEventListener('click',e=>{
+      const hit=e.target.closest('.hit');if(!hit)return;
+      const id=hit.dataset.id, on=!hit.classList.contains('focus');
+      document.querySelectorAll('.hit').forEach(h=>{h.classList.toggle('focus',on&&h.dataset.id===id);h.classList.toggle('open',on&&h.dataset.id===id)});
+      $('cols').classList.toggle('focusing',on);
+    });
+    $('run').addEventListener('click',run);
+    $('question').addEventListener('keydown',e=>{if(e.key==='Enter')run()});
+    loadDocuments();
+  </script>
+</body>
+</html>

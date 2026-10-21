@@ -1,0 +1,201 @@
+{
+  "splits": {
+    "train": {
+      "documents": [
+        "fedvip--2026-geha-dental-benefits-guide"
+      ],
+      "sections": [
+        "BENEFITS THAT GO BEYOND",
+        "BOTH PLANS INCLUDE",
+        "Benefits that go beyond",
+        "Contact us:",
+        "Dedicated solely to federal workers since our founding in 1937",
+        "EMPLOYED - BIWEEKLY",
+        "FOUNDED BY FEDERAL EMPLOYEES IN 1937",
+        "FedVisers can review plan options with you to ensure you:",
+        "Fitness discount 1",
+        "GEHA.COM/COMPAREDENTAL",
+        "GEHA.COM/STANDARDDENTAL",
+        "Get the coverage that millions of federal employees have counted on through the years",
+        "HIGH",
+        "Hearing aid discount 1",
+        "Maximum dental coverage for upcoming dental procedures",
+        "Medical alert system discount 1",
+        "ORAL HEALTH EQUALS OVERALL HEALTH",
+        "Open Season for 2026 benefits",
+        "Plan features:",
+        "RETIRED - MONTHLY",
+        "STANDARD",
+        "We're member founded, member dedicated"
+      ],
+      "chunks": 34,
+      "qa_pairs": 78,
+      "qa_by_synthesizer": {
+        "single_hop_specific_query_synthesizer": 27,
+        "multi_hop_abstract_query_synthesizer": 24,
+        "multi_hop_specific_query_synthesizer": 27
+      },
+      "sft_examples": {
+        "direct": 78,
+        "cot": 78
+      },
+      "tokens": {
+        "prompt": {
+          "min": 330,
+          "mean": 990,
+          "max": 2157
+        },
+        "target": {
+          "min": 15,
+          "mean": 135,
+          "max": 335
+        }
+      }
+    },
+    "validation": {
+      "documents": [
+        "fedvip--2026-geha-dental-benefits-guide"
+      ],
+      "sections": [
+        "Electric toothbrush discount 1",
+        "PICKED BY YOUR PEERS",
+        "PLANS BUILT FOR FEDERAL EMPLOYEES",
+        "Ready to enroll?",
+        "Teeth whitening discount 1",
+        "The numbers stack up"
+      ],
+      "chunks": 8,
+      "qa_pairs": 24,
+      "qa_by_synthesizer": {
+        "single_hop_specific_query_synthesizer": 7,
+        "multi_hop_abstract_query_synthesizer": 9,
+        "multi_hop_specific_query_synthesizer": 8
+      },
+      "sft_examples": {
+        "direct": 24,
+        "cot": 24
+      },
+      "tokens": {
+        "prompt": {
+          "min": 313,
+          "mean": 702,
+          "max": 997
+        },
+        "target": {
+          "min": 27,
+          "mean": 120,
+          "max": 316
+        }
+      }
+    },
+    "test": {
+      "documents": [
+        "fedvip--2026-geha-dental-plan-brochure"
+      ],
+      "sections": [
+        "A Nationwide Dental PPO Plan",
+        "Additional procedures covered as basic services",
+        "Adjunctive general services",
+        "Adjunctive general services (cont.)",
+        "Coinsurance",
+        "Connection Fitness\u00ae - 877-434-2336 - geha.com/Fit-For-Less",
+        "Connection Hearing\u00ae - 844-224-2712 - geha.com/Hearing-Savings",
+        "Connection Vision\u00ae - 877-808-8538 - geha.com/Save-Vision",
+        "Coordination of Benefits",
+        "Copayment",
+        "Current Dental Terminology \u00a9 American Dental Association",
+        "D0120 Periodic oral evaluation - established patient",
+        "D5110 Complete denture - maxillary",
+        "D9110 Palliative treatment of dental pain - per visit",
+        "Dental Review",
+        "Diagnostic and treatment services",
+        "Diagnostic and treatment services (cont.)",
+        "Discrimination is Against the Law",
+        "Disputed Claims Process",
+        "Emergency Response Services - 800-640-0518 - geha.com/savings/medical-alert-system",
+        "Endodontic services",
+        "Endodontic services (cont.)",
+        "Enrollment Options for this Plan:",
+        "FEDVIP Program Highlights",
+        "FSAFEDS/High Deductible Health Plans and FEDVIP",
+        "G.E.H.A Connection Dental Federal",
+        "High and Standard Options:",
+        "High and Standard Rates",
+        "How to File a Claim for Covered Services",
+        "How to find your rate - Premium Rating Areas by State/ZIP Code (first three digits)",
+        "IMPORTANT",
+        "Implant services",
+        "Important things you should keep in mind about these benefits:",
+        "Introduction",
+        "Limited Access Area",
+        "Major restorative services",
+        "Major restorative services (cont.)",
+        "Minor restorative services",
+        "New hire/Newly eligible",
+        "Not Eligible",
+        "Not covered:",
+        "Open Season",
+        "Oral Care Program - 855-944-8361 - geha.com/Smile-Savings",
+        "Oral surgery",
+        "Orthodontic services",
+        "Periodontal services",
+        "Periodontal services (cont.)",
+        "Preventive services",
+        "Preventive services (cont.)",
+        "Prosthodontic services",
+        "Prosthodontic services (cont.)",
+        "Qualifying Life Event",
+        "Qualifying Life Event: Annuity/ compensation restored",
+        "Qualifying Life Event: Marriage",
+        "Qualifying Life Event: Transferring to an eligible position*",
+        "Section 1 Eligibility",
+        "Section 2 Enrollment",
+        "Section 3 How You Obtain Care",
+        "Section 4 Your Cost For Covered Services",
+        "Section 6 International Services and Supplies",
+        "Section 7 General Exclusions - Things We Do Not Cover",
+        "Section 9 Definitions of Terms We Use in This Brochure",
+        "Stop Health Care Fraud!",
+        "Summary of Benefits",
+        "TEI certifying family member",
+        "This G.E.H.A Connection Dental Federal \u00ae plan and all other FEDVIP plans are not a part of the Federal Employees Health Benefits (FEHB) Program / Postal Service Health Benefits (PSHB) Program.",
+        "Unsectioned",
+        "VA Exception for Cancellation",
+        "You Pay:",
+        "You are eligible to enroll if you: Federal Annuitants",
+        "\u00b7 High Option",
+        "\u00b7 Standard Option"
+      ],
+      "chunks": 167,
+      "qa_pairs": 41,
+      "qa_by_synthesizer": {
+        "single_hop_specific_query_synthesizer": 8,
+        "multi_hop_abstract_query_synthesizer": 16,
+        "multi_hop_specific_query_synthesizer": 17
+      },
+      "sft_examples": {
+        "direct": 41,
+        "cot": 41
+      },
+      "tokens": {
+        "prompt": {
+          "min": 580,
+          "mean": 1251,
+          "max": 2042
+        },
+        "target": {
+          "min": 31,
+          "mean": 199,
+          "max": 427
+        }
+      }
+    }
+  },
+  "leakage_checks": {
+    "chunk ids disjoint (train/val/test)": true,
+    "sections disjoint (train vs val)": true,
+    "documents disjoint (train+val vs test)": true,
+    "questions disjoint (all splits)": true,
+    "every QA source chunk is in its own split": true
+  }
+}

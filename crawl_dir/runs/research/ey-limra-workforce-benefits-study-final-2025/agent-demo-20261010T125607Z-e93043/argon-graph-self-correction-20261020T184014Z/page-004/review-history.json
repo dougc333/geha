@@ -1,0 +1,176 @@
+[
+  {
+    "iteration": 0,
+    "validator_warnings": [],
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 43 distinct",
+        "html_evidence": "Companies plan to offer more benefits in five years.",
+        "correction": "Words not printed inside the figure box: ['plan', 'offer', 'years']"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 43 distinct",
+        "html_evidence": "QUESTION: In five years, do you think your company will be offering fewer, the same or more benefits than it does now?",
+        "correction": "Words not printed inside the figure box: ['question', 'years', 'do', 'you', 'think', 'your', 'company', 'be', 'offering', 'fewer', 'same', 'or', 'it', 'does', 'now']"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 43 distinct",
+        "html_evidence": "Fewer benefits",
+        "correction": "Words not printed inside the figure box: ['fewer']"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 43 distinct",
+        "html_evidence": "About the same",
+        "correction": "Words not printed inside the figure box: ['about', 'same']"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 43 distinct",
+        "html_evidence": "Small\n(10\u201399 employees)",
+        "correction": "Words not printed inside the figure box: ['small', '10-99', 'employees']"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 43 distinct",
+        "html_evidence": "Midsize\n(100\u2013999 employees)",
+        "correction": "Words not printed inside the figure box: ['midsize', '100-999', 'employees']"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 43 distinct",
+        "html_evidence": "Large\n(1,000 or more employees)",
+        "correction": "Words not printed inside the figure box: ['large', '1,000', 'or', 'employees']"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 43 distinct",
+        "html_evidence": "+7% change from 2023",
+        "correction": "Words not printed inside the figure box: ['+7%', 'change', 'from', '2023']"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 43 distinct",
+        "html_evidence": "+6% change from 2023",
+        "correction": "Words not printed inside the figure box: ['+6%', 'change', 'from', '2023']"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 43 distinct",
+        "html_evidence": "+5% change from 2023",
+        "correction": "Words not printed inside the figure box: ['+5%', 'change', 'from', '2023']"
+      },
+      {
+        "category": "chart_data",
+        "source_evidence": "Printed percentages: ['57%']",
+        "html_evidence": "Spec percentages: ['1%', '3%', '3%', '30%', '35%', '40%', '5%', '57%', '6%', '64%', '67%', '7%']",
+        "correction": "Missing from spec: {}; not printed in PDF: {'7%': 1, '6%': 1, '5%': 1, '3%': 2, '40%': 1, '1%': 1, '35%': 1, '64%': 1, '30%': 1, '67%': 1}"
+      }
+    ],
+    "source_chart_summary": "Figure 1 is a 100% stacked vertical bar chart titled 'Companies plan to offer more benefits in five years.' answering the question 'In five years, do you think your company will be offering fewer, the same or more benefits than it does now?'. It shows three series ('Fewer benefits' in light gray, 'About the same' in dark gray, and 'More benefits' in yellow) across three employer size categories: Small (10\u201399 employees) with 3%, 40%, 57% and callout '+7% change from 2023'; Midsize (100\u2013999 employees) with 1%, 35%, 64% and callout '+6% change from 2023'; and Large (1,000 or more employees) with 3%, 30%, 67% and callout '+5% change from 2023'."
+  },
+  {
+    "iteration": 1,
+    "validator_warnings": [],
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 53 distinct",
+        "html_evidence": "Figure 1",
+        "correction": "Words not printed inside the figure box: ['figure', '1']"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 53 distinct",
+        "html_evidence": "Companies plan to offer more benefits in five years.",
+        "correction": "Words not printed inside the figure box: ['companies', 'plan', 'to', 'offer']"
+      }
+    ],
+    "source_chart_summary": "Figure 1 is a 100% stacked vertical bar chart titled 'Companies plan to offer more benefits in five years.' answering the question 'In five years, do you think your company will be offering fewer, the same or more benefits than it does now?'. It shows three categories: Small (10\u201399 employees) with 3% Fewer benefits, 40% About the same, 57% More benefits (+7% change from 2023); Midsize (100\u2013999 employees) with 1% Fewer benefits, 35% About the same, 64% More benefits (+6% change from 2023); and Large (1,000 or more employees) with 3% Fewer benefits, 30% About the same, 67% More benefits (+5% change from 2023)."
+  },
+  {
+    "iteration": 2,
+    "validator_warnings": [],
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 21 distinct",
+        "html_evidence": "Figure 1",
+        "correction": "Words not printed inside the figure box: ['figure', '1']"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 21 distinct",
+        "html_evidence": "Companies plan to offer more benefits in five years.",
+        "correction": "Words not printed inside the figure box: ['companies', 'plan', 'five', 'years']"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 21 distinct",
+        "html_evidence": "QUESTION: In five years, do you think your company will be offering fewer, the same or more benefits than it does now?",
+        "correction": "Words not printed inside the figure box: ['question', 'five', 'years', 'do', 'you', 'think', 'your', 'company', 'will', 'be', 'offering', 'fewer', 'same', 'or', 'than', 'it', 'does', 'now']"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 21 distinct",
+        "html_evidence": "Fewer benefits",
+        "correction": "Words not printed inside the figure box: ['fewer']"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 21 distinct",
+        "html_evidence": "About the same",
+        "correction": "Words not printed inside the figure box: ['about', 'same']"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 21 distinct",
+        "html_evidence": "Small\n(10\u201399 employees)",
+        "correction": "Words not printed inside the figure box: ['small', '10-99', 'employees']"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 21 distinct",
+        "html_evidence": "Midsize\n(100\u2013999 employees)",
+        "correction": "Words not printed inside the figure box: ['midsize', '100-999', 'employees']"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 21 distinct",
+        "html_evidence": "Large\n(1,000 or more employees)",
+        "correction": "Words not printed inside the figure box: ['large', '1,000', 'or', 'employees']"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 21 distinct",
+        "html_evidence": "+7% change from 2023",
+        "correction": "Words not printed inside the figure box: ['+7%', 'change', 'from', '2023']"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 21 distinct",
+        "html_evidence": "+6% change from 2023",
+        "correction": "Words not printed inside the figure box: ['+6%', 'change', 'from', '2023']"
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Native PDF words in box: 21 distinct",
+        "html_evidence": "+5% change from 2023",
+        "correction": "Words not printed inside the figure box: ['+5%', 'change', 'from', '2023']"
+      },
+      {
+        "category": "chart_data",
+        "source_evidence": "Printed percentages: []",
+        "html_evidence": "Spec percentages: ['1%', '3%', '3%', '30%', '35%', '40%', '5%', '57%', '6%', '64%', '67%', '7%']",
+        "correction": "Missing from spec: {}; not printed in PDF: {'7%': 1, '6%': 1, '5%': 1, '3%': 2, '40%': 1, '57%': 1, '1%': 1, '35%': 1, '64%': 1, '30%': 1, '67%': 1}"
+      }
+    ],
+    "source_chart_summary": "Figure 1 is a 100% stacked vertical bar chart titled 'Companies plan to offer more benefits in five years.' answering 'QUESTION: In five years, do you think your company will be offering fewer, the same or more benefits than it does now?'. It compares three employer size categories across three series (from bottom to top: 'Fewer benefits' in light grey, 'About the same' in dark grey, and 'More benefits' in yellow): Small (10\u201399 employees) with 3%, 40%, 57% and a callout of '+7% change from 2023'; Midsize (100\u2013999 employees) with 1%, 35%, 64% and a callout of '+6% change from 2023'; and Large (1,000 or more employees) with 3%, 30%, 67% and a callout of '+5% change from 2023'."
+  }
+]

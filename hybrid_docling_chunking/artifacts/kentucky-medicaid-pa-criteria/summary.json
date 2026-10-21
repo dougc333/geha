@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0",
+  "source": "/Users/dc/geha/aws_data_workflow/runtime/documents/doc-673098c8003e/source.pdf",
+  "document_id": "77f190e9907127c30a4500f052d65a84f6083242c2f49e684a2b56c70c96f67a",
+  "document_markdown": "/Users/dc/geha/hybrid_docling_chunking/artifacts/kentucky-medicaid-pa-criteria/document.md",
+  "document_json": "/Users/dc/geha/hybrid_docling_chunking/artifacts/kentucky-medicaid-pa-criteria/document.json",
+  "tokenizer": "BAAI/bge-small-en-v1.5",
+  "llm_calls_made": 0,
+  "budgets": [
+    {
+      "max_tokens": 380,
+      "chunks": 1058,
+      "chunks_spanning_pages": 60,
+      "tokens": {
+        "minimum": 7,
+        "maximum": 397,
+        "mean": 147.92,
+        "median": 68.0,
+        "total": 156503
+      },
+      "output": "/Users/dc/geha/hybrid_docling_chunking/artifacts/kentucky-medicaid-pa-criteria/chunks-380.jsonl"
+    },
+    {
+      "max_tokens": 512,
+      "chunks": 985,
+      "chunks_spanning_pages": 73,
+      "tokens": {
+        "minimum": 7,
+        "maximum": 529,
+        "mean": 158.39,
+        "median": 61,
+        "total": 156014
+      },
+      "output": "/Users/dc/geha/hybrid_docling_chunking/artifacts/kentucky-medicaid-pa-criteria/chunks-512.jsonl"
+    },
+    {
+      "max_tokens": 800,
+      "chunks": 885,
+      "chunks_spanning_pages": 77,
+      "tokens": {
+        "minimum": 7,
+        "maximum": 810,
+        "mean": 175.47,
+        "median": 54,
+        "total": 155288
+      },
+      "output": "/Users/dc/geha/hybrid_docling_chunking/artifacts/kentucky-medicaid-pa-criteria/chunks-800.jsonl"
+    }
+  ]
+}
