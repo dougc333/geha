@@ -32,6 +32,28 @@ type DocumentInfo = {
   page_aspect_ratio: number
   annotation_path: string
   prompt_path: string
+  specs_path: string
+}
+
+type SpecPageState = {
+  page: number
+  state: 'boxed' | 'extracting' | 'evidence_extracted' | 'generating' | 'validating' | 'saved' | 'skipped_existing' | 'failed'
+  attempt: number
+  region_count: number
+  message: string
+  spec_path?: string | null
+  errors?: Array<Record<string, unknown>>
+}
+
+type SpecStatus = {
+  schema_version: number
+  document_id: string
+  running: boolean
+  updated_at: string
+  existing_spec_count: number
+  boxed_page_count: number
+  error?: string
+  pages: Record<string, SpecPageState>
 }
 
 type PromptEvidence = {
@@ -183,6 +205,7 @@ type AppState = {
   info: DocumentInfo | null
   annotations: AnnotationFile | null
   prompts: PromptFile | null
+  specs: SpecStatus | null
   page: number
   selectedId: string | null
   copiedPromptId: string | null
@@ -193,11 +216,13 @@ type AppState = {
 export class App extends Component<Record<string, never>, AppState> {
   private saveQueue: Promise<void> = Promise.resolve()
   private saveVersion = 0
+  private specTimer: number | null = null
 
   state: AppState = {
     info: null,
     annotations: null,
     prompts: null,
+    specs: null,
     page: 1,
     selectedId: null,
     copiedPromptId: null,
@@ -212,22 +237,58 @@ export class App extends Component<Record<string, never>, AppState> {
 
   componentWillUnmount(): void {
     window.removeEventListener('keydown', this.handleKeyDown)
+    if (this.specTimer !== null) window.clearTimeout(this.specTimer)
   }
 
   private load = async (): Promise<void> => {
     try {
-      const [infoResponse, annotationResponse, promptResponse] = await Promise.all([
+      const [infoResponse, annotationResponse, promptResponse, specResponse] = await Promise.all([
         fetch('/api/document'),
         fetch('/api/annotations'),
         fetch('/api/prompts'),
+        fetch('/api/specs'),
       ])
-      if (!infoResponse.ok || !annotationResponse.ok || !promptResponse.ok) throw new Error('Unable to load document, annotations, or prompts')
+      if (!infoResponse.ok || !annotationResponse.ok || !promptResponse.ok || !specResponse.ok) throw new Error('Unable to load document workspace')
       const info = await infoResponse.json() as DocumentInfo
       const annotations = await annotationResponse.json() as AnnotationFile
       const prompts = await promptResponse.json() as PromptFile
-      this.setState({ info, annotations, prompts, status: 'saved', error: null })
+      const specs = await specResponse.json() as SpecStatus
+      this.setState({ info, annotations, prompts, specs, status: 'saved', error: null }, this.scheduleSpecRefresh)
     } catch (error) {
       this.setState({ status: 'error', error: error instanceof Error ? error.message : String(error) })
+    }
+  }
+
+  private scheduleSpecRefresh = (): void => {
+    if (this.specTimer !== null) window.clearTimeout(this.specTimer)
+    if (!this.state.specs?.running) {
+      this.specTimer = null
+      return
+    }
+    this.specTimer = window.setTimeout(() => void this.refreshSpecs(), 850)
+  }
+
+  private refreshSpecs = async (): Promise<void> => {
+    try {
+      const response = await fetch('/api/specs', { cache: 'no-store' })
+      if (!response.ok) throw new Error(await response.text())
+      const specs = await response.json() as SpecStatus
+      this.setState({ specs, error: specs.error ?? null }, this.scheduleSpecRefresh)
+    } catch (error) {
+      this.setState({ error: error instanceof Error ? error.message : String(error) })
+    }
+  }
+
+  private generateSpecs = async (): Promise<void> => {
+    try {
+      const response = await fetch('/api/specs/generate', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({}),
+      })
+      if (!response.ok) throw new Error(await response.text())
+      await this.refreshSpecs()
+    } catch (error) {
+      this.setState({ error: error instanceof Error ? error.message : String(error) })
     }
   }
 
@@ -337,8 +398,8 @@ export class App extends Component<Record<string, never>, AppState> {
   }
 
   render(): React.ReactNode {
-    const { info, annotations, prompts, page, selectedId, copiedPromptId, status, error } = this.state
-    if (!info || !annotations || !prompts) {
+    const { info, annotations, prompts, specs, page, selectedId, copiedPromptId, status, error } = this.state
+    if (!info || !annotations || !prompts || !specs) {
       return <main className="loading-screen"><span className="spinner" /><h1>Loading figure annotator</h1>{error && <p>{error}</p>}</main>
     }
     const boxes = this.currentBoxes()
@@ -347,6 +408,13 @@ export class App extends Component<Record<string, never>, AppState> {
     const totalBoxes = Object.values(annotations.pages).reduce((sum, pageBoxes) => sum + pageBoxes.length, 0)
     const pagePrompts = prompts.pages[String(page)] ?? []
     const activePrompt = pagePrompts.find((record) => record.region_id === selectedId) ?? pagePrompts[0] ?? null
+    const pageSpec = specs.pages[String(page)]
+    const specStages = [
+      ['boxed', 'Boxed'], ['evidence_extracted', 'Crawl data loaded'], ['generating', 'Spec assembled'],
+      ['validating', 'Validating'], ['saved', 'Spec saved'],
+    ] as const
+    const stageOrder: Record<string, number> = { boxed: 0, extracting: 0, evidence_extracted: 1, generating: 2,
+      validating: 3, saved: 4, skipped_existing: 4, failed: -1 }
 
     return (
       <main className="app-shell">
@@ -417,6 +485,34 @@ export class App extends Component<Record<string, never>, AppState> {
               </div>
             )}
 
+            <section className="spec-panel" aria-labelledby="spec-panel-title">
+              <div className="spec-panel-header">
+                <div>
+                  <p className="eyebrow">EVIDENCE-GROUNDED</p>
+                  <h2 id="spec-panel-title">Figure specifications</h2>
+                </div>
+                <button className="generate-button" disabled={specs.running} onClick={() => void this.generateSpecs()}>
+                  {specs.running ? <><span className="mini-spinner" />Generating…</> : 'Generate specs'}
+                </button>
+              </div>
+              <p className="spec-summary"><strong>{specs.existing_spec_count}</strong> saved of <strong>{specs.boxed_page_count}</strong> boxed pages. Existing reviewed specs are preserved.</p>
+              {pageSpec ? (
+                <div className={`spec-progress ${pageSpec.state}`}>
+                  <header><strong>Page {page}</strong><span>{pageSpec.message}</span></header>
+                  <ol>
+                    {specStages.map(([key, label], index) => {
+                      const current = stageOrder[pageSpec.state] ?? 0
+                      const complete = index <= current
+                      const active = (key === pageSpec.state) || (pageSpec.state === 'extracting' && key === 'boxed') ||
+                        (pageSpec.state === 'skipped_existing' && key === 'saved')
+                      return <li key={key} className={`${complete ? 'complete' : ''} ${active ? 'active' : ''}`}><i />{label}</li>
+                    })}
+                  </ol>
+                  {pageSpec.spec_path && <code title={pageSpec.spec_path}>{pageSpec.spec_path.split('/').at(-1)}</code>}
+                </div>
+              ) : <div className="prompt-empty">Draw and save a box on this page before generating a spec.</div>}
+            </section>
+
             <section className="prompt-panel" aria-labelledby="prompt-panel-title">
               <div className="prompt-panel-header">
                 <div>
@@ -467,6 +563,7 @@ export class App extends Component<Record<string, never>, AppState> {
               <button className="clear-button" disabled={!boxes.length} onClick={this.clearPage}>Clear page</button>
               <p>Boxes<br/><code>{info.annotation_path}</code></p>
               <p>Prompts<br/><code>{info.prompt_path}</code></p>
+              <p>Specs<br/><code>{info.specs_path}</code></p>
             </div>
           </aside>
         </section>

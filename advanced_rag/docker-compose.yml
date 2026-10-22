@@ -1,0 +1,25 @@
+services:
+  advanced-rag:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: advanced-rag
+    ports:
+      - "8000:8000"
+    environment:
+      AWS_WORKFLOW_DATA_DIR: /app/runtime
+      AWS_WORKFLOW_SEED_TEST_PDFS: ${AWS_WORKFLOW_SEED_TEST_PDFS:-0}
+      AWS_WORKFLOW_PROCESSING_MODE: ${AWS_WORKFLOW_PROCESSING_MODE:-docling}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      LLAMA_CLOUD_API_KEY: ${LLAMA_CLOUD_API_KEY:-}
+      NOUS_KEY: ${NOUS_KEY:-}
+      NOUS_API_KEY: ${NOUS_API_KEY:-}
+      TYPESAFE_API_KEY: ${TYPESAFE_API_KEY:-}
+      MUSE_API_KEY: ${MUSE_API_KEY:-}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
+      AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN:-}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION:-us-east-1}
+    volumes:
+      - ./runtime:/app/runtime
+    restart: unless-stopped

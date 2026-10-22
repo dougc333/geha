@@ -1,8 +1,11 @@
 from __future__ import annotations
 
 import argparse
+import asyncio
+import hashlib
 import json
 import os
+import sys
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
@@ -19,11 +22,14 @@ CRAWL_DIR = REPO_DIR / "crawl_dir"
 DOCUMENT_ID = "ey-limra-workforce-benefits-study-final-2025"
 SOURCE_RELATIVE = Path("raw/research") / f"{DOCUMENT_ID}.pdf"
 SOURCE_PDF = CRAWL_DIR / SOURCE_RELATIVE
+CRAWL_RUNS = CRAWL_DIR / "runs" / "research" / DOCUMENT_ID
 ANNOTATIONS_DIR = BOUNDING_BOX_DIR / "annotations"
 ANNOTATION_DIR = ANNOTATIONS_DIR / "research" / DOCUMENT_ID
 ANNOTATION_PATH = ANNOTATION_DIR / "figure-bounding-boxes.json"
 PROMPTS_PATH = ANNOTATION_DIR / "figure-reconstruction-prompts.json"
-CACHE_DIR = APP_DIR / ".page-cache" / DOCUMENT_ID
+SPECS_DIR = ANNOTATION_DIR / "figure-specs"
+SPEC_STATUS_PATH = ANNOTATION_DIR / "spec-generation-status.json"
+CACHE_DIR = APP_DIR / ".page-cache" / f"{DOCUMENT_ID}-{hashlib.sha256(str(SOURCE_PDF).encode()).hexdigest()[:10]}"
 UI_DIST = APP_DIR / "ui" / "dist"
 COORDINATE_MAX = 1000
 TITLE = "EY + LIMRA 2025 Workforce Benefits Study"
@@ -33,7 +39,7 @@ EXPECTED_PAGES: int | None = 29
 def configure(pdf: Path, annotation_dir: Path | None = None) -> None:
     """Point the app at any PDF instead of the default EY study."""
     global DOCUMENT_ID, SOURCE_RELATIVE, SOURCE_PDF, ANNOTATION_DIR, ANNOTATION_PATH
-    global PROMPTS_PATH, CACHE_DIR, TITLE, EXPECTED_PAGES
+    global PROMPTS_PATH, SPECS_DIR, SPEC_STATUS_PATH, CRAWL_RUNS, CACHE_DIR, TITLE, EXPECTED_PAGES
     SOURCE_PDF = pdf.resolve()
     if not SOURCE_PDF.is_file():
         raise RuntimeError(f"Source PDF not found: {SOURCE_PDF}")
@@ -45,7 +51,10 @@ def configure(pdf: Path, annotation_dir: Path | None = None) -> None:
     ANNOTATION_DIR = (annotation_dir or ANNOTATIONS_DIR / "other" / DOCUMENT_ID).resolve()
     ANNOTATION_PATH = ANNOTATION_DIR / "figure-bounding-boxes.json"
     PROMPTS_PATH = ANNOTATION_DIR / "figure-reconstruction-prompts.json"
-    CACHE_DIR = APP_DIR / ".page-cache" / DOCUMENT_ID
+    SPECS_DIR = ANNOTATION_DIR / "figure-specs"
+    SPEC_STATUS_PATH = ANNOTATION_DIR / "spec-generation-status.json"
+    CRAWL_RUNS = CRAWL_DIR / "runs" / "research" / DOCUMENT_ID
+    CACHE_DIR = APP_DIR / ".page-cache" / f"{DOCUMENT_ID}-{hashlib.sha256(str(SOURCE_PDF).encode()).hexdigest()[:10]}"
     TITLE = DOCUMENT_ID
     EXPECTED_PAGES = None
 
@@ -192,6 +201,7 @@ async def get_document(_request: web.Request) -> web.Response:
             "page_aspect_ratio": first.rect.width / first.rect.height,
             "annotation_path": str(ANNOTATION_PATH),
             "prompt_path": str(PROMPTS_PATH),
+            "specs_path": str(SPECS_DIR),
         }
     return web.json_response(metadata)
 
@@ -211,6 +221,90 @@ async def get_prompts(_request: web.Request) -> web.Response:
     return web.json_response(json.loads(PROMPTS_PATH.read_text(encoding="utf-8")))
 
 
+def spec_status() -> dict[str, Any]:
+    annotations = load_annotations()
+    existing = {int(path.stem.split("-")[1]) for path in SPECS_DIR.glob("page-*.json")}
+    if SPEC_STATUS_PATH.is_file():
+        payload = json.loads(SPEC_STATUS_PATH.read_text(encoding="utf-8"))
+    else:
+        payload = {"schema_version": 1, "document_id": DOCUMENT_ID, "running": False,
+                   "updated_at": utc_now(), "pages": {}}
+    for key, boxes in annotations.get("pages", {}).items():
+        page = int(key)
+        payload.setdefault("pages", {}).setdefault(key, {
+            "page": page, "state": "saved" if page in existing else "boxed", "attempt": 0,
+            "region_count": len(boxes), "message": "Reviewed spec exists" if page in existing else "Ready",
+            "spec_path": str(SPECS_DIR / f"page-{page:03d}.json") if page in existing else None,
+        })
+    payload["existing_spec_count"] = len(existing)
+    payload["boxed_page_count"] = len(annotations.get("pages", {}))
+    return payload
+
+
+async def get_specs(_request: web.Request) -> web.Response:
+    return web.json_response(spec_status())
+
+
+async def get_page_spec(request: web.Request) -> web.Response:
+    try:
+        page = int(request.match_info["page"])
+    except ValueError as exc:
+        raise web.HTTPNotFound(text="Invalid page number") from exc
+    path = SPECS_DIR / f"page-{page:03d}.json"
+    if not path.is_file():
+        raise web.HTTPNotFound(text=f"No saved spec for page {page}")
+    return web.json_response(json.loads(path.read_text(encoding="utf-8")))
+
+
+async def _watch_generator(process: asyncio.subprocess.Process) -> None:
+    stdout, stderr = await process.communicate()
+    if process.returncode == 0:
+        return
+    payload = spec_status()
+    payload["running"] = False
+    payload["error"] = (stderr or stdout or b"spec generator failed").decode("utf-8", errors="replace")[-2000:]
+    save_json_atomic(SPEC_STATUS_PATH, payload)
+
+
+def save_json_atomic(path: Path, payload: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=path.parent)
+    temporary = Path(temporary_name)
+    try:
+        with os.fdopen(descriptor, "w", encoding="utf-8") as handle:
+            json.dump(payload, handle, indent=2, ensure_ascii=False)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        temporary.replace(path)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+async def generate_specs(request: web.Request) -> web.Response:
+    current = spec_status()
+    if current.get("running"):
+        raise web.HTTPConflict(text="Spec generation is already running")
+    body = await request.json() if request.can_read_body else {}
+    pages = str(body.get("pages", "")).strip()
+    command = [sys.executable, "-m", "bounding_box.figure_bbox_app.generate_figure_specs",
+               "--pdf", str(SOURCE_PDF), "--annotations", str(ANNOTATION_PATH),
+               "--specs-dir", str(SPECS_DIR), "--status", str(SPEC_STATUS_PATH),
+               "--crawl-runs", str(CRAWL_RUNS)]
+    if pages:
+        command += ["--pages", pages]
+    if body.get("overwrite") is True:
+        command.append("--overwrite")
+    current["running"] = True
+    current.pop("error", None)
+    save_json_atomic(SPEC_STATUS_PATH, current)
+    process = await asyncio.create_subprocess_exec(*command, cwd=REPO_DIR,
+                                                    stdout=asyncio.subprocess.PIPE,
+                                                    stderr=asyncio.subprocess.PIPE)
+    asyncio.create_task(_watch_generator(process))
+    return web.json_response({"started": True, "pid": process.pid, "pages": pages or "all missing"}, status=202)
+
+
 async def put_annotations(request: web.Request) -> web.Response:
     try:
         payload = await request.json()
@@ -225,7 +319,7 @@ async def get_page(request: web.Request) -> web.FileResponse:
         page_number = int(request.match_info["page"])
     except ValueError as exc:
         raise web.HTTPNotFound(text="Invalid page number") from exc
-    return web.FileResponse(render_page(page_number), headers={"Cache-Control": "public, max-age=31536000"})
+    return web.FileResponse(render_page(page_number), headers={"Cache-Control": "no-cache"})
 
 
 async def index(_request: web.Request) -> web.StreamResponse:
@@ -242,6 +336,9 @@ def create_app() -> web.Application:
     app.router.add_get("/api/document", get_document)
     app.router.add_get("/api/annotations", get_annotations)
     app.router.add_get("/api/prompts", get_prompts)
+    app.router.add_get("/api/specs", get_specs)
+    app.router.add_get("/api/specs/pages/{page}", get_page_spec)
+    app.router.add_post("/api/specs/generate", generate_specs)
     app.router.add_put("/api/annotations", put_annotations)
     app.router.add_get("/api/pages/{page}.png", get_page)
     if UI_DIST.exists():

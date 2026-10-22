@@ -1,0 +1,106 @@
+{
+  "Comment": "Route reviewed policy documents into contextual policy RAG indexing.",
+  "StartAt": "DoclingExtractAndChunk",
+  "States": {
+    "DoclingExtractAndChunk": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "${DoclingWorkerFunctionArn}",
+        "Payload.$": "$"
+      },
+      "OutputPath": "$.Payload",
+      "Next": "DetectPolicyDocument",
+      "Retry": [
+        {
+          "ErrorEquals": ["Lambda.ServiceException", "Lambda.TooManyRequestsException"],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 3,
+          "BackoffRate": 2
+        }
+      ]
+    },
+    "DetectPolicyDocument": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "${DocumentRouterFunctionArn}",
+        "Payload.$": "$"
+      },
+      "OutputPath": "$.Payload",
+      "Next": "IsPolicyDocument"
+    },
+    "IsPolicyDocument": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.classification.is_policy",
+          "BooleanEquals": true,
+          "Next": "BoundedPolicyReview"
+        }
+      ],
+      "Default": "StoreGenericArtifacts"
+    },
+    "BoundedPolicyReview": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "${PolicyReviewFunctionArn}",
+        "Payload.$": "$"
+      },
+      "OutputPath": "$.Payload",
+      "Next": "PolicyReviewPassed"
+    },
+    "PolicyReviewPassed": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.review.status",
+          "StringEquals": "passed",
+          "Next": "CreateContextualEmbeddings"
+        }
+      ],
+      "Default": "HoldForHumanReview"
+    },
+    "CreateContextualEmbeddings": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "${ContextualEmbeddingFunctionArn}",
+        "Payload.$": "$"
+      },
+      "OutputPath": "$.Payload",
+      "Next": "IndexPolicyChunks"
+    },
+    "IndexPolicyChunks": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "${PolicyIndexFunctionArn}",
+        "Payload.$": "$"
+      },
+      "OutputPath": "$.Payload",
+      "Next": "PolicyReady"
+    },
+    "StoreGenericArtifacts": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "${GenericArtifactFunctionArn}",
+        "Payload.$": "$"
+      },
+      "OutputPath": "$.Payload",
+      "Next": "GenericDocumentReady"
+    },
+    "HoldForHumanReview": {
+      "Type": "Succeed"
+    },
+    "PolicyReady": {
+      "Type": "Succeed"
+    },
+    "GenericDocumentReady": {
+      "Type": "Succeed"
+    }
+  }
+}
+
