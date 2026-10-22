@@ -1,5 +1,10 @@
 # AWS Data Workflow
 
+```bash
+cd /Users/dc/geha/advanced_rag
+docker compose up --build
+```
+
 This directory is the production-oriented AWS counterpart to
 `document_ingestion_workflow`. The existing local workflow remains unchanged.
 
@@ -557,7 +562,7 @@ runtime/documents/<document-id>/
 Start the backend with the existing GEHA environment:
 
 ```bash
-cd /Users/dc/geha/aws_data_workflow
+cd /Users/dc/geha/advanced_rag
 source /Users/dc/geha/.venv/bin/activate
 PYTHONPATH=src python -m aws_data_workflow.server
 ```
@@ -568,7 +573,7 @@ Swagger API documentation is available at `http://127.0.0.1:8000/docs`.
 For frontend development, leave the backend running and start Vite separately:
 
 ```bash
-cd /Users/dc/geha/aws_data_workflow/web
+cd /Users/dc/geha/advanced_rag/web
 npm install
 npm run dev
 ```
@@ -576,6 +581,24 @@ npm run dev
 Open `http://localhost:5175`; Vite proxies `/api` to port 8000. Use **Run
 next** to process one queued record at a time, select a document to inspect its route
 and artifact destination, or add local PDFs to the queue.
+
+### Docker
+
+The Docker image builds the React application first, then serves the compiled UI
+and FastAPI API together on port 8000. Runtime documents and generated artifacts
+remain on the host through the `./runtime:/app/runtime` volume.
+
+Export any provider keys needed by the workflow in the shell that launches
+Compose. Compose passes through Anthropic, LlamaParse, Nous, TypeSafe Jev, Muse,
+and standard AWS credential variables when they are present.
+
+```bash
+cd /Users/dc/geha/advanced_rag
+docker compose up --build
+```
+
+Open `http://127.0.0.1:8000`. Stop the stack with `Ctrl-C`, or run
+`docker compose down` from the same directory.
 
 The default `AWS_WORKFLOW_PROCESSING_MODE=docling` runs real Docling extraction,
 chunking, table normalization, and figure cropping. Set it to `simulate` only
