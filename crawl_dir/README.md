@@ -200,6 +200,23 @@ and is deterministic: the same specs always produce the same HTML. The time that
 remains is mostly local Docling text export for the 9 pages without charts. The
 Claude version of the model loops has not been benchmarked.
 
+### Chunk length and noise report
+
+Summarize chunk length and estimated noise per document, per family and per
+document-length bucket:
+
+```bash
+uv run python -m crawl_dir.src.chunk_noise_report --batch batch-20261009-all
+```
+
+Without `--batch`, the newest run of each document is used, which can mix
+batches that chunk differently. The report is written to
+`reports/chunk-noise/` (`summary.md`, `report.json`, `documents.csv`,
+`families.csv`). The noise flags are text heuristics, not labels: `toc` (3+
+dot-leader or page-number lines), `form` (2+ blank fields or checkboxes),
+`tiny` (under 25 words) and `boilerplate` (half or more of a chunk's lines
+repeated across at least 10% of documents).
+
 ## Artifact layout
 
 ```text
