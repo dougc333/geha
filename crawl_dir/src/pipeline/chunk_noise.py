@@ -9,10 +9,13 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import re
 import statistics
+import tempfile
 from collections import Counter
 from dataclasses import asdict, dataclass
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Iterable
 
@@ -218,3 +221,112 @@ def build_report(runs_root: Path, batch: str | None = None) -> dict:
         ],
         "documents": [asdict(row) for row in rows],
     }
+
+
+STATS_FILENAME = "chunk-noise.json"
+
+
+def list_runs(runs_root: Path) -> list[dict]:
+    """Every run directory that has chunks, newest first."""
+    runs = []
+    for chunks_path in runs_root.glob("*/*/*/candidate/chunks.jsonl"):
+        run_dir = chunks_path.parents[1]
+        manifest = run_dir / "run-manifest.json"
+        created = ""
+        if manifest.is_file():
+            created = json.loads(manifest.read_text(encoding="utf-8")).get("created_at", "")
+        runs.append({
+            "id": run_dir.relative_to(runs_root).as_posix(),
+            "family": run_dir.parents[1].name,
+            "document_id": run_dir.parent.name,
+            "run_id": run_dir.name,
+            "created_at": created,
+        })
+    return sorted(runs, key=lambda run: (run["created_at"], run["id"]), reverse=True)
+
+
+def resolve_run(runs_root: Path, run_id: str) -> Path:
+    """Map a ``family/document/run`` id to its directory, refusing paths outside runs_root."""
+    root = runs_root.resolve()
+    run_dir = (root / run_id).resolve()
+    if run_dir.parent.parent.parent != root or not (run_dir / "candidate" / "chunks.jsonl").is_file():
+        raise ValueError(f"Unknown run: {run_id}")
+    return run_dir
+
+
+def stats_path(stats_root: Path, runs_root: Path, run_dir: Path) -> Path:
+    """Stats live under stats_root at the same family/document/run path as the run."""
+    return stats_root / run_dir.relative_to(runs_root.resolve()) / STATS_FILENAME
+
+
+def corpus_boilerplate(runs_root: Path) -> tuple[set[str], float]:
+    """Template lines shared across the newest run of every document."""
+    runs = find_runs(runs_root)
+    line_documents: Counter[str] = Counter()
+    for run_dir in runs.values():
+        line_documents.update(template_lines(chunk["text"] for chunk in read_chunks(run_dir)))
+    threshold = max(BOILERPLATE_MIN_DOCS, BOILERPLATE_DOC_FRACTION * len(runs))
+    return {line for line, count in line_documents.items() if count >= threshold}, threshold
+
+
+def chunk_rows(chunks: list[dict], boilerplate: set[str]) -> list[dict]:
+    rows = []
+    for chunk in chunks:
+        text = chunk["text"]
+        share = boilerplate_share(text, boilerplate)
+        rows.append({
+            "chunk_id": chunk.get("chunk_id", ""),
+            "pages": chunk.get("pages") or [],
+            "section": chunk.get("section") or "",
+            "content_type": chunk.get("content_type") or "",
+            "words": len(WORD_RE.findall(text)),
+            "toc": is_toc(text),
+            "form": is_form(text),
+            "tiny": is_tiny(text),
+            "boilerplate": share >= BOILERPLATE_LINE_SHARE,
+            "boilerplate_share": round(share, 2),
+            "table": chunk.get("content_type") == "table" or bool(chunk.get("table_ids")),
+            "preview": " ".join(text.split())[:240],
+        })
+    return rows
+
+
+def compute_run_stats(runs_root: Path, stats_root: Path, run_id: str) -> dict:
+    """Compute stats for one run and save them next to its mirrored path under stats_root."""
+    run_dir = resolve_run(runs_root, run_id)
+    boilerplate, threshold = corpus_boilerplate(runs_root)
+    chunks = read_chunks(run_dir)
+    payload = {
+        "schema_version": 1,
+        "run": run_id,
+        "computed_at": datetime.now(UTC).isoformat(),
+        "heuristics": {
+            "tiny_words": TINY_WORDS,
+            "toc_min_matches": TOC_MIN_MATCHES,
+            "form_min_matches": FORM_MIN_MATCHES,
+            "boilerplate_line_share": BOILERPLATE_LINE_SHARE,
+            "boilerplate_min_documents": threshold,
+        },
+        "summary": asdict(document_stats(run_dir, chunks, boilerplate)),
+        "chunks": chunk_rows(chunks, boilerplate),
+    }
+    path = stats_path(stats_root, runs_root, run_dir)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    # A unique temporary file per call, so concurrent recomputes never share one.
+    descriptor, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=path.parent)
+    temporary = Path(temporary_name)
+    try:
+        with os.fdopen(descriptor, "w", encoding="utf-8") as stream:
+            stream.write(json.dumps(payload, indent=2) + "\n")
+        temporary.replace(path)
+    finally:
+        temporary.unlink(missing_ok=True)
+    return payload
+
+
+def load_run_stats(runs_root: Path, stats_root: Path, run_id: str) -> dict | None:
+    """Return saved stats for a run without recomputing, or None if none are saved."""
+    path = stats_path(stats_root, runs_root, resolve_run(runs_root, run_id))
+    if not path.is_file():
+        return None
+    return json.loads(path.read_text(encoding="utf-8"))

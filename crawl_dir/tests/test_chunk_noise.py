@@ -7,11 +7,15 @@ from pathlib import Path
 
 from crawl_dir.src.pipeline.chunk_noise import (
     build_report,
+    compute_run_stats,
     find_runs,
     is_form,
     is_tiny,
     is_toc,
+    list_runs,
+    load_run_stats,
     loglog_slope,
+    resolve_run,
 )
 
 TOC = "Contents\nIntroduction ........ 3\nBenefits ........ 7\nExclusions ........ 12\n"
@@ -72,6 +76,30 @@ class ReportTests(unittest.TestCase):
         dental = next(row for row in report["documents"] if row["document_id"] == "brochure")
         self.assertEqual((dental["toc"], dental["form"], dental["boilerplate"]), (1, 1, 0))
         self.assertEqual(report["corpus"]["chunks"], 13)
+
+
+class RunStatsTests(unittest.TestCase):
+    def test_stats_are_saved_under_the_run_path_and_reloaded(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            runs_root, stats_root = Path(temporary) / "runs", Path(temporary) / "stats"
+            write_run(runs_root, "research", "ey", "run-1", "2026-10-10", [TOC, PROSE])
+            run_id = "research/ey/run-1"
+            self.assertEqual([run["id"] for run in list_runs(runs_root)], [run_id])
+            self.assertIsNone(load_run_stats(runs_root, stats_root, run_id))
+
+            computed = compute_run_stats(runs_root, stats_root, run_id)
+            self.assertTrue((stats_root / run_id / "chunk-noise.json").is_file())
+            self.assertEqual(load_run_stats(runs_root, stats_root, run_id), computed)
+            self.assertEqual([row["toc"] for row in computed["chunks"]], [True, False])
+
+    def test_run_ids_outside_runs_root_are_rejected(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            runs_root = Path(temporary) / "runs"
+            write_run(runs_root, "research", "ey", "run-1", "2026-10-10", [PROSE])
+            write_run(Path(temporary) / "elsewhere", "research", "ey", "run-1", "2026-10-10", [PROSE])
+            for run_id in ("../elsewhere/research/ey/run-1", "research/ey/run-1/x", "research/ey"):
+                with self.assertRaises(ValueError):
+                    resolve_run(runs_root, run_id)
 
 
 if __name__ == "__main__":

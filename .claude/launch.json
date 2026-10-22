@@ -6,6 +6,18 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["--prefix", "context_assembly_benchmarks/dashboard", "run", "dev"],
       "port": 5174
+    },
+    {
+      "name": "chunk-stats-api",
+      "runtimeExecutable": ".venv/bin/python",
+      "runtimeArgs": ["-m", "crawl_dir.src.stats_server"],
+      "port": 8520
+    },
+    {
+      "name": "chunk-stats-app",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "crawl_dir/stats_app", "run", "dev"],
+      "port": 5180
     }
   ]
 }
