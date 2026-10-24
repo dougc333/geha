@@ -22,7 +22,17 @@ jobs:
         with:
           version: "0.11.28"
           enable-cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: advanced_rag/web/package-lock.json
       - uses: hashicorp/setup-terraform@v3
+      - name: Build the runtime React application
+        working-directory: advanced_rag/web
+        run: |
+          npm ci
+          npm run build
       - name: Run tests without AWS or model calls
         run: |
           uv python install 3.12
