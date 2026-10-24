@@ -387,6 +387,122 @@ class DocumentStore:
         return self.prepare_pages(saved["id"])
 
 
+class AwsDocumentStore(DocumentStore):
+    """Filesystem working cache backed by S3 artifacts and DynamoDB records.
+
+    The deployment intentionally runs one ECS task.  Local files therefore remain
+    the fast working representation used by Docling, while S3 and DynamoDB are the
+    durable source used to hydrate a replacement task after a deployment or crash.
+    """
+
+    def __init__(
+        self,
+        root: Path,
+        *,
+        bucket: str,
+        table_name: str,
+        region_name: str | None = None,
+        s3_client: Any | None = None,
+        table: Any | None = None,
+    ) -> None:
+        super().__init__(root)
+        if not bucket or not table_name:
+            raise ValueError("Both bucket and table_name are required for AWS persistence")
+        if s3_client is None or table is None:
+            import boto3
+
+            session = boto3.session.Session(region_name=region_name)
+            s3_client = s3_client or session.client("s3")
+            table = table or session.resource("dynamodb").Table(table_name)
+        self.bucket = bucket
+        self.table_name = table_name
+        self.s3 = s3_client
+        self.table = table
+        self._remote_lock = threading.RLock()
+        self._uploaded_files: dict[str, tuple[int, int]] = {}
+        self._hydrate()
+
+    def _safe_local_target(self, key: str) -> Path:
+        target = (self.root / key).resolve()
+        root = self.root.resolve()
+        if target != root and root not in target.parents:
+            raise ValueError(f"Unsafe S3 artifact key: {key}")
+        return target
+
+    def _hydrate(self) -> None:
+        """Restore job records and artifacts before the API begins serving traffic."""
+        scan_kwargs: dict[str, Any] = {}
+        while True:
+            response = self.table.scan(**scan_kwargs)
+            for item in response.get("Items", []):
+                try:
+                    record = json.loads(item["payload"])
+                    path = self._record_path(record["id"])
+                    path.parent.mkdir(parents=True, exist_ok=True)
+                    path.write_text(
+                        json.dumps(record, indent=2, sort_keys=True) + "\n",
+                        encoding="utf-8",
+                    )
+                except (KeyError, TypeError, json.JSONDecodeError):
+                    continue
+            last_key = response.get("LastEvaluatedKey")
+            if not last_key:
+                break
+            scan_kwargs["ExclusiveStartKey"] = last_key
+
+        continuation: str | None = None
+        while True:
+            kwargs: dict[str, Any] = {"Bucket": self.bucket}
+            if continuation:
+                kwargs["ContinuationToken"] = continuation
+            response = self.s3.list_objects_v2(**kwargs)
+            for item in response.get("Contents", []):
+                key = str(item.get("Key") or "")
+                if not (key.startswith("documents/") or key.startswith("runs/")):
+                    continue
+                target = self._safe_local_target(key)
+                target.parent.mkdir(parents=True, exist_ok=True)
+                self.s3.download_file(self.bucket, key, str(target))
+                stat = target.stat()
+                self._uploaded_files[key] = (stat.st_mtime_ns, stat.st_size)
+            if not response.get("IsTruncated"):
+                break
+            continuation = response.get("NextContinuationToken")
+            if not continuation:
+                break
+
+    def _sync_tree(self, tree: Path) -> None:
+        if not tree.is_dir():
+            return
+        for path in tree.rglob("*"):
+            if not path.is_file() or path.suffix == ".tmp" or path.name == "job.json":
+                continue
+            key = path.relative_to(self.root).as_posix()
+            stat = path.stat()
+            fingerprint = (stat.st_mtime_ns, stat.st_size)
+            if self._uploaded_files.get(key) == fingerprint:
+                continue
+            self.s3.upload_file(
+                str(path),
+                self.bucket,
+                key,
+                ExtraArgs={"ServerSideEncryption": "AES256"},
+            )
+            self._uploaded_files[key] = fingerprint
+
+    def save(self, record: dict[str, Any]) -> dict[str, Any]:
+        saved = super().save(record)
+        with self._remote_lock:
+            self.table.put_item(Item={
+                "id": saved["id"],
+                "updated_at": saved["updatedAt"],
+                "payload": json.dumps(saved, separators=(",", ":"), sort_keys=True),
+            })
+            self._sync_tree(self.directory(saved["id"]))
+            self._sync_tree(self.root / "runs")
+        return saved
+
+
 def seed_corpus_documents(store: DocumentStore, corpus: Path, limit: int) -> int:
     """Idempotently register the first ``limit`` PDFs from a local corpus."""
     if limit <= 0 or not corpus.is_dir():
@@ -1251,7 +1367,22 @@ def create_app(
     contextual_generate_judgment: Any | None = None,
 ) -> FastAPI:
     root = data_root or Path(os.environ.get("AWS_WORKFLOW_DATA_DIR", DEFAULT_DATA_ROOT))
-    store = DocumentStore(root.expanduser().resolve())
+    resolved_root = root.expanduser().resolve()
+    bucket = os.environ.get("AWS_WORKFLOW_S3_BUCKET")
+    table_name = os.environ.get("AWS_WORKFLOW_DYNAMODB_TABLE")
+    if bool(bucket) != bool(table_name):
+        raise RuntimeError(
+            "AWS_WORKFLOW_S3_BUCKET and AWS_WORKFLOW_DYNAMODB_TABLE must be configured together"
+        )
+    if bucket and table_name:
+        store: DocumentStore = AwsDocumentStore(
+            resolved_root,
+            bucket=bucket,
+            table_name=table_name,
+            region_name=os.environ.get("AWS_REGION") or os.environ.get("AWS_DEFAULT_REGION"),
+        )
+    else:
+        store = DocumentStore(resolved_root)
     processing_mode = mode or os.environ.get("AWS_WORKFLOW_PROCESSING_MODE", "docling")
     default_concurrency = "1" if processing_mode == "docling" else "3"
     manager = IngestionManager(
@@ -1322,7 +1453,12 @@ def create_app(
 
     @app.get("/api/health")
     def health() -> dict[str, Any]:
-        return {"status": "ok", "processingMode": manager.mode, "dataRoot": str(store.root)}
+        return {
+            "status": "ok",
+            "processingMode": manager.mode,
+            "dataRoot": str(store.root),
+            "persistence": "s3+dynamodb" if isinstance(store, AwsDocumentStore) else "filesystem",
+        }
 
     cluster_manifest = PROJECT_ROOT / "evals" / "cluster_manifest.json"
 

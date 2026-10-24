@@ -3,6 +3,7 @@ import { useState } from "react";
 import { DocumentTable } from "./components/DocumentTable";
 import { ClusterRouter } from "./components/ClusterRouter";
 import { ContextualRetrieval } from "./components/ContextualRetrieval";
+import { RuntimeContextualRetrieval } from "./components/RuntimeContextualRetrieval";
 import { Header } from "./components/Header";
 import { Inspector } from "./components/Inspector";
 import { PageComparison } from "./components/PageComparison";
@@ -16,6 +17,7 @@ type WorkspaceTab = "router" | "ingestion" | "contextual";
 export default function App() {
   const state = useIngestionState();
   const [activeTab, setActiveTab] = useState<WorkspaceTab>("router");
+  const runtimeOnly = import.meta.env.VITE_DEPLOYMENT_MODE === "runtime";
 
   return (
     <div className="min-h-screen bg-ink text-white">
@@ -62,7 +64,7 @@ export default function App() {
               <p className="pb-6 text-center font-mono text-[9px] uppercase tracking-[.16em] text-fog/60">Query routing debugger · TypeSafe JEV with explicit fallback status</p>
             </div>
           ) : activeTab === "contextual" ? (
-            <ContextualRetrieval />
+            runtimeOnly ? <RuntimeContextualRetrieval /> : <ContextualRetrieval />
           ) : (
             <div className="grid items-start gap-5 xl:grid-cols-[minmax(0,1fr)_340px]">
               <div className="min-w-0 space-y-5">

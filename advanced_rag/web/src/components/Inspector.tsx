@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useIngestionActions, useSelectedDocument } from "../store/ingestion";
 
 export function Inspector() {
+  const runtimeOnly = import.meta.env.VITE_DEPLOYMENT_MODE === "runtime";
   const document = useSelectedDocument();
   const { select, retry } = useIngestionActions();
   const [hoveredPage, setHoveredPage] = useState<{ page: number; status: string } | null>(null);
@@ -18,8 +19,8 @@ export function Inspector() {
     ? Math.round((completedPageJobs / llamaStatus.total) * 100)
     : document.progress;
   const facts = [
-    { label: "Local source", value: `runtime/documents/${document.id}/source.pdf`, icon: Box },
-    { label: "Execution", value: `local://${document.id}`, icon: FileCode2 },
+    { label: runtimeOnly ? "Index source" : "Local source", value: runtimeOnly ? `s3://indexes/${document.id}.jsonl` : `runtime/documents/${document.id}/source.pdf`, icon: Box },
+    { label: "Execution", value: runtimeOnly ? "Read-only serving tier" : `local://${document.id}`, icon: FileCode2 },
     { label: "OCR engine", value: document.ocrEngine ?? "Pending selection", icon: ScanText },
     { label: "Run artifacts", value: document.runDirectory ?? "Created when processing starts", icon: FileCode2 },
     { label: "Classification", value: document.isPolicy === undefined ? "Pending" : document.isPolicy ? "Policy document" : "Non-policy artifact", icon: ShieldCheck },
@@ -109,11 +110,12 @@ export function Inspector() {
           <div className="flex items-center gap-2 text-white/80"><Clock3 size={13} className="text-citron" /> Latest event</div>
           <p className="mt-2">{document.stage === "reviewing" && document.reviewIssues ? `${document.reviewIssues} figure/table regions require bounded review.` : document.stage === "complete" ? `Canonical manifest written in ${document.duration}.` : `AWS task entered ${document.stage} stage.`}</p>
         </div>
-        <a href={`/api/documents/${document.id}/source`} target="_blank" rel="noreferrer" className="button-secondary mt-5 w-full"><FileCode2 size={15} /> Open source PDF</a>
+        {!runtimeOnly && <a href={`/api/documents/${document.id}/source`} target="_blank" rel="noreferrer" className="button-secondary mt-5 w-full"><FileCode2 size={15} /> Open source PDF</a>}
         {document.contextArtifact && <a href={`/api/documents/${document.id}/artifacts/${document.contextArtifact}`} target="_blank" rel="noreferrer" className="button-secondary mt-2 w-full"><Database size={15} /> Open contextual form record</a>}
         {document.pageManifest && <a href="#page-comparison" className="button-secondary mt-2 w-full"><ScanText size={15} /> Compare PDF + Markdown</a>}
         {document.visualManifest && <a href={`/api/documents/${document.id}/artifacts/${document.visualManifest}`} target="_blank" rel="noreferrer" className="button-secondary mt-2 w-full"><Database size={15} /> Open visual manifest</a>}
-        <button onClick={() => void retry(document.id)} className="button-secondary mt-2 w-full"><RotateCcw size={15} /> Restart execution</button>
+        {!runtimeOnly && <button onClick={() => void retry(document.id)} className="button-secondary mt-2 w-full"><RotateCcw size={15} /> Restart execution</button>}
+        {runtimeOnly && <div className="button-secondary mt-5 w-full cursor-default"><Database size={15} /> Precomputed on Mac · served from S3</div>}
       </div>
     </aside>
   );
