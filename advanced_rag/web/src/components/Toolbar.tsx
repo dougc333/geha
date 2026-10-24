@@ -4,6 +4,7 @@ import { type Filter, useIngestionActions, useIngestionState } from "../store/in
 import type { OcrEngine } from "../api";
 
 export function Toolbar() {
+  const runtimeOnly = import.meta.env.VITE_DEPLOYMENT_MODE === "runtime";
   const inputRef = useRef<HTMLInputElement>(null);
   const { query, filter, ocrEngine } = useIngestionState();
   const { search, setFilter, setOcrEngine, addFiles } = useIngestionActions();
@@ -30,7 +31,7 @@ export function Toolbar() {
             <option value="complete">Complete</option>
           </select>
         </label>
-        <label className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[.035] px-3 py-2">
+        {!runtimeOnly && <label className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[.035] px-3 py-2">
           <span className="font-mono text-[9px] uppercase tracking-[.13em] text-fog">OCR</span>
           <select
             value={ocrEngine}
@@ -41,10 +42,10 @@ export function Toolbar() {
             <option value="deepseek">DeepSeek (default)</option>
             <option value="llamaparse">LlamaParse</option>
           </select>
-        </label>
+        </label>}
       </div>
-      <input ref={inputRef} className="hidden" type="file" accept="application/pdf,.pdf" multiple onChange={onFiles} />
-      <button className="button-secondary" onClick={() => inputRef.current?.click()}><Upload size={16} /> Add PDFs</button>
+      {!runtimeOnly && <><input ref={inputRef} className="hidden" type="file" accept="application/pdf,.pdf" multiple onChange={onFiles} /><button className="button-secondary" onClick={() => inputRef.current?.click()}><Upload size={16} /> Add PDFs</button></>}
+      {runtimeOnly && <span className="rounded-full border border-mint/25 bg-mint/10 px-3 py-2 font-mono text-[9px] uppercase tracking-[.14em] text-mint">Read-only AWS index</span>}
     </div>
   );
 }

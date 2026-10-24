@@ -12,6 +12,28 @@ permissions:
   contents: read
 
 jobs:
+  advanced-rag:
+    name: advanced_rag unit tests and infrastructure checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.28"
+          enable-cache: true
+      - uses: hashicorp/setup-terraform@v3
+      - name: Run tests without AWS or model calls
+        run: |
+          uv python install 3.12
+          PYTHONPATH=advanced_rag/src uv run --no-project --python 3.12 \
+            --with fastapi --with httpx --with pandas --with pillow --with pymupdf --with pypdf \
+            --with python-multipart --with boto3 \
+            --with 'typesafe-sdk>=0.7,<1' \
+            python -m unittest discover -s advanced_rag/tests -v
+      - name: Check Terraform formatting
+        run: terraform -chdir=advanced_rag/infra/terraform fmt -check
+
   python-tests:
     name: Python unit and workflow tests
     runs-on: ubuntu-latest

@@ -194,6 +194,20 @@ export interface FormVectorRecord {
   updated_at: string;
 }
 
+export interface RuntimeIndexRecord {
+  document_id: string;
+  chunk_id: string;
+  filename: string;
+  cluster: string | null;
+  pages: number[];
+  text: string;
+  retrieval_context: string;
+  contextual_retrieval_text: string;
+  embedding_model: string;
+  embedding_dimensions: number;
+  review_status: string;
+}
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(path, init);
   if (!response.ok) {
@@ -263,6 +277,7 @@ export const ingestionApi = {
   }),
   contextualJudgment: (id: string, page: number) => request<ContextualJudgment>(`/api/documents/${id}/contextual-retrieval/judge/pages/${page}`),
   formVectorRecords: () => request<FormVectorRecord[]>("/api/vector-db/forms"),
+  runtimeIndexes: () => request<RuntimeIndexRecord[]>("/api/runtime/indexes"),
 };
 
 export type OcrEngine = "deepseek" | "llamaparse";

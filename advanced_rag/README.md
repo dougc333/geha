@@ -8,20 +8,107 @@ docker compose up --build
 This directory is the production-oriented AWS counterpart to
 `document_ingestion_workflow`. The existing local workflow remains unchanged.
 
+> **Deployment note:** Docling is not required in AWS after preprocessing on
+> the Mac has produced `whole-document-context.jsonl` records with contextual
+> text and embeddings. The deployed service is a read-only retrieval tier: Jev
+> routes each query, `BAAI/bge-small-en-v1.5` embeds the incoming query in the
+> same 384-dimensional space as the stored vectors, and BM25 plus vector search
+> are combined with reciprocal-rank fusion. It has no Docling/OCR component, no
+> reranker, and no answer-generation LLM. S3 stores the prepared indexes and
+> DynamoDB stores query-run state. Keeping the compute-heavy Docling ingestion
+> step on the Mac avoids leaving an ingestion-sized Fargate task running in AWS,
+> which was estimated at roughly $200 per month. The smaller retrieval-only
+> service still incurs AWS charges. The current six form records are still
+> marked `review_status=pending`; unreviewed retrieval is enabled only for this
+> demo and must be disabled before production or member-facing use.
+
 ## Status
 
-Scaffold only. No AWS resources are deployed and no existing pipeline code has
-been copied yet.
+The local application performs ingestion and contextual-embedding creation.
+The AWS deployment is deliberately a separate, read-only ECS/Fargate serving
+runtime: S3 contains the contextual JSONL indexes, DynamoDB records query runs,
+and TypeSafe Jev performs six-cluster query routing. Docling, OCR, contextual
+generation, and answer generation do not run in ECS. An explicitly labelled
+deterministic classifier is used if Jev is unavailable.
+
+The larger event-driven Step Functions architecture described later in this
+document remains a future target and is not required by the single-service
+deployment.
+
+## Single-service AWS deployment
+
+```text
+Browser
+  -> CloudFront HTTPS
+  -> public Application Load Balancer (HTTP origin)
+  -> one ECS/Fargate task
+       -> TypeSafe Jev query router
+       -> BGE query embedding + BM25/vector rank fusion
+       -> read-only contextual indexes in S3
+       -> DynamoDB query-run records
+```
+
+Prerequisites:
+
+- AWS CLI authenticated to the target account
+- Docker with Buildx
+- Terraform 1.7 or newer
+- `TYPESAFE_API_KEY` exported in the deployment shell
+- locally completed `whole-document-context.jsonl` artifacts
+
+Terraform creates a dedicated VPC with public subnets in two Availability
+Zones; the AWS account does not need a default VPC.
+
+Deploy to `us-west-2`:
+
+```bash
+cd /Users/dc/geha/advanced_rag
+export TYPESAFE_API_KEY='...'
+PREBUILT_RUNTIME_DIR=/Users/dc/geha/advanced_rag/runtime/documents \
+  AWS_REGION=us-west-2 ./scripts/deploy-ecs.sh
+```
+
+The script finds only prebuilt whole-document artifacts that already contain
+embeddings, uploads them under the S3 `indexes/` prefix, transfers the Jev key
+without placing it in Terraform state, builds the dedicated
+`Dockerfile.runtime` image for `linux/amd64`, applies the stack, waits for ECS
+stability, and verifies `/api/health` through CloudFront. The runtime image omits
+Docling and all ingestion dependencies. It retains the compact
+`BAAI/bge-small-en-v1.5` model because every new browser query must be embedded
+in the same 384-dimensional space as the stored document vectors.
+
+The currently prepared form records have `review_status=pending`. Terraform
+sets `AWS_RAG_ALLOW_UNREVIEWED=1` for this demo so those six records are visible.
+Set it to `0` after approving records, and do not use pending evidence in a
+production or member-facing system.
+
+CloudFront provides the browser-facing HTTPS URL, proxies to the ALB over HTTP,
+and is also where the deploy script verifies `/api/health`. The ALB security
+group permits only CloudFront origin addresses and the deployer's public IPv4
+address. A viewer-request function separately restricts the HTTPS URL to exact
+viewer addresses. It defaults to the deployer's IPv4; if the browser connects
+to CloudFront over IPv6, pass both addresses as a Terraform-list expression:
+
+```bash
+export CLOUDFRONT_ALLOWED_IPS='["198.51.100.10","2001:db8::10"]'
+```
+
+Set `ALLOWED_CIDR` explicitly if a different IPv4 `/32` must reach the ALB
+directly. Add application authentication before exposing non-public documents.
+
+The runtime image builds and serves the same three-tab React interface used by
+the local demo. Its AWS build is explicitly read-only: the Ingestion tab shows
+completed S3 index inventory without upload/run/retry controls, and Contextual
+Retrieval displays the precomputed source and contextual text without offering
+contextualize or judge actions. Generated query examples, cluster inventory,
+Jev routing, and DynamoDB-backed routing history remain available.
 
 ## Cluster query router
 
-The dashboard shows the six retrieval clusters and their current document
-counts. Its JSONL query inspector accepts one object per line using a
-`user_input`, `query`, or `question` field, then displays every routing stage,
-the selected cluster, confidence, evidence signals, and search destination.
-Every successful run is stored under `runtime/query-router-runs/`; the newest
-runs appear in the UI's **Previous run** selector and restore the original
-JSONL, router mode, event trail, cluster probabilities, and destination.
+The AWS browser page accepts a query, routes it through Jev, searches only the
+selected cluster with BM25 plus vector similarity and reciprocal-rank fusion,
+and returns ranked source text. It does not synthesize an answer. Every search
+is written to DynamoDB for demo run history.
 
 The preferred classifier is TypeSafe Jev. When both `typesafe-sdk` and
 `TYPESAFE_API_KEY` are available, the API asks Jev to choose among the six
@@ -34,13 +121,17 @@ never presented as a Jev result.
 {"query":"What are the prior authorization criteria?"}
 ```
 
-API routes:
+AWS runtime API routes:
 
 - `GET /api/clusters` returns cluster descriptions, document counts, and search
   destinations.
-- `POST /api/query-router` accepts `{"jsonl": "..."}` and returns router
-  capability, validation/classification events, and one route per JSONL line.
-- `GET /api/query-router/runs` returns persisted runs newest first.
+- `POST /api/search` accepts `{"query": "...", "top_k": 6}` and returns the
+  Jev route plus ranked source records. Every response includes `latency_ms`
+  measurements for routing, query embedding, rank fusion, retrieval,
+  persistence, and total server time; the same values are emitted in the
+  standard `Server-Timing` response header.
+- `GET /api/health` reports the loaded record count and confirms that Docling
+  and answer generation are disabled.
 
 ## Target workflow
 
