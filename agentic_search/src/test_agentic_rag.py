@@ -3,7 +3,9 @@
 import unittest
 from types import SimpleNamespace
 
-from agentic_rag import NOT_FOUND, AgenticRag
+from agentic_rag import (
+    NOT_FOUND, AgenticRag, BatchAssessment, least_covered_named_target, queries_too_similar,
+)
 from reranking_models_class import RerankingModels
 
 
@@ -19,10 +21,19 @@ class FakeRetriever:
 class FakeChain:
     def __init__(self):
         self.calls = 0
+        self.values = []
 
     def invoke(self, values):
         self.calls += 1
+        self.values.append(values)
         return f"answer {self.calls} to {values['question']}"
+
+
+class Passage(str):
+    def __new__(cls, text, paper_title):
+        value = super().__new__(cls, text)
+        value.metadata = {"paper_title": paper_title}
+        return value
 
 
 def client():
@@ -35,6 +46,21 @@ def agent(c, grade=lambda q, p: True, rewrite=lambda q, query: "better " + query
 
 
 class AgenticRagTests(unittest.TestCase):
+    def test_detects_semantically_repeated_search_query(self):
+        original = "Compare RAG, ReAct, and Self-RAG. Identify when retrieval starts and one limitation."
+        repeat = "Compare RAG, ReAct, and Self-RAG in terms of when retrieval is initiated and limitations."
+        self.assertTrue(queries_too_similar(original, repeat))
+        self.assertFalse(queries_too_similar(original, "ReAct reasoning actions observations limitations"))
+
+    def test_least_covered_named_target_uses_paper_metadata(self):
+        passages = [
+            Passage("one", "Self-RAG: Learning to Retrieve"),
+            Passage("two", "Self-RAG: Learning to Retrieve"),
+            Passage("three", "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks"),
+        ]
+        target = least_covered_named_target("Compare RAG, ReAct, and Self-RAG", passages)
+        self.assertEqual(target, "ReAct")
+
     def test_relevant_on_first_try_answers_once(self):
         c = client()
         result = agent(c).generate("q")
@@ -63,6 +89,8 @@ class AgenticRagTests(unittest.TestCase):
         result = agent(c, check=lambda ctx, r: next(checks)).generate("q")
         self.assertEqual(c.chain.calls, 2)
         self.assertIn("answer 2", result["response"])
+        self.assertEqual(c.chain.values[1]["previous_response"], "answer 1 to q")
+        self.assertIn("failed the grounding check", c.chain.values[1]["revision_instruction"])
 
     def test_regeneration_is_bounded(self):
         c = client()
@@ -74,6 +102,78 @@ class AgenticRagTests(unittest.TestCase):
         c = client()
         result = agent(c, grade=lambda q, p: "better" in p).generate("q")
         self.assertTrue(result["response"].endswith("to q"))
+
+    def test_batch_assessment_is_one_call_per_retrieval_round(self):
+        c = client()
+        decisions = iter([
+            BatchAssessment(relevant_indices=[1], complete=False, missing=["reflection tokens"],
+                            next_query="Self-RAG reflection tokens"),
+            BatchAssessment(relevant_indices=[1], complete=True),
+        ])
+        calls = []
+
+        def assess(question, query, passages, accumulated):
+            calls.append((query, len(passages), len(accumulated)))
+            return next(decisions)
+
+        result = AgenticRag(c, assess=assess, check=lambda ctx, r: True).generate("compare RAG and Self-RAG")
+        self.assertEqual(c.retriever.queries, ["compare RAG and Self-RAG", "Self-RAG reflection tokens"])
+        self.assertEqual(calls, [("compare RAG and Self-RAG", 1, 0), ("Self-RAG reflection tokens", 1, 1)])
+        self.assertTrue(result["complete"])
+        self.assertEqual(c.chain.calls, 1)
+
+    def test_batch_assessment_discloses_incomplete_evidence(self):
+        c = client()
+        decision = BatchAssessment(relevant_indices=[1], complete=False, missing=["reported latency"])
+        result = AgenticRag(c, assess=lambda *args: decision, check=lambda ctx, r: True).generate("q")
+        self.assertIn("Evidence remains incomplete: reported latency", result["response"])
+        self.assertFalse(result["complete"])
+
+    def test_empty_next_query_gets_deterministic_corrective_search(self):
+        c = client()
+        decisions = iter([
+            BatchAssessment(relevant_indices=[1], complete=False, missing=["ReAct limitations"]),
+            BatchAssessment(relevant_indices=[1], complete=True),
+        ])
+        result = AgenticRag(
+            c, assess=lambda *args: next(decisions), check=lambda ctx, r: True
+        ).generate("compare RAG and ReAct")
+        self.assertEqual(c.retriever.queries, [
+            "compare RAG and ReAct",
+            "ReAct: ReAct limitations",
+        ])
+        self.assertEqual(result["retrieval_rounds"], 2)
+        self.assertTrue(result["complete"])
+
+    def test_repeated_next_query_gets_deterministic_corrective_search(self):
+        c = client()
+        decisions = iter([
+            BatchAssessment(
+                relevant_indices=[1], complete=False, missing=["ReAct limitations"],
+                next_query="compare RAG and ReAct",
+            ),
+            BatchAssessment(relevant_indices=[1], complete=True),
+        ])
+        result = AgenticRag(
+            c, assess=lambda *args: next(decisions), check=lambda ctx, r: True
+        ).generate("compare RAG and ReAct")
+        self.assertEqual(c.retriever.queries[1], "ReAct: ReAct limitations")
+        self.assertEqual(result["retrieval_rounds"], 2)
+
+    def test_paraphrased_next_query_gets_targeted_corrective_search(self):
+        c = client()
+        decisions = iter([
+            BatchAssessment(
+                relevant_indices=[1], complete=False, missing=["comparison and limitations"],
+                next_query="Compare RAG and ReAct in terms of their limitations",
+            ),
+            BatchAssessment(relevant_indices=[1], complete=True),
+        ])
+        result = AgenticRag(
+            c, assess=lambda *args: next(decisions), check=lambda ctx, r: True
+        ).generate("Compare RAG and ReAct and identify their limitations")
+        self.assertTrue(c.retriever.queries[1].startswith("ReAct:"))
+        self.assertEqual(result["retrieval_rounds"], 2)
 
 
 if __name__ == "__main__":

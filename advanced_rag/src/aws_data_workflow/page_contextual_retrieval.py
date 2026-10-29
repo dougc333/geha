@@ -7,40 +7,22 @@ written immediately so an interrupted run resumes at the first stale page.
 
 from __future__ import annotations
 
-import hashlib
 import json
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Callable, TypedDict
+from typing import Any, Callable
+
+from geha_processing.contextual import (
+    ContextGenerator,
+    contextual_retrieval_prompt as _shared_contextual_retrieval_prompt,
+    make_claude_context_generator as _shared_make_claude_context_generator,
+)
+from geha_processing.io import atomic_json, atomic_jsonl, read_jsonl, sha256_text
 
 
 CLAUDE_MODEL = "claude-sonnet-5-5"
 FALLBACK_BETA = "server-side-fallback-2026-07-01"
 PROMPT_VERSION = "anthropic-contextual-retrieval-v1"
-SYSTEM_PROMPT = (
-    "You prepare concise context for retrieval indexing. Use only the supplied "
-    "document. Do not answer questions, add advice, or introduce facts absent "
-    "from the document."
-)
-USER_TEMPLATE = """Here is the chunk we want to situate within the whole document.
-<chunk>
-{chunk}
-</chunk>
-Please give a short succinct context to situate this chunk within the overall
-document for the purposes of improving search retrieval of the chunk. Include
-the document subject and any policy code, entity, section, or time period needed
-to disambiguate it. Answer only with the succinct context and nothing else."""
-
-
-class ClaudeContextResult(TypedDict):
-    context: str
-    input_tokens: int
-    output_tokens: int
-    cache_creation_input_tokens: int
-    cache_read_input_tokens: int
-
-
-ContextGenerator = Callable[[str, str], str | ClaudeContextResult]
 ProgressSink = Callable[[dict[str, Any]], None]
 
 
@@ -48,92 +30,31 @@ def utc_now() -> str:
     return datetime.now(UTC).isoformat()
 
 
-def contextual_retrieval_prompt(document: str, chunk: str) -> dict[str, Any]:
-    """Return the same cacheable prompt contract used by the crawler pipeline."""
-    return {
-        "system": [
-            {"type": "text", "text": SYSTEM_PROMPT},
-            {
-                "type": "text",
-                "text": f"<document>\n{document}\n</document>",
-                "cache_control": {"type": "ephemeral"},
-            },
-        ],
-        "message": USER_TEMPLATE.format(chunk=chunk),
-    }
+# Compatibility exports backed by the shared processing package.
+contextual_retrieval_prompt = _shared_contextual_retrieval_prompt
 
 
 def make_claude_context_generator(model: str = CLAUDE_MODEL) -> ContextGenerator:
-    """Create one reusable Anthropic client for all pages in one document."""
-    import anthropic
-
-    client = anthropic.Anthropic(max_retries=2, timeout=180)
-
-    def generate(document: str, chunk: str) -> ClaudeContextResult:
-        prompt = contextual_retrieval_prompt(document, chunk)
-        with client.beta.messages.stream(
-            model=model,
-            max_tokens=256,
-            system=prompt["system"],
-            messages=[{
-                "role": "user",
-                "content": [{"type": "text", "text": prompt["message"]}],
-            }],
-            betas=[FALLBACK_BETA],
-            fallbacks="default",
-        ) as stream:
-            message = stream.get_final_message()
-        if message.stop_reason == "refusal":
-            category = (
-                getattr(message.stop_details, "category", None)
-                if message.stop_details else None
-            )
-            raise RuntimeError(
-                f"Claude declined contextualization (category: {category})"
-            )
-        text = "".join(block.text for block in message.content if block.type == "text")
-        usage = message.usage
-        return {
-            "context": " ".join(text.split()).strip(),
-            "input_tokens": int(usage.input_tokens),
-            "output_tokens": int(usage.output_tokens),
-            "cache_creation_input_tokens": int(
-                usage.cache_creation_input_tokens or 0
-            ),
-            "cache_read_input_tokens": int(usage.cache_read_input_tokens or 0),
-        }
-
-    return generate
+    return _shared_make_claude_context_generator(
+        model,
+        fallback_beta=FALLBACK_BETA,
+    )
 
 
 def _sha256(text: str) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+    return sha256_text(text)
 
 
 def _read_jsonl(path: Path) -> list[dict[str, Any]]:
-    if not path.is_file():
-        return []
-    records: list[dict[str, Any]] = []
-    for line in path.read_text(encoding="utf-8").splitlines():
-        if line.strip():
-            records.append(json.loads(line))
-    return records
+    return read_jsonl(path)
 
 
 def _write_json_atomic(path: Path, payload: dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_suffix(path.suffix + ".tmp")
-    temporary.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
-    temporary.replace(path)
+    atomic_json(path, payload)
 
 
 def _write_jsonl_atomic(path: Path, records: list[dict[str, Any]]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_suffix(path.suffix + ".tmp")
-    with temporary.open("w", encoding="utf-8") as stream:
-        for record in records:
-            stream.write(json.dumps(record, ensure_ascii=False) + "\n")
-    temporary.replace(path)
+    atomic_jsonl(path, records)
 
 
 def discover_page_chunks(

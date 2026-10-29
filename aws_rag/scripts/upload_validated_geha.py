@@ -4,19 +4,18 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
+import sys
 from pathlib import Path
 
 import boto3
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for block in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
+from geha_processing.io import sha256_file
+
+
+sha256 = sha256_file
 
 
 def main() -> None:
@@ -40,7 +39,7 @@ def main() -> None:
         if not sidecar.is_file():
             raise SystemExit(f"missing validated sidecar: {sidecar}")
         payload = json.loads(sidecar.read_text(encoding="utf-8"))
-        if payload.get("validation_status") != "validated" or payload.get("source_sha256") != sha256(pdf):
+        if payload.get("validation_status") != "validated" or payload.get("source_sha256") != sha256_file(pdf):
             raise SystemExit(f"invalid or mismatched validated sidecar: {sidecar}")
         key = args.prefix.rstrip("/") + "/" + relative.as_posix()
         plan.append((pdf, sidecar, key))

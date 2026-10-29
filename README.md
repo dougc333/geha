@@ -124,3 +124,12 @@ tests, and retrieval benchmarks for `aws_rag` (62 questions) and
 `agentic_search`. Tests use local fixtures and need no API key, live database or
 model download. Database-backed evaluations, vision review and deployment
 tests stay manual. CI does not certify clinical correctness or HIPAA compliance.
+
+## Shared processing library
+
+Reusable document-processing behavior is centralized in `geha_processing/`.
+Applications and demos retain their own orchestration and artifact layouts but
+must import common PDF, Docling, table-repair, contextual-retrieval, hashing,
+and JSON/JSONL helpers from this package instead of copying implementations.
+Shared chunking benchmarks, RAG services, rerankers, and FHIR fraud analytics
+also live there; historical project paths are thin compatibility entrypoints.

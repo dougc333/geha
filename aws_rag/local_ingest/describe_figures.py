@@ -99,7 +99,13 @@ def process(jsonl: Path, s3, bucket: str | None, redo: bool = False,
         lines.append({"document_id": doc_id, "source": source, "title": title,
                       "chunk_index": len(lines), "page_number": fig["page"],
                       "content": figure_chunk(title, fig), "kind": "figure",
-                      "image": f"figures/{doc_id}/{fig['file']}"})
+                      "image": f"figures/{doc_id}/{fig['file']}",
+                      "citation_metadata": {
+                          "figure_id": Path(fig["file"]).stem,
+                          "caption": fig.get("caption", ""),
+                          "bbox": fig.get("bbox"),
+                          "source_file": fig["file"],
+                      }})
     jsonl.write_text("\n".join(json.dumps(l) for l in lines) + "\n")
     if s3:
         # Images first: the JSONL upload triggers the embedder, and the chat shows

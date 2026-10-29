@@ -9,17 +9,11 @@ import statistics
 from pathlib import Path
 from typing import Any, Iterable
 
+from geha_processing.io import sha256_file, write_jsonl as _write_jsonl
+
 
 DEFAULT_TOKENIZER = "BAAI/bge-small-en-v1.5"
 DEFAULT_MAX_TOKENS = (380, 512, 800)
-
-
-def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for block in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def page_numbers(chunk: Any) -> list[int]:
@@ -35,10 +29,7 @@ def page_numbers(chunk: Any) -> list[int]:
 
 
 def write_jsonl(records: Iterable[dict[str, Any]], path: Path) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as stream:
-        for record in records:
-            stream.write(json.dumps(record, ensure_ascii=False) + "\n")
+    _write_jsonl(path, records)
 
 
 def chunk_for_budget(

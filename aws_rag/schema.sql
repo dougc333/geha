@@ -51,6 +51,17 @@ CREATE INDEX IF NOT EXISTS rag_chunks_tsv_idx ON rag_chunks USING gin (tsv);
 -- table chunks. The query API turns it into a short-lived presigned URL.
 ALTER TABLE rag_chunks ADD COLUMN IF NOT EXISTS image text;
 
+-- Machine-readable citation provenance for agentic retrieval.  Older rows remain
+-- valid: image-backed chunks are figures and every other legacy row defaults to
+-- text.  Re-ingesting Docling JSONL restores table IDs and figure bounding boxes.
+ALTER TABLE rag_chunks
+    ADD COLUMN IF NOT EXISTS content_type text NOT NULL DEFAULT 'text'
+        CHECK (content_type IN ('text', 'table', 'figure')),
+    ADD COLUMN IF NOT EXISTS citation_metadata jsonb NOT NULL DEFAULT '{}'::jsonb;
+
+UPDATE rag_chunks SET content_type = 'figure'
+WHERE image IS NOT NULL AND content_type = 'text';
+
 -- BM25 support (Neon doesn't allow the pg_search extension). rag_terms is an
 -- inverted index: one row per (word, chunk) with the word's count in that chunk,
 -- filled from the tsvector by a trigger, so the embedder needs no changes and

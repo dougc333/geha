@@ -13,6 +13,8 @@ import json
 from pathlib import Path
 from typing import Any, Iterable
 
+from geha_processing.io import sha256_file, write_jsonl as _write_jsonl
+
 
 DEFAULT_TOKENIZER = "BAAI/bge-small-en-v1.5"
 DEFAULT_MAX_TOKENS = 380
@@ -20,11 +22,7 @@ DEFAULT_MAX_TOKENS = 380
 
 def _document_id(source: Path) -> str:
     """Return a stable identifier based on the source bytes."""
-    digest = hashlib.sha256()
-    with source.open("rb") as stream:
-        for block in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
+    return sha256_file(source)
 
 
 def _metadata(chunk: Any) -> dict[str, Any]:
@@ -104,13 +102,7 @@ def build_whole_document_record(
 
 def write_jsonl(records: Iterable[dict[str, Any]], output: Path) -> int:
     """Write one UTF-8 JSON object per line and return the record count."""
-    output.parent.mkdir(parents=True, exist_ok=True)
-    count = 0
-    with output.open("w", encoding="utf-8") as stream:
-        for record in records:
-            stream.write(json.dumps(record, ensure_ascii=False, sort_keys=True) + "\n")
-            count += 1
-    return count
+    return _write_jsonl(output, records, sort_keys=True)
 
 
 def chunk_document(

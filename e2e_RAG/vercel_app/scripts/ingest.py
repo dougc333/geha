@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import os
 import sys
 from pathlib import Path
@@ -17,7 +16,9 @@ from pgvector.psycopg import register_vector
 # Direct script execution places ``scripts/`` rather than the project root on
 # sys.path. Add the root explicitly so the documented command works anywhere.
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
+from geha_processing.io import sha256_file
 from rag_core import chunk_text, table_schema
 
 
@@ -33,7 +34,7 @@ def extract_chunks(pdf_path: Path) -> list[tuple[int, str]]:
 def ingest(pdf_path: Path, title: str | None = None) -> str:
     database_url = os.environ["DATABASE_URL"]
     schema = table_schema()
-    document_id = hashlib.sha256(pdf_path.read_bytes()).hexdigest()
+    document_id = sha256_file(pdf_path)
     chunks = extract_chunks(pdf_path)
     if not chunks:
         raise ValueError(f"No extractable text in {pdf_path}")

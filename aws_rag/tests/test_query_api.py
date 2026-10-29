@@ -6,6 +6,7 @@ key, validation) or run against stubs.
 
 import json
 import unittest
+from contextlib import nullcontext
 from unittest import mock
 
 from fastapi.testclient import TestClient
@@ -157,6 +158,37 @@ class FigureUrlsTest(unittest.TestCase):
         with mock.patch.object(chat, "CHUNK_BUCKET", "chunks-bucket"):
             self.assertEqual(chat._figure_urls(connection, []), {})
         connection.cursor.assert_not_called()
+
+
+class AgenticRetrieveApiTest(unittest.TestCase):
+    def test_returns_full_chunks_with_citation_metadata_without_generation(self):
+        row = {
+            "id": 42,
+            "chunk_index": 9,
+            "page": 6,
+            "content": "full figure description",
+            "document_id": "doc-1",
+            "title": "You Only Look Once",
+            "image": "figures/doc-1/p006_f01.png",
+            "content_type": "figure",
+            "citation_metadata": {"figure_id": "p006_f01", "bbox": [1, 2, 3, 4]},
+            "rerank_score": 0.91,
+        }
+        with (
+            mock.patch.object(chat, "database", side_effect=lambda: nullcontext(object())),
+            mock.patch.object(chat, "_retrieve", return_value=[row]) as retrieve,
+            mock.patch.object(chat, "_rerank", return_value=[row]) as rerank,
+            mock.patch.object(chat, "_figure_urls", return_value={42: "https://signed/image"}),
+        ):
+            result = chat.retrieve(chat.RetrieveRequest(query="YOLO localization", top_k=5))
+        retrieve.assert_called_once()
+        rerank.assert_called_once()
+        self.assertNotIn("answer", result)
+        item = result["results"][0]
+        self.assertEqual(item["content"], "full figure description")
+        self.assertEqual(item["paper"], {"title": "You Only Look Once", "document_id": "doc-1"})
+        self.assertEqual(item["citation_metadata"]["figure_id"], "p006_f01")
+        self.assertEqual(item["image_url"], "https://signed/image")
 
 
 if __name__ == "__main__":

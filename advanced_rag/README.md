@@ -1,4 +1,27 @@
-# AWS Data Workflow
+# AWS Advanced RAG
+
+RAGAS generates evals and we can use these as queries. If we use these as queries then they are NOT underspecified. Most user queries are underspecified. 
+
+The query needs a BM25 embedding call. 
+
+The problem with using frontier LLMs in production is the continued obsolescence of older models. Current production workflows on gpt-4-o are working but needed to be reworked for no functional reason. Once enterprise sw is working they want to leave it alone and continue to the next project. 
+
+# AWS Deploy
+A full teardown and later redeployment is cleaner and avoids roughly $64–$66/month.
+Resource	State	Approx./month
+Fargate task: 1 vCPU, 2 GB	Running	$36.04
+Application Load Balancer	Active	$16.43 + small LCU usage
+Three public IPv4 addresses	Active	$10.95
+Secrets Manager	1 secret	$0.40
+ECR	14 images, ~5.5 GB	$0.51–$0.55
+S3	42 versions, 3.62 MB	$0.00008
+DynamoDB	24 records, 0.82 MB	Essentially $0
+CloudFront	Enabled	No fixed idle charge; request/transfer charges only
+
+
+Total baseline is approximately $64–$66/month, before meaningful traffic. There is no NAT gateway.
+
+
 
 ```bash
 cd /Users/dc/geha/advanced_rag
@@ -7,6 +30,10 @@ docker compose up --build
 
 This directory is the production-oriented AWS counterpart to
 `document_ingestion_workflow`. The existing local workflow remains unchanged.
+Reusable extraction, table-repair, PDF, contextual-retrieval, hashing, and
+atomic artifact helpers live in the repository-level `geha_processing/`
+package. This directory owns only its orchestration, API, UI, and runtime
+artifact contracts.
 
 ## Status
 
@@ -74,7 +101,7 @@ PDF upload to S3
 ## Planned layout
 
 ```text
-aws_data_workflow/
+advanced_rag/
 ├── infra/                 # Infrastructure as code
 ├── src/
 │   ├── control_plane/     # Submission, status, and manifest logic
@@ -99,12 +126,12 @@ prefix. S3 transfer and workflow state intentionally remain outside the chunker.
 Run it locally:
 
 ```bash
-cd /Users/dc/geha/aws_data_workflow
+cd /Users/dc/geha/advanced_rag
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 
-PYTHONPATH=src python -m aws_data_workflow.docling_chunking \
+PYTHONPATH=..:src python -m aws_data_workflow.docling_chunking \
   /path/to/document.pdf \
   --output artifacts/chunks.jsonl \
   --max-tokens 380
@@ -145,7 +172,7 @@ cacheable token count.
 export AWS_REGION=us-east-1
 export BEDROCK_CONTEXT_MODEL_ID='<enabled Bedrock chat model ID>'
 
-PYTHONPATH=src python -m aws_data_workflow.contextual_embeddings \
+PYTHONPATH=..:src python -m aws_data_workflow.contextual_embeddings \
   --document artifacts/document.md \
   --chunks artifacts/chunks.jsonl \
   --output artifacts/contextual-chunks.jsonl
@@ -265,10 +292,10 @@ when every cached page should be extracted again.
 Run the preflight directly:
 
 ```bash
-cd /Users/dc/geha/aws_data_workflow
+cd /Users/dc/geha/advanced_rag
 source ../.venv/bin/activate
 
-PYTHONPATH=src python -m aws_data_workflow.docling_preextract \
+PYTHONPATH=..:src python -m aws_data_workflow.docling_preextract \
   runtime/documents/<document-id>/source.pdf \
   runtime/documents/<document-id>/pages
 ```
@@ -287,7 +314,7 @@ For the registered corpus, process different PDFs on separate CPU workers while
 keeping each PDF's pages sequential and race-free:
 
 ```bash
-PYTHONPATH=src python -m aws_data_workflow.batch_docling_preextract \
+PYTHONPATH=..:src python -m aws_data_workflow.batch_docling_preextract \
   --workers 2
 ```
 
@@ -325,16 +352,16 @@ It runs automatically after `batch_docling_preextract` finishes. To run or
 resume only the post-processing step:
 
 ```bash
-cd /Users/dc/geha/aws_data_workflow
+cd /Users/dc/geha/advanced_rag
 source ../.venv/bin/activate
 
-PYTHONPATH=src python -m aws_data_workflow.table_postprocess
+PYTHONPATH=..:src python -m aws_data_workflow.table_postprocess
 ```
 
 Restrict it to one registered document when debugging:
 
 ```bash
-PYTHONPATH=src python -m aws_data_workflow.table_postprocess \
+PYTHONPATH=..:src python -m aws_data_workflow.table_postprocess \
   --document-id doc-925d61c412d6
 ```
 
@@ -384,7 +411,7 @@ keep the API key in your shell configuration rather than this repository:
 export NOUS_KEY='...'
 
 source ~/.zshrc
-PYTHONPATH=src python -m uvicorn aws_data_workflow.server:app --host 127.0.0.1 --port 8000
+PYTHONPATH=..:src python -m uvicorn aws_data_workflow.server:app --host 127.0.0.1 --port 8000
 ```
 
 The default Nous model is `deepseek/deepseek-v4.1-flash-1017`. Override it only
@@ -488,7 +515,7 @@ from becoming policy evidence.
 export AWS_REGION=us-east-1
 export BEDROCK_ANSWER_MODEL_ID='<enabled Bedrock chat model ID>'
 
-PYTHONPATH=src python -m aws_data_workflow.policy_rag \
+PYTHONPATH=..:src python -m aws_data_workflow.policy_rag \
   --chunks artifacts/contextual-chunks.jsonl \
   --query 'Are preventive dental services covered in network?'
 ```
@@ -507,7 +534,7 @@ asking an LLM to make an opaque routing decision. The result includes the score,
 threshold, every matching signal, document type, and selected route.
 
 ```bash
-PYTHONPATH=src python -m aws_data_workflow.document_router \
+PYTHONPATH=..:src python -m aws_data_workflow.document_router \
   --source-name geha-coverage-policy-bendamustine.pdf \
   --document artifacts/document.md \
   --output artifacts/classification.json
@@ -530,7 +557,7 @@ Lambda functions or IAM roles.
 Run the lightweight unit tests without parsing a PDF:
 
 ```bash
-PYTHONPATH=src python -m unittest discover -s tests -v
+PYTHONPATH=..:src python -m unittest discover -s tests -v
 ```
 
 ## React ingestion dashboard
@@ -564,7 +591,7 @@ Start the backend with the existing GEHA environment:
 ```bash
 cd /Users/dc/geha/advanced_rag
 source /Users/dc/geha/.venv/bin/activate
-PYTHONPATH=src python -m aws_data_workflow.server
+PYTHONPATH=..:src python -m aws_data_workflow.server
 ```
 
 The built React application is then available at `http://127.0.0.1:8000`.
@@ -630,7 +657,7 @@ excluded.
 Validate the corpus and pair assignments without an API call:
 
 ```bash
-cd /Users/dc/geha/aws_data_workflow
+cd /Users/dc/geha/advanced_rag
 /Users/dc/geha/.venv/bin/python \
   evals/generate_cluster_ragas_queries.py --dry-run
 ```

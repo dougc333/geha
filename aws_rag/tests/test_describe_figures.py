@@ -50,6 +50,8 @@ class ProcessTest(unittest.TestCase):
         self.assertEqual([f["chunk_index"] for f in figures], [2, 3])
         self.assertEqual([f["page_number"] for f in figures], [3, 5])
         self.assertEqual(figures[0]["image"], f"figures/{DOC}/p003_f01.png")
+        self.assertEqual(figures[0]["citation_metadata"]["figure_id"], "p003_f01")
+        self.assertEqual(figures[0]["citation_metadata"]["caption"], "Figure 1: Model.")
         self.assertEqual(figures[0]["content"],
                          'Figure (page 3) from "A Paper": Figure 1: Model.\nText in figure: A | B')
 

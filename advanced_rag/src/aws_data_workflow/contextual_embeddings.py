@@ -8,6 +8,8 @@ import os
 from pathlib import Path
 from typing import Any, Callable, Iterable, TypedDict
 
+from geha_processing.io import atomic_jsonl, read_jsonl as _read_jsonl
+
 
 PROMPT_VERSION = "contextual-retrieval-v2-cached-document-prefix"
 SYSTEM_PROMPT = (
@@ -41,23 +43,11 @@ Embedder = Callable[[str], list[float]]
 def read_jsonl(path: Path) -> list[dict[str, Any]]:
     if not path.is_file():
         raise FileNotFoundError(path)
-    return [
-        json.loads(line)
-        for line in path.read_text(encoding="utf-8").splitlines()
-        if line.strip()
-    ]
+    return _read_jsonl(path)
 
 
 def write_jsonl_atomic(records: Iterable[dict[str, Any]], output: Path) -> int:
-    output.parent.mkdir(parents=True, exist_ok=True)
-    temporary = output.with_suffix(output.suffix + ".tmp")
-    count = 0
-    with temporary.open("w", encoding="utf-8") as stream:
-        for record in records:
-            stream.write(json.dumps(record, ensure_ascii=False) + "\n")
-            count += 1
-    temporary.replace(output)
-    return count
+    return atomic_jsonl(output, records)
 
 
 def make_bedrock_context_generator(

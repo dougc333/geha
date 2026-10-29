@@ -8,6 +8,8 @@ import random
 from pathlib import Path
 from typing import Any, Iterable
 
+from geha_processing.io import read_jsonl as _read_jsonl, write_jsonl as _write_jsonl
+
 try:
     from .generate_ragas_qa import table_of_contents_reason
 except ImportError:  # Permit direct execution from finetuning/.
@@ -27,15 +29,13 @@ BROCHURE_QA = BROCHURE_CHUNKS.parent / "ragas/qa_pairs.jsonl"
 
 
 def read_jsonl(path: Path) -> list[dict[str, Any]]:
-    with path.open(encoding="utf-8") as handle:
-        return [json.loads(line) for line in handle if line.strip()]
+    if not path.is_file():
+        raise FileNotFoundError(path)
+    return _read_jsonl(path)
 
 
 def write_jsonl(path: Path, rows: Iterable[dict[str, Any]]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as handle:
-        for row in rows:
-            handle.write(json.dumps(row, ensure_ascii=False) + "\n")
+    _write_jsonl(path, rows)
 
 
 def substantive(rows: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
