@@ -86,6 +86,110 @@ function Mini({ value, color }) {
   );
 }
 
+/* ---------------------------------------------------------------- improvement ladder */
+
+function improvementStages(data) {
+  const table = data.answers?.summary?.table?.overall;
+  const notes = data.answers?.summary?.notes?.overall;
+  return [
+    {
+      id: "parent",
+      label: "1. Parent-table expansion",
+      status: "Measured",
+      assemblyError: table?.cases_with_assembly_error,
+      contextError: table == null ? null : 1 - table.context_complete_rate,
+      answerError: table == null ? null : 1 - table.answer_complete_rate,
+      code: "Expand each matching child row to its complete parent table.",
+      detail: "Headers and sibling rows restore relationships, but nearby qualifiers and footnotes are still absent.",
+    },
+    {
+      id: "notes",
+      label: "2. Attach table notes",
+      status: "Measured",
+      assemblyError: notes?.cases_with_assembly_error,
+      contextError: notes == null ? null : 1 - notes.context_complete_rate,
+      answerError: notes == null ? null : 1 - notes.answer_complete_rate,
+      code: "Attach the verified paragraph before the table and its linked notes after the table.",
+      detail: "Every required fact now reaches the model. The remaining failures are generation drops, not retrieval or assembly failures.",
+    },
+    {
+      id: "repair",
+      label: "3. Verify + repair incomplete answers",
+      status: "Target — rerun required",
+      assemblyError: 0,
+      contextError: 0,
+      answerError: 0,
+      code: "Check required facts against the draft answer; regenerate once with only the missing supported facts.",
+      detail: "This is the intended next implementation. Zero answer error is a target until a fresh 59-case run measures it.",
+    },
+  ];
+}
+
+function ErrorMeter({ label, value, previous }) {
+  const delta = previous == null || value == null ? null : previous - value;
+  return (
+    <div className="error-meter">
+      <div className="error-meter-head">
+        <span>{label}</span>
+        <strong>{pct(value)}</strong>
+      </div>
+      <div className="error-track" aria-label={`${label}: ${pct(value)}`}>
+        <span style={{ width: `${(value ?? 0) * 100}%` }} />
+      </div>
+      <div className="meta">
+        {delta == null ? "Starting measured rate" : delta > 0 ? `Down ${pct(delta)} from the previous stage` : "Preserved at 0%"}
+      </div>
+    </div>
+  );
+}
+
+function ImprovementView({ data }) {
+  const [stageId, setStageId] = useState("parent");
+  const stages = improvementStages(data);
+  const index = stages.findIndex((s) => s.id === stageId);
+  const stage = stages[index];
+  const previous = index > 0 ? stages[index - 1] : null;
+  return (
+    <>
+      <p className="sub">
+        Turn improvements on cumulatively to see which failure class the code addresses. Measured stages use the saved
+        59-question benchmark; the final stage is explicitly a target until it is rerun and verified.
+      </p>
+      <div className="stage-picker" role="radiogroup" aria-label="TableRAG implementation stage">
+        {stages.map((s, i) => (
+          <label key={s.id} className={s.id === stageId ? "selected" : ""}>
+            <input type="radio" name="improvement-stage" value={s.id} checked={s.id === stageId} onChange={() => setStageId(s.id)} />
+            <span className="stage-number">{i + 1}</span>
+            <span><b>{s.label.replace(/^\d+\. /, "")}</b><small>{s.status}</small></span>
+          </label>
+        ))}
+      </div>
+      <div className="card improvement-card">
+        <div>
+          <span className={`evidence-badge ${stage.status.startsWith("Measured") ? "measured" : "target"}`}>{stage.status}</span>
+          <h2>{stage.label}</h2>
+          <p>{stage.detail}</p>
+          <div className="code-change"><span>Code added</span>{stage.code}</div>
+        </div>
+        <div className="meter-grid">
+          <ErrorMeter label="Assembly error" value={stage.assemblyError} previous={previous?.assemblyError} />
+          <ErrorMeter label="Context incomplete" value={stage.contextError} previous={previous?.contextError} />
+          <ErrorMeter label="Answer incomplete" value={stage.answerError} previous={previous?.answerError} />
+        </div>
+      </div>
+      <div className="flow-strip" aria-label="TableRAG improvement flow">
+        <span>Search row children</span><i>→</i><span>Expand parent table</span><i>→</i>
+        <span className={index >= 1 ? "active" : "muted"}>Attach notes</span><i>→</i>
+        <span className={index >= 2 ? "active" : "muted"}>Verify + repair</span>
+      </div>
+      <div className="notice">
+        <b>Important:</b> 0% assembly error and 100% context completeness are measured for attached notes. A 0% answer-incomplete
+        rate is not yet measured; it must come from the verifier/repair implementation followed by a new benchmark run.
+      </div>
+    </>
+  );
+}
+
 /* ---------------------------------------------------------------- context completeness */
 
 function ContextView({ data, slice, strategies, bind, open }) {
@@ -445,13 +549,14 @@ export default function App() {
       </header>
       <div className="toolbar">
         <div className="tabs" role="tablist">
-          {[["summary", "Summary"], ["context", "① Context completeness"], ["answers", "② Answer completeness"], ["method", "Method"]].map(([id, label]) => (
+          {[["summary", "Summary"], ["improve", "Improvement ladder"], ["context", "① Context completeness"], ["answers", "② Answer completeness"], ["method", "Method"]].map(([id, label]) => (
             <button key={id} role="tab" aria-selected={tab === id} onClick={() => setTab(id)}>{label}</button>
           ))}
         </div>
-        {tab !== "method" && <SliceFilter slice={slice} setSlice={setSlice} cases={cases} />}
+        {tab !== "method" && tab !== "improve" && <SliceFilter slice={slice} setSlice={setSlice} cases={cases} />}
       </div>
       {tab === "summary" && <SummaryView data={data} slice={slice} strategies={strategies} setTab={setTab} />}
+      {tab === "improve" && <ImprovementView data={data} />}
       {tab === "context" && <ContextView data={data} slice={slice} strategies={strategies} bind={bind} open={setItem} />}
       {tab === "answers" && <AnswerView data={data} slice={slice} strategies={strategies} bind={bind} open={setItem} />}
       {tab === "method" && <MethodView />}

@@ -117,6 +117,19 @@ The live comparison app currently exposes flat rows and table-aware parent
 tables. The third, attached-notes strategy is implemented in the evaluation
 pipeline and shown in the React dashboard.
 
+The React dashboard also includes an **Improvement ladder**. Its radio controls
+show cumulative code changes while preserving the measured table-aware baseline:
+
+- parent-table expansion: 27.1% assembly error, 30.5% context incomplete, and
+  30.5% answer incomplete;
+- attached table notes: 0% assembly error, 0% context incomplete, and 6.8%
+  answer incomplete;
+- completeness verification plus one-pass repair: a 0% answer-incomplete
+  **target**, clearly labeled unmeasured until a fresh 59-case evaluation proves it.
+
+The dashboard deliberately separates measured results from proposed targets;
+selecting a radio option does not rerun the benchmark or manufacture a result.
+
 ## Retrieval and storage design
 
 `table_rag.py` stores two levels:
@@ -183,6 +196,12 @@ The attached-notes strategy reaches 100% context completeness partly by
 construction: its qualifier cases are defined from those notes. The answer
 evaluation is still necessary to test whether the model uses the available
 facts. Qualifiers located on other pages are not yet covered.
+
+Exact value matching applies a deliberately small curated drug-name alias map
+before token comparison. This repairs verified extraction variants such as
+`berahyaluronidas e alfa-pmph` versus `berahyaluronidase alfa-pmph` without
+stemming or fuzzy-matching drug names or HCPCS codes. Changes to this map
+require a new evaluation version and a fresh generation-evaluation run.
 
 ## Reproduce the evaluation
 
@@ -255,6 +274,22 @@ python -m context_assembly_benchmarks.evaluate_chunking_judge --resume
 `--resume` reuses completed records in `chunking_judge_partial.jsonl`. Without
 it, the command refuses to overwrite an existing partial checkpoint. Use
 `--limit N` for a smaller pilot before paying for the full run.
+
+To preserve an independent, reproducible run, provide a unique directory and
+leave the checked-in README snapshot unchanged:
+
+```bash
+python -m context_assembly_benchmarks.evaluate_chunking_judge \
+  --run-dir context_assembly_benchmarks/runs/20261026T120000Z \
+  --no-update-readme
+```
+
+The directory contains `partial.jsonl`, `results.json`, `results.md`, and
+`run.json`. The manifest records the UTC run ID and timestamps, Git commit and
+dirty state, model and retrieval settings, corpus/evaluation/prompt hashes,
+token totals, completion counts, and artifact paths. `results.json` retains
+every per-case answer, judge verdict, fact check, and token count. Resume the
+same run by passing the same `--run-dir` together with `--resume`.
 
 Outputs:
 

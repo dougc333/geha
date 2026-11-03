@@ -114,8 +114,11 @@ the `raw` tree as a PDF-only corpus.
 
 ## Canonical processing code
 
-All new processing code lives under `crawl_dir/src`; legacy implementations
-remain in their original directories only for comparison and compatibility.
+Repository-wide processing primitives live under `geha_processing/` at the
+repository root. `crawl_dir/src` owns the canonical corpus workflow, immutable
+run layout, validation, and promotion policy. Legacy imports remain available
+as compatibility wrappers while all active implementations use the shared
+package.
 
 ```text
 src/
@@ -309,6 +312,15 @@ Verified on October 7, 2026:
 
 The source distribution is 35 coverage-policy PDFs, 2 dental PDFs, and 17
 medical PDFs.
+
+On October 22, 2026, the 50 public (non-GEHA) PDFs behind the `advanced_rag`
+retrieval clusters were added as families named after their cluster:
+`policy` (5), `clinical_guidance` (10), `population_health` (7),
+`benefits_research` (7), `forms_directory` (7) and `research` (14, alongside
+the EY/LIMRA report). They are copied from `advanced_rag/tests/documents/`
+at their source URL paths, listed with their cluster in
+`advanced_rag/evals/cluster_manifest.json`, and processed in
+`runs/batch-20261022-clusters.json` without contextual retrieval.
 
 ## Complete PDF-to-HTML verification
 

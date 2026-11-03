@@ -1,8 +1,15 @@
-# aws version of RAG
+# A multimodal, hybrid-search RAG system with document-layout extraction, text/vector/BM25 retrieval, Bedrock reranking, and figure/table-aware answer generation.
+
+
 
 ![aws_rag architecture](docs/architecture.svg)
 
 Serverless AWS RAG platform for 203 public ML papers and 12,000+ text, table, and figure chunks using hybrid BM25/pgvector retrieval, reciprocal-rank fusion, Bedrock reranking, cited generation, and Langfuse tracing; achieved 95% retrieval hit@5 and 0.85 MRR@10 across 62 grounded evaluation questions.
+
+`POST /api/retrieve` exposes the same all-corpus hybrid retrieval and Bedrock
+reranking without answer generation. It returns full chunks plus paper, page,
+chunk, table and figure citation metadata for the bounded corrective workflow in
+`agentic_search/src/agentic_rag.py`.
 
 Docling-based table extraction and Bedrock vision descriptions for figures, improving retrieval from 0/9 to 7/9 on figure-only questions and answering 11/13 table-grounded questions.
 
@@ -35,6 +42,27 @@ These are with 103 papers. With 202 papers (10,167 chunks) the chatbot scores
 (includes network round trips). In the Lambda, a whole chat answer takes
 ~2.4–3.9 s: route ~0.4–0.7 s, BM25 ~0.2 s, vector ~0.25 s, rerank ~1 s,
 answer ~0.45–1.8 s.
+
+### Effect of semantic reranking
+
+The current 62-question suite provides a direct comparison of the same BM25 +
+vector RRF retrieval path with and without Amazon Rerank:
+
+| Retrieval configuration | Hit@1 | Hit@5 | MRR@10 |
+|---|---:|---:|---:|
+| BM25 + vector, RRF | 68% | 90% | 0.76 |
+| BM25 + vector, RRF with reranker | 77% | 95% | 0.85 |
+| **Change** | **+9 points** | **+5 points** | **+0.09** |
+
+The reranker improves retrieval ranking on this suite but adds about one second
+per query. These retrieval metrics do not by themselves prove that final answers
+are more correct. Keep the reranker only if a controlled answer evaluation shows
+enough improvement in correctness, completeness, or citation support to justify
+its latency and cost. See
+[`evals/results_figures_v2.md`](evals/results_figures_v2.md) for the complete
+configuration matrix.
+
+![Semantic reranker retrieval comparison](docs/semantic_reranker_ablation.png)
 
 **Improvement from table-aware parsing (Docling)**, all 202 papers, chatbot setup
 (BM25 + vector → RRF → rerank → Nova Lite):

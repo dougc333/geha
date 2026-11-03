@@ -4,17 +4,16 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
+import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-def file_sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for block in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
+from geha_processing.io import atomic_json, sha256_file, sha256_text
+
+
+file_sha256 = sha256_file
 
 
 def safe_child(root: Path, name: str) -> Path:
@@ -29,7 +28,7 @@ def safe_child(root: Path, name: str) -> Path:
 
 def build(pdf: Path, run_dir: Path, *, title: str | None = None) -> dict:
     batch = json.loads((run_dir / "batch.json").read_text(encoding="utf-8"))
-    source_sha256 = file_sha256(pdf)
+    source_sha256 = sha256_file(pdf)
     if batch.get("source_sha256") != source_sha256:
         raise ValueError("MCP batch source SHA-256 does not match the supplied PDF")
     if batch.get("status") != "completed" or batch.get("pages_failed") != 0:
@@ -54,7 +53,7 @@ def build(pdf: Path, run_dir: Path, *, title: str | None = None) -> dict:
             "correction_passes": len(page.get("passes", [])),
             "content_changed": bool(page.get("content_changed")),
             "content": content,
-            "content_sha256": hashlib.sha256(content.encode("utf-8")).hexdigest(),
+            "content_sha256": sha256_text(content),
         })
 
     return {
@@ -91,10 +90,7 @@ def main() -> None:
         else pdf.with_name(pdf.name + ".validated.json")
     )
     payload = build(pdf, run_dir, title=args.title)
-    output.parent.mkdir(parents=True, exist_ok=True)
-    temporary = output.with_name(output.name + ".tmp")
-    temporary.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    temporary.replace(output)
+    atomic_json(output, payload)
     print(output)
 
 

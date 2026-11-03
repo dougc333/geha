@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-import json
 import re
 from pathlib import Path
 from typing import Any, Callable, Iterable
 
 from ..models import ChunkRecord
+from geha_processing.io import write_jsonl as _write_jsonl
 
 
 SPACE_RE = re.compile(r"[ \t]+")
@@ -95,7 +95,4 @@ def validate_embedding_token_lengths(
 
 
 def write_jsonl(path: Path, records: Iterable[ChunkRecord]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as stream:
-        for record in records:
-            stream.write(json.dumps(record, ensure_ascii=False) + "\n")
+    _write_jsonl(path, records)

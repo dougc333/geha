@@ -3,12 +3,13 @@
 from __future__ import annotations
 
 import base64
-import hashlib
 import json
 import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable, TypedDict
+
+from geha_processing.io import atomic_jsonl, read_jsonl, sha256_file
 
 from crawl_dir.src.pipeline.claude_client import (
     CLAUDE_MODEL,
@@ -44,14 +45,6 @@ class VisualContextResult(TypedDict):
 
 VisualContextGenerator = Callable[[Path, Path], str | VisualContextResult]
 EventSink = Callable[[dict[str, Any]], None]
-
-
-def _sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for block in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def _latest_iteration(figure_dir: Path) -> Path | None:
@@ -176,21 +169,11 @@ def make_visual_context_generator(
 
 
 def _read_jsonl(path: Path) -> list[dict[str, Any]]:
-    if not path.is_file():
-        return []
-    return [
-        json.loads(line)
-        for line in path.read_text(encoding="utf-8").splitlines()
-        if line.strip()
-    ]
+    return read_jsonl(path)
 
 
 def _write_jsonl_atomic(path: Path, records: list[dict[str, Any]]) -> None:
-    temporary = path.with_suffix(path.suffix + ".tmp")
-    with temporary.open("w", encoding="utf-8") as stream:
-        for record in records:
-            stream.write(json.dumps(record, ensure_ascii=False) + "\n")
-    temporary.replace(path)
+    atomic_jsonl(path, records)
 
 
 def contextualize_visual_run(
@@ -216,8 +199,8 @@ def contextualize_visual_run(
     for index, chunk in enumerate(chunks, 1):
         source_pdf = run_dir / chunk["source_pdf"]
         chunk_image = run_dir / chunk["chunk_image"]
-        document_sha256 = _sha256(source_pdf)
-        chunk_sha256 = _sha256(chunk_image)
+        document_sha256 = sha256_file(source_pdf)
+        chunk_sha256 = sha256_file(chunk_image)
         existing = completed.get(chunk["chunk_id"])
         if (
             existing

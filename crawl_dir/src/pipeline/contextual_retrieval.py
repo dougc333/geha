@@ -11,110 +11,41 @@ from __future__ import annotations
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Callable, TypedDict
+from typing import Any, Callable
+
+from geha_processing.contextual import (
+    ContextGenerator,
+    contextual_retrieval_prompt as _shared_contextual_retrieval_prompt,
+    make_claude_context_generator as _shared_make_claude_context_generator,
+)
+from geha_processing.io import atomic_jsonl, read_jsonl
 
 from .claude_client import CLAUDE_MODEL, FALLBACK_BETA, ClaudeRefusalError
 
 
 PROMPT_VERSION = "anthropic-contextual-retrieval-v1"
-SYSTEM_PROMPT = (
-    "You prepare concise context for retrieval indexing. Use only the supplied "
-    "document. Do not answer questions, add advice, or introduce facts absent "
-    "from the document."
-)
-USER_TEMPLATE = """Here is the chunk we want to situate within the whole document.
-<chunk>
-{chunk}
-</chunk>
-Please give a short succinct context to situate this chunk within the overall
-document for the purposes of improving search retrieval of the chunk. Include
-the document subject and any policy code, entity, section, or time period needed
-to disambiguate it. Answer only with the succinct context and nothing else."""
 
 EventSink = Callable[[dict[str, Any]], None]
 
 
-class ClaudeContextResult(TypedDict):
-    context: str
-    input_tokens: int
-    output_tokens: int
-    cache_creation_input_tokens: int
-    cache_read_input_tokens: int
-
-
-ContextGenerator = Callable[[str, str], str | ClaudeContextResult]
-
-
-def contextual_retrieval_prompt(document: str, chunk: str) -> dict[str, Any]:
-    """Return the prompt with the entire document separate from the target chunk."""
-    return {
-        "system": [
-            {"type": "text", "text": SYSTEM_PROMPT},
-            {
-                "type": "text",
-                "text": f"<document>\n{document}\n</document>",
-                "cache_control": {"type": "ephemeral"},
-            },
-        ],
-        "message": USER_TEMPLATE.format(chunk=chunk),
-    }
+# Compatibility exports backed by the shared processing package.
+contextual_retrieval_prompt = _shared_contextual_retrieval_prompt
 
 
 def make_claude_context_generator(model: str = CLAUDE_MODEL) -> ContextGenerator:
-    """Create one reusable Claude client; the document block is prompt-cacheable."""
-    import anthropic
-
-    client = anthropic.Anthropic(max_retries=2, timeout=180)
-
-    def generate(document: str, chunk: str) -> ClaudeContextResult:
-        prompt = contextual_retrieval_prompt(document, chunk)
-        with client.beta.messages.stream(
-            model=model,
-            max_tokens=256,
-            system=prompt["system"],
-            messages=[{
-                "role": "user",
-                "content": [{"type": "text", "text": prompt["message"]}],
-            }],
-            betas=[FALLBACK_BETA],
-            fallbacks="default",
-        ) as stream:
-            message = stream.get_final_message()
-        if message.stop_reason == "refusal":
-            category = (
-                getattr(message.stop_details, "category", None)
-                if message.stop_details else None
-            )
-            raise ClaudeRefusalError(
-                f"Claude declined contextualization (category: {category})"
-            )
-        text = "".join(block.text for block in message.content if block.type == "text")
-        usage = message.usage
-        return {
-            "context": " ".join(text.split()).strip(),
-            "input_tokens": usage.input_tokens,
-            "output_tokens": usage.output_tokens,
-            "cache_creation_input_tokens": usage.cache_creation_input_tokens or 0,
-            "cache_read_input_tokens": usage.cache_read_input_tokens or 0,
-        }
-
-    return generate
+    return _shared_make_claude_context_generator(
+        model,
+        fallback_beta=FALLBACK_BETA,
+        refusal_error=ClaudeRefusalError,
+    )
 
 
 def _read_jsonl(path: Path) -> list[dict[str, Any]]:
-    if not path.is_file():
-        return []
-    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()
-            if line.strip()]
+    return read_jsonl(path)
 
 
 def _write_jsonl_atomic(path: Path, records: list[dict[str, Any]]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_suffix(path.suffix + ".tmp")
-    with temporary.open("w", encoding="utf-8") as stream:
-        for record in records:
-            stream.write(json.dumps(record, ensure_ascii=False) + "\n")
-    temporary.replace(path)
+    atomic_jsonl(path, records)
 
 
 def contextualize_candidate(

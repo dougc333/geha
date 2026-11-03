@@ -108,6 +108,18 @@ class ChatRequest(BaseModel):
     backend: Literal["postgres", "weaviate"] = "postgres"  # where retrieval runs
 
 
+class RetrieveRequest(BaseModel):
+    """Raw all-corpus retrieval for bounded agentic workflows.
+
+    Unlike /api/chat this endpoint does not generate an answer, and unlike the
+    document-lab /api/search endpoint it can search across the paper library.
+    """
+
+    query: str = Field(min_length=2, max_length=2000)
+    document_ids: list[str] | None = Field(default=None, max_length=50)
+    top_k: int = Field(default=10, ge=1, le=10)
+
+
 class CompareBackendsRequest(BaseModel):
     query: str = Field(min_length=2, max_length=2000)
     top_k: int = Field(default=8, ge=1, le=20)
@@ -278,6 +290,53 @@ def _figure_urls(connection, chunk_ids: list[int]) -> dict[int, str]:
         return {chunk_id: s3.generate_presigned_url("get_object", Params={"Bucket": CHUNK_BUCKET, "Key": key},
                                                     ExpiresIn=FIGURE_URL_SECONDS)
                 for chunk_id, key in cursor.fetchall()}
+
+
+@router.post("/api/retrieve")
+def retrieve(request: RetrieveRequest) -> dict:
+    """Hybrid retrieval + Bedrock reranking, returning full citation-ready chunks.
+
+    This is the retriever contract used by the local corrective agent.  Generation,
+    relevance/completeness assessment and grounding checks happen in that bounded
+    workflow, so this endpoint intentionally performs no answer-generation call.
+    """
+    query, verdict = guard.apply(request.query, "input")
+    if verdict and not verdict.allowed and guard.MODE == "enforce":
+        raise HTTPException(status_code=400, detail=query)
+    timings: dict[str, float] = {}
+    started = time.perf_counter()
+    try:
+        with database() as connection:
+            candidates = _retrieve(connection, query, request.document_ids, timings)
+        step = time.perf_counter()
+        sources = _rerank(query, candidates[:RERANK_CANDIDATES])[: request.top_k]
+        timings["rerank_ms"] = round((time.perf_counter() - step) * 1000, 1)
+        with database() as connection:
+            figure_urls = _figure_urls(connection, [s["id"] for s in sources])
+        timings["total_ms"] = round((time.perf_counter() - started) * 1000, 1)
+        return {
+            "query": query,
+            "results": [
+                {
+                    "paper": {"title": s["title"], "document_id": s["document_id"]},
+                    "page": s["page"],
+                    "chunk_id": s["id"],
+                    "chunk_index": s["chunk_index"],
+                    "content_type": s.get("content_type") or ("figure" if s.get("image") else "text"),
+                    "content": s["content"],
+                    "citation_metadata": s.get("citation_metadata") or {},
+                    "image_key": s.get("image"),
+                    "image_url": figure_urls.get(s["id"]),
+                    "rerank_score": s.get("rerank_score"),
+                }
+                for s in sources
+            ],
+            "timings": timings,
+        }
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=str(exc)) from exc
 
 
 @router.post("/api/chat")

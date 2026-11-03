@@ -10,6 +10,8 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+from geha_processing.pdf import split_pdf_pages as _shared_split_pdf_pages
+
 
 def document_slug(filename: str) -> str:
     stem = Path(filename).stem.casefold()
@@ -116,20 +118,8 @@ def _write_single_page_pdf(source: Path, page_index: int, target: Path) -> None:
 
 
 def split_pdf_pages(source: Path, pages_dir: Path) -> list[Path]:
-    """Split a PDF into deterministic, one-page PDF artifacts."""
-    from pypdf import PdfReader, PdfWriter
-
-    reader = PdfReader(source)
-    outputs: list[Path] = []
-    for page_index, page in enumerate(reader.pages):
-        target = pages_dir / f"page-{page_index + 1:03d}" / "source.pdf"
-        target.parent.mkdir(parents=True, exist_ok=True)
-        writer = PdfWriter()
-        writer.add_page(page)
-        with target.open("wb") as stream:
-            writer.write(stream)
-        outputs.append(target)
-    return outputs
+    """Compatibility wrapper for the shared deterministic page splitter."""
+    return _shared_split_pdf_pages(source, pages_dir)
 
 
 def copy_page_markdown_checkpoints(

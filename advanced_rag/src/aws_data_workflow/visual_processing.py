@@ -10,6 +10,8 @@ from io import BytesIO
 from pathlib import Path
 from typing import Any, Callable
 
+from geha_processing.tables import table_headers_are_default as _shared_table_headers_are_default
+
 
 VisionDescriber = Callable[[bytes, str, str], dict[str, Any]]
 PageMarkdownExtractor = Callable[[bytes, int, str], str]
@@ -73,21 +75,8 @@ def validate_table_frame(frame: Any) -> list[str]:
     return issues
 
 
-def table_headers_are_default(columns: list[Any]) -> bool:
-    """Detect pandas/Docling placeholder headers without rejecting year headers."""
-    normalized = [str(column).strip() for column in columns]
-    if not normalized:
-        return False
-    indexes: list[int] = []
-    for column in normalized:
-        match = re.fullmatch(r"(?:Unnamed:\s*)?(\d+)", column, flags=re.IGNORECASE)
-        if match is None:
-            return False
-        indexes.append(int(match.group(1)))
-    return indexes in (
-        list(range(len(indexes))),
-        list(range(1, len(indexes) + 1)),
-    )
+# Preserve the established import path while using the repository-wide rule.
+table_headers_are_default = _shared_table_headers_are_default
 
 
 def validate_figure_spec(spec: dict[str, Any], native_text: str) -> list[str]:

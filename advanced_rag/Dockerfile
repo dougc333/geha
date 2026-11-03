@@ -1,9 +1,9 @@
 FROM node:22-bookworm-slim AS web-build
 
 WORKDIR /build/web
-COPY web/package.json web/package-lock.json ./
+COPY advanced_rag/web/package.json advanced_rag/web/package-lock.json ./
 RUN npm ci
-COPY web/ ./
+COPY advanced_rag/web/ ./
 RUN npm run build
 
 
@@ -11,7 +11,7 @@ FROM python:3.12-slim-bookworm AS app
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PYTHONPATH=/app/src \
+    PYTHONPATH=/app:/app/src \
     AWS_WORKFLOW_DATA_DIR=/app/runtime
 
 RUN apt-get update \
@@ -24,13 +24,14 @@ RUN apt-get update \
 
 WORKDIR /app
 
-COPY requirements.txt ./
+COPY advanced_rag/requirements.txt ./
 RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
 
-COPY src/ ./src/
-COPY evals/ ./evals/
-COPY state_machines/ ./state_machines/
+COPY geha_processing/ ./geha_processing/
+COPY advanced_rag/src/ ./src/
+COPY advanced_rag/evals/ ./evals/
+COPY advanced_rag/state_machines/ ./state_machines/
 COPY --from=web-build /build/web/dist ./web/dist
 
 RUN mkdir -p /app/runtime

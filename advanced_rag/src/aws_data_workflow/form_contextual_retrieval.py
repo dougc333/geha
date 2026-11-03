@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 import sqlite3
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Callable, TypedDict
+
+from geha_processing.io import atomic_json, atomic_jsonl, read_jsonl, sha256_text
 
 from .page_contextual_retrieval import (
     CLAUDE_MODEL,
@@ -45,30 +46,20 @@ def utc_now() -> str:
 
 
 def _sha256(text: str) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+    return sha256_text(text)
 
 
 def _write_json_atomic(path: Path, payload: dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_suffix(path.suffix + ".tmp")
-    temporary.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
-    temporary.replace(path)
+    atomic_json(path, payload)
 
 
 def _write_jsonl_atomic(path: Path, records: list[dict[str, Any]]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_suffix(path.suffix + ".tmp")
-    with temporary.open("w", encoding="utf-8") as stream:
-        for record in records:
-            stream.write(json.dumps(record, ensure_ascii=False) + "\n")
-    temporary.replace(path)
+    atomic_jsonl(path, records)
 
 
 def _read_single_jsonl(path: Path) -> dict[str, Any] | None:
-    if not path.is_file():
-        return None
-    lines = [line for line in path.read_text(encoding="utf-8").splitlines() if line]
-    return json.loads(lines[0]) if len(lines) == 1 else None
+    records = read_jsonl(path)
+    return records[0] if len(records) == 1 else None
 
 
 def make_claude_form_context_generator(

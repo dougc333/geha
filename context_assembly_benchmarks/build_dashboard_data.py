@@ -48,7 +48,7 @@ def answer_section() -> dict | None:
     if not path.exists():
         return None
     report = json.loads(path.read_text())
-    if report.get("configuration", {}).get("evaluation_version") != 3:
+    if report.get("configuration", {}).get("evaluation_version") not in {3, 4}:
         return None
     summary = {"queries_completed": report["summary"]["queries_completed"],
                "queries_requested": report["summary"]["queries_requested"],

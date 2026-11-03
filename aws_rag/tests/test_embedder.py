@@ -77,6 +77,7 @@ class ProcessTest(unittest.TestCase):
         self.assertEqual(rows[0][3], "text here")        # NUL removed (Postgres rejects it)
         self.assertIsNone(rows[0][5])                    # text chunk: no image
         self.assertEqual(rows[1][5], "figures/doc/p003_f01.png")
+        self.assertEqual([r[6] for r in rows], ["text", "figure"])
 
     def test_empty_file_fails(self):
         with self.assertRaises(ValueError):

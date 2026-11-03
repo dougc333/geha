@@ -128,3 +128,32 @@ code { font-size: 12px; background: var(--wash); padding: 1px 4px; border-radius
 .tooltip { position: fixed; pointer-events: none; z-index: 30; background: var(--surface); color: var(--ink); border: 1px solid var(--ring); border-radius: 8px; padding: 6px 9px; font-size: 12px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15); max-width: 280px; }
 table.summary th { white-space: normal; vertical-align: bottom; max-width: 140px; }
 table.summary td, table.summary th { padding: 10px 12px; }
+
+.stage-picker { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 20px 0 12px; }
+.stage-picker label { display: flex; align-items: center; gap: 10px; min-height: 72px; padding: 12px; border: 1px solid var(--ring); border-radius: 10px; background: var(--surface); cursor: pointer; }
+.stage-picker label.selected { border-color: var(--s-table); box-shadow: inset 0 0 0 1px var(--s-table); }
+.stage-picker input { position: absolute; opacity: 0; pointer-events: none; }
+.stage-picker small { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; font-weight: 400; }
+.stage-number { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--wash); color: var(--ink-2); font-weight: 700; flex: none; }
+.stage-picker label.selected .stage-number { background: var(--s-table); color: white; }
+.improvement-card { display: grid; grid-template-columns: minmax(260px, .9fr) minmax(420px, 1.4fr); gap: 28px; align-items: center; }
+.improvement-card h2 { margin: 8px 0; font-size: 20px; }
+.improvement-card p { color: var(--ink-2); }
+.evidence-badge { display: inline-block; border-radius: 999px; padding: 3px 8px; font-size: 11px; font-weight: 700; }
+.evidence-badge.measured { color: var(--good-ink); background: color-mix(in srgb, var(--good) 12%, transparent); }
+.evidence-badge.target { color: var(--critical); background: color-mix(in srgb, var(--critical) 12%, transparent); }
+.code-change { margin-top: 14px; padding: 10px 12px; border-left: 3px solid var(--s-table); background: var(--wash); color: var(--ink-2); }
+.code-change span { display: block; margin-bottom: 3px; color: var(--muted); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.meter-grid { display: grid; gap: 16px; }
+.error-meter-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.error-meter-head strong { font-size: 22px; font-variant-numeric: tabular-nums; }
+.error-track { height: 12px; margin-top: 6px; overflow: hidden; border-radius: 999px; background: var(--grid); }
+.error-track span { display: block; height: 100%; min-width: 0; border-radius: inherit; background: var(--critical); transition: width 280ms ease; }
+.flow-strip { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin: 14px 0; color: var(--ink-2); }
+.flow-strip span { padding: 7px 10px; border: 1px solid var(--ring); border-radius: 8px; background: var(--surface); }
+.flow-strip span.active { border-color: var(--s-table); color: var(--ink); }
+.flow-strip span.muted { opacity: .45; }
+@media (max-width: 760px) {
+  .stage-picker { grid-template-columns: 1fr; }
+  .improvement-card { grid-template-columns: 1fr; }
+}
