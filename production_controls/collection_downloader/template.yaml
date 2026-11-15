@@ -1,0 +1,131 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: GEHA S3-backed catalog and document downloader.
+
+Globals:
+  Function:
+    Runtime: python3.12
+    Timeout: 120
+    MemorySize: 1024
+
+Resources:
+  DocumentBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: aws:kms
+      VersioningConfiguration:
+        Status: Enabled
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+
+  InventoryTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: asset_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: asset_id
+          KeyType: HASH
+
+  ApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/
+      Handler: handler.handler
+      Environment:
+        Variables:
+          CATALOG_BUCKET: !Ref DocumentBucket
+          DOCUMENT_BUCKET: !Ref DocumentBucket
+          TABLE_NAME: !Ref InventoryTable
+          DOWNLOADER_FUNCTION: !Ref DownloaderFunction
+          STATE_MACHINE_ARN: !GetAtt DownloadStateMachine.Arn
+      Policies:
+        - S3ReadPolicy:
+            BucketName: !Ref DocumentBucket
+        - DynamoDBReadPolicy:
+            TableName: !Ref InventoryTable
+        - LambdaInvokePolicy:
+            FunctionName: !Ref DownloaderFunction
+        - Statement:
+            - Effect: Allow
+              Action: states:StartExecution
+              Resource: !GetAtt DownloadStateMachine.Arn
+      Events:
+        Inventory:
+          Type: HttpApi
+          Properties:
+            Path: /api/inventory
+            Method: GET
+        Download:
+          Type: HttpApi
+          Properties:
+            Path: /api/download
+            Method: POST
+        DownloadAll:
+          Type: HttpApi
+          Properties:
+            Path: /api/download-all
+            Method: POST
+
+  DownloaderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/
+      Handler: handler.worker
+      Timeout: 120
+      MemorySize: 1024
+      Environment:
+        Variables:
+          CATALOG_BUCKET: !Ref DocumentBucket
+          DOCUMENT_BUCKET: !Ref DocumentBucket
+          TABLE_NAME: !Ref InventoryTable
+      Policies:
+        - S3WritePolicy:
+            BucketName: !Ref DocumentBucket
+        - DynamoDBCrudPolicy:
+            TableName: !Ref InventoryTable
+
+  DownloadStateMachine:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      DefinitionSubstitutions:
+        DownloaderArn: !GetAtt DownloaderFunction.Arn
+      Definition:
+        StartAt: DownloadDocuments
+        States:
+          DownloadDocuments:
+            Type: Map
+            ItemsPath: $.assets
+            MaxConcurrency: 8
+            ItemSelector:
+              asset.$: $$.Map.Item.Value
+            ItemProcessor:
+              ProcessorConfig:
+                Mode: INLINE
+              StartAt: Download
+              States:
+                Download:
+                  Type: Task
+                  Resource: '${DownloaderArn}'
+                  End: true
+            End: true
+      Policies:
+        - LambdaInvokePolicy:
+            FunctionName: !Ref DownloaderFunction
+
+Outputs:
+  ApiUrl:
+    Description: HTTP API URL for the React frontend
+    Value: !Sub https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com
+  BucketName:
+    Value: !Ref DocumentBucket
+  InventoryTableName:
+    Value: !Ref InventoryTable
