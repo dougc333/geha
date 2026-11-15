@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "invoice/totals",
+  "type": "object",
+  "description": "Totals band: subtotal, tax, shipping and grand total.",
+  "properties": {
+    "pretax_amount": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "total_tax_amount": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "tax_rate": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "Percent as a number, e.g. 20 for 20%"
+    },
+    "total_amount": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "total_number_of_items": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "shipping_charges": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "pretax_amount",
+    "total_tax_amount",
+    "tax_rate",
+    "total_amount",
+    "total_number_of_items",
+    "shipping_charges"
+  ],
+  "additionalProperties": false
+}

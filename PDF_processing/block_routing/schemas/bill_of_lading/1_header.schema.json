@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "bill_of_lading/1_header",
+  "type": "object",
+  "description": "Block 1 (header)",
+  "properties": {
+    "bl_number": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "value next to the label 'B/L NO.'",
+      "pattern": "BL\\d{9}"
+    },
+    "scac": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "value next to the label 'SCAC'",
+      "pattern": "[A-Z]{4}"
+    }
+  },
+  "required": [
+    "bl_number",
+    "scac"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "invoice/extras",
+  "type": "object",
+  "description": "Anything labeled that does not belong to the other blocks.",
+  "properties": {
+    "extras": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "null"
+        ]
+      },
+      "description": "Any other labeled fields (PO reference, payment terms, VIN, project code, ...), keyed by a snake_case label"
+    }
+  },
+  "required": [
+    "extras"
+  ],
+  "additionalProperties": false
+}

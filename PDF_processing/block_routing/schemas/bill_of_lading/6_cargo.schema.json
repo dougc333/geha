@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "bill_of_lading/6_cargo",
+  "type": "object",
+  "description": "Block 6 (cargo)",
+  "properties": {
+    "freight_terms": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "value next to the label 'freight_terms'"
+    }
+  },
+  "required": [
+    "freight_terms"
+  ],
+  "additionalProperties": false
+}
