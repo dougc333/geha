@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "test-unstructured-cloudapi"
+version = "0.1.0"
+description = "Small CLI for testing document extraction with the Unstructured managed API"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115,<1",
+    "python-dotenv>=1.0,<2",
+    "requests>=2.32,<3",
+    "uvicorn[standard]>=0.34,<1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10"]
+
+[project.scripts]
+unstructured-extract = "unstructured_cloud_test.cli:main"
+unstructured-cloud-ui = "unstructured_cloud_test.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
