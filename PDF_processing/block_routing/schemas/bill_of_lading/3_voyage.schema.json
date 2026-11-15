@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "bill_of_lading/3_voyage",
+  "type": "object",
+  "description": "Block 3 (voyage)",
+  "properties": {
+    "vessel_voyage": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "value next to the label 'OCEAN VESSEL / VOYAGE'",
+      "pattern": "[A-Z][A-Z ]+ / [0-9A-Z]+"
+    },
+    "port_of_loading": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "value next to the label 'PORT OF LOADING'",
+      "pattern": "[A-Z][A-Z .'-]+, [A-Z][A-Z .'-]+"
+    },
+    "port_of_discharge": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "value next to the label 'PORT OF DISCHARGE'",
+      "pattern": "[A-Z][A-Z .'-]+, [A-Z][A-Z .'-]+"
+    }
+  },
+  "required": [
+    "vessel_voyage",
+    "port_of_loading",
+    "port_of_discharge"
+  ],
+  "additionalProperties": false
+}

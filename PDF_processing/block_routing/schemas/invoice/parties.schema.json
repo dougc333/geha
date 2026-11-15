@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "invoice/parties",
+  "type": "object",
+  "description": "Seller (sender) and buyer (receiver) details, including the seller's bank details.",
+  "properties": {
+    "sender_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sender_address": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sender_phone": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sender_email": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sender_website": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sender_vat": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sender_company_number": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sender_bank_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sender_bank_account_number": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sender_bic": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "receiver_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "receiver_address": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "receiver_vat": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "receiver_customer_number": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "sender_name",
+    "sender_address",
+    "sender_phone",
+    "sender_email",
+    "sender_website",
+    "sender_vat",
+    "sender_company_number",
+    "sender_bank_name",
+    "sender_bank_account_number",
+    "sender_bic",
+    "receiver_name",
+    "receiver_address",
+    "receiver_vat",
+    "receiver_customer_number"
+  ],
+  "additionalProperties": false
+}

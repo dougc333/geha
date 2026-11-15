@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "bill_of_lading/8_issue",
+  "type": "object",
+  "description": "Block 8 (issue)",
+  "properties": {
+    "place_of_issue": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "value next to the label 'PLACE OF ISSUE'",
+      "pattern": "[A-Z][A-Za-z .'-]+"
+    },
+    "date_of_issue": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "value next to the label 'DATE OF ISSUE'",
+      "pattern": "\\d{4}-\\d{2}-\\d{2}"
+    },
+    "original_bls": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "value next to the label 'NUMBER OF ORIGINAL B/L'S:'",
+      "pattern": "[A-Z]+ \\(\\d\\)"
+    }
+  },
+  "required": [
+    "place_of_issue",
+    "date_of_issue",
+    "original_bls"
+  ],
+  "additionalProperties": false
+}

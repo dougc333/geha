@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "invoice/header",
+  "type": "object",
+  "description": "Top band: document title, number, dates and currency.",
+  "properties": {
+    "invoice_number": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Invoice number exactly as printed"
+    },
+    "invoice_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Date exactly as printed on the document (do not reformat), or null"
+    },
+    "due_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Date exactly as printed on the document (do not reformat), or null"
+    },
+    "currency": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "ISO currency code, e.g. EUR, USD, GBP"
+    },
+    "document_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Title of the document if it is not simply 'Invoice' (e.g. 'Tax Invoice'), else null"
+    }
+  },
+  "required": [
+    "invoice_number",
+    "invoice_date",
+    "due_date",
+    "currency",
+    "document_type"
+  ],
+  "additionalProperties": false
+}

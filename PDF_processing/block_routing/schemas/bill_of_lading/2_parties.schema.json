@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "bill_of_lading/2_parties",
+  "type": "object",
+  "description": "Block 2 (parties)",
+  "properties": {
+    "shipper": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "value next to the label 'SHIPPER'"
+    },
+    "booking_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "value next to the label 'BOOKING REF.'",
+      "pattern": "BKG\\d{7}"
+    },
+    "shipper_ref": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "value next to the label 'SHIPPER'S REF.'",
+      "pattern": "[A-Z]{3}-\\d{5}"
+    },
+    "pre_carriage_by": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "value next to the label 'PRE-CARRIAGE BY'"
+    },
+    "consignee": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "value next to the label 'CONSIGNEE'"
+    },
+    "place_of_receipt": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "value next to the label 'PLACE OF RECEIPT'"
+    },
+    "notify_party": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "value next to the label 'NOTIFY PARTY'"
+    },
+    "delivery_agent": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "value next to the label 'DELIVERY AGENT'"
+    }
+  },
+  "required": [
+    "shipper",
+    "booking_ref",
+    "consignee"
+  ],
+  "additionalProperties": false
+}

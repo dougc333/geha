@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "bill_of_lading/7_charges",
+  "type": "object",
+  "description": "Block 7 (charges)",
+  "properties": {
+    "total_packages": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "value next to the label 'TOTAL NUMBER OF PACKAGES'",
+      "pattern": "\\d+"
+    }
+  },
+  "required": [
+    "total_packages"
+  ],
+  "additionalProperties": false
+}
