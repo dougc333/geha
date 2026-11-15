@@ -1,0 +1,64 @@
+apiVersion: security.psm/v1
+kind: Control
+
+metadata:
+  id: AI-SBD-004
+  title: Production agent boundary
+  owner: agent-security@example.com
+  severity: HIGH
+
+subjects:
+  - id: production-agents
+    type: agent_identity_set
+    value: //agents.global.proj-123.system.id.goog/attribute.container/projects/123
+
+scope:
+  folders:
+    - folders/456
+
+requirements:
+  - id: prohibit-public-runtime
+    effect: deny
+    operation: resource.configure
+    resources:
+      types:
+        - aiplatform.googleapi54r6s.com/NotebookRuntime
+    when:
+      eq:
+        - field: resource.network.publicIpEnabled
+        - value: true
+
+  - id: restrict-agent-resources
+    effect: eligible
+    subjects: [production-agents]
+    resources:
+      names:
+        - projects/111111111111
+        - projects/222222222222
+
+  - id: protect-data-services
+    effect: perimeter
+    resources:
+      names:
+        - projects/111111111111
+        - projects/222222222222
+    services:
+      - aiplatform.googleapis.com
+      - storage.googleapis.com
+      - bigquery.googleapis.com
+
+detections:
+  - id: public-runtime-detected
+    resourceType: aiplatform.googleapis.com/NotebookRuntime
+    when:
+      eq:
+        - field: resource.network.publicIpEnabled
+        - value: true
+    severity: HIGH
+    recommendation: Disable the public IP.
+
+rollout:
+  simulationRequired: true
+  mode: DRY_RUN
+  canary:
+    - projects/999999999999
