@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+/* Role tokens. Light and dark are each chosen, not flipped: the series and
+   status steps come from a validated chart palette. */
+:root {
+  color-scheme: light;
+  --bg: #f4f4f1;
+  --surface: #fcfcfb;
+  --surface-2: #f0efec;
+  --border: #e1e0da;
+  --border-strong: #c9c8c1;
+  --text: #0b0b0b;
+  --text-2: #52514e;
+  --muted: #74736d;
+  --accent: #2a78d6;
+  --accent-soft: #e3eefb;
+
+  --exact: #2a78d6;
+  --near: #eb6834;
+  --containment: #1baf7a;
+
+  --good: #0ca30c;
+  --warning: #fab219;
+  --serious: #ec835a;
+  --critical: #d03b3b;
+
+  --del-bg: #fbe1e0;
+  --del-text: #8e1f1f;
+  --ins-bg: #dbf2db;
+  --ins-text: #165c16;
+  --mark: #fff1c2;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --bg: #121211;
+    --surface: #1a1a19;
+    --surface-2: #242422;
+    --border: #33332f;
+    --border-strong: #4a4a45;
+    --text: #f0efec;
+    --text-2: #c3c2b7;
+    --muted: #8f8e86;
+    --accent: #3987e5;
+    --accent-soft: #1d2e44;
+    --exact: #3987e5;
+    --near: #d95926;
+    --containment: #199e70;
+    --del-bg: #4a1f1f;
+    --del-text: #ffb4b0;
+    --ins-bg: #1c3d1c;
+    --ins-text: #a8e6a8;
+    --mark: #4a3d12;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #121211;
+  --surface: #1a1a19;
+  --surface-2: #242422;
+  --border: #33332f;
+  --border-strong: #4a4a45;
+  --text: #f0efec;
+  --text-2: #c3c2b7;
+  --muted: #8f8e86;
+  --accent: #3987e5;
+  --accent-soft: #1d2e44;
+  --exact: #3987e5;
+  --near: #d95926;
+  --containment: #199e70;
+  --del-bg: #4a1f1f;
+  --del-text: #ffb4b0;
+  --ins-bg: #1c3d1c;
+  --ins-text: #a8e6a8;
+  --mark: #4a3d12;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-ink: var(--text);
+  --color-ink-2: var(--text-2);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-exact: var(--exact);
+  --color-near: var(--near);
+  --color-containment: var(--containment);
+  --color-good: var(--good);
+  --color-warning: var(--warning);
+  --color-serious: var(--serious);
+  --color-critical: var(--critical);
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-feature-settings: "tnum" 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+.chunk-text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.diff-del {
+  background: var(--del-bg);
+  color: var(--del-text);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+  border-radius: 2px;
+}
+
+.diff-ins {
+  background: var(--ins-bg);
+  color: var(--ins-text);
+  border-radius: 2px;
+}
+
+.num-flag {
+  background: var(--mark);
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px var(--warning);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
