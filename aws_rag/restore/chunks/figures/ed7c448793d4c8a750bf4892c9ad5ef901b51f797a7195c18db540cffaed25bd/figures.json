@@ -1,0 +1,533 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1: Object detection system overview. Our system (1) takes an input image, (2) extracts around 2000 bottom-up region proposals, (3) computes features for each proposal using a large convolutional neural network (CNN), and then (4) classifies each region using class-specific linear SVMs. R-CNN achieves a mean average precision (mAP) of 53.7% on PASCAL VOC 2010 . For comparison, [39] reports 35.1% mAP using the same region proposals, but with a spatial pyramid and bag-of-visual-words approach. The popular deformable part models perform at 33.4%. On the 200-class ILSVRC2013 detection dataset, R-CNN's mAP is 31.4% , a large improvement over OverFeat [34], which had the previous best result at 24.3%.",
+    "width": 476,
+    "height": 159,
+    "description": "This figure is a diagram showing the process of an object detection system. It consists of four main steps: 1) Input image, 2) Extract region proposals, 3) Compute CNN features, and 4) Classify regions. The system takes an input image, extracts around 2000 region proposals, computes features for each proposal using a convolutional neural network (CNN), and then classifies each region using class-specific linear SVMs. The figure also shows an example of a warped region and the classification results for the region."
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2: Warped training samples from VOC 2007 train.",
+    "width": 483,
+    "height": 114,
+    "description": "## Description\nThe figure displays a collage of images, each labeled with a category: aeroplane, bicycle, bird, and car. Each category contains multiple images of objects that fall under that category, showing various poses, angles, and backgrounds.\n\n## Text in figure\naeroplane, bicycle, bird, car"
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "",
+    "width": 967,
+    "height": 247,
+    "description": "## Search Index Section 1\nThis figure contains two bar charts from the paper \"Rich feature hierarchies for accurate object detection and semantic segmentation.\" The left chart shows the mean Average Precision (mAP) for different object detection models on the ILSVRC2013 detection test set. The highest mAP is achieved by *R-CNN BB with 31.4%, and the lowest is by SYS_Vision with 10.5%. The right chart displays class Average Precision (AP) box plots for the same models.\n\n## Search Index Section 2\nText in figure: *R-CNN BB 31.4%, *OverFeat (2) 24.3%, UvA-Evision 22.6%, *NEC-MU 20.9%, *OverFeat (1) 19.4%, Toronto A 11.5%, SYS_Vision 10.5%, mAP, class AP, box plots."
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 4: Top regions for six pool 5 units. Receptive fields and activation values are drawn in white. Some units are aligned to concepts, such as people (row 1) or text (4). Other units capture texture and material properties, such as dot arrays (2) and specular reflections (6).",
+    "width": 993,
+    "height": 65,
+    "description": "## Figure Description\nThis figure displays top regions for six pool 5 units in a neural network, showing receptive fields and activation values. Each unit is associated with specific visual concepts or properties, such as people, textures, and reflections.\n\n## Text in Figure\nUnit activations: 1.0, 0.9, 0.8, 0.8, 0.8, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7\nConcepts: people, dot arrays, specular reflections, text\nReceptive fields: various visual elements"
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 6: Sensitivity to object characteristics. Each plot shows the mean (over classes) normalized AP (see [23]) for the highest and lowest performing subsets within six different object characteristics (occlusion, truncation, bounding-box area, aspect ratio, viewpoint, part visibility). We show plots for our method (R-CNN) with and without fine-tuning (FT) and bounding-box regression (BB) as well as for DPM voc-release5. Overall, fine-tuning does not reduce sensitivity (the difference between max and min), but does substantially improve both the highest and lowest performing subsets for nearly all characteristics. This indicates that fine-tuning does more than simply improve the lowest performing subsets for aspect ratio and bounding-box area, as one might conjecture based on how we warp network inputs. Instead, fine-tuning improves robustness for all characteristics including occlusion, truncation, viewpoint, and part visibility.",
+    "width": 990,
+    "height": 187,
+    "description": "### Description\n\nThis figure is a set of four bar plots comparing the sensitivity of different object detection methods to various object characteristics. Each plot shows the mean normalized Average Precision (AP) for the highest and lowest performing subsets within six object characteristics: occlusion, truncation, bounding-box area, aspect ratio, viewpoint, and part visibility. The methods compared are R-CNN fc6, R-CNN FT fc7, R-CNN FT fc7 BB, and DPM voc-release5. The highest performing subset is represented by the top bar in each plot, while the lowest is represented by the bottom bar. The R-CNN FT fc7 BB plot shows the smallest difference between the highest and lowest performing subsets, indicating the least sensitivity.\n\n### Text in Figure\n\n- **R-CNN fc6: sensitivity and impact**\n  - Highest: 0.720\n  - Lowest: 0.212\n\n- **R-CNN FT fc7: sensitivity and impact**\n  - Highest: 0.701\n  - Lowest: 0.179\n\n- **R-CNN FT fc7 BB: sensitivity and impact**\n  - Highest: 0.786\n  - Lowest: 0.211\n\n- **DPM voc-release5: sensitivity and impact**\n  - Highest: 0.487\n  - Lowest: 0.056"
+  },
+  {
+    "file": "p008_f06.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 5: Distribution of top-ranked false positive (FP) types. Each plot shows the evolving distribution of FP types as more FPs are considered in order of decreasing score. Each FP is categorized into 1 of 4 types: Loc-poor localization (a detection with an IoU overlap with the correct class between 0.1 and 0.5, or a duplicate); Sim-confusion with a similar category; Oth-confusion with a dissimilar object category; BG-a FP that fired on background. Compared with DPM (see [23]), significantly more of our errors result from poor localization, rather than confusion with background or other object classes, indicating that the CNN features are much more discriminative than HOG. Loose localization likely results from our use of bottom-up region proposals and the positional invariance learned from pre-training the CNN for whole-image classification. Column three shows how our simple bounding-box regression method fixes many localization errors.",
+    "width": 474,
+    "height": 353,
+    "description": "This figure is a collection of six stacked bar charts, each showing the distribution of false positive types in object detection tasks. The charts are divided into four categories: Localization (Loc), Similar (Sim), Other (Oth), and Background (BG). The x-axis represents the total number of false positives, and the y-axis shows the percentage of each type. The highest series is Localization (Loc), which is consistently the largest portion across all charts, indicating that many errors are due to poor localization. The lowest series is Background (BG), which is the smallest portion in all charts. The series are labeled in the legend as Loc, Sim, Oth, and BG.\n\nText in figure: \"R-CNN fc6: animals\", \"R-CNN FT fc7: animals\", \"R-CNN FT fc7 BB: animals\", \"R-CNN fc6: furniture\", \"R-CNN FT fc7: furniture\", \"R-CNN FT fc7 BB: furniture\", \"Loc\", \"Sim\", \"Oth\", \"BG\", \"total false positives\"."
+  },
+  {
+    "file": "p011_f07.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 7: Different object proposal transformations. (A) the original object proposal at its actual scale relative to the transformed CNN inputs; (B) tightest square with context; (C) tightest square without context; (D) warp. Within each column and example proposal, the top row corresponds to p = 0 pixels of context padding while the bottom row has p = 16 pixels of context padding.",
+    "width": 475,
+    "height": 279,
+    "description": "Description: This figure displays various object proposal transformations for object detection and semantic segmentation. It shows four different methods of transforming object proposals: (A) the original object proposal at its actual scale, (B) tightest square with context, (C) tightest square without context, and (D) warp. Each method is applied with two different levels of context padding: 0 pixels and 16 pixels.\n\nText in figure: (A), (B), (C), (D), p = 0 pixels, p = 16 pixels, context padding, tightest square, warp, original object proposal, scale."
+  },
+  {
+    "file": "p016_f08.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 8: Example detections on the val 2 set from the configuration that achieved 31.0% mAP on val 2 . Each image was sampled randomly (these are not curated). All detections at precision greater than 0.5 are shown. Each detection is labeled with the predicted class and the precision value of that detection from the detector's precision-recall curve. Viewing digitally with zoom is recommended.",
+    "width": 959,
+    "height": 1167,
+    "description": "Figure: A collage of images with various objects detected by a computer vision model. Each image contains multiple detections, highlighted with red bounding boxes. The detected objects are labeled with their predicted class and the precision value of the detection. The images include a variety of scenes such as people, animals, vehicles, and objects in different environments.\n\nText in figure: person, dog, cat, bird, snowmobile, car, boat, train, mushroom, pepper, flower pot, refrigerator, skateboard, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog, cat, bird, dog"
+  },
+  {
+    "file": "p017_f09.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "Figure 9: More randomly selected examples. See Figure 8 caption for details. Viewing digitally with zoom is recommended.",
+    "width": 976,
+    "height": 1157,
+    "description": "## Description\nThis figure displays a collection of 36 images, each with a bounding box and a label indicating the detected object and its confidence score. The images vary widely in content, including people, animals, food, and objects. Each image is accompanied by a label such as \"dog\", \"person\", \"snake\", or \"butterfly\", along with a confidence score ranging from 0.54 to 0.99.\n\n## Text in figure\n- \"hat with a wide brim 0.96\"\n- \"dog 0.98\"\n- \"dog 0.96\"\n- \"dog 0.94\"\n- \"dog 0.97\"\n- \"dog 0.97\"\n- \"dog 0.97\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0.98\"\n- \"dog 0."
+  },
+  {
+    "file": "p018_f10.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "Figure 10: Curated examples. Each image was selected because we found it impressive, surprising, interesting, or amusing. Viewing digitally with zoom is recommended.",
+    "width": 950,
+    "height": 1169,
+    "description": "Figure type: Image collage\nDescription: The figure is a collage of 36 images, each with a bounding box and a label indicating the detected object and its confidence score. The images show a variety of objects and scenes, including people, animals, fruits, and household items. The bounding boxes and labels demonstrate the accuracy and diversity of the object detection model.\n\nText in figure: person, dog, cat, horse, giraffe, lemon, orange, pineapple, milk can, sofa, chair, table, lamp, microwave, computer keyboard, sailboat, dragonfly, starfish, nest, hamburger, sandwich, tennis ball, tennis racket, tennis court, broccoli, lettuce, cucumber, potato, carrot, apple, pear, watermelon, snake, fox, monkey, star, fan, lamp, table, sofa, chair, microwave, refrigerator, television, computer, keyboard, monitor, printer, scanner, fax machine, copier, projector, camera, camcorder, microphone, speaker, headphones, headset, glasses, hat, shoe, glove, belt, bracelet, watch, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring, necklace, earring, bracelet, ring"
+  },
+  {
+    "file": "p020_f11.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 184,
+    "height": 135,
+    "description": "## Figure Description\nThe figure shows a hand holding a small snake, with a red bounding box highlighting the snake. The image is from a computer vision paper, demonstrating object detection. The snake is identified with a confidence score of 0.76.\n\n## Visible Text\n- \"person 0.62\"\n- \"snake 0.76\""
+  },
+  {
+    "file": "p020_f12.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 196,
+    "height": 135,
+    "description": "Figure type: Object detection result\nDescription: The figure shows an object detection result with a bounding box around a frog. The bounding box has a confidence score of 0.78.\n\nText in figure: \"frog 0.78\""
+  },
+  {
+    "file": "p020_f13.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 180,
+    "height": 135,
+    "description": "## Figure Description\nThis figure displays a visual representation of object detection in an image, specifically focusing on goldfish in a fish tank. It shows multiple goldfish with bounding boxes and confidence scores, indicating the model's detection accuracy.\n\n## Text in Figure\n- \"goldfish 0.76\"\n- \"goldfish 0.76\"\n- \"goldfish 0.58\"\n- \"goldfish 0.76\"\n- \"goldfish 0.58\""
+  },
+  {
+    "file": "p020_f14.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 204,
+    "height": 136,
+    "description": "## Search Index Description\n\nThis figure is a visual representation of object detection and segmentation results from a computer vision model. It shows a scene with several people and objects, each marked with a bounding box and a confidence score indicating the model's certainty in its detection.\n\n## Search Index Text\n\nObjects and confidence scores:\n- Person 0: 0.85\n- Person 1: 0.87\n- Person 2: 0.88\n- Table: 0.81\n- Bowls on table: multiple detections"
+  },
+  {
+    "file": "p020_f15.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 182,
+    "height": 136,
+    "description": "## Description\nThe figure shows a detection result from an object detection model. It displays a jellyfish with two bounding boxes, one labeled \"jellyfish 0.87\" and the other \"tentacle 0.52\". The jellyfish is the main object, and the tentacle is a part of it.\n\n## Text in figure\n- jellyfish 0.87\n- tentacle 0.52"
+  },
+  {
+    "file": "p020_f16.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 176,
+    "height": 133,
+    "description": "## Figure Description\nThis figure is a photograph showing two people on a sailboat. The image includes bounding boxes around the people and the boat, with confidence scores for the object detections.\n\n## Text in Figure\n- \"person 0.78\"\n- \"person 0.85\"\n- \"watercraft 0.56\""
+  },
+  {
+    "file": "p020_f17.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 182,
+    "height": 135,
+    "description": "Figure: Two women playing table tennis, detected by a computer vision model. The model has drawn bounding boxes around each person, with a confidence score of 0.94 for both. The image shows the model's ability to accurately detect and identify people in a scene.\n\nText in figure: person 0.94, person 0.94"
+  },
+  {
+    "file": "p020_f18.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 205,
+    "height": 134,
+    "description": "Figure Description: The image shows a scene with two individuals seated in front of a computer monitor. The monitor displays a video with a person on the screen. The image is annotated with bounding boxes and labels indicating the detected objects and their associated probabilities. The objects detected include a dog, a person, and a computer keyboard. The probabilities for each detection are provided next to the labels.\n\nText in Figure: dog 0.60, person 0.79, v or monitor person 0.82 person 0.59, person 0.88, computer keyboard 0.81."
+  },
+  {
+    "file": "p020_f19.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 195,
+    "height": 136,
+    "description": "Figure: Object detection in an outdoor scene.\nShows a small lizard detected with a bounding box.\nText in figure: \"Lizard 0.58\".\n\nSection 1: Object detection in an outdoor scene.\nThe figure shows an outdoor scene with a small lizard detected using a bounding box. The lizard is located in the center of the image, partially obscured by the ground and vegetation. The bounding box has a confidence score of 0.58, indicating the model's certainty in the detection.\n\nSection 2: Text in figure.\nThe text in the figure reads \"Lizard 0.58\", indicating the detected object and its confidence score. The object is a small lizard, and the confidence score of 0.58 suggests a moderate level of certainty in the detection."
+  },
+  {
+    "file": "p020_f20.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 211,
+    "height": 135,
+    "description": "Figure type: Image with object detection bounding boxes and confidence scores.\n\nDescription: The image shows a group of people in a water body, likely a beach. Several people are detected by an object detection model, with bounding boxes and confidence scores labeled on the image. The confidence scores range from 0.54 to 0.96.\n\nText in figure: person 0.69, person 0.58, person 0.79, person 0.54, person 0.56, person 0.88, person 0.66, person 0.94, person 0.94, person 0.94, person 0.96, person 0.94, person 0.71, swimming trunks 0.56."
+  },
+  {
+    "file": "p020_f21.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 185,
+    "height": 131,
+    "description": "## Section 1: Figure Description\nThis figure is a visual example from a research paper on object detection and semantic segmentation. It shows a baseball player in action, with bounding boxes and labels indicating detected objects and their confidence scores. The objects detected are a baseball and a helmet, with confidence scores of 0.75 and 0.74, respectively.\n\n## Section 2: Text in Figure\n- Object: baseball, confidence score: 0.75\n- Object: helmet, confidence score: 0.74\n- Player: baseball player\n- Action: throwing a baseball"
+  },
+  {
+    "file": "p020_f22.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 204,
+    "height": 135,
+    "description": "## Search Index Section 1: Figure Description\nThis figure is a visual representation of object detection in an image. It shows two dogs with bounding boxes and confidence scores. The left dog has a bounding box with a confidence score of 0.93, and the right dog has a bounding box with a confidence score of 0.98.\n\n## Search Index Section 2: Text in Figure\nText in figure: \"dog 0.93\", \"dog 0.98\""
+  },
+  {
+    "file": "p020_f23.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 173,
+    "height": 134,
+    "description": "Figure type: Image with bounding boxes and confidence scores.\n\nDescription: The image shows a ski slope with several people detected by an object detection algorithm. Four people are marked with red bounding boxes and labeled with their confidence scores.\n\nText in figure: \"person 0.84\", \"person 0.75\", \"person 0.65\", \"person 0.80\", \"ski 0.80\"."
+  },
+  {
+    "file": "p020_f24.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 205,
+    "height": 136,
+    "description": "## Search Index Description\nThis figure displays an image of two tigers with bounding boxes and confidence scores. The image is used to demonstrate object detection capabilities, showing how the model identifies and classifies objects within the image.\n\n## Search Index Text\ntiger 1.00, tiger 0.59, tiger 0.87, tiger 0.83"
+  },
+  {
+    "file": "p020_f25.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 181,
+    "height": 137,
+    "description": "## Figure Description\nThe figure displays an image of a whale with a bounding box around it. The bounding box is marked with the label \"Whale 1.00\" and a confidence score of \"0.56\".\n\n## Text in Figure\n- Label: Whale 1.00\n- Confidence score: 0.56"
+  },
+  {
+    "file": "p020_f26.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 199,
+    "height": 134,
+    "description": "## Search Index Section 1: Figure Description\nThis figure is a visual representation of object detection and semantic segmentation results from a computer vision model. It shows a snowy scene with several objects detected and labeled, including people and a chair. Each detected object is enclosed in a red bounding box with a label and a confidence score indicating the model's certainty in the detection.\n\n## Search Index Section 2: Figure Details\nObjects detected: person (confidence scores: 0.78, 0.82, 0.92, 0.92), chair (confidence score: 0.53). The highest confidence score is 0.92 for two of the person detections, while the lowest is 0.53 for the chair. The labels and confidence scores are printed on the bounding boxes around the detected objects."
+  },
+  {
+    "file": "p020_f27.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 229,
+    "height": 135,
+    "description": "## Search Index Section 1\nThis figure shows a collection of sports equipment, including croquet mallets, balls, and a wicket. The image highlights the equipment's arrangement on a grassy field. The text overlays indicate the prices of the items: \"mushroom 0.571\" and \"all croquet ball 0.91\".\n\n## Search Index Section 2\nText in figure: \"mushroom 0.571\", \"all croquet ball 0.91\". The image shows a set of croquet equipment, including mallets, balls, and a wicket. The prices of the items are labeled on the image."
+  },
+  {
+    "file": "p020_f28.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 181,
+    "height": 135,
+    "description": "Figure type: Image with bounding boxes and confidence scores.\n\nDescription: The image shows a photograph of a sailboat with three bounding boxes drawn around it, each labeled with a \"watercraft\" tag and a confidence score.\n\nText in figure: watercraft 0.87, watercraft 0.91, watercraft 0.58"
+  },
+  {
+    "file": "p020_f29.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 182,
+    "height": 134,
+    "description": "Figure: Two plastic bags with bounding boxes and labels indicating their weight.\n\nDescription: The image shows two plastic bags with bounding boxes and labels indicating their weight. The left bag is labeled \"plastic bag 0.60\" and the right bag is labeled \"plastic bag 0.62\".\n\nText in figure: \"plastic bag 0.60\", \"plastic bag 0.62\""
+  },
+  {
+    "file": "p020_f30.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 181,
+    "height": 136,
+    "description": "## Search Index Description\nThis figure demonstrates object detection using a feature hierarchy model. It shows a cart with people detected by bounding boxes, each labeled with a class (e.g., \"person\") and a confidence score (e.g., 0.79).\n\n## Search Index Text\nText in figure: \"cart 0.88\", \"person 0.53\", \"person 0.79\"."
+  },
+  {
+    "file": "p020_f31.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 183,
+    "height": 136,
+    "description": "## Image Description\nThe figure shows a photograph with bounding boxes and labels indicating object detection. Four people are visible, each with a bounding box and a label \"person\" along with a confidence score. The scores range from 0.52 to 0.82.\n\n## Textual Content\n- person 0.52\n- person 0.82\n- person 0.54\n- person 0.88"
+  },
+  {
+    "file": "p020_f32.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 183,
+    "height": 136,
+    "description": "## Description\nThe figure shows a traffic light with a bounding box around it. The bounding box has a label \"traffic light 0.79\" indicating the confidence score of the object detection model. The traffic light is green, indicating that it is safe to proceed.\n\n## Text in figure\n- traffic light 0.79"
+  },
+  {
+    "file": "p020_f33.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 227,
+    "height": 137,
+    "description": "Figure: Object detection with bounding boxes and confidence scores.\n\nDescription: The figure shows a collection of vegetables with object detection bounding boxes and confidence scores. The vegetables include cucumbers, radishes, and a bird. The bounding boxes are labeled with the detected object and the confidence score.\n\nText in figure: bird 0.59, cucumber 0.53, cucumber 0.52."
+  },
+  {
+    "file": "p020_f34.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 194,
+    "height": 136,
+    "description": "## Search Index Description\nThis figure displays an image with multiple bounding boxes and confidence scores for object detection. The objects detected are antelopes and a fox, with confidence scores ranging from 0.53 to 1.00.\n\n## Search Index Text\nantelope 0.63, antelope 1.00, antelope 0.63, antelope 0.73, fox 0.67, antelope 0.94"
+  },
+  {
+    "file": "p020_f35.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 170,
+    "height": 137,
+    "description": "## Search Index Description\n\nThe figure displays an image with two bounding boxes, one labeled \"person 0.90\" and the other \"snake 0.84\". The image shows a hand holding a small snake, with the snake's body and head clearly visible. The bounding boxes indicate the object detection results for the person and the snake.\n\n## Search Index Text\n\n- \"person 0.90\"\n- \"snake 0.84\""
+  },
+  {
+    "file": "p020_f36.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 178,
+    "height": 136,
+    "description": "## Figure Description\nThe figure displays an image with two dogs, one black and one brown, identified by red bounding boxes. Each dog has a label indicating its detection confidence score: 0.97 for the black dog and 0.98 for the brown dog.\n\n## Text in Figure\n- dog 0.97\n- dog 0.98"
+  },
+  {
+    "file": "p020_f37.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 170,
+    "height": 133,
+    "description": "Figure type: Image with object detection bounding boxes.\n\nDescription: The image shows a scene with a person riding a horse. The image has multiple bounding boxes drawn around the person, horse, and a person in the background. Each bounding box has a label and a confidence score.\n\nText in figure: \"helmet 0.89\", \"person 0.82\", \"person 0.72\", \"horse 0.69\", \"horse 0.68\""
+  },
+  {
+    "file": "p020_f38.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 179,
+    "height": 130,
+    "description": "Figure: Multiple images of oranges with bounding boxes and confidence scores.\n\nDescription: The figure displays multiple images of oranges, each with a bounding box and a confidence score indicating the model's certainty in detecting the orange.\n\nText in figure: \"orange 0.68\", \"orange 0.59\", \"orange 0.79\", \"orange 0.71\""
+  },
+  {
+    "file": "p020_f39.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 204,
+    "height": 135,
+    "description": "Figure type: Object detection example\nDescription: The image shows an object detection example with a bounding box around a person and a guitar. The bounding box for the person has a confidence score of 0.82, and the bounding box for the guitar has a confidence score of 1.00.\n\nText in figure: person 0.82, guitar 1.00"
+  },
+  {
+    "file": "p020_f40.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 184,
+    "height": 136,
+    "description": "## Image Description\nThe figure shows an outdoor scene with a tandem bicycle. Two people are riding the bicycle, one in front and one in the back. The image has bounding boxes around the bicycle and the two people, with labels indicating the object type and confidence scores. The bicycle has a confidence score of 0.95, while the two people have confidence scores of 0.93 and 0.96, respectively.\n\n## Text in Figure\n- bicycle 0.95\n- person 0.93\n- person 0.96"
+  },
+  {
+    "file": "p020_f41.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "Figure 11: More curated examples. See Figure 10 caption for details. Viewing digitally with zoom is recommended.",
+    "width": 216,
+    "height": 139,
+    "description": "## Description\nThis figure displays a scene with multiple objects detected and classified by a computer vision model. The image shows a sidewalk with people and dogs, and a car parked nearby. Each object is enclosed in a colored bounding box with a label and a confidence score indicating the model's certainty in its classification.\n\n## Text in Figure\n- person 0.83\n- person 0.54\n- car 1.00\n- car 0.97\n- dog 0.85\n- dog 0.50\n- log 0.86\n- person 0.80\n- dog 0.98\n- dog 0.86"
+  },
+  {
+    "file": "p020_f42.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 184,
+    "height": 136,
+    "description": "Figure: Object detection with bounding box\nShows: A seal on a rock with a bounding box\n\nText in figure: \"elephant 0.60\""
+  },
+  {
+    "file": "p021_f43.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "",
+    "width": 450,
+    "height": 79,
+    "description": "## Search Index\n\n### Figure Description\nThis figure displays a grid of images with associated confidence scores, likely from an object detection task. Each image shows a scene with varying degrees of clarity and lighting, and the confidence scores range from 0.6 to 1.0.\n\n### Text in Figure\nConfidence scores: 1.0, 0.9, 0.8, 0.7, 0.6\nImages: Scenes with varying lighting and clarity"
+  },
+  {
+    "file": "p021_f44.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "",
+    "width": 451,
+    "height": 78,
+    "description": "## Figure Description\nThis figure displays a grid of images with associated confidence scores, likely from an object detection task. Each image is accompanied by a numerical score ranging from 0.6 to 0.9, indicating the model's confidence in the detection.\n\n## Textual Content\n0.9, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.7, 0.7, 0.7, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6"
+  },
+  {
+    "file": "p021_f45.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "",
+    "width": 452,
+    "height": 80,
+    "description": "## Search Index\n\n### Figure Description\nThis figure displays a series of images with associated confidence scores, ranging from 0.7 to 0.9. Each image shows different scenes, including people, animals, and objects in various settings. The confidence scores are printed above each image, indicating the model's certainty in its predictions.\n\n### Text in Figure\nConfidence scores: 0.9, 0.8, 0.7\nImages: car, people, cat, dog, person, bicycle, person, cat, person, bird, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person, person"
+  },
+  {
+    "file": "p021_f46.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "",
+    "width": 451,
+    "height": 79,
+    "description": "## Search Index\n\n### Figure Description\nThis figure displays a series of images with associated confidence scores, likely from an object detection task. Each image shows a different object, such as a monitor, a helmet, and a television, with a confidence score above it. The scores range from 0.6 to 0.9, indicating the model's confidence in detecting the object correctly.\n\n### Text in Figure\n- Confidence scores: 0.9, 0.8, 0.7, 0.6\n- Objects: monitor, helmet, television, laptop, computer, screen, helmet, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor, monitor"
+  },
+  {
+    "file": "p021_f47.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "",
+    "width": 452,
+    "height": 79,
+    "description": "## Section 1: Figure Description\nThis figure displays a grid of images with associated numerical values, likely representing the confidence scores of object detections. Each image is labeled with a score ranging from 0.6 to 0.7, indicating the model's confidence in detecting objects within the image.\n\n## Section 2: Text in Figure\n0.7, 0.7, 0.7, 0.7, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6,"
+  },
+  {
+    "file": "p021_f48.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "",
+    "width": 452,
+    "height": 80,
+    "description": "## Index\n\n### Figure Description\nThis figure displays a series of images with associated confidence scores, ranging from 0.8 to 0.9. Each image shows different outdoor scenes, including trees, buildings, and landscapes. The confidence scores are displayed above each image, indicating the model's certainty in its predictions.\n\n### Text in Figure\n- Confidence scores: 0.9, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8,"
+  },
+  {
+    "file": "p021_f49.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "",
+    "width": 452,
+    "height": 80,
+    "description": "## Section 1: Figure Description\nThis figure displays a grid of images with varying confidence scores (0.7 and 0.8) for object detection. Each row represents a different image, and the columns show the detected objects with their respective confidence scores.\n\n## Section 2: Text in Figure\n0.8, 0.7, 0.8, 0.7, 0.8, 0.7, 0.8, 0.7, 0.8, 0.7, 0.8, 0.7, 0.8, 0.7, 0.8, 0.7, 0.8, 0.7, 0.8, 0.7"
+  },
+  {
+    "file": "p021_f50.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "",
+    "width": 452,
+    "height": 80,
+    "description": "## Section 1: Figure Description\nThis figure displays a grid of images with associated confidence scores, likely from an object detection task. Each image is accompanied by a numerical score ranging from 0.7 to 0.9, indicating the model's confidence in the detection.\n\n## Section 2: Figure Content\nText in figure: \"0.9, 0.9, 0.8, 0.8, 0.8, 0.8, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7,"
+  },
+  {
+    "file": "p021_f51.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "",
+    "width": 452,
+    "height": 79,
+    "description": "## Figure Description\nThis figure displays a series of images with associated confidence scores, likely from an object detection task. Each image is accompanied by a numerical score ranging from 0.7 to 1.0, indicating the model's confidence in the detection.\n\n## Textual Content\n- Scores: 1.0, 0.9, 0.9, 0.9, 0.9, 0.8, 0.8, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7\n- Images: Various objects and scenes, including a person, a car, a bottle, and a table."
+  },
+  {
+    "file": "p021_f52.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "",
+    "width": 453,
+    "height": 78,
+    "description": "## Index Section 1: Figure Description\nThis figure displays a grid of images with associated numerical values, likely representing detection scores or confidence levels for object detection tasks. Each image is accompanied by a score ranging from 0.6 to 0.9, indicating the model's confidence in detecting an object within that image.\n\n## Index Section 2: Figure Content\nText in figure: \"0.9\", \"0.8\", \"0.7\", \"0.6\"; images of various objects and scenes; scores ranging from 0.6 to 0.9."
+  },
+  {
+    "file": "p021_f53.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "",
+    "width": 452,
+    "height": 79,
+    "description": "## Index Section 1: Figure Description\nThis figure displays a series of images with associated confidence scores, likely from an object detection task. Each image shows a car or vehicle, and each is accompanied by a numerical score ranging from 0.7 to 0.9, indicating the model's confidence in the detection.\n\n## Index Section 2: Figure Content\nText in figure: \"0.9\", \"0.8\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \"0.7\", \""
+  },
+  {
+    "file": "p021_f54.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "",
+    "width": 452,
+    "height": 79,
+    "description": "## Section 1: Figure Description\n\nThis figure displays a grid of images with associated confidence scores, showcasing the performance of an object detection model. Each image is labeled with a confidence score ranging from 0.5 to 0.9, indicating the model's certainty in its detections.\n\n## Section 2: Figure Details\n\nText in figure: \"0.9, 0.8, 0.8, 0.7, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0."
+  },
+  {
+    "file": "p021_f55.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "",
+    "width": 452,
+    "height": 79,
+    "description": "## Section 1: Figure Description\nThis figure is a visual representation of a feature hierarchy used in object detection and semantic segmentation. It shows a series of images with varying levels of abstraction, each labeled with a confidence score. The images range from highly detailed (0.9) to more abstract (0.6), demonstrating the progression from raw input to processed features.\n\n## Section 2: Figure Content\nText in figure: 0.9, 0.8, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6."
+  },
+  {
+    "file": "p021_f56.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "",
+    "width": 453,
+    "height": 79,
+    "description": "## Section 1: Figure Description\nThis figure displays a series of images with associated confidence scores, likely from an object detection task. Each image is accompanied by a numerical score ranging from 0.7 to 0.9, indicating the model's confidence in its detection.\n\n## Section 2: Figure Content\nImages with scores: 0.9, 0.9, 0.9, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7."
+  },
+  {
+    "file": "p021_f57.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "",
+    "width": 452,
+    "height": 80,
+    "description": "## Index Section 1: Figure Description\nThis figure displays a grid of images with associated confidence scores, likely from an object detection task. Each image is labeled with a confidence score ranging from 0.6 to 0.9. The images show various scenes, including people eating, a wheel, and a door.\n\n## Index Section 2: Figure Details\nText in figure: \"0.9, 0.8, 0.8, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6\""
+  },
+  {
+    "file": "p021_f58.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "",
+    "width": 452,
+    "height": 79,
+    "description": "## Section 1: Figure Description\n\nThis figure is a visual representation of feature maps from a neural network, showing the activations at different layers. It displays a series of images with varying sizes and content, each corresponding to a specific layer in the network. The images are arranged in a grid, with each row representing a different layer and each column showing the activations at that layer for a particular input image.\n\n## Section 2: Figure Content\n\nText in figure: \"0.8\", \"0.7\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\", \"0.6\","
+  },
+  {
+    "file": "p021_f59.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "",
+    "width": 929,
+    "height": 81,
+    "description": "## Index\n\n### Description\nThe figure displays a grid of images with associated confidence scores, likely from an object detection task. Each image is accompanied by a numerical score ranging from 0.6 to 1.0, indicating the model's confidence in the detection.\n\n### Text in figure\n0.9, 0.8, 0.8, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6,"
+  }
+]

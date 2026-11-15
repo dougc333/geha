@@ -1,0 +1,98 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 1: Plots showing one term (i.e., a single timestep) of the surrogate function L CLIP as a function of the probability ratio r , for positive advantages (left) and negative advantages (right). The red circle on each plot shows the starting point for the optimization, i.e., r = 1. Note that L CLIP sums many of these terms.",
+    "width": 636,
+    "height": 287,
+    "description": "Description: The figure consists of two plots showing the surrogate function L_CLIP for a single timestep as a function of the probability ratio r. The left plot is for positive advantages (A > 0), and the right plot is for negative advantages (A < 0). Both plots have L_CLIP on the y-axis and r on the x-axis. The red circle marks the starting point at r = 1.\n\nText in figure: r, L_CLIP, 0, 1, 1 + \u03f5, A > 0, 1 1 + \u03f5, r, L_CLIP, 0, 1, 1 \u2212 \u03f5, A < 0",
+    "pdf_text": "r | LCLIP | 0 | 1 1 + \u03f5 | A > 0 | r | LCLIP | 0 | 1 | 1 \u2212\u03f5 | A < 0",
+    "bbox": [
+      136.5,
+      451.2,
+      454.3,
+      594.6
+    ]
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 2: Surrogate objectives, as we interpolate between the initial policy parameter \u03b8 old , and the updated policy parameter, which we compute after one iteration of PPO. The updated policy has a KL divergence of about 0 . 02 from the initial policy, and this is the point at which L CLIP is maximal. This plot corresponds to the first policy update on the Hopper-v1 problem, using hyperparameters provided in Section 6.1.",
+    "width": 717,
+    "height": 256,
+    "description": "Figure: Line graph showing four different surrogate objectives as a function of the linear interpolation factor. The blue line, labeled \"Et[KLt],\" starts at 0 and increases to about 0.12. The orange line, labeled \"LCPI = Et[rtAt],\" starts at 0 and increases to about 0.12. The green line, labeled \"Et[clip(rt, 1 - \u03b5, 1 + \u03b5)At],\" starts at 0 and increases to about 0.04. The red line, labeled \"LCLIP = Et[min(rtAt, clip(rt, 1 - \u03b5, 1 + \u03b5)At)],\" starts at 0 and increases to about 0.02.\n\nFigure: Linear interpolation factor, 0.02, 0.04, 0.06, 0.08, 0.10, 0.12, Et[KLt], LCPI = Et[rtAt], Et[clip(rt, 1 - \u03b5, 1 + \u03b5)At], LCLIP = Et[min(rtAt, clip(rt, 1 - \u03b5, 1 + \u03b5)At)]",
+    "pdf_text": "0 | 1 | Linear interpolation factor | 0.02 | 0.00 | 0.02 | 0.04 | 0.06 | 0.08 | 0.10 | 0.12 | Et[KLt] | LCPI = Et[rtAt] | Et[clip(rt, 1 | , 1 + )At] | LCLIP = Et[min(rtAt, clip(rt, 1 | , 1 + )At)]",
+    "bbox": [
+      118.4,
+      109.4,
+      476.8,
+      237.5
+    ]
+  },
+  {
+    "file": "p007_f03.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 3: Comparison of several algorithms on several MuJoCo environments, training for one million timesteps.",
+    "width": 901,
+    "height": 368,
+    "description": "## Description\nThis figure contains six line plots comparing the performance of various reinforcement learning algorithms on different MuJoCo environments. Each plot represents a different environment, with the x-axis indicating the number of timesteps and the y-axis showing the cumulative reward. The algorithms include A2C, A2C + Trust Region, CEM, PPO (Clip), Vanilla PG, Adaptive, and TRPO. The plots show the performance of these algorithms over one million timesteps.\n\n## Text in figure\nHalfCheetah-v1: A2C, A2C + Trust Region, CEM, PPO (Clip), Vanilla PG, Adaptive, TRPO\nHopper-v1: A2C, A2C + Trust Region, CEM, PPO (Clip), Vanilla PG, Adaptive, TRPO\nInvertedDoublePendulum-v1: A2C, A2C + Trust Region, CEM, PPO (Clip), Vanilla PG, Adaptive, TRPO\nInvertedPendulum-v1: A2C, A2C + Trust Region, CEM, PPO (Clip), Vanilla PG, Adaptive, TRPO\nReacher-v1: A2C, A2C + Trust Region, CEM, PPO (Clip), Vanilla PG, Adaptive, TRPO\nSwimmer-v1: A2C, A2C + Trust Region, CEM, PPO (Clip), Vanilla PG, Adaptive, TRPO\nWalker2d-v1: A2C, A2C + Trust Region, CEM, PPO (Clip), Vanilla PG, Adaptive, TRPO\n0, 1000000, 500, 0, 500, 1000, 1500, 2000, 2500, 120, 100, 80, 60, 40, 20, 100, 80, 60, 40, 20, 1000, 2000, 3000, 200, 400, 600, 800, 1000",
+    "pdf_text": "0 | 1000000 | 500 | 0 | 500 | 1000 | 1500 | 2000 | HalfCheetah-v1 | 0 | 1000000 | 0 | 500 | 1000 | 1500 | 2000 | 2500 | Hopper-v1 | 0 | 1000000 | 0 | 2000 | 4000 | 6000 | 8000 | InvertedDoublePendulum-v1 | 0 | 1000000 | 0 | 200 | 400 | 600 | 800 | 1000 | InvertedPendulum-v1 | 0 | 1000000 | 120 | 100 | 80 | 60 | 40 | 20 | Reacher-v1 | 0 | 1000000 | 0 | 20 | 40 | 60 | 80 | 100 | 120 | Swimmer-v1 | 0 | 1000000 | 0 | 1000 | 2000 | 3000 | Walker2d-v1 | A2C | A2C + Trust Region | CEM | PPO (Clip) | Vanilla PG, Adaptive | TRPO",
+    "bbox": [
+      71.4,
+      180.2,
+      521.9,
+      364.1
+    ]
+  },
+  {
+    "file": "p007_f04.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 4: Learning curves from PPO on 3D humanoid control tasks, using Roboschool.",
+    "width": 629,
+    "height": 191,
+    "description": "Section 1: Figure Description\nThis figure displays three learning curves from Proximal Policy Optimization (PPO) algorithms on three different 3D humanoid control tasks using Roboschool. Each panel represents a different task: RoboschoolHumanoid-v0, RoboschoolHumanoidFlagrun-v0, and RoboschoolHumanoidFlagrunHarder-v0. The x-axis represents the number of timesteps, ranging from 0 to 100 million, while the y-axis shows the performance metric, which is the cumulative reward. The learning curves are plotted with a blue line.\n\nSection 2: Figure Text\nText in figure:\n- Panels: RoboschoolHumanoid-v0, RoboschoolHumanoidFlagrun-v0, RoboschoolHumanoidFlagrunHarder-v0\n- X-axis: Timestep (0 to 100M)\n- Y-axis: Cumulative Reward (0 to 4000, 0 to 3000, 0 to 3000)\n- Legend: None\n- Values: 0, 50M, 100M, 1000, 2000, 3000, 4000",
+    "pdf_text": "0 | 50M | Timestep | 0 | 1000 | 2000 | 3000 | 4000 | RoboschoolHumanoid-v0 | 0 | 100M | Timestep | 0 | 500 | 1000 | 1500 | 2000 | 2500 | RoboschoolHumanoidFlagrun-v0 | 0 | 100M | Timestep | 0 | 1000 | 2000 | 3000 | RoboschoolHumanoidFlagrunHarder-v0",
+    "bbox": [
+      139.6,
+      585.2,
+      454.0,
+      680.4
+    ]
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 5: Still frames of the policy learned from RoboschoolHumanoidFlagrun. In the first six frames, the robot runs towards a target. Then the position is randomly changed, and the robot turns and runs toward the new target.",
+    "width": 912,
+    "height": 198,
+    "description": "Figure Type: Sequence of still frames from a simulation\n\nDescription: The figure displays a sequence of 12 still frames showing a humanoid robot running towards a target on a green field. The robot's position and orientation change in each frame, indicating its movement towards the target. After the first six frames, the target's position is randomly changed, and the robot adjusts its path to run towards the new target.\n\nText in Figure:\n\n- Frame 1: Robot running towards the target.\n- Frame 2: Robot running towards the target.\n- Frame 3: Robot running towards the target.\n- Frame 4: Robot running towards the target.\n- Frame 5: Robot running towards the target.\n- Frame 6: Robot running towards the target.\n- Frame 7: Target position changed, robot turns.\n- Frame 8: Robot running towards the new target.\n- Frame 9: Robot running towards the new target.\n- Frame 10: Robot running towards the new target.\n- Frame 11: Robot running towards the new target.\n- Frame 12: Robot running towards the new target.",
+    "pdf_text": "",
+    "bbox": [
+      69.5,
+      105.0,
+      525.4,
+      203.9
+    ]
+  },
+  {
+    "file": "p011_f06.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 6: Comparison of PPO and A2C on all 49 ATARI games included in OpenAI Gym at the time of publication.",
+    "width": 689,
+    "height": 944,
+    "description": "Description: The figure is a collection of 49 line plots, each representing the performance of three algorithms (A2C, ACER, PPO) on different ATARI games. Each plot shows the average score over time (in frames) for a specific game. The highest performing algorithm varies by game, but PPO generally shows the highest scores across most games. The lowest performing algorithm is typically A2C.\n\nText in figure: Alien, Amidar, Assault, Asterix, Asteroids, Atlantis, BankHeist, BattleZone, BeamRider, Bowling, Boxing, Breakout, Centipede, ChopperCommand, CrazyClimber, DemonAttack, DoubleDunk, Enduro, FishingDerby, Freeway, Frostbite, Gopher, Gravitar, IceHockey, Jamesbond, Kangaroo, Krull, KungFuMaster, MontezumaRevenge, MsPacman, NameThisGame, Pitfall, Pong, PrivateEye, Qbert, Riverraid, RoadRunner, Robotank, Seaquest, SpaceInvaders, StarGunner, Tennis, TimePilot, Tutankham, UpNDown, Venture, VideoPinball, WizardOfWor, Zaxxon, A2C, ACER, PPO.",
+    "pdf_text": "1000 | 2000 | Alien | 0 | 250 | 500 | 750 | Amidar | 0 | 2000 | 4000 | Assault | 0 | 2500 | 5000 | 7500 | Asterix | 1500 | 2000 | 2500 | Asteroids | 0 | 1000000 | 2000000 | 3000000 | Atlantis | 0 | 500 | 1000 | BankHeist | 5000 | 10000 | 15000 | 20000 | BattleZone | 1000 | 2000 | 3000 | 4000 | BeamRider | 30 | 40 | 50 | Bowling | 0 | 50 | 100 | Boxing | 0 | 200 | 400 | Breakout | 5000 | 10000 | Centipede | 2000 | 4000 | 6000 | ChopperCommand | 50000 | 100000 | CrazyClimber | 0 | 20000 | 40000 | DemonAttack | 17.5 | 15.0 | 12.5 | 10.0 | DoubleDunk | 0 | 250 | 500 | 750 | Enduro | 100 | 50 | 0 | FishingDerby | 0 | 10 | 20 | 30 | Freeway | 100 | 200 | 300 | Frostbite | 0 | 20000 | 40000 | Gopher | 250 | 500 | 750 | Gravitar | 10 | 8 | 6 | 4 | IceHockey | 0 | 200 | 400 | 600 | Jamesbond | 0 | 5000 | 10000 | Kangaroo | 2000 | 4000 | 6000 | 8000 | Krull | 0 | 20000 | 40000 | KungFuMaster | 0 | 50 | 100 | MontezumaRevenge | 1000 | 2000 | 3000 | MsPacman | 2500 | 5000 | 7500 | 10000 | NameThisGame | 100 | 0 | Pitfall | 20 | 0 | 20 | Pong | 0 | 500 | PrivateEye | 0 | 5000 | 10000 | 15000 | Qbert | 2500 | 5000 | 7500 | 10000 | Riverraid | 0 | 20000 | 40000 | RoadRunner | 2 | 4 | 6 | Robotank | 0 | 500 | 1000 | 1500 | Seaquest | 500 | 1000 | SpaceInvaders | 0 | 20000 | 40000 | StarGunner | 20 | 15 | 10 | Tennis | 3000 | 4000 | TimePilot | 0 | 100 | 200 | 300 | Tutankham | 0 | 100000 | 200000 | UpNDown | 0 | 40M | Frames | 0 | 5 | 10 | Venture | 0 | 40M | Frames | 50000 | 100000 | 150000 | VideoPinball | 0 | 40M | Frames | 2000 | 4000 | WizardOfWor | 0 | 40M | Frames | 0 | 2000 | 4000 | 6000 | Zaxxon | A2C | ACER | PPO",
+    "bbox": [
+      117.5,
+      160.4,
+      461.9,
+      632.3
+    ]
+  }
+]

@@ -1,0 +1,98 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1: Different schemes for addressing multiple scales and sizes. (a) Pyramids of images and feature maps are built, and the classifier is run at all scales. (b) Pyramids of filters with multiple scales/sizes are run on the feature map. (c) We use pyramids of reference boxes in the regression functions.",
+    "width": 978,
+    "height": 193,
+    "description": "## Section 1: Figure Description\nThis figure illustrates three different schemes for addressing multiple scales and sizes in object detection. Panel (a) shows the use of pyramids of images and feature maps, with the classifier applied at all scales. Panel (b) demonstrates the use of pyramids of filters with multiple scales/sizes on the feature map. Panel (c) depicts the use of pyramids of reference boxes in the regression functions.\n\n## Section 2: Text in Figure\n- Panel (a): multiple scaled images, image, feature map\n- Panel (b): multiple filter sizes, image, feature map\n- Panel (c): multiple references, image, feature map",
+    "pdf_text": "multiple scaled images | multiple filter sizes | multiple references | (a) | (b) | (c) | image | feature map | image | feature map | image | feature map",
+    "bbox": [
+      36.5,
+      54.1,
+      525.4,
+      150.6
+    ]
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2: Faster R-CNN is a single, unified network for object detection. The RPN module serves as the 'attention' of this unified network.",
+    "width": 453,
+    "height": 458,
+    "description": "This figure is a diagram illustrating the architecture of the Faster R-CNN model for object detection. It shows the flow of data through the network, starting with an input image. The image passes through convolutional layers to generate feature maps. These feature maps are then fed into a Region Proposal Network (RPN) that generates region proposals. These proposals are then classified and refined through RoI pooling and a classifier. The final output is the detection of objects within the image.\n\nText in figure: image, conv layers, feature maps, Region Proposal Network, proposals, classifier, RoI pooling.",
+    "pdf_text": "image | conv layers | feature maps | Region Proposal Network | proposals | classifier | RoI pooling",
+    "bbox": [
+      42.8,
+      52.3,
+      269.6,
+      281.7
+    ]
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3: Left : Region Proposal Network (RPN). Right : Example detections using RPN proposals on PASCAL VOC 2007 test. Our method detects objects in a wide range of scales and aspect ratios.",
+    "width": 956,
+    "height": 301,
+    "description": "## Description\nThis figure illustrates the Region Proposal Network (RPN) used in the Faster R-CNN model for object detection. It shows how the RPN generates region proposals from a convolutional feature map using a sliding window approach. The left side of the figure depicts the process, while the right side shows example detections on the PASCAL VOC 2007 test set.\n\n## Text in figure\n- Left side: \"2k scores\", \"4k coordinates\", \"cls layer\", \"reg layer\", \"256-d\", \"intermediate layer\", \"sliding window\", \"conv feature map\", \"k anchor boxes\"\n- Right side: \"car : 1.000\", \"dog : 0.997\", \"person : 0.992\", \"person : 0.979\", \"horse : 0.993\", \"bus : 0.996\", \"person : 0.736\", \"boat : 0.970\", \"person : 0.989\", \"person : 0.983\", \"person : 0.983\", \"person : 0.925\", \"cat : 0.982\", \"dog : 0.994\"",
+    "pdf_text": "car : 1.000 | dog : 0.997 | person : 0.992 | person : 0.979 | horse : 0.993 | conv feature map | intermediate layer | 256-d | 2k scores | 4k coordinates | sliding window | reg layer | cls layer | k anchor boxes | bus : 0.996 | person : 0.736 | boat : 0.970 | person : 0.989 | person : 0.983 person : 0.983 | person : 0.925 | cat : 0.982 | dog : 0.994",
+    "bbox": [
+      41.8,
+      53.2,
+      519.9,
+      203.7
+    ]
+  },
+  {
+    "file": "p010_f04.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 4: Recall vs . IoU overlap ratio on the PASCAL VOC 2007 test set.",
+    "width": 688,
+    "height": 194,
+    "description": "This figure is a set of three line graphs comparing the recall of different object detection methods against the Intersection over Union (IoU) overlap ratio on the PASCAL VOC 2007 test set. Each graph represents a different number of proposals: 300, 1000, and 2000. The series are labeled as SS, EB, RPN ZF, and RPN VGG. In each graph, the SS series is consistently the highest, followed by EB, RPN ZF, and RPN VGG, which is the lowest. The differences in recall between the series vary across the IoU ratios.\n\nText in figure: 300 proposals, 1000 proposals, 2000 proposals, Recall, IoU, SS, EB, RPN ZF, RPN VGG.",
+    "pdf_text": "\u0002\u0003\u0004 | \u0002\u0003\u0005 | \u0002\u0003\u0006 | \u0002\u0003\u0007 | \u0002\u0003\b | \u0002 | \u0002\u0003 | \u0002\u0003 | \u0002\u0003\u0005 | \u0002\u0003\u0007 | \u0002\u0003\u0004 | \u0002\u0003\u0004\u0005\u0006\u0006 | \u0002\u0003\u0003\u0004\u0005\u0006\u0007\u0005\u0007\b | \b | \u0002\u0002 | \u0003\u0004 | \u0005\u0006\u0007\b | \u0005\u0006\u0007\b | \u0002\u0003\u0004 | \u0002\u0003\u0005 | \u0002\u0003\u0006 | \u0002\u0003\u0007 | \u0002\u0003\b | \u0002 | \u0002\u0003 | \u0002\u0003 | \u0002\u0003\u0005 | \u0002\u0003\u0007 | \u0002\u0003\u0004 | \u0003\u0003\u0003\u0004\u0005\u0006\u0007\u0005\u0007\b | \b | \u0002\u0002 | \u0003\u0004 | \u0005\u0006\u0007\b | \u0005\u0006\u0007\b | \u0002\u0003\u0004 | \u0002\u0003\u0005 | \u0002\u0003\u0006 | \u0002\u0003\u0007 | \u0002\u0003\b | \u0002 | \u0002\u0003 | \u0002\u0003 | \u0002\u0003\u0005 | \u0002\u0003\u0007 | \u0002\u0003\u0004 | \u0003\u0003\u0003\u0004\u0005\u0006\u0007\u0005\u0007\b | \b | \u0002\u0002 | \u0003\u0004 | \u0005\u0006\u0007\b | \u0005\u0006\u0007\b",
+    "bbox": [
+      108.9,
+      52.7,
+      453.2,
+      149.3
+    ]
+  },
+  {
+    "file": "p012_f05.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 5: Selected examples of object detection results on the PASCAL VOC 2007 test set using the Faster R-CNN system. The model is VGG-16 and the training data is 07+12 trainval (73.2% mAP on the 2007 test set). Our method detects objects of a wide range of scales and aspect ratios. Each output box is associated with a category label and a softmax score in [0 , 1] . A score threshold of 0.6 is used to display these images. The running time for obtaining these results is 198ms per image, including all steps .",
+    "width": 652,
+    "height": 1035,
+    "description": "## Figure Type:\nThis is an image figure showing object detection results.\n\n## Content:\nThe figure displays multiple images with detected objects highlighted by bounding boxes. Each bounding box is labeled with the detected object's category (e.g., \"person\", \"dog\", \"car\") and a confidence score. The images show various scenes with objects like people, animals, vehicles, and household items. The model used is VGG-16, and the training data includes PASCAL VOC 2007 trainval. The detection results demonstrate the model's ability to identify objects of different scales and aspect ratios. The running time for detection is 198ms per image.",
+    "pdf_text": "bottle : 0.726 | person : 0.992 | dog : 0.981 | bicycle : 0.987 | bicycle : 0.977 | 7 | bicycle : 0.972 | person : 0.995 | person : 0.994 | e : 0.987 | e : 0 987 | bicyc | bicyc | bicyc | b | 4person : 0.981 | person : 0.975 | person : 0.972 | person : 0.948 | person : 0.919 | horse : 0.984 | person : 0.670 | bird : 0.997 | bird : 0.727 | car : 1.000 | car : 0.982 | car | car | car : 0.981 | car : 0.880 | bottle : 0.826 | chair : 0.630 | diningtable : 0.862 | pottedplant : 0.728 | boat : 0.995 | boat : 0.948 | boat : 0.808 | : 0 808 | :boat : 0.692 | boat : 0.992 | boat : 0.846 | boat : 0.693 | bottle : 0.962 | 0 962 | bottle : 0.851 | diningtable : 0.791 | person : 0.962 | person : 0.930 | pottedplant : 0.951 | dog : 0.987 | person : 0.940 | 940 | 940 | person : 0.893 | cat : 0.998 | car : 1.000 | person : 0.917 | boat : 0.895 | boat : 0.877 | boat : 0.749 | boat : 0.671 | person : 0.988 | car : 0.955 | 55 | 55 | car : 0.745 | .745 | horse : 0.991 | person : 0.988 | person : 0.797 | bird : 0.978 | bird : 0.972 | bird : 0.941 | bird : 0.902 | person : 0.918 | cow : 0.998 | cow : 0.995 | aeroplane : 0.992 | aeroplane : 0.986 | sheep : 0.970 | bird : 0.998 | bird : 0.980 | bird : 0.806 | pottedplant : 0.993 | pottedplant : 0.940 | pottedplant : 0.869 | pottedplant : 0.820 | pottedplant : 0.715 | aeroplane : 0.998 | car : 0.907 | 907 | 907 | person : 0.993 | person : 0.987 | chair : 0.984 | chair : 0.978 | chair : 0.976 | chair : 0.962 | 984 | 984 | diningtable : 0.997 | bottle : 0.789 | chair : 0.723 | diningtable : 0.903 | e : 0.789 | person : 0.968 | tvmonitor : 0.993 | tvmonitor : 0.945 | aeroplane : 0.978 | person : 0.988 | bottle : 0.903 | bottle : 0.884 | bottle : 0.858 | b | bottle : 0 | bot | bottle : 0.616 | chair : 0.982 | chair : 0.852 | person : 0.983 | person : 0.959 | : 0 903 | person : 0.897 | person : 0.870 | tvmonitor : 0.993 | dog : 0.697 | person : 0.961 | person : 0.960 | person | person | person : 0.958 | person : 0.757 | bus : 0.999 | person : 0.996 | per | per | per | person : 0.995 | person : 0.994 | person : 0.985 | cow : 0.985 | cow : 0.979 | cow : 0.979 | cow : 0.974 | cow : 0.892 | person : 0.998 | car : 0.999 | person : 0.929 | person : 0.994 | person : 0.991 | person : 0.988 | pers | p | person : 0.976 | person : 0.964 | car : 0.997 | car : 0.980 | person : 0.993 | person | person | person | person | person : 0.986 0 993 | : | n86 | n : | n : | nperson : 0.959",
+    "bbox": [
+      115.4,
+      54.8,
+      441.3,
+      572.6
+    ]
+  },
+  {
+    "file": "p013_f06.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 6: Selected examples of object detection results on the MS COCO test-dev set using the Faster R-CNN system. The model is VGG-16 and the training data is COCO trainval (42.7% mAP@0.5 on the test-dev set). Each output box is associated with a category label and a softmax score in [0 , 1] . A score threshold of 0.6 is used to display these images. For each image, one color represents one object category in that image.",
+    "width": 699,
+    "height": 1002,
+    "description": "## Figure Description\nThis figure is a collection of images showcasing object detection results using the Faster R-CNN system. Each image displays various objects detected with bounding boxes and associated category labels and confidence scores. The model used is VGG-16, trained on the COCO dataset, achieving a mean Average Precision (mAP) of 42.7% on the test-dev set.\n\n## Text in Figure\n- Object categories and confidence scores (e.g., cup: 0.807, bowl: 0.847, person: 0.999)\n- Model: VGG-16\n- Training data: COCO trainval\n- mAP on test-dev set: 42.7%\n- Score threshold for displaying boxes: 0.6\n- Example object detections: person, cup, bowl, chair, dining table, pizza, teddy bear, bus, train, traffic light, dog, giraffe, airplane, bicycle, motorcycle, clock, sandwich, bird, horse, oven, refrigerator, clock, bed, skis, broccoli, surfboard, umbrella, handbag, backpack",
+    "pdf_text": "cup : 0.807 | bowl : 0.847 | bowl : 0.816 | bowl : 0.744 | bowl : 0.710 | chair : 0.772 | dining table : 0.618 | oven : 0.969 | refrigerator : 0.631 | cup : 0.990 | pizza : 0.919 | dining table : 0.888 | person : 0.984 | person | person | car : 0.816 | pizza : 0.965 | clock : 0.988 | person : 0.998 | kite : 0.934 | toothbrush : 0.668 | teddy bear : 0.999 | teddy bear : 0.890 | teddy bear : 0.802 | teddy bear : 0.738 | bowl : 0.602 | potted plant : 0.769 | toilet : 0.921 | sink : 0.969 | sink : 0.994 | sink : 0.992 | sink : 0.976sink : 0.938 | person : 0.970 | : 0.970 | erson | person : 0.869 | bus : 0.999 | bottle : 0.768 | cup : 0.720 | chair : 0.644 | tv : 0.964 | tv : 0.959 | laptop : 0.986 | mouse : 0.871 | mouse : 0.677 | m | keyboard : 0.956 | book : 0.611 | person : 0.986 | boat : 0.758 | boat : 0.746 | boat : 0.613 | bench : 0.971 | train : 0.965 | traffic light : 0.869 | traffic light : 0.713 | chair : 0.631 | couch : 0.991 | couch : 0.719 | couch : 0.627 | dining table : 0.637 | dog : 0.966 | frisbee : 0.998 | bird : 0.987 | bird : 0.968 | bird : 0.894 | person : 0.723 | cup : 0.986 | cup : 0.931 | bowl : 0.958 | sandwich : 0.629 | dining table : 0.941 | zebra : 0.996 | zebra : 0.993 | zebra : 0.970 | 970 | zebra : 0.848 | person : 0.917 | person : 0.792 | : 0.792 | 0 792 | tv : 0.711 | laptop : 0.973 | mouse : 0.981 | keyboard : 0.638 | keyboard : 0.615 | person : 0.999 | person : 0.999 | person : 0.999 | perso | perso | tennis racket : 0.960 | bird : 0.956 | bird : 0.906 | bird : 0.746 | horse : 0.990 | person : 0.993 | bottle : 0.982 | oven : 0.655 | refrigerator : 0.699 | clock : 0.982 | bed : 0.999 | person : 0.808 | bottle : 0.627 | pizza : 0.995 | pizza : 0.985 | pizza : 0.982 | pizza : 0.938 | dining table : 0.956 | person : 0.998 | skis : 0.919 | bowl : 0.759 | broccoli : 0.953 | person : 0.999 | person : 0.934 | surfboard : 0.979 | person : 0.940 | person : 0.927 | person : 0.864 | 0.940 | person : 0.854 | person : 0.825person : 0.813 | person : 0.716 | person : 0.692 | p | person : 0.691 | 927 | 927 | person : 0.665 | person : 0.618 | boat : 0.992 | umbrella : 0.885 | giraffe : 0.993 | giraffe : 0.989 | giraffe : 0.988 | person : 0.867 | airplane : 0.997 | person : 0.970 | person : 0.950 | person : 0.931 | p | person : 0.916 | person : 0.897 | person : 0.842 | person : 0.841 | person : 0.84 | person : 0.772 | bicycle : 0.891 | bicycle : 0.639 | car : 0.957 | motorcycle : 0.827 | motorcycle : 0.713 | traffic light : 0.802 | umbrella : 0.824 | person : 0.800 | clock : 0.986 | clock : 0.981 | person : 0.996 | person : 0.976 | person : 0.975 | rson : 0.975 | rson | son : 0 | on | person : 0.958 | person : 0.950 | person : 0.941 | 0.976 | 0 976 | person : 0.939 | pe | pe | person : 0.928 | 958 | 958 | 0 975 | n : 0. | n : 0. | 0.975 | 0.975 | 0. | person : 0.823 | on : 0.950 | 0 50 | person : 0.805 | person : 0.766 | person : 0.759 | .941 | 4 | person : 0.673 | dog : 0.996 | dog : 0.691 | 0 939 | p | backpack : 0.756 | handbag : 0",
+    "bbox": [
+      105.8,
+      53.5,
+      455.4,
+      554.6
+    ]
+  }
+]

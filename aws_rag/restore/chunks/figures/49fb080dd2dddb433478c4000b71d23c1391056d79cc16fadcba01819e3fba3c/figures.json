@@ -1,0 +1,128 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2: Corresponding computation graph for Figure 1",
+    "width": 194,
+    "height": 353,
+    "description": "Description: This diagram depicts a computation graph for a neural network operation. It shows the flow of data through various layers and operations, including matrix multiplication (MatMul), addition (Add), and the Rectified Linear Unit (ReLU) activation function. The input tensors are 'b', 'W', and 'x', and the output is 'C'. The graph illustrates how these inputs are processed through multiple layers to produce the final output.\n\nText in figure: C, ReLU, Add, MatMul, b, W, x"
+  },
+  {
+    "file": "p005_f02.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "",
+    "width": 287,
+    "height": 256,
+    "description": "## Figure Description\nThis figure is a diagram showing the architecture of a single process in TensorFlow. It depicts a \"client\" initiating a \"session\" with a \"master\" that runs and executes a sub-graph. The \"worker\" section includes various computational units such as GPUs (GPU0, GPU1,...) and CPUs (CPU0).\n\n## Search Index\n- **Figure Type**: Diagram\n- **Content**: Shows TensorFlow process architecture with a client, master, and worker components.\n- **Components**: Client, session, master, execute sub-graph, worker, GPUs (GPU0, GPU1,...), CPU (CPU0)."
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 3: Single machine and distributed system structure",
+    "width": 473,
+    "height": 277,
+    "description": "Description: This figure is a diagram showing the structure of a TensorFlow system on a\nsingle machine and a distributed system. It depicts a client process initiating a session\nrun, which is handled by a master process. The master process then executes a subgraph\ndistributed across three worker processes, each equipped with GPUs and CPUs.\n\nText in figure: client process, master process, session run, execute subgraph, worker\nprocess 1, GPU0, GPU1, CPU0, worker process 2, GPU0, GPU1, CPU0, worker process 3, GPU0,\nGPU1, CPU0."
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 4: Before & after insertion of Send/Receive nodes",
+    "width": 451,
+    "height": 202,
+    "description": "This figure is a diagram showing the transformation of a computational graph before and after the insertion of Send/Receive nodes. Initially, Device A and Device B are connected directly, with Device B receiving inputs from Device A. After the transformation, Send/Receive nodes are inserted, allowing Device A to send data to Device B, which then receives the data.\n\nText in figure: Device A, Device B, a, b, c, x, y, W, send, recv"
+  },
+  {
+    "file": "p006_f05.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 5: Gradients computed for graph in Figure 2",
+    "width": 371,
+    "height": 275,
+    "description": "## Search Index Section 1: Figure Description\nThis figure is a diagram showing the computation of gradients in a computational graph. It illustrates the forward and backward pass of a neural network, specifically focusing on the gradient calculations for various operations. The diagram shows how gradients are computed for each operation, such as ReLU, Add, MatMul, and their corresponding derivative operations (dReLU, dAdd, dMatMul).\n\n## Search Index Section 2: Text in Figure\n- Operations: ReLU, Add, MatMul, dReLU, dAdd, dMatMul\n- Gradients: dC/db, dC/dW, dC/dx\n- Inputs: C, 1, b, W, x\n- Arrows: Indicate the flow of gradients from output to input\n- Labels: Operations and their derivative counterparts are clearly labeled"
+  },
+  {
+    "file": "p007_f06.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 6: Before and after graph transformation for partial execution",
+    "width": 394,
+    "height": 274,
+    "description": "## Description\nThis figure is a diagram showing a graph transformation for partial execution in TensorFlow. It depicts two states of a graph: before and after a transformation. The graph consists of nodes labeled a, b, c, d, e, and f, connected by arrows indicating dependencies. The transformation involves reorganizing the graph to optimize for partial execution.\n\n## Text in figure\nNodes: a, b, c, d, e, f\nArrows: connections between nodes\nLabels: fetch, feed\nTransformation: before and after graph transformation for partial execution"
+  },
+  {
+    "file": "p011_f07.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 7: Synchronous and asynchronous data parallel training",
+    "width": 665,
+    "height": 552,
+    "description": "Description: The figure illustrates two types of data parallelism in distributed machine learning: synchronous and asynchronous. In the synchronous model, a single client updates the model parameters, which are then distributed to all devices simultaneously. In the asynchronous model, multiple clients update the model parameters independently and at different times, which are then aggregated.\n\nText in figure: Parameter Device(s), Add, Update, P, Device A, model, input, Device B, model, input, Device C, model, input, Synchronous Data Parallelism, Parameter Device(s), Client 3, Update, \u0394P, Client 2, Update, \u0394P, Client 1, Update, \u0394P, Device A, model, input, Device B, model, input, Device C, model, input, Asynchronous Data Parallelism, P"
+  },
+  {
+    "file": "p012_f08.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 8: Model parallel training",
+    "width": 335,
+    "height": 290,
+    "description": "Section 1: Figure description\nThis figure illustrates model parallel training in TensorFlow, showing a distributed system with multiple devices. The Client is at the top, connected to three devices (Device 1, Device 2, Device 3). Each device has multiple instances (A, B, C) that are connected to the Client. The connections are bidirectional, indicating data flow between the Client and the devices.\n\nSection 2: Text in figure\nText in figure: Client, Device 3, P3, C, C, C, C, C, Device 2, P2, B, B, B, B, B, Device 1, P1, A, A, A, A, A."
+  },
+  {
+    "file": "p012_f09.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 9: Concurrent steps",
+    "width": 368,
+    "height": 224,
+    "description": "## Figure Description\nThis figure illustrates a distributed system architecture for concurrent model updates. It shows a central \"Client\" node connected to multiple \"model\" nodes. Each model node receives \"input\" and \"update\" signals from the client. The \"P\" node is connected to all model nodes, indicating a parallel processing setup.\n\n## Textual Content\n- Client\n- Update\n- P\n- model\n- input"
+  },
+  {
+    "file": "p013_f10.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 10: TensorBoard graph visualization of a convolutional neural network model",
+    "width": 729,
+    "height": 504,
+    "description": "## Description\nThis figure is a TensorBoard graph visualization of a convolutional neural network model. It shows the architecture of the model, including various layers such as convolutional layers (conv1, conv2), softmax layers (softmax, softmax_linear), and pooling layers (local3, local4). The graph illustrates the flow of data through the network, highlighting the connections between layers and the operations performed at each step.\n\n## Text in figure\nTensorBoard graph visualization, convolutional neural network model, softmax, softmax_linear, local3, local4, conv1, conv2, total_loss, global_step, moving_avg, group_desc, init, init_1, count, const, sgd, gradient, LabelClasses."
+  },
+  {
+    "file": "p013_f11.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 11: TensorBoard graphical display of model summary statistics time series data",
+    "width": 893,
+    "height": 201,
+    "description": "Description: The figure shows three time series plots from TensorBoard, displaying model summary statistics over time. The first plot, labeled \"nn1/biases,\" shows a series of values ranging from -0.6 to 0.6. The second plot, \"nn1/biases:gradient,\" displays a noisy signal with values fluctuating between -2.000e-4 and 2.000e-4. The third plot, \"nn1/weights,\" shows a series of values ranging from -0.3 to 0.3.\n\nText in figure: nn1/biases, nn1/biases:gradient, nn1/weights, 0.600, 0.400, 0.200, 0.000, -0.200, -0.400, -0.600, 2.000e-4, 0.00, -2.000e-4, -4.000e-4, 0.300, 0.200, 0.100, 0.00, -0.100, -0.200, -0.300"
+  },
+  {
+    "file": "p015_f12.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 12: EEG visualization of multi-threaded CPU operations (x-axis is time in \u00b5 s).",
+    "width": 940,
+    "height": 500,
+    "description": "## Description\nThis figure is a visualization of multi-threaded CPU operations using EEG (Electroencephalogram) data. It shows various CPU tasks over time, with each task represented by a different color. The x-axis represents time in microseconds (\u00b5s), and the y-axis lists different CPU tasks. The figure highlights the performance of these tasks, with some tasks showing higher activity than others.\n\n## Text in figure\nreplica, ktrace/cpu00, ktrace/cpu01, ktrace/cpu02, ktrace/cpu03, ktrace/cpu04, ktrace/cpu05, ktrace/cpu06, ktrace/cpu07, ktrace/cpu08, ktrace/cpu09, ktrace/cpu10, ktrace/cpu11, ktrace/cpu12, ktrace/cpu13, ktrace/cpu14, ktrace/cpu15, ktrace/cpu16, ktrace/cpu17, ktrace/cpu18, ktrace/cpu19, ktrace/cpu20, ktrace/cpu21, ktrace/cpu22, ktrace/cpu23, ktrace/cpu24, ktrace/cpu25, ktrace/cpu26, ktrace/cpu27, ktrace/cpu28, ktrace/cpu29, ktrace/cpu30, ktrace/cpu31, ktrace/cpu32, ktrace/cpu33, ktrace/cpu34, ktrace/cpu35, ktrace/cpu36, ktrace/cpu37, ktrace/cpu38, ktrace/cpu39, ktrace/cpu40, ktrace/cpu41, ktrace/cpu42, ktrace/cpu43, ktrace/cpu44, ktrace/cpu45, ktrace/cpu46, ktrace/cpu47, 1800000, 1801000, 1802000, 1803000, 1804000, 1805000, 1806000, 1807000, 1808000, 1809000, 1810000, 1811000, 1812000, 1813000, 1814000, 1815000, 1816000, 1817000, 1818000, 181"
+  },
+  {
+    "file": "p015_f13.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 13: EEG visualization of Inception training showing CPU and GPU activity.",
+    "width": 895,
+    "height": 346,
+    "description": "## Description\nThis figure is a visualization of CPU and GPU activity during the training of an Inception model, as depicted in a heat map. The x-axis represents time, and the y-axis lists various ktrace functions. The highest activity is seen in the \"gradients/AddN_159\" function, with a peak around 3,740,000. The lowest activity is in \"ktrace/cpu38\" and \"ktrace/cpu39\", showing minimal to no activity throughout.\n\n## Text in figure\nJob/worker/replica, ktrace/cpu0, ktrace/cpu1, ktrace/cpu2, ktrace/cpu3, ktrace/cpu4, ktrace/cpu5, ktrace/cpu6, ktrace/cpu7, ktrace/cpu8, ktrace/cpu9, ktrace/cpu10, ktrace/cpu11, ktrace/cpu12, ktrace/cpu13, ktrace/cpu14, ktrace/cpu15, ktrace/cpu16, ktrace/cpu17, ktrace/cpu18, ktrace/cpu19, ktrace/cpu20, ktrace/cpu21, ktrace/cpu22, ktrace/cpu23, ktrace/cpu36, ktrace/cpu37, ktrace/cpu38, ktrace/cpu39, gpu0/memcpy, gpu0/stream, [221us] gradients/AddN_159, AddN, 3,730,000, 3,740,000, 3,745,000, 3,750,000, 3,755,000, 3,760,000, 3,765,000, 3,770,000, 0%, 1%, 2%, 4%, 8%, 10%, 12%, 14%, 16%, 17%, 19%, 20%, 24%, 25%, 26%, 27%, 28%, 29%, 30%, 31%, 32%, 33%, 34%, 35%, 36%, 37%, 38%, 39%, 40%, 41%, 42%, 43%, 44%, 45%, 46%, 47%, 48%, 49%, 50%, 51%, 52%, 53%, 54%, 55%, 56"
+  },
+  {
+    "file": "p016_f14.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 14: Timeline of multi-stream GPU execution.",
+    "width": 901,
+    "height": 381,
+    "description": "## Description\nThis figure is a timeline showing the execution of multiple GPU streams. It displays the execution of various streams, each represented by a different color. The highest stream is green, and the lowest is blue. The green stream peaks at around 7,710,000, while the blue stream is at around 7,690,000. The figure also includes annotations and markers, such as a yellow annotation indicating the gradient and block sizes.\n\n## Text in figure\ngpu_0_stream_0, gpu_0_stream_1, gpu_0_stream_2, gpu_0_stream_3, gpu_0_stream_4, gpu_0_stream_5, gpu_0_stream_6, gpu_0_stream_7, gpu_0_stream_8, gpu_0_stream_9, gpu_0_stream_10, gpu_0_stream_11, gpu_0_stream_12, gpu_0_stream_13, gpu_0_stream_14, gpu_0_stream_15, gpu_0_stream_16, gpu_0_stream_17, gpu_0_stream_18, gpu_0_stream_19, gpu_0_stream_20, gpu_0_stream_21, gpu_0_stream_22, gpu_0_stream_23, gpu_0_stream_24, gpu_0_stream_25, gpu_0_stream_26, gpu_0_stream_27, gpu_0_stream_28, gpu_0_stream_29, gpu_0_stream_30, gpu_0_stream_31, gpu_0_stream_32, gpu_0_stream_33, gpu_0_stream_34, gpu_0_stream_35, gpu_0_stream_36, gpu_0_stream_37, gpu_0_stream_38, gpu_0_stream_39, gpu_0_stream_40, gpu_0_stream_41, gpu_0_stream_42, gpu_0_stream_43, gpu_0_stream_44, gpu_0_stream_45, gpu_0_stream_46, gpu_0_stream_47, gpu_0_stream_48, gpu_0_stream_49, gpu_0_stream_5"
+  }
+]

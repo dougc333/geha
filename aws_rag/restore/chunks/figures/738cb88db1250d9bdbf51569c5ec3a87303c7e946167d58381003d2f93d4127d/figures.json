@@ -1,0 +1,137 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1. ReLU vs. PReLU. For PReLU, the coefficient of the negative part is not constant and is adaptively learned.",
+    "width": 403,
+    "height": 158,
+    "description": "Figure type: Line graph\nDescription: The figure displays two line graphs comparing ReLU and PReLU functions. In the left graph, the ReLU function is depicted with f(y) = 0 for y < 0 and f(y) = y for y \u2265 0. The right graph shows the PReLU function with f(y) = 0 for y < 0, f(y) = y for y \u2265 0, and an adaptive coefficient a for the negative part.\n\nText in figure: f(y) = 0, f(y) = y, f(y) = ay, y"
+  },
+  {
+    "file": "p005_f02.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 2. The convergence of a 22-layer large model (B in Table 3). The x-axis is the number of training epochs. The y-axis is the top-1 error of 3,000 random val samples, evaluated on the center crop. We use ReLU as the activation for both cases. Both our initialization (red) and ' Xavier ' (blue) [7] lead to convergence, but ours starts reducing error earlier.",
+    "width": 380,
+    "height": 231,
+    "description": "Description: The figure is a line graph comparing the convergence of two different initialization methods for a 22-layer model. The x-axis represents the number of training epochs, and the y-axis shows the top-1 error of 3,000 random validation samples. The red line represents the authors' initialization method, while the blue line represents the Xavier initialization. The red line starts reducing error earlier and remains lower throughout the epochs.\n\nText in figure: Error, Epoch, 1/n_Var[w] = 1 ours, 1/n_Var[w] = 1 Xavier."
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 3. The convergence of a 30-layer small model (see the main text). We use ReLU as the activation for both cases. Our initialization (red) is able to make it converge. But ' Xavier ' (blue) [7] completely stalls - we also verify that its gradients are all diminishing. It does not converge even given more epochs.",
+    "width": 381,
+    "height": 228,
+    "description": "Figure: Line graph comparing the convergence of two models using different initialization methods.\n\nDescription: The graph shows the error rate over epochs for two models. The red line represents the model with the authors' initialization method, while the blue line represents the model with Xavier initialization. The red line starts higher but quickly decreases and remains lower throughout the epochs, indicating better convergence. The blue line, representing Xavier initialization, shows no significant improvement and remains stagnant.\n\nText in figure: Error, Epoch, 1/n_Var[w] = 1 ours, 1/n_Var[w] = 1 Xavier"
+  },
+  {
+    "file": "p010_f04.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "GT: horse cart",
+    "width": 146,
+    "height": 97,
+    "description": "### Description\nThis image depicts a street scene with a horse-drawn cart in the foreground. A person is standing next to the cart, and another person is sitting on it. A bus is parked on the side of the road in the background. Several people are walking on the street, and a building is visible on the left side.\n\n### Text in Figure\n- GT: horse cart\n- Bus parked on the side of the road\n- People walking on the street\n- Building on the left side"
+  },
+  {
+    "file": "p010_f05.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "GT: coucal",
+    "width": 146,
+    "height": 137,
+    "description": "### Description\nThe figure is a photograph showing a bird, identified as a coucal, perched on a branch amidst green foliage and white flowers. The bird has a distinctive blue and brown plumage with red eyes. The image captures the bird in a natural setting, surrounded by vegetation.\n\n### Text in Figure\n- GT: coucal\n- Bird: blue and brown plumage, red eyes\n- Surroundings: green foliage, white flowers"
+  },
+  {
+    "file": "p010_f06.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "GT: birdhouse",
+    "width": 146,
+    "height": 121,
+    "description": "## Description\nThe figure is a photograph showing a green and blue birdhouse placed on a pole in front of a window. The birdhouse has a triangular roof and a small entrance hole. The pole is painted in a combination of green and blue. The background includes a window with a reflection of trees and a brick wall.\n\n## Text in figure\n- Birdhouse\n- Green and blue\n- Pole\n- Window\n- Reflection of trees\n- Brick wall"
+  },
+  {
+    "file": "p010_f07.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "GT: komondor",
+    "width": 146,
+    "height": 110,
+    "description": "## Figure Description\nThe figure shows a photograph of a dog, specifically a Komondor, standing on a grassy lawn in front of a white house. The dog has a distinctive, corded coat that is white and shaggy, typical of the Komondor breed. The background includes a house with several windows and a porch, surrounded by trees and greenery.\n\n## Text in Figure\n- GT: komondor"
+  },
+  {
+    "file": "p010_f08.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "GT: yellow lady's slipper",
+    "width": 147,
+    "height": 110,
+    "description": "## Description\nThe figure is a photograph of a yellow lady's slipper (Cypripedium calceolus) in a natural setting. The plant is shown with its distinctive yellow flower and green leaves, growing on a forest floor covered with dried leaves.\n\n## Text in figure\nGT: yellow lady's slipper"
+  },
+  {
+    "file": "p010_f09.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "GT: mountain tent",
+    "width": 145,
+    "height": 98,
+    "description": "## Description\nThe figure shows a photograph of a person sitting inside a tent in a snowy environment. The tent is yellow and blue, with a blue sleeping pad on top. The person is wearing a blue jacket, green pants, and a blue beanie. The image is labeled \"GT: mountain tent,\" indicating that it is a ground truth example of a mountain tent.\n\n## Text in figure\nGT: mountain tent\nPerson sitting inside a tent\nBlue jacket\nGreen pants\nBlue beanie\nYellow and blue tent\nBlue sleeping pad on top\nSnowy environment"
+  },
+  {
+    "file": "p010_f10.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "GT: sunscreen",
+    "width": 147,
+    "height": 149,
+    "description": "## Figure Description\nThe figure shows a woman holding a bottle of sunscreen. She is standing in front of a black metal railing, possibly on a balcony or a staircase. The woman is looking up, possibly at the sun, and has her hand on her forehead, indicating she might be trying to shield her eyes from the sun. The bottle she is holding is blue and white, and she is wearing a green shirt.\n\n## Text in Figure\n- Sunscreen bottle\n- Green shirt\n- Black metal railing"
+  },
+  {
+    "file": "p010_f11.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "GT: flute",
+    "width": 128,
+    "height": 170,
+    "description": "## Description\nThe figure depicts a person playing a flute, dressed in traditional attire with face paint. The individual is standing in front of a microphone, suggesting a performance or recording session. The background is blurred, showing other people, possibly an audience or fellow performers.\n\n## Text in figure\n- GT: flute\n- Person playing a flute\n- Traditional attire with face paint\n- Microphone in front of the person\n- Blurred background with other people"
+  },
+  {
+    "file": "p010_f12.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "GT: spotlight",
+    "width": 114,
+    "height": 152,
+    "description": "## Figure Description\nThis image depicts a musician performing on stage. The musician is standing and holding a guitar, singing into a microphone. The stage is illuminated by a spotlight, and there is a blurred image of another person playing a guitar in the background.\n\n## Text in Figure\n- Spotlight\n- Musician\n- Guitar\n- Microphone\n- Stage\n- Performance\n- Blurred background\n- Another person\n- Guitar playing"
+  },
+  {
+    "file": "p010_f13.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "GT: restaurant",
+    "width": 152,
+    "height": 113,
+    "description": "## Image Description\nThis image depicts a table setting in a restaurant. The table is covered with a tablecloth and has several plates, wine glasses, and a candle in a glass vase. There are also some bottles and a menu book on the table. The image is taken from a low angle, giving a close-up view of the table setting.\n\n## Text in Figure\n- Plates\n- Wine glasses\n- Candle in a glass vase\n- Bottles\n- Menu book\n- Restaurant setting"
+  },
+  {
+    "file": "p011_f14.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 6. The per-class top-5 errors of our result (average of 4.94%) on the test set. Errors are displayed in ascending order.",
+    "width": 456,
+    "height": 177,
+    "description": "Description: The figure is a bar chart showing the per-class top-5 errors of the model's results on the ImageNet test set. The errors are displayed in ascending order, with the lowest error at the left and the highest at the right. The average top-5 error is 4.94%.\n\nText in figure: \"Figure 6. The per-class top-5 errors of our result (average of 4.94%) on the test set. Errors are displayed in ascending order.\""
+  },
+  {
+    "file": "p011_f15.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 7. The difference of top-5 error rates between our result (average of 4.94%) and our team's in-competition result for ILSVRC 2014 (average of 8.06%) on the test set, displayed in ascending order. A positive number indicates a reduced error rate.",
+    "width": 453,
+    "height": 134,
+    "description": "Description: This figure is a bar chart showing the difference in top-5 error rates between the authors' final result and their in-competition result for ILSVRC 2014. The differences are displayed in ascending order, with positive numbers indicating a reduced error rate. The highest bar is at the far right, indicating the largest reduction in error rate.\n\nText in figure: Difference of top-5 error rates, 0.15, 0.1, 0.05, 0, -0.05, 100, 200, 300, 400, 500, 600, 700, 800, 900"
+  }
+]

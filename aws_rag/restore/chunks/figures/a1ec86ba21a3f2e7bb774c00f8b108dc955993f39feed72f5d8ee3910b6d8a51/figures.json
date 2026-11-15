@@ -1,0 +1,56 @@
+[
+  {
+    "file": "p005_f01.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 6: Overview of Optuna 's system design. Each worker executes one instance of an objective function in each study . The Objective function runs its trial using Optuna APIs. When the API is invoked, the objective function accesses the shared storage and obtains the information of the past studies from the storage when necessary. Each worker runs the objective function independently and shares the progress of the current study via the storage.",
+    "width": 410,
+    "height": 218,
+    "description": "This figure is a system design overview of Optuna, a hyperparameter optimization framework. It shows the interaction between workers, storage, and the Optuna API. Workers execute the objective function, which uses Optuna APIs to suggest algorithms and prune trials. The storage holds past study information, and the objective function accesses it as needed.\n\nText in figure: Workers, Optuna API, Suggest Algo, suggest(), Pruning Algo, should_prune(), Storage, report(), return(), Objective Function"
+  },
+  {
+    "file": "p006_f02.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 7: Distributed optimization in Optuna . Figure (a) is the optimization script executed by one worker. Figure (b) is an example shell for the optimization with multiple workers in a distributed environment.",
+    "width": 455,
+    "height": 244,
+    "description": "Figure type: Line graph\n\nDescription: The figure shows a line graph with two series, \"value\" and \"parameter_layer\". The \"value\" series is highest at the beginning and lowest at the end, while the \"parameter_layer\" series is lowest at the beginning and highest at the end. The \"value\" series has a peak at the first point, while the \"parameter_layer\" series has a peak at the last point.\n\nText in figure: \"value\", \"parameter_layer\", \"COMPLETE\", \"PRUNE\", \"0.2345678901234567\", \"0.12345678901234567\", \"0.012345678901234567\", \"0.0012345678901234567\", \"0.00012345678901234567\", \"0.000012345678901234567\", \"0.0000012345678901234567\", \"0.00000012345678901234567\", \"0.000000012345678901234567\", \"0.0000000012345678901234567\", \"0.00000000012345678901234567\", \"0.000000000012345678901234567\", \"0.0000000000012345678901234567\", \"0.00000000000012345678901234567\", \"0.000000000000012345678901234567\", \"0.0000000000000012345678901234567\", \"0.00000000000000012345678901234567\", \"0.00000000000"
+  },
+  {
+    "file": "p006_f03.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 9: Result of comparing TPE + CMA-ES against other existing methods in terms of best attained objective value. Each algorithm was applied to each study 30 times, and Paired MannWhitney U test with = 0 : 0005 was used to determine whether TPE + CMA-ES outperforms each rival.",
+    "width": 348,
+    "height": 247,
+    "description": "This figure is a bar chart comparing the performance of different optimization algorithms in terms of the best attained objective value. The algorithms compared are Random, Hyperopt, SMAC3, and GPyOpt. The chart shows that TPE+CMA-ES is better in most cases, with Random having the highest number of test cases where it is better, followed by Hyperopt, SMAC3, and GPyOpt.\n\nText in figure: Random, Hyperopt, SMAC3, GPyOpt, TPE+CMA-ES is better, No significant difference, TPE+CMA-ES is worse, Number of test cases."
+  },
+  {
+    "file": "p007_f04.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 10: Computational time spent by di erent frameworks for each test case.",
+    "width": 344,
+    "height": 239,
+    "description": "Figure: A scatter plot comparing computational time across different optimization frameworks.\nSeries: TPE+CMA-ES, GPyOpt, SMAC3, HyperOpt, Random.\nObservations: TPE+CMA-ES is the highest, GPyOpt is the lowest. TPE+CMA-ES peaks at 100 seconds\nfor 10 design variables. GPyOpt remains below 1 second across all variables.\n\nText in figure: \"Time (sec)\", \"Number of design variables\", \"TPE+CMA-ES\", \"GPyOpt\", \"SMAC3\",\n\"HyperOpt\", \"Random\", \"2\", \"4\", \"6\", \"8\", \"10\"."
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 11: The transition of average test errors of simplified AlexNet for SVHN dataset. Figure (a) illustrates the e ect of pruning mechanisms on TPE and random search. Figure (b) illustrates the e ect of the number of workers on the performance. Figure (c) plots the test errors against the number of trials for di erent number of workers. Note that the number of workers has no e ect on the relation between the number of executed trials and the test error. The result also shows the superiority of ASHA pruning over median pruning.",
+    "width": 988,
+    "height": 235,
+    "description": "This figure consists of three line graphs, labeled (a), (b), and (c), showing the average test error of a simplified AlexNet model for the SVHN dataset. Graph (a) compares different pruning mechanisms (Random, TPE, Median Pruning, Successive Halving Pruning) over elapsed time. Graph (b) shows the effect of the number of workers on performance. Graph (c) plots test errors against the number of trials for different worker sizes. The highest average test error is observed in the Random series in graph (a), while the lowest is in the TPE + Successive Halving Pruning series. In graph (b), the series with size=1 has the highest error, and size=8 has the lowest. Graph (c) shows that the number of workers does not affect the relation between trials and test error.\n\nText in figure: \"Elapsed time (min)\", \"Number of trials\", \"Average test error\", \"Random\", \"TPE\", \"Random + Median Pruning\", \"TPE + Median Pruning\", \"Random + Successive Halving Pruning\", \"TPE + Successive Halving Pruning\", \"size=1\", \"size=2\", \"size=4\", \"size=8\"."
+  },
+  {
+    "file": "p008_f06.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 12: Distributed hyperparameter optimization process for the minimization of average test errors of simplified AlexNet for SVHN dataset. The optimization was done with ASHA pruning.",
+    "width": 359,
+    "height": 234,
+    "description": "Description: This plot shows the average test error of a simplified AlexNet model for the SVHN dataset over time. The x-axis represents elapsed time in minutes, and the y-axis represents the average test error. Four series are plotted, each representing a different size of the model. The size 1 model has the highest average test error, followed by size 2, size 4, and size 8. The size 8 model has the lowest average test error.\n\nText in figure: Average test error, Elapsed time (min), size = 1, size = 2, size = 4, size = 8."
+  }
+]

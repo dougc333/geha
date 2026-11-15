@@ -1,0 +1,155 @@
+[
+  {
+    "file": "p024_f01.png",
+    "page": 24,
+    "kind": "picture",
+    "caption": "Figure 1: Variation of UMAP hyperparameters n and min-dist result in different embeddings. The data is uniform random samples from a 3-dimensional colorcube, allowing for easy visualization of the original 3-dimensional coordinates in the embedding space by using the corresponding RGB colour. Low values of n spuriously interpret structure from the random sampling noise - see Section 6 for further discussion of this phenomena.",
+    "width": 675,
+    "height": 679,
+    "description": "Description: The figure displays a series of 16 plots, each showing a different embedding of a 3-dimensional colorcube dataset. The embeddings vary based on the hyperparameters n_neighbors and min_dist. The plots are colored according to the original RGB coordinates, allowing for visual comparison of the embeddings. The n_neighbors values range from 5 to 320, and the min_dist values range from 0.0125 to 0.8.\n\nText in figure: n_neighbors = 5, 20, 80, 320; min_dist = 0.0125, 0.05, 0.2, 0.8; n_neighbors, min_dist."
+  },
+  {
+    "file": "p026_f02.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "Figure 2: Variation of UMAP hyperparameters n and min-dist result in different embeddings. The data is the PenDigits dataset, where each point is an 8x8 grayscale image of a hand-written digit.",
+    "width": 676,
+    "height": 680,
+    "description": "Description: The figure displays a series of 16 plots, each showing a different embedding of the PenDigits dataset using the UMAP algorithm. The plots vary by the number of neighbors (n) and the minimum distance (min_dist) used in the UMAP algorithm. The number of neighbors ranges from 5 to 320, and the minimum distance ranges from 0.0125 to 0.8. Each plot shows clusters of points, each representing a hand-written digit, colored differently to indicate clusters.\n\nText in figure: n_neighbors = 5, 20, 80, 320; min_dist = 0.0125, 0.05, 0.2, 0.8."
+  },
+  {
+    "file": "p027_f03.png",
+    "page": 27,
+    "kind": "picture",
+    "caption": "Figure 3: Variation of UMAP hyperparameters n and min-dist result in different embeddings. The data is the MNIST dataset, where each point is an 28x28 grayscale image of a hand-written digit.",
+    "width": 676,
+    "height": 680,
+    "description": "This figure displays a series of 16 plots, each showing the effect of varying UMAP hyperparameters on the embedding of the MNIST dataset. The hyperparameters varied are the number of neighbors (n) and the minimum distance (min_dist). The plots are arranged in a 4x4 grid, with each row representing a different value of min_dist (0.0125, 0.05, 0.2, 0.8) and each column representing a different number of neighbors (5, 20, 80, 320). Each plot shows a different embedding of the MNIST dataset, with each point representing a 28x28 grayscale image of a hand-written digit.\n\nText in figure: \"n_neighbors = 5\", \"n_neighbors = 20\", \"n_neighbors = 80\", \"n_neighbors = 320\", \"min_dist = 0.0125\", \"min_dist = 0.05\", \"min_dist = 0.2\", \"min_dist = 0.8\"."
+  },
+  {
+    "file": "p029_f04.png",
+    "page": 29,
+    "kind": "picture",
+    "caption": "Figure 4: A comparison of several dimension reduction algorithms. We note that UMAP successfully reflects much of the large scale global structure that is well represented by Laplacian Eigenmaps and PCA (particularly for MNIST and Fashion-MNIST), while also preserving the local fine structure similar to t-SNE and LargeVis.",
+    "width": 780,
+    "height": 975,
+    "description": "This figure is a comparison of various dimension reduction algorithms, including UMAP, t-SNE, LargeVis, Laplacian Eigenmaps, PCA, and others, applied to different datasets such as COlL20, MNIST, Fashion MNIST, and Word Vectors. Each panel shows the results of a specific algorithm on a dataset, with data points colored to represent different classes or features. The figure demonstrates how UMAP captures both global and local structures of the data, similar to Laplacian Eigenmaps and PCA for global structure, and t-SNE and LargeVis for local structure.\n\nText in figure: UMAP, t-SNE, LargeVis, Laplacian Eigenmaps, PCA, COlL20, MNIST, Fashion MNIST, Word Vectors, N/A."
+  },
+  {
+    "file": "p033_f05.png",
+    "page": 33,
+    "kind": "picture",
+    "caption": "Figure 5: k NN Classifier accuracy for varying values of k over the embedding spaces of COIL-20 and PenDigits datasets. Accuracy scores are given for each fold of a 10-fold cross-validation for each of PCA, Laplacian Eigenmaps, LargeVis, t-SNE and UMAP. We note that UMAP produces competitive accuracy scores to t-SNE and LargeVis for most cases, and outperforms both t-SNE and LargeVis for larger k values on COIL-20.",
+    "width": 777,
+    "height": 309,
+    "description": "Figure: A set of scatter plots comparing the k-NN classifier accuracy for different embedding methods on the COIL-20 and PenDigits datasets. Each plot shows accuracy scores for varying values of k (10, 20, 40, 80, 160) across 10-fold cross-validation. Methods include PCA, Laplacian Eigenmaps, LargeVis, t-SNE, and UMAP. UMAP shows competitive accuracy to t-SNE and LargeVis, often outperforming them for larger k values on COIL-20.\n\nText in figure: \"COIL-20, k = 10\", \"COIL-20, k = 20\", \"COIL-20, k = 40\", \"COIL-20, k = 80\", \"COIL-20, k = 160\", \"PenDigits, k = 10\", \"PenDigits, k = 20\", \"PenDigits, k = 40\", \"PenDigits, k = 80\", \"PenDigits, k = 160\", \"PCA\", \"Laplacian Eigenmaps\", \"LargeVis\", \"t-SNE\", \"UMAP\", \"Algorithm\", \"Accuracy\""
+  },
+  {
+    "file": "p034_f06.png",
+    "page": 34,
+    "kind": "picture",
+    "caption": "Figure 6: k NN Classifier accuracy for varying values of k over the embedding spaces of Shuttle, MNIST and Fashion-MNIST datasets. Accuracy scores are given for each fold of a 10-fold cross-validation for Shuttle, and 20-fold crossvalidation for MNIST and Fashion-MNIST, for each of PCA, Laplacian Eigenmaps, LargeVis, t-SNE and UMAP. UMAP performs better than the other algorithms for large k , particularly on the Shuttle dataset. For Fashion-MNIST UMAP provides slightly poorer accuracy than t-SNE and LargeVis at small scales, but is competitive at larger k values.",
+    "width": 778,
+    "height": 387,
+    "description": "## Figure Description\nThis figure displays a series of box plots comparing the k-NN classifier accuracy for various embedding algorithms across three datasets: Shuttle, MNIST, and Fashion-MNIST. Each dataset is represented in separate rows, with columns showing different embedding methods: PCA, Laplacian Eigenmaps, LargeVis, t-SNE, and UMAP. The x-axis represents varying values of k, and the y-axis shows accuracy scores. UMAP generally shows higher accuracy, especially for larger k values, particularly on the Shuttle dataset.\n\n## Text in Figure\nText includes: \"Shuttle, k = 100\", \"MNIST, k = 100\", \"Fashion-MNIST, k = 100\", \"PCA\", \"Laplacian Eigenmaps\", \"LargeVis\", \"t-SNE\", \"UMAP\", \"Accuracy\", and values of k ranging from 100 to 3200."
+  },
+  {
+    "file": "p035_f07.png",
+    "page": 35,
+    "kind": "picture",
+    "caption": "Figure 7: Procrustes based alignment of a 10% subsample (red) against the full dataset (blue) for the flow cytometry dataset for both UMAP and t-SNE.",
+    "width": 683,
+    "height": 386,
+    "description": "Description: The figure shows two plots comparing the alignment of a 10% subsample (red) against the full dataset (blue) for the flow cytometry dataset using UMAP and t-SNE. The UMAP plot (a) shows a scattered distribution of points, while the t-SNE plot (b) shows a more clustered distribution.\n\nText in figure: UMAP, t-SNE, 10% subsample, full dataset, flow cytometry dataset."
+  },
+  {
+    "file": "p037_f08.png",
+    "page": 37,
+    "kind": "picture",
+    "caption": "Figure 8: Comparison of average Procustes distance per point for t-SNE, LargeVis and UMAP over a variety of sizes of subsamples from the full Flow Cytometry dataset. UMAP sub-sample embeddings are very close to the full embedding even for subsamples of 5% of the full dataset, outperforming the results of t-SNE and LargeVis even when they use the full Flow Cytometry dataset.",
+    "width": 683,
+    "height": 544,
+    "description": "Description: This plot compares the average Procustes distance per point for three embedding techniques: UMAP, t-SNE, and LargeVis. The x-axis represents the subsample size, and the y-axis represents the average Procustes distance per point. UMAP consistently shows the lowest distance, followed by t-SNE, and then LargeVis. The distances decrease as the subsample size increases.\n\nText in figure: UMAP, t-SNE, LargeVis, Embedding stability under subsampling, Average Procustes distance per point, Subsample size, 0, 200000, 400000, 600000, 800000, 1000000, 0.000, 0.002, 0.004, 0.006, 0.008, 0.010, 0.012"
+  },
+  {
+    "file": "p040_f09.png",
+    "page": 40,
+    "kind": "picture",
+    "caption": "(a) A comparison of run time for UMAP, t-SNE and LargeVis with respect to embedding dimension on the Pen digits dataset. We see that t-SNE scales worse than exponentially while UMAP and LargeVis scale linearly with a slope so slight to be undetectable at this scale.",
+    "width": 314,
+    "height": 248,
+    "description": "Figure: A line graph comparing the run time of UMAP, t-SNE, and LargeVis with respect to embedding dimension on the Pen digits dataset. t-SNE has the highest run time, followed by UMAP and LargeVis. The run time of t-SNE increases exponentially, while UMAP and LargeVis increase linearly.\n\nText in figure: UMAP, t-SNE, LargeVis, Embedding dimension, Time (s), 2, 4, 6, 8, 10, 12, 17500, 15000, 12500, 10000, 7500, 5000, 2500, 0."
+  },
+  {
+    "file": "p040_f10.png",
+    "page": 40,
+    "kind": "picture",
+    "caption": "",
+    "width": 304,
+    "height": 246,
+    "description": "Figure: Line graph comparing performance of UMAP, t-SNE, and LargeVis.\nSeries: UMAP (blue), t-SNE (green), LargeVis (red).\nTrend: UMAP remains constant, t-SNE increases, LargeVis increases.\nHighest: t-SNE at dimension 6 (80%).\nLowest: UMAP (0% across all dimensions).\n\nText in figure: UMAP, t-SNE, LargeVis, Embedding dimension, Time (%)."
+  },
+  {
+    "file": "p041_f11.png",
+    "page": 41,
+    "kind": "picture",
+    "caption": "Figure 10: Runtime performance scaling of UMAP, t-SNE, FIt-SNE and Largevis with respect to the ambient dimension of the data. As the ambient dimension increases beyond a few thousand dimensions the computational cost of t-SNE, FIt-SNE, and LargeVis all increase dramatically, while UMAP continues to perform well into the tens-of-thousands of dimensions.",
+    "width": 661,
+    "height": 574,
+    "description": "Description: The figure is a log-log plot comparing the runtime performance of UMAP, t-SNE, FIt-SNE, and LargeVis as the ambient dimension of the data increases. UMAP remains efficient even as the ambient dimension reaches tens of thousands, while t-SNE, FIt-SNE, and LargeVis show a dramatic increase in computational cost beyond a few thousand dimensions. UMAP is the lowest series, maintaining performance, while t-SNE, FIt-SNE, and LargeVis are the highest, with significant increases in time taken.\n\nText in figure: Performance Comparison of UMAP, t-SNE, FIt-SNE and LargeVis Scaling with ambient dimension, UMAP, t-SNE, FIt-SNE, LargeVis, Time taken for dimension reduction (s), Ambient dimension."
+  },
+  {
+    "file": "p043_f12.png",
+    "page": 43,
+    "kind": "picture",
+    "caption": "Figure 11: Runtime performance scaling of t-SNE and UMAP on various sized sub-samples of the full Google News dataset. The lower t-SNE line is the wall clock runtime for Multicore t-SNE using 8 cores.",
+    "width": 661,
+    "height": 557,
+    "description": "This figure is a log-log plot comparing the runtime performance of UMAP, t-SNE, FIt-SNE, and LargeVis for dimension reduction on varying numbers of data points. The UMAP line is the lowest, followed by FIt-SNE, then LargeVis, with t-SNE being the highest. The 8 core t-SNE line is also shown, positioned between the single-core t-SNE and UMAP lines. The plot shows that UMAP scales better than t-SNE as the number of data points increases.\n\nText in figure: UMAP, t-SNE, 8 core t-SNE, FIt-SNE, LargeVis, Time taken for dimension reduction (s), Number of data points."
+  },
+  {
+    "file": "p044_f13.png",
+    "page": 44,
+    "kind": "picture",
+    "caption": "Figure 12: Visualization of the full 3 million word vectors from the GoogleNews dataset as embedded by UMAP.",
+    "width": 797,
+    "height": 459,
+    "description": "## Description\nThe figure is a visualization of 3 million word vectors from the GoogleNews dataset, embedded using the UMAP (Uniform Manifold Approximation and Projection) technique. The image shows a scatter plot with points distributed in a complex, non-linear pattern, indicating the high-dimensional data's structure in a lower-dimensional space.\n\n## Text in figure\nThe figure does not contain any text or printed values. It solely displays the scatter plot of the embedded word vectors."
+  },
+  {
+    "file": "p046_f14.png",
+    "page": 46,
+    "kind": "picture",
+    "caption": "Figure 13: Visualization of 30,000,000 integers as represented by binary vectors of prime divisibility, colored by density of points.",
+    "width": 780,
+    "height": 779,
+    "description": "## Description\nThe figure is a visualization of 30,000,000 integers represented as binary vectors of prime divisibility. It shows a complex, multi-colored pattern with varying densities of points. The colors range from green to blue, with yellow and purple accents. The central area is dense with green and yellow points, while the outer regions have fewer points, primarily in blue and purple.\n\n## Text in figure\nThe figure contains no explicit text or printed values. The colors represent the density of points, with green and yellow indicating higher densities and blue and purple indicating lower densities."
+  },
+  {
+    "file": "p047_f15.png",
+    "page": 47,
+    "kind": "picture",
+    "caption": "Figure 14: Visualization of 30,000,000 integers as represented by binary vectors of prime divisibility, colored by integer value of the point (larger values are green or yellow, smaller values are blue or purple).",
+    "width": 780,
+    "height": 780,
+    "description": "Description: The figure is a visualization of 30,000,000 integers represented as binary vectors of prime divisibility. The points are colored by the integer value, with larger values appearing in green or yellow and smaller values in blue or purple. The visualization is created using UMAP, a technique for dimension reduction.\n\nText in figure: No text is visible in the figure. The colors represent the integer values, with green and yellow indicating larger values and blue and purple indicating smaller values."
+  },
+  {
+    "file": "p048_f16.png",
+    "page": 48,
+    "kind": "picture",
+    "caption": "Figure 15: Zooming in on various regions of the integer embedding reveals further layers of fine structure have been preserved.",
+    "width": 692,
+    "height": 774,
+    "description": "## Description\nThis figure displays three panels of a zoomed-in view of an integer embedding, showcasing intricate structures. Panel (a) shows an upper right spiral, panel (b) reveals a lower right spiral and starbursts, and panel (c) highlights a central cloud. The visualizations are colorful, with various shades of green, blue, and purple, indicating different features or densities within the embedding.\n\n## Text in figure\n- Panel (a): Upper right spiral\n- Panel (b): Lower right spiral and starbursts\n- Panel (c): Central cloud"
+  },
+  {
+    "file": "p053_f17.png",
+    "page": 53,
+    "kind": "picture",
+    "caption": "",
+    "width": 388,
+    "height": 104,
+    "description": "## Figure Description\nThis figure is a diagram showing the relationship between different components in the UMAP algorithm. It illustrates the flow from Fin-sFuzz to FinReal and FinEPMet. The diagram includes arrows indicating the direction of the process, with Fin-sFuzz at the top, FinReal to the right, and FinEPMet at the bottom. The arrows suggest a transformation or mapping process.\n\n## Text in Figure\n- Fin-sFuzz\n- FinReal\n- FinEPMet\n- \u0394xI\n- F"
+  }
+]

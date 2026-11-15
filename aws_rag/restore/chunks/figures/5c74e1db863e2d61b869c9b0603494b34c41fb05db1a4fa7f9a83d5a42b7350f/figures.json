@@ -1,0 +1,29 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1: Our model reads an input sentence 'ABC' and produces 'WXYZ' as the output sentence. The model stops making predictions after outputting the end-of-sentence token. Note that the LSTM reads the input sentence in reverse, because doing so introduces many short term dependencies in the data that make the optimization problem much easier.",
+    "width": 717,
+    "height": 147,
+    "description": "This figure is a diagram showing a sequence-to-sequence learning model. It depicts the process of reading an input sentence 'ABC' and producing an output sentence 'WXYZ'. The model reads the input sentence in reverse, which simplifies the optimization problem. The diagram shows the flow of data from input to output, with arrows indicating the direction of data flow. The model stops making predictions after outputting the end-of-sentence token.\n\nText in figure: ABC, WXYZ, <EOS>, W, X, Y, Z, A, B, C"
+  },
+  {
+    "file": "p006_f02.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 2: The figure shows a 2-dimensional PCA projection of the LSTM hidden states that are obtained after processing the phrases in the figures. The phrases are clustered by meaning, which in these examples is primarily a function of word order, which would be difficult to capture with a bag-of-words model. Notice that both clusters have similar internal structure.",
+    "width": 694,
+    "height": 237,
+    "description": "## Description\nThe figure is a 2-dimensional PCA projection of LSTM hidden states, illustrating how phrases are clustered by meaning. The phrases are primarily differentiated by word order, which is challenging for bag-of-words models. The clusters show similar internal structures, indicating effective learning by the LSTM model.\n\n## Text in figure\nPhrases: \"Mary admires John\", \"Mary is in love with John\", \"Mary respects John\", \"John admires Mary\", \"John is in love with Mary\", \"John respects Mary\", \"I was given a card by her in the garden\", \"In the garden, she gave me a card\", \"She gave me a card in the garden\", \"In the garden, I gave her a card\", \"I gave her a card in the garden\", \"She was given a card by me in the garden\"."
+  },
+  {
+    "file": "p007_f03.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 3: The left plot shows the performance of our system as a function of sentence length, where the x-axis corresponds to the test sentences sorted by their length and is marked by the actual sequence lengths. There is no degradation on sentences with less than 35 words, there is only a minor degradation on the longest sentences. The right plot shows the LSTM's performance on sentences with progressively more rare words, where the x-axis corresponds to the test sentences sorted by their 'average word frequency rank'.",
+    "width": 650,
+    "height": 333,
+    "description": "Figure: Two plots showing performance of an LSTM model on test sentences. Left plot: Sentence length vs. BLEU score. Right plot: Average word frequency rank vs. BLEU score.\n\nLeft plot: LSTM (blue) highest at 47 words, baseline (red) lowest at 47 words, difference ~10. Right plot: LSTM (blue) highest at 0 rank, baseline (red) lowest at 3500 rank, difference ~5.\n\nText in figure: \"LSTM (34.8)\", \"baseline (33.3)\", \"BLEU score\", \"test sentences sorted by their length\", \"test sentences sorted by average word frequency rank\"."
+  }
+]

@@ -1,0 +1,101 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1: Chain-of-thought prompting enables large language models to tackle complex arithmetic, commonsense, and symbolic reasoning tasks. Chain-of-thought reasoning processes are highlighted.",
+    "width": 759,
+    "height": 368,
+    "description": "Figure type: Comparison of model outputs\nContent: The figure compares the outputs of two models, Standard Prompting and Chain-of-Thought Prompting, on two arithmetic problems. The first problem involves Roger's tennis balls, and the second involves the cafeteria's apples. The Chain-of-Thought Prompting model provides detailed reasoning steps, while the Standard Prompting model only gives the final answer.\n\nText in figure:\n- Roger's tennis balls problem:\n  - Standard Prompting: \"The answer is 11.\"\n  - Chain-of-Thought Prompting: \"Roger started with 5 balls. 2 cans of 3 tennis balls each is 6 tennis balls. 5 + 6 = 11. The answer is 11.\"\n- Cafeteria's apples problem:\n  - Standard Prompting: \"The answer is 27.\"\n  - Chain-of-Thought Prompting: \"The cafeteria had 23 apples originally. They used 20 to make lunch. So they had 23 - 20 = 3. They bought 6 more apples, so they have 3 + 6 = 9. The answer is 9.\""
+  },
+  {
+    "file": "p002_f02.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 2: PaLM 540B uses chain-ofthought prompting to achieve new stateof-the-art performance on the GSM8K benchmark of math word problems. Finetuned GPT-3 and prior best are from Cobbe et al. (2021).",
+    "width": 299,
+    "height": 210,
+    "description": "Figure Description:\nThis figure is a bar chart comparing the solve rates of different models on the GSM8K benchmark of math word problems. The chart shows three models: \"Finetuned GPT-3\", \"Prior best\", and \"PaLM 540B\". The solve rates are as follows: \"Finetuned GPT-3\" at 33%, \"Prior best\" at 55%, and \"PaLM 540B\" at 57%. The \"PaLM 540B\" model has the highest solve rate, followed by \"Prior best\", and \"Finetuned GPT-3\" has the lowest solve rate.\n\nText in Figure:\n\"Math Word Problems (GSM8K)\"\n\"Solve rate (%)\"\n\"Finetuned GPT-3: 33%\"\n\"Prior best: 55%\"\n\"PaLM 540B: 57%\""
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3: Examples of \u3008 input, chain of thought, output \u3009 triples for arithmetic, commonsense, and symbolic reasoning benchmarks. Chains of thought are highlighted. Full prompts in Appendix G.",
+    "width": 791,
+    "height": 627,
+    "description": "Figure type: A table displaying examples of input, chain of thought, and output for various reasoning tasks.\nContent: The table shows examples of \u3008 input, chain of thought, output \u3009 triples for arithmetic, commonsense, and symbolic reasoning benchmarks. Each row represents a different reasoning task, with the input, chain of thought, and output highlighted. The tasks include math word problems, multiple choice math problems, commonsense questions, strategy questions, date understanding, sports understanding, instructing a robot, last letter concatenation, and coin flip state tracking.\n\nSection 1: This figure is a table that presents examples of input, chain of thought, and output for various reasoning tasks. The table showcases different types of reasoning, including arithmetic, commonsense, and symbolic reasoning. Each row represents a specific reasoning task, with the input, chain of thought, and output highlighted.\n\nSection 2: The table includes examples of math word problems, multiple choice math problems, commonsense questions, strategy questions, date understanding, sports understanding, instructing a robot, last letter concatenation, and coin flip state tracking. The input, chain of thought, and output for each task are highlighted, demonstrating the reasoning process and the final answer."
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "",
+    "width": 379,
+    "height": 586,
+    "description": "This figure is a set of three line graphs comparing the performance of different prompting methods on three datasets: GSM8K, SVAMP, and MAWPS. Each graph shows the solve rate percentage over varying numbers of training steps. The series are labeled as \"Standard prompting,\" \"Chain-of-thought prompting,\" and \"Prior supervised best.\" The \"Prior supervised best\" series is consistently the highest across all datasets, indicating the best performance benchmark. The \"Chain-of-thought prompting\" series shows a significant improvement over \"Standard prompting,\" especially on the MAWPS dataset, where it surpasses the \"Prior supervised best\" at the highest number of training steps.\n\nText in figure: GSM8K, SVAMP, MAWPS, Standard prompting, Chain-of-thought prompting, Prior supervised best, solve rate (%), LaMDA, GPT, PaLM."
+  },
+  {
+    "file": "p006_f05.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 5: Ablation study for different variations of prompting using LaMDA 137B and PaLM 540B. Results for other datasets are given in Appendix Table 6 and Table 7.",
+    "width": 270,
+    "height": 329,
+    "description": "This figure is a bar chart comparing the GSM8K solve rate percentage for different prompting methods using LaMDA 137B and PaLM 540B models. The chart shows six series: Standard prompting, Equation only, Variable compute only, Reasoning after answer, and Chain-of-thought prompting. The Chain-of-thought prompting series has the highest solve rate, particularly for PaLM 540B, reaching nearly 60%. The lowest solve rate is observed in the Equation only series for LaMDA 137B, around 10%.\n\nDescription: Standard prompting, Equation only, Variable compute only, Reasoning after answer, Chain-of-thought prompting, LaMDA 137B, PaLM 540B, GSM8K solve rate, 60%, 10%."
+  },
+  {
+    "file": "p006_f06.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 6: Chain-of-thought prompting has variance for different prompt examples (as expected) but outperforms standard prompting for various annotators as well as for different exemplars.",
+    "width": 316,
+    "height": 430,
+    "description": "## Description\nThis figure contains two bar charts comparing the solve rates of different prompting methods. The left chart shows results for GSM8K, and the right for MAWPS. The series are: Standard prompting, Chain-of-thought prompting, different annotators (B, C), and exemplars from GSM8K (\u03b1, \u03b2, \u03b3). In the GSM8K chart, Chain-of-thought prompting has the highest solve rate, followed by Standard prompting. In the MAWPS chart, Chain-of-thought prompting also has the highest solve rate, followed by Standard prompting.\n\n## Text in figure\nGSM8K\n- Standard prompting: 10%\n- Chain-of-thought prompting: 15%\n- Different annotators (B, C): 12%, 14%\n- Exemplars from GSM8K (\u03b1, \u03b2, \u03b3): 13%, 14%, 15%\n\nMAWPS\n- Standard prompting: 40%\n- Chain-of-thought prompting: 60%\n- Different annotators (B, C): 55%, 58%\n- Exemplars from GSM8K (\u03b1, \u03b2, \u03b3): 58%, 60%, 62%"
+  },
+  {
+    "file": "p007_f07.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 7: Chain-of-thought prompting also improves the commonsense reasoning abilities of language models. The language model shown here is PaLM. Prior best numbers are from the leaderboards of CSQA (Talmor et al., 2019) and StrategyQA (Geva et al., 2021) (single-model only, as of May 5, 2022). Additional results using various sizes of LaMDA, GPT-3, and PaLM are shown in Table 4.",
+    "width": 756,
+    "height": 211,
+    "description": "## Description\nThis figure displays a set of five line graphs comparing the solve rates of different models on various tasks. Each graph represents a different task: CSQA, StrategyQA, Date, Sports, and SayCan. The series are labeled as \"Standard prompting,\" \"Chain of thought,\" \"Prior supervised best,\" and \"Human.\" The \"Chain of thought\" series is consistently the highest across all tasks, followed by \"Standard prompting,\" \"Prior supervised best,\" and \"Human.\" The \"Human\" series is the lowest in all cases.\n\n## Text in figure\nTasks: CSQA, StrategyQA, Date, Sports, SayCan\nSeries: Standard prompting, Chain of thought, Prior supervised best, Human\nValues: 8, 62, 540 (Model scale in billions)\nAnnotations: Chain of thought series is highest, Human series is lowest"
+  },
+  {
+    "file": "p008_f08.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Model scale (# parameters in billions)",
+    "width": 299,
+    "height": 466,
+    "description": "## Index Section 1\nThis figure is a set of four line graphs comparing the performance of standard prompting versus chain-of-thought prompting across different model sizes and tasks. Each graph shows the solve rate percentage on the y-axis and the number of parameters in billions on the x-axis. The tasks include Letter Concatenation (in domain and out of domain) and Coin Flip (in domain and out of domain). The blue line with circle markers represents chain-of-thought prompting, while the black line with square markers represents standard prompting. In all graphs, the chain-of-thought prompting shows a higher solve rate than standard prompting, especially as the model size increases.\n\n## Index Section 2\nText in figure: \"Standard prompting\", \"Chain-of-thought prompting\", \"Letter Concat: 2 (in domain)\", \"Letter Concat: 4 (OOD)\", \"Coin Flip: 2 (in domain)\", \"Coin Flip: 4 (OOD)\", \"Solve rate (%)\", \"8\", \"62\", \"540\"."
+  },
+  {
+    "file": "p016_f09.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 9: Error analysis of 45 problems that PaLM 62B got incorrect. These errors were categorized that semantic understanding, one step missing, and other. The other category includes hallucinations, repetitive outputs, and symbol mapping errors. Scaling PaLM to 540B fixed a substantial portion of errors in all categories.",
+    "width": 618,
+    "height": 239,
+    "description": "## Description\nThis figure is a bar chart showing the types of errors made by a 62B language model and how scaling it to 540B reduced these errors. The chart has three categories of errors: semantic understanding, one step missing, and other. The 62B model made 20 semantic understanding errors, 18 one step missing errors, and 7 other errors. Scaling to 540B reduced these errors by 6, 12, and 4 respectively.\n\n## Text in figure\n- Semantic understanding: 62B made 20 errors, 540B fixes 6 of them.\n- One step missing: 62B made 18 errors, 540B fixes 12 of them.\n- Other: 62B made 7 errors, 540B fixes 4 of them."
+  },
+  {
+    "file": "p017_f10.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "Figure 10: Examples of semantic understanding and one-step missing errors that were fixed by scaling PaLM from 62B to 540B.",
+    "width": 787,
+    "height": 872,
+    "description": "Figure type: Image with text\nContent: The figure shows examples of semantic understanding and one-step missing errors in language models. It compares the outputs of a 62B model and a 540B model on four different questions. For each question, the 62B model output is labeled as \"incorrect\" with a specific type of error (semantic understanding error or one-step missing error), while the 540B model output is labeled as \"correct\".\n\nKey text:\n- \"62B Model Output\" and \"540B Model Output\" labels for each question\n- \"incorrect: semantic understanding error\" and \"incorrect: one step missing error\" labels for 62B model outputs\n- \"Correct\" label for 540B model outputs\n- Example questions and their corresponding model outputs\n\nNotable values:\n- No numerical values are present in the figure."
+  },
+  {
+    "file": "p029_f11.png",
+    "page": 29,
+    "kind": "picture",
+    "caption": "Figure 11: The improvement of chain of thought prompting over standard prompting appears robust to varying the number of few-shot exemplars in the prompt.",
+    "width": 790,
+    "height": 292,
+    "description": "Description: This figure contains five line plots comparing the performance of standard prompting and chain of thought prompting across different tasks and varying numbers of few-shot exemplars. Each plot shows the solve rate percentage on the y-axis against the number of few-shot exemplars on the x-axis. The blue line with circle markers represents chain of thought prompting, while the black line with square markers represents standard prompting. Across all tasks, chain of thought prompting consistently outperforms standard prompting, with the largest improvements seen in the GSM8K and Coin Flip tasks.\n\nText in figure: GSM8K, Multi-Arith (MAWPS), Sports Understanding, Coin Flip, Last Letter Concatenation, Standard prompting, Chain of thought prompting, Solve rate (%), Number of few-shot exemplars, 1, 2, 3, 4, 6, 8, 10, 15, 20, 25, 50, 75, 100."
+  }
+]

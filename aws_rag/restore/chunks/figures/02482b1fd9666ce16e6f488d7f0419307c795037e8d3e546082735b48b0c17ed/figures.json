@@ -1,0 +1,322 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "",
+    "width": 821,
+    "height": 404,
+    "description": "Section 1: Figure description\nThis figure is a bar chart showing the number of contributed works in the literature for Interpretable Artificial Intelligence, XAI, and Explainable Artificial Intelligence from 2012 to 2019. The chart displays three series of data, each represented by a different color: blue for Interpretable Artificial Intelligence, orange for XAI, and green for Explainable Artificial Intelligence.\n\nSection 2: Key data points\nThe highest number of contributed works is observed in 2019 for Explainable Artificial Intelligence, with approximately 175 works. The lowest number of contributed works is seen in 2012 for XAI, with around 5 works. The series for Interpretable Artificial Intelligence consistently shows the highest number of works, followed by XAI and then Explainable Artificial Intelligence.",
+    "pdf_text": "2012 | 2013 | 2014 | 2015 | 2016 | 2017 | 2018 | 2019 | (December 10th) | 0 | 25 | 50 | 75 | 100 | 125 | 150 | 175 | 200 | # of contributed works in the literature | Interpretable Arti\ufb01cial Intelligence | XAI | Explainable Arti\ufb01cial Intelligence",
+    "bbox": [
+      99.4,
+      103.1,
+      509.9,
+      305.1
+    ]
+  },
+  {
+    "file": "p007_f02.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 2: Diagram showing the different purposes of explainability in ML models sought by different audience profiles. Two goals occur to prevail across them: need for model understanding, and regulatory compliance. Image partly inspired by the one presented in [29], used with permission from IBM.",
+    "width": 750,
+    "height": 297,
+    "description": "This figure is a diagram illustrating the different purposes of explainability in machine learning (ML) models, as sought by various audience profiles. It shows how different groups, such as domain experts, users affected by model decisions, regulatory entities, data scientists, and managers, have distinct needs for understanding and compliance. The diagram highlights two overarching goals: the need for model understanding and regulatory compliance. It also includes a target audience section specifically for explainable artificial intelligence (XAI).\n\nText in figure: Target audience in XAI, Who? Domain experts/users of the model (e.g. medical doctors, insurance agents), Why? Trust the model itself, gain scientific knowledge, Who? Regulatory entities/agencies, Why? Certify model compliance with the, Who? Users affected by model decisions, Why? Understand their situation, verify fair decisions..., Who? Managers and executive board members, Why? Assess regulatory compliance, understand corporate AI applications..., Who? Data scientists, developers, product owners..., Why? Ensure/improve product efficiency, research, new functionalities..., legislation in force, audits,...,?,?, < / >,?, $$$,?,?",
+    "pdf_text": "Target audience | in XAI | Who? Domain experts/users of the model (e.g. medical doctors, insurance agents) | Why? Trust the model itself, gain scienti\ufb01c knowledge | Who? Regulatory entities/agencies | Why? Certify model compliance with the | Who? Users a\ufb00ected by model decisions | Why? Understand their situation, verify | Who? Managers and executive board members | Why? Assess regulatory compliance, understand | Who? Data scientists, developers, product owners... | Why? Ensure/improve product e\ufb03ciency, research, | corporate AI applications... | new functionalities... | fair decisions... | legislation in force, audits, ... | ? | ? | < / > | ? | $ $ $ | ? | ? | ?",
+    "bbox": [
+      118.0,
+      363.7,
+      492.9,
+      511.9
+    ]
+  },
+  {
+    "file": "p011_f03.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 3: Conceptual diagram exemplifying the different levels of transparency characterizing a ML model M \u03d5 , with \u03d5 denoting the parameter set of the model at hand: (a) simulatability; (b) decomposability; (c) algorithmic transparency. Without loss of generality, the example focuses on the ML model as the explanation target. However, other targets for explainability may include a given example, the output classes or the dataset itself.",
+    "width": 790,
+    "height": 179,
+    "description": "This figure is a conceptual diagram illustrating different levels of transparency in machine learning models. It consists of three panels labeled (a), (b), and (c), each representing a different level of transparency: simulatability, decomposability, and algorithmic transparency, respectively. Panel (a) shows a model with a function g that combines outputs from functions fA and fB, leading to a decision rule based on the value of g. Panel (b) demonstrates a decision tree with rules based on input features x1, x2, and x3. Panel (c) presents a rule-based explanation derived from training data, showing that certain conditions on the input features lead to specific output decisions.\n\nText in figure: M\u03d5, x1, x2, x3, y, (a), (b), (c), If g(fA(x1), fB(x2)) > 5 then y = 1, else y = 0, fA(x1) = 1/x2, fB(x2) = log x2, g(f, g) = 1/(f + g), If x2 > 180 then y = 1, Else if x1 + x3 > 150 then y = 1, Else y = 0, x1: weight, x2: height, x3: age, 95% of the positive training samples have x2 > 180 \u2192 Rule 1, 90% of the positive training samples have x1 + x3 > 150 \u2192 Rule 2.",
+    "pdf_text": "M\u03d5 | x1 | x2 | x3 | y | (b) | If x2 > 180 then y = 1 | Else if x1 + x3 > 150 then y = 1 | Else y = 0 | M\u03d5 | x1 | x2 | x3 | y | (a) | If g(fA(x1), fB(x2)) > 5 | then y = 1, else y = 0 | fA(x1) = 1/x2 | 1, fB(x2) = log x2 | g(f, g) = 1/(f + g) | x1: weight, x2: height, x3: age | M\u03d5 | x1 | x2 | x3 | y | (c) | (c) | 95% of the positive training samples | have x2 > 180 7\u2192Rule 1 | 90% of the positive training samples | have x1 + x3 > 150 7\u2192Rule 2 | ? | ? | ?",
+    "bbox": [
+      107.9,
+      361.2,
+      502.8,
+      450.3
+    ]
+  },
+  {
+    "file": "p013_f04.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 4: Conceptual diagram showing the different post-hoc explainability approaches available for a ML model M \u03d5 .",
+    "width": 667,
+    "height": 528,
+    "description": "Figure type: Conceptual diagram\nDescription: The figure illustrates various post-hoc explainability approaches for a machine learning model M\u03d5. It shows how these methods can be applied to a black-box model to understand its predictions and feature relevance.\n\nText in figure: Black-box model, Feature relevance, Local explanations, Visualization, Model simplification, Text explanations, Explanatory examples, x, y, M\u03d5, x = (x1,..., xn), xi, yi, x1, x3, x7, x13, y\u2032, F, G, xA \u2192 yA, xB \u2192 yB, xC \u2192 yC, \u201cFeature x2 has a 90% importance in y\u201d, \u201cThe output for xi is yi because x3 > \u03b3\u201d",
+    "pdf_text": "Black-box | model | x | y | M\u03d5 | x = (x1, ... , xn) | Feature | relevance | ... | \u201cFeature x2 has a | 90% importance in y\u201d | ... | Local | explanations | xi | yi | M\u03d5 | \u201cWhat happens with the prediction yi if | we change slightly the features of xi?\u201d | xi: input instance | Visualization | x | y | M\u03d5 | x1 x2 x3 x4 | xn | x1 | x3 | Model | simpli\ufb01cation | x | y | M\u03d5 | x1 | x3 | x7 | x13 | y\u2032 | x | F | G | Text | explanations | xi | yi | M\u03d5 | \u201cThe output for xi is | yi because x3 > \u03b3 \u201d | by example | Explanations | xi | yi | M\u03d5 | \u201dExplanatory examples | for the model:\u201d | - xA 7\u2192yA | - xB 7\u2192yB | - xC 7\u2192yC",
+    "bbox": [
+      139.3,
+      99.2,
+      472.9,
+      363.0
+    ]
+  },
+  {
+    "file": "p015_f05.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 5: Graphical illustration of the levels of transparency of different ML models considered in this overview: (a) Linear regression; (b) Decision trees; (c) K-Nearest Neighbors; (d) Rule-based Learners; (e) Generalized Additive Models; (f) Bayesian Models.",
+    "width": 830,
+    "height": 506,
+    "description": "This figure is a graphical illustration of the levels of transparency of different machine learning models. It shows six panels, each representing a different model: (a) Linear regression, (b) Decision trees, (c) K-Nearest Neighbors, (d) Rule-based Learners, (e) Generalized Additive Models, and (f) Bayesian Models. Each panel includes a brief description of the model's transparency, interpretability, and other relevant characteristics.\n\nText in figure: Linear regression, Decision trees, K-Nearest Neighbors, Rule-based Learners, Generalized Additive Models, Bayesian Models, Transparency, Interpretability, Simulatable, Decomposable, Algorithmic transparency, Distribution fitting, Fuzzy rules, Independence assumption, Expected value, Majority voting, Simple univariate thresholds, Direct support and impurity measures, Linguistic rules, Fuzzyness, Support, Impurity, Coverage, Specificity, Sparseness, Contribution of each variable.",
+    "pdf_text": "x2 | x1 | x1 \u2265\u03b3 | x2 \u2265\u03b3\u2032 | x2 \u2265\u03b3\u2032\u2032 | Yes | No | x1 \u2265\u03b3\u2032\u2032\u2032 | Yes | No | Yes | No | Class | Support: 70% | Impurity: 0.1 | Straightforward what-if testing | Simple univariate thresholds | Simulatable, decomposable | Direct support and impurity measures | wi: increase in y if xi | w0 (intercept): y for a test instance | with average normalized features | increases by one unit | x1 | x2 | xtest | 2 | xtest | 1 | Yes | Prediction by majority voting | K similar training instances | Simulatable, decomposable | Algorithmic transparency (lazy training) | Linguistic rules: easy to interpret | Training | dataset | \u2212If x1 is high then y = | \u2212If x1 is low and x2 is | high then y = | \u2212If x2 is low then y = | Simulatable if ruleset coverage and | speci\ufb01ty are kept constrained | Fuzziness improves interpretability | y = w1x1 + w2x2 + w0 | g(E(y)) = w1f1(x1) + w2f2(x2) | Training | dataset | g(z) | z | fi(xi) | xi | E(y): expected value | Simulatable, decomposable | Interpretability depends on link | function g(z), the selected fi(xi) | and the sparseness of [w1, . . . , wN] | y | Training | dataset | Training | dataset | Training | dataset | Training | dataset | x1 | x2 | y | p(y|x1, x2) \u221dp(y|x1)p(y|x2) | xi | p(y|xi) | to assess the contribution of each variable | The independence assumption permits | Simulatable, decomposable | Algorithmic transparency (distribution \ufb01tting) | (a) | (b) | (c) | (d) | (e) | (f) | Class | Class | Class | Class | ? | ? | ? | ? | ? | ?",
+    "bbox": [
+      99.1,
+      99.9,
+      513.9,
+      353.2
+    ]
+  },
+  {
+    "file": "p019_f06.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "Figure 6: Taxonomy of the reviewed literature and trends identified for explainability techniques related to different ML models. References boxed in blue, green and red correspond to XAI techniques using image, text or tabular data, respectively. In order to build this taxonomy, the literature has been analyzed in depth to discriminate whether a post-hoc technique can be seamlessly applied to any ML model, even if, e.g., explicitly mentions Deep Learning in its title and/or abstract.",
+    "width": 753,
+    "height": 963,
+    "description": "This figure is a taxonomy of explainability techniques for different machine learning models. It categorizes techniques into model-agnostic, model-specific, and post-hoc explainability. Techniques are further classified by their approach, such as rule-based learners, decision trees, and feature relevance explanations. The figure includes references to studies that use image, text, or tabular data.\n\nKey terms: Taxonomy, Explainability Techniques, Machine Learning Models, Model-Agnostic, Model-Specific, Post-Hoc Explainability, Rule-based Learners, Decision Trees, Feature Relevance Explanations, References, Image, Text, Tabular Data.",
+    "pdf_text": "XAI in ML | Transparent Models | Logistic / Linear Regression | Decision Trees | K-Nearest Neighbors | Rule-base Learners | General Additive Models: | [44] | Bayesian Models: | [31, 49, 209, 210] | Post-Hoc Explainability | Model-Agnostic | Explanation by simpli\ufb01cation | Rule-based learner: | [32, 51, 120, 190, 211, 212, 213, 214, 215, 216] | Decision Tree: | [21, 119, 133, 135, 149, 217, 218] | Others: | [56, 219] | Feature relevance explanation | In\ufb02uence functions: | [173, 220, 221] | Sensitivity: | [222, 223] | Game theory inspired: | [224, 225] [226] | Saliency: | [85, 227] | Interaction based: | [123, 228] | Others: | [140, 141, 229, 230, 231] | Local Explanations | Rule-based learner: | [32, 216] | Decision Tree: | [232, 233] | Others: | [67, 224, 230, 234, 235, 236, 237] | Visual explanation | Conditional / Dependence / Shapley plots: | [56, 224, 238, 239] | Sensitivity / Saliency: | [85, 227] [222, 223] | Others: | [117, 123, 140, 178, 234] | Model-Speci\ufb01c | Ensembles and Multiple Classi\ufb01er Systems | Explanation by simpli\ufb01cation | Decision Tree/Prototype: | [84, 118, 122] | Feature relevance explanation | Feature importance / contribution: | [103, 104, 240, 241] | Visual explanation | Variable importance / attribution: | [104, 241] [242, 243] | Support Vector Machines | Explanation by simpli\ufb01cation | Rule-based learner: | [57, 93, 94, 98, 106, 134, 244, 245, 246] | Probabilistic: | [247, 248] | Others: | [102] | Feature relevance explanation | Feature Contribution / Statistics: | [249] [116, 249] | Visual explanation | Internal visualization: | [68, 77, 250] | Multi-Layer Neural Networks | Explanation by simpli\ufb01cation | Rule-based learner: | [82, 83, 147, 148, 251, 252, 253, 254, 255, 256] | Decision Tree: | [21, 56, 79, 81, 97, 135, 257, 258, 259] | Others: | [80] | Feature relevance explanation | Importance/Contribution: | [60, 61, 110, 260, 261] | Sensitivity / Saliency: | [260] | [262] | Local explanation | Decision Tree / Sensitivity: | [233] [263] | Explanation by Example | Activation clusters: | [264, 144] | Text explanation | Caption generation: | [111] [150] | Visual explanation | Saliency / Weights: | [265] | Architecture modi\ufb01cation | Others: | [264] [266] | [267] | Convolutional Neural Networks | Explanation by simpli\ufb01cation | Decision Tree: | [78] | Feature relevance explanation | Activations: | [72, 268] [46] | Feature Extraction: | [72, 268] | Visual explanation | Filter / Activation: | [63, 136, 137, 142, 152, 269, 270, 271] | Sensitivity / Saliency: | [131, 272] [46] | Others: | [273] | Architecture modi\ufb01cation | Layer modi\ufb01cation: | [143, 274, 275] | Model combination: | [91, 274, 276] | Attention networks: | [107, 114, 277, 278] [91] | Loss modi\ufb01cation: | [276] [113] | Others: | [279] | Recurrent Neural Networks | Explanation by simpli\ufb01cation | Rule-based learner: | [146] | Feature relevance explanation | Activation propagation: | [280] | Visual explanation | Activations: | [281] | Arquitecture modi\ufb01cation | Loss / Lay",
+    "bbox": [
+      116.8,
+      97.5,
+      493.7,
+      578.9
+    ]
+  },
+  {
+    "file": "p025_f07.png",
+    "page": 25,
+    "kind": "picture",
+    "caption": "(a) Heatmap [168]",
+    "width": 147,
+    "height": 199,
+    "description": "## Search Index Section 1: Figure Description\nThis figure is a heatmap visualization of a dog, likely created using thermal imaging technology. The dog is depicted in various colors, with red and yellow indicating warmer areas and blue indicating cooler areas. The dog's face, ears, and paws appear to be the warmest, while the rest of its body is cooler. The image is abstract and does not provide specific numerical data.\n\n## Search Index Section 2: Figure Text\nHeatmap, dog, thermal imaging, warm areas (red, yellow), cool areas (blue), face, ears, paws, warmest, body, cooler, abstract, no numerical data.",
+    "pdf_text": "",
+    "bbox": [
+      102.3,
+      300.2,
+      176.0,
+      399.3
+    ]
+  },
+  {
+    "file": "p025_f08.png",
+    "page": 25,
+    "kind": "picture",
+    "caption": "",
+    "width": 394,
+    "height": 211,
+    "description": "## Figure Description\nThe figure contains two images. The left image shows a photograph of a golden retriever puppy and a kitten sitting on grass. The right image is a pixelated, abstract representation of an image, likely a visualization of an attention map or feature map from a machine learning model.\n\n## Text in Figure\n- (b) Attribution [293]",
+    "pdf_text": "(b) Attribution [293]",
+    "bbox": [
+      195.4,
+      300.3,
+      392.4,
+      406.1
+    ]
+  },
+  {
+    "file": "p025_f09.png",
+    "page": 25,
+    "kind": "picture",
+    "caption": "",
+    "width": 197,
+    "height": 196,
+    "description": "## Search Index Section 1: Figure Description\n\nThis figure depicts a visual representation of an explainable artificial intelligence (XAI) model. It shows a dog with a colorful, glowing pattern on its head, symbolizing the model's interpretability and transparency. The dog is standing on a purple surface, possibly indicating a futuristic or technological setting. The glowing pattern on the dog's head represents the model's ability to provide insights and explanations for its decisions.\n\n## Search Index Section 2: Text in Figure\n\n- Colorful glowing pattern on dog's head\n- Purple surface\n- Symbolizes interpretability and transparency\n- Model's ability to provide insights and explanations",
+    "pdf_text": "",
+    "bbox": [
+      411.4,
+      300.5,
+      509.9,
+      398.5
+    ]
+  },
+  {
+    "file": "p026_f10.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "",
+    "width": 190,
+    "height": 193,
+    "description": "## Figure Description:\nThe image is an abstract, colorful, and somewhat blurry representation of a complex system or process. It features a central, multicolored circular structure with radiating lines and patterns, suggesting a dynamic and interconnected system. The colors range from blues and greens to yellows and pinks, indicating various components or states within the system.\n\n## Text in Figure:\n- No specific words or printed values are visible in the image. The focus is on the abstract, colorful patterns and the overall visual representation of a complex system.",
+    "pdf_text": "",
+    "bbox": [
+      143.3,
+      337.6,
+      238.6,
+      434.2
+    ]
+  },
+  {
+    "file": "p026_f11.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "",
+    "width": 194,
+    "height": 204,
+    "description": "Section 1: Figure description\nThis figure is an abstract representation of a complex network, possibly illustrating the interconnectedness of various components in a system. The network is composed of nodes and edges, with nodes represented by circles and edges by lines connecting them. The colors and patterns within the nodes and edges suggest a dynamic and evolving system.\n\nSection 2: Text in figure\n(b) Ch | l",
+    "pdf_text": "(b) Ch | l",
+    "bbox": [
+      257.4,
+      337.1,
+      354.3,
+      439.0
+    ]
+  },
+  {
+    "file": "p026_f12.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "",
+    "width": 195,
+    "height": 196,
+    "description": "## Figure Description\nThis figure is an abstract, artistic representation of multiple faces, likely depicting a concept related to artificial intelligence or machine learning. The faces are arranged in a circular pattern, with each face having distinct features and expressions. The background is a combination of green and blue colors, possibly symbolizing different aspects of AI or technology.\n\n## Text in Figure\n- Multiple faces with distinct features and expressions\n- Circular arrangement of faces\n- Green and blue background\n- Possible symbolism of AI or technology",
+    "pdf_text": "",
+    "bbox": [
+      373.5,
+      337.5,
+      470.9,
+      435.3
+    ]
+  },
+  {
+    "file": "p026_f13.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "(a) Original image",
+    "width": 195,
+    "height": 195,
+    "description": "Section 1: Figure description\nThis figure is an image showing a dog wearing a hat and playing a guitar. The dog is sitting on the floor and holding the guitar with its paws. The guitar has a strap around the dog's body. The dog's face is visible, and it appears to be smiling.\n\nSection 2: Text in figure\n- Hat\n- Guitar\n- Strap\n- Dog\n- Floor\n- Paws\n- Face\n- Smiling",
+    "pdf_text": "",
+    "bbox": [
+      118.3,
+      492.3,
+      215.9,
+      590.1
+    ]
+  },
+  {
+    "file": "p026_f14.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "",
+    "width": 197,
+    "height": 197,
+    "description": "## Description\nThe figure is a graphical representation of an acoustic guitar, with a p-value of 0.24. It shows a 3D model of a guitar with a gray background. The guitar has a black body and a white neck, with a black pickguard and a black and white headstock. The guitar's strings are visible, and the guitar's body has a black and white design.\n\n## Text in figure\n- Acoustic Guitar\n- p = 0.24",
+    "pdf_text": "",
+    "bbox": [
+      383.3,
+      492.4,
+      482.0,
+      590.8
+    ]
+  },
+  {
+    "file": "p026_f15.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "Figure 8: Feature visualization at different levels of a certain network [293].",
+    "width": 197,
+    "height": 197,
+    "description": "## Description\nThe figure is a visualization of features at different levels of a neural network, specifically for an electric guitar. It shows a distorted image of a hand playing an electric guitar, with the text \"Electric Guitar p = 0.32\" overlayed. The image is intentionally blurred to represent the feature visualization technique.\n\n## Text in figure\n- Electric Guitar\n- p = 0.32",
+    "pdf_text": "",
+    "bbox": [
+      244.7,
+      492.2,
+      343.0,
+      590.7
+    ]
+  },
+  {
+    "file": "p028_f16.png",
+    "page": 28,
+    "kind": "picture",
+    "caption": "Figure 10: Pictorial representation of a hybrid model. A neural network considered as a black-box can be explained by associating it to a more interpretable model such as a Decision Tree [306], a (fuzzy) rule-based system [19] or KNN [264].",
+    "width": 665,
+    "height": 171,
+    "description": "Section 1: Figure description\nThis figure is a diagram showing a hybrid model for explainable artificial intelligence. It depicts a black-box machine learning model that makes predictions, which are then explained using transparent design methods such as Decision Trees, fuzzy rule-based learning, and KNN.\n\nSection 2: Text in figure\nText in figure: Black-box, ML model, M\u03d5, x, y, Transparent design methods, Decision Tree, (Fuzzy) rule-based learning, KNN, Prediction, Explanation",
+    "pdf_text": "M\u03d5 | Black-box | ML model | x | y | Transparent design methods | \u2022 Decision Tree | \u2022 (Fuzzy) rule-based learning | \u2022 KNN | Prediction | Explanation",
+    "bbox": [
+      139.0,
+      159.3,
+      471.6,
+      245.2
+    ]
+  },
+  {
+    "file": "p029_f17.png",
+    "page": 29,
+    "kind": "picture",
+    "caption": "Figure 11: (a) Alternative Deep Learning specific taxonomy extended from the categorization from [13]; and (b) its connection to the taxonomy in Figure 6.",
+    "width": 830,
+    "height": 475,
+    "description": "Figure type: Taxonomy diagram\nDescription: The figure presents a taxonomy of Explainable Artificial Intelligence (XAI) in the context of Deep Learning (DL) and Machine Learning (ML). It shows various categories and subcategories related to XAI, including \"Explanation of Deep Network Processing,\" \"Explanation of Deep Network Representation,\" and \"Explanation Producing Systems.\" It also connects these categories to a broader taxonomy of XAI in ML.\n\nText in figure: \"XAI in DL,\" \"Explanation of Deep Network Processing,\" \"Explanation of Deep Network Representation,\" \"Explanation Producing Systems,\" \"Attention Networks,\" \"Representation Disentanglement,\" \"Explanation Generation,\" \"Hybrid Transparent and Black-box Methods,\" \"Neural-symbolic Systems,\" \"KB-enhanced Systems,\" \"Deep Formulation,\" \"Relational Reasoning,\" \"Case-base Reasoning,\" \"Simplification,\" \"Local Explanation,\" \"Text Explanation,\" \"Feature Relevance,\" \"Architecture Modification,\" \"Visual explanation,\" \"XAI in ML,\" \"Hybrid Transparent and Black-box Methods,\" \"Transparent Models,\" \"Explanation by Example\"",
+    "pdf_text": "XAI in DL | Explanation of Deep | Network Processing | Linear Proxy Models | [32] | Decision Trees | [82, 257, 258, 259] | Automatic-Rule Extraction | [217, 251, 252, 253, 254, 255, 256, 319, 320, 321] | Salience Mapping | [96, 136, 261, 262, 272, 280, 322, 323] | Explanation of Deep | Network Representation | Role of Layers | [324, 325] | Role of IndividualUnits | [125, 326, 327, 328, 329] | Role of RepresentationVectors | [144] | Explanation Producing | Systems | Attention Networks | [267, 278, 330, 331, 332, 333, 334] | Representation Disentanglement | [113, 279, 335, 336, 337, 338, 339, 340, 341, 342] | Explanation Generation | [276, 343, 344, 345] | Hybrid Transparent | and Black-box Methods | Neural-symbolic Systems | [297, 298, 299, 300] | KB-enhanced Systems | [24, 169, 301, 308, 309, 310] | Deep Formulation | [264, 302, 303, 304, 305] | Relational Reasoning | [75, 312, 313, 314] | Case-base Reasoning | [316, 317, 318] | Explanation of Deep | Explanation Producing | Learning Representation | Explanation of Deep | Network Processing | Systems | Simpli\ufb01cation | Local Explanation | Text Explanation | Feature Relevance | Architecture Modi\ufb01cation | Visual explanation | XAI in DL | XAI in ML | Hybrid Transparent and | Black-box Methods | Transparent Models | (Fig. 11.a) | (Fig. 6) | Explanation by Example | (a) | (b)",
+    "bbox": [
+      98.8,
+      133.7,
+      513.9,
+      371.0
+    ]
+  },
+  {
+    "file": "p031_f18.png",
+    "page": 31,
+    "kind": "picture",
+    "caption": "Figure 12: Trade-off between model interpretability and performance, and a representation of the area of improvement where the potential of XAI techniques and tools resides.",
+    "width": 618,
+    "height": 354,
+    "description": "Description: This figure is a scatter plot showing the trade-off between model interpretability and model accuracy. The x-axis represents model interpretability, ranging from low to high, while the y-axis represents model accuracy, also ranging from low to high. The plot includes various machine learning models and techniques, such as Deep Learning, SVM, Ensembles, Bayesian Models, Decision Trees, Generalized Models, Linear/Logistic Regression, kNN, Additive Models, and Rule-based learning.\n\nText in figure: Model interpretability, Model accuracy, Low, High, Model, SVM, Ensembles, Bayesian Models, Decision Trees, Generalized Models, Linear/Logistic Regression, kNN, Additive Models, Rule-based learning, Learning, Deep, Post-hoc explainability techniques, Interpretability-driven model designs, Hybrid modelling approaches, New explainability-preserving modelling approaches, Interpretable feature engineering, XAI\u2019s future research arena.",
+    "pdf_text": "Model interpretability | Model | SVM | Ensembles | Bayesian Models | Decision Trees | Generalized | Models | Linear/Logistic | kNN | Additive | Regression | Rule-based | learning | Learning | Deep | Model accuracy | Post-hoc explainability techniques | Interpretability-driven model designs | Hybrid modelling approaches | New explainability-preserving modelling approaches | Interpretable feature engineering | XAI\u2019s future | research arena | Low | High | Low | High",
+    "bbox": [
+      150.8,
+      98.8,
+      460.0,
+      276.0
+    ]
+  },
+  {
+    "file": "p042_f19.png",
+    "page": 42,
+    "kind": "picture",
+    "caption": "Figure 13: Diagrams showing different levels at which data fusion can be performed: (a) data level; (b) model level; (c) knowledge level; (d) Big Data fusion; (e) Federated Learning and (f) Multiview Learning.",
+    "width": 832,
+    "height": 408,
+    "description": "Description: The figure is a diagram showing different levels at which data fusion can be performed in machine learning. It includes six panels labeled (a) to (f), each illustrating a different method: (a) data level fusion, (b) model level fusion, (c) knowledge level fusion, (d) Big Data fusion, (e) Federated Learning, and (f) Multiview Learning.\n\nText in figure: D1, D2, DN,..., Data Fusion technique, Model Fusion, Knowledge extractor, Knowledge Fusion, KB, ML, DF, Di,..., (a), (b), (c),..., ML, KB,..., Predictions, Knowledge Base, Fused data, i-th dataset, Split, Map, Reduce, W1, W2, W3, WN, R, ML1, ML2, MLN,..., View 1, View 2, View 3, View V,..., ML1, ML2, ML3, MLV,..., Joint optimization, + Fusion, Client-server delivery, Server side, Remote clients, Aggregation, Secure, encrypted model, model update, information (e.g. gradients)",
+    "pdf_text": "D1 | D2 | DN | ... | D1 | D2 | DN | ... | (d) | (e) | (f) | ... | ... | W1 | Split | W2 | W3 | WN | Map | Reduce | R | \u223cML | ML1 | ML2 | MLN | ... | Aggregation | Secure | Client-server | delivery | : encrypted model | : model update | information (e.g. | Server side | Remote clients | gradients) | Wn: n-th worker node | R: reducer node | ... | D1 | D2 | DN | ... | MLN | ... | View 1 | View 2 | View 3 | View V | ... | ML1 | ML2 | ML3 | MLV | ... | Joint optimization | + Fusion | D1 | D2 | DN | DF | D1 | D2 | DN | ML | ML | ML | ML | Data Fusion technique | Model Fusion | ... | ... | ... | D1 | D2 | DN | ... | Knowledge | extractor | Knowledge | extractor | Knowledge | extractor | Knowledge Fusion | KB | ... | ML | KB | Di | DF | ... | (a) | (b) | (c) | : Predictions | : Knowledge Base | : Fused data | : i-th dataset",
+    "bbox": [
+      97.6,
+      100.0,
+      513.7,
+      304.1
+    ]
+  },
+  {
+    "file": "p046_f20.png",
+    "page": 46,
+    "kind": "picture",
+    "caption": "Figure 14: Summary of XAI challenges discussed in this overview and its impact on the principles for Responsible AI.",
+    "width": 829,
+    "height": 308,
+    "description": "## Description\nThis figure is a conceptual diagram illustrating the challenges of Explainable Artificial Intelligence (XAI) and its impact on the principles of Responsible AI. It shows various XAI challenges and how they relate to principles like fairness, privacy, accountability, ethics, transparency, security, and safety. The diagram includes terms such as interpretability, performance, explainability, deep learning, and adversarial machine learning.\n\n## Text in figure\nInterpretability, Performance, XAI, Concepts, Metrics, Achieving, Explainability, Deep Learning, XAI, Output, Confidence, XAI, Data, Fusion, Fairness, Privacy, Accountability, Ethics, Transparency, Security, Safety, Responsible, AI, XAI, Security, Adversarial, ML, Rationale, Explanation, Critical, Data, Studies, Theory, guided Data, Science, Implementation, Guidelines, XAI, Data",
+    "pdf_text": "XAI | Interpretability | versus | Performance | XAI | Concepts | and Metrics | Achieving | Explainability | in Deep | Learning | XAI & | Security: | Adversarial | ML | Rationale | Explanation | & Critical | Data | Studies | Theory | guided Data | Science | Implementation | & Guidelines | XAI and | Output | Confidence | XAI & Data | Fusion | Fairness | Privacy | Accountability | Ethics | Transparency | Security & | Safety | Responsible | AI",
+    "bbox": [
+      99.2,
+      326.6,
+      513.6,
+      480.7
+    ]
+  }
+]

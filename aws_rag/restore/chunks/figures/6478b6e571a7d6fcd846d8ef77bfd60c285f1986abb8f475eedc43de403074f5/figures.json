@@ -1,0 +1,191 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1. Summary of our approach. While standard image models jointly train an image feature extractor and a linear classifier to predict some label, CLIP jointly trains an image encoder and a text encoder to predict the correct pairings of a batch of (image, text) training examples. At test time the learned text encoder synthesizes a zero-shot linear classifier by embedding the names or descriptions of the target dataset's classes.",
+    "width": 974,
+    "height": 345,
+    "description": "Figure type: Diagram\nDescription: The figure is a diagram showing a three-step process for learning transferable visual models from natural language supervision. It includes a contrastive pre-training step, creating a dataset classifier from label text, and using it for zero-shot prediction.\n\nText in figure: \"Contrastive pre-training\", \"Create dataset classifier from label text\", \"Use for zero-shot prediction\", \"Text Encoder\", \"Image Encoder\", \"A photo of a [object]\", \"A photo of a dog\", \"Pepper the aussie pup\""
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2. CLIP is much more efficient at zero-shot transfer than our image caption baseline. Although highly expressive, we found that transformer-based language models are relatively weak at zero-shot ImageNet classification. Here, we see that it learns 3x slower than a baseline which predicts a bag-of-words (BoW) encoding of the text (Joulin et al., 2016). Swapping the prediction objective for the contrastive objective of CLIP further improves efficiency another 4x.",
+    "width": 470,
+    "height": 307,
+    "description": "This figure is a line graph comparing the efficiency of different models in zero-shot ImageNet classification. The x-axis represents the number of images processed, ranging from 2 million to 400 million. The y-axis shows the Zero-Shot ImageNet Accuracy. The green line represents the Bag of Words Contrastive (CLIP) model, which is the highest performing model. The orange line represents the Bag of Words Prediction model, which is the second highest. The blue line represents the Transformer Language Model, which is the lowest performing model. The figure also includes annotations indicating 4x and 3x efficiency.\n\nText in figure: \"Zero-Shot ImageNet Accuracy\", \"Bag of Words Contrastive (CLIP)\", \"Bag of Words Prediction\", \"Transformer Language Model\", \"4x efficiency\", \"3x efficiency\", \"# of images processed\"."
+  },
+  {
+    "file": "p007_f03.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 4. Prompt engineering and ensembling improve zeroshot performance. Compared to the baseline of using contextless class names, prompt engineering and ensembling boost zero-shot classification performance by almost 5 points on average across 36 datasets. This improvement is similar to the gain from using 4 times more compute with the baseline zero-shot method but is 'free' when amortized over many predictions.",
+    "width": 470,
+    "height": 454,
+    "description": "Description: This figure is a line graph comparing the average score of two methods: \"Prompt engineering and ensembling\" and \"Contextless class names (Li et al. 2017)\". The \"Prompt engineering and ensembling\" method shows a higher average score, peaking at 68% for the RN50x64 model. The \"Contextless class names\" method has a lower average score, reaching 61% for the RN50x16 model. The graph highlights a 5-point improvement and a 4x efficiency gain for the \"Prompt engineering and ensembling\" method.\n\nText in figure: RN50, RN101, RN50x4, RN50x16, RN50x64, Prompt engineering and ensembling, Contextless class names (Li et al. 2017), 5 point improvement, 4x efficiency gain, 45, 50, 55, 60, 65, 70."
+  },
+  {
+    "file": "p008_f04.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "",
+    "width": 470,
+    "height": 522,
+    "description": "This figure is a bar chart comparing the performance of various datasets using Zero-Shot CLUIP versus Linear Probe on ResNet50. The datasets are listed along the x-axis, and the change in score percentage is shown on the y-axis. The highest score is StanfordCars with +28.9%, and the lowest is EuroSAT with -37.1%. Other notable datasets include Country211 with +23.2%, Food101 with +22.5%, and Kinetics700 with +14.5%.\n\nText in figure: StanfordCars, Country211, Food101, Kinetics700, SST2, SUN397, UCF101, HatefulMemes, CIFAR10, CIFAR100, STL10, FER2013, Caltech101, ImageNet, OxfordPets, PascalVOC2007, Birdsnap, MNIST, FGVCAircraft, RESISC45, Flowers102, DTD, CLEVRCounts, GTSRB, PatchCamelyon, KITTI Distance, EuroSAT, -37.1, -34.0, -19.5, -18.4, -18.2, -16.6, -12.5, -11.9, -11.3, -10.0, -3.2, +0.5, +1.1, +1.9, +2.0, +2.8, +3.0, +3.0, +3.9, +6.7, +7.7, +7.8, +12.4, +14.5, +22.5, +23.2, +28.9."
+  },
+  {
+    "file": "p009_f05.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 6. Zero-shot CLIP outperforms few-shot linear probes. Zero-shot CLIP matches the average performance of a 4-shot linear classifier trained on the same feature space and nearly matches the best results of a 16-shot linear classifier across publicly available models. For both BiT-M and SimCLRv2, the best performing model is highlighted. Light gray lines are other models in the eval suite. The 20 datasets with at least 16 examples per class were used in this analysis.",
+    "width": 473,
+    "height": 453,
+    "description": "This figure is a line graph comparing the average score of various models in a zero-shot learning task. The x-axis represents the number of labeled training examples per class, ranging from 0 to 16. The y-axis shows the average score percentage. The highest performing model is Linear Probe CLIP, reaching nearly 70% at 16 examples. The lowest is ResNet50, starting at around 30% and reaching about 55% at 16 examples. Other models include Zero-Shot CLIP, BiT-M (ImageNet-21K), and SimCLRv2.\n\nText in figure: \"Linear Probe CLIP\", \"Zero-Shot CLIP\", \"BiT-M (ImageNet-21K)\", \"SimCLRv2\", \"ResNet50\", \"# of labeled training examples per class\", \"Average Score (%)\".\n\n\nDescription: at most 120 words. What conclusions can be drawn from the figure alone.\n\nThe figure shows that Zero-Shot CLIP performs comparably to a 4-shot linear classifier and nearly matches the performance of a 16-shot linear classifier. This suggests that Zero-Shot CLIP can achieve high accuracy with very few labeled examples, making it effective for zero-shot learning tasks. The performance of other models, such as BiT-M and SimCLRv2, improves with more labeled data, but still lags behind Zero-Shot CLIP at lower data points. This indicates that Zero-Shot CLIP's approach to learning from natural language supervision is particularly effective with limited labeled data."
+  },
+  {
+    "file": "p010_f06.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 7. The data efficiency of zero-shot transfer varies widely. Calculating the number of labeled examples per class a linear classifier on the same CLIP feature space requires to match the performance of the zero-shot classifier contextualizes the effectiveness of zero-shot transfer. Values are estimated based on log-linear interpolation of 1, 2, 4, 8, 16-shot and fully supervised results. Performance varies widely from still underperforming a one-shot classifier on two datasets to matching an estimated 184 labeled examples per class.",
+    "width": 468,
+    "height": 405,
+    "description": "This figure is a bar chart showing the number of labeled examples per class required to match the performance of a zero-shot classifier. The highest bar is for FER2013 with 184 examples, and the lowest is for Flowers102 with 0.9 examples. The chart includes datasets like CIFAR10, Food101, OxfordPets, ImageNet, and more, each with varying numbers of examples needed.\n\nText in figure: FER2013, CIFAR10, Food101, OxfordPets, Country211, ImageNet, PCam, SST2, Kinetics700, STL10, CIFAR100, HatefulMemes, StanfordCars, MNIST, SUN397, Caltech101, KITTI Distance, UCF101, Birdsnap, DTD, FGVCAircraft, GTSRB, CLEVRCounts, RESISC45, EuroSAT, Flowers102, Mean: 20.8, Median: 5.4.\n\nDescription: at most 120 words. What is the main point of the figure.\n\nText in figure: The main point of the figure is to illustrate the data efficiency of zero-shot transfer across various datasets. It shows that the number of labeled examples required to match the performance of a zero-shot classifier varies significantly, with some datasets needing as few as 0.9 examples and others needing up to 184 examples. This highlights the effectiveness of zero-shot learning in different contexts.\n\nText in figure: The main point of the figure is to illustrate the data efficiency of zero-shot transfer across various datasets. It shows that the number of labeled examples required to match the performance of a zero-shot classifier varies significantly, with some datasets needing as few as 0.9 examples and others needing up to 184 examples. This highlights the effectiveness of zero-shot learning in different contexts."
+  },
+  {
+    "file": "p010_f07.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 8. Zero-shot performance is correlated with linear probe performance but still mostly sub-optimal. Comparing zero-shot and linear probe performance across datasets shows a strong correlation with zero-shot performance mostly shifted 10 to 25 points lower. On only 5 datasets does zero-shot performance approach linear probe performance ( \u2264 3 point difference).",
+    "width": 472,
+    "height": 407,
+    "description": "This figure is a scatter plot comparing zero-shot performance with linear probe performance across various datasets. The highest zero-shot performance is observed in the \"STL10\" dataset, while the lowest is in the \"CLEVRCounts\" dataset. The correlation coefficient (r) is 0.82, indicating a strong positive correlation. The datasets are labeled on the plot, with \"MNIST\" and \"VOC2007\" being the highest performers in both categories.\n\nText in figure: \"STL10\", \"CIFAR10\", \"Food101\", \"OxfordPets\", \"MNIST\", \"VOC2007\", \"Stanford Cars\", \"CIFAR100\", \"ImageNet\", \"UCF101\", \"Flowers102\", \"RFS15C45\", \"SUN397\", \"SST2\", \"HatefulMemes\", \"Kinetics700\", \"PCAM\", \"EuroSAT\", \"DTD\", \"GTSRB\", \"Birdsnap\", \"FGVCAircraft\", \"Country211\", \"KITTI Distance\", \"CLEVRCounts\", \"r = 0.82\"."
+  },
+  {
+    "file": "p011_f08.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 9. Zero-shot CLIP performance scales smoothly as a function of model compute. Across 39 evals on 36 different datasets, average zero-shot error is well modeled by a log-log linear trend across a 44x range of compute spanning 5 different CLIP models. Lightly shaded lines are performance on individual evals, showing that performance is much more varied despite the smooth overall trend.",
+    "width": 472,
+    "height": 303,
+    "description": "Description: This figure is a log-log plot showing the relationship between model compute (GFLOPs) and zero-shot CLIP performance (error percentage) across 39 evaluations on 36 datasets. The trend is modeled by a linear line, with the RN50 model at the lowest compute (6.1 GFLOPs) and highest error (45%), and the RN50x64 model at the highest compute (265.9 GFLOPs) and lowest error (30%). Individual evaluations are represented by lightly shaded lines, showing more variability despite the overall smooth trend.\n\nText in figure: RN50, RN101, RN50x4, RN50x16, RN50x64, Error (%), Model GFLOPS, 45, 40, 35, 30, 6.1, 9.9, 21.5, 75.3, 265.9"
+  },
+  {
+    "file": "p012_f09.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 10. Linear probe performance of CLIP models in comparison with state-of-the-art computer vision models , including EfficientNet (Tan & Le, 2019; Xie et al., 2020), MoCo (Chen et al., 2020d), Instagram-pretrained ResNeXt models (Mahajan et al., 2018; Touvron et al., 2019), BiT (Kolesnikov et al., 2019), ViT (Dosovitskiy et al., 2020), SimCLRv2 (Chen et al., 2020c), BYOL (Grill et al., 2020), and the original ResNet models (He et al., 2016b). (Left) Scores are averaged over 12 datasets studied by Kornblith et al. (2019). (Right) Scores are averaged over 27 datasets that contain a wider variety of distributions. Dotted lines indicate models fine-tuned or evaluated on images at a higher-resolution than pre-training. See Table 10 for individual scores and Figure 20 for plots for each dataset.",
+    "width": 962,
+    "height": 610,
+    "description": "This figure contains two plots comparing the linear probe performance of various computer vision models. The left plot shows performance averaged over 12 datasets, while the right plot shows performance averaged over 27 datasets. The highest performing model on both plots is CLIP-ViT, with an average score of around 90%. The lowest performing model is ResNet50, with an average score of around 75%. Other models include EfficientNet, MoCo, Instagram-pretrained ResNeXt, BiT, ViT, SimCLRv2, BYOL, and the original ResNet models. Dotted lines indicate models fine-tuned or evaluated on higher-resolution images.\n\nText in figure: \"Linear probe average over Kornblith et al.'s 12 datasets\", \"Linear probe average over all 27 datasets\", \"Average Score (%)\", \"Forward-pass GFLOPS/image\", \"CLIP-ViT\", \"CLIP-ResNet\", \"EfficientNet-NoisyStudent\", \"EfficientNet\", \"MoCo\", \"Instagram-pretrained\", \"SimCLRv2\", \"BYOL\", \"ViT (ImageNet-21k)\", \"BiT-M\", \"BiT-S\", \"ResNet\", \"RN50x16\", \"RN50x64\", \"RN101\", \"RN50\", \"RN101\", \"RN50x4\", \"RN101\", \"RN50x4\", \"RN101\", \"RN50x16\", \"RN50x64\", \"RN101\", \"RN50x16\", \"RN50x64\", \"RN101\", \"RN50x16\", \"RN50x64\", \"RN101\", \"RN50x16\", \"RN50x64\", \"RN101\", \"RN50x16\", \"RN50x64\", \"RN101\", \"RN50x16\", \"RN50x64\", \"RN101\", \"RN50x16\", \"RN50x64\", \"RN101\", \"RN50x16\", \"RN50x64\", \"RN101\", \"RN50x16\", \"RN50x64\", \"RN101\", \"RN50x16\", \"RN50x64\", \"RN101\", \"RN50x16\", \"RN50x64\", \"RN101\", \"RN50x16\", \"RN50x64\", \"RN101\", \"RN50x16\", \"RN50x64\", \"RN101"
+  },
+  {
+    "file": "p013_f10.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 11. CLIP's features outperform the features of the best ImageNet model on a wide variety of datasets. Fitting a linear classifier on CLIP's features outperforms using the Noisy Student EfficientNet-L2 on 21 out of 27 datasets.",
+    "width": 465,
+    "height": 518,
+    "description": "Description: This bar chart compares the performance of CLIP's features against the best ImageNet model on 27 datasets. The x-axis represents the change in score percentage, and the y-axis lists the datasets. The highest score is +23.6% for SSTT2, and the lowest is -3.0% for ImageNet. The datasets are arranged in descending order of score change.\n\nText in figure: SSTT2 +23.6, Country211 +22.7, HatefulMemes +18.8, StanfordCars +15.9, GTSRB +14.7, SUN397 +6.5, Kinetics700 +6.2, RESISC45 +5.1, FER2013 +4.5, Food101 +3.9, FGVCAircraft +3.2, UCF101 +3.1, KITTI +2.3, Distance +1.4, Birdsnap +1.4, Flowers102 +1.3, Caltech101 +1.3, EuroSAT +0.9, MNIST +0.6, DTD +0.5, VOC2007 +0.5, STL10 +0.0, OxfordPets -0.5, CIFAR10 -0.8, PatchCamelyon -1.2, CIFAR100 -1.7, CLEVRCounts -2.4, ImageNet -3.0."
+  },
+  {
+    "file": "p014_f11.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 12. CLIP's features are more robust to task shift when compared to models pre-trained on ImageNet. For both dataset splits, the transfer scores of linear probes trained on the representations of CLIP models are higher than other models with similar ImageNet performance. This suggests that the representations of models trained on ImageNet are somewhat overfit to their task.",
+    "width": 964,
+    "height": 609,
+    "description": "This figure contains two scatter plots comparing the transfer scores of various models against their ImageNet scores. The left plot shows the linear probe average over Kornblith et al.'s 12 datasets, while the right plot shows the average over 26 datasets. The models include CLIP-ViT, CLIP-ResNet, EfficientNet-NoisyStudent, EfficientNet, Instagram, ViT (ImageNet-21k), SimCLRv2, BiT-M, BiT-S, BYOL, and MoCo. The CLIP models, represented by red stars, consistently have higher transfer scores than other models with similar ImageNet scores, indicating more robust features.\n\nText in figure: \"Linear probe average over Kornblith et al.'s 12 datasets\", \"Linear probe average over 26 datasets\", \"Transfer Score (%)\", \"ImageNet Score (%)\", \"CLIP-ViT\", \"CLIP-ResNet\", \"EfficientNet-NoisyStudent\", \"EfficientNet\", \"Instagram\", \"ViT (ImageNet-21k)\", \"SimCLRv2\", \"BiT-M\", \"BiT-S\", \"BYOL\", \"MoCo\", \"ResNet\"."
+  },
+  {
+    "file": "p015_f12.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 13. Zero-shot CLIP is much more robust to distribution shift than standard ImageNet models. (Left) An ideal robust model (dashed line) performs equally well on the ImageNet distribution and on other natural image distributions. Zero-shot CLIP models shrink this 'robustness gap' by up to 75%. Linear fits on logit transformed values are shown with bootstrap estimated 95% confidence intervals. (Right) Visualizing distribution shift for bananas, a class shared across 5 of the 7 natural distribution shift datasets. The performance of the best zero-shot CLIP model, ViT-L/14@336px, is compared with a model that has the same performance on the ImageNet validation set, ResNet-101.",
+    "width": 945,
+    "height": 370,
+    "description": "Figure 13: A graph comparing the robustness of different models to distribution shift. The left panel shows a line graph with three series: Ideal robust model, Zero-shot CLIP, and Standard ImageNet training. The Zero-shot CLIP series is highest, followed by the Ideal robust model, and the Standard ImageNet training is the lowest. The right panel shows a series of images comparing the performance of the best zero-shot CLIP model and a ResNet-101 model on the ImageNet validation set.\n\nFigure text: Ideal robust model, Zero-shot CLIP, Standard ImageNet training, ImageNet, ImageNetV2, ImageNet-R, ObjectNet, ImageNet Sketch, ImageNet-A, ResNet101, ViT-L/14@336px, 76.2, 76.2, 0%, 64.3, 70.1, +5.8%, 37.7, 88.9, +51.2%, 32.6, 72.3, +39.7%, 25.2, 60.2, +35.0%, 2.7, 77.1, +74.4%"
+  },
+  {
+    "file": "p016_f13.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 14. While supervised adaptation to ImageNet increases ImageNet accuracy by 9.2%, it slightly reduces average robustness. (Left) Customizing zero-shot CLIP to each dataset improves robustness compared to using a single static zero-shot ImageNet classifier and pooling predictions across similar classes as in Taori et al. (2020). CLIP models adapted to ImageNet have similar effective robustness as the best prior ImageNet models. (Right) Details of per dataset changes in accuracy for the two robustness interventions. Adapting to ImageNet increases accuracy on ImageNetV2 noticeably but trades off accuracy on several other distributions. Dataset specific zero-shot classifiers can improve accuracy by a large amount but are limited to only a few datasets that include classes which don't perfectly align with ImageNet categories.",
+    "width": 944,
+    "height": 477,
+    "description": "Figure: Two bar charts comparing ImageNet classifier accuracy changes from zero-shot to adapted models. Left chart shows ImageNet accuracy increases from adapting to ImageNet (9.2%) and dataset-specific zero-shot classifiers (+26.9% for YouTube-BB). Right chart shows per-dataset accuracy changes from adapting to ImageNet and dataset-specific zero-shot classifiers. ImageNet accuracy increases by 9.2% from adapting to ImageNet but decreases for other datasets. Dataset-specific zero-shot classifiers improve accuracy by a large amount for some datasets.\n\nText in figure: ImageNet, ImageNetV2, YouTube-BB, ImageNet-Vid, ImageNet-Sketch, ImageNet-R, ImageNet-A, ImageNet-R, ImageNet-V2, ImageNet-0, ImageNet-1, ImageNet-2, ImageNet-3, ImageNet-4, ImageNet-5, ImageNet-6, ImageNet-7, ImageNet-8, ImageNet-9, ImageNet-10, ImageNet-11, ImageNet-12, ImageNet-13, ImageNet-14, ImageNet-15, ImageNet-16, ImageNet-17, ImageNet-18, ImageNet-19, ImageNet-20, ImageNet-21, ImageNet-22, ImageNet-23, ImageNet-24, ImageNet-25, ImageNet-26, ImageNet-27, ImageNet-28, ImageNet-29, ImageNet-30, ImageNet-31, ImageNet-32, ImageNet-33, ImageNet-34, ImageNet-35, ImageNet-36, ImageNet-37, ImageNet-38, ImageNet-39, ImageNet-40, ImageNet-41, ImageNet-42, ImageNet-43, ImageNet-44, ImageNet-45, ImageNet-46, ImageNet-47, ImageNet-48, ImageNet-49, ImageNet-50, ImageNet-51, ImageNet-52, ImageNet-53, ImageNet-54, ImageNet-55, ImageNet-56, ImageNet-57, ImageNet-58, ImageNet-59, ImageNet-60, ImageNet-61, ImageNet-62, ImageNet-63, ImageNet-64, ImageNet-65, ImageNet-66, ImageNet-67, ImageNet-68, ImageNet-69, ImageNet-70, ImageNet-71, ImageNet-72, ImageNet-73, ImageNet-74, ImageNet-75, ImageNet-76, ImageNet-77, ImageNet-78, ImageNet-79, ImageNet-80, ImageNet-81, ImageNet-82, ImageNet-83, ImageNet-84, ImageNet-85, ImageNet-86, ImageNet-87, ImageNet-88, ImageNet-89, ImageNet-90, ImageNet-91, ImageNet"
+  },
+  {
+    "file": "p017_f14.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "Figure 15. Few-shot CLIP also increases effective robustness compared to existing ImageNet models but is less robust than zero-shot CLIP. Minimizing the amount of ImageNet training data used for adaption increases effective robustness at the cost of decreasing relative robustness. 16-shot logistic regression CLIP matches zero-shot CLIP on ImageNet, as previously reported in Figure 7, but is less robust.",
+    "width": 474,
+    "height": 459,
+    "description": "Figure: Scatter plot comparing average on 7 natural datasets (top-1%) to average on class subsampled ImageNet (top-1%).\nSeries: Few-Shot CLIP (best model) is highest, followed by Zero-Shot CLIP (best model), Standard ImageNet training, Robustness intervention, and Trained with more data.\nText: Few-Shot CLIP (best model), Zero-Shot CLIP (best model), Standard ImageNet training, Robustness intervention, Trained with more data, Ideal robust model (y = x), 1 shot, 2 shot, 4 shot, 8 shot, 16 shot, all, 0 shot, 32, 64, 128.\n\nDescription: Scatter plot showing the relationship between average performance on 7 natural datasets and average performance on class subsampled ImageNet. The plot includes data points for different models and interventions, with lines indicating the ideal robust model and the performance of Few-Shot CLIP and Zero-Shot CLIP. The data points are labeled with the number of shots and specific interventions."
+  },
+  {
+    "file": "p018_f15.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "Figure 16. The hardest problems for CLIP also tend to be the hardest problems for humans. Here we rank image categories by difficulty for CLIP as measured as probability of the correct label.",
+    "width": 460,
+    "height": 429,
+    "description": "Description: This figure is a line graph comparing the accuracy of three different models: Zero-Shot CLIP, One-Shot Human, and Zero-Shot Human. The graph ranks image categories by difficulty for CLIP, measured by the probability of the correct label. The Zero-Shot CLIP model starts highest at around 100% accuracy and gradually decreases, ending at around 60%. The One-Shot Human model starts at around 100% and fluctuates, ending at around 40%. The Zero-Shot Human model starts at around 90% and also fluctuates, ending at around 30%.\n\nText in figure: Zero-Shot CLIP, One-Shot Human, Zero-Shot Human, Accuracy (%), pug, sphinx, shorthaired, shiba inu, beagle, great pyrenees, english setter, saint bernard, samoyed, powderhound, welsh terrier, newfoundland, scottish terrier, yorkshire terrier, miniature pinscher, havanese, keeshond, machine learning, basset hound, japanese chin, russian blue, american bulldog, siberian husky, leonberger, abysinian, british shorthair, staffordshire bull terrier, american pit bull terrier, egyptian mau, birman, cocker spaniel, english setter, spaniel."
+  },
+  {
+    "file": "p019_f16.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "Figure 17. Few statistically significant improvements in accuracy due to detected data overlap. (Left) While several datasets have up to \u00b1 20% apparent differences in zero-shot accuracy on detected overlapping vs clean examples only 5 datasets out of 35 total have 99.5% Clopper-Pearson confidence intervals that exclude a 0% accuracy difference. 2 of these datasets do worse on overlapping data. (Right) Since the percentage of detected overlapping examples is almost always in the single digits, the overall test accuracy gain due to overlap is much smaller with the largest estimated increase being only 0.6% on Birdsnap. Similarly, for only 6 datasets are the accuracy improvements statistically significant when calculated using a one-sided binomial test.",
+    "width": 973,
+    "height": 339,
+    "description": "## Figure Description\nThis figure contains two scatter plots. The left plot shows the difference in accuracy on overlapping vs. clean data for various datasets, with the CIFAR-100 dataset showing the highest difference at around 20%. The right plot displays the overall accuracy change due to overlap, with Birdsnap having the highest estimated increase at 0.6%. Both plots use different markers to indicate statistical significance.\n\n## Figure Text\nLeft plot: CIFAR-100, SUN397, ImageNet Sketch, Kinetics-700, SUN, Birdsnap, Stanford Cars, Country211\nRight plot: CIFAR-100, p < 1e-3, p < 0.05, p > 0.05, Birdsnap, SUN397, SUN, Stanford Cars, Country211\nLeft plot values: 20, 10, 0, -10, -20\nRight plot values: 0.75, 0.5, 0.25, 0, -0.25, -0.5, -0.75\nDatasets: CIFAR-100, SUN397, ImageNet Sketch, Kinetics-700, SUN, Birdsnap, Stanford Cars, Country211\nStatistical significance: p < 1e-3, p < 0.05, p > 0.05"
+  },
+  {
+    "file": "p024_f17.png",
+    "page": 24,
+    "kind": "picture",
+    "caption": "Figure 18. CLIP performance on Member of Congress images when given the combined returned label set for the images from Google Cloud Vision, Amazon Rekognition and Microsoft Azure Computer Vision. The 20 most gendered labels for men and women were identified with \u03c7 2 tests with the threshold at 0.5%. Labels are sorted by absolute frequencies. Bars denote the percentage of images for a certain label by gender.",
+    "width": 864,
+    "height": 440,
+    "description": "This figure is a bar chart comparing the top labels for images of men and women, as identified by CLIP performance on Member of Congress images. The chart shows the percentage of images for each label by gender, sorted by absolute frequencies. The labels are divided into two groups: those most associated with women and those most associated with men. The series with the highest percentage is \"man\" for men, reaching nearly 100%, while the lowest is \"blouse\" for women, with a percentage of around 1%. The series with the highest percentage for women is \"woman,\" reaching nearly 100%, while the lowest is \"blouse,\" with a percentage of around 1%.\n\nText in figure: \"woman,\" \"lady,\" \"female,\" \"looking,\" \"senior citizen,\" \"public speaking,\" \"blonde,\" \"spokesperson,\" \"blazer,\" \"laughing,\" \"hot,\" \"magenta,\" \"bob cut,\" \"black hair,\" \"pixie cut,\" \"pink,\" \"bangs,\" \"newsreader,\" \"purple,\" \"blouse,\" \"man,\" \"male,\" \"face,\" \"player,\" \"black,\" \"head,\" \"facial expression,\" \"suit,\" \"photo,\" \"military officer,\" \"walking,\" \"photograph,\" \"elder,\" \"display,\" \"tie,\" \"shoulder,\" \"frown,\" \"kid,\" \"necktie,\" \"yellow,\" \"Women,\" \"Men.\""
+  },
+  {
+    "file": "p038_f18.png",
+    "page": 38,
+    "kind": "picture",
+    "caption": "Figure 19. Two example images from the Rendered SST2 dataset",
+    "width": 861,
+    "height": 409,
+    "description": "Figure type: Image\nDescription: The figure shows two text excerpts from a review of a film. The first excerpt praises the director for his energy and nuanced narrative, while the second excerpt criticizes the filmmakers for their lack of direction and skills.\n\nText in figure: \"Montias... pumps a lot of energy into his nicely nuanced narrative and surrounds himself with a cast of quirky -- but not stereotyped -- street characters.\" \"It's clear the filmmakers weren't sure where they wanted their story to go, and even more clear that they lack the skills to get us to this undetermined destination.\""
+  },
+  {
+    "file": "p041_f19.png",
+    "page": 41,
+    "kind": "picture",
+    "caption": "Figure 20. Linear probe performance plotted for each of the 27 datasets, using the data from Table 10.",
+    "width": 917,
+    "height": 1234,
+    "description": "Description: The figure contains 27 line plots, each showing the performance of various visual models on different datasets. The x-axis represents the number of training steps, and the y-axis shows the accuracy. Each plot includes multiple lines representing different models, with markers and annotations highlighting specific points. The models include CUP-ViT, EfficientNet, Instagram-pretrain, SimCLRv2, BYOL, MoCo, VGG, ResNet, and others. The highest performing model varies by dataset, with CUP-ViT often leading.\n\nText in figure: CUP-ViT, EfficientNet, Instagram-pretrain, SimCLRv2, BYOL, MoCo, VGG, ResNet, Food101, CIFAR10, CIFAR100, Birds, SUN397, StanfordCars, FGVCAircraft, PascalVOC2007, DescribableTextures, OxfordPets, Caltech101, Flowers102, MNIST, STL10, EuroSAT, RESISC45, GTSR, KITTI, ImageNet, PatchCamelyon, HatefulMemes, Kinetics700, CLEVRCounts, Country1211, FLOPs/image, ImageNet."
+  },
+  {
+    "file": "p042_f20.png",
+    "page": 42,
+    "kind": "picture",
+    "caption": "Figure 21. Visualization of predictions from 36 CLIP zero-shot classifiers. All examples are random with the exception of reselecting Hateful Memes to avoid offensive content. The predicted probability of the top 5 classes is shown along with the text used to represent the class. When more than one template is used, the first template is shown. The ground truth label is colored green while an incorrect prediction is colored orange.",
+    "width": 919,
+    "height": 1192,
+    "description": "## Section 1: Figure Description\nThis figure is a visualization of predictions from 36 CLIP zero-shot classifiers. It shows various images with their predicted probabilities for the top 5 classes. The ground truth label is highlighted in green, while incorrect predictions are marked in orange. The text used to represent each class is also displayed.\n\n## Section 2: Figure Content\nText in figure: \"Learning Transferable Visual Models From Natural Language Supervision\", \"Figure 21\", \"Visualization of predictions from 36 CLIP zero-shot classifiers\", \"All examples are random with the exception of reselecting Hateful Memes to avoid offensive content\", \"The predicted probability of the top 5 classes is shown along with the text used to represent the class\", \"When more than one template is used, the first template is shown\", \"The ground truth label is colored green while an incorrect prediction is colored orange\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \"Current label\", \"Current probability\", \"Correct label\", \""
+  },
+  {
+    "file": "p043_f21.png",
+    "page": 43,
+    "kind": "picture",
+    "caption": "Figure 22. CLIP's zero-shot performance compared to linear-probe ResNet performance",
+    "width": 964,
+    "height": 749,
+    "description": "Description: The figure displays a series of plots comparing the zero-shot performance of CLIP with linear-probe ResNet across various datasets. Each plot shows accuracy on the y-axis against the number of GFLOPs per image on the x-axis. The CLIP series is represented by red stars, ResNet by yellow stars, and CLIP-ResNet by green stars. The CLIP series generally shows higher accuracy across most datasets, with the largest differences observed in datasets like ImageNet and Kinetics700.\n\nText in figure: Food101, CIFAR10, CIFAR100, Birdsnap, SUN397, StanfordCars, FGVCAircraft, PascalVOC2007, DescribableTextures, OxfordPets, Caltech101, Flowers102, MNIST, FacialEmotionRecognition2013, STL10, EuroSAT, RESISC45, GTSRB, KITTI, PatchCamelyon, UCF101, Kinetics700, CLEVRCounts, Country211, HatefulMemes, SST2, ImageNet, CLIP-ViT, CLIP-ResNet, ResNet, GFLOPs/image."
+  }
+]

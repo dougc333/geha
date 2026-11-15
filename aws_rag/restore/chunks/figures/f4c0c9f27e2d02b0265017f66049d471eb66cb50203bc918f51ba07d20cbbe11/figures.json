@@ -1,0 +1,155 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "",
+    "width": 165,
+    "height": 232,
+    "description": "## Description\nThis figure displays a white bicycle parked on a bench. The image is labeled with \"InstantNGP (9.2 fps)\" and provides details about the training time and PSNR (Peak Signal-to-Noise Ratio) values. The training time is 7 minutes, and the PSNR is 22.1.\n\n## Text in figure\nInstantNGP (9.2 fps)  \nTrain: 7min  \nPSNR: 22.1"
+  },
+  {
+    "file": "p001_f02.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "",
+    "width": 165,
+    "height": 229,
+    "description": "## Figure Description\nThis figure displays a rendered image of a bicycle using the Plenoxels method. The image shows a white bicycle parked on a grassy area next to a bench. The text overlay indicates the method used (\"Plenoxels (8.2 fps)\") and the training time (26 minutes) along with the Peak Signal-to-Noise Ratio (PSNR) of 21.9.\n\n## Text in Figure\n- Method: Plenoxels (8.2 fps)\n- Train: 26min\n- PSNR: 21.9"
+  },
+  {
+    "file": "p001_f03.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "",
+    "width": 165,
+    "height": 230,
+    "description": "## Figure Description\nThis figure displays a white bicycle parked on a grassy area next to a bench. The bicycle is equipped with a black seat and handlebars. The image is labeled with \"Mip-NeRF360 (0.071 fps)\" and \"Train: 48h, PSNR: 24.3\".\n\n## Text in Figure\n- Mip-NeRF360\n- 0.071 fps\n- Train: 48h\n- PSNR: 24.3"
+  },
+  {
+    "file": "p001_f04.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "",
+    "width": 163,
+    "height": 231,
+    "description": "## Figure Description\nThis figure displays a white bicycle parked on a grassy area next to a bench. The bicycle is equipped with a black handlebar and a black seat. The image is labeled \"Ours (135 fps)\" and includes a caption indicating the training time of 6 minutes and a PSNR (Peak Signal-to-Noise Ratio) value of 23.6.\n\n## Text in Figure\n- \"Ours (135 fps)\"\n- \"Train: 6min\"\n- \"PSNR: 23.6\""
+  },
+  {
+    "file": "p001_f05.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "",
+    "width": 164,
+    "height": 230,
+    "description": "## Figure Description\nThis figure displays a white bicycle parked on a grassy area next to a bench. The bicycle is captured at 93 frames per second (fps). The image also includes a caption that reads \"Ours (93 fps)\" and provides details about the training time and peak signal-to-noise ratio (PSNR): \"Train: 51min, PSNR: 25.2\".\n\n## Text in Figure\n- \"Ours (93 fps)\"\n- \"Train: 51min\"\n- \"PSNR: 25.2\""
+  },
+  {
+    "file": "p001_f06.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Fig. 1. Our method achieves real-time rendering of radiance fields with quality that equals the previous method with the best quality [Barron et al. 2022], while only requiring optimization times competitive with the fastest previous methods [Fridovich-Keil and Yu et al. 2022; M\u00fcller et al. 2022]. Key to this performance is a novel 3D Gaussian scene representation coupled with a real-time differentiable renderer, which offers significant speedup to both scene optimization and novel view synthesis. Note that for comparable training times to InstantNGP [M\u00fcller et al. 2022], we achieve similar quality to theirs; while this is the maximum quality they reach, by training for 51min we achieve state-of-the-art quality, even slightly better than Mip-NeRF360 [Barron et al. 2022].",
+    "width": 164,
+    "height": 233,
+    "description": "Figure Description: This image shows a photograph of a white bicycle parked on a grassy area next to a bench. The bicycle is leaning against the bench, and the image includes the words \"Ground Truth\" in the bottom right corner. The background features trees and a road, suggesting an outdoor setting.\n\nText in Figure: \"Ground Truth\""
+  },
+  {
+    "file": "p005_f07.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Fig. 2. Optimization starts with the sparse SfM point cloud and creates a set of 3D Gaussians. We then optimize and adaptively control the density of this set of Gaussians. During optimization we use our fast tile-based renderer, allowing competitive training times compared to SOTA fast radiance field methods. Once trained, our renderer allows real-time navigation for a wide variety of scenes.",
+    "width": 1011,
+    "height": 185,
+    "description": "Figure type: Diagram showing the process flow of a 3D Gaussian Splatting system.\nDescription: The diagram illustrates the optimization process starting with sparse SfM points, initializing 3D Gaussians, and adaptively controlling their density. It includes components like camera projection, differentiable tile rasterizer, and real-time rendering capabilities.\n\nText in figure: SfM Points, Initialization, 3D Gaussians, Camera, Projection, Differentiable Tile Rasterizer, Adaptive Density Control, Operation Flow, Gradient Flow, Image."
+  },
+  {
+    "file": "p005_f08.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Fig. 3. We visualize the 3D Gaussians after optimization by shrinking them 60% (far right). This clearly shows the anisotropic shapes of the 3D Gaussians that compactly represent complex geometry after optimization. Left the actual rendered image.",
+    "width": 489,
+    "height": 197,
+    "description": "### Description:\nThis figure compares a rendered image with its 3D Gaussian representation. The left image shows the actual rendered scene, while the right image displays the 3D Gaussians after optimization, with a 60% shrinkage. The middle image shows the original Gaussians. The rightmost image highlights the anisotropic shapes of the Gaussians, demonstrating their ability to represent complex geometry.\n\n### Text in figure:\n- Left: \"WE\"\n- Middle: \"Original\"\n- Right: \"Shrunken Gaussians\""
+  },
+  {
+    "file": "p006_f09.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Fig. 4. Our adaptive Gaussian densification scheme. Top row (underreconstruction) : When small-scale geometry (black outline) is insufficiently covered, we clone the respective Gaussian. Bottom row (over-reconstruction) : If small-scale geometry is represented by one large splat, we split it in two.",
+    "width": 459,
+    "height": 265,
+    "description": "## Description\nThis figure illustrates an adaptive Gaussian densification scheme for 3D Gaussian Splatting. It shows two processes: under-reconstruction and over-reconstruction. In under-reconstruction, when small-scale geometry is insufficiently covered, the respective Gaussian is cloned. In over-reconstruction, if small-scale geometry is represented by one large splat, it is split into two.\n\n## Text in figure\nUnder-Reconstruction\nClone\nOptimization Continues\n\nOver-Reconstruction\nSplit\nOptimization Continues"
+  },
+  {
+    "file": "p007_f10.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Fig. 5. We show comparisons of ours to previous methods and the corresponding ground truth images from held-out test views. The scenes are, from the top down: Bicycle, Garden, Stump, Counter and Room from the Mip-NeRF360 dataset; Playroom, DrJohnson from the Deep Blending dataset [Hedman et al. 2018] and Truck and Train from Tanks&Temples. Non-obvious differences in quality highlighted by arrows/insets.",
+    "width": 1003,
+    "height": 1141,
+    "description": "## Figure Description\nThis figure displays a comparison of 3D Gaussian Splatting against previous methods and ground truth images from various datasets. It includes eight scenes: Bicycle, Garden, Stump, Counter, Room, Playroom, DrJohnson, and Truck and Train. Each scene is shown in multiple views, highlighting differences in quality.\n\n## Text in Figure\nBicycle, Garden, Stump, Counter, Room, Playroom, DrJohnson, Truck, Train, Mip-NeRF360, Deep Blending, Tanks&Temples, 3D Gaussian Splatting, previous methods, ground truth, arrows, insets."
+  },
+  {
+    "file": "p008_f11.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Fig. 6. For some scenes (above) we can see that even at 7K iterations ( \u223c 5min for this scene), our method has captured the train quite well. At 30K iterations ( \u223c 35min) the background artifacts have been reduced significantly. For other scenes (below), the difference is barely visible; 7K iterations ( \u223c 8min) is already very high quality.",
+    "width": 486,
+    "height": 292,
+    "description": "Figure Description: The figure displays two sets of images comparing the visual quality of a scene rendered using a 3D Gaussian Splatting method at 7K and 30K iterations. The top set shows a train, while the bottom set shows a garden scene with a table and plants. Each set has two images labeled with the number of iterations and the approximate rendering time.\n\nText in Figure: \"7K iterations\", \"30K iterations\", \"\u223c 5min\", \"\u223c 35min\", \"\u223c 8min\""
+  },
+  {
+    "file": "p010_f12.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Fig. 7. Initialization with SfM points helps. Above: initialization with a random point cloud. Below: initialization using SfM points.",
+    "width": 488,
+    "height": 384,
+    "description": "Description: The figure shows two sets of images comparing the initialization of a 3D model using random points versus using Structure from Motion (SfM) points. The top set of images shows the model initialized with random points, while the bottom set shows the model initialized with SfM points. The images demonstrate the improved accuracy and detail of the model when initialized with SfM points.\n\nText in figure: Random, SfM"
+  },
+  {
+    "file": "p010_f13.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Fig. 8. Ablation of densification strategy for the two cases \"clone\" and \"split\" (Sec. 5).",
+    "width": 486,
+    "height": 583,
+    "description": "Figure type: Image comparison\nDescription: The figure shows three different densification strategies for rendering a bicycle image using 3D Gaussian Splatting. The strategies are \"No Split-5k\", \"No Clone-5k\", and \"Full-5k\". Each strategy is applied to the same bicycle image, resulting in three different rendered images. The \"No Split-5k\" and \"No Clone-5k\" strategies show less detail and more artifacts compared to the \"Full-5k\" strategy, which provides the most detailed and artifact-free rendering.\n\nText in figure: No Split-5k, No Clone-5k, Full-5k"
+  },
+  {
+    "file": "p010_f14.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Fig. 9. If we limit the number of points that receive gradients, the effect on visual quality is significant. Left: limit of 10 Gaussians that receive gradients. Right: our full method.",
+    "width": 482,
+    "height": 156,
+    "description": "## Figure Description\nThis figure compares two images of a wooden table with a vase on it. The left image shows a table with a blurred effect, indicating a limitation of 10 Gaussians receiving gradients. The right image shows a clearer, more detailed version of the same table, representing the full method.\n\n## Text in Figure\n- Left image caption: \"limit of 10 Gaussians that receive gradients\"\n- Right image caption: \"our full method\""
+  },
+  {
+    "file": "p011_f15.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Fig. 10. We train scenes with Gaussian anisotropy disabled and enabled. The use of anisotropic volumetric splats enables modelling of fine structures and has a significant impact on visual quality. Note that for illustrative purposes, we restricted Ficus to use no more than 5k Gaussians in both configurations.",
+    "width": 1010,
+    "height": 197,
+    "description": "## Description\nThis figure displays a comparison of 3D Gaussian splatting techniques in rendering scenes. It shows three different renderings of a potted plant and a car, each labeled as \"Ground Truth\", \"Full\", and \"Isotropic\". The \"Full\" and \"Isotropic\" renderings demonstrate the impact of anisotropic volumetric splats on visual quality, highlighting fine structures.\n\n## Text in figure\nGround Truth, Full, Isotropic, Ground Truth, Full, Isotropic, Ground Truth, Full, Isotropic"
+  },
+  {
+    "file": "p011_f16.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Fig. 11. Comparison of failure artifacts: Mip-NeRF360 has 'floaters' and grainy appearance (left, foreground), while our method produces coarse, anisoptropic Gaussians resulting in low-detail visuals (right, background). Train scene.",
+    "width": 483,
+    "height": 133,
+    "description": "## Figure Description\nThis figure compares two rendering methods for a train scene. The left image shows artifacts from Mip-NeRF360, characterized by 'floaters' and a grainy appearance. The right image shows artifacts from the proposed method, which produces low-detail visuals with coarse, anisotropic Gaussians.\n\n## Text in Figure\n- Mip-NeRF360: 'floaters' and grainy appearance\n- Proposed method: coarse, anisotropic Gaussians, low-detail visuals\n- Train scene comparison"
+  },
+  {
+    "file": "p011_f17.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Fig. 12. In views that have little overlap with those seen during training, our method may produce artifacts (right). Again, Mip-NeRF360 also has artifacts in these cases (left). DrJohnson scene.",
+    "width": 482,
+    "height": 157,
+    "description": "## Figure Description\nThis figure displays two images side by side, comparing the rendering results of two different methods. The left image shows artifacts in the rendering, while the right image, produced by the proposed method, also exhibits artifacts but in a different manner. Both images depict a room with wooden floors, green walls, and various furniture items, including a table, chairs, and a radiator.\n\n## Text in Figure\n- DrJohnson scene\n- Mip-NeRF360\n- Our method"
+  }
+]

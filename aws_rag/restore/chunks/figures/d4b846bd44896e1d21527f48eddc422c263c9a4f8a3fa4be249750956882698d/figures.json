@@ -1,0 +1,119 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Fig. 1: DETR directly predicts (in parallel) the final set of detections by combining a common CNN with a transformer architecture. During training, bipartite matching uniquely assigns predictions with ground truth boxes. Prediction with no match should yield a ' no object ' ( \u2205 ) class prediction.",
+    "width": 690,
+    "height": 122,
+    "description": "This figure is a diagram showing the architecture of the DETR model for object detection. It consists of a CNN, a transformer encoder-decoder, and a bipartite matching loss. The input image is processed by the CNN to extract features, which are then fed into the transformer encoder-decoder to generate box predictions. The bipartite matching loss is used during training to assign predictions to ground truth boxes. The figure shows the flow of data from the input image to the final set of detections."
+  },
+  {
+    "file": "p007_f02.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Fig. 2: DETR uses a conventional CNN backbone to learn a 2D representation of an input image. The model flattens it and supplements it with a positional encoding before passing it into a transformer encoder. A transformer decoder then takes as input a small fixed number of learned positional embeddings, which we call object queries , and additionally attends to the encoder output. We pass each output embedding of the decoder to a shared feed forward network (FFN) that predicts either a detection (class and bounding box) or a ' no object ' class.",
+    "width": 693,
+    "height": 170,
+    "description": "Figure type: Diagram\nDescription: The diagram illustrates the architecture of the DETR model for object detection. It shows a conventional CNN backbone that processes the input image to create a 2D representation. This representation is flattened and combined with positional encoding before being passed into a transformer encoder. The transformer decoder takes a fixed number of learned positional embeddings (object queries) and attends to the encoder output. Each output embedding from the decoder is processed by a shared feed-forward network (FFN) to predict either a detection (class and bounding box) or a 'no object' class.\n\nText in figure: \"backbone\", \"encoder\", \"decoder\", \"prediction heads\", \"set of image features\", \"CNN\", \"transformer encoder\", \"transformer decoder\", \"positional encoding\", \"object queries\", \"FFN\", \"class, box\", \"no object\", \"class, box\", \"no object\""
+  },
+  {
+    "file": "p011_f03.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Fig. 3: Encoder self-attention for a set of reference points. The encoder is able to separate individual instances. Predictions are made with baseline DETR model on a validation set image.",
+    "width": 687,
+    "height": 234,
+    "description": "Description: The figure shows a visual representation of the encoder self-attention mechanism in a DETR model. It displays how the model separates individual instances in an image. The image in the center depicts a scene with cows, and the surrounding images show the self-attention maps for different reference points. The red arrows indicate the attention from one point to another.\n\nText in figure: self-attention[430, 600], self-attention[450, 830], self-attention[520, 450], self-attention[440, 1200]"
+  },
+  {
+    "file": "p012_f04.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Fig. 4: AP and AP 50 performance after each decoder layer. A single long schedule baseline model is evaluated. DETR does not need NMS by design, which is validated by this figure. NMS lowers AP in the final layers, removing TP predictions, but improves AP in the first decoder layers, removing double predictions, as there is no communication in the first layer, and slightly improves AP 50 .",
+    "width": 324,
+    "height": 240,
+    "description": "This figure is a line graph showing the Average Precision (AP) and AP 50 performance of a model after each decoder layer. The graph compares four series: AP No NMS, AP NMS=0.7, AP 50 No NMS, and AP 50 NMS=0.7. The AP No NMS series is the highest, followed by AP NMS=0.7, AP 50 No NMS, and AP 50 NMS=0.7. The AP No NMS series peaks at around 62, while the AP 50 NMS=0.7 series is the lowest, peaking at around 42.\n\nText in figure: AP, AP 50, AP No NMS, AP NMS=0.7, AP 50 No NMS, AP 50 NMS=0.7, decoder layer."
+  },
+  {
+    "file": "p012_f05.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Fig. 5: Out of distribution generalization for rare classes. Even though no image in the training set has more than 13 giraffes, DETR has no difficulty generalizing to 24 and more instances of the same class.",
+    "width": 245,
+    "height": 212,
+    "description": "Figure Description: The image displays a series of detections made by the DETR model on images containing giraffes. Each row represents a different image, with detections highlighted by colored bounding boxes. The detections are labeled with the word \"giraffe\" and a confidence score percentage. The colors of the bounding boxes vary, indicating different confidence levels.\n\nText in Figure: \"giraffe 97%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \"giraffe 99%\", \""
+  },
+  {
+    "file": "p013_f06.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Fig. 6: Visualizing decoder attention for every predicted object (images from COCO val set). Predictions are made with DETR-DC5 model. Attention scores are coded with different colors for different objects. Decoder typically attends to object extremities, such as legs and heads. Best viewed in color.",
+    "width": 642,
+    "height": 299,
+    "description": "Figure Description: The figure shows two images of animals with bounding boxes and attention heatmaps. The left image depicts an elephant with a baby elephant, both with bounding boxes and attention heatmaps. The right image shows two zebras with bounding boxes and attention heatmaps. The attention heatmaps are color-coded to indicate the focus of the model's attention.\n\nText in Figure: \"elephant 100%\", \"elephant 100%\", \"zebra\", \"zebra\", \"zebra\", \"zebra\"."
+  },
+  {
+    "file": "p014_f07.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Fig. 7: Visualization of all box predictions on all images from COCO 2017 val set for 20 out of total N = 100 prediction slots in DETR decoder. Each box prediction is represented as a point with the coordinates of its center in the 1-by-1 square normalized by each image size. The points are color-coded so that green color corresponds to small boxes, red to large horizontal boxes and blue to large vertical boxes. We observe that each slot learns to specialize on certain areas and box sizes with several operating modes. We note that almost all slots have a mode of predicting large image-wide boxes that are common in COCO dataset.",
+    "width": 687,
+    "height": 132,
+    "description": "Figure: A series of 20 visualizations showing box predictions on the COCO 2017 validation set. Each visualization represents 20 out of 100 prediction slots in the DETR decoder. Points are color-coded: green for small boxes, red for large horizontal boxes, and blue for large vertical boxes. The points are plotted in a normalized 1-by-1 square.\n\nText in figure: No specific text in the figure. The visualizations show the distribution and specialization of box predictions across different slots."
+  },
+  {
+    "file": "p015_f08.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Fig. 8: Illustration of the panoptic head. A binary mask is generated in parallel for each detected object, then the masks are merged using pixel-wise argmax.",
+    "width": 691,
+    "height": 216,
+    "description": "Description: The figure illustrates the process of generating a binary mask for each detected object in an image, using an end-to-end object detection model with transformers. It shows the input image, encoded image, ResNet features, multi-head attention, FPN-style CNN, and the final pixel-wise argmax to merge the masks.\n\nText in figure: Input image, Encoded image, ResNet features, Multi head attention, FPN-style CNN, Box embeddings, Attention maps, Masks logits, Pixel-wise argmax, cow, tree, grass."
+  },
+  {
+    "file": "p015_f09.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Fig. 9: Qualitative results for panoptic segmentation generated by DETR-R101. DETR produces aligned mask predictions in a unified manner for things and stuff.",
+    "width": 687,
+    "height": 188,
+    "description": "## Figure Description\nThis figure displays qualitative results for panoptic segmentation using DETR-R101. It shows three panels, each with different objects and their corresponding segmentation masks. The first panel features a kitchen scene with objects like a microwave, oven, and potted plant. The second panel depicts a bus with its segmentation mask. The third panel illustrates two giraffes in a natural setting, also with their segmentation masks.\n\n## Text in Figure\n- Panel 1: \"wall-stonedoor-stuff\", \"microwave\", \"potted plant\", \"shelf\", \"counter\", \"sink\"\n- Panel 2: \"bus\", \"pavement\"\n- Panel 3: \"giraffe\", \"giraffe\", \"grass\""
+  },
+  {
+    "file": "p022_f10.png",
+    "page": 22,
+    "kind": "picture",
+    "caption": "Fig. 10: Architecture of DETR's transformer. Please, see Section A.3 for details.",
+    "width": 473,
+    "height": 514,
+    "description": "Figure type: Diagram\nDescription: The figure shows the architecture of DETR's transformer model for object detection. It consists of an encoder and a decoder. The encoder processes image features and spatial-positional encoding, while the decoder generates class and bounding box predictions. Both the encoder and decoder use multi-head self-attention and multi-head attention mechanisms.\n\nText in figure: Encoder, Decoder, Add & Norm, FFN, Multi-Head Self-Attention, Multi-Head Attention, Image features, Spatial-positional encoding, Object queries, Class, Bounding Box"
+  },
+  {
+    "file": "p024_f11.png",
+    "page": 24,
+    "kind": "picture",
+    "caption": "(a) Failure case with overlapping objects. PanopticFPN misses one plane entirely, while DETR fails to accurately segment 3 of them.",
+    "width": 680,
+    "height": 149,
+    "description": "## Search Index\n\n### Figure Description\nThis figure displays a comparison of object detection performance between PanopticFPN and DETR models. It shows three images, each representing a failure case with overlapping objects. The images depict multiple planes, with annotations highlighting the detections made by each model. The first image shows PanopticFPN missing one plane entirely, while the second image shows DETR failing to accurately segment three planes. The third image highlights the detections made by both models.\n\n### Text in Figure\n- Panel 1: PanopticFPN, Missing one plane entirely\n- Panel 2: DETR, Fails to accurately segment 3 planes\n- Panel 3: Both models, Detections highlighted"
+  },
+  {
+    "file": "p024_f12.png",
+    "page": 24,
+    "kind": "picture",
+    "caption": "(b) Things masks are predicted at full resolution, which allows sharper boundaries than PanopticFPN",
+    "width": 680,
+    "height": 149,
+    "description": "Figure Type: Image comparison\nDescription: The figure compares the object detection masks of two models, showing that the model using transformers predicts sharper boundaries.\n\nText in figure: \n- Left panel: \"airplane\", \"0.99\"\n- Middle panel: \"airplane\", \"0.99\"\n- Right panel: \"airplane\", \"0.99\", \"0.99\""
+  },
+  {
+    "file": "p025_f13.png",
+    "page": 25,
+    "kind": "picture",
+    "caption": "Fig. 12: Analysis of the number of instances of various classes missed by DETR depending on how many are present in the image. We report the mean and the standard deviation. As the number of instances gets close to 100, DETR starts saturating and misses more and more objects",
+    "width": 396,
+    "height": 332,
+    "description": "Description: This graph depicts the percentage of missed instances of various classes by DETR as the number of visible instances increases. The graph shows three series: dog, person, and apple. The dog series is the highest, followed by person and apple. The apple series is the lowest, with a percentage of missed instances around 10% when the number of visible instances is 100.\n\nText in figure: dog, person, apple, % of missed instances, Number of visible instances, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100."
+  }
+]

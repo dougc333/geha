@@ -1,0 +1,274 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Fig. 1 Basic GAN structure. The discriminator and generator are two deep neural networks trained jointly. The discriminator is trained for the task of classifying whether an input image is natural (real) or generated (fake), while the generator is optimized to fool the discriminator.",
+    "width": 667,
+    "height": 325,
+    "description": "Figure type: Diagram\nDescription: The diagram shows the basic structure of a Generative Adversarial Network (GAN). It consists of two neural networks: the Generator and the Discriminator. The Generator takes a latent random variable as input and generates fake data. The Discriminator receives both real data from the real world distribution and fake data from the Generator, and classifies them as real or fake. The Generator aims to produce data that the Discriminator cannot distinguish from real data.\n\nText in figure: Real world distribution, Latent random variable, Generator, Discriminator, Real, Fake, Loss",
+    "pdf_text": "",
+    "bbox": [
+      133.7,
+      356.8,
+      466.9,
+      519.7
+    ]
+  },
+  {
+    "file": "p005_f02.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Fig. 2 Example of the mode collapse problem in GANs. The top row shows a training without mode collapse, where all MNIST modes (digits) are generated. The bottom row shows a bad training with mode collapse, where the generator outputs only the digit '6'. Figure was taken from [44].",
+    "width": 665,
+    "height": 348,
+    "description": "Figure: A comparison of GAN training outcomes with and without mode collapse.\nPanels: Four panels showing GAN training at different steps (10k, 20k, 50k, 100k).\nTop row: Successful GAN training without mode collapse, generating diverse MNIST digits.\nBottom row: GAN training with mode collapse, generating only the digit '6'.\n\nText in figure: \"10k steps\", \"20k steps\", \"50k steps\", \"100k steps\".\n\nDescription: The figure compares GAN training outcomes with and without mode collapse. The top row shows successful GAN training at 10k, 20k, 50k, and 100k steps, generating diverse MNIST digits. The bottom row shows GAN training with mode collapse, where the generator outputs only the digit '6' at all steps.",
+    "pdf_text": "",
+    "bbox": [
+      133.8,
+      95.8,
+      466.6,
+      270.1
+    ]
+  },
+  {
+    "file": "p007_f03.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Fig. 3 Vanishing gradients in GANs. (a) An example of a real image distribution \ud835\udc5d \ud835\udc5f x , a Gaussian with zero mean, with three more different Gaussian distributions: \ud835\udc5d \ud835\udc54 1, \ud835\udc5d \ud835\udc54 2, and \ud835\udc5d \ud835\udc54 3. (b) Calculating the JS divergence measure between \ud835\udc5d \ud835\udc5f x and a Gaussian distribution with mean from 0 to 80. When training with optimal discriminator ( \ud835\udc37 x ), the generator \ud835\udc3a minimizes the loss in Eq. (6), pushing \ud835\udc5d \ud835\udc54 x left towards \ud835\udc5d \ud835\udc5f x , alas, it could take a very long time due to diminished gradients when being far from \ud835\udc5d \ud835\udc5f x .",
+    "width": 592,
+    "height": 908,
+    "description": "This figure is a combination of a plot and a diagram. The plot in panel (a) shows four Gaussian distributions: \ud835\udc5d \ud835\udc5f x, \ud835\udc5d \ud835\udc54 1, \ud835\udc5d \ud835\udc54 2, and \ud835\udc5d \ud835\udc54 3. The highest peak is \ud835\udc5d \ud835\udc5f x, followed by \ud835\udc5d \ud835\udc54 1, \ud835\udc5d \ud835\udc54 2, and \ud835\udc5d \ud835\udc54 3. Panel (b) illustrates the JS divergence between \ud835\udc5d \ud835\udc5f x and a Gaussian distribution with varying means. The divergence is highest at the start and decreases as the mean approaches \ud835\udc5d \ud835\udc5f x.\n\nText in figure: \ud835\udc5d \ud835\udc5f x, \ud835\udc5d \ud835\udc54 1, \ud835\udc5d \ud835\udc54 2, \ud835\udc5d \ud835\udc54 3, Vanishing gradient region, Meaningful gradient region, JS Divergence.",
+    "pdf_text": "",
+    "bbox": [
+      139.7,
+      101.5,
+      435.4,
+      555.3
+    ]
+  },
+  {
+    "file": "p008_f04.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Fig. 4 Optimized distribution \ud835\udc5e for (a) minimizing KL divergence \ud835\udc3e\ud835\udc3f \ud835\udc5d \ud835\udc5e ) and for (b) minimizing reverse KL divergence \ud835\udc3e\ud835\udc3f \ud835\udc5e \ud835\udc5d . Figure is taken from [71].",
+    "width": 656,
+    "height": 210,
+    "description": "Description: The figure shows two plots comparing the distributions of two probability density functions, p and q. In plot (a), the blue curve (p) is highest, while the red curve (q) is lowest, particularly in the middle. In plot (b), the red curve (q) is highest, and the blue curve (p) is lowest, especially on the right side.\n\nText in figure: Probability Density, x, p, q, KL divergence, Reverse KL divergence.",
+    "pdf_text": "",
+    "bbox": [
+      137.6,
+      96.7,
+      465.3,
+      201.7
+    ]
+  },
+  {
+    "file": "p009_f05.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Fig. 5 Training instability in GANs. (a) \ud835\udc3d\ud835\udc46 distance metric in GAN training using the loss in Eq. (1). This quantity correlates poorly to the generated image quality, saturating to log 2 0 69, the highest value taken by the \ud835\udc3d\ud835\udc46 distance. (b) Generator loss during training using a different generator cost (maximizing log \ud835\udc37 \ud835\udc3a z instead of minimizing log 1 \ud835\udc37 \ud835\udc3a z ) showing increasing error without a significant improvement in image quality. Plots are taken from [4]",
+    "width": 649,
+    "height": 233,
+    "description": "Figure Description: Two plots showing the instability in GAN training. Plot (a) displays the JSD estimate over generator iterations, with the line labeled \"MLP\" remaining constant at 0.69. Plot (b) shows the generator cost over iterations, with the line labeled \"MLP_512\" fluctuating between 5 and 15. Both plots include visual examples of generated images at different iterations.\n\nText in Figure: MLP, MLP_512, JSD estimate, Generator iterations, Generator Cost, 0.69, 5, 15.",
+    "pdf_text": "",
+    "bbox": [
+      140.2,
+      100.9,
+      464.7,
+      217.4
+    ]
+  },
+  {
+    "file": "p009_f06.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Fig. 6 Recent GAN models which solve the original GAN's problems: Mode diversity (collapse), vanishing gradients, and image quality. (a) A subset of architecture-variant GANs, (b): A subset of loss-variant GANs. Larger axis values indicate better performance. Red points indicate the model improves all three challenges, blue points improve two, and black points improve only one. Figures are taken from [72].",
+    "width": 661,
+    "height": 240,
+    "description": "## Figure Description\nThis figure consists of two scatter plots comparing different GAN models. Each plot shows two axes: \"Image quality\" and \"Mode diversity\" (or \"Vanishing gradient\" in the second plot). Models are represented by points, with red indicating improvement in all three challenges, blue for two challenges, and black for one challenge. The highest point in both plots is \"PROGAN 2017\" in plot (a) and \"Sphere GAN 2019\" in plot (b), indicating significant improvements in image quality and mode diversity.\n\n## Text in Figure\n- Plot (a) Labels: \"Image quality\", \"Mode diversity\", \"vanishing gradient\"\n  - Points: PROGAN 2017, BigGAN 2018, MS-GAN 2020, BEGAN 2017, SAGAN 2018, YLG 2020, LAPG-AN 2015, DCGAN 2016, CGAN 2014, SGAN 2016, BIGAN 2015, ImOGaN 2016, AC-GAN 2017, rGANs 2019\n- Plot (b) Labels: \"Image quality\", \"Mode diversity\", \"Vanishing gradient\"\n  - Points: Sphere GAN 2019, SS-GAN 2019, RGAN 2018, SN-GAN 2018, ReannesGAN 2020, WGAN 2017, LS-GAN 2017, IWGAN-GP 2017, MRGAN 2018, Original GAN 2014, Geometric GAN 2017, Unrolled GAN 2018, LSGAN 2017",
+    "pdf_text": "",
+    "bbox": [
+      135.8,
+      365.7,
+      466.4,
+      485.7
+    ]
+  },
+  {
+    "file": "p010_f07.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Fig. 7 SGAN architecture.",
+    "width": 658,
+    "height": 239,
+    "description": "Figure type: Diagram\nDescription: The figure is a diagram showing the architecture of a Style-based Generative Adversarial Network (SGAN). It illustrates the components and their connections, including the generator (G), discriminator (D/C), and the softmax and sigmoid functions.\n\nText in figure: G, D/C, Softmax, Sigmoid, REAL, FAKE, X, Z, N-1, 0, 1,...",
+    "pdf_text": "",
+    "bbox": [
+      134.3,
+      409.1,
+      463.7,
+      528.7
+    ]
+  },
+  {
+    "file": "p011_f08.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Fig. 8 CGAN architecture. Both the generator and discriminator are fed with a class label \ud835\udc66 to condition both the images \ud835\udc65 and latent variable \ud835\udc67 (see Eq. (10)).",
+    "width": 631,
+    "height": 348,
+    "description": "Figure type: Diagram\nDescription: The figure shows a Conditional Generative Adversarial Network (CGAN) architecture. It consists of a generator (G) and a discriminator (D). Both are conditioned on a class label y. The generator takes a latent variable z and class label y to produce an image x. The discriminator takes the image x and class label y to determine if the image is real or fake.\n\nText in figure: G, D, X, Z, Y, Real, Fake",
+    "pdf_text": "",
+    "bbox": [
+      145.5,
+      274.0,
+      460.8,
+      448.1
+    ]
+  },
+  {
+    "file": "p012_f09.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Fig. 9 LeNet architecture. A popular Convolutional Neural Network (CNN) used for image recognition. Image was taken from [37].",
+    "width": 658,
+    "height": 178,
+    "description": "Description: This figure shows the architecture of a LeNet Convolutional Neural Network (CNN) used for image recognition. The architecture includes several layers of convolutions, subsampling, and full connections. The input is a 32x32 image, and the output is a 10-dimensional vector. The figure shows the flow of data through the network, with each layer labeled and connected to the next.\n\nText in figure: INPUT, 32x32, C1: feature maps, 6@28x28, S2: f. maps, 6@14x14, C3: f. maps, 16@10x10, S4: f. maps, 16@5x5, C5: layer, 120, F6: layer, 84, OUTPUT, 10, Convolutions, Subsampling, Convolutions, Subsampling, Full connection, Full connection, Gaussian connections.",
+    "pdf_text": "",
+    "bbox": [
+      136.8,
+      159.4,
+      465.9,
+      248.3
+    ]
+  },
+  {
+    "file": "p013_f10.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Fig. 10 DCGANgenerator architecture. This generator creates a complex 64 64 pixel image from a 100 dimensional uniform distribution \ud835\udc67 . No fully connected or pooling layers are used. Figure is taken from [57]",
+    "width": 658,
+    "height": 265,
+    "description": "Description: The figure illustrates the architecture of a DCGAN generator, designed to produce 64x64 pixel images from a 100-dimensional uniform distribution. It consists of several convolutional layers without fully connected or pooling layers. The architecture includes a \"Project and reshape\" step, followed by four convolutional layers (CONV 1 to CONV 4) and two stride operations. The output is a 64x64 pixel image.\n\nText in figure: Project and reshape, CONV 1, Stride 2, 1024, 8, 512, 16, Stride 2, CONV 2, Stride 2, 256, 32, Stride 2, CONV 3, Stride 2, 128, 64, CONV 4, 3, 64, 5, Stride 2, 5",
+    "pdf_text": "",
+    "bbox": [
+      135.0,
+      95.9,
+      464.1,
+      228.5
+    ]
+  },
+  {
+    "file": "p014_f11.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Fig. 11 Training process for the PROGAN progressive methodology. Training starts with both \ud835\udc3a and \ud835\udc37 having a low spatial resolution of 4 4 pixels. Every training step adds a new incremented intermediate layer to \ud835\udc37 and \ud835\udc3a , enhancing the generated images' resolution. All existing layers are trainable throughout the process. The images on the right are examples of generated images using PROGAN at 1024 1024. Figure was taken from [29]",
+    "width": 663,
+    "height": 298,
+    "description": "Section 1: Figure description\nThis figure illustrates the training process of the PROGAN progressive methodology, which involves the progressive enhancement of the spatial resolution of both the generator (G) and discriminator (D) networks. The training starts with both G and D at a low resolution of 4x4 pixels. As training progresses, new layers are added to both networks, increasing the resolution of the generated images. The figure shows the evolution of the network layers and the corresponding generated images at 1024x1024 resolution.\n\nSection 2: Text in figure\nText in figure: Latent, 4x4, 8x8, 1024x1024, Reals, Training progresses, G, D, 4x4, 8x8, 4x4, 4x4, 1024x1024, 1024x1024, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4, 4x4,",
+    "pdf_text": "j | y",
+    "bbox": [
+      134.8,
+      86.3,
+      466.5,
+      235.7
+    ]
+  },
+  {
+    "file": "p015_f12.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Fig. 12 Using truncated sampling from the latent space. (a) Trade-off between image quality and image variety. From left to right, the range threshold is set to 2, 1, 0 5, and 0 04. (b) Saturation artifacts from applying truncated normal distribution to a model training with \ud835\udc67 0 1 . Images were taken from [8].",
+    "width": 654,
+    "height": 149,
+    "description": "Description: The figure displays two panels of images, labeled (a) and (b). Panel (a) shows a series of images of dogs, varying in quality and variety as the range threshold is adjusted. Panel (b) shows images with saturation artifacts resulting from applying a truncated normal distribution to a model trained with \ud835\udc67 0 1.\n\nText in figure: (a) Trade-off between image quality and image variety. Range threshold: 2, 1, 0.5, 0.04. (b) Saturation artifacts from applying truncated normal distribution to a model training with \ud835\udc67 0 1. Images taken from [8].",
+    "pdf_text": "",
+    "bbox": [
+      136.4,
+      96.2,
+      463.4,
+      170.6
+    ]
+  },
+  {
+    "file": "p015_f13.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Fig. 13 Comparison between a traditional generator (left) to the StyleGAN generator (right). Unlike the standard generator which selects a random latent variable only in its input, in StyleGAN generator the latent input is mapped to an intermediate latent space , which then controls the generator through adaptive instance normalization (AdaIN). Also, Gaussian noise is injected after every convolution layer. \"A\" corresponds to a learned affine transform, and \"B\" applies learned scaling factors to the input noise. Figure is taken from [30].",
+    "width": 648,
+    "height": 563,
+    "description": "Description: The figure compares two types of generators: a traditional generator (left) and a StyleGAN generator (right). The traditional generator uses a fully-connected network with convolutional layers and pixel normalization. The StyleGAN generator maps the latent input to an intermediate latent space, controlling the generator through adaptive instance normalization (AdaIN) and injecting Gaussian noise after each convolution layer.\n\nText in figure: Latent z \u2208 Z, Normalize, Fully-connected, PixelNorm, Conv 3x3, PixelNorm, Upsample, Conv 3x3, PixelNorm, Conv 3x3, Const 4x4x512, +, style, AdaIN, +, 4x4, +, 8x8, Mapping network f, FC, A, style, B, A, style, B, A, style, B, A, style, B, Noise, Synthesis network g, w \u2208 W",
+    "pdf_text": "",
+    "bbox": [
+      138.9,
+      244.7,
+      463.1,
+      526.1
+    ]
+  },
+  {
+    "file": "p016_f14.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Fig. 14 Selected face images generated using the StyleGAN2 architecture (an improved version of the original StyleGAN), trained on the FFHQ dataset. Figure from [32].",
+    "width": 664,
+    "height": 664,
+    "description": "## Description\nThe figure displays four individual face images generated by the StyleGAN2 architecture, trained on the FFHQ dataset. Each image shows a distinct face with unique features, such as different hairstyles, facial expressions, and skin tones.\n\n## Text in figure\n- Face 1: Male with curly hair, smiling.\n- Face 2: Female with glasses, smiling.\n- Face 3: Young girl with long hair, neutral expression.\n- Face 4: Older man with gray hair and a beard, neutral expression.",
+    "pdf_text": "",
+    "bbox": [
+      134.9,
+      259.8,
+      466.9,
+      591.9
+    ]
+  },
+  {
+    "file": "p018_f15.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "Fig. 15 Differentiating two Gaussian distributions using optimal discriminator \ud835\udc37 . The original GANcost saturates (red line), resulting in vanishing gradients, whereas WGAN cost objective (blue line) yields measurable gradients. Plot was taken from [4].",
+    "width": 636,
+    "height": 488,
+    "description": "Description: This plot compares the discriminator functions of a regular GAN and a Wasserstein GAN (WGAN). The red line represents the GAN discriminator, which shows vanishing gradients, while the blue line represents the WGAN critic, which maintains measurable gradients. The green line shows the density of fake data, and the blue dots represent the density of real data.\n\nText in figure: Density of real, Density of fake, GAN Discriminator, WGAN Critic, Linear gradients in a WGAN, Vanishing gradients in regular GAN.",
+    "pdf_text": "",
+    "bbox": [
+      137.8,
+      98.3,
+      456.0,
+      342.3
+    ]
+  },
+  {
+    "file": "p019_f16.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "Fig. 16 Self-Supervised GAN (SSGAN) discriminator. The discriminator, \ud835\udc37 , performs two tasks: Identifying real/fake images (as the original GAN) and rotation classification. Both the real and fake images are rotated by ( 0 \u00b0 90 \u00b0 180 \u00b0 270 \u00b0 ), and sent to the rotation degree classifier (in blue). Only the original 0 \u00b0 images are sent to the real/fake classifier (in red). Plot is taken from [10].",
+    "width": 664,
+    "height": 349,
+    "description": "Figure Type: Diagram\nDescription: The diagram shows a Self-Supervised GAN (SSGAN) discriminator. It performs two tasks: identifying real/fake images and rotation classification. Real and fake images are rotated by 0\u00b0, 90\u00b0, 180\u00b0, and 270\u00b0. Only the original 0\u00b0 images are sent to the real/fake classifier. The rotation degree classifier handles the rotated images.\n\nText in Figure: \"Fake image\", \"Real image\", \"G(z)\", \"Px(x)\", \"D\", \"Real / Fake\", \"Pd(S|x)\", \"Shared weights\", \"Qd(R|x')\", \"Rotation degree\", \"0\u00b0\", \"90\u00b0\", \"180\u00b0\", \"270\u00b0\"",
+    "pdf_text": "",
+    "bbox": [
+      134.5,
+      189.2,
+      466.3,
+      363.5
+    ]
+  },
+  {
+    "file": "p021_f17.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "Fig. 17 Pipeline of Sphere GAN. The generator creates fake data from noise inputs. Real and fake data are fed to the discriminator, which maps the output to an \ud835\udc5b -dimensional Euclidean feature space (yellow plane). Green and purple points on the feature plane correspond to fake and real samples, respectively. The key idea of SphereGAN is remapping the feature points into the \ud835\udc5b -dimensional hypersphere by using geometric transformations. These mapped points are then used to calculate the geometric moments centered at the north pole of the hypersphere ( \ud835\udc41 ). While the discriminator tries to maximize the moment differences of real and fake samples, the generator tries to interfere with the discriminator by minimizing those moment differences. Figure was taken from [52].",
+    "width": 657,
+    "height": 261,
+    "description": "Description: The figure is a diagram illustrating the pipeline of Sphere GAN, a type of generative adversarial network. It shows the generator creating fake data from noise inputs, which is then combined with real data and fed into the discriminator. The discriminator maps the data to an n-dimensional Euclidean feature space. The key innovation is the remapping of these feature points into an n-dimensional hypersphere using geometric transformations, followed by the calculation of geometric moments centered at the north pole of the hypersphere. The discriminator aims to maximize the moment differences between real and fake samples, while the generator aims to minimize these differences.\n\nText in figure: Generator, Discriminator, LReLU, Avg Pooling, Dense, Geometric Block, N, Sphere GAN, fake data, real data, n-dimensional Euclidean feature space, n-dimensional hypersphere, geometric transformations, geometric moments, north pole.",
+    "pdf_text": "",
+    "bbox": [
+      137.2,
+      99.2,
+      465.3,
+      229.5
+    ]
+  }
+]

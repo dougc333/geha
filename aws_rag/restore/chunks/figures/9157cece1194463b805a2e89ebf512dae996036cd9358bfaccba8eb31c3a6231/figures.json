@@ -1,0 +1,164 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 1: Our training starts with both the generator (G) and discriminator (D) having a low spatial resolution of 4 \u00d7 4 pixels. As the training advances, we incrementally add layers to G and D, thus increasing the spatial resolution of the generated images. All existing layers remain trainable throughout the process. Here N \u00d7 N refers to convolutional layers operating on N \u00d7 N spatial resolution. This allows stable synthesis in high resolutions and also speeds up training considerably. One the right we show six example images generated using progressive growing at 1024 \u00d7 1024 .",
+    "width": 791,
+    "height": 334,
+    "description": "### Search Index Description\n\nThis figure illustrates the process of progressive growing in Generative Adversarial Networks (GANs). It shows how the generator (G) and discriminator (D) start with a low resolution of 4x4 pixels and gradually increase in resolution as training progresses. The figure includes a diagram of the network architecture and example images generated at 1024x1024 resolution.\n\n### Search Index Text\n\n- **Figure Type**: Diagram\n- **Text in Figure**:\n  - \"Latent\", \"4x4\", \"8x8\", \"1024x1024\", \"Reals\", \"Training progresses\"\n  - \"G\", \"D\"\n  - \"4x4\", \"8x8\", \"1024x1024\"\n  - \"N x N\" (convolutional layers)\n  - \"Example images generated at 1024x1024\""
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 2: When doubling the resolution of the generator (G) and discriminator (D) we fade in the new layers smoothly. This example illustrates the transition from 16 \u00d7 16 images (a) to 32 \u00d7 32 images (c). During the transition (b) we treat the layers that operate on the higher resolution like a residual block, whose weight \u03b1 increases linearly from 0 to 1 . Here 2 \u00d7 and 0 . 5 \u00d7 refer to doubling and halving the image resolution using nearest neighbor filtering and average pooling, respectively. The toRGB represents a layer that projects feature vectors to RGB colors and fromRGB does the reverse; both use 1 \u00d7 1 convolutions. When training the discriminator, we feed in real images that are downscaled to match the current resolution of the network. During a resolution transition, we interpolate between two resolutions of the real images, similarly to how the generator output combines two resolutions.",
+    "width": 553,
+    "height": 276,
+    "description": "This figure is a diagram illustrating the process of progressively increasing the resolution of a Generative Adversarial Network (GAN) from 16x16 to 32x32 images. It shows three stages: (a) 16x16 images, (b) transition phase, and (c) 32x32 images. During the transition, new layers are introduced gradually, with the weight \u03b1 increasing linearly from 0 to 1. The diagram includes operations like 2x and 0.5x for resolution changes, toRGB and fromRGB for color space conversions, and nearest neighbor filtering and average pooling.\n\nText in figure: \"16x16\", \"2x\", \"32x32\", \"toRGB\", \"fromRGB\", \"0.5x\", \"\u03b1\", \"1-\u03b1\", \"16x16\", \"16x16\", \"16x16\", \"32x32\", \"32x32\", \"0.5x\", \"0.5x\""
+  },
+  {
+    "file": "p006_f03.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 3: (a) - (g) CELEBA examples corresponding to rows in Table 1. These are intentionally non-converged. (h) Our converged result. Notice that some images show aliasing and some are not sharp - this is a flaw of the dataset, which the model learns to replicate faithfully.",
+    "width": 794,
+    "height": 182,
+    "description": "Description: The figure displays a series of images labeled from (a) to (h), showcasing the progression of a GAN model's output. Panels (a) to (g) show non-converged results, while (h) shows the final, converged output. The images depict various faces, some with noticeable aliasing and lack of sharpness, reflecting the dataset's imperfections.\n\nText in figure: (a), (b), (c), (d), (e*), (e), (f), (g), (h) Converged, CELEBA examples, intentionally non-converged, converged result, aliasing, not sharp, flaw of the dataset, model learns to replicate faithfully."
+  },
+  {
+    "file": "p007_f04.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 4: Effect of progressive growing on training speed and convergence. The timings were measured on a single-GPU setup using NVIDIA Tesla P100. (a) Statistical similarity with respect to wall clock time for Gulrajani et al. (2017) using CELEBA at 128 \u00d7 128 resolution. Each graph represents sliced Wasserstein distance on one level of the Laplacian pyramid, and the vertical line indicates the point where we stop the training in Table 1. (b) Same graph with progressive growing enabled. The dashed vertical lines indicate points where we double the resolution of G and D. (c) Effect of progressive growing on the raw training speed in 1024 \u00d7 1024 resolution.",
+    "width": 798,
+    "height": 288,
+    "description": "Figure: Line graphs showing the effect of progressive growing on training speed and convergence.\nPanel (a): Sliced Wasserstein distance over time for Gulrajani et al. (2017) at 128x128 resolution.\nPanel (b): Sliced Wasserstein distance over time with progressive growing at 128x124 resolution.\nPanel (c): Training speed in millions of real images shown over time at 1024x1024 resolution.\n\nLegend labels: 128, 64, 32, 16, Avg\nPanel (a) series: 128 is highest, 16 is lowest\nPanel (b) series: 128 is highest, 16 is lowest\nPanel (c) series: Fixed layers, Progressive growing\n\nText in figure: Sliced Wasserstein in distance x 10^3, Sliced Wasserstein in distance x 10^3, Millions of real images shown, Training time in hours, Training time in hours, Training time in hours, 128, 64, 32, 16, Avg, 128, 64, 32, 16, Avg, 128x64, 128x128, Snapshot, 512x512, 1024x1024, Fixed layers, Progressive growing"
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 5: 1024 \u00d7 1024 images generated using the CELEBA-HQ dataset. See Appendix F for a larger set of results, and the accompanying video for latent space interpolations.",
+    "width": 794,
+    "height": 398,
+    "description": "## Description\nThe figure displays a collage of 10 images, each showing a different face generated by a GAN using the CELEBA-HQ dataset. The images vary in appearance, capturing different facial features and expressions.\n\n## Text in figure\n1024 \u00d7 1024 images generated using the CELEBA-HQ dataset. See Appendix F for a larger set of results, and the accompanying video for latent space interpolations."
+  },
+  {
+    "file": "p008_f06.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "",
+    "width": 793,
+    "height": 263,
+    "description": "## Figure Description\nThis figure displays a collage of 20 bedroom images generated by a GAN model. The images vary in style, color, and furniture arrangement, showcasing the model's ability to produce diverse bedroom scenes.\n\n## Text in Figure\n- No specific text is visible in the figure."
+  },
+  {
+    "file": "p009_f07.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 7: Selection of 256 \u00d7 256 images generated from different LSUN categories.",
+    "width": 795,
+    "height": 583,
+    "description": "## Description\nThe figure displays a collage of 256 \u00d7 256 images generated from various categories of the LSUN dataset. Each image represents a different category, including \"POTTEDPLANT,\" \"HORSE,\" \"SOFA,\" \"BUS,\" \"CHURCHOUTDOOR,\" \"BICYCLE,\" and \"TVMONITOR.\" The images showcase the diversity and quality of the generated content, highlighting the model's ability to produce realistic and varied outputs.\n\n## Text in figure\nPOTTEDPLANT, HORSE, SOFA, BUS, CHURCHOUTDOOR, BICYCLE, TVMONITOR"
+  },
+  {
+    "file": "p015_f08.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 8: Creating the CELEBA-HQ dataset. We start with a JPEG image (a) from the CelebA inthe-wild dataset. We improve the visual quality (b,top) through JPEG artifact removal (b,middle) and 4x super-resolution (b,bottom). We then extend the image through mirror padding (c) and Gaussian filtering (d) to produce a visually pleasing depth-of-field effect. Finally, we use the facial landmark locations to select an appropriate crop region (e) and perform high-quality resampling to obtain the final image at 1024 \u00d7 1024 resolution (f).",
+    "width": 796,
+    "height": 222,
+    "description": "Figure Description:\nThis figure illustrates the process of creating the CELEBA-HQ dataset from a JPEG image. It shows a sequence of transformations applied to a single image, starting from a low-quality JPEG (a) and ending with a high-resolution, high-quality image (f). The transformations include JPEG artifact removal, super-resolution, mirror padding, Gaussian filtering, and facial landmark-based cropping.\n\nText in Figure:\n(a) Original JPEG image\n(b) JPEG artifact removal, Super-resolution\n(c) Mirror padding\n(d) Gaussian filtering\n(e) Facial landmark-based cropping\n(f) Final high-resolution image"
+  },
+  {
+    "file": "p016_f09.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 9: CIFAR10 images generated using a network that was trained unsupervised (no label conditioning), and achieves a record 8 . 80 inception score.",
+    "width": 793,
+    "height": 423,
+    "description": "## Description\nThis figure displays a grid of 100 images generated by a GAN trained without label conditioning. The images depict a variety of objects, including animals, vehicles, and other objects, showcasing the model's ability to produce diverse and realistic images.\n\n## Text in figure\nCIFAR10 images generated using a network that was trained unsupervised (no label conditioning), and achieves a record 8.80 inception score."
+  },
+  {
+    "file": "p018_f10.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "Figure 10: Top: Our CELEBA-HQ results. Next five rows: Nearest neighbors found from the training data, based on feature-space distance. We used activations from five VGG layers, as suggested by Chen & Koltun (2017). Only the crop highlighted in bottom right image was used for comparison in order to exclude image background and focus the search on matching facial features.",
+    "width": 794,
+    "height": 805,
+    "description": "Figure Description: This figure displays a collection of 30 images, organized in a 6x5 grid, showcasing the results of the CELEBA-HQ dataset. The top row presents the generated images, while the subsequent rows exhibit the nearest neighbors found from the training data based on feature-space distance. The search utilized activations from five VGG layers, as recommended by Chen & Koltun (2017). The comparison focused on matching facial features by using only the crop highlighted in the bottom right image.\n\nText in Figure: The figure contains no explicit text, values, or labels. However, it includes the following elements: 30 images organized in a 6x5 grid, with the top row displaying generated images and the next five rows showing nearest neighbors found from the training data. The search was conducted using activations from five VGG layers, as suggested by Chen & Koltun (2017). The comparison focused on matching facial features by using only the crop highlighted in the bottom right image."
+  },
+  {
+    "file": "p019_f11.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "Figure 11: Additional 1024 \u00d7 1024 images generated using the CELEBA-HQ dataset. Sliced Wasserstein Distance (SWD) \u00d7 10 3 for levels 1024, . . . , 16: 7.48, 7.24, 6.08, 3.51, 3.55, 3.02, 7.22, for which the average is 5.44. Fr\u00b4 echet Inception Distance (FID) computed from 50K images was 7.30. See the video for latent space interpolations.",
+    "width": 793,
+    "height": 1190,
+    "description": "## Description\nThis figure displays a collage of 48 images, each measuring 1024 \u00d7 1024 pixels, generated by a GAN using the CELEBA-HQ dataset. The images depict various human faces, showcasing the model's ability to produce realistic and diverse facial features. The figure includes metrics such as Sliced Wasserstein Distance (SWD) and Fr\u00b4 echet Inception Distance (FID) to evaluate the quality and diversity of the generated images.\n\n## Text in figure\n- Sliced Wasserstein Distance (SWD) \u00d7 10^3 for levels 1024,..., 16: 7.48, 7.24, 6.08, 3.51, 3.55, 3.02, 7.22\n- Average SWD: 5.44\n- Fr\u00b4 echet Inception Distance (FID) computed from 50K images: 7.30"
+  },
+  {
+    "file": "p020_f12.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "Figure 12: Example images generated at 256 \u00d7 256 from LSUN categories. Sliced Wasserstein Distance (SWD) \u00d7 10 3 is given for levels 256, 128, 64, 32 and 16, and the average is bolded. We also quote the Fr\u00b4 echet Inception Distance (FID) computed from 50K images.",
+    "width": 796,
+    "height": 1132,
+    "description": "This figure displays a collection of generated images from the Progressive Growing of GANs model at a resolution of 256 \u00d7 256 pixels. The images are categorized into four groups: airplane, bedroom, bicycle, and bird. Each category contains five images, representing different levels of the model's progressive growth. The figure also includes quantitative metrics such as Sliced Wasserstein Distance (SWD) and Fr\u00b4 echet Inception Distance (FID) for each level, with the average values highlighted in bold.\n\nText in figure: \"AIRPLANE\", \"BEDROOM\", \"BICYCLE\", \"BIRD\", \"SWD 4.05, 3.73, 3.27, 3.08, 2.97\", \"SWD 2.90, 3.00, 3.08, 3.00, 2.74\", \"SWD 5.43, 5.33, 5.27, 5.13, 5.23\", \"SWD 8.66, 8.60, 8.64, 8.62, 8.69\", \"SWD 4.58, 4.72, 4.79, 4.92, 4.91\", \"SWD 5.75, 5.73, 5.67, 5.64, 5.62\", \"FID 3.73, 3.73, 3.73, 3.73, 3.73\", \"FID 3.85, 3.85, 3.85, 3.85, 3.85\", \"FID 3.85, 3.85, 3.85, 3.85, 3.85\", \"FID 3.85, 3.85, 3.85, 3.85, 3.85\", \"FID 3.85, 3.85, 3.85, 3.85, 3.85\", \"FID 3.85, 3.85, 3.85, 3.85, 3.85\"."
+  },
+  {
+    "file": "p021_f13.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "Figure 13: Example images generated at 256 \u00d7 256 from LSUN categories. Sliced Wasserstein Distance (SWD) \u00d7 10 3 is given for levels 256, 128, 64, 32 and 16, and the average is bolded. We also quote the Fr\u00b4 echet Inception Distance (FID) computed from 50K images.",
+    "width": 798,
+    "height": 1131,
+    "description": "This figure displays a collection of generated images from the LSUN dataset at a resolution of 256 \u00d7 256. Each row represents a different category: bottle, bridge, bus, car, and cat. The images are arranged in a grid, with each column showing the progression of image quality as the model is trained. The Sliced Wasserstein Distance (SWD) values are provided for different levels of training, with the average SWD highlighted in bold. Additionally, the Fr\u00b4 echet Inception Distance (FID) is computed from 50K images.\n\nText in figure: \"Bottle\", \"Bridge\", \"Bus\", \"Car\", \"Cat\", \"SWD\", \"FID\", \"SWD-1.30\", \"SWD-3.13\", \"SWD-5.75\", \"SWD-7.71\", \"SWD-4.30\", \"SWD-3.93\", \"SWD-2.59\", \"SWD-2.06\", \"SWD-1.89\", \"SWD-1.44\", \"SWD-0.90\", \"SWD-0.59\", \"SWD-0.39\", \"SWD-0.29\", \"SWD-0.20\", \"SWD-0.19\", \"SWD-0.12\", \"SWD-0.07\", \"FID-14.75\", \"FID-12.75\", \"FID-12.86\", \"FID-12.76\", \"FID-12.19\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.59\", \"FID-12.5"
+  },
+  {
+    "file": "p022_f14.png",
+    "page": 22,
+    "kind": "picture",
+    "caption": "Figure 14: Example images generated at 256 \u00d7 256 from LSUN categories. Sliced Wasserstein Distance (SWD) \u00d7 10 3 is given for levels 256, 128, 64, 32 and 16, and the average is bolded. We also quote the Fr\u00b4 echet Inception Distance (FID) computed from 50K images.",
+    "width": 796,
+    "height": 1133,
+    "description": "Description: The figure displays a collection of generated images from the Progressive Growing of GANs model at a resolution of 256 \u00d7 256 pixels. Each row represents a different category: chair, church outdoor, classroom, conference room, and cow. For each category, there are five images, each corresponding to a different level of the progressive growing process (256, 128, 64, 32, and 16). The Sliced Wasserstein Distance (SWD) and Fr\u00b4 echet Inception Distance (FID) values are provided for each level, with the average SWD and FID values highlighted in bold.\n\nText in figure: Chair, Church Outdoor, Classroom, Conference Room, Cow, SWD 4.93, 3.73, 4.70, 6.8, 5.7, FID 67.1, 56.5, 99.1, 6.8, 5.7, SWD 3.2, 3.8, 4.0, 3.6, 3.8, FID 52.5, 55.5, 73.2, 8.3, 2.2, SWD 3.8, 3.8, 4.0, 3.2, 3.2, FID 63.1, 63.0, 77.3, 8.3, 2.2, SWD 3.2, 3.6, 4.0, 3.8, 3.2, FID 67.2, 70.7, 73.3, 8.3, 2.2, SWD 3.3, 3.0, 3.8, 3.6, 3.3, FID 42.7, 20.7, 73.3, 8.3, 2.2, SWD 3.6, 3.8, 4.1, 3.5, 3.2, FID 63.9, 99.1, 73.2, 8.3, 2.2, SWD 5.7, 6.2, 7.4, 3.5, 3.7, FID 60.7, 26.2, 72.4, 8.3, 2.2."
+  },
+  {
+    "file": "p023_f15.png",
+    "page": 23,
+    "kind": "picture",
+    "caption": "Figure 15: Example images generated at 256 \u00d7 256 from LSUN categories. Sliced Wasserstein Distance (SWD) \u00d7 10 3 is given for levels 256, 128, 64, 32 and 16, and the average is bolded. We also quote the Fr\u00b4 echet Inception Distance (FID) computed from 50K images.",
+    "width": 797,
+    "height": 1134,
+    "description": "Description: The figure displays a collection of generated images from the Progressive Growing of GANs model at a resolution of 256 \u00d7 256 pixels. Each row represents a different category: dining room, dining table, dog, horse, and kitchen. For each category, there are five columns showing images generated at different levels of the model (256, 128, 64, 32, and 16). The Sliced Wasserstein Distance (SWD) values are provided for each level, with the average SWD highlighted in bold. Additionally, the Fr\u00b4 echet Inception Distance (FID) is quoted for each category.\n\nText in figure: \"DININGROOM\", \"SWD 2.47, 2.04, 2.73, 2.90, 2.73\", \"SWD 2.47, 2.04, 2.73, 2.90, 2.73\", \"DININGTABLE\", \"SWD 2.57, 2.03, 2.74, 2.98, 2.74\", \"SWD 2.57, 2.03, 2.74, 2.98, 2.74\", \"DOG\", \"SWD 9.26, 5.56, 5.36, 2.32, 8.33\", \"SWD 9.26, 5.56, 5.36, 2.32, 8.33\", \"HORSE\", \"SWD 4.72, 6.94, 2.80, 1.52, 1.60\", \"SWD 4.72, 6.94, 2.80, 1.52, 1.60\", \"KITCHEN\", \"SWD 3.80, 3.92, 2.72, 6.31, 3.88\", \"SWD 3.80, 3.92, 2.72, 6.31, 3.88\""
+  },
+  {
+    "file": "p024_f16.png",
+    "page": 24,
+    "kind": "picture",
+    "caption": "Figure 16: Example images generated at 256 \u00d7 256 from LSUN categories. Sliced Wasserstein Distance (SWD) \u00d7 10 3 is given for levels 256, 128, 64, 32 and 16, and the average is bolded. We also quote the Fr\u00b4 echet Inception Distance (FID) computed from 50K images.",
+    "width": 797,
+    "height": 1134,
+    "description": "Description: This figure displays a collection of generated images from the LSUN dataset at a resolution of 256 \u00d7 256. The images are categorized into five groups: living room, motorbike, person, potted plant, and restaurant. Each category contains multiple images, with the Sliced Wasserstein Distance (SWD) and Fr\u00b4 echet Inception Distance (FID) scores provided for each level of image generation.\n\nText in figure: \"LIVINGROOM\", \"MOTORBIKE\", \"PERSON\", \"POTTED PLANT\", \"RESTAURANT\", \"SWD 4.55 3.79 2.22 3.93 3.94\", \"SWD 3.37 0.95 2.50 1.04 0.44\", \"SWD 4.20 2.20 1.53 3.31 1.42\", \"SWD 8.51 1.09 0.90 5.54 2.50\", \"SWD 3.37 2.19 3.44 5.55 3.63\", \"FID 3.37 2.19 3.44 5.55 3.63\", \"FID 10.63 6.34 4.44 4.44 4.44\", \"FID 4.76 4.46 4.13 3.35 2.50\""
+  },
+  {
+    "file": "p025_f17.png",
+    "page": 25,
+    "kind": "picture",
+    "caption": "Figure 17: Example images generated at 256 \u00d7 256 from LSUN categories. Sliced Wasserstein Distance (SWD) \u00d7 10 3 is given for levels 256, 128, 64, 32 and 16, and the average is bolded. We also quote the Fr\u00b4 echet Inception Distance (FID) computed from 50K images.",
+    "width": 796,
+    "height": 1132,
+    "description": "Figure: A collage of images generated by GANs at 256x256 resolution from various categories like sheep, sofa, tower, train, and monitor. Each category has multiple images with Sliced Wasserstein Distance (SWD) and Fr\u00b4 echet Inception Distance (FID) values.\n\nText in figure: SWD values for sheep, sofa, tower, train, and monitor categories at resolutions 256, 128, 64, 32, and 16. FID values for 50K images."
+  },
+  {
+    "file": "p026_f18.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "Figure 18: A larger set of generated images corresponding to the non-converged setups in Table 1.",
+    "width": 791,
+    "height": 1256,
+    "description": "Description: The figure is a collection of 100 generated images arranged in a 10x10 grid. Each row represents a different setup or condition, as indicated by the labels at the top of each row. The images show variations in facial features, expressions, and backgrounds, demonstrating the diversity and quality of the generated images.\n\nText in figure: Progressive growing, Initial human likeness, Revised training parameters, Minimized training rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate, Minimized learning rate,"
+  }
+]

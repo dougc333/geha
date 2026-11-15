@@ -1,0 +1,137 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1: Super-resolved image (left) is almost indistinguishable from original (right). [ 4 \u00d7 upscaling]",
+    "width": 460,
+    "height": 230,
+    "description": "## Description\nThe figure displays two images side by side, labeled \"4x SRGAN (proposed)\" and \"original.\" The left image is a super-resolved version of the right image, which is the original high-resolution image. Both images show a close-up of a mandrill's face with detailed facial features.\n\n## Text in figure\n- \"4x SRGAN (proposed)\"\n- \"original\""
+  },
+  {
+    "file": "p002_f02.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 2: From left to right: bicubic interpolation, deep residual network optimized for MSE, deep residual generative adversarial network optimized for a loss more sensitive to human perception, original HR image. Corresponding PSNR and SSIM are shown in brackets. [ 4 \u00d7 upscaling]",
+    "width": 969,
+    "height": 374,
+    "description": "## Figure Description\nThis figure displays four images of a person in traditional attire, each processed using different methods for super-resolution. From left to right, the images are: bicubic interpolation, SRResNet, SRGAN, and the original high-resolution image. Each image is accompanied by its PSNR and SSIM values in brackets.\n\n## Text in Figure\n- bicubic (21.59dB/0.6423)\n- SRResNet (23.53dB/0.7832)\n- SRGAN (21.15dB/0.6868)\n- original"
+  },
+  {
+    "file": "p003_f03.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 3: Illustration of patches from the natural image manifold (red) and super-resolved patches obtained with MSE (blue) and GAN (orange). The MSE-based solution appears overly smooth due to the pixel-wise average of possible solutions in the pixel space, while GAN drives the reconstruction towards the natural image manifold producing perceptually more convincing solutions.",
+    "width": 434,
+    "height": 275,
+    "description": "Figure type: Diagram illustrating image super-resolution techniques.\nDescription: The diagram shows patches from the natural image manifold (red) and super-resolved patches obtained using Mean Squared Error (MSE) (blue) and Generative Adversarial Networks (GAN) (orange). The MSE-based solution is overly smooth, while the GAN-based solution is more convincing.\n\nText in figure: \"Natural Image Manifold\", \"MSE-based Solution\", \"GAN-based Solution\", \"pixel-wise average of possible solutions\".\n\nSection 1: Diagram illustrating image super-resolution techniques.\nSection 2: Natural Image Manifold, MSE-based Solution, GAN-based Solution, pixel-wise average of possible solutions."
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 4: Architecture of Generator and Discriminator Network with corresponding kernel size (k), number of feature maps (n) and stride (s) indicated for each convolutional layer.",
+    "width": 920,
+    "height": 455,
+    "description": "Figure type: Diagram\nDescription: The figure shows the architecture of a Generator and Discriminator Network for a super-resolution task. The Generator Network takes an input and processes it through various convolutional layers, batch normalization, and residual blocks to produce a super-resolved image. The Discriminator Network takes both the original and super-resolved images as input and outputs a binary classification (SR or ISR).\n\nText in figure: Generator Network, Discriminator Network, Input, LR, SR, ISR, k9n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k3n64s1, k"
+  },
+  {
+    "file": "p007_f05.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 5: Color-coded distribution of MOS scores on BSD100 . For each method 2600 samples (100 images \u00d7 26 raters) were assessed. Mean shown as red marker, where the bins are centered around value i . [ 4 \u00d7 upscaling]",
+    "width": 482,
+    "height": 208,
+    "description": "Description: This figure is a color-coded distribution of Mean Opinion Scores (MOS) for various super-resolution methods on the BSD100 dataset. The methods are arranged vertically, with MOS scores on the horizontal axis. The red markers indicate the mean MOS scores for each method. The highest mean MOS score is for the nearest bicubic method, while the lowest is for the HR method.\n\nText in figure: nearest bicubic, SRCnn, SelfExSR, DRCN, ESPCN, SRResNet, SRGAN, HR, MOS, 1, 2, 3, 4, 5, 2000, 1600, 1200, 800, 400"
+  },
+  {
+    "file": "p008_f06.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 6: SRResNet (left: a,b), SRGAN-MSE (middle left: c,d), SRGAN-VGG2.2 (middle: e,f) and SRGAN -VGG54 (middle right: g,h) reconstruction results and corresponding reference HR image (right: i,j). [ 4 \u00d7 upscaling]",
+    "width": 1091,
+    "height": 408,
+    "description": "## Description\nThis figure displays a comparison of super-resolution (SR) techniques applied to a high-resolution (HR) image of a mandrill's face. The image is upscaled by 4x. The figure shows results from four different methods: SRResNet, SRGAN-MSE, SRGAN-VGG2.2, and SRGAN-VGG54. Each method's output is shown in a separate column, with the original HR image on the far right for reference.\n\n## Text in figure\n- SRResNet\n- SRGAN-MSE\n- SRGAN-VGG2.2\n- SRGAN-VGG54\n- original HR image\n- [4\u00d7 upscaling]"
+  },
+  {
+    "file": "p012_f07.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 7: Dependence of network performance (PSNR, time) on network depth. PSNR (left) calculated on BSD100. Time (right) averaged over 100 reconstructions of a random LR image with resolution 64 \u00d7 64.",
+    "width": 988,
+    "height": 370,
+    "description": "Figure: Two line graphs showing network performance metrics.\nLeft graph: PSNR on BSD100, with SRResNet (proposed) higher than SRResNet (no skip-connection).\nRight graph: Time for LR 64x64, with SRResNet (proposed) higher than SRResNet (no skip-connection).\n\nText in figure: PSNR on BSD100 (dB), time (s) for LR 64x64, SRResNet (no skip-connection), SRResNet (proposed), number of residual blocks."
+  },
+  {
+    "file": "p013_f08.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 8: Evolution of SRGAN generator network during training progress. Note: Generator initialized with SRResNet weights; learning rate set to 10 - 4 for first 100k iterations, then reduced to 10 - 5 for another 100k iterations. [ 4 \u00d7 upscaling]",
+    "width": 1093,
+    "height": 825,
+    "description": "## Description\nThis figure displays the evolution of the SRGAN generator network during training, showing the progression of image quality as the network is trained over 200,000 iterations. The images are upscaled by a factor of 4. The figure includes a comparison of the initial SRResNet weights and subsequent iterations at 20k, 40k, 60k, 80k, 100k, 140k, 180k, and the final SRGAN result, alongside the original high-resolution image.\n\n## Text in figure\n- SRResNet\n- 20k\n- 40k\n- 60k\n- 80k\n- 100k\n- 140k\n- 180k\n- SRGAN\n- original HR image"
+  },
+  {
+    "file": "p014_f09.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 9: Color-coded distribution of MOS scores on Set5, Set14, BSD100. Mean shown as red marker, where the bins are centered around value i. [ 4 \u00d7 upscaling]",
+    "width": 946,
+    "height": 161,
+    "description": "Description: This figure displays a color-coded distribution of Mean Opinion Scores (MOS) for various image super-resolution methods across three datasets: Set5, Set14, and BSD100. Each panel shows a heatmap with MOS scores on the x-axis and different methods on the y-axis. The mean MOS is indicated by a red marker. The methods include bicubic, SRCNN, SelfExSR, ESPNet, SRResNet, SRGAN, and HR.\n\nText in figure: Set5, Set14, BSD100, nearest, bicubic, SRCNN, SelfExSR, ESPNet, SRResNet, SRGAN, HR, MOS, 1, 2, 3, 4, 5, 100, 80, 60, 40, 20, 250, 200, 150, 100, 50, 2000, 1600, 1200, 800, 400."
+  },
+  {
+    "file": "p014_f10.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 10: Average rank on Set5, Set14, BSD100 by averaging the ranks over all available individual ratings. [ 4 \u00d7 upscaling]",
+    "width": 903,
+    "height": 453,
+    "description": "Section 1: This figure displays three bar charts comparing the average ranks of different categories on three datasets: Set5, Set14, and BSD100. Each chart shows the average rank of various categories, with the lowest rank indicating the best performance. The categories include nearest, bicubic, and others like SRResNet, SRGAN, etc. The highest average rank is observed in the BSD100 dataset, while the lowest is in the Set5 dataset.\n\nSection 2: Text in figure: Set5, Set14, BSD100, Average Rank, nearest, bicubic, SRResNet, SRGAN, HR, 1 to 12."
+  },
+  {
+    "file": "p015_f11.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 11: Results for Set5 using bicubic interpolation, SRResNet and SRGAN. [ 4 \u00d7 upscaling]",
+    "width": 880,
+    "height": 1164,
+    "description": "## Description\nThe figure displays a comparative analysis of image super-resolution techniques using different methods: bicubic interpolation, SRResNet, and SRGAN. It shows four sets of images, each set containing four variations of the same scene: a child, a toucan, a butterfly, and a woman. Each set demonstrates the results of upscaling images by 4x using the mentioned techniques.\n\n## Text in figure\nbicubic, SRResNet, SRGAN, original\nSet5\n4\u00d7 upscaling"
+  },
+  {
+    "file": "p016_f12.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 12: Results for Set14 using bicubic interpolation, SRResNet and SRGAN. [ 4 \u00d7 upscaling]",
+    "width": 937,
+    "height": 1140,
+    "description": "## Description\nThe figure displays a comparative analysis of image super-resolution techniques using four methods: bicubic interpolation, SRResNet, SRGAN, and the original image. Each method is applied to three different images: a mandrill, a woman, and a boat on a river. The images are upscaled by a factor of 4. The figure is organized in a grid format, with each row representing a different image and each column showing the result of a specific method.\n\n## Text in figure\nbicubic, SRResNet, SRGAN, original\nmandrill, woman, boat on river\noriginal image, bicubic interpolation, SRResNet, SRGAN"
+  },
+  {
+    "file": "p017_f13.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "Figure 13: Results for Set14 using bicubic interpolation , SRResNet and SRGAN. [ 4 \u00d7 upscaling]",
+    "width": 937,
+    "height": 1035,
+    "description": "## Figure Description\nThis figure displays a comparative analysis of image super-resolution techniques using different methods: bicubic interpolation, SRResNet, and SRGAN. It shows the results of upscaling images by 4x using these methods on various sample images. Each method's output is juxtaposed with the original image for direct comparison.\n\n## Text in Figure\nbicubic, SRResNet, SRGAN, original\n[Images of faces, flowers, a man in a hard hat, a woman in a hat, and a man in a pirate costume]"
+  },
+  {
+    "file": "p018_f14.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "Figure 14: Results for Set14 using bicubic interpolation, SRResNet and SRGAN. [ 4 \u00d7 upscaling]",
+    "width": 939,
+    "height": 817,
+    "description": "## Figure Description\nThis figure displays a comparison of image super-resolution techniques using four different methods: bicubic interpolation, SRResNet, SRGAN, and the original image. Each method is applied to three different images: a butterfly, a collection of vegetables, and a zebra. The images are upscaled by 4x.\n\n## Text in Figure\nbicubic, SRResNet, SRGAN, original\nHow to Do Everything with PowerPoint 2002\nElen Finkelstein"
+  },
+  {
+    "file": "p019_f15.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "Figure 15: Results for five random samples of BSD100 using bicubic interpolation, SRResNet and SRGAN. [ 4 \u00d7 upscaling]",
+    "width": 938,
+    "height": 953,
+    "description": "## Figure Description\nThis figure displays a comparison of image super-resolution techniques using five random samples from the BSD100 dataset. Each sample is processed using bicubic interpolation, SRResNet, and SRGAN, with a 4x upscaling factor. The original images are also shown for reference.\n\n## Text in Figure\nbicubic, SRResNet, SRGAN, original\n1st row: bicubic, SRResNet, SRGAN, original\n2nd row: bicubic, SRResNet, SRGAN, original\n3rd row: bicubic, SRResNet, SRGAN, original\n4th row: bicubic, SRResNet, SRGAN, original\n5th row: bicubic, SRResNet, SRGAN, original"
+  }
+]

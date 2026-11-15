@@ -1,0 +1,226 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "",
+    "width": 272,
+    "height": 88,
+    "description": "## Description\nThe figure consists of three panels displaying images of a sidewalk with varying levels of clarity. The first panel shows a clear image of a sidewalk with a white post and shadows. The second panel is slightly blurred, and the third panel is heavily blurred, making details indistinguishable.\n\n## Text in figure\n- Alexei A. Efros1\n- nAI\n- Eli She\n- {",
+    "pdf_text": "Alexei A. Efros1 | nAI | Eli She | {",
+    "bbox": [
+      252.3,
+      85.5,
+      388.5,
+      129.7
+    ]
+  },
+  {
+    "file": "p001_f02.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1: Which patch (left or right) is 'closer' to the middle patch in these examples? In each case, the traditional metrics (L2/PSNR, SSIM, FSIM) disagree with human judgments. But deep networks, even across architectures (Squeezenet [20], AlexNet [27], VGG [52]) and supervision type (supervised [47], self-supervised [13, 40, 43, 64], and even unsupervised [26]), provide an emergent embedding which agrees surprisingly well with humans. We further calibrate existing deep embeddings on a large-scale database of perceptual judgments; models and data can be found at https://www.github.com/richzhang/PerceptualSimilarity .",
+    "width": 992,
+    "height": 233,
+    "description": "Figure Description: This figure presents a comparative analysis of different image similarity metrics, including traditional metrics (L2/PSNR, SSIM, FSIM) and various deep learning networks (random, unsupervised, self-supervised, supervised). Each row shows three images: a reference image, a patch to be compared, and another patch. The figure asks viewers to determine which patch is closer to the reference image. The results indicate that traditional metrics often disagree with human judgments, while deep learning networks, regardless of their architecture or training method, align more closely with human perception.\n\nText in Figure: Reference, Patch 1, Patch 0, L2/PSNR, SSIM, FSIM, Random Networks, Unsupervised Networks, Self-Supervised Networks, Supervised Networks, Humans.",
+    "pdf_text": "Reference | Patch 1 | Patch 0 | Reference | Patch 1 | Patch 0 | Reference | Patch 1 | Patch 0 | L2/PSNR, SSIM, FSIM | Random Networks | Unsupervised Networks | Self-Supervised Networks | Supervised Networks | Humans",
+    "bbox": [
+      49.7,
+      168.3,
+      545.5,
+      284.9
+    ]
+  },
+  {
+    "file": "p002_f03.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "",
+    "width": 988,
+    "height": 221,
+    "description": "## Description:\nThe figure displays a comparison between original images and their perturbed patches. It consists of two sets of images, each set showing an original image on the left and its corresponding perturbed patches on the right. The perturbed patches exhibit various types of distortions, such as color shifts, blurriness, and pixelation.\n\n## Text in figure:\n- Original\n- Perturbed Patches\n- Original\n- Perturbed Patches",
+    "pdf_text": "Original | Perturbed Patches | Original | Perturbed Patches",
+    "bbox": [
+      49.1,
+      72.3,
+      543.0,
+      182.9
+    ]
+  },
+  {
+    "file": "p006_f04.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 3: Computing distance from a network (Left) To compute a distance d 0 between two patches, x , x 0 , given a network F , we first compute deep embeddings, normalize the activations in the channel dimension, scale each channel by vector w , and take the \u2113 2 distance. We then average across spatial dimension and across all layers. (Right) A small network G is trained to predict perceptual judgment h from distance pair ( d 0 , d 1 ).",
+    "width": 981,
+    "height": 211,
+    "description": "This figure is a diagram illustrating the process of computing perceptual distance between two image patches using deep learning features. It is divided into two main parts: computing distance and predicting perceptual judgment. The left part shows the steps to compute the distance d0 between two patches x and x0 using a network F. The right part depicts a small network G that predicts perceptual judgment h from the distance pair (d0, d1). The diagram includes blocks for normalization, subtraction, multiplication, L2 norm, spatial averaging, and cross-entropy loss.\n\nText in figure: Computing Distance, Normalize, Subtract, Multiply, L2 norm, Spatial Average, Computing Distance, Predicting Perceptual Judgement, Cross-Entropy, Loss, \u210e, Avg, F, F, w, x, x0, d0, d1, G, h",
+    "pdf_text": "Computing Distance | Cross- | Entropy | Loss | ! | ! | Normalize | Subtract | Multiply | L2 norm | Spatial Average | \" | \"# | $# | $# | $% | & | \u210e | Predicting Perceptual Judgement | ( | Avg",
+    "bbox": [
+      49.8,
+      71.9,
+      540.6,
+      177.5
+    ]
+  },
+  {
+    "file": "p006_f05.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 4: Quantitative comparison. We show a quantitative comparison across metrics on our test sets. (Left) Results averaged across our traditional and CNN-based distortions. (Right) Results averaged across our 4 real algorithm sets.",
+    "width": 960,
+    "height": 343,
+    "description": "Figure type: Bar chart\nDescription: The figure is a bar chart comparing different metrics on test sets. It shows two panels, one for distortions and one for real algorithms. Each panel has bars representing different metrics, with the height of each bar indicating the 2AFC score percentage. The highest bar in the left panel is for Human, at around 85%, and the lowest is for VGG, at around 50%. In the right panel, the highest bar is also for Human, at around 70%, and the lowest is for VGG, at around 50%.\n\nText in figure: Distortions, Real algorithms, Human, L2, SSIM, FSIMc, HDR-VDP, RandNet, Kmeans, Watching, SplitBrain, Puzzle, BiGAN, Squeeze, Alex, VGG, 50, 55, 60, 65, 70, 75, 80, 85, 2AFC score [%], Human, Low-level, Net (Random), Net (Unsupervised), Net (Self-supervised), Net (Supervised), LPIPS (linear), LPIPS (scratch), LPIPS (tune), Human, L2, SSIM, FSIMc, HDR-VDP, RandNet, Kmeans, Watching, SplitBrain, Puzzle, BiGAN, Squeeze, Alex, VGG, 50.0, 52.5, 55.0, 57.5, 60.0, 62.5, 65.0, 67.5, 70.0, 2AFC score [%]",
+    "pdf_text": "Distortions | Real algorithms | Human | L2 | SSIM | FSIMc | HDR-VDP | RandNet | Kmeans | Watching | SplitBrain | Puzzle | BiGAN | Squeeze | Alex | VGG | Squeeze | Alex | VGG | Squeeze | Alex | VGG | Squeeze | Alex | VGG | 50 | 55 | 60 | 65 | 70 | 75 | 80 | 85 | 2AFC score [%] | Human | Low-level | Net (Random) | Net (Unsupervised) | Net (Self-supervised) | Net (Supervised) | LPIPS (linear) | LPIPS (scratch) | LPIPS (tune) | Human | L2 | SSIM | FSIMc | HDR-VDP | RandNet | Kmeans | Watching | SplitBrain | Puzzle | BiGAN | Squeeze | Alex | VGG | Squeeze | Alex | VGG | Squeeze | Alex | VGG | Squeeze | Alex | VGG | 50.0 | 52.5 | 55.0 | 57.5 | 60.0 | 62.5 | 65.0 | 67.5 | 70.0 | 2AFC score [%] | Human | Low-level | Net (Random) | Net (Unsupervised) | Net (Self-supervised) | Net (Supervised) | LPIPS (linear) | LPIPS (scratch) | LPIPS (tune)",
+    "bbox": [
+      65.4,
+      240.8,
+      545.4,
+      412.3
+    ]
+  },
+  {
+    "file": "p007_f06.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 5: Correlating Perceptual Tests. We show performance across methods, including unsupervised [26], selfsupervised [1, 44, 12, 57, 63, 41, 43, 40, 13, 64], supervised [27, 52, 20], and our perceptually-learned metrics (LPIPS). The scores are on our 2AFC and JND tests, averaged across traditional and CNN-based distortions.",
+    "width": 468,
+    "height": 330,
+    "description": "This figure is a scatter plot comparing the performance of various methods on two perceptual tests: 2AFC and JND. The methods include unsupervised, self-supervised, supervised, and perceptually-learned metrics (LPIPS). The highest performing method is Squeeze-lin, with a score of approximately 80% on the 2AFC test and 62.5% on the JND test. The lowest performing method is HDR-VDP, with a score of approximately 66% on the 2AFC test and 42.5% on the JND test. Other methods include Gauss, K-means, Egomotion, Inpainting, Colorization, Context, Sound, Video, Watching, Splitbrain, Puzzle, BiGAN, Alex, VGG, Squeeze, Alex-lin, VGG-lin, L2, SSIM, FSIMc, and Low-level.\n\nText in figure: 42.5, 45.0, 47.5, 50.0, 52.5, 55.0, 57.5, 60.0, 62.5, JND Test [mAP %], 66, 68, 70, 72, 74, 76, 78, 80, 82, 2AFC Test [%], Gauss, K-means, Egomotion, Inpainting, Colorization, Context, Sound, Video, Watching, Splitbrain, Puzzle, BiGAN, Alex, VGG, Squeeze, Alex-lin, VGG-lin, Squeeze-lin, L2, SSIM, FSIMc, HDR-VDP, Low-level, Net (Random), Net (Unsupervised), Net (Self-supervised), Net (Supervised), LPIPS (linear)",
+    "pdf_text": "42.5 | 45.0 | 47.5 | 50.0 | 52.5 | 55.0 | 57.5 | 60.0 | 62.5 | JND Test [mAP %] | 66 | 68 | 70 | 72 | 74 | 76 | 78 | 80 | 82 | 2AFC Test [%] | Gauss | K-means | Egomotion | Inpainting | Colorization | Context | Sound | Video | Watching | Splitbrain | Puzzle | BiGAN | Alex | VGG | Squeeze | Alex-lin | VGG-lin | Squeeze-lin | L2 | SSIM | FSIMc | HDR-VDP | Low-level | Net (Random) | Net (Unsupervised) | Net (Self-supervised) | Net (Supervised) | LPIPS (linear)",
+    "bbox": [
+      49.9,
+      78.7,
+      284.2,
+      243.5
+    ]
+  },
+  {
+    "file": "p008_f07.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 6: Qualitative comparisons on distortions. We show qualitative comparison on traditional distortions, using the SSIM [58] metric and BiGAN network [13]. We show examples where the metrics agree and disagree. A primary difference is that deep embeddings appear to be more sensitive to blur. Please see the appendix for additional examples.",
+    "width": 988,
+    "height": 357,
+    "description": "## Figure Description\nThis figure presents a qualitative comparison of image distortions using two different metrics: SSIM and BiGAN. It displays various images with different levels of distortion, ranging from close to far. The images are arranged in a grid, with each row representing a different level of distortion. The figure shows examples where the metrics agree and disagree, highlighting the differences in sensitivity to blur between the two methods.\n\n## Text in Figure\n- SSIM\n- close\n- far\n- BiGAN\n- far\n- close",
+    "pdf_text": "SSIM | close | far | BiGAN | far | close",
+    "bbox": [
+      50.3,
+      71.4,
+      544.7,
+      249.8
+    ]
+  },
+  {
+    "file": "p011_f08.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 7: Individual results (left) traditional distortions (right) CNN-based distortions",
+    "width": 962,
+    "height": 344,
+    "description": "This figure is a bar chart comparing the performance of various image quality assessment methods. It shows two panels, one for traditional distortions and one for CNN-based distortions. Each panel has bars representing different methods, including human evaluation, L2 distance, SSIM, FSIMc, HDR-VDP, RandNet, Kmeans, Watching, SplitBrain, Puzzle, BiGAN, Squeeze, Alex, and VGG. The bars are grouped into categories such as low-level, Net (Random), Net (Unsupervised), Net (Self-supervised), Net (Supervised), LPIPS (linear), LPIPS (scratch), and LPIPS (tune). The height of each bar indicates the 2AFC score percentage.\n\nDescription: at most 120 words. What is the main point of the figure. What would change in the figure if the variable the figure shows were to vary (increase, decrease). How would the figure's interpretation change in each case, naming each series by its legend label.\n\nText in figure: the words and printed values, grouped by panel or chart (for example\n\"YOLO: Correct 65.5%, Loc 19.0%\"): block and layer names, legend entries, axis titles,\nlabels on arrows, example inputs, values printed on bars or slices. Leave out axis tick\nnumbers. At most 80 items.\n\nThe main point of the figure is to compare the performance of different image quality assessment methods using 2AFC scores. The figure shows that CNN-based methods generally outperform traditional methods, with the highest scores achieved by methods like LPIPS (tune) and Net (Supervised). If the 2AFC scores were to decrease, it would indicate that the methods are less effective at assessing image quality. Conversely, if the scores were to increase, it would suggest that the methods are more effective. The interpretation of the figure would change accordingly, with lower scores indicating less accurate assessments and higher scores indicating more accurate assessments.",
+    "pdf_text": "Distortions (Traditional) | Distortions (CNN-Based) | Human | L2 | SSIM | FSIMc | HDR-VDP | RandNet | Kmeans | Watching | SplitBrain | Puzzle | BiGAN | Squeeze | Alex | VGG | Squeeze | Alex | VGG | Squeeze | Alex | VGG | Squeeze | Alex | VGG | 50 | 55 | 60 | 65 | 70 | 75 | 80 | 2AFC score [%] | Human | Low-level | Net (Random) | Net (Unsupervised) | Net (Self-supervised) | Net (Supervised) | LPIPS (linear) | LPIPS (scratch) | LPIPS (tune) | Human | L2 | SSIM | FSIMc | HDR-VDP | RandNet | Kmeans | Watching | SplitBrain | Puzzle | BiGAN | Squeeze | Alex | VGG | Squeeze | Alex | VGG | Squeeze | Alex | VGG | Squeeze | Alex | VGG | 50 | 55 | 60 | 65 | 70 | 75 | 80 | 85 | 2AFC score [%] | Human | Low-level | Net (Random) | Net (Unsupervised) | Net (Self-supervised) | Net (Supervised) | LPIPS (linear) | LPIPS (scratch) | LPIPS (tune)",
+    "bbox": [
+      65.6,
+      71.9,
+      546.3,
+      243.9
+    ]
+  },
+  {
+    "file": "p011_f09.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "",
+    "width": 458,
+    "height": 305,
+    "description": "This figure is a bar chart comparing the 2AFC scores of various models and methods. The highest score is achieved by the Human model at approximately 73%, while the lowest score is around 50% for the RandNet model. The chart includes models like SSIM, FSIMc, HDR-VDP, Kmeans, Watching, SplitBrain, Puzzle, BiGAN, Squeeze, Alex, and VGG, each represented by different colored bars. The models are categorized into Human, Low-level, Net (Random), Net (Unsupervised), Net (Self-supervised), Net (Supervised), LPIPS (linear), LPIPS (scratch), and LPIPS (tune).\n\nText in figure: Human, L2, SSIM, FSIMc, HDR-VDP, RandNet, Kmeans, Watching, SplitBrain, Puzzle, BiGAN, Squeeze, Alex, VGG, Squeeze, Alex, VGG, Squeeze, Alex, VGG, Squeeze, Alex, VGG, 50, 55, 60, 65, 70, 75, 2AFC score [%], Human, Low-level, Net (Random), Net (Unsupervised), Net (Self-supervised), Net (Supervised), LPIPS (linear), LPIPS (scratch), LPIPS (tune)",
+    "pdf_text": "Human | L2 | SSIM | FSIMc | HDR-VDP | RandNet | Kmeans | Watching | SplitBrain | Puzzle | BiGAN | Squeeze | Alex | VGG | Squeeze | Alex | VGG | Squeeze | Alex | VGG | Squeeze | Alex | VGG | 50 | 55 | 60 | 65 | 70 | 75 | 2AFC score [%] | Human | Low-level | Net (Random) | Net (Unsupervised) | Net (Self-supervised) | Net (Supervised) | LPIPS (linear) | LPIPS (scratch) | LPIPS (tune)",
+    "bbox": [
+      66.6,
+      299.1,
+      295.6,
+      451.6
+    ]
+  },
+  {
+    "file": "p011_f10.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 8: Individual results (left) superresolution (right) frame interpolation",
+    "width": 468,
+    "height": 306,
+    "description": "## Figure Description\nThis figure is a bar chart comparing the performance of various models on a perceptual metric task, specifically superresolution and frame interpolation. The x-axis lists different models, including human performance, low-level models, and various neural network architectures. The y-axis represents the 2AFC score percentage. The highest score is achieved by the 'Human' model, reaching approximately 68%. The lowest score is observed in the 'Low-level' category, around 55%. Other models, such as 'Net (Supervised)', 'LPIPS (linear)', and 'LPIPS (tune)', show varying performance levels, with scores ranging from 55% to 65%.\n\n## Index Terms\nHuman performance, low-level models, neural network architectures, superresolution, frame interpolation, 2AFC score, perceptual metric, supervised learning, unsupervised learning, self-supervised learning, LPIPS, BiGAN, Squeeze, Alex, VGG, SplitBrain, Watching, Kmeans, RandNet, HDR-VDP, FSIMc, SSIM, L2.",
+    "pdf_text": "Human | L2 | SSIM | FSIMc | HDR-VDP | RandNet | Kmeans | Watching | SplitBrain | Puzzle | BiGAN | Squeeze | Alex | VGG | Squeeze | Alex | VGG | Squeeze | Alex | VGG | Squeeze | Alex | VGG | 50.0 | 52.5 | 55.0 | 57.5 | 60.0 | 62.5 | 65.0 | 67.5 | 70.0 | 2AFC score [%] | Human | Low-level | Net (Random) | Net (Unsupervised) | Net (Self-supervised) | Net (Supervised) | LPIPS (linear) | LPIPS (scratch) | LPIPS (tune)",
+    "bbox": [
+      311.3,
+      299.2,
+      545.4,
+      451.9
+    ]
+  },
+  {
+    "file": "p011_f11.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 9: Individual results (left) video deblurring (right) colorization",
+    "width": 970,
+    "height": 304,
+    "description": "## Figure Description\n\nThis figure contains two bar charts comparing various methods for video deblurring and colorization tasks. Each chart displays the 2AFC score percentage for different methods, including Human, L2, SSIM, FSIMc, HDR-VDP, RandNet, Kmeans, Watching, SplitBrain, Puzzle, BiGAN, Squeeze, Alex, and VGG. The methods are categorized into Human, Low-level, Net (Random), Net (Unsupervised), Net (Self-supervised), Net (Supervised), LPIPS (linear), LPIPS (scratch), and LPIPS (tune). The left chart shows the highest score for Human at 67.5% and the lowest for VGG at 50.0%. The right chart shows the highest score for Human at 70.0% and the lowest for VGG at 50.0%.\n\n## Textual Content\n\nHuman, L2, SSIM, FSIMc, HDR-VDP, RandNet, Kmeans, Watching, SplitBrain, Puzzle, BiGAN, Squeeze, Alex, VGG, 50.0, 52.5, 55.0, 57.5, 60.0, 62.5, 65.0, 67.5, 70.0, 2AFC score [%], Human, Low-level, Net (Random), Net (Unsupervised), Net (Self-supervised), Net (Supervised), LPIPS (linear), LPIPS (scratch), LPIPS (tune)",
+    "pdf_text": "Human | L2 | SSIM | FSIMc | HDR-VDP | RandNet | Kmeans | Watching | SplitBrain | Puzzle | BiGAN | Squeeze | Alex | VGG | Squeeze | Alex | VGG | Squeeze | Alex | VGG | Squeeze | Alex | VGG | 50.0 | 52.5 | 55.0 | 57.5 | 60.0 | 62.5 | 65.0 | 67.5 | 2AFC score [%] | Human | Low-level | Net (Random) | Net (Unsupervised) | Net (Self-supervised) | Net (Supervised) | LPIPS (linear) | LPIPS (scratch) | LPIPS (tune) | Human | L2 | SSIM | FSIMc | HDR-VDP | RandNet | Kmeans | Watching | SplitBrain | Puzzle | BiGAN | Squeeze | Alex | VGG | Squeeze | Alex | VGG | Squeeze | Alex | VGG | Squeeze | Alex | VGG | 50.0 | 52.5 | 55.0 | 57.5 | 60.0 | 62.5 | 65.0 | 67.5 | 70.0 | 2AFC score [%] | Human | Low-level | Net (Random) | Net (Unsupervised) | Net (Self-supervised) | Net (Supervised) | LPIPS (linear) | LPIPS (scratch) | LPIPS (tune)",
+    "bbox": [
+      60.7,
+      507.7,
+      545.3,
+      659.7
+    ]
+  },
+  {
+    "file": "p013_f12.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 10: Learned linear weights by layer. (a) Unlearned weights correspond to using weighting 1 for each channel in each layer, which results in computing cosine distance. (b) We show the learned weights from each layer of our Alex-lin model. This is the w term in Figure 3. Each subplot shows the channel weights from each layer, sorted in descending order. The x-axis shows the channel number, and y-axis shows the weight. Weights are restricted to be non-negative, as image patches should not have negative distance. (c,d) Same as (b), but with the VGG-lin and Squeeze-lin models.",
+    "width": 970,
+    "height": 885,
+    "description": "Section 1: Figure type and content.\nThis figure is a collection of plots showing learned linear weights for different layers of neural network models. Each subplot displays the weights from a specific layer, sorted in descending order. The x-axis represents the channel number, and the y-axis shows the weight value. The plots are labeled as (a) Unlearned weights for AlexNet model, (b) Learned weights from Alex-lin model, (c) Learned weights from VGG-lin model, and (d) Learned weights from Squeeze-lin model.\n\nSection 2: Textual content in the figure.\nText in figure: 0, 16, 32, 48, 64, Conv 1, 0.00, 0.25, 0.50, 0.75, 1.00, Weight, 0, 48, 96, 144, 192, Conv 2, 0, 96, 192, 288, 384, Conv 3, 0, 64, 128, 192, 256, Conv 4, 0, 64, 128, 192, 256, Conv 5, (a) Unlearned weights for AlexNet model (cosine distance), 0, 16, 32, 48, 64, Conv 1, 0.0, 0.2, 0.4, 0.6, 0.8, Weight, 0, 48, 96, 144, 192, Conv 2, 0, 96, 192, 288, 384, Conv 3, 0, 64, 128, 192, 256, Conv 4, 0, 64, 128, 192, 256, Conv 5, (b) Learned weights from Alex\u2013lin model, 0, 16, 32, 48, 64, conv1_2, 0.0, 0.2, 0.4, 0.6, 0.8, Weight, 0, 32, 64, 96, 128, conv2_2, 0, 64, 128, 192, 256, conv3_3, 0, 128, 256, 384, 512, conv4_3, 0,",
+    "pdf_text": "0 | 16 | 32 | 48 | 64 | Conv 1 | 0.00 | 0.25 | 0.50 | 0.75 | 1.00 | Weight | 0 | 48 | 96 | 144 | 192 | Conv 2 | 0 | 96 | 192 | 288 | 384 | Conv 3 | 0 | 64 | 128 | 192 | 256 | Conv 4 | 0 | 64 | 128 | 192 | 256 | Conv 5 | (a) Unlearned weights for AlexNet model (cosine distance) | 0 | 16 | 32 | 48 | 64 | Conv 1 | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | Weight | 0 | 48 | 96 | 144 | 192 | Conv 2 | 0 | 96 | 192 | 288 | 384 | Conv 3 | 0 | 64 | 128 | 192 | 256 | Conv 4 | 0 | 64 | 128 | 192 | 256 | Conv 5 | (b) Learned weights from Alex\u2013lin model | 0 | 16 | 32 | 48 | 64 | conv1_2 | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | Weight | 0 | 32 | 64 | 96 | 128 | conv2_2 | 0 | 64 | 128 | 192 | 256 | conv3_3 | 0 | 128 | 256 | 384 | 512 | conv4_3 | 0 | 128 | 256 | 384 | 512 | conv5_3 | (c) Learned weights from VGG\u2013lin model | 0 | 32 | 64 | conv1 | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | Weight | 0 | 64 | 128 | fire3 | 0 | 128 | 256 | fire5 | 0 | 192 | 384 | fire6 | 0 | 192 | 384 | fire7 | 0 | 256 | 512 | fire8 | 0 | 256 | 512 | fire9 | (d) Learned weights from Squeeze\u2013lin model",
+    "bbox": [
+      58.4,
+      74.4,
+      543.6,
+      517.1
+    ]
+  },
+  {
+    "file": "p014_f13.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 11: Qualitative comparisons on distortions. We show qualitative comparison on CNN-based distortions, using the SSIM [58] metric and BiGAN network [13]. We show examples where both agree the patches are closer or far, and examples where the metrics disagree. A primary difference is that deep embeddings appear to be more sensitive to blur. Please see the appendix for additional examples.",
+    "width": 988,
+    "height": 357,
+    "description": "### Description\nThis figure presents a qualitative comparison of distortions using two different metrics: SSIM and BiGAN. It displays various image patches categorized as \"close\" or \"far\" based on the metrics. The figure shows examples where both metrics agree on the proximity of the patches and instances where they disagree, highlighting that deep embeddings are more sensitive to blur.\n\n### Text in Figure\n- **SSIM**\n  - close\n  - far\n- **BiGAN**\n  - far\n  - close",
+    "pdf_text": "SSIM | close | far | BiGAN | far | close",
+    "bbox": [
+      50.7,
+      71.3,
+      544.6,
+      250.0
+    ]
+  },
+  {
+    "file": "p014_f14.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 12: TID Dataset Weshow the Spearman correlation coefficient of various methods on the TID2013 Dataset [45]. Note that deep networks trained for classification perform well out of the box (blue).",
+    "width": 449,
+    "height": 277,
+    "description": "## Figure Description\nThis figure is a bar chart showing the Spearman correlation coefficients of various methods on the TID2013 Dataset. The methods include PSNR, SSIM, MSSIM, FSIM, FSIMc, Squeeze, Alex, VGG, and Resnet50. The highest correlation coefficient is for FSIMc at approximately 0.85, while the lowest is for PSNR and SSIM at around 0.65.\n\n## Index Terms\nSpearman correlation coefficient, TID2013 Dataset, PSNR, SSIM, MSSIM, FSIM, FSIMc, Squeeze, Alex, VGG, Resnet50, deep learning, image quality assessment, classification performance.",
+    "pdf_text": "PSNR | SSIM | MSSIM | FSIM | FSIMc | Squeeze | Alex | VGG | Resnet50 | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | Spearman correlation coefficient",
+    "bbox": [
+      53.9,
+      314.8,
+      278.5,
+      453.4
+    ]
+  }
+]

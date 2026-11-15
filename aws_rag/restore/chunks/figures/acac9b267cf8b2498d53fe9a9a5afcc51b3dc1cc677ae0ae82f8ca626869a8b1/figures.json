@@ -1,0 +1,56 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 1: Systematic dilation supports exponential expansion of the receptive field without loss of resolution or coverage. (a) F 1 is produced from F 0 by a 1-dilated convolution; each element in F 1 has a receptive field of 3 \u00d7 3 . (b) F 2 is produced from F 1 by a 2-dilated convolution; each element in F 2 has a receptive field of 7 \u00d7 7 . (c) F 3 is produced from F 2 by a 4-dilated convolution; each element in F 3 has a receptive field of 15 \u00d7 15 . The number of parameters associated with each layer is identical. The receptive field grows exponentially while the number of parameters grows linearly.",
+    "width": 758,
+    "height": 272,
+    "description": "## Section 1: Figure Description\nThis figure illustrates the concept of multi-scale context aggregation using dilated convolutions. It shows three panels (a, b, c) demonstrating the exponential expansion of the receptive field without loss of resolution or coverage. Each panel represents a different layer (F1, F2, F3) produced by dilated convolutions with increasing dilation rates.\n\n## Section 2: Figure Details\nText in figure: \"F 1\", \"F 2\", \"F 3\", \"1-dilated convolution\", \"2-dilated convolution\", \"4-dilated convolution\", \"3 \u00d7 3\", \"7 \u00d7 7\", \"15 \u00d7 15\". Panels: (a) shows a 3x3 receptive field, (b) shows a 7x7 receptive field, (c) shows a 15x15 receptive field."
+  },
+  {
+    "file": "p005_f02.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 2: Semantic segmentations produced by different adaptations of the VGG-16 classification network. From left to right: (a) input image, (b) prediction by FCN-8s (Long et al., 2015), (c) prediction by DeepLab (Chen et al., 2015a), (d) prediction by our simplified front-end module, (e) ground truth.",
+    "width": 776,
+    "height": 763,
+    "description": "Description: The figure displays a comparison of semantic segmentations produced by different adaptations of the VGG-16 classification network. It shows five panels for each image: the original image, the segmentation by FCN-8s, the segmentation by DeepLab, the segmentation by the simplified front-end module, and the ground truth segmentation. The segmentations are highlighted in different colors to distinguish between various objects.\n\nText in figure: (a) Image, (b) FCN-8s, (c) DeepLab, (d) Our front end, (e) Ground truth."
+  },
+  {
+    "file": "p007_f03.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 3: Semantic segmentations produced by different models. From left to right: (a) input image, (b) prediction by the front-end module, (c) prediction by the large context network plugged into the front end, (d) prediction by the front end + context module + CRF-RNN, (e) ground truth.",
+    "width": 775,
+    "height": 630,
+    "description": "Figure type: Image comparison\nDescription: The figure shows a comparison of semantic segmentations produced by different models on various input images. Each row represents a different input image, with the original image on the left and the segmentations produced by different models on the right. The models include the front-end module, the large context network, the front end + context module + CRF-RNN, and the ground truth.\n\nText in figure: Image, Front end, + Context, + CRF-RNN, Ground truth"
+  },
+  {
+    "file": "p008_f04.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 4: Failure cases from the VOC-2012 validation set. The most accurate architecture we trained (Context + CRF-RNN) performs poorly on these images.",
+    "width": 751,
+    "height": 216,
+    "description": "## Description\nThe figure displays a collection of images with their corresponding segmentation results. Each image is shown alongside the model's output and the ground truth. The images include various objects such as bottles, a sofa, a chair, a horse, a cat, and a dog. The segmentation results are highlighted in different colors, with the model's output on the left and the ground truth on the right.\n\n## Text in figure\n- Image: Bottles, Sofa, Chair, Horse, Cat, Dog\n- Our result: Bottles, Person, Horse, Person, Cat, Horse, Dog\n- Ground truth: Bottles, Person, Horse, Person, Sofa, Chair, Cat, Dog"
+  },
+  {
+    "file": "p013_f05.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 5: Results produced by the Dilation10 model after different training stages. (a) Input image. (b) Ground truth segmentation. (c) Segmentation produced by the model after the first stage of training (front-end only). (d) Segmentation produced after the second stage, which trains the context module. (e) Segmentation produced after the third stage, in which both modules are trained jointly.",
+    "width": 793,
+    "height": 434,
+    "description": "Figure type: Image segmentation results from a model trained in stages.\nDescription: Displays six panels showing the progression of a model's segmentation accuracy. Panels (a) and (b) show the input image and ground truth segmentation, respectively. Panels (c) to (e) show the model's segmentation at different training stages, with (c) being the front-end only, (d) adding context, and (e) training both modules jointly. Panel (f) is the ground truth segmentation for reference.\n\nText in figure: (a) Image, (b) Ground truth, (c) Front end, (d) +Context, (e) +Joint, (f) Ground truth."
+  },
+  {
+    "file": "p013_f06.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "",
+    "width": 758,
+    "height": 196,
+    "description": "## Figure description\n\nThis figure shows a table with two rows of data, labeled \"Validation set\" and \"Test set.\" Each row contains accuracy percentages for various object classes, including \"Road,\" \"Sidewalk,\" \"Building,\" \"Wall,\" \"Fence,\" \"Pole,\" \"Light,\" \"Sign,\" \"Vegetation,\" \"Terrain,\" \"Sky,\" \"Person,\" \"Rider,\" \"Car,\" \"Truck,\" \"Bus,\" \"Train,\" \"Motorcycle,\" \"Bicycle,\" and \"mean IoU.\"\n\n## Search index\n\n### Figure type\n\nTable showing accuracy percentages for object detection models.\n\n### Content\n\nThe table displays accuracy percentages for two sets of data: \"Validation set\" and \"Test set.\" The object classes include \"Road,\" \"Sidewalk,\" \"Building,\" \"Wall,\" \"Fence,\" \"Pole,\" \"Light,\" \"Sign,\" \"Vegetation,\" \"Terrain,\" \"Sky,\" \"Person,\" \"Rider,\" \"Car,\" \"Truck,\" \"Bus,\" \"Train,\" \"Motorcycle,\" \"Bicycle,\" and \"mean IoU.\" The \"mean IoU\" row shows the average Intersection over Union (IoU) scores for all object classes."
+  }
+]

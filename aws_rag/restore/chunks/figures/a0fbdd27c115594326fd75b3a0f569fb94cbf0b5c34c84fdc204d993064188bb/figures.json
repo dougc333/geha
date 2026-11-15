@@ -1,0 +1,29 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1: Throughput and accuracy on Imagenet of our methods compared to EfficientNets, trained on Imagenet1k only. The throughput is measured as the number of images processed per second on a V100 GPU. DeiT-B is identical to VIT-B, but the training is more adapted to a data-starving regime. It is learned in a few days on one machine. The symbol \u2697 refers to models trained with our transformer-specific distillation. See Table 5 for details and more models.",
+    "width": 489,
+    "height": 477,
+    "description": "This figure is a line graph comparing the top-1 accuracy and throughput of various models on ImageNet. The x-axis represents the number of images processed per second on a V100 GPU, while the y-axis shows the top-1 accuracy percentage. The highest accuracy is achieved by DeiT-B\u2697 at 86%, and the lowest is B0 at 76%. The series with the highest throughput is EfficientNet, reaching up to 2500 images/s, while the lowest is ViT-L at around 50 images/s.\n\nLegend: EfficientNet, ViT, Ours, Ours\u2697\nAnnotations: DeiT-B\u2697, DeiT-B\u2697, DeiT-S\u2697, B7, B1, B0, ViT-B, ViT-L"
+  },
+  {
+    "file": "p007_f02.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 2: Our distillation procedure: we simply include a new distillation token . It interacts with the class and patch tokens through the self-attention layers. This distillation token is employed in a similar fashion as the class token, except that on output of the network its objective is to reproduce the (hard) label predicted by the teacher, instead of true label. Both the class and distillation tokens input to the transformers are learned by back-propagation.",
+    "width": 345,
+    "height": 528,
+    "description": "This figure is a schematic representation of a distillation procedure for training data-efficient image transformers. It shows the interaction of a new distillation token with class and patch tokens through self-attention layers. The distillation token aims to reproduce the label predicted by the teacher network, rather than the true label. Both class and distillation tokens are learned through back-propagation.\n\nText in figure: \"LCE\", \"Lteacher\", \"FFN\", \"self-attention\", \"class token\", \"patch tokens\", \"distillation token\"."
+  },
+  {
+    "file": "p013_f03.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 3: Distillation on ImageNet [42] with DeiT-B: performance as a function of the number of training epochs. We provide the performance without distillation (horizontal dotted line) as it saturates after 400 epochs.",
+    "width": 511,
+    "height": 499,
+    "description": "This figure is a line graph showing the top-1 accuracy percentage of different distillation methods over the number of training epochs. The series with the highest accuracy is \"Distillation token 384\", which peaks at around 85% accuracy after 1000 epochs. The lowest accuracy is observed in the \"No distillation\" series, which remains constant at around 82% throughout the epochs. The \"Usual distillation\" series shows a peak at around 82.5% accuracy after 400 epochs, while the \"Hard distillation\" series reaches around 84% accuracy after 1000 epochs.\n\nText in figure: \"top-1 accuracy (%)\", \"epochs\", \"No distillation\", \"Usual distillation\", \"Hard distillation\", \"Distillation token\", \"Distillation token 384\", \"81\", \"82\", \"83\", \"84\", \"85\", \"86\", \"384\"."
+  }
+]

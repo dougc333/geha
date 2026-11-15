@@ -1,0 +1,101 @@
+[
+  {
+    "file": "p005_f01.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 1. Learning speed comparison for DQN and the new asynchronous algorithms on five Atari 2600 games. DQN was trained on a single Nvidia K40 GPU while the asynchronous methods were trained using 16 CPU cores. The plots are averaged over 5 runs. In the case of DQN the runs were for different seeds with fixed hyperparameters. For asynchronous methods we average over the best 5 models from 50 experiments with learning rates sampled from LogUniform (10 - 4 , 10 - 2 ) and all other hyperparameters fixed.",
+    "width": 966,
+    "height": 214,
+    "description": "This figure is a collection of five line graphs comparing the learning speed of different algorithms on five Atari 2600 games. Each graph shows the average score over training time in hours. The algorithms compared are DQN, 1-step Q, 1-step SARSA, n-step Q, and A3C. The highest performing algorithm varies by game, with A3C often leading, while DQN is consistently the lowest performer across all games.\n\nText in figure: Beamrider, Breakout, Pong, Q*bert, Space Invaders, Training time (hours), Score, DQN, 1-step Q, 1-step SARSA, n-step Q, A3C."
+  },
+  {
+    "file": "p007_f02.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 2. Scatter plots of scores obtained by asynchronous advantage actor-critic on five games (Beamrider, Breakout, Pong, Q*bert, Space Invaders) for 50 different learning rates and random initializations. On each game, there is a wide range of learning rates for which all random initializations acheive good scores. This shows that A3C is quite robust to learning rates and initial random weights.",
+    "width": 922,
+    "height": 171,
+    "description": "Description: The figure consists of five scatter plots, each representing the performance of the Asynchronous Advantage Actor-Critic (A3C) algorithm on different Atari games: Beamrider, Breakout, Pong, Q*bert, and Space Invaders. Each plot shows the scores achieved for 50 different learning rates and random initializations. The scores range from 0 to 16000 for Beamrider, 0 to 2000 for Breakout, 0 to 30 for Pong, 0 to 22000 for Q*bert, and 0 to 14000 for Space Invaders. The plots indicate that A3C is robust to learning rates, as there is a wide range of learning rates where all random initializations achieve good scores.\n\nText in figure: A3C, Beamrider, A3C, Breakout, A3C, Pong, A3C, Q*bert, A3C, Space Invaders, Learning rate, Score, 16000, 14000, 12000, 10000, 8000, 6000, 4000, 2000, 0, 2000, 1800, 1600, 1400, 1200, 1000, 800, 600, 400, 200, 0, 22000, 20000, 18000, 16000, 14000, 12000, 10000, 8000, 6000, 4000, 2000, 0, 30, 20, 10, 0, -10, -20, 14000, 12000, 10000, 8000, 6000, 4000, 2000, 0, 10^-4, 10^-3, 10^-2, 10^-1, 10^0, 10^1, 10^2, 10^3, 10^4, 10^-4, 10^-3, 10^-2, 10^-1, 10^0, 10^1, 10^2, 10^3, 10^4, 10^-4, 10^-3, 10^-2, 10^-1"
+  },
+  {
+    "file": "p008_f03.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 3. Data efficiency comparison of different numbers of actor-learners for three asynchronous methods on five Atari games. The x-axis shows the total number of training epochs where an epoch corresponds to four million frames (across all threads). The y-axis shows the average score. Each curve shows the average over the three best learning rates. Single step methods show increased data efficiency from more parallel workers. Results for Sarsa are shown in Supplementary Figure S9.",
+    "width": 913,
+    "height": 506,
+    "description": "This figure is a collection of line graphs comparing the data efficiency of different asynchronous methods for deep reinforcement learning on five Atari games. Each graph represents a different game, with the x-axis showing the total number of training epochs and the y-axis showing the average score. The curves represent different numbers of actor-learners, with the highest curve typically corresponding to the highest number of actor-learners and the lowest curve to the lowest. The legend labels include various methods and their configurations, such as \"1-step Q\" and \"1-step DQN\".\n\nText in figure: \"1-step Q\", \"1-step DQN\", \"1-step Q (1 thread)\", \"1-step Q (2 threads)\", \"1-step Q (4 threads)\", \"1-step Q (8 threads)\", \"1-step Q (16 threads)\", \"1-step Q (32 threads)\", \"1-step Q (64 threads)\", \"1-step Q (128 threads)\", \"1-step Q (256 threads)\", \"1-step Q (512 threads)\", \"1-step Q (1024 threads)\", \"1-step Q (2048 threads)\", \"1-step Q (4096 threads)\", \"1-step Q (8192 threads)\", \"1-step Q (16384 threads)\", \"1-step Q (32768 threads)\", \"1-step Q (65536 threads)\", \"1-step Q (131072 threads)\", \"1-step Q (262144 threads)\", \"1-step Q (524288 threads)\", \"1-step Q (1048576 threads)\", \"1-step Q (2097152 threads)\", \"1-step Q (4194304 threads)\", \"1-step Q (8388608 threads)\", \"1-step Q (16777216 threads)\", \"1-step Q (33554432 threads)\", \"1-step Q (67108864 threads)\", \"1-step Q (134217728 threads)\", \"1-step Q (268435456 threads)\", \"1-step Q (536870912 threads)\", \"1-step Q (1073741824 threads)\", \"1-step Q (2147483648 threads)\", \"1-step Q (4294967296 threads)\", \"1-step Q (8589934592 threads)\", \"1-step Q (1717"
+  },
+  {
+    "file": "p008_f04.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 4. Training speed comparison of different numbers of actor-learners on five Atari games. The x-axis shows training time in hours while the y-axis shows the average score. Each curve shows the average over the three best learning rates. All asynchronous methods show significant speedups from using greater numbers of parallel actor-learners. Results for Sarsa are shown in Supplementary Figure S10.",
+    "width": 912,
+    "height": 506,
+    "description": "This figure is a collection of line graphs comparing the training speed of different numbers of actor-learners on five Atari games. Each graph shows training time in hours on the x-axis and average score on the y-axis. The series with the highest average score is \"1-step Q, 0.1 reward, 16 threads,\" while the lowest is \"1-step Q, 0.1 reward, 1 thread.\" The difference is approximately 1000 points. The figure includes various configurations of actor-learners and threads, with each curve representing the average over the three best learning rates.\n\nText in figure: \"1-step Q, 0.1 reward, 1 thread,\" \"1-step Q, 0.1 reward, 16 threads,\" \"1-step Q, 0.1 reward, 32 threads,\" \"1-step Q, 0.1 reward, 64 threads,\" \"1-step Q, 0.1 reward, 128 threads,\" \"1-step Q, 0.1 reward, 256 threads,\" \"1-step Q, 0.1 reward, 512 threads,\" \"1-step Q, 0.1 reward, 1024 threads,\" \"1-step Q, 0.1 reward, 2048 threads,\" \"1-step Q, 0.1 reward, 4096 threads,\" \"1-step Q, 0.1 reward, 8192 threads,\" \"1-step Q, 0.1 reward, 16384 threads,\" \"1-step Q, 0.1 reward, 32768 threads,\" \"1-step Q, 0.1 reward, 65536 threads,\" \"1-step Q, 0.1 reward, 131072 threads,\" \"1-step Q, 0.1 reward, 262144 threads,\" \"1-step Q, 0.1 reward, 524288 threads,\" \"1-step Q, 0.1 reward, 1048576 threads,\" \"1-step Q, 0.1 reward, 2097152 threads,\" \"1-step Q, 0.1 reward, 4194304 threads,\" \"1-step Q, 0.1 reward, 8388608 threads,\" \"1-step Q, 0.1 reward, 16777216 threads,\" \"1-step Q, 0.1 reward, 33554432 threads,\" \"1-step Q, 0.1 reward, 6"
+  },
+  {
+    "file": "p015_f05.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure S5. Comparison of three different optimization methods (Momentum SGD, RMSProp, Shared RMSProp) tested using two different algorithms (Async n -step Q and Async Advantage Actor-Critic) on four different Atari games (Breakout, Beamrider, Seaquest and Space Invaders). Each curve shows the final scores for 50 experiments sorted in descending order that covers a search over 50 random initializations and learning rates. The top row shows results using Async n -step Q algorithm and bottom row shows results with Async Advantage Actor-Critic. Each individual graph shows results for one of the four games and three different optimization methods. Shared RMSProp tends to be more robust to different learning rates and random initializations than Momentum SGD and RMSProp without sharing.",
+    "width": 693,
+    "height": 343,
+    "description": "## Description\n\nThis figure contains eight line graphs comparing optimization methods for deep reinforcement learning. Each graph shows the final scores of 50 experiments, sorted in descending order, for different Atari games using either Async n-step Q or Async Advantage Actor-Critic algorithms. The optimization methods compared are Momentum SGD, RMSProp, and Shared RMSProp. The highest performing method varies by game and algorithm, but Shared RMSProp generally shows the most consistent performance.\n\n## Text in figure\n\nLegend: Momentum SGD, RMSProp, Shared RMSProp\nGames: Breakout, Beamrider, Seaquest, Space Invaders\nAlgorithms: Async n-step Q, Async Advantage Actor-Critic\nScores: Sorted in descending order, 50 experiments\nOptimization methods: Momentum SGD, RMSProp, Shared RMSProp"
+  },
+  {
+    "file": "p015_f06.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure S6. Comparison of algorithms on the TORCS car racing simulator. Four different configurations of car speed and opponent presence or absence are shown. In each plot, all four algorithms (one-step Q, one-step Sarsa, n -step Q and Advantage Actor-Critic) are compared on score vs training time in wall clock hours. Multi-step algorithms achieve better policies much faster than one-step algorithms on all four levels. The curves show averages over the 5 best runs from 50 experiments with learning rates sampled from LogUniform (10 - 4 , 10 - 2 ) and all other hyperparameters fixed.",
+    "width": 665,
+    "height": 460,
+    "description": "Description: The figure is a set of four line plots comparing the performance of four reinforcement learning algorithms on the TORCS car racing simulator. Each plot shows the average score over time for the algorithms: Async 1-step Q, Async SARSA, Async n-step Q, and Async actor-critic. The plots are grouped into two sets of two, representing different car speeds and the presence or absence of opponent bots. The highest performing algorithm is Async actor-critic, which consistently achieves the highest scores across all plots. The lowest performing algorithm is Async 1-step Q, which shows the slowest improvement in scores.\n\nText in figure: Async 1-step Q, Async SARSA, Async n-step Q, Async actor-critic, Human tester, Score, Training time [hours], Slow car, no bots, Slow car, bots, Fast car, no bots, Fast car, bots."
+  },
+  {
+    "file": "p016_f07.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure S7. Performance for the Mujoco continuous action domains. Scatter plot of the best score obtained against learning rates sampled from LogUniform (10 - 5 , 10 - 1 ) . For nearly all of the tasks there is a wide range of learning rates that lead to good performance on the task.",
+    "width": 846,
+    "height": 824,
+    "description": "Description: The figure is a collection of scatter plots showing the performance of various reinforcement learning tasks against different learning rates. Each plot represents a different task, with the x-axis labeled as \"Learning rate\" and the y-axis as \"Score.\" The learning rates are sampled from a LogUniform distribution ranging from 10^-5 to 10^-1. The tasks include Canada20, Cart, Cartpole, Cheetah, Gripper, Pendulum, Reacher, Hopper, Walker2D, Jaco, Pendulum RGB, and Pointmass2D RGB.\n\nText in figure: Canada20, Cart, Cartpole, Cheetah, Gripper, Pendulum, Reacher, Hopper, Walker2D, Jaco, Pendulum RGB, Pointmass2D RGB, LogUniform, Learning rate, Score, 10^-5, 10^-1."
+  },
+  {
+    "file": "p017_f08.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "Figure S8. Score per episode vs wall-clock time plots for the Mujoco domains. Each plot shows error bars for the top 5 experiments.",
+    "width": 846,
+    "height": 834,
+    "description": "This figure contains 16 line plots, each showing the score per episode against wall-clock time for different Mujoco domains. Each plot displays error bars for the top 5 experiments. The domains include Canada26, Cart, Cartpole, Cheetah, Gripper, Pendulum, Reacher, Pointmass2D, Hopper, Walker20, Jaco, PendulumRGB, Pointmass2DRGB, GripperRGB, and PendulumRGB. The plots vary in their score ranges and trends, with some showing improvement over time and others showing more variability.\n\nText in figure: Canada26, Cart, Cartpole, Cheetah, Gripper, Pendulum, Reacher, Pointmass2D, Hopper, Walker20, Jaco, PendulumRGB, Pointmass2DRGB, GripperRGB, PendulumRGB, Training Time (hours), Score."
+  },
+  {
+    "file": "p017_f09.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "Figure S9. Data efficiency comparison of different numbers of actor-learners one-step Sarsa on five Atari games. The x-axis shows the total number of training epochs where an epoch corresponds to four million frames (across all threads). The y-axis shows the average score. Each curve shows the average of the three best performing agents from a search over 50 random learning rates. Sarsa shows increased data efficiency with increased numbers of parallel workers.",
+    "width": 862,
+    "height": 157,
+    "description": "Description: This figure contains five line graphs, each representing the performance of different numbers of actor-learners using one-step Sarsa on five Atari games. The x-axis represents the total number of training epochs, and the y-axis shows the average score. Each curve represents the average of the three best performing agents from a search over 50 random learning rates. The series with the highest average score is \"1-step SARSA, 24 threads\" in the \"Beamrider\" game, while the lowest is \"1-step SARSA, 1 thread\" in the \"Pong\" game.\n\nText in figure: \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \"Beamrider\", \""
+  },
+  {
+    "file": "p018_f10.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "Figure S10. Training speed comparison of different numbers of actor-learners for all one-step Sarsa on five Atari games. The x-axis shows training time in hours while the y-axis shows the average score. Each curve shows the average of the three best performing agents from a search over 50 random learning rates. Sarsa shows significant speedups from using greater numbers of parallel actor-learners.",
+    "width": 864,
+    "height": 159,
+    "description": "Description: This figure contains five line plots, each showing the training speed comparison of different numbers of actor-learners for one-step Sarsa on five Atari games. The x-axis represents training time in hours, and the y-axis shows the average score. Each plot displays the average of the three best performing agents from a search over 50 random learning rates. The series with the highest average score is \"1-step Sarsa, 18 threads,\" and the lowest is \"1-step Sarsa, 1 thread.\" The difference in scores is significant, with the highest series consistently outperforming the others.\n\nText in figure: \"Training Time [hours],\" \"Score,\" \"1-step Sarsa, 1 thread,\" \"1-step Sarsa, 2 threads,\" \"1-step Sarsa, 4 threads,\" \"1-step Sarsa, 8 threads,\" \"1-step Sarsa, 18 threads,\" \"Breakout,\" \"Pong,\" \"Q*bert,\" \"Space Invaders,\" \"Beamrider.\""
+  },
+  {
+    "file": "p018_f11.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "Figure S11. Scatter plots of scores obtained by one-step Q, one-step Sarsa, and n -step Q on five games (Beamrider, Breakout, Pong, Q*bert, Space Invaders) for 50 different learning rates and random initializations. All algorithms exhibit some level of robustness to the choice of learning rate.",
+    "width": 864,
+    "height": 482,
+    "description": "Description: The figure shows scatter plots comparing the performance of three reinforcement learning algorithms: one-step Q, one-step Sarsa, and n-step Q. Each plot represents a different game: Beamrider, Breakout, Pong, Q*bert, and Space Invaders. The x-axis represents the learning rate, and the y-axis represents the score achieved. The plots demonstrate the robustness of these algorithms to varying learning rates, with some overlap in performance across different learning rates.\n\nText in figure: Beamrider, Breakout, Pong, Q*bert, Space Invaders, one-step Q, one-step Sarsa, n-step Q, learning rate, score, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa, n-step Q, 1-step Q, 1-step Sarsa"
+  }
+]

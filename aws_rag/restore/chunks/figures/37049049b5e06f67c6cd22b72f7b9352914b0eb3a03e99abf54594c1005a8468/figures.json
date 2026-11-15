@@ -1,0 +1,47 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1. We adapt this figure from the Focal Loss paper [9]. YOLOv3 runs significantly faster than other detection methods with comparable performance. Times from either an M40 or Titan X, they are basically the same GPU.",
+    "width": 499,
+    "height": 290,
+    "description": "Description: This figure is a line graph comparing the inference time and mean Average Precision (mAP) of various object detection methods. The YOLOv3 method is represented by a star symbol and is the fastest, with an inference time of 22 ms and an mAP of 33.0. The RetinaNet-50 and RetinaNet-101 methods are represented by blue and orange circles, respectively, and show a trade-off between speed and accuracy.\n\nText in figure: YOLOv3, RetinaNet-50, RetinaNet-101, SSD321, DSSD321, R-FCN, SSD513, DSSD513, FPN FRCN, RetinaNet-50-500, RetinaNet-101-500, RetinaNet-101-800, YOLOv3-320, YOLOv3-416, YOLOv3-608, mAP, time, 28.0, 28.0, 29.9, 31.2, 33.2, 36.2, 32.5, 34.4, 37.8, 28.2, 31.0, 33.0, 61, 85, 85, 125, 156, 172, 73, 90, 198, 22, 29, 51."
+  },
+  {
+    "file": "p002_f02.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 2. Bounding boxes with dimension priors and location prediction. We predict the width and height of the box as offsets from cluster centroids. We predict the center coordinates of the box relative to the location of filter application using a sigmoid function. This figure blatantly self-plagiarized from [15].",
+    "width": 475,
+    "height": 354,
+    "description": "## Description\nThis figure illustrates the concept of bounding box prediction in the YOLOv3 model. It shows how the width and height of a bounding box are predicted as offsets from cluster centroids. The center coordinates of the box are predicted relative to the filter application location using a sigmoid function. The figure includes a grid with a blue square representing the bounding box, and annotations explaining the prediction process.\n\n## Text in figure\n- \\( b_x = \\sigma(t_x) + c_x \\)\n- \\( b_y = \\sigma(t_y) + c_y \\)\n- \\( b_w = p_w e^{t_w} \\)\n- \\( b_h = p_h e^{t_h} \\)\n- \\( \\rho_w \\)\n- \\( \\rho_h \\)\n- \\( \\sigma(t_x) \\)\n- \\( \\sigma(t_y) \\)\n- \\( p_w \\)\n- \\( p_h \\)\n- \\( c_x \\)\n- \\( c_y \\)\n- \\( b_x \\)\n- \\( b_y \\)\n- \\( b_w \\)\n- \\( b_h \\)"
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3. Again adapted from the [9], this time displaying speed/accuracy tradeoff on the mAP at .5 IOU metric. You can tell YOLOv3 is good because it's very high and far to the left. Can you cite your own paper? Guess who's going to try, this guy \u2192 [16]. Oh, I forgot, we also fix a data loading bug in YOLOv2, that helped by like 2 mAP. Just sneaking this in here to not throw off layout.",
+    "width": 1045,
+    "height": 644,
+    "description": "## Description\nThis figure is a line graph comparing the speed and accuracy of various object detection methods, measured by mAP (mean Average Precision) at 0.5 IOU (Intersection over Union) metric. The x-axis represents inference time in milliseconds, and the y-axis represents mAP score. YOLOv3 is the highest performing method, achieving the highest mAP score of 58 while maintaining the lowest inference time of 50 ms. RetinaNet-101-800 is the second highest, with an mAP score of 57.5 and an inference time of 198 ms.\n\n## Text in figure\nYOLOv3, RetinaNet-50, RetinaNet-101, SSD321, DSSD321, R-FCN, SSD513, DSSD513, FPN FRCN, RetinaNet-50-500, RetinaNet-101-500, RetinaNet-101-800, YOLOv3-320, YOLOv3-416, YOLOv3-608, mAP-50 time, 58, 56, 54, 52, 50, 48, 50, 100, 150, 200, 250, inference time (ms)"
+  },
+  {
+    "file": "p006_f04.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 4. Zero-axis charts are probably more intellectually honest... and we can still screw with the variables to make ourselves look good!",
+    "width": 972,
+    "height": 290,
+    "description": "## Description\nThe figure contains two scatter plots comparing the performance of YOLOv3 with other models. The left plot shows execution time in milliseconds against mAP50, with YOLOv3 marked by stars. The right plot shows FPS against mAP50, with YOLOv3 also marked by stars. YOLOv3 has higher mAP50 scores in both plots.\n\n## Text in figure\nYOLOv3, All the other slow ones, mAP 50, Execution time (ms), FPS"
+  },
+  {
+    "file": "p006_f05.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 5. These two hypothetical detectors are perfect according to mAP over these two images. They are both perfect. Totally equal.",
+    "width": 475,
+    "height": 324,
+    "description": "Figure Description: The figure shows two panels, each containing two images with object detection results. Each image has bounding boxes with labels and confidence percentages for detected objects. The top panel shows a person riding a camel and a dog, while the bottom panel shows a person riding a horse with a bird of prey.\n\nText in Figure:\n\nTop Panel:\n- Person riding a camel: Person 99%, Camel 99%\n- Dog: Dog 99%\n\nBottom Panel:\n- Person riding a horse with a bird of prey: Bird 99%, Person 99%, Horse 79%\n- Person riding a horse: Person 79%, Horse 79%"
+  }
+]

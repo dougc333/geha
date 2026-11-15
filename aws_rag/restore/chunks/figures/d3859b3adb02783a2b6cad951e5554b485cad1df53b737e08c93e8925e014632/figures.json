@@ -1,0 +1,20 @@
+[
+  {
+    "file": "p008_f01.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 1: Comparison of baseline vs. ELMo performance for SNLI and SRL as the training set size is varied from 0.1% to 100%.",
+    "width": 421,
+    "height": 244,
+    "description": "## Description\nThe figure contains two line plots comparing the performance of baseline and ELMo models on SNLI and SRL tasks. For SNLI, the ELMo model outperforms the baseline by 1.4 to 12.3 points across different training set sizes. For SRL, the ELMo model outperforms the baseline by 10.8 to 20.5 points.\n\n## Text in figure\nSNLI (Accuracy): Baseline, ELMo\nSRL (F1): Baseline, ELMo\nTraining set sizes: 0.1%, 1%, 10%, 100%\nSNLI performance differences: 1.4, 7.7, 1.5, 12.3\nSRL performance differences: 10.8, 18.6, 20.5, 3.1"
+  },
+  {
+    "file": "p008_f02.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 2: Visualization of softmax normalized biLM layer weights across tasks and ELMo locations. Normalized weights less then 1 / 3 are hatched with horizontal lines and those greater then 2 / 3 are speckled.",
+    "width": 434,
+    "height": 181,
+    "description": "## Description\nThis figure is a heatmap visualization showing the softmax normalized biLM layer weights across different tasks and ELMo locations. The heatmap uses color gradients to represent the weight values, with darker colors indicating higher weights and lighter colors indicating lower weights. Hatching and speckling patterns are used to highlight specific weight ranges: horizontal lines for weights less than 1/3 and speckles for weights greater than 2/3.\n\n## Text in Figure\n- Tasks: LSTM 2, LSTM 1, Token\n- ELMo Locations: SRL, Coref, SNLI, SQuAD, SST-5\n- Input Layer, Output Layer\n- Weights: 1, 5/6, 2/3, 1/2, 1/3, 2/5, 1/6, 0\n- Patterns: Horizontal lines for weights < 1/3, Speckles for weights > 2/3"
+  }
+]

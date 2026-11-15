@@ -1,0 +1,38 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 1: elastic weight consolidation (EWC) ensures task A is remembered whilst training on task B. Training trajectories are illustrated in a schematic parameter space, with parameter regions leading to good performance on task A (gray) and on task B (cream). After learning the first task, the parameters are at \u03b8 \u2217 A . If we take gradient steps according to task B alone (blue arrow), we will minimize the loss of task B but destroy what we have learnt for task A. On the other hand, if we constrain each weight with the same coefficient (green arrow) the restriction imposed is too severe and we can only remember task A at the expense of not learning task B. EWC, conversely, finds a solution for task B without incurring a significant loss on task A (red arrow) by explicitly computing how important weights are for task A.",
+    "width": 322,
+    "height": 180,
+    "description": "Description: This figure illustrates the concept of elastic weight consolidation (EWC) in a schematic parameter space. It shows two overlapping regions representing good performance on task A (gray) and task B (cream). The figure highlights three different training trajectories: blue for no penalty, green for L2 penalty, and red for EWC. The red arrow represents the EWC method, which finds a balance between learning task B and retaining knowledge from task A.\n\nText in figure: Low error for task B, Low error for task A, EWC, L2, no penalty, \u03b8 * A"
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 2: Results on the permuted MNIST task. A: Training curves for three random permutations A, B and C using EWC(red), L 2 regularization (green) and plain SGD(blue). Note that only EWC is capable of mantaining a high performance on old tasks, while retaining the ability to learn new tasks. B: Average performance across all tasks using EWC (red) or SGD with dropout regularization (blue). The dashed line shows the performance on a single task only. C: Similarity between the Fisher information matrices as a function of network depth for two different amounts of permutation. Either a small square of 8x8 pixels in the middle of the image is permuted (grey) or a large square of 26x26 pixels is permuted (black). Note how the more different the tasks are, the smaller the overlap in Fisher information matrices in early layers.",
+    "width": 776,
+    "height": 184,
+    "description": "Figure: Three plots showing results on the permuted MNIST task. Plot A: Training curves for three permutations using EWC (red), L2 regularization (green), and SGD (blue). Plot B: Average performance across tasks using EWC (red) and SGD with dropout (blue). Plot C: Similarity between Fisher information matrices for different permutations.\n\nText in figure: \"Training time\", \"Number of tasks\", \"Layer depth\", \"EWC\", \"L2\", \"SGD\", \"SGD+dropout\", \"low % permutation\", \"high % permutation\", \"Fraction correct\", \"Overlap in Fisher\"\n\nDescription: Plot A shows EWC maintaining high performance on old tasks while learning new ones. Plot B shows EWC outperforming SGD with dropout. Plot C shows less overlap in Fisher information matrices for larger permutations."
+  },
+  {
+    "file": "p006_f03.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 3: Results on Atari task. A: Schedule of games. Black bars indicate the sequential training periods (segments) for each game. After each training segment, performance on all games is measured. The EWC constraint is only activated to protect an agent's performance on each game once the agent has experienced 20 million frames in that game. B: Total scores for each method across all games. Red curve denotes the network which infers the task labels using the Forget Me Not algorithm; brown curve is the network provided with the task labels. The EWC and SGD curves start diverging when games start being played again that have been protected by EWC. C: Sensitivity of a single-game DQN, trained on Breakout, to noise added to its weights. The performance on Breakout is shown as a function of the magnitude (standard deviation) of the weight perturbation. The weight perturbation is drawn from a zero mean Gaussian with covariance that is either uniform (black; i.e. targets all weights equally), the inverse Fisher ( ( F + \u03bbI ) - 1 ; blue; i.e. mimicking weight changes allowed by EWC), or uniform within the nullspace of the Fisher (orange; i.e. targets weights that the Fisher estimates that the network output is entirely invariant to). To evaluate the score, we ran the agent for ten full game episodes, drawing a new random weight perturbation for every timestep.",
+    "width": 793,
+    "height": 203,
+    "description": "This figure is a composite of three panels (A, B, and C) illustrating the results of a study on overcoming catastrophic forgetting in neural networks. Panel A shows a schedule of games with black bars indicating training periods. Panel B displays total scores for different methods across all games, with the EWC constraint curve being the highest and the SGD curve being the lowest. Panel C shows the sensitivity of a DQN to weight perturbations, with the uniform curve being the highest and the nullspace curve being the lowest. The figure includes text labels for different methods and curves, such as \"EWC + task oracle\", \"no penalty\", and \"inverse fisher\".\n\nText in figure: \"A\", \"B\", \"C\", \"space_invaders\", \"road_runner\", \"krull\", \"gopher\", \"freeway\", \"demon_attack\", \"staircase\", \"defender\", \"climber\", \"crazy_breakout\", \"boxing\", \"training time (million frames)\", \"total normalized score\", \"protected games\", \"EWC + task oracle\", \"EWC + FMN\", \"no penalty\", \"perturbation size\", \"inv. fisher\", \"nullspace\", \"uniform\""
+  },
+  {
+    "file": "p013_f04.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 4: Score in the individual games as a function of steps played in that game. The black baseline curves show learning on individual games alone.",
+    "width": 697,
+    "height": 684,
+    "description": "Description: This figure contains 20 line plots, each showing the score in individual games as a function of steps played. The red line represents the score of the \"EWC\" method, the blue line represents the score of the \"SGD\" method, and the black line represents the baseline score of learning on individual games alone. The highest score is achieved by the \"EWC\" method in most of the plots, while the \"SGD\" method has the lowest score in most of the plots.\n\nText in figure: crazy_climber, riverraid, jamesbond, breakout, gopher, kangaroo, kung_fu_master, fishing_derby, enduro, pong, star_gunner, demon_attack, boxing, asterix, road_runner, defender, freeway, krull, space_invaders, EWC, SGD, single game"
+  }
+]

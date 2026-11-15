@@ -1,0 +1,38 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1: Architecture of a CNN on graphs and the four ingredients of a (graph) convolutional layer.",
+    "width": 795,
+    "height": 334,
+    "description": "**Figure Description:**\n\nThis figure is a diagram illustrating the architecture of a Convolutional Neural Network (CNN) applied to graph data. It shows the process from input graph signals to output signals, highlighting the key components of a graph convolutional layer. The diagram is divided into four main sections: Input graph signals, Feature extraction, Classification, and Output signals. Each section is connected by arrows indicating the flow of data. The Feature extraction section includes graph signal filtering, which consists of convolution, non-linear activation, sub-sampling, and pooling. The Classification section uses fully connected layers.\n\n**Text in Figure:**\n\nInput graph signals, Feature extraction, Classification, Output signals, Convolutional layers, Fully connected layers, Graph signal filtering, Convolution, Non-linear activation, Sub-sampling, Pooling, e.g. bags of words, e.g. labels."
+  },
+  {
+    "file": "p005_f02.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 2: Example of Graph Coarsening and Pooling. Let us carry out a max pooling of size 4 (or two poolings of size 2) on a signal x \u2208 R 8 living on G 0 , the finest graph given as input. Note that it originally possesses n 0 = |V 0 | = 8 vertices, arbitrarily ordered. For a pooling of size 4, two coarsenings of size 2 are needed: let Graclus gives G 1 of size n 1 = |V 1 | = 5 , then G 2 of size n 2 = |V 2 | = 3 , the coarsest graph. Sizes are thus set to n 2 = 3 , n 1 = 6 , n 0 = 12 and fake nodes (in blue) are added to V 1 (1 node) and V 0 (4 nodes) to pair with the singeltons (in orange), such that each node has exactly two children. Nodes in V 2 are then arbitrarily ordered and nodes in V 1 and V 0 are ordered consequently. At that point the arrangement of vertices in V 0 permits a regular 1D pooling on x \u2208 R 12 such that z = [max( x 0 , x 1 ) , max( x 4 , x 5 , x 6 ) , max( x 8 , x 9 , x 10 )] \u2208 R 3 , where the signal components x 2 , x 3 , x 7 , x 11 are set to a neutral value.",
+    "width": 795,
+    "height": 179,
+    "description": "Figure type: Diagram showing graph coarsening and pooling.\nDescription: The figure illustrates the process of graph coarsening and pooling on a signal x \u2208 R^8. It shows three graphs, G0, G1, and G2, with nodes labeled 0-11. G0 is the finest graph, G1 is a coarsened version of G0, and G2 is further coarsened from G1. The process involves adding fake nodes to ensure each node has two children, leading to a final arrangement that allows for 1D pooling on x \u2208 R^12.\n\nText in figure: G0, G1, G2, 0-11, x \u2208 R^8, max pooling, fake nodes, 1D pooling, z \u2208 R^3."
+  },
+  {
+    "file": "p007_f03.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 3: Time to process a mini-batch of S = 100 20NEWS documents w.r.t. the number of words n .",
+    "width": 440,
+    "height": 211,
+    "description": "## Description\n\nThis figure is a line graph comparing the processing time of two methods, Chebyshev and Non-Parametric Spline, as the number of words in a mini-batch increases. The Chebyshev method is represented by the blue line, while the Non-Parametric Spline method is represented by the green line. The green line is consistently higher than the blue line, indicating that the Non-Parametric Spline method takes longer to process the data. The difference in processing time between the two methods increases as the number of words increases.\n\n## Text in figure\n\n- Legend: Chebyshev, Non-Parametric Spline\n- X-axis: number of features (words)\n- Y-axis: time (ms)\n- Data points: 2000, 4000, 6000, 8000, 10000, 12000\n- Values: 0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300"
+  },
+  {
+    "file": "p008_f04.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 4: Plots of validation accuracy and training loss for the first 2000 iterations on MNIST.",
+    "width": 796,
+    "height": 175,
+    "description": "This figure contains two plots showing validation accuracy and training loss over 2000 iterations for three methods: Chebyshev, Non-Param, and Spline. The left plot shows validation accuracy, with Chebyshev starting highest and remaining so, followed by Non-Param, and Spline starting lowest but catching up. The right plot shows training loss, with Chebyshev starting highest and decreasing, followed by Spline, and Non-Param starting lowest and remaining so.\n\nText in figure: \"validation accuracy\", \"training loss\", \"Chebyshev\", \"Non-Param\", \"Spline\"."
+  }
+]

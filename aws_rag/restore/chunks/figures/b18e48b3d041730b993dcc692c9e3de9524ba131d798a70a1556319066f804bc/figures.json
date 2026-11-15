@@ -1,0 +1,110 @@
+[
+  {
+    "file": "p004_f01.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Fig. 1. The architecture of the proposed DnCNN network.",
+    "width": 1012,
+    "height": 202,
+    "description": "This figure is a diagram showing the architecture of the proposed DnCNN network for image denoising. It starts with a noisy image and ends with a residual image. The process involves several convolutional layers with ReLU activation, batch normalization, and residual learning. The final step is a convolutional layer that produces the residual image.\n\nText in figure: Noisy Image, Residual Image, Conv + ReLU, Conv + BN + ReLU, Conv + BN + ReLU, Conv + BN + ReLU, Conv."
+  },
+  {
+    "file": "p005_f02.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Fig. 2. The Gaussian denoising results of four specific models under two gradient-based optimization algorithms, i.e., (a) SGD, (b) Adam, with respect to epochs. The four specific models are in different combinations of residual learning (RL) and batch normalization (BN) and are trained with noise level 25. The results are evaluated on 68 natural images from Berkeley segmentation dataset.",
+    "width": 937,
+    "height": 336,
+    "description": "This figure is a line graph comparing the average PSNR (Peak Signal-to-Noise Ratio) of four denoising models over 50 epochs. The models are differentiated by their use of residual learning (RL) and batch normalization (BN). The two optimization algorithms used are SGD and Adam. The highest average PSNR is achieved by the model with RL and BN under both SGD and Adam, reaching approximately 29.2 dB. The lowest average PSNR is observed in the model without RL and BN under both algorithms, starting around 27.6 dB. The series with RL and without BN shows intermediate performance.\n\nText in figure: SGD, Adam, With RL, with BN, With RL, without BN, Without RL, with BN, Without RL, without BN, Epochs, Average PSNR(dB)."
+  },
+  {
+    "file": "p007_f03.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Fig. 3. The 12 widely used testing images.",
+    "width": 1031,
+    "height": 82,
+    "description": "## Description\nThis figure displays a collection of 12 grayscale images, each depicting different subjects. The images include a person with a camera, a house, a pile of vegetables, a starfish, a butterfly, a plane, a parrot, a woman with a hat, a woman sitting, a table, a boat, and a man and woman in a room.\n\n## Text in figure\n- Person with a camera\n- House\n- Pile of vegetables\n- Starfish\n- Butterfly\n- Plane\n- Parrot\n- Woman with a hat\n- Woman sitting\n- Table\n- Boat\n- Man and woman in a room"
+  },
+  {
+    "file": "p007_f04.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Fig. 8. Average PSNR improvement over BM3D/CBM3D with respect to different noise levels by our DnCNN-B/CDnCNN-B model. The results are evaluated on the gray/color BSD68 dataset.",
+    "width": 428,
+    "height": 238,
+    "description": "This figure is a line graph comparing the average PSNR improvement of two models, DnCNN-B and CDnCNN-B, over BM3D/CBM3D across different noise levels. The graph shows two series: Gray and Color, represented by blue circles and red triangles, respectively. The Gray series starts at 0.2 and increases steadily to 0.8, while the Color series starts at 0.2 and peaks at 0.9 before dropping to 0.7. The highest point for the Gray series is at 0.8, and for the Color series, it is at 0.9. The lowest point for both series is at 0.2.\n\nText in figure: DnCNN-B, CDnCNN-B, BM3D/CBM3D, PSNR, Gray, Color, Noise level \u03c3."
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Fig. 4. Denoising results of one image from BSD68 with noise level 50.",
+    "width": 1027,
+    "height": 828,
+    "description": "Description: The figure displays denoising results of an image from BSD68 with a noise level of 50. It compares various denoising methods, showing the original noisy image and the denoised versions produced by different algorithms. Each panel includes a zoomed-in section to highlight the denoising effect on a specific area of the image.\n\nText in figure: Noisy / 14.76dB, BM3D / 26.21dB, WNNMD / 26.51dB, EPLL / 26.36dB, MLP / 26.54dB, TNRD / 26.59dB, DnCNN-S / 26.90dB, DnCNN-B / 26.92dB."
+  },
+  {
+    "file": "p009_f06.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Fig. 5. Denoising results of the image 'parrot' with noise level 50.",
+    "width": 1027,
+    "height": 581,
+    "description": "## Description\nThis figure displays denoising results for an image of a parrot with a noise level of 50. It shows eight different denoising methods applied to the same noisy image, each with a highlighted region of interest (ROI) in the center. The methods include Noisy, BM3D, WNN, EPLL, MLP, TNRD, DnCNN-S, and DnCNN-B.\n\n## Text in figure\n- Noisy / 15.00dB\n- BM3D / 25.90dB\n- WNN / 26.14dB\n- EPLL / 25.95dB\n- MLP / 26.12dB\n- TNRD / 26.16dB\n- DnCNN-S / 26.48dB\n- DnCNN-B / 26.48dB"
+  },
+  {
+    "file": "p010_f07.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Fig. 6. Color image denoising results of one image from the DSD68 dataset with noise level 35.",
+    "width": 1027,
+    "height": 407,
+    "description": "## Description\nThis figure displays image denoising results from the DSD68 dataset with a noise level of 35. It shows four panels: (a) Ground-truth, (b) Noisy / 17.25dB, (c) CBM3D / 25.93dB, and (d) CDnCNN-B / 26.58dB. Each panel includes a full image and a zoomed-in section highlighting the denoising effect.\n\n## Text in figure\n- (a) Ground-truth\n- (b) Noisy / 17.25dB\n- (c) CBM3D / 25.93dB\n- (d) CDnCNN-B / 26.58dB"
+  },
+  {
+    "file": "p010_f08.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Fig. 7. Color image denoising results of one image from the DSD68 dataset with noise level 45.",
+    "width": 1027,
+    "height": 199,
+    "description": "This figure is a comparative analysis of image denoising techniques applied to a zebra image with noise level 45 from the DSD68 dataset. It displays four panels: (a) Ground-truth, (b) Noisy / 15.07dB, (c) CBM3D / 26.97dB, and (d) CDNCNN-B / 27.87dB. Each panel shows a zoomed-in section of the zebra's face, highlighting the denoising effect. The ground-truth image is clear, while the noisy image is significantly blurred. The CBM3D and CDNCNN-B panels show progressively clearer images, with CDNCNN-B being the clearest.\n\nText in figure: Ground-truth, Noisy / 15.07dB, CBM3D / 26.97dB, CDNCNN-B / 27.87dB."
+  },
+  {
+    "file": "p012_f09.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Fig. 9. Single image super-resolution results of 'butterfly' from Set5 dataset with upscaling factor 3.",
+    "width": 1027,
+    "height": 279,
+    "description": "This figure is a comparison of image super-resolution techniques applied to a butterfly image from the Set5 dataset. It shows four panels: (a) Ground-truth, (b) TNRD / 28.91dB, (c) VDSR / 29.95dB, and (d) DnCNN-3 / 30.02dB. Each panel displays a zoomed-in section of the butterfly's wing, highlighting the differences in image clarity and detail.\n\nText in figure: (a) Ground-truth, (b) TNRD / 28.91dB, (c) VDSR / 29.95dB, (d) DnCNN-3 / 30.02dB."
+  },
+  {
+    "file": "p012_f10.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Fig. 10. Single image super-resolution results of one image from Urban100 dataset with upscaling factor 4.",
+    "width": 1027,
+    "height": 224,
+    "description": "This figure is a comparative analysis of image super-resolution techniques. It displays four panels, each showing a different method applied to an image from the Urban100 dataset with a 4x upscaling factor. The panels are labeled (a) Ground-truth, (b) TNRD / 32.00dB, (c) VDSRR / 32.58dB, and (d) DnCNN-3 / 32.73dB. Each panel includes a zoomed-in section highlighting the staircase area, with the ground-truth image in (a) and the results from the respective methods in (b), (c), and (d).\n\nText in figure: Ground-truth, TNRD / 32.00dB, VDSRR / 32.58dB, DnCNN-3 / 32.73dB."
+  },
+  {
+    "file": "p012_f11.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Fig. 11. JPEG image deblocking results of 'Carnivaldolls' from LIVE1 dataset with quality factor 10.",
+    "width": 1030,
+    "height": 230,
+    "description": "### Description\nThis figure displays four panels, each showing a denoised image of a group of carnival dolls. The images are labeled (a) JPEG, (b) AR-CNN, (c) TNRD, and (d) DnCNN-3, with corresponding signal-to-noise ratios (SNR) in decibels (dB). The images are cropped to highlight a specific area, indicated by a green box, with a magnified view shown in a red box. The figure aims to compare the denoising performance of different algorithms.\n\n### Text in Figure\n- (a) JPEG / 28.10dB\n- (b) AR-CNN / 28.85dB\n- (c) TNRD / 29.54dB\n- (d) DnCNN-3 / 29.70dB"
+  },
+  {
+    "file": "p012_f12.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Fig. 12. An example to show the capacity of our proposed model for three different tasks. The input image is composed by noisy images with noise level 15 (upper left) and 25 (lower left), bicubically interpolated low-resolution images with upscaling factor 2 (upper middle) and 3 (lower middle), JPEG images with quality factor 10 (upper right) and 30 (lower right). Note that the white lines in the input image are just used for distinguishing the six regions, and the residual image is normalized into the range of [0 , 1] for visualization. Even the input image is corrupted with different distortions in different regions, the restored image looks natural and does not have obvious artifacts.",
+    "width": 1005,
+    "height": 249,
+    "description": "This figure is a comparison of three images: the input image, the output residual image, and the restored image. The input image is composed of noisy images with different noise levels and low-resolution images with different upscaling factors, as well as JPEG images with different quality factors. The output residual image shows the difference between the input image and the restored image, while the restored image appears natural and free of artifacts.\n\nText in figure: Input Image, Output Residual Image, Restored Image, noise level 15, noise level 25, bicubically interpolated low-resolution images, upscaling factor 2, upscaling factor 3, JPEG images, quality factor 10, quality factor 30, white lines, residual image, range [0, 1], corrupted, natural, artifacts."
+  }
+]

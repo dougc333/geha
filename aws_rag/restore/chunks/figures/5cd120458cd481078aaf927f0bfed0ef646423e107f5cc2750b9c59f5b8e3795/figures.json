@@ -1,0 +1,146 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1: Visualization of a scan captured from a Structure Sensor (left: RGB; right: point cloud).",
+    "width": 396,
+    "height": 116,
+    "description": "Figure Description: The image shows a comparison between an RGB image and a point cloud representation of the same scene. The left panel displays a photograph of a room with a couch and a table. The right panel shows a point cloud visualization of the same room, with different colors representing varying distances from the sensor.\n\nText in Figure: No specific text is visible in the image.",
+    "pdf_text": "",
+    "bbox": [
+      305.5,
+      170.7,
+      503.7,
+      228.4
+    ]
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2: Illustration of our hierarchical feature learning architecture and its application for set segmentation and classification using points in 2D Euclidean space as an example. Single scale point grouping is visualized here. For details on density adaptive grouping, see Fig. 3",
+    "width": 712,
+    "height": 296,
+    "description": "This figure is a schematic representation of the PointNet++ architecture, illustrating its application in point set segmentation and classification. It shows a hierarchical feature learning process, starting with point sampling and grouping, followed by multiple levels of set abstraction using PointNet layers. The architecture includes skip links for concatenation and interpolation steps, leading to fully connected layers for classification. The figure also demonstrates the use of pointnet layers for both segmentation and classification tasks, with per-point scores and class scores as outputs. The dimensions of the data at each stage are indicated, such as (N,d+C) and (N,k).",
+    "pdf_text": "sampling & | grouping | pointnet | set abstraction | interpolate | skip link concatenation | pointnet | sampling & | grouping | pointnet | interpolate | unit | pointnet | unit | pointnet | fully connected layers | set abstraction | Segmentation | Classification | Hierarchical point set feature learning | class scores | per-point | scores | (N,d+C) | (1,C4) | (k) | (N1,K,d+C) | (N1,d+C1) | (N2,K,d+C1) | (N2,d+C2) | (N1,d+C2+C1) | (N1,d+C3) | (N,d+C3+C) | (N,k)",
+    "bbox": [
+      127.9,
+      63.0,
+      484.2,
+      210.8
+    ]
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "",
+    "width": 350,
+    "height": 164,
+    "description": "Section 1: Figure showing hierarchical feature learning on point sets in a metric space. Depicts three stages of feature learning: (a) concatenation of features, (b) concatenation followed by a multi-layer perceptron (MLP), and (c) concatenation with separate MLPs for different features.\n\nSection 2: Text and labels in the figure: concat, (a), (b), (c), Fi, 3, M lti, l. The figure illustrates three different methods of feature learning: concatenation, concatenation with MLP, and concatenation with separate MLPs.",
+    "pdf_text": "concat | (a) | (b) | concat | Fi | 3 | ( ) M lti | l",
+    "bbox": [
+      389.8,
+      243.4,
+      565.2,
+      325.4
+    ]
+  },
+  {
+    "file": "p006_f04.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 4: Left: Point cloud with random point dropout. Right: Curve showing advantage of our density adaptive strategy in dealing with non-uniform density. DP means random input dropout during training; otherwise training is on uniformly dense points. See Sec.3.3 for details.",
+    "width": 763,
+    "height": 198,
+    "description": "Figure: Point cloud visualization and accuracy curve.\nLeft: Visualization of point clouds with varying numbers of points (1024, 512, 256, 128).\nRight: Accuracy curve showing the performance of different models with varying point densities.\nSeries: PointNet vanilla, PointNet vanilla (DP), Ours (SSG), Ours (SSG+DP), Ours (MSG+DP), Ours (MRG+DP).\nHighest: PointNet vanilla (DP) at 1000 points, lowest: Ours (MRG+DP) at 200 points.\n\nFigure: Point cloud visualization and accuracy curve.\nLeft: Visualization of point clouds with 1024, 512, 256, and 128 points.\nRight: Accuracy curve for PointNet vanilla, PointNet vanilla (DP), Ours (SSG), Ours (SSG+DP), Ours (MSG+DP), Ours (MRG+DP).\nHighest: PointNet vanilla (DP) at 1000 points, lowest: Ours (MRG+DP) at 200 points.",
+    "pdf_text": "1024 points | 512 points | 256 points | 128 points",
+    "bbox": [
+      113.8,
+      173.7,
+      495.6,
+      272.4
+    ]
+  },
+  {
+    "file": "p006_f05.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 5: Scannet labeling accuracy.",
+    "width": 405,
+    "height": 503,
+    "description": "This figure is a bar chart comparing the accuracy of different methods for ScanNet labeling. The chart shows two sets of bars, one for ScanNet and one for ScanNet non-uniform. The methods compared are 3DCNN, PointNet, and three variations of the proposed method: SSG, MSG+DP, and MRG+DP. The accuracy values are printed on the bars. The highest accuracy is achieved by the proposed method with MSG+DP, followed by MRG+DP and SSG. The lowest accuracy is achieved by 3DCNN.\n\nText in figure: 3DCNN, PointNet, Ours(SSG), Ours(MSG+DP), Ours(MRG+DP), ScanNet, ScanNet non-uniform, 0.65, 0.775, 0.9, 0.730, 0.739, 0.680, 0.804, 0.727, 0.834, 0.845, 0.833, Accuracy",
+    "pdf_text": "t method MVCNN [26]. | ensor data directly captured from real world usually | g. 1). Our approach selects point neighborhood of | veness and robustness by properly weighting them. | g test time to validate our network\u2019s robustness to | see MSG+DP (multi-scale grouping with random | ulti-resolution grouping with random input dropout | ity variation. MSG+DP performance drops by less | er, it achieves the best performance on almost all | PointNet vanilla [20] is fairly robust under density | rather than \ufb01ne details. However loss of details | roach. SSG (ablated PointNet++ with single scale | arse sampling density while SSG+DP amends the | ning time. | ne Labeling | 0.65 | 0.775 | 0.9 | 3DCNN[3] | PointNet[19] | Ours(SSG) | Ours(MSG+DP)Ours(MRG+DP) | 0.762 | 0.804 | 0.727 | 0.680 | 0.834 | 0.845 | 0.833 | 0.739 | 0.730 | Accuracy | ScanNet | ScanNet non-uniform | Figure 5: Scannet labeling accuracy",
+    "bbox": [
+      306.1,
+      387.5,
+      508.4,
+      639.2
+    ]
+  },
+  {
+    "file": "p007_f06.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Wall Floor Chair Desk Bed Door Table Figure 6: Scannet labeling results. [20] captures the overall layout of the room correctly but fails to discover the furniture. Our approach, in contrast, is much better at segmenting objects besides the room layout.",
+    "width": 367,
+    "height": 217,
+    "description": "Description: The figure displays a comparison of room segmentation results from three different methods: PointNet, the proposed method (labeled \"Ours\"), and the ground truth. Each method's output is shown in three separate panels, with color-coded regions representing different room elements such as walls, floors, and furniture. The \"Ours\" method shows a more accurate segmentation of furniture compared to PointNet.\n\nText in figure: Wall, Floor, Chair, Desk, Bed, Door, Table, PointNet, Ours, Ground Truth",
+    "pdf_text": "Wall | Floor | Chair | Desk | Bed | Door | Table | PointNet | Ours | Ground Truth",
+    "bbox": [
+      319.7,
+      131.8,
+      503.2,
+      240.4
+    ]
+  },
+  {
+    "file": "p007_f07.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 7: An example of nonrigid shape classification.",
+    "width": 239,
+    "height": 134,
+    "description": "## Description\nThis figure is a visual representation of nonrigid shape classification using PointNet++. It shows three different colored point cloud models of animals: a cat, a horse, and a giraffe. The cat is depicted in blue, the horse in yellow, and the giraffe in green. The point clouds are used to demonstrate the model's ability to classify shapes that are not perfectly aligned or in the same pose.\n\n## Text in figure\n- PointNet++\n- Deep Hierarchical Feature Learning on Point Sets in a Metric Space\n- Nonrigid shape classification\n- Cat (blue)\n- Horse (yellow)\n- Giraffe (green)",
+    "pdf_text": "",
+    "bbox": [
+      383.6,
+      451.5,
+      503.0,
+      518.4
+    ]
+  },
+  {
+    "file": "p008_f08.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 8: 3D point cloud patterns learned from the first layer kernels. The model is trained for ModelNet40 shape classification (20 out of the 128 kernels are randomly selected). Color indicates point depth (red is near, blue is far).",
+    "width": 339,
+    "height": 272,
+    "description": "Description: The figure displays 20 randomly selected 3D point cloud patterns learned from the first layer kernels of a deep learning model trained for ModelNet40 shape classification. Each pattern is represented by a colored point cloud, with color indicating point depth (red for near, blue for far). The patterns vary in shape and complexity, showcasing the model's ability to learn diverse features from point sets.\n\nText in figure: No text is visible in the figure. The patterns are labeled by their position in the grid, with no specific names or values provided. The color coding for point depth is indicated in the caption.",
+    "pdf_text": "",
+    "bbox": [
+      333.9,
+      184.7,
+      503.5,
+      320.5
+    ]
+  },
+  {
+    "file": "p012_f09.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 9: Virtual scan generated from ScanNet",
+    "width": 391,
+    "height": 181,
+    "description": "## Figure Description\nThe figure displays two panels labeled (a) and (b), showing point cloud data from ScanNet. Panel (a) is labeled \"ScanNet labeled scene\" and shows a colored point cloud with distinct regions labeled in various colors. Panel (b) is labeled \"ScanNet non-uniform\" and shows a point cloud with less distinct color regions and more scattered points.\n\n## Textual Content\n- Panel (a): ScanNet labeled scene\n- Panel (b): ScanNet non-uniform\n- Colors: red, green, blue, yellow, cyan, magenta",
+    "pdf_text": "(a) ScanNet labeled scene | (b) ScanNet non-uniform",
+    "bbox": [
+      206.8,
+      187.7,
+      402.4,
+      278.1
+    ]
+  }
+]

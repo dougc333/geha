@@ -1,0 +1,146 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Fig. 1: Model Illustration. A Deep Convolutional Neural Network such as VGG-16 or ResNet-101 is employed in a fully convolutional fashion, using atrous convolution to reduce the degree of signal downsampling (from 32x down 8x). A bilinear interpolation stage enlarges the feature maps to the original image resolution. A fully connected CRF is then applied to refine the segmentation result and better capture the object boundaries.",
+    "width": 726,
+    "height": 327,
+    "description": "Figure type: Model illustration\nDescription: The figure illustrates the process of semantic image segmentation using a Deep Convolutional Neural Network (DCNN) with atrous convolution and fully connected CRFs. It shows the input image, the DCNN with atrous convolution, the aeroplane coarse score map, the final output, the fully connected CRF, and the bi-linear interpolation.\n\nText in figure: Input, DCNN, Atrous Convolution, Aeroplane Coarse Score map, Final Output, Fully Connected CRF, Bi-linear Interpolation"
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "",
+    "width": 458,
+    "height": 282,
+    "description": "Figure type: Diagram\nDescription: The figure shows two diagrams of convolution operations. The top diagram depicts sparse feature extraction with a kernel size of 3, stride of 1, and pad of 1. The bottom diagram shows a convolution operation with a kernel size of 3, stride of 1, pad of 2, and a rate of 2, which includes inserting a zero.\n\nText in figure: Output feature, Input feature, Convolution, kernel = 3, stride = 1, pad = 1, (a) Sparse feature extraction, Convolution, kernel = 3, stride = 1, pad = 2, rate = 2 (insert 1 zero), rate = 2"
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Fig. 2: Illustration of atrous convolution in 1-D. (a) Sparse feature extraction with standard convolution on a low resolution input feature map. (b) Dense feature extraction with atrous convolution with rate r = 2 , applied on a high resolution input feature map.",
+    "width": 462,
+    "height": 291,
+    "description": "Description: This figure illustrates the concept of atrous convolution in a 1-D context. It shows the difference between standard convolution and atrous convolution. The figure consists of two main parts: (a) standard convolution on a low-resolution input feature map, and (b) atrous convolution with a rate of 2 on a high-resolution input feature map.\n\nText in figure: downsampling stride=2, convolution kernel=7, upsampling stride=2, atrous convolution kernel=7 rate=2 stride=1."
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Fig. 4: Atrous Spatial Pyramid Pooling (ASPP). To classify the center pixel (orange), ASPP exploits multi-scale features by employing multiple parallel filters with different rates. The effective Field-Of-Views are shown in different colors.",
+    "width": 518,
+    "height": 261,
+    "description": "Section 1: Figure showing Atrous Spatial Pyramid Pooling (ASPP) in DeepLab for semantic image segmentation. It illustrates how ASPP uses multiple parallel filters with different rates to classify the center pixel in an input feature map. Each filter has a different rate, resulting in varying effective field-of-views, depicted in different colors.\n\nSection 2: Four parallel convolutional filters with 3x3 kernels and rates of 6, 12, 18, and 24. The input feature map is processed by these filters to produce multi-scale features, which are then pooled to classify the center pixel. The figure shows the effective field-of-views of each filter."
+  },
+  {
+    "file": "p006_f05.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Fig. 5: Score map (input before softmax function) and belief map (output of softmax function) for Aeroplane. We show the score (1st row) and belief (2nd row) maps after each mean field iteration. The output of last DCNN layer is used as input to the mean field inference.",
+    "width": 503,
+    "height": 145,
+    "description": "Figure Description: This figure displays a sequence of images showing the progression of score and belief maps for an aeroplane using DeepLab's method. The first row shows the score maps, while the second row shows the belief maps after each mean field iteration. The images progress from the DCNN output to CRF Iteration 10.\n\nText in Figure: Image/GT, DCNN output, CRF Iteration 1, CRF Iteration 2, CRF Iteration 10."
+  },
+  {
+    "file": "p008_f06.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Fig. 6: PASCAL VOC 2012 val results. Input image and our DeepLab results before/after CRF.",
+    "width": 1024,
+    "height": 406,
+    "description": "Figure Type: Image comparison\nDescription: The figure displays a series of images comparing the results of semantic image segmentation before and after applying Fully Connected CRFs (Conditional Random Fields). Each row shows an input image followed by its segmentation results in two stages: before CRF and after CRF.\n\nText in Figure:\n- Image\n- Before CRF\n- After CRF\n- PASCAL VOC 2012 val results"
+  },
+  {
+    "file": "p009_f07.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Fig. 9: DeepLab results based on VGG-16 net or ResNet101 before and after CRF. The CRF is critical for accurate prediction along object boundaries with VGG-16, whereas ResNet-101 has acceptable performance even before CRF.",
+    "width": 490,
+    "height": 151,
+    "description": "Figure Description: This figure displays a comparison of semantic image segmentation results using different neural network architectures and the application of Conditional Random Fields (CRF). It shows two images of cyclists and motorcyclists, each segmented using VGG-16 and ResNet101 networks, both before and after applying CRF. The segmentations are visualized with different colors overlaying the original images.\n\nText in Figure: Image, VGG-16 Bef., VGG-16 Aft., ResNet Bef., ResNet Aft.\n\nSection 1: Figure shows segmentation results of cyclists and motorcyclists using VGG-16 and ResNet101 networks, both before and after applying CRF. The CRF significantly improves boundary accuracy for VGG-16, while ResNet101 shows acceptable performance even without CRF.\n\nSection 2: VGG-16 Bef., VGG-16 Aft., ResNet Bef., ResNet Aft. show segmentations of cyclists and motorcyclists. VGG-16 benefits greatly from CRF, while ResNet101 performs well without it."
+  },
+  {
+    "file": "p009_f08.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Fig. 10: (a) Trimap examples (top-left: image. top-right: ground-truth. bottom-left: trimap of 2 pixels. bottom-right: trimap of 10 pixels). (b) Pixel mean IOU as a function of the band width around the object boundaries when employing VGG-16 or ResNet-101 before and after CRF.",
+    "width": 446,
+    "height": 179,
+    "description": "Figure: Trimap examples and mean IOU as a function of band width.\nPanel (a): Shows trimap examples with images, ground-truth, and trimaps of 2 and 10 pixels.\nPanel (b): Plots mean IOU against band width for VGG-16 and ResNet-101 before and after CRF.\nText in figure: Trimap, mean IOU, band width, VGG-16, ResNet-101, before CRF, after CRF."
+  },
+  {
+    "file": "p010_f09.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Fig. 11: PASCAL-Context results. Input image, ground-truth, and our DeepLab results before/after CRF.",
+    "width": 928,
+    "height": 335,
+    "description": "## Figure Description\nThis figure displays a comparison of semantic image segmentation results using DeepLab with and without Fully Connected CRFs (Conditional Random Fields). It shows input images, ground truth segmentations, and segmentation results before and after applying CRFs. The images are from the PASCAL-Context dataset.\n\n## Text in Figure\n- (a) Image\n- (b) G.T. (Ground Truth)\n- (c) Before CRF\n- (d) After CRF\n- U.LA.PO.L (text on one image)"
+  },
+  {
+    "file": "p011_f10.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Fig. 12: PASCAL-Person-Part results. Input image, ground-truth, and our DeepLab results before/after CRF.",
+    "width": 929,
+    "height": 387,
+    "description": "Figure type: Image segmentation results comparison.\nDescription: The figure displays a series of images comparing different segmentation methods. Each row shows an input image, ground truth segmentation, and results from two methods: G.T. and DeepLab before and after CRF refinement. The images illustrate the accuracy of each method in segmenting human figures from the background.\n\nText in figure: Image, G.T., Before CRF, After CRF."
+  },
+  {
+    "file": "p011_f11.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Fig. 13: Cityscapes results. Input image, ground-truth, and our DeepLab results before/after CRF.",
+    "width": 931,
+    "height": 363,
+    "description": "Description: The figure displays a series of images comparing different stages of semantic segmentation in urban scenes using DeepLab. It shows the original image, ground truth segmentation, and the results before and after applying Conditional Random Fields (CRF). The CRF refinement improves the segmentation accuracy.\n\nText in figure: Image, G.T., Before CRF, After CRF"
+  },
+  {
+    "file": "p012_f12.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Fig. 14: Failure modes. Input image, ground-truth, and our DeepLab results before/after CRF.",
+    "width": 478,
+    "height": 169,
+    "description": "Figure Type: Image comparison\nDescription: The figure displays a comparison of input images, ground truth segmentations, and the results of the DeepLab model before and after applying Conditional Random Fields (CRF). It shows two scenes: a street with a bicycle and a room with a table and chairs.\n\nText in figure: Image, G.T., Before CRF, After CRF"
+  },
+  {
+    "file": "p014_f13.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "",
+    "width": 144,
+    "height": 166,
+    "description": "## Search Index Section 1\nThis figure is a close-up portrait of a man wearing glasses and a blue shirt. The man has short, dark hair and a beard. He is looking directly at the camera with a slight smile. The background is plain and white, providing a simple and uncluttered setting for the portrait.\n\n## Search Index Section 2\nText in figure: None. The figure is a portrait of a man with no text or labels visible. The man is wearing glasses and a blue shirt, with short dark hair and a beard. He is looking directly at the camera with a slight smile. The background is plain and white."
+  },
+  {
+    "file": "p014_f14.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "",
+    "width": 145,
+    "height": 182,
+    "description": "## Section 1: Figure Description\nThis figure is a portrait of a man with short, curly brown hair and a beard. He is wearing a light blue shirt and is standing in front of a colorful, abstract background. The man is looking directly at the camera with a neutral expression.\n\n## Section 2: Text in Figure\n- Man with short, curly brown hair\n- Beard\n- Light blue shirt\n- Abstract, colorful background\n- Neutral expression, looking directly at the camera"
+  },
+  {
+    "file": "p014_f15.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "",
+    "width": 145,
+    "height": 171,
+    "description": "Figure: A mugshot of a man with short hair and a serious expression, wearing a green shirt. The image is a close-up of the man's face and shoulders against a plain white background.\n\nText in figure: No text is visible in the image."
+  },
+  {
+    "file": "p014_f16.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "",
+    "width": 137,
+    "height": 182,
+    "description": "Figure type: Portrait photograph.\nDescription: The image is a portrait photograph of a man with short, light-colored hair. He is wearing a multicolored sweater with a mix of red, green, and blue stripes. The man is smiling and looking directly at the camera. The background is dark, and the lighting is focused on the man's face and upper body.\n\nText in figure: No text is visible in the image."
+  }
+]

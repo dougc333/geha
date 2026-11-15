@@ -1,0 +1,218 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Fig. 1: (a) Original image with a cat and a dog. (b-f) Support for the cat category according to various visualizations for VGG-16 and ResNet. (b) Guided Backpropagation [53]: highlights all contributing features. (c, f) Grad-CAM (Ours): localizes class-discriminative regions, (d) Combining (b) and (c) gives Guided Grad-CAM, which gives high-resolution class-discriminative visualizations. Interestingly, the localizations achieved by our Grad-CAM technique, (c) are very similar to results from occlusion sensitivity (e), while being orders of magnitude cheaper to compute. (f, l) are Grad-CAM visualizations for ResNet-18 layer. Note that in (c, f, i, l), red regions corresponds to high score for class, while in (e, k), blue corresponds to evidence for the class. Figure best viewed in color.",
+    "width": 973,
+    "height": 356,
+    "description": "Description: The figure displays a series of visualizations from a deep learning model, specifically focusing on the localization of class-discriminative regions for a cat and a dog in an image. Panels (a) and (g) show the original images. Panels (b) to (f) and (h) to (l) present various visualization techniques applied to the images, highlighting regions that contribute to the model's decision for the cat and dog categories, respectively.\n\nText in figure: Original Image, Guided Backprop, Grad-CAM, Guided Grad-CAM, Occlusion map, ResNet Grad-CAM, Cat, Dog."
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Fig. 2: Grad-CAM overview: Given an image and a class of interest ( e.g ., 'tiger cat' or any other type of differentiable output) as input, we forward propagate the image through the CNN part of the model and then through task-specific computations to obtain a raw score for the category. The gradients are set to zero for all classes except the desired class (tiger cat), which is set to 1. This signal is then backpropagated to the rectified convolutional feature maps of interest, which we combine to compute the coarse Grad-CAM localization (blue heatmap) which represents where the model has to look to make the particular decision. Finally, we pointwise multiply the heatmap with guided backpropagation to get Guided Grad-CAM visualizations which are both high-resolution and concept-specific.",
+    "width": 989,
+    "height": 370,
+    "description": "This figure is a diagram showing the process of Grad-CAM, a technique for generating visual explanations from deep learning models. It illustrates how an input image is processed through a CNN, then through task-specific computations to obtain a raw score for a class of interest. The gradients are manipulated to highlight the regions of the image that contribute most to the model's decision. The process involves guided backpropagation, rectified convolutional feature maps, and the combination of these to produce a heatmap. The final step combines this heatmap with guided backpropagation to create Guided Grad-CAM visualizations.\n\nText in figure: Guided Grad-CAM, Guided Backpropagation, Guided Backprop, CNN, Input, ReLU, Backprop till conv, Rectified Conv Feature Maps, Task-specific Network, RNN/LSTM, FC Layers, Tiger Cat, Image Classification, Image Captioning, Visual Question Answering, A cat lying on the ground, Is there a cat?, Yes."
+  },
+  {
+    "file": "p006_f03.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "",
+    "width": 473,
+    "height": 152,
+    "description": "## Figure Description\nThis figure shows a sequence of three images demonstrating the application of Grad-CAM on a dog and a cat. The first image is a photograph of a dog and a cat. The second image overlays a heatmap on the dog, highlighting areas of interest. The third image shows a heatmap on the cat, indicating regions of focus.\n\n## Text in Figure\n- Image 1: A photograph of a dog and a cat.\n- Image 2: A photograph of a dog with a heatmap overlay.\n- Image 3: A photograph of a cat with a heatmap overlay."
+  },
+  {
+    "file": "p007_f04.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Fig. 4: PASCAL VOC 2012 Segmentation results with Grad-CAM as seed for SEC [32].",
+    "width": 471,
+    "height": 268,
+    "description": "Figure type: Image comparison\nDescription: The figure displays a comparison of segmentation results using different methods on the PASCAL VOC 2012 dataset. It shows three panels: Ground-Truth, Input, and SEC with Grad-CAM. The Ground-Truth panel displays the actual segmentation masks, the Input panel shows the original images, and the SEC with Grad-CAM panel presents the segmentation results using Grad-CAM as a seed for SEC.\n\nText in figure: Ground-Truth, Input, SEC with Grad-CAM"
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "(a) Raw input image. Note that this is not a part of the tasks (b) and (c)",
+    "width": 138,
+    "height": 138,
+    "description": "Figure type: Image\nDescription: The image shows a person riding a horse over an obstacle in a competition setting. The rider is wearing a blue jacket, white pants, and a black hat. The horse is brown and jumping over a blue and white striped obstacle. The background includes a grassy field and a red banner with white text.\n\nText in figure: \"Mr. VINRE\""
+  },
+  {
+    "file": "p008_f06.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Fig. 5: AMT interfaces for evaluating different visualizations for class discrimination (b) and trustworthiness (c). Guided Grad-CAM outperforms baseline approaches (Guided-backprop and Deconvolution) showing that our visualizations are more class-discriminative and help humans place trust in a more accurate classifier.",
+    "width": 705,
+    "height": 335,
+    "description": "Figure type: Interface screenshots\nDescription: The figure shows two Amazon Mechanical Turk (AMT) interfaces used to evaluate visualizations for class discrimination and trustworthiness. The left panel (b) presents an interface for evaluating class discrimination, where users are asked to identify what they see in an image and choose between \"Horse\" and \"Person\" options. The right panel (c) shows an interface for evaluating trustworthiness, where users are asked to compare the reasonableness of two robots, Robot A and Robot B, based on their decision-making processes.\n\nText in figure: \"What do you see?\", \"Your options: Horse, Person\", \"Both robots predicted: Person\", \"Robot A based its decision on\", \"Robot B based its decision on\", \"Which robot is more reasonable?\", \"Robot A seems clearly more reasonable than robot B\", \"Robot A seems slightly more reasonable than robot B\", \"Both robots seem equally reasonable\", \"Robot B seems slightly more reasonable than robot A\", \"Robot B seems clearly more reasonable than robot A\""
+  },
+  {
+    "file": "p009_f07.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Fig. 6: In these cases the model (VGG-16) failed to predict the correct class in its top 1 (a and d) and top 5 (b and c) predictions. Humans would find it hard to explain some of these predictions without looking at the visualization for the predicted class. But with Grad-CAM, these mistakes seem justifiable.",
+    "width": 457,
+    "height": 383,
+    "description": "Description: The figure displays a comparison between ground truth images and the predictions made by a VGG-16 model using Grad-CAM visualizations. It shows four instances where the model's predictions differ from the ground truth. The top row presents the actual images, while the bottom row shows the Grad-CAM visualizations for the model's predictions.\n\nText in figure: Ground truth: volcano, Ground truth: volcano, Ground truth: beaker, Ground truth: coil, Predicted: sandbar, Predicted: car mirror, Predicted: syringe, Predicted: vine snake"
+  },
+  {
+    "file": "p009_f08.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Fig. 7: (a-b) Original image and the generated adversarial image for category 'airliner'. (c-d) Grad-CAM visualizations for the original categories 'tiger cat' and 'boxer (dog)' along with their confidence. Despite the network being completely fooled into predicting the dominant category label of 'airliner' with high confidence (>0.9999), Grad-CAM can localize the original categories accurately. (e-f) Grad-CAM for the top-2 predicted classes 'airliner' and 'space shuttle' seems to highlight the background.",
+    "width": 472,
+    "height": 373,
+    "description": "Figure Description: The figure displays six images of a dog and a cat, with various visualizations and predictions. Panels (a) and (b) show the original image and an adversarial image, respectively. Panels (c) to (f) present Grad-CAM visualizations for different categories, highlighting areas of interest.\n\nText in Figure: Original image, Adversarial image, Boxer: 0.4, Cat: 0.2, Airliner: 0.9999, Boxer: 1.1e-20, Tiger Cat: 6.5e-17, Airliner: 0.9999, Space shuttle: 1e-5.\n\nKey Values: Boxer confidence: 0.4, Cat confidence: 0.2, Airliner confidence: 0.9999, Tiger Cat confidence: 6.5e-17, Space shuttle confidence: 1e-5."
+  },
+  {
+    "file": "p010_f09.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Fig. 8: In the first row, we can see that even though both models made the right decision, the biased model (model1) was looking at the face of the person to decide if the person was a nurse, whereas the unbiased model was looking at the short sleeves to make the decision. For the example image in the second row, the biased model made the wrong prediction (misclassifying a doctor as a nurse) by looking at the face and the hairstyle, whereas the unbiased model made the right prediction looking at the white coat, and the stethoscope.",
+    "width": 476,
+    "height": 370,
+    "description": "Figure Type: Image comparison\nDescription: The figure compares the visual explanations of two models using Grad-CAM. The first row shows that both models correctly identified the person as a nurse, but the biased model focused on the face, while the unbiased model focused on the short sleeves. The second row shows that the biased model incorrectly identified a doctor as a nurse by focusing on the face and hairstyle, while the unbiased model correctly identified the person as a doctor by focusing on the white coat and stethoscope.\n\nText in Figure:\n- Input Image\n- Ground-Truth Nurse\n- Predicted Nurse (Biased model)\n- Predicted Nurse (Unbiased model)\n- Ground-Truth Doctor\n- Predicted Doctor (Biased model)\n- Predicted Doctor (Unbiased model)"
+  },
+  {
+    "file": "p011_f10.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Fig. 9: Examples showing visual explanations and textual explanations for VGG-16 trained on Places365 dataset [61]. For textual explanations we provide the most important neurons for the predicted class along with their names. Important neurons can be either be persuasive (positive importance) or inhibitive (negative importance). The first 2 rows show success cases, and the last row shows 2 failure cases. We see that in (a), the important neurons computed by (1) look for concepts such as book and shelf which are indicative of class 'Book-store' which is fairly intuitive.",
+    "width": 949,
+    "height": 521,
+    "description": "Figure: A collection of visual explanations and textual explanations from VGG-16 trained on Places365 dataset. It shows examples of Grad-CAM visualizations for different classes like 'Book-store', 'Waterfall', 'Home-office', 'Bedroom', 'Rope-bridge', and 'Elevator Door'. Each example includes a Grad-CAM heatmap and a list of important neurons with their names, categorized as positive or negative importance.\n\nText in figure: Neuron ID Concept, Neuron ID Concept, Positive, Negative, Book, Sky, Book, Road, Closet, Water, Water, Bus, Shelf, Car, Waterfall, Grid, Striped, Flower, Stratified, Landmark, Corridor, 117, Waterfall, 115, Corridor, 106, Closet, 166, Road, 148, Water, 494, Bus, 213, Waterfall, 416, Grid, 78, Book, 186, Chequered, Book, Sky, Desk, Swimming pool, Office, Sidewalk, Stove, Swimming pool, Screen, Crosswalk, Home-office, 305, Screen, 492, Stove, 334, Sidewalk, 75, Office, 494, Swimming pool, 315, Desk, 237, Sky, 438, Crosswalk, 305, Screen, 492, Stove, 334, Sidewalk, 75, Office, 494, Swimming pool, 315, Desk, 237, Sky, 438, Crosswalk, 305, Screen, 492, Stove, 334, Sidewalk, 75, Office, 494, Swimming pool, 315, Desk, 237, Sky, 438, Crosswalk, 148, Water, 242, House, 166, Water, 101, House, 266, Bridge, 351, House, 103, Water, 490, Tree, 146, Closet, 477, Dog, 148, Water, 242, House, 166, Water, 101, House, 266, Bridge, 351, House, 103, Water, 490, Tree, 146, Closet, 477, Dog, 323, Bed, 479, Crosswalk, 431, Staircase, 61, Staircase, 290, Bed, 294, Pantry"
+  },
+  {
+    "file": "p011_f11.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Fig. 10: Interpreting image captioning models: We use our class-discriminative localization technique, Grad-CAM to find spatial support regions for captions in images. Fig. 10a Visual explanations from image captioning model [31] highlighting image regions considered to be important for producing the captions. Fig. 10b Grad-CAM localizations of a global or holistic captioning model for captions generated by a dense captioning model [29] for the three bounding box proposals marked on the left. We can see that we get back Grad-CAM localizations (right) that agree with those bounding boxes - even though the captioning model and Grad-CAM techniques do not use any bounding box annotations.",
+    "width": 975,
+    "height": 168,
+    "description": "This figure displays visual explanations from image captioning models using Grad-CAM. It shows two sets of images: (a) image captioning explanations and (b) comparison to DenseCap. In (a), Grad-CAM highlights important regions for captions in images. In (b), Grad-CAM localizations match the bounding boxes of a dense captioning model, demonstrating agreement without using bounding box annotations.\n\nText in figure: \"Grad-CAM\", \"A group of people flying kites on a beach\", \"A man is sitting at a table with a pizza\", \"A house with a green roof\", \"Sheep grazing in a field\", \"A house with a roof\", \"(a) Image captioning explanations\", \"(b) Comparison to DenseCap\""
+  },
+  {
+    "file": "p012_f12.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Fig. 11: Qualitative Results for our word-level captioning experiments: (a) Given the image on the left and the caption, we visualize Grad-CAM maps for the visual words 'bike\", 'bench\" and 'bus\". Note how well the Grad-CAM maps correlate with the COCO segmentation maps on the right column. (b) shows a similar example where we visualize Grad-CAM maps for the visual words 'people\", 'bicycle\" and 'bird\".",
+    "width": 952,
+    "height": 477,
+    "description": "This figure displays qualitative results from word-level captioning experiments using Grad-CAM. It shows two sets of images, each with an original photo, Grad-CAM visualizations, and COCO segmentation maps. The first set (a) visualizes Grad-CAM maps for 'bike', 'bench', and 'bus', while the second set (b) shows maps for 'people', 'bicycle', and 'bird'. The Grad-CAM maps correlate well with the COCO segmentation maps.\n\nText in figure: bike, bench, bus, people, bicycle, bird, Grad-CAM, COCO segmentation, against a bus stop, the road approaching a bird."
+  },
+  {
+    "file": "p013_f13.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "(a) Visualizing VQA model from [38]",
+    "width": 468,
+    "height": 325,
+    "description": "Figure type: Image comparison\nDescription: The figure compares three different visual explanation methods applied to a VQA model. It shows the original image of a fire hydrant, followed by three panels displaying the results of Guided Backprop, Grad-CAM, and Guided Grad-CAM. Each panel highlights different regions of the image, indicating the areas most relevant to the model's prediction.\n\nText in figure: Guided Backprop, Grad-CAM, Guided Grad-CAM, What color is the firehydrant?"
+  },
+  {
+    "file": "p013_f14.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "(b) Visualizing ResNet based Hierarchical co-attention VQA model from [39]",
+    "width": 470,
+    "height": 250,
+    "description": "Figure: A collage of images showing visual explanations from a ResNet-based Hierarchical co-attention VQA model. Each image pair includes a photograph and a heatmap indicating areas of focus. The first pair shows a surfer with a heatmap highlighting the surfboard and wave. The second pair depicts a person holding a baseball bat, with the heatmap focusing on the bat. The third pair features elephants, with the heatmap emphasizing the elephant in the center.\n\nText in figure: \"What is the man doing?\", \"Surfing\", \"What is the she holding?\", \"Baseball bat\", \"What is that?\", \"Elephant\", \"What is that?\", \"Zebra\""
+  },
+  {
+    "file": "p015_f15.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Fig. 13: Grad-CAM at different convolutional layers for the 'tiger cat' class. This figure analyzes how localizations change qualitatively as we perform Grad-CAM with respect to different feature maps in a CNN (VGG16 [52]). We find that the best looking visualizations are often obtained after the deepest convolutional layer in the network, and localizations get progressively worse at shallower layers. This is consistent with our intuition described in Section 3 of main paper, that deeper convolutional layer capture more semantic concepts.",
+    "width": 976,
+    "height": 333,
+    "description": "Description: The figure is a series of heatmaps generated using Grad-CAM, showing the visual explanations from a deep learning network for the 'tiger cat' class. Each heatmap corresponds to different convolutional layers in a CNN (VGG16). The heatmaps illustrate how the network's focus changes as it moves through deeper layers, with the best visualizations appearing in the deepest layers.\n\nText in figure: relu5_3, relu5_2, relu5_1, relu4_3, relu4_2, relu4_1, relu3_3, relu3_2, relu3_1, relu2_2, relu2_1, relu1_2, relu1_1."
+  },
+  {
+    "file": "p015_f16.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Fig. 14: Grad-CAM localizations for 'tiger cat' category for different rectified convolutional layer feature maps for AlexNet.",
+    "width": 974,
+    "height": 190,
+    "description": "Figure: A series of heatmaps showing the Grad-CAM localizations for the 'tiger cat' category using different rectified convolutional layers in AlexNet.\n\nText in figure: relu5, relu4, relu3, relu2, relu1\n\nDescription: The figure displays heatmaps for the 'tiger cat' category, illustrating the areas of interest identified by Grad-CAM using different rectified layers in AlexNet. Each heatmap highlights regions of the image where the model focuses to make its prediction. The layers are labeled as relu5, relu4, relu3, relu2, and relu1, showing varying levels of abstraction and detail in the highlighted areas."
+  },
+  {
+    "file": "p015_f17.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Fig. 15: Grad-CAM visualizations for 'tiger cat' category with Global Average Pooling and Global Max Pooling.",
+    "width": 471,
+    "height": 181,
+    "description": "## Description\nThis figure displays three visualizations of Grad-CAM applied to a 'tiger cat' category. The left image shows a dog and a cat. The middle image uses Grad-CAM with Global Average Pooling, highlighting areas of interest. The right image uses Grad-CAM with Global Max Pooling, showing a more focused visualization.\n\n## Text in figure\n- Grad-CAM\n- Grad-CAM with Global Max Pooled gradients"
+  },
+  {
+    "file": "p015_f18.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Fig. 16: Grad-CAM visualizations for 'tiger cat' category for different modifications to the ReLU backward pass. The best results are obtained when we use the actual gradients during the computation of Grad-CAM.",
+    "width": 471,
+    "height": 128,
+    "description": "Figure type: Image comparison\nContent: Four images showing a dog and a cat with different visualizations of Grad-CAM.\nText in figure: Grad-CAM, Grad-CAM with guided ReLU, Grad-CAM with decoy ReLU\n\nSection 1: Figure shows four images comparing Grad-CAM visualizations for a 'tiger cat' category. The images depict a dog and a cat with different visualizations of Grad-CAM. The best results are obtained when using actual gradients during the computation of Grad-CAM.\n\nSection 2: Text in figure includes the labels \"Grad-CAM\", \"Grad-CAM with guided ReLU\", and \"Grad-CAM with decoy ReLU\". The images show varying levels of visualization clarity, with the first image having the least clarity and the fourth image having the most clarity."
+  },
+  {
+    "file": "p016_f19.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Fig. 17: Visualizations for randomly sampled images from the COCO validation dataset. Predicted classes are mentioned at the top of each column.",
+    "width": 972,
+    "height": 662,
+    "description": "This figure displays visual explanations from deep networks using Grad-CAM, showing different visualizations for randomly sampled images from the COCO validation dataset. Each column represents a different image with the predicted class mentioned at the top. The figure includes four rows: the input image, guided backpropagation, Grad-CAM, and guided Grad-CAM. The visualizations highlight areas of interest in the images, with color-coded heatmaps indicating the importance of different regions for the model's predictions.\n\nText in figure: Torch, Umbrella, Taxi, Ice cream, Toilet seat, Car mirror, Input, Guided Backprop, Grad-CAM, Guided Grad-CAM, a, b, c, d, e, f."
+  },
+  {
+    "file": "p017_f20.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "Fig. 18: Guided Backpropagation, Grad-CAM and Guided Grad-CAM visualizations for the captions produced by the Neuraltalk2 image captioning model.",
+    "width": 809,
+    "height": 1225,
+    "description": "Description: The figure displays a series of images comparing three different visualization techniques: Guided Backpropagation, Grad-CAM, and Guided Grad-CAM. Each technique is applied to images from the Neuraltalk2 image captioning model, showing how they highlight different regions of the images to explain the model's predictions.\n\nText in figure: Guided Backpropagation, Grad-CAM, Guided Grad-CAM, A man is holding a hot dog in his hand, A large clock tower with a clock on the top of it, A bathroom with a toilet and a sink, Two giraffes standing in a zoo enclosure with a fence, STOP"
+  },
+  {
+    "file": "p018_f21.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "Fig. 19: Guided Backpropagation, Grad-CAM and Guided Grad-CAM visualizations for the answers from a VQA model. For each image-question pair, we show visualizations for AlexNet, VGG-16 and VGG-19. Notice how the attention changes in row 3, as we change the answer from Yellow to Green .",
+    "width": 844,
+    "height": 1200,
+    "description": "Figure Description:\nThis figure displays visual explanations from a VQA model using three different techniques: Guided Backpropagation, Grad-CAM, and Guided Grad-CAM. Each row represents an image-question pair, with visualizations for AlexNet, VGG-16, and VGG-19 models. The figure highlights how the attention areas change when the answer changes from Yellow to Green in the third row.\n\nText in Figure:\n- Guided Backpropagation\n- Grad-CAM\n- Guided Grad-CAM\n- AlexNet\n- VGG-16\n- VGG-19\n- What vegetable is on the plate?\n- Is the person riding the waves?\n- Is this a school bus?\n- What is the person hitting?\n- What color is the fire hydrant?\n- Is this a whole orange?\n- What is behind these two men?"
+  },
+  {
+    "file": "p019_f22.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "Fig. 20: Visualizations for ground-truth categories (shown below each image) for images sampled from the PASCAL [17] validation set.",
+    "width": 616,
+    "height": 1355,
+    "description": "This figure displays visual explanations from deep networks using Grad-CAM. It shows heatmaps for various objects in images, highlighting areas of interest. The heatmaps are generated for categories like 'person', 'pottedplant', 'train', 'boat', 'cat', and 'dog'. Each row represents a different image, with the original image on the left and heatmaps from three methods (c-MWP, CAM, Grad-CAM) on the right. The heatmaps are color-coded, with warmer colors indicating higher importance.\n\nText in figure: person, pottedplant, train, boat, person, person, person, pottedplant, pottedplant, pottedplant, train, train, train, person, person, person, boat, boat, boat, person, person, person, cat, cat, cat, dog, dog, dog."
+  },
+  {
+    "file": "p020_f23.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 945,
+    "height": 875,
+    "description": "Figure: Grad-CAM visualizations for various concepts\n\nSection 1:\nThis figure displays Grad-CAM visualizations for different concepts, showing the important regions in images that contribute to the model's predictions. Each panel shows a heatmap overlaying an image, highlighting areas of interest.\n\nSection 2:\nPanels: Canal Urban, Runway, Cliff, Porch, Veterinarians office, Cemetery, Badlands, Archive, Physics Laboratory\nConcepts: Water, Mountain, Tree, Airplane, Highway, Grass, Striped, Striped, Book, Screen, Cockpit, Office, Grid, Water, Screen, Cockpit, Screen, Painting, Head, Book, Screen, Cockpit, Screen, Painting, Book, Corridor, Tree, Screen, Painting, Horse"
+  },
+  {
+    "file": "p021_f24.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "",
+    "width": 965,
+    "height": 972,
+    "description": "Figure type: Image analysis with Grad-CAM visualizations.\n\nDescription: The figure displays input images of dogs and cats, overlaid with Grad-CAM heatmaps for different layers of a neural network. The heatmaps highlight areas of the image that are most influential for the network's predictions.\n\nText in figure: Input image, Grad-CAM for last conv layer, Grad-CAM for last Residual block, Grad-CAM for last downsampling layer."
+  }
+]

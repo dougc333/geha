@@ -1,0 +1,38 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1. (a) Using an image pyramid to build a feature pyramid. Features are computed on each of the image scales independently, which is slow. (b) Recent detection systems have opted to use only single scale features for faster detection. (c) An alternative is to reuse the pyramidal feature hierarchy computed by a ConvNet as if it were a featurized image pyramid. (d) Our proposed Feature Pyramid Network (FPN) is fast like (b) and (c), but more accurate. In this figure, feature maps are indicate by blue outlines and thicker outlines denote semantically stronger features.",
+    "width": 479,
+    "height": 280,
+    "description": "Figure Type: Diagram\nDescription: The figure illustrates different methods for constructing feature pyramids for object detection. It shows four panels: (a) a featurized image pyramid, (b) a single feature map, (c) a pyramidal feature hierarchy, and (d) the proposed Feature Pyramid Network (FPN). Each panel depicts how features are computed and reused for detection.\n\nText in Figure:\n- Panel (a): \"Featurized image pyramid\"\n- Panel (b): \"Single feature map\"\n- Panel (c): \"Pyramidal feature hierarchy\"\n- Panel (d): \"Feature Pyramid Network (FPN)\"\n- Arrows indicating the flow of features and predictions\n- Labels: \"predict\" at the end of each flow\n- Blue outlines for feature maps, thicker outlines for stronger features"
+  },
+  {
+    "file": "p002_f02.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 2. Top: a top-down architecture with skip connections, where predictions are made on the finest level ( e.g ., [28]). Bottom: our model that has a similar structure but leverages it as a feature pyramid , with predictions made independently at all levels.",
+    "width": 357,
+    "height": 287,
+    "description": "## Description\nThis figure is a diagram comparing two architectures for object detection. The top part shows a top-down architecture with skip connections, where predictions are made on the finest level. The bottom part illustrates a feature pyramid network, where predictions are made independently at all levels.\n\n## Text in figure\n- Top part: \"predict\"\n- Bottom part: \"predict\", \"predict\", \"predict\"\n- Labels: \"Top-down architecture with skip connections\", \"Feature Pyramid Networks\""
+  },
+  {
+    "file": "p003_f03.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 3. A building block illustrating the lateral connection and the top-down pathway, merged by addition.",
+    "width": 289,
+    "height": 247,
+    "description": "This figure is a diagram illustrating a building block of a Feature Pyramid Network\n(FPN) for object detection. It shows the lateral connection and top-down pathway\nin an FPN. The diagram includes a 1x1 convolution, a 2x upsampling, and the merging\nof features by addition. The lateral connections are shown as arrows pointing from\nthe top-down pathway to the lateral connections, and the final predictions are made\nat the top of the pyramid.\n\nText in figure: 1x1 conv, 2x up, predict, predict, predict."
+  },
+  {
+    "file": "p008_f04.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 4. FPN for object segment proposals. The feature pyramid is constructed with identical structure as for object detection. We apply a small MLP on 5 \u00d7 5 windows to generate dense object segments with output dimension of 14 \u00d7 14. Shown in orange are the size of the image regions the mask corresponds to for each pyramid level (levels P 3 - 5 are shown here). Both the corresponding image region size (light orange) and canonical object size (dark orange) are shown. Half octaves are handled by an MLP on 7x7 windows ( 7 \u2248 5 \u221a 2 ), not shown here. Details are in the appendix.",
+    "width": 473,
+    "height": 152,
+    "description": "Figure Type: Diagram showing the process of constructing a feature pyramid for object segment proposals.\n\nDescription: The diagram illustrates the process of generating a feature pyramid for object segment proposals. It starts with an input image, which is processed through a series of 5x5 windows to create a 14x14 output. This process is repeated at different pyramid levels (P3-P5), with each level corresponding to a specific image region size. The sizes of these regions are indicated in orange, with the canonical object size shown in dark orange. The diagram also mentions the use of a small MLP on 7x7 windows for handling half octaves.\n\nText in Figure: \"FPN for object segment proposals\", \"5x5\", \"14x14\", \"P3-P5\", \"image region size\", \"canonical object size\", \"small MLP on 7x7 windows\", \"half octaves\"."
+  }
+]

@@ -1,0 +1,210 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1. Pass rates of our models on the HumanEval dataset as a function of model size. When a single sample is generated for each problem, GPT-12B solves no problems, but Codex (fine-tuned on code) solves 28.8% of the problems, and Codex-S (further fine-tuned on correctly implemented standalone functions) solves 37.7% of the problems. From here, further gains can be realized by generating 100 samples per problem and selecting the sample with the highest mean log-probability (44.5% solved) or by selecting the sample that passes the unit tests (77.5% solved). All samples are generated with temperature 0.8.",
+    "width": 472,
+    "height": 292,
+    "description": "Description: This plot shows the pass rates of various models on the HumanEval dataset as a function of the number of non-embedding parameters. The highest pass rate is achieved by Codex-S oracle reranking, reaching 0.8 at 10^10 parameters. The lowest pass rate is for GPT-3 pass@1, which remains at 0 across all parameter sizes.\n\nText in figure: GPT-3 pass@1, Codex pass@1, Codex-S pass@1, Codex-S mean logp reranking, Codex-S oracle reranking, Pass rate, Non-embedding parameters, 10^5, 10^6, 10^7, 10^8, 10^9, 10^10.",
+    "pdf_text": "",
+    "bbox": [
+      54.4,
+      77.8,
+      290.6,
+      223.9
+    ]
+  },
+  {
+    "file": "p005_f02.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 4. Model cross-entropy test loss measured on a held-out split of our Python GitHub code corpus. The smooth power law scaling of performance with model size observed in GPT-3 appears to hold even after code fine-tuning.",
+    "width": 474,
+    "height": 295,
+    "description": "Description: This figure is a log-log plot showing the scaling of test loss for a language model fine-tuned on code. The x-axis represents the number of non-embedding parameters, and the y-axis represents the test loss. The plot shows a smooth power law scaling of performance with model size, similar to GPT-3.\n\nText in figure: \"Codex Loss Scaling\", \"Test loss\", \"Non-embedding parameters\", \"(5.92e + 07)-0.13\".\n\nDescription: The plot shows a single series of data points, with the highest point at the leftmost part of the plot and the lowest point at the rightmost part. The series is labeled as \"(5.92e + 07)-0.13\". The x-axis values range from 10^5 to 10^10, and the y-axis values range from 10^0 to 2 x 10^0.",
+    "pdf_text": "",
+    "bbox": [
+      54.0,
+      65.4,
+      291.1,
+      212.9
+    ]
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 5. In the top panel, we plot pass@ k against the number of samples ( k ) for various temperature settings. Higher temperatures are better when the number of samples is large, likely due to the increased sample diversity. In the bottom panel, we plot the best temperature setting for each k , obtained by taking the upper hull of the top panel.",
+    "width": 473,
+    "height": 597,
+    "description": "This figure contains two plots. The top plot shows pass@k against the number of samples for various temperature settings. The series with T=1.2 is the highest, followed by T=1.0, T=0.8, T=0.6, T=0.4, T=0.2, and T=0.0, which is the lowest. The bottom plot shows the best temperature setting for each k, obtained by taking the upper hull of the top panel.\n\nText in figure: Pass@K vs K, Temperature; Number of samples (k); Best temperature vs K; Best temperature; Number of samples (k); T=0.0, T=0.2, T=0.4, T=0.6, T=0.8, T=1.0, T=1.2.",
+    "pdf_text": "",
+    "bbox": [
+      306.4,
+      66.2,
+      542.8,
+      364.7
+    ]
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 6. Using the optimal temperatures 0.2 and 0.8 for pass@1 and pass@100, we plot these two metrics as a function of model size. Performance appears to scale smoothly as a sigmoid in logparameters.",
+    "width": 472,
+    "height": 315,
+    "description": "Description: The figure is a line graph showing the relationship between model size and pass rate for two metrics: pass@1 and pass@100. The x-axis represents the number of non-embedding parameters on a logarithmic scale, while the y-axis represents the pass rate. The orange line (pass@100) starts at a lower pass rate and increases more steeply than the blue line (pass@1), which starts higher and increases more gradually.\n\nText in figure: \"Pass Rate vs Model Size\", \"pass@1 (T*=0.2)\", \"pass@100 (T*=0.8)\", \"Pass@k\", \"Non-embedding parameters\"",
+    "pdf_text": "",
+    "bbox": [
+      306.8,
+      480.7,
+      542.9,
+      638.1
+    ]
+  },
+  {
+    "file": "p006_f05.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 7. Model performance in the setting where we can generate multiple samples, but only evaluate one. We can do better than randomly selecting a sample by choosing the solution with the highest mean log-probability (red) or with the highest back-translation score (orange) described in Sec. 5. The blue line represents the theoretical best performance obtained using an oracle with prior knowledge of the unit tests.",
+    "width": 474,
+    "height": 388,
+    "description": "Description: This plot shows the pass rate of various sample ranking heuristics as the number of samples increases. The blue line, labeled \"Oracle,\" is the highest, representing the best theoretical performance. The red line, \"Mean logp,\" is the second highest, followed by \"Docstring backtranslation\" (orange), \"Sum logp\" (green), and \"Random\" (purple), which is the lowest. The x-axis represents the number of samples (k), and the y-axis represents the pass rate.\n\nText in figure: Sample Ranking Heuristics, Pass rate, Number of samples (k), Oracle, Docstring backtranslation, Sum logp, Mean logp, Random, 10^0, 10^1, 10^2.",
+    "pdf_text": "",
+    "bbox": [
+      53.7,
+      67.1,
+      290.5,
+      260.8
+    ]
+  },
+  {
+    "file": "p006_f06.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 8. BLEU score probability densities for correct (blue) and wrong (green) solutions from Codex-12B for 4 random tasks from HumanEval. Note that the distributions are not cleanly separable, suggesting that optimizing for BLEU score is not equivalent to optimizing for functional correctness.",
+    "width": 466,
+    "height": 459,
+    "description": "Description: The figure shows four bar charts comparing the BLEU scores of correct and wrong solutions for four different tasks from the HumanEval dataset. Each chart represents a different task, labeled as HumanEval/72, HumanEval/38, HumanEval/4, and HumanEval/21. The blue bars represent correct solutions, and the green bars represent wrong solutions. The highest bars are for correct solutions in HumanEval/72 and HumanEval/38, while the lowest bars are for wrong solutions in HumanEval/4 and HumanEval/21.\n\nText in figure: HumanEval/72, HumanEval/38, HumanEval/4, HumanEval/21, correct, wrong, BLEU score.",
+    "pdf_text": "",
+    "bbox": [
+      309.6,
+      65.8,
+      542.3,
+      295.4
+    ]
+  },
+  {
+    "file": "p009_f07.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 9. Optimal sampling temperatures as a function of the number of samples generated for both Codex and Codex-S. Codex-S generally requires a higher temperature for any particular value of k , possibly to compensate for the fact that it models a narrower distribution.",
+    "width": 471,
+    "height": 294,
+    "description": "Description: This graph depicts the optimal sampling temperatures for Codex and Codex-S as a function of the number of samples generated. The orange line (Codex-S) is consistently higher than the blue line (Codex), indicating that Codex-S requires a higher temperature for any given number of samples. The Codex-S line peaks at 1.0 at 10^2 samples, while the Codex line peaks at 0.8 at 10^1 samples.\n\nText in figure: \"Best temperature\", \"Number of samples (k)\", \"Codex\", \"Codex-S\", \"10^0\", \"10^1\", \"10^2\"",
+    "pdf_text": "",
+    "bbox": [
+      54.4,
+      76.7,
+      290.2,
+      223.7
+    ]
+  },
+  {
+    "file": "p009_f08.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 10. Comparing Codex-S against Codex on the metrics proposed in Section 3. Codex-S is one or two orders of magnitude more parameter efficient on pass@1 and pass@100, and log-prob sample ranking with Codex-S yields similar benefits over random sampling that Codex does.",
+    "width": 473,
+    "height": 653,
+    "description": "Description: The figure contains two plots comparing Codex-S against Codex. The first plot shows the pass rate at 1 and 100 against the number of non-embedding parameters. The second plot shows the pass rate against the number of samples for various ranking heuristics. The highest series in the first plot is Codex-S pass@100, and the lowest is Codex pass@1. In the second plot, Codex-S oracle has the highest pass rate, while Codex-S random has the lowest.\n\nText in figure: Codex pass@1, Codex pass@100, Codex-S pass@1, Codex-S pass@100, Codex oracle, Codex mean logp, Codex random, Codex-S oracle, Codex-S mean logp, Codex-S random, Pass@K, Non-embedding parameters, Number of samples (k), Codex-S Ranking Heuristics.",
+    "pdf_text": "",
+    "bbox": [
+      54.5,
+      307.5,
+      290.8,
+      634.2
+    ]
+  },
+  {
+    "file": "p010_f09.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 11. Pass rates of Codex-12B samples against the number of chained components in the synthetically generated docstring. With each additional component, pass rate drops by roughly a factor of 2-3.",
+    "width": 472,
+    "height": 307,
+    "description": "Description: This figure is a line plot showing the pass rates of Codex-12B samples against the number of chained components in synthetically generated docstrings. The highest pass rate is at 1 chained component, and the lowest is at 7 chained components. The pass rate drops by roughly a factor of 2-3 with each additional component.\n\nText in figure: Synthetic Pass Rate vs Components, Pass rate, Number of chained components, 0.25, 0.20, 0.15, 0.10, 0.05, 0.00, 1, 2, 3, 4, 5, 6, 7.",
+    "pdf_text": "",
+    "bbox": [
+      306.2,
+      150.3,
+      541.8,
+      303.9
+    ]
+  },
+  {
+    "file": "p011_f10.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 12. When the prompt includes subtle bugs, Codex tends to produce worse code than it is capable of. This persists when the prompt also includes instructions to write correct code. This gap increases with model size.",
+    "width": 447,
+    "height": 244,
+    "description": "## Description\n\nThis figure is a line graph showing the fraction of correct code generated by a model as the number of non-embedding parameters increases. The graph has three lines, each representing a different condition: \"Correct examples in context\", \"Examples with subtle bugs in context\", and \"No examples in context\". The line for \"Correct examples in context\" is the highest, followed by \"Examples with subtle bugs in context\", and \"No examples in context\" is the lowest. The gap between the lines increases as the number of non-embedding parameters increases.\n\n## Text in figure\n\nCorrect examples in context\nExamples with subtle bugs in context\nNo examples in context\nFraction Correct\nNon-embedding Parameters",
+    "pdf_text": "",
+    "bbox": [
+      306.3,
+      76.6,
+      530.1,
+      198.3
+    ]
+  },
+  {
+    "file": "p019_f11.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "Figure 13. Comparing the amount of bias and variance of two estimators of pass@ k . While the top expression may look correct, it underestimates the true value by a considerable margin. The unbiased estimator may have a slightly higher variance initially but allows for a fair comparison across different numbers of samples.",
+    "width": 473,
+    "height": 578,
+    "description": "Description: The figure contains two plots comparing two estimators of pass@k. The top plot shows the biased estimator, with the series for k=5 being the lowest and k=100 being the highest. The bottom plot shows the unbiased estimator, with the series for k=5 being the lowest and k=100 being the highest. The unbiased estimator has a slightly higher variance initially.\n\nText in figure: \"1 - (1 - p\u0302)k\", \"1 - ((n - c)/n)k\", \"Pass@k\", \"Number of samples (k)\", \"k=5\", \"k=10\", \"k=20\", \"k=100\".",
+    "pdf_text": "",
+    "bbox": [
+      306.2,
+      67.4,
+      542.7,
+      356.7
+    ]
+  },
+  {
+    "file": "p027_f12.png",
+    "page": 27,
+    "kind": "picture",
+    "caption": "Figure 14. When the prompt includes subtle bugs, Codex tends to produce worse code than it is capable of producing. This gap increases with model size. Including an instruction to write correct code helps a little but does not fix the problem. Even with no examples in the context, Codex produces significantly worse code than it is capable of.",
+    "width": 428,
+    "height": 327,
+    "description": "## Description\nThis figure is a line graph showing the fraction of code that passes tests (pass@1) for different model sizes, measured in non-embedding parameters. The graph compares six different conditions, each represented by a different line. The highest line is \"Examples with subtle bugs in context, instructed to write good code\", while the lowest line is \"No examples in context, no instructions\". The gap between the highest and lowest lines increases as model size increases.\n\n## Text in figure\nLegend: Examples with subtle bugs in context, instructed to write good code, Correct examples in context, instructed to write good code, No examples in context, instructed to write good code, Examples with subtle bugs in context, Correct examples in context, no instructions, No examples in context, no instructions. X-axis: Non-embedding parameters. Y-axis: Fraction Correct (pass@1).",
+    "pdf_text": "",
+    "bbox": [
+      54.4,
+      76.7,
+      268.4,
+      240.0
+    ]
+  },
+  {
+    "file": "p033_f13.png",
+    "page": 33,
+    "kind": "picture",
+    "caption": "Figure 15. Clearly insecure encryption keys produced by Codex. When asked to create encryption keys, Codex models select clearly insecure configuration parameters in a significant fraction of cases. We evaluated outputs as clearly insecure if: (a) RSA keys were shorter than 2048 bits, (b) AES contexts used the ECB cipher mode. Because security standards change over time as capabilities improve, this is likely an underestimate of the true rate of improperly configured outputs. Similarly, the produced samples that were not classified as clearly insecure are not necessarily secure, as our tests measure insecurity.",
+    "width": 453,
+    "height": 278,
+    "description": "Description: This figure is a scatter plot showing the fraction of clearly insecure encryption keys produced by Codex models. The x-axis represents the number of parameters, and the y-axis represents the fraction of clearly insecure keys. The plot includes two series: AES and RSA. The RSA series has the highest fraction of clearly insecure keys, reaching up to 0.7, while the AES series has a lower fraction, reaching up to 0.5.\n\nText in figure: Fraction clearly insecure, Parameters, AES, RSA, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 10^8, 10^9, 10^10",
+    "pdf_text": "",
+    "bbox": [
+      54.1,
+      77.6,
+      280.5,
+      216.4
+    ]
+  }
+]

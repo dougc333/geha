@@ -1,0 +1,56 @@
+[
+  {
+    "file": "p004_f01.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 1: (a): Content stream attention, which is the same as the standard self-attention. (b): Query stream attention, which does not have access information about the content x z t . (c): Overview of the permutation language modeling training with two-stream attention.",
+    "width": 749,
+    "height": 347,
+    "description": "This figure illustrates the architecture of XLNet's two-stream attention mechanism. Panel (a) depicts the content stream attention, which is similar to standard self-attention. Panel (b) shows the query stream attention, which lacks access to information about the content. Panel (c) provides an overview of the permutation language modeling training with two-stream attention, including attention masks and a sample factorization order.\n\nText in figure: Attention, Masked Two-stream Attention, Attention Masks, Content stream, Query stream, Sample a factorization order, 3, 2, 4, 1, x1, x2, x3, x4, h1, h2, h3, h4, g1, g2, g3, g4, s1, s2, s3, s4, e(x1), e(x2), e(x3), e(x4), w, w, w, w, Q, K, V, (1), (2), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), ("
+  },
+  {
+    "file": "p015_f02.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 2: Attention patterns shared by XLNet and BERT . Rows and columns represent query and key respectively.",
+    "width": 789,
+    "height": 202,
+    "description": "Figure type: Heatmap\nDescription: The figure shows four heatmaps comparing attention patterns between XLNet and BERT. Each heatmap represents a different attention pattern: (a) Content stripes, (b) Local/Self focus, (c) Two segments, and (d) Content-based symmetry. The rows and columns of each heatmap correspond to query and key positions, respectively.\n\nText in figure: Content stripes, Local/Self focus, Two segments, Content-based symmetry"
+  },
+  {
+    "file": "p015_f03.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 3: Attention patterns that appear only in XLNet . Rows and columns represent query and key respectively.",
+    "width": 786,
+    "height": 178,
+    "description": "Description: This figure displays three heatmaps representing attention patterns in XLNet. Each heatmap shows the attention scores between query and key tokens. Panel (a) shows self-exclusion, where attention is low for the same token. Panel (b) shows relative stride, with attention scores decreasing as the distance between tokens increases. Panel (c) shows one-side masked attention, where attention is only present on one side of the mask.\n\nText in figure: Self exclusion, Relative stride, One-side masked, 0.025, 0.020, 0.015, 0.010, 0.005, 0.0, -0.05, -0.1, -0.15, -0.2, -0.25, -0.3, -0.35, -0.4, -0.45, -0.5, -0.55, -0.6, -0.65, -0.7, -0.75, -0.8, -0.85, -0.9, -0.95, -1.0."
+  },
+  {
+    "file": "p016_f04.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 4: Illustration of the permutation language modeling objective for predicting x 3 given the same input sequence x but with different factorization orders.",
+    "width": 796,
+    "height": 604,
+    "description": "Description: The figure illustrates the permutation language modeling objective for predicting a specific input sequence element, x3, using different factorization orders. It shows four diagrams, each representing a different factorization order, with elements x1, x2, x3, and x4 arranged in various sequences. The diagrams include hidden states h1, h2, h3, and h4, and memory states mem(0) and mem(1).\n\nText in figure: Factorization order: 3 \u2192 2 \u2192 4 \u2192 1, Factorization order: 2 \u2192 4 \u2192 3 \u2192 1, Factorization order: 1 \u2192 4 \u2192 2 \u2192 3, Factorization order: 4 \u2192 3 \u2192 1 \u2192 2, x1, x2, x3, x4, mem(0), mem(1), h1, h2, h3, h4."
+  },
+  {
+    "file": "p017_f05.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "",
+    "width": 794,
+    "height": 950,
+    "description": "Section 1: Figure type and content\nThis figure is a diagram showing the structure of XLNet's joint view and split view of the content stream. It illustrates how the model processes input data through different factorization orders and positional views.\n\nSection 2: Figure details\nText in figure: Joint View of the Content Stream, Split View, Position-1 View, Position-2 View, Position-3 View, Position-4 View, mem, h, x, W, Factorization order: 3 -> 2 -> 1, mem(t), h(t), x, W."
+  },
+  {
+    "file": "p018_f06.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "",
+    "width": 795,
+    "height": 953,
+    "description": "## Section 1: Figure Description\nThis figure illustrates the joint view and split views of a query stream in the XLNet model. It shows the factorization order of the query stream and how it is split into different positions. The figure includes various components such as memory blocks, input words, and weights, connected through different views.\n\n## Section 2: Key Elements\n- Joint View of the Query Stream\n- Factorization order: 3 \u2192 2 \u2192 4 \u2192 1\n- Split Views: Position-1, Position-2, Position-3, Position-4\n- Components: Memory blocks (mem), Input words (x1, x2, x3, x4), Weights (W)"
+  }
+]

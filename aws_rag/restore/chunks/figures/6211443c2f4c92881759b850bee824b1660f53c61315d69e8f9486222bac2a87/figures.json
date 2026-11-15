@@ -1,0 +1,146 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Fig. 1. Example results for style transfer (top) and \u00d7 4 super-resolution (bottom). For style transfer, we achieve similar results as Gatys et al [10] but are three orders of magnitude faster. For super-resolution our method trained with a perceptual loss is able to better reconstruct fine details compared to methods trained with per-pixel loss.",
+    "width": 575,
+    "height": 321,
+    "description": "## Figure Description\nThis figure displays results from style transfer and super-resolution techniques. It includes four panels for each task. The top row shows style transfer results using different methods, while the bottom row shows super-resolution results. The panels are labeled as follows: Style, Content, Gatys et al [10], Ours, Ground Truth, Bicubic, SRCNN [11], and Perceptual loss.\n\n## Textual Content\n- Style\n- Content\n- Gatys et al [10]\n- Ours\n- Ground Truth\n- Bicubic\n- SRCNN [11]\n- Perceptual loss",
+    "pdf_text": "Style | Content | Gatys et al [10] | Ours | Ground Truth | Bicubic | SRCNN [11] | Perceptual loss",
+    "bbox": [
+      63.2,
+      32.1,
+      350.4,
+      192.5
+    ]
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Fig. 2. System overview. We train an image transformation network to transform input images into output images. We use a loss network pretrained for image classification to define perceptual loss functions that measure perceptual differences in content and style between images. The loss network remains fixed during the training process.",
+    "width": 669,
+    "height": 229,
+    "description": "Figure Type: Diagram\nDescription: The diagram illustrates a system for image transformation using a neural network. It shows an input image being processed by an \"Image Transform Net\" to produce an output image. The system uses a \"Style Target\" and a \"Content Target\" to guide the transformation. A \"Loss Network\" (VGG-16) is employed to measure perceptual differences in content and style between images. The loss network remains fixed during training.\n\nText in Figure: Input, Image, Image Transform Net, Style Target, Content Target, Loss Network (VGG-16)",
+    "pdf_text": "Input | Image | Image Transform Net | Style Target | Content Target | Loss Network (VGG-16)",
+    "bbox": [
+      38.9,
+      37.1,
+      373.4,
+      151.7
+    ]
+  },
+  {
+    "file": "p006_f03.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Fig. 3. Similar to [6], we use optimization to find an image \u02c6 y that minimizes the feature reconstruction loss \u2113 \u03c6,j feat (\u02c6 y, y ) for several layers j from the pretrained VGG-16 loss network \u03c6 . As we reconstruct from higher layers, image content and overall spatial structure are preserved, but color, texture, and exact shape are not.",
+    "width": 657,
+    "height": 175,
+    "description": "Description: The figure displays a series of images resulting from optimization to minimize the feature reconstruction loss for different layers of a pretrained VGG-16 network. The images show the original input, followed by reconstructions at various layers (relu2_2, relu3_3, relu4_3, relu5_1, relu5_3). As the reconstruction progresses to higher layers, the images maintain the content and spatial structure but lose color, texture, and exact shape details.\n\nText in figure: y, relu2_2, relu3_3, relu4_3, relu5_1, relu5_3",
+    "pdf_text": "y | relu2_2 | relu3_3 | relu4_3 | relu5_1 | relu5_3",
+    "bbox": [
+      42.7,
+      32.2,
+      370.9,
+      119.7
+    ]
+  },
+  {
+    "file": "p007_f04.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Fig. 4. Similar to [10], we use optimization to find an image \u02c6 y that minimizes the style reconstruction loss \u2113 \u03c6,j style (\u02c6 y, y ) for several layers j from the pretrained VGG-16 loss network \u03c6 . The images \u02c6 y preserve stylistic features but not spatial structure.",
+    "width": 685,
+    "height": 233,
+    "description": "Description: The figure displays a comparison of original images with their style-reconstructed counterparts using different layers of a pretrained VGG-16 network. The original images are shown in the leftmost column labeled 'y'. The subsequent columns show the reconstructed images using the style from layers 'relu1_2', 'relu2_2', 'relu3_3', and 'relu4_3'. The reconstructed images retain the style of the original but lack the spatial structure.\n\nText in figure: y, relu1_2, relu2_2, relu3_3, relu4_3",
+    "pdf_text": "y | relu1_2 | relu2_2 | relu3_3 | relu4_3",
+    "bbox": [
+      35.3,
+      32.2,
+      378.2,
+      148.3
+    ]
+  },
+  {
+    "file": "p009_f05.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Fig. 5. Our style transfer networks and [10] minimize the same objective. We compare their objective values on 50 images; dashed lines and error bars show standard deviations. Our networks are trained on 256 \u00d7 256 images but generalize to larger images.",
+    "width": 620,
+    "height": 182,
+    "description": "## Description\nThis figure displays three plots comparing the objective function values of different style transfer networks over iterations of L-BFGS. Each plot corresponds to a different image size: 256x256, 512x512, and 1024x1024. The series are labeled as \"Content Image\" (red dashed line), \"Ours\" (green dashed line), and \"[10]\" (blue line with markers). The \"Content Image\" series is consistently the highest, followed by \"Ours\", and \"[10]\" is the lowest across all plots.\n\n## Text in figure\n\"The Muse, 256 x 256\", \"The Muse, 512 x 512\", \"The Muse, 1024 x 1024\", \"Objective function\", \"L-BFGS iteration\", \"Content Image\", \"Ours\", \"[10]\"",
+    "pdf_text": "",
+    "bbox": [
+      49.9,
+      35.2,
+      359.9,
+      126.1
+    ]
+  },
+  {
+    "file": "p010_f06.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Fig. 6. Example results of style transfer using our image transformation networks. Our results are qualitatively similar to Gatys et al [10] but are much faster to generate (see Table 1). All generated images are 256 \u00d7 256 pixels.",
+    "width": 694,
+    "height": 977,
+    "description": "Figure type: Image comparison\nDescription: The figure displays a comparison of style transfer results using different methods. It shows original artworks and their corresponding style transfer results using the method from Gatys et al. [10] and the proposed method in the paper. The artworks include \"The Starry Night\" by Vincent van Gogh, \"The Muse\" by Pablo Picasso, \"Composition VII\" by Wassily Kandinsky, and \"The Great Wave off Kanagawa\" by Hokusai. The style transfer results are labeled as \"Style\" and \"Content\" for both methods.\n\nText in figure: Style, The Starry Night, Vincent van Gogh, 1889, Style, The Muse, Pablo Picasso, 1935, Style, Composition VII, Wassily Kandinsky, 1913, Style, The Great Wave off Kanagawa, Hokusai, 1829-1832, Style, Sketch, Style, The Simpsons, Content, [10], Ours, Content, [10], Ours",
+    "pdf_text": "Style | The Starry Night, | Vincent van Gogh, | 1889 | Style | The Muse, | Pablo Picasso, | 1935 | Style | Composition VII, | Wassily | Kandinsky, 1913 | Style | The Great Wave o\ufb00 | Kanagawa, Hokusai, | 1829-1832 | Style | Sketch | Style | The Simpsons | Content | [10] | Ours | Content | [10] | Ours",
+    "bbox": [
+      33.5,
+      43.0,
+      380.6,
+      531.7
+    ]
+  },
+  {
+    "file": "p011_f07.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Fig. 7. Example results for style transfer on 512 \u00d7 512 images. The model is applied in in a fully-convolutional manner to high-resolution images at test-time. The style images are the same as Figure 6.",
+    "width": 605,
+    "height": 294,
+    "description": "## Description\nThe figure displays a collection of images demonstrating the results of style transfer on 512 \u00d7 512 images. Each image is a combination of a content image and a style image, showcasing the model's ability to apply the style to the content in a fully-convolutional manner at test-time.\n\n## Text in figure\n- \"COM\" (appears twice)\n- \"Pol\" (appears twice)\n- \"ct\" (appears once)\n- \"COM\" (appears once)\n- \"Pol\" (appears once)\n- \"ct\" (appears once)",
+    "pdf_text": "",
+    "bbox": [
+      54.6,
+      33.3,
+      357.0,
+      180.6
+    ]
+  },
+  {
+    "file": "p013_f08.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "are shown in the supplementary material.",
+    "width": 827,
+    "height": 680,
+    "description": "## Description\nThis figure displays results for \u00d74 super-resolution on images from Set5 and Set14. It shows comparisons between different methods: Ground Truth, Bicubic, Ours (\u2113pixel), SRCNN [11], and Ours (\u2113feat). The metrics PSNR and SSIM are reported for each example and the mean for each dataset.\n\n## Text in figure\nGround Truth, Bicubic, Ours (\u2113pixel), SRCNN [11], Ours (\u2113feat), This image, Set5 mean, 31.78 / 0.8577, 28.43 / 0.8114, 31.47 / 0.8573, 28.40 / 0.8205, 32.99 / 0.8784, 30.48 / 0.8628, 29.24 / 0.7841, 27.09 / 0.7680, Ground Truth, This Image, Set14 mean, BSD100 mean, 21.69 / 0.5840, 25.99 / 0.7301, 25.96 / 0.682, 21.66 / 0.5881, 25.75 / 0.6994, 25.91 / 0.6680, 22.53 / 0.6524, 27.49 / 0.7503, 26.90 / 0.7101, 21.04 / 0.6116, 24.99 / 0.6731, 24.95 / 63.17",
+    "pdf_text": "Perceptual Losses for Real-Time Style Transfer and Super-Resolution | 13 | Ground Truth | This image | Set5 mean | Bicubic | 31.78 / 0.8577 | 28.43 / 0.8114 | Ours (\u2113pixel) | 31.47 / 0.8573 | 28.40 / 0.8205 | SRCNN [11] | 32.99 / 0.8784 | 30.48 / 0.8628 | Ours (\u2113feat) | 29.24 / 0.7841 | 27.09 / 0.7680 | Ground Truth | This Image | Set14 mean | BSD100 mean | Bicubic | 21.69 / 0.5840 | 25.99 / 0.7301 | 25.96 / 0.682 | Ours (\u2113pixel) | 21.66 / 0.5881 | 25.75 / 0.6994 | 25.91 / 0.6680 | SRCNN [11] | 22.53 / 0.6524 | 27.49 / 0.7503 | 26.90 / 0.7101 | Ours (\u2113feat) | 21.04 / 0.6116 | 24.99 / 0.6731 | 24.95 / 63.17 | Fig. 8. Results for \u00d74 super-resolution on images from Set5 (top) and Set14 (bottom). | We report PSNR / SSIM for each example and the mean for each dataset. More results | h | i | th | l | t | t | i l",
+    "bbox": [
+      0.7,
+      7.9,
+      413.9,
+      347.8
+    ]
+  },
+  {
+    "file": "p014_f09.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Fig. 9. Super-resolution results with scale factor \u00d7 8 on an image from the BSD100 dataset. We report PSNR / SSIM for the example image and the mean for each dataset. More results are shown in the supplementary material.",
+    "width": 828,
+    "height": 366,
+    "description": "## Description\nThe figure displays super-resolution results with a scale factor of \u00d78 on an image from the BSD100 dataset. It compares different methods: Ground Truth, Bicubic, and two proposed methods labeled \"Ours (\u2113pixel)\" and \"Ours (\u2113feat)\". The results are evaluated using PSNR and SSIM metrics.\n\n## Text in figure\nGround Truth, Bicubic, Ours (\u2113pixel), Ours (\u2113feat), This image: 22.75 / 0.5946, 23.80 / 0.6455, 23.42 / 0.6168, 21.90 / 0.6083\nSet5 mean: 22.37 / 0.5518, 23.02 / 0.5787, 21.64 / 0.5837\nSet14 mean: 22.11 / 0.5322, 22.54 / 0.5526, 21.35 / 0.5474\nBSD100 mean: 24.77 / 0.6864, 23.26 / 0.7058",
+    "pdf_text": "14 | Johnson et al | Ground Truth | This image | Set5 mean | Set14 mean | BSD100 mean | Bicubic | 22.75 / 0.5946 | 23.80 / 0.6455 | 22.37 / 0.5518 | 22.11 / 0.5322 | Ours (\u2113pixel) | 23.42 / 0.6168 | 24.77 / 0.6864 | 23.02 / 0.5787 | 22.54 / 0.5526 | Ours (\u2113feat) | 21.90 / 0.6083 | 23.26 / 0.7058 | 21.64 / 0.5837 | 21.35 / 0.5474",
+    "bbox": [
+      0.0,
+      0.0,
+      413.8,
+      182.8
+    ]
+  }
+]

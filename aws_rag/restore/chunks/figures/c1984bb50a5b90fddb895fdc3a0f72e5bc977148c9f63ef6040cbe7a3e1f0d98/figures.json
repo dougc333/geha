@@ -1,0 +1,386 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1: Human evaluations of various models on our API prompt distribution, evaluated by how often outputs from each model were preferred to those from the 175B SFT model. Our InstructGPT models (PPO-ptx) as well as its variant trained without pretraining mix (PPO) significantly outperform the GPT-3 baselines (GPT, GPT prompted); outputs from our 1.3B PPO-ptx model are preferred to those from the 175B GPT-3. Error bars throughout the paper are 95% confidence intervals.",
+    "width": 606,
+    "height": 343,
+    "description": "Description: This figure is a line graph comparing the win rates of various language models against the 175B SFT model. The models include PPO-ptx, PPO, SFT, GPT (prompted), and GPT. The graph shows that PPO-ptx and PPO models outperform the others, with PPO-ptx at 1.3B being the highest at around 0.65, followed by PPO at 1.3B at around 0.6. The GPT models are the lowest, with GPT at 1.3B at around 0.15.\n\nText in figure: 1.3B, 6B, 175B, Model size, 0.2, 0.4, 0.6, Win rate against SFT 175B, Model, PPO-ptx, PPO, SFT, GPT (prompted), GPT",
+    "pdf_text": "1.3B | 6B | 175B | Model size | 0.2 | 0.4 | 0.6 | Win rate against SFT 175B | Model | PPO-ptx | PPO | SFT | GPT (prompted) | GPT",
+    "bbox": [
+      149.9,
+      74.2,
+      453.2,
+      245.5
+    ]
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2: A diagram illustrating the three steps of our method: (1) supervised fine-tuning (SFT), (2) reward model (RM) training, and (3) reinforcement learning via proximal policy optimization (PPO) on this reward model. Blue arrows indicate that this data is used to train one of our models. In Step 2, boxes A-D are samples from our models that get ranked by labelers. See Section 3 for more details on our method.",
+    "width": 761,
+    "height": 448,
+    "description": "Figure type: Diagram\nDescription: The figure illustrates a three-step process for training language models with human feedback. Step 1 involves collecting demonstration data and training a supervised policy. Step 2 entails collecting comparison data and training a reward model. Step 3 optimizes a policy using reinforcement learning with the reward model. Arrows indicate data flow between steps.\n\nText in figure: Step 1, Step 2, Step 3, Collect demonstration data, and train a supervised policy, Collect comparison data, and train a reward model, Optimize a policy against the reward model using reinforcement learning, A prompt is sampled from our prompt dataset, Explain the moon landing to a 6 year old, A labeler demonstrates the desired output behavior, This data is used to fine-tune GPT-3 with supervised learning, A prompt and several model outputs are sampled, Explain the moon landing to a 6 year old, A labeler ranks the outputs from best to worst, This data is used to train our reward model, A new prompt is sampled from the dataset, Write a story about frogs, The policy generates an output, The reward model calculates a reward for the output, The reward is used to update the policy using PPO",
+    "pdf_text": "",
+    "bbox": [
+      116.2,
+      71.8,
+      496.3,
+      296.0
+    ]
+  },
+  {
+    "file": "p011_f03.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 3: Preference results of our models, measured by winrate against the 175B SFT model. Left: results on prompts submitted to GPT models on the API; Right: results on prompts submitted to InstructGPT models on the API; Top: results from held-out labelers; Bottom: results from training labelers. We omit GPT (prompted) from the evals on prompts submitted to GPT-3 models (left) as these prompts are already designed to perform well for GPT-3, as opposed to prompts submitted to InstructGPT models (right).",
+    "width": 696,
+    "height": 609,
+    "description": "## Figure Description\n\nThis figure contains two panels of line graphs, each showing the win rate of various models against a 175B SFT model. The left panel is labeled \"GPT distribution\" and the right \"Instruct distribution.\" Each panel has two sets of lines, one for held-out workers and one for training workers. The series are labeled as GPT, GPT (prompted), SFT, PPO, and PPO-ptx. In the left panel, the PPO-ptx series is highest, followed by PPO, SFT, GPT, and GPT (prompted) is the lowest. In the right panel, the order is similar but with slight variations in the relative positions of the series.\n\n## Text in Figure\n\nLeft Panel: 0.25, 0.50, 0.75, 1.3B, 6B, 175B, GPT distribution, GPT, GPT (prompted), SFT, PPO, PPO-ptx, Win rate against SFT 175B, Model size\n\nRight Panel: 0.25, 0.50, 0.75, 1.3B, 6B, 175B, Instruct distribution, GPT, GPT (prompted), SFT, PPO, PPO-ptx, Heldout workers, Training workers, Model size",
+    "pdf_text": "0.25 | 0.50 | 0.75 | Win rate against SFT 175B | GPT distribution | GPT | GPT | (prompted) | SFT | PPO | PPO-ptx | Instruct distribution | Heldout workers | 1.3B | 6B | 175B | 0.25 | 0.50 | 0.75 | 1.3B | 6B | 175B | Model size | Training workers",
+    "bbox": [
+      131.9,
+      76.2,
+      480.0,
+      380.3
+    ]
+  },
+  {
+    "file": "p012_f04.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 4: Metadata results on the API distribution. Note that, due to dataset sizes, these results are collapsed across model sizes. See Appendix E.2 for analysis that includes model size. Compared to GPT-3, the PPO models are more appropriate in the context of a customer assistant, are better at following explicit constraints in the instruction and attempting the correct instruction, and less likely to 'hallucinate' (meaning, making up information on closed domain tasks like summarization).",
+    "width": 787,
+    "height": 239,
+    "description": "## Figure Description\n\nThis figure consists of four bar charts, each representing different metrics related to language models' performance. The metrics are \"Attempts correct instruction,\" \"Follows explicit constraints,\" \"Hallucinations,\" and \"Uses language appropriate for customer assistant.\" Each chart has bars for GPT, GPT (prompted), SFT, PPO, and PPO-ptx models. The PPO-ptx model shows the highest prevalence in all metrics, followed by PPO, SFT, GPT, and GPT (prompted).\n\n## Figure Content\n\nText in figure: \"Attempts correct instruction,\" \"Follows explicit constraints,\" \"Hallucinations,\" \"Uses language appropriate for customer assistant,\" \"Prevalence,\" \"GPT,\" \"GPT (prompted),\" \"SFT,\" \"PPO,\" \"PPO-ptx,\" \"0,\" \"0.25,\" \"0.50,\" \"0.75.\"",
+    "pdf_text": "GPT | GPT | (prompted) | SFT | PPO PPO-ptx | 0 | 0.25 | 0.50 | 0.75 | Prevalence | Attempts correct instruction | GPT | GPT | (prompted) | SFT | PPO PPO-ptx | 0 | 0.1 | 0.2 | 0.3 | 0.4 | 0.5 | Follows explicit constraints | GPT | GPT | (prompted) | SFT | PPO PPO-ptx | 0 | 0.2 | 0.4 | Hallucinations | GPT | GPT | (prompted) | SFT | PPO PPO-ptx | 0 | 0.25 | 0.50 | 0.75 | Uses language appropriate | for customer assistant",
+    "bbox": [
+      109.1,
+      73.1,
+      502.7,
+      192.6
+    ]
+  },
+  {
+    "file": "p012_f05.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 5: Comparing our models with FLAN and T0 in terms of Likert scores on a 1-7 scale, on the InstructGPT prompt distribution. FLAN and T0 perform better than default GPT-3, and comparably with a few-shot GPT-3 model placed into 'instruction-following' mode.",
+    "width": 384,
+    "height": 312,
+    "description": "## Description\nThis bar chart compares the Likert scores of various language models on a 1-7 scale. The models include GPT, GPT (prompted), SFT, PPO-ptx, FLAN, and T0. The PPO-ptx model has the highest score, approximately 5, while the GPT model has the lowest score, around 2.5. The chart shows that FLAN and T0 perform better than the default GPT-3 model and are comparable to the few-shot GPT-3 model in 'instruction-following' mode.\n\n## Text in figure\nModel: GPT, GPT (prompted), SFT, PPO-ptx, FLAN, T0\nLikert score: 2, 4, 6\n2, 4, 6\nModel\n2\n4\n6\nLikert score\nGPT\nGPT (prompted)\nSFT\nPPO-ptx\nFLAN\nT0",
+    "pdf_text": "GPT | GPT | (prompted) | SFT | PPO-ptx | FLAN | T0 | Model | 2 | 4 | 6 | Likert score",
+    "bbox": [
+      208.9,
+      270.8,
+      401.2,
+      427.1
+    ]
+  },
+  {
+    "file": "p013_f06.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 6: Results on the TruthfulQA dataset. Gray bars indicate ratings of truthfulness; colored bars indicate ratings of truthfulness and informativeness.",
+    "width": 714,
+    "height": 330,
+    "description": "## Description\n\nThis figure presents a bar chart comparing the performance of different language models on the TruthfulQA dataset. The chart is divided into two panels, each showing the percentage of truthful and informative responses. The left panel is labeled \"QA prompt\" and the right panel is labeled \"Instruction + QA prompt.\" Each panel contains four bars representing different models: GPT, SFT, PPO, and PPO-ptx. The gray bars indicate ratings of truthfulness, while the colored bars indicate ratings of truthfulness and informativeness. The PPO-ptx model shows the highest percentage in both panels, followed by PPO, SFT, and GPT.\n\n## Text in figure\n\nText in figure: GPT, SFT, PPO, PPO-ptx, 0, 25, 50, 75, Percentage, QA prompt, GPT, SFT, PPO, PPO-ptx, Model, Instruction + QA prompt.",
+    "pdf_text": "GPT | SFT | PPO | PPO-ptx | 0 | 25 | 50 | 75 | Percentage | QA prompt | GPT | SFT | PPO | PPO-ptx | Model | Instruction + QA prompt",
+    "bbox": [
+      127.9,
+      360.0,
+      484.8,
+      524.9
+    ]
+  },
+  {
+    "file": "p014_f07.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 7: Comparing human evaluations and automatic evaluations (Perspective API scores) on RealToxicityPrompts. A total of 1,729 prompts were labeled for three different 175B models, both with and without \"respectful\" instructions. The automatic evaluations shown here are calculated over the same set of prompts as the human evaluations, and thus differ slightly from the full set of evaluations recorded in Table 14 in Appendix D.",
+    "width": 767,
+    "height": 367,
+    "description": "## Description\n\nThis figure contains two bar charts comparing human evaluations and automatic evaluations (Perspective API scores) on RealToxicityPrompts. Each chart has two sets of bars, one for prompts without \"respectful\" instructions and one for prompts with \"respectful\" instructions. The human evaluations show that prompts with \"respectful\" instructions have lower toxicity scores compared to those without. The automatic evaluations also show a similar trend, with lower scores for prompts with \"respectful\" instructions.\n\n## Visible Text\n\nNone | Respectful | 0 | 0.05 | 0.10 | 0.15 | 0.20 | 0.25 | Toxicity | Human eval | Model | GPT | SFT | PPO-ptx | None | Respectful | Prompt | PerspectiveAPI score",
+    "pdf_text": "None | Respectful | 0 | 0.05 | 0.10 | 0.15 | 0.20 | 0.25 | Toxicity | Human eval | Model | GPT | SFT | PPO-ptx | None | Respectful | Prompt | PerspectiveAPI score",
+    "bbox": [
+      110.2,
+      73.9,
+      493.5,
+      257.3
+    ]
+  },
+  {
+    "file": "p039_f08.png",
+    "page": 39,
+    "kind": "picture",
+    "caption": "",
+    "width": 793,
+    "height": 467,
+    "description": "Section 1: Figure description\nThis figure is a screenshot of a web interface for evaluating the output of a language model. It shows a form with various checkboxes and rating scales for assessing the quality and appropriateness of the model's response.\n\nSection 2: Figure details\n- The form includes sections for summarizing a news article, rating the response, and providing notes.\n- Rating options range from 1 (worst) to 7 (best).\n- Checkboxes assess whether the response fails to follow instructions, is inappropriate, contains sexual or violent content, encourages or discourages violence, denigrates a protected class, gives harmful advice, or expresses moral judgment.\n- An optional notes section is provided for additional feedback.",
+    "pdf_text": "",
+    "bbox": [
+      107.6,
+      117.0,
+      504.2,
+      350.5
+    ]
+  },
+  {
+    "file": "p039_f09.png",
+    "page": 39,
+    "kind": "picture",
+    "caption": "",
+    "width": 792,
+    "height": 484,
+    "description": "The generated text has been blocked by our content filters.",
+    "pdf_text": "",
+    "bbox": [
+      107.8,
+      366.4,
+      504.0,
+      608.4
+    ]
+  },
+  {
+    "file": "p043_f10.png",
+    "page": 43,
+    "kind": "picture",
+    "caption": "Figure 13: Tuning FLAN and T0 based on reward model scores",
+    "width": 755,
+    "height": 455,
+    "description": "## Figure Description\nThe figure displays two line plots comparing the performance of two models, FLAN and T0, over a series of elapsed examples. Each plot shows the reward mean over time, with two different learning rates (LR) indicated on the right side of the plots. The top plot has a learning rate of 4e-6, and the bottom plot has a learning rate of 6e-6. The FLAN model is represented by the pink line, and the T0 model is represented by the brown line. The FLAN model shows a higher reward mean in the top plot, while the T0 model shows a higher reward mean in the bottom plot.\n\n## Visible Text\nReward mean, Elapsed examples, LR = 4e-6, Model, FLAN, T0, LR = 6e-6, 250000, 500000, 750000, 1000000, 1250000, 6.5, 6, 5.5",
+    "pdf_text": "6.5 | 6 | 5.5 | Reward mean | LR = 4e-6 | Model | FLAN | T0 | 250000 | 500000 | 750000 | 1000000 | 1250000 | Elapsed examples | 6.5 | 6 | 5.5 | LR = 6e-6",
+    "bbox": [
+      111.9,
+      75.5,
+      489.7,
+      303.2
+    ]
+  },
+  {
+    "file": "p051_f11.png",
+    "page": 51,
+    "kind": "picture",
+    "caption": "Figure 28: Zero-shot performance of our models on various public NLP datasets. The 175B PPO models consistently show performance regressions, which is mitigated by adding updates on the pretraining data during fine-tuning. Few-shot performance is shown in Figure 29. Error bars for translation are not available because we use a software package that does not report them.",
+    "width": 769,
+    "height": 848,
+    "description": "## Figure Description\nThis figure displays a series of line graphs comparing the zero-shot performance of various language models on different NLP datasets. Each graph represents a different dataset, with the x-axis indicating the model size (1.3B, 6B, 175B) and the y-axis showing performance metrics such as F1 score, accuracy, or BLEU score. The series are labeled as PPO-ptx, PPO, SFT, and GPT. The 175B PPO models generally show performance regressions, which are mitigated by updates on pretraining data during fine-tuning.\n\n## Textual Content\nDatasets: DROP (F1), Hellaswag (acc), QuAC (F1), RTE v2 (acc), SST (acc), Squad V2 (F1), Translate Fr => En (BLEU), Winograd (acc). Models: PPO-ptx, PPO, SFT, GPT. Sizes: 1.3B, 6B, 175B. Performance metrics: F1 score, accuracy, BLEU score.",
+    "pdf_text": "10 | 15 | 20 | 25 | DROP (F1) | PPO-ptx | PPO | SFT | GPT | 0.5 | 0.6 | 0.7 | 0.8 | Hellaswag (acc) | 30 | 35 | 40 | 45 | QuAC (F1) | 0.5 | 0.6 | 0.7 | RTE v2 (acc) | 0.6 | 0.7 | 0.8 | 0.9 | SST (acc) | 40 | 50 | 60 | Squad V2 (F1) | 1.3B | 6B | 175B | 20 | 25 | 30 | 35 | Translate Fr => En (BLEU) | 1.3B | 6B | 175B | 0.5 | 0.6 | 0.7 | 0.8 | Winograd (acc)",
+    "bbox": [
+      112.8,
+      114.3,
+      497.5,
+      538.4
+    ]
+  },
+  {
+    "file": "p052_f12.png",
+    "page": 52,
+    "kind": "picture",
+    "caption": "Figure 29: Few-shot performance of our models on various public NLP datasets (compare to zero-shot performance shown in Figure 28",
+    "width": 771,
+    "height": 834,
+    "description": "This figure presents a comparative analysis of few-shot performance across various natural language processing (NLP) datasets for different models. Each panel represents a different dataset, with performance metrics such as F1 score and accuracy plotted against the number of parameters (1.3B, 6B, 175B). The models compared include PPO-ptx, PPO, SFT, and GPT. In most datasets, GPT consistently shows the highest performance, while PPO often shows the lowest. For instance, in the DROP (F1) dataset, GPT's performance is around 35, while PPO's is around 25. The figure also includes annotations and markers to highlight specific points of interest.",
+    "pdf_text": "25 | 30 | 35 | DROP (F1) | PPO-ptx | PPO | SFT | GPT | 0.5 | 0.6 | 0.7 | 0.8 | Hellaswag (acc) | 30 | 35 | 40 | 45 | 50 | QuAC (F1) | 0.5 | 0.6 | 0.7 | 0.8 | RTE v2 (acc) | 0.80 | 0.85 | 0.90 | 0.95 | SST (acc) | 45 | 50 | 55 | 60 | 65 | 70 | Squad V2 (F1) | 1.3B | 6B | 175B | 25 | 30 | 35 | 40 | Translate Fr => En (BLEU) | 1.3B | 6B | 175B | 0.5 | 0.6 | 0.7 | 0.8 | Winograd (acc)",
+    "bbox": [
+      112.0,
+      75.9,
+      497.7,
+      492.8
+    ]
+  },
+  {
+    "file": "p053_f13.png",
+    "page": 53,
+    "kind": "picture",
+    "caption": "Figure 30: Metadata ratings as a function of model type and model size",
+    "width": 758,
+    "height": 552,
+    "description": "This figure presents a series of bar charts comparing various model types across different sizes, measured by their prevalence in four categories: \"Attempts correct instruction\", \"Appropriate for customer assistant\", \"Follows explicit constraints\", and \"Hallucinations\". The models include PPO-ptx, PPO, SFT, and GPT (prompted). The sizes range from 1.3B to 175B parameters. The highest prevalence is observed in the \"Attempts correct instruction\" category for all models, with PPO-ptx leading at 0.95. The lowest prevalence is in the \"Hallucinations\" category, with GPT (prompted) at 0.2.\n\nText in figure: 1.3B, 6B, 175B, 0.6, 0.7, 0.8, 0.9, Prevalence, Attempts correct instruction, Model, PPO-ptx, PPO, SFT, GPT, (prompted), GPT, 1.3B, 6B, 175B, 0.80, 0.85, 0.90, 0.95, Appropriate for customer assistant, 1.3B, 6B, 175B, 0.2, 0.4, 0.6, Follows explicit constraints, 1.3B, 6B, 175B, Model size, 0",
+    "pdf_text": "1.3B | 6B | 175B | 0.6 | 0.7 | 0.8 | 0.9 | Prevalence | Attempts correct instruction | Model | PPO-ptx | PPO | SFT | GPT | (prompted) | GPT | 1.3B | 6B | 175B | 0.80 | 0.85 | 0.90 | 0.95 | Appropriate for customer assistant | 1.3B | 6B | 175B | 0.2 | 0.4 | 0.6 | Follows explicit constraints | 1.3B | 6B | 175B | Model size | 0 | 0.2 | 0.4 | 0.6 | Hallucinations",
+    "bbox": [
+      111.7,
+      75.5,
+      490.4,
+      351.7
+    ]
+  },
+  {
+    "file": "p054_f14.png",
+    "page": 54,
+    "kind": "picture",
+    "caption": "Figure 31: Likert scores for each of our models",
+    "width": 757,
+    "height": 474,
+    "description": "## Figure description\nThis figure contains two line plots, each with six lines, showing Likert scores for different models across three sizes. The left plot is labeled \"Instruct distribution\" and the right \"GPT distribution.\" Each plot has three axes: one horizontal labeled \"Model size\" with three tick marks for 1.3B, 6B, and 175B, and two vertical axes labeled \"Likert score\" with tick marks at 2, 3, 4, 5, and 6. The series are labeled by legend: PPO-ptx, PPO, SFT, GPT (prompted), and GPT. In the left plot, the PPO-ptx series is highest, followed by PPO, SFT, GPT (prompted), and GPT. In the right plot, the PPO-ptx series is again highest, followed by PPO, SFT, GPT (prompted), and GPT.\n\n## Visible text\nLikert score, Instruct distribution, Model, PPO-ptx, PPO, SFT, GPT (prompted), GPT, GPT distribution, Training workers, 1.3B, 6B, 175B, 2, 3, 4, 5, 6, Model size, Heldout workers",
+    "pdf_text": "2 | 3 | 4 | 5 | 6 | Likert score | Instruct distribution | Model | PPO-ptx | PPO | SFT | GPT | (prompted) | GPT | GPT distribution | Training workers | 1.3B | 6B | 175B | 2 | 3 | 4 | 5 | 6 | 1.3B | 6B | 175B | Model size | Heldout workers",
+    "bbox": [
+      112.1,
+      101.4,
+      490.4,
+      338.5
+    ]
+  },
+  {
+    "file": "p054_f15.png",
+    "page": 54,
+    "kind": "picture",
+    "caption": "Figure 32: Bias results on Winogender and CrowS-Pairs.",
+    "width": 761,
+    "height": 493,
+    "description": "## Figure description\nThis figure contains three panels, each showing a line graph with four lines representing different models: PPO-ptx, PPO, SFT, and GPT. The x-axis represents model sizes (1.3B, 6B, 175B), and the y-axis represents normed entropy. The three panels correspond to different prompts: \"Biased prompt,\" \"No prompt,\" and \"Respectful prompt.\" The lines in each panel show the performance of the models on two tasks: Winogender and CrowS-Pairs.\n\n## Index terms\n- Biased prompt\n- No prompt\n- Respectful prompt\n- Model sizes: 1.3B, 6B, 175B\n- Models: PPO-ptx, PPO, SFT, GPT\n- Tasks: Winogender, CrowS-Pairs\n- Normed entropy\n- Line graphs",
+    "pdf_text": "0.2 | 0.3 | 0.4 | Normed entropy | Biased prompt | Model | PPO-ptx | PPO | SFT | GPT | No prompt | Respectful prompt | CrowS-Pairs | 1.3B | 6B | 175B | 0.4 | 0.5 | 0.6 | 0.7 | 0.8 | 1.3B | 6B | 175B1.3B | 6B | 175B | Model size | Winogender",
+    "bbox": [
+      111.3,
+      424.4,
+      492.2,
+      670.9
+    ]
+  },
+  {
+    "file": "p055_f16.png",
+    "page": 55,
+    "kind": "picture",
+    "caption": "Figure 33: Evaluation on public NLP datasets as a function of pretraining loss coefficient. There is a pretraining coefficient that leads to a significant improvement on DROP and SQuAD and not much regression on validatoin reward.",
+    "width": 752,
+    "height": 372,
+    "description": "## Search Index Section 1\nThis figure contains two line graphs showing the evaluation of two datasets, DROP and SQuAD v2, as a function of the pretraining loss coefficient. The left graph displays the F1 score, with the SQuAD v2 dataset (green line) consistently higher than the DROP dataset (red line). The right graph shows the validation reward, with the SQuAD v2 dataset (green line) starting higher and decreasing more steeply than the DROP dataset (red line).\n\n## Search Index Section 2\nText in figure: F1, Validation reward, Dataset, DROP, SQuAD v2, 1, 10, 100, 20, 30, 40, 50, 60, (GPT), (GPT), Pretraining loss coefficient, 1.6, 1.4, 1.2, 1, 0.8, 0.6.",
+    "pdf_text": "1 | 10 | 100 | 20 | 30 | 40 | 50 | 60 | F1 | (GPT) | (GPT) | Dataset | a | DROP | a | SQuAD v2 | 1 | 10 | 100 | Pretraining loss coefficient | 1.6 | 1.4 | 1.2 | 1 | 0.8 | 0.6 | Validation reward",
+    "bbox": [
+      112.0,
+      121.0,
+      487.9,
+      307.1
+    ]
+  },
+  {
+    "file": "p055_f17.png",
+    "page": 55,
+    "kind": "picture",
+    "caption": "Figure 34: Evaluation on public NLP datasets as a function of KL reward coefficient. Increasing the KL coefficient does not fully mitigate the regressions on DROP and SQuAD.",
+    "width": 751,
+    "height": 366,
+    "description": "This figure contains two line graphs, each showing the performance of two datasets, DROP and SQuAD v2, as a function of the KL reward coefficient. The left graph displays the F1 score, with SQuAD v2 (green line) consistently higher than DROP (red line). The right graph shows the validation reward, where SQuAD v2 (green line) starts higher but decreases as the KL reward coefficient increases, while DROP (red line) remains relatively stable.\n\nSection 1: Figure 34 shows two line graphs evaluating the performance of DROP and SQuAD v2 datasets against the KL reward coefficient. The left graph depicts the F1 score, with SQuAD v2 consistently higher than DROP. The right graph shows the validation reward, where SQuAD v2 starts higher but decreases with increasing KL reward coefficient, while DROP remains stable.\n\nSection 2: F1 score: SQuAD v2 (green) > DROP (red). Validation reward: SQuAD v2 (green) starts higher, decreases with KL reward coefficient; DROP (red) remains stable.",
+    "pdf_text": "1e-4 1e-3 1e-2 1e-1 | 1 | 0 | 20 | 40 | 60 | F1 | (GPT) | (GPT) | Dataset | a | DROP | a | SQuAD v2 | 1e-4 1e-3 1e-2 1e-1 | 1 | KL reward coefficient | 2 | 0 | 2 | 4 | Validation reward",
+    "bbox": [
+      112.3,
+      455.5,
+      488.2,
+      638.4
+    ]
+  },
+  {
+    "file": "p057_f18.png",
+    "page": 57,
+    "kind": "picture",
+    "caption": "Figure 35: Evaluation on public NLP datasets as a function of training episodes",
+    "width": 590,
+    "height": 354,
+    "description": "Description: The figure is a line graph showing the F1 score of two datasets, DROP and SQuAD v2, as a function of training episodes. The DROP dataset, represented by the red line, starts at an F1 score of around 25 and gradually increases to about 30. The SQuAD v2 dataset, represented by the blue line, starts at an F1 score of around 60 and decreases to about 55. Both datasets are labeled with (GPT) indicating they are evaluated using GPT.\n\nText in figure: 1e3, 1e4, 1e5, Episodes, 30, 40, 50, 60, F1 score, (GPT), (GPT), Dataset, DROP, SQuAD v2",
+    "pdf_text": "1e3 | 1e4 | 1e5 | Episodes | 30 | 40 | 50 | 60 | F1 score | (GPT) | (GPT) | Dataset | a | DROP | a | SQuAD v2",
+    "bbox": [
+      152.3,
+      82.9,
+      447.7,
+      260.1
+    ]
+  },
+  {
+    "file": "p057_f19.png",
+    "page": 57,
+    "kind": "picture",
+    "caption": "Figure 36: Likert scores as a function of KL reward coefficient. The blue line indicates the reward value when the coefficient is zero (not shown on the rest of the graph due to log scale of the x axis).",
+    "width": 463,
+    "height": 355,
+    "description": "## Description\n\nThis figure is a line graph showing Likert scores as a function of the KL reward coefficient. The x-axis represents the KL reward coefficient on a logarithmic scale, ranging from 0.001 to 1. The y-axis represents the Likert score, ranging from 2 to 4.5. The graph includes a blue line indicating the reward value when the coefficient is zero.\n\n## Text in figure\n\nKL reward coefficient, 0.001, 0.01, 0.1, 1, Likert score, 2, 2.5, 3, 3.5, 4, 4.5",
+    "pdf_text": "0.001 | 0.01 | 0.1 | 1 | KL reward coefficient | 2 | 2.5 | 3 | 3.5 | 4 | 4.5 | Likert score",
+    "bbox": [
+      189.8,
+      308.1,
+      421.7,
+      485.4
+    ]
+  },
+  {
+    "file": "p057_f20.png",
+    "page": 57,
+    "kind": "picture",
+    "caption": "Figure 37: Human likert scores for PPO with different init models.",
+    "width": 385,
+    "height": 301,
+    "description": "Description: This figure is a bar chart showing human Likert scores for PPO with different initial models. The chart displays four bars, each representing a different pretraining fraction: 0, 0.1, 0.5, and 0 (2 epochs). The Likert scores range from 0 to 4, with the highest score being approximately 4 for the pretraining fraction 0.1 and the lowest score being around 3.5 for the pretraining fraction 0.5.\n\nText in figure: Pretraining fraction 0, Pretraining fraction 0.1, Pretraining fraction 0.5, Pretraining fraction 0 (2 epochs), Likert score, 0, 1, 2, 3, 4.",
+    "pdf_text": "Pretraining | fraction 0 | Pretraining | fraction 0.1 | Pretraining | fraction 0.5 | Pretraining | fraction 0 | (2 epochs) | 0 | 1 | 2 | 3 | 4 | Likert score",
+    "bbox": [
+      208.9,
+      541.4,
+      401.7,
+      692.2
+    ]
+  },
+  {
+    "file": "p058_f21.png",
+    "page": 58,
+    "kind": "picture",
+    "caption": "Figure 38: Human evaluation metrics as a function of learning rates.",
+    "width": 684,
+    "height": 420,
+    "description": "## Figure Description\nThis figure presents a series of line graphs comparing human evaluation metrics against different learning rates for various model sizes. Each graph shows two lines: one for \"Pretrain mix\" and another for \"No pretrain mix.\" The metrics include Likert scores and win rates against a 175B model. The learning rates range from 0.5e-5 to 3.75e-6. The \"Pretrain mix\" line is generally higher than the \"No pretrain mix\" line across all graphs.\n\n## Visible Text\n1.3B, 6B, 175B, Pretrain mix, No pretrain mix, Likert, Learning rate, Win rates against, 175b SFT, 0.5e-5, 1e-5, 1.5e-5, 2e-5, 2.5e-5, 2.50e-6, 2.75e-6, 3e-6, 3.25e-6, 3.50e-6, 3.75e-6, 3.5, 4, 4.5, 5, 0.5, 0.6, 0.7, 0.8",
+    "pdf_text": "3.5 | 4 | 4.5 | 5 | 1.3B | Pretrain mix | No pretrain mix | 6B | 175B | Likert | 0.5e-5 | 1e-5 | 1.5e-5 | 2e-5 | 2.5e-5 | 0.5 | 0.6 | 0.7 | 0.8 | 0.5e-5 | 1e-5 | 1.5e-5 | 2e-5 | 2.5e-5 | 2.50e-6 | 2.75e-6 | 3e-6 | 3.25e-6 | 3.50e-6 | 3.75e-6 | Learning rate | Win rates against | 175b SFT",
+    "bbox": [
+      130.2,
+      74.2,
+      472.2,
+      284.1
+    ]
+  },
+  {
+    "file": "p059_f22.png",
+    "page": 59,
+    "kind": "picture",
+    "caption": "Figure 39: Toxicity scores on RealToxicityPrompts as a function of input prompt toxicity. PPO instruction-following models generally create less toxic output than the non-instruction-following models, but only when instructed to be respectful. When instructed to be biased, these same models will reliably output very toxic content even at low input prompt toxicity.",
+    "width": 782,
+    "height": 854,
+    "description": "## Figure description\nThis figure contains six line plots, each showing the relationship between input prompt toxicity and output toxicity. The plots are grouped into three pairs, each pair representing a different model size (1.3B, 6B, 175B) and prompt type (Biased, No prompt, Respectful). Each plot has four lines, representing different model types: PPO-ptx, PPO, SFT, GPT. The y-axis represents output toxicity, and the x-axis represents prompt toxicity.\n\n## Visible text\n1.3B, 6B, 175B, Biased prompt, PPO-ptx, PPO, SFT, GPT, No prompt, Respectful prompt, Output toxicity, Prompt toxicity, 0.25, 0.50, 0.75, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35",
+    "pdf_text": "0.25 | 0.50 | 0.75 | 0.2 | 0.3 | 0.4 | 0.5 | Output toxicity | 175B | Biased prompt | PPO-ptx | PPO | SFT | GPT | 0.25 | 0.50 | 0.75 | 0.1 | 0.2 | 0.3 | 0.4 | 175B | No prompt | 0.25 | 0.50 | 0.75 | 0.1 | 0.2 | 0.3 | 175B | Respectful prompt | 0.25 | 0.50 | 0.75 | 0.1 | 0.2 | 0.3 | 0.4 | 0.5 | 0.6 | 6B | Biased prompt | 0.25 | 0.50 | 0.75 | 0.1 | 0.2 | 0.3 | 0.4 | 6B | No prompt | 0.25 | 0.50 | 0.75 | 0.1 | 0.2 | 0.3 | 6B | Respectful prompt | 0.25 | 0.50 | 0.75 | 0.2 | 0.3 | 0.4 | 1.3B | Biased prompt | 0.25 | 0.50 | 0.75 | 0.1 | 0.2 | 0.3 | 0.4 | 1.3B | No prompt | 0.25 | 0.50 | 0.75 | Prompt toxicity | 0.10 | 0.15 | 0.20 | 0.25 | 0.30 | 0.35 | 1.3B | Respectful prompt",
+    "bbox": [
+      110.5,
+      169.7,
+      501.5,
+      596.4
+    ]
+  },
+  {
+    "file": "p060_f23.png",
+    "page": 60,
+    "kind": "picture",
+    "caption": "Figure 40: Continuity and relative toxicity ratings for the RealToxicityPrompts experiment.",
+    "width": 763,
+    "height": 377,
+    "description": "## Description:\nThe figure contains two bar charts, each representing different metrics for two prompts: \"no_prompt\" and \"respectful_prompt\". The left chart shows \"Continuity\" scores, with \"respectful_prompt\" having the highest score at 6, followed by \"no_prompt\" at 5. The right chart displays \"Relative toxicity\" scores, where \"no_prompt\" has the highest toxicity at 0, followed by \"respectful_prompt\" at -0.2. The series are labeled as \"Model\" with sub-series \"GPT\", \"SFT\", and \"PPO-ptx\".\n\n## Text in figure:\nContinuity: no_prompt 5, respectful_prompt 6\nRelative toxicity: no_prompt 0, respectful_prompt -0.2\nModel: GPT, SFT, PPO-ptx\nPrompt: no_prompt, respectful_prompt\nToxicity\nContinuity\nModel\n0\n0.1\n0.2\n0.3\nRelative toxicity",
+    "pdf_text": "no_prompt | respectful_prompt | 0 | 2 | 4 | 6 | Toxicity | Continuity | Model | GPT | SFT | PPO-ptx | no_prompt | respectful_prompt | Prompt | 0.3 | 0.2 | 0.1 | 0 | Relative toxicity",
+    "bbox": [
+      110.8,
+      74.5,
+      492.7,
+      262.9
+    ]
+  },
+  {
+    "file": "p060_f24.png",
+    "page": 60,
+    "kind": "picture",
+    "caption": "Figure 41: Win rates of PPO-ptx and SFT against 175B GPT-3 in RealToxicityPrompts.",
+    "width": 454,
+    "height": 263,
+    "description": "Description: The figure is a bar chart comparing the win rates of two models, PPO-ptx and SFT, against 175B GPT-3 in RealToxicityPrompts. The chart shows two conditions: \"No prompt\" and \"Respectful prompt.\" For \"No prompt,\" PPO-ptx has a win rate of approximately 0.5, while SFT has a win rate of approximately 0.5. For \"Respectful prompt,\" PPO-ptx has a win rate of approximately 0.6, while SFT has a win rate of approximately 0.3.\n\nText in figure: No prompt | Respectful prompt | 0 | 0.2 | 0.4 | 0.6 | Win rate against 175B GPT | Model | PPO-ptx | SFT",
+    "pdf_text": "No prompt | Respectful prompt | 0 | 0.2 | 0.4 | 0.6 | Win rate against 175B GPT | Model | PPO-ptx | SFT",
+    "bbox": [
+      189.2,
+      297.8,
+      416.1,
+      429.3
+    ]
+  }
+]

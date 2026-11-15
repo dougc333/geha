@@ -1,0 +1,101 @@
+[
+  {
+    "file": "p004_f01.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 1. Overview of our approach. A sequence-to-sequence Transformer model is trained on many different speech processing tasks, including multilingual speech recognition, speech translation, spoken language identification, and voice activity detection. All of these tasks are jointly represented as a sequence of tokens to be predicted by the decoder, allowing for a single model to replace many different stages of a traditional speech processing pipeline. The multitask training format uses a set of special tokens that serve as task specifiers or classification targets, as further explained in Section 2.3.",
+    "width": 973,
+    "height": 722,
+    "description": "Figure type: Diagram\nDescription: The figure is a diagram showing the multitask training approach for a sequence-to-sequence Transformer model. It illustrates the training on various speech processing tasks, including multilingual speech recognition, speech translation, spoken language identification, and voice activity detection. The model uses a sequence of tokens to represent all tasks, enabling a single model to replace multiple stages of a traditional pipeline. Special tokens are used for task specification and classification targets.\n\nText in figure: Multitask training data, English transcription, Any-to-English speech translation, Non-English transcription, No speech, Sequence-to-sequence learning, Transformer Encoder Blocks, Sinusoidal Positional Encoding, Log-Mel Spectrogram, Multitask training format, Language identification, Transcription, START OF TRANSCRIPT, NO SPEECH, TRANSLATE, begin time, end time, text tokens, Tokens in Multitask Training Format, EOT, special tokens, text tokens, timestamp tokens, Voice activity detection, Text-only transcription, X \u2192 English Translation, VAD."
+  },
+  {
+    "file": "p006_f02.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 2. Zero-shot Whisper models close the gap to human robustness. Despite matching or outperforming a human on LibriSpeech dev-clean, supervised LibriSpeech models make roughly twice as many errors as a human on other datasets demonstrating their brittleness and lack of robustness. The estimated robustness frontier of zero-shot Whisper models, however, includes the 95% confidence interval for this particular human.",
+    "width": 453,
+    "height": 439,
+    "description": "Description: This figure is a scatter plot comparing the average Word Error Rate (WER) on Common Voice datasets to the WER on LibriSpeech dev-clean datasets for different models. The highest series is the \"Supervised LibriSpeech models\" with a WER of around 50% on Common Voice and 0% on LibriSpeech. The lowest series is the \"Zero-shot Whisper models\" with a WER of around 25% on Common Voice and 0% on LibriSpeech. The \"Zero-shot Human (Alec)\" is represented by a single point with a WER of around 15% on both datasets. The \"Ideal robustness (y = x)\" is a line indicating the ideal relationship between the two WERs.\n\nText in figure: Supervised LibriSpeech models, Zero-shot Whisper models, Zero-shot Human (Alec), Ideal robustness (y = x), Average WER on [Common Voice, TED-LIUM] (%), WER on LibriSpeech dev-clean (%), 0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 20, 30, 40, 50."
+  },
+  {
+    "file": "p007_f03.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 3. Correlation of pre-training supervision amount with downstream speech recognition performance. The amount of pre-training speech recognition data for a given language is very predictive of zero-shot performance on that language in Fleurs.",
+    "width": 455,
+    "height": 428,
+    "description": "Description: This scatter plot shows the correlation between the amount of pre-training data and the word error rate (WER) in speech recognition. The x-axis represents the hours of transcribed audio, ranging from 0.1 to 1 million hours. The y-axis represents the WER, ranging from 2.5 to 160. Each point represents a different language, labeled with a two-letter code. The trend line indicates a strong negative correlation, with an \\( r^2 \\) value of 0.83.\n\nText in figure: Hours of transcribed audio, Word Error Rate (WER), \\( r^2 = 0.83 \\), LO, GU, KA, PA, BN, TE, UZ, ML, KM, TG, MT, NE, RE, HY, MR, KN, SW, AF, KK, IS, SR, FA, HI, SL, LV, UR, AZ, IT, ET, MK, TA, HU, GL, BS, BG, RO, AR, KD, ZH, FIL, HR, CS, DA, EL, SK, TH, VI, NB, MS, UK, FI, SV, TR, FR, ID, CA, NL, PL, JA, RU, PT, DE, IT, ES, EN."
+  },
+  {
+    "file": "p007_f04.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 4. Correlation of pre-training supervision amount with downstream translation performance. The amount of pretraining translation data for a given language is only moderately predictive of Whisper's zero-shot performance on that language in Fleurs.",
+    "width": 456,
+    "height": 424,
+    "description": "Figure 4: Scatter plot showing the correlation between the amount of pre-training supervision and downstream translation performance. The x-axis represents the hours of translated audio, ranging from 1 to 100K. The y-axis represents the BLEU score, ranging from 0 to 40. The data points are labeled with country codes. The trend line indicates a moderate positive correlation, with an r-squared value of 0.24.\n\nFigure text: BLEU, Hours of translated audio, r2 = 0.24, country codes (e.g., CA, DE, FR, etc.)."
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 5. WERonLibriSpeech test-clean as a function of SNR under additive white noise (left) and pub noise (right). The accuracy of LibriSpeech-trained models degrade faster than the best Whisper model ( \u22c6 ). NVIDIA STT models ( \u00b7 ) perform best under low noise but are outperformed by Whisper under high noise (SNR < 10 dB). The second-best model under low noise ( \u25bc ) is fine-tuned on LibriSpeech only and degrades even more quickly.",
+    "width": 461,
+    "height": 449,
+    "description": "## Description\nThis figure contains two plots showing Word Error Rate (WER) on LibriSpeech test-clean as a function of Signal-to-Noise Ratio (SNR) under white noise and pub noise. The plots compare various models, with the Whisper model (red stars) performing best under high noise. The plots show that LibriSpeech-trained models degrade faster than Whisper, especially at low SNRs. The highest performing model under low noise is marked with a blue triangle (wav2vec2-large-robust-ft-libri-960h), while the second-best model under low noise (wav2vec2-large-960h-lv60-self) is marked with a blue diamond.\n\n## Text in figure\n- White noise plot: \"white noise\", \"WERonLibriSpeech test-clean (%)\"\n- Pub noise plot: \"pub noise\", \"WERonLibriSpeech test-clean (%)\"\n- Legend labels: \"unispeech-sat-base-100h-libri-ft\", \"hubert-large-ls960-ft\", \"hubert-xlarge-ls960-ft\", \"s2t-medium-librispeech-asr\", \"s2t-large-librispeech-asr\", \"stt_en_conformer_ctc_large\", \"stt_en_conformer_transducer_xlarge\", \"asr-crdn-rnnlm-librispeech\", \"asr-transformer-transformerlm-librispeech\", \"Whisper (red stars)\", \"wav2vec2-large-960h-lv60-self (blue diamond)\"\n- Axis labels: \"signal-to-noise ratio (dB)\""
+  },
+  {
+    "file": "p009_f06.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 6. Whisper is competitive with state-of-the-art commercial and open-source ASR systems in long-form transcription. The distribution of word error rates from six ASR systems on seven long-form datasets are compared, where the input lengths range from a few minutes to a few hours. The boxes show the quartiles of per-example WERs, and the per-dataset aggregate WERs are annotated on each box. Our model outperforms the best open source model (NVIDIA STT) on all datasets, and in most cases, commercial ASR systems as well.",
+    "width": 968,
+    "height": 386,
+    "description": "## Description\n\nThis figure is a box plot comparing the word error rates (WER) of six Automatic Speech Recognition (ASR) systems across seven long-form datasets. The systems include Whisper, Company A, Company B, Company C, Company D, and NVIDIA STT (CTC large). The datasets range from a few minutes to a few hours in length. The boxes represent the quartiles of per-example WERs, with aggregate WERs annotated on each box. Whisper outperforms the best open-source model, NVIDIA STT, on all datasets and often outperforms commercial ASR systems.\n\n## Text in figure\n\nWhisper, Company A, Company B, Company C, Company D, NVIDIA STT (CTC large), WER, %, 3.52, 6.23, 6.78, 4.81, 5.02, 4.00, 5.09, 8.23, 9.31, 10.79, 8.80, 10.29, 9.94, 11.5, 12.5, 13.1, 11.3, 11.5, 10.9, 13.9, 14.5, 9.72, 9.94, 12.6, 12.6, 12.6, 12.6, 13.5, 13.7, 15.4, 17.0, 17.6, 13.5, 13.7, 15.4, 17.0, 17.6, 21.7, 30.0, 24.5, 25.1, 14.6"
+  },
+  {
+    "file": "p010_f07.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 7. Whisper's performance is close to that of professional human transcribers. This plot shows the WER distributions of 25 recordings from the Kincaid46 dataset transcribed by Whisper, the same 4 commercial ASR systems from Figure 6 (A-D), one computer-assisted human transcription service (E) and 4 human transcription services (F-I). The box plot is superimposed with dots indicating the WERs on individual recordings, and the aggregate WER over the 25 recordings are annotated on each box.",
+    "width": 459,
+    "height": 276,
+    "description": "## Index Section 1: Figure Description\nThis figure is a box plot comparing the Word Error Rate (WER) distributions of various transcription methods. It includes Whisper, four commercial ASR systems (A-D), one computer-assisted human transcription service (E), and four human transcription services (F-I). The box plots show the central tendency and variability of WERs across 25 recordings from the Kincaid46 dataset. Individual WERs are indicated by dots, and aggregate WERs are annotated on each box.\n\n## Index Section 2: Figure Content\nWhisper, ASR systems (A-D), computer-assisted human transcription (E), human transcription services (F-I); WER distributions; box plots; individual WERs; aggregate WERs; Whisper: 8.81%, A: 9.66%, B: 9.74%, C: 10.9%, D: 12.2%, E: 7.61%, F: 8.14%, G: 8.65%, H: 8.96%, I: 10.5%."
+  },
+  {
+    "file": "p011_f08.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 8. Zero-shot Whisper performance scales reliably across tasks and languages with increasing model size. Lightly shaded lines represent individual datasets or languages, showing that performance is more varied than the smooth trends in aggregate performance. Large V2 distinguished with a dashed orange line since it includes several changes that are not present for the smaller models in this analysis.",
+    "width": 965,
+    "height": 264,
+    "description": "## Index Section 1\nFigure: Four line graphs showing performance scaling with model size across different tasks. Tasks include English Speech Recognition, Multilingual Speech Recognition, X->En Translation, and Language Identification. Each graph plots performance metrics against model parameters. The \"Average\" series is represented by a solid blue line, and the \"Large V2\" series is represented by a dashed orange line. The \"Average\" series is generally higher than \"Large V2\" across all tasks, with the largest difference observed in the English Speech Recognition task.\n\n## Index Section 2\nText in figure: \"English Speech Recognition\", \"Multilingual Speech Recognition (Fleur)\", \"X->En Translation (CoVoST2)\", \"Language Identification (Fleur)\", \"Average\", \"Large V2\", \"WER on 12 languages (%)\", \"WER on 67 languages (%)\", \"BLEU on 21 languages\", \"Accuracy on 102 languages (%)\", \"Model parameters\", \"38M\", \"73M\", \"244M\", \"768M\", \"1549M\"."
+  },
+  {
+    "file": "p012_f09.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 9. Multitask and multilingual transfer improves with scale. For small models, performance on English speech recognition degrades when trained jointly in a multitask and multilingual setup. However, multilingual and multitask models benefit more from scale and eventually outperform models trained on English data only. 95% bootstrap estimate confidence intervals are shown.",
+    "width": 454,
+    "height": 435,
+    "description": "Description: This figure is a line graph comparing the average Word Error Rate (WER) on 11 English speech recognition datasets for models trained on English only versus multilingual and multitask datasets. The x-axis represents the FLOPs training on English speech recognition, and the y-axis represents the average WER. The English Only series starts higher and decreases, while the Multilingual and Multitask series starts lower and increases. The Multilingual and Multitask series eventually surpasses the English Only series.\n\nText in figure: English Only, Multilingual and Multitask, Average WER on 11 English speech recognition datasets, FLOPs training on English speech recognition, 10e+19, 10e+20, 10e+21, 10e+22."
+  },
+  {
+    "file": "p012_f10.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "",
+    "width": 453,
+    "height": 385,
+    "description": "This figure is a horizontal bar chart comparing the performance of open-source and Whisper models across various datasets. The datasets are listed on the y-axis, and the performance is measured on the x-axis. The open-source models are represented by blue bars, while the Whisper models are represented by orange bars. The highest performing open-source model is on the LibriSpeech dataset, and the lowest is on the CallHome dataset. The highest performing Whisper model is on the LibriSpeech dataset, and the lowest is on the CallHome dataset.\n\nDatasets: CORAAL, CommonVoice9.en, AMI-SDM1, CommonVoice5.1, Fleurs.en_us, AMI-IHM, Artie, LibriSpeech, TED-LIUM3, VoxPopuli.en, WSJ, CallHome, Switchboard. Open-source models, Whisper models."
+  },
+  {
+    "file": "p027_f11.png",
+    "page": 27,
+    "kind": "picture",
+    "caption": "Figure 11. Training dataset statistics",
+    "width": 958,
+    "height": 958,
+    "description": "This figure is a bar chart showing the distribution of hours of audio across different languages and tasks. The chart is divided into three sections: Multilingual Speech Recognition, Dataset Components, and Translation. The Multilingual Speech Recognition section shows the hours of audio for various languages, with Chinese having the highest number of hours (234,464) and Lao having the lowest (0.1). The Dataset Components section shows the breakdown of hours of audio for different tasks, with English Speech Recognition having the highest number of hours (1438,218) and Luxembourgish having the lowest (1). The Translation section shows the hours of audio for different languages, with Korean having the highest number of hours (117,331) and Turkmen having the lowest (1).\n\nDescription: at most 120 words. What is the main point of the figure? What would be lost if this figure were not in the paper. If the figure contains multiple series, how do they contribute to the main point? Are there underlying assumptions? Are there any anomalies or observations that are important?\n\nText in figure: the words and printed values, grouped by panel or chart (for example\n\"YOLO: Correct 65.5%, Loc 19.0%\"): block and layer names, legend entries, axis titles,\nlabels on arrows, example inputs, values printed on bars or slices. Leave out axis tick\nnumbers. At most 80 items.\n\nThe main point of this figure is to show the distribution of hours of audio across different languages and tasks in the training dataset. Without this figure, the reader would not have a clear understanding of the diversity and balance of the dataset. The Multilingual Speech Recognition section shows the hours of audio for various languages, which is important for understanding the dataset's coverage of different languages. The Dataset Components section shows the breakdown of hours of audio for different tasks, which is important for understanding the dataset's balance between different tasks. The Translation section shows the hours of audio for different languages, which is important for understanding the dataset's coverage of different languages for translation tasks. The figure also highlights the imbalance in the dataset, with English Speech Recognition having the highest number of hours and many languages having very few hours of audio."
+  }
+]

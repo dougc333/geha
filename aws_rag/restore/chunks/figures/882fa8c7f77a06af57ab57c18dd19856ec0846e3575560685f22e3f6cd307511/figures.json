@@ -1,0 +1,101 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "",
+    "width": 331,
+    "height": 251,
+    "description": "## Index Section 1: Figure Description\nThis figure illustrates the process of a Spatial Transformer Network (STN) applied to digit recognition. It shows the transformation of input images through various stages, highlighting the localization and normalization of digits.\n\n## Index Section 2: Figure Content\nText in figure: \"7\", \"5\", \"6\". Panels: (a) Original images, (b) Localized and normalized images, (c) Further processed images, (d) Final recognized digits."
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "",
+    "width": 591,
+    "height": 227,
+    "description": "## Section 1: Figure Description\nThis figure is a schematic representation of a Spatial Transformer Network (STN) architecture. It shows the flow of data through various components, including the Localisation net, Grid generator, Sampler, and Spatial Transformer. The input 'U' is processed by the Localisation net to produce parameters \u03b8, which are then used by the Grid generator to create a grid G. This grid is sampled by the Sampler to produce the transformed output 'V'.\n\n## Section 2: Figure Elements\nText in figure: Localisation net, Grid generator, Sampler, Spatial Transformer, U, V, \u03b8, T\u03b8(G). Arrows indicate the flow of data from the input 'U' through the Localisation net to the Grid generator, then to the Sampler, and finally to the output 'V'. The Localisation net outputs parameters \u03b8, which are used by the Grid generator to create a grid G. The Sampler uses T\u03b8(G) to produce the transformed output 'V'."
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3: Two examples of applying the parameterised sampling grid to an image U producing the output V . (a) The sampling grid is the regular grid G = T I ( G ) , where I is the identity transformation parameters. (b) The sampling grid is the result of warping the regular grid with an affine transformation T \u03b8 ( G ) .",
+    "width": 586,
+    "height": 252,
+    "description": "This figure is a visual representation of the Spatial Transformer Networks (STN) concept, showing how a regular grid is transformed into a warped grid. Panel (a) displays the regular grid G = T I ( G ), where I is the identity transformation parameters, applied to an image U, resulting in the output V. Panel (b) shows the warped grid T \u03b8 ( G ), which is the result of applying an affine transformation T \u03b8 to the regular grid G.\n\nText in figure:\n- Panel (a): T i ( G ), U, V\n- Panel (b): T \u03b8 ( G ), U, V"
+  },
+  {
+    "file": "p006_f04.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Table 1: Left: The percentage errors for different models on different distorted MNIST datasets. The different distorted MNIST datasets we test are TC: translated and cluttered, R: rotated, RTS: rotated, translated, and scaled, P: projective distortion, E: elastic distortion. All the models used for each experiment have the same number of parameters, and same base structure for all experiments. Right: Some example test images where a spatial transformer network correctly classifies the digit but a CNN fails. (a) The inputs to the networks. (b) The transformations predicted by the spatial transformers, visualised by the grid T \u03b8 ( G ) . (c) The outputs of the spatial transformers. E and RTS examples use thin plate spline spatial transformers (ST-CNN TPS), while R examples use affine spatial transformers (ST-CNN Aff) with the angles of the affine transformations given. For videos showing animations of these experiments and more see https://goo.gl/qdEhUu .",
+    "width": 774,
+    "height": 220,
+    "description": "This figure is a combination of a table and images, showing the performance of various models on distorted MNIST datasets and examples of spatial transformer networks correcting digit classification errors. The table lists different models and their performance metrics on various distorted datasets. The images demonstrate how spatial transformer networks can correct classification errors made by CNNs on distorted images.\n\nText in figure:\n\nTable:\n\n- Models: FCN, CNN, Aff, ST-FCN Proj, Aff, ST-CNN Proj, TPS\n- Distortion types: TC, R, RTS, P, E\n- Performance metrics: R, RTS, P, I\n\nImages:\n\n- (a) Input images\n- (b) Transformations predicted by spatial transformers\n- (c) Outputs of spatial transformers\n- Distortion types: E, RTS, R\n- Transformation types: Thin plate spline (ST-CNN TPS), Affine (ST-CNN Aff)"
+  },
+  {
+    "file": "p007_f05.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "",
+    "width": 759,
+    "height": 167,
+    "description": "Figure type: Diagram with visual examples.\n\nDescription: The figure shows a diagram of a Spatial Transformer Network (STN) architecture and visual examples of its application. The STN architecture is depicted with input images, intermediate feature maps, and output images. The visual examples demonstrate the network's ability to transform and localize specific regions of interest in the input images.\n\nText in figure: Model, Size, 64px, 12, Maxout CNN [13], 4.0, CNN (ours), 4.0, DRAM [1], 3.9, ST-CNN Single, 3.7, ST-CNN Multi, 3.6, 260, 260, 104, 104, 24, 24"
+  },
+  {
+    "file": "p008_f06.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Table 3: Left: The accuracy on CUB-200-2011 bird classification dataset. Spatial transformer networks with two spatial transformers ( 2 \u00d7 ST-CNN) and four spatial transformers ( 4 \u00d7 ST-CNN) in parallel achieve higher accuracy. 448px resolution images can be used with the ST-CNN without an increase in computational cost due to downsampling to 224px after the transformers. Right: The transformation predicted by the spatial transformers of 2 \u00d7 ST-CNN (top row) and 4 \u00d7 ST-CNN (bottom row) on the input image. Notably for the 2 \u00d7 ST-CNN, one of the transformers (shown in red) learns to detect heads, while the other (shown in green) detects the body, and similarly for the 4 \u00d7 ST-CNN.",
+    "width": 788,
+    "height": 221,
+    "description": "This figure is a table showing the accuracy of various models on the CUB-200-2011 bird classification dataset. The models include Cimpoi '15, Zhang '14, Branson '14, Lin '15, Simon '15, and CNN (ours) with different resolutions. The table shows the accuracy of each model, with the highest accuracy being 88% for the 4xST-CNN 448px model. The figure also shows the transformation predicted by the spatial transformers of 2xST-CNN and 4xST-CNN on the input image.\n\nText in figure: Model, Cimpoi '15, Zhang '14, Branson '14, Lin '15, Simon '15, CNN (ours) 224px, 2xST-CNN 224px, 2xST-CNN 448px, 4xST-CNN 448px, Accuracy, 6, 7, 7, 8, 8, 8, 8, 8, 8."
+  },
+  {
+    "file": "p011_f07.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Table 4: Left: The percentage error for the two digit MNIST addition task, where each digit is transformed independently in separate channels, trained by supplying only the label of the sum of the two digits. The use of two spatial transformers in parallel, 2 \u00d7 ST-FCN, allows the fully-connected neural network to become invariant to the transformations of each digit, giving the lowest error. All the models used for each column have approximately the same number of parameters. Right: A test example showing the learnt behaviour of each spatial transformer (using a thin plate spline (TPS) transformation). The 2-channel input (the blue bar denotes separation between channels) is fed to two independent spatial transformers, ST1 and ST2, each of which operate on both channels. The outputs of ST1 and ST2 and concatenated and used as a 4-channel input to a fully connected network (FCN) which predicts the addition of the two original digits. During training, the two spatial transformers co-adapt to focus on a single channel each.",
+    "width": 765,
+    "height": 259,
+    "description": "## Description\nThis figure is a diagram illustrating the process of a Spatial Transformer Network (STN) applied to a two-digit addition task on the MNIST dataset. It shows how two separate spatial transformers (ST1 and ST2) are used to transform each digit independently before they are concatenated and fed into a fully connected network (FCN) for prediction. The diagram includes the input, the transformations applied by ST1 and ST2, the concatenated output, and the final prediction by the FCN.\n\n## Text in figure\n- FCN\n- ST1\n- ST2\n- Input\n- ST1 out\n- ST2 out\n- Concatenated\n- FCN\n- 13\n- 2x!"
+  },
+  {
+    "file": "p011_f08.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Table 5: Left: The percent of correctly co-localised digits for different MNIST digit classes, for just translated digits (T), and for translated digits with clutter added (TC). Right: The optimisation architecture. We use a hinge loss to enforce the distance between the two outputs of the spatial transformer (ST) to be less than the distance to a random crop, hoping to encourage the spatial transformer to localise the common objects.",
+    "width": 737,
+    "height": 242,
+    "description": "Figure: A diagram showing the optimization architecture for spatial transformer networks.\nIt includes a table showing the percentage of correctly localized digits for different\nMNIST digit classes, for translated digits (T) and translated digits with clutter added (TC).\nThe diagram on the right illustrates the use of a hinge loss to enforce the distance between\ntwo outputs of the spatial transformer to be less than the distance to a random crop.\n\nText in figure: \"Class\", \"MNIST T\", \"T\", \"TC\", \"ST\", \"I_m\", \"I_n\", \"rand\", \"e()\", \"e(I_m)\",\n\"e(I_n)\", \"e(I_rand)\", \"small distance\", \"large distance\""
+  },
+  {
+    "file": "p012_f09.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 4: A look at the optimisation dynamics for co-localisation. Here we show the localisation predicted by the spatial transformer for three of the 100 dataset images after the SGD step labelled below. By SGD step 180 the model has process has correctly localised the three digits. A full animation is shown in the video https://goo.gl/qdEhUu",
+    "width": 625,
+    "height": 268,
+    "description": "Description: The figure displays a sequence of images showing the optimization dynamics of a spatial transformer network for digit localization. Each image represents a step in the optimization process, with the number of steps indicated below each image. The images show the predicted localization of digits in a dataset, with the digits becoming more accurately localized as the optimization progresses.\n\nText in figure: Step 0, Step 10, Step 60, Step 90, Step 120, Step 150, Step 180, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,"
+  },
+  {
+    "file": "p013_f10.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 5: The behaviour of a trained 3D MNIST classifier on a test example. The 3D voxel input contains a random MNIST digit which has been extruded and randomly placed inside a 60 \u00d7 60 \u00d7 60 volume. A 3D spatial transformer performs a transformation of the input, producing an output volume whose depth is then flattened. This creates a 2D projection of the 3D space, which the subsequent layers of the network are able to classify. The whole network is trained end-to-end with just classification labels.",
+    "width": 621,
+    "height": 350,
+    "description": "## Description\nThis figure illustrates the process of a 3D MNIST classifier using a 3D voxel input. It shows a 3D spatial transformer applying a transformation to the input, resulting in a 2D projection that is then classified by the network.\n\n## Text in figure\n3D transformation applied, 3D voxel input, 2D projection, 6"
+  },
+  {
+    "file": "p015_f11.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 6: The architecture of the 2 \u00d7 ST-CNN 448px used for bird classification. A single localisation network f loc predicts two transformation parameters \u03b8 1 and \u03b8 2 , with the subsequent transforms T \u03b8 1 and T \u03b8 2 applied to the original input image.",
+    "width": 632,
+    "height": 166,
+    "description": "## Description\nThis figure is a diagram showing the architecture of a 2 \u00d7 ST-CNN 448px model used for bird classification. It depicts a single localization network that predicts two transformation parameters, \u03b81 and \u03b82, which are then applied to the original input image through transformations T\u03b81 and T\u03b82. The input image is a 448px bird image, and the output images are 224px bird images processed by two Inception networks.\n\n## Text in figure\n- 448px\n- f_loc()\n- \u03b81\n- T\u03b81(G)\n- \u03b82\n- T\u03b82(G)\n- 224px\n- Inception1\n- 1k\n- 200\n- 224px\n- Inception2\n- 1k"
+  }
+]

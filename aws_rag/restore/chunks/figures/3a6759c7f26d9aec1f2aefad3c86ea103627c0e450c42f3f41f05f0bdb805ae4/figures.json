@@ -1,0 +1,74 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1. Atrous convolution with kernel size 3 \u00d7 3 and different rates. Standard convolution corresponds to atrous convolution with rate = 1 . Employing large value of atrous rate enlarges the model's field-of-view, enabling object encoding at multiple scales.",
+    "width": 455,
+    "height": 216,
+    "description": "This figure is a diagram illustrating the concept of atrous convolution in image segmentation. It shows three panels, each representing a feature map with different atrous rates. The left panel has a rate of 1, the middle panel a rate of 6, and the right panel a rate of 24. Each panel displays a 3x3 kernel applied to the feature map, with the rate determining the size of the receptive field.\n\nText in figure: Conv kernel: 3x3, rate: 1, Feature map, rate = 1, Conv kernel: 3x3, rate: 6, Feature map, rate = 6, Conv kernel: 3x3, rate: 24, Feature map, rate = 24."
+  },
+  {
+    "file": "p002_f02.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "",
+    "width": 992,
+    "height": 267,
+    "description": "## Index Section 1\nFigure type: Diagram\nContent: The figure illustrates four different architectures for capturing multi-scale context in image processing. It includes: (a) Image Pyramid, (b) Encoder-Decoder, (c) Deeper w. Atrous Convolution, and (d) Spatial Pyramid Pooling. Each architecture shows how images are processed at different scales and resolutions.\n\n## Index Section 2\nText in figure: Image Pyramid, Encoder-Decoder, Deeper w. Atrous Convolution, Spatial Pyramid Pooling, Merge, 2x up, Small Resolution, Atrous Convolution, Spatial Pyramid Pooling, Image Scale 1, Image Scale 2, Image"
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "(b) Going deeper with atrous convolution. Atrous convolution with rate > 1 is applied after block3 when output stride = 16 . Figure 3. Cascaded modules without and with atrous convolution.",
+    "width": 941,
+    "height": 308,
+    "description": "## Index Section 1\nThis figure compares two methods of increasing network depth in convolutional neural networks for image segmentation. The top panel (a) shows a network that increases depth without atrous convolution, resulting in a significant reduction in output stride. The bottom panel (b) demonstrates the use of atrous convolution to maintain a higher output stride while increasing depth, as indicated by the \"rate\" labels on the blocks.\n\n## Index Section 2\nText in figure: \"Conv1\", \"Pool1\", \"Block1\" to \"Block7\", \"output stride\", \"rate=2\", \"rate=4\", \"rate=8\", \"rate=16\", \"Image\", \"Going deeper without atrous convolution\", \"Going deeper with atrous convolution\", \"Figure 3. Cascaded modules without and with atrous convolution\"."
+  },
+  {
+    "file": "p004_f04.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 4. Normalized counts of valid weights with a 3 \u00d7 3 fi lter on a 65 \u00d7 65 feature map as atrous rate varies. When atrous rate is small, all the 9 filter weights are applied to most of the valid region on feature map, while atrous rate gets larger, the 3 \u00d7 3 fi lter degenerates to a 1 \u00d7 1 fi lter since only the center weight is effective.",
+    "width": 327,
+    "height": 251,
+    "description": "This figure is a line plot showing the normalized counts of valid weights for a 3 \u00d7 3 filter on a 65 \u00d7 65 feature map as the atrous rate varies. The plot has three series: 1 valid weight, 4 valid weights, and 9 valid weights. The 9 valid weights series starts highest and decreases as the atrous rate increases, while the 1 valid weight series starts lowest and increases. The 4 valid weights series is in between.\n\nText in figure: Normalized count, atrous rate, 1 valid weight, 4 valid weights, 9 valid weights."
+  },
+  {
+    "file": "p005_f05.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 5. Parallel modules with atrous convolution (ASPP), augmented with image-level features.",
+    "width": 942,
+    "height": 232,
+    "description": "## Figure Description\nThis figure illustrates two parallel modules for semantic image segmentation: Atrous Spatial Pyramid Pooling (ASPP) and Image Pooling. The ASPP module uses 1x1, 3x3 convolutions with varying rates to capture multi-scale features. The Image Pooling module aggregates global image features. Both modules are combined to enhance feature extraction.\n\n## Figure Details\n- **ASPP Module**: 1x1 Conv (rate=1), 3x3 Conv (rate=6), 3x3 Conv (rate=12), 3x3 Conv (rate=18)\n- **Image Pooling**: 1x1 Conv\n- **Concatenation**: Combines ASPP and Image Pooling outputs\n- **Output Stride**: 4, 8, 16, 16\n- **Rates**: 2, 6, 12, 18\n- **Input**: Image\n- **Output**: 16"
+  },
+  {
+    "file": "p008_f06.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 6. Visualization results on the val set when employing our best ASPP model. The last row shows a failure mode.",
+    "width": 921,
+    "height": 1198,
+    "description": "Figure: Visualization results from the ASPP model on the validation set.\nContent: Images of various subjects (motorcycles, airplanes, cats, dogs, horses, cows, people) with colored silhouettes indicating segmentation results. The last row shows a failure mode.\n\nIndex:\n- Figure type: Visualization results\n- Content: Images with colored silhouettes indicating segmentation results\n- Subjects: Motorcycles, airplanes, cats, dogs, horses, cows, people\n- Last row: Failure mode\n- Colors: Red, purple, green, pink, yellow, blue, cyan, magenta\n- Model: ASPP model\n- Dataset: Validation set"
+  },
+  {
+    "file": "p009_f07.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 7. Bootstrapping on hard images improves segmentation accuracy for rare and finely annotated classes such as bicycle.",
+    "width": 491,
+    "height": 185,
+    "description": "Figure type: Image segmentation results comparison.\nDescription: The figure displays four panels comparing different segmentation methods on bicycle images. Panel (a) shows the original images, while panels (b), (c), and (d) show the segmentation results using different methods. Panel (b) uses Ground Truth (G.T.), panel (c) uses a method without bootstrapping, and panel (d) uses a method with bootstrapping.\n\nText in figure: Image, G.T., w/o bootstrapping, w/ bootstrapping."
+  },
+  {
+    "file": "p011_f08.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 8. Visualization results on Cityscapes val set when training with only train fine set.",
+    "width": 941,
+    "height": 1206,
+    "description": "Description: The figure displays a series of visualization results from semantic image segmentation on the Cityscapes validation set. Each row shows a pair of images: the left is the original scene, and the right is the segmented output. The segmentation highlights different objects in various colors, such as red for pedestrians, blue for cars, and green for bicycles.\n\nText in figure: No specific text is visible in the figure. The images show segmentation results with different colored overlays indicating various objects."
+  }
+]

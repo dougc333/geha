@@ -1,0 +1,20 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 1: Training loss over train tokens for the 7B, 13B, 33B, and 65 models. LLaMA-33B and LLaMA65B were trained on 1.4T tokens. The smaller models were trained on 1.0T tokens. All models are trained with a batch size of 4M tokens.",
+    "width": 423,
+    "height": 286,
+    "description": "Figure 1: A line graph showing training loss over training tokens for LLaMA models of different sizes. The series for LLaMA 7B starts highest, followed by LLaMA 13B, LLaMA 33B, and LLaMA 65B. The LLaMA 7B series ends at approximately 1.8, while LLaMA 65B ends at around 1.6. The x-axis represents the number of billion tokens, ranging from 0 to 1400.\n\nText in figure: LLaMA 7B, LLaMA 13B, LLaMA 33B, LLaMA 65B, Training loss, Billion of tokens.\n\nDescription: at most 120 words.\n\nFigure 1 displays a line graph illustrating the training loss of various LLaMA models over the number of training tokens. The graph includes four series, each representing a different model size: LLaMA 7B, LLaMA 13B, LLaMA 33B, and LLaMA 65B. The LLaMA 7B series starts at the highest point and ends at approximately 1.8, while the LLaMA 65B series starts lowest and ends at around 1.6. The x-axis indicates the number of billion tokens, ranging from 0 to 1400."
+  },
+  {
+    "file": "p008_f02.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 2: Evolution of performance on question answering and common sense reasoning during training.",
+    "width": 895,
+    "height": 544,
+    "description": "Figure: Six line graphs showing the evolution of performance on various question answering and common sense reasoning tasks during the training of LLaMA models. Each graph represents a different dataset: TriviaQA, HellaSwag, NaturalQuestions, SQuAD, WinoGrande, and PIQA. The x-axis represents the number of tokens processed during training, ranging from 0 to 1500 billion. The y-axis represents accuracy, ranging from 0 to 85. Each line corresponds to a different LLaMA model size, labeled as 7B, 13B, 33B, 65B, and Chinchilla.\n\nDescription: The graphs show the performance of LLaMA models of varying sizes on six different datasets. The Chinchilla model consistently achieves the highest accuracy across all datasets, followed by the 65B, 33B, 13B, and 7B models. The accuracy generally increases with the number of tokens processed, indicating that larger models benefit more from extended training."
+  }
+]

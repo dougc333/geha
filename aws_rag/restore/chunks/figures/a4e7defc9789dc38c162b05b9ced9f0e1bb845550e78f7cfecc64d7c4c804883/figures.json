@@ -1,0 +1,98 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1. Illustration of our framework. (a) FPN backbone. (b) Bottom-up path augmentation. (c) Adaptive feature pooling. (d) Box branch. (e) Fully-connected fusion. Note that we omit channel dimension of feature maps in (a) and (b) for brevity.",
+    "width": 894,
+    "height": 295,
+    "description": "## Figure Description\nThis figure illustrates the framework of the Path Aggregation Network for Instance Segmentation. It consists of five panels labeled (a) to (e), each depicting a different component of the network.\n\n- Panel (a) shows the FPN (Feature Pyramid Network) backbone, which processes input images to produce feature maps labeled P2 to P5.\n- Panel (b) demonstrates the bottom-up path augmentation, where additional paths are created from the feature maps.\n- Panel (c) illustrates the adaptive feature pooling, which combines features from different levels.\n- Panel (d) shows the box branch, which predicts bounding boxes for detected objects.\n- Panel (e) depicts the fully-connected fusion, where features are combined to produce the final output, including class labels, bounding boxes, and masks.\n\n## Index Terms\n- Path Aggregation Network\n- Instance Segmentation\n- Feature Pyramid Network (FPN)\n- Bottom-up Path Augmentation\n- Adaptive Feature Pooling\n- Box Branch\n- Fully-connected Fusion\n- Class Labels\n- Bounding Boxes\n- Masks",
+    "pdf_text": "mask | box | class | \ud835\udc432 | \ud835\udc433 | \ud835\udc434 | \ud835\udc435 | \ud835\udc415 | \ud835\udc414 | \ud835\udc413 | \ud835\udc412 | (a) | (b) | (c) | (d) | (e)",
+    "bbox": [
+      71.0,
+      71.0,
+      517.9,
+      218.5
+    ]
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2. Illustration of our building block of bottom-up path augmentation.",
+    "width": 288,
+    "height": 167,
+    "description": "Section 1: Figure description\nThis figure illustrates the building block of bottom-up path augmentation in the Path Aggregation Network for Instance Segmentation. It shows how the network processes input data through a series of layers, with the input represented by the arrow pointing to the left. The network consists of three main components: Ni, Ni+1, and Pi+1. Ni and Ni+1 are connected by an arrow pointing upwards, indicating a flow of information from Ni to Ni+1. Pi+1 is connected to both Ni and Ni+1, suggesting that it plays a role in integrating information from these two components.\n\nSection 2: Text in figure\nText in the figure includes the following labels: Ni, Ni+1, and Pi+1. These labels represent different components or layers within the network. The arrows between these components indicate the flow of information or connections between them.",
+    "pdf_text": "\ud835\udc41\ud835\udc56 | \ud835\udc41\ud835\udc56+1 | \ud835\udc43\ud835\udc56+1",
+    "bbox": [
+      95.7,
+      70.8,
+      239.7,
+      154.6
+    ]
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3. Ratio of features pooled from different feature levels with adaptive feature pooling. Each line represents a set of proposals that should be assigned to the same feature level in FPN, i.e ., proposals with similar scales. The horizontal axis denotes the source of pooled features. It shows that proposals with different sizes all exploit features from several different levels.",
+    "width": 384,
+    "height": 233,
+    "description": "Line graph showing the distribution of features pooled from different levels. Four series: level 1, level 2, level 3, level 4. Level 4 highest at 0.4, level 1 lowest at 0.1. Markers and annotations not visible.\n\nText in figure: 0, 0.1, 0.2, 0.3, 0.4, 0.5, LEVEL 1, LEVEL 2, LEVEL 3, LEVEL 4, FEATURE DISTRIBUTION, level 1, level 2, level 3, level 4",
+    "pdf_text": "0 | 0.1 | 0.2 | 0.3 | 0.4 | 0.5 | LEVEL 1 | LEVEL 2 | LEVEL 3 | LEVEL 4 | FEATURE DISTRIBUTION | level 1 | level 2 | level 3 | level 4",
+    "bbox": [
+      68.9,
+      70.7,
+      261.0,
+      187.0
+    ]
+  },
+  {
+    "file": "p004_f04.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 4. Mask prediction branch with fully-connected fusion.",
+    "width": 431,
+    "height": 221,
+    "description": "Description: The figure illustrates a neural network architecture for mask prediction in instance segmentation. It shows a sequence of convolutional layers (conv1 to conv4) followed by a deconvolution layer (deconv). The output of the deconvolution layer is reshaped and then passed through two fully connected layers (conv4_fc and conv5_fc). The final output is a mask, which is the result of element-wise multiplication with a mask.\n\nText in figure: ROI, conv1, conv2, conv3, conv4, deconv, reshape, conv4_fc, conv5_fc, fc, mask",
+    "pdf_text": "ROI conv1 conv2 conv3 conv4 | deconv | reshape | conv4_fc conv5_fc | fc | mask",
+    "bbox": [
+      316.1,
+      71.0,
+      531.6,
+      181.7
+    ]
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 5. Images in each row are visual results of our model on COCO test-dev , Cityscapes test and MVD test , respectively.",
+    "width": 845,
+    "height": 429,
+    "description": "## Description\nThe figure is a collection of images showcasing the visual results of a model on three different datasets: COCO test-dev, Cityscapes test, and MVD test. Each row represents a different dataset, with multiple images per row. The images depict various scenes with objects and people highlighted in different colors, indicating the model's instance segmentation capabilities.\n\n## Text in figure\n- COCO test-dev\n- Cityscapes test\n- MVD test\n- Model results\n- Object and person segmentation\n- Different colors indicating various instances\n- Multiple images per dataset row",
+    "pdf_text": "",
+    "bbox": [
+      83.2,
+      71.5,
+      505.4,
+      285.8
+    ]
+  },
+  {
+    "file": "p009_f06.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 6. Illustration of adaptive feature pooling on box branch.",
+    "width": 456,
+    "height": 194,
+    "description": "This figure illustrates the adaptive feature pooling process on the box branch of the Path Aggregation Network for instance segmentation. It shows how features from different regions of interest (ROIs) are pooled and processed through fully connected layers (fc1 and fc2) to predict the class and bounding box of an object. The process starts with ROIAlign, which extracts features from the input feature map. These features are then passed through fc1 and fc2 layers, with the final output being the class and box predictions.\n\nSection 2:\n\nKey elements: ROIAlign, fc1, fc2, class, box, \ud835\udc412, \ud835\udc413, \ud835\udc414, \ud835\udc415\nConnections: ROIAlign \u2192 fc1 \u2192 fc2 \u2192 class, box\nProcess: Features from ROIAlign are processed through fc1 and fc2 to produce class and box predictions.",
+    "pdf_text": "box | class | \ud835\udc415 | \ud835\udc414 | \ud835\udc413 | \ud835\udc412 | ROIAlign | fc1 | fc2",
+    "bbox": [
+      309.2,
+      71.4,
+      536.8,
+      168.4
+    ]
+  }
+]

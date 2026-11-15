@@ -1,0 +1,128 @@
+[
+  {
+    "file": "p012_f01.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 1: The proposed architecture includes a deep feature extractor (green) and a deep label predictor (blue), which together form a standard feed-forward architecture. Unsupervised domain adaptation is achieved by adding a domain classifier (red) connected to the feature extractor via a gradient reversal layer that multiplies the gradient by a certain negative constant during the backpropagation-based training. Otherwise, the training proceeds standardly and minimizes the label prediction loss (for source examples) and the domain classification loss (for all samples). Gradient reversal ensures that the feature distributions over the two domains are made similar (as indistinguishable as possible for the domain classifier), thus resulting in the domain-invariant features.",
+    "width": 732,
+    "height": 303,
+    "description": "Description: The figure illustrates the architecture of a domain-adversarial neural network. It consists of a feature extractor (green), a label predictor (blue), and a domain classifier (red). The feature extractor processes input data, and the label predictor predicts class labels. The domain classifier distinguishes between source and target domains. A gradient reversal layer is used to reverse the gradient during backpropagation, ensuring domain-invariant features.\n\nText in figure: input, feature extractor, label predictor, domain classifier, gradient reversal layer, loss \\( L_y \\), loss \\( L_d \\), class label \\( y \\), domain label \\( d \\), forwardprop, backprop, produced derivatives."
+  },
+  {
+    "file": "p014_f02.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "",
+    "width": 873,
+    "height": 184,
+    "description": "## Index Section 1\nFigure: Four panels of a scientific plot showing data points and trend lines. Each panel contains red and black data points, with red points forming a distinct pattern and black points scattered. Green lines represent trend lines or boundaries. Panels labeled A, B, C, and D with arrows indicating direction or flow.\n\n## Index Section 2\nText in figure: Labels A, B, C, D; arrows indicating direction; red and black data points; green trend lines; no axis titles or tick numbers visible."
+  },
+  {
+    "file": "p014_f03.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "(a) Standard NN. For the 'domain classification', we use a non adversarial domain regressor on the hidden neurons learned by the Standard NN. (This is equivalent to run Algorithm 1, without Lines 22 and 31)",
+    "width": 871,
+    "height": 203,
+    "description": "Description: The figure shows four panels labeled (a) to (d) representing different stages of a neural network training process. Panel (a) depicts a standard neural network with data points and decision boundaries. Panels (b) to (d) illustrate the domain-adversarial training of neural networks using Algorithm 1, showing the evolution of the network's performance over iterations.\n\nText in figure: (a) Standard NN, (b) DANN (Algorithm 1), (c) DANN (Algorithm 1), (d) DANN (Algorithm 1), A, B, C, D, 1.5, 1.0, 0.5, 0.0, -0.5, -1.0, -1.5, 3, 2, 1, 0, -1, -2, -3"
+  },
+  {
+    "file": "p019_f04.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "Figure 3: Proxy A -distances (PAD). Note that the PAD values of mSDA representations are symmetric when swapping source and target samples.",
+    "width": 839,
+    "height": 250,
+    "description": "This figure consists of three scatter plots comparing Proxy A-distances (PAD) for different neural network representations. Plot (a) shows PAD values for DANN on original data, with points scattered around the diagonal line. Plot (b) compares PAD values for DANN and NN with 100 hidden neurons, also around the diagonal. Plot (c) shows PAD values for DANN on mSDA representations, with points clustered around the diagonal, indicating symmetry when swapping source and target samples.\n\nLegend entries: mSDA, mSDA + DANN, E, D, K, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K, D, B, E, K,"
+  },
+  {
+    "file": "p021_f05.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "",
+    "width": 831,
+    "height": 521,
+    "description": "This figure is a diagram showing two neural network architectures. The first architecture is for MNIST, inspired by LeNet-5, and the second is for SVHN, adopted from Srivastava et al. (2014). Both architectures include convolutional layers, max-pooling layers, fully connected layers, and ReLU activation functions. The MNIST architecture has 32, 48, and 100 units in its fully connected layers, while the SVHN architecture has 64, 128, 3072, 2048, and 1024 units in its fully connected layers. Both architectures end with a softmax layer for classification.\n\nSection 1: Neural network architectures for MNIST and SVHN, showing layers and units.\nSection 2: Convolutional, max-pooling, fully connected layers, ReLU activation, softmax output."
+  },
+  {
+    "file": "p022_f06.png",
+    "page": 22,
+    "kind": "picture",
+    "caption": "",
+    "width": 346,
+    "height": 206,
+    "description": "## Search Index\n\n### Figure Description\nThis figure is a scatter plot showing two distinct clusters of data points. The clusters are colored in blue and red, with the red cluster being more concentrated in the center and the blue cluster more dispersed. The red cluster has a higher density of points in the center, while the blue cluster has points spread out more evenly.\n\n### Figure Content\n- Two clusters of data points\n- Blue cluster: more dispersed\n- Red cluster: higher density in the center\n- No axis titles or labels\n- No legend or series labels"
+  },
+  {
+    "file": "p022_f07.png",
+    "page": 22,
+    "kind": "picture",
+    "caption": "",
+    "width": 347,
+    "height": 238,
+    "description": "Figure Description: The figure shows a scatter plot with two distinct clusters of data points, colored in red and blue. The red cluster is denser and more concentrated in the center, while the blue cluster is more dispersed. The figure is labeled as \"Adapted\" indicating a modified or processed state of the data.\n\nText in Figure: Adapted\n\nSection 1: This figure is a scatter plot showing two clusters of data points, colored in red and blue. The red cluster is denser and more concentrated in the center, while the blue cluster is more dispersed. The figure is labeled as \"Adapted,\" indicating a modified or processed state of the data.\n\nSection 2: Text in Figure: Adapted"
+  },
+  {
+    "file": "p022_f08.png",
+    "page": 22,
+    "kind": "picture",
+    "caption": "",
+    "width": 348,
+    "height": 206,
+    "description": "## Search Index Description\nThis figure is a scatter plot showing two distinct groups of data points, colored in red and blue. The red points are more concentrated in the center, while the blue points are more dispersed around the edges. The plot does not have a legend, axis titles, or labels, but it visually represents a clustering or classification problem.\n\n## Search Index Text in Figure\nRed points, blue points, central concentration, dispersed points, clustering, classification, no legend, no axis titles, no labels."
+  },
+  {
+    "file": "p022_f09.png",
+    "page": 22,
+    "kind": "picture",
+    "caption": "Figure 5: The effect of adaptation on the distribution of the extracted features (best viewed in color). The figure shows t-SNE (van der Maaten, 2013) visualizations of the CNN's activations (a) in case when no adaptation was performed and (b) in case when our adaptation procedure was incorporated into training. Blue points correspond to the source domain examples, while red ones correspond to the target domain. In all cases, the adaptation in our method makes the two distributions of features much closer.",
+    "width": 347,
+    "height": 234,
+    "description": "Description: The figure is a t-SNE visualization of CNN activations, comparing two scenarios: (a) without adaptation and (b) with adaptation. It shows two clusters of points, blue for the source domain and red for the target domain. The adaptation process significantly reduces the distance between the two clusters.\n\nText in figure: (b) Adapted, Blue points correspond to the source domain examples, Red points correspond to the target domain."
+  },
+  {
+    "file": "p024_f10.png",
+    "page": 24,
+    "kind": "picture",
+    "caption": "Figure 6: Examples of domain pairs used in the experiments. See Section 5.2.4 for details.",
+    "width": 693,
+    "height": 135,
+    "description": "## Search Index\n\n### Figure Description\nThis figure displays examples of domain pairs used in the experiments from the paper \"Domain-Adversarial Training of Neural Networks.\" It shows four different types of domain pairs: MNIST, SYN NUMBERS, SVHN, and SYN SIGNS. Each domain pair consists of a source and a target image, demonstrating the transformation between the two domains.\n\n### Figure Content\n- **MNIST**: Source: 401, Target: 816\n- **SYN NUMBERS**: Source: 98, Target: 1825\n- **SVHN**: Source: 73610, Target: 342\n- **SYN SIGNS**: Source: [triangle sign, 70 speed limit sign, 80 speed limit sign], Target: [70 speed limit sign, triangle sign, right turn sign]"
+  },
+  {
+    "file": "p025_f11.png",
+    "page": 25,
+    "kind": "picture",
+    "caption": "",
+    "width": 450,
+    "height": 277,
+    "description": "## Index Section 1: Figure Description\n\nThis figure is a line graph showing validation error over batches seen. The graph has five lines, each representing a different training method: Real, Syn, Syn Adapted, Syn + Real, and Syn + Real Adapted. The Real line is the highest, followed by Syn, Syn Adapted, Syn + Real, and Syn + Real Adapted, which is the lowest. The x-axis represents batches seen, and the y-axis represents validation error.\n\n## Index Section 2: Figure Text\n\nReal, Syn, Syn Adapted, Syn + Real, Syn + Real Adapted, Validation error, Batches seen"
+  },
+  {
+    "file": "p027_f12.png",
+    "page": 27,
+    "kind": "picture",
+    "caption": "Figure 8: Matching and non-matching pairs of probe-gallery images from different person re-identification data sets. The three data sets are treated as different domains in our experiments.",
+    "width": 854,
+    "height": 175,
+    "description": "## Figure Description\nThis figure displays matching and non-matching pairs of probe-gallery images from three different person re-identification datasets. Each dataset is treated as a separate domain in the experiments. The figure is divided into three sections labeled \"VIPER\", \"PRId\", and \"CUHK\", each showing a series of images representing both matching and non-matching pairs.\n\n## Textual Content\n- \"VIPER\"\n- \"PRId\"\n- \"CUHK\"\n- \"Matching and non-matching pairs of probe-gallery images from different person re-identification data sets.\"\n- \"The three data sets are treated as different domains in our experiments.\""
+  },
+  {
+    "file": "p029_f13.png",
+    "page": 29,
+    "kind": "picture",
+    "caption": "Figure 9: Results on VIPeR, PRID and CUHK/p1 with and without domain-adversarial learning. Across the eight domain pairs domain-adversarial learning improves reidentification accuracy. For some domain pairs the improvement is considerable.",
+    "width": 918,
+    "height": 931,
+    "description": "Description: The figure consists of eight line plots comparing identification rates for different domain pairs. Each plot shows two lines: one for DML and one for DML with adaptation. The x-axis represents the rank, and the y-axis represents the identification rate in percentage. The plots show that DML with adaptation consistently outperforms DML across all domain pairs.\n\nText in figure: DML, DML, adaptation, Rank, Identification rate, VIPeR, PRID, CUHK/p1, VIPeR \u2192 PRID, VIPeR \u2192 CUHK/p1, PRID \u2192 CUHK/p1, PRID \u2192 VIPeR, CUHK/p1 \u2192 VIPeR, CUHK/p1 \u2192 PRID, Whole CUHK \u2192 VIPeR, Whole CUHK \u2192 PRID, CUHK/p1 \u2192 PRID, VIPeR \u2192 PRID, VIPeR \u2192 CUHK/p1, PRID \u2192 CUHK/p1, PRID \u2192 VIPeR, CUHK/p1 \u2192 VIPeR, CUHK/p1 \u2192 PRID, VIPeR \u2192 PRID, VIPeR \u2192 CUHK/p1, PRID \u2192 CUHK/p1, PRID \u2192 VIPeR, CUHK/p1 \u2192 VIPeR, CUHK/p1 \u2192 PRID."
+  },
+  {
+    "file": "p030_f14.png",
+    "page": 30,
+    "kind": "picture",
+    "caption": "Figure 10: The effect of adaptation shown by t-SNE visualizations of source and target domains descriptors in a VIPeR \u2192 CUHK/p1 experiment pair. VIPeR is depicted with green and CUHK/p1 - with red . As in the image classification case, domain-adversarial learning ensures a closer match between the source and the target distributions.",
+    "width": 715,
+    "height": 408,
+    "description": "Figure type: t-SNE visualizations\nDescription: The figure shows two t-SNE visualizations comparing the source and target domains in a VIPeR \u2192 CUHK/p1 experiment pair. VIPeR is represented by green points, and CUHK/p1 by red points. The first visualization (a) shows the domains without adaptation, while the second (b) shows the domains after domain-adversarial training, which results in a closer match between the source and target distributions.\n\nText in figure: VIPeR, CUHK/p1, DML, DML, adaptation"
+  }
+]

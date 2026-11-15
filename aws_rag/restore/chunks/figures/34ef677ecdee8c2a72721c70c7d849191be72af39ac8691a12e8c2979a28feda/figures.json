@@ -1,0 +1,29 @@
+[
+  {
+    "file": "p006_f01.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 1: Example screenshots of a sample of environments we attempt to solve with DDPG. In order from the left: the cartpole swing-up task, a reaching task, a gasp and move task, a puck-hitting task, a monoped balancing task, two locomotion tasks and Torcs (driving simulator). We tackle all tasks using both low-dimensional feature vector and high-dimensional pixel inputs. Detailed descriptions of the environments are provided in the supplementary. Movies of some of the learned policies are available at https://goo.gl/J4PIAz .",
+    "width": 793,
+    "height": 90,
+    "description": "## Figure Description\nThis figure displays a series of screenshots from various environments solved using the DDPG algorithm. The environments include:\n- Cartpole swing-up task\n- Reaching task\n- Grasp and move task\n- Puck-hitting task\n- Monoped balancing task\n- Two locomotion tasks\n- Torcs (driving simulator)\n\n## Text in Figure\n- Cartpole swing-up task\n- Reaching task\n- Grasp and move task\n- Puck-hitting task\n- Monoped balancing task\n- Two locomotion tasks\n- Torcs (driving simulator)"
+  },
+  {
+    "file": "p006_f02.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 2: Performance curves for a selection of domains using variants of DPG: original DPG algorithm (minibatch NFQCA) with batch normalization (light grey), with target network (dark grey), with target networks and batch normalization (green), with target networks from pixel-only inputs (blue). Target networks are crucial.",
+    "width": 795,
+    "height": 253,
+    "description": "Figure: Line plots showing performance curves for various domains using different variants of DPG.\nLegend: minibatch NFQCA, batch normalization, target network, target networks, target networks from pixel-only inputs.\nAxes: Million Steps, Normalized Reward.\nHighest: Target networks from pixel-only inputs (blue) in most domains.\nLowest: minibatch NFQCA (light grey) in most domains.\nText: Cart, Pendulum Swing-up, Cartpole Swing-up, Fixed Reacher, Monoped Balancing, Gripper, Blockworld, Puck Shooting, Cheetah, Moving Gripper."
+  },
+  {
+    "file": "p007_f03.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 3: Density plot showing estimated Q values versus observed returns sampled from test episodes on 5 replicas. In simple domains such as pendulum and cartpole the Q values are quite accurate. In more complex tasks, the Q estimates are less accurate, but can still be used to learn competent policies. Dotted line indicates unity, units are arbitrary.",
+    "width": 559,
+    "height": 147,
+    "description": "Description: The figure shows three density plots comparing estimated Q values with observed returns for three different tasks: Pendulum, Cartpole, and Cheetah. The plots are labeled with the task names. The x-axis represents the return, and the y-axis represents the estimated Q values. The dotted line indicates unity. The Cheetah plot has the highest density of points, followed by Cartpole, and then Pendulum.\n\nText in figure: Pendulum, Cartpole, Cheetah, Estimated Q, Return, dotted line indicates unity."
+  }
+]

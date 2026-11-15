@@ -1,0 +1,110 @@
+[
+  {
+    "file": "p006_f01.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 1: Cross-entropy loss values while creating an adversarial example from the MNIST and CIFAR10 evaluation datasets. The plots show how the loss evolves during 20 runs of projected gradient descent (PGD). Each run starts at a uniformly random point in the \u2113 \u00a5 -ball around the same natural example (additional plots for different examples appear in Figure 11). The adversarial loss plateaus after a small number of iterations. The optimization trajectories and final loss values are also fairly clustered, especially on CIFAR10. Moreover, the final loss values on adversarially trained networks are significantly smaller than on their standard counterparts.",
+    "width": 876,
+    "height": 239,
+    "description": "Figure Description: The figure contains four plots showing the evolution of cross-entropy loss during adversarial training on MNIST and CIFAR10 datasets. Each plot displays the loss values over 100 iterations of projected gradient descent (PGD). The plots are labeled as follows: (a) MNIST Standard training, (b) MNIST Adversarial training, (c) CIFAR10 Natural training, and (d) CIFAR10 Adversarial training. The loss values are represented by multiple lines, each corresponding to a different run of the PGD algorithm. The adversarial loss tends to plateau after a few iterations, and the final loss values are significantly lower for adversarially trained networks compared to standard training.\n\nText in Figure: MNIST, CIFAR10, Standard training, Adversarial training, Natural training, Cross-entropy loss, Iterations, Loss value, 0, 25, 50, 75, 100."
+  },
+  {
+    "file": "p007_f02.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 2: Values of the local maxima given by the cross-entropy loss for five examples from the MNIST and CIFAR10 evaluation datasets. For each example, we start projected gradient descent (PGD) from 10 5 uniformly random points in the \u2113 \u00a5 -ball around the example and iterate PGD until the loss plateaus. The blue histogram corresponds to the loss on a standard network, while the red histogram corresponds to the adversarially trained counterpart. The loss is significantly smaller for the adversarially trained networks, and the final loss values are very concentrated without any outliers.",
+    "width": 923,
+    "height": 376,
+    "description": "Description: The figure shows histograms of local maxima of cross-entropy loss values for five examples from MNIST and CIFAR10 datasets. Each histogram compares a standard network (blue) and an adversarially trained network (red). The red histograms consistently show lower loss values, indicating better performance of the adversarially trained networks.\n\nText in figure: MNIST, CIFAR10, Loss value, log(frequency), blue histogram, red histogram, standard network, adversarially trained network."
+  },
+  {
+    "file": "p009_f03.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 3: A conceptual illustration of standard vs. adversarial decision boundaries. Left: A set of points that can be easily separated with a simple (in this case, linear) decision boundary. Middle: The simple decision boundary does not separate the \u2113 \u00a5 -balls (here, squares) around the data points. Hence there are adversarial examples (the red stars) that will be misclassified. Right: Separating the \u2113 \u00a5 -balls requires a significantly more complicated decision boundary. The resulting classifier is robust to adversarial examples with bounded \u2113 \u00a5 -norm perturbations.",
+    "width": 178,
+    "height": 231,
+    "description": "Figure Description: The figure illustrates the difference between standard and adversarial decision boundaries in a conceptual manner. It shows three panels: left, middle, and right. The left panel displays a set of points that can be easily separated by a simple linear decision boundary. The middle panel shows that this simple decision boundary fails to separate the \u2113\u00a5-balls (represented as squares) around the data points, leading to misclassification of adversarial examples (red stars). The right panel demonstrates that separating the \u2113\u00a5-balls requires a more complex decision boundary, resulting in a classifier that is robust to adversarial examples with bounded \u2113\u00a5-norm perturbations.\n\nText in Figure: No specific text is visible in the figure. The figure consists of three panels with visual representations of decision boundaries and \u2113\u00a5-balls (squares) around data points, along with adversarial examples (red stars)."
+  },
+  {
+    "file": "p011_f04.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 4: The effect of network capacity on the performance of the network. We trained MNIST and CIFAR10 networks of varying capacity on: (a) natural examples, (b) with FGSM-made adversarial examples, (c) with PGD-made adversarial examples. In the first three plots/tables of each dataset, we show how the standard and adversarial accuracy changes with respect to capacity for each training regime. In the final plot/table, we show the value of the cross-entropy loss on the adversarial examples the networks were trained on. This corresponds to the value of our saddle point formulation (2.1) for different sets of allowed perturbations.",
+    "width": 867,
+    "height": 373,
+    "description": "Description: The figure displays four plots comparing the performance of MNIST and CIFAR10 networks with varying capacities under different training conditions. Plots (a), (b), and (c) show accuracy rates for natural, FGSM, and PGD training, respectively. Plot (d) shows the average loss for adversarial training. In plot (a), the Natural series is highest across all capacities, followed by FGSM and PGD. In plot (b), FGSM accuracy is highest, while PGD is lowest. Plot (c) shows PGD accuracy is lowest for all capacities. Plot (d) shows the highest loss for PGD training.\n\nText in figure: MNIST, CIFAR10, Natural, FGSM, PGD, Accuracy, Capacity scale, Simple, Wide, Average loss, 1, 2, 4, 8, 16, 92.7%, 95.2%, 87.4%, 90.3%, 79.4%, 87.3%, 27.5%, 32.7%, 90.9%, 95.1%, 51.7%, 56.1%, 0.8%, 3.5%, 0.0%, 0.0%, 43.7%, 45.8%, 0.00357, 0.00371, 0.0115, 0.00557, 1.11, 0.0218."
+  },
+  {
+    "file": "p012_f05.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 5: Cross-entropy loss on adversarial examples during training. The plots show how the adversarial loss on training examples evolves during training the MNIST and CIFAR10 networks against a PGD adversary. The sharp drops in the CIFAR10 plot correspond to decreases in training step size. These plots illustrate that we can consistently reduce the value of the inner problem of the saddle point formulation (2.1), thus producing an increasingly robust classifier.",
+    "width": 672,
+    "height": 262,
+    "description": "Figure: Two plots showing cross-entropy loss on adversarial examples during training for MNIST and CIFAR10 datasets. Both plots depict the loss value on the y-axis and iterations on the x-axis. The MNIST plot shows a steady decrease in loss from 1.00 to 0.10 over 100k iterations. The CIFAR10 plot also shows a decrease in loss from 1.00 to 0.01 over 75k iterations, with sharp drops corresponding to decreases in training step size.\n\nText in figure: \"Loss value\", \"Iterations\", \"MNIST\", \"CIFAR10\", \"1.00\", \"0.10\", \"0.01\", \"100k\", \"75k\"."
+  },
+  {
+    "file": "p014_f06.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 6: Performance of our adversarially trained networks against PGD adversaries of different strength. The MNIST and CIFAR10 networks were trained against # = 0.3 and # = 8 PGD \u2113 \u00a5 adversaries respectively (the training # is denoted with a red dashed lines in the \u2113 \u00a5 plots). In the case of the MNIST adversarially trained networks, we also evaluate the performance of the Decision Boundary Attack (DBA) [4] with 2000 steps and PGD on standard and adversarially trained models. We observe that for # less or equal to the value used during training, the performance is equal or better. For MNIST there is a sharp drop shortly after. Moreover, we observe that the performance of PGD on the MNIST \u2113 2-trained networks is poor and significantly overestimates the robustness of the model. This is potentially due to the threshold filters learned by the model masking the loss gradients (the decision-based attack does not utilize gradients).",
+    "width": 896,
+    "height": 204,
+    "description": "## Description\nThis figure contains four plots showing the performance of adversarially trained deep learning models against Projected Gradient Descent (PGD) adversaries of varying strength. Each plot displays accuracy against the adversary strength (\u03b5). The plots are labeled (a) MNIST, \u2113\u221e-norm, (b) MNIST, \u21132-norm, (c) CIFAR10, \u2113\u221e-norm, and (d) CIFAR10, \u21132-norm. The highest accuracy is observed for PGD adv. trained in all plots, while the lowest is for DBA standard in plot (b). The red dashed line in plots (b) and (c) indicates the training strength.\n\n## Text in figure\nPlot (a): MNIST, \u2113\u221e-norm\n- PGD adv. trained\n- DBA adv. trained\n- PGD standard\n- DBA standard\n\nPlot (b): MNIST, \u21132-norm\n- PGD adv. trained\n- DBA adv. trained\n- PGD standard\n- DBA standard\n\nPlot (c): CIFAR10, \u2113\u221e-norm\n- PGD adv. trained\n\nPlot (d): CIFAR10, \u21132-norm\n- PGD adv. trained"
+  },
+  {
+    "file": "p023_f07.png",
+    "page": 23,
+    "kind": "picture",
+    "caption": "Figure 7: CIFAR10: change of loss function in the direction of white-box and black-box FGSM and PGD examples with # = 8 for the same five natural examples. Each line shows how the loss changes as we move from the natural example to the corresponding adversarial example. Top: simple naturally trained model. Bottom: wide PGD trained model. We plot the loss of the original network in the direction of the FGSM example for the original network (red lines), 5 PGD examples for the original network obtained from 5 random starting points (blue lines), the FGSM example for an independently trained copy network (green lines) and 5 PGD examples for the copy network obtained from 5 random starting points (black lines). All PGD attacks use 100 steps with step size 0.3.",
+    "width": 881,
+    "height": 270,
+    "description": "Description: The figure consists of 10 plots, each showing the change in loss function as we move from natural examples to adversarial examples. The plots are divided into two rows, with the top row showing results for a naturally trained model and the bottom row for a wide PGD trained model. Each plot displays four series: red for FGSM examples, blue for PGD examples from the original network, green for FGSM examples from a copy network, and black for PGD examples from the copy network. The highest series is the blue line for PGD examples from the original network, while the lowest is the green line for FGSM examples from the copy network.\n\nText in figure: CIFAR10, loss function, white-box, black-box, FGSM, PGD, natural examples, adversarial examples, original network, copy network, FGSM example, PGD example, random starting points, step size 0.3, 100 steps."
+  },
+  {
+    "file": "p024_f08.png",
+    "page": 24,
+    "kind": "picture",
+    "caption": "Figure 8: Transferability experiments for four different instances (standard large and very large networks, and FGSM-trained large and very large networks, respectively). For each instance we ran the same training algorithm twice, starting from different initializations. Tables on the left show the accuracy of the networks against three types of input (clean, perturbed with FGSM, perturbed with PGD ran for 40 steps); the first column shows the resilience of the first network against examples produced using its own gradients, the second column shows resilience of the second network against examples transferred from the former network. The histograms reflect angles between pairs of gradients corresponding to the same inputs versus the baseline consisting of angles between gradients from random pairs of points. Images on the right hand side reflect how the loss functions of the native and the transfer network change when moving in the direction of the perturbation; the perturbation is at 1 on the horizontal axis. Plots in the top row are for FGSM perturbations, plots in the bottom row are for PGD perturbations produced over 40 iterations.",
+    "width": 907,
+    "height": 744,
+    "description": "Figure: A collection of histograms and line plots comparing the accuracy and gradient angles of different neural network models under various training conditions and adversarial attack methods.\n\nText in figure: \"Clean\", \"Source\", \"Transfer\", \"FGSM\", \"PGD\", \"Large network, standard training\", \"Very large network, standard training\", \"Large network, FGSM training\", \"Very large network, FGSM training\", \"99.2%\", \"99.2%\", \"99.3%\", \"99.3%\", \"92%\", \"96.4%\", \"99.9%\", \"99.4%\", \"41.9%\", \"35.5%\", \"62.0%\", \"54.1%\", \"71.6%\", \"60.6%\", \"97.8%\", \"96.1%\", \"72%\", \"44.6%\", \"35.0%\", \"62.0%\", \"54.1%\", \"71.6%\", \"60.6%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0%\", \"0"
+  },
+  {
+    "file": "p026_f09.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "Figure 9: Visualizing a sample of the convolutional filters. For the standard model (a,b) we visualize random filters, since there is no observable difference in any of them. For the first layer of robust networks we make sure to include the 3 non-zero filters. For the second layer, the first three columns represent convolutional filters that utilize the 3 non-zero channels, and we choose the most interesting ones (larger range of values). We observe that adversarially trained networks have significantly more concentrated weights. Moreover, the first convolutional layer degrades into a few thresholding filters.",
+    "width": 765,
+    "height": 967,
+    "description": "Description: The figure displays visualizations of convolutional filters from various models. Panels (a) and (b) show filters from a standard model, with no significant differences. Panels (c) and (d) depict filters from a public model, highlighting the first and second convolutional layers. Panels (e) and (f) show filters from a secret model, focusing on the first and second convolutional layers. The visualizations indicate that adversarially trained networks have more concentrated weights, and the first convolutional layer tends to degrade into thresholding filters.\n\nText in figure: Standard Model First Conv. Layers, Natural Model Second Conv. Layer, Public Model First Conv. Layers, Public Model Second Conv. Layer, Secret Model First Conv. Layers, Secret Model Second Conv. Layer."
+  },
+  {
+    "file": "p027_f10.png",
+    "page": 27,
+    "kind": "picture",
+    "caption": "Figure 10: Softmax layer examination. For each network we create a histogram of the layer's weights and plot the per-class bias. We observe that while weights are similar (slightly more concentrated for the standard one) the biases are far from uniform and with a similar pattern for the two adversarially trained networks.",
+    "width": 736,
+    "height": 317,
+    "description": "Figure type: Two bar plots with legends.\n\nDescription: The figure contains two bar plots. The first plot (a) shows softmax biases for each class, with three series: natural, public, and secret. The secret series has the highest bias, peaking at around 0.175, while the natural series has the lowest bias, around 0.100. The second plot (b) shows the distribution of softmax weights, with similar patterns across the three series. The public series has the highest frequency, peaking at around 4000, while the natural series has the lowest frequency, around 1000.\n\nText in figure: \"Softmax bias\", \"Class\", \"Frequency\", \"Softmax weight\", \"natural\", \"public\", \"secret\"."
+  },
+  {
+    "file": "p028_f11.png",
+    "page": 28,
+    "kind": "picture",
+    "caption": "Figure 11: Loss function value over PGD iterations for 20 random restarts on random examples. The 1st and 3rd rows correspond to standard networks, while the 2nd and 4th to adversarially trained ones.",
+    "width": 856,
+    "height": 606,
+    "description": "Description: The figure displays a series of line plots showing the loss function values over 100 iterations of Projected Gradient Descent (PGD) for 20 random restarts on random examples. The plots are divided into two main sections: the top section for standard networks and the bottom for adversarially trained ones. Each plot shows the loss value decreasing over iterations, with variations in the rate of decrease among the 20 restarts.\n\nText in figure: MNIST, CIFAR10, Loss value, Iterations, 1st row, 2nd row, 3rd row, 4th row, standard networks, adversarially trained ones, 1st, 2nd, 3rd, 4th, 5th, 6th, 7th, 8th, 9th, 10th, 11th, 12th, 13th, 14th, 15th, 16th, 17th, 18th, 19th, 20th."
+  },
+  {
+    "file": "p028_f12.png",
+    "page": 28,
+    "kind": "picture",
+    "caption": "Figure 12: Sample adversarial examples with \u2113 2 norm bounded by 4. The perturbations are significant enough to cause misclassification by humans too.",
+    "width": 797,
+    "height": 326,
+    "description": "Figure Description: The image displays a set of adversarial examples created for deep learning models, showing original and adversarially perturbed images. Each row contains a pair of images: the top image is the original, and the bottom is the adversarially perturbed version. The figures are labeled with the classification accuracy of natural and adversarial examples, indicating the effectiveness of the adversarial attacks.\n\nText in Figure: \"Natural: 9 Adversarial: 7\", \"Natural: 9 Adversarial: 4\", \"Natural: 8 Adversarial: 5\", \"Natural: 8 Adversarial: 3\", \"Natural: 2 Adversarial: 3\""
+  }
+]

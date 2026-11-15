@@ -1,0 +1,92 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "",
+    "width": 425,
+    "height": 481,
+    "description": "## Figure Description\nThis figure displays a series of images of a man's face with numerical values above each image. The images show variations in facial expressions and lighting conditions. The values represent some form of measurement or score related to the images.\n\n## Text in Figure\n1.04\n1.22\n1.33\n0.78\n1.33\n1.26\n0.99"
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2. Model structure. Our network consists of a batch input layer and a deep CNN followed by L 2 normalization, which results in the face embedding. This is followed by the triplet loss during training.",
+    "width": 455,
+    "height": 76,
+    "description": "This figure is a diagram showing the structure of the FaceNet model. It consists of a batch input layer, a deep convolutional neural network (CNN), an L2 normalization layer, and a triplet loss function during training. The input batch is processed through the deep CNN, followed by L2 normalization to produce a face embedding. The triplet loss is used during training to optimize the model.\n\nText in figure: Batch, DEEP ARCHITECTURE, L2, EMBEDDDING, Triplet Loss"
+  },
+  {
+    "file": "p003_f03.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 3. The Triplet Loss minimizes the distance between an anchor and a positive , both of which have the same identity, and maximizes the distance between the anchor and a negative of a different identity.",
+    "width": 459,
+    "height": 104,
+    "description": "This figure is a diagram illustrating the concept of Triplet Loss in machine learning, specifically for face recognition tasks. It shows three points labeled as \"Negative Anchor,\" \"Positive Anchor,\" and \"Negative.\" The diagram depicts the learning process where the distance between the \"Anchor\" and \"Positive\" is minimized, while the distance between the \"Anchor\" and \"Negative\" is maximized. The arrows indicate the direction of learning, aiming to reduce the distance between the anchor and positive points while increasing the distance between the anchor and negative points."
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 4. FLOPS vs . Accuracy trade-off. Shown is the trade-off between FLOPS and accuracy for a wide range of different model sizes and architectures. Highlighted are the four models that we focus on in our experiments.",
+    "width": 490,
+    "height": 351,
+    "description": "This figure is a scatter plot showing the trade-off between FLOPS (floating-point operations per second) and accuracy for various model sizes and architectures. The x-axis represents FLOPS, and the y-axis represents accuracy. The highest accuracy is achieved by NN2, with a value of approximately 90%, while the lowest accuracy is achieved by NN4, with a value of approximately 40%. The four highlighted models are NN1, NN2, NN3, and NN4.\n\nText in figure: NN1, NN2, NN3, NN4, NNS1, NNS2, Multi-Add (FLOPS), VAL@10^-3 FAR."
+  },
+  {
+    "file": "p006_f05.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 5. Network Architectures. This plot shows the complete ROC for the four different models on our personal photos test set from section 4.2. The sharp drop at 10 E-4 FAR can be explained by noise in the groundtruth labels. The models in order of performance are: NN2: 224 \u00d7 224 input Inception based model; NN1: Zeiler&Fergus based network with 1 \u00d7 1 convolutions; NNS1: small Inception style model with only 220M FLOPS; NNS2: tiny Inception model with only 20M FLOPS.",
+    "width": 463,
+    "height": 363,
+    "description": "Description: The figure is a Receiver Operating Characteristic (ROC) plot comparing the performance of four different models on a personal photos test set. The plot shows the Verification Accuracy (VAL) against the False Acceptance Rate (FAR). The models are NN2, NN1, NNS1, and NNS2. NN2 has the highest performance, followed by NN1, NNS1, and NNS2. The plot shows a sharp drop at 10^-4 FAR, likely due to noise in the ground truth labels.\n\nText in figure: NN2, NN1, NNS1, NNS2, Verification Accuracy (VAL), False Acceptance Rate (FAR), 10^-6, 10^-5, 10^-4, 10^-3, 10^-2, 10^-1, 10^0."
+  },
+  {
+    "file": "p008_f06.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 6. LFW errors. This shows all pairs of images that were incorrectly classified on LFW. Only eight of the 13 false rejects shown here are actual errors the other five are mislabeled in LFW.",
+    "width": 456,
+    "height": 653,
+    "description": "Figure type: Image collage\nDescription: The figure displays a collage of images categorized into two main sections: \"False accept\" and \"False reject.\" Each section contains multiple images of faces, some of which are incorrectly classified in the LFW dataset. The \"False accept\" section shows images where the model incorrectly identified two different people as the same, while the \"False reject\" section shows images where the model failed to recognize two images of the same person as identical.\n\nText in figure: \"False accept,\" \"False reject\""
+  },
+  {
+    "file": "p008_f07.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 7. Face Clustering. Shown is an exemplar cluster for one user. All these images in the users personal photo collection were clustered together.",
+    "width": 428,
+    "height": 906,
+    "description": "## Description\nThis figure is a collage of 48 face images, arranged in a grid. It represents an exemplar cluster for a single user, showing the diversity of facial expressions, poses, and conditions in the user's personal photo collection.\n\n## Text in figure\nExemplar cluster for one user. All these images in the user's personal photo collection were clustered together."
+  },
+  {
+    "file": "p009_f08.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 8. Harmonic Embedding Compatibility. These ROCs show the compatibility of the harmonic embeddings of NN2 to the embeddings of NN1. NN2 is an improved model that performs much better than NN1. When comparing embeddings generated by NN1 to the harmonic ones generated by NN2 we can see the compatibility between the two. In fact, the mixed mode performance is still better than NN1 by itself.",
+    "width": 453,
+    "height": 318,
+    "description": "Description: The figure is a plot showing Receiver Operating Characteristic (ROC) curves for the compatibility of harmonic embeddings generated by two models, NN2 and NN1. The black line represents NN2, the red line represents NN2 compared to NN1, and the green line represents NN1. The black line is highest, followed by the red line, and the green line is the lowest. The x-axis is labeled \"FAR\" and the y-axis is labeled \"VAL\".\n\nText in figure: \"VAL\", \"FAR\", \"NN2\", \"NN2 compared to NN1\", \"NN1\""
+  },
+  {
+    "file": "p009_f09.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 9. Learning the Harmonic Embedding. In order to learn a harmonic embedding, we generate triplets that mix the v1 embeddings with the v2 embeddings that are being trained. The semihard negatives are selected from the whole set of both v1 and v2 embeddings.",
+    "width": 244,
+    "height": 315,
+    "description": "This figure is a diagram showing the process of learning a harmonic embedding in the FaceNet model. It illustrates the generation of triplets by mixing v1 and v2 embeddings. Each panel represents a different template version (v7 and v8). The diagram shows an anchor point connected to a positive point and a semi-hard negative point. The anchor and positive points are connected by a solid line, while the anchor and negative points are connected by a dashed line.\n\nText in figure: v7 template, v8 template, Anchor, Positive, Semi-hard Negative."
+  },
+  {
+    "file": "p010_f10.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 10. Harmonic Embedding Space. This visualisation sketches a possible interpretation of how harmonic embeddings are able to improve verification accuracy while maintaining compatibility to less accurate embeddings. In this scenario there is one misclassified face, whose embedding is perturbed to the 'correct' location in v2.",
+    "width": 436,
+    "height": 188,
+    "description": "This figure is a conceptual diagram illustrating the idea of harmonic embeddings in the context of face recognition and clustering. It shows two stages: the initial state with two sets of embeddings (v7 and v8) and the final state after learning harmonic embeddings. The initial state has misclassified embeddings, while the final state shows corrected embeddings, with one misclassified face's embedding moved to the correct location in v2.\n\nText in figure: v7 template, v8 template, Learning, harmonic embeddings."
+  }
+]

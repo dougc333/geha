@@ -1,0 +1,65 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1. Diagram of our model-agnostic meta-learning algorithm (MAML), which optimizes for a representation \u03b8 that can quickly adapt to new tasks.",
+    "width": 338,
+    "height": 199,
+    "description": "Description: The figure is a diagram illustrating the MAML algorithm, which optimizes a representation \u03b8 for fast adaptation to new tasks. It shows a meta-learning process (dashed line) and learning/adaptation processes (solid lines) with changes in loss (\u0394L1, \u0394L2, \u0394L3) and optimal parameters (\u03b81*, \u03b82*, \u03b83*).\n\nText in figure: meta-learning, learning/adaptation, \u0394L3, \u0394L2, \u0394L1, \u03b81*, \u03b82*, \u03b83*"
+  },
+  {
+    "file": "p006_f02.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 2. Few-shot adaptation for the simple regression task. Left: Note that MAML is able to estimate parts of the curve where there are no datapoints, indicating that the model has learned about the periodic structure of sine waves. Right: Fine-tuning of a model pretrained on the same distribution of tasks without MAML, with a tuned step size. Due to the often contradictory outputs on the pre-training tasks, this model is unable to recover a suitable representation and fails to extrapolate from the small number of test-time samples.",
+    "width": 930,
+    "height": 195,
+    "description": "Description: The figure displays three plots comparing the performance of MAML and a pretrained model on a simple regression task. Each plot shows the ground truth curve (red) and various model predictions (green, blue, and purple). The left plots show MAML's ability to estimate parts of the curve without data, while the right plots show a pretrained model's failure to extrapolate from few samples.\n\nText in figure: MAML, K=5, MAML, K=10, pretrained, K=5, step size=0.01, pretrained, K=10, step size=0.02, pre-update, 1 grad step, 10 grad steps, ground truth, used for grad, pre-update, 1 grad step, 10 grad steps."
+  },
+  {
+    "file": "p006_f03.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 3. Quantitative sinusoid regression results showing the learning curve at meta test-time. Note that MAML continues to improve with additional gradient steps without overfitting to the extremely small dataset during meta-testing, achieving a loss that is substantially lower than the baseline fine-tuning approach.",
+    "width": 297,
+    "height": 198,
+    "description": "Description: The figure is a line graph showing the mean squared error of three different methods over a number of gradient steps. The series labeled \"MAML (ours)\" starts highest and decreases steadily, ending lowest. The \"pretrained, step=0.02\" series starts lower and remains above \"MAML (ours)\" throughout. The \"oracle\" series is constant and the lowest of all.\n\nText in figure: k-shot regression, k=10; mean squared error; number of gradient steps; MAML (ours); pretrained, step=0.02; oracle."
+  },
+  {
+    "file": "p007_f04.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 4. Top: quantitative results from 2D navigation task, Bottom: qualitative comparison between model learned with MAML and with fine-tuning from a pretrained network.",
+    "width": 464,
+    "height": 272,
+    "description": "Description: The figure contains a top plot and a bottom set of two plots. The top plot is a line graph showing average return on a log scale against the number of gradient steps. The MAML (ours) series is highest, followed by pretrained, random, and oracle. The bottom plots show qualitative results of navigation tasks, with MAML on the left and pretrained on the right. Both plots show trajectories leading to a goal position marked by a red star.\n\nText in figure: point robot, 2d navigation, MAML (ours), pretrained, random, oracle, average return (log scale), number of gradient steps, MAML, pretrained, pre-update, 3 steps, goal position."
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 5. Reinforcement learning results for the half-cheetah and ant locomotion tasks, with the tasks shown on the far right. Each gradient step requires additional samples from the environment, unlike the supervised learning tasks. The results show that MAML can adapt to new goal velocities and directions substantially faster than conventional pretraining or random initialization, achieving good performs in just two or three gradient steps. We exclude the goal velocity, random baseline curves, since the returns are much worse ( < - 200 for cheetah and < - 25 for ant).",
+    "width": 974,
+    "height": 156,
+    "description": "Description: The figure contains four line graphs comparing the performance of different learning methods on two tasks: half-cheetah and ant locomotion. Each graph shows the average return over the number of gradient steps. The highest performing method is MAML (ours), followed by pretrained, random, and oracle. The lowest performing method is random, with returns below -200 for the half-cheetah and below -25 for the ant.\n\nText in figure: half-cheetah, goal velocity; half-cheetah, forward/backward; ant, goal velocity; ant, forward/backward; MAML (ours); pretrained; random; oracle; number of gradient steps; average return."
+  },
+  {
+    "file": "p012_f06.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 6. Quantitative sinusoid regression results showing test-time learning curves with varying numbers of K test-time samples. Each gradient step is computed using the same K examples. Note that MAML continues to improve with additional gradient steps without overfitting to the extremely small dataset during meta-testing, and achieves a loss that is substantially lower than the baseline fine-tuning approach.",
+    "width": 928,
+    "height": 201,
+    "description": "Figure: Three line graphs showing mean squared error against the number of gradient steps for k-shot regression with k=5, k=10, and k=20. Each graph compares MAML (ours), pretrained, and oracle methods. The MAML method shows the lowest mean squared error across all graphs, followed by the pretrained method, and the oracle method has the highest error.\n\nText in figure: k-shot regression, k=5, k-shot regression, k=10, k-shot regression, k=20, MAML (ours), pretrained, oracle, mean squared error, number of gradient steps."
+  },
+  {
+    "file": "p013_f07.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 7. A random sample of qualitative results from the sinusoid regression task.",
+    "width": 936,
+    "height": 1139,
+    "description": "## Description\nThis figure presents a collection of plots from a sinusoid regression task, showcasing various learning approaches. Each plot displays multiple lines representing different methods: 'pre-update', '1 grad step', '10 grad steps', and 'ground truth'. The 'pre-update' line is consistently the lowest, indicating the initial state before any gradient steps. The 'ground truth' line, marked with a red color, serves as the reference for the correct output. The '1 grad step' and '10 grad steps' lines show the model's performance after one and ten gradient steps, respectively. The '10 grad steps' line is generally the highest, indicating better convergence towards the 'ground truth'.\n\n## Text in figure\npre-update, 1 grad step, 10 grad steps, ground truth, used for grad, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update, 1 grad step, 10 grad steps, pre-update"
+  }
+]

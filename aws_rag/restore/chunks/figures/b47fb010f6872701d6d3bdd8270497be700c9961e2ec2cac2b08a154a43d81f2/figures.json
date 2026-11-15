@@ -1,0 +1,29 @@
+[
+  {
+    "file": "p008_f01.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 1: A trace of the first few operators of Resnet-50. The top row depicts the execution of the control flow running on the host CPU. The gray areas are Python code executed by its interpreter. The colored areas correspond to the work done on the host CPU to queue various operators (convolution, batch normalization, and so on). The bottom row shows the corresponding execution of those operators on the GPU. The arrows pair the two events in time.",
+    "width": 792,
+    "height": 44,
+    "description": "This figure is a visual representation of the execution trace of the first few operators of the ResNet-50 model. It shows the execution of control flow on the host CPU and the corresponding execution of operators on the GPU. The top row depicts the CPU execution, with gray areas representing Python code and colored areas representing the work done on the CPU to queue various operators. The bottom row shows the GPU execution, with arrows pairing the CPU and GPU events in time.\n\nText in figure: CPU, GPU, conv2d, add, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad, batch_norm, th_max, conv2d, ad"
+  },
+  {
+    "file": "p008_f02.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 2: Annotated traces of the execution of ResNet-50 on GPU.",
+    "width": 795,
+    "height": 110,
+    "description": "## Description\nThis figure is a visual representation of the execution traces of ResNet-50 on a GPU. It shows the distribution of time spent in different CUDA operations during the first and subsequent iterations of the model's execution. The figure is divided into two main sections: \"First iteration\" and \"Subsequent iterations,\" each displaying the time spent in CUDA kernels and the CUDA runtime.\n\n## Text in figure\nCUDA Malloc, CUDA Free, CUDA Memcpy, CUDA Kernels, CUDA Runtime, First iteration, Subsequent iterations"
+  },
+  {
+    "file": "p009_f03.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 3: Among arXiv papers each month that mention common deep learning frameworks, percentage of them that mention PyTorch.",
+    "width": 783,
+    "height": 159,
+    "description": "## Description\n\nThis line graph depicts the percentage of arXiv papers mentioning common deep learning frameworks each month, with a focus on PyTorch. The graph spans from July 2017 to January 2019. The series for PyTorch starts at around 0% in July 2017 and rises steadily, reaching approximately 40% by January 2019. The series for other frameworks remains relatively stable, showing minor fluctuations but no significant upward or downward trends.\n\n## Text in figure\n\nThe graph shows the percentage of arXiv papers mentioning common deep learning frameworks each month, focusing on PyTorch. The x-axis represents the months from July 2017 to January 2019. The y-axis represents the percentage of papers mentioning the frameworks. The series for PyTorch starts at 0% in July 2017 and increases to approximately 40% by January 2019. The series for other frameworks remains relatively stable throughout the period."
+  }
+]

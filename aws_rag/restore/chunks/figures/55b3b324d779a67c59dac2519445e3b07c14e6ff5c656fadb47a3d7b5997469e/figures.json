@@ -1,0 +1,306 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1. Left: Memory layout when serving an LLM with 13B parameters on NVIDIA A100. The parameters (gray) persist in GPU memory throughout serving. The memory for the KV cache (red) is (de)allocated per serving request. A small amount of memory (yellow) is used ephemerally for activation. Right: vLLM smooths out the rapid growth curve of KV cache memory seen in existing systems [31, 60], leading to a notable boost in serving throughput.",
+    "width": 444,
+    "height": 250,
+    "description": "## Description\n\nThe figure compares memory usage and throughput between existing systems and vLLM. The left panel shows a memory layout on an NVIDIA A100 40GB GPU, with parameters (26GB, 65%) in gray, KV cache (>30%) in red, and others in yellow. The right panel shows memory usage and throughput. The vLLM series is higher than existing systems, with memory usage peaking at 40GB and throughput at 1.2k tokens/s.\n\n## Text in figure\n\nLeft panel: Parameters (26GB, 65%), KV Cache (>30%), Others, NVIDIA A100 40GB\nRight panel: Memory usage (GB), Parameter size, Existing systems, vLLM, Batch size (# requests), Throughput (token/s)",
+    "pdf_text": "NVIDIA A100 40GB | Parameters | (26GB, 65%) | KV | Cache | (>30%) | Others | 20 | 30 | 40 | Memory usage (GB) | Parameter size | Existing systems | vLLM | 0 | 10 | 20 | 30 | 40 | Batch size (# requests) | 0 | 0.4k | 0.8k | 1.2k | Throughput (token/s)",
+    "bbox": [
+      323.7,
+      182.9,
+      545.6,
+      308.1
+    ]
+  },
+  {
+    "file": "p002_f02.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 2. Average percentage of memory wastes in different LLM serving systems during the experiment in \u00a76.2.",
+    "width": 450,
+    "height": 244,
+    "description": "This figure is a bar chart comparing the average percentage of memory wastes in different LLM serving systems. The chart shows four systems: Orca (Max), Orca (Pow2), Orca (Oracle), and vLLM. Each system is represented by a bar divided into four segments, each segment representing a different type of memory waste: Token states, Reservation, Internal frag., and External frag. & Others. The vLLM system has the highest percentage of memory waste, with 96.3% of its memory usage being waste. The Orca (Max) system has the lowest percentage of memory waste, with 20.4% of its memory usage being waste.\n\nText in figure: Orca, (Max), Orca, (Pow2), Orca, (Oracle), vLLM, 0, 20, 40, 60, 80, 100, KV cache usage (%), 20.4, 13.3, 57.3, 8.9, 26.8, 17.9, 13.6, 41.6, 38.2, 25.2, 36.6, 96.3, Token states, Reservation, Internal frag., External frag., & Others",
+    "pdf_text": "Orca | (Max) | Orca | (Pow2) | Orca | (Oracle) | vLLM | 0 | 20 | 40 | 60 | 80 | 100 | KV cache usage (%) | 20.4 | 13.3 | 57.3 | 8.9 | 26.8 | 17.9 | 13.6 | 41.6 | 38.2 | 25.2 | 36.6 | 96.3 | Token states | Reservation | Internal frag. | External frag. | & Others",
+    "bbox": [
+      57.9,
+      82.4,
+      282.9,
+      204.7
+    ]
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3. KVcache memory management in existing systems. Three types of memory wastes - reserved, internal fragmentation, and external fragmentation - exist that prevent other requests from fitting into the memory. The token in each memory slot represents its KV cache. Note the same tokens can have different KV cache when at different positions.",
+    "width": 857,
+    "height": 127,
+    "description": "This figure is a diagram illustrating memory management in existing systems for large language models, specifically focusing on KV cache memory. It shows three types of memory waste: reserved, internal fragmentation, and external fragmentation. The diagram includes a sequence of words with their corresponding KV cache states, highlighting how the same tokens can have different KV caches at different positions. It also indicates the number of slots never used due to internal and external fragmentation, and slots reserved for future use.\n\nText in figure: Four, score, and, seven, years, ago, our, fathers brought, forth, <eos>, <resv>, You, only, live, once, <eos>, <resv>, 2038 slots never used, (internal fragmentation), 2 slots future used, (reserved), External fragmentation, 7 KV cache states for, request A\u2019s prompt, 3 KV cache states for, request B\u2019s prompt, 1 slot future used, (reserved), 507 slots never used, (Internal fragmentation), Request B, current iteration, Request A, current iteration, 1 slot for, generated token",
+    "pdf_text": "Four | score | and | seven | years | ago | our | fathers brought | forth | <eos> <resv> | \u2026 | <resv> | You | only | live | once | <eos> <resv> | \u2026 | <resv> | 2038 slots never used | (internal fragmentation) | 2 slots future used | (reserved) | External fragmentation | 7 KV cache states for | request A\u2019s prompt | 3 KV cache states for | request B\u2019s prompt | 1 slot future used | (reserved) | 507 slots never used | (Internal fragmentation) | Request B | current iteration | Request A | current iteration | 1 slot for | generated token",
+    "bbox": [
+      90.5,
+      72.5,
+      518.8,
+      136.1
+    ]
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 4. vLLM system overview.",
+    "width": 430,
+    "height": 228,
+    "description": "## Description\n\nThis figure is a system overview diagram for the vLLM system, illustrating the architecture and components involved in efficient memory management for large language model serving. It shows the KV Cache Manager, Scheduler, CPU Block Allocator, GPU Block Allocator, and Block tables. The diagram also depicts multiple Worker nodes, each containing a Cache Engine, Model Shard, and Cache.\n\n## Text in figure\n\nKV Cache Manager, Scheduler, CPU Block Allocator, GPU Block Allocator, Block tables, Worker 0, Model, Shard 0, Cache, Engine, Worker 1, Model, Shard 1, Cache, Engine, Worker N - 1, Model, Shard N - 1, Cache, Engine,...",
+    "pdf_text": "KV Cache Manager | Scheduler | CPU Block | Allocator | GPU Block | Allocator | Block tables | Worker 0 | Model | Shard 0 | Cache | Engine | Worker 1 | Model | Shard 1 | Cache | Engine | Worker N - 1 | Model | Shard N - 1 | Cache | Engine | \u2026",
+    "bbox": [
+      64.8,
+      71.6,
+      280.0,
+      185.3
+    ]
+  },
+  {
+    "file": "p005_f05.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 5. Illustration of the PagedAttention algorithm, where the attention key and values vectors are stored as non-contiguous blocks in the memory.",
+    "width": 382,
+    "height": 174,
+    "description": "## Description\n\nThis figure illustrates the PagedAttention algorithm, showing how attention key and value vectors are stored in non-contiguous memory blocks. The diagram includes three blocks: Block 0, Block 1, and Block 2. The query vector \"forth\" is connected to Block 2, which contains the vectors \"brought\" and \"forth\". Block 1 holds \"years\", \"ago\", \"our\", and \"fathers\", while Block 0 contains \"Four\", \"score\", \"and\", and \"seven\".\n\n## Text in figure\n\nBlock 0: Four, score, and, seven\nBlock 1: years, ago, our, fathers\nBlock 2: brought, forth\nQuery vector: forth\nKey and value vectors",
+    "pdf_text": "forth | Query | vector | years | ago | our | fathers | brought | forth | Four | score | and | seven | Key and value vectors | Block 1 | Block 2 | Block 0",
+    "bbox": [
+      340.6,
+      73.2,
+      531.7,
+      160.0
+    ]
+  },
+  {
+    "file": "p006_f06.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 6. Block table translation in vLLM.",
+    "width": 477,
+    "height": 226,
+    "description": "## Description\nThis figure illustrates the memory management strategy in vLLM for large language models, specifically focusing on the block table translation process. It shows how logical KV blocks are mapped to physical KV blocks on GPU DRAM. The figure includes a prompt and its outputs, a block table, and a mapping between logical and physical blocks.\n\n## Text in figure\nRequest A, Prompt: \"Four score and seven years ago our\", Outputs: \"fathers\" \u2192 \"brought\" \u2192..., Block 0, Block 1, Block 2, Block 3, years, ago, our, fathers, brought, Four, score, and, seven, Physical KV blocks (on GPU DRAM), Block 0, Block 1, Block 2, Block 3, Block 4, Block 5, Block 6, Block 7, Block 8, Logical KV blocks, Physical block number, # filled, 7, 4, 1, 3 \u2192 4, 3, 1, \u2013, \u2013, Block Table, 1, 1, 1, 1, 1, 1, 1, 2, 3, 1, 1, 1, 1, 2, 3, 3, 3, 1, 1, 1, 1, 3, 1, 1, 1, 2, 1, 1, 1, 1, 3",
+    "pdf_text": "Request | A | Four | score | and | seven | years | ago | our | fathers | brought | Prompt: \u201cFour score and seven years ago our\u201d | Outputs: \u201cfathers\u201d \u2192 \u201cbrought\u201d \u2192 \u2026 | Block 0 | Block 1 | Block 2 | Block 3 | years | ago | our | fathers | brought | Four | score | and | seven | Physical KV blocks | (on GPU DRAM) | Block 0 | Block 1 | Block 2 | Block 3 | Block 4 | Block 5 | Block 6 | Block 7 | Block 8 | Logical KV blocks | Physical block | number | # filled | 7 | 4 | 1 | 3 \u2192 4 | 3 | 1 | \u2013 | \u2013 | Block Table | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 2 | 3 | 1 | 1 | 1 | 1 | 2 | 3 | 3 | 3 | 1 | 1 | 1 | 1 | 3 | 1 | 1 | 1 | 2 | 1 | 1 | 1 | 1 | 3",
+    "bbox": [
+      54.3,
+      72.3,
+      293.2,
+      185.6
+    ]
+  },
+  {
+    "file": "p006_f07.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 7. Storing the KV cache of two requests at the same time in vLLM.",
+    "width": 479,
+    "height": 190,
+    "description": "This figure illustrates the memory management strategy for storing the key-value (KV) cache of two concurrent requests in a large language model (LLM) serving system, as described in the paper \"Efficient Memory Management for Large Language Model Serving with PagedAttention.\" It shows how physical KV blocks are mapped to logical KV blocks for two requests, A and B, to optimize memory usage.\n\nThe figure displays two sets of logical KV blocks for Request A and Request B, each containing words like \"Four,\" \"score,\" \"and,\" \"seven,\" \"years,\" \"ago,\" \"our,\" \"fathers,\" \"brought,\" \"of,\" \"times,\" \"It,\" \"was,\" \"the,\" and \"best.\" These blocks are stored in physical KV blocks, with Request A's blocks on the left and Request B's blocks on the right. The mapping between logical and physical blocks is shown, indicating how the system efficiently utilizes memory to handle multiple requests simultaneously.",
+    "pdf_text": "Four | score | and | seven | years | ago | our | fathers | brought | Block 0 | Block 1 | Block 2 | Block 3 | years | ago | our | fathers | of | times | brought | It | was | the | best | Four | score | and | seven | Physical KV blocks | Block 0 | Block 1 | Block 2 | Block 3 | Block 4 | Block 5 | Block 6 | Block 7 | Block 8 | Logical KV blocks | It | was | the | best | of | times | Block 0 | Block 1 | Block 2 | Logical KV blocks | Request | A | Request | B",
+    "bbox": [
+      317.8,
+      72.7,
+      557.6,
+      167.4
+    ]
+  },
+  {
+    "file": "p007_f08.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 8. Parallel sampling example.",
+    "width": 479,
+    "height": 190,
+    "description": "## Description\nThis figure illustrates the concept of parallel sampling in a memory management system for large language models, specifically using the PagedAttention mechanism. It shows how multiple samples (A1 and A2) are processed in parallel, with each sample accessing different logical KV blocks that are mapped to physical KV blocks. The figure highlights the use of a copy-on-write mechanism to manage memory efficiently.\n\n## Text in figure\nSample A1, Four, score, and, seven, years, ago, our, fathers, Block 0, Block 1, years, ago, our, mothers, years, ago, our, fathers, Four, score, and, seven, Physical KV blocks, Block 0, Block 1, Block 2, Block 3, Block 4, Block 5, Block 6, Block 7, Block 8, Logical KV blocks, Four, score, and, seven, years, ago, our, mothers, Block 0, Block 1, Logical KV blocks, Sample A2, Copy-on-write, Ref count: 2 \u2192 1",
+    "pdf_text": "Sample | A1 | Four | score | and | seven | years | ago | our | fathers | Block 0 | Block 1 | years | ago | our | mothers | years | ago | our | fathers | Four | score | and | seven | Physical KV blocks | Block 0 | Block 1 | Block 2 | Block 3 | Block 4 | Block 5 | Block 6 | Block 7 | Block 8 | Logical KV blocks | Four | score | and | seven | years | ago | our | mothers | Block 0 | Block 1 | Logical KV blocks | Sample | A2 | Copy-on-write | Ref count: 2 \u2192 1",
+    "bbox": [
+      54.2,
+      72.0,
+      293.5,
+      167.1
+    ]
+  },
+  {
+    "file": "p007_f09.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 9. Beam search example.",
+    "width": 430,
+    "height": 155,
+    "description": "## Search Index\n\n### Description\nThis figure illustrates a beam search example for a language model, showing how beam candidates are expanded and pruned over multiple steps. It depicts the progression of beam candidates through various blocks, with some blocks being eliminated (marked with an 'X').\n\n### Text in Figure\nBeam candidate 0, Beam candidate 1, Beam candidate 2, Beam candidate 3, Block 0, Block 1, Block 2, Block 3, Block 4, Block 5, Block 6, Block 7, Block 8, Block 9, Block 10, Block 11, Block 12, X, X, X, X",
+    "pdf_text": "Block 10 | Block 11 | Block 1 | Block 3 | Block 6 | Block 7 | Block 5 | Block 0 | Block 2 | Block 4 | Block 8 | Block 9 | Block 12 | Beam candidate 0 | Beam candidate 1 | Beam candidate 2 | Beam candidate 3",
+    "bbox": [
+      329.4,
+      72.4,
+      544.3,
+      150.1
+    ]
+  },
+  {
+    "file": "p008_f10.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 10. Shared prompt example for machine translation. The examples are adopted from [5].",
+    "width": 426,
+    "height": 153,
+    "description": "## Figure Description\nThis figure illustrates a shared prompt example for machine translation using large language models (LLMs). It shows two sequences, A and B, each with a shared prefix and a task input. The shared prefix includes translations for \"sea otter,\" \"peppermint,\" and \"plush giraffe.\" Sequence A has a task input for \"cheese,\" while Sequence B has \"I love you.\" The figure demonstrates how the LLMs generate outputs for these inputs.\n\n## Figure Content\n- Shared prefix: \"sea otter\" => \"loutre de mer\", \"peppermint\" => \"menthe poivr\u00e9e\", \"plush giraffe\" => \"girafe en peluche\"\n- Sequence A: Task input: \"cheese\", Task output: \"fromage\"\n- Sequence B: Task input: \"I love you\", Task output: \"Je t\u2019amie\"\n- LLM outputs: Sequence A, Sequence B",
+    "pdf_text": "Translate English to French: | \u201csea otter\u201d => \u201cloutre de mer\u201d | \u201cpeppermint\u201d => \u201cmenthe poivr\u00e9e\u201d | \u201cplush girafe\u201d => \u201cgirafe en peluche\u201d | \u201ccheese\u201d => | \u201cfromage\u201d | Translate English to French: | \u201csea otter\u201d => \u201cloutre de mer\u201d | \u201cpeppermint\u201d => \u201cmenthe poivr\u00e9e\u201d | \u201cplush girafe\u201d => \u201cgirafe en peluche\u201d | \u201cI love you\u201d => | \u201cJe t\u2019amie\u201d | Shared prefix | Task input | Task output | Sequence A | Prompt | Sequence B | Prompt | Sequence A | LLM output | Sequence B | LLM output",
+    "bbox": [
+      66.0,
+      71.5,
+      279.1,
+      147.9
+    ]
+  },
+  {
+    "file": "p009_f11.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 11. Input and output length distributions of the (a) ShareGPT and (b) Alpaca datasets.",
+    "width": 465,
+    "height": 190,
+    "description": "## Figure Description\n\nThis figure displays two density plots comparing the input and output token lengths for two datasets: ShareGPT and Alpaca. Each plot has two series: Input and Output. In the ShareGPT plot, the Input series peaks at a density of 1.5 and has a mean of 161.31 tokens, while the Output series peaks at a density of 0.5 and has a mean of 337.99 tokens. In the Alpaca plot, the Input series peaks at a density of 6 and has a mean of 19.31 tokens, while the Output series peaks at a density of 2 and has a mean of 58.45 tokens.\n\n## Textual Content\n\nText in figure: \"Input (mean: 161.31)\", \"Output (mean: 337.99)\", \"Input (mean: 19.31)\", \"Output (mean: 58.45)\", \"Density\", \"1e\u22122\", \"0.0\", \"0.5\", \"1.0\", \"1.5\", \"2.0\", \"2\", \"4\", \"6\", \"8\", \"0\", \"500\", \"1000\", \"1500\", \"2000\", \"# Tokens\", \"(a) ShareGPT\", \"(b) Alpaca\"",
+    "pdf_text": "0 | 500 | 1000 | 1500 | 2000 | # Tokens | 0.0 | 0.5 | 1.0 | 1.5 | 2.0 | Density | 1e\u22122 | Input (mean: 161.31) | Output (mean: 337.99) | (a) ShareGPT | 0 | 500 | 1000 | 1500 | 2000 | # Tokens | 0 | 2 | 4 | 6 | 8 | Density | 1e\u22122 | Input (mean: 19.31) | Output (mean: 58.45) | (b) Alpaca",
+    "bbox": [
+      321.0,
+      75.9,
+      553.4,
+      170.8
+    ]
+  },
+  {
+    "file": "p010_f12.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 12. Single sequence generation with OPT models on the ShareGPT and Alpaca dataset",
+    "width": 996,
+    "height": 370,
+    "description": "## Description:\nThis figure presents six line graphs comparing the normalized latency of different models under varying request rates. Each graph corresponds to a different model size and dataset combination. The models compared are FasterTransformer, Orca (Max), Orca (Pow2), Orca (Oracle), and vLLM. The x-axis represents the request rate in requests per second (req/s), and the y-axis shows the normalized latency in seconds per token (s/token).\n\n## Text in figure:\nNormalized latency (s/token), Request rate (req/s), FasterTransformer, Orca (Max), Orca (Pow2), Orca (Oracle), vLLM, 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, (a) OPT-13B, 1 GPU, ShareGPT, (b) OPT-66B, 4 GPUs, ShareGPT, (c) OPT-175B, 8 GPUs, ShareGPT, (d) OPT-13B, 1 GPU, Alpaca, (e) OPT-66B, 4 GPUs, Alpaca, (f) OPT-175B, 8 GPUs, Alpaca",
+    "pdf_text": "0.0 | 0.5 | 1.0 | 1.5 | 2.0 | Request rate (req/s) | (a) OPT-13B, 1 GPU, ShareGPT | 0.0 | 0.5 | 1.0 | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Request rate (req/s) | (b) OPT-66B, 4 GPUs, ShareGPT | 0.0 | 0.5 | 1.0 | 0.0 | 0.5 | 1.0 | 1.5 | 2.0 | 2.5 | Request rate (req/s) | (c) OPT-175B, 8 GPUs, ShareGPT | 0.0 | 0.5 | 1.0 | Normalized latency | (s/token) | FasterTransformer | Orca (Max) | Orca (Pow2) | Orca (Oracle) | vLLM | 0 | 10 | 20 | 30 | Request rate (req/s) | (d) OPT-13B, 1 GPU, Alpaca | 0.0 | 0.5 | 1.0 | 0 | 5 | 10 | 15 | 20 | Request rate (req/s) | (e) OPT-66B, 4 GPUs, Alpaca | 0.0 | 0.5 | 1.0 | 0 | 5 | 10 | 15 | 20 | Request rate (req/s) | (f) OPT-175B, 8 GPUs, Alpaca | 0.0 | 0.5 | 1.0 | Normalized latency | (s/token)",
+    "bbox": [
+      57.0,
+      76.3,
+      554.9,
+      261.5
+    ]
+  },
+  {
+    "file": "p010_f13.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 13. Average number of batched requests when serving OPT-13B for the ShareGPT (2 reqs/s) and Alpaca (30 reqs/s) traces.",
+    "width": 448,
+    "height": 184,
+    "description": "## Figure Description\nThe figure consists of two bar charts labeled (a) ShareGPT and (b) Alpaca, each showing the average number of batched requests for different memory management strategies. In both charts, the x-axis represents different strategies: Orca (Max), Orca (Pow2), Orca (Oracle), and vLLM. The y-axis represents the number of batched requests. In the ShareGPT chart, vLLM has the highest number of batched requests (30.42), followed by Orca (Oracle) (13.62), Orca (Pow2) (9.81), and Orca (Max) (7.00). In the Alpaca chart, vLLM also has the highest number of batched requests (132.44), followed by Orca (Oracle) (72.75), Orca (Pow2) (43.24), and Orca (Max) (7.00).\n\n## Figure Details\nText in figure: Orca (Max), Orca (Pow2), Orca (Oracle), vLLM, # Batched requests, 7.00, 9.81, 13.62, 30.42, 7.00, 43.24, 72.75, 132.44.",
+    "pdf_text": "Orca | (Max) | Orca | (Pow2) | Orca | (Oracle) | vLLM | 0 | 5 | 10 | 15 | 20 | 25 | 30 | 35 | # Batched requests | 7.00 | 9.81 | 13.62 | 30.42 | (a) ShareGPT | Orca | (Max) | Orca | (Pow2) | Orca | (Oracle) | vLLM | 0 | 25 | 50 | 75 | 100 | 125 | 150 | # Batched requests | 7.00 | 43.24 | 72.75 | 132.44 | (b) Alpaca",
+    "bbox": [
+      62.4,
+      288.0,
+      286.3,
+      380.2
+    ]
+  },
+  {
+    "file": "p011_f14.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 14. Parallel generation and beam search with OPT-13B on the Alpaca dataset.",
+    "width": 997,
+    "height": 369,
+    "description": "## Description\n\nThis figure presents six line graphs comparing the normalized latency of different models under varying request rates for parallel generation and beam search tasks. Each graph is labeled with the task type and the size of the parallel or beam width. The models compared are Orca (Max), Orca (Pow2), Orca (Oracle), and vLLM. The x-axis represents the request rate in requests per second (req/s), and the y-axis shows the normalized latency in seconds per token (s/token).\n\n## Text in figure\n\nNormalized latency (s/token)\n0.0, 0.5, 1.0\nRequest rate (req/s)\n0, 2, 4, 6, 8, 10, 15\n(a) parallel generation (parallel size = 2)\n(b) parallel generation (parallel size = 4)\n(c) parallel generation (parallel size = 6)\n(d) beam search (beam width = 2)\n(e) beam search (beam width = 4)\n(f) beam search (beam width = 6)\nOrca (Max), Orca (Pow2), Orca (Oracle), vLLM",
+    "pdf_text": "0 | 5 | 10 | 15 | Request rate (req/s) | (a) parallel generation (parallel size = 2) | 0.0 | 0.5 | 1.0 | 0 | 2 | 4 | 6 | 8 | 10 | Request rate (req/s) | (b) parallel generation (parallel size = 4) | 0.0 | 0.5 | 1.0 | 0 | 2 | 4 | 6 | Request rate (req/s) | (c) parallel generation (parallel size = 6) | 0.0 | 0.5 | 1.0 | Normalized latency | (s/token) | Orca (Max) | Orca (Pow2) | Orca (Oracle) | vLLM | 0 | 5 | 10 | 15 | Request rate (req/s) | (d) beam search (beam width = 2) | 0.0 | 0.5 | 1.0 | 0 | 2 | 4 | 6 | 8 | 10 | Request rate (req/s) | (e) beam search (beam width = 4) | 0.0 | 0.5 | 1.0 | 0 | 2 | 4 | 6 | Request rate (req/s) | (f) beam search (beam width = 6) | 0.0 | 0.5 | 1.0 | Normalized latency | (s/token)",
+    "bbox": [
+      57.3,
+      76.8,
+      555.9,
+      261.7
+    ]
+  },
+  {
+    "file": "p011_f15.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 15. Average amount of memory saving from sharing KV blocks, when serving OPT-13B for the Alpaca trace.",
+    "width": 448,
+    "height": 150,
+    "description": "## Description\n\nThis figure contains two bar charts, labeled (a) and (b), showing memory savings percentages for different configurations of OPT-13B model serving. Chart (a) titled \"Parallel sampling\" shows memory savings for 2, 4, and 6 output sequences, with values 6.09%, 8.53%, and 9.79% respectively. Chart (b) titled \"Beam search\" shows memory savings for beam widths of 2, 4, and 6, with values 37.56%, 53.13%, and 55.16% respectively.\n\n## Visible Text\n\n(a) Parallel sampling\n2: 6.09%\n4: 8.53%\n6: 9.79%\nMemory saving (%)\n# Output sequences\n\n(b) Beam search\n2: 37.56%\n4: 53.13%\n6: 55.16%\nMemory saving (%)\nBeam width",
+    "pdf_text": "2 | 4 | 6 | # Output sequences | 0 | 4 | 8 | 12 | Memory saving (%) | 6.09 | 8.53 | 9.79 | (a) Parallel sampling | 2 | 4 | 6 | Beam width | 0 | 20 | 40 | 60 | Memory saving (%) | 37.56 | 53.13 | 55.16 | (b) Beam search",
+    "bbox": [
+      324.9,
+      300.0,
+      549.1,
+      374.9
+    ]
+  },
+  {
+    "file": "p012_f16.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "",
+    "width": 424,
+    "height": 217,
+    "description": "## Description\n\nThis figure contains two line graphs comparing the normalized latency of two systems, Orca (Oracle) and vLLM, under different request rates. Both graphs measure latency in seconds per token. In graph (a), the Orca system shows higher latency at lower request rates, while vLLM maintains a lower latency. At higher request rates, both systems' latencies increase, with Orca's latency surpassing vLLM's. In graph (b), both systems show similar low latencies at lower request rates, with vLLM slightly ahead. As the request rate increases, vLLM's latency increases more gradually than Orca's.\n\n## Text in figure\n\nNormalized latency (s/token), Request rate (req/s), Orca (Oracle), vLLM, 0, 20, 40, 0.0, 0.5, 1.0, (a) 1-shot prefix prompt, (b) 5-shot prefix prompt",
+    "pdf_text": "0 | 20 | 40 | Request rate (req/s) | (a) 1-shot prefix prompt | 0.0 | 0.5 | 1.0 | 0 | 20 | 40 | Request rate (req/s) | (b) 5-shot prefix prompt | 0.0 | 0.5 | 1.0 | Normalized latency | (s/token) | Orca (Oracle) | vLLM",
+    "bbox": [
+      67.0,
+      77.2,
+      279.1,
+      185.3
+    ]
+  },
+  {
+    "file": "p012_f17.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 16. Translation workload where the input prompts share a common prefix. The prefix includes (a) 1 example with 80 tokens or (b) 5 examples with 341 tokens.",
+    "width": 369,
+    "height": 145,
+    "description": "## Description\nThis figure is a line graph comparing the normalized latency of different memory management techniques under varying request rates. The graph shows four series: Orca (Max), Orca (Pow2), Orca (Oracle), and vLLM. Orca (Max) has the highest latency, followed by Orca (Oracle), Orca (Pow2), and vLLM, which has the lowest latency. The graph indicates that as the request rate increases, the normalized latency also increases for all techniques.\n\n## Text in figure\nNormalized latency (s/token), Request rate (req/s), Orca (Max), Orca (Pow2), Orca (Oracle), vLLM, 0.0, 0.2, 0.4, 0.6, 0.8, 0.0, 0.5, 1.0",
+    "pdf_text": "0.0 | 0.2 | 0.4 | 0.6 | 0.8 | Request rate (req/s) | 0.0 | 0.5 | 1.0 | Normalized latency | (s/token) | Orca (Max) | Orca (Pow2) | Orca (Oracle) | vLLM",
+    "bbox": [
+      79.6,
+      252.0,
+      264.2,
+      324.7
+    ]
+  },
+  {
+    "file": "p012_f18.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "",
+    "width": 453,
+    "height": 155,
+    "description": "## Section 1: Figure Description\n\nThis figure consists of two plots comparing kernel latency and normalized latency for different models and configurations. The left plot shows kernel latency in microseconds (us) as a function of context length, comparing vLLM and FT models with batch sizes of 8 and 32. The right plot shows normalized latency in seconds per token (s/token) as a function of block size, comparing ShareGPT and Alpaca models.\n\n## Section 2: Figure Details\n\n- **Left Plot:**\n  - **Highest Latency:** vLLM (bs 32) at 250 us.\n  - **Lowest Latency:** FT (bs 8) at 50 us.\n  - **Context Lengths:** 64, 128, 256.\n  - **Series:** vLLM (bs 8), vLLM (bs 32), FT (bs 8), FT (bs 32).\n\n- **Right Plot:**\n  - **Highest Latency:** Alpaca at 17.5 s/token.\n  - **Lowest Latency:** ShareGPT at 0.0 s/token.\n  - **Block Sizes:** 1, 2, 4, 8, 16, 32, 64, 128, 256.\n  - **Series:** ShareGPT, Alpaca.",
+    "pdf_text": "64 | 128 | 256 | Context length | 0 | 50 | 100 | 150 | 200 | 250 | Kernel latency (us) | vLLM (bs 8) | FT (bs 8) | vLLM (bs 32) | FT (bs 32) | 1 | 2 | 4 | 8 | 16 | 32 | 64 | 128 256 | Block size | 0.0 | 2.5 | 5.0 | 7.5 | 10.0 | 12.5 | 15.0 | 17.5 | Normalized latency (s/token) | ShareGPT | Alpaca",
+    "bbox": [
+      322.3,
+      78.9,
+      548.8,
+      156.7
+    ]
+  },
+  {
+    "file": "p013_f19.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 19. (a) Overhead of recomputation and swapping for different block sizes. (b) Performance when serving OPT-13B with the ShareGPT traces at the same request rate.",
+    "width": 439,
+    "height": 170,
+    "description": "## Section 1: Figure description and visible content\n\nThis figure consists of two plots, labeled (a) and (b), showing performance metrics for different memory management techniques in large language model serving. Plot (a) depicts the overhead of recomputation and swapping for varying block sizes, measured in milliseconds. The highest series is \"Recompute\" at 140 ms, while the lowest is \"Swap in + out\" at around 20 ms. Plot (b) shows normalized latency in seconds per token for the same techniques, with \"Recompute\" having the highest latency at 2.5 s/token and \"Swap\" the lowest at 0.5 s/token.\n\n## Section 2: Visible content details\n\nText in figure: \"Microbenchmark\", \"End-to-end performance\", \"Block size\", \"Time (ms)\", \"Recompute\", \"Swap in\", \"Swap out\", \"Swap in + out\", \"Normalized latency (s/token)\", \"1\", \"2\", \"4\", \"8\", \"16\", \"32\", \"64\", \"128\", \"256\", \"0.0\", \"0.5\", \"1.0\", \"1.5\", \"2.0\", \"2.5\"",
+    "pdf_text": "1 | 2 | 4 | 8 | 16 | 32 | 64 | 128 256 | Block size | 0 | 20 | 40 | 60 | 80 | 100 | 120 | 140 | Time (ms) | Recompute | Swap in | Swap out | Swap in + out | (a) Microbenchmark | 1 | 2 | 4 | 8 | 16 | 32 | 64 | 128 256 | Block size | 0.0 | 0.5 | 1.0 | 1.5 | 2.0 | 2.5 | Normalized latency (s/token) | Recompute | Swap | (b) End-to-end performance",
+    "bbox": [
+      62.7,
+      74.9,
+      282.0,
+      159.8
+    ]
+  }
+]

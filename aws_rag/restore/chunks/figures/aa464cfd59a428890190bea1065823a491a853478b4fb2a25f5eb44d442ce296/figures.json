@@ -1,0 +1,226 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1: Self-attention from a Vision Transformer with 8 \u00d7 8 patches trained with no supervision. We look at the self-attention of the [CLS] token on the heads of the last layer. This token is not attached to any label nor supervision. These maps show that the model automatically learns class-specific features leading to unsupervised object segmentations.",
+    "width": 991,
+    "height": 250,
+    "description": "Figure 1 displays self-attention maps from a Vision Transformer with 8x8 patches, trained without supervision. The maps show unsupervised object segmentations, with the [CLS] token's self-attention on the last layer's heads. Objects include a bird, toothbrush, London skyline, giraffes, a sailboat, a house, a dog, and an airplane.\n\nText in figure: Figure 1, Self-attention from a Vision Transformer with 8 \u00d7 8 patches trained with no supervision, [CLS] token, self-attention, last layer, heads, bird, toothbrush, London skyline, giraffes, sailboat, house, dog, airplane.",
+    "pdf_text": "",
+    "bbox": [
+      49.7,
+      226.5,
+      545.1,
+      351.7
+    ]
+  },
+  {
+    "file": "p002_f02.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 2: Self-distillation with no labels. We illustrate DINO in the case of one single pair of views ( x 1 , x 2 ) for simplicity. The model passes two different random transformations of an input image to the student and teacher networks. Both networks have the same architecture but different parameters. The output of the teacher network is centered with a mean computed over the batch. Each networks outputs a K dimensional feature that is normalized with a temperature softmax over the feature dimension. Their similarity is then measured with a cross-entropy loss. We apply a stop-gradient (sg) operator on the teacher to propagate gradients only through the student. The teacher parameters are updated with an exponential moving average (ema) of the student parameters.",
+    "width": 289,
+    "height": 282,
+    "description": "Figure type: Diagram\nDescription: The diagram illustrates the self-distillation process in DINO, a self-supervised learning method for vision transformers. It shows a single pair of input views (x1, x2) being processed by a student network (g\u03b8s) and a teacher network (g\u03b8t). Both networks have the same architecture but different parameters. The student network outputs a feature vector, which is normalized using a softmax function. The teacher network also outputs a feature vector, which is centered using a mean computed over the batch. The similarity between the student and teacher outputs is measured using a cross-entropy loss. The teacher parameters are updated with an exponential moving average (ema) of the student parameters.\n\nText in figure: student g\u03b8s, x, x2, x1, teacher g\u03b8t, centering, sg, softmax, p1, p2, softmax, loss:, - p2 log p1, ema",
+    "pdf_text": "student g\u03b8s | x | x2 | x1 | teacher g\u03b8t | centering | sg | softmax | p1 | p2 | softmax | loss: | - p2 log p1 | ema",
+    "bbox": [
+      354.3,
+      76.4,
+      498.9,
+      217.5
+    ]
+  },
+  {
+    "file": "p007_f03.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 3: Attention maps from multiple heads. We consider the heads from the last layer of a ViT-S/8 trained with DINO and display the self-attention for [CLS] token query. Different heads, materialized by different colors, focus on different locations that represents different objects or parts (more examples in Appendix).",
+    "width": 469,
+    "height": 478,
+    "description": "Figure 3: Attention maps from multiple heads. Displays self-attention for [CLS] token query from the last layer of a ViT-S/8 trained with DINO. Different heads, represented by different colors, focus on different locations, representing different objects or parts. Examples include a clock tower, a sandwich, a zebra, a stop sign, and a FedEx truck.\n\nText in figure: No specific text in the figure. The focus is on the visual representation of attention maps from multiple heads.",
+    "pdf_text": "",
+    "bbox": [
+      50.7,
+      300.2,
+      284.8,
+      539.0
+    ]
+  },
+  {
+    "file": "p008_f04.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "",
+    "width": 477,
+    "height": 335,
+    "description": "Description: The figure displays a comparison of different self-supervised learning methods for Vision Transformers (ViTs) using two datasets, ViT-S/16 and ViT-S/8. It shows the performance of three methods: Random, Supervised, and DINO, measured by a metric (possibly accuracy). The DINO method shows the highest performance across both datasets, with scores of 45.9 for ViT-S/16 and 44.7 for ViT-S/8.\n\nText in figure: Supervised, DINO, Random, ViT-S/16, 22.0, 27.3, 45.9, ViT-S/8, 21.8, 23.7, 44.7",
+    "pdf_text": "Supervised | DINO | Random | Supervised | DINO | ViT-S/16 | 22.0 | 27.3 | 45.9 | ViT-S/8 | 21.8 | 23.7 | 44.7",
+    "bbox": [
+      49.1,
+      74.4,
+      287.6,
+      242.2
+    ]
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "SK: Sinkhorn-Knopp, MC: Multi-Crop, Pred.: Predictor CE: Cross-Entropy, MSE: Mean Square Error, INCE: InfoNCE",
+    "width": 271,
+    "height": 221,
+    "description": "Section 1: Figure description\nThis figure is a line graph comparing the performance of two models, ViT-B and DeiT-S, in terms of ImageNet top-1 accuracy against throughput. The x-axis represents throughput in images per second (im/s), ranging from 10^2 to 10^3. The y-axis shows ImageNet top-1 accuracy, ranging from 72 to 78. ViT-B is represented by orange markers, while DeiT-S is represented by blue markers. The highest accuracy is achieved by ViT-B at 8x8 throughput, while the lowest accuracy is achieved by DeiT-S at 16x16 throughput.\n\nSection 2: Figure details\nText in figure: 102, 103, throughput (im/s), 72, 74, 76, 78, ImageNet top-1, 5x5, 8x8, 16x16, 8x8, 16x16, ViT-B, DeiT-S.",
+    "pdf_text": "102 | 103 | throughput (im/s) | 72 | 74 | 76 | 78 | ImageNet top-1 | 5x5 | 8x8 | 16x16 | 8x8 | 16x16 | ViT-B | DeiT-S",
+    "bbox": [
+      309.4,
+      350.4,
+      444.8,
+      460.8
+    ]
+  },
+  {
+    "file": "p009_f06.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 6: Top-1 accuracy on ImageNet validation with k -NN classifier. (left) Comparison between the performance of the momentum teacher and the student during training. (right) Comparison between different types of teacher network. The momentum encoder leads to the best performance but is not the only viable option.",
+    "width": 457,
+    "height": 174,
+    "description": "Description: The figure shows a line graph comparing the top-1 accuracy on the ImageNet validation set between a student and a teacher network during training. The student network's accuracy is represented by the blue line, while the teacher network's accuracy is represented by the orange line. The student network starts with a lower accuracy but eventually surpasses the teacher network. The graph includes a table on the right with various metrics, such as \"Student copy,\" \"Previous iter,\" \"Previous epoch,\" and \"Momentum.\"\n\nText in figure: \"val acc@1,\" \"Student,\" \"Teacher,\" \"Teacher,\" \"Top-1,\" \"Student copy,\" \"0.1,\" \"Previous iter,\" \"0.1,\" \"Previous epoch,\" \"66.6,\" \"Momentum,\" \"72.8,\" \"0,\" \"100,\" \"200,\" \"300,\" \"epochs,\" \"64,\" \"68,\" \"72\"",
+    "pdf_text": "0 | 100 | 200 | 300 | epochs | 64 | 68 | 72 | val acc@1 | Student | Teacher | Teacher | Top-1 | Student copy | 0.1 | Previous iter | 0.1 | Previous epoch | 66.6 | Momentum | 72.8",
+    "bbox": [
+      53.2,
+      76.0,
+      281.7,
+      162.9
+    ]
+  },
+  {
+    "file": "p009_f07.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 7: Collapse study. (left) : evolution of the teacher's target entropy along training epochs; (right) : evolution of KL divergence between teacher and student outputs.",
+    "width": 463,
+    "height": 195,
+    "description": "## Description\nThe figure consists of two plots. The left plot shows the evolution of the teacher's target entropy over training epochs. The \"both\" series starts highest at 8, then decreases to around 2. The \"sharpening\" series starts at 0 and remains at 0 throughout. The \"centering\" series remains constant at 8. The right plot shows the evolution of KL divergence between teacher and student outputs. The \"both\" series starts at 0, spikes to 4, and then decreases to around 2. The \"centering\" series remains at 0.\n\n## Text in figure\nTarget Entropy: 0, 2, 4, 6, 8\nKL divergence: 0, 2\nepochs: 0, 100\nsharpening: 0\ncentering: 8\nboth: 8, 2",
+    "pdf_text": "0 | 100 | epochs | 0 | 2 | 4 | 6 | 8 | Target Entropy | sharpening | centering | both | 0 | 100 | epochs | 0 | 2 | KL divergence",
+    "bbox": [
+      311.1,
+      75.2,
+      542.4,
+      172.7
+    ]
+  },
+  {
+    "file": "p015_f08.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 8: Self-attention for a set of reference points. We visualize the self-attention module from the last block of a ViT-S/8 trained with DINO. The network is able to separate objects, though it has been trained with no supervision at all.",
+    "width": 980,
+    "height": 176,
+    "description": "## Description\nThis figure displays visualizations of self-attention in a Vision Transformer (ViT) trained with the DINO self-supervised learning method. It shows how the model separates different objects in various scenes, despite being trained without any labeled data. The figure includes images of bottles, bananas, a cup, scissors, and animals, each with highlighted areas indicating the model's focus.\n\n## Text in figure\n- Bottles: \"Dragon Stout\", \"Guinness\"\n- Bananas\n- Cup with coffee\n- Scissors\n- Animals: elephant, zebra, other animals\n- Highlighted areas in images",
+    "pdf_text": "",
+    "bbox": [
+      52.0,
+      72.1,
+      542.2,
+      159.8
+    ]
+  },
+  {
+    "file": "p016_f09.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 9: Projection head design w/ or w/o l2-norm bottleneck.",
+    "width": 463,
+    "height": 324,
+    "description": "## Index Section 1\nFigure 9: Projection head design with and without l2-norm bottleneck. Two architectures shown: one with a 12-norm bottleneck and one without. Both include a linear layer, an n-layer MLP, and a final projection head. The input is a batch of images (B x 3 x 224 x 224). The output is a batch of features (B x K). The architecture with the bottleneck includes an additional l2 normalization step.\n\n## Index Section 2\nProjection head h, linear layer, 12 normalization, n-layer MLP, f, B x 384, B x 256, B x 256, B x K, g(x), x, B x 3 x 224 x 224, w/ l2-bottleneck, w/o l2-bottleneck.",
+    "pdf_text": "f | n-layer MLP | l2 normalization | linear layer | x | B x 3 x 224 x 224 | B x 384 | B x 256 | B x 256 | B x K | g(x) | projection head h | f | n-layer MLP | x | B x 384 | B x K | g(x) | projection head h | B x 3 x 224 x 224 | w/ l2-bottleneck | w/o l2-bottleneck",
+    "bbox": [
+      311.2,
+      72.2,
+      542.7,
+      234.0
+    ]
+  },
+  {
+    "file": "p017_f10.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "",
+    "width": 214,
+    "height": 154,
+    "description": "## Index\n\n### Figure Description\nThis figure is a line graph showing the validation accuracy of two models, labeled \"Student\" and \"Teacher,\" over 100 epochs. The \"Student\" model starts at 40% accuracy and increases to about 60%, while the \"Teacher\" model starts at 40% and reaches approximately 65%. The \"Teacher\" model consistently outperforms the \"Student\" model throughout the epochs.\n\n### Data Summary\n- **Series**: Student, Teacher\n- **Highest Series**: Teacher at 65%\n- **Lowest Series**: Student at 60%\n- **Epochs**: 0 to 100\n- **Val acc@1**: Ranges from 40% to 65%\n- **Legend**: Student, Teacher\n- **Axes**: Epochs (x-axis), Val acc@1 (y-axis)",
+    "pdf_text": "0 | 100 | epochs | 40 | 45 | 50 | 55 | 60 | val acc@1 | Student | Teacher",
+    "bbox": [
+      371.8,
+      66.9,
+      478.8,
+      143.9
+    ]
+  },
+  {
+    "file": "p018_f11.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "",
+    "width": 224,
+    "height": 162,
+    "description": "This figure is a line graph comparing the performance of two models over time, measured in epochs. The two models are labeled as \"w/o mc\" and \"w/ mc\". The \"w/o mc\" model starts at a lower value of approximately 45 and increases steadily to around 65. The \"w/ mc\" model starts at a higher value of approximately 50 and also increases steadily, reaching a peak of around 60 before decreasing slightly to about 55. The \"w/ mc\" model consistently outperforms the \"w/o mc\" model throughout the epochs.\n\nDescription of the figure: The graph shows the performance of two models over 300 epochs. The \"w/o mc\" model starts at 45 and increases to 65. The \"w/ mc\" model starts at 50 and increases to 60, then decreases slightly to 55. The \"w/ mc\" model is consistently higher than the \"w/o mc\" model.",
+    "pdf_text": "0 | 100 | 200 | 300 | epochs | 45 | 50 | 55 | 60 | 65 | k-nn val top-1 | w/o mc | w/ mc",
+    "bbox": [
+      369.6,
+      66.7,
+      481.5,
+      147.6
+    ]
+  },
+  {
+    "file": "p020_f12.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "Figure 10: Self-attention heads from the last layer. We look at the attention map when using the [CLS] token as a query for the different heads in the last layer. Note that the [CLS] token is not attached to any label or supervision.",
+    "width": 1020,
+    "height": 1252,
+    "description": "This figure displays a grid of attention maps from the last layer of a vision transformer model. Each row represents a different image, and each column shows the attention map for a specific self-attention head. The attention maps are visualized using a color-coded scheme, where different colors indicate varying levels of attention. The figure is divided into two main sections, labeled \"DINO\" and \"Supervised,\" showing the attention maps for models trained with and without supervision, respectively. The attention maps reveal how the model focuses on different parts of the input images, highlighting areas of interest for each head.",
+    "pdf_text": "DINO | Supervised | DINO | Supervised",
+    "bbox": [
+      49.4,
+      71.4,
+      559.7,
+      697.7
+    ]
+  },
+  {
+    "file": "p021_f13.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "",
+    "width": 301,
+    "height": 87,
+    "description": "Figure type: Dendrogram\n\nDescription: The figure is a dendrogram showing the hierarchical clustering of various bird species based on their visual features. The dendrogram illustrates the relationships and similarities between different bird species, with branches representing the distances between species. The species names are printed along the branches, indicating their groupings and relationships.\n\nText in figure: cock, hen, ostrich, brambling, goldfinch, house finch, junco, indigo bunting, robin, bulbul, jay, magpie, chickadee, water ouzel, kite, bald eagle, vulture, great grey owl, black grouse, ptarmigan, ruffed grouse, prairie chicken, peacock, quail, partridge, African grey, macaw, sulphur-crested cockatoo, lorikeet, coucal, bee eater, hornbill, hummingbird, jacamar, toucan, drake, red-breasted merganser, goose, black swan, white stork, black stork, spoonbill, flamingo, little blue heron, American egret, bittern, crane, limpkin, European gallinule, American coot, bustard, ruddy turnstone, red-backed sandpiper, redshank dowitcher, oystercatcher, pelican, king penguin, albatross",
+    "pdf_text": "cock | hen ostrich | brambling | goldfinch | house finch | junco | indigo bunting | robin | bulbul | jay | magpie | chickadee | water ouzel | kite | bald eagle | vulture | great grey owl | black grouse | ptarmigan | ruffed grouse | prairie chicken | peacock | quail | partridge | African grey | macaw | sulphur-crested cockatoo | lorikeet | coucal | bee eater | hornbill | hummingbird | jacamar | toucan | drake | red-breasted merganser | goose | black swan | white stork | black stork | spoonbill | flamingo | little blue heron | American egret | bittern | crane | limpkin | European gallinule | American coot | bustard | ruddy turnstone | red-backed sandpiper | redshank dowitcher | oystercatcher | pelican | king penguin | albatross",
+    "bbox": [
+      193.2,
+      146.7,
+      343.3,
+      190.1
+    ]
+  },
+  {
+    "file": "p021_f14.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "Figure 11: t-SNE visualization of ImageNet classes as represented using DINO. For each class, we obtain the embedding by taking the average feature for all images of that class in the validation set.",
+    "width": 998,
+    "height": 729,
+    "description": "This figure is a t-SNE visualization of ImageNet classes as represented using DINO. It shows the embeddings of various animal and object classes, plotted in a two-dimensional space. The text in the figure includes the names of the classes, such as \"tench,\" \"goldfish,\" \"great white shark,\" \"tiger shark,\" \"hammerhead,\" \"electric ray,\" \"stingray,\" \"European fire salamander,\" \"common newt,\" \"spotted salamander,\" \"axolotl,\" \"bullfrog,\" \"tree frog,\" \"tailed frog,\" \"loggerhead,\" \"leatherback turtle,\" \"mud turtle,\" \"terrapin,\" \"box turtle,\" \"banded gecko,\" \"common iguana,\" \"American chameleon,\" \"whiptail,\" \"agama,\" \"fringed lizard,\" \"alligator lizard,\" \"Gila monster,\" \"green lizard,\" \"African chameleon,\" \"Komodo dragon,\" \"African crocodile,\" \"American alligator,\" \"triceratops,\" \"thunder snake,\" \"ringneck snake,\" \"hognose snake,\" \"green snake,\" \"king snake,\" \"garter snake,\" \"water snake,\" \"vine snake,\" \"night snake,\" \"boa constrictor,\" \"rock python,\" \"Indian cobra,\" \"green mamba,\" \"sea snake,\" \"horned viper,\" \"diamondback,\" \"sidewinder,\" \"trilobite,\" \"harvestman,\" \"scorpion,\" \"black and gold garden spider,\" \"barn spider,\" \"garden spider,\" \"black widow,\" \"tarantula,\" \"wolf spider,\" \"tick,\" \"centipede,\" \"tusker,\" \"echidna,\" \"platypus,\" \"wallaby,\" \"koala,\" \"wombat,\" \"jellyfish,\" \"sea anemone,\" \"brain coral,\" \"flatworm,\" \"nematode,\" \"conch,\" \"snail,\" \"slug,\" \"sea slug,\" \"chiton,\" \"chambered nautilus,\" \"Dungeness crab,\" \"rock crab,\" \"fiddler crab,\" \"king crab,\" \"American lobster,\" \"spiny lobster,\" \"crayfish,\" \"hermit crab,\" \"isopod,\" \"grey whale,\" \"killer whale,\" \"dugong,\" \"sea lion,\" \"Chihuahua,\" \"Japanese spaniel,\" \"Maltese dog,\" \"Pekinese,\" \"Shih-Tzu,\" \"Blenheim spaniel,\" \"papillon,\" \"toy terrier,\" \"Rhodesian ridgeback,\" \"Afghan hound,\" \"basset,\" \"beagle,\" \"bloodhound,\" \"bluetick,\" \"black-and-tan coonhound,\" \"Walker hound,\" \"English foxhound,\" \"redbone,\" \"borzoi,\" \"Irish wolfhound,\" \"Italian greyhound,\" \"whippet,\" \"Ibizan hound,\" \"Norwegian elkhound,\" \"Saluki,\" \"Scottish deerhound,\" \"Weimaran",
+    "pdf_text": "tench | goldfish | great white shark | tiger shark | hammerhead | electric ray | stingray | European fire salamander | common newt | eft | spotted salamander | axolotl | bullfrog | tree frog | tailed frog | loggerhead | leatherback turtle | mud turtle | terrapin | box turtle | banded gecko | common iguana | American chameleon | whiptail | agama | frilled lizard | alligator lizard | Gila monster | green lizard | African chameleon | Komodo dragon | African crocodile | American alligator | triceratops | thunder snake | ringneck snake | hognose snake | green snake | king snake | garter snake | water snake | vine snake | night snake | boa constrictor | rock python | Indian cobra | green mamba | sea snake | horned viper | diamondback | sidewinder | trilobite | harvestman | scorpion | black and gold garden spider | barn spider | garden spider | black widow | tarantula | wolf spider | tick | centipede | tusker | echidna | platypus | wallaby | koala | wombat | jellyfish | sea anemone | brain coral | flatworm | nematode | conch | snail | slug | sea slug | chiton | chambered nautilus | Dungeness crab | rock crab | fiddler crab | king crab | American lobster | spiny lobster | crayfish | hermit crab | isopod | grey whale | killer whale | dugong | sea lion | Chihuahua | Japanese spaniel | Maltese dog | Pekinese | Shih-Tzu | Blenheim spaniel | papillon | toy terrier | Rhodesian ridgeback | Afghan hound | basset | beagle | bloodhound | bluetick | black-and-tan coonhound | Walker hound | English foxhound | redbone | borzoi | Irish wolfhound | Italian greyhound | whippet | Ibizan hound | Norwegian elkhound | otterhound | Saluki | Scottish deerhound | Weimaraner | Staffordshire bullterrier | American Staffordshire terrier | Bedlington terrier | Border terrier | Kerry blue terrier | Irish terrier | Norfolk terrier | Norwich terrier | Yorkshire terrier | wire-haired fox terrier | Lakeland terrier | Sealyham terrier | Airedale | cairn | Australian terrier | Dandie Dinmont | Boston bull | miniature schnauzer | giant schnauzer | standard schnauzer | Scotch terrier | Tibetan terrier | silky terrier | soft-coated wheaten terrier | West Highland white terrier | Lhasa | flat-coated retriever | curly-coated retriever | golden retriever | Labrador retriever | Chesapeake Bay retriever | German short-haired pointer | vizsla | English setter | Irish setter | Gordon setter | Brittany spaniel | clumber | English springer | Welsh springer spaniel | cocker spaniel | Sussex spaniel | Irish water spaniel | kuvasz | schipperke | groenendael | malinois | briard | kelpie | komondor | Old English sheepdog | Shetland sheepdog | collie | Border collie | Bouvier des Flandres | Rottweiler | German shepherd | Doberman miniature pinscher | Greater Swiss Mountain dog | Bernese mountain dog | Appenzeller | EntleBucher | boxer | bull mastiff | Tibetan mastiff | French bulldog | Great Dane | Saint Bernard | Eskimo dog | malamute | Siberian husky | dalmatian | affenpinscher | basenji | pug | Leonber",
+    "bbox": [
+      48.7,
+      237.8,
+      547.4,
+      602.5
+    ]
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1. ImageNet-1K classification results for \u00b7 ConvNets and \u25e6 vision Transformers. Each bubble's area is proportional to FLOPs of a variant in a model family. ImageNet-1K/22K models here take 224 2 /384 2 images respectively. ResNet and ViT results were obtained with improved training procedures over the original papers. We demonstrate that a standard ConvNet model can achieve the same level of scalability as hierarchical vision Transformers while being much simpler in design.",
+    "width": 469,
+    "height": 303,
+    "description": "This figure is a scatter plot comparing the ImageNet-1K classification accuracy of various convolutional neural networks (ConvNets) and vision transformers. The x-axis represents the diameter of the model, and the y-axis represents the ImageNet-1K accuracy. Each bubble's area is proportional to the FLOPs of a variant in a model family. The ConvNets are represented by solid circles, and the vision transformers are represented by open circles. The ConvNets include ResNet, DeiT, and ConvNeXt, while the vision transformers include ViT and Swin Transformer.\n\nDescription: at most 80 words. What is the main point of the figure.\n\nText in figure: the main conclusion, taking into account both the data and the visual encoding.\n\nThe main point of the figure is that a standard ConvNet model can achieve the same level of scalability as hierarchical vision Transformers while being much simpler in design. The figure shows that ConvNets can achieve similar or better accuracy than vision transformers with fewer parameters and computational complexity."
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2. We modernize a standard ConvNet (ResNet) towards the design of a hierarchical vision Transformer (Swin), without introducing any attention-based modules. The foreground bars are model accuracies in the ResNet-50/Swin-T FLOP regime; results for the ResNet-200/Swin-B regime are shown with the gray bars. A hatched bar means the modification is not adopted. Detailed results for both regimes are in the appendix. Many Transformer architectural choices can be incorporated in a ConvNet, and they lead to increasingly better performance. In the end, our pure ConvNet model, named ConvNeXt, can outperform the Swin Transformer.",
+    "width": 453,
+    "height": 596,
+    "description": "This figure is a bar chart comparing the performance of various convolutional neural network (ConvNet) architectures. It shows the ImageNet Top-1 accuracy percentages for different models, with ResNet-50/Swin-T FLOP regime results in the foreground and ResNet-200/Swin-B regime results in the background. The models include ResNet-50/200, ResNetXt, Inverted Bottleneck, Large Kernel, ReLU-GELU, Micro Design, ConvNeXt-T/B, and Swin-T/B. The highest accuracy is achieved by ConvNeXt-T/B at 82.0%, while the lowest is ResNet-50/200 at 78.8%.\n\nText in figure: ResNet-50/200, ResNetXt, Inverted Bottleneck, Large Kernel, ReLU-GELU, Micro Design, ConvNeXt-T/B, Swin-T/B, ImageNet Top-1 Acc (%), 78, 80, 82, 78.8, 79.4, 79.5, 78.8, 80.5, 80.6, 79.9, 80.4, 80.6, 80.6, 81.3, 81.4, 81.5, 82.0, 81.3, 4.1, 4.5, 4.4, 2.4, 5.3, 4.6, 4.1, 4.1, 4.2, 4.2, 4.3, 4.2, 4.2, 4.2, 4.5, 4.5."
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3. Block modifications and resulted specifications. (a) is a ResNeXt block; in (b) we create an inverted bottleneck block and in (c) the position of the spatial depthwise conv layer is moved up.",
+    "width": 469,
+    "height": 157,
+    "description": "This figure is a diagram showing modifications to a convolutional neural network (ConvNet) block. It consists of three panels labeled (a), (b), and (c), each illustrating a different configuration of the block. Panel (a) represents a ResNeXt block, panel (b) shows an inverted bottleneck block, and panel (c) depicts a block with the spatial depthwise convolution layer moved up.\n\nText in figure: \"1\u00d71, 384\u219296\", \"d3\u00d73, 96\u219296\", \"d3\u00d73, 384\u2192384\", \"1\u00d71, 96\u2192384\", \"1\u00d71, 384\u219296\", \"1\u00d71, 96\u2192384\", \"1\u00d71, 384\u219296\""
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 4. Block designs for a ResNet, a Swin Transformer, and a ConvNeXt. Swin Transformer's block is more sophisticated due to the presence of multiple specialized modules and two residual connections. For simplicity, we note the linear layers in Transformer MLP blocks also as '1 \u00d7 1 convs' since they are equivalent.",
+    "width": 470,
+    "height": 484,
+    "description": "Description: The figure is a diagram comparing the block designs of ResNet, Swin Transformer, and ConvNeXt architectures. It shows the internal structure of each block, including the number of layers, dimensions, and types of operations such as convolutions, batch normalization, and activation functions. The ResNet block is simple with a few layers, while the ConvNeXt block is more complex with multiple layers and operations.\n\nText in figure: ResNet Block, ConvNeXt Block, 1x1, 96x3, 1x1, 96, 96-d, LN, 1x1, 64, 256-d, 96-d, BN, ReLU, 3x3, 64, BN, ReLU, 1x1, 256, BN, ReLU, 1x1, 384, d7x7, 96, LN, 1x1, 384, GEL, 1x1, 96, GEL, 1x1, 96."
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1: Prototypical networks in the few-shot and zero-shot scenarios. Left : Few-shot prototypes c k are computed as the mean of embedded support examples for each class. Right : Zero-shot prototypes c k are produced by embedding class meta-data v k . In either case, embedded query points are classified via a softmax over distances to class prototypes: p \u03c6 ( y = k | x ) \u221d exp( - d ( f \u03c6 ( x ) , c k )) .",
+    "width": 754,
+    "height": 231,
+    "description": "This figure is a diagram comparing two scenarios: few-shot and zero-shot learning. In the few-shot scenario, prototypes are computed as the mean of embedded support examples for each class. In the zero-shot scenario, prototypes are produced by embedding class meta-data. Both scenarios classify embedded query points using a softmax over distances to class prototypes.\n\nText in figure: Few-shot, Zero-shot, c1, c2, c3, v1, v2, v3, X, f\u03c6(x), d(f\u03c6(x), ck), p\u03c6(y=k|x)"
+  },
+  {
+    "file": "p006_f02.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 2: Comparison showing the effect of distance metric and number of classes per training episode on 5-way classification accuracy for both matching and prototypical networks on mini ImageNet. The x -axis indicates configuration of the training episodes (way, distance, and shot), and the y -axis indicates 5-way test accuracy for the corresponding shot. Error bars indicate 95% confidence intervals as computed over 600 test episodes. Note that matching networks and prototypical networks are identical in the 1-shot case.",
+    "width": 706,
+    "height": 241,
+    "description": "Description: This figure contains two bar charts comparing the 5-way classification accuracy of matching and prototypical networks on mini ImageNet. The x-axis represents the configuration of training episodes (way, distance, and shot). The y-axis shows the 5-way test accuracy. The highest accuracy is observed in the 20-way Euclidean distance metric with 5-shot, while the lowest is in the 5-way Cosine distance metric with 1-shot. Error bars indicate 95% confidence intervals.\n\nText in figure: Matching / Proto. Nets, Matching Nets, Proto. Nets, 1-shot Accuracy (5-way), 5-shot Accuracy (5-way), 5-way Cosine, 5-way Euclid., 20-way Cosine, 20-way Euclid., 5-way Cosine, 5-way Euclid., 20-way Cosine, 20-way Euclid."
+  },
+  {
+    "file": "p012_f03.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 3: A t-SNE visualization of the embeddings learned by prototypical networks on the Omniglot dataset. A subset of the Tengwar script is shown (an alphabet in the test set). Class prototypes are indicated in black. Several misclassified characters are highlighted in red along with arrows pointing to the correct prototype.",
+    "width": 529,
+    "height": 506,
+    "description": "Figure: A t-SNE visualization of embeddings from prototypical networks on the Omniglot dataset. It shows a subset of the Tengwar script, with class prototypes in black and misclassified characters in red. Arrows point to the correct prototypes.\n\nText in figure: \"Omniglot dataset\", \"Tengwar script\", \"Class prototypes\", \"Misclassified characters\", \"Correct prototype\"."
+  },
+  {
+    "file": "p012_f04.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 4: Comparison of the effect of training 'way' (number of classes per episode) for prototypical networks trained on mini ImageNet. Each training episode contains 15 query points per class. Error bars indicate 95% confidence intervals as computed over 600 test episodes.",
+    "width": 707,
+    "height": 218,
+    "description": "Figure: Two line plots comparing 1-shot and 5-shot accuracy of prototypical networks trained on mini ImageNet. Each plot shows accuracy as a function of the number of training classes per episode. The 1-shot plot shows accuracy ranging from 45% to 51%, peaking at 30 training classes. The 5-shot plot shows accuracy from 65.5% to 69%, peaking at 20 training classes.\n\nText in figure: 1-shot, 5-shot, Training Classes per Episode, 1-shot Accuracy (5-way), 5-shot Accuracy (5-way), 45%, 46%, 47%, 48%, 49%, 50%, 51%, 65.5%, 66%, 66.5%, 67%, 67.5%, 68%, 68.5%, 69%, 5, 10, 15, 20, 25, 30."
+  }
+]

@@ -1,0 +1,306 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "",
+    "width": 516,
+    "height": 213,
+    "description": "Section 1: Figure description\nThis figure illustrates the concept of Score-Based Generative Modeling through Stochastic Differential Equations (SDEs). It shows two processes: Forward SDE (data to noise) and Reverse SDE (noise to data). The Forward SDE transforms data into noise, while the Reverse SDE reconstructs data from noise. The score function is highlighted as a key component in the Reverse SDE.\n\nSection 2: Text in figure\nText in figure: Forward SDE (data \u2192 noise), Reverse SDE (noise \u2192 data), score function, x(0), x(T), dx = f(x, t)dt + g(t)dw, dx = [f(x, t) - g^2(t)\u2207_x log p_t(x)]dt + g(t)dw",
+    "pdf_text": "Forward SDE (data \u2192 noise) | Reverse SDE (noise \u2192 data) | score function",
+    "bbox": [
+      107.1,
+      84.7,
+      364.8,
+      190.8
+    ]
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 2: Overview of score-based generative modeling through SDEs . We can map data to a noise distribution (the prior) with an SDE (Section 3.1), and reverse this SDE for generative modeling (Section 3.2). We can also reverse the associated probability flow ODE (Section 4.3), which yields a deterministic process that samples from the same distribution as the SDE. Both the reverse-time SDE and probability flow ODE can be obtained by estimating the score \u2207 x log p t p x q (Section 3.3).",
+    "width": 790,
+    "height": 263,
+    "description": "## Figure Description\nThis figure illustrates the process of score-based generative modeling through stochastic differential equations (SDEs). It shows the transformation of data into a noise distribution (the prior) using an SDE and the reverse process for generative modeling. The figure includes two main plots: the forward SDE and the reverse SDE, with the probability flow ODE in between. The forward SDE maps data to the prior, while the reverse SDE generates data from the prior. The probability flow ODE provides an alternative deterministic process for sampling from the same distribution as the SDE.\n\n## Text in Figure\n- **Labels and Titles:**\n  - Data\n  - Forward SDE\n  - Prior\n  - Reverse SDE\n  - Data\n- **Legend Entries:**\n  - SDE\n  - Probability Flow ODE\n- **Equations:**\n  - \\( dx = f(x, t)dt + g(t)dw \\)\n  - \\( dx = [f(x, t) - g^2(t) \\nabla_x \\log p_t(x)] dt + g(t)dw \\)\n- **Axes:**\n  - \\( x(0) \\)\n  - \\( x(T) \\)\n  - \\( x \\)\n  - \\( p_0(x) \\)\n  - \\( p_t(x) \\)\n  - \\( p_T(x) \\)\n  - \\( p_t(x) \\)\n  - \\( p_0(x) \\)",
+    "pdf_text": "Forward SDE | Data | Prior | Data | Reverse SDE",
+    "bbox": [
+      107.7,
+      81.3,
+      502.7,
+      213.2
+    ]
+  },
+  {
+    "file": "p008_f03.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "",
+    "width": 170,
+    "height": 197,
+    "description": "## Description:\nThis figure is a line graph showing the evaluation time points for ODE (Ordinary Differential Equation) evaluations at different precision levels. The x-axis represents the evaluation number, ranging from 10^0 to 10^3. The y-axis represents the evaluation time point, ranging from 0.0 to 1.0. Three series are plotted: 1e-1, 1e-3, and 1e-5, each with a distinct color (blue, orange, and green, respectively). The series with the highest evaluation time point is 1e-1, followed by 1e-3, and the lowest is 1e-5.\n\n## Text in figure:\nODE Evaluation Points, Evaluation timepoint, Evaluation number, Precision, 1e-1, 1e-3, 1e-5, 10^0, 10^1, 10^2, 10^3, 0.0, 0.5, 1.0",
+    "pdf_text": "100 | 101 | 102 | 103 | Evaluation number | 0.0 | 0.5 | 1.0 | Evaluation timepoint | ODE Evaluation Points | Precision | 1e-1 | 1e-3 | 1e-5",
+    "bbox": [
+      110.8,
+      88.0,
+      196.0,
+      186.3
+    ]
+  },
+  {
+    "file": "p008_f04.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "",
+    "width": 244,
+    "height": 181,
+    "description": "## Description:\nThe figure displays a series of images showing the progression of face generation using a score-based generative model. Each row contains three images of a woman and a man, with varying levels of detail and clarity. The images are labeled with the number of Neural Function Evaluations (NFE) used in their generation, specifically NFE=14, NFE=86, and NFE=548.\n\n## Text in figure:\nNFE=14 | NFE=86 | NFE=548",
+    "pdf_text": "NFE=14 | NFE=86 | NFE=548",
+    "bbox": [
+      203.0,
+      84.6,
+      324.8,
+      174.9
+    ]
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 3: Probability flow ODE enables fast sampling with adaptive stepsizes as the numerical precision is varied ( left ), and reduces the number of score function evaluations (NFE) without harming quality ( middle ). The invertible mapping from latents to images allows for interpolations ( right ).",
+    "width": 326,
+    "height": 167,
+    "description": "## Figure Description\nThis figure displays a series of images demonstrating the capabilities of a generative model. The left panel shows images generated with varying numerical precision, indicating the model's adaptability. The middle panel compares the number of score function evaluations (NFE) against image quality, showing that fewer evaluations do not compromise quality. The right panel illustrates interpolations between latent representations, showcasing the model's ability to create smooth transitions between images.\n\n## Text in Figure\n- Left panel: Numerical precision variations\n- Middle panel: NFE vs. image quality\n- Right panel: Interpolations between latents\n- Labels: NFE, quality, interpolations\n- No specific values or percentages mentioned",
+    "pdf_text": "",
+    "bbox": [
+      335.6,
+      90.9,
+      498.3,
+      174.3
+    ]
+  },
+  {
+    "file": "p009_f06.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 4: Left : Class-conditional samples on 32 32 CIFAR-10. Top four rows are automobiles and bottom four rows are horses. Right: Inpainting (top two rows) and colorization (bottom two rows) results on 256 256 LSUN. First column is the original image, second column is the masked/grayscale image, remaining columns are sampled image completions or colorizations.",
+    "width": 790,
+    "height": 261,
+    "description": "Figure: A collage of images demonstrating generative modeling techniques.\n\nDescription: The figure showcases various generative modeling techniques, including class-conditional sampling, inpainting, and colorization. It features images of automobiles and horses from CIFAR-10 and LSUN datasets.\n\nText in figure: \"Class-conditional samples on 32 32 CIFAR-10\", \"Top four rows are automobiles and bottom four rows are horses\", \"Inpainting (top two rows) and colorization (bottom two rows) on 256 256 LSUN\", \"First column is the original image, second column is the masked/grayscale image, remaining columns are sampled image completions or colorizations\".",
+    "pdf_text": "",
+    "bbox": [
+      108.1,
+      82.8,
+      503.0,
+      213.7
+    ]
+  },
+  {
+    "file": "p016_f07.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 5: Discrete-time perturbation kernels and our continuous generalizations match each other almost exactly. (a) compares the variance of perturbation kernels for SMLD and VE SDE; (b) compares the scaling factors of means of perturbation kernels for DDPM and VP SDE; and (c) compares the variance of perturbation kernels for DDPM and VP SDE.",
+    "width": 775,
+    "height": 226,
+    "description": "## Description\nThe figure consists of three plots comparing discrete-time perturbation kernels with their continuous generalizations. Plot (a) shows the variance of perturbation kernels for SMLD and VE SDE. The VE SDE line is higher than the SMLD original line, with a significant increase as t approaches 1. Plot (b) compares the scaling factors of means of perturbation kernels for DDPM and VP SDE. The VP SDE line is lower than the DDPM original line, decreasing as t increases. Plot (c) compares the variance of perturbation kernels for DDPM and VP SDE. The VP SDE line is lower than the DDPM original line, with a noticeable decrease as t increases.\n\n## Text in figure\nSMLD original, VE SDE, Variance of Perturbation Kernels, t, (a) SMLD, DDPM original, VP SDE, Scaling Factor of Means, Mean of Perturbation Kernels, t, (b) DDPM (mean), DDPM original, VP SDE, Variance of Perturbation Kernels, t, (c) DDPM (variance)",
+    "pdf_text": "0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | t | 0 | 500 | 1000 | 1500 | 2000 | 2500 | Variance | Variance of Perturbation Kernels | SMLD original | VE SDE | (a) SMLD | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | t | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Scaling Factor of Means | Mean of Perturbation Kernels | DDPM original | VP SDE | (b) DDPM (mean) | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | t | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Variance | Variance of Perturbation Kernels | DDPM original | VP SDE | (c) DDPM (variance)",
+    "bbox": [
+      112.0,
+      82.5,
+      499.6,
+      195.6
+    ]
+  },
+  {
+    "file": "p020_f08.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "Figure 6: Samples from the probability flow ODE for VP SDE on 256 256 CelebA-HQ. Top: spherical interpolations between random samples. Bottom: temperature rescaling (reducing norm of embedding).",
+    "width": 793,
+    "height": 1092,
+    "description": "## Description\nThis figure displays a collection of 64 images arranged in an 8x8 grid, showcasing samples generated by the VP SDE model on the CelebA-HQ dataset. The top row features spherical interpolations between random samples, while the bottom row demonstrates temperature rescaling effects on the embeddings.\n\n## Text in Figure\n- Top row: Spherical interpolations between random samples.\n- Bottom row: Temperature rescaling (reducing norm of embedding).",
+    "pdf_text": "",
+    "bbox": [
+      107.6,
+      110.8,
+      504.2,
+      657.0
+    ]
+  },
+  {
+    "file": "p021_f09.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "Figure 7: Comparing the first 100 dimensions of the latent code obtained for a random CIFAR-10 image. 'Model A' and 'Model B' are separately trained with different architectures.",
+    "width": 786,
+    "height": 150,
+    "description": "## Figure Description\nThis line graph compares the first 100 dimensions of the latent code for a random CIFAR-10 image between two models, labeled as Model A and Model B. The x-axis represents the dimension number from 0 to 100, while the y-axis shows the latent value ranging from -100 to 100. Model A is represented by red lines with star markers, and Model B is represented by blue lines with circle markers. The graph shows fluctuations in latent values across dimensions for both models.\n\n## Textual Content\n0, 20, 40, 60, 80, 100, Dimension, 100, 0, 100, Latent value, Model A, Model B",
+    "pdf_text": "0 | 20 | 40 | 60 | 80 | 100 | Dimension | 100 | 0 | 100 | Latent value | Model A | Model B",
+    "bbox": [
+      108.8,
+      82.8,
+      502.0,
+      157.8
+    ]
+  },
+  {
+    "file": "p021_f10.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "Figure 8: Left : The dimension-wise difference between encodings obtained by Model A and B. As a baseline, we also report the difference between shuffled representations of these two models. Right : The dimension-wise correlation coefficients of encodings obtained by Model A and Model B.",
+    "width": 716,
+    "height": 229,
+    "description": "Figure: Two plots comparing encodings from Model A and Model B.\nLeft plot: Boxplots showing the difference in encodings between Model A and Model B, and between shuffled representations of Model A and Model B. The difference in encodings for Model A vs. Model B is concentrated around 0, while the shuffled representations show a wider spread.\nRight plot: Scatter plot with a fitted line showing the correlation between encodings from Model A and Model B. The correlation coefficient is 0.96, indicating a strong positive correlation.\n\nText in figure: Difference in encodings, Model A, Model B, Model A (shuffled), Model B (shuffled), Count, Correlation Coefficient, r=0.96, x1(T)",
+    "pdf_text": "0 | 100 | 200 | 300 | Difference in encodings | Model A | vs. | Model B | Model A (shuffled) | vs. | Model B (shuffled) | 0.00 | 0.25 | 0.50 | 0.75 | 1.00 | Correlation Coefficient | 0 | 200 | 400 | 600 | Count | Model A | Model B | r=0.96 | x1(T)",
+    "bbox": [
+      126.7,
+      204.4,
+      484.3,
+      318.8
+    ]
+  },
+  {
+    "file": "p023_f11.png",
+    "page": 23,
+    "kind": "picture",
+    "caption": "Figure 9: PC sampling for LSUN bedroom and church. The vertical axis corresponds to the total computation, and the horizontal axis represents the amount of computation allocated to the corrector. Samples are the best when computation is split between the predictor and corrector.",
+    "width": 714,
+    "height": 260,
+    "description": "Description: This figure displays a comparison of PC sampling techniques for two datasets: LSUN bedroom and church. It shows how the total computation is split between the predictor and corrector in score-based generative modeling. The vertical axis represents the total computation, while the horizontal axis indicates the computation allocated to the corrector. The figure demonstrates that the best samples are produced when the computation is balanced between the predictor and corrector.\n\nText in figure: Total score function evaluations, Langevin steps per noise level, 0, 1, 2, 3, LSUN bedroom, church, Total score function evaluations, 3000, 2000, 1000, 0, 1, 2, 3.",
+    "pdf_text": "",
+    "bbox": [
+      126.4,
+      490.8,
+      483.7,
+      621.2
+    ]
+  },
+  {
+    "file": "p025_f12.png",
+    "page": 25,
+    "kind": "picture",
+    "caption": "",
+    "width": 765,
+    "height": 425,
+    "description": "Description: The figure consists of six box plots comparing the FID (Frechet Inception Distance) scores for different datasets and configurations. Each plot evaluates a specific parameter or setting, such as FIR, skip_rescale, resblock_type, num_res_blocks, and Progressive Arch. (input, output). The datasets used are CIFAR-10 and CelebA. The plots show the distribution of FID scores for each configuration, with the highest and lowest scores varying across different parameters and datasets.\n\nText in figure: CIFAR-10, CelebA, dataset, 2.5, 3.0, 3.5, 4.0, 4.5, FID, FIR, False, True, skip_rescale, resblock_type, ddpm, biggan, num_res_blocks, 2, 4, Progressive Arch. (input, output), none, none, input_skip, none, residual, none, none, output_skip, input_skip, output_skip, residual, output_skip, none, residual, input_skip, residual, residual, residual",
+    "pdf_text": "CIFAR-10 | CelebA | dataset | 2.5 | 3.0 | 3.5 | 4.0 | 4.5 | FID | FIR | False | True | CIFAR-10 | CelebA | dataset | 2.5 | 3.0 | 3.5 | 4.0 | 4.5 | FID | skip_rescale | False | True | CIFAR-10 | CelebA | dataset | 2.5 | 3.0 | 3.5 | 4.0 | 4.5 | FID | resblock_type | ddpm | biggan | CIFAR-10 | CelebA | dataset | 2.5 | 3.0 | 3.5 | 4.0 | 4.5 | FID | num_res_blocks | 2 | 4 | CIFAR-10 | CelebA | dataset | 2.5 | 3.0 | 3.5 | 4.0 | 4.5 | FID | Progressive Arch. (input, output) | none, none | input_skip, none | residual, none | none, output_skip | input_skip, output_skip | residual, output_skip | none, residual | input_skip, residual | residual, residual",
+    "bbox": [
+      113.3,
+      313.1,
+      496.2,
+      525.5
+    ]
+  },
+  {
+    "file": "p027_f13.png",
+    "page": 27,
+    "kind": "picture",
+    "caption": "Figure 11: Unconditional CIFAR-10 samples from NCSN++ cont. (deep, VE).",
+    "width": 790,
+    "height": 1184,
+    "description": "## Description\nThe figure is a grid of 100 images, each depicting a small photograph. The images are arranged in a 10x10 grid, showing a variety of subjects including animals, vehicles, and landscapes. The images appear to be generated by a neural network, likely a generative model, as they exhibit a range of styles and compositions.\n\n## Text in Figure\n- No specific text or labels are visible in the figure.\n- The images are unlabeled and do not contain any printed values or annotations.",
+    "pdf_text": "",
+    "bbox": [
+      108.5,
+      99.1,
+      503.4,
+      691.0
+    ]
+  },
+  {
+    "file": "p028_f14.png",
+    "page": 28,
+    "kind": "picture",
+    "caption": "Figure 12: Samples on 1024 1024 CelebA-HQ from a modified NCSN++ model trained with the VE SDE.",
+    "width": 793,
+    "height": 1191,
+    "description": "### Description\nThis figure displays a collection of 20 images, each depicting a human face. The images are arranged in a 4x5 grid, showcasing a variety of facial features, expressions, and styles. The faces include both men and women, with different hair colors and styles, and various expressions ranging from neutral to smiling.\n\n### Text in Figure\nThe figure contains no text, values, or labels. It solely presents the images of the faces.",
+    "pdf_text": "",
+    "bbox": [
+      107.5,
+      91.7,
+      504.2,
+      687.2
+    ]
+  },
+  {
+    "file": "p030_f15.png",
+    "page": 30,
+    "kind": "picture",
+    "caption": "Figure 13: Class-conditional image generation by solving the conditional reverse-time SDE with PC. The curve shows the accuracy of our noise-conditional classifier over different noise scales.",
+    "width": 765,
+    "height": 1063,
+    "description": "Description: The figure displays a collection of class-conditional image generations using a reverse-time stochastic differential equation (SDE) with a preconditioner (PC). Each panel shows images of a specific class (e.g., airplane, automobile, bird, etc.), with 64 images per panel. The bottom left panel shows images of trucks. The bottom right graph plots the accuracy of a noise-conditional classifier against different noise scales, with accuracy decreasing as noise scale increases.\n\nText in figure: class: airplane, class: automobile, class: bird, class: cat, class: deer, class: dog, class: frog, class: horse, class: ship, class: truck, Accuracy vs. noise scale, Accuracy, 10^-2, 10^-1, 10^0, 10^1, 0.2, 0.4, 0.6, 0.8",
+    "pdf_text": "10 | 2 | 10 | 1 | 100 | 101 | 0.2 | 0.4 | 0.6 | 0.8 | Accuracy | Accuracy vs. noise scale",
+    "bbox": [
+      114.5,
+      123.8,
+      496.8,
+      655.5
+    ]
+  },
+  {
+    "file": "p033_f16.png",
+    "page": 33,
+    "kind": "picture",
+    "caption": "Figure 14: Extended inpainting results for 256 256 bedroom images.",
+    "width": 793,
+    "height": 982,
+    "description": "Description: The figure displays a collection of 256x256 bedroom images, showcasing the results of extended inpainting techniques. Each image is a bedroom scene with various elements such as beds, furniture, and decor. The images are arranged in a grid format, allowing for a comparative analysis of the inpainting quality across different samples.\n\nText in figure: The figure contains the number \"5044199\" prominently displayed in the center, likely indicating the total number of images or a specific identifier for the dataset. Each image in the grid is labeled with a unique identifier, though specific values are not visible in the image.",
+    "pdf_text": "",
+    "bbox": [
+      107.5,
+      149.7,
+      504.2,
+      640.3
+    ]
+  },
+  {
+    "file": "p034_f17.png",
+    "page": 34,
+    "kind": "picture",
+    "caption": "Figure 15: Extended inpainting results for 256 256 church images.",
+    "width": 794,
+    "height": 981,
+    "description": "Description: The figure displays a grid of 36 images, each showing a different inpainting result for 256x256 church images. The images are arranged in a 6x6 grid, with each row representing a different inpainting technique or model. The images vary in the completeness and quality of the inpainting, with some showing more accurate and detailed reconstructions than others.\n\nText in figure: The figure contains the following text: \"304419\". This appears to be a reference or identifier for the figure, rather than specific data points or labels within the images themselves.",
+    "pdf_text": "",
+    "bbox": [
+      107.6,
+      149.4,
+      504.3,
+      640.2
+    ]
+  },
+  {
+    "file": "p035_f18.png",
+    "page": 35,
+    "kind": "picture",
+    "caption": "Figure 16: Extended colorization results for 256 256 bedroom images.",
+    "width": 794,
+    "height": 981,
+    "description": "## Description\nThe figure displays a grid of 24 images, each showing a bedroom scene. The images vary in colorization, demonstrating the results of a generative modeling technique applied to bedroom images. The images are arranged in a 4x6 grid, with each row representing a different colorization effect.\n\n## Text in Figure\n- No specific text is visible in the figure. The images are labeled with \"No. 1\" to \"No. 24\" at the bottom of each image.",
+    "pdf_text": "",
+    "bbox": [
+      107.5,
+      149.6,
+      504.4,
+      640.1
+    ]
+  },
+  {
+    "file": "p036_f19.png",
+    "page": 36,
+    "kind": "picture",
+    "caption": "Figure 17: Extended colorization results for 256 256 church images.",
+    "width": 794,
+    "height": 982,
+    "description": "## Description\nThe figure displays a series of images showing colorization results for 256x256 church images. Each row represents a different colorization technique applied to the same set of images. The images are arranged in a grid, with each column showing the same image under different colorization methods.\n\n## Text in figure\nchurch images, colorization results, extended colorization, 256x256, different techniques, grid arrangement, same images, color variations, visual comparison, image processing, generative modeling, stochastic differential equations.",
+    "pdf_text": "",
+    "bbox": [
+      107.5,
+      149.5,
+      504.3,
+      640.3
+    ]
+  }
+]

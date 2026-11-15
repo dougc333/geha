@@ -1,0 +1,29 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 1: Illustration of (a) LSTM and (b) gated recurrent units. (a) i , f and o are the input, forget and output gates, respectively. c and \u02dc c denote the memory cell and the new memory cell content. (b) r and z are the reset and update gates, and h and \u02dc h are the activation and the candidate activation.",
+    "width": 690,
+    "height": 272,
+    "description": "Figure type: Diagram\nDescription: The figure illustrates two types of recurrent neural network units: LSTM and gated recurrent units. In the LSTM diagram, the input, forget, and output gates (i, f, o) control the flow of information. The memory cell (c) and new memory cell content (c\u0303) are central to the LSTM's memory capabilities. In the gated recurrent unit diagram, the reset (r) and update (z) gates manage the activation (h) and candidate activation (h\u0303).\n\nText in figure: LSTM, gated recurrent unit, input gate (i), forget gate (f), output gate (o), memory cell (c), new memory cell content (c\u0303), reset gate (r), update gate (z), activation (h), candidate activation (h\u0303)"
+  },
+  {
+    "file": "p007_f02.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 2: Learning curves for training and validation sets of different types of units with respect to (top) the number of iterations and (bottom) the wall clock time. y-axis corresponds to the negativelog likelihood of the model shown in log-scale.",
+    "width": 788,
+    "height": 680,
+    "description": "This figure displays learning curves for various neural network architectures, comparing training and validation performance over epochs and wall clock time. The top row shows performance by epoch, with tanh units performing best, followed by GRU and LSTM units. The bottom row shows performance by wall clock time, with tanh units again leading, followed by GRU and LSTM units. The y-axis represents negative log likelihood on a logarithmic scale.\n\nLegend: tanh train, tanh valid, GRU train, GRU valid, LSTM train, LSTM valid\n\nText in figure: Per epoch, Wall Clock Time (seconds), tanh train, tanh valid, GRU train, GRU valid, LSTM train, LSTM valid"
+  },
+  {
+    "file": "p008_f03.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 3: Learning curves for training and validation sets of different types of units with respect to (top) the number of iterations and (bottom) the wall clock time. x-axis is the number of epochs and y-axis corresponds to the negative-log likelihood of the model shown in log-scale.",
+    "width": 786,
+    "height": 673,
+    "description": "This figure contains two plots showing learning curves for different neural network architectures. The top plot displays the negative-log likelihood on a logarithmic scale against the number of epochs. The bottom plot shows the same metric against wall clock time in seconds. The series are labeled as tanh train, tanh valid, GRU train, GRU valid, LSTM train, and LSTM valid. The tanh train series starts highest and decreases steadily, while the LSTM valid series starts lowest and also decreases. The GRU series are in between.\n\nDescription: at most 120 words. What is the main point of the figure.\n\nText in figure: the main point of the figure, in a single sentence.\n\nThe main point of the figure is to compare the learning curves of different neural network architectures, specifically tanh, GRU, and LSTM units, in terms of their performance over epochs and wall clock time."
+  }
+]

@@ -1,0 +1,722 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "",
+    "width": 329,
+    "height": 129,
+    "description": "## Description\nThis figure is a screenshot from a research paper, showing a computer-generated image of an urban street scene. The image depicts a road with bollards, trees, and buildings, annotated with various elements for semantic understanding. The text overlay indicates that this is part of the Cityscapes Dataset, specifically for training and validation purposes, with a total of 3475 images.\n\n## Text in figure\n- train/val\n- fine annotation\n- 3475 images",
+    "pdf_text": "train/val \u2013 \ufb01ne annotation \u2013 3475 images",
+    "bbox": [
+      49.1,
+      219.1,
+      213.3,
+      283.5
+    ]
+  },
+  {
+    "file": "p001_f02.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "",
+    "width": 327,
+    "height": 128,
+    "description": "## Description\nThe figure is a visual representation of a training dataset for semantic urban scene understanding. It shows a street scene with multiple people depicted as red figures walking on a purple path. The image is labeled with \"train \u2013 coarse annotation \u2013 20 000 images,\" indicating that it is part of a training set with 20,000 images, each annotated with coarse labels.\n\n## Text in figure\n- train\n- coarse annotation\n- 20 000 images",
+    "pdf_text": "train \u2013 coarse annotation \u2013 20 000 images",
+    "bbox": [
+      215.5,
+      218.9,
+      379.2,
+      283.2
+    ]
+  },
+  {
+    "file": "p001_f03.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "",
+    "width": 329,
+    "height": 130,
+    "description": "Section 1: Figure description\nThis figure is a visual representation of a scene from the Cityscapes Dataset for Semantic Urban Scene Understanding. It shows a street scene with multiple people, cars, and buildings. The people are depicted in red, while the cars and buildings are in various colors. The text \"test \u2013 fine annotation \u2013 1525 images\" is printed at the bottom of the figure.\n\nSection 2: Text in figure\ntest\nfine annotation\n1525 images",
+    "pdf_text": "test \u2013 \ufb01ne annotation \u2013 1525 images",
+    "bbox": [
+      381.1,
+      218.4,
+      545.7,
+      283.5
+    ]
+  },
+  {
+    "file": "p002_f04.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1. Number of finely annotated pixels (y-axis) per class and their associated categories (x-axis).",
+    "width": 977,
+    "height": 229,
+    "description": "## Description\nThis figure is a bar chart showing the number of pixels annotated for different classes in the Cityscapes Dataset. The x-axis categorizes the classes into groups: flat, construction, nature, vehicle, sky, object, human, and void. The y-axis represents the number of pixels, ranging from 10^6 to 10^10. The highest number of pixels is in the \"flat\" category, specifically for \"road\" with approximately 10^10 pixels. The lowest number of pixels is in the \"void\" category, specifically for \"dynamic2\" with around 10^6 pixels.\n\n## Text in figure\nflat, construction, nature, vehicle, sky, object, human, void, 10^6, 10^8, 10^10, road, sidewalk, parking2, rail track2, build., fence, wall, bridge2, tunnel2, guard rail2, veget., terrain, car1, bicycle1, bus1, truck1, train1, motorcycle1, caravan1,2, trailer1,2, sky, pole, traffic sign, traffic light, pole group2, person1, rider1, static2, ground2, dynamic2, number of pixels",
+    "pdf_text": "\ufb02at | construction | nature | vehicle | sky | object | human | void | 106 | 108 | 1010 | 1 instance-level annotations are available | 2 ignored for evaluation | road | sidewalk | parking2 | rail track2 | build. | fence | wall | bridge2 | tunnel2 | guard rail2 | veget. | terrain | car1 | bicycle1 | bus1 | truck1 | train1 | motorcycle1 | caravan1,2 | trailer1,2 | sky | pole | traf\ufb01c sign | traf\ufb01c light | pole group2 | person1 | rider1 | static2 | ground2 | dynamic2 | number of pixels",
+    "bbox": [
+      54.3,
+      74.1,
+      543.2,
+      188.3
+    ]
+  },
+  {
+    "file": "p003_f05.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2. Proportion of annotated pixels (y-axis) per category (x-axis) for Cityscapes, CamVid [7], DUS [61], and KITTI [19].",
+    "width": 972,
+    "height": 181,
+    "description": "## Description\nThis figure is a bar chart comparing the proportion of annotated pixels per category across four datasets: Cityscapes, CamVid, DUS, and KITTI. The x-axis lists categories such as \"flat,\" \"construction,\" \"nature,\" etc. The y-axis represents the proportion of annotated pixels. The series are distinguished by color: blue for Cityscapes, purple for CamVid, red for DUS, and green for KITTI. The Cityscapes dataset has the highest proportion of annotated pixels across most categories, while the KITTI dataset has the lowest proportion.\n\n## Text in figure\n\"flat,\" \"construction,\" \"nature,\" \"vehicle,\" \"sky,\" \"object,\" \"human,\" \"void,\" \"proportion,\" \"Our dataset,\" \"CamVid,\" \"DUS,\" \"KITTI,\" \"human,\" \"0,\" \"0.01,\" \"0.02,\" \"0.1,\" \"0.2,\" \"0.3,\" \"0.4\"",
+    "pdf_text": "\ufb02at | construction | nature | vehicle | sky | object | human | void | 0 | 0.1 | 0.2 | 0.3 | 0.4 | proportion | Our dataset | CamVid | DUS | KITTI | human | 0 | 0.01 | 0.02",
+    "bbox": [
+      55.3,
+      74.6,
+      541.4,
+      165.2
+    ]
+  },
+  {
+    "file": "p004_f06.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3. Dataset statistics regarding scene complexity. Only MS COCO and Cityscapes provide instance segmentation masks.",
+    "width": 452,
+    "height": 179,
+    "description": "Description: The figure is a bar chart showing the distribution of the number of traffic participant instances per image across four datasets: Cityscapes, KITTI, MS COCO, and Pascal. The x-axis represents the number of traffic participant instances per image, divided into bins (0, 1-9, 19-27, 37-45, 55-63, 73-81, >90). The y-axis shows the number of images. The Cityscapes dataset has the highest number of images in the 1-9 bin, followed by MS COCO. The KITTI dataset has the highest number of images in the 19-27 bin, while Pascal has the highest number in the 37-45 bin. The lowest number of images is observed in the >90 bin across all datasets.\n\nIndex: Cityscapes, KITTI, MS COCO, Pascal, number of images, traffic participant instances, bar chart, distribution, bins, 1-9, 19-27, 37-45, 55-63, 73-81, >90.",
+    "pdf_text": "0 | 1-9 | 19-27 | 37-45 | 55-63 | 73-81 | >90 | 101 | 103 | 105 | number of traf\ufb01c participant instances per image | number of images | Cityscapes | KITTI | MS COCO | Pascal",
+    "bbox": [
+      313.6,
+      74.4,
+      539.3,
+      163.8
+    ]
+  },
+  {
+    "file": "p004_f07.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 4. Histogram of object distances in meters for class vehicle .",
+    "width": 441,
+    "height": 166,
+    "description": "Figure: Histogram of object distances in meters for class vehicle.\nData presented: Our dataset, KITTI\nAxes: Distance in meters, Number of vehicles\nKey observations: KITTI has higher counts at lower distances, Our dataset has higher counts at higher distances.\n\nDescription: Histogram comparing object distances for vehicles in two datasets.\nKITTI dataset has higher counts at lower distances (1-5 meters), peaking at 3-4 meters.\nOur dataset has higher counts at higher distances (100+ meters), with a peak at 154 meters.\nKITTI's highest bar is at 3-4 meters, Our dataset's highest bar is at 154 meters.",
+    "pdf_text": "1 | 2 | 3 | 4 | 5 | 7 | 9 | 11 | 14 | 18 | 23 | 29 | 37 | 46 | 59 | 75 | 95 | 121 | 154 | 196 | 249 | 0 | 1k | 2k | 3k | 4k | number of vehicles | Our dataset | KITTI",
+    "bbox": [
+      316.3,
+      201.6,
+      536.8,
+      284.3
+    ]
+  },
+  {
+    "file": "p008_f08.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 5. Qualitative examples of selected baselines. From left to right: image with stereo depth maps partially overlayed, annotation, DeepLab [48], Adelaide [37], and Dilated10 [79]. The color coding of the semantic classes matches Fig. 1.",
+    "width": 994,
+    "height": 310,
+    "description": "## Figure Description\nThis figure displays qualitative examples of selected baselines for semantic urban scene understanding. It shows a series of images and annotations, including the original image with stereo depth maps, the annotation, and results from three different models: DeepLab, Adelaide, and Dilated10. Each model's output is color-coded to match the semantic classes.\n\n## Text in Figure\n- Image with stereo depth maps partially overlayed\n- Annotation\n- DeepLab\n- Adelaide\n- Dilated10\n- Color coding of semantic classes",
+    "pdf_text": "",
+    "bbox": [
+      49.2,
+      71.4,
+      545.8,
+      226.6
+    ]
+  },
+  {
+    "file": "p012_f09.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 6. Exemplary labeling process. Distant objects are annotated first and subsequently their occluders. This ensures the boundary between these objects to be shared and consistent.",
+    "width": 381,
+    "height": 190,
+    "description": "## Description\nThis figure is a visual representation of the labeling process in the Cityscapes Dataset for Semantic Urban Scene Understanding. It shows a black car with a red dashed rectangle highlighting a distant object and a blue dashed rectangle indicating an occluder. The figure demonstrates how distant objects are annotated first, followed by their occluders, ensuring consistent boundaries.\n\n## Text in figure\n- \"Cityscapes Dataset for Semantic Urban Scene Understanding\"\n- \"Exemplary labeling process\"\n- \"Distant objects are annotated first and subsequently their occluders\"\n- \"This ensures the boundary between these objects to be shared and consistent\"",
+    "pdf_text": "",
+    "bbox": [
+      331.5,
+      71.6,
+      521.8,
+      166.3
+    ]
+  },
+  {
+    "file": "p015_f10.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "",
+    "width": 359,
+    "height": 180,
+    "description": "## Search Index\n\n### Figure Description\nThis figure is a photograph showing a group of people walking in an urban setting. The image captures a diverse crowd, with individuals dressed in various styles, walking in different directions. The background includes a modern building with glass walls and a large screen. The photo is slightly blurred, focusing on the people rather than the specific details of the environment.\n\n### Text in Figure\n- People walking in an urban setting\n- Modern building with glass walls\n- Large screen on the building\n- Diverse crowd with various clothing styles\n- Slightly blurred photo focusing on people",
+    "pdf_text": "",
+    "bbox": [
+      358.6,
+      482.2,
+      538.1,
+      572.2
+    ]
+  },
+  {
+    "file": "p015_f11.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "",
+    "width": 360,
+    "height": 183,
+    "description": "## Description\nThis figure is a photograph showing a group of people riding bicycles on a city street. The cyclists are wearing casual clothing and helmets. The image captures a moment of urban cycling, with the cyclists navigating through a busy intersection. The background includes buildings, trees, and a signboard with a portrait.\n\n## Text in figure\nCyclists, buildings, trees, signboard, portrait, intersection, casual clothing, helmets, urban cycling, busy street.",
+    "pdf_text": "",
+    "bbox": [
+      358.5,
+      201.2,
+      538.4,
+      292.3
+    ]
+  },
+  {
+    "file": "p015_f12.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "",
+    "width": 359,
+    "height": 182,
+    "description": "## Image Description\nThe image depicts a street scene with multiple vehicles moving on a road. Visible are a black car, a white van, a dark blue van, and several other cars. The road has white markings, and there are trees and buildings on the side. A person is standing near a building on the left side of the image.\n\n## Textual Content\n- Buildings and trees on the side of the road\n- White van\n- Dark blue van\n- Black car\n- White car\n- Person standing near a building",
+    "pdf_text": "",
+    "bbox": [
+      358.5,
+      296.4,
+      538.0,
+      387.3
+    ]
+  },
+  {
+    "file": "p015_f13.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "",
+    "width": 359,
+    "height": 180,
+    "description": "## Description\nThe figure shows an image of an orange emergency vehicle, specifically an ambulance, driving on a road. The vehicle is labeled \"Feuerwehr Rettungsdienst\" indicating it is a fire department and rescue service vehicle. The image captures the vehicle from the side, showing its distinct orange color and the text on its side.\n\n## Text in figure\n- Feuerwehr\n- Rettungsdienst\n- 112",
+    "pdf_text": "",
+    "bbox": [
+      358.6,
+      482.2,
+      538.1,
+      572.2
+    ]
+  },
+  {
+    "file": "p015_f14.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "",
+    "width": 359,
+    "height": 180,
+    "description": "## Image Description\nThis figure is a photograph showing a street scene with a bus and cyclists. The image captures a moment where a bus is stopped at a traffic light, and two individuals are riding bicycles on the sidewalk. The bus is prominently displayed with advertisements on its side, and the traffic light is visible, indicating a green signal. The setting includes trees and buildings in the background, suggesting an urban environment.\n\n## Text in Figure\n- Bus with advertisements\n- Traffic light (green signal)\n- Two cyclists on the sidewalk\n- Trees and buildings in the background\n- Sidewalk\n- Urban environment",
+    "pdf_text": "",
+    "bbox": [
+      358.6,
+      482.2,
+      538.1,
+      572.2
+    ]
+  },
+  {
+    "file": "p015_f15.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "",
+    "width": 360,
+    "height": 180,
+    "description": "## Description\nThe figure shows a tram on a railway track. The tram is white with blue and orange accents. It is moving on the track, and there is a metal fence on the side of the track. The tram has several windows and doors. The background includes trees and a clear sky.\n\n## Text in figure\n- The tram is white with blue and orange accents.\n- There are several windows and doors on the tram.\n- The tram is on a railway track with a metal fence on the side.\n- The background includes trees and a clear sky.",
+    "pdf_text": "",
+    "bbox": [
+      358.4,
+      574.8,
+      538.5,
+      665.2
+    ]
+  },
+  {
+    "file": "p016_f16.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "",
+    "width": 360,
+    "height": 182,
+    "description": "## Figure Description\nThe figure is a photograph showing a street scene with several scooters parked on the side of the road. The scooters are lined up, and there are people and buildings in the background. The scooters have license plates, and one has a helmet on the back.\n\n## Text in Figure\n- License plates: YB 70, YB 71, YB 72, YB 73\n- Buildings with signs and awnings\n- People walking and standing\n- Red umbrellas\n- Parking sign (P)",
+    "pdf_text": "",
+    "bbox": [
+      358.2,
+      99.7,
+      537.9,
+      190.3
+    ]
+  },
+  {
+    "file": "p016_f17.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "",
+    "width": 358,
+    "height": 179,
+    "description": "## Description\nThe image depicts an urban street scene with several bicycles parked along the sidewalk. Two individuals are riding bicycles on the road, and there are several cars parked along the curb. The buildings on the left side of the image have multiple windows, and there is a tree in the background.\n\n## Text in figure\n- Bicycles parked along the sidewalk\n- Two individuals riding bicycles on the road\n- Several cars parked along the curb\n- Buildings with multiple windows on the left side\n- Tree in the background",
+    "pdf_text": "",
+    "bbox": [
+      358.9,
+      192.8,
+      538.0,
+      282.7
+    ]
+  },
+  {
+    "file": "p016_f18.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "",
+    "width": 359,
+    "height": 182,
+    "description": "## Image Description\nThe image depicts a street scene with several vehicles parked along the roadside. A white recreational vehicle (RV) is parked in the middle of the row of cars. The buildings on the left side of the street have multiple windows. There are trees and streetlights visible in the background.\n\n## Text in Figure\n- Buildings with multiple windows\n- White recreational vehicle (RV)\n- Row of parked cars\n- Trees\n- Streetlights",
+    "pdf_text": "",
+    "bbox": [
+      358.4,
+      567.9,
+      538.0,
+      658.9
+    ]
+  },
+  {
+    "file": "p016_f19.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "",
+    "width": 360,
+    "height": 181,
+    "description": "## Search Index Description\nThis image depicts a blue van parked on the side of a street, with a trailer attached to the back. The van is positioned next to a grassy area, and there are several trash bins and a signboard visible in the background. The street is lined with houses and trees, and there is a car parked on the opposite side of the road.\n\n## Search Index Text\nBlue van, trailer, grassy area, trash bins, signboard, houses, trees, car, parked, street, side, background, opposite side, road.",
+    "pdf_text": "",
+    "bbox": [
+      358.3,
+      378.1,
+      538.4,
+      468.4
+    ]
+  },
+  {
+    "file": "p016_f20.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "",
+    "width": 360,
+    "height": 180,
+    "description": "## Description\nThe figure is a photograph showing an empty urban street with greenery on both sides. The road is straight, with no visible vehicles or pedestrians. Trees and bushes line the sides of the road, and there are streetlights and a signboard on the left side. The sky is partly cloudy.\n\n## Text in figure\n- Streetlights\n- Signboard\n- Trees\n- Bushes\n- Road\n- Cloudy sky",
+    "pdf_text": "",
+    "bbox": [
+      358.5,
+      476.0,
+      538.3,
+      565.8
+    ]
+  },
+  {
+    "file": "p016_f21.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "",
+    "width": 359,
+    "height": 182,
+    "description": "## Description\nThe figure depicts an outdoor scene in a park, featuring a playground with a swing set and a bench. Two individuals are present, one standing near the swing set and the other near the bench. A bicycle is parked nearby, and a sign is visible on the left side of the image. The park is surrounded by trees, and the ground is covered with grass.\n\n## Text in figure\n- Sign: \"none\"\n- People: 2\n- Bicycle: 1\n- Swing set: 1\n- Bench: 1\n- Trees: multiple\n- Grass: covering the ground",
+    "pdf_text": "",
+    "bbox": [
+      358.4,
+      567.9,
+      538.0,
+      658.9
+    ]
+  },
+  {
+    "file": "p017_f22.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "",
+    "width": 359,
+    "height": 180,
+    "description": "## Figure Description\nThe figure is a photograph of an urban street scene. It shows a street lined with buildings of various architectural styles, including a mix of modern and traditional designs. The street is empty, with a few people visible in the distance. The image captures the architectural diversity and urban environment.\n\n## Text in Figure\n- No text is visible in the image.",
+    "pdf_text": "",
+    "bbox": [
+      358.6,
+      195.3,
+      537.9,
+      285.3
+    ]
+  },
+  {
+    "file": "p017_f23.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "",
+    "width": 359,
+    "height": 180,
+    "description": "## Description\nThe figure depicts a street scene with a person standing near a wall. The wall is made of bricks and has a small archway. The street is empty, with trees lining both sides. The road has white markings, indicating lanes. The image captures a quiet, possibly abandoned or less-trafficked area.\n\n## Text in figure\n- Person standing near a wall\n- Brick wall with a small archway\n- Empty street\n- Trees on both sides of the street\n- White markings on the road",
+    "pdf_text": "",
+    "bbox": [
+      358.6,
+      195.3,
+      537.9,
+      285.3
+    ]
+  },
+  {
+    "file": "p017_f24.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "",
+    "width": 359,
+    "height": 179,
+    "description": "## Search Index Description\nThis image depicts a scene from a city street, showing a row of barriers along the sidewalk. The barriers are red and white striped, and there is a sign with white text on a black background. Two people are standing near the barriers, and a car is parked on the road. The background includes a staircase and a building.\n\n## Search Index Text\n- Red and white striped barriers\n- White sign with black text\n- Two people standing\n- Car parked on the road\n- Staircase in the background\n- Building in the background\n- Sidewalk\n- Road",
+    "pdf_text": "",
+    "bbox": [
+      358.6,
+      288.2,
+      538.1,
+      377.7
+    ]
+  },
+  {
+    "file": "p017_f25.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "",
+    "width": 359,
+    "height": 181,
+    "description": "## Search Index\n\n### Figure Description\nThis figure is a photograph showing a highway scene. It depicts a road with a concrete barrier on the left side, a grassy area, and a truck parked on the side of the road. The image is slightly blurry, capturing a moment of a truck parked near a building in the background.\n\n### Text in Figure\n- Truck\n- Concrete barrier\n- Grassy area\n- Road\n- Building in the background",
+    "pdf_text": "",
+    "bbox": [
+      358.7,
+      472.9,
+      537.9,
+      563.5
+    ]
+  },
+  {
+    "file": "p017_f26.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "",
+    "width": 359,
+    "height": 181,
+    "description": "## Search Index Section 1: Figure Description\nThis figure is an image from the Cityscapes Dataset for Semantic Urban Scene Understanding. It depicts a street scene with a pedestrian bridge over a cobblestone road. Several people are walking on the bridge and on the street below. There are buildings on either side of the street, and a car is driving on the road. The image captures a typical urban environment with various elements such as pedestrians, vehicles, and architectural structures.\n\n## Search Index Section 2: Text in Figure\nBuildings, Pedestrian bridge, People, Cobblestone road, Car, Street, Urban environment, Vehicles, Architecture, Cityscape, Road, Traffic, Pedestrians, Urban scene, City, Vehicles, People walking, Bridge, Street scene, Urban, Cityscape dataset, Semantic understanding, Urban environment, Pedestrians, Vehicles, Architecture, City, Road, Traffic, People walking, Bridge, Street scene, Urban, Cityscape dataset, Semantic understanding.",
+    "pdf_text": "",
+    "bbox": [
+      358.7,
+      472.9,
+      537.9,
+      563.5
+    ]
+  },
+  {
+    "file": "p017_f27.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "",
+    "width": 360,
+    "height": 184,
+    "description": "## Description\nThe figure depicts a man walking in a tunnel, with a brick wall on the left and a road on the right. The tunnel has an arched ceiling and is illuminated by lights. The man is wearing a black shirt and jeans. There is a sign on the ceiling with the number \"211\" and a red and white sign. The road has white markings and a car is visible in the distance.\n\n## Text in figure\n- \"211\" on the ceiling\n- Red and white sign on the ceiling\n- White markings on the road\n- Car in the distance",
+    "pdf_text": "",
+    "bbox": [
+      358.3,
+      564.5,
+      538.5,
+      656.3
+    ]
+  },
+  {
+    "file": "p018_f28.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "",
+    "width": 359,
+    "height": 182,
+    "description": "## Description\nThis image is a snapshot from the Cityscapes Dataset, showcasing a real-world urban scene. It depicts a road intersection with a white truck and a black car navigating through. The truck is turning left, while the car is moving straight. The road is marked with white and red striped bollards, indicating a potential hazard or restricted area. The background features trees and a traffic light, suggesting a busy urban environment.\n\n## Text in figure\n- White truck\n- Black car\n- White and red striped bollards\n- Trees\n- Traffic light",
+    "pdf_text": "",
+    "bbox": [
+      358.5,
+      145.6,
+      537.9,
+      236.5
+    ]
+  },
+  {
+    "file": "p018_f29.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "",
+    "width": 359,
+    "height": 179,
+    "description": "## Search Index Description\nThis figure is a photograph of an urban street scene. It shows a street with traffic lights, buildings, and a cloudy sky. The image captures a moment with traffic lights indicating caution, and several buildings in the background, one of which has a clock tower.\n\n## Search Index Text\nTraffic lights, buildings, cloudy sky, street, caution signal, clock tower, urban scene, buildings, street lights, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights, buildings, street, traffic lights,",
+    "pdf_text": "",
+    "bbox": [
+      358.7,
+      239.9,
+      538.0,
+      329.3
+    ]
+  },
+  {
+    "file": "p018_f30.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "",
+    "width": 360,
+    "height": 180,
+    "description": "## Image Description\nThe image depicts a woman standing on a city street corner, possibly waiting for a bus or a ride. She is positioned on the sidewalk, with a pole and a sign behind her. The street is empty, and there are several buildings visible in the background. The image is taken from a low angle, giving a sense of the urban environment.\n\n## Text in Figure\n- Sign on pole: \"No Entry\"\n- Sign on pole: \"No Parking\"\n- Sign on building: \"TAXI\"\n- Sign on building: \"FOLDERS\"\n- Person: \"Woman standing on sidewalk\"",
+    "pdf_text": "",
+    "bbox": [
+      358.7,
+      331.6,
+      538.3,
+      421.3
+    ]
+  },
+  {
+    "file": "p018_f31.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "",
+    "width": 360,
+    "height": 181,
+    "description": "## Description\nThe figure is a photograph showing an urban street scene. It depicts a road with a car driving down it, surrounded by buildings, streetlights, and bollards. The sky is cloudy, and there are people walking on the sidewalk.\n\n## Text in figure\nBuildings, car, streetlights, bollards, people, cloudy sky, road.",
+    "pdf_text": "",
+    "bbox": [
+      358.7,
+      521.8,
+      538.6,
+      612.3
+    ]
+  },
+  {
+    "file": "p018_f32.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "",
+    "width": 360,
+    "height": 181,
+    "description": "## Image Description\nThe image depicts a street scene with a pedestrian crossing a crosswalk. The street is lined with trees and streetlights, and there is a yellow street sign with the word \"Greenwich\" on it. A man is walking across the street, and there are cars parked on the side of the road. The image is clear and shows a typical urban environment.\n\n## Text in Figure\n- Greenwich\n- Person walking across the street\n- Street sign\n- Trees\n- Streetlights\n- Cars parked on the side of the road\n- Pedestrian crossing\n- Urban environment",
+    "pdf_text": "",
+    "bbox": [
+      358.7,
+      521.8,
+      538.6,
+      612.3
+    ]
+  },
+  {
+    "file": "p019_f33.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "",
+    "width": 359,
+    "height": 181,
+    "description": "## Image Description\nThis image is a photograph of an urban street scene. It shows a double-decker bus turning left at an intersection. The road has white markings indicating traffic flow directions. There are buildings on both sides of the street, with one building featuring a red facade. Pedestrians are visible on the sidewalk, and traffic lights are present at the intersection.\n\n## Text in Figure\n- Double-decker bus\n- Turning left\n- Intersection\n- White markings\n- Traffic flow directions\n- Buildings\n- Red facade\n- Pedestrians\n- Sidewalk\n- Traffic lights",
+    "pdf_text": "",
+    "bbox": [
+      358.5,
+      487.1,
+      538.1,
+      577.5
+    ]
+  },
+  {
+    "file": "p019_f34.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "",
+    "width": 360,
+    "height": 180,
+    "description": "## Description\nThe figure is a photograph of an urban street scene. It shows a pedestrian walking on a sidewalk with bollards, street signs, and a building in the background. There are also people and tables with umbrellas in the distance.\n\n## Text in figure\n- Street signs: \"H\" (pedestrian crossing), \"No Entry\"\n- Person walking with a box\n- Bollard\n- Building with a large advertisement\n- People and tables with umbrellas in the distance",
+    "pdf_text": "",
+    "bbox": [
+      358.7,
+      288.1,
+      538.4,
+      378.0
+    ]
+  },
+  {
+    "file": "p019_f35.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "",
+    "width": 359,
+    "height": 181,
+    "description": "## Figure Description\nThis figure is a photograph showing a street scene. It depicts a road with parked cars on both sides, bicycles parked on the sidewalk, and a building with a \"P\" sign indicating parking. The image captures a typical urban environment with greenery and buildings.\n\n## Text in Figure\n- \"P\" sign\n- \"P\" (on the building)",
+    "pdf_text": "",
+    "bbox": [
+      358.5,
+      487.1,
+      538.1,
+      577.5
+    ]
+  },
+  {
+    "file": "p019_f36.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "",
+    "width": 359,
+    "height": 181,
+    "description": "## Description\nThe figure shows a tram on a track, positioned at a tram stop. The tram is red and white, with a modern design. It is situated on the right side of the image, with a building in the background. The tram stop is marked by a pole with a sign, and the tram appears to be either arriving at or departing from the stop. The environment is urban, with trees and a road visible in the background.\n\n## Text in figure\n- Tram\n- Stop\n- Building\n- Sign\n- Road\n- Trees\n- Urban environment",
+    "pdf_text": "",
+    "bbox": [
+      358.5,
+      487.1,
+      538.1,
+      577.5
+    ]
+  },
+  {
+    "file": "p020_f37.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 359,
+    "height": 181,
+    "description": "## Image Description\nThe image depicts a street scene with several people walking on a cobblestone street. There are buildings on either side of the street, one of which has a white van parked in front. The people are walking in various directions, and some are standing near the buildings. The image has a slightly blurry effect, possibly due to camera movement or a low-quality lens.\n\n## Text in Figure\n- People walking on the street\n- Buildings on either side\n- White van parked in front of a building\n- Cobblestone street\n- Blurry effect on the image",
+    "pdf_text": "",
+    "bbox": [
+      358.6,
+      175.4,
+      538.2,
+      266.0
+    ]
+  },
+  {
+    "file": "p020_f38.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 360,
+    "height": 181,
+    "description": "## Image Description\nThe image depicts a street scene with a cobblestone road, a sidewalk, and a row of bollards. There are several people walking on the sidewalk, and some are sitting at outdoor tables with chairs. The tables are arranged in a row, and there are umbrellas above them. The street is lined with parked cars, and there are trees and buildings in the background.\n\n## Textual Content\n- People walking on the sidewalk\n- Outdoor tables with chairs\n- Umbrellas above the tables\n- Row of bollards\n- Parked cars on the street\n- Trees and buildings in the background",
+    "pdf_text": "",
+    "bbox": [
+      358.6,
+      267.6,
+      538.6,
+      357.9
+    ]
+  },
+  {
+    "file": "p020_f39.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 359,
+    "height": 180,
+    "description": "## Description\nThis image depicts a street scene with multiple cyclists and pedestrians. The cyclists are riding bicycles on the road, while pedestrians are standing on the sidewalk. The street is lined with streetlights and trees, and there are vehicles parked and driving in the background.\n\n## Text in figure\nCyclists, pedestrians, streetlights, trees, vehicles, sidewalk, road.",
+    "pdf_text": "",
+    "bbox": [
+      358.8,
+      361.0,
+      538.3,
+      451.1
+    ]
+  },
+  {
+    "file": "p021_f40.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "Figure 7. Examples of our annotations on various images of our train and val sets. The images were selected based on criteria overlayed on each image.",
+    "width": 992,
+    "height": 1144,
+    "description": "Figure type: Image collage with annotations\n\nDescription: The figure is a collage of nine images, each annotated with a specific criterion related to urban scene understanding. The criteria include the largest number of instances and persons, riders, cars, bicycles, buses, trucks, motorcycles, large spatial variation of persons, and the fewest number of instances.\n\nText in figure: Largest number of instances and persons | Largest number of riders | Largest number of cars | Largest number of bicycles | Largest number of buses | Largest number of trucks | Largest number of motorcycles | Large spatial variation of persons | Fewest number of instances",
+    "pdf_text": "Largest number of instances and persons | Largest number of riders | Largest number of cars | Largest number of bicycles | Largest number of buses | Largest number of trucks | Largest number of motorcycles | Large spatial variation of persons | Fewest number of instances",
+    "bbox": [
+      49.5,
+      90.2,
+      545.6,
+      661.8
+    ]
+  },
+  {
+    "file": "p025_f41.png",
+    "page": 25,
+    "kind": "picture",
+    "caption": "Figure 8. Exemplary output of our control experiments for the pixel-level semantic labeling task, see the main paper for details. The image is part of our test set and has both, the largest number of instances and persons.",
+    "width": 993,
+    "height": 1140,
+    "description": "This figure presents a series of control experiments for pixel-level semantic labeling in urban scenes. It includes an original image, its annotation, and various segmentation results. The panels show different segmentation methods applied to the image, including static fine and coarse segmentations, ground truth segmentations with different sampling rates, and a nearest training neighbor approach. The figure demonstrates the impact of different segmentation strategies on the accuracy and detail of the resulting segmentations.\n\nText in figure: Image, Annotation, static fine (SF), static coarse (SC), GT segmentation w/ SF, GT segmentation w/ SC, GT segmentation w/ [41], GT subsampled by 2, GT subsampled by 8, GT subsampled by 32, GT subsampled by 128, nearest training neighbor.",
+    "pdf_text": "Image | Annotation | static \ufb01ne (SF) | static coarse (SC) | GT segmentation w/ SF | GT segmentation w/ SC | GT segmentation w/ [41] | GT subsampled by 2 | GT subsampled by 8 | GT subsampled by 32 | GT subsampled by 128 | nearest training neighbor",
+    "bbox": [
+      49.4,
+      91.2,
+      545.8,
+      661.2
+    ]
+  },
+  {
+    "file": "p026_f42.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "Figure 9. Exemplary output of our baselines for the pixel-level semantic labeling task, see the main paper for details. The image is part of our test set and has both, the largest number of instances and persons.",
+    "width": 993,
+    "height": 1140,
+    "description": "This figure displays various models' outputs for pixel-level semantic labeling on an urban scene image. It includes the original image, ground truth annotation, and results from different models like FCN-32s, FCN-8s, SegNet, DPN, CRF as RNN, DeepLab, Adelaide, and Dilated10. Each model's output is visualized in a separate panel, showing how well they identify and label different elements in the scene.\n\nText in figure: Image | Annotation | FCN-32s | FCN-8s | FCN-8s half resolution | FCN-8s trained on coarse | SegNet basic [4] | DPN [40] | CRF as RNN [81] | DeepLab LargeFOV StrongWeak [48] | Adelaide [37] | Dilated10 [79]",
+    "pdf_text": "Image | Annotation | FCN-32s | FCN-8s | FCN-8s half resolution | FCN-8s trained on coarse | SegNet basic [4] | DPN [40] | CRF as RNN [81] | DeepLab LargeFOV StrongWeak [48] | Adelaide [37] | Dilated10 [79]",
+    "bbox": [
+      49.4,
+      91.2,
+      545.8,
+      660.8
+    ]
+  },
+  {
+    "file": "p027_f43.png",
+    "page": 27,
+    "kind": "picture",
+    "caption": "Figure 10. Exemplary output of our control experiments for the pixel-level semantic labeling task, see the main paper for details. The image is part of our test set and has the largest number of car instances.",
+    "width": 994,
+    "height": 1140,
+    "description": "This figure is a collection of visual outputs from control experiments for pixel-level semantic labeling in urban scenes. It includes various segmentation results and subsampling techniques applied to a test image from the Cityscapes dataset. The figure shows the original image, ground truth annotation, and different segmentation results with varying levels of detail and subsampling.\n\nKey elements include:\n- Original image and ground truth annotation\n- Segmentation results with static fine (SF) and static coarse (SC) labels\n- Ground truth segmentation with SF and SC\n- Segmentation using method [41]\n- Ground truth subsampled by factors of 2, 8, 32, and 128\n- Nearest training neighbor\n\nText in figure: Image, Annotation, static fine (SF), static coarse (SC), GT segmentation w/ SF, GT segmentation w/ SC, GT segmentation w/ [41], GT subsampled by 2, GT subsampled by 8, GT subsampled by 32, GT subsampled by 128, nearest training neighbor.",
+    "pdf_text": "Image | Annotation | static \ufb01ne (SF) | static coarse (SC) | GT segmentation w/ SF | GT segmentation w/ SC | GT segmentation w/ [41] | GT subsampled by 2 | GT subsampled by 8 | GT subsampled by 32 | GT subsampled by 128 | nearest training neighbor",
+    "bbox": [
+      49.1,
+      91.2,
+      546.1,
+      661.0
+    ]
+  },
+  {
+    "file": "p028_f44.png",
+    "page": 28,
+    "kind": "picture",
+    "caption": "Figure 11. Exemplary output of our baseline experiments for the pixel-level semantic labeling task, see the main paper for details. The image is part of our test set and has the largest number of car instances.",
+    "width": 994,
+    "height": 1140,
+    "description": "Figure Type: Image comparison\nDescription: The figure displays various semantic segmentation outputs for a test image from the Cityscapes dataset. It compares the performance of different models, including FCN-32s, FCN-8s, SegNet, DPN, CRF as RNN, DeepLab, Adelaide, and Dilated10, against the ground truth annotation.\n\nText in figure: Image, Annotation, FCN-32s, FCN-8s, FCN-8s half resolution, FCN-8s trained on coarse, SegNet basic, DPN, CRF as RNN, DeepLab LargeFOV StrongWeak, Adelaide, Dilated10",
+    "pdf_text": "Image | Annotation | FCN-32s | FCN-8s | FCN-8s half resolution | FCN-8s trained on coarse | SegNet basic [4] | DPN [40] | CRF as RNN [81] | DeepLab LargeFOV StrongWeak [48] | Adelaide [37] | Dilated10 [79]",
+    "bbox": [
+      49.2,
+      91.2,
+      546.1,
+      661.1
+    ]
+  },
+  {
+    "file": "p029_f45.png",
+    "page": 29,
+    "kind": "picture",
+    "caption": "Figure 12. Exemplary output of our control experiments and baselines for the instance-level semantic labeling task, see the main paper for details.",
+    "width": 993,
+    "height": 1119,
+    "description": "Description: The figure presents a comparative analysis of different methods for instance-level semantic labeling in urban scenes. It shows the output of various control experiments and baselines, focusing on the largest number of instances and cars. The methods include FRCN + MCG bboxes, FRCN + MCG regions, FRCN + GT bboxes, and FRCN + GT regions. Each method's output is compared against the ground truth annotation.\n\nText in figure: Largest number of instances and persons, Annotation, FRCN + MCG bboxes, FRCN + MCG regions, FRCN + GT bboxes, FRCN + GT regions, Largest number of cars, Annotation, FRCN + MCG bboxes, FRCN + MCG regions, FRCN + GT bboxes, FRCN + GT regions",
+    "pdf_text": "Largest number of instances and persons | Annotation | FRCN + MCG bboxes | FRCN + MCG regions | FRCN + GT bboxes | FRCN + GT regions | Largest number of cars | Annotation | FRCN + MCG bboxes | FRCN + MCG regions | FRCN + GT bboxes | FRCN + GT regions",
+    "bbox": [
+      49.5,
+      97.4,
+      545.8,
+      656.9
+    ]
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Fig. 1: The overview of CBAM . The module has two sequential sub-modules: channel and spatial . The intermediate feature map is adaptively refined through our module (CBAM) at every convolutional block of deep networks.",
+    "width": 691,
+    "height": 205,
+    "description": "## Convolutional Block Attention Module Overview\nThis figure illustrates the Convolutional Block Attention Module (CBAM), which consists of two sequential sub-modules: channel and spatial attention. The input feature is processed through the channel attention module, followed by the spatial attention module, resulting in a refined feature. The process is adaptive, refining the feature map at every convolutional block of deep networks.\n\n## CBAM Components and Process\nThe figure shows the CBAM's components and process flow. It starts with an input feature, which is first passed through the channel attention module. The output of this module is then combined with the spatial attention module's output. The final refined feature is the result of these two attention mechanisms working in sequence."
+  },
+  {
+    "file": "p005_f02.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Fig. 2: Diagram of each attention sub-module. As illustrated, the channel sub-module utilizes both max-pooling outputs and average-pooling outputs with a shared network; the spatial sub-module utilizes similar two outputs that are pooled along the channel axis and forward them to a convolution layer.",
+    "width": 661,
+    "height": 340,
+    "description": "Description: The figure is a diagram illustrating the Convolutional Block Attention Module (CBAM) from the paper \"CBAM: Convolutional Block Attention Module.\" It shows two sub-modules: the Channel Attention Module and the Spatial Attention Module. The Channel Attention Module uses max-pooling and average-pooling outputs with a shared network. The Spatial Attention Module uses similar outputs pooled along the channel axis, which are then processed by a convolution layer.\n\nText in figure: Input feature F, MaxPool Channel Attention Module, AvgPool, Shared MLP, Channel Attention Mc, Channel-refined [MaxPool, AvgPool] feature F', Spatial Attention Module, conv layer, Spatial Attention Ms."
+  },
+  {
+    "file": "p006_f03.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Fig. 3: CBAMintegrated with a ResBlock in ResNet[5]. This figure shows the exact position of our module when integrated within a ResBlock. We apply CBAM on the convolution outputs in each block.",
+    "width": 663,
+    "height": 136,
+    "description": "Description: The figure is a schematic diagram showing the integration of the Convolutional Block Attention Module (CBAM) within a ResNet block. It illustrates the position of CBAM in the ResNet architecture, applied to the convolution outputs in each block. The diagram includes components such as previous convolutional blocks, a convolutional layer, CBAM, and next convolutional blocks.\n\nText in figure: Previous conv blocks, conv, Channel attention, Mc, Spatial attention, Ms, Next conv blocks, ResBlock + CBAM"
+  },
+  {
+    "file": "p011_f04.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "",
+    "width": 694,
+    "height": 234,
+    "description": "## Description\nThe figure contains two plots, each showing the Top-1 Error of different models over epochs. Plot (a) is for ResNet50 and plot (b) is for MobileNet. Each plot has six series, representing different training methods. The series with the highest Top-1 Error is ResNet50 Baseline train, and the lowest is ResNet50 + CBAM val.\n\n## Text in figure\nResNet50 Baseline train, ResNet50 Baseline val, ResNet50 + SE train, ResNet50 + SE val, ResNet50 + CBAM train, ResNet50 + CBAM val\nMobileNet Baseline train, MobileNet Baseline val, MobileNet + SE train, MobileNet + SE val, MobileNet + CBAM train, MobileNet + CBAM val"
+  },
+  {
+    "file": "p012_f05.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Fig. 5: Grad-CAM [18] visualization results. We compare the visualization results of CBAM-integrated network (ResNet50 + CBAM) with baseline (ResNet50) and SE-integrated network (ResNet50 + SE). The grad-CAM visualization is calculated for the last convolutional outputs. The ground-truth label is shown on the top of each input image and P denotes the softmax score of each network for the ground-truth class.",
+    "width": 687,
+    "height": 806,
+    "description": "Figure: Visualization of Grad-CAM results for ResNet50, ResNet50 + SE, and ResNet50 + CBAM networks. It shows input images and their corresponding Grad-CAM visualizations for eight different objects. Each row represents a different network, with the input image on the left and the Grad-CAM visualization on the right. The ground-truth label and softmax score for the ground-truth class are shown above each input image.\n\nText in figure: Tailed frog, Toilet tissue, Loudspeaker, Spider web, American egret, Tank, Seawall, Space heater, Croquet ball, Eel, Hammerhead, Eskimo dog, Snow leopard, Boat paddle, Daddy longlegs, School bus, ResNet50, ResNet50 + SE, ResNet50 + CBAM, P = 0.80736, P = 0.11857, P = 0.65681, P = 0.22357, P = 0.64185, P = 0.14763, P = 0.92236, P = 0.01176, P = 0.87240, P = 0.14643, P = 0.77550, P = 0.25093, P = 0.70827, P = 0.15367, P = 0.97166, P = 0.26611, P = 0.96340, P = 0.1994, P = 0.93707, P = 0.35248, P = 0.87490, P = 0.53005, P = 0.99085, P = 0.59662, P = 0.58732, P = 0.08126, P = 0.67128, P = 0.56634, P = 0.85873, P = 0.62856, P = 0.68065, P = 0.07429, P = 0.89962, P = 0.14804, P = 0.72659, P = 0.61595, P = 0.96575, P = 0.79829, P = 0.73723, P = 0.9225"
+  }
+]

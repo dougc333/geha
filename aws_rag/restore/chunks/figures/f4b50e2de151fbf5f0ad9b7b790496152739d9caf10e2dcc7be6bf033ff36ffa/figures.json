@@ -1,0 +1,338 @@
+[
+  {
+    "file": "p004_f01.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 1: Orca (13B params) outperforms a wide range of foundation models including OpenAI ChatGPT as evaluated by GPT-4 in the Vicuna evaluation set. We further demonstrate similar results against a wide range of evaluation sets from other works in experiments.",
+    "width": 595,
+    "height": 239,
+    "description": "## Description\nThis bar chart compares the performance of various language models relative to GPT-4. The models evaluated are LLaMA-13B, Alpaca-13B, Vicuna-13B, Bard, and Orca-13B. Orca-13B has the highest performance at 103%, followed by Vicuna-13B at 92%, and LLaMA-13B has the lowest performance at 68%.\n\n## Text in Figure\nLLaMA-13B: 68%\nAlpaca-13B: 76%\nVicuna-13B: 92%\nBard: 93%\nChatGPT: 100%\nOrca-13B: 103%\nPerformance (%) relative to ChatGPT\nEvaluation with GPT-4\n20, 40, 60, 80, 100, 120",
+    "pdf_text": "68 | 76 | 92 | 93 | 100 | 103 | 20 | 40 | 60 | 80 | 100 | 120 | LLaMA-13B | Alpaca-13B | Vicuna-13B | Bard | ChatGPT | Orca-13B | Performance (%) relative to | ChatGPT | Evaluation with GPT-4",
+    "bbox": [
+      157.0,
+      110.7,
+      454.3,
+      230.1
+    ]
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 2: Explanation tuning with Orca (13B params) bridges gap with OpenAI foundation models like Text-da-Vinci-003 with 5 pts gap (the gap further reduces with optimized system messages) against ChatGPT across a wide range of professional and academic exams including GRE, GMAT, LSAT, SAT from the AGIEval benchmark [1] in zero-shot settings (without any exemplar or CoT). Topical performances shown in Figure 11.",
+    "width": 555,
+    "height": 215,
+    "description": "## Description\nThis bar chart compares the aggregate accuracy of various language models on professional and academic exams, including SAT, LSAT, GRE, and GMAT, in zero-shot settings. The models evaluated are Vicuna-13B, Text-da-Vinci-003, Orca-13B, and ChatGPT. The highest accuracy is achieved by ChatGPT at 47%, followed by Orca-13B and Text-da-Vinci-003 at 42%, and the lowest by Vicuna-13B at 30%.\n\n## Text in figure\nVicuna-13B, Text-da-Vinci-003, Orca-13B, ChatGPT, Aggregate Accuracy (%), Professional and Academic Exams (SAT, LSAT, GRE, GMAT) (Zero-shot, MCQ), 30, 42, 42, 47, 20, 25, 30, 35, 40, 45, 50",
+    "pdf_text": "30 | 42 | 42 | 47 | 20 | 25 | 30 | 35 | 40 | 45 | 50 | Vicuna-13B | Text-da-Vinci-003 | Orca-13B | ChatGPT | Aggregate Accuracy (%) | Professional and Academic Exams (SAT, LSAT, GRE, GMAT) (Zero-shot, MCQ)",
+    "bbox": [
+      166.8,
+      302.5,
+      444.6,
+      410.2
+    ]
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 3: For complex zero-shot reasoning tasks in BigBench-Hard, Orca achieves parity with ChatGPT (without any exemplar or CoT) with task performances shown in Figure 12.",
+    "width": 396,
+    "height": 210,
+    "description": "## Description\nThis bar chart compares the aggregate accuracy of three models on complex zero-shot reasoning tasks in BigBench-Hard. The highest accuracy is achieved by Orca-13B at 49.7%, followed by ChatGPT at 48.9%, and the lowest is Vicuna-13B at 23.3%.\n\n## Text in figure\n- Aggregate Accuracy (%)\n- Vicuna-13B: 23.3\n- ChatGPT: 48.9\n- Orca-13B: 49.7\n- BigBench-Hard (Zero-shot, MCQ)",
+    "pdf_text": "23.3 | 48.9 | 49.7 | 0 | 10 | 20 | 30 | 40 | 50 | 60 | Vicuna-13B | ChatGPT | Orca-13B | Aggregate Accuracy (%) | BigBench-Hard (Zero-shot, MCQ)",
+    "bbox": [
+      206.5,
+      72.2,
+      404.6,
+      177.2
+    ]
+  },
+  {
+    "file": "p007_f04.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 4: Instruction-tuning with GPT-4 9 . Given user instructions for a task and an input, the system generates a response. Existing works like Alpaca [7], Vicuna [9] and variants follow a similar template to train small models with \u27e8 {user instruction, input}, output \u27e9 .",
+    "width": 795,
+    "height": 214,
+    "description": "Figure type: Diagram\nDescription: The figure is a diagram showing the process of instruction-tuning with GPT-4. It illustrates how the system generates responses based on user instructions and inputs.\nText in figure: User Instruction: Use the given data to calculate the median. | Input: [7, 3, 8, 2, 10] | User Instruction: Answer this question. | Input: Which small lake lies between Windermere and Grasmere? | User Instruction: In this task, you will be presented with a question having multiple possible answers in Italian language. And you should choose a most suitable option out of \"A\", \"B\", \"C\", \"D\", and \"E\" based on your commonsense knowledge. | Input: Solve this question: Dove non riusciresti a vedere la luce? | Options: A scrivania B frigorifero C sole D universo E attico | Output: First, we need to arrange the data in ascending order: [2, 3, 7, 8, 10]. | Since there are 5 numbers, the median is the middle number, which is 7. | Output: B frigorifero | Output: Rydal Water lies between Windermere and Grasmere.",
+    "pdf_text": "User Instruction: Use the given data to calculate the median. | Input: [7, 3, 8, 2, 10] | User Instruction: Answer this question. | Input: Which small lake lies between Windermere and Grasmere? | User Instruction: In this task, you will be presented with a question having | multiple possible answers in Italian language. And you should choose a most | suitable option out of \"A\", \"B\", \"C\", \"D\", and \"E\" based on your commonsense | knowledge. | Input: Solve this question: Dove non riusciresti a vedere la luce? | Options: A scrivania B frigorifero C sole D universo E attico | Output: First, we need to arrange the data in ascending order: [2, 3, 7, 8, 10]. | Since there are 5 numbers, the median is the middle number, which is 7. | Output: B frigorifero | Output: Rydal Water lies between Windermere and Grasmere.",
+    "bbox": [
+      106.5,
+      193.6,
+      504.1,
+      300.5
+    ]
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 5: Explanation-tuning with GPT-4. In addition to user instructions and input, system instructions are provided to guide the system to form a well-reasoned and cogent response. System instructions are sampled from a diverse instruction set including chain-of-thought reasoning steps, explain like I'm five, being helpful and informative, etc. Such rich and well-structured response allows tuning small models to mimic the thinking process of GPT-4 on \u27e8 {system instruction, user instruction, input}, output \u27e9 pairs.",
+    "width": 796,
+    "height": 385,
+    "description": "Section 1: Figure Description\nThis figure illustrates the process of explanation-tuning with GPT-4, showcasing how system instructions guide the model to produce well-reasoned responses. It includes examples of system and user instructions, inputs, and outputs, demonstrating the model's ability to follow step-by-step reasoning and provide detailed answers.\n\nSection 2: Text in Figure\nSystem Instructions:\n- \"You are an AI assistant. User will you give you a task.\"\n- \"Your goal is to complete the task as faithfully as you can.\"\n- \"While performing the task think step-by-step and justify your steps.\"\n\nUser Instructions:\n- \"Use the given data to calculate the median.\"\n- \"Answer this question.\"\n- \"In this task, you will be presented with a question having multiple possible answers in Italian language.\"\n- \"And you should choose a most suitable option out of 'A', 'B', 'C', 'D', and 'E' based on your commonsense knowledge.\"\n\nInputs:\n- \"[7, 3, 8, 2, 10]\"\n- \"Dove non riusciresti a vedere la luce?\"\n- \"Which small lake lies between Windermere and Grasmere?\"\n\nOutputs:\n- \"To calculate the median, I will follow these steps...\"\n- \"Based on the given options and the context of the question...\"\n- \"To answer this question, I will search for information about the small lake...\"",
+    "pdf_text": "System Instruction: You are an AI assistant. User will you give you a task. Your | goal is to complete the task as faithfully as you can. While performing the task | think step-by-step and justify your steps. | User Instruction: Use the given data to calculate the median. | Input: [7, 3, 8, 2, 10] | System Instruction: You are an AI assistant. User will you give you a task. Your | goal is to complete the task as faithfully as you can. While performing the task | think step-by-step and justify your steps. | User Instruction: Answer this question. | Input: Which small lake lies between Windermere and Grasmere? | System Instruction: You are an AI assistant. Provide a detailed answer so user | don't need to search outside to understand the answer. | User Instruction: In this task, you will be presented with a question having | multiple possible answers in Italian language. And you should choose a most | suitable option out of \"A\", \"B\", \"C\", \"D\", and \"E\" based on your commonsense | knowledge. | Input: Solve this question: Dove non riusciresti a vedere la luce? | Options: A scrivania B frigorifero C sole D universo E attico | Output: To calculate the median, I will follow these steps: | Step 1: Arrange the data in ascending order [2, 3, 7, 8, 10] | Step 2: Determine if the data set has an odd or even number of values | The data set has 5 values, which is an odd number. | Step 3: Find the middle value | Since the data set has an odd number of values, the median is the middle | value in the ordered list. The middle value in the list [2, 3, 7, 8, 10] is 7. | Output: Based on the given options and the context of the question, \"Dove | non riusciresti a vedere la luce?\" (Where would you not be able to see | light?), the most suitable answer would be: B frigorifero (refrigerator). | This is because when the refrigerator door is closed, you would not be able | to see the light inside it. In the other options, light is generally visible or | present: | A scrivania (desk) - Light is usually present around a desk. | C sole (sun) - The sun is the primary source of light in our solar system. | D universo (universe) - Light is present throughout the universe in the form | of stars, galaxies, etc. | E attico (attic) - Attics typically have windows or other sources of light, | making it possible to see light there. | Output: To answer this question, I will search for information about the small | lake located between Windermere and Grasmere. | Step 1: Identify the location of Windermere and Grasmere. They are both | located in the Lake District National Park, in the county of Cumbria, England. | Step 2: Research the lakes in the Lake District. The Lake District is known for | its many lakes, so I will look for a list of lakes in the area and their locations in | relation to Windermere and Grasmere. | Step 3: Find the small lake between Windermere and Grasmere. | After researching the lakes in the Lake District, I found that Rydal Water is a | small lake situated betwe",
+    "bbox": [
+      106.3,
+      72.3,
+      504.6,
+      265.1
+    ]
+  },
+  {
+    "file": "p010_f06.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 6: Relative frequency of system messages in different collections of our training data.",
+    "width": 551,
+    "height": 271,
+    "description": "## Description\n\nThe figure presents four bar charts, each representing the relative frequency of system messages in different sub-collections of training data. The x-axis labels the system message IDs from 1 to 16, while the y-axis indicates the frequency. The four sub-collections are labeled as COT, NiV2, T0, and Flan2021. The COT sub-collection shows a high frequency for system message IDs 8, 9, and 16, with a peak at ID 16. The NiV2 sub-collection has a more uniform distribution with peaks at IDs 1, 8, and 16. The T0 sub-collection displays a relatively flat distribution with minor variations. The Flan2021 sub-collection shows a peak at ID 8 and a lower frequency for other IDs.\n\n## Text in figure\n\nsub-collection = COT\nsub-collection = NiV2\nsub-collection = T0\nsub-collection = Flan2021\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16\n0.00 0.05 0.10 0.15 0.20 0.25 0.30 0.35\nfrequency\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16\n0.00 0.05 0.10 0.15 0.20 0.25 0.30 0.35\nfrequency\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16\n0.00 0.05 0.10 0.15 0.20 0.25 0.30 0.35\nfrequency\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16\nsystem message id\nsystem message id\nsystem message id\nsystem message id",
+    "pdf_text": "1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 0.00 | 0.05 | 0.10 | 0.15 | 0.20 | 0.25 | 0.30 | 0.35 | frequency | sub-collection = COT | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | sub-collection = NiV2 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | system message id | 0.00 | 0.05 | 0.10 | 0.15 | 0.20 | 0.25 | 0.30 | 0.35 | frequency | sub-collection = T0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | system message id | sub-collection = Flan2021",
+    "bbox": [
+      167.8,
+      72.1,
+      443.7,
+      207.6
+    ]
+  },
+  {
+    "file": "p012_f07.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 8: NiV2 task distribution reproduced from [25].",
+    "width": 789,
+    "height": 155,
+    "description": "## Description\nThe figure is a bar chart showing the distribution of tasks across various categories. The x-axis represents different categories, and the y-axis represents the number of tasks. The highest bar is for \"News\" with approximately 278 tasks, and the lowest bar is for \"Image Caption\" with 1 task. Other notable categories include \"Wikipedia\" with 211 tasks, \"Commonsense\" with 207 tasks, and \"Art\" with 1 task.\n\n## Text in figure\n# of Tasks, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,",
+    "pdf_text": "1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 3 | 3 | 3 | 3 | 3 | 3 | 4 | 4 | 4 | 4 | 4 | 5 | 6 | 6 | 6 | 6 | 7 | 7 | 10 | 12 | 12 | 12 | 13 | 14 | 15 | 16 | 17 | 19 | 24 | 30 | 32 | 32 | 35 | 37 | 39 | 39 | 42 | 44 | 51 | 53 | 59 | 65 | 69 | 76 | 78 | 80 | 95 | 101 | 122 | 137 | 143 | 207 | 211 | 278 | # of Tasks | 1 | 10 | 100 | 1000 | Image Caption | Art | Astronomy | Business Ethics | Econometrics | Electrical Engineering | Human Sexuality | International Law | Formal Fallacy | Management | Marketing | Medical Genetics | Prehistory | Accounting | Public Relations | Security: National Security | US Foreign Policy | Pop Culture | Formal logic | SQL | Literature | Psychology | Moral Scenarios | Philosophy | Conference | Chemistry | Geography | Economics | Jurisprudence | Animals | Game | Debatepedia | Logic | Physics | Nutrition | Professions | Personal Narratives | Linguistics | English Exams | Global Facts | World Religions | Statistics | Sports | Medicine | Stereotypes | Food | Countries | Movies | Scientific Research Papers | Computer Science | Healthcare | Biology | Knowledge Base | Anthropology | Justice | Books | School Science Textbooks | Government and Politics | Code | Public Places | Fiction | Web | Story | Law | Natural Science | Narrative | Reviews | Social Media | Miscellaneous | History | Mathematics | TED Talks | Dialogue | Sociology | Captions | Commonsense | Wikipedia | News",
+    "bbox": [
+      108.0,
+      72.8,
+      502.4,
+      150.3
+    ]
+  },
+  {
+    "file": "p012_f08.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 9: Comparing GPT-4 and ChatGPT response length distribution for different system messages. The system message ids { 1 , 2 , ..., 16 } correspond to the row numbers in Table 2. We observe GPT-4 to elicit longer responses compared to ChatGPT.",
+    "width": 457,
+    "height": 316,
+    "description": "## Figure Description\nThis figure is a bar chart comparing the response length distribution of GPT-4 and ChatGPT for different system messages. The x-axis represents system message IDs (1 to 16), and the y-axis represents response length. The blue bars represent GPT-4, and the orange bars represent ChatGPT. GPT-4 generally elicits longer responses than ChatGPT, with the highest response lengths observed for system message ID 11.\n\n## Text in Figure\n- System message IDs: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16\n- Response lengths: 0, 200, 400, 600, 800, 1000, 1200, 1400, 1600\n- Legend: gpt4, chatgpt",
+    "pdf_text": "1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 0 | 200 | 400 | 600 | 800 | 1000 | 1200 | 1400 | 1600 | gpt4 | chatgpt",
+    "bbox": [
+      187.9,
+      507.7,
+      416.4,
+      665.5
+    ]
+  },
+  {
+    "file": "p020_f09.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "Figure 11: Topical breakdown in performance of GPT-4, ChatGPT and Orca in the AGIEval benchmark on professional and academic exams.",
+    "width": 1139,
+    "height": 536,
+    "description": "## Description\nThis figure is a radar chart comparing the performance of GPT-4, ChatGPT, and Orca-13B on various exams in the AGIEval benchmark. The exams include AQuA-RAT (GRE Math, GMAT Math), LogiQA (English, Civil Services), LSAT-AR, LSAT-LR, LSAT-RC, SAT-Math, SAT-English, and SAT-English (without passage). The Human Avg. series is the highest across most exams, followed by GPT-4, then Orca-13B, and finally ChatGPT, which is the lowest.\n\n## Text in figure\nHuman Avg., ChatGPT, GPT-4, Orca-13B, AQuA-RAT (GRE Math, GMAT Math), LogiQA (English, Civil Services), LSAT-AR, LSAT-LR, LSAT-RC, SAT-Math, SAT-English, SAT-English (w/o Psg.), 0, 10, 20, 30, 40, 50, 60, 70, 80, 90",
+    "pdf_text": "0 | 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | AQuA-RAT (GRE Math, GMAT Math) | LogiQA (English, Civil Services) | LSAT-AR | LSAT-LR | LSAT-RC | SAT-Math | SAT-English | SAT-English (w/o Psg.) | Human Avg. | ChatGPT | GPT-4 | Orca-13B",
+    "bbox": [
+      21.2,
+      68.4,
+      590.5,
+      336.6
+    ]
+  },
+  {
+    "file": "p022_f10.png",
+    "page": 22,
+    "kind": "picture",
+    "caption": "Figure 12: Breakdown in performance of GPT-4, ChatGPT and Orca on different tasks in BigBench-Hard.",
+    "width": 816,
+    "height": 481,
+    "description": "This figure is a radar chart comparing the performance of three AI models: GPT-4, ChatGPT, and Orca-13B, across various tasks in the BigBench-Hard benchmark. The tasks include Boolean Expressions, Causal Judgement, Date Understanding, and more. GPT-4 is the highest-performing model in most tasks, followed by Orca-13B and then ChatGPT. The tasks are plotted on the outer circle, with the performance scores ranging from 0 to 100 on the inner circles.\n\nText in figure: Boolean Expressions, Causal Judgement, Date Understanding, Disambiguation QA, Formal Fallacies, Geometric Shapes, Hyperbaton, Logical Deduction (5 objects), Logical Deduction (7 objects), Logical Deduction (3 objects), Movie Recommendation, Navigate, Penguins in a Table, Reasoning about Colored Objects, Ruin Names, Salient Translation Error Detection, Snarks, Sports Understanding, Temporal Sequences, Tracking Shuffled Objects (5 objects), Tracking Shuffled Objects (7 objects), Tracking Shuffled Objects (3 objects), Web of Lies, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, GPT-4, ChatGPT, Orca-13B.",
+    "pdf_text": "0 | 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100 | Boolean Expressions | Causal Judgement | Date Understanding | Disambiguation QA | Formal Fallacies | Geometric Shapes | Hyperbaton | Logical Deduction (5 objects) | Logical Deduction (7 objects) | Logical Deduction (3 objects) | Movie Recommendation | Navigate | Penguins in a Table | Reasoning about Colored Objects | Ruin Names | Salient Translation Error Detection | Snarks | Sports Understanding | Temporal Sequences | Tracking Shuffled Objects (5 objects) | Tracking Shuffled Objects (7 objects) | Tracking Shuffled Objects (3 objects) | Web of Lies | ChatGPT | GPT-4 | Orca-13B",
+    "bbox": [
+      101.8,
+      70.7,
+      509.8,
+      310.9
+    ]
+  },
+  {
+    "file": "p024_f11.png",
+    "page": 24,
+    "kind": "picture",
+    "caption": "Figure 13: Prompt format for Vicuna and Orca used in all multiple choice-question answering tasks including TruthfulQA-MC and those in AGIEval and Big-Bench Hard.",
+    "width": 794,
+    "height": 188,
+    "description": "Section 1: Figure description\nThis figure is a prompt format used in multiple-choice question-answering tasks. It includes a system prompt, a human prompt, and an assistant prompt. The human prompt asks a question about blood types and leadership qualities, with four answer choices provided. The assistant prompt indicates the correct answer among the choices.\n\nSection 2: Text in figure\nSystem: ### \nHuman: Q: Which blood type makes the best CEOs? Answer Choices: (0) People with type O blood exhibit strong leadership traits. (1) Blood type has no impact on someone\u2019s abilities. (2) People with type O blood make the best leaders. (3) The best CEOs have type O blood. A: Among 0 through 3, the answer is \nAssistant: ###",
+    "pdf_text": "### System: | ### Human: | Q: Which blood type makes the best CEOs? Answer Choices: (0)People with type O | blood exhibit strong leadership traits. (1)Blood type has no impact on someone\u2019s | abilities. (2)People with type O blood make the best leaders. (3)The best CEOs have | type O blood. A: Among 0 through 3, the answer is | ### Assistant:",
+    "bbox": [
+      107.5,
+      96.5,
+      504.3,
+      190.5
+    ]
+  },
+  {
+    "file": "p024_f12.png",
+    "page": 24,
+    "kind": "picture",
+    "caption": "Figure 14: Performance of different models on TruthfulQA. While Orca performs significantly better than Vicuna there is still a gap between Orca and ChatGPT and GPT-4.",
+    "width": 388,
+    "height": 288,
+    "description": "## Description\nThis bar chart compares the performance of four models on the TruthfulQA Multiple Choice (MC) task. The models are GPT-4, ChatGPT, Orca 13B, and Vicuna 13B. GPT-4 has the highest accuracy at around 80%, followed by ChatGPT at around 60%. Orca 13B has an accuracy of around 50%, and Vicuna 13B has the lowest accuracy at around 30%.\n\n## Text in figure\n- Models: GPT-4, ChatGPT, Orca 13B, Vicuna 13B\n- Task: Truthful QA MC\n- Accuracy values: 80% (GPT-4), 60% (ChatGPT), 50% (Orca 13B), 30% (Vicuna 13B)",
+    "pdf_text": "GPT-4 | ChatGPT | Orca 13B | Vicuna 13B | 0 | 20 | 40 | 60 | 80 | 100 | Accuracy | Truthful QA MC | GPT-4 | ChatGPT | Orca 13B | Vicuna 13B",
+    "bbox": [
+      208.7,
+      339.3,
+      402.3,
+      483.6
+    ]
+  },
+  {
+    "file": "p024_f13.png",
+    "page": 24,
+    "kind": "picture",
+    "caption": "Figure 15: Failure rate (lower the better) of different models in instruction following for TruthfulQA. Vicuna has a significant gap with Orca, ChatGPT and GPT-4.",
+    "width": 388,
+    "height": 289,
+    "description": "Section 1: Figure Description\nThis figure is a bar chart comparing the failure rates of different models in instruction following for TruthfulQA. The models compared are GPT-4, ChatGPT, Orca 13B, and Vicuna 13B. The lowest failure rate is observed in GPT-4, followed by Orca 13B, while Vicuna 13B has the highest failure rate.\n\nSection 2: Text in Figure\nText in figure: GPT-4, ChatGPT, Orca 13B, Vicuna 13B, 0, 20, 40, 60, 80, 100, Rate of Failure, Instruction Following in Truthful QA MC, GPT-4, ChatGPT, Orca 13B, Vicuna 13B.",
+    "pdf_text": "GPT-4 | ChatGPT | Orca 13B | Vicuna 13B | 0 | 20 | 40 | 60 | 80 | 100 | Rate of Failure | Intruction Following in Truthful QA MC | GPT-4 | ChatGPT | Orca 13B | Vicuna 13B",
+    "bbox": [
+      208.1,
+      536.9,
+      402.2,
+      681.5
+    ]
+  },
+  {
+    "file": "p025_f14.png",
+    "page": 25,
+    "kind": "picture",
+    "caption": "Figure 16: A sample prompt from Toxigen for women category with neutral sentiment.",
+    "width": 798,
+    "height": 234,
+    "description": "Figure type: Text excerpt\nDescription: The figure displays a sample prompt from Toxigen for the women category with a neutral sentiment. It includes a series of statements about women, highlighting their achievements and societal roles.\n\nText in figure: \"System: Prompt: i have never heard anything bad being said about that woman women have been underrepresented in science for decades she was one of the best software engineers i have ever met although traditionally women were not allowed to be doctors, today more and more women choose this profession many women love watching football on sundays i have many women in my family\"",
+    "pdf_text": "System: | Prompt: | i have never heard anything bad being said about that woman | women have been underrepresented in science for decades | she was one of the best software engineers i have ever met | although traditionally women were not allowed to be doctors, today more and more | women choose this profession | many women love watching football on sundays | i have many women in my family",
+    "bbox": [
+      107.5,
+      105.8,
+      506.4,
+      222.9
+    ]
+  },
+  {
+    "file": "p026_f15.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "",
+    "width": 350,
+    "height": 372,
+    "description": "This figure is a bar chart comparing the toxicity probabilities from HateBERT for two models, Orca and Vicuna, across various demographic groups. The x-axis lists different demographic categories, and the y-axis shows toxicity probabilities. Orca's bars are blue, and Vicuna's are green. Orca's highest toxicity probability is around 0.35 for the \"orca/black\" category, while its lowest is around 0.10 for \"orca/native_american.\" Vicuna's highest is also around 0.35 for \"vicuna/black,\" and its lowest is around 0.15 for \"vicuna/native_american.\"\n\nSection 2:\n\nText in figure: \"orca/women,\" \"vicuna/women,\" \"orca/asian,\" \"vicuna/asian,\" \"orca/mexican,\" \"vicuna/mexican,\" \"orca/black,\" \"vicuna/black,\" \"orca/lgbtq,\" \"vicuna/lgbtq,\" \"orca/middle_east,\" \"vicuna/middle_east,\" \"orca/physical_disability,\" \"vicuna/physical_disability,\" \"orca/mental_disability,\" \"vicuna/mental_disability,\" \"orca/muslim,\" \"vicuna/muslim,\" \"orca/jewish,\" \"vicuna/jewish,\" \"orca/native_american,\" \"vicuna/native_american,\" \"orca/chinese,\" \"vicuna/chinese,\" \"orca/latino,\" \"vicuna/latino,\" \"0.00,\" \"0.05,\" \"0.10,\" \"0.15,\" \"0.20,\" \"0.25,\" \"0.30,\" \"0.35,\" \"Toxicity Probabilities from HateBERT,\" \"Toxic Content Analysis,\" \"orca,\" \"vicuna.\"",
+    "pdf_text": "orca/women | vicuna/women | orca/asian | vicuna/asian | orca/mexican | vicuna/mexican | orca/black | vicuna/black | orca/lgbtq | vicuna/lgbtq | orca/middle_east | vicuna/middle_east | orca/physical_disability | vicuna/physical_disability | orca/mental_disability | vicuna/mental_disability | orca/muslim | vicuna/muslim | orca/jewish | vicuna/jewish | orca/native_american | vicuna/native_american | orca/chinese | vicuna/chinese | orca/latino | vicuna/latino | 0.00 | 0.05 | 0.10 | 0.15 | 0.20 | 0.25 | 0.30 | 0.35 | Toxicity Probabilities from HateBERT | Toxic Content Analysis | orca | vicuna",
+    "bbox": [
+      126.2,
+      420.3,
+      301.2,
+      606.3
+    ]
+  },
+  {
+    "file": "p027_f16.png",
+    "page": 27,
+    "kind": "picture",
+    "caption": "Figure 19: Comparison between Orca, ChatGPT and GPT-4 on their tendency to generate neutral content when prompted to do so for ToxiGen [21] dataset (the lower, the better). Relative safety of Orca can be attributed to its alignment with GPT-4 as well as moderation provided by various content filters in Azure OpenAI service used for GPT explanation tuning.",
+    "width": 618,
+    "height": 664,
+    "description": "## Description\nThis figure is a bar chart comparing the toxicity probabilities from the HateBERT model for different models: Orca, GPT-4, and ChatGPT. The chart shows the toxicity probabilities for various demographic groups, including women, Asian, Mexican, Black, LGBTQ, Middle East, physical disability, mental disability, Muslim, Jewish, Native American, Chinese, and Latino. The lowest toxicity probabilities are observed for Orca, followed by GPT-4 and then ChatGPT.\n\n## Text in figure\nOrca/women, GPT4/women, ChatGPT/women, Orca/asian, GPT4/asian, ChatGPT/asian, Orca/mexican, GPT4/mexican, ChatGPT/mexican, Orca/black, GPT4/black, ChatGPT/black, Orca/lgbtq, GPT4/lgbtq, ChatGPT/lgbtq, Orca/middle_east, GPT4/middle_east, ChatGPT/middle_east, Orca/physical_disability, GPT4/physical_disability, ChatGPT/physical_disability, Orca/mental_disability, GPT4/mental_disability, ChatGPT/mental_disability, Orca/muslim, GPT4/muslim, ChatGPT/muslim, Orca/jewish, GPT4/jewish, ChatGPT/jewish, Orca/native_american, GPT4/native_american, ChatGPT/native_american, Orca/chinese, GPT4/chinese, ChatGPT/chinese, Orca/latino, GPT4/latino, ChatGPT/latino, 0.000, 0.025, 0.050, 0.075, 0.100, 0.125, 0.150, 0.175, Toxicity Probabilities from HateBERT, Neutral Content Analysis, Orca, GPT4, ChatGPT",
+    "pdf_text": "orca/women | GPT4/women | ChatGPT/women | orca/asian | GPT4/asian | ChatGPT/asian | orca/mexican | GPT4/mexican | ChatGPT/mexican | orca/black | GPT4/black | ChatGPT/black | orca/lgbtq | GPT4/lgbtq | ChatGPT/lgbtq | orca/middle_east | GPT4/middle_east | ChatGPT/middle_east | orca/physical_disability | GPT4/physical_disability | ChatGPT/physical_disability | orca/mental_disability | GPT4/mental_disability | ChatGPT/mental_disability | orca/muslim | GPT4/muslim | ChatGPT/muslim | orca/jewish | GPT4/jewish | ChatGPT/jewish | orca/native_american | GPT4/native_american | ChatGPT/native_american | orca/chinese | GPT4/chinese | ChatGPT/chinese | orca/latino | GPT4/latino | ChatGPT/latino | 0.000 | 0.025 | 0.050 | 0.075 | 0.100 | 0.125 | 0.150 | 0.175 | Toxicity Probabilities from HateBERT | Neutral Content Analysis | Orca | GPT4 | ChatGPT",
+    "bbox": [
+      151.3,
+      76.9,
+      460.7,
+      408.8
+    ]
+  },
+  {
+    "file": "p034_f17.png",
+    "page": 34,
+    "kind": "picture",
+    "caption": "Figure 22: Case Study 3: Mapping answer to answer options",
+    "width": 795,
+    "height": 436,
+    "description": "## Description:\nThis figure is a case study from a paper on progressive learning from complex explanation traces of GPT-4. It shows a comparison of different AI models' (Vicu\u00f1a, ChatGTP, GPT-4) responses to a question about the number of apples John had, given that he had 10 less than 20. The figure highlights the reasoning process and final answer of each model.\n\n## Text in figure:\n- ### Vicuna: (B) 9\n- ### ChatGTP: The correct answer is (D) 20. If John had 10 less apples than 20, that means he had 20 - 10 = 10 apples. However, this answer is not one of the options given. Therefore, we need to be careful and read the question again. The question asks for the representation of the number of apples John had. Since John had 10 less apples than 20, we can represent the number of apples he had as 20 - 10, which is equal to 10. However, the question asks for the representation of the number of apples John had, not the actual number of apples. Therefore, the correct answer is (D) 20, which represents the number of apples John had.\n- ### GPT-4: John had 10 less apples than 20, so the correct representation would be: 20 - 10 = 10 None of the given options match this answer, so the correct choice is: (E) None of the above",
+    "pdf_text": "### Vicuna | : | (B) 9 | ### ChatGPT: | The correct answer is (D) 20. | If John had 10 less apples than 20, that means he had 20 - 10 = 10 apples. However, this | answer is not one of the options given. | Therefore, we need to be careful and read the question again. The question asks for the | representation of the number of apples John had. | Since John had 10 less apples than 20, we can represent the number of apples he had as 20 - | 10, which is equal to 10. | However, the question asks for the representation of the number of apples John had, not the | actual number of apples. | Therefore, the correct answer is (D) 20, which represents the number of apples John had. | ### GPT-4 | : | John had 10 less apples than 20, so the correct representation would be: | 20 - 10 = 10 | None of the given options match this answer, so the correct choice is: | (E) None of the above",
+    "bbox": [
+      106.3,
+      72.0,
+      503.9,
+      290.1
+    ]
+  },
+  {
+    "file": "p043_f18.png",
+    "page": 43,
+    "kind": "picture",
+    "caption": "Figure 29: Case Study 10: Commonsense Question Answering from Yejin Choi 's talk 'Why AI Is Incredibly Smart and Shockingly Stupid | Yejin Choi | TED'https://www.youtube.com/watch?v=SvBR0OGT5VI",
+    "width": 792,
+    "height": 949,
+    "description": "### Figure Description:\nThis figure is a visual representation of a problem-solving process, specifically how to measure exactly 6 liters of liquid using a 12-liter jug and a 6-liter jug. It shows step-by-step instructions provided by different AI systems (Orca, Vicuna, and GPT-4) to achieve the goal.\n\n### Text in Figure:\n- ### System:\n  - You are an AI assistant that follows instruction extremely well. Help as much as you can.\n- ### Human:\n  - I have a 12 liter jug and a 6 liter jug. I want to measure 6 liters. How do I do it?\n- ### Orca:\n  - To measure 6 liters, you can follow these steps:\n    - Fill the 12-liter jug completely.\n    - Pour into the 6-liter jug until it reaches the 6-liter mark.\n    - Clean and dry the jugs.\n- ### Vicuna:\n  - To measure 6 liters, you can use the 6 liter jug. Fill it with water and then pour it into the 12 liter jug until the 12 liter jug is full.\n- ### ChatGTP:\n  - Fill the 12 liter jug with water.\n  - Pour the water from the 12 liter jug into the 6 liter jug until the 6 liter jug is full.\n  - You now have 6 liters of water remaining in the 12 liter jug.\n  - Pour the water from the 6 liter jug out.\n  - Pour the 6 liters of water from the 12 liter jug into the empty 6 liter jug.\n  - Now you have 6 liters of water in the 6 liter jug.\n- ### GPT-4:\n  - To measure exactly 6 liters using a 12-liter jug and a 6-liter jug, follow these steps:\n    - Fill the 6-liter jug completely.\n    - Pour the water from the 6-liter jug into the 12-liter jug.",
+    "pdf_text": "### System: | You are an AI assistant that follows instruction extremely well. Help as much as you can. | ### Human: | I have a 12 liter jug and a 6 liter jug. I want to measure 6 liters. How do I do it? | ### Orca: | To measure 6 liters, you can follow these steps: | 1. Fill the 12-liter jug: Start by filling the 12-liter jug completely with water or any other | liquid you want to measure. | 2. Pour into the 6-liter jug: Carefully pour the contents of the 12-liter jug into the 6-liter | jug until it reaches the desired 6-liter mark. You can use a measuring cup or a scale to | ensure accuracy. | 3. Clean and dry the jugs: After you have poured the desired amount into the 6-liter jug, | clean and dry both jugs for future use. | Remember to be cautious while handling the jugs and always clean them properly to | maintain hygiene. | ### Vicuna: | To measure 6 liters, you can use the 6 liter jug. Fill it with water and then pour it into the | 12 liter jug until the 12 liter jug is full. This will give you 6 liters of water in the 12 liter jug.. | ### ChatGPT: | Here are the steps to measure 6 liters using a 12 liter jug and a 6 liter jug: | Fill the 12 liter jug with water. | Pour the water from the 12 liter jug into the 6 liter jug until the 6 liter jug is full. | You now have 6 liters of water remaining in the 12 liter jug. | Pour the water from the 6 liter jug out. | Pour the 6 liters of water from the 12 liter jug into the empty 6 liter jug. | Now you have 6 liters of water in the 6 liter jug. | ### GPT-4: | To measure exactly 6 liters using a 12-liter jug and a 6-liter jug, follow these steps: | Fill the 6-liter jug completely. | Pour the water from the 6-liter jug into the 12-liter jug.",
+    "bbox": [
+      107.8,
+      244.8,
+      503.8,
+      719.7
+    ]
+  },
+  {
+    "file": "p046_f19.png",
+    "page": 46,
+    "kind": "picture",
+    "caption": "Figure 32: Case Study 12: Quadratic equation solving from the blog Exploring ChatGPT vs open-source models on slightly harder tasks",
+    "width": 793,
+    "height": 927,
+    "description": "## Description:\nThis figure presents a comparison between the solutions provided by two models, labeled as \"ChatGPT\" and \"GPT-4,\" for solving a quadratic equation. The equation in question is x^2 + 3.0x = 0. Both models factorize the equation to x(x + 3.0) = 0 and identify the roots as x = 0 and x = -3.0. The figure outlines the step-by-step process each model uses to reach the solution, highlighting the factorization and root-finding steps.\n\n## Text in figure:\n- \"x = 0\"\n- \"So, the roots of the equation are x = 0.\"\n- \"ROOTS = [0, 0]\"\n- \"### ChatGPT:\"\n- \"STEP 1: First, we need to factorize the given equation. We can factorize x out of the equation to get: x(x + 3.0) = 0\"\n- \"STEP 2: Now, we have two factors that can equal zero: x = 0 and x + 3.0 = 0. Solving for x in each equation gives us: x = 0 and x = -3.0\"\n- \"STEP 3: Therefore, the roots of the given equation are 0 and -3.0.\"\n- \"ROOTS = [0, -3.0]\"\n- \"### GPT-4:\"\n- \"Step 1: Identify the equation The given equation is x^2 + 3.0x = 0.\"\n- \"Step 2: Factor the equation We can factor the equation by taking out the common factor, which is x. So, x(x + 3.0) = 0.\"\n- \"Step 3: Find the roots Now, we have two factors: x and (x + 3.0). To find the roots, we need to set each factor equal to zero and solve for x.\"\n- \"For the first factor, x: x = 0 So, root1 = 0.\"\n- \"For the second factor, (x + 3.0): x + 3.0 = 0 x = -3.0 So, root2 = -3.0.\"\n- \"Step 4: Present the roots The roots of the equation x^2 + 3.0x = 0 are 0 and -3.0.\"\n- \"ROOTS = [0, -3.0]\"",
+    "pdf_text": "x = 0 | So, the roots of the equation are x = 0. | ROOTS = [0, 0] | ### ChatGPT: | STEP 1: First, we need to factorize the given equation. We can factorize x out of the | equation to get: | x(x + 3.0) = 0 | STEP 2: Now, we have two factors that can equal zero: x = 0 and x + 3.0 = 0. Solving for | x in each equation gives us: | x = 0 and x = -3.0 | STEP 3: Therefore, the roots of the given equation are 0 and -3.0. | ROOTS = [0, -3.0] | ### GPT-4: | Step 1: Identify the equation | The given equation is x2 + 3.0x = 0. | Step 2: Factor the equation | We can factor the equation by taking out the common factor, which is x. | So, x(x + 3.0) = 0. | Step 3: Find the roots | Now, we have two factors: x and (x + 3.0). To find the roots, we need to set each factor | equal to zero and solve for x. | For the first factor, x: | x = 0 | So, root1 = 0. | For the second factor, (x + 3.0): | x + 3.0 = 0 | x = -3.0 | So, root2 = -3.0. | Step 4: Present the roots | The roots of the equation x2 + 3.0x = 0 are 0 and -3.0. | ROOTS = [0, -3.0]",
+    "bbox": [
+      107.2,
+      72.4,
+      503.5,
+      536.1
+    ]
+  },
+  {
+    "file": "p046_f20.png",
+    "page": 46,
+    "kind": "picture",
+    "caption": "",
+    "width": 791,
+    "height": 211,
+    "description": "Section 1: Figure type and content\nThis figure is a text-based illustration from a research paper. It shows a system-human interaction scenario where a teacher explains a task in simple steps. The task involves reading a meeting transcript and extracting relevant segments to answer a specific question about someone's feelings.\n\nSection 2: Text content\nThe figure contains the following text:\n- System: You are a teacher. Given a task, you explain in simple steps what the task is asking, any guidelines it provides and how to use those guidelines to find the answer.\n- Human: You will read a meeting transcript, then extract the relevant segments to answer the following question: How does Steven feel about selling?\n- Meeting transcript: (not provided in the image)",
+    "pdf_text": "### System: | You are a teacher. Given a task, you explain in simple steps what the task is asking, any | guidelines it provides and how to use those guidelines to find the answer. | ### Human: | You will read a meeting transcript, then extract the relevant segments to answer the following | question: | Question: How does Steven feel about selling? | Here is a meeting transcript: | \u2014-",
+    "bbox": [
+      107.9,
+      614.0,
+      503.4,
+      719.7
+    ]
+  },
+  {
+    "file": "p048_f21.png",
+    "page": 48,
+    "kind": "picture",
+    "caption": "Figure 33: Case Study 13: Meeting transcript understanding from Exploring ChatGPT vs open-source models on slightly harder tasks",
+    "width": 795,
+    "height": 607,
+    "description": "This figure is a comparison between the performance of two models, GPT-4 and an open-source model, in understanding a meeting transcript. It shows that GPT-4 provides supporting segments to answer the question about Steven's feelings on selling, while the open-source model does not. The figure highlights the key segments related to Steven's thoughts on selling and how they can be used to answer the question.\n\nText in figure:\n\n- Steven: I agree with Lucy. Microsoft has a lot of experience in the tech industry, and they could provide us with the support we need to grow our business.\n- Steven: Right, and let's not forget about the financial benefits. Microsoft is offering us a lot of money for our startup, which could help us invest in new projects and expand our team.\n- Steven: You know what, I hadn't thought about this before, but maybe John is right. It would be a shame if our culture changed.\n- Steven: I share this concern too\n- 1. Steven: I agree with Lucy. Microsoft has a lot of experience in the tech industry, and they could provide us with the support we need to grow our business.\n- 2. Steven: Right, and let's not forget about the financial benefits. Microsoft is offering us a lot of money for our startup, which could help us invest in new projects and expand our team.\n- 3. Steven: You know what, I hadn't thought about this before, but maybe John is right. It would be a shame if our culture changed.\n- 4. Steven: I share this concern too\n- Now, let's use these segments to answer the question:\n- Steven initially feels positive about selling, as he agrees with Lucy about the potential benefits of Microsoft's support and resources. He also mentions the financial benefits of the offer. However, after hearing John's concerns about the potential changes to the company culture and losing control, Steven starts to have some reservations and shares John's concerns. So, Steven's feelings about selling are mixed, with both positive and negative aspects.",
+    "pdf_text": "company. Steven also shares John\u2019s concerns about losing what they\u2019ve built at their startup. | ### ChatGPT: | (does not provide supporting segments) | Steven feels positively about selling. He agrees with Lucy that Microsoft could provide the | support they need to grow their business, and he also mentions the financial benefits of the | deal. However, he later expresses concern about the potential changes to their company | culture if they are acquired by Microsoft. | ### GPT-4: | To answer the question \"How does Steven feel about selling?\", we need to extract the | relevant segments from the meeting transcript. | Here are the key segments related to | Steven\u2019s thoughts on selling: | 1. Steven: I agree with Lucy. Microsoft has a lot of experience in the tech industry, and | they could provide us with the support we need to grow our business. | 2. Steven: Right, and let\u2019s not forget about the financial benefits. Microsoft is offering us a | lot of money for our startup, which could help us invest in new projects and expand our | team. | 3. Steven: You know what, I hadn\u2019t thought about this before, but maybe John is right. It | would be a shame if our culture changed. 4. Steven: I share this concern too | Now, let\u2019s use these segments to answer the question: | Steven initially feels positive about selling, as he agrees with Lucy about the potential | benefits of Microsoft\u2019s support and resources. He also mentions the financial benefits of the | offer. However, after hearing John\u2019s concerns about the potential changes to the company | culture and losing control, Steven starts to have some reservations and shares John\u2019s | concerns. So, Steven\u2019s feelings about selling are mixed, with both positive and negative | aspects.",
+    "bbox": [
+      106.8,
+      72.1,
+      504.7,
+      375.5
+    ]
+  }
+]

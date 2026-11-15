@@ -1,0 +1,92 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "(a) 2D Convolution. Analogous to a graph, each pixel in an image is taken as a node where neighbors are determined by the filter size. The 2D convolution takes the weighted average of pixel values of the red node along with its neighbors. The neighbors of a node are ordered and have a fixed size.",
+    "width": 211,
+    "height": 206,
+    "description": "This figure illustrates a 2D convolution operation, analogous to a graph. Each pixel in an image is treated as a node, with neighbors determined by the filter size. The red node represents the central pixel, and its neighbors are the surrounding pixels. The 2D convolution calculates the weighted average of the pixel values of the red node and its neighbors. The neighbors are ordered and have a fixed size.\n\nKey elements in the figure:\n- Red node: Central pixel.\n- Neighbors: Surrounding pixels.\n- Filter size: Determines the number of neighbors.\n- Weighted average: Calculation of pixel values."
+  },
+  {
+    "file": "p002_f02.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "",
+    "width": 211,
+    "height": 191,
+    "description": "## Section 1: Figure Description\nThis figure is a diagram illustrating a graph neural network (GNN) architecture. It shows a network of interconnected nodes, where each node represents a unit in the GNN. The nodes are connected by lines, indicating the flow of information or connections between units. A central node is highlighted in red, possibly indicating a significant or central unit in the network.\n\n## Section 2: Figure Content\n- Nodes: Multiple white nodes connected by blue and gray lines.\n- Central Node: One red node.\n- Connections: Lines connecting nodes, indicating relationships or data flow.\n- No specific values or labels are visible in the figure."
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "(a) A ConvGNN with multiple graph convolutional layers. A graph convolutional layer encapsulates each node's hidden representation by aggregating feature information from its neighbors. After feature aggregation, a non-linear transformation is applied to the resulted outputs. By stacking multiple layers, the final hidden representation of each node receives messages from a further neighborhood.",
+    "width": 505,
+    "height": 163,
+    "description": "Figure type: Diagram\nText in figure: Graph, Gconv, Gconv, ReLu, ReLu, Outputs, X\n\nDescription: The figure is a diagram showing a Convolutional Graph Neural Network (ConvGNN) with multiple layers. It starts with a graph and input features, then passes through two graph convolutional layers, each followed by a ReLU activation function. The final output is a set of node representations.\n\nSection 1: Diagram of a Convolutional Graph Neural Network (ConvGNN)\n- Shows a graph and input features\n- Passes through two graph convolutional layers\n- Each layer followed by a ReLU activation function\n- Outputs a set of node representations\n\nSection 2: Components of the ConvGNN\n- Graph: Initial input\n- Gconv: Graph convolutional layers\n- ReLu: ReLU activation functions\n- Outputs: Final node representations"
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "(b) A ConvGNN with pooling and readout layers for graph classification [21]. A graph convolutional layer is followed by a pooling layer to coarsen a graph into sub-graphs so that node representations on coarsened graphs represent higher graph-level representations. A readout layer summarizes the final graph representation by taking the sum/mean of hidden representations of sub-graphs.",
+    "width": 505,
+    "height": 172,
+    "description": "Section 1: Figure description\nThis figure illustrates a Convolutional Graph Neural Network (ConvGNN) architecture for graph classification. It shows a graph input, followed by graph convolutional layers (Gconv), pooling, readout, and multi-layer perceptron (MLP) layers. The process ends with a softmax layer to produce the final classification output.\n\nSection 2: Figure details\nText in figure: Graph, X, Gconv, Pooling, Readout, MLP, Softmax, y\nBlocks and layers: Graph input, Gconv layers, Pooling, Readout, MLP, Softmax\nArrows: Flow from graph input to Gconv layers, pooling, readout, MLP, and softmax output\nOutput: Final classification output (y)"
+  },
+  {
+    "file": "p005_f05.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "(c) A GAE for network embedding [61]. The encoder uses graph convolutional layers to get a network embedding for each node. The decoder computes the pair-wise distance given network embeddings. After applying a non-linear activation function, the decoder reconstructs the graph adjacency matrix. The network is trained by minimizing the discrepancy between the real adjacency matrix and the reconstructed adjacency matrix.",
+    "width": 495,
+    "height": 164,
+    "description": "Figure type: Diagram\nDescription: The diagram illustrates the process of a Graph Autoencoder (GAE) for network embedding. It shows an input graph 'A' with nodes 'X', which is processed by an encoder consisting of graph convolutional layers to produce a network embedding 'Z'. The decoder then reconstructs the graph adjacency matrix from 'Z'. The process minimizes the difference between the original adjacency matrix and the reconstructed one.\n\nText in figure: \"Gconv Gconv\", \"Encoder\", \"Z\", \"Decoder\", \"Z^T\", \"\u03c6()\", \"*\", \"\u03b1\""
+  },
+  {
+    "file": "p005_f06.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "(d) A STGNN for spatial-temporal graph forecasting [74]. A graph convolutional layer is followed by a 1D-CNN layer. The graph convolutional layer operates on A and X ( t ) to capture the spatial dependency, while the 1D-CNN layer slides over X along the time axis to capture the temporal dependency. The output layer is a linear transformation, generating a prediction for each node, such as its future value at the next time step.",
+    "width": 501,
+    "height": 168,
+    "description": "Figure Description: This figure illustrates a spatial-temporal graph neural network (STGNN) for spatial-temporal graph forecasting. It shows a sequence of graph convolutional layers (Gconv) and 1D convolutional layers (CNN) processing input data over time. The input data consists of a graph structure (A) and node features (X) at different time steps. The graph convolutional layers capture spatial dependencies, while the 1D convolutional layers capture temporal dependencies. The output layer is a linear transformation that generates predictions for each node, such as its future value at the next time step.\n\nText in Figure: Gconv, CNN, Gconv, CNN, MLP, y, Time, Time, A, X"
+  },
+  {
+    "file": "p007_f07.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "(a) Recurrent Graph Neural Networks (RecGNNs). RecGNNs use the same graph recurrent layer (Grec) in updating node representations.",
+    "width": 503,
+    "height": 90,
+    "description": "Section 1: Recurrent Graph Neural Networks (RecGNNs) Figure Description\nThis figure illustrates Recurrent Graph Neural Networks (RecGNNs), which update node representations using the same graph recurrent layer (Grec) repeatedly.\n\nSection 2: Figure Details\nText in figure: \"RecGNNs\", \"Grec\", \"h_v^(0)\", \"h_v^(1)\", \"h_v^(2)\", \"h_v^(t-1)\", \"h_v^(t)\""
+  },
+  {
+    "file": "p007_f08.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "(b) Convolutional Graph Neural Networks (ConvGNNs). ConvGNNs use a different graph convolutional layer (Gconv) in updating node representations.",
+    "width": 502,
+    "height": 91,
+    "description": "Section 1: Convolutional Graph Neural Networks (ConvGNNs) in the survey.\nSection 2: Graph convolutional layers (Gconv) update node representations.\n\nDescription: The figure shows a sequence of graph convolutional layers (Gconv) updating node representations in a graph neural network. Each layer, labeled Gconv1 to Gconvk, processes the input node representation \\( h_v^{(0)} \\) to \\( h_v^{(k)} \\), indicating a step-by-step transformation of the graph's structure and features.\n\nText in figure: Convolutional Graph Neural Networks (ConvGNNs), Graph convolutional layer (Gconv), \\( h_v^{(0)} \\), \\( h_v^{(1)} \\), \\( h_v^{(2)} \\), \\( h_v^{(k-1)} \\), \\( h_v^{(k)} \\), Gconv1, Gconv2,..., Gconvk."
+  },
+  {
+    "file": "p009_f09.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "(a) GCN [22] explicitly assigns a non-parametric weight a ij = 1 \u221a deg ( v i ) deg ( v j ) to the neighbor v j of v i during the aggregation process.",
+    "width": 214,
+    "height": 236,
+    "description": "Figure type: Diagram\nDescription: The figure is a diagram illustrating the aggregation process in Graph Convolutional Networks (GCN). It shows a node v_i with neighbors v_j, where weights a_ij are assigned during aggregation. The weights are defined as a_ij = 1 / sqrt(deg(v_i) * deg(v_j)), where deg(v_i) and deg(v_j) are the degrees of nodes v_i and v_j, respectively. The diagram includes arrows labeled with h_v1, h_v2, h_v3, and h_v4, indicating the flow of information between nodes.\n\nText in figure: a_12, a_13, a_14, h_v1, h_v2, h_v3, h_v4, deg(v_i), deg(v_j)"
+  },
+  {
+    "file": "p009_f10.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "(b) GAT [43] implicitly captures the weight a ij via an end-to-end neural network architecture, so that more important nodes receive larger weights.",
+    "width": 212,
+    "height": 236,
+    "description": "Figure description: A diagram illustrating the Graph Attention Network (GAT) architecture. It shows nodes labeled a12, a13, and a14 connected by arrows with weights h\u03bd1, h\u03bd2, h\u03bd3, and h\u03bd4. The diagram emphasizes that GAT captures the importance of nodes through an end-to-end neural network, assigning larger weights to more important nodes.\n\nIndex section 1: Graph Attention Network (GAT) architecture diagram. Shows nodes a12, a13, a14 connected by arrows with weights h\u03bd1, h\u03bd2, h\u03bd3, h\u03bd4. Illustrates how GAT assigns larger weights to more important nodes.\n\nIndex section 2: Diagram of Graph Attention Network (GAT). Nodes a12, a13, a14. Weights h\u03bd1, h\u03bd2, h\u03bd3, h\u03bd4. GAT captures node importance through neural network."
+  }
+]

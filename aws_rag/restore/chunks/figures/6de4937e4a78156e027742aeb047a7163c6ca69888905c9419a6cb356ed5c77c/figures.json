@@ -1,0 +1,92 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1. A canonical Inception module (Inception V3).",
+    "width": 408,
+    "height": 220,
+    "description": "Figure type: Diagram\nDescription: The figure shows a canonical Inception module, a component of the Xception\narchitecture. It consists of multiple convolutional layers and an average pooling layer.\nThe input is processed through 1x1 convolutions, 3x3 convolutions, and an average pooling\nlayer, then concatenated to form the output.\n\nText in figure: Concat, 3x3 conv, 1x1 conv, Avg Pool, 1x1 conv, Input"
+  },
+  {
+    "file": "p002_f02.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 2. A simplified Inception module.",
+    "width": 398,
+    "height": 242,
+    "description": "Figure type: Diagram\nDescription: The figure shows a simplified Inception module, a component of the Xception architecture. It consists of three parallel convolutional paths: one 3x3 convolution, one 1x1 convolution, and another 3x3 convolution. The outputs of these paths are concatenated along the depth dimension.\n\nText in figure: \"Concat\", \"3x3 conv\", \"1x1 conv\""
+  },
+  {
+    "file": "p002_f03.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 3. A strictly equivalent reformulation of the simplified Inception module.",
+    "width": 429,
+    "height": 239,
+    "description": "Description: This figure is a diagram showing a reformulation of the simplified Inception module. It consists of three 3x3 convolution blocks, each followed by a concatenation operation. The output of the concatenation is then passed through a 1x1 convolution block, resulting in the final output channels.\n\nText in figure: Concatenate, 3x3 conv, 3x3 conv, 3x3 conv, Output channels, 1x1 conv, Input"
+  },
+  {
+    "file": "p002_f04.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 4. An 'extreme' version of our Inception module, with one spatial convolution per output channel of the 1x1 convolution.",
+    "width": 428,
+    "height": 240,
+    "description": "Description: The figure is a diagram showing an \"extreme\" version of the Inception module from the Xception architecture. It depicts a series of 3x3 convolutions concatenated along the channel dimension, followed by a 1x1 convolution. The input is processed through multiple 3x3 convolutions, and the results are concatenated. The concatenated output then passes through a 1x1 convolution to produce the final output channels.\n\nText in figure: Concatenate, 3x3, 3x3, 3x3, 3x3, 3x3, 3x3, 3x3, Output channels, 1x1 conv, Input"
+  },
+  {
+    "file": "p005_f05.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 5. The Xception architecture: the data first goes through the entry flow, then through the middle flow which is repeated eight times, and finally through the exit flow. Note that all Convolution and SeparableConvolution layers are followed by batch normalization [7] (not included in the diagram). All SeparableConvolution layers use a depth multiplier of 1 (no depth expansion).",
+    "width": 982,
+    "height": 667,
+    "description": "Figure: Architecture diagram of the Xception model.\nText in figure: Entry flow, Middle flow, Exit flow, 299x299x3 images, 19x19x728 feature maps, Conv 32, 3x3, stride=2x2, ReLU, Conv 64, 3x3, ReLU, SeparableConv 128, 3x3, ReLU, Conv 1x1, stride=2x2, ReLU, SeparableConv 128, 3x3, MaxPooling 3x3, stride=2x2, ReLU, SeparableConv 256, 3x3, ReLU, Conv 1x1, stride=2x2, ReLU, SeparableConv 256, 3x3, MaxPooling 3x3, stride=2x2, ReLU, SeparableConv 728, 3x3, ReLU, Conv 1x1, stride=2x2, ReLU, SeparableConv 728, 3x3, MaxPooling 3x3, stride=2x2, ReLU, SeparableConv 728, 3x3, ReLU, SeparableConv 728, 3x3, ReLU, SeparableConv 728, 3x3, ReLU, SeparableConv 728, 3x3, ReLU, SeparableConv 728, 3x3, ReLU, SeparableConv 728, 3x3, ReLU, SeparableConv 728, 3x3, ReLU, SeparableConv 728, 3x3, ReLU, SeparableConv 728, 3x3, ReLU, SeparableConv 728, 3x3, ReLU, SeparableConv 728, 3x3, ReLU, SeparableConv 728, 3x3, ReLU, SeparableConv 728, 3x3, ReLU, SeparableConv 728, 3x3, ReLU, SeparableConv 728, 3x3, ReLU, SeparableConv 728, 3x3, ReLU, SeparableConv 728, 3x3, ReLU, SeparableConv 728, 3x3, ReLU, SeparableConv 728, 3x3, ReLU, SeparableConv 728, 3x3, ReLU, SeparableConv 728, 3x3, ReLU, Separa"
+  },
+  {
+    "file": "p006_f06.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 6. Training profile on ImageNet",
+    "width": 442,
+    "height": 333,
+    "description": "Description: This plot shows the training profiles of two deep learning models, Xception and Inception V3, on the ImageNet dataset. The Xception model starts with a lower validation accuracy but quickly surpasses Inception V3, reaching a higher accuracy by 120,000 gradient descent steps. Inception V3 starts with a higher accuracy but is eventually overtaken by Xception.\n\nText in figure: Xception, Inception V3, ImageNet validation accuracy, Gradient descent steps, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80"
+  },
+  {
+    "file": "p006_f07.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 7. Training profile on JFT, without fully-connected layers",
+    "width": 439,
+    "height": 353,
+    "description": "## Description\nThis figure is a line graph comparing the training profiles of two models, Xception and Inception V3, without fully-connected layers. The Xception model shows a higher FastEval14k MAP@100 score, peaking at around 6.7, while Inception V3 reaches a slightly lower peak of about 6.5. Both models exhibit similar trends, with scores increasing steadily over the gradient descent steps.\n\n## Text in figure\nXception\nInception V3\nGradient descent steps\nFastEval14k MAP@100 (no FC layers)"
+  },
+  {
+    "file": "p006_f08.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 8. Training profile on JFT, with fully-connected layers",
+    "width": 439,
+    "height": 352,
+    "description": "Description: This plot compares the training profiles of two models, Xception and Inception V3, on the JFT dataset. The Xception model starts higher and remains consistently above Inception V3 throughout the gradient descent steps. The Xception line is the highest, while Inception V3 is the lowest. The difference is approximately 0.5 to 1.0 on the FastEval14k MAP@100 scale.\n\nText in figure: Xception, Inception V3, FastEval14k MAP@100 (with FC layers), Gradient descent steps, 1e7."
+  },
+  {
+    "file": "p006_f09.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 9. Training profile with and without residual connections.",
+    "width": 441,
+    "height": 350,
+    "description": "This figure is a line graph comparing the ImageNet validation accuracy of two models over the number of gradient descent steps. The red line represents the Xception model, which starts higher and remains consistently above the blue line, representing the Xception - Non-residual model. The Xception model peaks at around 0.8 accuracy, while the Xception - Non-residual model peaks at around 0.65 accuracy.\n\nText in figure: Xception, Xception - Non-residual, ImageNet validation accuracy, Gradient descent steps."
+  },
+  {
+    "file": "p007_f10.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 10. Training profile with different activations between the depthwise and pointwise operations of the separable convolution layers.",
+    "width": 442,
+    "height": 333,
+    "description": "Description: The figure is a line graph comparing the ImageNet validation accuracy of a model using different activation functions between depthwise and pointwise operations in separable convolution layers. The graph shows three series: \"No intermediate activation\", \"Intermediate ReLU\", and \"Intermediate ELU\". The \"Intermediate ELU\" series starts lowest but surpasses the others by around 0.05 accuracy points at 160,000 gradient descent steps.\n\nText in figure: ImageNet validation accuracy, Gradient descent steps, No intermediate activation, Intermediate ReLU, Intermediate ELU."
+  }
+]

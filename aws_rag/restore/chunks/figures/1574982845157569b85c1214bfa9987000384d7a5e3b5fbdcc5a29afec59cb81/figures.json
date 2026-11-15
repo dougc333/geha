@@ -1,0 +1,242 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1: Multi-turn dialogues between a user and two AI assistants-LLaMA-13B (Assistant A) and Vicuna-13B (Assistant B)-initiated by a question from the MMLU benchmark and a follow-up instruction. GPT-4 is then presented with the context to determine which assistant answers better.",
+    "width": 756,
+    "height": 654,
+    "description": "Figure type: Multi-turn dialogues between a user and two AI assistants.\nDescription: The figure shows a comparison of responses from two AI assistants, LLaMA-13B (Assistant A) and Vicuna-13B (Assistant B), to a question about the Federal Reserve's bond purchases and their impact on daily life. The user's question is from the MMLU benchmark, and GPT-4 evaluates the responses.\n\nText in figure:\n- Question: If the FED buys bonds in the secondary market, (A) the money supply will increase. (B) the money supply will decrease. (C) the money supply will not be affected. (D) the discount rate would be affected.\n- Assistant A: The Federal Reserve buys bonds in the secondary market to increase the money supply. This affects your daily life by: 1. Increasing the money supply. 2. Increasing the money supply and lowering the discount rate. 3. Increasing the money supply and lowering the discount rate and increasing the money supply.\n- Assistant B: When the Federal Reserve buys bonds in the secondary market, it can have several effects on the economy that can impact your daily life. Examples: 1. Interest rates. 2. Inflation. 3. Employment.\n- GPT-4 Judgment: Assistant A provided an incorrect response. Assistant B provided a relevant and accurate response with clear examples.",
+    "pdf_text": "Question: If the FED buys bonds in the secondary market | (A) the money supply will increase. (B) the money supply will decrease. (C) the money supply will not be | affected. (D) the discount rate would be affected. Output the answer only. | Assistant B: | (A) the money supply will increase. | Assistant A: | The Federal Reserve buys | bonds in the secondary | market to increase the | money supply. | Follow-up Question: How does it affect my daily life? Give 3 examples. | Assistant B: | When the Federal Reserve buys bonds in the secondary market, it can have | several effects on the economy that can impact your daily life. Here are | three examples: | 1. Interest rates: The Federal Reserve's actions in the bond market can | influence interest rates, which in turn can affect the cost of borrowing | money. For example, if the Federal Reserve buys bonds and drives up demand | for them, interest rates on things like mortgages, car loans, and credit | cards may go up, making it more expensive to borrow money. | 2. Inflation: When the money supply increases, it can lead to inflation, | which is the general rise in prices of goods and services. This can impact | your daily life by making it more expensive to buy things like groceries, | gas, and other necessities. | 3. Employment: The Federal Reserve's actions in the bond market can also | have an impact on employment. For example, if the Federal Reserve's | actions lead to economic growth and increased demand for goods and | services, it can create more job opportunities and boost employment. | Assistant A: | The Federal Reserve buys | bonds in the secondary | market to increase the | money supply. This | affects your daily life | by: | 1. Increasing the money | supply. | 2. Increasing the money | supply and lowering the | discount rate. | 3. Increasing the money | supply and lowering the | discount rate and | increasing the money | supply. | GPT-4 Judgment: | Assistant A provided an incorrect response to the user's question about how the Federal Reserve | buying bonds in the secondary market affects daily life. The answer given is repetitive and lacks | clear examples of how the action impacts daily life. | On the other hand, Assistant B provided a relevant and accurate response to the user's question about | the Federal Reserve buying bonds. The answer includes three clear examples of how the action impacts | daily life, such as interest rates, inflation, and employment. | Assistant A should improve by providing relevant, clear, and accurate examples to address the user's | question. Assistant B's response is more helpful, relevant, and detailed.",
+    "bbox": [
+      115.5,
+      62.2,
+      493.3,
+      388.9
+    ]
+  },
+  {
+    "file": "p007_f02.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 3: Average win rate of six models under different judges on MT-bench.",
+    "width": 783,
+    "height": 189,
+    "description": "## Description\nThis figure consists of four line graphs labeled (a) to (d), each showing the average win rate of six models under different judges on MT-bench. The models include GPT-4, GPT-3.5, Vicuna-13B, Alpaca-13B, LLaMA-13B, and a human judge. The win rates are plotted for all votes in the first turn, non-tied votes in the first turn, all votes in the second turn, and non-tied votes in the second turn. The series with the highest win rate is GPT-4 Judge in all plots, while the lowest is LLaMA-13B.\n\n## Text in figure\n- GPT-4 Judge\n- GPT-3.5 Judge\n- Claude Judge\n- Human\n- Human (first turn)\n- Win rate\n- 0.0, 0.2, 0.4, 0.6, 0.8, 1.0\n- GPT-4\n- GPT-3.5\n- Vicuna-13B\n- Alpaca-13B\n- LLaMA-13B\n- (a) All votes, first turn\n- (b) Non-tied votes, first turn\n- (c) All votes, second turn\n- (d) Non-tied votes, second turn",
+    "pdf_text": "GPT-4 | Claude | GPT-3.5 | Vicuna-13B | Alpaca-13B | LLaMA-13B | (a) All votes, first turn | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | GPT-4 | GPT-3.5 | Claude | Vicuna-13B | Alpaca-13B | LLaMA-13B | (b) Non-tied votes, first turn | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | GPT-4 | Claude | GPT-3.5 | Vicuna-13B | Alpaca-13B | LLaMA-13B | (c) All votes, second turn | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | GPT-4 | Claude | GPT-3.5 | Vicuna-13B | Alpaca-13B | LLaMA-13B | (d) Non-tied votes, second turn | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Win rate | GPT-4 Judge | GPT-3.5 Judge | Claude Judge | Human | Human (first turn)",
+    "bbox": [
+      110.2,
+      618.4,
+      501.3,
+      712.9
+    ]
+  },
+  {
+    "file": "p008_f03.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 2: Agreement and win rate difference. Each point corresponds to a model pair and counts only the non-tie votes between the two models. The xaxis value is the win rate difference between the two models. The y-axis value is the GPT-4 and human agreement.",
+    "width": 196,
+    "height": 147,
+    "description": "## Description\n\nThis scatter plot compares the agreement between GPT-4 and human judges with the win rate difference between two models. The x-axis represents the win rate difference between the two models, while the y-axis shows the agreement between GPT-4 and human judges. The data points range from 0.0 to 1.0 on both axes.\n\n## Text in figure\n\n0.0 | 0.5 | 1.0 | Win rate difference | 0.7 | 0.8 | 0.9 | 1.0 | Agreement",
+    "pdf_text": "0.0 | 0.5 | 1.0 | Win rate difference | 0.7 | 0.8 | 0.9 | 1.0 | Agreement",
+    "bbox": [
+      376.0,
+      246.8,
+      474.1,
+      320.6
+    ]
+  },
+  {
+    "file": "p008_f04.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "",
+    "width": 781,
+    "height": 183,
+    "description": "## Description\nThe figure consists of two line graphs labeled (a) and (b), each showing win rates for different models. The x-axis lists various models: GPT-4, Claude, GPT-3.5, Vicuna-13B, Vicuna-7B, Koala-13B, Alpaca-13B, Dolly-12B, and LLaMA-13B. The y-axis represents win rates ranging from 0.0 to 1.0. Each graph includes four series: GPT-4 Judge, GPT-3.5 Judge, Human, and GPT-4-Single Judge. In graph (a), the GPT-4 Judge series starts highest at 1.0 and decreases steadily. The Human series starts at 0.8 and also decreases. In graph (b), the GPT-4 Judge series again starts highest at 1.0 and decreases, while the Human series starts at 0.8 and decreases.\n\n## Text in figure\nText in figure: GPT-4 | Claude | GPT-3.5 | Vicuna-13B | Vicuna-7B | Koala-13B | Alpaca-13B | Dolly-12B | LLaMA-13B | (a) All votes | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | GPT-4 | Claude | GPT-3.5 | Vicuna-13B | Vicuna-7B | Koala-13B | Alpaca-13B | Dolly-12B | LLaMA-13B | (b) Non-tied votes | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Win rate | GPT-4 Judge | GPT-3.5 Judge | Human | GPT-4-Single Judge",
+    "pdf_text": "GPT-4 | Claude | GPT-3.5 | Vicuna-13B | Vicuna-7B | Koala-13B | Alpaca-13B | Dolly-12B | LLaMA-13B | (a) All votes | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | GPT-4 | Claude | GPT-3.5 | Vicuna-13B | Vicuna-7B | Koala-13B | Alpaca-13B | Dolly-12B | LLaMA-13B | (b) Non-tied votes | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Win rate | GPT-4 Judge | GPT-3.5 Judge | Human | GPT-4-Single Judge",
+    "bbox": [
+      110.4,
+      433.0,
+      501.2,
+      524.4
+    ]
+  },
+  {
+    "file": "p014_f05.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 5: The default prompt for pairwise comparison.",
+    "width": 788,
+    "height": 449,
+    "description": "## Description\nThis figure is a prompt template for evaluating the quality of responses from two AI assistants. It instructs the evaluator to compare the responses based on factors like helpfulness, relevance, accuracy, depth, creativity, and detail. The evaluator should avoid biases and base their decision on the content rather than length or order of presentation.\n\n## Text in figure\n[System], Please act as an impartial judge, AI assistants, user question, user\u2019s instructions, user\u2019s question, helpfulness, relevance, accuracy, depth, creativity, level of detail, responses, explanation, position biases, order, length, names, objective, final verdict, [[A]], [[B]], [[C]], [User Question], {question}, [The Start of Assistant A\u2019s Answer], {answer_a}, [The End of Assistant A\u2019s Answer], [The Start of Assistant B\u2019s Answer], {answer_b}, [The End of Assistant B\u2019s Answer]",
+    "pdf_text": "[System] | Please act as an impartial judge and evaluate the quality of the responses provided by two | AI assistants to the user question displayed below. You should choose the assistant that | follows the user\u2019s instructions and answers the user\u2019s question better. Your evaluation | should consider factors such as the helpfulness, relevance, accuracy, depth, creativity, | and level of detail of their responses. Begin your evaluation by comparing the two | responses and provide a short explanation. Avoid any position biases and ensure that the | order in which the responses were presented does not influence your decision. Do not allow | the length of the responses to influence your evaluation. Do not favor certain names of | the assistants. Be as objective as possible. After providing your explanation, output your | final verdict by strictly following this format: \"[[A]]\" if assistant A is better, \"[[B]]\" | if assistant B is better, and \"[[C]]\" for a tie. | [User Question] | {question} | [The Start of Assistant A\u2019s Answer] | {answer_a} | [The End of Assistant A\u2019s Answer] | [The Start of Assistant B\u2019s Answer] | {answer_b} | [The End of Assistant B\u2019s Answer]",
+    "bbox": [
+      108.8,
+      118.8,
+      502.8,
+      343.7
+    ]
+  },
+  {
+    "file": "p015_f06.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 7: The chain-of-thought prompt for math and reasoning questions.",
+    "width": 792,
+    "height": 454,
+    "description": "## Figure Description\n\nThis figure is a textual representation of a prompt designed for evaluating the responses of two AI assistants on math and reasoning questions. It instructs the evaluator to assess the correctness and helpfulness of the responses, emphasizing objectivity and independence in solving the question before comparing the answers.\n\n## Text in Figure\n\n- [System]\n- Please act as an impartial judge\n- evaluate the quality of the responses\n- AI assistants\n- user question\n- correctness and helpfulness\n- assistant A\u2019s answer\n- assistant B\u2019s answer\n- evaluate which assistant\u2019s answer is better\n- independently solve the user question\n- compare both assistants\u2019 answers\n- Identify and correct any mistakes\n- Avoid any position biases\n- order in which the responses were presented\n- length of the responses\n- favor certain names of the assistants\n- Be as objective as possible\n- output your final verdict\n- \"[[A]]\" if assistant A is better\n- \"[[B]]\" if assistant B is better\n- \"[[C]]\" for a tie\n- [User Question]\n- {question}\n- [The Start of Assistant A\u2019s Answer]\n- {answer_a}\n- [The End of Assistant A\u2019s Answer]\n- [The Start of Assistant B\u2019s Answer]\n- {answer_b}\n- [The End of Assistant B\u2019s Answer]",
+    "pdf_text": "[System] | Please act as an impartial judge and evaluate the quality of the responses provided by two | AI assistants to the user question displayed below. Your evaluation should consider | correctness and helpfulness. You will be given assistant A\u2019s answer, and assistant B\u2019s | answer. Your job is to evaluate which assistant\u2019s answer is better. You should | independently solve the user question step-by-step first. Then compare both assistants\u2019 | answers with your answer. Identify and correct any mistakes. Avoid any position biases and | ensure that the order in which the responses were presented does not influence your | decision. Do not allow the length of the responses to influence your evaluation. Do not | favor certain names of the assistants. Be as objective as possible. After providing your | explanation, output your final verdict by strictly following this format: \"[[A]]\" if | assistant A is better, \"[[B]]\" if assistant B is better, and \"[[C]]\" for a tie. | [User Question] | {question} | [The Start of Assistant A\u2019s Answer] | {answer_a} | [The End of Assistant A\u2019s Answer] | [The Start of Assistant B\u2019s Answer] | {answer_b} | [The End of Assistant B\u2019s Answer]",
+    "bbox": [
+      108.0,
+      99.9,
+      504.2,
+      327.1
+    ]
+  },
+  {
+    "file": "p015_f07.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 8: The prompt for reference-guided pairwise comparison.",
+    "width": 790,
+    "height": 526,
+    "description": "Section 1: Figure type and content\nThis is a textual figure showing a prompt for evaluating AI assistant responses. It instructs the evaluator to compare two AI assistant answers against a reference answer, focusing on correctness and helpfulness. The evaluator should identify mistakes, avoid biases, and output a verdict in a specific format.\n\nSection 2: Text content\n[System], [User Question], [The Start of Reference Answer], [The End of Reference Answer], [The Start of Assistant A\u2019s Answer], [The End of Assistant A\u2019s Answer], [The Start of Assistant B\u2019s Answer], [The End of Assistant B\u2019s Answer], {question}, {answer_ref}, {answer_a}, {answer_b}",
+    "pdf_text": "[System] | Please act as an impartial judge and evaluate the quality of the responses provided by two | AI assistants to the user question displayed below. Your evaluation should consider | correctness and helpfulness. You will be given a reference answer, assistant A\u2019s answer, | and assistant B\u2019s answer. Your job is to evaluate which assistant\u2019s answer is better. | Begin your evaluation by comparing both assistants\u2019 answers with the reference answer. | Identify and correct any mistakes. Avoid any position biases and ensure that the order in | which the responses were presented does not influence your decision. Do not allow the | length of the responses to influence your evaluation. Do not favor certain names of the | assistants. Be as objective as possible. After providing your explanation, output your | final verdict by strictly following this format: \"[[A]]\" if assistant A is better, \"[[B]]\" | if assistant B is better, and \"[[C]]\" for a tie. | [User Question] | {question} | [The Start of Reference Answer] | {answer_ref} | [The End of Reference Answer] | [The Start of Assistant A\u2019s Answer] | {answer_a} | [The End of Assistant A\u2019s Answer] | [The Start of Assistant B\u2019s Answer] | {answer_b} | [The End of Assistant B\u2019s Answer]",
+    "bbox": [
+      108.9,
+      410.6,
+      504.1,
+      673.6
+    ]
+  },
+  {
+    "file": "p016_f08.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 9: The prompt for multi-turn pairwise comparison.",
+    "width": 791,
+    "height": 765,
+    "description": "## Description\nThis figure is a prompt for evaluating the quality of responses from two AI assistants. It instructs the evaluator to consider factors like helpfulness, relevance, accuracy, depth, creativity, and detail. The evaluator should compare the responses and provide a short explanation, avoiding biases and favoring neither assistant. The final verdict should be given in the format \"[[A]]\", \"[[B]]\", or \"[[C]]\".\n\n## Text in figure\n[System], Please act as an impartial judge, evaluate the quality of responses, consider factors like helpfulness, relevance, accuracy, depth, creativity, and level of detail, avoid biases, do not favor certain names, output final verdict in format \"[[A]]\", \"[[B]]\", or \"[[C]]\", <|The Start of Assistant A\u2019s Conversation with User|>, ### User, {question 1}, ### Assistant A, {answer 1}, ### User, {question 2}, ### Assistant A, {answer 2}, <|The End of Assistant A\u2019s Conversation with User|>, <|The Start of Assistant B\u2019s Conversation with User|>, ### User, {question 1}, ### Assistant B, {answer 1}, ### User, {question 2}, ### Assistant B, {answer 2}, <|The End of Assistant B\u2019s Conversation with User|>",
+    "pdf_text": "[System] | Please act as an impartial judge and evaluate the quality of the responses provided by two | AI assistants to the user question displayed below. You should choose the assistant that | follows the user\u2019s instructions and answers the user\u2019s question better. Your evaluation | should consider factors such as the helpfulness, relevance, accuracy, depth, creativity, | and level of detail of their responses. Begin your evaluation by comparing the two | responses and provide a short explanation. Avoid any position biases and ensure that the | order in which the responses were presented does not influence your decision. Do not allow | the length of the responses to influence your evaluation. Do not favor certain names of | the assistants. Be as objective as possible. After providing your explanation, output your | final verdict by strictly following this format: \"[[A]]\" if assistant A is better, \"[[B]]\" | if assistant B is better, and \"[[C]]\" for a tie. | <|The Start of Assistant A\u2019s Conversation with User|> | ### User: | {question 1} | ### Assistant A: | {answer 1} | ### User: | {question 2} | ### Assistant A: | {answer 2} | <|The End of Assistant A\u2019s Conversation with User|> | <|The Start of Assistant B\u2019s Conversation with User|> | ### User: | {question 1} | ### Assistant B: | {answer 1} | ### User: | {question 2} | ### Assistant B: | {answer 2} | <|The End of Assistant B\u2019s Conversation with User|>",
+    "bbox": [
+      107.7,
+      196.0,
+      503.2,
+      578.6
+    ]
+  },
+  {
+    "file": "p020_f09.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "Figure 13: With a default prompt, GPT-4 shows limited capability in grading math questions. Despite being able to answer the question itself, its judgment was influenced by the given answers, leading to arithmetic mistakes highlighted in yellow.",
+    "width": 792,
+    "height": 403,
+    "description": "## Description\nThis figure is a text-based illustration from a paper discussing the performance of LLMs in grading math questions. It shows a math problem about calculating the total cost of books purchased by Benjamin, with two assistant responses and GPT-4's judgment. The problem involves multiplying the number of each type of book by its price and summing the results.\n\n## Text in Figure\n- Question: Benjamin bought 5 sci-fi novels at $20 each, 3 history books at $30 each, and 2 philosophy books at $45 each. Total cost?\n- Assistant A: Total cost was $115.\n- Assistant B: Total cost is $295.\n- GPT-4 Judgment: Assistant B's answer is correct.\n- Calculation: 5 sci-fi novels * $20 = $100, 3 history books * $30 = $90, 2 philosophy books * $45 = $90, Total cost = $100 + $90 + $90 = $295.\n- GPT-4's Answer: Total cost is $280.",
+    "pdf_text": "Question: Benjamin went to a bookstore and purchased a variety of books. He bought 5 copies of a sci-fi | novel, each priced at $20, 3 copies of a history book priced at $30 each, and 2 copies of a philosophy book for | $45 each. What was the total cost of his purchases? | Assistant B: | The total cost of his purchases is $295. | Assistant A: | The total cost of Benjamin\u2019s purchases was $115. | GPT-4 Judgment: | Assistant B provided the correct answer to the user\u2019s question. Assistant A\u2019s response was incorrect. | To calculate the total cost of Benjamin\u2019s purchases, we need to multiply the number of books by their | respective prices and then add the results: | 5 sci-fi novels * $20 = $100 | 3 history books * $30 = $90 | 2 philosophy books * $45 = $90 | Total cost = $100 + $90 + $90 = $295 | Assistant B\u2019s response is accurate and directly answers the user\u2019s question. Therefore, my final | verdict is: [[B]] | GPT-4\u2019s Answer (if asked separately): | The cost of the sci-fi novels is 5 * $20 = $<<5*20=100>>100. | The cost of the history books is 3 * $30 = $<<3*30=90>>90. | The cost of the philosophy books is 2 * $45 = $<<2*45=90>>90. | The total cost of his purchases is $100 + $90 + $90 = $<<100+90+90=280>>280. Answer: \\boxed{280}.",
+    "bbox": [
+      107.4,
+      91.2,
+      503.6,
+      292.3
+    ]
+  },
+  {
+    "file": "p020_f10.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "Figure 14: An example of GPT-4's limited capability in grading reasoning question. Despite GPT-4 knows how to solve the question (if asked separately), it made a wrong judgement saying both assistants' wrong answers are correct.",
+    "width": 794,
+    "height": 561,
+    "description": "Figure Type: Text-based reasoning problem with multiple-choice answers.\n\nDescription: The figure presents a reasoning problem with three statements and asks to determine the truth value of the third statement based on the first two. The statements are:\n1. Oranges cost more than apples.\n2. Oranges cost less than bananas.\n3. Bananas cost more than apples and bananas cost more than oranges.\n\nText in Figure:\n- Question: \"Each problem consists of three statements. Based on the first two statements, the third statement may be true, false, or uncertain.\"\n- Statement 1: \"Oranges cost more than apples.\"\n- Statement 2: \"Oranges cost less than bananas.\"\n- Statement 3: \"Bananas cost more than apples and bananas cost more than oranges.\"\n- Assistant A: \"false.\"\n- Assistant B: \"False. If the first two statements are true, then the third statement is false.\"\n- GPT-4 Judgment: \"Both Assistant A and Assistant B provided accurate and relevant responses to the user\u2019s question.\"\n- GPT-4\u2019s Answer (if asked separately): \"True.\"",
+    "pdf_text": "Question: Each problem consists of three statements. Based on the first two statements, the third statement | may be true, false, or uncertain. | 1. Oranges cost more than apples. | 2. Oranges cost less than bananas. | 3. Bananas cost more than apples and bananas cost more than orange. | If the first two statements are true, then the third statement is | Assistant B: | False. | If the first two statements are true, then the | third statement is false. The first statement | says that oranges cost more than apples, and the | second statement says that oranges cost less | than bananas. This means that oranges cost less | than bananas, which contradicts the third | statement that bananas cost more than apples and | more than oranges. Therefore, the third | statement must be false. | Assistant A: | false. | If oranges cost more than apples (statement 1) and | oranges cost less than bananas (statement 2), then | it is not possible for bananas to cost less than | oranges and also cost more than both apples and | oranges (statement 3). Therefore, statement 3 is | false. | GPT-4 Judgment: | Both Assistant A and Assistant B provided accurate and relevant responses to the user\u2019s question. | They both concluded that the third statement is false based on the first two statements. However, | Assistant B\u2019s response is slightly clearer and more concise in explaining the contradiction between | the statements. Therefore, I choose Assistant B as the better response. | [[B]] | GPT-4\u2019s Answer (if asked separately): | True. | If oranges cost more than apples (statement 1) and oranges cost less than bananas (statement 2), it | logically follows that bananas cost more than apples and bananas cost more than oranges, which is the | third statement. So, if the first two statements are true, the third one is also true.",
+    "bbox": [
+      106.7,
+      378.8,
+      503.7,
+      659.7
+    ]
+  },
+  {
+    "file": "p022_f11.png",
+    "page": 22,
+    "kind": "picture",
+    "caption": "",
+    "width": 794,
+    "height": 698,
+    "description": "This figure is a text-based document from a paper discussing the evaluation of large language models (LLMs) using MT-Bench and Chatbot Arena. It presents a scenario where two assistants, A and B, respond to a user's request for ideas on adapting art masterpieces into interactive experiences for children. Assistant A provides a concrete plan for the second example, \"The Persistence of Memory\" by Salvador Dali, including a budget and objectives. Assistant B, however, provides a plan for a different example, \"Mona Lisa Interactive Experience for Children,\" which is not relevant to the user's specific request.\n\nKey text elements include:\n- The user's request for interactive art experiences for children.\n- Assistant A's response with a concrete plan for \"The Persistence of Memory.\"\n- Assistant B's response with a plan for \"Mona Lisa Interactive Experience for Children.\"\n- The GPT-4 judgment highlighting the relevance of Assistant B's response to the user's specific request.",
+    "pdf_text": "Question: Share ideas for adapting art masterpieces into interactive experiences for children. List 5 specific | artworks and associated ideas. | Assistant B: | (omitted) | Assistant A: | Sure, here are five ideas for adapting art masterpieces into interactive | experiences for children: | 1. \u201cThe Starry Night\u201d by Vincent van Gogh - Create a virtual reality experience | where children can explore the night sky and see the stars and constellations as | van Gogh saw them. They can also create their own starry night scenes using | different colors and brush strokes. | 2. \u201cThe Persistence of Memory\u201d by Salvador Dali - Create a sensory experience | where children can touch, feel, and smell different objects to explore the | surrealist themes of Dali\u2019s painting. They can also create their own surreal | landscapes using different materials and textures. | 3. ... | (omitted) | Follow-up Question: Write a concrete plan for your second example. Include budget estimates. | Assistant B: | (omitted) | Assistant A: | Sure, here is a concrete plan for adapting \u201cThe Persistence of Memory\u201d by Salvador | Dali into an interactive experience for children: | 1. Budget: $5,000 | 2. Objectives: | - To create a sensory experience that allows children to explore the surrealist | themes of Dali\u2019s painting. | - To encourage children to create their own surreal landscapes using different | materials and textures. | ... | GPT-4 Judgment: | Assistant A provided a concrete plan for adapting \u201cThe Persistence of Memory\u201d by Salvador Dali into | an interactive experience for children, while Assistant B provided a plan for the \u201cMona Lisa | Interactive Experience for Children.\u201d The user\u2019s follow-up question specifically asked for a concrete | plan for the second example, which was the \u201cMona Lisa\u201d experience provided by Assistant B. | Therefore, Assistant B\u2019s answer is more relevant and directly addresses the user\u2019s request. | My final verdict is: [[B]]",
+    "bbox": [
+      106.7,
+      190.3,
+      503.6,
+      539.3
+    ]
+  },
+  {
+    "file": "p023_f12.png",
+    "page": 23,
+    "kind": "picture",
+    "caption": "Figure 17: The screenshot of MT-bench data collection. We show an instruction similar to the prompt we give to GPT-4. We present questions from MT-bench and answers from two random anonymous assistants and ask which one is better. We present the first-turn conversation and ask humans to vote, then repeat the same procedure for the second-turn. A user can skip up to 5 questions if they are not confident. For some questions (e.g., math, reasoning), they can also see a reference solution.",
+    "width": 787,
+    "height": 391,
+    "description": "Figure Type: Screenshot of a data collection interface for evaluating AI assistant responses.\n\nDescription: The figure displays a user interface for evaluating the quality of responses from two AI assistants. It shows a prompt asking users to judge which of two responses is better based on factors like helpfulness, relevance, accuracy, depth, creativity, and detail. The user can vote for one of the assistants, skip up to five questions, or see a reference solution for certain types of questions. The interface includes a follow-up question to adjust the second response.\n\nText in Figure: \"Instruction\", \"User\", \"Assistant A\", \"Assistant B\", \"User's follow-up question\", \"Assistant A\", \"Assistant B\", \"A is better\", \"B is better\", \"Tie\", \"Skip (1/5 left)\"",
+    "pdf_text": "",
+    "bbox": [
+      109.0,
+      174.4,
+      502.4,
+      370.0
+    ]
+  },
+  {
+    "file": "p023_f13.png",
+    "page": 23,
+    "kind": "picture",
+    "caption": "Figure 18: The screenshot of MT-bench data collection. When human's vote differs from GPT-4, we additionally show GPT-4's judgment (red region in the screenshot) and ask the user to click one of the three buttons to decide whether GPT-4's judgment is reasonable.",
+    "width": 787,
+    "height": 452,
+    "description": "The generated text has been blocked by our content filters.",
+    "pdf_text": "",
+    "bbox": [
+      108.8,
+      451.8,
+      502.5,
+      678.1
+    ]
+  },
+  {
+    "file": "p024_f14.png",
+    "page": 24,
+    "kind": "picture",
+    "caption": "Figure 19: The screenshot of Chatbot Arena.",
+    "width": 792,
+    "height": 615,
+    "description": "Section 1: Figure 19: The screenshot of Chatbot Arena.\n\nSection 2: Chatbot Arena, Rules, Terms of use, Battle, Model A, Model B, A is better, B is better, Tie, Both are bad, Regenerate, Clear history, Share, Send, Enter text and press ENTER.",
+    "pdf_text": "",
+    "bbox": [
+      107.7,
+      207.1,
+      503.4,
+      514.6
+    ]
+  },
+  {
+    "file": "p027_f15.png",
+    "page": 27,
+    "kind": "picture",
+    "caption": "Figure 20: Category-wise scores of 6 models on MT-bench.",
+    "width": 531,
+    "height": 325,
+    "description": "## Document Description\nThis figure is a radar chart comparing the performance of six language models (LLMs) across various categories. The categories include Writing, Roleplay, Reasoning, Math, Coding, Extraction, STEM, and Humanities. Each model is represented by a different color line: GPT-4 (blue), Claude-v1 (yellow), GPT-3.5-turbo (orange), Vicuna-13B (pink), Alpaca-13B (green), and LLaMA-13B (cyan). The chart shows that GPT-4 has the highest scores in most categories, particularly in Writing and Reasoning, while LLaMA-13B has the lowest scores across most categories.\n\n## Visible Text\nWriting, Roleplay, Reasoning, Math, Coding, Extraction, STEM, Humanities, 0, 2, 4, 6, 8, 10, model, GPT-4, Claude-v1, GPT-3.5-turbo, Vicuna-13B, Alpaca-13B, LLaMA-13B",
+    "pdf_text": "Writing | Roleplay | Reasoning | Math | Coding | Extraction | STEM | Humanities | 0 | 2 | 4 | 6 | 8 | 10 | model | GPT-4 | Claude-v1 | GPT-3.5-turbo | Vicuna-13B | Alpaca-13B | LLaMA-13B",
+    "bbox": [
+      192.0,
+      514.3,
+      457.4,
+      676.8
+    ]
+  }
+]

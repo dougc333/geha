@@ -1,0 +1,56 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1: Top: cropping or warping to fit a fixed size. Middle: a conventional CNN. Bottom: our spatial pyramid pooling network structure.",
+    "width": 478,
+    "height": 191,
+    "description": "Figure Description: This figure illustrates three different methods for processing images in deep convolutional networks for visual recognition. The top row shows cropping and warping techniques to fit images into a fixed size. The middle row depicts a conventional CNN architecture. The bottom row presents the spatial pyramid pooling network structure proposed in the paper.\n\nText in Figure: crop, warp, conv layers, fc layers, output, image, spatial pyramid pooling."
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2: Visualization of the feature maps. (a) Two images in Pascal VOC 2007. (b) The feature maps of some conv 5 filters. The arrows indicate the strongest responses and their corresponding positions in the images. (c) The ImageNet images that have the strongest responses of the corresponding filters. The green rectangles mark the receptive fields of the strongest responses.",
+    "width": 982,
+    "height": 235,
+    "description": "This figure is a visualization of feature maps in deep convolutional networks. It shows two images, their corresponding feature maps, and the strongest activations of certain filters. The arrows in the feature maps indicate the strongest responses, and the green rectangles in the ImageNet images mark the receptive fields of these responses.\n\nText in figure: \"filter #175\", \"filter #55\", \"filter #66\", \"filter #118\""
+  },
+  {
+    "file": "p003_f03.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 3: A network structure with a spatial pyramid pooling layer . Here 256 is the filter number of the conv 5 layer, and conv 5 is the last convolutional layer.",
+    "width": 480,
+    "height": 323,
+    "description": "This figure is a schematic representation of a neural network architecture with a spatial pyramid pooling layer. It shows the flow of data from the input image through convolutional layers, to feature maps, and then to fully-connected layers. The spatial pyramid pooling layer is highlighted, which pools features at different scales to create a fixed-length representation. The dimensions of the feature maps and the fully-connected layers are also indicated.\n\nText in figure: input image, convolutional layers, feature maps of convs, spatial pyramid pooling layer, fully-connected layers, fixed-length representation, 16x256-d, 4x256-d, 256-d."
+  },
+  {
+    "file": "p004_f04.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "",
+    "width": 429,
+    "height": 288,
+    "description": "Figure type: Table\nContent: The table shows parameters for three different pooling layers in a neural network. Each row represents a different pooling layer (pool1x3, pool2x2, pool1x1) with columns detailing the type, maximum pool size, input layer, size, and stride.\n\nKey values: \n- pool1x3: type=pool, pool=max, inputs=conv5, size=5, stride=4\n- pool2x2: type=pool, pool=max, inputs=conv5, size=7, stride=6\n- pool1x1: type=pool, pool=max, inputs=conv5, size=13, stride=13\n\nAdditionally, there is a fully connected layer (fc6) with type=fc, outputs=4096, and inputs from pool1x3, pool2x2, and pool1x1."
+  },
+  {
+    "file": "p009_f05.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 5: Pooling features from arbitrary windows on feature maps. The feature maps are computed from the entire image. The pooling is performed in candidate windows.",
+    "width": 458,
+    "height": 340,
+    "description": "This figure is a schematic representation of a deep convolutional neural network architecture. It shows the process of spatial pyramid pooling, where features are extracted from arbitrary windows on feature maps. The input image passes through convolutional layers, generating feature maps. These feature maps are then pooled in candidate windows, and the resulting features are passed to fully-connected layers. The final output is a fixed-length representation.\n\nText in figure: fully-connected layers (fc6, fc7), fixed-length representation, spatial pyramid pooling layer, window, feature maps of conv5, convolutional layers, input image.\n\nDescription: The figure illustrates the process of spatial pyramid pooling in a deep convolutional network. It starts with an input image that is processed by convolutional layers to produce feature maps. These feature maps are then subjected to spatial pyramid pooling, where features are extracted from various windows. The resulting features are flattened and passed to fully-connected layers, culminating in a fixed-length representation."
+  },
+  {
+    "file": "p013_f06.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 6: Example detection results of 'SPP-net ftfc 7 bb' on the Pascal VOC 2007 testing set (59.2% mAP). All windows with scores > 0 are shown. The predicted category/score are marked. The window color is associated with the predicted category. These images are manually selected because we find them impressive. Visit our project website to see all 4,952 detection results in the testing set.",
+    "width": 825,
+    "height": 890,
+    "description": "Figure type: Detection results from a computer vision model.\nContent: The figure displays 20 images with various objects detected by the model. Each image shows multiple bounding boxes with labels indicating the detected object and confidence score. The bounding boxes are colored based on the predicted object category. The images include diverse scenes such as people, animals, vehicles, and indoor settings.\n\nText in figure: Object labels and confidence scores (e.g., \"person 0.95\", \"dog 0.87\"). No specific values or axis titles are visible."
+  }
+]

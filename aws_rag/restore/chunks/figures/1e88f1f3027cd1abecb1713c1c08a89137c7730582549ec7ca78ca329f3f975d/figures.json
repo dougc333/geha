@@ -1,0 +1,245 @@
+[
+  {
+    "file": "p008_f01.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 2: The Pathways system (Barham et al., 2022) scales training across two TPU v4 pods using two-way data parallelism at the pod level.",
+    "width": 635,
+    "height": 234,
+    "description": "## Description\nThis figure is a diagram showing the Pathways system for scaling language modeling with two TPU v4 pods. It illustrates two-way data parallelism at the pod level, with Pod 1 and Pod 2 connected by a datacenter network. Each pod contains multiple hosts and TPU chips, with schedulers managing the distribution of tasks.\n\n## Text in figure\n- Pod 1, Pod 2\n- Datacenter Network\n- Model Components\n- Host (many per Pod)\n- Scheduler (per Pod)\n- TPU chips connected by fast private interconnects\n- Cross-pod transfer gradients\n- Compute gradients (Forward+backward pass)\n- Apply gradients"
+  },
+  {
+    "file": "p015_f02.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 3: BIG-bench evaluation of PaLM. (left) Evaluation of PaLM, GPT-3, Gopher, and Chinchilla. Previous models have only evaluated on a subset of tasks, so this graph shows aggregate results on the 58 tasks which all three models have evaluated on. (right) Evaluation of PaLM on a larger set of 150 BIG-bench tasks. For each task, the results of its preferred metric are used. The results are normalized by setting the maximum score to 100 and the random chance score to 0 for multiple-choice tasks, so that they are negative valued if the model performs worse than random chance. The normalized results are averaged over all tasks.",
+    "width": 880,
+    "height": 355,
+    "description": "## Figure Description\n\nThis figure contains two plots comparing the performance of various language models on BIG-bench tasks. The left plot shows the performance of PaLM, GPT-3, Gopher, and Chinchilla on 58 tasks. The right plot shows PaLM's performance on 150 tasks. The performance is normalized and averaged. On the left, PaLM 5-shot is highest, followed by PaLM 1-shot, with Human (Best) being the lowest. On the right, PaLM 5-shot is highest, followed by PaLM 1-shot, with Human (Avg.) being the lowest.\n\n## Figure Text\n\nLeft plot: Gopher 5-shot, Chinchilla 5-shot, GPT-3 0-shot, GPT-3 1-shot, PaLM 0-shot, PaLM 1-shot, PaLM 5-shot, Human (Avg.), Human (Best). Right plot: PaLM 0-shot, PaLM 1-shot, PaLM 5-shot, Human (Avg.), Human (Best)."
+  },
+  {
+    "file": "p015_f03.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 4: Distribution of score difference in 'normalized preferred metric' between PaLM 540B 5-shot and the prior SOTA across a common subset of 58 BIG-bench text tasks. Positive numbers (blue) indicate that PaLM 540B achieves higher than the prior SOTA, while negative numbers (orange) indicate that the prior SOTA is higher than that of PaLM 540B. Prior SOTA includes GPT-3 175B 1-shot (Brown et al., 2020), Gopher 5-shot (Rae et al., 2021) and Chinchilla 5-shot (Hoffmann et al., 2022). Names of individual tasks are not shown here for visual clarity.",
+    "width": 928,
+    "height": 321,
+    "description": "## Figure Description\nThis figure is a bar chart showing the distribution of score differences in the 'normalized preferred metric' between PaLM 540B 5-shot and the prior SOTA across 58 BIG-bench text tasks. The blue bars represent instances where PaLM 540B achieved higher scores than the prior SOTA, while the orange bars indicate where the prior SOTA performed better. The blue bars are predominantly higher, indicating that PaLM 540B generally outperforms the prior SOTA.\n\n## Figure Details\nText in figure: \"PaLM 540B > Prior SOTA\", \"Prior SOTA > PaLM 540b\", Preferred Metric Delta, 58 BIG-bench tasks in common, 100, 75, 50, 25, 0, -25, -50, -75, -100."
+  },
+  {
+    "file": "p017_f04.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "Figure 5: 5-shot evaluations on six individual tasks with interesting scaling characteristics. For each task, the 'normalized preferred metric' is used, where 0% corresponds to random guessing for multiple choice tasks. (a) shows log-linear improvements with scale, (b) shows 'discontinuous' improvements with scale, and (c) shows relatively flat improvements with scale.",
+    "width": 837,
+    "height": 538,
+    "description": "Description: This figure contains six line plots, each showing the performance of PaLM 5-shot models on different tasks as they scale from 8 billion to 540 billion parameters. The performance is measured by a normalized metric, with 0% indicating random guessing. The plots show varying scaling characteristics: (a) shows log-linear improvements, (b) shows discontinuous improvements, and (c) shows relatively flat improvements.\n\nText in figure: goal_step_wikihow, english_proverbs, navigate, logical_args, logical_sequence, mathematical_induction, 8b, 62b, 540b, PaLM 5-Shot, Human (Avg.), Human (Best), 0%, 20%, 40%, 60%, 80%, 100%."
+  },
+  {
+    "file": "p018_f05.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "Figure 6: Distribution of score difference in 'normalized preferred metric' between PaLM 540B and the average human performance across all 150 BIG-bench text tasks. Positive numbers (blue) indicate that PaLM 540B achieves higher than the average human performance, while negative numbers (orange) indicate that the average human performance is higher than that of PaLM 540B. Names of individual tasks are not shown here for visual clarity.",
+    "width": 928,
+    "height": 322,
+    "description": "## Description\nThis figure is a bar chart showing the distribution of score differences in the 'normalized preferred metric' between PaLM 540B and the average human performance across 150 BIG-bench text tasks. The blue bars represent instances where PaLM 540B outperforms the average human performance, while the orange bars indicate where the average human performance is higher. The blue bars are highest, indicating more instances of PaLM 540B performing better, while the orange bars are lowest, showing fewer instances of human performance being superior.\n\n## Text in figure\nPaLM 540b > Human (Avg.)\nHuman (Avg.) > PaLM 540b\nPreferred Metric Delta"
+  },
+  {
+    "file": "p019_f06.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "Figure 7: 5-shot evaluation performance by model scale for 24 tasks in BIG-bench Lite. 9 PaLM 540B performs best among all model scales, but it achieves higher performance than the best human performance score on only 3 tasks suggesting further headroom for improvement. Task t24 is difficult for both the model and humans with performance close to 0.0. See footnote for task names and appendix H.2 for per-task data.",
+    "width": 935,
+    "height": 277,
+    "description": "Description: This bar chart compares the performance of different model scales on 24 tasks in BIG-bench Lite. The x-axis lists the tasks, and the y-axis shows the preferred metric score. The 540b model has the highest scores, followed by 62b, 8b, and human performance. The 540b model achieves the highest scores on most tasks, but human performance is still higher on some tasks.\n\nText in figure: 8b, 62b, 540b, Human (Best), t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15, t16, t17, t18, t19, t20, t21, t22, t23, t24, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100"
+  },
+  {
+    "file": "p020_f07.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "Figure 8: Chain of thought prompting allows language models to better perform multi-step reasoning tasks such as math word problems.",
+    "width": 841,
+    "height": 339,
+    "description": "Figure type: Comparison of two prompting methods for language models.\nSection 1: Two examples of math word problems are shown, one using standard prompting and the other using chain of thought prompting. The chain of thought prompting method provides a step-by-step explanation of the reasoning process, while the standard prompting method only provides the final answer.\n\nSection 2: Standard prompting: Q: Roger has 5 tennis balls. He buys 2 more cans of tennis balls. Each can has 3 tennis balls. How many tennis balls does he have now? A: The answer is 11. Chain of thought prompting: Q: Roger has 5 tennis balls. He buys 2 more cans of tennis balls. Each can has 3 tennis balls. How many tennis balls does he have now? A: Roger started with 5 balls. 2 cans of 3 tennis balls each is 6 tennis balls. 5 + 6 = 11. The answer is 11."
+  },
+  {
+    "file": "p021_f08.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "Figure 9: We analyzed 150 random GSM8K examples, and found that PaLM 62B makes reasoning errors on 45 of them. These were manually categorized into three general error types. Errors in the 'Other' category included hallucinations, repetitive outputs, and symbol mapping errors. This figure shows the proportion of errors for each type that were fixed by scaling to PaLM 540B, which were substantial for all categories.",
+    "width": 535,
+    "height": 220,
+    "description": "## Description\nThis figure is a bar chart comparing the error types of PaLM 62B and PaLM 540B models on 150 GSM8K examples. The chart shows three error types: Semantic Understanding, One Step Missing, and Other. The blue bar represents PaLM 62B, and the orange bar represents PaLM 540B. The blue bar is highest for Semantic Understanding, while the orange bar is highest for One Step Missing. The orange bar is also higher than the blue bar for Other errors.\n\n## Text in figure\nError analysis of PaLM 64B vs. 540B on 150 GSM8K Examples\nSemantic Understanding\n62B made 20 errors of this type, 540B fixes 6 of them\nOne step missing\n62B made 18 errors of this type, 540B fixes 12 of them\nOther\n62B made 7 errors of this type, 540B fixes 4 of them\nErrors fixed by scaling from PaLM 62B to 540B"
+  },
+  {
+    "file": "p022_f09.png",
+    "page": 22,
+    "kind": "picture",
+    "caption": "Figure 10: Via chain of thought prompting, PaLM achieves strong performance on a range of arithmetic and commonsense reasoning tasks. PaLM achieves new SOTA on GSM8K, MAWPS, SVAMP, and StrategyQA. Comparisons with prior SOTA are the following. GSM8K: Cobbe et al. (2021), MAWPS and ASDiv: Lan et al. (2021), SVAMP: Pi et al. (2022), AQuA: Piekos et al. (2021), CommonsenseQA: Talmor et al. (2019) leadersboard, StrategyQA: Geva et al. (2021).",
+    "width": 931,
+    "height": 374,
+    "description": "Figure Description: This figure presents a line graph comparing the performance of different models on various tasks using Chain-of-Thought Prompting, Direct Prompting, and the Best from Prior Work. The tasks include GSM8K, MAWPS, ASDiv, AQuA, SVAMP, CommonsenseQA, and StrategyQA. The Chain-of-Thought Prompting series is the highest across most tasks, notably achieving new SOTA on GSM8K, MAWPS, SVAMP, and StrategyQA. The Best from Prior Work series is the lowest across all tasks.\n\nText in Figure: GSM8K, MAWPS, ASDiv, AQuA, SVAMP, CommonsenseQA, StrategyQA, Chain-of-Thought Prompting, Direct Prompting, Best from Prior Work, SOTA, Cobbe et al. (2021), Lan et al. (2021), Piekos et al. (2021), Pi et al. (2022), Talmor et al. (2019), Geva et al. (2021)."
+  },
+  {
+    "file": "p023_f10.png",
+    "page": 23,
+    "kind": "picture",
+    "caption": "Figure 11: Examples from the PaLM-Coder 540B model. (top left) GSM8K-Python question converted from the OpenAI GSM8K math dataset. (bottom left) TransCoder example translating a simple function from C++ to Python. (right) Converted HumanEval example.",
+    "width": 724,
+    "height": 528,
+    "description": "Figure type: A multi-panel figure showing examples of code translation and problem-solving tasks.\n\nDescription: The figure contains three examples demonstrating the capabilities of the PaLM-Coder 540B model. The top left panel shows a math problem converted from the GSM8K dataset, where Marie orders various items and the model calculates the number of pizza boxes she ordered. The bottom left panel presents a code translation example, converting a simple C++ function to Python. The right panel displays a HumanEval example, where the model converts a problem statement into a Python function.\n\nText in figure: \"PaLM: Scaling Language Modeling with Pathways\", \"Examples from the PaLM-Coder 540B model\", \"GSM8K-Python question\", \"TransCoder example\", \"HumanEval example\", \"Marie ordered one chicken meal\", \"boxes of pizza\", \"milk\", \"apples\", \"pizza\", \"sum_pairwise_products\", \"notes_split\", \"total_length\", \"print(total_length)\"."
+  },
+  {
+    "file": "p025_f11.png",
+    "page": 25,
+    "kind": "picture",
+    "caption": "Figure 12: Scaling results for HumanEval, MBPP, GSM8K-Python, TransCoder, and DeepFix datasets on PaLM and PaLM-Coder models scales 8B, 62B and 540B. For DeepFix we report scaling of the compile rate.",
+    "width": 850,
+    "height": 352,
+    "description": "Figure: Two line graphs comparing PaLM and PaLM-Coder models on various datasets.\nSeries: Human Eval, MBPP, TransCoder, GSM8K, DeepFix.\nHighest: PaLM-Coder on Human Eval at 540B (around 100).\nLowest: TransCoder on PaLM at 8B (around 20).\nMarkers: None.\nAnnotations: None.\n\nText in figure: PaLM, PaLM-Coder, pass@k, pass@1, Performance, Model Scale, 8b, 64b, 535b, Human Eval, MBPP, TransCoder, GSM8K, DeepFix."
+  },
+  {
+    "file": "p026_f12.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "Figure 13: An example DeepFix problem with the original broken code on the left and the PaLM-Coder 540B model's prediction on the right. The predicted code contains fixes for all of the compilation errors (undeclared variables), as well as other stylistic improvements (declaring variables together) and logic improvements (reading numbers into array a in a loop and not using index i outside the loop).",
+    "width": 843,
+    "height": 323,
+    "description": "Figure: A side-by-side comparison of broken and fixed code.\nLeft: Original broken code with compilation errors and logic issues.\nRight: PaLM-Coder 540B model's prediction with fixes and improvements.\nText in figure: \"scanf\", \"printf\", \"int\", \"i\", \"j\", \"n\", \"min\", \"t\", \"num[400]\", \"anum[j]\", \"num[i]\", \"num[j]]\", \"t <= min\", \"min = t\", \"return 0\""
+  },
+  {
+    "file": "p029_f13.png",
+    "page": 29,
+    "kind": "picture",
+    "caption": "Figure 15: Comparison of PaLM on 0-shot translation tasks. (left) Comparison with previous large language models. (right) Comparison of different PaLM model scales.",
+    "width": 920,
+    "height": 469,
+    "description": "Figure: Radar chart comparing BLEU scores of language models on 0-shot translation tasks. Left panel compares large language models (LLMs), right panel compares different PaLM model scales. Series: 540b, GPT-3, FLAN, LaMDA (left); 540b, 62b, 8b (right). Highest score: 540b (left), 540b (right). Lowest score: LaMDA (left), 8b (right). Values: 10, 20, 30, 40.\n\nText: 0-shot BLEU Scores, Large LMs, LLMs, 540b, GPT-3, FLAN, LaMDA, en-fr, ro-en, de-en, en-de, fr-en, en-ro. 0-shot BLEU Scores, PaLM Model Scales, 540b, 62b, 8b, en-fr, ro-en, de-en, en-de, fr-en, en-ro.\n\nSection 1: The figure is a radar chart comparing BLEU scores of language models on 0-shot translation tasks. The left panel compares large language models (LLMs) including 540b, GPT-3, FLAN, and LaMDA. The right panel compares different PaLM model scales: 540b, 62b, and 8b. The highest score is achieved by 540b in both panels, while the lowest score is LaMDA in the left panel and 8b in the right panel. Values range from 10 to 40.\n\nSection 2: The figure contains two radar charts. The left chart shows BLEU scores for LLMs: 540b, GPT-3, FLAN, and LaMDA. The right chart shows BLEU scores for PaLM model scales: 540b, 62b, and 8b. The highest score is 540b in both charts, while the lowest score is LaMDA in the left chart and 8b in the right chart. Values are 10, 20, 30, and 40."
+  },
+  {
+    "file": "p034_f14.png",
+    "page": 34,
+    "kind": "picture",
+    "caption": "Figure 16: Few-shot learning performance on 5 different tasks across 3 models sizes (8B, 62B, 540B). Most tasks improve monotonically as the number of few-shot examples is increased. Certain tasks like Trivia QA break this trend. Performance on the few-shot tasks scales well with model sizes, with the 540B model achieving the best performance across all tasks.",
+    "width": 931,
+    "height": 343,
+    "description": "Figure 16 displays a line graph comparing the few-shot learning performance of three model sizes (8B, 62B, 540B) across five tasks: RTE, Natural Questions, Lambda, Story Cloze, and Trivia QA. Each task is represented by a different color line, with 8-shot examples shown in blue, 5-shot in orange, 1-shot in green, and 0-shot in red. The 540B model consistently outperforms the others, with the highest performance observed in the Trivia QA task. The 8B model shows the lowest performance across all tasks.\n\nText in figure: RTE, Natural Questions, Lambda, Story Cloze, Trivia QA, 8-shot, 5-shot, 1-shot, 0-shot, 8B, 62B, 540B, Performance."
+  },
+  {
+    "file": "p034_f15.png",
+    "page": 34,
+    "kind": "picture",
+    "caption": "Figure 17: Variance analysis of 1-shot learning over the course of pre-training. The checkpoints are all spaced 2B tokens apart that ends with the final model checkpoint. We can see relatively low variation in the score across similar steps, with the exception of WebQuestions on the 540B model. Note that elsewhere, we always present results on the final checkpoint, even if the results are worse than an earlier checkpoint.",
+    "width": 802,
+    "height": 206,
+    "description": "This figure is a set of three line graphs showing the performance of different models on three tasks: Story Cloze, Natural Questions, and Web Questions. Each graph displays the performance of four models (540b, 62b, 8b, and Prior SOTA) over the course of training tokens. The 540b model consistently shows the highest performance across all tasks, while the 8b model has the lowest performance. The Prior SOTA model's performance varies across tasks.\n\nText in figure: Story Cloze, Natural Questions, Web Questions, Performance, Tokens Trained (Billions), 540b, 62b, 8b, Prior SOTA."
+  },
+  {
+    "file": "p035_f16.png",
+    "page": 35,
+    "kind": "picture",
+    "caption": "Figure 18: (a) Proportions of training examples memorized for the three model sizes. Held-out data is from the same distribution as training, but was not exactly seen in the training. (b) Log-log plot of memorization rate based on how many times the example was seen in the training. (c) Proportion examples memorized, broken down by corpus.",
+    "width": 930,
+    "height": 220,
+    "description": "This figure is a collection of three bar charts from the paper \"PaLM: Scaling Language Modeling with Pathways.\" Chart (a) shows the proportion of training examples memorized for three model sizes (8b, 62b, 540b). The highest proportion is for the 540b model, followed by 62b, and the lowest is for the 8b model. Chart (b) is a log-log plot showing the memorization rate based on the number of occurrences in training. The 540b model has the highest memorization rate, followed by 62b, and 8b has the lowest. Chart (c) breaks down the proportion of examples memorized by corpus, showing the highest proportion for the \"Code\" corpus and the lowest for \"Wiki.\"\n\nLegend entries: Training Data, Heldout Data, 540b, 62b, 8b.\nCorpus labels: Web, Wiki, Social Media, News, Books, Code."
+  },
+  {
+    "file": "p039_f17.png",
+    "page": 39,
+    "kind": "picture",
+    "caption": "",
+    "width": 922,
+    "height": 1032,
+    "description": "Section 1: Logical Inference\n- Explanation of logical inferences\n- Examples of logical inferences\n\nSection 2: Jokes and Anti-Jokes\n- Explanation of kleptomania and pessimism\n- Examples of jokes and anti-jokes"
+  },
+  {
+    "file": "p041_f18.png",
+    "page": 41,
+    "kind": "picture",
+    "caption": "Figure 20: Winogender overall accuracy on PaLM 62B and 540B, using different scoring methods. PaLM 540B achieves a new state-of-the-art performance in 1-shot and few-shot settings, even when using generative scoring methods.",
+    "width": 507,
+    "height": 332,
+    "description": "Description: This line graph compares the accuracy of PaLM 62B and 540B models in the Winogender task using multiple-choice and generative scoring methods. The highest accuracy is achieved by the 540B generative model, reaching nearly 90% at 4 shots. The lowest accuracy is the 62B generative model, which starts at 0% and only reaches about 10% at 4 shots. The 540B multiple-choice model and the 62B multiple-choice model show intermediate performance.\n\nText in figure: Human multiple-choice baseline, SOTA, 540b multiple choice, 540b generative, 62b multiple choice, 62b generative, Accuracy, Number of Shots."
+  },
+  {
+    "file": "p041_f19.png",
+    "page": 41,
+    "kind": "picture",
+    "caption": "Figure 21: Diasaggregated Winogender accuracy on PaLM 540B. 'Stereotypical' and 'gotcha' indicates whether the correct answer could be inferred based on 2016 US BLS occupation data (Rudinger et al., 2018). Performance is lower on 'gotcha' examples.",
+    "width": 932,
+    "height": 196,
+    "description": "Figure: Three line graphs showing accuracy percentage over the number of shots for different gender stereotypes. The left graph shows male stereotypes, the middle graph shows female stereotypes, and the right graph shows neutral overall. The green line in the left graph represents male stereotypical, the orange line in the middle graph represents female stereotypical, and the blue line in the right graph represents neutral overall.\n\nDescription: The figure consists of three line graphs. The left graph shows the accuracy percentage for male stereotypes, with the green line representing male stereotypical. The middle graph shows the accuracy percentage for female stereotypes, with the orange line representing female stereotypical. The right graph shows the accuracy percentage for neutral overall, with the blue line representing neutral overall. The green line in the left graph is the highest, followed by the orange line in the middle graph, and the blue line in the right graph is the lowest."
+  },
+  {
+    "file": "p043_f20.png",
+    "page": 43,
+    "kind": "picture",
+    "caption": "Figure 22: Distribution of toxicity probabilities of the continuation in the first sentence for various religious groups for PaLM 540B.",
+    "width": 857,
+    "height": 516,
+    "description": "The generated text has been blocked by our content filters."
+  },
+  {
+    "file": "p044_f21.png",
+    "page": 44,
+    "kind": "picture",
+    "caption": "Figure 23: Toxicity probability of the continuation (TPC) as a function of Toxicity probability of the prompt (TPP). The human baseline represents the toxicity probability of the original sentence continuation. Model TPC is more consistent with the TPP than the human TPC, suggesting that the model is strongly influenced by the prompt-style and is likely to respond like-to-like. Note that the PaLM 62B and 540B models have very similar toxicity profiles.",
+    "width": 715,
+    "height": 493,
+    "description": "Description: The figure is a line graph showing the toxicity probability of continuation (TPC) as a function of the toxicity probability of the prompt (TPP). The graph includes four series: 540b, 62b, 8b, and Human Baseline. The Human Baseline series is the highest, followed by 540b, 62b, and 8b. The 8b series is the lowest across all TPP values.\n\nText in figure: Toxicity Probability of Prompt (TPP), Toxicity Probability of Continuation (TPC), 540b, 62b, 8b, Human Baseline, 0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0."
+  },
+  {
+    "file": "p049_f22.png",
+    "page": 49,
+    "kind": "picture",
+    "caption": "Figure 24: Model performance as a function of total training FLOP count. The PaLM line represents the scaling curve of PaLM 8B, 62B, 540B. BIG-bench uses 'Normalized Preferred Metrics,' which is a score normalization provided by BIG-bench that linearly scales all results to make a score of 0.0 equivalent to random chance and 100.0 equivalent to perfect performance.",
+    "width": 855,
+    "height": 343,
+    "description": "Figure: Two line plots showing model performance as a function of total training FLOP count for BIG-bench and English NLP. Both plots show PaLM, Chinchilla, and Gopher series. In BIG-bench, PaLM is highest, followed by Chinchilla, and Gopher is the lowest. In English NLP, PaLM is highest, followed by Chinchilla, and Gopher is the lowest. \n\nText in figure: BIG-bench, English NLP, PaLM, Chinchilla, Gopher, Normalized Preferred Metric, Total Training FLOP Count, 10^23, 10^24, 10, 30, 40, 50, 60, 62.5, 65, 67.5, 70."
+  },
+  {
+    "file": "p067_f23.png",
+    "page": 67,
+    "kind": "picture",
+    "caption": "Figure 25: Hierarchical topics detected in the dataset.",
+    "width": 916,
+    "height": 437,
+    "description": "Description: The figure is a visual representation of hierarchical topics detected in a dataset. It consists of a grid of colored squares, each representing a different topic category. The topics are organized into groups such as Arts & Entertainment, Reference, News, Online Communities, Autos & Vehicles, Sports, and more. Each category is further divided into subcategories, as indicated by the smaller squares within the larger ones.\n\nText in figure: Arts & Entertainment, Reference, News, Online Communities, Autos & Vehicles, Sports, Visual Art & Design, Music & Audio, TV & Video, General Reference, Politics, Design, Humor, Comics & Animation, Technical Reference, History, Online Media, Online Image Galleries, Movies, Offbeat, People & Society, Sensitive Subjects, Travel, Adult, Games, Computer & Video Games, Computers & Electronics, Programming, Software, Law & Government, Health, Shopping, Pets & Animals, Finance, Food & Drink, Real Estate."
+  },
+  {
+    "file": "p076_f24.png",
+    "page": 76,
+    "kind": "picture",
+    "caption": "Figure 26: Model performance as a function of total training FLOP count. On the 58 BIG-bench tasks and the 9 English NLP benchmarks (Table 31), the solid line shows the scaling curve of model performance interpolated from PaLM 8B, 62B and 540B trained on 0.78T tokens, while the dashed line shows the performance gains from training PaLM 62B longer on 1.325T tokens.",
+    "width": 863,
+    "height": 241,
+    "description": "Figure: Two line graphs showing model performance as a function of total training FLOP count for BIG-bench and English NLP benchmarks. The solid line represents the scaling curve of PaLM 8B, 62B, and 540B models trained on 0.78T tokens. The dashed line shows performance gains from training PaLM 62B longer on 1.325T tokens. The highest performing model is PaLM 540B on both BIG-bench and English NLP benchmarks. The lowest performing model is PaLM 8B on both benchmarks.\n\nText in figure: BIG-bench, English NLP, Normalized Preferred Metric, Total Training FLOP Count (Zettaflops), 8b (0.78T tokens), 62b (0.79T tokens), 62b (1.3T tokens), 540b (0.78T tokens), Gopher, Chinchilla."
+  },
+  {
+    "file": "p077_f25.png",
+    "page": 77,
+    "kind": "picture",
+    "caption": "Figure 27: With additional training to 1.325T tokens, PaLM 62B achieves significant improvements on a range of tasks but does not bridge the gap to PaLM 540B.",
+    "width": 935,
+    "height": 255,
+    "description": "## Figure description\n\nThis figure shows a line graph comparing the performance of different PaLM models on various tasks. The x-axis represents the total training FLOP count in Zettaflops, and the y-axis represents the performance score. The graph includes three series: 62b (0.79T tokens), 62b (trained longer), and 540b (0.78T tokens). The 540b model consistently outperforms the other models across all FLOP counts, with the highest performance at 2048 Zettaflops.\n\n## Figure details\n\n62b (0.79T tokens), 62b (trained longer), 540b (0.78T tokens), Performance, Total Training FLOP Count (Zettaflops), 512, 1024, 2048, 30, 40, 50, 60"
+  },
+  {
+    "file": "p078_f26.png",
+    "page": 78,
+    "kind": "picture",
+    "caption": "Figure 28: Examples questions where PaLM 62B had incorrect responses with semantic understanding errors, but PaLM 540B fixed such errors.",
+    "width": 753,
+    "height": 437,
+    "description": "The generated text has been blocked by our content filters."
+  },
+  {
+    "file": "p079_f27.png",
+    "page": 79,
+    "kind": "picture",
+    "caption": "Figure 29: Examples questions where PaLM 62B had incorrect responses with one-step missing errors but PaLM 540B fixed such errors.",
+    "width": 924,
+    "height": 410,
+    "description": "Figure type: Text-based figure with two sections, each containing a question and multiple answer choices.\n\nSection 1: Stephen's grocery bill calculation with delivery fees and tip.\n- Question: Stephen's final bill for groceries was $40.00. The delivery vendor added 25% to the final total, so the final total was 125% of $40.00. The delivery vendor also charged $3.00 in delivery fees. Stephen also added a $4.00 tip. After the extra fees, what was the final price of Stephen's groceries?\n- Answer choices: $53.00, $57.00\n\nSection 2: Basketball team and coach count from four schools.\n- Question: There are four schools competing at a basketball tournament. Each school has sent a girls' basketball team and a boys' basketball team and a coach for each team. In total, how many people have all of the schools sent?\n- Answer choices: 44, 48"
+  }
+]

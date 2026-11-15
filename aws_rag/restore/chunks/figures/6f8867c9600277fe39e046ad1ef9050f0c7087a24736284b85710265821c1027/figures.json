@@ -1,0 +1,65 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "",
+    "width": 377,
+    "height": 337,
+    "description": "This figure is a line graph comparing various models based on their performance metrics. The x-axis represents the number of parameters in millions, and the y-axis shows the ADE20K mIoU score. The highest score is achieved by SETR with 48.6 million parameters, while the lowest score is for FCN-R50 with 36.1 million parameters. The graph includes models like SegFormer-B5, Twins, Swin Transformer, DeepLabV3+/R101, HRNet-W48 + OCR, and others. Each model is represented by a line with markers indicating specific points.\n\nText in figure: SegFormer-B5, B3, B4, Twins, SETR, DeepLabV3+/R101, HRNet-W48 + OCR, PVT, SemFPN, FCN-R50, SegFormer-B0, FCN-R50, SegFormer-B1, HRNet-R50, SegFormer-B4, SETR, mIoU, Params, FLOPs, FPS, 37.4, 3.7M, 8.4G, 50.5, 36.1, 49.6M, 255.1G, 198.0G, 23.5, 44.1, 62.7M, 255.1G, 164.8G, 17.0, 43.0, 70.5M, 104.8G, 17.0, 50.3, 64.1M, 95.7G, 15.4, 48.6, 318.3M, 362.1G, 5.4."
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2: The proposed SegFormer framework consists of two main modules: A hierarchical Transformer encoder to extract coarse and fine features; and a lightweight All-MLP decoder to directly fuse these multi-level features and predict the semantic segmentation mask. 'FFN' indicates feed-forward network.",
+    "width": 640,
+    "height": 321,
+    "description": "This figure is a schematic representation of the SegFormer framework, illustrating its architecture. It shows a hierarchical Transformer encoder and a lightweight All-MLP decoder. The encoder consists of multiple Transformer blocks, each with a self-attention mechanism and a feed-forward network (FFN). The decoder includes an MLP layer and an upsampling process. The diagram also highlights the use of overlap patches and efficient self-attention mechanisms.\n\nKey components include:\n- Encoder: Transformer Block 1, 2, 3, 4\n- Decoder: MLP Layer, UpSample\n- Special blocks: Efficient Self-Atten, Mix-FFN\n- Processes: Overlap Patch, Embeddings Patches\n- Weights: \\( H \\times W \\times C \\), \\( H \\times W \\times C_1 \\), \\( H \\times W \\times C_2 \\), \\( H \\times W \\times C_3 \\), \\( H \\times W \\times C_4 \\), \\( H \\times W \\times N_{cls} \\)"
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 3: Effective Receptive Field (ERF) on Cityscapes (average over 100 images). Top row: Deeplabv3+. Bottom row: SegFormer. ERFs of the four stages and the decoder heads of both architectures are visualized. Best viewed with zoom in.",
+    "width": 472,
+    "height": 172,
+    "description": "## Index Section 1: Figure Description\nThis figure is a visualization of the Effective Receptive Field (ERF) for two semantic segmentation architectures: Deeplabv3+ and SegFormer. It shows the ERFs for the four stages and the decoder heads of both architectures. The top row represents Deeplabv3+ and the bottom row represents SegFormer. The ERFs are visualized in a color-coded format, with red indicating higher values and blue indicating lower values.\n\n## Index Section 2: Figure Text\nText in figure:\n- Panel labels: Stage-1, Stage-2, Stage-3, Stage-4, Head\n- Architecture names: DeepLabv3+, SegFormer\n- Color legend: Red (high), Blue (low)\n- No specific values or printed text in the figure."
+  },
+  {
+    "file": "p009_f04.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 4: Qualitative results on Cityscapes. Compared to SETR, our SegFormer predicts masks with substantially finer details near object boundaries. Compared to DeeplabV3+, SegFormer reduces long-range errors as highlighted in red. Best viewed in screen.",
+    "width": 776,
+    "height": 125,
+    "description": "## Description:\nThis figure displays qualitative results of semantic segmentation models on the Cityscapes dataset. It compares the performance of SETR, SegFormer, and DeepLabV3+ models. Each model's output is shown with bounding boxes highlighting areas of interest, particularly focusing on the accuracy of object boundary predictions and the presence of long-range errors.\n\n## Text in figure:\n- Models: SETR, SegFormer, DeepLabV3+, SegFormer\n- Highlighted areas: Red boxes indicate regions with long-range errors.\n- Caption: \"Figure 4: Qualitative results on Cityscapes. Compared to SETR, our SegFormer predicts masks with substantially finer details near object boundaries. Compared to DeeplabV3+, SegFormer reduces long-range errors as highlighted in red. Best viewed in screen.\""
+  },
+  {
+    "file": "p012_f05.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 5: Qualitative results on Cityscapes, ADE20K and COCO-Stuff. First row: Cityscapes. Second row: ADE20K. Third row: COCO-Stuff. Zoom in for best view.",
+    "width": 762,
+    "height": 551,
+    "description": "Figure: A comparative analysis of segmentation models on various datasets.\nShows: Cityscapes, ADE20K, and COCO-Stuff datasets.\nSegmentation models: SegFormer, SETR, DeepLabV3+.\nResults: Visual comparisons of segmentation outputs.\nText in figure: \"SegFormer\", \"SETR\", \"DeepLabV3+\".\n\nDescription: The figure presents qualitative results of three segmentation models: SegFormer, SETR, and DeepLabV3+ on Cityscapes, ADE20K, and COCO-Stuff datasets. Each row represents a different dataset, with three columns showing the segmentation outputs of the respective models. The results are visually compared to highlight the performance of each model."
+  },
+  {
+    "file": "p013_f06.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 6: Effective Receptive Field on Cityscapes. ERFs of the four stages and the decoder heads of both architectures are visualized.",
+    "width": 782,
+    "height": 821,
+    "description": "Description: The figure shows heatmaps representing the Effective Receptive Field (ERF) of different stages and decoder heads of two architectures: DeepLabv3+ and SegFormer. Each row corresponds to a different architecture, with the leftmost image showing the input scene. The heatmaps illustrate the areas of the input image that influence the output at each stage and head.\n\nText in figure: DeepLabv3+, SegFormer, DeepLabv3+ SegFormer, Stage-1, Stage-2, Stage-3, Stage-4, Head"
+  },
+  {
+    "file": "p014_f07.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 7: Comparison of zero shot robustness on Cityscapes-C between SegFormer and DeepLabV3+. Blue line is SegFormer and orange line is DeepLabV3+. X-Axis means corrupt severity and Y-Axis is mIoU. Following[77], we test 3 severities for 'Noise' and 5 severities for the rest.",
+    "width": 790,
+    "height": 737,
+    "description": "This figure contains 16 line plots comparing the robustness of SegFormer and DeepLabV3+ under various corruptions. Each plot shows the mean Intersection over Union (mIoU) on the Cityscapes-C dataset as the severity of corruption increases from 1 to 5. The blue line represents SegFormer, and the orange line represents DeepLabV3+. The plots are labeled with the type of corruption, such as Gaussian Noise, Shot Noise, etc.\n\nDescription: The plots show that SegFormer generally outperforms DeepLabV3+ in terms of robustness across different corruptions. For instance, in the Gaussian Noise plot, SegFormer maintains a higher mIoU at all severities compared to DeepLabV3+. Similarly, in the Motion Blur plot, SegFormer's mIoU decreases less sharply than DeepLabV3+ as the severity increases. The contrast between the two models is most pronounced in the Snow plot, where SegFormer's mIoU remains relatively stable while DeepLabV3+'s mIoU drops significantly."
+  }
+]

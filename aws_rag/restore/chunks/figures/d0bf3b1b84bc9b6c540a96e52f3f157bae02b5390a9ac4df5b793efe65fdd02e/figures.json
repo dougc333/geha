@@ -1,0 +1,322 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Fig. 1. The proposed Super-Resolution Convolutional Neural Network (SRCNN) surpasses the bicubic baseline with just a few training iterations, and outperforms the sparse-coding-based method (SC) [50] with moderate training. The performance may be further improved with more training iterations. More details are provided in Section 4.4.1 (the Set5 dataset with an upscaling factor 3). The proposed method provides visually appealing reconstructed image.",
+    "width": 418,
+    "height": 588,
+    "description": "## Figure description\nThis figure contains a line graph and four image panels. The line graph shows the average test PSNR (Peak Signal-to-Noise Ratio) for three methods: SRCNN, SC, and Bicubic, plotted against the number of backpropagations. SRCNN starts at a lower PSNR, increases rapidly, and stabilizes above 32 dB. SC remains constant at around 30 dB. Bicubic also remains constant at around 31.5 dB. The image panels show a butterfly image at different stages of processing: original, bicubic, SC, and SRCNN. Each panel includes a close-up view and the corresponding PSNR value.\n\n## Visible text\nSRCNN, SC, Bicubic, Number of backprops, Average test PSNR (dB), Original / PSNR, Bicubic / 24.04 dB, SC / 25.58 dB, SRCNN / 27.95 dB, 2, 4, 6, 8, 10, 12, x 10^8, 29.5, 30, 30.5, 31, 31.5, 32, 32.5, 33",
+    "pdf_text": "SC / 25.58 dB | Original / PSNR | 2 | 4 | 6 | 8 | 10 | 12 | x 10 | 8 | 29.5 | 30 | 30.5 | 31 | 31.5 | 32 | 32.5 | 33 | Number of backprops | Average test PSNR (dB) | SRCNN | SC | Bicubic | Bicubic / 24.04 dB | SRCNN / 27.95 dB | SRCNN | SC | Bicubic | Number of backprops | Average test PSNR (dB)",
+    "bbox": [
+      69.8,
+      60.3,
+      278.8,
+      354.7
+    ]
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Fig. 2. Given a low-resolution image Y , the first convolutional layer of the SRCNN extracts a set of feature maps. The second layer maps these feature maps nonlinearly to high-resolution patch representations. The last layer combines the predictions within a spatial neighbourhood to produce the final high-resolution image F ( Y ) .",
+    "width": 826,
+    "height": 293,
+    "description": "Figure type: Diagram\nDescription: The diagram illustrates the process of image super-resolution using a deep convolutional network (SRCNN). It shows three main steps: patch extraction and representation, non-linear mapping, and reconstruction. The input is a low-resolution image, which is processed through convolutional layers to extract feature maps. These feature maps are then nonlinearly mapped to high-resolution patch representations. Finally, the high-resolution image is reconstructed from these representations.\n\nSection 1: Image super-resolution process\n- Low-resolution image (input)\n- Patch extraction and representation\n- Non-linear mapping\n- Reconstruction\n- High-resolution image (output)\n\nSection 2: Feature maps and layers\n- Feature maps of low-resolution image\n- Feature maps of high-resolution image\n- f1 x f1, f2 x f2, f3 x f3 (dimensions of feature maps)",
+    "pdf_text": "feature maps | Patch extraction | and representation | Non-linear mapping | Reconstruction | Low-resolution | image (input) | High-resolution | image (output) | of low-resolution image | of high-resolution image | feature maps",
+    "bbox": [
+      99.0,
+      52.2,
+      512.1,
+      198.7
+    ]
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Fig. 3. An illustration of sparse-coding-based methods in the view of a convolutional neural network.",
+    "width": 828,
+    "height": 306,
+    "description": "Figure type: Diagram\nDescription: The figure illustrates the process of image super-resolution using deep convolutional networks. It shows the steps of patch extraction, non-linear mapping, and reconstruction. The process starts with a butterfly image, which is divided into patches. These patches are then represented and mapped non-linearly. Finally, the patches are reconstructed to form the super-resolved image.\n\nSection 1: Patch extraction and representation\n- Patch extraction\n- f1 x f1\n- n1\n- n2\n\nSection 2: Non-linear mapping and reconstruction\n- Non-linear mapping\n- f3 x f3\n- neighbouring patches\n- Reconstruction",
+    "pdf_text": "responses | of patch | of | neighbouring | patches | Patch extraction | and representation | Non-linear | mapping | Reconstruction",
+    "bbox": [
+      98.8,
+      53.4,
+      513.0,
+      206.6
+    ]
+  },
+  {
+    "file": "p006_f04.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Fig. 4. Training with the much larger ImageNet dataset improves the performance over the use of 91 images.",
+    "width": 430,
+    "height": 163,
+    "description": "## Description\n\nThis figure is a line graph comparing the performance of two SRCNN models and a baseline SC model. The x-axis represents the number of backpropagations, and the y-axis represents the average test PSNR (dB). The SRCNN trained on ImageNet consistently outperforms the SRCNN trained on 91 images, and both outperform the SC baseline. The SRCNN trained on ImageNet reaches the highest PSNR, approximately 32.6 dB, while the SC baseline remains the lowest, around 31.4 dB.\n\n## Visible text\n\nAverage test PSNR (dB) | 31.4 | 31.6 | 31.8 | 32 | 32.2 | 32.4 | 32.6 | 32.8 | 33 | 33.2 | 33.4 | 33.6 | 33.8 | 34 | 34.2 | 34.4 | 34.6 | 34.8 | 35 | 35.2 | 35.4 | 35.6 | 35.8 | 36 | 36.2 | 36.4 | 36.6 | 36.8 | 37 | 37.2 | 37.4 | 37.6 | 37.8 | 38 | 38.2 | 38.4 | 38.6 | 38.8 | 39 | 39.2 | 39.4 | 39.6 | 39.8 | 40 | 40.2 | 40.4 | 40.6 | 40.8 | 41 | 41.2 | 41.4 | 41.6 | 41.8 | 42 | 42.2 | 42.4 | 42.6 | 42.8 | 43 | 43.2 | 43.4 | 43.6 | 43.8 | 44 | 44.2 | 44.4 | 44.6 | 44.8 | 45 | 45.2 | 45.4 | 45.6 | 45.8 | 46 | 46.2 | 46.4 | 46.6 | 46.8 | 47 | 47.2 | 47.4 | 47.6 | 47.8 | 48 | 48.2 |",
+    "pdf_text": "1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | xS10 | 8 | 31.4 | 31.6 | 31.8 | 32 | 32.2 | 32.4 | 32.6 | NumberSofSbackprops | AverageStestSPSNRSndBI | SRCNNSntrainedSonSImageNetI | SRCNNSntrainedSonS91SimagesI | SCSn31.42SdBI | T i i | i h h | h l | I | N | d",
+    "bbox": [
+      325.6,
+      653.0,
+      540.5,
+      734.6
+    ]
+  },
+  {
+    "file": "p007_f05.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Fig. 5. The figure shows the first-layer filters trained on ImageNet with an upscaling factor 3. The filters are organized based on their respective variances.",
+    "width": 452,
+    "height": 115,
+    "description": "## Description\nThe figure displays a grid of 8x12 grayscale images, representing the first-layer filters trained on ImageNet with an upscaling factor of 3. The filters are organized based on their respective variances, with the most significant filters shown at the top and the least significant at the bottom.\n\n## Text in figure\na | b | c | d | e | f | g | h",
+    "pdf_text": "a | b | c | d | e | f | g | h",
+    "bbox": [
+      61.3,
+      52.9,
+      287.4,
+      110.4
+    ]
+  },
+  {
+    "file": "p007_f06.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Fig. 6. Example feature maps of different layers.",
+    "width": 436,
+    "height": 240,
+    "description": "Figure type: Image processing visualization\nDescription: The figure shows the input image, output image, and feature maps from the first and second layers of a deep convolutional network used for image super-resolution.\nText in figure: Input, Output, Feature maps of the first layer, Feature maps of the second layer",
+    "pdf_text": "Input | Feature maps of the first layer | Output | Feature maps of the second layer",
+    "bbox": [
+      65.1,
+      152.9,
+      283.1,
+      273.2
+    ]
+  },
+  {
+    "file": "p007_f07.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "",
+    "width": 429,
+    "height": 159,
+    "description": "Section 1:\nThis figure is a line graph comparing the average test PSNR (dB) of different image super-resolution models against the number of backpropagations. The models include SRCNN (9-5-5), SRCNN (9-3-5), SRCNN (9-1-5), and SC (31.42 dB). The graph shows the performance of these models as the number of backpropagations increases from 1 to 10.\n\nSection 2:\nSRCNN (9-5-5) starts at 31.5 dB and increases to 32.5 dB. SRCNN (9-3-5) starts at 31.5 dB and increases to 32.5 dB. SRCNN (9-1-5) starts at 31.5 dB and increases to 32.5 dB. SC (31.42 dB) remains constant at 31.42 dB. SRCNN (9-5-5) is the highest, SRCNN (9-3-5) is the second highest, SRCNN (9-1-5) is the third highest, and SC is the lowest.",
+    "pdf_text": "1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | x 10 | 8 | 31.5 | 32 | 32.5 | NumberSofSbackprops | AverageStestSPSNRS(dB) | SRCNNS(9\u22125\u22125) | SRCNNS(9\u22123\u22125) | SRCNNS(9\u22121\u22125) | SCS(31.42SdB)",
+    "bbox": [
+      326.1,
+      58.7,
+      540.5,
+      138.2
+    ]
+  },
+  {
+    "file": "p008_f08.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Fig. 8. Comparisons between three-layer and four-layer networks.",
+    "width": 432,
+    "height": 575,
+    "description": "This figure presents three line graphs comparing the performance of different network architectures in terms of average test PSNR (dB) as the number of backpropagations increases. Each graph represents a different network configuration: (a) 9-1-5 vs. 9-1-1-5, (b) 9-3-5 vs. 9-3-1-5, and (c) 9-5-5 vs. 9-5-1-5. The series labeled SRCNN (9-1-5), SRCNN (9-1-1-5), SRCNN (9-3-5), SRCNN (9-3-1-5), SRCNN (9-5-5), and SRCNN (9-5-1-5) show varying performance trends, while the series labeled SC (31.42 dB) serves as a baseline.\n\nDescription: at most 120 words. What kind of conclusion one can draw from the figure.\n\nThe figure demonstrates that the performance of the SRCNN networks improves with an increasing number of backpropagations, with the 9-5-5 configuration showing the highest average test PSNR. The 9-1-1-5 configuration consistently outperforms the 9-1-5 configuration, indicating that adding an additional layer can enhance performance. Similarly, the 9-3-1-5 configuration outperforms the 9-3-5 configuration, and the 9-5-1-5 configuration outperforms the 9-5-5 configuration. However, the differences in performance between the configurations are relatively small, suggesting that the number of layers and the inclusion of additional layers have a limited impact on the overall performance.",
+    "pdf_text": "2 | 4 | 6 | 8 | 10 | 12 | x(10 | 8 | 31 | 31.5 | 32 | 32.5 | Number(of(backprops | Average(test(PSNR((dB) | SRCNN((9\u22121\u22125) | SRCNN((9\u22121\u22121\u22125) | SC((31.42(dB) | (a) 9-1-5 vs. 9-1-1-5 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | xS10 | 8 | 31.5 | 32 | 32.5 | NumberSofSbackprops | AverageStestSPSNRS(dB) | SRCNNS(9\u22123\u22125) | SRCNNS(9\u22123\u22121\u22125) | SCS(31.42SdB) | (b) 9-3-5 vs. 9-3-1-5 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | xR10 | 8 | 31.5 | 32 | 32.5 | NumberRofRbackprops | AverageRtestRPSNRR(dB) | SRCNNR(9\u22125\u22125) | SRCNNR(9\u22125\u22121\u22125) | SCR(31.42RdB) | (c) 9-5-5 vs. 9-5-1-5",
+    "bbox": [
+      64.4,
+      56.4,
+      280.4,
+      344.0
+    ]
+  },
+  {
+    "file": "p008_f09.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Fig. 9. Deeper structure does not always lead to better results.",
+    "width": 430,
+    "height": 383,
+    "description": "Description: The figure contains two plots labeled (a) and (b), each showing average test PSNR (dB) against the number of backpropagations. Plot (a) compares SRCNN architectures with different layer configurations, while plot (b) compares SRCNN architectures with varying layer depths. The highest PSNR is achieved by SRCNN (9-1-1-1-5, n22=32, n23=16) in plot (a), and by SRCNN (9-3-3-5) in plot (b). The lowest PSNR is observed for SC (31.42 dB) in both plots.\n\nText in figure: Average test PSNR (dB), Number of backpropagations, SRCNN (9-1-5), SRCNN (9-1-1-5, n22=16), SRCNN (9-1-1-5, n22=32), SRCNN (9-1-1-1-5, n22=32, n23=16), SC (31.42 dB), 9-1-1-5 (n22 = 32), 9-1-1-1-5 (n22 = 32, n23 = 16), SRCNN (9-3-5), SRCNN (9-3-1-5), SRCNN (9-3-3-5), SRCNN (9-3-3-3), SC (31.42 dB), 9-3-3-5, 9-3-3-3.",
+    "pdf_text": "2 | 4 | 6 | 8 | 10 | 12 | x(10 | 8 | 31 | 31.5 | 32 | 32.5 | Number(of(backprops | Average(test(PSNR(=dB) | SRCNN(=9\u22121\u22125) | SRCNN(=9\u22121\u22121\u22125,(n22=16) | SRCNN(=9\u22121\u22121\u22125,(n22=32) | SRCNN(=9\u22121\u22121\u22121\u22125,(n22=32,(n23=16) | SC(=31.42(dB) | (a) 9-1-1-5 (n22 = 32) and 9-1-1-1-5 (n22 = 32, n23 = 16) | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | xS10 | 8 | 31.5 | 32 | 32.5 | NumberSofSbackprops | AverageStestSPSNRS(dB) | SRCNNS(9\u22123\u22125) | SRCNNS(9\u22123\u22121\u22125) | SRCNNS(9\u22123\u22123\u22125) | SRCNNS(9\u22123\u22123\u22123) | SCS(31.42SdB) | (b) 9-3-3-5 and 9-3-3-3",
+    "bbox": [
+      327.7,
+      57.6,
+      542.6,
+      248.9
+    ]
+  },
+  {
+    "file": "p009_f10.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Fig. 10. The test convergence curve of SRCNN and results of other methods on the Set5 dataset.",
+    "width": 479,
+    "height": 204,
+    "description": "This figure is a line graph showing the convergence curve of SRCNN and the results of other methods on the Set5 dataset. The x-axis represents the number of backpropagations, and the y-axis represents the average test PSNR in decibels (dB). The SRCNN curve is the highest, followed by A+, KK, ANR, NE+LLE, and SC. The Bicubic method is the lowest. The values for each method are: SRCNN - 32.59 dB, A+ - 32.59 dB, KK - 32.28 dB, ANR - 31.92 dB, NE+LLE - 31.84 dB, SC - 31.42 dB, and Bicubic - 30.39 dB.\n\nDescription: at most 120 words. What is the main point of the figure. If the figure contains multiple subplots or has a complex layout, only describe the main point of the entire figure.\n\nText in figure: the most important words and values, in order of importance. Leave out technical terms and details unless they are crucial to the main point.\n\nThe main point of this figure is to compare the performance of SRCNN with other methods on the Set5 dataset. The SRCNN method shows the highest average test PSNR, indicating better performance compared to other methods.",
+    "pdf_text": "2 | 4 | 6 | 8 | 10 | 12 | x(10 | 8 | 30.5 | 31 | 31.5 | 32 | 32.5 | 33 | Number(of(backprops | Average(test(PSNR((dB) | ANR - 31.92 dB | A+ - 32.59 dB | SRCNN | SC - 31.42 dB | Bicubic - 30.39 dB | NE+LLE - 31.84 dB | KK - 32.28 dB | S C",
+    "bbox": [
+      60.7,
+      58.1,
+      299.9,
+      160.1
+    ]
+  },
+  {
+    "file": "p009_f11.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Fig. 11. The test convergence curve of SRCNN and the result of DNC on the Set5 dataset.",
+    "width": 431,
+    "height": 165,
+    "description": "## Description\n\nThis figure is a line graph showing the convergence curve of SRCNN and the results of DNC on the Set5 dataset. The x-axis represents the number of backpropagations, ranging from 2 to 12, with a scale of \u00d7 10^7. The y-axis represents the average test PSNR (dB). The SRCNN (9-5-5 trained on 91 images) curve starts at 30.5 dB and increases to 32.5 dB. The DNC curve starts at 32.08 dB and remains constant. The Bicubic curve starts at 30.29 dB and remains constant.\n\n## Text in figure\n\nNumberBofBbackprops: 2, 4, 6, 8, 10, 12, \u00d7 10^7\nAverageBtestBPSNRBidBn: 30.5, 31, 31.5, 32, 32.5\nSRCNNBi9-5-5BtrainedBonB91Bimagesn\nDNCBi32.08BdBn\nBicubicBi30.29BdBn",
+    "pdf_text": "NumberBofBbackprops | \u00d7 107 | 2 | 4 | 6 | 8 | 10 | 12 | AverageBtestBPSNRBidBn | 30.5 | 31 | 31.5 | 32 | 32.5 | SRCNNBi9-5-5BtrainedBonB91Bimagesn | DNCBi32.08BdBn | BicubicBi30.29BdBn",
+    "bbox": [
+      325.2,
+      650.0,
+      540.5,
+      732.3
+    ]
+  },
+  {
+    "file": "p011_f12.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Fig. 12. The proposed SRCNN achieves the stateof-the-art super-resolution quality, whilst maintains high and competitive speed in comparison to existing external example-based methods. The chart is based on Set14 results summarized in Table 3. The implementation of all three SRCNN networks are available on our project page.",
+    "width": 431,
+    "height": 230,
+    "description": "This figure is a bar chart comparing the performance of various super-resolution methods. The x-axis represents the running time in seconds, ranging from slower to faster. The y-axis shows the PSNR (Peak Signal-to-Noise Ratio) in decibels (dB), indicating the quality of the super-resolved images. The chart includes data for methods like SC, NE+LLE, ANR, KK, A+, and three versions of SRCNN (9-1-5, 9-3-5, 9-5-5). The SRCNN methods are highlighted with red markers, showing their superior performance in both speed and quality.\n\nText in figure: 10, 0, 10, 1, 10, 2, 28.2, 28.4, 28.6, 28.8, 29, 29.2, 29.4, Running time (sec), PSNR (dB), SC, NE+LLE, ANR, KK, A+, SRCNN(9-1-5), SRCNN(9-3-5), SRCNN(9-5-5), \u2014\u2014> Faster, Slower <\u2014\u2014",
+    "pdf_text": "10 | 0 | 10 | 1 | 10 | 2 | 28.2 | 28.4 | 28.6 | 28.8 | 29 | 29.2 | 29.4 | Running time (sec) | PSNR (dB) | SC | NE+LLE | ANR | KK | A+ | SRCNN(9-1-5) | SRCNN(9-3-5) | SRCNN(9-5-5) | \u2014\u2014> Faster | Slower <\u2014\u2014",
+    "bbox": [
+      62.1,
+      59.4,
+      277.3,
+      174.3
+    ]
+  },
+  {
+    "file": "p011_f13.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Fig. 13. Chrominance channels of the first-layer filters using the 'Y pre-train' strategy.",
+    "width": 450,
+    "height": 260,
+    "description": "Description: The figure displays two panels of grayscale images, each representing the first-layer filters of a convolutional neural network. Panel (a) shows the filters for the Cb channel, and panel (b) shows the filters for the Cr channel. Both panels contain 32 filters, each depicted as a 16x16 pixel image.\n\nText in figure: (a) First-layer filters \u2013 Cb channel | (b) First-layer filters \u2013 Cr channel",
+    "pdf_text": "(a) First-layer \ufb01lters \u2013 Cb channel | (b) First-layer \ufb01lters \u2013 Cr channel",
+    "bbox": [
+      324.7,
+      53.0,
+      549.7,
+      183.2
+    ]
+  },
+  {
+    "file": "p013_f14.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "",
+    "width": 146,
+    "height": 181,
+    "description": "Figure type: Portrait photograph.\nDescription: The image is a black-and-white portrait photograph of a man. He is wearing glasses and a white collared shirt. He is smiling and appears to be standing in front of a building with a pagoda-like structure in the background. The image is cropped to focus on the man's face and upper body.\n\nText in figure: None.",
+    "pdf_text": "",
+    "bbox": [
+      48.2,
+      388.4,
+      121.2,
+      479.1
+    ]
+  },
+  {
+    "file": "p013_f15.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "",
+    "width": 146,
+    "height": 182,
+    "description": "## Figure Description\nThe figure is a black-and-white photograph of a man wearing glasses and a black jacket. He is looking directly at the camera with a slight smile. The background is blurred, showing a building with a striped awning and a window.\n\n## Text in Figure\n- No text is visible in the figure.",
+    "pdf_text": "",
+    "bbox": [
+      48.4,
+      515.6,
+      121.7,
+      606.5
+    ]
+  },
+  {
+    "file": "p013_f16.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "",
+    "width": 145,
+    "height": 181,
+    "description": "Section 1: Figure description\nThis figure is a black and white photograph of a smiling man wearing glasses and a jacket. The man is standing in front of a blurry background of buildings and trees.\n\nSection 2: Text in figure\nThere is no text in the figure.",
+    "pdf_text": "",
+    "bbox": [
+      48.3,
+      650.6,
+      120.9,
+      741.1
+    ]
+  },
+  {
+    "file": "p013_f17.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "",
+    "width": 145,
+    "height": 182,
+    "description": "## Search Index Section 1\n**Figure Type:** Portrait photograph of an individual.\n\n**Description:** The image depicts a black-and-white photograph of a man. He is wearing formal attire, including a suit, a collared shirt, and a tie. He also has glasses on. The man is looking directly at the camera with a neutral expression.\n\n## Search Index Section 2\n**Text in Figure:** No text is visible in the image.\n\n**Additional Information:** The individual in the photograph is likely a professional or academic, given the formal attire and the context of the paper, which is about image super-resolution using deep convolutional networks.",
+    "pdf_text": "",
+    "bbox": [
+      311.7,
+      58.0,
+      384.2,
+      149.2
+    ]
+  },
+  {
+    "file": "p014_f18.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Fig. 14. The 'butterfly' image from Set5 with an upscaling factor 3.",
+    "width": 826,
+    "height": 437,
+    "description": "## Figure Description\nThis figure displays a comparison of image super-resolution techniques using a butterfly image with a 3x upscaling factor. It shows the original image alongside seven different super-resolution methods, each with a peak signal-to-noise ratio (PSNR) value.\n\n## Text in Figure\n- Original / PSNR\n- Bicubic / 24.04 dB\n- SC / 25.58 dB\n- NE+LLE / 25.75 dB\n- KK / 27.31 dB\n- ANR / 25.90 dB\n- A+ / 27.24 dB\n- SRCNN / 27.95 dB",
+    "pdf_text": "BicubicK/K24.04KdB | OriginalK/KPSNR | ANRK/K25.90KdB | SRCNNK/K27.95KdB | SCK/K25.58KdB | NE+LLEK/K25.75KdB | A+K/K27.24KdB | KKK/K27.31KdB",
+    "bbox": [
+      99.0,
+      55.8,
+      512.2,
+      274.4
+    ]
+  },
+  {
+    "file": "p014_f19.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Fig. 15. The 'ppt3' image from Set14 with an upscaling factor 3.",
+    "width": 828,
+    "height": 542,
+    "description": "Section 1: Figure description\nThis figure shows the 'ppt3' image from Set14 with an upscaling factor of 3. It compares different super-resolution methods, including Bicubic, Original, ANR, SRCNN, SC, NE+LLE, A+, and KK.\n\nSection 2: Search index\nBicubic+/+23.71+dB\nOriginal+/+PSNR\nANR+/+25.03+dB\nSRCNN+/+27.04+dB\nSC+/+24.98+dB\nNE+LLE+/+24.94+dB\nA++/+26.09+dB\nKK+/+25.60+dB",
+    "pdf_text": "Bicubic+/+23.71+dB | Original+/+PSNR | ANR+/+25.03+dB | SRCNN+/+27.04+dB | SC+/+24.98+dB | NE+LLE+/+24.94+dB | A++/+26.09+dB | KK+/+25.60+dB | h | i | f | S | i h | li | f",
+    "bbox": [
+      98.9,
+      295.4,
+      513.0,
+      566.3
+    ]
+  },
+  {
+    "file": "p014_f20.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Fig. 16. The 'zebra' image from Set14 with an upscaling factor 3.",
+    "width": 826,
+    "height": 308,
+    "description": "Description: The figure displays a comparative analysis of various image super-resolution techniques applied to a 'zebra' image with an upscaling factor of 3. Each panel shows the original image and its super-resolved versions using different methods. The methods include Bicubic, SC, NE+LLE, KK, ANR, A+, and SRCNN. The figure also includes PSNR values for each method, indicating the quality of the super-resolved images.\n\nText in figure: Original / PSNR, Bicubic / 26.63 dB, SC / 27.95 dB, NE+LLE / 28.31 dB, KK / 28.85 dB, ANR / 28.43 dB, A+ / 28.98 dB, SRCNN / 29.29 dB",
+    "pdf_text": "BicubicL/L26.63LdB | OriginalL/LPSNR | ANRL/L28.43LdB | SRCNNL/L29.29LdB | SCL/L27.95LdB | NE+LLEL/L28.31LdB | A+L/L28.98LdB | KKL/L28.85LdB",
+    "bbox": [
+      99.5,
+      585.1,
+      512.6,
+      739.0
+    ]
+  }
+]

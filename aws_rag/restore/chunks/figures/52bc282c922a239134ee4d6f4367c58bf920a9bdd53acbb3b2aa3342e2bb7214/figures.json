@@ -1,0 +1,226 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1: Tree Ensemble Model. The final prediction for a given example is the sum of predictions from each tree.",
+    "width": 403,
+    "height": 194,
+    "description": "Figure type: Diagram showing a tree ensemble model.\nDescription: The figure displays two decision trees (tree1 and tree2) used in an ensemble model. Each tree predicts a value based on specific conditions. Tree1 predicts based on age and gender, while tree2 predicts based on computer usage. The final prediction is the sum of the predictions from both trees.\n\nText in figure: \"tree1\", \"age < 15\", \"Y\", \"N\", \"is male?\", \"Y\", \"N\", \"tree2\", \"Use Computer Daily\", \"Y\", \"N\", \"+2\", \"+0.1\", \"-1\", \"+0.9\", \"-0.9\", \"f(child) = +2 + 0.9 * 2.9 = 4.71\", \"f(child) = -1 - 0.9 * 1.9 = -2.71\"",
+    "pdf_text": "",
+    "bbox": [
+      334.0,
+      54.7,
+      535.3,
+      151.6
+    ]
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2: Structure Score Calculation. We only need to sum up the gradient and second order gradient statistics on each leaf, then apply the scoring formula to get the quality score.",
+    "width": 403,
+    "height": 182,
+    "description": "This figure illustrates the structure score calculation in the XGBoost algorithm. It shows a decision tree with five instances, each assigned a gradient statistic. The tree splits based on age and gender, leading to different leaf nodes. The figure calculates the score for each leaf using gradient and second-order gradient statistics, applying a scoring formula to determine the quality of the structure.\n\nText in figure: \"Instance index\", \"gradient statistics\", \"age < 15\", \"is male?\", \"Y\", \"N\", \"I3=(2,3,5)\", \"I1=(1)\", \"I2=(4)\", \"G1=g1\", \"G2=g4\", \"H1=h1\", \"H4=h4\", \"G3=g2+g3+g5\", \"H3=h2+h3+h5\", \"Obj=\u2211i(Gj+3\u03b3)\"",
+    "pdf_text": "",
+    "bbox": [
+      73.7,
+      52.9,
+      274.8,
+      143.8
+    ]
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3: Comparison of test AUC convergence on Higgs 10M dataset. The eps parameter corresponds to the accuracy of the approximate sketch. This roughly translates to 1 / eps buckets in the proposal. We find that local proposals require fewer buckets, because it refine split candidates.",
+    "width": 341,
+    "height": 250,
+    "description": "Figure: Line graph comparing test AUC convergence on the Higgs 10M dataset.\nSeries: exact greedy, global eps=0.3, local eps=0.3, global eps=0.05.\nHighest: exact greedy, lowest: global eps=0.3.\nLegend: exact greedy, global eps=0.3, local eps=0.3, global eps=0.05.\nAxes: Number of Iterations, Test AUC.\nValues: 0.75 to 0.83 on y-axis, 0 to 90 on x-axis.\n\nText in figure: exact greedy, global eps=0.3, local eps=0.3, global eps=0.05, Number of Iterations, Test AUC, 0.75, 0.76, 0.77, 0.78, 0.79, 0.80, 0.81, 0.82, 0.83, 0, 10, 20, 30, 40, 50, 60, 70, 80, 90.",
+    "pdf_text": "0 | 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | Number of Iterations | 0.75 | 0.76 | 0.77 | 0.78 | 0.79 | 0.80 | 0.81 | 0.82 | 0.83 | Test AUC | exact greedy | global eps=0.3 | local eps=0.3 | global eps=0.05",
+    "bbox": [
+      86.8,
+      58.8,
+      257.6,
+      183.9
+    ]
+  },
+  {
+    "file": "p004_f04.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 4: Tree structure with default directions. An example will be classified into the default direction when the feature needed for the split is missing.",
+    "width": 355,
+    "height": 148,
+    "description": "Figure type: Diagram\nDescription: The figure is a decision tree diagram showing how examples are classified based on age and gender. The tree splits on the age being less than 20, then on gender. Missing data is handled by default directions.\n\nText in figure: Example, Age, Gender, X1, X2, X3, age < 20, is male?, Y, N, default",
+    "pdf_text": "",
+    "bbox": [
+      347.5,
+      54.7,
+      525.0,
+      128.4
+    ]
+  },
+  {
+    "file": "p005_f05.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 6: Block structure for parallel learning. Each column in a block is sorted by the corresponding feature value. A linear scan over one column in the block is sufficient to enumerate all the split points.",
+    "width": 789,
+    "height": 205,
+    "description": "This figure illustrates the block structure for parallel learning in XGBoost, showing how data is organized and processed. It consists of three main parts: the layout transformation of a single feature column, the input layout of three feature columns, and the linear scan over presorted columns to find the best split. The figure demonstrates how sorting and indexing are used to efficiently compute gradient statistics and identify optimal split points for tree boosting.\n\nText in figure: Layout Transformation of one Feature (Column), sorted, Gradient statistics of each example, Feature values, The Input Layout of Three Feature Columns, Missing values are not stored, Stored pointer from feature value to instance index, Linear scan over presorted columns to find best split, g1, h1, g4, h4, g2, h2, g5, h5, g3, h3, GL = g1 + g4, GR = g2 + g3 + g5.",
+    "pdf_text": "",
+    "bbox": [
+      106.9,
+      54.9,
+      501.5,
+      157.5
+    ]
+  },
+  {
+    "file": "p005_f06.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 5: Impact of the sparsity aware algorithm on Allstate-10K. The dataset is sparse mainly due to one-hot encoding. The sparsity aware algorithm is more than 50 times faster than the naive version that does not take sparsity into consideration.",
+    "width": 311,
+    "height": 231,
+    "description": "Description: This figure is a line graph comparing the performance of two algorithms, \"Basic algorithm\" and \"Sparsity aware algorithm\", in terms of time per tree in seconds. The x-axis represents the number of threads, ranging from 1 to 16. The y-axis represents the time per tree in seconds, ranging from 0.03125 to 32. The \"Basic algorithm\" is represented by a red line with markers, while the \"Sparsity aware algorithm\" is represented by a blue line with markers. The \"Sparsity aware algorithm\" is significantly faster than the \"Basic algorithm\", with a difference of more than 50 times.\n\nText in figure: 1, 2, 4, 8, 16, Number of Threads, 0.03125, 0.0625, 0.125, 0.25, 0.5, 1, 2, 4, 8, 16, 32, Time per Tree(sec), Sparsity aware algorithm, Basic algorithm",
+    "pdf_text": "1 | 2 | 4 | 8 | 16 | Number of Threads | 0.03125 | 0.0625 | 0.125 | 0.25 | 0.5 | 1 | 2 | 4 | 8 | 16 | 32 | Time per Tree(sec) | Sparsity aware algorithm | Basic algorithm",
+    "bbox": [
+      359.6,
+      194.9,
+      514.8,
+      310.5
+    ]
+  },
+  {
+    "file": "p006_f07.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 7: Impact of cache-aware prefetching in exact greedy algorithm. We find that the cache-miss effect impacts the performance on the large datasets (10 million instances). Using cache aware prefetching improves the performance by factor of two when the dataset is large.",
+    "width": 966,
+    "height": 210,
+    "description": "## Figure Description\nThis figure contains four line graphs comparing the performance of a basic algorithm and a cache-aware algorithm across different numbers of threads. Each graph represents a different dataset size and type: Allstate 10M, Higgs 10M, Allstate 1M, and Higgs 1M. The y-axis measures the time per tree in seconds, and the x-axis represents the number of threads. The basic algorithm is represented by red crosses, while the cache-aware algorithm is represented by blue circles.\n\n## Textual Content\n- Number of Threads: 1, 2, 4, 8, 16\n- Time per Tree(sec): 8, 16, 32, 64, 128, 256\n- Basic algorithm\n- Cache-aware algorithm\n- (a) Allstate 10M\n- (b) Higgs 10M\n- (c) Allstate 1M\n- (d) Higgs 1M",
+    "pdf_text": "1 | 2 | 4 | 8 | 16 | Number of Threads | 8 | 16 | 32 | 64 | 128 | Time per Tree(sec) | Basic algorithm | Cache-aware algorithm | (a) Allstate 10M | 1 | 2 | 4 | 8 | 16 | Number of Threads | 8 | 16 | 32 | 64 | 128 | 256 | Time per Tree(sec) | Basic algorithm | Cache-aware algorithm | (b) Higgs 10M | 1 | 2 | 4 | 8 | 16 | Number of Threads | 0.25 | 0.5 | 1 | 2 | 4 | 8 | Time per Tree(sec) | Basic algorithm | Cache-aware algorithm | (c) Allstate 1M | 1 | 2 | 4 | 8 | 16 | Number of Threads | 0.25 | 0.5 | 1 | 2 | 4 | 8 | Time per Tree(sec) | Basic algorithm | Cache-aware algorithm | (d) Higgs 1M",
+    "bbox": [
+      63.4,
+      62.0,
+      546.6,
+      166.9
+    ]
+  },
+  {
+    "file": "p006_f08.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 8: Short range data dependency pattern that can cause stall due to cache miss.",
+    "width": 336,
+    "height": 137,
+    "description": "This figure is a diagram illustrating a short-range data dependency pattern in a tree structure, which can lead to stalls due to cache misses. The diagram shows a block structure with nodes labeled 1, 3, 5, and 8, connected by lines indicating dependencies. The instructions section provides equations for updating G and H, with references to ptr(i). The text highlights the short-range dependency with non-contiguous access to g.\n\nText in figure: Block Structure, Instructions, G = G + g[ptr(i)], H = H + h[ptr(i)], Short range dependency, with non-contiguous access to g.",
+    "pdf_text": "",
+    "bbox": [
+      90.0,
+      209.3,
+      257.9,
+      277.8
+    ]
+  },
+  {
+    "file": "p006_f09.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 9: The impact of block size in the approximate algorithm. We find that overly small blocks results in inefficient parallelization, while overly large blocks also slows down training due to cache misses.",
+    "width": 269,
+    "height": 566,
+    "description": "## Description\nThe figure contains two plots, labeled (a) and (b), each showing the impact of block size on the time per tree in seconds for different numbers of threads. The x-axis represents the number of threads, ranging from 1 to 16. The y-axis represents the time per tree in seconds, ranging from 4 to 512. Four series are plotted, each corresponding to a different block size: 2^12, 2^16, 2^20, and 2^24. The series with block size 2^12 is the lowest, while the series with block size 2^24 is the highest.\n\n## Text in figure\nNumber of Threads: 1, 2, 4, 8, 16\nTime per Tree(sec): 4, 8, 16, 32, 64, 128, 256, 512\nblock size=2^12, block size=2^16, block size=2^20, block size=2^24\n(a) Allstate 10M\n(b) Higgs 10M",
+    "pdf_text": "1 | 2 | 4 | 8 | 16 | Number of Threads | 4 | 8 | 16 | 32 | 64 | 128 | Time per Tree(sec) | block size=2^12 | block size=2^16 | block size=2^20 | block size=2^24 | (a) Allstate 10M | 1 | 2 | 4 | 8 | 16 | Number of Threads | 4 | 8 | 16 | 32 | 64 | 128 | 256 | 512 | Time per Tree(sec) | block size=2^12 | block size=2^16 | block size=2^20 | block size=2^24 | (b) Higgs 10M",
+    "bbox": [
+      369.5,
+      213.8,
+      503.9,
+      497.2
+    ]
+  },
+  {
+    "file": "p008_f10.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 10: Comparison between XGBoost and pGBRT on Yahoo LTRC dataset.",
+    "width": 331,
+    "height": 251,
+    "description": "## Description\n\nThis figure is a line graph comparing the performance of XGBoost and pGBRT on the Yahoo LTRC dataset. It shows the time per tree in seconds on the y-axis and the number of threads on the x-axis. XGBoost is represented by a blue line with circular markers, while pGBRT is represented by a green line with square markers. XGBoost has the lowest time per tree, especially at higher thread counts, while pGBRT has the highest time per tree.\n\n## Text in figure\n\nNumber of Threads: 1, 2, 4, 8, 16\nTime per Tree(sec): 0.5, 1, 2, 4, 8, 16, 32\nXGBoost\npGBRT",
+    "pdf_text": "1 | 2 | 4 | 8 | 16 | Number of Threads | 0.5 | 1 | 2 | 4 | 8 | 16 | 32 | Time per Tree(sec) | XGBoost | pGBRT",
+    "bbox": [
+      353.5,
+      156.5,
+      518.9,
+      282.1
+    ]
+  },
+  {
+    "file": "p009_f11.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 11: Comparison of out-of-core methods on different subsets of criteo data. The missing data points are due to out of disk space. We can find that basic algorithm can only handle 200M examples. Adding compression gives 3x speedup, and sharding into two disks gives another 2x speedup. The system runs out of file cache start from 400M examples. The algorithm really has to rely on disk after this point. The compression+shard method has a less dramatic slowdown when running out of file cache, and exhibits a linear trend afterwards.",
+    "width": 344,
+    "height": 297,
+    "description": "Description: This figure compares the performance of different out-of-core methods on subsets of Criteo data. It shows the time per tree in seconds against the number of training examples in millions. The \"Basic algorithm\" line is the lowest, followed by \"Block compression\" and \"Compression+shard\". The \"Out of system file cache\" annotation marks the point where the system runs out of file cache.\n\nText in figure: 128, 256, 512, 1024, 2048, Number of Training Examples (million), 128, 256, 512, 1024, 2048, 4096, Time per Tree(sec), Basic algorithm, Block compression, Compression+shard, Out of system file cache, start from this point",
+    "pdf_text": "128 | 256 | 512 | 1024 | 2048 | Number of Training Examples (million) | 128 | 256 | 512 | 1024 | 2048 | 4096 | Time per Tree(sec) | Basic algorithm | Block compression | Compression+shard | Out of system file cache | start from this point",
+    "bbox": [
+      86.9,
+      58.6,
+      259.2,
+      206.9
+    ]
+  },
+  {
+    "file": "p009_f12.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "",
+    "width": 357,
+    "height": 270,
+    "description": "Description: The figure is a line graph comparing the total running time of three machine learning systems: Spark MLLib, H2O, and XGBoost. The x-axis represents the number of training examples in millions, ranging from 128 to 2048. The y-axis shows the total running time in seconds, ranging from 128 to 32768. Spark MLLib has the highest running time, followed by H2O, and XGBoost has the lowest running time.\n\nText in figure: 128, 256, 512, 1024, 2048, Number of Training Examples (million), 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, Total Running Time (sec), Spark MLLib, H2O, XGBoost",
+    "pdf_text": "128 | 256 | 512 | 1024 | 2048 | Number of Training Examples (million) | 128 | 256 | 512 | 1024 | 2048 | 4096 | 8192 | 16384 | 32768 | Total Running Time (sec) | Spark MLLib | H2O | XGBoost",
+    "bbox": [
+      346.9,
+      58.2,
+      525.7,
+      193.2
+    ]
+  },
+  {
+    "file": "p009_f13.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "(b) Per iteration cost exclude data loading",
+    "width": 351,
+    "height": 303,
+    "description": "Description: The figure is a line graph comparing the time per iteration for three machine learning systems: Spark MLLib, H2O, and XGBoost. The x-axis represents the number of training examples in millions, ranging from 128 to 2048. The y-axis shows the time per iteration in seconds, ranging from 8 to 2048. Spark MLLib has the highest time per iteration, followed by H2O, and XGBoost has the lowest time per iteration.\n\nText in figure: 128, 256, 512, 1024, 2048, Number of Training Examples (million), 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, Time per Iteration (sec), Spark MLLib, H2O, XGBoost",
+    "pdf_text": "128 | 256 | 512 | 1024 | 2048 | Number of Training Examples (million) | 8 | 16 | 32 | 64 | 128 | 256 | 512 | 1024 | 2048 | 4096 | Time per Iteration (sec) | Spark MLLib | H2O | XGBoost",
+    "bbox": [
+      348.2,
+      227.4,
+      523.6,
+      379.2
+    ]
+  },
+  {
+    "file": "p010_f14.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 13: Scaling of XGBoost with different number of machines on criteo full 1.7 billion dataset. Using more machines results in more file cache and makes the system run faster, causing the trend to be slightly super linear. XGBoost can process the entire dataset using as little as four machines, and scales smoothly by utilizing more available resources.",
+    "width": 333,
+    "height": 288,
+    "description": "Description: This figure is a line graph showing the scaling of XGBoost with different numbers of machines on the Criteo full 1.7 billion dataset. The x-axis represents the number of machines, ranging from 4 to 32. The y-axis represents the time per iteration in seconds, ranging from 128 to 2048. The graph shows a downward trend, indicating that using more machines results in faster processing times.\n\nDescription: The graph shows a single line with data points at 4, 8, 16, and 32 machines. The highest point is at 4 machines with a time per iteration of approximately 2048 seconds. The lowest point is at 32 machines with a time per iteration of approximately 128 seconds. The trend is slightly super linear, indicating that using more machines results in more file cache and faster processing times.",
+    "pdf_text": "4 | 8 | 16 | 32 | Number of Machines | 128 | 256 | 512 | 1024 | 2048 | Time per Iteration (sec)",
+    "bbox": [
+      89.9,
+      58.6,
+      256.4,
+      202.6
+    ]
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1. A spacetime non-local operation in our network trained for video classification in Kinetics. A position x i 's response is computed by the weighted average of the features of all positions x j (only the highest weighted ones are shown here). In this example computed by our model, note how it relates the ball in the first frame to the ball in the last two frames. More examples are in Figure 3.",
+    "width": 472,
+    "height": 146,
+    "description": "## Section 1: Figure Description\nThis figure is a visual representation of a spacetime non-local operation in a neural network, specifically designed for video classification. It shows how the response of a position \\( x_i \\) is computed by taking a weighted average of the features from all positions \\( x_j \\). The arrows indicate the influence of different positions on the response of \\( x_i \\), highlighting the non-local nature of the operation.\n\n## Section 2: Text in Figure\nText in figure: \\( X_i \\), \\( X_j \\). The figure shows arrows connecting different positions in a sequence, indicating the influence of one position on another. The text \\( X_i \\) and \\( X_j \\) labels specific positions in the sequence."
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2. A spacetime non-local block . The feature maps are shown as the shape of their tensors, e.g ., T \u00d7 H \u00d7 W \u00d7 1024 for 1024 channels (proper reshaping is performed when noted). ' \u2297 ' denotes matrix multiplication, and ' \u2295 ' denotes element-wise sum. The softmax operation is performed on each row. The blue boxes denote 1 \u00d7 1 \u00d7 1 convolutions. Here we show the embedded Gaussian version, with a bottleneck of 512 channels. The vanilla Gaussian version can be done by removing \u03b8 and \u03c6 , and the dot-product version can be done by replacing softmax with scaling by 1 /N .",
+    "width": 352,
+    "height": 306,
+    "description": "Description: This figure illustrates a spacetime non-local block from the \"Non-local Neural Networks\" paper. It shows a neural network architecture with various tensor operations. The input tensor is T \u00d7 H \u00d7 W \u00d7 1024, and the output tensor is T \u00d7 H \u00d7 W \u00d7 1024. The block includes 1 \u00d7 1 \u00d7 1 convolutions, softmax operations, and element-wise sums. The Gaussian version is depicted, with a bottleneck of 512 channels. The figure also shows the embedded Gaussian version, with \u03b8 and \u03c6 parameters, and the vanilla Gaussian version can be achieved by removing these parameters.\n\nText in figure: T \u00d7 H \u00d7 W \u00d7 1024, 1 \u00d7 1 \u00d7 1, softmax, \u2295, \u2297, T \u00d7 H \u00d7 W \u00d7 512, \u03b8, \u03c6, g, 1 / N, embedded Gaussian version, vanilla Gaussian version."
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 3. Examples of the behavior of a non-local block in res 3 computed by a 5-block non-local model trained on Kinetics. These examples are from held-out validation videos. The starting point of arrows represents one x i , and the ending points represent x j . The 20 highest weighted arrows for each x i are visualized. The 4 frames are from a 32-frame input, shown with a stride of 8 frames. These visualizations show how the model finds related clues to support its prediction.",
+    "width": 975,
+    "height": 598,
+    "description": "Description: The figure displays a series of images showing the behavior of a non-local block in a ResNet model trained on the Kinetics dataset. Each image shows arrows connecting different points in a sequence of frames, indicating the relationships between frames that the model uses to make predictions.\n\nText in figure: The arrows represent connections between frames, with the starting point of each arrow indicating one frame and the ending point indicating another. The arrows are color-coded to show the strength of the connection, with the 20 highest weighted arrows for each frame being visualized. The images show how the model identifies related clues across frames to support its predictions."
+  },
+  {
+    "file": "p006_f04.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Table 2. Ablations on Kinetics action classification. We show top-1 and top-5 classification accuracy (%).",
+    "width": 414,
+    "height": 275,
+    "description": "This figure is a line graph comparing the performance of different neural network models on the Kinetics action classification task. The graph shows the error percentage over iterations. The C2D baseline (train) model starts highest at around 60% error and decreases steadily. The C2D baseline (val) model starts slightly lower and follows a similar trend. The NL C2D, 5-block (train) model starts at around 55% error and decreases more rapidly, reaching the lowest error percentage. The NL C2D, 5-block (val) model starts at around 50% error and also decreases steadily, ending with the lowest error percentage.\n\nText in figure: C2D baseline (train), C2D baseline (val), NL C2D, 5-block (train), NL C2D, 5-block (val), error (%), iterations (K)."
+  }
+]

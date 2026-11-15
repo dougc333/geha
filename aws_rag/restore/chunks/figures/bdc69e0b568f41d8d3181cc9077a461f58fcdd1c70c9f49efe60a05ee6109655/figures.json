@@ -1,0 +1,20 @@
+[
+  {
+    "file": "p006_f01.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 1: (a) The test accuracy of the MNIST network trained with and without Batch Normalization, vs. the number of training steps. Batch Normalization helps the network train faster and achieve higher accuracy. (b, c) The evolution of input distributions to a typical sigmoid, over the course of training, shown as { 15 , 50 , 85 } th percentiles. Batch Normalization makes the distribution more stable and reduces the internal covariate shift.",
+    "width": 450,
+    "height": 124,
+    "description": "Figure Description: This figure contains three panels (a, b, c) showing the impact of Batch Normalization (BN) on the training of a deep network on the MNIST dataset. Panel (a) displays the test accuracy of the network over training steps, with and without BN. The blue line (With BN) is consistently higher than the black line (Without BN), indicating faster training and higher accuracy with BN. Panels (b) and (c) show the evolution of input distributions to a sigmoid function, represented by the 15th, 50th, and 85th percentiles. Panel (b) (Without BN) shows more fluctuation, while panel (c) (With BN) shows a more stable distribution, demonstrating the effect of BN in reducing internal covariate shift.\n\nText in Figure: Test accuracy, Without BN, With BN, 10K, 20K, 30K, 40K, 50K, 15th percentile, 50th percentile, 85th percentile, (b) Without BN, (c) With BN."
+  },
+  {
+    "file": "p007_f02.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 2: Single crop validation accuracy of Inception and its batch-normalized variants, vs. the number of training steps.",
+    "width": 453,
+    "height": 255,
+    "description": "Description: This plot shows the single crop validation accuracy of various Inception models over the number of training steps. The Inception model is the highest, reaching nearly 0.8 accuracy. BN-x5-Sigmoid is the lowest, starting at 0.4 accuracy. BN-x5 and BN-x30 are close, with BN-x5 slightly higher. BN-Baseline is between BN-x5 and Inception. BN-x5-Sigmoid has a marker at 25M steps.\n\nText in figure: Inception, BN-Baseline, BN-x5, BN-x30, BN-x5-Sigmoid, Steps to match Inception, 0.4, 0.5, 0.6, 0.7, 0.8, 5M, 10M, 15M, 20M, 25M, 30M."
+  }
+]

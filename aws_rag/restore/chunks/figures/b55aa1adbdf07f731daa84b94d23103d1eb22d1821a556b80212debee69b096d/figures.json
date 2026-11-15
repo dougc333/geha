@@ -1,0 +1,47 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1: A 5-layer dense block with a growth rate of k = 4 . Each layer takes all preceding feature-maps as input.",
+    "width": 478,
+    "height": 341,
+    "description": "Description: The figure is a schematic representation of a 5-layer densely connected convolutional network with a growth rate of k = 4. It shows a series of layers, each labeled from H1 to H4, with arrows indicating the flow of feature maps from one layer to the next. The input layer is labeled as \"Input\" and the final layer as \"Transition Layer.\"\n\nText in figure: Input, H1, H2, H3, H4, Transition Layer, BN-ReLU-Conv, k = 4."
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2: Adeep DenseNet with three dense blocks. The layers between two adjacent blocks are referred to as transition layers and change feature-map sizes via convolution and pooling.",
+    "width": 973,
+    "height": 125,
+    "description": "Description: This figure is a schematic representation of a DenseNet architecture, specifically a deep DenseNet with three dense blocks. It shows the flow of data from the input image through convolutional layers, dense blocks, and transition layers, ending with a prediction output. The dense blocks are interconnected, allowing each layer to receive inputs from all preceding layers, promoting feature reuse.\n\nText in figure: Input, Dense Block 1, Convolution, Pooling, Dense Block 2, Convolution, Pooling, Dense Block 3, Convolution, Pooling, Prediction, \"horse\""
+  },
+  {
+    "file": "p006_f03.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "",
+    "width": 591,
+    "height": 218,
+    "description": "## Index entry 1\nFigure: Validation error vs. number of parameters and FLOPS for ResNet and DenseNet models. Two plots show validation error percentage on the y-axis against the number of parameters and FLOPS on the x-axis. The ResNet series is represented by red triangles and the DenseNet-BC series by blue diamonds. The ResNet-34 model has the highest validation error at around 27.5% with the fewest parameters and FLOPS. The DenseNet-264 model has the lowest validation error at around 21.5% with the most parameters and FLOPS.\n\n## Index entry 2\nFigure: Validation error percentage for ResNet and DenseNet models plotted against the number of parameters and FLOPS. The ResNet series is represented by red triangles and the DenseNet-BC series by blue diamonds. The ResNet-34 model has the highest validation error at around 27.5% with the fewest parameters and FLOPS. The DenseNet-264 model has the lowest validation error at around 21.5% with the most parameters and FLOPS."
+  },
+  {
+    "file": "p007_f04.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 4: Left: Comparison of the parameter efficiency on C10+ between DenseNet variations. Middle: Comparison of the parameter efficiency between DenseNet-BC and (pre-activation) ResNets. DenseNet-BC requires about 1/3 of the parameters as ResNet to achieve comparable accuracy. Right: Training and testing curves of the 1001-layer pre-activation ResNet [12] with more than 10M parameters and a 100-layer DenseNet with only 0.8M parameters.",
+    "width": 985,
+    "height": 225,
+    "description": "## Description\nThis figure contains three plots comparing the parameter efficiency of different DenseNet variations and ResNets. The left plot shows DenseNet variations with DenseNet-BC having the lowest test error. The middle plot compares DenseNet-BC with ResNets, showing DenseNet-BC requires fewer parameters for similar accuracy. The right plot displays training and testing curves for a ResNet and a DenseNet, with DenseNet having fewer parameters and lower test error.\n\n## Text in figure\nLeft plot: DenseNet, DenseNet-C, DenseNet-B, DenseNet-BC\nMiddle plot: DenseNet-BC, ResNet\nRight plot: Test error: ResNet-1001 (10.2M), Test error: DenseNet-BC-100 (0.8M), Training loss: ResNet-1001 (10.2M), Training loss: DenseNet-BC-100 (0.8M)"
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 5: The average absolute filter weights of convolutional layers in a trained DenseNet. The color of pixel ( s, \u2113 ) encodes the average L 1 norm (normalized by number of input feature-maps) of the weights connecting convolutional layer s to \u2113 within a dense block. Three columns highlighted by black rectangles correspond to two transition layers and the classification layer. The first row encodes weights connected to the input layer of the dense block.",
+    "width": 475,
+    "height": 192,
+    "description": "Figure: A heatmap showing average absolute filter weights in a trained DenseNet.\nPanels: Dense Block 1, Dense Block 2, Dense Block 3.\nAxes: Source layer (1-11), Target layer (1-12).\nColors: Normalized L1 norm of weights, from 0 (blue) to 1 (red).\nHighlights: Transition layers and classification layer.\n\nText in figure: Dense Block 1, Dense Block 2, Dense Block 3, Transition layer 1, Transition layer 2, Classification layer, Source layer, Target layer."
+  }
+]

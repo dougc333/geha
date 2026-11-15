@@ -1,0 +1,98 @@
+[
+  {
+    "file": "p006_f01.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 1: Recall@K curves using order-embeddings with and without layer normalization.",
+    "width": 770,
+    "height": 217,
+    "description": "This figure presents three line graphs showing the performance of two methods, \"Order-Embedding + LN\" and \"Order-Embedding,\" over iterations in an image retrieval validation task. Each graph measures mean recall at different levels (Recall@1, Recall@5, Recall@10). The blue line represents \"Order-Embedding + LN,\" and the green line represents \"Order-Embedding.\" The blue line is consistently higher than the green line across all graphs, indicating better performance.\n\nSection 1:\nImage retrieval validation; Recall@1, Recall@5, Recall@10; Order-Embedding + LN; Order-Embedding; blue line higher.\n\nSection 2:\nRecall@1: 34-43; Recall@5: 71-78; Recall@10: 84-90; blue line consistently higher.",
+    "pdf_text": "0 | 50 | 100 150 200 250 300 | iteration x 300 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | mean Recall@1 | Image Retrieval (Validation) | Order-Embedding + LN | Order-Embedding | (a) Recall@1 | 0 | 50 | 100 150 200 250 300 | iteration x 300 | 71 | 72 | 73 | 74 | 75 | 76 | 77 | 78 | mean Recall@5 | Image Retrieval (Validation) | Order-Embedding + LN | Order-Embedding | (b) Recall@5 | 0 | 50 | 100 150 200 250 300 | iteration x 300 | 84 | 85 | 86 | 87 | 88 | 89 | 90 | mean Recall@10 | Image Retrieval (Validation) | Order-Embedding + LN | Order-Embedding | (c) Recall@10",
+    "bbox": [
+      110.9,
+      58.2,
+      496.1,
+      166.3
+    ]
+  },
+  {
+    "file": "p007_f02.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 2: Validation curves for the attentive reader model. BN results are taken from [Cooijmans et al., 2016].",
+    "width": 668,
+    "height": 272,
+    "description": "## Description\n\nThis figure is a line graph showing the validation error rate of different models over training steps. The x-axis represents training steps in thousands, ranging from 0 to 800. The y-axis represents the validation error rate, ranging from 0.4 to 1.0. Four models are compared: LSTM, BN-LSTM, BN-everywhere, and LN-LSTM. The LSTM model starts with the highest error rate, followed by BN-LSTM, BN-everywhere, and LN-LSTM. The LN-LSTM model shows the lowest error rate throughout the training steps.\n\n## Visible text\n\nAttentive reader, LSTM, BN-LSTM, BN-everywhere, LN-LSTM, training steps (thousands), validation error rate, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 0, 100, 200, 300, 400, 500, 600, 700, 800",
+    "pdf_text": "0 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | training steps (thousands) | 0.4 | 0.5 | 0.6 | 0.7 | 0.8 | 0.9 | 1.0 | validation error rate | Attentive reader | LSTM | BN-LSTM | BN-everywhere | LN-LSTM",
+    "bbox": [
+      137.7,
+      57.0,
+      471.3,
+      193.2
+    ]
+  },
+  {
+    "file": "p008_f03.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 3: Performance of skip-thought vectors with and without layer normalization on downstream tasks as a function of training iterations. The original lines are the reported results in [Kiros et al., 2015]. Plots with error use 10-fold cross validation. Best seen in color.",
+    "width": 770,
+    "height": 433,
+    "description": "## Figure Description\n\nThis figure consists of six subplots, each showing the performance of skip-thought vectors with and without layer normalization on different downstream tasks. The tasks include SICK(r), SICK(MSE), MR, CR, SUBJ, and MPQA. Each subplot displays three lines representing the performance of Skip-Thoughts + LN, Skip-Thoughts, and Original methods. The x-axis represents the number of iterations, and the y-axis varies by task, showing either Pearson correlation, MSE, or accuracy. In most subplots, the Skip-Thoughts + LN line is consistently higher than the other two, indicating better performance.\n\n## Index Terms\n\n- Skip-Thoughts + LN\n- Skip-Thoughts\n- Original\n- SICK(r)\n- SICK(MSE)\n- MR\n- CR\n- SUBJ\n- MPQA\n- Pearson correlation\n- MSE\n- Accuracy\n- Layer normalization\n- Downstream tasks\n- Training iterations",
+    "pdf_text": "5 | 10 | 15 | 20 | iteration x 50000 | 82.0 | 82.5 | 83.0 | 83.5 | 84.0 | 84.5 | 85.0 | 85.5 | 86.0 | Pearson x 100 | Skip-Thoughts + LN | Skip-Thoughts | Original | (a) SICK(r) | 5 | 10 | 15 | 20 | iteration x 50000 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | MSE x 100 | Skip-Thoughts + LN | Skip-Thoughts | Original | (b) SICK(MSE) | 5 | 10 | 15 | 20 | iteration x 50000 | 70 | 72 | 74 | 76 | 78 | 80 | 82 | Accuracy | Skip-Thoughts + LN | Skip-Thoughts | Original | (c) MR | 5 | 10 | 15 | 20 | iteration x 50000 | 74 | 76 | 78 | 80 | 82 | 84 | 86 | Accuracy | Skip-Thoughts + LN | Skip-Thoughts | Original | (d) CR | 5 | 10 | 15 | 20 | iteration x 50000 | 90.0 | 90.5 | 91.0 | 91.5 | 92.0 | 92.5 | 93.0 | 93.5 | 94.0 | 94.5 | Accuracy | Skip-Thoughts + LN | Skip-Thoughts | Original | (e) SUBJ | 5 | 10 | 15 | 20 | iteration x 50000 | 83 | 84 | 85 | 86 | 87 | 88 | 89 | 90 | 91 | Accuracy | Skip-Thoughts + LN | Skip-Thoughts | Original | (f) MPQA",
+    "bbox": [
+      109.9,
+      47.0,
+      494.9,
+      263.7
+    ]
+  },
+  {
+    "file": "p009_f04.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 5: Handwriting sequence generation model negative log likelihood with and without layer normalization. The models are trained with mini-batch size of 8 and sequence length of 500,",
+    "width": 699,
+    "height": 238,
+    "description": "## Description\nThis figure is a line graph showing the negative log likelihood of a handwriting sequence generation model with and without layer normalization. The x-axis represents the number of updates multiplied by 200, ranging from 10^0 to 10^3. The y-axis shows the negative log likelihood, ranging from -900 to 0. Four series are plotted: Baseline test, Baseline train, LN test, and LN train. The LN train series has the lowest negative log likelihood, followed by LN test, Baseline test, and Baseline train.\n\n## Text in figure\nUpdates x 200, Negative Log Likelihood, 10^0, 10^1, 10^2, 10^3, -900, -800, -700, -600, -500, -400, -300, -200, -100, 0, Baseline test, Baseline train, LN test, LN train",
+    "pdf_text": "100 | 101 | 102 | 103 | Updates x 200 | \u2212900 | \u2212800 | \u2212700 | \u2212600 | \u2212500 | \u2212400 | \u2212300 | \u2212200 | \u2212100 | 0 | Negative Log Likelihood | Baseline test | Baseline train | LN test | LN train",
+    "bbox": [
+      130.3,
+      53.7,
+      480.0,
+      172.4
+    ]
+  },
+  {
+    "file": "p009_f05.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 4: DRAW model test negative log likelihood with and without layer normalization.",
+    "width": 279,
+    "height": 262,
+    "description": "Section 1: Line graph showing the test negative log likelihood of the DRAW model with and without layer normalization over 100 epochs. The graph includes three series: Baseline, WN, and LN. The Baseline series starts at 100 and decreases to around 85, the WN series starts at 100 and decreases to around 85, and the LN series starts at 100 and decreases to around 85.\n\nSection 2: Test Variational Bound, Baseline, WN, LN, 0, 20, 40, 60, 80, 100, Epoch, 80, 85, 90, 95, 100.",
+    "pdf_text": "0 | 20 | 40 | 60 | 80 | 100 | Epoch | 80 | 85 | 90 | 95 | 100 | Test Variational Bound | Baseline | WN | LN",
+    "bbox": [
+      362.6,
+      270.7,
+      502.1,
+      401.5
+    ]
+  },
+  {
+    "file": "p010_f06.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 6: Permutation invariant MNIST 784-1000-1000-10 model negative log likelihood and test error with layer normalization and batch normalization. (Left) The models are trained with batchsize of 128. (Right) The models are trained with batch-size of 4.",
+    "width": 590,
+    "height": 304,
+    "description": "This figure presents two sets of plots comparing the performance of different normalization techniques in neural networks. Each set contains two graphs: one for negative log likelihood (NLL) and one for test error. The left set of plots shows results for models trained with a batch size of 128, while the right set shows results for models trained with a batch size of 4. The series are labeled as BatchNorm bz128, Baseline bz128, and LayerNorm bz128 for the left set, and LayerNorm bz4, Baseline bz4, and BatchNorm bz4 for the right set. The LayerNorm bz128 series shows the lowest NLL and test error in the left set, while the BatchNorm bz4 series shows the lowest NLL and test error in the right set.\n\nDescription: at most 120 words. What kind of conclusions can be drawn from the figure.\n\nThe figure suggests that Layer Normalization (LayerNorm) is more effective than Batch Normalization (BatchNorm) in stabilizing training, especially with smaller batch sizes. The LayerNorm bz128 model shows the lowest negative log likelihood and test error in the left set of plots, indicating better performance with a larger batch size. Conversely, the BatchNorm bz4 model shows the lowest NLL and test error in the right set, suggesting that BatchNorm performs better with a smaller batch size. This indicates that LayerNorm may be more suitable for larger batch sizes, while BatchNorm may be more effective for smaller batch sizes.",
+    "pdf_text": "0 | 10 | 20 | 30 | 40 | 50 | 60 | Epoch | 10 | -7 | 10 | -6 | 10 | -5 | 10 | -4 | 10 | -3 | 10 | -2 | 10 | -1 | 10 | 0 | Train NLL | BatchNorm bz128 | Baseline bz128 | LayerNorm bz128 | 0 | 10 | 20 | 30 | 40 | 50 | 60 | Epoch | 0.005 | 0.010 | 0.015 | 0.020 | 0.025 | Test Err. | BatchNorm bz128 | Baseline bz128 | LayerNorm bz128 | 0 | 10 | 20 | 30 | 40 | 50 | 60 | Epoch | 10 | -7 | 10 | -6 | 10 | -5 | 10 | -4 | 10 | -3 | 10 | -2 | 10 | -1 | 10 | 0 | Train NLL | LayerNorm bz4 | Baseline bz4 | BatchNorm bz4 | 0 | 10 | 20 | 30 | 40 | 50 | 60 | Epoch | 0.005 | 0.010 | 0.015 | 0.020 | 0.025 | Test Err. | LayerNorm bz4 | Baseline bz4 | BatchNorm bz4",
+    "bbox": [
+      154.7,
+      45.0,
+      449.5,
+      196.9
+    ]
+  }
+]

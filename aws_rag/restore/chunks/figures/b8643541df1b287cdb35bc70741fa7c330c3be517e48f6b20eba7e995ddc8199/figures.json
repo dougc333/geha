@@ -1,0 +1,274 @@
+[
+  {
+    "file": "p006_f01.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Fig. 1 The diversity of data in the ILSVRC image classification and single-object localization tasks. For each of the eight dimensions, we show example object categories along the range of that property. Object scale, number of instances and image clutter for each object category are computed using the metrics defined in Section 3.2.2 and in Appendix B. The other properties were computed by asking human subjects to annotate each of the 1000 object categories (Russakovsky et al., 2013).",
+    "width": 802,
+    "height": 1209,
+    "description": "Figure type: A horizontal bar chart showing the diversity of data in the ILSVRC image classification and single-object localization tasks.\n\nDescription: The figure shows eight dimensions of diversity in the ImageNet dataset, each with example object categories along a spectrum from low to high. The dimensions include object scale, number of instances, image clutter, deformability, amount of texture, color distinctiveness, shape distinctiveness, and real-world size.\n\nText in figure: Object Scale, Number of Instances, Image Clutter, Deformability, Amount of Texture, Color Distinctiveness, Shape Distinctiveness, Real-world Size, Low, High, Candle, Oyster, Cannon, Spider Web, Lizard, Stocking, Mushroom, Strawberry, Compass, Racket, Minivan, Steel Drum, Canoe, Pill Bottle, Horse-cart, Monkey, Skewdriver, Hatchet, Pool Table, Leopard, Mug, Tank, Ant, Red Wine, Jigsaw Puzzle, Foreland, Lion, Bell, Orange, Laptop, Four-poster, Airliner.",
+    "pdf_text": "",
+    "bbox": [
+      91.5,
+      90.7,
+      492.7,
+      694.9
+    ]
+  },
+  {
+    "file": "p008_f02.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "",
+    "width": 860,
+    "height": 466,
+    "description": "Section 1: Figure description\nThis figure displays a comparison between the PASCAL and ILSVRC datasets, focusing on the categories of birds, cats, and dogs. Each category is represented by a set of images, showcasing various species within the category. The figure highlights the differences in image quality, background, and context between the two datasets.\n\nSection 2: Textual content\nPASCAL, ILSVRC, birds, cats, dogs, bird, flamingo, cock, ruffed grouse, quail, partridge, cat, Egyptian cat, Persian cat, Siamese cat, tabby, lynx, dog, dalmatian, keeshond, miniature schnauzer, standard schnauzer, giant schnauzer",
+    "pdf_text": "PASCAL | ILSVRC | birds | \u00b7 \u00b7 \u00b7 | cats | \u00b7 \u00b7 \u00b7 | dogs | \u00b7 \u00b7 \u00b7",
+    "bbox": [
+      72.8,
+      87.3,
+      502.8,
+      320.7
+    ]
+  },
+  {
+    "file": "p011_f03.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Fig. 3 Summary of images collected for the detection task. Images in green (bold) boxes have all instances of all 200 detection object classes fully annotated. Table 4 lists the complete statistics.",
+    "width": 473,
+    "height": 246,
+    "description": "## Description\nThis figure is a diagram summarizing the collection of images for the detection task in the ImageNet Large Scale Visual Recognition Challenge. It shows the distribution of images based on their annotation completeness. The diagram is divided into two main sections: \"Train\" and \"Val, Test.\" Each section is further divided into three categories: \"Pos: ILSVRC 2012 train images for the detection object classes,\" \"Neg: additional images, mostly from Flickr,\" and \"Additional images from Flickr using generic queries (added in 2014).\" The images are categorized by their annotation status: fully annotated, partially annotated, and fully annotated with additional images from Flickr.\n\n## Text in figure\n- Train\n  - Pos: ILSVRC 2012 train images for the detection object classes: 288,661 total\n  - Neg: additional images, mostly from Flickr: 109,364 total\n  - Additional images from Flickr using generic queries (added in 2014): 60,658 total\n- Val, Test\n  - ILSVRC 2012 val, test for the detection object classes: 77% (15,522 val and 30,901 test)\n  - Images with target object occupying \u2265 50% of image area: 23% (4,599 val and 9,251 test)\n  - Additional images from Flickr using generic queries (e.g., \"kitchenette,\" \"Australian zoo\"): 23% (4,599 val and 9,251 test)",
+    "pdf_text": "",
+    "bbox": [
+      297.1,
+      89.1,
+      533.4,
+      212.1
+    ]
+  },
+  {
+    "file": "p012_f04.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Fig. 4 Random selection of images in ILSVRC detection validation set. The images in the top 4 rows were taken from ILSVRC2012 single-object localization validation set, and the images in the bottom 4 rows were collected from Flickr using scene-level queries.",
+    "width": 980,
+    "height": 949,
+    "description": "## Description\nThis figure is a collage of 32 images, each representing a different scene or object. The images are divided into two sections: the top 4 rows show images from the ILSVRC2012 single-object localization validation set, while the bottom 4 rows depict images collected from Flickr using scene-level queries.\n\n## Text in figure\n- Top 4 rows: ILSVRC2012 single-object localization validation set\n- Bottom 4 rows: Images collected from Flickr using scene-level queries\n- Images include: dogs, horses, people, food, landscapes, and various objects.",
+    "pdf_text": "",
+    "bbox": [
+      43.7,
+      92.0,
+      533.6,
+      566.5
+    ]
+  },
+  {
+    "file": "p013_f05.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Fig. 5 Consider the problem of binary multi-label annotation. For each input (e.g., image) and each label (e.g., object), the goal is to determine the presence or absense (+ or -) of the label (e.g., decide if the object is present in the image). Multilabel annotation becomes much more efficient when considering real-world structure of data: correlation between labels, hierarchical organization of concepts, and sparsity of labels.",
+    "width": 464,
+    "height": 266,
+    "description": "Description: This figure is a table showing the results of binary multi-label annotation for various objects in images. It displays the presence (+) or absence (-) of labels for different objects in four images. The table is divided into sections for man-made objects, animals, and label hierarchy. It highlights the efficiency of multi-label annotation when considering label correlation, hierarchical organization, and sparsity.\n\nText in figure: Labels, Input, Man-made objects, Furniture, Table, Chair, Bowl, Animals, Label hierarchy, Dog, Cat, Label sparsity, Label correlation, +, -, +, +, -, -, -, -, +, +, -, +, -, -, -, -, +, +, -, -, -, -, +, +, -, -, -, -, +, +, -, -, -, -.",
+    "pdf_text": "",
+    "bbox": [
+      46.5,
+      88.6,
+      278.4,
+      221.7
+    ]
+  },
+  {
+    "file": "p014_f06.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Fig. 6 Our algorithm dynamically selects the next query to efficiently determine the presence or absence of every object in every image. Green denotes a positive annotation and red denotes a negative annotation. This toy example illustrates a sample progression of the algorithm for one label (cat) on a set of images.",
+    "width": 486,
+    "height": 79,
+    "description": "This figure is a visual representation of an algorithm that dynamically selects queries to determine the presence or absence of objects in images. It shows a progression of the algorithm for the label \"cat\" across a set of images. The images are represented as grids, with green squares indicating a positive annotation (presence of a cat) and red squares indicating a negative annotation (absence of a cat). The algorithm starts by asking if there is an animal, then if there is a mammal, and finally if there is a cat. The figure illustrates the efficiency of the algorithm by showing that it only needs to ask the final question for a subset of images.\n\nText in figure: Image, Object Presence, Is there, an animal?, Is there, a mammal?, Is there, a cat?, green, red.",
+    "pdf_text": "Image | Object Presence | Is there | an animal? | Is there | a mammal? | Is there | a cat?",
+    "bbox": [
+      41.5,
+      88.4,
+      284.4,
+      127.9
+    ]
+  },
+  {
+    "file": "p016_f07.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Fig. 7 Tasks in ILSVRC. The first column shows the ground truth labeling on an example image, and the next three show three sample outputs with the corresponding evaluation score.",
+    "width": 973,
+    "height": 668,
+    "description": "Figure Description: This figure displays three tasks in the ImageNet Large Scale Visual Recognition Challenge (ILSVRC) with corresponding outputs and evaluation scores. The tasks include image classification, single-object localization, and object detection. Each task shows the ground truth labeling on an example image and three sample outputs with evaluation scores.\n\nText in Figure: Tasks: Image classification, Single-object localization, Object detection. Outputs: Steel drum, Scale T-shirt, Scale T-shirt, Steel drum, Folding chair, Loudspeaker, Mud turtle, Persian cat, Loud speaker, Steel drum, Folding chair, Picket fence, Screwdriver, Loud speaker, Folding chair, Picket fence, Microphone, Steel drum, Person, Folding chair, Microphone, Steel drum, Person, Folding chair, Microphone, Steel drum, Person, Folding chair. Scores: Accuracy: 1, Accuracy: 1, Accuracy: 0, Accuracy: 1, Accuracy: 0, Accuracy: 0, AP: 1.0 1.0 1.0 1.0, AP: 0.0 0.5 1.0 0.3, AP: 1.0 0.7 0.5 0.9.",
+    "pdf_text": "",
+    "bbox": [
+      46.1,
+      95.6,
+      532.3,
+      429.4
+    ]
+  },
+  {
+    "file": "p016_f08.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Fig. 8 Images marked as 'difficult' in the ILSVRC2012 single-object localization validation set. Please refer to Section 4.2 for details.",
+    "width": 977,
+    "height": 145,
+    "description": "Figure: A collage of images labeled with words such as \"bucket,\" \"hip,\" \"tennis ball,\" \"crane,\" \"dough,\" and \"banana.\" Each image represents a visual challenge in object localization, showcasing various objects and scenes. The images are diverse, ranging from a collection of buckets to a close-up of a hip, a box of tennis balls, a construction crane, a loaf of dough, and a bunch of bananas.\n\nSections for search index:\n1. \"Bucket, hip, tennis ball, crane, dough, banana images\" - Visual challenges in object localization.\n2. \"Diverse objects and scenes\" - Examples include buckets, hips, tennis balls, cranes, dough, and bananas.",
+    "pdf_text": "",
+    "bbox": [
+      44.1,
+      471.9,
+      532.3,
+      544.4
+    ]
+  },
+  {
+    "file": "p023_f09.png",
+    "page": 23,
+    "kind": "picture",
+    "caption": "Fig. 9 Performance of winning entries in the ILSVRC20102014 competitions in each of the three tasks (details about the entries and numerical results are in Section 5.1). There is a steady reduction of error every year in object classification and single-object localization tasks, and a 1.9x improvement in mean average precision in object detection. There are two considerations in making these comparisons. (1) The object categories used in ISLVRC changed between years 2010 and 2011, and between 2011 and 2012. However, the large scale of the data (1000 object categories, 1.2 million training images) has remained the same, making it possible to compare results. Image classification and single-object localization entries shown here use only provided training data. (2) The size of the object detection training data has increased significantly between years 2013 and 2014 (Section 3.3). Section 6.1 discusses the relative effects of training data increase versus algorithmic improvements.",
+    "width": 472,
+    "height": 129,
+    "description": "Figure: Three bar charts showing performance trends in image classification, single-object localization, and object detection tasks from 2010 to 2014. Image classification: 2010 highest at 0.3, 2014 lowest at 0.06. Single-object localization: 2011 highest at 0.45, 2014 lowest at 0.2. Object detection: 2013 highest at 0.2, 2014 lowest at 0.45.\n\nText in figure: \"Image classification\", \"Single-object localization\", \"Object detection\", \"Classification error\", \"Localization error\", \"Average precision\", \"2010\", \"2011\", \"2012\", \"2013\", \"2014\", \"ILSVRC year\".",
+    "pdf_text": "",
+    "bbox": [
+      43.3,
+      88.7,
+      279.5,
+      153.1
+    ]
+  },
+  {
+    "file": "p024_f10.png",
+    "page": 24,
+    "kind": "picture",
+    "caption": "Fig. 10 For each object class, we consider the best performance of any entry submitted to ILSVRC2012-2014, including entries using additional training data. The plots show the distribution of these 'optimistic' per-class results. Performance is measured as accuracy for image classification (left) and for single-object localization (middle), and as average precision for object detection (right). While the results are very promising in image classification, the ILSVRC datasets are far from saturated: many object classes continue to be challenging for current algorithms.",
+    "width": 467,
+    "height": 138,
+    "description": "## Description:\nThis figure displays three box plots showing the distribution of performance metrics for image classification, single-object localization, and object detection tasks. The left plot shows per-class classification accuracy, the middle plot shows per-class localization accuracy, and the right plot shows per-class average precision. The image classification plot has the highest median, followed by the single-object localization plot, and the object detection plot has the lowest median.\n\n## Text in figure:\n- Image classification: Per-class classification accuracy\n- Single-object localization: Per-class localization accuracy\n- Object detection: Per-class average precision\n- Values: 0.6, 0.8, 1.0 (for image classification); 0.6, 0.8 (for single-object localization); 0.4, 0.6, 0.8 (for object detection)",
+    "pdf_text": "",
+    "bbox": [
+      299.3,
+      88.9,
+      533.2,
+      157.8
+    ]
+  },
+  {
+    "file": "p026_f11.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "Fig. 11 For each object category, we take the best performance of any entry submitted to ILSVRC2012-2014 (including entries using additional training data). Given these 'optimistic' results we show the easiest and harder classes for each task. The numbers in parentheses indicate classification and localization accuracy. For image classification the 10 easiest classes are randomly selected from among 121 object classes with 100% accuracy. Object detection results are shown in Figure 12.",
+    "width": 725,
+    "height": 1207,
+    "description": "Section 1: Figure description\nThis figure displays the results of the ImageNet Large Scale Visual Recognition Challenge (ILSVRC) from 2012 to 2014. It shows the easiest and hardest classes for image classification, object detection, and single-object localization tasks. The numbers in parentheses indicate the classification and localization accuracy for each class.\n\nSection 2: Figure details\nEasiest classes for image classification: red fox, hen-of-the-woods, ibex, goldfinch, flat-coated retriever, tiger, hamster, porcupine, stingray, Blenheim spaniel.\nHardest classes for image classification: muzzle, hatchet, water bottle, velvet, loupe, hook, spotlight, ladle, restaurant, letter opener.\nEasiest classes for single-object localization: Leonberg, ruffed grouse, ruddy turnstone, giant schnauzer, tiger, Maltese dog, Japanese spaniel, Tibetan mastiff, hare, African hunting dog.\nHardest classes for single-object localization: horizontal bar, flagpole, hook, lakeside, letter opener, spotlight, wing, ladle, pole, space bar.",
+    "pdf_text": "g | Easiest classes | Hardest classes | Single-object localization | Easiest classes | Hardest classes",
+    "bbox": [
+      109.1,
+      102.2,
+      471.3,
+      705.5
+    ]
+  },
+  {
+    "file": "p027_f12.png",
+    "page": 27,
+    "kind": "picture",
+    "caption": "Fig. 12 For each object category, we take the best performance of any entry submitted to ILSVRC2012-2014 (including entries using additional training data). Given these 'optimistic' results we show the easiest and harder classes for the object detection task, i.e., classes with best and worst results. The numbers in parentheses indicate average precision. Image classification and single-object localization results are shown in Figure 11.",
+    "width": 703,
+    "height": 617,
+    "description": "## Figure Description\nThis figure displays a comparison of the easiest and hardest classes for object detection in the ImageNet Large Scale Visual Recognition Challenge (ILSVRC) from 2012 to 2014. It shows images of objects along with their average precision scores, indicating the performance of detection algorithms.\n\n## Index Entries\n- Object detection\n- Easiest classes\n- Hardest classes\n- Average precision\n- ILSVRC 2012-2014\n- Object categories\n- Performance comparison\n- Visual recognition challenge\n- Detection algorithms\n- Image classification\n- Single-object localization",
+    "pdf_text": "Object detection | Easiest classes | Hardest classes",
+    "bbox": [
+      109.5,
+      100.8,
+      461.2,
+      409.5
+    ]
+  },
+  {
+    "file": "p027_f13.png",
+    "page": 27,
+    "kind": "picture",
+    "caption": "Fig. 13 Performance of the 'optimistic' method as a function of object scale in the image, on each task. Each dot corresponds to one object class. Average scale (x-axis) is computed as the average fraction of the image area occupied by an instance of that object class on the ILSVRC2014 validation set. 'Optimistic' performance (y-axis) corresponds to the best performance on the test set of any entry submitted to ILSVRC2012-2014 (including entries with additional training data). The test set has remained the same over these three years. We see that accuracy tends to increase as the objects get bigger in the image. However, it is clear that far from all the variation in accuracy on these classes can be accounted for by scale alone.",
+    "width": 969,
+    "height": 248,
+    "description": "Figure Description: This figure contains three scatter plots, each representing the performance of the 'optimistic' method for different tasks as a function of object scale in the image. The tasks are image classification, single-object localization, and object detection. Each plot shows the average scale of objects on the x-axis and the corresponding performance on the y-axis. The image classification plot has the highest average performance, followed by single-object localization, and object detection has the lowest average performance. The plots indicate that accuracy tends to increase as the objects get bigger in the image.\n\nText in Figure: Image classification, Single-object localization, Object detection, Classification accuracy, Localization accuracy, Average precision, Average scale of object, 0.5, 1.",
+    "pdf_text": "",
+    "bbox": [
+      46.2,
+      505.5,
+      530.7,
+      629.6
+    ]
+  },
+  {
+    "file": "p029_f14.png",
+    "page": 29,
+    "kind": "picture",
+    "caption": "Fig. 14 Performance of the 'optimistic' computer vision model as a function of object properties. The x-axis corresponds to object properties annotated by human labelers for each object class (Russakovsky et al., 2013) and illustrated in Figure 1. The y-axis is the average accuracy of the 'optimistic' model. Note that the range of the y-axis is different for each task to make the trends more visible. The black circle is the average accuracy of the model on all object classes that fall into each bin. We control for the effects of object scale by normalizing the object scale within each bin (details in Section 6.3.4). The color bars show the model accuracy averaged across the remaining classes. Error bars show the 95% confidence interval obtained with bootstrapping. Some bins are missing color bars because less than 5 object classes remained in the bin after scale normalization. For example, the bar for XL real-world object detection classes is missing because that bin has only 3 object classes (airplane, bus, train) and after normalizing by scale no classes remain.",
+    "width": 558,
+    "height": 1169,
+    "description": "Description: The figure presents a series of bar charts comparing the performance of a computer vision model across different tasks and object properties. Each panel shows the average accuracy of the model on tasks like image classification, single-object localization, and object detection. The x-axis categorizes objects by properties such as real-world size, deformability, and texture. The y-axis displays the model's accuracy, with different scales for each task. Markers and error bars indicate average accuracy and confidence intervals.\n\nText in figure: Real-world size, Deformability within instance, Amount of texture, Image classification, Single-object localization, Object detection, XS, S, M, L, XL, Rigid, Deformable, Man-made, Natural, None, Low, Medium, High, Average precision, Classification accuracy, Localization accuracy, 0.6, 0.8, 0.9, 1.0, 0.2, 0.4, 0.5, 0.7, 0.85, 0.95, 0.65, 0.75, 0.8, 0.95, 0.9, 0.85, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0.0",
+    "pdf_text": "Real-world size | Deformability within instance | Amount of texture",
+    "bbox": [
+      148.4,
+      92.7,
+      427.3,
+      676.8
+    ]
+  },
+  {
+    "file": "p032_f15.png",
+    "page": 32,
+    "kind": "picture",
+    "caption": "Fig. 15 Representative validation images that highlight common sources of error. For each image, we display the ground truth in blue, and top 5 predictions from GoogLeNet follow (red = wrong, green = right). GoogLeNet predictions on the validation set images were graciously provided by members of the GoogLeNet team. From left to right: Images that contain multiple objects, images of extreme closeups and uncharacteristic views, images with filters, images that significantly benefit from the ability to read text, images that contain very small and thin objects, images with abstract representations, and example of a fine-grained image that GoogLeNet correctly identifies but a human would have significant difficulty with.",
+    "width": 986,
+    "height": 260,
+    "description": "Section 1: Figure description\nThis figure is a visual representation of common sources of error in image recognition tasks. It displays a series of images with their ground truth labels in blue and the top 5 predictions from GoogLeNet in red (incorrect) and green (correct). The images are categorized into seven groups, each highlighting a specific type of error.\n\nSection 2: Text in figure\nImages with multiple objects, extreme closeups, filters, text, small/thin objects, abstract representations, fine-grained objects. Ground truth labels: blue. GoogLeNet predictions: red (wrong), green (right). Categories: multiple objects, extreme closeups, filters, text, small/thin objects, abstract representations, fine-grained objects.",
+    "pdf_text": "",
+    "bbox": [
+      41.8,
+      88.9,
+      534.9,
+      219.1
+    ]
+  },
+  {
+    "file": "p037_f16.png",
+    "page": 37,
+    "kind": "picture",
+    "caption": "200 hardest classes of ILSVRC2012-2014 single-object localization (dark green) versus 20 classes of PASCAL 2012 (light blue)",
+    "width": 972,
+    "height": 226,
+    "description": "## Figure description\nThis figure contains four bar charts, each showing two series of data. The x-axis represents different difficulty levels, and the y-axis represents the fraction of object categories. The series are labeled as \"more difficult\" and \"more difficult\" in the figure. The first chart shows the fraction of object categories with varying instances per image. The second chart shows the fraction of object categories with varying object scales. The third chart shows the fraction of object categories with varying chance performance of localization. The fourth chart shows the fraction of object categories with varying levels of clutter. The series with the highest fraction is \"more difficult\" in all charts, while the series with the lowest fraction is \"more difficult\" in the first and fourth charts and \"more difficult\" in the second and third charts.\n\n## Figure details\nText in figure: \u2192more difficult | more difficult \u2190 | more difficult \u2190 | \u2192more difficult\nInstances per image | Object scale | Chance performance of localization | Level of clutter\n1 | 0 | 0 | 0\n2 | 0.2 | 0.2 | 4\n3 | 0.4 | 0.4 | 8\n4 | 0.6 | 0.6 | 8\n5 | 0.8 | 0.8 | 8\nFraction of object categories | Fraction of object categories | Fraction of object categories | Fraction of object categories\n0 | 0 | 0 | 0\n0.2 | 0.2 | 0.2 | 0.2\n0.4 | 0.4 | 0.4 | 0.4\n0.6 | 0.6 | 0.6 | 0.6\n0.8 | 0.8 | 0.8 | 0.8\nmore difficult | more difficult | more difficult | more difficult\nmore difficult | more difficult | more difficult | more difficult",
+    "pdf_text": "\u2192more di\ufb03ult | more di\ufb03ult \u2190 | more di\ufb03ult \u2190 | \u2192more di\ufb03ult",
+    "bbox": [
+      45.0,
+      121.8,
+      531.2,
+      235.2
+    ]
+  },
+  {
+    "file": "p037_f17.png",
+    "page": 37,
+    "kind": "picture",
+    "caption": "Fig. 16 Distribution of various measures of localization difficulty on the ILSVRC2012-2014 single-object localization (dark green) and PASCAL VOC 2012 (light blue) validation sets. Object scale is fraction of image area occupied by an average object instance. Chance performance of localization and level of clutter are defined in Appendix B. The plots on top contain the full ILSVRC validation set with 1000 classes; the plots on the bottom contain 200 ILSVRC classes with the lowest chance performance of localization. All plots contain all 20 classes of PASCAL VOC.",
+    "width": 973,
+    "height": 226,
+    "description": "## Figure Description\nThis figure consists of four bar charts, each showing the distribution of various measures of localization difficulty on two datasets: ILSVRC2012-2014 single-object localization and PASCAL VOC 2012 validation sets. The measures include instances per image, object scale, chance performance of localization, and level of clutter. Each chart has two series: ILSVRC (dark green) and PASCAL VOC (light blue). The top charts include all 1000 ILSVRC classes, while the bottom charts focus on 200 ILSVRC classes with the lowest chance performance of localization.\n\n## Textual Content\n- Instances per image\n- Object scale\n- Chance performance of localization\n- Level of clutter\n- ILSVRC (dark green)\n- PASCAL VOC (light blue)\n- more difficult\n- \u2192more difficult\n- \u2190more difficult\n- \u2190more difficult\n- \u2192more difficult",
+    "pdf_text": "\u2192more di\ufb03ult | more di\ufb03ult \u2190 | more di\ufb03ult \u2190 | \u2192more di\ufb03ult",
+    "bbox": [
+      44.9,
+      279.7,
+      531.7,
+      392.5
+    ]
+  }
+]

@@ -1,0 +1,242 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "",
+    "width": 1142,
+    "height": 1009,
+    "description": "Figure: Model overview of the Vision Transformer (ViT) architecture.\n- Shows the process of transforming an image into a sequence of vectors for classification.\n- Steps include splitting the image into fixed-size patches, linearly embedding each patch, adding position embeddings, and feeding the sequence to a standard Transformer encoder.\n- Includes an extra learnable \"classification token\" for classification.\n- Inspired by Vaswani et al. (2017).",
+    "pdf_text": "Published as a conference paper at ICLR 2021 | Transformer Encoder | MLP | Head | Vision Transformer (ViT) | * | Linear Projection of Flattened Patches | * Extra learnable | [ cl ass] embedding | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 | Patch + Position | Embedding | Class | Bird | Ball | Car | ... | Embedded | Patches | Multi-Head | Attention | Norm | MLP | Norm | + | L x | + | Transformer Encoder | Figure 1: Model overview. We split an image into \ufb01xed-size patches, linearly embed each of them, | add position embeddings, and feed the resulting sequence of vectors to a standard Transformer | encoder. In order to perform classi\ufb01cation, we use the standard approach of adding an extra learnable | \u201cclassi\ufb01cation token\u201d to the sequence. The illustration of the Transformer encoder was inspired by | Vaswani et al. (2017). | 3 | METHOD | In model design we follow the original Transformer (Vaswani et al., 2017) as closely as possible. | An advantage of this intentionally simple setup is that scalable NLP Transformer architectures \u2013 and | their ef\ufb01cient implementations \u2013 can be used almost out of the box. | 3.1 | VISION TRANSFORMER (VIT) | An overview of the model is depicted in Figure 1. The standard Transformer receives as input a 1D | sequence of token embeddings To handle 2D images we reshape the image x \u2208RH\u00d7W \u00d7C into a",
+    "bbox": [
+      40.5,
+      1.2,
+      611.3,
+      505.3
+    ]
+  },
+  {
+    "file": "p006_f02.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 2: Breakdown of VTAB performance in Natural , Specialized , and Structured task groups.",
+    "width": 761,
+    "height": 164,
+    "description": "## Figure Description\nThe figure is a bar chart comparing the accuracy of different models across various task groups. The models include ViT-H/14, BiT-L (R152x4), VIVI-Ex-100% (R50x3), and S4L (R50x1). The task groups are VTAB (19 tasks), Natural (7 tasks), Specialized (4 tasks), and Structured (8 tasks). ViT-H/14 has the highest accuracy across all task groups, followed by BiT-L (R152x4), VIVI-Ex-100% (R50x3), and S4L (R50x1). The accuracy ranges from 65% to 80% across different models and tasks.\n\n## Index Terms\nViT-H/14, BiT-L (R152x4), VIVI-Ex-100% (R50x3), S4L (R50x1), VTAB (19 tasks), Natural (7 tasks), Specialized (4 tasks), Structured (8 tasks), accuracy, bar chart, model comparison, task groups.",
+    "pdf_text": "VTAB (19 tasks) | 65 | 70 | 75 | 80 | Accuracy [%] | Natural (7 tasks) | 70 | 80 | 90 | Specialized (4 tasks) | 80 | 82 | 85 | 88 | 90 | Structured (8 tasks) | 50 | 60 | 70 | ViT-H/14 | BiT-L (R152x4) | VIVI-Ex-100% (R50x3) | S4L (R50x1)",
+    "bbox": [
+      114.4,
+      287.3,
+      495.2,
+      369.6
+    ]
+  },
+  {
+    "file": "p007_f03.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 3: Transfer to ImageNet. While large ViT models perform worse than BiT ResNets (shaded area) when pre-trained on small datasets, they shine when pre-trained on larger datasets. Similarly, larger ViT variants overtake smaller ones as the dataset grows.",
+    "width": 363,
+    "height": 250,
+    "description": "## Description 1\n\nThis graph compares the ImageNet Top 1 Accuracy of various Vision Transformer (ViT) models and BiT ResNets when pre-trained on different datasets. The datasets include ImageNet, ImageNet-21k, and JFT-300M. The ViT models are categorized by size: ViT-B/32, ViT-B/16, ViT-L/32, ViT-L/16, and ViT-H/14. The highest accuracy is observed in the ViT-H/14 model pre-trained on JFT-300M, reaching approximately 90%. The lowest accuracy is seen in the ViT-B/16 model pre-trained on ImageNet, around 75%.\n\n## Description 2\n\nThe figure displays a line graph showing the ImageNet Top 1 Accuracy of various Vision Transformer (ViT) models and BiT ResNets across three pre-training datasets: ImageNet, ImageNet-21k, and JFT-300M. ViT models include ViT-B/32, ViT-B/16, ViT-L/32, ViT-L/16, and ViT-H/14. The highest accuracy is achieved by ViT-H/14 on JFT-300M, around 90%. The lowest accuracy is for ViT-B/16 on ImageNet, approximately 75%.",
+    "pdf_text": "ImageNet | ImageNet-21k | JFT-300M | Pre-training dataset | 70 | 75 | 80 | 85 | 90 | ImageNet Top1 Accuracy [%] | BiT | ViT-B/32 | ViT-B/16 | ViT-L/32 | ViT-L/16 | ViT-H/14",
+    "bbox": [
+      109.8,
+      84.5,
+      291.7,
+      209.6
+    ]
+  },
+  {
+    "file": "p007_f04.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "",
+    "width": 360,
+    "height": 243,
+    "description": "This figure is a line graph showing the performance of various models in terms of Linear 5-shot ImageNet Top1 accuracy. The x-axis represents the number of JFT pre-training samples, ranging from 10 million to 300 million. The y-axis represents the Linear 5-shot ImageNet Top1 accuracy, ranging from 30% to 70%. The graph includes six series: ViT-L/16, ViT-L/32, ViT-B/32, ViT-b/32, ResNet50x1 (BiT), and ResNet152x2 (BiT). The ViT-L/16 series starts at around 40% and increases to about 70%, while the ViT-L/32 series starts at around 50% and also increases to about 70%. The ViT-B/32 series starts at around 40% and increases to about 60%. The ViT-b/32 series starts at around 40% and increases to about 50%. The ResNet50x1 (BiT) series starts at around 50% and increases to about 60%. The ResNet152x2 (BiT) series starts at around 50% and increases to about 60%.\n\nDescription: at most 40 words. What is the main point of the figure.\n\nText in figure: the take-home message based on the data shown, without interpreting why it is. Just state the trend.\n\nText: The graph shows that as the number of JFT pre-training samples increases, the Linear 5-shot ImageNet Top1 accuracy generally increases for all models.",
+    "pdf_text": "10 M | 30 M | 100 M | 300 M | Number of JFT pre-training samples | 30 | 40 | 50 | 60 | 70 | Linear 5-shot ImageNet Top1 [%] | ViT-L/16 | ViT-L/32 | ViT-B/32 | ViT-b/32 | ResNet50x1 (BiT) | ResNet152x2 (BiT)",
+    "bbox": [
+      309.8,
+      86.6,
+      490.1,
+      208.2
+    ]
+  },
+  {
+    "file": "p007_f05.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 4: Linear few-shot evaluation on ImageNet versus pre-training size. ResNets perform better with smaller pre-training datasets but plateau sooner than ViT, which performs better with larger pre-training. ViT-b is ViT-B with all hidden dimensions halved.",
+    "width": 718,
+    "height": 300,
+    "description": "Description: The figure displays two scatter plots comparing the transfer accuracy of different models against the total pre-training compute in exaFLOPs. Each plot shows three series: Transformer (ViT), ResNet (BiT), and Hybrid. In both plots, the Transformer (ViT) series is highest, followed by Hybrid, and ResNet (BiT) is the lowest. The values range from 75% to 95% for transfer accuracy and from 10^2 to 10^3 for total pre-training compute.\n\nText in figure: 102, 103, 90, 95, Transfer accuracy [%], Average-5, Transformer (ViT), ResNet (BiT), Hybrid, 102, 103, 75, 80, 85, 90, ImageNet, Transformer (ViT), ResNet (BiT), Hybrid, Total pre-training compute [exaFLOPs]",
+    "pdf_text": "102 | 103 | 90 | 95 | Transfer accuracy [%] | Average-5 | Transformer (ViT) | ResNet (BiT) | Hybrid | 102 | 103 | 75 | 80 | 85 | 90 | ImageNet | Transformer (ViT) | ResNet (BiT) | Hybrid | Total pre-training compute [exaFLOPs]",
+    "bbox": [
+      124.8,
+      311.6,
+      484.2,
+      461.5
+    ]
+  },
+  {
+    "file": "p008_f06.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 6: Representative examples of attention from the output token to the input space. See Appendix D.7 for details.",
+    "width": 186,
+    "height": 334,
+    "description": "## Description\nThe figure displays a comparison between input images and their corresponding attention maps. The input images show a dog, an airplane, and a snake. The attention maps highlight specific areas of the input images, indicating where the model is focusing its attention.\n\n## Text in figure\nInput: dog, airplane, snake\nAttention: highlighted areas of the input images",
+    "pdf_text": "Input | Attention",
+    "bbox": [
+      401.8,
+      344.2,
+      495.2,
+      511.0
+    ]
+  },
+  {
+    "file": "p009_f07.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 7: Left: Filters of the initial linear embedding of RGB values of ViT-L/32. Center: Similarity of position embeddings of ViT-L/32. Tiles show the cosine similarity between the position embedding of the patch with the indicated row and column and the position embeddings of all other patches. Right: Size of attended area by head and network depth. Each dot shows the mean attention distance across images for one of 16 heads at one layer. See Appendix D.7 for details.",
+    "width": 787,
+    "height": 226,
+    "description": "## Description\nThis figure consists of three panels. The left panel displays the RGB embedding filters of the ViT-L/32 model, showing the first 28 principal components. The center panel illustrates the position embedding similarity of the ViT-L/32 model, with tiles representing the cosine similarity between the position embedding of a patch and all other patches. The right panel depicts the mean attention distance by head and network depth, with each dot representing the mean attention distance for one of 16 heads at a specific layer.\n\n## Text in figure\nRGB embedding filters (first 28 principal components), Input patch column 1 2 3 4 5 6 7, Input patch row 1 2 3 4 5 6 7, Position embedding similarity, Cosine similarity, 0 5 10 15 20, Network depth (layer), 0 20 40 60 80 100 120, Mean attention distance (pixels), ViT-L/16, Head 1, Head 2, Head 3",
+    "pdf_text": "RGB embedding filters | (first 28 principal components) | 1 | 2 | 3 | 4 | 5 | 6 | 7 | Input patch column | 1 | 2 | 3 | 4 | 5 | 6 | 7 | Input patch row | Position embedding similarity | 1 | 1 | Cosine similarity | 0 | 5 | 10 | 15 | 20 | Network depth (layer) | 0 | 20 | 40 | 60 | 80 | 100 | 120 | Mean attention distance (pixels) | ViT-L/16 | Head 1 | Head 2 | Head 3 | ...",
+    "bbox": [
+      106.7,
+      93.3,
+      499.9,
+      206.6
+    ]
+  },
+  {
+    "file": "p016_f08.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 8: Scaling different model dimensions of the Vision Transformer.",
+    "width": 753,
+    "height": 242,
+    "description": "## Index Section 1\nThe figure consists of two line graphs showing the performance of different model dimensions of the Vision Transformer. The left graph plots ImageNet 5-shot accuracy against relative compute, while the right graph plots average 5-shot accuracy against relative compute. The series \"Depth\" is the highest, followed by \"Patch size\", \"Width MLP\", \"Width\", and \"All\". The \"Width\" series is the lowest across both graphs.\n\n## Index Section 2\nText in figure: \"ImageNet 5shot\", \"Average 5shot\", \"Relative Compute\", \"Models\", \"All\", \"Depth\", \"Patch size\", \"Width MLP\", \"Width\", \"0.2\", \"0.3\", \"0.4\", \"0.5\", \"0.6\", \"0.7\", \"0.8\", \"10^0\", \"10^1\".",
+    "pdf_text": "100 | 101 | Relative Compute | 0.2 | 0.3 | 0.4 | 0.5 | 0.6 | ImageNet 5shot | Models | All | Depth | Patch size | Width MLP | Width | 100 | 101 | Relative Compute | 0.4 | 0.5 | 0.6 | 0.7 | 0.8 | Average 5shot | Models | All | Depth | Patch size | Width MLP | Width",
+    "bbox": [
+      110.0,
+      209.0,
+      486.5,
+      329.9
+    ]
+  },
+  {
+    "file": "p017_f09.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "Figure 9: Comparison of class-token and global average pooling classifiers. Both work similarly well, but require different learning-rates.",
+    "width": 543,
+    "height": 283,
+    "description": "Figure 9: Comparison of class-token and global average pooling classifiers. The plot shows the ImageNet linear 5-shot accuracy over epochs of training. The CLS-Token, lr=8e-4 series starts at 25% and increases to 55%. The GAP, lr=8e-4 series starts at 30% and increases to 50%. The GAP, lr=3e-4 series starts at 35% and increases to 60%. The CLS-Token, lr=8e-4 series is highest, followed by GAP, lr=3e-4, and GAP, lr=8e-4 is the lowest.\n\nFigure text: ImageNet linear 5-shot accuracy, CLS-Token, lr=8e-4, GAP, lr=8e-4, GAP, lr=3e-4, Epochs of training, 25, 30, 35, 40, 45, 50, 55, 60.",
+    "pdf_text": "0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | Epochs of training | 25 | 30 | 35 | 40 | 45 | 50 | 55 | 60 | ImageNet linear 5-shot accuracy [%] | CLS-Token, lr=8e-4 | GAP, lr=8e-4 | GAP, lr=3e-4",
+    "bbox": [
+      169.3,
+      85.3,
+      441.0,
+      227.0
+    ]
+  },
+  {
+    "file": "p018_f10.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "Figure 10: Position embeddings of models trained with different hyperparameters.",
+    "width": 783,
+    "height": 252,
+    "description": "## Description\n\nThis figure displays three heatmaps representing the cosine similarity of input patches in a Vision Transformer (ViT) model. Each heatmap corresponds to a different set of training hyperparameters. The x-axis and y-axis represent the input patch columns and rows, respectively. The color scale indicates the cosine similarity, with darker colors representing higher similarity.\n\n## Text in figure\n\nViT-L16, 7 epochs, LR=0.0002, WD=0.01\nViT-L16, 7 epochs, LR=0.0004, WD=0.1\nViT-L16, 14 epochs, LR=0.0004, WD=0.1\nInput patch column\nInput patch row\nCosine similarity\n1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14\n1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14\n1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14",
+    "pdf_text": "1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 11 12 13 14 | Input patch column | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | Input patch row | ViT-L16 | 7 epochs, LR=0.0002, WD=0.01 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 11 12 13 14 | Input patch column | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | Input patch row | ViT-L16 | 7 epochs, LR=0.0004, WD=0.1 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 11 12 13 14 | Input patch column | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | Input patch row | ViT-L16 | 14 epochs, LR=0.0004, WD=0.1 | 1 | 1 | Cosine similarity",
+    "bbox": [
+      109.5,
+      83.3,
+      501.2,
+      209.3
+    ]
+  },
+  {
+    "file": "p018_f11.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "Figure 11: Size of attended area by head and network depth. Attention distance was computed for 128 example images by averaging the distance between the query pixel and all other pixels, weighted by the attention weight. Each dot shows the mean attention distance across images for one of 16 heads at one layer. Image width is 224 pixels.",
+    "width": 653,
+    "height": 347,
+    "description": "Description: The figure presents two scatter plots comparing the mean attention distance in pixels for different heads across various network depths. Each plot shows data points representing the mean attention distance for 16 heads at each layer, with the x-axis indicating network depth (layer) and the y-axis showing mean attention distance (pixels). The left plot is labeled \"ViT-L/16\" and the right plot is labeled \"R50x1 + ViT-L/16\". The data points are color-coded by head, with Head 1 in blue, Head 2 in orange, and Head 3 in red. The plots indicate that the mean attention distance varies across heads and layers, with some heads showing larger attention distances than others.\n\nText in figure: \"ViT-L/16\", \"R50x1 + ViT-L/16\", \"Network depth (layer)\", \"Mean attention distance (pixels)\", \"Head 1\", \"Head 2\", \"Head 3\", \"0\", \"5\", \"10\", \"15\", \"20\", \"0\", \"20\", \"40\", \"60\", \"80\", \"100\", \"120\".",
+    "pdf_text": "0 | 5 | 10 | 15 | 20 | Network depth (layer) | 0 | 20 | 40 | 60 | 80 | 100 | 120 | Mean attention distance (pixels) | ViT-L/16 | Head 1 | Head 2 | Head 3 | ... | 0 | 5 | 10 | 15 | 20 | Network depth (layer) | 0 | 20 | 40 | 60 | 80 | 100 | 120 | R50x1 + ViT-L/16 | Head 1 | Head 2 | Head 3 | ...",
+    "bbox": [
+      141.5,
+      430.5,
+      468.2,
+      604.0
+    ]
+  },
+  {
+    "file": "p019_f12.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "Figure 12: Left: Real wall-clock timings of various architectures across input sizes. ViT models have speed comparable to similar ResNets. Right : Largest per-core batch-size fitting on device with various architectures across input sizes. ViT models are clearly more memory-efficient.",
+    "width": 718,
+    "height": 303,
+    "description": "Figure 12 displays two plots comparing various architectures' performance across different input sizes. The left plot shows peak inference speed in images per second per core, with ViT models achieving speeds comparable to similar ResNets. The right plot illustrates the largest per-core batch-size fitting on the device, with ViT models proving more memory-efficient. Series include R50x1, R50x2, ViT-B/32, ViT-L/32, ViT-B/16, ViT-L/16, ViT-H/14, and R152x4.\n\nDescription: at most 120 words. What is the main point of the figure.\n\nText in figure: the main conclusion, without interpretation. Do not start with \"The figure shows...\"\n\nText in figure: \"ViT models have speed comparable to similar ResNets. ViT models are clearly more memory-efficient.\"",
+    "pdf_text": "64 | 128 | 224 | 384 | 512 | Input size [px] | 102 | 103 | 104 | Peak inference speed [img/sec/core] | 64 | 128 | 224 | 384 | 512 | Input size [px] | 102 | 103 | Largest per-core batch-size | R50x1 | R50x2 | ViT-B/32 | ViT-L/32 | ViT-B/16 | ViT-L/16 | ViT-H/14 | R152x4",
+    "bbox": [
+      125.7,
+      223.0,
+      484.4,
+      374.6
+    ]
+  },
+  {
+    "file": "p020_f13.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "Figure 13: Performance of Axial-Attention based models, in terms of top-1 accuracy on ImageNet 5-shot linear, versus their speed in terms of number of FLOPs ( left ) and inference time ( left ).",
+    "width": 350,
+    "height": 305,
+    "description": "This figure is a scatter plot comparing the performance of various models in terms of ImageNet 5-shot linear top-1 accuracy against their computational cost in exaFLOPs. The highest performing model, AxialViT-B/16, is located at the top right corner with an accuracy of approximately 0.650 and a computational cost of 10^2 exaFLOPs. The lowest performing model, ResNet50, is at the bottom left with an accuracy of around 0.500 and a computational cost of 10^0 exaFLOPs.\n\nOther models include AxialViT-B/32, ViT-B/16, ViT-B/32, and AxialResNet50, each positioned between these two extremes. AxialViT-B/32 has an accuracy of about 0.575 and a computational cost of 10^1 exaFLOPs, while ViT-B/16 and ViT-B/32 have accuracies of around 0.550 and computational costs of 10^0 exaFLOPs. AxialResNet50 has an accuracy of approximately 0.525 and a computational cost of 10^0 exaFLOPs.\n\n\n\nDescription: at most 120 words. What is the main point of the figure. If the figure contains multiple charts or panels, what is the main point of each.\n\nText in figure: the words and printed values, grouped by panel or chart (for example\n\"YOLO: Correct 65.5%, Loc 19.0%\"): block and layer names, legend entries, axis titles,\nlabels on arrows, example inputs, values printed on bars or slices. Leave out axis tick\nnumbers. At most 80 items.\n\nThe main point of this figure is to illustrate the trade-off between the performance and computational cost of various models in image recognition tasks. The scatter plot shows that as the computational cost increases, the ImageNet 5-shot linear top-1 accuracy also increases, indicating that more powerful models (in terms of computational resources) generally achieve higher accuracy. This relationship is evident across different model architectures, including AxialViT, ViT, and ResNet.",
+    "pdf_text": "102 | Total compute [exaFLOPs] | 0.500 | 0.525 | 0.550 | 0.575 | 0.600 | 0.625 | 0.650 | ImageNet 5-shot linear top-1 accuracy | AxialViT-B/16 | AxialViT-B/32 | ViT-B/16 | ViT-B/32 | ResNet50 | AxialResNet50",
+    "bbox": [
+      121.6,
+      83.0,
+      296.6,
+      235.4
+    ]
+  },
+  {
+    "file": "p020_f14.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 349,
+    "height": 303,
+    "description": "## Description of the figure\nThe figure is a scatter plot comparing the ImageNet 5-shot linear top-1 accuracy against the peak inference speed in images per second per core for various models. The models include AxialViT-B/16, AxialViT-B/32, ViT-B/16, ViT-B/32, ResNet50, and AxialResNet50. The highest accuracy is achieved by AxialViT-B/16, while the lowest is ResNet50. The inference speed varies across models, with AxialViT-B/16 being the fastest and ResNet50 the slowest.\n\n## Visible text\nAxialViT-B/16, AxialViT-B/32, ViT-B/16, ViT-B/32, ResNet50, AxialResNet50, Peak inference speed [img/sec/core], ImageNet 5-shot linear top-1 accuracy, 10^2, 10^3, 0.500, 0.525, 0.550, 0.575, 0.600, 0.625, 0.650",
+    "pdf_text": "102 | 103 | Peak inference speed [img/sec/core] | 0.500 | 0.525 | 0.550 | 0.575 | 0.600 | 0.625 | 0.650 | ImageNet 5-shot linear top-1 accuracy | AxialViT-B/16 | AxialViT-B/32 | ViT-B/16 | ViT-B/32 | ResNet50 | AxialResNet50",
+    "bbox": [
+      314.7,
+      83.4,
+      489.1,
+      235.0
+    ]
+  },
+  {
+    "file": "p021_f15.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "Figure 14: Further example attention maps as in Figure 6 (random selection).",
+    "width": 766,
+    "height": 1008,
+    "description": "## Figure Description\nThis figure displays a collection of 128 attention maps from an image recognition model, showcasing the model's focus areas across various images. Each attention map highlights specific regions of an image, indicating where the model is concentrating its analysis to make predictions.\n\n## Text in Figure\n1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128",
+    "pdf_text": "1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 | 48 | 49 | 50 | 51 | 52 | 53 | 54 | 55 | 56 | 57 | 58 | 59 | 60 | 61 | 62 | 63 | 64 | 65 | 66 | 67 | 68 | 69 | 70 | 71 | 72 | 73 | 74 | 75 | 76 | 77 | 78 | 79 | 80 | 81 | 82 | 83 | 84 | 85 | 86 | 87 | 88 | 89 | 90 | 91 | 92 | 93 | 94 | 95 | 96 | 97 | 98 | 99 | 100 | 101 | 102 | 103 | 104 | 105 | 106 | 107 | 108 | 109 | 110 | 111 | 112 | 113 | 114 | 115 | 116 | 117 | 118 | 119 | 120 | 121 | 122 | 123 | 124 | 125 | 126 | 127 | 128",
+    "bbox": [
+      113.8,
+      138.1,
+      497.1,
+      642.0
+    ]
+  }
+]

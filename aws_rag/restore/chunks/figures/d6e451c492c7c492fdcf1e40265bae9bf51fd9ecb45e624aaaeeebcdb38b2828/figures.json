@@ -1,0 +1,65 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Fig. 1. A Squeeze-and-Excitation block.",
+    "width": 868,
+    "height": 173,
+    "description": "## Section 1: Diagram Description\nThis figure is a diagram illustrating the architecture of a Squeeze-and-Excitation (SE) block. It shows the flow of data through various components, starting from an input tensor \\( X \\) of shape \\( C' \\times H' \\times W' \\). The diagram includes transformations such as \\( F_{tr} \\), \\( F_{sq} \\), \\( F_{ex} \\), and \\( F_{scale} \\), leading to an output tensor \\( \\hat{X} \\) of shape \\( C \\times H \\times W \\).\n\n## Section 2: Text in Figure\n- Input tensor: \\( X \\) with shape \\( C' \\times H' \\times W' \\)\n- Transformations: \\( F_{tr} \\), \\( F_{sq} \\), \\( F_{ex} \\), \\( F_{scale} \\)\n- Output tensor: \\( \\hat{X} \\) with shape \\( C \\times H \\times W \\)\n- Intermediate shapes: \\( H' \\), \\( H \\), \\( C' \\), \\( C \\), \\( W' \\), \\( W \\)\n- Components: \\( 1 \\times 1 \\times C \\) and \\( 1 \\times 1 \\times C \\) convolutions"
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Fig. 2. The schema of the original Inception module (left) and the SEInception module (right).",
+    "width": 332,
+    "height": 334,
+    "description": "Description: This figure is a schematic diagram comparing the original Inception module (left) and the SE-Inception module (right). The original Inception module consists of multiple parallel convolutional layers. The SE-Inception module includes an additional Squeeze-and-Excitation (SE) block that reweights the channels of the convolutional output.\n\nText in figure: Inception, Inception Module, Global pooling, FC, ReLU, Sigmoid, Scale, SE-Inception Module, HxWxC"
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "",
+    "width": 364,
+    "height": 348,
+    "description": "Section 1: Figure description\nThis figure is a schematic representation of a Squeeze-and-Excitation (SE) ResNet module. It shows the flow of data through the module, including the residual connections, global pooling, and scale blocks. The input is processed through a ResNet module, followed by a global pooling layer, and then through an SE block. The output is a scaled version of the input.\n\nSection 2: Text in figure\nText in figure: Residual, Global pooling, FC, ReLU, Sigmoid, Scale, ResNet Module, HxWxC, C, r, x"
+  },
+  {
+    "file": "p006_f04.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Fig. 4. Training baseline architectures and their SENet counterparts on ImageNet. SENets exhibit improved optimisation characteristics and produce consistent gains in performance which are sustained throughout the training process.",
+    "width": 941,
+    "height": 200,
+    "description": "This figure is a set of four line graphs comparing the training and validation performance of various neural network architectures on the ImageNet dataset. Each graph shows the top-1 error percentage over epochs. The highest series is the ResNet-50 validation error, which starts at around 60% and decreases to about 20%. The lowest series is the SE-ResNet-50 validation error, which starts at around 60% and decreases to about 20%. The other series are ResNet-50 and ResNet-152 training and validation errors, all showing a similar trend of decreasing error over epochs.\n\nText in figure: ResNet-50 train, ResNet-50 val, SE-ResNet-50 train, SE-ResNet-50 val, ResNet-152 train, ResNet-152 val, SE-ResNet-152 train, SE-ResNet-152 val, BN-Inception train, SE-BN-Inception train, BN-Inception val, SE-BN-Inception val, Epoch, % Top-1 Error."
+  },
+  {
+    "file": "p010_f05.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Fig. 6. Activations induced by the Excitation operator at different depths in the SE-ResNet-50 on ImageNet. Each set of activations is named according to the following scheme: SE_stageID_blockID . With the exception of the unusual behaviour at SE_5_2 , the activations become increasingly class-specific with increasing depth.",
+    "width": 922,
+    "height": 774,
+    "description": "This figure is a collection of plots showing activations induced by the Excitation operator at various depths in the SE-ResNet-50 on ImageNet. Each plot is labeled according to its depth, e.g., SE_5_2. The plots display activations for different classes: goldfish, pug, plane, cliff, and all. The activations generally become more class-specific as the depth increases, except for SE_5_2 which shows unusual behavior.\n\nText in figure: SE_2_3, SE_3_4, SE_5_1, SE_5_2, SE_5_3, SE_4_6, Residual, SE, goldfish, pug, plane, cliff, all, Channel Index, Activation."
+  },
+  {
+    "file": "p011_f06.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Fig. 7. Activations induced by Excitation in the different modules of SE-ResNet-50 on image samples from the goldfish and plane classes of ImageNet. The module is named ' SE_stageID_blockID '.",
+    "width": 899,
+    "height": 477,
+    "description": "This figure displays six plots, each showing activations induced by excitation in different modules of SE-ResNet-50 on image samples from the goldfish and plane classes of ImageNet. The plots are labeled from (a) to (f), each representing a specific module named 'SE_stageID_blockID'. The x-axis represents the channel index, and the y-axis represents the activation. The goldfish plane is shown in blue, and the plane is shown in red. The highest activations are seen in plot (a) for the goldfish plane, while the lowest activations are in plot (e) for the goldfish plane.\n\nText in figure: SE_stageID_blockID, goldfish plane, plane, Activation, Channel Index."
+  },
+  {
+    "file": "p012_f07.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Fig. 8. Sample images from the four classes of ImageNet used in the experiments described in Sec. 7.2.",
+    "width": 497,
+    "height": 121,
+    "description": "Figure Description: The image displays four distinct panels, each labeled with a letter (a-d) and a descriptive term. Panel (a) shows a goldfish, panel (b) depicts a pug, panel (c) features a plane, and panel (d) illustrates a cliff. Each image is a photograph of the respective subject, with no additional text or annotations within the panels.\n\nText in Figure: (a) goldfish, (b) pug, (c) plane, (d) cliff."
+  }
+]

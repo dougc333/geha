@@ -1,0 +1,47 @@
+[
+  {
+    "file": "p005_f01.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Fig 1: Illustration of integrated expected improvement. (a) Three posterior samples are shown, each with different length scales, after the same five observations. (b) Three expected improvement acquisition functions, with the same data and hyperparameters. The maximum of each is shown. (c) The integrated expected improvement, with its maximum shown.",
+    "width": 895,
+    "height": 568,
+    "description": "Figure Description: This figure illustrates the concept of integrated expected improvement in Bayesian optimization. It consists of four panels, each showing different aspects of the optimization process. Panel (a) displays three posterior samples with varying hyperparameters after five observations. Panel (b) shows three expected improvement acquisition functions, with the maximum of each highlighted. Panel (c) depicts the integrated expected improvement, with its maximum indicated. The figure demonstrates how different hyperparameters and data points influence the optimization process.\n\nText in Figure: Posterior samples under varying hyperparameters, Posterior samples after three data, Expected improvement under varying hyperparameters, Expected improvement under three fantasies, Integrated expected improvement, Expected improvement across fantasies."
+  },
+  {
+    "file": "p007_f02.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Fig 3: A comparison of standard approaches compared to our GP EI MCMC approach on the Branin-Hoo function (3a) and training logistic regression on the MNIST data (3b).",
+    "width": 891,
+    "height": 302,
+    "description": "Figure: Two plots comparing optimization methods on two tasks. Plot (a) shows minimum function values over function evaluations for the Branin-Hoo function. GP EI MCMC starts highest, followed by GP EI MCMC, GP-UCB, and TPA. Plot (b) shows minimum function values over function evaluations for training logistic regression on MNIST. GP EI MCMC starts highest, followed by GP EI MCMC, and TPA.\n\nText in figure: GP EI MCMC, GP EI MCMC, GP-UCB, TPA, Function evaluations, Min Function Value, Min Function Value, Function evaluations.\n\nSource: Practical Bayesian Optimization of Machine Learning Algorithms, page 7."
+  },
+  {
+    "file": "p008_f03.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Fig 4: Different strategies of optimization on the Online LDA problem compared in terms of function evaluations (4a), walltime (4b) and constrained to a grid or not (4c).",
+    "width": 891,
+    "height": 613,
+    "description": "This figure consists of three line graphs comparing different optimization strategies for the Online LDA problem. Graph 4a compares strategies by function evaluations, showing GP EI MCMC as the highest and Random Grid Search as the lowest. Graph 4b compares strategies by walltime, with GP EI per second being the highest and 10x GP EI MCMC being the lowest. Graph 4c compares on-grid and off-grid strategies, with 3x GP EI MCMC (On grid) being the highest and 5x GP EI MCMC (Off grid) being the lowest.\n\nLegend: GP EI MCMC, GP EI per second, Random Grid Search, 3x GP EI MCMC, 5x GP EI MCMC, 10x GP EI MCMC, 3x GP EI MCMC (On grid), 5x GP EI MCMC (On grid), 3x GP EI MCMC (Off grid), 5x GP EI MCMC (Off grid)"
+  },
+  {
+    "file": "p009_f04.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Fig 5: A comparison of various strategies for optimizing the hyperparameters of M3E models on the protein motif finding task in terms of wallclock time (5a), function evaluations (5b) and different covariance functions(5c).",
+    "width": 894,
+    "height": 615,
+    "description": "Description: The figure shows three plots comparing different optimization strategies for hyperparameters of M3E models. Plot 5a compares strategies by wallclock time, with GP EI MCMC being the fastest. Plot 5b compares strategies by function evaluations, with GP EI MCMC again being the most efficient. Plot 5c compares different covariance functions, with Matern 52 ARD performing the best.\n\nText in figure: GP EI MCMC, GP EI per Second, 3x GP EI MCMC, 3x GP EI per Second, Random Grid Search, Matern 52 ARD, SqExp, SqExp ARD, Matern 32 ARD, Time (hours), Function evaluations, Min Function Value."
+  },
+  {
+    "file": "p010_f05.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Fig 6: Validation error on the CIFAR-10 data for different optimization strategies.",
+    "width": 890,
+    "height": 296,
+    "description": "This figure shows two plots comparing different optimization strategies for machine learning algorithms on the CIFAR-10 dataset. Plot (a) compares the minimum function value over function evaluations, with GP EI MCMC 3x Parallel starting highest and GP EI per Second starting lowest. Plot (b) compares the minimum function value over time, with GP EI MCMC 3x Parallel again starting highest and GP EI per Second starting lowest.\n\nText in figure: GP EI MCMC, GP EI Opt, GP EI per Second, GP EI MCMC 3x Parallel, Human Expert, Min Function Value, Function evaluations, Time (Hours), 0.4, 0.35, 0.3, 0.25, 0.2."
+  }
+]

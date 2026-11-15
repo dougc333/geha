@@ -1,0 +1,20 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1. Channel shuffle with two stacked group convolutions. GConv stands for group convolution. a) two stacked convolution layers with the same number of groups. Each output channel only relates to the input channels within the group. No cross talk; b) input and output channels are fully related when GConv2 takes data from different groups after GConv1; c) an equivalent implementation to b) using channel shuffle.",
+    "width": 897,
+    "height": 332,
+    "description": "Description: The figure is a diagram illustrating the process of channel shuffle in a convolutional neural network, specifically within ShuffleNet architecture. It shows three panels: (a) depicts two stacked convolution layers with the same number of groups, where each output channel is only related to input channels within the group. (b) illustrates how input and output channels become fully related when the second group convolution (GConv2) takes data from different groups after the first group convolution (GConv1). (c) presents an equivalent implementation to (b) using channel shuffle.\n\nText in figure: Input, GConv1, Feature, GConv2, Output, Channels, GConv, Channel Shuffle."
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2. ShuffleNet Units. a) bottleneck unit [9] with depthwise convolution (DWConv) [3, 12]; b) ShuffleNet unit with pointwise group convolution (GConv) and channel shuffle; c) ShuffleNet unit with stride = 2.",
+    "width": 714,
+    "height": 402,
+    "description": "This figure is a diagram showing three different types of ShuffleNet units used in convolutional neural networks. Panel (a) depicts a bottleneck unit with depthwise convolution. Panel (b) shows a ShuffleNet unit with pointwise group convolution and channel shuffle. Panel (c) illustrates a ShuffleNet unit with stride = 2.\n\nText in figure: 1x1 Conv, 1x1 GConv, 3x3 DWConv, BN ReLU, Channel Shuffle, 3x3 AVG Pool, stride = 2, Concat, Add, ReLU."
+  }
+]

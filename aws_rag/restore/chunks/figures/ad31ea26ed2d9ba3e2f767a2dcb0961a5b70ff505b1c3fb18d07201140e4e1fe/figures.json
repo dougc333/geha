@@ -1,0 +1,47 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1. Momentum Contrast (MoCo) trains a visual representation encoder by matching an encoded query q to a dictionary of encoded keys using a contrastive loss. The dictionary keys { k 0 , k 1 , k 2 , ... } are defined on-the-fly by a set of data samples. The dictionary is built as a queue, with the current mini-batch enqueued and the oldest mini-batch dequeued, decoupling it from the mini-batch size. The keys are encoded by a slowly progressing encoder, driven by a momentum update with the query encoder. This method enables a large and consistent dictionary for learning visual representations.",
+    "width": 288,
+    "height": 232,
+    "description": "This figure is a diagram illustrating the Momentum Contrast (MoCo) method for unsupervised visual representation learning. It shows an encoder processing a query and a queue of keys, with a contrastive loss function. The encoder generates representations for the query and keys, which are compared using a similarity measure. The keys are updated using a momentum encoder, creating a dynamic dictionary for learning visual representations.\n\nText in figure: encoder, momentum encoder, query, key, contrastive loss, similarity, queue, k0, k1, k2,..., xquery, x0, x1, x2,...\n\nDescription: The diagram shows an encoder processing a query and a queue of keys. The encoder generates representations for the query and keys, which are compared using a similarity measure. The keys are updated using a momentum encoder, creating a dynamic dictionary for learning visual representations."
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2. Conceptual comparison of three contrastive loss mechanisms (empirical comparisons are in Figure 3 and Table 3). Here we illustrate one pair of query and key. The three mechanisms differ in how the keys are maintained and how the key encoder is updated. (a) : The encoders for computing the query and key representations are updated end-to-end by back-propagation (the two encoders can be different). (b) : The key representations are sampled from a memory bank [61]. (c) : MoCo encodes the new keys on-the-fly by a momentum-updated encoder, and maintains a queue (not illustrated in this figure) of keys.",
+    "width": 686,
+    "height": 241,
+    "description": "This figure is a conceptual comparison of three contrastive loss mechanisms for unsupervised visual representation learning. It shows three different methods: (a) end-to-end, (b) memory bank, and (c) MoCo. Each method is illustrated with a query and key pair. The end-to-end method updates both query and key encoders through back-propagation. The memory bank method samples key representations from a memory bank. The MoCo method uses a momentum-updated encoder to encode new keys and maintains a queue of keys.\n\nText in figure: contrastive loss, gradient, q, k, encoder q, encoder k, xq, xk, sampling, memory bank, momentum encoder, (a) end-to-end, (b) memory bank, (c) MoCo."
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 3. Comparison of three contrastive loss mechanisms under the ImageNet linear classification protocol. We adopt the same pretext task (Sec. 3.3) and only vary the contrastive loss mechanism (Figure 2). The number of negatives is K in memory bank and MoCo, and is K - 1 in end-to-end (offset by one because the positive key is in the same mini-batch). The network is ResNet-50.",
+    "width": 472,
+    "height": 238,
+    "description": "This figure is a line graph comparing the accuracy of three contrastive loss mechanisms: end-to-end, memory bank, and MoCo. The x-axis represents the number of negatives (K) on a logarithmic scale, and the y-axis represents accuracy in percentage. The MoCo series has the highest accuracy, reaching 60.6% at the highest K value. The end-to-end series has the lowest accuracy, starting at 50% and increasing to 58%. The memory bank series starts at 52% and increases to 58%.\n\nText in figure: \"accuracy (%)\", \"K (log-scale)\", \"end-to-end\", \"memory bank\", \"MoCo\", \"50.0\", \"52.0\", \"54.1\", \"54.9\", \"56.3\", \"56.4\", \"57.3\", \"57.5\", \"58.0\", \"59.0\", \"60.4\", \"60.6\"."
+  },
+  {
+    "file": "p006_f04.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "",
+    "width": 452,
+    "height": 694,
+    "description": "This figure is a scatter plot comparing the accuracy and number of parameters of various machine learning methods. The x-axis represents the number of parameters (in millions), and the y-axis represents accuracy (in percentage). The plot includes methods like Exemplar, RelativePosition, Jigsaw, Rotation, Colorization, DeepCluster, BigBiGAN, InstDisc, LocalAgg, CPC v1, CPC v2, CMC, AMDIM, and MoCo. The highest accuracy is achieved by MoCo with approximately 68.6%, while the lowest is Colorization with around 39.6%. The AMDIM-large method has the highest number of parameters at 626 million.\n\nSection 1: The figure is a scatter plot comparing machine learning methods based on accuracy and number of parameters. The highest accuracy is MoCo at 68.6%, and the lowest is Colorization at 39.6%. The AMDIM-large method has the highest number of parameters at 626 million.\n\nSection 2: The figure includes methods such as Exemplar, RelativePosition, Jigsaw, Rotation, Colorization, DeepCluster, BigBiGAN, InstDisc, LocalAgg, CPC v1, CPC v2, CMC, AMDIM, and MoCo. MoCo achieves the highest accuracy, while Colorization has the lowest. AMDIM-large has the most parameters."
+  },
+  {
+    "file": "p010_f05.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure A.1. Ablation of Shuffling BN . Dash : training curve of the pretext task, plotted as the accuracy of ( K +1)-way dictionary lookup. Solid : validation curve of a kNN-based monitor [61] (not a linear classifier) on ImageNet classification accuracy. This plot shows the first 80 epochs of training: training longer without shuffling BN overfits more.",
+    "width": 457,
+    "height": 204,
+    "description": "Description: This plot compares the training and validation accuracy of two models over 80 epochs. The blue line represents the model with Shuffling Batch Normalization (BN), while the orange line represents the model without Shuffling BN. The blue line is consistently higher than the orange line, indicating better performance. The blue line reaches an accuracy of around 90% by the 20th epoch, while the orange line reaches around 70% by the same epoch.\n\nText in figure: Accuracy (%), epochs, MoCo w/ ShuffleBN, MoCo w/o ShuffleBN, 0, 100, 20, 40, 60, 80."
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "",
+    "width": 440,
+    "height": 228,
+    "description": "## Section 1: Figure Description\nThis figure illustrates the process of semantic segmentation using fully convolutional networks (FCNs). It shows a cat image on the left, a series of convolutional layers in the middle, and a segmented image on the right. The middle section highlights the forward and backward processes, with pixelwise prediction and segmentation.\n\n## Section 2: Figure Details\nText in figure: \"forward/inference\", \"backward/learning\", \"pixelwise prediction\", \"segmentation\", \"256\", \"384\", \"384\", \"256\", \"4096\", \"4096\", \"21\", \"96\", \"21\". The figure shows a cat image, convolutional layers, and a segmented image. The process includes forward inference and backward learning, with pixelwise prediction leading to segmentation."
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "",
+    "width": 450,
+    "height": 252,
+    "description": "Figure type: Diagram with accompanying images.\n\nDescription: The figure illustrates the process of convolutionalization and the resulting heatmap for a \"tabby cat\" image. It shows two images of cats, one with a tabby pattern and another with a different pattern. The diagram depicts the convolutional layers and their corresponding feature maps. The heatmap visualizes the activation of the convolutional layers for the \"tabby cat\" image.\n\nText in figure: \"tabby cat\", \"convolutionalization\", \"tabby cat heatmap\", \"96\", \"256\", \"384\", \"384\", \"256\", \"4096\", \"4096\", \"1000\"."
+  },
+  {
+    "file": "p006_f03.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 4. Refining fully convolutional nets by fusing information from layers with different strides improves segmentation detail. The first three images show the output from our 32, 16, and 8 pixel stride nets (see Figure 3).",
+    "width": 490,
+    "height": 204,
+    "description": "## Description\nThis figure displays the output of fully convolutional networks (FCNs) with varying strides for semantic segmentation. The three left panels show the segmentation results from FCNs with 32, 16, and 8 pixel strides, respectively. The rightmost panel shows the ground truth segmentation.\n\n## Text in figure\nFCN-32s, FCN-16s, FCN-8s, Ground truth"
+  },
+  {
+    "file": "p006_f04.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 3. Our DAG nets learn to combine coarse, high layer information with fine, low layer information. Layers are shown as grids that reveal relative spatial coarseness. Only pooling and prediction layers are shown; intermediate convolution layers (including our converted fully connected layers) are omitted. Solid line (FCN-32s): Our single-stream net, described in Section 4.1, upsamples stride 32 predictions back to pixels in a single step. Dashed line (FCN-16s): Combining predictions from both the final layer and the pool4 layer, at stride 16, lets our net predict finer details, while retaining high-level semantic information. Dotted line (FCN-8s): Additional predictions from pool3 , at stride 8, provide further precision.",
+    "width": 995,
+    "height": 225,
+    "description": "This figure is a diagram showing the architecture of Fully Convolutional Networks (FCN) for semantic segmentation. It illustrates how different FCN models combine coarse and fine-grained information from various layers to make predictions. The diagram shows three different FCN models: FCN-32s, FCN-16s, and FCN-8s. Each model uses a different combination of pooling layers and upsampling to achieve different levels of detail in the predictions.\n\nText in figure: image, pool1, pool2, pool3, pool4, pool5, 32x upsampled prediction (FCN-32s), 2x upsampled prediction, 16x upsampled prediction (FCN-16s), 2x upsampled prediction, 8x upsampled prediction (FCN-8s)"
+  },
+  {
+    "file": "p007_f05.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 5. Training on whole images is just as effective as sampling patches, but results in faster (wall time) convergence by making more efficient use of data. Left shows the effect of sampling on convergence rate for a fixed expected batch size, while right plots the same by relative wall time.",
+    "width": 456,
+    "height": 210,
+    "description": "Description: The figure contains two line plots comparing the loss during training of a fully convolutional network for semantic segmentation. The left plot shows loss over iteration number, while the right plot shows loss over relative wall time. Both plots compare training with full images, 50% sampling, and 25% sampling.\n\nText in figure: \"loss\", \"full images\", \"50% sampling\", \"25% sampling\", \"iteration number\", \"relative time (num. images processed)\""
+  },
+  {
+    "file": "p008_f06.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 6. Fully convolutional segmentation nets produce stateof-the-art performance on PASCAL. The left column shows the output of our highest performing net, FCN-8s. The second shows the segmentations produced by the previous state-of-the-art system by Hariharan et al . [16]. Notice the fine structures recovered (first row), ability to separate closely interacting objects (second row), and robustness to occluders (third row). The fourth row shows a failure case: the net sees lifejackets in a boat as people.",
+    "width": 468,
+    "height": 426,
+    "description": "Description: The figure displays a comparison of segmentation results from two different models: FCN-8s and SDS [16]. Each row shows the output of these models alongside the ground truth and the original image. The FCN-8s model demonstrates better performance in recovering fine structures, separating closely interacting objects, and handling occlusions. However, it fails to correctly identify lifejackets in a boat as people.\n\nText in figure: FCN-8s, SDS [16], Ground Truth, Image, 1st row: horse, 2nd row: motorcycles, 3rd row: sheep, 4th row: boat."
+  }
+]
