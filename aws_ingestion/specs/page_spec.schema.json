@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "page_spec.schema.json",
+  "title": "PageSpec",
+  "description": "Source of truth for one PDF page. HTML is rendered from this by spec_to_html.",
+  "type": "object",
+  "required": ["spec_version", "doc_sha256", "page_no", "page_size", "blocks"],
+  "additionalProperties": false,
+  "properties": {
+    "spec_version": {"const": "1"},
+    "doc_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "page_no": {"type": "integer", "minimum": 1},
+    "page_size": {
+      "type": "object",
+      "required": ["width_pt", "height_pt"],
+      "properties": {
+        "width_pt": {"type": "number", "exclusiveMinimum": 0},
+        "height_pt": {"type": "number", "exclusiveMinimum": 0}
+      }
+    },
+    "language": {"type": "string"},
+    "has_text_layer": {"type": "boolean"},
+    "blocks": {
+      "type": "array",
+      "description": "Reading order. Index is the order.",
+      "items": {"$ref": "#/$defs/block"}
+    }
+  },
+  "$defs": {
+    "bbox": {
+      "type": "array",
+      "items": {"type": "number"},
+      "minItems": 4,
+      "maxItems": 4,
+      "description": "[x0, y0, x1, y1] in PDF points, origin top-left"
+    },
+    "provenance": {"enum": ["pymupdf", "tesseract", "agent", "human"]},
+    "block": {
+      "type": "object",
+      "required": ["id", "type", "bbox", "provenance"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^b[0-9]+$"},
+        "type": {"enum": ["heading", "paragraph", "list", "table", "figure", "footnote", "header", "footer"]},
+        "bbox": {"$ref": "#/$defs/bbox"},
+        "provenance": {"$ref": "#/$defs/provenance"},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "level": {"type": "integer", "minimum": 1, "maximum": 6},
+        "text": {"type": "string"},
+        "items": {"type": "array", "items": {"type": "string"}},
+        "table": {
+          "type": "object",
+          "required": ["rows"],
+          "properties": {
+            "caption": {"type": "string"},
+            "header_rows": {"type": "integer", "minimum": 0},
+            "rows": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["text"],
+                  "properties": {
+                    "text": {"type": "string"},
+                    "rowspan": {"type": "integer", "minimum": 1},
+                    "colspan": {"type": "integer", "minimum": 1}
+                  }
+                }
+              }
+            }
+          }
+        },
+        "figure": {
+          "type": "object",
+          "properties": {
+            "caption": {"type": "string"},
+            "alt": {"type": "string"},
+            "data_table": {"type": "object", "description": "Same shape as table; values printed on the chart only"}
+          }
+        }
+      }
+    }
+  }
+}
