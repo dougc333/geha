@@ -1,0 +1,56 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1. MobileNet models can be applied to various recognition tasks for efficient on device intelligence.",
+    "width": 917,
+    "height": 344,
+    "description": "Figure type: Diagram\nDescription: The figure is a diagram showing how MobileNet models can be applied to various recognition tasks. It includes four panels: Object Detection, MobileNets, Face Attributes, and Landmark Recognition. Each panel shows an example image and the corresponding task.\n\nText in figure: Object Detection, MobileNets, Face Attributes, Landmark Recognition, Photo by Juanedc, Photo by HarshLight, Photo by Sarah Harrison, Photo by Sharon VanderKaay"
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "",
+    "width": 425,
+    "height": 500,
+    "description": "## Search Index\n\n### Figure Description\nThis figure illustrates the architecture of MobileNets, showing the transformation of input data through various layers. The top panel depicts a sequence of rectangular blocks labeled \"M\" and \"N,\" indicating different layers in the network. The middle panel shows a series of smaller square blocks labeled \"1\" and \"Dk,\" representing a simplified version of the network. The bottom panel returns to the original rectangular blocks, labeled \"M\" and \"N,\" with an additional \"1\" indicating a specific layer. Arrows between the panels indicate the flow of data through the network.\n\n### Figure Content\n- Top panel: \"M\" blocks, \"N\" blocks\n- Middle panel: \"1\" blocks, \"Dk\" blocks\n- Bottom panel: \"M\" blocks, \"N\" blocks, \"1\" block\n- Arrows indicating data flow between panels"
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3. Left: Standard convolutional layer with batchnorm and ReLU. Right: Depthwise Separable convolutions with Depthwise and Pointwise layers followed by batchnorm and ReLU.",
+    "width": 370,
+    "height": 228,
+    "description": "Figure type: Diagram showing two types of convolutional layers.\nDescription: The figure compares two types of convolutional layers: standard convolutional layers and depthwise separable convolutions. The left panel shows a standard convolutional layer with a 3x3 convolution, batch normalization, and ReLU activation. The right panel shows depthwise separable convolutions, which consist of a depthwise convolution, a pointwise convolution, batch normalization, and ReLU activation.\n\nText in figure: 3x3 Conv, BN, ReLU, 3x3 Depthwise Conv, BN, ReLU, 1x1 Conv, BN, ReLU"
+  },
+  {
+    "file": "p006_f04.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 4. This figure shows the trade off between computation (Mult-Adds) and accuracy on the ImageNet benchmark. Note the log linear dependence between accuracy and computation.",
+    "width": 372,
+    "height": 257,
+    "description": "Description: This figure is a scatter plot showing the relationship between computation (Mult-Adds) and accuracy on the ImageNet benchmark. The x-axis represents the number of million Mult-Adds, and the y-axis represents the ImageNet Accuracy. The plot shows a log-linear dependence between accuracy and computation.\n\nText in figure: ImageNet Accuracy, Million Mult-Adds, 40, 50, 60, 70, 80, 10, 100, 1000."
+  },
+  {
+    "file": "p006_f05.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 5. This figure shows the trade off between the number of parameters and accuracy on the ImageNet benchmark. The colors encode input resolutions. The number of parameters do not vary based on the input resolution.",
+    "width": 358,
+    "height": 257,
+    "description": "Section 1: Scatter plot showing the trade-off between the number of parameters and ImageNet accuracy. The plot includes four series: 224, 192, 160, and 128. The 224 series has the highest accuracy, followed by 192, 160, and 128. The 128 series has the lowest accuracy.\n\nSection 2: Colors encode input resolutions. The number of parameters does not vary based on input resolution. The plot shows that as the number of parameters increases, the accuracy generally increases. The 224 series has the highest accuracy, while the 128 series has the lowest."
+  },
+  {
+    "file": "p007_f06.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 6. Example objection detection results using MobileNet SSD.",
+    "width": 475,
+    "height": 317,
+    "description": "## Description\nThis figure is an example of object detection results using MobileNet SSD. It shows a\nbus and two people on the street, with detection boxes and confidence percentages\nlabeled on them.\n\n## Text in figure\nbus: 98%\nperson: 83%\ncar: 88%\nC11\n445\nBUS\nBUS\nBUS"
+  }
+]

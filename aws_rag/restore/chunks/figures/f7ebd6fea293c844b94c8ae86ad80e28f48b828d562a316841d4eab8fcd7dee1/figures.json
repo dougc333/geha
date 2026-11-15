@@ -1,0 +1,65 @@
+[
+  {
+    "file": "p004_f01.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 1. Three paths between an a baseline ( r 1 , r 2 ) and an input ( s 1 , s 2 ) . Each path corresponds to a different attribution method. The path P 2 corresponds to the path used by integrated gradients.",
+    "width": 224,
+    "height": 207,
+    "description": "Description: The figure shows three paths between a baseline (r1, r2) and an input (s1, s2). Each path represents a different attribution method. The paths are labeled P1, P2, and P3. Path P2 is highlighted as the one used by integrated gradients.\n\nText in figure: P1, P2, P3, r1, r2, s1, s2"
+  },
+  {
+    "file": "p006_f02.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 2. Comparing integrated gradients with gradients at the image. Left-to-right: original input image, label and softmax score for the highest scoring class, visualization of integrated gradients, visualization of gradients*image. Notice that the visualizations obtained from integrated gradients are better at reflecting distinctive features of the image.",
+    "width": 328,
+    "height": 562,
+    "description": "## Figure Description\nThis figure displays a comparison between two visualization techniques: integrated gradients and gradients at the image. It shows six different images, each with four panels: the original image, the top label and score, integrated gradients, and gradients at the image. The integrated gradients visualizations are noted to better reflect distinctive features of the images.\n\n## Textual Content\n- Original image\n- Top label and score\n- Integrated gradients\n- Gradients at image\n- Top label: reflex camera, Score: 0.9993756\n- Top label: firetruck, Score: 0.999962\n- Top label: school bus, Score: 0.999033\n- Top label: mosque, Score: 0.999127\n- Top label: viaduct, Score: 0.999994\n- Top label: cabbage butterfly, Score: 0.999838\n- Top label: starfish, Score: 0.999990"
+  },
+  {
+    "file": "p006_f03.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 3. Attribution for Diabetic Retinopathy grade prediction from a retinal fundus image. The original image is show on the left, and the attributions (overlayed on the original image in gray scaee) is shown on the right. On the original image we annotate lesions visible to a human, and confirm that the attributions indeed point to them.",
+    "width": 372,
+    "height": 185,
+    "description": "Figure Description: The figure displays two images related to the analysis of a retinal fundus image for Diabetic Retinopathy (DR) grading. The left image shows the original retinal fundus image with visible lesions annotated by arrows. The right image overlays the original image with gray-scale attributions highlighting regions of interest, which correspond to the annotated lesions.\n\nText in Figure: \"Lesions\", \"Regions of interest\", \"DR Grade: Moderate (with score: 0.4564)\""
+  },
+  {
+    "file": "p007_f04.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 5. Attributions from a language translation model. Input in English: 'good morning ladies and gentlemen'. Output in German: 'Guten Morgen Damen und Herren'. Both input and output are tokenized into word pieces, where a word piece prefixed by underscore indicates that it should be the prefix of a word.",
+    "width": 319,
+    "height": 241,
+    "description": "## Search Index Description\nThis figure displays a heatmap of attributions from a language translation model. The input is an English sentence \"good morning ladies and gentlemen\" and the output is its German translation \"Guten Morgen Damen und Herren\". The heatmap shows the contribution of each input word piece to the output word pieces.\n\n## Search Index Text in Figure\nInput word pieces: \u2581good, morning, \u2581ladies, \u2581and, \u2581gentlemen\nOutput word pieces: Guten, Morgen, Damen, und, Herren\nValues: 0.00, 0.03, 0.02, 0.03, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.03, 0.02, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02, 0.02, 0.03, 0.02,"
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 6. Attribution for a molecule under the W2N2 network (Kearnes et al., 2016) . The molecules is active on task PCBA-58432.",
+    "width": 424,
+    "height": 219,
+    "description": "## Description:\nThis figure displays an attribution summary for a molecule under the W2N2 network, focusing on its activity on the PCBA-58432 task. It includes a molecular structure, an atom attribution plot, and a bar chart for bond and pair attributions. The atom attribution plot shows varying contributions, with some atoms having higher contributions than others. The bar chart highlights the contributions of different bond and pair types.\n\n## Text in figure:\nMolecular structure, Atom attribution, Attribution summary, Bond and pair attribution, Molecule active on task PCBA-58432, W2N2 network, Atom contributions, Bond contributions, Pair contributions."
+  },
+  {
+    "file": "p010_f06.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "",
+    "width": 377,
+    "height": 71,
+    "description": "Figure Description: This diagram illustrates a computational process involving two inputs, x and x_g, and their transformations through a function f. The inputs are x = 3 and x_g = 1. The function f is defined as f(x, x_g) = ReLu(U(x, -1 - z_g)) where z_g = ReLu(U(x_g)) = 1. The diagram shows the transformation of x and x_g through the function f, resulting in an output of 1.\n\nText in Figure: x = 3, x_g = 1, z_g = ReLu(U(x_g)) = 1, f(x, x_g) = ReLu(U(x, -1 - z_g)) = 1"
+  },
+  {
+    "file": "p010_f07.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "",
+    "width": 378,
+    "height": 70,
+    "description": "## Search Index\n\n### Figure Description\nThis figure is a diagram showing the flow of data through a computational process. It consists of three main blocks connected by arrows. The first block contains the input \\( x_3 \\) and \\( x_1 \\). The second block has two equations: \\( z_1 = \\text{ReLU}(x_1) \\) and \\( z_2 = \\text{ReLU}(x_2) \\). The third block contains the equation \\( g(x_1, x_2) = \\text{ReLU}(z_1 - z_2) \\).\n\n### Text in Figure\n- Inputs: \\( x_3 \\), \\( x_1 \\)\n- Equations: \\( z_1 = \\text{ReLU}(x_1) \\), \\( z_2 = \\text{ReLU}(x_2) \\)\n- Output: \\( g(x_1, x_2) = \\text{ReLU}(z_1 - z_2) \\)"
+  }
+]

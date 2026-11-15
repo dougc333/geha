@@ -1,0 +1,74 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "",
+    "width": 469,
+    "height": 487,
+    "description": "## Description\nThe figure contains two bar charts and two cumulative distribution plots. The bar charts show the percentage of samples for LeNet (1998) and ResNet (2016) on the CIFAR-100 dataset. The cumulative distribution plots show the accuracy of outputs and the gap between outputs and confidence for both models. The ResNet model has a lower error (30.6) compared to LeNet (44.9).\n\n## Text in figure\nLeNet (1998) CIFAR-100, ResNet (2016) CIFAR-100, Avg. confidence, Accuracy, Outputs, Gap, Error=44.9, Error=30.6, Confidence, Accuracy."
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2. The effect of network depth (far left), width (middle left), Batch Normalization (middle right), and weight decay (far right) on miscalibration, as measured by ECE (lower is better).",
+    "width": 974,
+    "height": 289,
+    "description": "Description: Four bar charts showing the effect of different factors on miscalibration in neural networks. The first chart shows the effect of varying network depth, with the highest error at 0 depth and the lowest at 120 depth. The second chart shows the effect of varying width, with the highest error at 0 filters and the lowest at 300 filters. The third chart compares the use of batch normalization, with the highest error without batch normalization and the lowest with it. The fourth chart shows the effect of weight decay, with the highest error at 10^-5 weight decay and the lowest at 10^-3 weight decay.\n\nText in figure: Varying Depth, Varying Width, Using Normalization, Varying Weight Decay, ResNet-CIFAR-100, ResNet-14-CIFAR-100, ConvNet-CIFAR-100, ResNet-110-CIFAR-100, Error, ECE, Depth, Filters per layer, Without, With, Batch Normalization, Weight decay, 10^-5, 10^-4, 10^-3, 10^-2."
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3. Test error and NLL of a 110-layer ResNet with stochastic depth on CIFAR-100 during training. NLL is scaled by a constant to fit in the figure. Learning rate drops by 10x at epochs 250 and 375. The shaded area marks between epochs at which the best validation loss and best validation error are produced.",
+    "width": 415,
+    "height": 347,
+    "description": "Description: The figure is a line plot showing the test error and negative log-likelihood (NLL) of a 110-layer ResNet with stochastic depth on the CIFAR-100 dataset during training. The test error is represented by the red line, while the NLL is represented by the blue line. The NLL is scaled by a constant to fit within the figure. The learning rate drops by 10x at epochs 250 and 375. The shaded area marks the epochs between which the best validation loss and best validation error are produced.\n\nText in figure: NLL Overfitting on CIFAR-100, Test error, Test NLL, Error / NLL (scaled), Epoch"
+  },
+  {
+    "file": "p008_f04.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 4. Reliability diagrams for CIFAR-100 before (far left) and after calibration (middle left, middle right, far right).",
+    "width": 953,
+    "height": 299,
+    "description": "Figure: Reliability diagrams for CIFAR-100 before and after calibration.\nText: Uncal. - CIFAR-100 ResNet-110 (SD), Temp. Scale - CIFAR-100 ResNet-110 (SD), Hist. Bin. - CIFAR-100 ResNet-110 (SD), Iso. Reg. - CIFAR-100 ResNet-110 (SD), Outputs, Gap, ECE=12.67, ECE=0.96, ECE=2.46, ECE=4.16, Accuracy, Confidence.\n\nDescription: Four bar charts showing calibration of ResNet-110 on CIFAR-100. Each chart has two series: Outputs (blue) and Gap (red). The highest series is Outputs in the middle right chart, and the lowest is Gap in the far left chart. The ECE values are 12.67, 0.96, 2.46, and 4.16 for the respective charts."
+  },
+  {
+    "file": "p012_f05.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure S1. Entropy and NLL for CIFAR-100 before and after calibration. The optimal T selected by temperature scaling rises throughout optimization, as the pre-calibration entropy decreases steadily. The post-calibration entropy and NLL on the validation set coincide (which can be derived from the gradient optimality condition of T ).",
+    "width": 627,
+    "height": 517,
+    "description": "Description: This plot shows the entropy and negative log-likelihood (NLL) for CIFAR-100 before and after calibration. The blue line represents entropy before calibration, which starts high and decreases steadily. The red line represents NLL before calibration, which also decreases. The green line shows entropy after calibration, which remains relatively stable. The pink line indicates the optimal temperature (T) selected by temperature scaling, which increases throughout optimization. The post-calibration entropy and NLL coincide.\n\nText in figure: Entropy vs. NLL on CIFAR-100, Entropy & NLL after Calibration, Entropy before Calibration, NLL before Calibration, Optimal T Selected, Entropy / T, Epoch."
+  },
+  {
+    "file": "p014_f06.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure S2. Reliability diagrams for CIFAR-10 before (far left) and after calibration (middle left, middle right, far right).",
+    "width": 970,
+    "height": 301,
+    "description": "Description: The figure shows four reliability diagrams for CIFAR-10, comparing uncalibrated and calibrated ResNet-110 models. Each diagram plots accuracy against confidence. The uncalibrated model (far left) shows the highest gap between outputs and accuracy, with an ECE of 4.12. The calibrated models show progressively smaller gaps: Temporal Scaling (middle left) with ECE 0.60, Histogram Binning (middle right) with ECE 0.67, and Isotonic Regression (far right) with ECE 1.11.\n\nText in figure: Uncal. - CIFAR-10 ResNet-110 (SD), Temp. Scale - CIFAR-10 ResNet-110 (SD), Hist. Bin. - CIFAR-10 ResNet-110 (SD), Iso. Reg. - CIFAR-10 ResNet-110 (SD), Outputs, Gap, Accuracy, ECE=4.12, ECE=0.60, ECE=0.67, ECE=1.11, Confidence."
+  },
+  {
+    "file": "p014_f07.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure S3. Reliability diagrams for SST Binary and SST Fine Grained before (far left) and after calibration (middle left, middle right, far right).",
+    "width": 971,
+    "height": 301,
+    "description": "Figure: Reliability diagrams for SST Binary and SST Fine Grained before and after calibration.\n\nDescription: Four bar charts showing calibration of Tree LSTM models on SST datasets. Each chart compares model outputs and gap. The Uncal. - SST-FG chart shows the highest gap at 0.8 confidence, while the Iso. Reg. - SST-FG chart shows the lowest gap at 0.2 confidence. ECE values are provided for each chart.\n\nText in figure: \"Uncal. - SST-FG Tree LSTM\", \"Temp. Scale - SST-FG Tree LSTM\", \"Hist. Bin. - SST-FG Tree LSTM\", \"Iso. Reg. - SST-FG Tree LSTM\", \"Outputs\", \"Gap\", \"ECE=6.71\", \"ECE=2.56\", \"ECE=2.09\", \"ECE=1.65\", \"Confidence\"."
+  },
+  {
+    "file": "p014_f08.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure S4. Reliability diagrams for SST Binary and SST Fine Grained before (far left) and after calibration (middle left, middle right, far right).",
+    "width": 971,
+    "height": 302,
+    "description": "Figure: Four bar graphs showing calibration of SST-BIN Tree LSTM models. Each graph displays \"Outputs\" and \"Gap\" bars for different calibration methods. The \"Uncal. - SST-BIN\" graph has the highest \"Gap\" (6.63) and the lowest \"Outputs\" (0.37). The \"Iso. Reg. - SST-BIN\" graph has the lowest \"Gap\" (1.65) and the highest \"Outputs\" (0.83).\n\nText in figure: \"Uncal. - SST-BIN\", \"Temp. Scale - SST-BIN\", \"Hist. Bin. - SST-BIN\", \"Iso. Reg. - SST-BIN\", \"Outputs\", \"Gap\", \"ECE=6.63\", \"ECE=1.84\", \"ECE=1.93\", \"ECE=1.65\", \"Accuracy\", \"Confidence\"."
+  }
+]

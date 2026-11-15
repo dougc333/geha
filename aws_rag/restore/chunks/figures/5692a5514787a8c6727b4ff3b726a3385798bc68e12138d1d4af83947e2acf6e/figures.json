@@ -1,0 +1,82 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 1: Overall pre-training and fine-tuning procedures for BERT. Apart from output layers, the same architectures are used in both pre-training and fine-tuning. The same pre-trained model parameters are used to initialize models for different down-stream tasks. During fine-tuning, all parameters are fine-tuned. [CLS] is a special symbol added in front of every input example, and [SEP] is a special separator token (e.g. separating questions/answers).",
+    "width": 897,
+    "height": 357,
+    "description": "Figure type: Diagram\nDescription: The figure shows the overall pre-training and fine-tuning procedures for BERT. It consists of two main parts: pre-training and fine-tuning. During pre-training, BERT uses two tasks: Next Sentence Prediction (NSP) and Masked Language Modeling (Mask LM). In fine-tuning, BERT is adapted for specific tasks like SQuAD, MNLI, and NER using different datasets.\n\nKey elements:\n- Pre-training: Uses unlabeled sentence pairs and masked sentences.\n- Fine-tuning: Uses specific datasets like SQuAD, MNLI, and NER.\n- Tasks: NSP, Mask LM, Start/End Span.\n- Special tokens: [CLS], [SEP].\n- Architecture: Same for both pre-training and fine-tuning, with all parameters fine-tuned during fine-tuning.",
+    "pdf_text": "BERT | BERT | E[CLS] | E1 | E[SEP] | ... | EN | E1\u2019 | ... | EM\u2019 | C | T1 | T[SEP] | ... | TN | T1\u2019 | ... | TM\u2019 | [CLS] | Tok 1 | [SEP] | ... | Tok N | Tok 1 | ... | TokM | Question | Paragraph | Start/End Span | BERT | E[CLS] | E1 | E[SEP] | ... | EN | E1\u2019 | ... | EM\u2019 | C | T1 | T[SEP] | ... | TN | T1\u2019 | ... | TM\u2019 | [CLS] | Tok 1 | [SEP] | ... | Tok N | Tok 1 | ... | TokM | Masked Sentence A | Masked Sentence B | Pre-training | Fine-Tuning | NSP | Mask LM | Mask LM | Unlabeled Sentence A and B Pair | SQuAD | Question Answer Pair | NER | MNLI",
+    "bbox": [
+      74.7,
+      62.4,
+      522.8,
+      240.8
+    ]
+  },
+  {
+    "file": "p005_f02.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 2: BERT input representation. The input embeddings are the sum of the token embeddings, the segmentation embeddings and the position embeddings.",
+    "width": 713,
+    "height": 210,
+    "description": "Section 1: Figure description\nThis figure illustrates the input representation for BERT, a deep bidirectional transformer model for language understanding. It shows how the input embeddings are constructed by summing the token embeddings, segment embeddings, and position embeddings.\n\nSection 2: Figure details\nInput: [CLS] my dog is cute [SEP] he likes play ##ing [SEP]\nToken Embeddings: E[CLS], Emy, Edog, Eis, Ecute, E[SEP], Ehe, Elikes, Eplay, E##ing, E[SEP]\nSegment Embeddings: EA, EA, EA, EA, EA, EA, EB, EB, EB, EB, EB\nPosition Embeddings: E0, E1, E2, E3, E4, E5, E6, E7, E8, E9, E10",
+    "pdf_text": "[CLS] | he | likes | play | ##ing | [SEP] | my | dog | is | cute | [SEP] | Input | E[CLS] | Ehe | Elikes | Eplay | E##ing | E[SEP] | Emy | Edog | Eis | Ecute | E[SEP] | Token | Embeddings | EA | EB | EB | EB | EB | EB | EA | EA | EA | EA | EA | Segment | Embeddings | E0 | E6 | E7 | E8 | E9 | E10 | E1 | E2 | E3 | E4 | E5 | Position | Embeddings",
+    "bbox": [
+      115.7,
+      61.9,
+      471.8,
+      167.1
+    ]
+  },
+  {
+    "file": "p013_f03.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 3: Differences in pre-training model architectures. BERT uses a bidirectional Transformer. OpenAI GPT uses a left-to-right Transformer. ELMo uses the concatenation of independently trained left-to-right and right-toleft LSTMs to generate features for downstream tasks. Among the three, only BERT representations are jointly conditioned on both left and right context in all layers. In addition to the architecture differences, BERT and OpenAI GPT are fine-tuning approaches, while ELMo is a feature-based approach.",
+    "width": 892,
+    "height": 202,
+    "description": "## Figure Description\nThis figure compares the pre-training model architectures of BERT, OpenAI GPT, and ELMo. BERT uses a bidirectional Transformer, while OpenAI GPT uses a left-to-right Transformer. ELMo concatenates left-to-right and right-to-left LSTMs. Only BERT jointly conditions on both left and right context in all layers.\n\n## Text in Figure\nBERT (Ours): T1, T2,..., TN, Trm, Trm,..., Trm, Trm, Trm,..., Trm, E1, E2,..., EN\nOpenAI GPT: T1, T2,..., TN, Trm, Trm,..., Trm, Trm, Trm,..., Trm, E1, E2,..., EN\nELMo: T1, T2,..., TN, Lstm, Lstm,..., Lstm, Lstm, Lstm,..., Lstm, E1, E2,..., EN",
+    "pdf_text": "BERT (Ours) | Trm | Trm | Trm | Trm | Trm | Trm | ... | ... | Trm | Trm | Trm | Trm | Trm | Trm | ... | ... | OpenAI GPT | Lstm | ELMo | Lstm | Lstm | Lstm | Lstm | Lstm | Lstm | Lstm | Lstm | Lstm | Lstm | Lstm | T1 | T2 | TN | ... | ... | ... | ... | ... | E1 | E2 | EN | ... | T1 | T2 | TN | ... | E1 | E2 | EN | ... | T1 | T2 | TN | ... | E1 | E2 | EN | ...",
+    "bbox": [
+      78.4,
+      62.9,
+      524.5,
+      163.9
+    ]
+  },
+  {
+    "file": "p015_f04.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 4: Illustrations of Fine-tuning BERT on Different Tasks.",
+    "width": 741,
+    "height": 735,
+    "description": "## Figure Description\nThis figure illustrates how BERT is fine-tuned for various natural language processing tasks. It shows four panels, each depicting a different task: (a) Sentence Pair Classification Tasks, (b) Single Sentence Classification Tasks, (c) Question Answering Tasks, and (d) Single Sentence Tagging Tasks. Each panel includes a diagram of the BERT model with input tokens, class labels, and specific task annotations.\n\n## Index Terms\nBERT, Natural Language Processing, Fine-tuning, Sentence Pair Classification, Single Sentence Classification, Question Answering, Named Entity Recognition, Tokenization, [CLS], [SEP], Task-specific Annotations, Deep Bidirectional Transformers, Language Understanding.",
+    "pdf_text": "BERT | E[CLS] | E1 | E[SEP] | ... | EN | E1\u2019 | ... | EM\u2019 | C | T1 | T[SEP] | ... | TN | T1\u2019 | ... | TM\u2019 | [CLS] | Tok | 1 | [SEP] | ... | Tok | N | Tok | 1 | ... | Tok | M | Question | Paragraph | BERT | E[CLS] | E1 | E2 | EN | C | T1 | T2 | TN | Single Sentence | ... | ... | BERT | Tok 1 | Tok 2 | Tok N | ... | [CLS] | E[CLS] | E1 | E2 | EN | C | T1 | T2 | TN | Single Sentence | B-PER | O | O | ... | ... | E[CLS] | E1 | E[SEP] | Class | Label | ... | EN | E1\u2019 | ... | EM\u2019 | C | T1 | T[SEP] | ... | TN | T1\u2019 | ... | TM\u2019 | Start/End Span | Class | Label | BERT | Tok 1 | Tok 2 | Tok N | ... | [CLS] | Tok 1 | [CLS] | [CLS] | Tok | 1 | [SEP] | ... | Tok | N | Tok | 1 | ... | Tok | M | Sentence 1 | ... | Sentence 2",
+    "bbox": [
+      112.8,
+      65.0,
+      483.6,
+      432.7
+    ]
+  },
+  {
+    "file": "p016_f05.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 5: Ablation over number of training steps. This shows the MNLI accuracy after fine-tuning, starting from model parameters that have been pre-trained for k steps. The x-axis is the value of k .",
+    "width": 392,
+    "height": 262,
+    "description": "Description: The figure is a line graph showing the MNLI Dev Accuracy of two BERTBASE models over varying pre-training steps. The x-axis represents the number of pre-training steps in thousands, ranging from 200 to 1,000. The y-axis represents the MNLI Dev Accuracy, ranging from 76 to 84. The blue line with triangle markers represents BERTBASE (Masked LM), while the red line with star markers represents BERTBASE (Left-to-Right). The BERTBASE (Masked LM) model starts at 78 accuracy and increases to 84, while the BERTBASE (Left-to-Right) model starts at 80 accuracy and increases to 82.\n\nDescription: The figure displays the performance of two BERTBASE models on the MNLI Dev Accuracy as a function of pre-training steps. The x-axis indicates the number of pre-training steps in thousands, from 200 to 1,000. The y-axis shows the MNLI Dev Accuracy, ranging from 76 to 84. The blue line with triangle markers represents BERTBASE (Masked LM), and the red line with star markers represents BERTBASE (Left-to-Right). The BERTBASE (Masked LM) model starts at 78 accuracy and reaches 84, while the BERTBASE (Left-to-Right) model starts at 80 accuracy and reaches 82.",
+    "pdf_text": "200 | 400 | 600 | 800 | 1,000 | 76 | 78 | 80 | 82 | 84 | Pre-training Steps (Thousands) | MNLI Dev Accuracy | BERTBASE (Masked LM) | BERTBASE (Left-to-Right)",
+    "bbox": [
+      74.4,
+      570.9,
+      270.3,
+      702.2
+    ]
+  }
+]

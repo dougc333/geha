@@ -1,0 +1,83 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 1. Top: A deconvnet layer (left) attached to a convnet layer (right). The deconvnet will reconstruct an approximate version of the convnet features from the layer beneath. Bottom: An illustration of the unpooling operation in the deconvnet, using switches which record the location of the local max in each pooling region (colored zones) during pooling in the convnet.",
+    "width": 474,
+    "height": 476,
+    "description": "This figure is a diagram illustrating the architecture of a deconvolutional network (deconvnet) and its connection to a convolutional network (convnet). It shows how a deconvnet layer reconstructs features from a convnet layer. The top part of the figure depicts a deconvnet layer on the left and a convnet layer on the right, connected by a switch mechanism. The bottom part illustrates the unpooling operation, where \"switches\" record the location of the local maximum in each pooling region during pooling in the convnet.\n\nText in figure: Layer Above Reconstruction, Pooled Maps, Switches, Max Unpooling, Unpooled Maps, Rectified Feature Maps, Rectified Linear Function, Rectified Linear Function, Rectified Unpooled Maps, Feature Maps, Convolutional Filtering (F1), Convolutional Filtering (F1), Reconstruction, Layer Below Pooled Maps, Layer Above Reconstruction, Unpooling, Max Locations \"Switches\", Unpooled Maps, Rectified Feature Maps, Pooled Maps, Pooling."
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 2. Visualization of features in a fully trained model. For layers 2-5 we show the top 9 activations in a random subset of feature maps across the validation data, projected down to pixel space using our deconvolutional network approach. Our reconstructions are not samples from the model: they are reconstructed patterns from the validation set that cause high activations in a given feature map. For each feature map we also show the corresponding image patches. Note: (i) the the strong grouping within each feature map, (ii) greater invariance at higher layers and (iii) exaggeration of discriminative parts of the image, e.g. eyes and noses of dogs (layer 4, row 1, cols 1). Best viewed in electronic form.",
+    "width": 867,
+    "height": 1193,
+    "description": "Figure: Visualization of features in a fully trained model, showing activations and corresponding image patches for layers 2-5. It demonstrates strong grouping within feature maps, increased invariance at higher layers, and emphasis on discriminative parts of images.\n\nText in figure: Layer 1, Layer 2, Layer 3, Layer 4, Layer 5, top 9 activations, random subset, deconvolutional network approach, reconstructed patterns, validation set, feature map, image patches, strong grouping, invariance, exaggeration, discriminative parts, eyes, noses, dogs."
+  },
+  {
+    "file": "p006_f03.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "",
+    "width": 998,
+    "height": 232,
+    "description": "Section 1: Convolutional Neural Network Architecture\nThis figure illustrates the architecture of a Convolutional Neural Network (CNN) used for image classification. It shows the input image size, filter sizes, strides, and the number of filters in each layer. The network consists of convolutional layers, max pooling layers, and fully connected layers. The input image is 224x224 pixels, and the network has 7 layers, including convolutional, pooling, and fully connected layers. The output layer has 4096 units and a softmax function for classification.\n\nSection 2: Layer Details and Output\nThe figure provides details of each layer in the CNN. Layer 1 has 96 filters with a size of 7x7, followed by a 3x3 max pooling layer with a stride of 2. Layer 2 has 256 filters with a size of 5x5, and another 3x3 max pooling layer with a stride of 2. Layer 3 has 384 filters with a size of 3x3, and a 3x3 max pooling layer with a stride of 2. Layer 4 has 384 filters with a size of 3x3, and a 3x3 max pooling layer with a stride of 2. Layer 5 has 256 filters with a size of 3x3, and a 3x3 max pooling layer with a stride of 2. The final two layers are fully connected layers with 4096 units each, followed by a softmax output layer for classification."
+  },
+  {
+    "file": "p006_f04.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 3. Architecture of our 8 layer convnet model. A 224 by 224 crop of an image (with 3 color planes) is presented as the input. This is convolved with 96 different 1st layer filters (red), each of size 7 by 7, using a stride of 2 in both x and y. The resulting feature maps are then: (i) passed through a rectified linear function (not shown), (ii) pooled (max within 3x3 regions, using stride 2) and (iii) contrast normalized across feature maps to give 96 different 55 by 55 element feature maps. Similar operations are repeated in layers 2,3,4,5. The last two layers are fully connected, taking features from the top convolutional layer as input in vector form (6 \u00b7 6 \u00b7 256 = 9216 dimensions). The final layer is a C -way softmax function, C being the number of classes. All filters and feature maps are square in shape.",
+    "width": 1011,
+    "height": 169,
+    "description": "Figure type: Visualization of a convolutional neural network architecture.\n\nDescription: The figure shows the architecture of an 8-layer convolutional neural network (CNN). It displays the progression of image processing through different layers, starting with a 224x224 input image and ending with a softmax output layer for classification.\n\nText in figure: Layer 1, Layer 2, Layer 3, Layer 4, Layer 5, Layer 6, Layer 7, Layer 8, 96 filters, 55x55 elements, 256 dimensions, C-way softmax function."
+  },
+  {
+    "file": "p006_f05.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 4. Evolution of a randomly chosen subset of model features through training. Each layer's features are displayed in a different block. Within each block, we show a randomly chosen subset of features at epochs [1,2,5,10,20,30,40,64]. The visualization shows the strongest activation (across all training examples) for a given feature map, projected down to pixel space using our deconvnet approach. Color contrast is artificially enhanced and the figure is best viewed in electronic form.",
+    "width": 937,
+    "height": 466,
+    "description": "Figure Description: This figure displays the evolution of a subset of model features through training, visualized for different layers at various epochs. Each block represents a different layer, with features shown at epochs 1, 2, 5, 10, 20, 30, 40, and 64. The visualizations are created by projecting the strongest activations of each feature map down to pixel space using a deconvolutional network approach. The color contrast is enhanced for clarity.\n\nText in Figure: Layer names: Lawn Mower, ShirtTzu, African Crocodile, African Grey, Entertainment Center. Epochs: 1, 2, 5, 10, 20, 30, 40, 64. Axis titles: Vertical Translation (Pixels), Scale (Ratio), Rotation (Degrees)."
+  },
+  {
+    "file": "p007_f06.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 6. (a): 1st layer features without feature scale clipping. Note that one feature dominates. (b): 1st layer features from (Krizhevsky et al., 2012). (c): Our 1st layer features. The smaller stride (2 vs 4) and filter size (7x7 vs 11x11) results in more distinctive features and fewer 'dead' features. (d): Visualizations of 2nd layer features from (Krizhevsky et al., 2012). (e): Visualizations of our 2nd layer features. These are cleaner, with no aliasing artifacts that are visible in (d).",
+    "width": 911,
+    "height": 276,
+    "description": "Figure type: Image comparison\nDescription: The figure compares the visualizations of convolutional neural network (CNN) features from different layers and configurations. Panels (a) to (e) show the features from the first and second layers of CNNs with varying parameters. Panel (a) displays the first layer features without feature scale clipping, where one feature dominates. Panel (b) shows the first layer features from Krizhevsky et al. (2012). Panel (c) presents the first layer features with a smaller stride and filter size, resulting in more distinctive features. Panels (d) and (e) compare the second layer features from Krizhevsky et al. (2012) and the modified CNN, respectively, with the latter showing cleaner features without aliasing artifacts.\n\nText in figure: (a) 1st layer features without feature scale clipping. (b) 1st layer features from (Krizhevsky et al., 2012). (c) Our 1st layer features. (d) Visualizations of 2nd layer features from (Krizhevsky et al., 2012). (e) Visualizations of our 2nd layer features."
+  },
+  {
+    "file": "p007_f07.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 7. Three test examples where we systematically cover up different portions of the scene with a gray square (1st column) and see how the top (layer 5) feature maps ((b) & (c)) and classifier output ((d) & (e)) changes. (b): for each position of the gray scale, we record the total activation in one layer 5 feature map (the one with the strongest response in the unoccluded image). (c): a visualization of this feature map projected down into the input image (black square), along with visualizations of this map from other images. The first row example shows the strongest feature to be the dog's face. When this is covered-up the activity in the feature map decreases (blue area in (b)). (d): a map of correct class probability, as a function of the position of the gray square. E.g. when the dog's face is obscured, the probability for 'pomeranian' drops significantly. (e): the most probable label as a function of occluder position. E.g. in the 1st row, for most locations it is 'pomeranian', but if the dog's face is obscured but not the ball, then it predicts 'tennis ball'. In the 2nd example, text on the car is the strongest feature in layer 5, but the classifier is most sensitive to the wheel. The 3rd example contains multiple objects. The strongest feature in layer 5 picks out the faces, but the classifier is sensitive to the dog (blue region in (d)), since it uses multiple feature maps.",
+    "width": 999,
+    "height": 573,
+    "description": "Figure: Visualization of convolutional neural network responses to occluded images.\nShows input images with parts covered, feature map activations, and classifier outputs.\nText: Input Image, Layer 5, strongest feature map, Layer 5, strongest feature map projections,\nClassifier, probability of correct class, Classifier, most probable class, Pomeranian, Tennis ball,\nKeeshond, Pekingese, Car wheel, Racer, Cab, Police van, Afghan hound, Gordon setter, Irish setter,\nMortboard, Fur coat, Academic gown, Australian terrier, Ice lolly, Vizsla, Neck brace\n\nSection 1: Figure shows visualization of CNN responses to occluded images.\nInput images have parts covered, feature map activations, and classifier outputs.\nText: Input Image, Layer 5, strongest feature map, Layer 5, strongest feature map projections,\nClassifier, probability of correct class, Classifier, most probable class\n\nSection 2: Text lists dog breeds, car parts, and other objects used in the examples.\nText: Pomeranian, Tennis ball, Keeshond, Pekingese, Car wheel, Racer, Cab, Police van,\nAfghan hound, Gordon setter, Irish setter, Mortboard, Fur coat, Academic gown, Australian terrier,\nIce lolly, Vizsla, Neck brace"
+  },
+  {
+    "file": "p008_f08.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 8. Images used for correspondence experiments. Col 1: Original image. Col 2,3,4: Occlusion of the right eye, left eye, and nose respectively. Other columns show examples of random occlusions.",
+    "width": 459,
+    "height": 256,
+    "description": "## Figure Description\nThis figure displays a series of images used for correspondence experiments in convolutional neural networks. Each row shows an original image of a dog, followed by images with specific parts occluded (right eye, left eye, nose) and random occlusions. The purpose is to visualize how the network responds to different levels of occlusion.\n\n## Text in Figure\n- Original image\n- Occlusion of the right eye\n- Occlusion of the left eye\n- Occlusion of the nose\n- Random occlusions"
+  },
+  {
+    "file": "p009_f09.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 9. Caltech-256 classification performance as the number of training images per class is varied. Using only 6 training examples per class with our pre-trained feature extractor, we surpass best reported result by (Bo et al., 2013).",
+    "width": 359,
+    "height": 290,
+    "description": "Description: This graph compares the accuracy of three models in classifying images from the Caltech-256 dataset. The x-axis represents the number of training images per class, ranging from 0 to 60. The y-axis shows the accuracy percentage, from 0% to 75%. The blue line represents \"Our Model,\" which starts at 30% and increases to 75%. The red line, \"Bo et al.,\" starts at 40% and rises to 55%. The green line, \"Sohn et al.,\" starts at 35% and reaches 50%.\n\nText in figure: Accuracy %, Training Images per-class, Our Model, Bo et al., Sohn et al."
+  }
+]

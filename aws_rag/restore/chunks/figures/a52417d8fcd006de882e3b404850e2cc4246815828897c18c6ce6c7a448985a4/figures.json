@@ -1,0 +1,210 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1: Three example problems from GSM8K. Calculation annotations are highlighted in red.",
+    "width": 688,
+    "height": 363,
+    "description": "The generated text has been blocked by our content filters.",
+    "pdf_text": "",
+    "bbox": [
+      133.7,
+      125.2,
+      477.5,
+      306.3
+    ]
+  },
+  {
+    "file": "p005_f02.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 2: Final test performance for various GPT-3 model sizes after finetuning on training sets of different sizes. Mean and standard deviation is shown across 3 runs.",
+    "width": 653,
+    "height": 320,
+    "description": "## Description\n\nThis figure contains two line graphs showing the test solve rate percentage for various GPT-3 model sizes after finetuning on training sets of different sizes. The left graph plots the test solve rate against the training set size, while the right graph plots it against the number of model parameters. The series include 3B, 6B, 12B, and 175B models. The 175B model consistently shows the highest test solve rate, while the 3B model has the lowest.\n\n## Text in figure\n\nLeft graph: Training Set Size, Test Solve Rate (%), 3B model, 6B model, 12B model, 175B model, 500, 1000, 2000, 4000, 8000, 0, 5, 10, 15, 20, 25, 30, 35\n\nRight graph: # Model Parameters (B), Test Solve Rate (%), 3B model, 6B model, 12B model, 175B model, 3, 6, 12, 175, 0, 5, 10, 15, 20, 25, 30, 35, 500 problems, 1K problems, 2K problems, 4K problems, 7.5K problems",
+    "pdf_text": "500 | 1000 | 2000 | 4000 | 8000 | Training Set Size | 0 | 5 | 10 | 15 | 20 | 25 | 30 | 35 | Test Solve Rate (%) | 3B model | 6B model | 12B model | 175B model | 3 | 6 | 12 | 175 | # Model Parameters (B) | 0 | 5 | 10 | 15 | 20 | 25 | 30 | 35 | Test Solve Rate (%) | 500 problems | 1K problems | 2K problems | 4K problems | 7.5K problems",
+    "bbox": [
+      142.2,
+      126.2,
+      468.3,
+      285.9
+    ]
+  },
+  {
+    "file": "p006_f03.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 3: Test solve rate after finetuning a 6B model on the full GSM8K training set, when the model is allowed to make 1 guess (left) or 100 guesses (right).",
+    "width": 660,
+    "height": 323,
+    "description": "Section 1: Figure description\nThis figure consists of two line graphs, each showing the test solve rate of a 6B model after finetuning on the GSM8K training set. The left graph displays the Test@1 Solve Rate, while the right graph shows the Test@100 Solve Rate. Both graphs have epochs on the x-axis and solve rates on the y-axis.\n\nSection 2: Figure details\nTest@1 Solve Rate: The 6B model's Test@1 Solve Rate starts at 12% and increases to 22% by epoch 50. The highest point is at epoch 10 with 22%, and the lowest point is at epoch 0 with 12%.\nTest@100 Solve Rate: The 6B model's Test@100 Solve Rate starts at 84% and decreases to 70% by epoch 50. The highest point is at epoch 0 with 84%, and the lowest point is at epoch 50 with 70%.",
+    "pdf_text": "0 | 10 | 20 | 30 | 40 | 50 | Epoch | 12 | 14 | 16 | 18 | 20 | 22 | Test@1 Solve Rate (%) | 6B | 0 | 10 | 20 | 30 | 40 | 50 | Epoch | 70 | 72 | 74 | 76 | 78 | 80 | 82 | 84 | Test@100 Solve Rate (%) | 6B",
+    "bbox": [
+      138.7,
+      126.1,
+      468.5,
+      287.5
+    ]
+  },
+  {
+    "file": "p007_f04.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 4: A diagram of the verification training pipeline.",
+    "width": 677,
+    "height": 283,
+    "description": "## Section 1: Figure Description\nThis figure is a diagram illustrating the verification training pipeline for solving math word problems. It consists of three main stages: 1) Training the generator, 2) Generating and labeling 100 solutions per problem, and 3) Training the verifier. Each stage is represented by a separate block with arrows indicating the flow of data.\n\n## Section 2: Figure Details\nThe figure shows three stages: 1) Training the generator uses questions and solutions to produce outputs. 2) The generator then creates 100 solutions for each problem, which are labeled. 3) The verifier is trained using the questions, solutions, and their labels. Arrows connect the blocks, showing the data flow from one stage to the next.",
+    "pdf_text": "",
+    "bbox": [
+      135.8,
+      125.7,
+      474.5,
+      267.2
+    ]
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 5: A comparison between finetuning and verification using 6B and 175B model sizes. Verification considers 100 solutions per problem. Mean and standard deviation is shown across 3 runs, except for 175B verification which shows only a single run.",
+    "width": 678,
+    "height": 315,
+    "description": "Section 1: Figure description\nThis figure is a comparison of finetuning and verification methods using 6B and 175B model sizes. It shows the test solve rate percentage against the training set size. The figure consists of two plots, each with two lines representing different methods. The first plot shows 6B finetuning and 6B verification, while the second plot shows 175B finetuning and 175B verification. The lines are color-coded, with blue for finetuning and orange for verification. The mean and standard deviation are shown across 3 runs, except for 175B verification, which shows only a single run.\n\nSection 2: Figure content\n6B Finetuning, 6B Verification, 175B Finetuning, 175B Verification, Test Solve Rate (%), Training Set Size, 500, 1000, 2000, 4000, 8000, 0, 10, 20, 30, 40, 50, 60",
+    "pdf_text": "500 | 1000 | 2000 | 4000 | 8000 | Training Set Size | 0 | 10 | 20 | 30 | 40 | 50 | 60 | Test Solve Rate (%) | 6B Finetuning | 6B Verification | 500 | 1000 | 2000 | 4000 | 8000 | Training Set Size | 0 | 10 | 20 | 30 | 40 | 50 | 60 | Test Solve Rate (%) | 175B Finetuning | 175B Verification",
+    "bbox": [
+      134.9,
+      127.7,
+      473.8,
+      284.9
+    ]
+  },
+  {
+    "file": "p009_f06.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "(a) Comparison between a verifier trained to predict correctness after every token (token-level) and one trained to predict correctness after only the final token (solution-level)",
+    "width": 220,
+    "height": 220,
+    "description": "## Figure description\nThis line graph compares the performance of two verifiers over epochs. The x-axis represents the number of epochs, ranging from 0.0 to 1.0. The y-axis shows the test solve rate in percentage, ranging from 5% to 40%. Two lines are plotted: one for the token-level verifier and another for the token-level verifier with joint training. The token-level verifier starts at 5% and increases to around 35% by the end of the epochs. The token-level verifier with joint training starts at a lower rate and ends at a slightly higher rate, around 38%.\n\n## Image objects\nAxes: x-axis: epoch, y-axis: Test Solve Rate (%)\nLines: token-level, joint, token-level, verification-only\nLegend: token-level, joint, token-level, verification-only\nValues: 0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 5, 10, 15, 20, 25, 30, 35, 40",
+    "pdf_text": "0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | epoch | 5 | 10 | 15 | 20 | 25 | 30 | 35 | 40 | Test Solve Rate (%) | token-level, joint | token-level, verification-only",
+    "bbox": [
+      249.3,
+      125.4,
+      359.7,
+      235.3
+    ]
+  },
+  {
+    "file": "p010_f07.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "",
+    "width": 318,
+    "height": 317,
+    "description": "Section 1:\nThis figure is a line graph showing the relationship between the number of completions per test problem and the test solve rate percentage. The x-axis represents the number of completions per test problem, ranging from 25 to 3200. The y-axis represents the test solve rate percentage, ranging from 34% to 42%. The graph displays a series of data points connected by a line, indicating the trend of the test solve rate as the number of completions per test problem increases.\n\nSection 2:\nThe test solve rate percentage starts at 34% when the number of completions per test problem is 25. It then increases steadily, reaching a peak of 42% at around 400 completions per test problem. After this peak, the test solve rate percentage decreases gradually, reaching 38% at 1600 completions per test problem and 36% at 3200 completions per test problem.",
+    "pdf_text": "25 | 50 | 100 | 200 | 400 | 800 | 1600 | 3200 | Number of completions per test problem | 34 | 36 | 38 | 40 | 42 | Test Solve Rate (%)",
+    "bbox": [
+      135.3,
+      126.3,
+      294.4,
+      284.9
+    ]
+  },
+  {
+    "file": "p010_f08.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "",
+    "width": 321,
+    "height": 318,
+    "description": "## Figure description\nThe figure is a line graph showing the test solve rate percentage against the number of top samples used for voting. The graph has six lines, each representing a different number of completions: 100, 200, 400, 800, 1600, and 3200. The lines are color-coded and labeled in the legend. The highest line is for 100 completions, and the lowest is for 3200 completions. The graph shows a general downward trend as the number of top samples used for voting increases.\n\n## Index terms\n- Line graph\n- Test solve rate percentage\n- Number of top samples used for voting\n- 100 completions\n- 200 completions\n- 400 completions\n- 800 completions\n- 1600 completions\n- 3200 completions\n- Downward trend",
+    "pdf_text": "1 | 10 | 100 | Number of top samples used for voting | 28 | 30 | 32 | 34 | 36 | 38 | 40 | 42 | 44 | Test Solve Rate (%) | 100 completions | 200 completions | 400 completions | 800 completions | 1600 completions | 3200 completions",
+    "bbox": [
+      315.6,
+      126.1,
+      475.8,
+      285.2
+    ]
+  },
+  {
+    "file": "p011_f09.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 8: 6B finetuning and verification dropout ablations.",
+    "width": 683,
+    "height": 252,
+    "description": "## Description\nThis figure consists of three line graphs labeled (a), (b), and (c), each showing the test solve rate percentage over epochs. In (a), the highest line represents \"6B Finetuning, dropout = 0.2\" and the lowest is \"6B Finetuning, dropout = 0\". In (b), \"solution-level, dropout = 0.2\" is highest and \"solution-level, dropout = 0\" is lowest. In (c), \"token-level, dropout = 0.2\" is highest and \"token-level, dropout = 0\" is lowest.\n\n## Text in figure\n6B Finetuning, dropout = 0, 6B Finetuning, dropout = 0.2, Test Solve Rate (%), Training Set Size, 500, 1000, 2000, 4000, 8000, (a) Finetuning, 7.5, 10.0, 12.5, 15.0, 17.5, 20.0, 22.5, 25.0, solution-level, dropout = 0, solution-level, dropout = 0.2, Test Solve Rate (%), (b) Solution-level verifiers, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 10, 15, 20, 25, 30, 35, 40, token-level, dropout = 0, token-level, dropout = 0.2, Test Solve Rate (%), (c) Token-level verifiers, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0",
+    "pdf_text": "500 | 1000 | 2000 | 4000 | 8000 | Training Set Size | 7.5 | 10.0 | 12.5 | 15.0 | 17.5 | 20.0 | 22.5 | 25.0 | Test Solve Rate (%) | 6B Finetuning, dropout = 0 | 6B Finetuning, dropout = 0.2 | (a) Finetuning | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | epoch | 10 | 15 | 20 | 25 | 30 | 35 | 40 | Test Solve Rate (%) | solution-level, dropout = 0 | solution-level, dropout = 0.2 | (b) Solution-level veri\ufb01ers | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | epoch | 0 | 10 | 20 | 30 | 40 | Test Solve Rate (%) | token-level, dropout = 0 | token-level, dropout = 0.2 | (c) Token-level veri\ufb01ers",
+    "bbox": [
+      134.9,
+      125.1,
+      476.5,
+      251.1
+    ]
+  },
+  {
+    "file": "p017_f10.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "Figure 9: A diagram of the calculator sampling procedure.",
+    "width": 474,
+    "height": 228,
+    "description": "## Diagram Description\nThis figure is a flowchart illustrating the calculator sampling procedure in a model designed to solve math word problems. It shows a sequence of steps where a generator produces parts of a sentence, and a calculator evaluates the mathematical expression. The process begins with the generator creating a sentence fragment, then the calculator is triggered to evaluate the expression, and finally, the generator completes the sentence with the result.\n\n## Text in Figure\n- Generator: + Her sister gave her 20 + 10 = <<20\n- Generator: 10 Her sister gave her 20 + 10 = <<20+\n- Generator: = Her sister gave her 20 + 10 = <<20+10\n- Calculator: eval(\"20+10\") 30>>\n- Generator: books Her sister gave her 20 + 10 = <<20+10=\n- Trigger: Calculator\n- Generator: Her sister gave her 20 + 10 = <<20+10=30>>",
+    "pdf_text": "Generator | + | Her sister gave her 20 + 10 = <<20 | Generator | 10 | Her sister gave her 20 + 10 = <<20+ | Generator | = | Her sister gave her 20 + 10 = <<20+10 | Calculator | eval(\u201c20+10\u201d) | 30>> | Her sister gave her 20 + 10 = <<20+10= | Generator | books | Her sister gave her 20 + 10 = <<20+10=30>> | Trigger | Calculator",
+    "bbox": [
+      187.9,
+      376.1,
+      425.0,
+      490.1
+    ]
+  },
+  {
+    "file": "p018_f11.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "",
+    "width": 665,
+    "height": 810,
+    "description": "The generated text has been blocked by our content filters.",
+    "pdf_text": "",
+    "bbox": [
+      139.2,
+      181.7,
+      471.4,
+      586.7
+    ]
+  },
+  {
+    "file": "p020_f12.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "Figure 12: Visualization of the joint training objective. We mask out tokens in the question and only consider the loss corresponding to tokens in the solution.",
+    "width": 575,
+    "height": 241,
+    "description": "## Description\nThis figure is a visual representation of a joint training objective for a model that solves math word problems. It shows two objectives: Language Modeling and Verifier. The Language Modeling Objective involves a generator that takes question tokens and produces solution tokens. The Verifier Objective involves a verifier that takes question tokens and solution tokens to predict values. The figure highlights the masking of certain tokens in the question during training, which are not considered in the loss calculation.\n\n## Text in figure\nQ1, Q2,..., Qn, S1, S2,..., Sm, Language Modeling Objective, Generator, Q1, Q2,..., Qn, Y1, Y2,..., Yn, Verifier Objective, Verifier, Yn, Yk, the k-th value prediction, masked out (does not contribute to loss), the i-th question token, the j-th solution token",
+    "pdf_text": "Qi | Sj | the i-th question token | the j-th solution token | Q1 | Language Modeling Objective | Q2 | ... | Qn | Q2 | Q3 | ... | S1 | S2 | ... | Sm-1 | S2 | S3 | ... | Sm | Generator | S1 | Q1 | Verifier Objective | Q2 | ... | Qn | Y1 | Y2 | ... | S1 | S2 | ... | Sm | Yn+1 | Yn+2 | ... | Yn+m | Verifier | Yn | Yk | the k-th value prediction | masked out (does not | contribute to loss)",
+    "bbox": [
+      163.6,
+      473.2,
+      450.9,
+      593.7
+    ]
+  },
+  {
+    "file": "p021_f13.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "Figure 13: Five cherry-picked samples generated by a 175B finetuned model and scored by a 175B token-level verifier. A green background color indicates a high verifier score, and a red background color indicates a low one.",
+    "width": 489,
+    "height": 677,
+    "description": "Section 1:\nThis figure is a table showing five math word problems generated by a fine-tuned model and scored by a verifier. The table includes the problem statement, the model's solution, the verifier's predicted score, and the actual score. The problems cover various topics such as egg omelets, onions and potatoes, beads, and arcade spending.\n\nSection 2:\nClaire makes a 3 egg omelet every morning for breakfast. How many dozens of eggs will she eat in 4 weeks? Sophia and Rose went together to the market to buy onions and potatoes. Rose bought 4 times the number of onions and potatoes Sophia bought. If Rose bought 12 onions and 4 potatoes, how many onions and potatoes in total did Sophia buy at the market? Two sisters, Elizabeth and Margareth, bought beads. Elizabeth bought 1 pack of red and 2 packs of clear beads, while Margareth bought 3 packs of blue and 4 packs of red beads. How many more beads do one sister have than the other, if each pack of beads contains 20 pieces of beads? Howard spends $8 dollars at the arcade on Monday. On Tuesday, he spends twice as much at the arcade as he did on Monday. On Wednesday, he spends 4 times as much at the arcade as he spent on Tuesday. If he originally had $100, how much money does he have left? In a jewelers store, the price of a gold ewell is 4/5 times as much as the price of a diamond ewell. The cost of a silver ewell is $400 less than the price of gold. If a diamond ewell is $2000, find the total price for all three jewels.",
+    "pdf_text": "Question & Model Generation | Verifier | Pred. | Actual | Score | Claire makes a 3 egg omelet every morning for breakfast. How many dozens | of eggs will she eat in 4 weeks? | Claire makes 3 omelets every morning, so she eats 3*7=<<3*7=21>>21 | omelets per week | She eats 21 omelets per week so over 4 weeks she will eat | 4*21=<<21*4=84>>84 omelets | There are 12 in 1 dozen so she will eat 84/12=<<84/12=7.0>>7 dozens of | eggs | #### 7 | \u2705 | \u2705 | Sophia and Rose went together to the market to buy onions and potatoes. | Rose bought 4 times the number of onions and potatoes Sophia bought. If | Rose bought 12 onions and 4 potatoes, how many onions and potatoes in | total did Sophia buy at the market? | If Rose bought 12 onions and 4 potatoes, she bought 12+4 = <<12+4=16>>16 | onions and potatoes. | If Rose bought 4 times the number of onions and potatoes that Sophia | bought, Sophia bought 16/4 = <<16/4=4.0>>4 onions and potatoes at the | market. | #### 4 | \u274c | \u2705 | Two sisters, Elizabeth and Margareth, bought beads. Elizabeth bought 1 | pack of red and 2 packs of clear beads, while Margareth bought 3 packs | of blue and 4 packs of red beads. How many more beads do one sister have | than the other, if each pack of beads contains 20 pieces of beads? | Elizabeth bought 1 pack of red and 2 packs of clear, totaling 1+2 = | <<1+2=3>>3 packs of beads. | Margareth bought 3 packs of blue and 4 packs of red, totaling 3+4 = | <<3+4=7>>7 packs of beads. | So, Elizabeth has 3-7 = <<3-7=-4>>-4 more packs of beads than Margareth. | And since each pack of beads contains 20 pieces of beads, Elizabeth has | 20*4 = <<20*4=80>>80 more beads than Margareth. | #### 80 | \u274c | \u2705 | Howard spends $8 dollars at the arcade on Monday. On Tuesday, he spends | twice as much at the arcade as he did on Monday. On Wednesday, he spends | 4 times as much at the arcade as he spent on Tuesday. If he originally | had $100, how much money does he have left? | He spent $8 dollars on Monday and $8*2= $<<8*2=16>>16 dollars on | Tuesday. | He spent $16 dollars on Tuesday and $16*4= $<<16*4=64>>64 dollars on | Wednesday. | He has $100 dollars and spent $64 dollars so he has 100-64= | <<100-64=36>>36 dollars left. | #### 36 | \u274c | \u274c | In a jewelers store, the price of a gold Jewell is 4/5 times as much as | the price of a diamond Jewell. The cost of a silver Jewell is $400 less | than the price of gold. If a diamond Jewell is $2000, find the total | price for all three jewels. | The price of a gold Jewell is 4/5*$2000 = $<<4/5*2000=1600.0>>1600. | The cost of a silver Jewell is $2000-$400= $<<2000-400=1600>>1600. | The total price for all the jewels is $2000+$1600+$1600 = | $<<2000+1600+1600=5200>>5200 | #### 5200 | \u2705 | \u274c",
+    "bbox": [
+      184.7,
+      166.4,
+      429.1,
+      505.2
+    ]
+  }
+]

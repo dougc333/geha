@@ -1,0 +1,74 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "",
+    "width": 161,
+    "height": 161,
+    "description": "## Description:\n\nThe figure is a photograph of a panda bear sitting on a tree branch. The panda is shown in close-up, with its face and upper body visible. The image captures the panda's distinctive black and white fur, with black ears, eyes, nose, mouth, and paws, and white cheeks and chest.\n\n## Text in figure:\n\n- None"
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "sign ( \u2207 x J ( \u03b8 , x , y )) 'nematode' 8.2% confidence",
+    "width": 160,
+    "height": 163,
+    "description": "## Index Section 1: Figure Description\nThis figure displays a visual representation of the gradient sign (\u2207xJ(\u03b8,x,y)) for a 'nematode' image, showing the confidence level of 8.2%. The image is a colorful, pixelated pattern with various colors scattered across the entire area, indicating the gradient information.\n\n## Index Section 2: Figure Text\nText in figure: 'sign (\u2207xJ(\u03b8,x,y))', 'nematode', '8.2% confidence'."
+  },
+  {
+    "file": "p003_f03.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "'panda' 57.7% confidence",
+    "width": 162,
+    "height": 162,
+    "description": "Figure type: Image with text overlay\n\nDescription: The figure shows a photograph of a panda bear with a text overlay indicating the model's confidence in its classification. The text reads \"panda\" with a confidence score of 57.7%.\n\nText in figure:\n\n- \"panda\"\n- \"57.7% confidence\""
+  },
+  {
+    "file": "p004_f04.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "",
+    "width": 219,
+    "height": 242,
+    "description": "## Search Index\n\n### Figure Description\nThis figure displays a grid of numbers, likely representing a confusion matrix or a\nsimilar data structure. The numbers range from 0 to 9, with some letters\ninterspersed. The grid appears to be a 10x10 matrix, with each cell containing a\nnumber or letter.\n\n### Figure Content\n```\n7 7 7 3 7 7 3 3 3 3\n3 3 7 1 3 7 7 7 3 1\n3 7 3 3 7 7 3 3 3 3\n7 7 7 7 7 3 7 7 7 3\n3 3 7 7 7 3 3 3 7 3\n3 3 9 3 h 7 7 7 7 7\n2 7 7 3 3 7 3 3 7 3\n7 7 7 3 7 7 7 3 7 3\n7 7 7 3 7 3 3 7 3 3\n7 7 3 3 7 3 7 3 3 3\n```\n\n### Notable Features\n- Numbers range from 0 to 9.\n- Letters 'h' and 'n' appear in the grid.\n- The grid is a 10x10 matrix."
+  },
+  {
+    "file": "p006_f05.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 3: Weight visualizations of maxout networks trained on MNIST. Each row shows the filters for a single maxout unit. Left) Naively trained model. Right) Model with adversarial training.",
+    "width": 240,
+    "height": 238,
+    "description": "## Description\nThis figure displays weight visualizations of maxout networks trained on the MNIST dataset. Each row represents the filters for a single maxout unit. The left panel shows the filters of a naively trained model, while the right panel shows the filters of a model trained with adversarial examples. The visualizations highlight the differences in filter patterns between the two models.\n\n## Text in figure\n- Left panel: \"Naively trained model\"\n- Right panel: \"Model with adversarial training\""
+  },
+  {
+    "file": "p008_f06.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "",
+    "width": 285,
+    "height": 221,
+    "description": "Figure: Line plot showing the argument to softmax against \u03b5.\n\nDescription: The plot displays multiple lines, each representing a different series labeled from 0 to 9. The series labeled 0 is the highest, reaching approximately 1000, while series 9 is the lowest, starting near -2000. The lines intersect at a point near \u03b5 = 0.\n\nText in figure: \u03b5, argument to softmax, series labels 0 to 9."
+  },
+  {
+    "file": "p008_f07.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 4: By tracing out different values of \u03f5 , we can see that adversarial examples occur reliably for almost any sufficiently large value of \u03f5 provided that we move in the correct direction. Correct classifications occur only on a thin manifold where x occurs in the data. Most of R n consists of adversarial examples and rubbish class examples (see the appendix). This plot was made from a naively trained maxout network. Left) A plot showing the argument to the softmax layer for each of the 10 MNIST classes as we vary \u03f5 on a single input example. The correct class is 4. We see that the unnormalized log probabilities for each class are conspicuously piecewise linear with \u03f5 and that the wrong classifications are stable across a wide region of \u03f5 values. Moreover, the predictions become very extreme as we increase \u03f5 enough to move into the regime of rubbish inputs. Right) The inputs used to generate the curve (upper left = negative \u03f5 , lower right = positive \u03f5 , yellow boxes indicate correctly classified inputs).",
+    "width": 239,
+    "height": 240,
+    "description": "## Description\nThis figure is a plot showing the effect of varying \u03f5 on the softmax layer's output for a single MNIST input example. The plot demonstrates that adversarial examples occur reliably for large \u03f5 values, while correct classifications occur only on a thin manifold. The correct class is 4, and the plot shows piecewise linear unnormalized log probabilities for each class as \u03f5 varies. Yellow boxes indicate correctly classified inputs.\n\n## Text in figure\nLeft panel: \"\u03f5\", \"Correct class 4\", \"Unnormalized log probabilities\", \"Rubbish class examples\". Right panel: \"Inputs used to generate the curve\", \"Upper left = negative \u03f5\", \"Lower right = positive \u03f5\", \"Yellow boxes indicate correctly classified inputs\"."
+  },
+  {
+    "file": "p011_f08.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 5: Randomly generated fooling images for a convolutional network trained on CIFAR10. These examples were generated by drawing a sample from an isotropic Gaussian, then taking a gradient sign step in the direction that increases the probability of the 'airplane' class. Yellow boxes indicate samples that successfully fool the model into believing an airplane is present with at least 50% confidence. 'Airplane' is the hardest class to construct fooling images for on CIFAR-10, so this figure represents the worst case in terms of success rate.",
+    "width": 396,
+    "height": 396,
+    "description": "Description: The figure displays a grid of 64 images, each representing a randomly generated fooling image for a convolutional network trained on CIFAR-10. The images are grayscale with yellow boxes highlighting samples that successfully fool the model into classifying them as 'airplane' with at least 50% confidence. The yellow boxes indicate the worst-case scenario in terms of fooling success rate, as 'airplane' is the hardest class to generate fooling images for.\n\nText in figure: The figure contains the following text: \"Figure 5: Randomly generated fooling images for a convolutional network trained on CIFAR-10. These examples were generated by drawing a sample from an isotropic Gaussian, then taking a gradient sign step in the direction that increases the probability of the 'airplane' class. Yellow boxes indicate samples that successfully fool the model into believing an airplane is present with at least 50% confidence. 'Airplane' is the hardest class to construct fooling images for on CIFAR-10, so this figure represents the worst case in terms of success rate.\""
+  }
+]

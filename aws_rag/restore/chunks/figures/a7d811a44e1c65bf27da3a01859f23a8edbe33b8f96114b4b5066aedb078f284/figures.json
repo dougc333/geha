@@ -1,0 +1,20 @@
+[
+  {
+    "file": "p004_f01.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 1: Left: The attention mechanism a ( W \u20d7 h i , W \u20d7 h j ) employed by our model, parametrized by a weight vector \u20d7 a \u2208 R 2 F \u2032 , applying a LeakyReLU activation. Right: An illustration of multihead attention (with K = 3 heads) by node 1 on its neighborhood. Different arrow styles and colors denote independent attention computations. The aggregated features from each head are concatenated or averaged to obtain \u20d7 h \u2032 1 .",
+    "width": 796,
+    "height": 374,
+    "description": "## Description\nThis figure illustrates the attention mechanism and multihead attention in Graph Attention Networks (GAT). The left panel shows the attention mechanism, where a weight vector is applied to node features to compute attention scores. The right panel depicts multihead attention with three heads, where each head computes independent attention scores and the results are aggregated.\n\n## Text in figure\nLeft panel: \"softmax\", \"W\u20d7hi\", \"W\u20d7hj\", \"\u03b1ij\", \"\u03b1\"\nRight panel: \"concat/avg\", \"h1\", \"h2\", \"h3\", \"h4\", \"h5\", \"h6\", \"\u03b111\", \"\u03b112\", \"\u03b113\", \"\u03b114\", \"\u03b115\", \"\u03b116\""
+  },
+  {
+    "file": "p009_f02.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 2: A t-SNE plot of the computed feature representations of a pre-trained GAT model's first hidden layer on the Cora dataset. Node colors denote classes. Edge thickness indicates aggregated normalized attention coefficients between nodes i and j , across all eight attention heads ( \u2211 K k =1 \u03b1 k ij + \u03b1 k ji ) .",
+    "width": 711,
+    "height": 382,
+    "description": "Description: The figure is a t-SNE plot showing the feature representations of the first hidden layer of a pre-trained Graph Attention Network (GAT) on the Cora dataset. Node colors represent different classes. Edge thickness indicates the aggregated normalized attention coefficients between nodes, summed across all eight attention heads.\n\nText in figure: Node colors, Edge thickness, \u2211 K k =1 \u03b1 k ij + \u03b1 k ji, GAT model, first hidden layer, Cora dataset, t-SNE plot, feature representations, attention coefficients, attention heads."
+  }
+]

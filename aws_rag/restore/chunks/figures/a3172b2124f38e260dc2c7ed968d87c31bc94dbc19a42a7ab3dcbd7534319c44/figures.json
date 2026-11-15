@@ -1,0 +1,38 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Fig. 1. U-net architecture (example for 32x32 pixels in the lowest resolution). Each blue box corresponds to a multi-channel feature map. The number of channels is denoted on top of the box. The x-y-size is provided at the lower left edge of the box. White boxes represent copied feature maps. The arrows denote the different operations.",
+    "width": 675,
+    "height": 477,
+    "description": "Description: This figure is a diagram showing the architecture of the U-Net model for biomedical image segmentation. It illustrates the process of downsampling and upsampling feature maps through convolutional and transposed convolutional layers. The diagram shows the input image tile, the feature maps at different resolutions, and the final output segmentation map.\n\nText in figure: input image tile, output segmentation map, conv 3x3, ReLU, copy and crop, max pool 2x2, up-conv 2x2, conv 1x1, 572 x 572, 570 x 570, 568 x 568, 128, 64, 64, 2, 392 x 392, 390 x 390, 388 x 388, 388 x 388, 256, 128, 2002, 1982, 1962, 512, 256, 1402, 1382, 1362, 1024, 512, 512, 1024, 512, 512, 542, 522, 1002, 1002, 322, 302, 282, 562, 542, 256, 256, 682, 662, 1402, 1382, 1362, 1024, 512, 512, 1024, 512, 512, 1024, 512, 512, 1024, 512, 512, 1024, 512, 512, 1024, 512, 512, 1024, 512, 512, 1024, 512, 512, 1024, 512, 512, 1024, 512, 512, 1024, 512, 512, 1024, 512, 512, 1024, 512, 512, 1024, 512, 512, 1024,"
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Fig. 2. Overlap-tile strategy for seamless segmentation of arbitrary large images (here segmentation of neuronal structures in EM stacks). Prediction of the segmentation in the yellow area, requires image data within the blue area as input. Missing input data is extrapolated by mirroring",
+    "width": 483,
+    "height": 222,
+    "description": "Figure Description: The figure illustrates the overlap-tile strategy for seamless segmentation of large images, specifically for segmenting neuronal structures in electron microscopy (EM) stacks. It shows two panels connected by a green arrow, indicating the process flow. The left panel displays a segmented image with a yellow highlighted area, representing the region of interest for prediction. The right panel shows a zoomed-in view of the highlighted area, with a blue box indicating the input data required for the prediction. The figure caption mentions that missing input data is extrapolated by mirroring.\n\nText in Figure: Overlap-tile strategy, segmentation of neuronal structures, EM stacks, prediction, yellow area, blue area, input data, extrapolation, mirroring."
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Fig. 3. HeLa cells on glass recorded with DIC (differential interference contrast) microscopy. ( a ) raw image. ( b ) overlay with ground truth segmentation. Different colors indicate different instances of the HeLa cells. ( c ) generated segmentation mask (white: foreground, black: background). ( d ) map with a pixel-wise loss weight to force the network to learn the border pixels.",
+    "width": 663,
+    "height": 147,
+    "description": "## Description\nThis figure displays four panels of images related to the segmentation of HeLa cells using U-Net. Panel (a) shows a raw image of HeLa cells. Panel (b) overlays the raw image with ground truth segmentation, where different colors represent different instances of HeLa cells. Panel (c) presents the generated segmentation mask, with white indicating the foreground and black the background. Panel (d) shows a map with pixel-wise loss weights, highlighting the border pixels.\n\n## Text in figure\nPanel (a): raw image\nPanel (b): overlay with ground truth segmentation\nPanel (c): generated segmentation mask\nPanel (d): map with pixel-wise loss weight\nColors in Panel (b): different instances of HeLa cells\nWhite in Panel (c): foreground\nBlack in Panel (c): background\nMap in Panel (d): pixel-wise loss weight"
+  },
+  {
+    "file": "p007_f04.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Fig. 4. Result on the ISBI cell tracking challenge. ( a ) part of an input image of the 'PhC-U373' data set. ( b ) Segmentation result (cyan mask) with manual ground truth (yellow border) ( c ) input image of the 'DIC-HeLa' data set. ( d ) Segmentation result (random colored masks) with manual ground truth (yellow border).",
+    "width": 687,
+    "height": 146,
+    "description": "## Description:\nThe figure displays four panels of biomedical images related to cell segmentation. Panels a and b show a part of an input image and its segmentation result, respectively. Panels c and d show another input image and its segmentation result with multiple cells.\n\n## Text in figure:\n- Panel a: Input image of the 'PhC-U373' data set.\n- Panel b: Segmentation result (cyan mask) with manual ground truth (yellow border).\n- Panel c: Input image of the 'DIC-HeLa' data set.\n- Panel d: Segmentation result (random colored masks) with manual ground truth (yellow border)."
+  }
+]

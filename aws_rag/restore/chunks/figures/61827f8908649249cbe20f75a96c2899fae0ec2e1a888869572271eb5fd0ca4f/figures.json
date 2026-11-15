@@ -1,0 +1,101 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1: Comparison with other real-time object detectors, our proposed methods achieve state-of-the-arts performance.",
+    "width": 450,
+    "height": 333,
+    "description": "## Description\nThis is a line graph comparing the performance of various object detection models. The x-axis represents the V100 batch 1 inference time in milliseconds, while the y-axis shows the Average Precision (AP). The graph includes six series: YOLOv7, YOLOR, PPYOLOE, YOLOX, Scaled-YOLOv4, and YOLOv5 (r6.1). YOLOv7 is the highest performing model, followed by YOLOR, PPYOLOE, YOLOX, Scaled-YOLOv4, and YOLOv5. YOLOv7 is noted to be +120% faster.\n\n## Text in figure\nYOLOv7 (ours), YOLOR, PPYOLOE, YOLOX, Scaled-YOLOv4, YOLOv5 (r6.1), better, better, AP, V100 batch 1 inference time (ms), YOLOv7 is +120% faster"
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2: Extended efficient layer aggregation networks. The proposed extended ELAN (E-ELAN) does not change the gradient transmission path of the original architecture at all, but use group convolution to increase the cardinality of the added features, and combine the features of different groups in a shuffle and merge cardinality manner. This way of operation can enhance the features learned by different feature maps and improve the use of parameters and calculations.",
+    "width": 994,
+    "height": 356,
+    "description": "This figure is a diagram comparing four different network architectures: VoVNet, CSPVoVNet, ELAN, and E-ELAN. Each panel shows the structure of the network, with blocks and layers labeled. The networks use various techniques to increase feature cardinality and improve parameter efficiency. VoVNet and CSPVoVNet use cross-stage connections, while ELAN and E-ELAN use stack-in-computational blocks. E-ELAN introduces group convolution to further enhance feature learning.\n\nText in figure: VoVNet, CSPVoVNet, ELAN, E-ELAN, cross-stage connection, stack-in-computational block, expand cardinality, shuffle cardinality, merge cardinality, 3x3, 2x2, 4c, 8c, 2c, 1x1."
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3: Model scaling for concatenation-based models. From (a) to (b), we observe that when depth scaling is performed on concatenation-based models, the output width of a computational block also increases. This phenomenon will cause the input width of the subsequent transmission layer to increase. Therefore, we propose (c), that is, when performing model scaling on concatenationbased models, only the depth in a computational block needs to be scaled, and the remaining of transmission layer is performed with corresponding width scaling.",
+    "width": 968,
+    "height": 184,
+    "description": "This figure is a diagram illustrating different scaling methods for concatenation-based models in neural networks. It shows three panels: (a) a concatenation-based model, (b) a scaled-up concatenation-based model with increased depth, and (c) a compound scaling method that adjusts both depth and width. The diagram highlights how scaling up depth affects the width of computational blocks and subsequent transmission layers.\n\nText in figure: concatenation-based model, scaled-up concatenation-based model, compound scaling, computational block, transition, scaling up depth, scaling up width, partial scaling up width, cross stage merge."
+  },
+  {
+    "file": "p004_f04.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 4: Planned re-parameterized model. In the proposed planned re-parameterized model, we found that a layer with residual or concatenation connections, its RepConv should not have identity connection. Under these circumstances, it can be replaced by RepConvN that contains no identity connections.",
+    "width": 460,
+    "height": 339,
+    "description": "This figure is a diagram showing different types of convolutional layers used in neural network architectures. It includes PlainNet, RepPlainNet, ResNet, RepResNet, P1-RepResNet, P2-RepResNet, P3-RepResNet, and P4-RepResNet. Each type is represented by a series of blocks labeled with \"Conv\" or \"RepConv\" and \"RepConvN\". The figure highlights the importance of not using identity connections in layers with residual or concatenation connections, suggesting the use of RepConvN instead.\n\nText in figure: PlainNet, RepPlainNet, ResNet, RepResNet, P1-RepResNet, P2-RepResNet, P3-RepResNet, P4-RepResNet, 3x3 Conv, RepConv, RepConvN, Conv, c, \u2713, \u2717."
+  },
+  {
+    "file": "p005_f05.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 5: Coarse for auxiliary and fine for lead head label assigner. Compare with normal model (a), the schema in (b) has auxiliary head. Different from the usual independent label assigner (c), we propose (d) lead head guided label assigner and (e) coarse-to-fine lead head guided label assigner. The proposed label assigner is optimized by lead head prediction and the ground truth to get the labels of training lead head and auxiliary head at the same time. The detailed coarse-to-fine implementation method and constraint design details will be elaborated in Apendix.",
+    "width": 977,
+    "height": 192,
+    "description": "This figure is a diagram comparing different label assignment methods in object detection models. It shows five different models: (a) Normal model, (b) Model with auxiliary head, (c) Independent assigner, (d) Lead guided assigner, and (e) Coarse-to-fine lead guided assigner. Each model has a different approach to assigning labels to the lead and auxiliary heads during training.\n\nText in figure: Normal model, Model with auxiliary head, Independent assigner, Lead guided assigner, Coarse-to-fine lead guided assigner, Detection, Lead Head, Aux Head, GT, Loss, Assigner, fine, coarse."
+  },
+  {
+    "file": "p008_f06.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 6: Planned RepConv 3-stacked ELAN. Blue circles are the position we replace Conv by RepConv.",
+    "width": 410,
+    "height": 198,
+    "description": "Figure Description: A diagram showing the planned RepConv 3-stacked ELAN structure. It features a vertical stack of three 3x3 convolutional layers, each labeled \"3x3, c\". The diagram indicates positions where standard convolutional layers (Conv) are replaced by RepConv layers, marked by blue circles. The figure is divided into four panels (a, b, c, d) showing different configurations of RepConv positions.\n\nText in Figure: \"3x3, c\", \"RepConv position\", \"c\", \"c\", \"c\""
+  },
+  {
+    "file": "p008_f07.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 7: Reversed CSPDarknet. We reverse the position of 1 \u00d7 1 and 3 \u00d7 3 convolutional layer in dark block to fit our planned reparameterized model design strategy.",
+    "width": 459,
+    "height": 139,
+    "description": "Description: The figure displays four types of convolutional neural network blocks: Dark block, CSPDark block, RDark block, and RCSPDark block. Each block is represented by a diagram showing the arrangement of convolutional layers and their connections. The blocks are designed to fit a reparameterized model strategy, with variations in the order and type of convolutional layers used.\n\nText in figure: Dark block, CSPDark block, RDark block, RCSPDark block, 1x1, 3x3, c/2, c."
+  },
+  {
+    "file": "p009_f08.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 8: Objectness map predicted by different methods at auxiliary head and lead head.",
+    "width": 990,
+    "height": 217,
+    "description": "## Description\nThis figure displays objectness maps predicted by different methods at auxiliary and lead heads. It includes five panels labeled (b) to (e), each showing a different method's output. The maps are visualized with color-coded points, where red circles highlight specific areas.\n\n## Text in figure\nPanels: (b) Independent Aux Head, (c) Independent Lead Head, (d) Lead Guided Aux Head, (e) Lead Guided Lead Head\nLabels: Pyramids, Anchors\nColors: Red circles indicate highlighted areas."
+  },
+  {
+    "file": "p011_f09.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 9: Comparison with other object detectors.",
+    "width": 819,
+    "height": 488,
+    "description": "This figure is a line graph comparing the performance of various object detectors on the MS COCO mini-val dataset. It plots the Average Precision (AP) percentage against the V100 batch=1 inference time in milliseconds. The YOLOv7 series is highlighted with a red line, showing it is the fastest and most accurate. YOLOv7-E6E has the highest AP at 56.80%, while YOLOv7-tiny-SILU has the lowest at 38.70%. The graph also includes other detectors like PPYOLEO, YOLOX, YOLOR, YOLOv5, and Transformers.\n\nText in figure: YOLOv7, YOLOv7-E6E, YOLOv7-D6, YOLOv7-E6, YOLOv7-W6, YOLOv7-X, YOLOv7-tiny-SILU, PPYOLEO, YOLOX, YOLOR, YOLOv5, Transformers, EfficientDet-D7x, Dual-Swin-T(C-M-RCNN), Swin-B(C-M-RCNN), ViT-Adapter-B, Deformable DETR, DETR-DC5-R101, F-RCNN-R101-FPN+"
+  },
+  {
+    "file": "p011_f10.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 10: Comparison with other real-time object detectors.",
+    "width": 821,
+    "height": 297,
+    "description": "Figure: Line graph comparing inference times of various object detectors.\nText: YOLOv7 (ours), YOLOR, PPYOLOE, YOLOX, Scaled-YOLOv4, YOLOv5 (r6.1).\nAxes: V100 batch 1 inference time (ms), V100 batch 32 average inference time (ms/batch).\nAnnotations: YOLOv7 is +120% faster, YOLOv7 is +150% faster.\nHighest series: YOLOv7 (ours), lowest series: YOLOv5 (r6.1).\nAnnotations belong to YOLOv7 (ours).\n\nFigure: Line graph comparing AP scores of various object detectors.\nText: YOLOv7 (ours), YOLOR, PPYOLOE, YOLOX, Scaled-YOLOv4, YOLOv5 (r6.1).\nAxes: V100 batch 1 inference time (ms), V100 batch 32 average inference time (ms/batch).\nAnnotations: YOLOv7 is +120% faster, YOLOv7 is +150% faster.\nHighest series: YOLOv7 (ours), lowest series: YOLOv5 (r6.1).\nAnnotations belong to YOLOv7 (ours)."
+  },
+  {
+    "file": "p011_f11.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 11: Comparison with other real-time object detectors.",
+    "width": 410,
+    "height": 302,
+    "description": "Figure: Line graph comparing object detection models.\nData: V100 batch 32 average inference time (ms/batch) vs AP.\nSeries: YOLOv7-tiny, meituan/YOLOv6-n, meituan/YOLOv6-n_35.\nHighest: meituan/YOLOv6-n_35 at 35 AP.\nLowest: meituan/YOLOv6-n at 30.8 AP.\nAnnotation: YOLOv7-tiny at 35.2 AP.\n\nText in figure: V100 batch 32 average inference time (ms/batch), AP, YOLOv7-tiny, 35.2, meituan/YOLOv6-n, 30.8, meituan/YOLOv6-n_35, 35.\n\nSection 1: Line graph comparing object detection models.\nShows V100 batch 32 average inference time vs AP for YOLOv7-tiny, meituan/YOLOv6-n, and meituan/YOLOv6-n_35.\n\nSection 2: meituan/YOLOv6-n_35 has highest AP at 35, YOLOv7-tiny at 35.2 AP, meituan/YOLOv6-n lowest at 30.8 AP."
+  }
+]

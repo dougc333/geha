@@ -1,0 +1,254 @@
+[
+  {
+    "file": "p004_f01.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 2: Illustration of sweeping out a ROC curve through under-sampling. Increased under-sampling of the majority (negative) class will move the performance from the lower left point to the upper right.",
+    "width": 571,
+    "height": 456,
+    "description": "Description: This figure is a ROC curve showing the effect of under-sampling the majority class on the model's performance. The curve starts at the lower left (original data set) and moves to the upper right (increased under-sampling). The \"Ideal point\" is at the top right, representing perfect classification. The line y=x represents random guessing.\n\nText in figure: \"ROC\", \"Ideal point\", \"increased undersampling of the majority class moves the operating point to the upper right\", \"original data set\", \"y = x\", \"(100, 100)\", \"Percent True Positive\", \"Percent False Positive\""
+  },
+  {
+    "file": "p007_f02.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 3: a) Decision region in which the three minority class samples (shown by '+') reside after building a decision tree. This decision region is indicated by the solid-line rectangle. b) A zoomed-in view of the chosen minority class samples for the same dataset. Small solid-line rectangles show the decision regions as a result of oversampling the minority class with replication. c) A zoomed-in view of the chosen minority class samples for the same dataset. Dashed lines show the decision region after over-sampling the minority class with synthetic generation.",
+    "width": 881,
+    "height": 772,
+    "description": "This figure is a set of three scatter plots comparing decision regions for a minority class in a mammography dataset. Plot (a) shows the original decision region for three minority class samples. Plot (b) zooms in on the minority class samples after oversampling with replication, showing smaller decision regions. Plot (c) zooms in on the minority class samples after synthetic oversampling, with decision regions indicated by dashed lines.\n\nText in figure: \"2-attributes, 10% data of the original Mammography dataset\", \"Attribute 1\", \"Attribute 2\", \"+\", \"SMOTE: Synthetic Minority Over-sampling Technique\""
+  },
+  {
+    "file": "p010_f03.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 4: Comparison of decision tree sizes for replicated over-sampling and SMOTE for the Mammography dataset",
+    "width": 572,
+    "height": 461,
+    "description": "Description: This plot compares the size of pruned decision trees for replicated over-sampling and SMOTE techniques on the Mammography dataset. The x-axis represents the degree of minority over-sampling, while the y-axis shows the size of the decision tree in terms of the number of nodes. The synthetic data series is represented by stars, and the replicated data series is represented by a line. The synthetic data series is consistently higher than the replicated data series, with the difference increasing as the degree of minority over-sampling increases.\n\nText in figure: Pruned decision tree size vs the degree of minority over-sampling, Degree of minority over-sampling, Decision tree size (Number of nodes), Synthetic data, Replicated data."
+  },
+  {
+    "file": "p011_f04.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 5: Comparison of % Minority correct for replicated over-sampling and SMOTE for the Mammography dataset",
+    "width": 574,
+    "height": 474,
+    "description": "Description: This plot compares the percentage of minority class correctly classified using replicated over-sampling and SMOTE techniques. The x-axis represents the degree of minority over-sampling, and the y-axis shows the percentage of minority correct. The synthetic data series is highest at the 500 degree mark, while the replicated data series is lowest at the 0 degree mark.\n\nText in figure: % Minority Correct, Degree of Minority Over-sampling, Synthetic data, Replicated data"
+  },
+  {
+    "file": "p012_f05.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 6: Experiments Overview",
+    "width": 575,
+    "height": 483,
+    "description": "Description: This figure is a flowchart that outlines the experimental setup for comparing different techniques in a machine learning context. It shows three main branches: SMOTE and Undersampling, Loss-Ratio, and Modifying costs of majority and minority classes. Each branch leads to different classifiers (C4.5, Ripper, Naive Bayes) and subsequent evaluations using ROC curves and AUC scores.\n\nText in figure: SMOTE, Loss-Ratio, Modify costs, Undersampling, C4.5, Ripper, Naive Bayes, ROC, AUC, convex hull."
+  },
+  {
+    "file": "p015_f06.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 7: Phoneme. Comparison of SMOTE-C4.5, Under-C4.5, and Naive Bayes. SMOTEC4.5 dominates over Naive Bayes and Under-C4.5 in the ROC space. SMOTEC4.5 classifiers are potentially optimal classifiers.",
+    "width": 540,
+    "height": 432,
+    "description": "## Description\n\nThis figure is a Receiver Operating Characteristic (ROC) plot comparing the performance of different classifiers on a phoneme dataset. The plot shows four series: Under-C4.5, 200 SMOTE-C4.5, Naive Bayes, and Hull. The 200 SMOTE-C4.5 series is the highest, followed by Under-C4.5, Naive Bayes, and Hull. The 200 SMOTE-C4.5 series starts at the lowest point and ends at the highest, indicating superior performance.\n\n## Text in figure\n\nLegend: Under-C4.5, 200 SMOTE-C4.5, Naive Bayes, Hull\nAxes: %FP, %TP\nTitle: Phoneme ROC\nData points: various positions on the plot\nAnnotations: None visible"
+  },
+  {
+    "file": "p016_f07.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 8: Phoneme. Comparison of SMOTE-Ripper, Under-Ripper, and modifying Loss Ratio in Ripper. SMOTE-Ripper dominates over Under-Ripper and Loss Ratio in the ROC space. More SMOTE-Ripper classifiers lie on the ROC convex hull.",
+    "width": 540,
+    "height": 433,
+    "description": "Description: This figure is a Receiver Operating Characteristic (ROC) plot comparing the performance of three classifiers: Under-Ripper, 200 SMOTE-Ripper, and Loss Ratio in Ripper. The plot shows the percentage of True Positives (%TP) against the percentage of False Positives (%FP). The 200 SMOTE-Ripper classifier is the highest, followed by Under-Ripper, and then Loss Ratio in Ripper. The SMOTE-Ripper classifiers are closer to the ROC convex hull, indicating better performance.\n\nText in figure: Phoneme ROC with Ripper, Under-Ripper, 200 SMOTE-Ripper, Loss Ratio, Hull, %TP, %FP."
+  },
+  {
+    "file": "p016_f08.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 9: Pima Indians Diabetes. Comparison of SMOTE-C4.5, Under-C4.5, and Naive Bayes. Naive Bayes dominates over SMOTE-C4.5 in the ROC space.",
+    "width": 540,
+    "height": 434,
+    "description": "## Description\nThis figure is a Receiver Operating Characteristic (ROC) plot comparing the performance of different classification models on the Pima Indians Diabetes dataset. The plot shows the trade-off between the true positive rate (%TP) and the false positive rate (%FP). The Naive Bayes model is the highest performing model, followed by SMOTE-C4.5, Under-C4.5, and Hull. The Naive Bayes model dominates the ROC space, achieving higher %TP for a given %FP.\n\n## Text in figure\nLegend: Under-C4.5, 100 SMOTE-C4.5, Naive Bayes, Hull\nAxes: %FP, %TP\nTitle: Pima ROC\nData points: various positions on the plot"
+  },
+  {
+    "file": "p017_f09.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "Figure 10: Pima Indians Diabetes. Comparison of SMOTE-Ripper, Under-Ripper, and modifying Loss Ratio in Ripper. SMOTE-Ripper dominates over Under-Ripper and Loss Ratio in the ROC space.",
+    "width": 540,
+    "height": 434,
+    "description": "## Description\nThis figure is a ROC curve comparing three different methods: Under-Ripper, SMOTE-Ripper, and modifying Loss Ratio in Ripper. The highest curve is SMOTE-Ripper, followed by Under-Ripper, and the lowest is Loss Ratio. SMOTE-Ripper is consistently above the others across the entire range.\n\n## Text in figure\nLegend: Under-Ripper, 100 SMOTE-Ripper, Loss Ratio, Hull Ratio\nAxes: %FP, %TP\nTitle: Pima ROC with Ripper\nMarkers: * (Under-Ripper), 100 SMOTE-Ripper"
+  },
+  {
+    "file": "p018_f10.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "Figure 11: Satimage. Comparison of SMOTE-C4.5, Under-C4.5, and Naive Bayes. The ROC curves of Naive Bayes and SMOTE-C4.5 show an overlap; however, at higher TP's more points from SMOTE-C4.5 lie on the ROC convex hull.",
+    "width": 540,
+    "height": 435,
+    "description": "Description: The figure is a ROC curve comparing the performance of different classification models on the Satimage dataset. The highest performing model is Under-C4.5, followed closely by SMOTE-C4.5. Naive Bayes is the lowest performing model. The ROC curves of Naive Bayes and SMOTE-C4.5 overlap, but SMOTE-C4.5 has more points on the ROC convex hull at higher TP rates.\n\nText in figure: Satimage ROC, Under-C4.5, 200 SMOTE-C4.5, Naive Bayes, Hull, % TP, % FP."
+  },
+  {
+    "file": "p018_f11.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "Figure 12: Satimage. Comparison of SMOTE-Ripper, Under-Ripper, and modifying Loss Ratio in Ripper. SMOTE-Ripper dominates the ROC space. The ROC convex hull is mostly constructed with points from SMOTE-Ripper.",
+    "width": 540,
+    "height": 433,
+    "description": "Description: This figure is a Receiver Operating Characteristic (ROC) plot comparing the performance of three different methods: Under-Ripper, 300 SMOTE-Ripper, and modifying the Loss Ratio in Ripper. The SMOTE-Ripper method shows the highest performance, dominating the ROC space. The Under-Ripper method is the lowest, followed by the Loss Ratio method. The ROC convex hull is primarily composed of points from the SMOTE-Ripper method.\n\nText in figure: Satimage ROC with Ripper, Under-Ripper, 300 SMOTE-Ripper, Loss Ratio, Hull, % TP, % FP."
+  },
+  {
+    "file": "p019_f12.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "Figure 13: Forest Cover. Comparison of SMOTE-C4.5, Under-C4.5, and Naive Bayes. SMOTE-C4.5 and Under-C4.5 ROC curves are very close to each other. However, more points from the SMOTE-C4.5 ROC curve lie on the ROC convex hull, thus establishing a dominance.",
+    "width": 539,
+    "height": 432,
+    "description": "Description: This figure is a ROC curve comparison of different classification models on the Forest Cover dataset. The ROC curves for SMOTE-C4.5 and Under-C4.5 are very close, with SMOTE-C4.5 having more points on the ROC convex hull. The Hull curve is the highest, followed by Naive Bayes, then Under-C4.5, and finally 300 SMOTE-C4.5.\n\nText in figure: \"Covtype ROC\", \"% TP\", \"% FP\", \"Under-C4.5\", \"300 SMOTE-C4.5\", \"Naive Bayes\", \"Hull\""
+  },
+  {
+    "file": "p020_f13.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "Figure 14: Forest Cover. Comparison of SMOTE-Ripper, Under-Ripper, and modifying Loss Ratio in Ripper. SMOTE-Ripper shows a domination in the ROC space. More points from SMOTE-Ripper curve lie on the ROC convex hull.",
+    "width": 542,
+    "height": 434,
+    "description": "## Description\nThis figure is a line graph comparing the Receiver Operating Characteristic (ROC) performance of three methods: Under-Ripper, SMOTE-Ripper, and modifying the Loss Ratio in Ripper. The graph shows the percentage of True Positives (%TP) on the y-axis and the percentage of False Positives (%FP) on the x-axis. The SMOTE-Ripper curve is the highest, followed by Under-Ripper, and then the Loss Ratio modification. The SMOTE-Ripper curve is also closest to the ROC convex hull.\n\n## Text in figure\nLegend: Under-Ripper, SMOTE-Ripper, Loss Ratio, Hull\nAxes: %TP, %FP\nTitle: Covttype ROC with RIPPER\nAnnotations: None\nValues: None"
+  },
+  {
+    "file": "p020_f14.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "",
+    "width": 540,
+    "height": 433,
+    "description": "## Description\nThis figure is a line graph comparing the performance of different sampling techniques. The x-axis represents the percentage of false positives (%FP), and the y-axis represents the percentage of true positives (%TP). The graph shows four lines, each representing a different sampling technique: Under-C4.5, 500 SMOTE-C4.5, Naive Bayes, and Hull. The Under-C4.5 line is the highest, followed by 500 SMOTE-C4.5, Naive Bayes, and Hull. The Hull line is the lowest.\n\n## Text in figure\nUnder-C4.5, 500 SMOTE-C4.5, Naive Bayes, Hull, %FP, %TP"
+  },
+  {
+    "file": "p021_f15.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "Figure 16: Oil. Comparison of SMOTE-Ripper, Under-Ripper, and modifying Loss Ratio in Ripper. Under-Ripper and SMOTE-Ripper curves intersect, and more points from the Under-Ripper curve lie on the ROC convex hull.",
+    "width": 541,
+    "height": 433,
+    "description": "Description: This figure is a line graph comparing the performance of different classification techniques on an oil dataset. The graph shows the Receiver Operating Characteristic (ROC) curves for Under-Ripper, SMOTE-Ripper, and modifying the Loss Ratio in Ripper. The Under-Ripper curve is the lowest, while the SMOTE-Ripper curve is the highest, intersecting with the Under-Ripper curve. The Loss Ratio in Ripper curve lies between the two. The ROC convex hull is also plotted.\n\nText in figure: Oil ROC with Ripper, Under-Ripper, 300 SMOTE-Ripper, Loss Ratio, Hull, %TP, %FP."
+  },
+  {
+    "file": "p021_f16.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "Figure 17: Mammography. Comparison of SMOTE-C4.5, Under-C4.5, and Naive Bayes. SMOTE-C4.5 and Under-C4.5 curves intersect in the ROC space; however, by virtue of number of points on the ROC convex hull, SMOTE-C4.5 has more potentially optimal classifiers.",
+    "width": 540,
+    "height": 433,
+    "description": "## Description\n\nThis figure is a Receiver Operating Characteristic (ROC) plot comparing the performance of three classification methods: Under-C4.5, 400 SMOTE-C4.5, and Naive Bayes. The plot shows the trade-off between True Positive Rate (%TP) and False Positive Rate (%FP). The Under-C4.5 curve is the highest, followed by 400 SMOTE-C4.5, and Naive Bayes is the lowest. The intersection of SMOTE-C4.5 and Under-C4.5 curves is noted, with SMOTE-C4.5 having more optimal classifiers.\n\n## Text in figure\n\nLegend: Under-C4.5, 400 SMOTE-C4.5, Naive Bayes, Hull\nAxes: %FP, %TP\nTitle: Mammography ROC\nAnnotations: Intersection of SMOTE-C4.5 and Under-C4.5 curves"
+  },
+  {
+    "file": "p022_f17.png",
+    "page": 22,
+    "kind": "picture",
+    "caption": "Figure 18: Mammography. Comparison of SMOTE-Ripper, Under-Ripper, and modifying Loss Ratio in Ripper. SMOTE-Ripper dominates the ROC space for TP > 75%.",
+    "width": 540,
+    "height": 432,
+    "description": "## Description\nThis figure is a Receiver Operating Characteristic (ROC) plot comparing the performance of different classification techniques on mammography data. The plot shows four series: Under-Ripper, 400 SMOTE-Ripper, Loss Ratio, and Hull. The 400 SMOTE-Ripper series is the highest, dominating the ROC space for True Positive (TP) rates above 75%. The Under-Ripper series is the lowest, with the Loss Ratio series and Hull series in between.\n\n## Text in figure\nMammography ROC with Ripper\nUnder-Ripper\n400 SMOTE-Ripper\nLoss Ratio\nHull\n% TP\n% FP\n0\n10\n20\n30\n40\n50\n60\n70\n80\n90\n100"
+  },
+  {
+    "file": "p022_f18.png",
+    "page": 22,
+    "kind": "picture",
+    "caption": "Figure 19: A comparison of over-sampling minority class examples by SMOTE and oversampling the minority class examples by replication for the Mammography dataset.",
+    "width": 647,
+    "height": 520,
+    "description": "Description: This figure is a line graph comparing the performance of three methods for oversampling minority class examples in the Mammography dataset. The methods are 400 SMOTE, 400 Replicate, and Hull. The graph shows the percentage of true positives (%TP) on the y-axis and the percentage of false positives (%FP) on the x-axis. The 400 SMOTE method is represented by a blue line with star markers, the 400 Replicate method by a red line with circle markers, and the Hull method by a green line with diamond markers. The 400 SMOTE method starts at the lowest point and ends at the highest point, while the 400 Replicate method starts at the highest point and ends at the lowest point.\n\nText in figure: Mammography ROC with C4.5, 400 SMOTE, 400 Replicate, Hull, %TP, %FP"
+  },
+  {
+    "file": "p023_f19.png",
+    "page": 23,
+    "kind": "picture",
+    "caption": "Figure 20: E-state. (a) Comparison of SMOTE-C4.5, Under-C4.5, and Naive Bayes. SMOTE-C4.5 and Under-C4.5 curves intersect in the ROC space; however, SMOTE-C4.5 has more potentially optimal classifiers, based on the number of points on the ROC convex hull.",
+    "width": 541,
+    "height": 433,
+    "description": "Description: The figure is a Receiver Operating Characteristic (ROC) plot comparing the performance of different classification algorithms on the E-state dataset. The plot shows the trade-off between true positive rate (%TP) and false positive rate (%FP). The SMOTE-C4.5 curve is highest, followed by Under-C4.5, Naive Bayes, and Hull. The SMOTE-C4.5 curve intersects with the Under-C4.5 curve, but SMOTE-C4.5 has more points on the ROC convex hull, indicating more potentially optimal classifiers.\n\nText in figure: E-state ROC, %TP, %FP, Under-C4.5, 500 SMOTE-C4.5, Naive Bayes, Hull."
+  },
+  {
+    "file": "p023_f20.png",
+    "page": 23,
+    "kind": "picture",
+    "caption": "Figure 21: E-state. Comparison of SMOTE-Ripper, Under-Ripper, and modifying Loss Ratio in Ripper. SMOTE-Ripper has more potentially optimal classifiers, based on the number of points on the ROC convex hull.",
+    "width": 541,
+    "height": 434,
+    "description": "Description: This figure is a Receiver Operating Characteristic (ROC) plot comparing three different classification methods: Under-Ripper, SMOTE-Ripper, and modifying the Loss Ratio in Ripper. The plot shows the percentage of True Positives (%TP) against the percentage of False Positives (%FP). The SMOTE-Ripper method has the highest number of points on the ROC convex hull, indicating more potentially optimal classifiers. The Under-Ripper method has the lowest performance, while the Loss Ratio modification in Ripper lies between the other two.\n\nText in figure: E-state ROC with Ripper, Under-Ripper, 100 SMOTE-Ripper, Loss Ratio, Hull, %TP, %FP."
+  },
+  {
+    "file": "p024_f21.png",
+    "page": 24,
+    "kind": "picture",
+    "caption": "Figure 22: Can. Comparison of SMOTE-C4.5, Under-C4.5, and Naive Bayes. SMOTEC4.5 and Under-C4.5 ROC curves overlap for most of the ROC space.",
+    "width": 540,
+    "height": 434,
+    "description": "## Description\nThis figure is a Receiver Operating Characteristic (ROC) plot comparing the performance of three classification models: Under-C4.5, SMOTE-C4.5, and Naive Bayes. The SMOTE-C4.5 and Under-C4.5 ROC curves overlap significantly, indicating similar performance. The Naive Bayes model shows the lowest performance, with its curve positioned below the others. The highest performing model is Under-C4.5, which is represented by the green line with circular markers.\n\n## Text in figure\nCan ROC\n% TP\n% FP\nUnder-C4.5\n100 SMOTE-C4.5\nNaive Bayes\nHull"
+  },
+  {
+    "file": "p024_f22.png",
+    "page": 24,
+    "kind": "picture",
+    "caption": "Figure 23: Can. Comparison of SMOTE-Ripper, Under-Ripper, and modifying Loss Ratio in Ripper. SMOTE-Ripper and Under-Ripper ROC curves overlap for most of the ROC space.",
+    "width": 540,
+    "height": 436,
+    "description": "Description: This figure is a Receiver Operating Characteristic (ROC) curve comparing three methods: Under-Ripper, SMOTE-Ripper, and modifying the Loss Ratio in Ripper. The SMOTE-Ripper and Under-Ripper curves overlap significantly, indicating similar performance. The Loss Ratio in Ripper curve is the highest, followed by SMOTE-Ripper, and then Under-Ripper, which is the lowest. The highest point is around 100% True Positive Rate (%TP) with 0% False Positive Rate (%FP).\n\nText in figure: Can ROC with Ripper, Under-Ripper, 50 SMOTE-Ripper, Loss Ratio, Hull, %TP, %FP."
+  },
+  {
+    "file": "p026_f23.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "",
+    "width": 575,
+    "height": 461,
+    "description": "Figure type: Line graph\nDescription: The figure is a line graph comparing the performance of three different techniques: SMOTE, Varying C4.5 decision thresholds, and Hull. The graph shows the percentage of True Positives (%TP) on the y-axis and the percentage of False Positives (%FP) on the x-axis. The SMOTE line is the highest, followed by Varying C4.5 decision thresholds, and then Hull. The SMOTE line peaks at around 100% TP with 10% FP, while the Varying C4.5 decision thresholds line peaks at around 95% TP with 10% FP. The Hull line is the lowest, peaking at around 85% TP with 10% FP.\n\nText in figure: Phoneme, ROC comparison, SMOTE, Varying C4.5 decision thresholds, Hull"
+  },
+  {
+    "file": "p026_f24.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "Figure 24: SMOTE and Under-sampling combination against C4.5 learning by tuning the bias towards the minority class",
+    "width": 575,
+    "height": 463,
+    "description": "Description: The figure is a line graph comparing the accuracy of a model using SMOTE and under-sampling techniques against the C4.5 learning algorithm. It shows two series: \"Accuracy on majority (negative class)\" and \"Accuracy on minority (positive class).\" The blue line (minority class) peaks at around 100% accuracy at 100% under-sampling, while the green line (majority class) starts at 90% and drops to around 30% at 800% under-sampling.\n\nText in figure: SMOTE and Under-sampling, Accuracy on majority (negative class), Accuracy on minority (positive class), Percentage under-sampling of majority class."
+  },
+  {
+    "file": "p029_f25.png",
+    "page": 29,
+    "kind": "picture",
+    "caption": "",
+    "width": 538,
+    "height": 431,
+    "description": "Figure: Line graph showing performance metrics of different models.\nSeries: Under-C4.5, 50 SMOTE-NC-C4.5, Naive Bayes, Hull.\nHighest: Under-C4.5 at 100% TP.\nLowest: Under-C4.5 at 50% FP.\nMarkers: Naive Bayes at 10% FP, 50% TP.\nAnnotations: None.\n\nText in figure: Under-C4.5, 50 SMOTE-NC-C4.5, Naive Bayes, Hull."
+  },
+  {
+    "file": "p030_f26.png",
+    "page": 30,
+    "kind": "picture",
+    "caption": "Figure 27: Adult. Comparison of SMOTE-Ripper, Under-Ripper, and modifying Loss Ratio in Ripper. SMOTE-Ripper and Under-Ripper ROC curves overlap for most of the ROC space.",
+    "width": 539,
+    "height": 432,
+    "description": "Description: The figure is a Receiver Operating Characteristic (ROC) curve comparing the performance of three different methods: Under-Ripper, SMOTE-Ripper, and modifying the Loss Ratio in Ripper. The SMOTE-Ripper and Under-Ripper ROC curves overlap significantly, indicating similar performance. The Loss Ratio in Ripper curve is the highest, followed closely by SMOTE-Ripper and Under-Ripper. The lowest curve is the Under-Ripper, which starts lower but converges with the others.\n\nText in figure: Adult ROC with Ripper, Under-Ripper, 50 SMOTE-Ripper, Loss Ratio, Hull."
+  },
+  {
+    "file": "p030_f27.png",
+    "page": 30,
+    "kind": "picture",
+    "caption": "",
+    "width": 648,
+    "height": 516,
+    "description": "Section 1: Figure description\nThis figure is a line graph showing the percentage of TP (True Positives) against the percentage of FP (False Positives) for two different categories: \"Under\" and \"50 SMOTE\". The \"Under\" category is represented by green stars, while the \"50 SMOTE\" category is represented by blue crosses. The graph shows that the \"50 SMOTE\" category has a higher percentage of TP compared to the \"Under\" category across the entire range of FP percentages.\n\nSection 2: Text in figure\nText in figure: Adult only continuous [C4.5], %TP, %FP, Under, 50 SMOTE"
+  },
+  {
+    "file": "p034_f28.png",
+    "page": 34,
+    "kind": "picture",
+    "caption": "Figure 29: ROC curves for the Oil Dataset. (a) ROC curves for SMOTE-C4.5, UnderC4.5, Naive Bayes, and their ROC convex hull. (b) ROC curves for SMOTEC4.5, Under-C4.5, and Naive Bayes. (c) ROC convex hulls with and without SMOTE.",
+    "width": 924,
+    "height": 766,
+    "description": "Figure: Three ROC curves for the Oil Dataset. Panel (a) shows ROC curves for SMOTE-C4.5, Under-C4.5, Naive Bayes, and their ROC convex hull. Panel (b) shows ROC curves for SMOTEC4.5, Under-C4.5, and Naive Bayes. Panel (c) shows ROC convex hulls with and without SMOTE.\n\nText: Oil ROC, Under-C4.5, 500 SMOTE-C4.5, Naive Bayes, Hull, Oil, Convex Hull with SMOTE, Convex Hull without SMOTE\n\nLegend: Under-C4.5, 500 SMOTE-C4.5, Naive Bayes, Hull\n\nAxes: %FP, %TP\n\nAnnotations: None\n\nMarkers: None"
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "file": "p004_f01.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "",
+    "width": 202,
+    "height": 131,
+    "description": "## Search Index\n\n### Figure Description\nThe figure depicts a visual representation of a neural network architecture, specifically a simplified version of SqueezeNet. It shows four rectangular blocks, each representing a different layer in the network. The blocks are arranged in a sequence, indicating the flow of data through the network. The blocks are labeled with colors and patterns, possibly indicating different types of layers or operations.\n\n### Text in Figure\n- Blue block with studs\n- Blue block with studs\n- Blue block with studs\n- Gray block with studs"
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 1: Microarchitectural view: Organization of convolution filters in the Fire module . In this example, s 1 x 1 = 3 , e 1 x 1 = 4 , and e 3 x 3 = 4 . We illustrate the convolution filters but not the activations.",
+    "width": 531,
+    "height": 330,
+    "description": "Description: The figure is a diagram illustrating the organization of convolution filters within a Fire module, as described in the paper \"SqueezeNet: AlexNet-level accuracy with 50x fewer parameters and <0.5MB model size.\" It shows a sequence of operations: a \"squeeze\" step with 1x1 convolution filters, followed by an \"expand\" step with both 1x1 and 3x3 convolution filters, and concludes with a ReLU activation function. The diagram visually represents the flow of data through these operations, highlighting the efficiency of the Fire module in reducing model size while maintaining accuracy.\n\nText in figure: squeeze, 1x1 convolution filters, expand, 1x1 and 3x3 convolution filters, ReLU, ReLU, s 1 x 1 = 3, e 1 x 1 = 4, e 3 x 3 = 4."
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 2: Macroarchitectural view of our SqueezeNet architecture. Left: SqueezeNet (Section 3.3); Middle: SqueezeNet with simple bypass (Section 6); Right: SqueezeNet with complex bypass (Section 6).",
+    "width": 149,
+    "height": 467,
+    "description": "Figure type: Architectural diagram of SqueezeNet.\n\nDescription: The figure shows the macroarchitecture of SqueezeNet, a deep learning model designed for efficient image classification. It consists of a series of convolutional layers, fire modules, and pooling layers. The fire modules are the core building blocks, consisting of a squeeze layer followed by an expand layer. The diagram illustrates the flow of data through the network, from input to output.\n\nText in figure: conv1, maxpool/2, fire2, conv1x1, fire3, fire4, conv1x1, fire5, fire6, conv1x1, fire7, fire8, conv1x1, fire9, conv10, global avgpool, softmax."
+  },
+  {
+    "file": "p008_f04.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "",
+    "width": 211,
+    "height": 277,
+    "description": "This figure is a line graph comparing the ImageNet Top-5 accuracy of SqueezeNet against the size of its weights. The x-axis represents the weight size in MB, and the y-axis represents the ImageNet Top-5 accuracy in percentage. The graph shows that as the weight size decreases, the accuracy also decreases. The highest accuracy of 85.3% is achieved with 13 MB of weights, while the lowest accuracy of 80.3% is achieved with 4.8 MB of weights.\n\nText in figure: ImageNet Top-5 accuracy, SqueezeNet, 85.3, 80.3, 4.8 MB of weights, 13 MB of weights, SqueezeNet accuracy."
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "",
+    "width": 366,
+    "height": 279,
+    "description": "## Index\n\n### Description\n\nThis figure is a line graph showing the percentage of 3x3 filters in a model against the size of the model in megabytes (MB). The x-axis represents the model size in MB, ranging from 5.7 to 21 MB. The y-axis represents the percentage of 3x3 filters, ranging from 0% to 100%. The graph includes three data points: 5.7 MB, 13 MB, and 21 MB, each with corresponding accuracy percentages.\n\n### Text in figure\n\n- X-axis: MB of weights in model\n- Y-axis: ImageNet Top-5 accuracy (%)\n- Data points:\n  - 5.7 MB of weights: 76.3% accuracy\n  - 13 MB of weights: 85.3% accuracy\n  - 21 MB of weights: 85.3% accuracy"
+  }
+]

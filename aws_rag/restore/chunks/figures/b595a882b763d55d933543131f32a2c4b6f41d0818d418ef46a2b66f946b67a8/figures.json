@@ -1,0 +1,130 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1. The MaskR-CNN framework for instance segmentation.",
+    "width": 476,
+    "height": 213,
+    "description": "## Section 1: Figure Description\nThis figure illustrates the Mask R-CNN framework for instance segmentation. It shows the process flow from an input image to the final output, which includes class labels and bounding boxes for each instance. The figure highlights the RoIAlign operation, which aligns the region of interest (RoI) to a fixed grid size, and the convolutional layers that process the aligned regions.\n\n## Section 2: Text in Figure\nRoIAlign, class, box, conv, conv, conv, conv",
+    "pdf_text": "RoIAlign | RoIAlign | class | box | conv | conv | conv | conv",
+    "bbox": [
+      307.6,
+      201.5,
+      545.6,
+      308.2
+    ]
+  },
+  {
+    "file": "p002_f02.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 2. Mask R-CNN results on the COCO test set. These results are based on ResNet-101 [19], achieving a mask AP of 35.7 and running at 5 fps. Masks are shown in color, and bounding box, category, and confidences are also shown.",
+    "width": 992,
+    "height": 368,
+    "description": "## Description\nThis figure displays the results of Mask R-CNN on the COCO test set, showcasing the model's ability to detect objects and generate masks. The images are colored to highlight different objects, with bounding boxes, categories, and confidence scores provided.\n\n## Text in figure\n- dining table.96\n- person1.00\n- person.94\n- bottle.99\n- motorcycle1.00\n- person.96\n- person.98\n- person.90\n- person.92\n- person.99\n- person.91\n- bus.99\n- backpack.93\n- umbrella.98\n- handbag.96\n- elephant1.00\n- sheep1.00\n- sheep.99\n- sheep.91\n- sheep.99\n- sheep.99\n- sheep.95\n- sheep.99\n- sheep.96\n- sheep.96\n- sheep.86\n- sheep.82\n- sheep.93\n- dining table.99\n- chair.99\n- chair.90\n- chair.99\n- chair.98\n- chair.96\n- chair.86\n- chair.99\n- bowl.81\n- wine glass.99\n- wine glass1.00\n- bowl.85\n- knife.83\n- wine glass1.00\n- wine glass.93\n- wine glass.97\n- fork.95",
+    "pdf_text": "dining table.96 | person1.00 | person1.00 | person1.00 | person1.00 | person1.00 | person1.00 | person1.00 | person.94 | bottle.99 | bottle.99 | bottle.99 | motorcycle1.00 | motorcycle1.00 | person1.00 | person1.00 | person.96person1.00 | person.83 | person.96 | person.98 | person.90 | person.92 | person.99person.91 | bus.99 | person1.00 | person1.00 | person1.00 | backpack.93 | person1.00 | person.99 | person1.00 | backpack.99 | person.99 | person.98 | person.89 | person.95 | person1.00 | person1.00 | car1.00 | traffic light.96 | person.96 | truck1.00 | person.99 | car.99 | person.85 | motorcycle.95 | car.99 | car.92 | person.99 | person1.00 | traffic light.92 | traffic light.84 | traffic light.95 | car.93 | person.87 | person1.00 | person1.00 | umbrella.98 | umbrella.98 | backpack1.00 | handbag.96 | elephant1.00 | person1.00 | person1.00 | person.99 | sheep1.00 | person1.00 | sheep.99 | sheep.91 | sheep1.00 | sheep.99 | sheep.99 | sheep.95 | person.99 | sheep1.00 | sheep.96 | sheep.99 | sheep.99 | sheep.96 | sheep.96 | sheep.96 | sheep.86 | sheep.82 | sheep.93 | dining table.99 | chair.99 | chair.90 | chair.99 | chair.98 | chair.96 | chair.86 | chair.99 | bowl.81 | chair.96 | tv.99 | bottle.99 | wine glass.99 | wine glass1.00 | bowl.85 | knife.83 | wine glass1.00 | wine glass.93 | wine glass.97 | fork.95",
+    "bbox": [
+      49.3,
+      71.5,
+      545.5,
+      255.4
+    ]
+  },
+  {
+    "file": "p003_f03.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "",
+    "width": 471,
+    "height": 170,
+    "description": "## Description\nThis figure illustrates the RoIAlign method, showing how it computes values for sampling points within a Region of Interest (RoI). The dashed grid represents a feature map, the solid lines depict the RoI with 2x2 bins, and the dots indicate the 4 sampling points in each bin. RoIAlign uses bilinear interpolation to determine the value of each sampling point from nearby grid points on the feature map.\n\n## Text in figure\nRoIAlign, feature map, RoI, 2x2 bins, sampling points, bilinear interpolation, quantization",
+    "pdf_text": "Figure 3. RoIAlign: The dashed grid rep- | resents a feature map, the solid lines an RoI | (with 2\u00d72 bins in this example), and the dots | the 4 sampling points in each bin. RoIAlign | computes the value of each sampling point | by bilinear interpolation from the nearby grid | points on the feature map. No quantization is | performed on any coordinates involved in the | RoI, its bins, or the sampling points.",
+    "bbox": [
+      309.9,
+      73.2,
+      545.5,
+      158.0
+    ]
+  },
+  {
+    "file": "p004_f04.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 4. Head Architecture : We extend two existing Faster RCNN heads [19, 27]. Left/Right panels show the heads for the ResNet C4 and FPN backbones, from [19] and [27], respectively, to which a mask branch is added. Numbers denote spatial resolution and channels. Arrows denote either conv, deconv, or fc layers as can be inferred from context (conv preserves spatial dimension while deconv increases it). All convs are 3 \u00d7 3, except the output conv which is 1 \u00d7 1, deconvs are 2 \u00d7 2 with stride 2, and we use ReLU [31] in hidden layers. Left : 'res5' denotes ResNet's fifth stage, which for simplicity we altered so that the first conv operates on a 7 \u00d7 7 RoI with stride 1 (instead of 14 \u00d7 14 / stride 2 as in [19]). Right : ' \u00d7 4' denotes a stack of four consecutive convs.",
+    "width": 475,
+    "height": 151,
+    "description": "## Description\nThis figure illustrates the head architecture of Mask R-CNN, extending two existing Faster R-CNN heads with ResNet C4 and FPN backbones. It shows the addition of a mask branch to these heads, detailing the spatial resolution and channels at each stage. The left panel depicts the ResNet C4 backbone, while the right panel shows the FPN backbone. Both panels include convolutional layers, deconvolutional layers, and fully connected layers, with specific dimensions and channel counts provided.\n\n## Text in figure\n- **Left Panel (ResNet C4 Backbone)**\n  - RoI: 7x7, 1024 channels\n  - res5: 7x7, 2048 channels\n  - Average pooling: 2048 channels\n  - Convolutional layers: 14x14, 256 channels\n  - Fully connected layer: 1024 channels\n  - Mask branch: 14x14, 80 channels\n- **Right Panel (FPN Backbone)**\n  - RoI: 7x7, 256 channels\n  - Convolutional layers: 14x14, 256 channels\n  - Fully connected layer: 1024 channels\n  - Convolutional layers: 28x28, 256 channels\n  - Fully connected layer: 1024 channels\n  - Mask branch: 28x28, 80 channels",
+    "pdf_text": "ave | RoI | RoI | 14\u00d714 | \u00d7256 | 7\u00d77 | \u00d7256 | 14\u00d714 | \u00d7256 | 1024 | 28\u00d728 | \u00d7256 | 1024 | mask | 14\u00d714 | \u00d7256 | class | box | 2048 | RoI | res5 | 7\u00d77 | \u00d71024 | 7\u00d77 | \u00d72048 | \u00d74 | class | box | 14\u00d714 | \u00d780 | mask | 28\u00d728 | \u00d780 | Faster R-CNN | w/ ResNet [19] | Faster R-CNN | w/ FPN [27]",
+    "bbox": [
+      307.9,
+      70.3,
+      545.5,
+      146.0
+    ]
+  },
+  {
+    "file": "p005_f05.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 5. More results of Mask R-CNN on COCO test images, using ResNet-101-FPN and running at 5 fps, with 35.7 mask AP (Table 1).",
+    "width": 985,
+    "height": 516,
+    "description": "## Description\nThis figure is a collection of images showcasing the results of Mask R-CNN on COCO test images. Each image displays various objects such as cars, people, elephants, and more, with bounding boxes and segmentation masks highlighting the detected objects. The images demonstrate the model's ability to accurately identify and segment different objects in complex scenes.\n\n## Text in figure\nhorse1.00 | horse1.00 horse1.00 | bus1.00 | bus1.00 | car.98 | truck.88 | car.93 | car.78 | car.98 | car.91 | car.96 | car.99 | car.94 | car.99 | car.98 | truck.86 | car.99 | car.95 | car1.00 | car.93 | car.98 | car.95 | car.97 | car.87 | car.99 | car.82 | car.78 | car.93 | car.95 | car.97 | person.99 | traffic light.73 | person1.00 | person.99 | person.95 | person.93 | person.93 | person1.00 | person.98 | skateboard.82 | suitcase1.00 | suitcase.99 | suitcase.96 | suitcase1.00 | suitcase.93 | suitcase.98 | suitcase.88 | suitcase.72 | stop sign.88 | person1.00 | person1.00 | person1.00 | person1.00 | person.99 | person.99 | bench.76 | skateboard.91 | skateboard.83 | handbag.81 | surfboard1.00 | person1.00 | person1.00 | surfboard1.00 | person1.00 | person.98 | surfboard1.00 | person1.00 | surfboard.98 surfboard1.00 | person.91 | person.74 | person1.00 | person1.00 | person1.00 | person1.00 | person1.00 | person1.00 | person.98 | person.99 | person1.00 | person.99 | umbrella1.00 | person.95 | umbrella.99 | umbrella.97 | umbrella.97 | umbrella.96 | umbrella1.00 | backpack.96 | umbrella.98 | backpack.95 | person.80 | backpack.98 | bicycle.93 | umbrella.89 | person.89 | handbag.97 | handbag.85",
+    "pdf_text": "horse1.00 | horse1.00 horse1.00 | bus1.00 | bus1.00 | car.98 | truck.88 | car.93 | car.78 | car.98 | car.91 | car.96 | car.99 | car.94 | car.99 | car.98 | truck.86 | car.99 | car.95 | car1.00 | car.93 | car.98 | car.95 | car.97 | car.87 | car.99 | car.82 | car.78 | car.93 | car.95 | car.97 | person.99 | traffic light.73 | person1.00 | person.99 | person.95 | person.93 | person.93 | person1.00 | person.98 | skateboard.82 | suitcase1.00 | suitcase.99 | suitcase.96 | suitcase1.00 | suitcase.93 | suitcase.98 | suitcase.88 | suitcase.72 | stop sign.88 | person1.00 | person1.00 | person1.00 | person1.00 | person.99 | person.99 | bench.76 | skateboard.91 | skateboard.83 | handbag.81 | surfboard1.00 | person1.00 | person1.00 | surfboard1.00 | person1.00 | person.98 | surfboard1.00 | person1.00 | surfboard.98 surfboard1.00 | person.91 | person.74 | person1.00 | person1.00 | person1.00 | person1.00 | person1.00 | person1.00 | person.98 | person.99 | person1.00 | person.99 | umbrella1.00 | person.95 | umbrella.99 | umbrella.97 | umbrella.97 | umbrella.96 | umbrella1.00 | backpack.96 | umbrella.98 | backpack.95 | person.80 | backpack.98 | bicycle.93 | umbrella.89 | person.89 | handbag.97 | handbag.85 | person1.00 | person1.00 | person1.00 | person1.00 | person1.00 | person1.00 | motorcycle.72 | kite.89 | person.99 | kite.95 | person.99 | person1.00 | person.81 | person.72 | kite.93 | person.89 | kite1.00 | person.98 | person1.00 | kite.84 | kite.97 | person.80 | handbag.80 | person.99 | kite.82 | person.98 | person.96 | kite.98 | person.99 | person.82 | kite.81 | person.95 | person.84 | kite.98 | kite.72 | kite.99 | kite.84 | kite.99 | person.94 | person.72 | person.98 | kite.95 | person.98 | person.77 | kite.73 | person.78 | person.71 | person.87 | kite.88 | kite.88 | person.94 | kite.86 | kite.89 | zebra.99 | zebra1.00 | zebra1.00 | zebra.99 | zebra1.00 | zebra.96 | zebra.74 | zebra.96 | zebra.99 | zebra.90 | zebra.88 | zebra.76 | dining table.91 | dining table.78 | chair.97 | person.99 | person.86 | chair.94 | chair.98 | person.95 | chair.95 | person.97 | chair.92 | chair.99 | person.97 | person.99 | person.94 | person.99 | person.87 | person.99 | chair.83 | person.94 | person.99 | person.98 | chair.87 | chair.95 | person.97 | person.96 | chair.99 | person.86 | person.89 | chair.89 | wine glass.93 | person.98 | person.88 | person.97 | person.88 | person.88 | person.91 | chair.96 | person.95 | person.77 | person.92 | wine glass.94 | cup.83 | wine glass.94 | wine glass.83 | cup.91 | chair.85 | dining table.96 | wine glass.91 | person.96 | cup.98 | person.83 | dining table.75 | cup.96 | person.72 | wine glass.80 | chair.98 | person.81 | person.82 | dining table.81 | chair.85 | chair.78 | cup.75 | person.77 | cup.71 | wine glass.80 | cup.79 | cup.93 | cup.71 | person.99 | person.99 | person1.00 | person1.00 | frisbee1.00 | person.80 | person.82 | elephant1.00 | elephant1.00 | elephant1.00 | elephant.97 | elephant.99 | person1.00 | person1.00 | dining table.95",
+    "bbox": [
+      51.1,
+      71.7,
+      543.6,
+      329.4
+    ]
+  },
+  {
+    "file": "p006_f06.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 6. FCIS+++ [26] (top) vs . Mask R-CNN (bottom, ResNet-101-FPN). FCIS exhibits systematic artifacts on overlapping objects.",
+    "width": 992,
+    "height": 239,
+    "description": "### Description\nThis figure compares the performance of two object detection models, FCIS+++ and Mask R-CNN, using ResNet-101-FPN. It shows multiple images with detected objects highlighted in different colors. FCIS+++ exhibits systematic artifacts on overlapping objects, while Mask R-CNN provides more accurate detections.\n\n### Text in figure\nFCIS:\n- person1.00\n- person1.00\n- person1.00\n- person1.00\n- umbrella1.00\n- umbrella.99\n- car.99\n- car.93\n\nMask R-CNN:\n- person1.00\n- person1.00\n- person1.00\n- person1.00\n- umbrella.99\n- umbrella1.00\n- car.99\n- car.93\n- giraffe1.00\n- giraffe1.00\n- person1.00\n- person1.00\n- person1.00\n- person1.00\n- sports ball1.00\n- sports ball.98\n- person1.00\n- person1.00\n- person1.00\n- person.95\n- tie.95\n- tie1.00\n- person1.00\n- person1.00\n- person1.00\n- person1.00\n- person1.00\n- person1.00\n- skateboard.98\n- person.99\n- person.99\n- skateboard.99\n- handbag.93\n- train1.00\n- train.99\n- train.80\n- person1.00\n- person1.00\n- person1.00\n- person1.00\n- person1.00\n- person1.00",
+    "pdf_text": "person1.00 | person1.00 | person1.00 | person1.00 | umbrella1.00 | umbrella.99 | car.99 car.93 | giraffe1.00 | giraffe1.00 | person1.00 | person1.00 | person1.00 person1.00 | person.95 | sports ball1.00 | sports ball.98 | person1.00 | person1.00 | person1.00 | tie.95 | tie1.00 | FCIS | Mask R-CNN | train1.00 | train.99 | train.80 | person1.00 | person1.00 | person1.00 | person1.00 | person1.00 | person1.00 | skateboard.98 | person.99 | person.99 | skateboard.99 | handbag.93",
+    "bbox": [
+      49.7,
+      71.4,
+      545.4,
+      190.8
+    ]
+  },
+  {
+    "file": "p008_f07.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 7. Keypoint detection results on COCO test using Mask R-CNN (ResNet-50-FPN), with person segmentation masks predicted from the same model. This model has a keypoint AP of 63.1 and runs at 5 fps.",
+    "width": 992,
+    "height": 278,
+    "description": "This figure shows keypoint detection results on the COCO test dataset using Mask R-CNN (ResNet-50-FPN). It displays various images with human figures, each annotated with keypoints and segmentation masks. The model achieves a keypoint AP of 63.1 and operates at 5 frames per second.\n\nText in figure: Mask R-CNN, ResNet-50-FPN, keypoint detection, COCO test, person segmentation, keypoint AP 63.1, 5 fps.",
+    "pdf_text": "",
+    "bbox": [
+      49.3,
+      71.2,
+      545.5,
+      209.9
+    ]
+  },
+  {
+    "file": "p009_f08.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 8. Mask R-CNN results on Cityscapes test (32.0 AP). The bottom-right image shows a failure prediction.",
+    "width": 474,
+    "height": 363,
+    "description": "## Description\nThis figure is a collection of six images showcasing the results of Mask R-CNN on the Cityscapes test dataset, achieving an average precision (AP) of 32.0. Each image displays various urban scenes with objects such as cars, bicycles, and people, all annotated with bounding boxes and segmentation masks. The annotations include labels like \"car,\" \"person,\" \"bicycle,\" and \"bus,\" along with confidence scores ranging from 0.50 to 1.00.\n\n## Text in figure\n- car:1.00, car:0.98, car:0.98, car:0.95, car:0.81, car:0.52\n- person:1.00, person:1.00, person:1.00, person:1.00, person:1.00, person:0.99\n- person:0.99, person:0.99, person:0.98, person:0.98, person:0.98, person:0.94\n- person:0.94, person:0.82, person:0.79, person:0.73, person:0.67, person:0.66\n- person:0.59, truck:0.66, bus:1.00, bus:0.95, rider:0.59, bicycle:0.83\n- bicycle:0.56, car:1.00, car:1.00, car:1.00, car:1.00, car:1.00\n- car:1.00, car:1.00, car:1.00, car:0.99, car:0.95, car:0.95\n- car:0.95, car:0.69, car:0.68, car:0.68, car:0.64, car:0.57\n- car:0.52, person:1.00, person:0.99, person:0.99, person:0.99, person:0.99\n- person:0.98, person:0.98, person:0.98, person:0.97, person:0.93, person:0.92\n- person:0.91, person:0.86, person:0.84, person:0.82, person:0.73, person:0.72\n- person:0.72, person:0.72, person:0.",
+    "pdf_text": "car:1.00 | car:0.98 | car:0.98 | car:0.95 | car:0.81 | car:0.52 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:0.99 | person:0.99 | person:0.99 | person:0.99 | person:0.98 | person:0.98 | person:0.98 | person:0.98 | person:0.94 | person:0.94 | person:0.82 | person:0.82 | person:0.79 | person:0.73 | person:0.67 | person:0.66 | person:0.59 | truck:0.66 | bus:1.00 | bus:0.95 | rider:0.59 | bicycle:0.83 | bicycle:0.56 | car:1.00 | car:1.00 | car:1.00 | car:1.00 | car:1.00 | car:1.00 | car:1.00 | car:1.00 | car:1.00 | car:0.99 | car:0.95 | car:0.95 | car:0.95 | car:0.69 | car:0.68 | car:0.68 | car:0.64 | car:0.57 | car:0.52 | person:1.00 | person:0.99 | person:0.99 | person:0.99 | person:0.99 | person:0.98 | person:0.98 | person:0.98 | person:0.97 | person:0.93 | person:0.92 | person:0.91 | person:0.86 | person:0.84 | person:0.82 | person:0.73 | person:0.72 | person:0.72 | person:0.72 | person:0.63 | rider:0.68 | car:1.00 | car:1.00 | car:1.00 | car:1.00 | car:1.00 | car:1.00 | car:1.00 | car:1.00 | car:1.00 | car:1.00 | car:1.00 | car:1.00 | car:1.00 car:1.00car:1.00 | car:1.00 | car:1.00 | car:0.98 | car:0.97 | car:0.88 | car:0.76 | car:0.72 | car:0.72 | car:0.65 | car:0.50 | person:1.00 | person:1.00 | person:0.98 | person:0.93 | person:0.85 | person:0.78 | person:0.73 | person:0.58 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:0.99 | person:0.99 | person:0.98 | person:0.97 | person:0.96 | person:0.92 | person:0.91 | person:0.70 | person:0.59 | bicycle:0.99 | bicycle:0.97 | car:1.00 | car:1.00 | car:0.99 | car:0.89 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:0.96 | person:0.93 | person:0.89 | person:0.88 | person:0.75 | rider:0.94 | car:1.00 | car:1.00 | car:1.00 | car:1.00 | car:1.00 | car:1.00 | car:1.00 | car:0.99 | car:0.89 | car:0.67 | person:1.00 | person:1.00 | person:1.00 | person:1.00 | person:0.82 | bus:0.75",
+    "bbox": [
+      307.9,
+      176.6,
+      545.2,
+      357.9
+    ]
+  }
+]

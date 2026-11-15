@@ -1,0 +1,101 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1: The three stage compression pipeline: pruning, quantization and Huffman coding. Pruning reduces the number of weights by 10 \u00d7 , while quantization further improves the compression rate: between 27 \u00d7 and 31 \u00d7 . Huffman coding gives more compression: between 35 \u00d7 and 49 \u00d7 . The compression rate already included the meta-data for sparse representation. The compression scheme doesn't incur any accuracy loss.",
+    "width": 786,
+    "height": 273,
+    "description": "This is a flow diagram showing a three-stage compression pipeline for deep neural networks. It includes pruning, quantization, and Huffman coding. Pruning reduces the number of weights by 9x-13x. Quantization further compresses the weights, achieving a 27x-31x reduction. Huffman coding provides additional compression, resulting in a 35x-49x reduction. The process maintains the same accuracy throughout.\n\nText in figure: Pruning: less number of weights, Quantization: less bits per weight, Huffman Encoding, Train Connectivity, original network, original size, Prune Connections, Train Weights, Cluster the Weights, Generate Code Book, same accuracy, Encode Weights, same accuracy, 9x-13x reduction, Quantize the Weights with Code Book, 27x-31x reduction, Encode Index, same accuracy, 35x-49x reduction, Retrain Code Book."
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2: Representing the matrix sparsity with relative index. Padding filler zero to prevent overflow.",
+    "width": 477,
+    "height": 115,
+    "description": "This figure is a visual representation of matrix sparsity using relative index, showing how a sparse matrix can be represented efficiently. It includes a table with three rows: \"idx\", \"diff\", and \"value\". The \"idx\" row shows indices, the \"diff\" row shows differences between indices, and the \"value\" row shows the actual values. The figure also includes a note about padding filler zero to prevent overflow.\n\nKey elements in the figure:\n- \"idx\" row: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15\n- \"diff\" row: 1, 3, 8\n- \"value\" row: 3.4, 0.9, 0, 1.7\n- Note: \"Span Exceeds 8=2^3\" and \"Filler Zero\""
+  },
+  {
+    "file": "p003_f03.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "",
+    "width": 500,
+    "height": 335,
+    "description": "This figure illustrates the process of compressing a deep neural network using pruning, trained quantization, and Huffman coding. It shows the transformation of weights and centroids through various stages, including the initial weights, cluster indices, centroids, fine-tuned centroids, gradient, and reduced centroids. The figure highlights the changes in values and the grouping of weights by cluster indices.\n\nKey values and labels:\n- Weights: 2.09, -0.98, 1.48, 0.09, 0.05, -0.14, -1.08, 2.12, -0.91, 1.92, 0, -1.03, 1.87, 0, 1.53, 1.49\n- Cluster indices: 3, 0, 2, 1, 1, 1, 0, 3, 0, 3, 1, 0, 3, 1, 2, 2\n- Centroids: 2.00, 1.96, 1.50, 1.48, 0.00, -0.04, -1.00, -0.97\n- Gradient: -0.03, -0.01, 0.03, 0.02, -0.01, 0.01, -0.02, 0.12, -0.01, 0.02, 0.04, 0.01, -0.01, -0.02, 0.01, 0.04, -0.02, -0.07, -0.02, 0.01, -0.02\n- Reduced centroids: 0.04, 0.02, -0.03"
+  },
+  {
+    "file": "p004_f04.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 4: Left: Three different methods for centroids initialization. Right: Distribution of weights (blue) and distribution of codebook before (green cross) and after fine-tuning (red dot).",
+    "width": 730,
+    "height": 231,
+    "description": "Figure: Two plots comparing weight initialization methods and their effect on weight distribution. Left plot: CDF and PDF of weight values for three initialization methods. Right plot: Density of weight values (blue) and codebook distributions before (green cross) and after fine-tuning (red dot).\n\nText in figure: CDF, PDF, density initialization, linear initialization, random initialization, linear quantization, nonlinear quantization by clustering and fine-tuning, weight value."
+  },
+  {
+    "file": "p005_f05.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 5: Distribution for weight (Left) and index (Right). The distribution is biased.",
+    "width": 782,
+    "height": 221,
+    "description": "Description: This figure shows two histograms. The left histogram displays the distribution of weight indices, with the highest count around 100,000 and the lowest count around 0. The right histogram shows the distribution of sparse matrix location indices, with the highest count around 200,000 and the lowest count around 0.\n\nText in figure: Weight Index (32 Effective Weights), Sparse Matrix Location Index (Max Diff is 32), Count, 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31."
+  },
+  {
+    "file": "p008_f06.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 6: Accuracy v.s. compression rate under different compression methods. Pruning and quantization works best when combined.",
+    "width": 585,
+    "height": 268,
+    "description": "Section 1: Figure description\nThis figure is a line graph comparing the accuracy loss of different compression methods for a deep neural network. The x-axis represents the model size ratio after compression, ranging from 2% to 20%. The y-axis represents the accuracy loss, ranging from -4.5% to 0.5%. Four series are plotted: Pruning + Quantization, Pruning Only, Quantization Only, and SVD. The Pruning + Quantization series has the lowest accuracy loss, followed by Quantization Only, Pruning Only, and SVD.\n\nSection 2: Figure text\nText in figure: Pruning + Quantization, Pruning Only, Quantization Only, SVD, Model Size Ratio after Compression, Accuracy Loss, 2%, 5%, 8%, 11%, 14%, 17%, 20%, -4.5%, -4%, -3.5%, -3%, -2.5%, -2%, -1.5%, -1%, -0.5%, 0%, 0.5%"
+  },
+  {
+    "file": "p008_f07.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 7: Pruning doesn't hurt quantization. Dashed: quantization on unpruned network. Solid: quantization on pruned network; Accuracy begins to drop at the same number of quantization bits whether or not the network has been pruned. Although pruning made the number of parameters less, quantization still works well, or even better(3 bits case on the left figure) as in the unpruned network.",
+    "width": 791,
+    "height": 178,
+    "description": "Description: This figure contains three line graphs showing the accuracy of neural networks with varying numbers of bits per effective weight in fully connected (FC) layers, convolutional (Conv) layers, and all layers. Each graph has two series: one for networks quantized only and one for networks pruned and then quantized. The series for pruned and quantized networks is consistently higher, indicating better accuracy.\n\nText in figure: Accuracy, Number of bits per effective weight in all FC layers, Number of bits per effective weight in all Conv layers, Number of bits per effective weight in all layers, top5, quantized only, top5, pruned + quantized, top1, quantized only, top1, pruned + quantized."
+  },
+  {
+    "file": "p008_f08.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 8: Accuracy of different initialization methods. Left: top-1 accuracy. Right: top-5 accuracy. Linear initialization gives best result.",
+    "width": 780,
+    "height": 215,
+    "description": "Description: This figure contains two line plots comparing the accuracy of different initialization methods for a neural network. The left plot shows top-1 accuracy, and the right plot shows top-5 accuracy. The series with the highest accuracy is \"uniform init,\" followed by \"density init,\" and \"random init\" has the lowest accuracy. The differences in accuracy are most pronounced at lower bit counts and diminish as the number of bits increases.\n\nText in figure: Top-1 Accuracy, Top-5 Accuracy, 58%, 56%, 54%, 52%, 50%, 2bits, 3bits, 4bits, 5bits, 6bits, 7bits, 8bits, uniform init, density init, random init, Number of bits per effective weight, Number of bits per effective weight"
+  },
+  {
+    "file": "p009_f09.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 9: Compared with the original network, pruned network layer achieved 3 \u00d7 speedup on CPU, 3 . 5 \u00d7 on GPU and 4 . 2 \u00d7 on mobile GPU on average. Batch size = 1 targeting real time processing. Performance number normalized to CPU.",
+    "width": 752,
+    "height": 178,
+    "description": "This figure is a bar chart comparing the speedup of various neural network models on different hardware platforms. The chart shows the speedup normalized to CPU performance. The highest speedup is achieved by the GPU Pruned series on AlexNet Fc8, with a speedup of approximately 210x. The lowest speedup is observed in the CPU Pruned series on AlexNet Fc8, with a speedup of 0.5x. The series are labeled as CPU Dense, CPU Pruned, GPU Dense, GPU Pruned, TK1 Dense, and TK1 Pruned.\n\nText in figure: AlexNet Fc6, AlexNet Fc7, AlexNet Fc8, VGGNet Fc6, VGGNet Fc7, VGGNet Fc8, Geo Mean, CPU Dense, CPU Pruned, GPU Dense, GPU Pruned, TK1 Dense, TK1 Pruned, 1x, 2x, 3x, 5x, 8x, 9x, 10x, 14x, 17x, 22x, 56x, 61x, 94x, 135x, 210x."
+  },
+  {
+    "file": "p009_f10.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 10: Compared with the original network, pruned network layer takes 7 \u00d7 less energy on CPU, 3 . 3 \u00d7 less on GPU and 4 . 2 \u00d7 less on mobile GPU on average. Batch size = 1 targeting real time processing. Energy number normalized to CPU.",
+    "width": 754,
+    "height": 170,
+    "description": "## Description\nThis bar chart compares the energy efficiency of different neural network models on various hardware platforms. The chart shows that the pruned network consumes significantly less energy than the original network. The CPU Pruned series is the lowest, followed by GPU Pruned, with CPU Dense being the highest. The Geo Mean series shows an average reduction in energy consumption across all models.\n\n## Text in figure\nCPU Dense (Baseline), CPU Pruned, GPU Dense, GPU Pruned, TK1 Dense, TK1 Pruned\nAlexNet_Fc6, AlexNet_Fc7, AlexNet_Fc8, VGGNet_Fc6, VGGNet_Fc7, VGGNet_Fc8, Geo Mean\n1x, 2x, 3x, 5x, 7x, 8x, 10x, 12x, 13x, 15x, 17x, 18x, 20x, 26x, 27x, 37x, 42x, 59x, 61x, 78x, 101x, 102x"
+  },
+  {
+    "file": "p010_f11.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 11: Storage ratio of weight, index and codebook.",
+    "width": 637,
+    "height": 172,
+    "description": "This figure is a set of four pie charts, each representing the storage ratio of different components in various neural network architectures. The components are Weight, Index, and Codebook. The networks shown are AlexNet, VGGNet, Lenet-300-100, and Lenet-5. The Weight component is the largest in all charts, followed by Index, and Codebook is the smallest. AlexNet has the highest Weight percentage (51.4%) and the lowest Codebook percentage (0.1%). VGGNet has the highest Index percentage (51.8%) and the lowest Codebook percentage (0.1%). Lenet-300-100 has the highest Codebook percentage (1.5%). Lenet-5 has the highest Index percentage (53.8%) and the lowest Weight percentage (41.0%).\n\nIndex terms: neural network, storage ratio, AlexNet, VGGNet, Lenet-300-100, Lenet-5, Weight, Index, Codebook, pie chart, compression, deep learning."
+  }
+]

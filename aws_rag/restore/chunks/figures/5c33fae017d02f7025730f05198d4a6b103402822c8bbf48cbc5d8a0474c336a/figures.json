@@ -1,0 +1,66 @@
+[
+  {
+    "file": "p006_f01.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 1. Training curves on continuous control benchmarks. Soft actor-critic (yellow) performs consistently across all tasks and outperforming both on-policy and off-policy methods in the most challenging tasks.",
+    "width": 927,
+    "height": 533,
+    "description": "Description: The figure presents six line graphs comparing the performance of different reinforcement learning algorithms on various continuous control tasks. Each graph shows the average return over time, measured in million steps. The algorithms compared are SAC, DDPG, PPO, SQL, and TD3 (concurrent). The tasks include Hopper-v1, Walker2d-v1, HalfCheetah-v1, Ant-v1, Humanoid-v1, and Humanoid (rllab). The yellow line representing SAC consistently outperforms the other algorithms across all tasks.\n\nText in figure: average return, million steps, (a) Hopper-v1, (b) Walker2d-v1, (c) HalfCheetah-v1, (d) Ant-v1, (e) Humanoid-v1, (f) Humanoid (rllab), SAC, DDPG, PPO, SQL, TD3 (concurrent)",
+    "pdf_text": "0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | million steps | 0 | 1000 | 2000 | 3000 | 4000 | average return | (a) Hopper-v1 | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | million steps | 0 | 1000 | 2000 | 3000 | 4000 | 5000 | 6000 | average return | (b) Walker2d-v1 | 0.0 | 0.5 | 1.0 | 1.5 | 2.0 | 2.5 | 3.0 | million steps | 0 | 5000 | 10000 | 15000 | average return | (c) HalfCheetah-v1 | 0.0 | 0.5 | 1.0 | 1.5 | 2.0 | 2.5 | 3.0 | million steps | 0 | 2000 | 4000 | 6000 | average return | (d) Ant-v1 | 0 | 2 | 4 | 6 | 8 | 10 | million steps | 0 | 2000 | 4000 | 6000 | 8000 | average return | (e) Humanoid-v1 | 0 | 2 | 4 | 6 | 8 | 10 | million steps | 0 | 2000 | 4000 | 6000 | average return | ( | ) | SAC | DDPG | PPO | SQL | TD3 (concurrent) | (f) Humanoid (rllab)",
+    "bbox": [
+      65.3,
+      58.3,
+      529.0,
+      324.9
+    ]
+  },
+  {
+    "file": "p007_f02.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 2. Comparison of SAC (blue) and a deterministic variant of SAC (red) in terms of the stability of individual random seeds on the Humanoid (rllab) benchmark. The comparison indicates that stochasticity can stabilize training as the variability between the seeds becomes much higher with a deterministic policy.",
+    "width": 335,
+    "height": 261,
+    "description": "Description: The figure is a line graph comparing the performance of two policies, stochastic and deterministic, in the Humanoid (rllab) benchmark. The x-axis represents the number of million steps, ranging from 0 to 10. The y-axis shows the average return, ranging from 0 to 6000. The stochastic policy (blue line) generally has a higher average return than the deterministic policy (red line), especially after 4 million steps.\n\nText in figure: 0, 2, 4, 6, 8, 10, million steps, 0, 2000, 4000, 6000, average return, Humanoid (rllab), stochastic policy, deterministic policy",
+    "pdf_text": "0 | 2 | 4 | 6 | 8 | 10 | million steps | 0 | 2000 | 4000 | 6000 | average return | Humanoid (rllab) | stochastic policy | deterministic policy",
+    "bbox": [
+      338.0,
+      73.0,
+      505.6,
+      203.5
+    ]
+  },
+  {
+    "file": "p008_f03.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 3. Sensitivity of soft actor-critic to selected hyperparameters on Ant-v1 task. (a) Evaluating the policy using the mean action generally results in a higher return. Note that the policy is trained to maximize also the entropy, and the mean action does not, in general, correspond the optimal action for the maximum return objective. (b) Soft actor-critic is sensitive to reward scaling since it is related to the temperature of the optimal policy. The optimal reward scale varies between environments, and should be tuned for each task separately. (c) Target value smoothing coefficient \u03c4 is used to stabilize training. Fast moving target (large \u03c4 ) can result in instabilities (red), whereas slow moving target (small \u03c4 ) makes training slower (blue).",
+    "width": 936,
+    "height": 269,
+    "description": "Figure: Line graph showing sensitivity of soft actor-critic to hyperparameters on Ant-v1 task.\n\nPanel (a): Two lines showing average return over million steps for deterministic and stochastic evaluation. Stochastic evaluation line is higher.\n\nPanel (b): Multiple lines showing average return over million steps for different reward scales (1, 3, 10, 30, 100). Lines vary in height.\n\nPanel (c): Multiple lines showing average return over million steps for different target smoothing coefficients (0.0001, 0.001, 0.01, 0.1). Lines vary in height.\n\nLegend labels: deterministic evaluation, stochastic evaluation, 1, 3, 10, 30, 100, 0.0001, 0.001, 0.01, 0.1\n\nAxis titles: million steps, average return",
+    "pdf_text": "0.0 | 0.5 | 1.0 | 1.5 | 2.0 | 2.5 | 3.0 | million steps | 0 | 2000 | 4000 | 6000 | average return | deterministic evaluation | stochastic evaluation | (a) Evaluation | 0.0 | 0.5 | 1.0 | 1.5 | 2.0 | 2.5 | 3.0 | million steps | 0 | 2000 | 4000 | 6000 | average return | 1 | 3 | 10 | 30 | 100 | (b) Reward Scale | 0.0 | 0.5 | 1.0 | 1.5 | 2.0 | 2.5 | 3.0 | million steps | \u22122000 | 0 | 2000 | 4000 | 6000 | average return | 0.0001 | 0.001 | 0.01 | 0.1 | (c) Target Smoothing Coef\ufb01cient (\u03c4)",
+    "bbox": [
+      61.3,
+      59.0,
+      529.4,
+      193.7
+    ]
+  },
+  {
+    "file": "p014_f04.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 4. Training curves for additional baseline (Trust-PCL) and for two SAC variants. Soft actor-critic with hard target update (blue) differs from standard SAC in that it copies the value function network weights directly every 1000 iterations, instead of using exponentially smoothed average of the weights. The deterministic ablation (red) uses a deterministic policy with fixed Gaussian exploration noise, does not use a value function, drops the entropy terms in the actor and critic function updates, and uses hard target updates for the target Q-functions. It is equivalent to DDPG that uses two Q-functions, hard target updates, and removes the target actor.",
+    "width": 925,
+    "height": 520,
+    "description": "Figure: Line plots showing training curves for various reinforcement learning algorithms.\nLegend: SAC, SAC (hard target update), SAC (hard target update, deterministic), Trust-PCL.\nAxes: X-axis: million steps, Y-axis: average return. Panels: (a) Hopper-v1, (b) Walker2d-v1,\n(c) HalfCheetah-v1, (d) Ant-v1, (e) Humanoid-v1, (f) Humanoid (rllab).\n\nDescription: The figure displays training curves for different reinforcement learning\nalgorithms across various environments. The highest average return is observed in the\nHumanoid-v1 environment, with SAC (hard target update) achieving the highest return.\nThe lowest average return is seen in the Ant-v1 environment, with Trust-PCL having the\nlowest return. The series with the most consistent performance across environments is\nSAC (hard target update).",
+    "pdf_text": "0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | million steps | 0 | 1000 | 2000 | 3000 | 4000 | average return | (a) Hopper-v1 | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | million steps | 0 | 1000 | 2000 | 3000 | 4000 | 5000 | 6000 | average return | (b) Walker2d-v1 | 0.0 | 0.5 | 1.0 | 1.5 | 2.0 | 2.5 | 3.0 | million steps | 0 | 5000 | 10000 | 15000 | average return | (c) HalfCheetah-v1 | 0.0 | 0.5 | 1.0 | 1.5 | 2.0 | 2.5 | 3.0 | million steps | 0 | 2000 | 4000 | 6000 | average return | (d) Ant-v1 | 0 | 2 | 4 | 6 | 8 | 10 | million steps | 0 | 2000 | 4000 | 6000 | 8000 | average return | (e) Humanoid-v1 | 0 | 2 | 4 | 6 | 8 | 10 | million steps | 0 | 2000 | 4000 | 6000 | average return | ( | ) | SAC | SAC (hard target update) | SAC (hard target update, deterministic) | Trust-PCL | (f) Humanoid (rllab)",
+    "bbox": [
+      66.4,
+      190.8,
+      529.2,
+      450.9
+    ]
+  }
+]

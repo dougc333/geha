@@ -1,0 +1,50 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1. Fast R-CNN architecture. An input image and multiple regions of interest (RoIs) are input into a fully convolutional network. Each RoI is pooled into a fixed-size feature map and then mapped to a feature vector by fully connected layers (FCs). The network has two output vectors per RoI: softmax probabilities and per-class bounding-box regression offsets. The architecture is trained end-to-end with a multi-task loss.",
+    "width": 463,
+    "height": 174,
+    "description": "## Description\nThis figure illustrates the architecture of the Fast R-CNN model, showing how an input image and regions of interest (RoIs) are processed. The RoIs are pooled into feature maps, which are then mapped to feature vectors using fully connected layers. The model outputs softmax probabilities and bounding-box regression offsets for each RoI.\n\n## Text in figure\nDeep | ConvNet | Conv | feature map | RoI | projection | RoI | pooling | layer | FCs | RoI feature | vector | softmax | bbox | regressor | Outputs: | FC | FC | For each RoI",
+    "pdf_text": "Deep | ConvNet | Conv | feature map | RoI | projection | RoI | pooling | layer | FCs | RoI feature | vector | softmax | bbox | regressor | Outputs: | FC | FC | For each RoI",
+    "bbox": [
+      310.5,
+      81.9,
+      542.0,
+      169.2
+    ]
+  },
+  {
+    "file": "p006_f02.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 2. Timing for VGG16 before and after truncated SVD. Before SVD, fully connected layers fc6 and fc7 take 45% of the time.",
+    "width": 465,
+    "height": 229,
+    "description": "## Description\nThe figure is a pie chart showing the forward pass timing for VGG16 before and after truncated SVD. Before SVD, fully connected layers fc6 and fc7 take 45% of the time. After SVD, the fully connected layers fc6 and fc7 take 19.2% of the time.\n\n## Text in figure\n- roi_pool5: 5.4% (17ms)\n- other: 3.5% (11ms)\n- fc6: 38.7% (122ms)\n- conv: 46.3% (146ms)\n- fc7: 6.2% (20ms)\n- Forward pass timing: mAP 66.9% @ 320ms / image\n- roi_pool5: 7.9% (17ms)\n- other: 5.1% (11ms)\n- fc6: 17.5% (37ms)\n- conv: 67.8% (143ms)\n- fc7: 1.7% (4ms)\n- Forward pass timing (SVD): mAP 66.6% @ 223ms / image",
+    "pdf_text": "roi_pool5 | 5.4% (17ms) | other | 3.5% (11ms) | fc6 | 38.7% (122ms) | conv | 46.3% (146ms) | fc7 | 6.2% (20ms) | Forward pass timing | mAP 66.9% @ 320ms / image | roi_pool5 | 7.9% (17ms) | other | 5.1% (11ms) | fc6 | 17.5% (37ms) | conv | 67.8% (143ms) | fc7 | 1.7% (4ms) | Forward pass timing (SVD) | mAP 66.6% @ 223ms / image",
+    "bbox": [
+      52.3,
+      558.0,
+      285.0,
+      672.7
+    ]
+  },
+  {
+    "file": "p008_f03.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 3. VOC07 test mAP and AR for various proposal schemes.",
+    "width": 466,
+    "height": 278,
+    "description": "This figure is a line graph showing the mean Average Precision (mAP) and Average Recall (AR) for various object proposal schemes in the VOC07 test dataset. The x-axis represents the number of object proposals, ranging from 10^3 to 10^4. The y-axis represents mAP and AR, ranging from 49 to 66. The graph includes six series: Sel. Search (SS), SS (2k) + Rand Dense, SS replace Dense, 45k Dense Softmax, 45k Dense SVM, and SS Avg. Recall. The SS Avg. Recall series is the highest, reaching approximately 66, while the 45k Dense SVM series is the lowest, around 49. The SS (2k) + Rand Dense series is the second highest, reaching approximately 63.\n\nText in figure: 103, 104, Number of object proposals, 49, 51, 53, 56, 58, 61, 63, 66, mAP, Sel. Search (SS), SS (2k) + Rand Dense, SS replace Dense, 45k Dense Softmax, 45k Dense SVM, 49, 51, 53, 56, 58, 61, 63, 66, Average Recall, SS Avg. Recall.",
+    "pdf_text": "103 | 104 | Number of object proposals | 49 | 51 | 53 | 56 | 58 | 61 | 63 | 66 | mAP | Sel. Search (SS) | SS (2k) + Rand Dense | SS replace Dense | 45k Dense Softmax | 45k Dense SVM | 49 | 51 | 53 | 56 | 58 | 61 | 63 | 66 | Average Recall | SS Avg. Recall",
+    "bbox": [
+      51.4,
+      496.9,
+      284.3,
+      636.2
+    ]
+  }
+]

@@ -1,0 +1,546 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 1.1: Language model meta-learning. During unsupervised pre-training, a language model develops a broad set of skills and pattern recognition abilities. It then uses these abilities at inference time to rapidly adapt to or recognize the desired task. We use the term 'in-context learning' to describe the inner loop of this process, which occurs within the forward-pass upon each sequence. The sequences in this diagram are not intended to be representative of the data a model would see during pre-training, but are intended to show that there are sometimes repeated sub-tasks embedded within a single sequence.",
+    "width": 805,
+    "height": 391,
+    "description": "Figure type: Diagram\nDescription: The figure is a diagram illustrating the concept of language model meta-learning. It shows how a language model develops skills during unsupervised pre-training and uses them for rapid adaptation during inference. The diagram includes three sequences demonstrating in-context learning within a forward pass.\n\nText in figure: \"Learning via SGD during unsupervised pre-training\", \"In-context learning\", \"sequence #1\", \"sequence #2\", \"sequence #3\", \"5 + 8 = 13\", \"7 + 2 = 9\", \"1 + 0 = 1\", \"3 + 4 = 7\", \"5 + 9 = 14\", \"9 + 8 = 17\", \"gaot -> goat\", \"sakne -> snake\", \"brid -> bird\", \"fsh -> fish\", \"dduk -> duck\", \"cmihp -> chimp\", \"thanks -> merci\", \"hello -> bonjour\", \"mint -> menthe\", \"wall -> mur\", \"otter -> loutre\", \"bread -> pain\"",
+    "pdf_text": "",
+    "bbox": [
+      71.0,
+      447.9,
+      473.4,
+      643.6
+    ]
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 1.2: Larger models make increasingly efficient use of in-context information. Weshow in-context learning performance on a simple task requiring the model to remove random symbols from a word, both with and without a natural language task description (see Sec. 3.9.2). The steeper 'in-context learning curves' for large models demonstrate improved ability to learn a task from contextual information. We see qualitatively similar behavior across a wide range of tasks.",
+    "width": 752,
+    "height": 406,
+    "description": "Figure type: Line graph\nDescription: The graph shows the accuracy of in-context learning for different model sizes as the number of examples in context increases. The highest accuracy is achieved by the 175B Params model, followed by the 13B Params model, and the lowest by the 1.3B Params model. The graph also shows the effect of providing a natural language prompt on the accuracy.\n\nText in figure: \"Zero-shot\", \"One-shot\", \"Few-shot\", \"175B Params\", \"13B Params\", \"1.3B Params\", \"Natural Language Prompt\", \"No Prompt\", \"Accuracy (%)\"\n\nSection 1: The line graph depicts the in-context learning performance of different model sizes as the number of examples in context increases. The highest accuracy is achieved by the 175B Params model, followed by the 13B Params model, and the lowest by the 1.3B Params model. The graph also shows the effect of providing a natural language prompt on the accuracy.\n\nSection 2: The text in the figure includes the labels \"Zero-shot\", \"One-shot\", \"Few-shot\", \"175B Params\", \"13B Params\", \"1.3B Params\", \"Natural Language Prompt\", \"No Prompt\", and \"Accuracy (%)\". The graph shows the accuracy of in-context learning for different model sizes as the number of examples in context increases. The highest accuracy is achieved by the 175B Params model, followed by the 13B Params model, and the lowest by the 1.3B Params model. The graph also shows the effect of providing a natural language prompt on the accuracy.",
+    "pdf_text": "",
+    "bbox": [
+      116.9,
+      71.7,
+      493.0,
+      274.4
+    ]
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 1.3: Aggregate performance for all 42 accuracy-denominated benchmarks While zero-shot performance improves steadily with model size, few-shot performance increases more rapidly, demonstrating that larger models are more proficient at in-context learning. See Figure 3.8 for a more detailed analysis on SuperGLUE, a standard NLP benchmark suite.",
+    "width": 657,
+    "height": 402,
+    "description": "This figure is a line graph showing the aggregate performance of different learning methods across various benchmarks. The graph displays three series: Few Shot, One Shot, and Zero Shot, each represented by a different color. The Few Shot series, indicated by the orange line, is the highest, followed by One Shot (green), and then Zero Shot (blue). The graph shows that as the number of parameters in the language model increases, the performance of Few Shot learning improves more rapidly than the other methods.\n\nText in figure: Aggregate Performance Across Benchmarks, Few Shot, One Shot, Zero Shot, Accuracy, Parameters in LM (Billions), 0.1B, 0.4B, 0.8B, 1.3B, 2.6B, 6.7B, 13B, 175B.",
+    "pdf_text": "",
+    "bbox": [
+      141.0,
+      71.6,
+      469.5,
+      272.7
+    ]
+  },
+  {
+    "file": "p007_f04.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 2.1: Zero-shot, one-shot and few-shot, contrasted with traditional fine-tuning . The panels above show four methods for performing a task with a language model - fine-tuning is the traditional method, whereas zero-, one-, and few-shot, which we study in this work, require the model to perform the task with only forward passes at test time. We typically present the model with a few dozen examples in the few shot setting. Exact phrasings for all task descriptions, examples and prompts can be found in Appendix G.",
+    "width": 754,
+    "height": 659,
+    "description": "Figure type: Diagram\nDescription: The figure contrasts four methods for performing a task with a language model: traditional fine-tuning, zero-shot, one-shot, and few-shot learning. Traditional fine-tuning involves training the model with repeated gradient updates using a large corpus of example tasks. In contrast, zero-shot, one-shot, and few-shot learning require the model to perform the task with only forward passes at test time, without gradient updates. The figure shows the input and output for each method, including task descriptions, examples, and prompts.\n\nText in figure: \"Zero-shot\", \"One-shot\", \"Few-shot\", \"Traditional fine-tuning\", \"Translate English to French\", \"sea otter\", \"loutre de mer\", \"cheese\", \"peppermint\", \"menthe poivr\u00e9e\", \"plush giraffe\", \"girafe peluche\", \"task description\", \"example\", \"prompt\", \"gradient update\"",
+    "pdf_text": "",
+    "bbox": [
+      116.8,
+      71.6,
+      493.8,
+      401.0
+    ]
+  },
+  {
+    "file": "p009_f05.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 2.2: Total compute used during training . Based on the analysis in Scaling Laws For Neural Language Models [KMH + 20] we train much larger models on many fewer tokens than is typical. As a consequence, although GPT-3 3B is almost 10x larger than RoBERTa-Large (355M params), both models took roughly 50 petaflop/s-days of compute during pre-training. Methodology for these calculations can be found in Appendix D.",
+    "width": 846,
+    "height": 415,
+    "description": "Figure: Bar chart showing the total compute used during training for various models. The x-axis lists the model names, and the y-axis represents the training petaflop/s-days. The highest bar is for GPT-3 175B, with approximately 12000 petaflop/s-days, while the lowest is for BERT-Base, with around 3 petaflop/s-days. Other models include RoBERTa-Base, RoBERTa-Large, T5-Small, T5-Base, T5-Large, T5-3B, T5-11B, GPT-3 Small, GPT-3 Medium, GPT-3 Large, GPT-3 XL, GPT-3 2.7B, GPT-3 6.7B, GPT-3 13B, and GPT-3 175B.\n\nText in figure: BERT-Base, BERT-Large, RoBERTa-Base, RoBERTa-Large, T5-Small, T5-Base, T5-Large, T5-3B, T5-11B, GPT-3 Small, GPT-3 Medium, GPT-3 Large, GPT-3 XL, GPT-3 2.7B, GPT-3 6.7B, GPT-3 13B, GPT-3 175B, Training Petaflop/s-days.",
+    "pdf_text": "",
+    "bbox": [
+      95.1,
+      96.1,
+      518.0,
+      303.3
+    ]
+  },
+  {
+    "file": "p011_f06.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 3.1: Smooth scaling of performance with compute. Performance (measured in terms of cross-entropy validation loss) follows a power-law trend with the amount of compute used for training. The power-law behavior observed in [KMH + 20] continues for an additional two orders of magnitude with only small deviations from the predicted curve. For this figure, we exclude embedding parameters from compute and parameter counts.",
+    "width": 587,
+    "height": 446,
+    "description": "Description: This figure is a log-log plot showing the relationship between compute (in PetaFLOP/s-days) and validation loss. The plot displays a power-law trend, with performance improving as compute increases. The dashed line represents the predicted curve, labeled as \\( L = 2.57 \\cdot C^{-0.048} \\). The color bar indicates the number of parameters, ranging from \\( 10^5 \\) to \\( 10^{11} \\).\n\nText in figure: \"Validation Loss\", \"Compute (PetaFLOP/s-days)\", \"L = 2.57 \\cdot C^{-0.048}\", \"Parameters\", \"10^5\", \"10^6\", \"10^7\", \"10^8\", \"10^9\", \"10^{10}\", \"10^{11}\"",
+    "pdf_text": "",
+    "bbox": [
+      164.9,
+      83.8,
+      458.4,
+      307.2
+    ]
+  },
+  {
+    "file": "p012_f07.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 3.2: On LAMBADA, the few-shot capability of language models results in a strong boost to accuracy. GPT-3 2.7B outperforms the SOTA 17B parameter Turing-NLG [Tur20] in this setting, and GPT-3 175B advances the state of the art by 18%. Note zero-shot uses a different format from one-shot and few-shot as described in the text.",
+    "width": 649,
+    "height": 418,
+    "description": "Description: This line graph compares the accuracy of different language models on the LAMBADA task. The graph shows three series: Zero-Shot, One-Shot, and Few-Shot (K=15). The Few-Shot series is the highest, reaching 85% accuracy at 175B parameters. The Zero-Shot series is the lowest, starting at 40% accuracy at 0.1B parameters and reaching 75% at 175B parameters. The One-Shot series is in between, starting at 20% accuracy at 0.1B parameters and reaching 70% at 175B parameters.\n\nText in figure: \"Human\", \"Lambda\", \"Accuracy\", \"Zero-Shot\", \"One-Shot\", \"Few-Shot (K=15)\", \"Parameters in LM (Billions)\", \"0.1B\", \"0.4B\", \"0.8B\", \"1.3B\", \"2.6B\", \"6.7B\", \"13B\", \"175B\", \"90\", \"80\", \"70\", \"60\", \"50\", \"40\", \"30\", \"20\".",
+    "pdf_text": "",
+    "bbox": [
+      139.5,
+      233.0,
+      463.9,
+      441.9
+    ]
+  },
+  {
+    "file": "p014_f08.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 3.3: On TriviaQA GPT3's performance grows smoothly with model size, suggesting that language models continue to absorb knowledge as their capacity increases. One-shot and few-shot performance make significant gains over zero-shot behavior, matching and exceeding the performance of the SOTA fine-tuned open-domain model, RAG [LPP + 20]",
+    "width": 650,
+    "height": 419,
+    "description": "This figure is a line graph showing the performance of GPT3 on the TriviaQA dataset across different model sizes and learning methods. The graph has three series: Zero-Shot, One-Shot, and Few-Shot (K=64). The Few-Shot (K=64) series is the highest, reaching nearly 70% accuracy at 175B parameters. The Zero-Shot series is the lowest, starting at around 5% accuracy at 0.1B parameters and reaching about 65% at 175B parameters. The One-Shot series is in between, starting at around 10% and reaching about 68% at 175B parameters.\n\nText in figure: TriviaQA, Fine-tuned SOTA, Accuracy, Zero-Shot, One-Shot, Few-Shot (K=64), Parameters in LM (Billions), 0.1B, 0.4B, 0.8B, 1.3B, 2.6B, 6.7B, 13B, 175B.",
+    "pdf_text": "",
+    "bbox": [
+      139.4,
+      78.8,
+      464.6,
+      288.4
+    ]
+  },
+  {
+    "file": "p015_f09.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 3.4: Few-shot translation performance on 6 language pairs as model capacity increases. There is a consistent trend of improvement across all datasets as the model scales, and as well as tendency for translation into English to be stronger than translation from English.",
+    "width": 648,
+    "height": 419,
+    "description": "Description: This figure is a line graph showing the few-shot translation performance on six language pairs as the model capacity increases. The graph plots the BLEU score against the number of parameters in billions. The highest BLEU score is observed for the French -> English translation, while the lowest is for the English -> Romanian translation. The trend indicates a consistent improvement across all datasets as the model scales.\n\nText in figure: \"Translation (Multi-BLEU)\", \"Parameters in LM (Billions)\", \"BLEU\", \"French -> English\", \"English -> French\", \"German -> English\", \"English -> German\", \"Romanian -> English\", \"English -> Romanian\", \"0.1B\", \"0.4B\", \"0.8B\", \"1.3B\", \"2.6B\", \"6.7B\", \"13B\", \"175B\".",
+    "pdf_text": "",
+    "bbox": [
+      139.4,
+      426.1,
+      463.7,
+      635.7
+    ]
+  },
+  {
+    "file": "p016_f10.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 3.5: Zero-, one-, and few-shot performance on the adversarial Winogrande dataset as model capacity scales. Scaling is relatively smooth with the gains to few-shot learning increasing with model size, and few-shot GPT-3 175B is competitive with a fine-tuned RoBERTA-large.",
+    "width": 649,
+    "height": 418,
+    "description": "This figure is a line graph showing the performance of different models on the Winogrande dataset. The x-axis represents the model size in billions of parameters, and the y-axis represents the accuracy. The graph includes three series: Zero-Shot, One-Shot, and Few-Shot (K=50). The Few-Shot series is the highest, reaching nearly 80% accuracy at 175B parameters. The Zero-Shot series is the lowest, starting at around 50% and increasing to about 70% at 175B parameters. The One-Shot series starts at around 50% and increases to about 72% at 175B parameters.\n\nText in figure: \"Winogrande\", \"Human\", \"Fine-tuned SOTA\", \"Fine-tuned RoBERTa-Large\", \"Fine-tuned BERT-Large\", \"Zero-Shot\", \"One-Shot\", \"Few-Shot (K=50)\", \"Random Guessing\", \"Accuracy\", \"Parameters in LM (Billions)\", \"0.1B\", \"0.4B\", \"0.8B\", \"1.3B\", \"2.6B\", \"6.7B\", \"13B\", \"175B\".\n\nTags: Winogrande, model performance, model size, accuracy, Zero-Shot, One-Shot, Few-Shot, Random Guessing, language models, RoBERTa, BERT, GPT-3.",
+    "pdf_text": "",
+    "bbox": [
+      139.4,
+      214.6,
+      463.8,
+      423.5
+    ]
+  },
+  {
+    "file": "p017_f11.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "Figure 3.6: GPT-3 results on PIQA in the zero-shot, one-shot, and few-shot settings. The largest model achieves a score on the development set in all three conditions that exceeds the best recorded score on the task.",
+    "width": 648,
+    "height": 419,
+    "description": "This figure is a line graph showing the performance of GPT-3 on the Physical Intelligence Quotient Assessment (PIQA) in three learning settings: zero-shot, one-shot, and few-shot (K=50). The x-axis represents the number of parameters in the language model (LM) in billions, ranging from 0.1B to 175B. The y-axis shows the accuracy of the model, ranging from 50% to 90%. The highest performing model is the few-shot setting, followed by one-shot, and then zero-shot. The largest model (175B parameters) achieves the highest accuracy in all three conditions.\n\nText in figure: \"Human\", \"Zero-Shot\", \"One-Shot\", \"Few-Shot (K=50)\", \"Fine-tuned SOTA\", \"Random Guessing\", \"Accuracy\", \"Parameters in LM (Billions)\", \"0.1B\", \"0.4B\", \"0.8B\", \"1.3B\", \"2.6B\", \"6.7B\", \"13B\", \"175B\".",
+    "pdf_text": "",
+    "bbox": [
+      139.4,
+      217.4,
+      463.7,
+      426.8
+    ]
+  },
+  {
+    "file": "p019_f12.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "Figure 3.7: GPT-3 results on CoQA reading comprehension task. GPT-3 175B achieves 85 F1 in the few-shot setting, only a few points behind measured human performance and state-of-the-art fine-tuned models. Zero-shot and one-shot performance is a few points behind, with the gains to few-shot being largest for bigger models.",
+    "width": 648,
+    "height": 417,
+    "description": "Description: This figure is a line graph showing the performance of GPT-3 models on the CoQA reading comprehension task. It compares the accuracy of Zero-Shot, One-Shot, and Few-Shot (K=5) learning approaches across different model sizes. The Few-Shot (K=5) model is the highest performing, followed by One-Shot, and then Zero-Shot. The 175B model shows the largest gains in few-shot learning.\n\nText in figure: CoQA, Fine-tuned SOTA, Human, Accuracy, Zero-Shot, One-Shot, Few-Shot (K=5), Parameters in LM (Billions), 0.1B, 0.4B, 0.8B, 1.3B, 2.6B, 6.7B, 13B, 175B, 30, 40, 50, 60, 70, 80, 90.",
+    "pdf_text": "",
+    "bbox": [
+      139.3,
+      135.0,
+      463.3,
+      343.6
+    ]
+  },
+  {
+    "file": "p020_f13.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "Figure 3.8: Performance on SuperGLUE increases with model size and number of examples in context. Avalue of K = 32 means that our model was shown 32 examples per task, for 256 examples total divided across the 8 tasks in SuperGLUE. We report GPT-3 values on the dev set, so our numbers are not directly comparable to the dotted reference lines (our test set results are in Table 3.8). The BERT-Large reference model was fine-tuned on the SuperGLUE training set (125K examples), whereas BERT++ was first fine-tuned on MultiNLI (392K examples) and SWAG (113K examples) before further fine-tuning on the SuperGLUE training set (for a total of 630K fine-tuning examples). We find the difference in performance between the BERT-Large and BERT++ to be roughly equivalent to the difference between GPT-3 with one example per context versus eight examples per context.",
+    "width": 922,
+    "height": 414,
+    "description": "Figure: Two line graphs comparing SuperGLUE performance.\nLeft graph: Model size vs. SuperGLUE score.\nSeries: Zero-shot, One-shot, Few-shot (K=32).\nHighest: Few-shot (K=32), lowest: Zero-shot.\nRight graph: Number of examples in context vs. SuperGLUE score.\nSeries: Few-shot GPT-3 175B.\nHighest: Few-shot GPT-3 175B, lowest: Random Guessing.\n\nText in figure: SuperGLUE Performance, In-Context Learning on SuperGLUE, Human, Fine-tuned SOTA, Fine-tuned BERT++, Fine-tuned BERT Large, Random Guessing, Billions of Parameters in LM, Number of Examples in Context (K), 90, 80, 70, 60, 50, 40.",
+    "pdf_text": "",
+    "bbox": [
+      73.6,
+      75.3,
+      534.3,
+      282.3
+    ]
+  },
+  {
+    "file": "p021_f14.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "Figure 3.9: Performance of GPT-3 on ANLI Round 3. Results are on the dev-set, which has only 1500 examples and therefore has high variance (we estimate a standard deviation of 1.2%). We find that smaller models hover around random chance, while few-shot GPT-3 175B closes almost half the gap from random chance to SOTA. Results for ANLI rounds 1 and 2 are shown in the appendix.",
+    "width": 651,
+    "height": 415,
+    "description": "This figure is a line graph showing the performance of various language models on the ANLI Round 3 dataset. The x-axis represents the number of parameters in the language models, ranging from 0.1B to 175B. The y-axis represents the accuracy of the models, ranging from 32 to 48. The graph includes three series: Zero-Shot, One-Shot, and Few-Shot (K=50). The Few-Shot (K=50) series is the highest, reaching an accuracy of 40, while the Zero-Shot series is the lowest, hovering around 34. The One-Shot series falls between these two, with an accuracy of around 36.\n\nText in figure: ANLI Round3, Fine-tuned SOTA, Fine-tuned RoBERTa-Large, Fine-tuned BERT-Large, Accuracy, Zero-Shot, One-Shot, Few-Shot (K=50), Random Guessing, 0.1B, 0.4B, 0.8B, 1.3B, 2.6B, 6.7B, 13B, 175B, Parameters in LM (Billions). \n\nDescription: at most 120 words. What the figure is about, what it shows, and what the main take-away message is.\n\nThis figure illustrates the performance of different language models on the ANLI Round 3 dataset, focusing on their accuracy in various learning scenarios. The models range from smaller ones with 0.1B parameters to the largest with 175B parameters. The graph shows that smaller models perform around random guessing, while the largest model, GPT-3 175B, significantly improves performance, especially in few-shot learning. The key takeaway is that larger language models, when fine-tuned and used in few-shot learning, can achieve near-state-of-the-art accuracy, closing almost half the gap from random guessing to the best-performing models.",
+    "pdf_text": "",
+    "bbox": [
+      139.6,
+      90.3,
+      465.0,
+      298.1
+    ]
+  },
+  {
+    "file": "p022_f15.png",
+    "page": 22,
+    "kind": "picture",
+    "caption": "Figure 3.10: Results on all 10 arithmetic tasks in the few-shot settings for models of different sizes. There is a significant jump from the second largest model (GPT-3 13B) to the largest model (GPT-3 175), with the latter being able to reliably accurate 2 digit arithmetic, usually accurate 3 digit arithmetic, and correct answers a significant fraction of the time on 4-5 digit arithmetic, 2 digit multiplication, and compound operations. Results for one-shot and zero-shot are shown in the appendix.",
+    "width": 661,
+    "height": 418,
+    "description": "Description: This figure is a line graph showing the accuracy of various arithmetic tasks for language models of different sizes. The tasks include two-digit addition, subtraction, three-digit addition, subtraction, four-digit addition, subtraction, five-digit addition, subtraction, two-digit multiplication, and single-digit three operations. The x-axis represents the number of parameters in the language models, ranging from 0.1B to 175B. The y-axis represents the accuracy percentage. The highest accuracy is observed in the largest model (175B), which shows reliable accuracy in two-digit arithmetic and usually accurate three-digit arithmetic. The lowest accuracy is seen in the smallest model (0.1B), with minimal performance across all tasks.\n\nText in figure: \"Arithmetic (few-shot)\", \"Accuracy\", \"Parameters in LM (Billions)\", \"Two Digit Addition\", \"Two Digit Subtraction\", \"Three Digit Addition\", \"Three Digit Subtraction\", \"Four Digit Addition\", \"Four Digit Subtraction\", \"Five Digit Addition\", \"Five Digit Subtraction\", \"Two Digit Multiplication\", \"Single Digit Three Ops\", \"0.1B\", \"0.4B\", \"0.8B\", \"1.3B\", \"2.6B\", \"6.7B\", \"13B\", \"175B\".\n\nSection 1: The figure is a line graph displaying the accuracy of various arithmetic tasks for language models of different sizes. The tasks include two-digit addition, subtraction, three-digit addition, subtraction, four-digit addition, subtraction, five-digit addition, subtraction, two-digit multiplication, and single-digit three operations. The x-axis represents the number of parameters in the language models, ranging from 0.1B to 175B. The y-axis represents the accuracy percentage. The highest accuracy is observed in the largest model (175B), which shows reliable accuracy in two-digit arithmetic and usually accurate three-digit arithmetic. The lowest accuracy is seen in the smallest model (0.1B), with minimal performance across all tasks.\n\nSection 2: The text in the figure includes the title \"Arithmetic (few-shot)\", the y-axis label \"Accuracy\", the x-axis label \"Parameters in LM (Billions)\", and the legend entries for the different arithmetic tasks. The x-axis values range from 0.1B to 175B, and the y-axis values represent the accuracy percentage. The legend entries include \"Two Digit Addition\", \"Two Digit Subtraction\", \"Three Digit Addition\", \"Three Digit Subtraction\", \"Four Digit Addition\", \"Four Digit Subtraction\", \"Five Digit Addition\", \"Five Digit Subtraction\", \"Two Digit Multiplication\", and \"Single Digit Three Ops\".",
+    "pdf_text": "",
+    "bbox": [
+      134.8,
+      88.8,
+      465.4,
+      298.1
+    ]
+  },
+  {
+    "file": "p024_f16.png",
+    "page": 24,
+    "kind": "picture",
+    "caption": "Figure 3.11: Few-shot performance on the five word scrambling tasks for different sizes of model. There is generally smooth improvement with model size although the random insertion task shows an upward slope of improvement with the 175B model solving the task the majority of the time. Scaling of one-shot and zero-shot performance is shown in the appendix. All tasks are done with K = 100 .",
+    "width": 651,
+    "height": 419,
+    "description": "## Description\nThis figure is a line graph showing the few-shot performance of different word scrambling tasks for various model sizes. The tasks include cycle letters, mid word 1 anagrams, mid word 2 anagrams, random insertion, and reversed words. The x-axis represents the model size in billions of parameters, ranging from 0.1B to 175B. The y-axis represents accuracy. The highest accuracy is achieved by the cycle letters task with the 175B model, while the lowest accuracy is consistently shown by the reversed words task across all model sizes.\n\n## Text in figure\nTasks: cycle letters, mid word 1 anagrams, mid word 2 anagrams, random insertion, reversed words. Model sizes: 0.1B, 0.4B, 0.8B, 1.3B, 2.6B, 6.7B, 13B, 175B. Accuracy values are not explicitly listed but are represented by the height of the lines on the graph.",
+    "pdf_text": "",
+    "bbox": [
+      139.5,
+      88.6,
+      465.1,
+      298.0
+    ]
+  },
+  {
+    "file": "p025_f17.png",
+    "page": 25,
+    "kind": "picture",
+    "caption": "Figure 3.12: Zero-, one-,and few-shot performance on SAT analogy tasks, for different sizes of model. The largest model achieves 65% accuracy in the few-shot setting, and also demonstrates significant gains to in-context learning which are not present in smaller models.",
+    "width": 649,
+    "height": 420,
+    "description": "Description: This line graph compares the performance of zero-shot, one-shot, and few-shot learning on SAT analogy tasks across different model sizes. The largest model (175B parameters) achieves the highest accuracy, reaching 65% in the few-shot setting. The few-shot line is highest, followed by one-shot, and zero-shot is the lowest. The few-shot line surpasses the one-shot line by about 10%, and the one-shot line is about 5% higher than the zero-shot line.\n\nText in figure: SAT Analogies, Parameters in LM (Billions), Accuracy, Zero-Shot, One-Shot, Few-Shot (K=20), Random Guessing, 0.1B, 0.4B, 0.8B, 1.3B, 2.6B, 6.7B, 13B, 175B, 30, 40, 50, 60.",
+    "pdf_text": "",
+    "bbox": [
+      139.5,
+      88.3,
+      464.2,
+      298.3
+    ]
+  },
+  {
+    "file": "p027_f18.png",
+    "page": 27,
+    "kind": "picture",
+    "caption": "Figure 3.13: People's ability to identify whether news articles are model-generated (measured by the ratio of correct assignments to non-neutral assignments) decreases as model size increases. Accuracy on the outputs on the deliberatelybad control model (an unconditioned GPT-3 Small model with higher output randomness) is indicated with the dashed line at the top, and the random chance (50%) is indicated with the dashed line at the bottom. Line of best fit is a power law with 95% confidence intervals.",
+    "width": 921,
+    "height": 593,
+    "description": "Description: This figure is a line graph showing the human ability to detect model-generated news articles as the number of parameters increases. The graph has two lines: the control model (86%) and random chance (50%). The line for the control model is highest, followed by the random chance line. The x-axis represents the number of parameters on a logarithmic scale, and the y-axis represents accuracy in percentage.\n\nText in figure: Human ability to detect model generated news articles, control (86%), random chance (50%), Number of parameters (log scale), Accuracy (%), 1e8, 1e9, 1e10, 1e11.",
+    "pdf_text": "",
+    "bbox": [
+      74.8,
+      116.9,
+      535.7,
+      413.3
+    ]
+  },
+  {
+    "file": "p028_f19.png",
+    "page": 28,
+    "kind": "picture",
+    "caption": "Figure 3.14: The GPT-3 generated news article that humans had the greatest difficulty distinguishing from a human written article (accuracy: 12%).",
+    "width": 880,
+    "height": 560,
+    "description": "Description: The figure is a text-based representation of a news article generated by GPT-3. It discusses the United Methodist Church's decision to split into a new denomination due to disagreements over LGBTQ issues, particularly the ordination of LGBTQ clergy and officiating same-sex weddings. The article mentions the church's historical context, its membership decline, and previous splits.\n\nText in figure: Title: United Methodists Agree to Historic Split\nSubtitle: Those who oppose gay marriage will form their own denomination\nArticle: United Methodist Church, historic split, new denomination, theologically and socially conservative, Washington Post, delegates, General Conference, May, ban on ordination of LGBTQ clergy, new rules, discipline, clergy, same-sex weddings, Christian Methodist denomination, 12.5 million members, largest Protestant denomination, 1968, Evangelical United Brethren Church, 10 percent, schism, LGBTQ people, 2016, ordination of transgender clergy, North Pacific regional conference, South Pacific regional conference.",
+    "pdf_text": "Title: | United Methodists Agree to Historic Split | Subtitle: | Those who oppose gay marriage will form their own denomination | Article: | After two days of intense debate, the United Methodist Church | has agreed to a historic split - one that is expected to end in the | creation of a new denomination, one that will be \"theologically and | socially conservative,\" according to The Washington Post. | The majority of | delegates attending the church's annual General Conference in May voted to | strengthen a ban on the ordination of LGBTQ clergy and to write new rules | that will \"discipline\" clergy who officiate at same-sex weddings. | But | those who opposed these measures have a new plan: | They say they will form a | separate denomination by 2020, calling their church the Christian Methodist | denomination. | The Post notes that the denomination, which claims 12.5 million members, was | in the early 20th century the \"largest Protestant denomination in the U.S.,\" | but that it has been shrinking in recent decades. | The new split will be the | second in the church's history. | The first occurred in 1968, when roughly | 10 percent of the denomination left to form the Evangelical United Brethren | Church. | The Post notes that the proposed split \"comes at a critical time | for the church, which has been losing members for years,\" which has been | \"pushed toward the brink of a schism over the role of LGBTQ people in the | church.\" Gay marriage is not the only issue that has divided the church. | In | 2016, the denomination was split over ordination of transgender clergy, with | the North Pacific regional conference voting to ban them from serving as | clergy, and the South Pacific regional conference voting to allow them.",
+    "bbox": [
+      85.9,
+      85.6,
+      526.0,
+      365.3
+    ]
+  },
+  {
+    "file": "p031_f20.png",
+    "page": 31,
+    "kind": "picture",
+    "caption": "Figure 4.1: GPT-3 Training Curves We measure model performance during training on a deduplicated validation split of our training distribution. Though there is some gap between training and validation performance, the gap grows only minimally with model size and training time, suggesting that most of the gap comes from a difference in difficulty rather than overfitting.",
+    "width": 750,
+    "height": 416,
+    "description": "Description: This plot shows the training curves for GPT-3 models of various sizes. It displays the cross-entropy loss in nats/token for both training and validation sets over time, measured in billions of tokens elapsed. The validation loss is represented by solid lines, while the training loss is shown with dashed lines. The color gradient indicates the model size, ranging from 10^8 to 10^11 parameters.\n\nText in figure: Tokens Elapsed (Billions), Cross-Entropy Loss (nats/token, smoothed), Validation Loss, Train Loss, Model Parameters, 10^8, 10^9, 10^10, 10^11.",
+    "pdf_text": "",
+    "bbox": [
+      117.8,
+      71.7,
+      493.2,
+      279.4
+    ]
+  },
+  {
+    "file": "p032_f21.png",
+    "page": 32,
+    "kind": "picture",
+    "caption": "Figure 4.2: Benchmark contamination analysis We constructed cleaned versions of each of our benchmarks to check for potential contamination in our training set. The x-axis is a conservative lower bound for how much of the dataset is known with high confidence to be clean, and the y-axis shows the difference in performance when evaluating only on the verified clean subset. Performance on most benchmarks changed negligibly, but some were flagged for further review. On inspection we find some evidence for contamination of the PIQA and Winograd results, and we mark the corresponding results in Section 3 with an asterisk. We find no evidence that other benchmarks are affected.",
+    "width": 827,
+    "height": 356,
+    "description": "## Description\n\nThis figure is a scatter plot showing the impact of data cleanliness on the performance of various benchmarks. The x-axis represents the percentage of clean data in the dataset, ranging from 0% to 100%. The y-axis shows the percent change in performance (accuracy or F1 score) when evaluated on clean data versus all data. The benchmarks include QUAC, Symbol Insertion, SQUADV2, Winograd, PIQA, WMT16 en-de, Anagrams 2, WMT16 de-en, Anagrams 1, and DROP. The plot indicates that most benchmarks show negligible changes in performance, but some, like PIQA and Winograd, show significant differences.\n\n## Text in figure\n\nBenchmarks: QUAC, Symbol Insertion, SQUADV2, Winograd, PIQA, WMT16 en-de, Anagrams 2, WMT16 de-en, Anagrams 1, DROP.\nX-axis: Percentage of Data Clean in Dataset (0%, 25%, 50%, 75%, 100%).\nY-axis: Percent Change in Performance (Accuracy, F1 score, BLEU).\nLegend: eval on only clean data did better, eval on all data (including dirty) did better.\nAnnotations: PIQA and Winograd marked with an asterisk.",
+    "pdf_text": "",
+    "bbox": [
+      100.3,
+      71.2,
+      513.9,
+      249.1
+    ]
+  },
+  {
+    "file": "p038_f22.png",
+    "page": 38,
+    "kind": "picture",
+    "caption": "Figure 6.1: Racial Sentiment Across Models",
+    "width": 496,
+    "height": 343,
+    "description": "Description: This line graph depicts the sentiment scores across different racial groups\nfor various model sizes. The highest sentiment score is observed for the Latinx group at\nthe 2.7B model size, reaching approximately 30. The lowest sentiment score is for the\nBlack group at the 1.3B model size, around -10. The graph includes six racial groups:\nAsian, Black, White, Latinx, Indian, and Middle Eastern.\n\nText in figure: Sentiment Score, Model Size, Asian, Black, White, Latinx, Indian, Middle\neastern, 350M, 760M, 1.3B, 2.7B, 6.7B, 13B, 175B.",
+    "pdf_text": "",
+    "bbox": [
+      171.7,
+      84.1,
+      419.5,
+      255.6
+    ]
+  },
+  {
+    "file": "p047_f23.png",
+    "page": 47,
+    "kind": "picture",
+    "caption": "Figure E.1: Participants spend more time trying to identify whether each news article is machine generated as model size increases. Duration on the control model is indicated with the dashed line. Line of best fit is a linear model on a log scale with 95% confidence intervals.",
+    "width": 577,
+    "height": 431,
+    "description": "Description: This figure is a line graph with a log scale on the x-axis, showing the duration in seconds it takes participants to identify whether news articles are machine-generated. The line of best fit is a linear model with 95% confidence intervals. The control model duration is indicated by a dashed line at 105 seconds. The highest point on the graph is at the far right, with a duration slightly above 130 seconds.\n\nText in figure: Duration (seconds), Number of parameters (log scale), control (105 seconds), 1e8, 1e9, 1e10, 1e11.",
+    "pdf_text": "",
+    "bbox": [
+      151.8,
+      288.0,
+      440.4,
+      503.6
+    ]
+  },
+  {
+    "file": "p064_f24.png",
+    "page": 64,
+    "kind": "picture",
+    "caption": "Figure H.1: All results for all SuperGLUE tasks.",
+    "width": 977,
+    "height": 788,
+    "description": "This figure is a collection of line graphs comparing the performance of different models on various SuperGLUE tasks. Each graph shows the accuracy or F1 score of models like BERT, Random Guessing, and others, across different parameter sizes. The series with the highest performance is typically \"Zero-Shot\" or \"One-Shot,\" while \"Few-Shot\" often shows the lowest performance. The series \"BERT-Large\" and \"Random Guessing\" are also present, with varying performance across tasks. The x-axis represents the number of parameters in billions, and the y-axis shows accuracy or F1 score.\n\nText in figure: \"BERT-Large\", \"Random Guessing\", \"Few-Shot\", \"One-Shot\", \"Zero-Shot\", \"BERT-Large\", \"Random Guessing\", \"Few-Shot\", \"One-Shot\", \"Zero-Shot\", \"BERT-Large\", \"Random Guessing\", \"Few-Shot\", \"One-Shot\", \"Zero-Shot\", \"BERT-Large\", \"Random Guessing\", \"Few-Shot\", \"One-Shot\", \"Zero-Shot\", \"BERT-Large\", \"Random Guessing\", \"Few-Shot\", \"One-Shot\", \"Zero-Shot\", \"BERT-Large\", \"Random Guessing\", \"Few-Shot\", \"One-Shot\", \"Zero-Shot\", \"BERT-Large\", \"Random Guessing\", \"Few-Shot\", \"One-Shot\", \"Zero-Shot\", \"BERT-Large\", \"Random Guessing\", \"Few-Shot\", \"One-Shot\", \"Zero-Shot\", \"BERT-Large\", \"Random Guessing\", \"Few-Shot\", \"One-Shot\", \"Zero-Shot\", \"BERT-Large\", \"Random Guessing\", \"Few-Shot\", \"One-Shot\", \"Zero-Shot\", \"BERT-Large\", \"Random Guessing\", \"Few-Shot\", \"One-Shot\", \"Zero-Shot\", \"BERT-Large\", \"Random Guessing\", \"Few-Shot\", \"One-Shot\", \"Zero-Shot\", \"BERT-Large\", \"Random Guessing\", \"Few-Shot\", \"One-Shot\", \"Zero-Shot\", \"BERT-Large\", \"Random Guessing\", \"Few-Shot\", \"One-Shot\", \"Zero-Shot\", \"BERT-Large\", \"Random Guessing\", \"Few-Shot\", \"One-Shot\", \"Zero-Shot\", \"BERT-Large\", \"Random Guessing\", \"Few-Shot\", \"One-Shot\", \"Zero-Shot\", \"BERT-Large\", \"Random Guessing\", \"Few-Shot\", \"One-Shot\", \"Zero-Shot\", \"BERT-Large\", \"Random Guessing\", \"Few-Shot\", \"One-Shot\", \"Zero-Shot\", \"",
+    "pdf_text": "",
+    "bbox": [
+      78.2,
+      99.7,
+      566.4,
+      493.6
+    ]
+  },
+  {
+    "file": "p064_f25.png",
+    "page": 64,
+    "kind": "picture",
+    "caption": "Figure H.2: Results for SAT task.",
+    "width": 332,
+    "height": 208,
+    "description": "Figure: Line graph showing accuracy of different models on the SAT task.\nSeries: Zero-Shot, One-Shot, Few-Shot (k=20).\nHighest: Few-Shot (k=20) at 175B parameters, lowest: Zero-Shot at 0.1B parameters.\nText: SAT Analogies, Accuracy, Parameters in LM (Billion), Random Guessing.\n\nFigure: Line graph comparing model accuracy on the SAT task.\nSeries: Zero-Shot, One-Shot, Few-Shot (k=20).\nHighest: Few-Shot (k=20) at 175B parameters, lowest: Zero-Shot at 0.1B parameters.\nText: SAT Analogies, Accuracy, Parameters in LM (Billion), Random Guessing.",
+    "pdf_text": "",
+    "bbox": [
+      71.7,
+      571.7,
+      237.7,
+      675.6
+    ]
+  },
+  {
+    "file": "p064_f26.png",
+    "page": 64,
+    "kind": "picture",
+    "caption": "",
+    "width": 663,
+    "height": 208,
+    "description": "Figure: Two line graphs comparing model performance on the Winograd and Winogrande datasets.\n\nLeft graph: Shows performance of different models on the Winograd dataset. The \"Zero-Shot\" model has the highest accuracy, followed by \"One-Shot\" and \"Few-Shot (K=50)\".\n\nRight graph: Shows performance of different models on the Winogrande dataset. The \"Zero-Shot\" model has the highest accuracy, followed by \"One-Shot\" and \"Few-Shot (K=7)\".\n\nText in figure: Winograd, Winogrande, Human, Fine-tuned SOTA, Fine-tuned RoBERTa-Large, Zero-Shot, One-Shot, Few-Shot (K=50), Few-Shot (K=7), Random Guessing, Accuracy, Parameters in LM (Billions)",
+    "pdf_text": "",
+    "bbox": [
+      259.2,
+      572.5,
+      590.5,
+      676.7
+    ]
+  },
+  {
+    "file": "p065_f27.png",
+    "page": 65,
+    "kind": "picture",
+    "caption": "Figure H.4: All results for all Arithmetic tasks.",
+    "width": 981,
+    "height": 790,
+    "description": "Figure H.4 displays a collection of line graphs comparing the performance of different models on various arithmetic tasks. Each graph represents a specific arithmetic operation, such as addition, subtraction, and multiplication, with different digit counts. The series include \"Zero-Shot\", \"One-Shot\", and \"Few-Shot\" models. Generally, the \"Few-Shot\" model shows the highest accuracy across most tasks, followed by \"One-Shot\" and \"Zero-Shot\". For instance, in the \"Two Digit Addition\" graph, the \"Few-Shot\" model starts with the lowest accuracy but surpasses the others as the number of parameters increases. The \"Zero-Shot\" model consistently shows the lowest accuracy.\n\nText in figure: \"Two Digit Addition\", \"Two Digit Subtraction\", \"Two Digit Multiplication\", \"Three Digit Addition\", \"Three Digit Subtraction\", \"Four Digit Addition\", \"Four Digit Subtraction\", \"Five Digit Addition\", \"Five Digit Subtraction\", \"Single Digit Three Ops\", \"Zero-Shot\", \"One-Shot\", \"Few-Shot\", \"Parameters in LM (Billions)\", \"Accuracy\".",
+    "pdf_text": "",
+    "bbox": [
+      77.1,
+      98.3,
+      567.4,
+      493.7
+    ]
+  },
+  {
+    "file": "p065_f28.png",
+    "page": 65,
+    "kind": "picture",
+    "caption": "Figure H.5: All results for all Cloze and Completion tasks.",
+    "width": 999,
+    "height": 208,
+    "description": "Figure type: Line graph\nDescription: Three line graphs showing accuracy of different models on various tasks. In the HellaSwag graph, the Zero-Shot model has the highest accuracy, followed by One-Shot and Few-Shot (K=20). In the Lambdada graph, the Zero-Shot model has the highest accuracy, followed by One-Shot and Few-Shot (K=15). In the Storycloze graph, the Zero-Shot model has the highest accuracy, followed by One-Shot and Few-Shot (K=70).\n\nText in figure: HellaSwag, Lambdada, Storycloze, Human, Fine-tuned SOTA, Zero-Shot, One-Shot, Few-Shot (K=20), Few-Shot (K=15), Few-Shot (K=70), Random Guessing, Accuracy, Parameters in LM (Billions)",
+    "pdf_text": "",
+    "bbox": [
+      72.0,
+      572.1,
+      571.3,
+      676.1
+    ]
+  },
+  {
+    "file": "p066_f29.png",
+    "page": 66,
+    "kind": "picture",
+    "caption": "Figure H.6: All results for all Common Sense Reasoning tasks.",
+    "width": 945,
+    "height": 186,
+    "description": "## Index Section 1\nThis figure contains three line graphs comparing the performance of different learning methods on various tasks. Each graph represents a different dataset: PhysicalQA, ARC Challenge, and OpenBookQA. The x-axis shows the number of parameters in billions, and the y-axis shows accuracy. The series include Zero-Shot, One-Shot, and Few-Shot (K=50) learning methods. In the PhysicalQA graph, the Few-Shot method is highest, followed by One-Shot, and Zero-Shot is the lowest. In the ARC Challenge graph, the Few-Shot method is highest, followed by One-Shot, and Zero-Shot is the lowest. In the OpenBookQA graph, the Few-Shot method is highest, followed by One-Shot, and Zero-Shot is the lowest.\n\n## Index Section 2\nPhysicalQA: Few-Shot (K=50) highest, One-Shot, Zero-Shot lowest. ARC Challenge: Few-Shot (K=50) highest, One-Shot, Zero-Shot lowest. OpenBookQA: Few-Shot (K=100) highest, One-Shot, Zero-Shot lowest. Parameters in billions, Accuracy. Zero-Shot, One-Shot, Few-Shot (K=50), Few-Shot (K=100).",
+    "pdf_text": "",
+    "bbox": [
+      83.0,
+      82.2,
+      555.6,
+      175.1
+    ]
+  },
+  {
+    "file": "p066_f30.png",
+    "page": 66,
+    "kind": "picture",
+    "caption": "Figure H.7: All results for all QA tasks.",
+    "width": 999,
+    "height": 205,
+    "description": "Figure H.7 shows three plots comparing the performance of different models on various QA tasks. Each plot displays the accuracy of models like Zero-Shot, One-Shot, and Few-Shot (K=64) across different parameter sizes. The highest accuracy is observed in the Few-Shot (K=64) model, followed by One-Shot and Zero-Shot models. The Few-Shot model consistently outperforms the others, especially at higher parameter sizes.\n\nFigure H.7: Three plots comparing model performance on QA tasks. Few-Shot (K=64) highest, One-Shot, Zero-Shot. Few-Shot leads, especially at higher parameters.\n\nText in figure: NaturalQuestions, TriviaQA, WebQS, Fine-tuned SOTA, Accuracy, Zero-Shot, One-Shot, Few-Shot (K=64), Parameters in LM (Billions).",
+    "pdf_text": "",
+    "bbox": [
+      72.2,
+      226.3,
+      571.4,
+      329.2
+    ]
+  },
+  {
+    "file": "p066_f31.png",
+    "page": 66,
+    "kind": "picture",
+    "caption": "Figure H.8: All results for all Reading Comprehension tasks.",
+    "width": 989,
+    "height": 395,
+    "description": "Figure H.8 presents a series of line graphs comparing the performance of various models on reading comprehension tasks. Each graph shows the accuracy of models like RACE-h, RACE-m, SquadV2, CoQA, and Drop, under different conditions such as Zero-Shot, One-Shot, and Few-Shot learning. The highest accuracy is observed in the Few-Shot (K=10) condition across most tasks, with RACE-h and RACE-m showing the most significant improvement. The lowest accuracy is consistently in the Zero-Shot condition. The graphs include labels for Zero-Shot, One-Shot, and Few-Shot (K=10) conditions, and the x-axis represents the number of parameters in billions.\n\nText in figure: \"Fine-tuned SOTA\", \"Quac\", \"RACE-h\", \"RACE-m\", \"SquadV2\", \"CoQA\", \"Drop\", \"Zero-Shot\", \"One-Shot\", \"Few-Shot (K=10)\", \"Few-Shot (K=20)\", \"Human\", \"Accuracy\", \"Parameters in LM (Billions)\"",
+    "pdf_text": "",
+    "bbox": [
+      76.6,
+      367.2,
+      571.2,
+      564.5
+    ]
+  },
+  {
+    "file": "p066_f32.png",
+    "page": 66,
+    "kind": "picture",
+    "caption": "Figure H.9: All results for all ANLI rounds.",
+    "width": 943,
+    "height": 198,
+    "description": "Section 1:\nThis figure is a set of three line graphs comparing the performance of different models on the ANLI dataset across three rounds. Each graph shows the accuracy of models with varying numbers of parameters, measured in billions. The models include Fine-tuned RoBERTa-Large, Fine-tuned SOTA, and Fine-tuned BERT-Large. The performance is evaluated under different learning conditions: zero-shot, one-shot, and few-shot (K=50). The graphs indicate that the Fine-tuned RoBERTa-Large model generally outperforms the others, especially in the few-shot condition.\n\nSection 2:\nText in figure: ANLI Round1, ANLI Round2, ANLI Round3, Fine-tuned RoBERTa-Large, Fine-tuned SOTA, Fine-tuned BERT-Large, Zero-Shot, One-Shot, Few-Shot (K=50), Accuracy, Parameters in LM (Billions), Random Guessing.",
+    "pdf_text": "",
+    "bbox": [
+      71.8,
+      598.8,
+      543.5,
+      697.8
+    ]
+  },
+  {
+    "file": "p067_f33.png",
+    "page": 67,
+    "kind": "picture",
+    "caption": "Figure H.10: All results for all Scramble tasks.",
+    "width": 998,
+    "height": 396,
+    "description": "This figure is a collection of six line graphs, each representing different tasks in the Scramble benchmark. The tasks include cycle letters, word scramble (few-shot), mid word 1 anagrams, mid word 2 anagrams, random insertion, and reversed words. Each graph plots accuracy against the number of parameters in the language model (LM) in billions. The series include Zero-Shot, One-Shot, and Few-Shot (K=100). The highest series is typically Few-Shot (K=100), and the lowest is usually Zero-Shot. The differences in accuracy vary by task but are generally within a range of 10-20%.\n\nText in figure: cycle letters, word scramble (few-shot), mid word 1 anagrams, mid word 2 anagrams, random insertion, reversed words, Zero-Shot, One-Shot, Few-Shot (K=100), Parameters in LM (Billions), Accuracy.",
+    "pdf_text": "",
+    "bbox": [
+      72.4,
+      76.9,
+      571.3,
+      275.0
+    ]
+  },
+  {
+    "file": "p067_f34.png",
+    "page": 67,
+    "kind": "picture",
+    "caption": "Figure H.11: All results for all Translation tasks.",
+    "width": 980,
+    "height": 790,
+    "description": "Section 1:\nTranslation task results, multiple languages, zero-shot, one-shot, few-shot (k=4) learning. Accuracy vs. parameters in billions. German, English, French, Romanian languages. SacBLEU and MultiBLEU metrics.\n\nSection 2:\nGerman -> English, English -> German, English -> French, French -> English, English -> Romanian, Romanian -> English. Zero-shot, one-shot, few-shot (k=4) learning. Accuracy increases with parameters. MultiBLEU metric.",
+    "pdf_text": "",
+    "bbox": [
+      79.3,
+      305.1,
+      569.6,
+      700.1
+    ]
+  }
+]

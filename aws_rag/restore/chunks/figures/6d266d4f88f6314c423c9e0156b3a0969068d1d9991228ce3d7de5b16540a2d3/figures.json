@@ -1,0 +1,56 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Fig. 1. We improve DeepLabv3, which employs the spatial pyramid pooling module (a), with the encoder-decoder structure (b). The proposed model, DeepLabv3+, contains rich semantic information from the encoder module, while the detailed object boundaries are recovered by the simple yet effective decoder module. The encoder module allows us to extract features at an arbitrary resolution by applying atrous convolution.",
+    "width": 662,
+    "height": 255,
+    "description": "Figure type: Diagram\nDescription: The figure shows three different architectures for semantic image segmentation. Panel (a) depicts the Spatial Pyramid Pooling used in DeepLabv3. Panel (b) illustrates the Encoder-Decoder structure. Panel (c) presents the proposed model, DeepLabv3+, which combines the encoder module with the decoder module and uses atrous convolution.\n\nText in figure:\n- Panel (a): Spatial Pyramid Pooling\n- Panel (b): Encoder-Decoder\n- Panel (c): Encoder-Decoder with Atrous Conv\n- Labels: Image, Prediction\n- Values: 0.5x, 2x, 4x, 8x\n\nKey elements:\n- Spatial Pyramid Pooling\n- Encoder-Decoder\n- Atrous Convolution\n- Image\n- Prediction"
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Fig. 2. Our proposed DeepLabv3+ extends DeepLabv3 by employing a encoderdecoder structure. The encoder module encodes multi-scale contextual information by applying atrous convolution at multiple scales, while the simple yet effective decoder module refines the segmentation results along object boundaries.",
+    "width": 666,
+    "height": 342,
+    "description": "Figure type: Diagram\nDescription: The figure is a diagram showing the architecture of the proposed DeepLabv3+ model for semantic image segmentation. It consists of an encoder and a decoder. The encoder uses atrous separable convolution to encode multi-scale contextual information. The decoder refines segmentation results.\n\nText in figure: Encoder, Decoder, Image, Atrous Conv, 1x1 Conv, 3x3 Conv, rate 6, rate 12, rate 18, Image Pooling, Low-Level Features, 1x1 Conv, Upsample by 4, Concatenate, 3x3 Conv, Upsample by 4, Prediction"
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Fig. 3. 3 \u00d7 3 Depthwise separable convolution decomposes a standard convolution into (a) a depthwise convolution (applying a single filter for each input channel) and (b) a pointwise convolution (combining the outputs from depthwise convolution across channels). In this work, we explore atrous separable convolution where atrous convolution is adopted in the depthwise convolution, as shown in (c) with rate = 2.",
+    "width": 644,
+    "height": 156,
+    "description": "## Description:\nThis figure illustrates three types of convolutions used in image segmentation: depthwise convolution, pointwise convolution, and atrous depthwise convolution. Each panel shows a 3x3 convolution process. Panel (a) depicts depthwise convolution, where a single filter is applied to each input channel. Panel (b) shows pointwise convolution, which combines outputs from depthwise convolution across channels. Panel (c) represents atrous depthwise convolution, where atrous convolution is applied in the depthwise convolution with a rate of 2.\n\n## Text in figure:\n- (a) Depthwise conv.\n- (b) Pointwise conv.\n- (c) Atrous depthwise conv.\n- rate = 2"
+  },
+  {
+    "file": "p007_f04.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Fig. 4. We modify the Xception as follows: (1) more layers (same as MSRA's modification except the changes in Entry flow), (2) all the max pooling operations are replaced by depthwise separable convolutions with striding, and (3) extra batch normalization and ReLU are added after each 3 \u00d7 3 depthwise convolution, similar to MobileNet.",
+    "width": 644,
+    "height": 501,
+    "description": "This figure is a diagram showing the architecture of a modified Xception model for semantic image segmentation. It consists of three main flows: Entry flow, Middle flow, and Exit flow. Each flow includes a series of convolutional layers with varying numbers of filters and kernel sizes, as well as stride values. The architecture uses depthwise separable convolutions instead of max pooling and includes batch normalization and ReLU activations.\n\nEntry flow: Conv 32, 3x3, stride 2, Conv 64, 3x3, Sep Conv 128, 3x3, Conv 128, 1x1, stride 2, Sep Conv 128, 3x3, stride 2, Sep Conv 256, 3x3, Conv 256, 1x1, stride 2, Sep Conv 256, 3x3, stride 2, Sep Conv 728, 3x3, Conv 728, 1x1, stride 2, Sep Conv 728, 3x3, stride 2.\n\nMiddle flow: Sep Conv 728, 3x3, Sep Conv 728, 3x3, Sep Conv 728, 3x3, repeated 16 times.\n\nExit flow: Conv 1024, 1x1, stride 2, Sep Conv 1024, 3x3, Sep Conv 1024, 3x3, stride 2, Sep Conv 1536, 3x3, Sep Conv 1536, 3x3, Sep Conv 2048, 3x3."
+  },
+  {
+    "file": "p013_f05.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Fig. 5. (a) mIOU as a function of trimap band width around the object boundaries when employing train output stride = eval output stride = 16. BU : Bilinear upsampling. (b) Qualitative effect of employing the proposed decoder module compared with the naive bilinear upsampling (denoted as BU ). In the examples, we adopt Xception as feature extractor and train output stride = eval output stride = 16.",
+    "width": 675,
+    "height": 257,
+    "description": "Figure: Line graph and image comparisons.\nPanel (a): Line graph showing mean Intersection over Union (mIOU) as a function of trimap width. Series: Xception w/ Decoder, ResNet-101 w/ Decoder, Xception w/ BU, ResNet-101 w/ BU. Highest: Xception w/ Decoder, lowest: ResNet-101 w/ BU.\nPanel (b): Image comparisons showing the effect of the decoder module versus bilinear upsampling (BU). Images: Original, w/ BU, w/ Decoder.\n\nText in figure: mIOU, Trimap Width (pixels), Xception w/ Decoder, ResNet-101 w/ Decoder, Xception w/ BU, ResNet-101 w/ BU, BU, Decoder effect."
+  },
+  {
+    "file": "p014_f06.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Fig. 6. Visualization results on val set. The last row shows a failure mode.",
+    "width": 653,
+    "height": 247,
+    "description": "## Index Section 1: Figure Description\nThis figure displays visualization results from a semantic image segmentation model. It includes multiple images with color-coded segmentation masks, showing how the model identifies and separates different objects within the scenes. The last row highlights a failure mode of the model.\n\n## Index Section 2: Figure Content\nVisualization results; segmentation masks; failure mode; images of people, animals, and vehicles; color-coded masks (pink, purple, green, blue); last row shows failure."
+  }
+]

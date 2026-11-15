@@ -1,0 +1,178 @@
+[
+  {
+    "file": "p006_f01.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "",
+    "width": 734,
+    "height": 131,
+    "description": "Figure: Four panels of a plot showing a function with uncertainty estimates.\n\nText in figure: \u22126, \u22124, \u22122, 0, 2, 4, 6, \u2212200, \u2212100, 0, 100, 200, \u2212300, \u2212200, \u2212100, 0, 100, 200, 300\n\nDescription: Each panel shows a function plotted with a blue line and a shaded region indicating uncertainty. The x-axis ranges from -6 to 6, and the y-axis ranges from -200 to 200 in the first three panels and from -300 to 300 in the last panel. The blue line represents the function, and the shaded region represents the uncertainty estimate. The red dots represent data points.",
+    "pdf_text": "\u22126 \u22124 \u22122 | 0 | 2 | 4 | 6 | \u2212200 | \u2212100 | 0 | 100 | 200 | \u22126 \u22124 \u22122 | 0 | 2 | 4 | 6 | \u2212200 | \u2212100 | 0 | 100 | 200 | \u22126 \u22124 \u22122 | 0 | 2 | 4 | 6 | \u2212200 | \u2212100 | 0 | 100 | 200 | \u22126 \u22124 \u22122 | 0 | 2 | 4 | 6 | \u2212300 | \u2212200 | \u2212100 | 0 | 100 | 200 | 300",
+    "bbox": [
+      124.9,
+      71.5,
+      492.0,
+      137.2
+    ]
+  },
+  {
+    "file": "p007_f02.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "",
+    "width": 766,
+    "height": 146,
+    "description": "## Figure description\n\nThis figure contains six line graphs, each with four lines representing different methods: Ensemble, Ensemble + R, Ensemble + AT, and MC dropout. The x-axis represents the number of nets, ranging from 0 to 15. The y-axis varies across the graphs, showing different metrics: Classification Error, NLL, and Brier Score. The Ensemble method generally shows the highest values, while MC dropout often shows the lowest.\n\n## Figure content\n\nText in figure: \"Classification Error\", \"NLL\", \"Brier Score\", \"Ensemble\", \"Ensemble + R\", \"Ensemble + AT\", \"MC dropout\", \"Number of nets\", \"0\", \"5\", \"10\", \"15\", \"1.0\", \"1.2\", \"1.4\", \"1.6\", \"1.8\", \"0.02\", \"0.04\", \"0.06\", \"0.08\", \"0.10\", \"0.12\", \"0.14\", \"0.0014\", \"0.0016\", \"0.0018\", \"0.0020\", \"0.0022\", \"0.0024\", \"0.0026\", \"0.0028\", \"0.0030\", \"0.15\", \"0.20\", \"0.25\", \"0.30\", \"0.35\", \"0.40\", \"0.45\", \"0.50\", \"0.004\", \"0.006\", \"0.008\", \"0.010\", \"0.012\", \"0.014\", \"0.016\"",
+    "pdf_text": "0 | 5 | 10 | 15 | Number of nets | 1.0 | 1.2 | 1.4 | 1.6 | 1.8 | Classification Error | Ensemble | Ensemble + R | Ensemble + AT | MC dropout | 0 | 5 | 10 | 15 | Number of nets | 0.02 | 0.04 | 0.06 | 0.08 | 0.10 | 0.12 | 0.14 | NLL | Ensemble | Ensemble + R | Ensemble + AT | MC dropout | 0 | 5 | 10 | 15 | Number of nets | 0.0014 | 0.0016 | 0.0018 | 0.0020 | 0.0022 | 0.0024 | 0.0026 | 0.0028 | 0.0030 | Brier Score | Ensemble | Ensemble + R | Ensemble + AT | MC dropout | ( ) | S | d | i | 3 l | 0 | 5 | 10 | Number of nets | 2 | 4 | 6 | 8 | 10 | 12 | 14 | Classification Error | Ensemble | Ensemble + R | Ensemble + AT | MC dropout | 0 | 5 | 10 | Number of nets | 0.15 | 0.20 | 0.25 | 0.30 | 0.35 | 0.40 | 0.45 | 0.50 | NLL | Ensemble | Ensemble + R | Ensemble + AT | MC dropout | 0 | 5 | 10 | Number of nets | 0.004 | 0.006 | 0.008 | 0.010 | 0.012 | 0.014 | 0.016 | Brier Score | Ensemble | Ensemble + R | Ensemble + AT | MC dropout | (b) S | i | GG | l",
+    "bbox": [
+      115.3,
+      76.9,
+      498.5,
+      150.1
+    ]
+  },
+  {
+    "file": "p008_f03.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 3: : Histogram of the predictive entropy on test examples from known classes (top row) and unknown classes (bottom row), as we vary ensemble size M .",
+    "width": 764,
+    "height": 311,
+    "description": "This figure presents histograms of predictive entropy values for test examples from known and unknown classes, comparing different ensemble sizes and methods. The top row shows histograms for known classes, while the bottom row shows histograms for unknown classes. The x-axis represents entropy values, and the y-axis represents the frequency of these values. The series include 'Ensemble', 'Ensemble + R', 'Ensemble + AT', and 'MC dropout 0.1'. The histograms for known classes show a higher frequency of lower entropy values, while the histograms for unknown classes show a higher frequency of higher entropy values.\n\nLegend entries: Ensemble, Ensemble + R, Ensemble + AT, MC dropout 0.1\nX-axis: entropy values\nY-axis: frequency\nPanels: (a) MNIST-NotMNIST, (b) SVHN-CIFAR10",
+    "pdf_text": "\u22120.5 0.0 0.5 1.0 1.5 2.0 | entropy values | 0 | 2 | 4 | 6 | 8 | 10 | 12 | 14 | Ensemble | 1 | 5 | 10 | \u22120.5 0.0 0.5 1.0 1.5 2.0 | entropy values | Ensemble + R | 1 | 5 | 10 | \u22120.5 0.0 0.5 1.0 1.5 2.0 | entropy values | Ensemble + AT | 1 | 5 | 10 | \u22120.5 0.0 0.5 1.0 1.5 2.0 | entropy values | MC dropout 0.1 | 1 | 5 | 10 | \u22120.5 0.0 0.5 1.0 1.5 2.0 | entropy values | 0 | 2 | 4 | 6 | 8 | 10 | 12 | 14 | Ensemble | 1 | 5 | 10 | \u22120.5 0.0 0.5 1.0 1.5 2.0 | entropy values | Ensemble + R | 1 | 5 | 10 | \u22120.5 0.0 0.5 1.0 1.5 2.0 | entropy values | Ensemble + AT | 1 | 5 | 10 | \u22120.5 0.0 0.5 1.0 1.5 2.0 | entropy values | MC dropout 0.1 | 1 | 5 | 10 | (a) MNIST-NotMNIST | \u22120.50.0 0.5 1.0 1.5 2.0 2.5 | entropy values | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | Ensemble | 1 | 5 | 10 | \u22120.50.0 0.5 1.0 1.5 2.0 2.5 | entropy values | Ensemble + R | 1 | 5 | 10 | \u22120.50.0 0.5 1.0 1.5 2.0 2.5 | entropy values | Ensemble + AT | 1 | 5 | 10 | \u22120.5 0.0 0.5 1.0 1.5 2.0 | entropy values | MC dropout | 1 | 5 | 10 | \u22120.50.0 0.5 1.0 1.5 2.0 2.5 | entropy values | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | Ensemble | 1 | 5 | 10 | \u22120.50.0 0.5 1.0 1.5 2.0 2.5 | entropy values | Ensemble + R | 1 | 5 | 10 | \u22120.50.0 0.5 1.0 1.5 2.0 2.5 | entropy values | Ensemble + AT | 1 | 5 | 10 | \u22120.50.0 0.5 1.0 1.5 2.0 2.5 | entropy values | MC dropout | 1 | 5 | 10 | (b) SVHN-CIFAR10",
+    "bbox": [
+      115.2,
+      132.5,
+      497.1,
+      288.1
+    ]
+  },
+  {
+    "file": "p008_f04.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 5: ImageNet trained only on dogs: Histogram of the predictive entropy (left) and maximum predicted probability (right) on test examples from known classes (dogs) and unknown classes (non-dogs), as we vary the ensemble size.",
+    "width": 424,
+    "height": 141,
+    "description": "Figure 5 displays two histograms comparing predictive entropy and maximum predicted probability for known and unknown classes. The left histogram shows predictive entropy, with known classes (dogs) having a higher peak at lower entropy values and unknown classes (non-dogs) having a higher peak at higher entropy values. The right histogram shows maximum predicted probability, with known classes having a higher peak at higher probabilities and unknown classes having a lower peak at lower probabilities.\n\nSection 1: Histograms of predictive entropy and maximum predicted probability for known and unknown classes. Known classes (dogs) have higher peaks at lower entropy and higher probabilities. Unknown classes (non-dogs) have higher peaks at higher entropy and lower probabilities.\n\nSection 2: Known classes, Unknown classes, entropy values, max predicted prob, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 0, 1, 2, 3, 4, 5, 6, 7, 8.",
+    "pdf_text": "0.20.0 0.2 0.4 0.6 0.8 1.0 1.2 1.4 1.6 | entropy values | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | Known classes | 1 | 2 | 3 | 4 | 5 | 1 | 0 | 1 | 2 | 3 | 4 | 5 | entropy values | 0.0 | 0.1 | 0.2 | 0.3 | 0.4 | 0.5 | 0.6 | 0.7 | Unknown classes | 1 | 2 | 3 | 4 | 5 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | 1.2 | max predicted prob | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | Known classes | 1 | 2 | 3 | 4 | 5 | 0.2 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | 1.2 | max predicted prob | 0.0 | 0.5 | 1.0 | 1.5 | 2.0 | 2.5 | 3.0 | 3.5 | 4.0 | Unknown classes | 1 | 2 | 3 | 4 | 5",
+    "bbox": [
+      278.4,
+      586.0,
+      490.7,
+      656.5
+    ]
+  },
+  {
+    "file": "p009_f05.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 6: Accuracy vs Confidence curves: Networks trained on MNIST and tested on both MNIST test containing known classes and the NotMNIST dataset containing unseen classes. MC-dropout can produce overconfident wrong predictions, whereas deep ensembles are significantly more robust.",
+    "width": 369,
+    "height": 259,
+    "description": "Description: The figure displays accuracy versus confidence threshold curves for various predictive uncertainty estimation methods. The series \"Ensemble\" starts low, increases steadily, and peaks at the highest accuracy. \"Ensemble + R\" and \"Ensemble + AT\" follow similar trends but with slightly lower accuracy. \"MC dropout\" starts and remains the lowest. The x-axis represents the confidence threshold, and the y-axis represents accuracy on examples.\n\nText in figure: 0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, Confidence Threshold, 30, 40, 50, 60, 70, 80, 90, Accuracy on examples, p(y|x), Ensemble, Ensemble + R, Ensemble + AT, MC dropout",
+    "pdf_text": "0.0 | 0.1 | 0.2 | 0.3 | 0.4 | 0.5 | 0.6 | 0.7 | 0.8 | 0.9 | Confidence Threshold \u00bf | 30 | 40 | 50 | 60 | 70 | 80 | 90 | Accuracy on examples p(yjx) \u00b8 \u00bf | Ensemble | Ensemble + R | Ensemble + AT | MC dropout",
+    "bbox": [
+      213.4,
+      73.5,
+      398.0,
+      203.0
+    ]
+  },
+  {
+    "file": "p014_f06.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "",
+    "width": 476,
+    "height": 178,
+    "description": "## Search Index Section 1\nFigure type: Line graph\nDescription: The figure shows two line graphs with two series each. In the left graph, the blue line is higher than the red line, with the blue line reaching approximately 1.0 and the red line reaching approximately 0.9. In the right graph, the blue line is higher than the red line, with the blue line reaching approximately 1.0 and the red line reaching approximately 0.3.\n\n## Search Index Section 2\nText in figure: 0.0, 0.2, 0.4, 0.6, 0.8, 1.0 (x-axis and y-axis labels)",
+    "pdf_text": "0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0",
+    "bbox": [
+      186.5,
+      73.4,
+      424.4,
+      162.5
+    ]
+  },
+  {
+    "file": "p014_f07.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 8: Results on MNIST dataset using the same setup as that in Figure 2(a) except that we use two hidden layers in the MLP instead of three. Ensembles and adversarial training improve performance and our method outperforms MC-dropout.",
+    "width": 610,
+    "height": 221,
+    "description": "This figure consists of three line graphs, each showing a different metric (Classification Error, NLL, Brier Score) plotted against the number of nets in an ensemble. The metrics are used to evaluate the performance of various methods on the MNIST dataset. The series include Ensemble, Ensemble + R, Ensemble + AT, and MC dropout. In the Classification Error graph, the MC dropout series starts highest and decreases, while the Ensemble + AT series starts lowest and increases. The NLL graph shows the Ensemble + AT series at the lowest point, followed by Ensemble + R, Ensemble, and MC dropout. The Brier Score graph has the Ensemble + AT series at the lowest point, followed by Ensemble + R, Ensemble, and MC dropout.\n\nText in figure: \"0 | 5 | 10 | 15 | Number of nets | 1.0 | 1.1 | 1.2 | 1.3 | 1.4 | 1.5 | 1.6 | 1.7 | 1.8 | Classification Error | Ensemble | Ensemble + R | Ensemble + AT | MC dropout | 0 | 5 | 10 | 15 | Number of nets | 0.02 | 0.04 | 0.06 | 0.08 | 0.10 | 0.12 | 0.14 | NLL | Ensemble | Ensemble + R | Ensemble + AT | MC dropout | 0 | 5 | 10 | 15 | Number of nets | 0.0015 | 0.0020 | 0.0025 | 0.0030 | Brier Score | Ensemble | Ensemble + R | Ensemble + AT | MC dropout\"",
+    "pdf_text": "0 | 5 | 10 | 15 | Number of nets | 1.0 | 1.1 | 1.2 | 1.3 | 1.4 | 1.5 | 1.6 | 1.7 | 1.8 | Classification Error | Ensemble | Ensemble + R | Ensemble + AT | MC dropout | 0 | 5 | 10 | 15 | Number of nets | 0.02 | 0.04 | 0.06 | 0.08 | 0.10 | 0.12 | 0.14 | NLL | Ensemble | Ensemble + R | Ensemble + AT | MC dropout | 0 | 5 | 10 | 15 | Number of nets | 0.0015 | 0.0020 | 0.0025 | 0.0030 | Brier Score | Ensemble | Ensemble + R | Ensemble + AT | MC dropout",
+    "bbox": [
+      153.0,
+      312.6,
+      458.2,
+      422.9
+    ]
+  },
+  {
+    "file": "p014_f08.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 9: Results on MNIST dataset using a convolutional network as opposed to the 3-layer MLP in Figure 2(a). Even on a different architecture, ensembles and adversarial training improve performance and our method outperforms MC-dropout.",
+    "width": 626,
+    "height": 225,
+    "description": "## Description:\nThis figure contains three line graphs comparing the performance of different methods on the MNIST dataset using a convolutional network. The three metrics are Classification Error, NLL, and Brier Score. Each graph shows the performance of three methods: Ensemble, Ensemble + AT, and MC dropout, as the number of nets increases from 0 to 10.\n\n## Text in figure:\nClassification Error: Ensemble, Ensemble + AT, MC dropout\nNLL: Ensemble, Ensemble + AT, MC dropout\nBrier Score: Ensemble, Ensemble + AT, MC dropout\nNumber of nets: 0, 5, 10",
+    "pdf_text": "0 | 5 | 10 | Number of nets | 1.3 | 1.4 | 1.5 | 1.6 | 1.7 | 1.8 | 1.9 | 2.0 | 2.1 | Classification Error | Ensemble | Ensemble + AT | MC dropout | 0 | 5 | 10 | Number of nets | 0.04 | 0.05 | 0.06 | 0.07 | 0.08 | 0.09 | 0.10 | 0.11 | 0.12 | 0.13 | NLL | Ensemble | Ensemble + AT | MC dropout | 0 | 5 | 10 | Number of nets | 0.0020 | 0.0022 | 0.0024 | 0.0026 | 0.0028 | 0.0030 | 0.0032 | 0.0034 | Brier Score | Ensemble | Ensemble + AT | MC dropout",
+    "bbox": [
+      148.7,
+      495.1,
+      461.6,
+      607.4
+    ]
+  },
+  {
+    "file": "p015_f09.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 10: Results on MNIST showing test examples with high or low disagreement between the networks in the ensemble: Top two rows denote the test examples with least disagreement and the bottom two rows denote test examples with the most disagreement.",
+    "width": 721,
+    "height": 141,
+    "description": "Figure: A visual representation of test examples from the MNIST dataset, categorized by the level of disagreement among the networks in a deep ensemble. The top two rows display examples with the least disagreement, while the bottom two rows show examples with the most disagreement.\n\nText in figure: \"0012233445566778899\", \"00112233445566778899\", \"00112233445566778899\", \"00112233445566778899\", \"08112233445566778899\"",
+    "pdf_text": "",
+    "bbox": [
+      129.7,
+      106.3,
+      490.2,
+      177.2
+    ]
+  },
+  {
+    "file": "p015_f10.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 11: Results on MNIST showing test examples with high or low confidence: Top two rows denote the test examples with highest confidence and the bottom two rows denote test examples with the least confidence.",
+    "width": 726,
+    "height": 177,
+    "description": "## Description:\nThis figure displays test examples from the MNIST dataset, categorized by their confidence levels. The top two rows show examples with the highest confidence, while the bottom two rows show examples with the least confidence. Each row contains images of digits with their corresponding confidence scores.\n\n## Text in figure:\n- Top row: \"00112233445566778899\"\n- Second row: \"00112233445566778899\"\n- Third row: \"00112233445566778899\"\n- Fourth row: \"00112233445566778899\"",
+    "pdf_text": "",
+    "bbox": [
+      127.0,
+      247.2,
+      490.2,
+      335.4
+    ]
+  },
+  {
+    "file": "p015_f11.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "",
+    "width": 750,
+    "height": 160,
+    "description": "Section 1:\nThis figure displays a grid of numbers and letters, organized in a structured format. The grid consists of rows and columns, with each cell containing a combination of numbers and letters. The numbers range from 0 to 9, while the letters are primarily from the alphabet, with some symbols included. The arrangement suggests a systematic pattern, possibly representing a mapping or encoding scheme.\n\nSection 2:\nText in figure: 7, 1, 3, 7, 3, 1, 2, 1, 7, 3, 3, 1, 3, 1, 1, 7, 9, 0, 9, 0, 8, 0, 9, 8, 0, 0, 4, 4, 5, 0, 8, 0, 8, 4, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 2, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 5, 0, 7, 3, 7, 0, 6, 2, 5, 4, 6, 5, 7, 6, 4, 0, 5, 0, 5, 8.",
+    "pdf_text": "7 | 1 | 3 | 7 | 3 | 1 | 2 | 1 | 7 | 3 | 3 | 1 | 3 | 1 | 1 | 3 | 1 | 3 | 1 | 1 | 7 | 9 | 0 | 9 | 0 | 8 | 0 | 9 | 8 | 0 | 0 | 4 | 4 | 5 | 0 | 8 | 0 | 8 | 4 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 0 | 3 | 3 | 2 | 3 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 3 | 5 | 0 | 7 | 3 | 7 | 0 | 6 | 2 | 5 | 4 | 6 | 5 | 7 | 6 | 4 | 0 | 5 | 0 | 5 | 8",
+    "bbox": [
+      123.8,
+      403.3,
+      499.2,
+      483.7
+    ]
+  }
+]

@@ -1,0 +1,226 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1. (a) Inaccurate localization and alignment lead to prediction errors on attributes by existing methods (b) LNet localizes face regions by averaging the response maps of attribute filters. ANet predicts attributes without alignment (c) Face localization with the averaged response map when LNet is trained with different numbers of attributes. (Best viewed in color)",
+    "width": 448,
+    "height": 369,
+    "description": "Description: The figure compares face attribute prediction methods. Panel (a) shows errors in attribute prediction due to inaccurate localization and alignment. Panel (b) demonstrates the proposed method, which uses LNet for localization and ANet for attribute prediction. Panel (c) displays the localization accuracy of LNet trained with different numbers of attributes.\n\nText in figure: Arched Eyebrows, Receding Hairline, Smiling, Mustache, Young, HOG(landmarks)+SVM, Our Method, true, false, 5 attributes, 10 attributes, 20 attributes, 40 attributes",
+    "pdf_text": "Arched Eyebrows Receding Hairline | Smiling | Mustache | Young | (a) HOG(landmarks)+SVM | (b) Our Method | true | true | false | true | true | true | true | false | false | true | (c) | 5 attributes | 10 attributes | 20 attributes | 40 attributes",
+    "bbox": [
+      314.4,
+      227.0,
+      538.5,
+      411.3
+    ]
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2. The proposed pipeline of attribute prediction (Best viewed in color)",
+    "width": 895,
+    "height": 384,
+    "description": "## Description\nThis figure illustrates a pipeline for predicting facial attributes using deep learning models. It shows four main components: (a) LNeto, (b) LNets, (c) ANet, and (d) a feature extraction process for attribute prediction. The pipeline processes input images through convolutional layers, pooling, and fully connected layers, ultimately using linear SVMs to predict attributes like wavy hair, no beard, and high cheekbones.\n\n## Text in figure\n(a) LNeto, (b) LNets, (c) ANet, (d) Extracting features to predict attributes, Linear SVM, Wavy Hair, No Beard, High Cheekbones, Smiling, h, s, xo, xs, xf, m, n, o, (5), (5), FC, FC, FC, FC, y",
+    "pdf_text": "xo | Linear SVM | Smiling | Wavy Hair | No Beard | High Cheekbones | h | \u2026 | \u2026 | xs | xf | (a) LNeto | (b) LNets | (c) ANet | (d) Extracting features to predict attributes | m | n | o | (5) | s | (5) | h | f | (4) | h | FC | FC | FC | FC | y | Linear SVM | Linear SVM | xf",
+    "bbox": [
+      72.9,
+      70.2,
+      520.4,
+      262.0
+    ]
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3. (a.1) Original image. (a.2)-(a.4) are averaged response maps in C5 of LNet o after pre-training (a.2), fine-tuning (a.3) and directly training from scratch with attribute tags but without pre-training (a.4). (b) Determine threshold.",
+    "width": 451,
+    "height": 195,
+    "description": "This figure shows various response maps and a threshold determination plot. The response maps (a.1-a.4) depict the averaged activations in the C5 layer of a neural network (LNet) after different training stages. The maps show the network's focus areas on face images. The threshold plot (b) compares the maximum scores of responses on face images and background images, indicating the threshold for distinguishing faces from backgrounds.\n\nText in figure: (b), Response on Face Images, Response on Bg. Images, Maximum Score, Percentage of Images, threshold, (a.1), (a.2), (a.3), (a.4)",
+    "pdf_text": "(b) | Response on Face Images | Response on Bg. Images | Maximum Score | Percentage of Images | threshold | (a.1) | (a.2) | (a.3) | (a.4)",
+    "bbox": [
+      55.3,
+      70.7,
+      280.8,
+      167.9
+    ]
+  },
+  {
+    "file": "p004_f04.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "(b) multi-view detector (c) face localization by attributes (a) single detector Figure 4. Face localization by attributes",
+    "width": 446,
+    "height": 156,
+    "description": "## Description\nThis figure illustrates three methods for face localization: (a) single detector, (b) multi-view detector, and (c) face localization by attributes. Each method is depicted with a series of images showing different face views and attributes.\n\n## Text in figure\n- (a) single detector\n- (b) multi-view detector\n- (c) face localization by attributes\n- View 1\n- View N\n- Attr Config 1\n- Attr Config N\n- Frontal\n- Left\n- Brown Hair\n- Big Eyes\n- Smiling\n- Male\n- Black Hair\n- Sunglasses",
+    "pdf_text": "... | (b) multi-view detector | ... | ... | (c) face localization by attributes | (a) single detector | View N | View 1 | Attr Config 1 | Brown Hair | Big Eyes | Smiling | Left | Frontal | Attr Config N | Male | Black Hair | Sunglasses",
+    "bbox": [
+      315.5,
+      71.3,
+      538.6,
+      149.3
+    ]
+  },
+  {
+    "file": "p005_f05.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 5. Detailed pipeline of efficient feature extractions in ANet.",
+    "width": 891,
+    "height": 251,
+    "description": "## Description\nThis figure illustrates the pipeline of efficient feature extraction in ANet, a deep learning model for face attribute recognition. It consists of four panels: (a) global convolution, (b) local convolution, (c) feature extraction with interweaved operation, and (d) interweaved operation. Each panel shows a sequence of feature maps resulting from different convolution operations on input images.\n\n## Text in figure\n(a) global convolution\n(b) local convolution\n(c) feature extraction with interweaved operation\n(d) interweaved operation\n1, 2, 3, 4, 5, 6, 7, 8, 9, 4, 2, 3, 5, 6, 1, 7, 8, 9",
+    "pdf_text": "\u2026 | \u2026 | (a) global convolution | (b) local convolution | (c) feature extraction with | interweaved operation | (d) interweaved operation | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 4 | 2 | 3 | 5 | 6 | 1 | 7 | 8 | 9",
+    "bbox": [
+      74.2,
+      72.8,
+      519.6,
+      198.6
+    ]
+  },
+  {
+    "file": "p006_f06.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 6. Averaged response maps of LNet, including (a) CelebA, (b) MobileFaces, (c) some failure cases. (Best viewed in color)",
+    "width": 894,
+    "height": 249,
+    "description": "Description: The figure displays a collection of averaged response maps from LNet, a deep learning model, applied to different datasets. Panel (a) shows response maps from the CelebA dataset, panel (b) from the MobileFaces dataset, and panel (c) presents some failure cases. Each map highlights areas of interest detected by the model, with colors indicating the intensity of the response.\n\nText in figure: (a) | (b) | (c)",
+    "pdf_text": "(a) | (c) | (b)",
+    "bbox": [
+      74.6,
+      72.1,
+      521.7,
+      196.6
+    ]
+  },
+  {
+    "file": "p006_f07.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 7. ROC curves on (a) CelebA (b) MobileFaces. (c) Recall rates w.r.t. overlap ratio ( FPPI = 0 . 1 ). (d) Recall rates w.r.t. number of attributes ( FPPI = 0 . 1 )",
+    "width": 449,
+    "height": 340,
+    "description": "Section 1:\nThis figure contains four panels of plots comparing the performance of different face attribute detection methods. Panels (a) and (b) show ROC curves for the methods on CelebA and MobileFaces datasets, respectively. Panel (c) shows recall rates versus overlap ratio for the methods, and panel (d) shows recall rates versus the number of attributes.\n\nSection 2:\nLNet, DPM [21], ACF Multi-view [29], SURF Cascade [17], Face++ [1], LNet (w/o pre-training)",
+    "pdf_text": "0 | 0.1 | 0.2 | 0.3 | 0.4 | 0.5 | 0.2 | 0.4 | 0.6 | 0.8 | 1 | False Positive Per Image | True Positive Rates | LNet | DPM [21] | ACF Multi-view [29] | SURF Cascade [17] | Face++ [1] | 0 | 0.1 | 0.2 | 0.3 | 0.4 | 0.5 | 0.2 | 0.4 | 0.6 | 0.8 | 1 | False Positive Per Image | True Positive Rates | LNet | DPM [21] | ACF Multi-view [29] | SURF Cascade [17] | Face++ [1] | 0 | 0.2 | 0.4 | 0.6 | 0.8 | 1 | 0 | 0.2 | 0.4 | 0.6 | 0.8 | 1 | Overlap Ratio | Recall Rates (FPPI = 0.1) | LNet | DPM [21] | ACF Multi-view [29] | SURF Cascade [17] | LNet (w/o pre-training) | 10 | 20 | 30 | 40 | 0.7 | 0.8 | 0.9 | 1 | Number of Attributes | Recall Rates (FPPI = 0.1) | (a) | (b) | (c) | (d)",
+    "bbox": [
+      55.9,
+      219.2,
+      280.3,
+      388.9
+    ]
+  },
+  {
+    "file": "p006_f08.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 9. Attribute-specific regions discovery.",
+    "width": 451,
+    "height": 281,
+    "description": "Description: The figure displays heatmaps generated by a deep learning model to identify specific facial attributes in images of individuals. Each row corresponds to a different input image, with the leftmost image being the original input and the subsequent images showing the heatmaps for various attributes such as \"Young,\" \"Pale Skin,\" \"Bangs,\" and \"Brown Hair.\" The heatmaps highlight regions of the face that the model has identified as relevant for each attribute.\n\nText in figure: Input Image, Young, Pale Skin, Bangs, Brown Hair, No Beard, Input Image, Male, Receding Hairline, Bags, Under Eyes, Chubby, Wearing Necktie, Input Image, Straight Hair, Attractive, Wearing Lipstick, Wearing Earrings, Wearing Necklace",
+    "pdf_text": "Input Image | Attractive | Wearing | Lipstick | Wearing | Earrings | Wearing | Necklace | Input Image | Receding | Hairline | Bags | Under Eyes | Chubby | Wearing | Necktie | Male | Straight | Hair | (b) | (c) | Input Image | Pale Skin | Bangs | Brown Hair | No Beard | Young | (a)",
+    "bbox": [
+      313.9,
+      218.9,
+      539.7,
+      359.7
+    ]
+  },
+  {
+    "file": "p007_f09.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 8. Visualization of neurons in ANet (a) after pre-training (b) after fine-tuning (Best viewed in color)",
+    "width": 893,
+    "height": 254,
+    "description": "## Figure Description\nThis figure shows the visualization of neurons in a neural network after pre-training and fine-tuning. It includes images of faces with varying attributes such as gender, hair color, age, race, face shape, and eye shape. The figure is divided into two main sections: (a) pre-training and (b) fine-tuning. Each section has multiple rows, each representing a different attribute with corresponding high and low response images.\n\n## Text in Figure\nHigh Resp., Low Resp., Test Image, Neurons, High Resp., Low Resp., Age, Hair Color, Race, Gender, Face Shape, Eye Shape, Bangs, Brown Hair, Pale Skin, Narrow Eyes, High Cheek, Eyeglasses, Mustache, Black Hair, Smiling, Big Nose, Wear. Hat, Blond Hair, Wear. Lipstick, Asian, Big Eyes, (b.1), (b.2), (b.3), (a.1), (a.2), (a.3), (a.4), (a.5), (a.6), Activations",
+    "pdf_text": "High Resp. | Low Resp. | Test Image | Neurons | High Resp. | Low Resp. | Age | Hair Color | Race | Gender | Face Shape | Eye Shape | Bangs | Brown Hair | Pale Skin Narrow Eyes High Cheek. | Eyeglasses | Mustache | Black Hair | Smiling | Big Nose | Wear. Hat | Blond Hair Wear. Lipstick Asian | Big Eyes | (b.1) | (b.2) | (b.3) | (a.1) | (a.2) | (a.3) | (a.4) | (a.5) | (a.6) | Activations",
+    "bbox": [
+      74.4,
+      71.0,
+      521.0,
+      198.2
+    ]
+  },
+  {
+    "file": "p007_f10.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 10. (a) Layer-wise comparison of ANet after pre-training (b) Best performing neurons analysis of ANet after fine-tuning. Best performing neurons are different for different attributes. The proposed accuracies are averaged over attributes which select their own subsets of best performing neurons.",
+    "width": 445,
+    "height": 317,
+    "description": "## Description\nThis figure consists of two panels, labeled (a) and (b). Panel (a) displays a bar chart comparing the accuracy of ANet for different identity-related and identity-non-related attributes. The series are labeled ANet (FC), ANet (C4), and ANet (C3). Panel (b) shows a line graph comparing the average accuracy of ANet after fine-tuning and HOG after PCA, with the percentage of best performing neurons used.\n\n## Text in figure\nPanel (a): Identity-related Attributes, Identity-non-related Attributes, ANet (FC), ANet (C4), ANet (C3), Male, White, Black, Asian, Accuracy, 80%, 85%, 90%, 95%, 100%. Panel (b): ANet (After fine-tuning), HOG (After PCA), single best performing neuron, Average Accuracy, Percentage of Best Performing Neurons Used, Smiling, Wearing, Hat, Rosy, Cheeks, 5oClock, Shadow, 50%, 60%, 70%, 80%, 90%, 100%.",
+    "pdf_text": "Identity-related Attributes | Identity-non-related Attributes | ANet (FC) | ANet (C4) | ANet (C3) | (a) | (b) | 50% | 60% | 70% | 80% | 100% 90% 80% 70% 60% 50% 40% 30% 20% 10% | 0% | Average Accuracy | Percentage of Best Performing Neurons Used | ANet (After fine-tuning) | HOG (After PCA) | single best | performing | neuron | 70% | 75% | 80% | 85% | 90% | Smiling Wearing | Hat | Rosy | Cheeks | 5oClock | Shadow | 80% | 85% | 90% | 95% | 100% | Male | White Black | Asian | Accuracy",
+    "bbox": [
+      56.5,
+      221.4,
+      279.2,
+      380.0
+    ]
+  },
+  {
+    "file": "p007_f11.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 11. Automatic attributes grouping.",
+    "width": 443,
+    "height": 208,
+    "description": "## Description\n\nThis figure is a network diagram showing the automatic grouping of facial attributes. It visually represents how different facial features are clustered together based on their similarities. The diagram includes nodes representing various facial attributes and edges indicating the relationships between them. The nodes are grouped into six clusters, each labeled with a group number.\n\n## Text in figure\n\nGroup #1: Mouth Slightly Open, High Cheekbones, Smiling\nGroup #2: Attractive, Wavy Hair, Heavy Makeup, Young\nGroup #3: Blond Hair, Black Hair, Gray Hair, Pale Skin\nGroup #4: Blurry, Straight Hair, Eyeglasses\nGroup #5: Male, Mustache, Sideburns, Wearing Necktie\nGroup #6: Chubby, Double Chin, Bags Under Eyes, Narrow Eyes",
+    "pdf_text": "5_o_Clock_Shadow | Bald | Goatee | Male | Mustache | Sideburns | Wearing_Necktie | Arched_Eyebrows | Bags_Under_Eyes | Big_Lips | Big_Nose | Bushy_Eyebrows | Chubby | Double_Chin | Narrow_Eyes | Receding_Hairline | Wearing_Earrings | Wearing_Necklace | Attractive | Bangs | Brown_Hair | Heavy_Makeup | No_Beard | Oval_Face | Pointy_Nose | Rosy_Cheeks | Wavy_Hair | Wearing_Lipstick | Young | Black_Hair | Straight_Hair | Blond_Hair | Blurry | Gray_Hair | Pale_Skin | Wearing_Hat | Eyeglasses | High_Cheekbones | Mouth_Slightly_Open | Smiling | 5_o_Clock_Shadow | Bald | Goatee | Male | Mustache | Sideburns | Wearing_Necktie | Arched_Eyebrows | Bags_Under_Eyes | Big_Lips | Big_Nose | Bushy_Eyebrows | Chubby | Double_Chin | Narrow_Eyes | Receding_Hairline | Wearing_Earrings | Wearing_Necklace | Attractive | Bangs | Brown_Hair | Heavy_Makeup | No_Beard | Oval_Face | Pointy_Nose | Rosy_Cheeks | Wavy_Hair | Wearing_Lipstick | Young | Black_Hair | Straight_Hair | Blond_Hair | Blurry | Gray_Hair | Pale_Skin | Wearing_Hat | Eyeglasses | High_Cheekbones | Mouth_Slightly_Open | Smiling | 5_o_Clock_Shadow | Bald | Goatee | Male | Mustache | Sideburns | Wearing_Necktie | Arched_Eyebrows | Bags_Under_Eyes | Big_Lips | Big_Nose | Bushy_Eyebrows | Chubby | Double_Chin | Narrow_Eyes | Receding_Hairline | Wearing_Earrings | Wearing_Necklace | Attractive | Bangs | Brown_Hair | Heavy_Makeup | No_Beard | Oval_Face | Pointy_Nose | Rosy_Cheeks | Wavy_Hair | Wearing_Lipstick | Young | Black_Hair | Straight_Hair | Blond_Hair | Blurry | Gray_Hair | Pale_Skin | Wearing_Hat | Eyeglasses | High_Cheekbones | Mouth_Slightly_Open | Smiling | 5_o_Clock_Shadow | Bald | Goatee | Male | Mustache | Sideburns | Wearing_Necktie | Arched_Eyebrows | Bags_Under_Eyes | Big_Lips | Big_Nose | Bushy_Eyebrows | Chubby | Double_Chin | Narrow_Eyes | Receding_Hairline | Wearing_Earrings | Wearing_Necklace | Attractive | Bangs | Brown_Hair | Heavy_Makeup | No_Beard | Oval_Face | Pointy_Nose | Rosy_Cheeks | Wavy_Hair | Wearing_Lipstick | Young | Black_Hair | Straight_Hair | Blond_Hair | Blurry | Gray_Hair | Pale_Skin | Wearing_Hat | Eyeglasses | High_Cheekbones | Mouth_Slightly_Open | Smiling | Group #5 | Group #6 | Group #3 | Group #1 | Group #2 | Group #4",
+    "bbox": [
+      316.5,
+      222.1,
+      538.2,
+      325.9
+    ]
+  },
+  {
+    "file": "p009_f12.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 12. Performance comparison of FaceTracer [14], PANDA-w [32], PANDA-l [32] and LNets+ANet on LFWA+.",
+    "width": 484,
+    "height": 226,
+    "description": "## Description\nThis figure is a line graph comparing the performance of four different face attribute detection models: FaceTracer [11], PANDA-w [26], PANDA-l [26], and LNets+ANet. The graph shows accuracy percentages across various face attributes, such as \"Asian,\" \"Indian,\" \"White,\" and \"Black.\" The highest accuracy is achieved by LNets+ANet, particularly in attributes like \"Eyes Open\" and \"No Eyewear,\" while the lowest accuracy is observed in attributes like \"Flushed Face\" and \"Brown Eyes.\"\n\n## Text in figure\n60% | 65% | 70% | 75% | 80% | 85% | 90% | 95% | 100% | FaceTracer [11] | PANDA-w [26] | PANDA-l [26] | LNets+ANet | Accuracy | Asian | Indian | White | Black | Baby | Child | Middle Aged | Senior | No Eyewear | Eyewear | Frowning | Harsh Lighting | Soft Lighting | Flash | Outdoor | Curly Hair | F. V. Hair | P. V. Forehead | O. Forehead | Eyes Open | Mouth Closed | Teeth N. Visible | Round Jaw | Square Face | Round Face | Collar Photo | Posed Photo | Shiny Skin | Strong M Line | Flushed Face | Brown Eyes",
+    "pdf_text": "60% | 65% | 70% | 75% | 80% | 85% | 90% | 95% | 100% | FaceTracer [11] | PANDA-w [26] | PANDA-l [26] | LNets+ANet | Accuracy",
+    "bbox": [
+      53.0,
+      153.2,
+      295.2,
+      266.1
+    ]
+  },
+  {
+    "file": "p009_f13.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 13. Performances of different training dataset sizes.",
+    "width": 475,
+    "height": 173,
+    "description": "Description: This figure contains three line graphs comparing the accuracy of two models, LNets+ANet and PANDA-l, across different dataset sizes (1k, 3k, 10k) on three datasets: CelebA, LFWA, and LFWA+. The highest accuracy is achieved by LNets+ANet on LFWA+ at 10k with 86, while the lowest is PANDA-l on LFWA at 1k with 76.\n\nText in figure: CelebA, LFWA, LFWA+, LNets+ANet, PANDA-l, 1k, 3k, 10k, 82, 85, 88, 76, 80, 77, 82, 84, 86, Dataset Size, Accuracy.",
+    "pdf_text": "1k | 3k | 10k | 82 | 85 | 88 | LNets+ANet | Dataset Size | Accuracy | PANDA-l | 1k | 3k | 10k | 76 | 80 | 1k | 3k | 10k | 77 | 82 | 84 | 86 | CelebA | LFWA | LFWA+",
+    "bbox": [
+      53.2,
+      306.7,
+      290.6,
+      393.1
+    ]
+  },
+  {
+    "file": "p011_f14.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 14. More results of LNet averaged response maps. (Best viewed in color)",
+    "width": 988,
+    "height": 619,
+    "description": "## Description\nThe figure displays a collection of 40 images, each showing a person with a superimposed heatmap. The heatmaps indicate areas of interest or focus, likely related to facial attributes or features. The images vary in context, showing people in different poses, settings, and activities.\n\n## Text in figure\nThe figure contains the following text:\n- No specific text is visible in the images.\n- Heatmaps are superimposed on the images, indicating areas of interest.",
+    "pdf_text": "",
+    "bbox": [
+      50.5,
+      229.5,
+      544.6,
+      539.1
+    ]
+  }
+]

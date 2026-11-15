@@ -1,0 +1,182 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1: Many problems in image processing, graphics, and vision involve translating an input image into a corresponding output image. These problems are often treated with application-specific algorithms, even though the setting is always the same: map pixels to pixels. Conditional adversarial nets are a general-purpose solution that appears to work well on a wide variety of these problems. Here we show results of the method on several. In each case we use the same architecture and objective, and simply train on different data.",
+    "width": 988,
+    "height": 364,
+    "description": "Figure type: Image collage showing various image-to-image translation tasks.\nDescription: The figure displays multiple image translation tasks using conditional adversarial networks. Each task includes an input image and its corresponding output image. Tasks include translating labels to street scenes, facades, black-and-white to color, aerial images to maps, day to night, and edges to photos.\n\nText in figure: Labels to Street Scene, Labels to Facade, BW to Color, Aerial to Map, Day to Night, Edges to Photo, input, output."
+  },
+  {
+    "file": "p002_f02.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 2: Training a conditional GAN to map edges \u2192 photo. The discriminator, D , learns to classify between fake (synthesized by the generator) and real { edge, photo } tuples. The generator, G , learns to fool the discriminator. Unlike an unconditional GAN, both the generator and discriminator observe the input edge map.",
+    "width": 475,
+    "height": 148,
+    "description": "Figure: A diagram showing the training of a conditional GAN for image-to-image translation.\nShows two processes: one for generating fake images and another for classifying real images.\nContains two main components: a generator (G) and a discriminator (D).\nThe generator takes an input image (x) and produces a fake image (G(x)).\nThe discriminator takes a pair of images (edge, photo) and classifies them as real or fake.\nThe discriminator also receives the input image (x) to help in classification.\n\nText in figure: G, D, x, G(x), fake, real, edge, photo."
+  },
+  {
+    "file": "p003_f03.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 3: Two choices for the architecture of the generator. The 'U-Net' [50] is an encoder-decoder with skip connections between mirrored layers in the encoder and decoder stacks.",
+    "width": 474,
+    "height": 151,
+    "description": "Section 1: Figure type and content\nThis figure is a schematic diagram comparing two architectures for a generator in image-to-image translation. It shows an Encoder-Decoder architecture on the left and a U-Net architecture on the right. Both architectures take an input x and produce an output y. The Encoder-Decoder has a simple linear flow from input to output, while the U-Net includes skip connections between mirrored layers in the encoder and decoder stacks.\n\nSection 2: Figure details\nText in figure: \"Encoder-decoder\", \"U-Net\", \"x\", \"y\".\nBlocks and layers: Encoder-Decoder has two blocks connected in series; U-Net has multiple blocks with skip connections. Arrows indicate the flow of data from input x to output y."
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 4: Different losses induce different quality of results. Each column shows results trained under a different loss. Please see https://phillipi.github.io/pix2pix/ for additional examples.",
+    "width": 997,
+    "height": 620,
+    "description": "Description: The figure displays a comparative analysis of different loss functions used in image-to-image translation tasks. Each column represents results from images processed using a distinct loss function: Input, Ground truth, L1, cGAN, and L1 + cGAN. The images show the transformation of input images into various outputs, highlighting the differences in quality and detail preservation across the methods.\n\nText in figure: Input, Ground truth, L1, cGAN, L1 + cGAN\n\nDescription: The figure shows a comparative analysis of different loss functions in image-to-image translation tasks. Each column represents results from images processed using a distinct loss function: Input, Ground truth, L1, cGAN, and L1 + cGAN. The images show the transformation of input images into various outputs, highlighting the differences in quality and detail preservation across the methods.\n\nText in figure: Input, Ground truth, L1, cGAN, L1 + cGAN"
+  },
+  {
+    "file": "p006_f05.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 5: Adding skip connections to an encoder-decoder to create a 'U-Net' results in much higher quality results.",
+    "width": 473,
+    "height": 248,
+    "description": "Description: The figure displays a comparison of image translation results using different methods. It shows four panels, each representing a different approach: L1, L1+cGAN, Encoder-decoder, and U-Net. The images depict a street scene with parked cars, and the quality of the translation varies across the methods.\n\nText in figure: L1, L1+cGAN, Encoder-decoder, U-Net"
+  },
+  {
+    "file": "p007_f06.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "",
+    "width": 999,
+    "height": 486,
+    "description": "## Figure Description\nThis figure shows a comparison of different image translation models using log probability plots and histogram intersection scores. The top row displays images generated by various models at different scales. The bottom left plots show log probability distributions for these models. The bottom right table lists histogram intersection scores against ground truth for each model.\n\n## Search Index\n- Image translation models: GAN, LT+cGAN, LT+pixelGAN, LT+pixelGAN, PixelGAN\n- Log probability plots: GAN, LT+cGAN, LT+pixelGAN, LT+pixelGAN, PixelGAN\n- Histogram intersection scores: GAN, LT+cGAN, LT+pixelGAN, LT+pixelGAN, PixelGAN\n- Scales: 1x1, 16x16, 70x70, 286x286\n- Scores: 0.81, 0.89, 0.70, 0.87, 0.74, 0.84, 0.83, 0.86, 0.84, 0.82, 0.83, 0.88, 0.78"
+  },
+  {
+    "file": "p008_f07.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 8: Example results on Google Maps at 512x512 resolution (model was trained on images at 256 \u00d7 256 resolution, and run convolutionally on the larger images at test time). Contrast adjusted for clarity.",
+    "width": 991,
+    "height": 532,
+    "description": "## Description\nThis figure displays results from an image-to-image translation model, specifically converting maps to aerial photos and vice versa. It shows four examples, each with an input and output pair. The top row demonstrates map-to-aerial photo translation, while the bottom row shows aerial photo-to-map translation.\n\n## Text in figure\nMap to aerial photo, Aerial photo to map, input, output"
+  },
+  {
+    "file": "p008_f08.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 9: Colorization results of conditional GANs versus the L2 regression from [62] and the full method (classification with rebalancing) from [64]. The cGANs can produce compelling colorizations (first two rows), but have a common failure mode of producing a grayscale or desaturated result (last row).",
+    "width": 478,
+    "height": 392,
+    "description": "Description: The figure displays a comparison of colorization results from different methods. It shows images of a coffee maker, a bird, and a fox, each processed by four different methods: L2 regression, classification with rebalancing, conditional GANs, and ground truth. The conditional GANs produce visually appealing colorizations but sometimes result in grayscale or desaturated images.\n\nText in figure: L2 [62], Classification (rebal.) [62], Ours (L1 + cGAN), Ground truth"
+  },
+  {
+    "file": "p008_f09.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 10: Applying a conditional GAN to semantic segmentation. The cGAN produces sharp images that look at glance like the ground truth, but in fact include many small, hallucinated objects.",
+    "width": 477,
+    "height": 262,
+    "description": "Figure Description: The figure displays a comparison of different image translation methods applied to semantic segmentation. It shows four input images of road scenes, each paired with three corresponding output images: ground truth, L1 loss, and cGAN. The cGAN outputs appear visually similar to the ground truth but contain numerous small, hallucinated objects.\n\nText in Figure: Input, Ground truth, L1, cGAN."
+  },
+  {
+    "file": "p009_f10.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 11: Example applications developed by online community based on our pix2pix codebase: #edges2cats [3] by Christopher Hesse, Background removal [6] by Kaihu Chen, Palette generation [5] by Jack Qiao, Sketch \u2192 Portrait [7] by Mario Klingemann, Sketch \u2192 Pokemon [1] by Bertrand Gondouin, 'Do As I Do' pose transfer [2] by Brannon Dorsey, and #fotogenerator by Bosman et al. [4].",
+    "width": 991,
+    "height": 224,
+    "description": "## Figure Type\nThis figure is a collection of example applications developed by the online community using the pix2pix codebase.\n\n## Figure Description\nThe figure shows seven different applications developed using the pix2pix codebase. These applications include:\n\n1. #edges2cats by Christopher Hesse\n2. Background removal by Kaihu Chen\n3. Palette generation by Jack Qiao\n4. Sketch \u2192 Portrait by Mario Klingemann\n5. Sketch \u2192 Pokemon by Bertrand Gondouin\n6. 'Do As I Do' pose transfer by Brannon Dorsey\n7. #fotogenerator by Bosman et al.\n\nEach application is represented by a visual example and a brief description."
+  },
+  {
+    "file": "p009_f11.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 12: Learning to see: Gloomy Sunday : An interactive artistic demo developed by Memo Akten [8] based on our pix2pix codebase. Please click the image to play the video in a browser.",
+    "width": 410,
+    "height": 207,
+    "description": "## Figure Description\nThis figure is a collage of two images. The left image shows a charger with a cable and a keychain. The right image is a blurry photo of flowers.\n\n## Text in Figure\n- Charger\n- Cable\n- Keychain\n- Flowers"
+  },
+  {
+    "file": "p010_f12.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 13: Example results of our method on Cityscapes labels \u2192 photo, compared to ground truth.",
+    "width": 1005,
+    "height": 357,
+    "description": "## Description\nThis figure displays a series of image-to-image translation results using conditional adversarial networks. It shows three sets of images: input, ground truth, and output. The input images are labeled Cityscapes images, the ground truth are the corresponding photo images, and the output images are the results of the model's translation.\n\n## Text in figure\nInput, Ground truth, Output, Cityscapes labels \u2192 photo, compared to ground truth."
+  },
+  {
+    "file": "p010_f13.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 14: Example results of our method on facades labels \u2192 photo, compared to ground truth.",
+    "width": 1005,
+    "height": 686,
+    "description": "Figure: A collection of image pairs showing the results of a facades labels to photo translation method. Each row contains an input label map, the corresponding ground truth photo, and the output photo generated by the model. The input label maps are color-coded to represent different facade elements, and the output photos aim to match the style and appearance of the ground truth photos.\n\nText in figure: Input, Ground truth, Output, Facades labels \u2192 photo, compared to ground truth."
+  },
+  {
+    "file": "p011_f14.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "",
+    "width": 1004,
+    "height": 521,
+    "description": "## Figure Description\nThis figure displays a series of image comparisons, showing input images, ground truth images, and output images from a model. The images depict various scenes, including cityscapes at night and daytime, with a focus on lighting conditions and urban environments.\n\n## Textual Content in Figure\nInput, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground"
+  },
+  {
+    "file": "p011_f15.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "",
+    "width": 995,
+    "height": 515,
+    "description": "## Figure: Image-to-Image Translation Results\n\nThis figure displays the results of image-to-image translation using conditional adversarial networks. It shows three sets of images: input, ground truth, and output. Each set contains various handbag images with different styles and colors. The input images are sketches, the ground truth images are realistic handbag images, and the output images are the results of the translation process.\n\n## Text in Figure:\n\n- Input\n- Ground truth\n- Output\n- Various handbag styles and colors"
+  },
+  {
+    "file": "p012_f16.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 17: Example results of our method on automatically detected edges \u2192 shoes, compared to ground truth.",
+    "width": 995,
+    "height": 358,
+    "description": "## Figure Description\nThis figure displays a comparison between input images, ground truth images, and output images generated by a model. The images show various types of shoes, including high heels, boots, and sneakers. The figure is divided into two main sections, each with three columns: Input, Ground truth, and Output. The Input column shows the original images, the Ground truth column shows the expected output, and the Output column shows the model's generated images.\n\n## Textual Content\nInput, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output, Input, Ground truth, Output"
+  },
+  {
+    "file": "p012_f17.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 18: Additional results of the edges \u2192 photo models applied to human-drawn sketches from [19]. Note that the models were trained on automatically detected edges, but generalize to human drawings",
+    "width": 1006,
+    "height": 683,
+    "description": "Section 1: Figure type and content\nThis figure displays the results of image-to-image translation using conditional adversarial networks. It shows the transformation of human-drawn sketches into photorealistic images. The figure includes multiple pairs of input sketches and their corresponding output images, demonstrating the model's ability to generalize from automatically detected edges to human-drawn sketches.\n\nSection 2: Text in figure\nInput, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output, Input, Output,"
+  },
+  {
+    "file": "p013_f18.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 19: Example results on photo inpainting, compared to [43], on the Paris StreetView dataset [14]. This experiment demonstrates that the U-net architecture can be effective even when the predicted pixels are not geometrically aligned with the information in the input - the information used to fill in the central hole has to be found in the periphery of these photos.",
+    "width": 979,
+    "height": 387,
+    "description": "Description: The figure displays a comparative analysis of photo inpainting techniques on the Paris StreetView dataset. It shows input images with central areas masked, alongside their corresponding ground-truth images, and results from Pathak et al. and the proposed method. The images demonstrate the effectiveness of the U-net architecture in filling in missing information from peripheral areas.\n\nText in figure: Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak et al., Ours, Input, Ground-truth, Pathak"
+  },
+  {
+    "file": "p013_f19.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "",
+    "width": 1004,
+    "height": 252,
+    "description": "## Image-to-Image Translation Results\n\nThis figure displays the results of image-to-image translation using conditional adversarial networks. It shows three sets of images: input, ground truth, and output. The input images are grayscale, while the ground truth and output images are in color. The figure demonstrates the model's ability to translate grayscale images into color images that closely match the ground truth.\n\n## Image Details\n\nInput: grayscale images\nGround truth: color images\nOutput: color images\nComparison: Output vs. Ground truth\nTranslation: Input to Output"
+  },
+  {
+    "file": "p013_f20.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 21: Example failure cases. Each pair of images shows input on the left and output on the right. These examples are selected as some of the worst results on our tasks. Common failures include artifacts in regions where the input image is sparse, and difficulty in handling unusual inputs. Please see https://phillipi.github.io/pix2pix/ for more comprehensive results.",
+    "width": 988,
+    "height": 295,
+    "description": "## Figure Description\nThis figure displays a collection of image-to-image translation examples, showcasing both successful and failure cases. Each pair of images represents an input on the left and the corresponding output on the right. The figure includes various scenes such as day and night views, facades, street scenes, and object sketches. The failure cases highlight issues like artifacts in sparse regions and difficulties with unusual inputs.\n\n## Text in Figure\n- Day, Night, Labels, Facade, Labels, Street scene\n- Edges, Shoe, Edges, Handbag, Sketch, Shoe, Sketch, Handbag"
+  }
+]

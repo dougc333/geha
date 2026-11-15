@@ -1,0 +1,65 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "",
+    "width": 600,
+    "height": 224,
+    "description": "## Description\nThis figure illustrates the process of object detection using the Single Shot MultiBox Detector (SSD) method. It shows an image with ground truth (GT) boxes around objects, a feature map, and the detection results. The feature maps are grids that represent the image's spatial information, with different scales.\n\n## Text in figure\n- Image with GT boxes\n- 8 x 8 feature map\n- 4 x 4 feature map\n- loc: \u0394(cx, cy, w, h)\n- conf: (c1, c2,..., cp)"
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Fig. 2: A comparison between two single shot detection models: SSD and YOLO [5]. Our SSD model adds several feature layers to the end of a base network, which predict the offsets to default boxes of different scales and aspect ratios and their associated confidences. SSD with a 300 \u00d7 300 input size significantly outperforms its 448 \u00d7 448 YOLO counterpart in accuracy on VOC2007 test while also improving the speed.",
+    "width": 558,
+    "height": 297,
+    "description": "Figure: A comparison of SSD and YOLO architectures.\nText in figure: SSD, VGG-16, Extra Feature Layers, Classifier, 300, 19, 18, 11, 6, 3, 1, 0, YOLO, 448, 448, Fully Connected, Fully Connected, 30, 7, 1024, 1024, 256, 256, 7, 7, 128, 128, 63.4mAP, 45FPS, 74.3mAP, 59FPS, Detections, Non-Maximum Suppression, per Class, per Class\n\nSection 1: Figure description\nThis figure compares the architectures of two single shot detection models: SSD and YOLO. The SSD model adds several feature layers to the end of a base network, which predict the offsets to default boxes of different scales and aspect ratios and their associated confidences. The SSD model with a 300 \u00d7 300 input size significantly outperforms its 448 \u00d7 448 YOLO counterpart in accuracy on VOC2007 test while also improving the speed.\n\nSection 2: Figure details\nSSD: 300 \u00d7 300 input size, 74.3mAP, 59FPS\nVGG-16: Extra Feature Layers, Classifier\nYOLO: 448 \u00d7 448 input size, 63.4mAP, 45FPS\nFully Connected: 1024, 256, 128, 7, 7\nDetections: Non-Maximum Suppression, per Class"
+  },
+  {
+    "file": "p009_f03.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Fig. 3: Visualization of performance for SSD512 on animals, vehicles, and furniture from VOC2007 test . The top row shows the cumulative fraction of detections that are correct (Cor) or false positive due to poor localization (Loc), confusion with similar categories (Sim), with others (Oth), or with background (BG). The solid red line reflects the change of recall with strong criteria (0.5 jaccard overlap) as the number of detections increases. The dashed red line is using the weak criteria (0.1 jaccard overlap). The bottom row shows the distribution of top-ranked false positive types.",
+    "width": 659,
+    "height": 425,
+    "description": "This figure is a collection of plots showing the performance of the SSD512 model on three categories: animals, vehicles, and furniture. The top row displays cumulative detections, categorized by correctness and error types. The bottom row shows the distribution of false positives. The highest series is 'Cor' (correct detections), followed by 'Loc', 'Sim', 'Oth', and 'BG'. The lowest series is 'BG' (background errors). The red line indicates recall with strong criteria, while the dashed red line shows recall with weak criteria.\n\nText in figure: \"animals\", \"vehicles\", \"furniture\", \"Cor\", \"Loc\", \"Sim\", \"Oth\", \"BG\", \"total detections (x 357)\", \"total detections (x 415)\", \"total detections (x 400)\", \"total false positives\"."
+  },
+  {
+    "file": "p009_f04.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Fig. 4: Sensitivity and impact of different object characteristics on VOC2007 test set using [21]. The plot on the left shows the effects of BBox Area per category, and the right plot shows the effect of Aspect Ratio. Key: BBox Area: XS=extra-small; S=small; M=medium; L=large; XL =extra-large. Aspect Ratio: XT=extra-tall/narrow; T=tall; M=medium; W=wide; XW =extra-wide.",
+    "width": 692,
+    "height": 239,
+    "description": "Figure: Two plots showing the effects of BBox Area and Aspect Ratio on the SSD300 and SSD512 models.\n\nDescription: The left plot shows the BBox Area effects on the SSD300 model. The \"bird\" series is highest, followed by \"boat\" and \"chair.\" The \"table\" series is the lowest. The right plot shows the Aspect Ratio effects on the SSD300 model. The \"bird\" series is highest, followed by \"boat\" and \"chair.\" The \"table\" series is the lowest.\n\nText in figure: SSD300: BBox Area, SSD300: Aspect Ratio, SSD512: BBox Area, SSD512: Aspect Ratio, XS, S, M, L, XL, XT, T, M, W, XW, airplane, bicycle, bird, boat, chair, table."
+  },
+  {
+    "file": "p013_f05.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Fig. 5: Detection examples on COCO test-dev with SSD512 model. We show detections with scores higher than 0.6. Each color corresponds to an object category.",
+    "width": 677,
+    "height": 761,
+    "description": "The generated text has been blocked by our content filters."
+  },
+  {
+    "file": "p014_f06.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Fig. 6: Sensitivity and impact of object size with new data augmentation on VOC2007 test set using [21]. The top row shows the effects of BBox Area per category for the original SSD300 and SSD512 model, and the bottom row corresponds to the SSD300* and SSD512* model trained with the new data augmentation trick. It is obvious that the new data augmentation trick helps detecting small objects significantly.",
+    "width": 310,
+    "height": 242,
+    "description": "Description: This figure contains two rows of plots, each showing the sensitivity of object detection to object size for different models. The top row displays results for SSD300 and SSD512 models, while the bottom row shows results for SSD300* and SSD512* models trained with new data augmentation. The highest series is \"boat\" in the top row, and \"chair\" in the bottom row, both around 0.8. The lowest series is \"bicycle\" in the top row and \"boat\" in the bottom row, both around 0.2.\n\nText in figure: SSD300, SSD512, SSD300*, SSD512*, BBox Area, airplane, bicycle, bird, boat, chair, table, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL, XSS M L XL,"
+  },
+  {
+    "file": "p014_f07.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "",
+    "width": 345,
+    "height": 239,
+    "description": "## Description\n\nThis figure contains two plots comparing SSD512 and SSD512* models. Each plot has six series: airplane, bird, boat, chair, table, and total. The SSD512 plot shows higher values across all series compared to SSD512*, with the highest being the airplane series at around 0.8 and the lowest being the chair series at around 0.2. The SSD512* plot shows lower values, with the airplane series at around 0.6 and the chair series at around 0.4.\n\n## Text in figure\n\nSSD512: BBox Area\nairplane: 0.88, 0.69, 0.60, 0.47\nbird: 0.87, 0.66, 0.60, 0.47\nboat: 0.92, 0.66, 0.60, 0.47\nchair: 0.89, 0.66, 0.60, 0.47\ntable: 0.89, 0.66, 0.60, 0.47\ntotal: 0.88, 0.66, 0.60, 0.47\n\nSSD512*: BBox Area\nairplane: 0.88, 0.66, 0.60, 0.47\nbird: 0.87, 0.66, 0.60, 0.47\nboat: 0.92, 0.66, 0.60, 0.47\nchair: 0.89, 0.66, 0.60, 0.47\ntable: 0.89, 0.66, 0.60, 0.47\ntotal: 0.88, 0.66, 0.60, 0.47"
+  }
+]

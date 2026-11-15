@@ -1,0 +1,38 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "",
+    "width": 447,
+    "height": 150,
+    "description": "## Search Index Section 1\n\nFigure type: bar chart\nContent: The figure is a bar chart comparing two metrics, max_Q(s, a) - V(s) and Q'(s, argmax_a Q(s, a)) - V(s), across different values of lambda. The red bars represent max_Q(s, a) - V(s), while the blue bars represent Q'(s, argmax_a Q(s, a)) - V(s). The red bars are consistently higher than the blue bars across all values of lambda, with the difference being most pronounced at lambda = 1.0.\n\n## Search Index Section 2\n\nText in figure: lambda values: 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0\nLegend labels: max_Q(s, a) - V(s), Q'(s, argmax_a Q(s, a)) - V(s)\nAxis titles: None\nExample inputs: None\nValues printed on bars: None"
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 2: Illustration of overestimations during learning. In each state (x-axis), there are 10 actions. The left column shows the true values V \u2217 ( s ) (purple line). All true action values are defined by Q \u2217 ( s, a ) = V \u2217 ( s ) . The green line shows estimated values Q ( s, a ) for one action as a function of state, fitted to the true value at several sampled states (green dots). The middle column plots show all the estimated values (green), and the maximum of these values (dashed black). The maximum is higher than the true value (purple, left plot) almost everywhere. The right column plots shows the difference in orange. The blue line in the right plots is the estimate used by Double Q-learning with a second set of samples for each state. The blue line is much closer to zero, indicating less bias. The three rows correspond to different true functions (left, purple) or capacities of the fitted function (left, green). (Details in the text)",
+    "width": 812,
+    "height": 340,
+    "description": "Figure: Multiple plots illustrating overestimations in reinforcement learning. Each plot shows true values (V*(s), purple line) and estimated values (Q(s,a), green line) for different states and actions. The middle plots display all estimated values (green) and their maximum (dashed black), which is higher than the true value. The right plots show the difference between the maximum estimated value and the true value (orange line) and the Double Q-learning estimate (blue line), which is closer to zero.\n\nText in figure: True value, Estimated value, Maximum of estimated values, Double Q-learning estimate, Bias as function of state, Average error, +0.61, +0.47, +3.35, -0.02, -0.02, -0.02."
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 3: The top and middle rows show value estimates by DQN (orange) and Double DQN (blue) on six Atari games. The results are obtained by running DQN and Double DQN with 6 different random seeds with the hyper-parameters employed by Mnih et al. (2015). The darker line shows the median over seeds and we average the two extreme values to obtain the shaded area (i.e., 10% and 90% quantiles with linear interpolation). The straight horizontal orange (for DQN) and blue (for Double DQN) lines in the top row are computed by running the corresponding agents after learning concluded, and averaging the actual discounted return obtained from each visited state. These straight lines would match the learning curves at the right side of the plots if there is no bias. The middle row shows the value estimates (in log scale) for two games in which DQN's overoptimism is quite extreme. The bottom row shows the detrimental effect of this on the score achieved by the agent as it is evaluated during training: the scores drop when the overestimations begin. Learning with Double DQN is much more stable.",
+    "width": 696,
+    "height": 499,
+    "description": "This figure contains six plots, each showing the performance of DQN and Double DQN on different Atari games. The top row displays value estimates, with Double DQN (blue) consistently lower than DQN (orange). The middle row shows value estimates on a log scale for two games, highlighting DQN's overoptimism. The bottom row depicts the score achieved during training, with Double DQN maintaining a more stable performance.\n\nText in figure: \"Alien\", \"Space Invaders\", \"Time Pilot\", \"Zaxxon\", \"Wizard of Wor\", \"Asterix\", \"DQN estimate\", \"Double DQN estimate\", \"DQN true value\", \"Training steps (in millions)\", \"Score\", \"DQN\", \"Double DQN\"."
+  },
+  {
+    "file": "p006_f04.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "",
+    "width": 415,
+    "height": 765,
+    "description": "Section 1: Figure description\nThis figure is a bar chart comparing the performance of various Atari games using Double Q-learning and Q-learning algorithms. The x-axis represents the average score achieved by each game, while the y-axis lists the game titles. The chart includes two series: Double DQN (tuned) and Double DQN. The highest score is achieved by the game \"Video Pinball\" with Double DQN (tuned), while the lowest score is achieved by the game \"Solaris Eye\" with Double DQN.\n\nSection 2: Figure details\nText in figure: Video Pinball, Atlantis, Demon Attack, Breakout, Assault, Double Dunk, Robotank, Gopher, Boxing, Star Gunner, Road Runner, Crazy C, Krull, Kangaroo, Asterix, **Defender**, **Phoenix**, Up and Down, Space Invaders, James Bond, Enduro, Kung-Fu Master, Wizard of Wor, Name This Game, Time Pilot, Bank Heist, Beam Rider, Freeway, Pong, Zaxxon, Fishing Derby, Tennis, **Surround**, O'Bert, River Raid, Battle Zone, Ice Hockey, Tutankham, **Berzerk**, H.E.R.O., Seaquest, Chopper Command, Frostbite, **Skiing**, Centipede, Alien, **Yar's Revenge**, Pitfall!, Ms. Pacman, **Pitfall**, Asteroids, Montezuma's Revenge, Venture, Gravitar, Private Eye, **Solaris Eye**, Double DQN (tuned), Double DQN, DQN."
+  }
+]

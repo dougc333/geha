@@ -1,0 +1,114 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "(a) Arbitrary function f ( x ) as a function of data x (softmax input )",
+    "width": 478,
+    "height": 193,
+    "description": "Figure: A plot of an arbitrary function f(x) as a function of data x (softmax input).\nThe plot shows a sigmoid-like curve with a sharp transition around x = 0. The function\nstarts at a low value, increases sharply, and then plateaus at a high value. The x-axis\nrepresents the data x, and the y-axis represents the function f(x). The plot has a\ngray background with a black line and red dashed lines indicating specific points.\n\nText in figure: f(x), x, x*",
+    "pdf_text": "",
+    "bbox": [
+      55.9,
+      60.9,
+      294.8,
+      157.4
+    ]
+  },
+  {
+    "file": "p002_f02.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "",
+    "width": 477,
+    "height": 191,
+    "description": "Section 1: Figure description\nThis figure shows a plot of a function f(x) against x. The plot has a step-like shape, with a sharp transition from 0 to 1 between x = -1 and x = 0. The plot also has a shaded region between x = 2 and x = 5, indicating a range of uncertainty.\n\nSection 2: Search index\n- Function f(x) plot\n- Step-like shape\n- Sharp transition from 0 to 1 between x = -1 and x = 0\n- Shaded region indicating uncertainty between x = 2 and x = 5\n- x-axis labeled as x\n- y-axis labeled as f(x)",
+    "pdf_text": "",
+    "bbox": [
+      302.1,
+      62.6,
+      540.6,
+      158.1
+    ]
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 2. Predictive mean and uncertainties on the Mauna Loa CO 2 concentrations dataset, for various models. In red is the observed function (left of the dashed blue line); in blue is the predictive mean plus/minus two standard deviations (8 for fig. 2d). Different shades of blue represent half a standard deviation. Marked with a dashed red line is a point far away from the data: standard dropout confidently predicts an insensible value for the point; the other models predict insensible values as well but with the additional information that the models are uncertain about their predictions.",
+    "width": 975,
+    "height": 337,
+    "description": "## Description\nThis figure displays four plots comparing different models' predictive means and uncertainties on the Mauna Loa CO2 concentrations dataset. Each plot shows the observed function in red and the predictive mean plus/minus two standard deviations in blue. The shaded areas represent half a standard deviation. The dashed red line marks a point far from the data, where standard dropout confidently predicts an insensible value, while the other models also predict insensible values but with uncertainty.\n\n## Text in figure\n(a) Standard dropout with weight averaging\n(b) Gaussian process with SE covariance function\n(c) MC dropout with ReLU non-linearities\n(d) MC dropout with TanH non-linearities",
+    "pdf_text": "(a) Standard dropout with weight averaging | (b) Gaussian process with SE covariance function | (c) MC dropout with ReLU non-linearities | (d) MC dropout with TanH non-linearities",
+    "bbox": [
+      55.0,
+      64.8,
+      542.5,
+      233.6
+    ]
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 3. Predictive mean and uncertainties on the Mauna Loa CO 2 concentrations dataset for the MC dropout model with ReLU non-linearities, approximated with 10 samples.",
+    "width": 471,
+    "height": 102,
+    "description": "Description: The figure displays a plot of predictive mean and uncertainties for the Mauna Loa CO2 concentrations dataset using a Monte Carlo (MC) dropout model with ReLU non-linearities. The plot shows two series: the blue shaded area represents the uncertainty, while the red line indicates the predictive mean. The uncertainty is highest at the beginning of the dataset and decreases over time, while the predictive mean remains relatively stable.\n\nText in figure: Mauna Loa CO2 concentrations dataset, MC dropout model, ReLU non-linearities, predictive mean, uncertainty, 10 samples.",
+    "pdf_text": "",
+    "bbox": [
+      306.4,
+      628.6,
+      542.0,
+      679.5
+    ]
+  },
+  {
+    "file": "p006_f05.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 4. A scatter of 100 forward passes of the softmax input and output for dropout LeNet. On the X axis is a rotated image of the digit 1. The input is classified as digit 5 for images 6-7, even though model uncertainty is extremly large (best viewed in colour).",
+    "width": 965,
+    "height": 304,
+    "description": "## Description\nThe figure consists of two scatter plots labeled (a) Softmax input scatter and (b) Softmax output scatter. Both plots show 100 forward passes of a model with dropout applied to LeNet. The X-axis represents a rotated image of the digit 1. The plots are color-coded to represent different digits: green for digit 1, orange for digit 7, and blue for digit 5. The input is misclassified as digit 5 for images 6-7, despite high model uncertainty.\n\n## Text in figure\n(a) Softmax input scatter\n(b) Softmax output scatter\n1\n7\n5",
+    "pdf_text": "(a) Softmax input scatter | (b) Softmax output scatter",
+    "bbox": [
+      57.1,
+      64.9,
+      539.3,
+      216.9
+    ]
+  },
+  {
+    "file": "p008_f06.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 5. Depiction of the reinforcement learning problem used in the experiments. The agent is in the lower left part of the maze, facing north-west.",
+    "width": 481,
+    "height": 339,
+    "description": "Figure: A maze diagram with two distinct areas separated by a vertical line. The left area contains green dots, while the right area contains red dots. The agent, represented by a red dot, is positioned in the lower left part of the maze, facing north-west.\n\nText in figure: No specific text is visible in the figure.",
+    "pdf_text": "",
+    "bbox": [
+      56.7,
+      487.9,
+      297.0,
+      657.5
+    ]
+  },
+  {
+    "file": "p008_f07.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 6. Log plot of average reward obtained by both epsilon greedy (in green) and our approach (in blue), as a function of the number of batches.",
+    "width": 491,
+    "height": 402,
+    "description": "Description: This figure is a log plot comparing the average reward of two algorithms over batches. The blue line represents \"Thompson sampling (using uncertainty)\" and the green line represents \"Epsilon greedy.\" The blue line is generally higher than the green line, with both lines showing fluctuations over the batches. The highest point for the blue line is around 1.15, while the lowest point for the green line is around 0.5.\n\nText in figure: Average reward, Batches, Thompson sampling (using uncertainty), Epsilon greedy.",
+    "pdf_text": "",
+    "bbox": [
+      304.7,
+      481.7,
+      550.0,
+      682.7
+    ]
+  }
+]

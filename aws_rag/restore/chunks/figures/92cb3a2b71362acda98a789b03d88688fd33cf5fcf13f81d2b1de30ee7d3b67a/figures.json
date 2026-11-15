@@ -1,0 +1,82 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1: DPO optimizes for human preferences while avoiding reinforcement learning. Existing methods for fine-tuning language models with human feedback first fit a reward model to a dataset of prompts and human preferences over pairs of responses, and then use RL to find a policy that maximizes the learned reward. In contrast, DPO directly optimizes for the policy best satisfying the preferences with a simple classification objective, fitting an implicit reward model whose corresponding optimal policy can be extracted in closed form.",
+    "width": 791,
+    "height": 149,
+    "description": "Figure type: Diagram\nDescription: The figure shows two methods for fine-tuning language models with human feedback. The left panel illustrates Reinforcement Learning from Human Feedback (RLHF), where a reward model is trained on preference data, and then a language model (LM) policy is optimized using reinforcement learning. The right panel depicts Direct Preference Optimization (DPO), which directly optimizes the LM policy based on preference data, without explicitly training a reward model.\n\nText in figure: Reinforcement Learning from Human Feedback (RLHF), Direct Preference Optimization (DPO), label rewards, reward model, LM policy, preference data, maximum likelihood, reinforcement learning, sample completions, final LM, y_w, y_l, maximum likelihood.",
+    "pdf_text": "",
+    "bbox": [
+      107.6,
+      74.3,
+      502.9,
+      149.0
+    ]
+  },
+  {
+    "file": "p007_f02.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 2: Left. The frontier of expected reward vs KL to the reference policy. DPO provides the highest expected reward for all KL values, demonstrating the quality of the optimization. Right. TL;DR summarization win rates vs. human-written summaries, using GPT-4 as evaluator. DPO exceeds PPO's best-case performance on summarization, while being more robust to changes in the sampling temperature.",
+    "width": 779,
+    "height": 279,
+    "description": "Description: The figure contains two plots. The left plot shows the expected reward against the KL divergence to the reference policy. The DPO (Ours) series is highest across all KL values, indicating the highest expected reward. The Unlikelihood series is the lowest. The right plot shows the win rate of TL;DR summarization against the sampling temperature. The DPO series is highest at lower temperatures and decreases with increasing temperature, while the Preferred-FT series is the lowest across all temperatures.\n\nText in figure: Reward, KL(m|m_ref), 0.0, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, DPO (Ours), Unlikelihood, PPO (Our impl.), PPO-GT (Our impl.), PPO-GT (TRL), Preferred-FT, Win rate, Sampling temperature, 0.00, 0.25, 0.50, 0.75, 1.00, DPO, PPO, Preferred-FT, SFT, GPT-J, Best of 128.",
+    "pdf_text": "0.0 | 2.5 | 5.0 | 7.5 | 10.0 | 12.5 | 15.0 | 17.5 | 20.0 | KL( | ref) | 0.4 | 0.5 | 0.6 | 0.7 | 0.8 | 0.9 | 1.0 | Reward | IMDb Sentiment Generation | DPO (Ours) | Unlikelihood | PPO (Our impl.) | PPO-GT (Our impl.) | PPO-GT (TRL) | Preferred-FT | 0.00 | 0.25 | 0.50 | 0.75 | 1.00 | Sampling temperature | 0.0 | 0.1 | 0.2 | 0.3 | 0.4 | 0.5 | 0.6 | 0.7 | Win rate | TL;DR Summarization Win Rate vs Reference | DPO | PPO | Preferred-FT | SFT | GPT-J | Best of 128",
+    "bbox": [
+      111.0,
+      75.9,
+      500.5,
+      215.3
+    ]
+  },
+  {
+    "file": "p008_f03.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 3: Left. Win rates computed by GPT-4 for Anthropic-HH one-step dialogue; DPO is the only method that improves over chosen summaries in the Anthropic-HH test set. Right. Win rates for different sampling temperatures over the course of training. DPO's improvement over the dataset labels is fairly stable over the course of training for different sampling temperatures.",
+    "width": 776,
+    "height": 279,
+    "description": "## Description\n\nThis figure contains two plots. The left plot shows the win rates of different models in the Anthropic-HH dialogue task. The DPO model has the highest win rate, followed by Preferred-FT, Best of 128, and Pythia-2.8B. The right plot shows the win rate evolution of DPO over the course of training. The win rate increases sharply at the beginning and then fluctuates.\n\n## Text in figure\n\nLeft plot:\n- Anthropic-HH Dialogue Win Rate vs Chosen\n- DPO\n- Preferred-FT\n- Best of 128\n- Pythia-2.8B\n- 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0\n- Sampling temperature\n\nRight plot:\n- Dialogue Win Rate Evolution\n- DPO (temp = 1.0)\n- DPO (temp = 0.7)\n- 0, 300, 600, 900, 1200, 1500, 1800, 2100, 2400, 2700, 3000, 3300\n- Fine-tuning step",
+    "pdf_text": "0.25 | 0.50 | 0.75 | 1.00 | Sampling temperature | 0.1 | 0.2 | 0.3 | 0.4 | 0.5 | 0.6 | Win rate | Anthropic-HH Dialogue Win Rate vs Chosen | DPO | Best of 128 | Preferred-FT | Pythia-2.8B | 0 | 300 | 600 | 900 | 1200 1500 1800 2100 2400 2700 3000 3300 | Fine-tuning step | 0.30 | 0.35 | 0.40 | 0.45 | 0.50 | 0.55 | 0.60 | 0.65 | 0.70 | Win rate | Dialogue Win Rate Evolution | DPO (temp = 1.0) | DPO (temp = 0.7)",
+    "bbox": [
+      111.5,
+      76.2,
+      499.4,
+      215.7
+    ]
+  },
+  {
+    "file": "p023_f04.png",
+    "page": 23,
+    "kind": "picture",
+    "caption": "Figure 4: Best of N baseline for N = { 1 , 4 , 16 , 64 , 128 } . Performance plateaus after roughly 64-128 samples.",
+    "width": 769,
+    "height": 275,
+    "description": "## Figure Description\nThis figure contains two line plots comparing the win rates of different baselines against sampling temperature. The left plot is titled \"Anthropic-HH Dialogue Win Rate vs Chosen\" and the right plot is titled \"TL;DR Summarization Win Rate vs Reference.\" Each plot shows win rates for \"Best of 1,\" \"Best of 4,\" \"Best of 16,\" \"Best of 64,\" and \"Best of 128\" baselines. The left plot's \"Best of 128\" baseline has the highest win rate, peaking at around 0.60, while the \"Best of 1\" baseline has the lowest, around 0.30. The right plot's \"Best of 64\" baseline has the highest win rate, peaking at around 0.65, and the \"Best of 1\" baseline has the lowest, around 0.30.\n\n## Figure Details\nLeft plot: \"Anthropic-HH Dialogue Win Rate vs Chosen\"\n- Win rates for \"Best of 1,\" \"Best of 4,\" \"Best of 16,\" \"Best of 64,\" \"Best of 128\"\n- Highest: \"Best of 128\" at 0.60\n- Lowest: \"Best of 1\" at 0.30\n\nRight plot: \"TL;DR Summarization Win Rate vs Reference\"\n- Win rates for \"Best of 64,\" \"Best of 128,\" \"Best of 256\"\n- Highest: \"Best of 64\" at 0.65\n- Lowest: \"Best of 1\" at 0.30",
+    "pdf_text": "0.25 | 0.50 | 0.75 | 1.00 | Sampling temperature | 0.20 | 0.25 | 0.30 | 0.35 | 0.40 | 0.45 | 0.50 | 0.55 | 0.60 | Win rate | Anthropic-HH Dialogue Win Rate vs Chosen | Best of 1 | Best of 4 | Best of 16 | Best of 64 | Best of 128 | 0.00 | 0.25 | 0.50 | 0.75 | 1.00 | Sampling temperature | 0.0 | 0.1 | 0.2 | 0.3 | 0.4 | 0.5 | 0.6 | 0.7 | Win rate | TL;DR Summarization Win Rate vs Reference | Best of 64 | Best of 128 | Best of 256",
+    "bbox": [
+      113.9,
+      117.4,
+      498.5,
+      254.9
+    ]
+  },
+  {
+    "file": "p027_f05.png",
+    "page": 27,
+    "kind": "picture",
+    "caption": "Figure 5: Layout of the survey in SurveyMonkey. Each respondent completed 25 similarly-formatted judgments.",
+    "width": 432,
+    "height": 513,
+    "description": "Section 1: Figure description\nThis figure is a layout of a survey in SurveyMonkey, designed to evaluate the summarization of forum posts. It consists of 25 similarly-formatted judgments, each presenting a forum post and asking respondents to compare two summaries to determine which one better captures the most important points.\n\nSection 2: Figure details\nText in figure: \"Which of the following summaries does a better job of summarizing the most important points in the given forum post?\", \"Some responses may be very similar; please do your best to compare them and only use the 'I can't tell' option rarely, if at all.\", \"6. Which of the following summaries does a better job of summarizing the most important points in the given forum post?\", \"Post: My boyfriend and I have been together for 4 years, but I'm becoming tired of his childish hobbies.\", \"Summary A: Boyfriend has a room full of toys from video games, cartoons and Legos, and spends a lot of money on them.\", \"Summary B: Boyfriend has a 'toy room' lined with expensive video game and cartoon action figures and toys.\", \"I think it's time for him to give up his childish hobbies and become an adult with me. How should I approach this?\"",
+    "pdf_text": "",
+    "bbox": [
+      280.5,
+      94.3,
+      496.6,
+      351.1
+    ]
+  }
+]

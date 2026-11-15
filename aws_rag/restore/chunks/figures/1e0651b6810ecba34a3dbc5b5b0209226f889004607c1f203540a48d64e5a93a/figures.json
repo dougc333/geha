@@ -1,0 +1,65 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1. Training error (left) and test error (right) on CIFAR-10 with 20-layer and 56-layer 'plain' networks. The deeper network has higher training error, and thus test error. Similar phenomena on ImageNet is presented in Fig. 4.",
+    "width": 473,
+    "height": 158,
+    "description": "## Description\nThis figure contains two plots, each showing training and test error over iterations for 20-layer and 56-layer networks. The left plot shows training error, with the 56-layer network starting higher and decreasing more slowly. The right plot shows test error, with the 56-layer network also starting higher and decreasing more slowly.\n\n## Text in figure\nText in figure: \"training error\", \"test error\", \"iter. (1e4)\", \"56-layer\", \"20-layer\""
+  },
+  {
+    "file": "p002_f02.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 2. Residual learning: a building block.",
+    "width": 269,
+    "height": 149,
+    "description": "Figure type: Diagram\nDescription: The figure shows a diagram of a residual learning block, which is a fundamental building block in deep residual learning. It consists of two weight layers, each followed by a ReLU activation function. The input x is passed through the first weight layer and then through a ReLU function. The output of the first weight layer is added to the input x, and the result is passed through another ReLU function. The final output is the sum of the output of the second weight layer and the input x.\n\nText in figure: weight layer, ReLU, x, identity, F(x)"
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3. Example network architectures for ImageNet. Left : the VGG-19 model [41] (19.6 billion FLOPs) as a reference. Middle : a plain network with 34 parameter layers (3.6 billion FLOPs). Right : a residual network with 34 parameter layers (3.6 billion FLOPs). The dotted shortcuts increase dimensions. Table 1 shows more details and other variants.",
+    "width": 470,
+    "height": 1086,
+    "description": "This figure is a diagram comparing three neural network architectures for image recognition. It shows the VGG-19 model on the left, a 34-layer plain network in the middle, and a 34-layer residual network on the right. Each architecture displays the output sizes and layer types, such as convolutional layers and pooling layers. The VGG-19 model has 19 layers, while the other two have 34 layers but differ in their use of residual connections.\n\nText in figure: VGG-19, 34-layer plain, 34-layer residual, image, 3x3 conv, pool, output size, 224, 112, 56, 28, 14, 7, 1, fc, 4096, 1000."
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "",
+    "width": 851,
+    "height": 269,
+    "description": "## Index Section 1\nThe figure shows two plots comparing the error rates of different neural network architectures over iterations. The left plot compares \"plain-18\" and \"plain-34\" architectures, while the right plot compares \"ResNet-18\" and \"ResNet-34\". In both plots, the \"plain-18\" and \"ResNet-18\" lines are consistently lower than their \"34\" counterparts, indicating lower error rates. The \"plain-18\" line is the lowest in the left plot, while the \"ResNet-18\" line is the lowest in the right plot.\n\n## Index Section 2\nText in figure: \"plain-18\", \"plain-34\", \"18-layer\", \"34-layer\", \"ResNet-18\", \"ResNet-34\", \"error (%)\", \"iter. (1e4)\". The left plot shows \"plain-18\" and \"plain-34\" with \"plain-18\" having lower error rates. The right plot shows \"ResNet-18\" and \"ResNet-34\" with \"ResNet-18\" having lower error rates."
+  },
+  {
+    "file": "p006_f05.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 5. A deeper residual function F for ImageNet. Left: a building block (on 56 \u00d7 56 feature maps) as in Fig. 3 for ResNet34. Right: a 'bottleneck' building block for ResNet-50/101/152.",
+    "width": 404,
+    "height": 142,
+    "description": "Figure type: Diagram\nDescription: The figure shows two types of building blocks for ResNet architectures. The left block is a standard building block for ResNet34, while the right block is a bottleneck building block for ResNet-50/101/152. Both blocks use ReLU activation functions and include convolutional layers with specified dimensions.\n\nText in figure: 64-d, 256-d, 3x3, 64, 1x1, 64, 3x3, 256, relu, relu, relu, relu, relu, relu, +, +."
+  },
+  {
+    "file": "p008_f06.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "",
+    "width": 792,
+    "height": 199,
+    "description": "Section 1: Figure showing training error convergence of various neural network architectures over iterations. The left panel displays the error rates for plain networks with 20, 32, 44, and 56 layers. The right panel shows the error rates for ResNet architectures with 20, 32, 44, 56, and 110 layers. The ResNet-110 has the lowest error rate, followed by ResNet-56, ResNet-44, ResNet-32, and ResNet-20. The plain-56 network has the highest error rate.\n\nSection 2: Text in figure includes labels for plain-20, plain-32, plain-44, plain-56, ResNet-20, ResNet-32, ResNet-44, ResNet-56, ResNet-110, residual-110, residual-1202, and residual-1100. The x-axis is labeled \"iter. (1e4)\" and the y-axis is labeled \"error (%)\"."
+  },
+  {
+    "file": "p008_f07.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 6. Training on CIFAR-10 . Dashed lines denote training error, and bold lines denote testing error. Left : plain networks. The error of plain-110 is higher than 60% and not displayed. Middle : ResNets. Right : ResNets with 110 and 1202 layers.",
+    "width": 428,
+    "height": 230,
+    "description": "Description: This figure contains three plots comparing the training and testing errors of different neural network architectures on the CIFAR-10 dataset. The left plot shows plain networks, the middle plot shows ResNets, and the right plot shows ResNets with 110 and 1202 layers. The highest error is observed in the plain-110 network, which is not displayed due to its high error rate. The lowest error is observed in the ResNet-110 network, followed by ResNet-1202.\n\nText in figure: plain-20, plain-56, ResNet-20, ResNet-56, ResNet-110, ResNet-1202, training error, testing error, layer index (original), layer index (sorted by magnitude), sgd."
+  }
+]

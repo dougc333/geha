@@ -1,0 +1,98 @@
+[
+  {
+    "file": "p004_f01.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "",
+    "width": 443,
+    "height": 247,
+    "description": "Section 1: Figure showing a graph convolutional network architecture for semi-supervised classification. The figure consists of two main parts: the input layer and the output layer. The input layer includes nodes X1, X2, X3, and X4, while the output layer includes nodes Z1, Z2, Z3, and Z4. The hidden layers are not explicitly shown but are implied between the input and output layers.\n\nSection 2: The figure illustrates the flow of data from the input layer to the output layer through hidden layers. Nodes in the input layer are connected to nodes in the output layer via edges, indicating the transformation of input features into output features. The nodes are labeled with X and Z, representing input and output features, respectively.",
+    "pdf_text": "C | input layer | X1 | X2 | X3 | X4 | F | output layer | Z1 | Z2 | Z3 | Z4 | hidden | layers",
+    "bbox": [
+      112.7,
+      87.7,
+      334.2,
+      211.1
+    ]
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "30 20 10 0 10 20 Figure 1: Left : Schematic depiction of multi-layer Graph Convolutional Network (GCN) for semisupervised learning with C input channels and F feature maps in the output layer. The graph structure (edges shown as black lines) is shared over layers, labels are denoted by Y i . Right : t-SNE (Maaten & Hinton, 2008) visualization of hidden layer activations of a two-layer GCN trained on the Cora dataset (Sen et al., 2008) using 5% of labels. Colors denote document class.",
+    "width": 368,
+    "height": 362,
+    "description": "Description: The figure shows a t-SNE visualization of hidden layer activations from a two-layer Graph Convolutional Network (GCN) trained on the Cora dataset. The visualization displays the activations in a 2D space, with colors representing different document classes. The figure is labeled as \"(b) Hidden layer activations\".\n\nText in figure: (b) Hidden layer activations, C, l ti, l N t, k (GCN) f, i, Y1, Y4",
+    "pdf_text": "Y1 | Y4 | (b) Hidden layer activations | C | l ti | l N t | k (GCN) f | i",
+    "bbox": [
+      348.2,
+      57.1,
+      532.1,
+      238.2
+    ]
+  },
+  {
+    "file": "p008_f03.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 2: Wall-clock time per epoch for random graphs. (*) indicates out-of-memory error.",
+    "width": 379,
+    "height": 175,
+    "description": "Section 1: Figure description\nThis figure is a bar chart comparing the wall-clock time per epoch for random graphs on GPU and CPU. The x-axis represents the number of edges in the graph, ranging from 1k to 10M. The y-axis shows the time per epoch in seconds, on a logarithmic scale. The GPU series is represented by cyan bars, while the CPU series is represented by blue bars. The GPU series is generally lower than the CPU series, with the difference increasing as the number of edges increases. An asterisk (*) indicates an out-of-memory error for the 10M edge case on GPU.\n\nSection 2: Figure details\nFigure words: 1k, 10k, 100k, 1M, 10M, # Edges, 10^-3, 10^-2, 10^-1, 10^0, 10^1, Sec./epoch, *, GPU, CPU\nLegend: GPU, CPU\nX-axis: # Edges\nY-axis: Sec./epoch",
+    "pdf_text": "1k | 10k | 100k | 1M | 10M | # Edges | 10-3 | 10-2 | 10-1 | 100 | 101 | Sec./epoch | * | GPU | CPU",
+    "bbox": [
+      309.4,
+      94.3,
+      499.1,
+      182.2
+    ]
+  },
+  {
+    "file": "p012_f04.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 3: Left : Zachary's karate club network (Zachary, 1977), colors denote communities obtained via modularity-based clustering (Brandes et al., 2008). Right : Embeddings obtained from an untrained 3-layer GCN model (Eq. 13) with random weights applied to the karate club network. Best viewed on a computer screen.",
+    "width": 744,
+    "height": 281,
+    "description": "## Description\nThe figure displays two panels. Panel (a) shows Zachary's karate club network with nodes colored by community clusters. Panel (b) shows embeddings from an untrained 3-layer GCN model with random weights applied to the karate club network.\n\n## Text in figure\n(a) Karate club network\n(b) Random weight embedding",
+    "pdf_text": "(a) Karate club network | (b) Random weight embedding",
+    "bbox": [
+      117.9,
+      95.0,
+      489.8,
+      235.7
+    ]
+  },
+  {
+    "file": "p013_f05.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 4: Evolution of karate club network node embeddings obtained from a GCN model after a number of semi-supervised training iterations. Colors denote class. Nodes of which labels were provided during training (one per class) are highlighted (grey outline). Grey links between nodes denote graph edges. Best viewed on a computer screen.",
+    "width": 785,
+    "height": 974,
+    "description": "## Description\n\nThe figure consists of six subplots, each labeled with an iteration number (25, 50, 75, 100, 200, 300) and showing the evolution of node embeddings in a karate club network using a Graph Convolutional Network (GCN) model. Each subplot displays nodes in a 2D space, with colors indicating class membership. Nodes with provided labels during training are outlined in grey. The graph edges are represented by grey lines connecting the nodes.\n\n## Text in figure\n\n- (a) Iteration 25\n- (b) Iteration 50\n- (c) Iteration 75\n- (d) Iteration 100\n- (e) Iteration 200\n- (f) Iteration 300",
+    "pdf_text": "(a) Iteration 25 | (b) Iteration 50 | (c) Iteration 75 | (d) Iteration 100 | (e) Iteration 200 | (f) Iteration 300",
+    "bbox": [
+      112.4,
+      136.2,
+      504.9,
+      622.9
+    ]
+  },
+  {
+    "file": "p014_f06.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 5: Influence of model depth (number of layers) on classification performance. Markers denote mean classification accuracy (training vs. testing) for 5-fold cross-validation. Shaded areas denote standard error. We show results both for a standard GCN model (dashed lines) and a model with added residual connections (He et al., 2016) between hidden layers (solid lines).",
+    "width": 792,
+    "height": 293,
+    "description": "## Description\n\nThis figure contains three line plots, each showing the influence of model depth on classification performance for different datasets: Citeseer, Cora, and Pubmed. Each plot displays the mean classification accuracy for training and testing sets, with and without residual connections, across 5-fold cross-validation. The shaded areas represent the standard error. The series with residual connections generally outperforms the standard GCN model, especially in the testing set.\n\n## Visible text\n\nCiteseer, Cora, Pubmed, Number of layers, Accuracy, Train, Train (Residual), Test, Test (Residual), 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 0.76, 0.78, 0.80, 0.82, 0.84, 0.86, 0.88",
+    "pdf_text": "1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | Number of layers | 0.50 | 0.55 | 0.60 | 0.65 | 0.70 | 0.75 | 0.80 | 0.85 | 0.90 | Accuracy | Citeseer | Train | Train (Residual) | Test | Test (Residual) | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | Number of layers | 0.55 | 0.60 | 0.65 | 0.70 | 0.75 | 0.80 | 0.85 | 0.90 | 0.95 | Accuracy | Cora | Train | Train (Residual) | Test | Test (Residual) | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | Number of layers | 0.76 | 0.78 | 0.80 | 0.82 | 0.84 | 0.86 | 0.88 | Accuracy | Pubmed | Train | Train (Residual) | Test | Test (Residual)",
+    "bbox": [
+      108.9,
+      266.9,
+      504.8,
+      413.4
+    ]
+  }
+]

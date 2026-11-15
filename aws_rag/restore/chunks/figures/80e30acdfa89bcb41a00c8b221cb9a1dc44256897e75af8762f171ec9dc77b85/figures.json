@@ -1,0 +1,162 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 1. Mini-network replacing the 5 \u00d7 5 convolutions.",
+    "width": 292,
+    "height": 246,
+    "description": "## Description\nThis figure illustrates a mini-network replacing 5x5 convolutions in the Inception architecture. It shows a 3D structure with two layers of square blocks, each divided into smaller squares. The top layer has a smaller square block, while the bottom layer has larger square blocks. Red lines connect the blocks, indicating the flow of data or operations within the network.\n\n## Text in figure\n- Block names: Not explicitly labeled\n- Layer names: Not explicitly labeled\n- Connection lines: Red lines connecting blocks\n- Block divisions: Smaller squares within larger blocks\n- Layer structure: Two layers of blocks\n- Data flow: Indicated by red lines",
+    "pdf_text": "",
+    "bbox": [
+      100.7,
+      100.4,
+      246.6,
+      223.3
+    ]
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2. One of several control experiments between two Inception models, one of them uses factorization into linear + ReLU layers, the other uses two ReLU layers. After 3 . 86 million operations, the former settles at 76 . 2% , while the latter reaches 77 . 2% top-1 Accuracy on the validation set.",
+    "width": 395,
+    "height": 197,
+    "description": "This figure is a line graph comparing the top-1 accuracy of two Inception models over iterations. The models differ in their activation functions: one uses a factorization into linear and ReLU layers, while the other uses two ReLU layers. The graph shows that the model with linear and ReLU layers reaches a top-1 accuracy of 76.2%, while the model with two ReLU layers reaches 77.2%. The linear model starts lower but eventually surpasses the ReLU model in accuracy.\n\nText in figure: Iteration, Top-1 Accuracy, Factorization with Linear vs ReLU activation, ReLU, Linear",
+    "pdf_text": "0 | 0.5 | 1 | 1.5 | 2 | 2.5 | 3 | 3.5 | 4 | x 10 | 6 | 0 | 0.1 | 0.2 | 0.3 | 0.4 | 0.5 | 0.6 | 0.7 | 0.8 | Iteration | Top\u22121 Accuracy | Factorization with Linear vs ReLU activation | ReLU | Linear",
+    "bbox": [
+      315.9,
+      75.0,
+      513.4,
+      173.3
+    ]
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3. Mini-network replacing the 3 \u00d7 3 convolutions. The lower layer of this network consists of a 3 \u00d7 1 convolution with 3 output units.",
+    "width": 200,
+    "height": 276,
+    "description": "Section 1: Figure description\nThis figure illustrates a mini-network replacing the 3 \u00d7 3 convolutions in the Inception architecture. It shows a lower layer with a 3 \u00d7 1 convolution and 3 output units.\n\nSection 2: Text in figure\nMini-network, 3 \u00d7 1 convolution, 3 output units",
+    "pdf_text": "",
+    "bbox": [
+      115.6,
+      104.4,
+      215.6,
+      242.7
+    ]
+  },
+  {
+    "file": "p004_f04.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 4. Original Inception module as described in [20].",
+    "width": 434,
+    "height": 342,
+    "description": "This figure is a diagram illustrating the original Inception module architecture, as described in the referenced paper. It shows a series of convolutional layers and pooling operations connected in a specific manner. The diagram includes a 5x5 filter, a 3x3 filter, a 1x1 filter, a pooling layer, and a concatenation step labeled \"Filter Concat.\" The base layer is connected to all these components, and the final output is produced by combining the results of these layers.\n\nText in figure: 1x1, 1x1, 5x5, 3x3, Pool, 1x1, Base, Filter Concat, 1x1",
+    "pdf_text": "1x1 | 1x1 | 5x5 | 3x3 | Pool | 1x1 | Base | Filter Concat | 1x1",
+    "bbox": [
+      62.2,
+      328.4,
+      279.1,
+      499.5
+    ]
+  },
+  {
+    "file": "p004_f05.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 5. Inception modules where each 5 \u00d7 5 convolution is replaced by two 3 \u00d7 3 convolution, as suggested by principle 3 of Section 2.",
+    "width": 421,
+    "height": 411,
+    "description": "Description: The figure illustrates a modified Inception module from the paper \"Rethinking the Inception Architecture for Computer Vision.\" It shows a network architecture where each 5x5 convolution is replaced by two 3x3 convolutions, as per principle 3 of Section 2. The diagram includes various components such as 1x1, 3x3 convolutions, a pooling layer, and a base layer, all connected to a \"Filter Concat\" block.\n\nText in figure: 1x1, 1x1, 3x3, 3x3, Pool, 1x1, Base, Filter Concat, 3x3, 1x1",
+    "pdf_text": "1x1 | 1x1 | 3x3 | 3x3 | Pool | 1x1 | Base | Filter Concat | 3x3 | 1x1",
+    "bbox": [
+      319.5,
+      89.2,
+      530.1,
+      294.4
+    ]
+  },
+  {
+    "file": "p005_f06.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 6. Inception modules after the factorization of the n \u00d7 n convolutions. In our proposed architecture, we chose n = 7 for the 17 \u00d7 17 grid. (The filter sizes are picked using principle 3)",
+    "width": 438,
+    "height": 579,
+    "description": "This figure is a diagram illustrating the factorization of n \u00d7 n convolutions in the Inception architecture for computer vision tasks. It shows the transformation of a standard n \u00d7 n convolution into a combination of smaller convolutions, specifically 1xn, nx1, and 1x1 convolutions, followed by a pooling operation and a concatenation step. The diagram highlights the use of n = 7 for a 17 \u00d7 17 grid, as per the paper's principle 3 for selecting filter sizes. The components include '1x1', '1xn', 'nx1', 'Pool', 'Base', and 'Filter Concat', with arrows indicating the flow of data from the base layer through various convolutions and pooling operations before being concatenated.\n\nText in figure: \"1x1\", \"1xn\", \"nx1\", \"Pool\", \"Base\", \"Filter Concat\"",
+    "pdf_text": "1x1 | 1x1 | 1xn | Pool | 1x1 | Base | Filter Concat | nx1 | 1xn | nx1 | 1xn | nx1 | 1x1",
+    "bbox": [
+      60.4,
+      74.9,
+      279.5,
+      364.4
+    ]
+  },
+  {
+    "file": "p005_f07.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 7. Inception modules with expanded the filter bank outputs. This architecture is used on the coarsest ( 8 \u00d7 8 ) grids to promote high dimensional representations, as suggested by principle 2 of Section 2. We are using this solution only on the coarsest grid, since that is the place where producing high dimensional sparse representation is the most critical as the ratio of local processing (by 1 \u00d7 1 convolutions) is increased compared to the spatial aggregation.",
+    "width": 440,
+    "height": 376,
+    "description": "Figure Description: The figure illustrates an Inception module architecture used in computer vision tasks. It shows a network diagram with various convolutional layers and pooling operations. The diagram includes 1x1, 3x3, and 1x3 convolutional filters, a pooling layer, and a concatenation step labeled \"Filter Concat.\" The architecture is designed to process information on an 8x8 grid, emphasizing high-dimensional representations.\n\nText in Figure: 1x1, 1x1, 3x3, Pool, 1x1, Base, Filter Concat, 1x3, 1x3, 1x1, 3x1, 3x1",
+    "pdf_text": "1x1 | 1x1 | 3x3 | Pool | 1x1 | Base | Filter Concat | 1x3 | 1x3 | 1x1 | 3x1 | 3x1",
+    "bbox": [
+      316.3,
+      72.7,
+      536.6,
+      260.6
+    ]
+  },
+  {
+    "file": "p005_f08.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 8. Auxiliary classifier on top of the last 17 \u00d7 17 layer. Batch normalization[7] of the layers in the side head results in a 0 . 4% absolute gain in top1 accuracy. The lower axis shows the number of itertions performed, each with batch size 32 .",
+    "width": 304,
+    "height": 200,
+    "description": "Section 1: Figure description\nThis figure illustrates the architecture of an auxiliary classifier on top of the last 17x17 layer in the Inception model. It shows the dimensions of various layers and the connections between them. The figure includes a 1x1 convolution, 5x5 average pooling with stride 3, and a fully connected layer. The Inception block is also depicted, with dimensions of 8x8x1280. The figure highlights the batch normalization of the layers in the side head, which results in a 0.4% absolute gain in top1 accuracy.\n\nSection 2: Figure text\nText in figure: 17x17x768, 5x5x768, 8x8x1280, Inception, 5x5x128, 1x1x1024, 5x5 Average pooling with stride 3, 1x1 Convolution, Fully connected",
+    "pdf_text": "17x17x768 | 5x5x768 | 8x8x1280 | Inception | 5x5x128 | 1x1x1024 | 5x5 Average pooling with stride 3 | 1x1 Convolution | Fully connected | ...",
+    "bbox": [
+      348.0,
+      402.1,
+      500.0,
+      501.9
+    ]
+  },
+  {
+    "file": "p006_f09.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 9. Two alternative ways of reducing the grid size. The solution on the left violates the principle 1 of not introducing an representational bottleneck from Section 2. The version on the right is 3 times more expensive computationally.",
+    "width": 425,
+    "height": 209,
+    "description": "Figure type: Diagram showing two methods for reducing grid size in a computer vision architecture.\n\nDescription: The figure compares two methods for reducing grid size in a computer vision architecture. The left method uses pooling to reduce the grid size from 17x17x640 to 17x17x320, then applies an inception block, and finally pools again to 35x35x320. The right method uses an inception block to reduce the grid size from 17x17x640 to 35x35x640, then applies pooling to 35x35x320.\n\nText in figure: 35x35x320, 17x17x320, 17x17x640, Pooling, Inception, 35x35x320, 35x35x640, 17x17x640, Inception, Pooling",
+    "pdf_text": "35x35x320 | 17x17x320 | 17x17x640 | Pooling | Inception | 35x35x320 | 35x35x640 | 17x17x640 | Inception | Pooling",
+    "bbox": [
+      64.8,
+      76.5,
+      277.4,
+      180.9
+    ]
+  },
+  {
+    "file": "p006_f10.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 10. Inception module that reduces the grid-size while expands the filter banks. It is both cheap and avoids the representational bottleneck as is suggested by principle 1. The diagram on the right represents the same solution but from the perspective of grid sizes rather than the operations.",
+    "width": 445,
+    "height": 250,
+    "description": "This figure is a diagram illustrating the structure of an Inception module in a computer vision model. It shows how the module reduces the grid size while expanding the filter banks, as suggested by principle 1. The diagram on the right focuses on the grid sizes rather than the operations. Key components include a 1x1 filter, 3x3 filters with different strides, a pooling layer, and concatenation operations. The module starts with a base layer, followed by a filter concatenation, and ends with a pooling operation.\n\nText in figure: Base, Filter Concat, 1x1, 3x3, stride 1, stride 2, 35x35x320, 17x17x320, 17x17x640, pool, conv, concat",
+    "pdf_text": "Pool | stride 2 | Base | Filter Concat | 1x1 | 3x3 | stride 2 | 3x3 | stride 1 | 1x1 | 3x3 | stride 2 | 35x35x320 | 17x17x320 | 17x17x320 | 17x17x640 | pool | conv | concat",
+    "bbox": [
+      53.8,
+      260.4,
+      276.7,
+      385.6
+    ]
+  }
+]

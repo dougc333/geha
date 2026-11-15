@@ -1,0 +1,38 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1. A still from 'Quo Vadis' (1951). Where is this going? Are these actors about to kiss each other, or have they just done so? More importantly, where is action recognition going? Actions can be ambiguous in individual frames, but the limitations of existing action recognition datasets has meant that the best-performing video architectures do not depart significantly from single-image analysis, where they rely on powerful image classifiers trained on ImageNet. In this paper we demonstrate that video models are best pre-trained on videos and report significant improvements by using spatio-temporal classifiers pre-trained on Kinetics, a freshly collected, large, challenging human action video dataset.",
+    "width": 449,
+    "height": 371,
+    "description": "## Description\nThe image depicts a scene from the film \"Quo Vadis\" (1951). It shows three individuals in a room, with two of them lying on a bed and the third standing behind them. The person lying on the bed is wearing a white dress and a crown, while the other person is wearing a red cape and a crown. The third person, standing behind them, is wearing a blue robe. The room is decorated with flowers and a curtain.\n\n## Text in figure\n- The text in the image is not visible."
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2. Video architectures considered in this paper. K stands for the total number of frames in a video, whereas N stands for a subset of neighboring frames of the video.",
+    "width": 979,
+    "height": 285,
+    "description": "Description: The figure shows five different architectures for video action recognition. Each panel represents a different model: a) LSTM, b) 3D-ConvNet, c) Two-Stream, d) 3D-Fused Two-Stream, and e) Two-Stream 3D-ConvNet. The models are depicted with their input and output components, illustrating how they process video data.\n\nText in figure: LSTM, 3D-ConvNet, ConvNet, Action, Images 1 to K, Optical Flow 1 to N, time, K, N"
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 3. The Inflated Inception-V1 architecture (left) and its detailed inception submodule (right). The strides of convolution and pooling operators are 1 where not specified, and batch normalization layers, ReLu's and the softmax at the end are not shown. The theoretical sizes of receptive field sizes for a few layers in the network are provided in the format 'time,x,y' - the units are frames and pixels. The predictions are obtained convolutionally in time and averaged.",
+    "width": 932,
+    "height": 343,
+    "description": "Description: The figure shows the architecture of the Inflated Inception-V1 model, a deep learning model for action recognition. It consists of an inception module that is repeated multiple times. The inception module includes convolutional and pooling layers with varying receptive field sizes. The figure also shows the receptive field sizes for some layers.\n\nText in figure: Inflated Inception-V1, Inception Module (Inc.), Video, 7x7x7, 1x3x3, Max-Pool stride 2, 11x11, 23x75, 1x3x3, Max-Pool stride 1,2, 3x3x3, 1x3x3, Max-Pool stride 1,2, Inc., 59,219,219, 99,539,539, 2x2x2, Max-Pool stride 2, 2x7x7, Avg-Pool, 1x1x1, Predictions, Next Layer, Inc., Concatenation, 1x1x1, 3x3x3, 3x3x3, 1x1x1, Conv, Conv, Conv, Conv, 1x1x1, 1x1x1, 3x3x3, Max-Pool, Previous Layer"
+  },
+  {
+    "file": "p007_f04.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 4. All 64 conv1 filters of each Inflated 3D ConvNet after training on Kinetics (the filter dimensions are 7 \u00d7 7 \u00d7 7 , and the 7 time dimensions are shown left-to-right across the figure). The sequence on top shows the flow network filters, the one in the middle shows filters from the RGB I3D network, and the bottom row shows the original Inception-v1 filters. Note that the I3D filters possess rich temporal structure. Curiously the filters of the flow network are closer to the original ImageNet-trained Inception-v1 filters, while the filters in the RGB I3D network are no longer recognizable. Best seen on the computer, in colour and zoomed in.",
+    "width": 973,
+    "height": 443,
+    "description": "## Description\nThe figure displays a collection of 64 convolutional filters from three different networks, each visualized in a grid format. The top row shows filters from a flow network, the middle row from an RGB I3D network, and the bottom row from an original Inception-v1 network. Each filter is represented as a 7x7x7 cube, with the temporal dimension shown across the figure from left to right.\n\n## Text in Figure\n- Top row: Flow network filters\n- Middle row: RGB I3D network filters\n- Bottom row: Original Inception-v1 filters\n- Filter dimensions: 7x7x7\n- Temporal dimensions: shown left-to-right\n- Note: I3D filters possess rich temporal structure\n- Curiosity: Flow network filters resemble original ImageNet-trained Inception-v1 filters\n- Observation: RGB I3D network filters are no longer recognizable\n- Recommendation: Best viewed on a computer, in color, and zoomed in"
+  }
+]

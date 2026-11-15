@@ -1,0 +1,47 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1: The type of directed graphical model under consideration. Solid lines denote the generative model p \u03b8 ( z ) p \u03b8 ( x | z ) , dashed lines denote the variational approximation q \u03c6 ( z | x ) to the intractable posterior p \u03b8 ( z | x ) . The variational parameters \u03c6 are learned jointly with the generative model parameters \u03b8 .",
+    "width": 177,
+    "height": 179,
+    "description": "Section 1: Directed graphical model in \"Auto-Encoding Variational Bayes\"\nThis figure depicts a directed graphical model, illustrating the generative model and its variational approximation. Solid lines represent the generative model p\u03b8(z)p\u03b8(x|z), while dashed lines represent the variational approximation q\u03c6(z|x) to the posterior p\u03b8(z|x). The model parameters \u03b8 and variational parameters \u03c6 are learned jointly.\n\nSection 2: Key elements in the figure\nThe figure includes the following elements: \u03c6, \u03b8, z, x, N, and \u03b8. Solid lines connect \u03c6 to z, z to x, and x to N. Dashed lines connect \u03c6 to z and x to \u03b8. The figure shows the generative model p\u03b8(z)p\u03b8(x|z) and the variational approximation q\u03c6(z|x) to the posterior p\u03b8(z|x)."
+  },
+  {
+    "file": "p007_f02.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 2: Comparison of our AEVB method to the wake-sleep algorithm, in terms of optimizing the lower bound, for different dimensionality of latent space ( N z ). Our method converged considerably faster and reached a better solution in all experiments. Interestingly enough, more latent variables does not result in more overfitting, which is explained by the regularizing effect of the lower bound. Vertical axis: the estimated average variational lower bound per datapoint. The estimator variance was small ( < 1 ) and omitted. Horizontal axis: amount of training points evaluated. Computation took around 20-40 minutes per million training samples with a Intel Xeon CPU running at an effective 40 GFLOPS.",
+    "width": 741,
+    "height": 287,
+    "description": "Figure: Line plots comparing AEVB and Wake-Sleep methods.\nPanels: MNIST datasets with varying latent space dimensions (Nz=3, 5, 10, 20, 200) and Frey Face datasets (Nz=2, 5, 10, 20).\nSeries: Wake-Sleep (train), AEVB (train), AEVB (test).\nHighest: AEVB (test) in all panels, reaching up to 1600.\nLowest: Wake-Sleep (train) in all panels, reaching down to 0.\nText: MNIST, Nz=3, 5, 10, 20, 200; Frey Face, Nz=2, 5, 10, 20; Wake-Sleep (train), AEVB (train), AEVB (test); # Training samples evaluated, C.\n\nFigure text: MNIST, Nz=3, 5, 10, 20, 200; Frey Face, Nz=2, 5, 10, 20; Wake-Sleep (train), AEVB (train), AEVB (test); # Training samples evaluated, C."
+  },
+  {
+    "file": "p008_f03.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 3: Comparison of AEVB to the wake-sleep algorithm and Monte Carlo EM, in terms of the estimated marginal likelihood, for a different number of training points. Monte Carlo EM is not an on-line algorithm, and (unlike AEVB and the wake-sleep method) can't be applied efficiently for the full MNIST dataset.",
+    "width": 781,
+    "height": 288,
+    "description": "Figure: Two plots comparing AEVB, Wake-Sleep, and MCMC EM methods on marginal log-likelihood. Left plot: N_train = 1000. Right plot: N_train = 50000. Series: Wake-Sleep (train), Wake-Sleep (test), MCMC EM (train), MCMC EM (test), AEVB (train), AEVB (test). Highest: AEVB (train) on both plots. Lowest: MCMC EM (train) on both plots. Markers: None. Annotations: None.\n\nText in figure: N_train = 1000, N_train = 50000, Marginal log-likelihood, # Training samples evaluated (millions), Wake-Sleep (train), Wake-Sleep (test), MCMC EM (train), MCMC EM (test), AEVB (train), AEVB (test)."
+  },
+  {
+    "file": "p010_f04.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 4: Visualisations of learned data manifold for generative models with two-dimensional latent space, learned with AEVB. Since the prior of the latent space is Gaussian, linearly spaced coordinates on the unit square were transformed through the inverse CDF of the Gaussian to produce values of the latent variables z . For each of these values z , we plotted the corresponding generative p \u03b8 ( x | z ) with the learned parameters \u03b8 .",
+    "width": 713,
+    "height": 474,
+    "description": "Description: The figure shows two visualizations of learned data manifolds for generative models with a two-dimensional latent space, trained using AEVB. Panel (a) displays the learned Frey Face manifold, and panel (b) shows the learned MNIST manifold. Each panel consists of a grid of images generated from the latent space, with linearly spaced coordinates transformed through the inverse CDF of the Gaussian prior.\n\nText in figure: (a) Learned Frey Face manifold, (b) Learned MNIST manifold, Frey Face, MNIST, AEVB, latent space, generative models, two-dimensional, Gaussian prior, inverse CDF, grid of images, coordinates."
+  },
+  {
+    "file": "p010_f05.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 5: Random samples from learned generative models of MNIST for different dimensionalities of latent space.",
+    "width": 737,
+    "height": 209,
+    "description": "Figure 5 displays random samples from generative models of MNIST data, each generated using different dimensionalities of the latent space. The panels show 2-D, 5-D, 10-D, and 20-D latent spaces. Each panel contains a grid of 16 images, illustrating the variety and quality of generated digits. The images in each panel demonstrate the model's ability to capture the complexity of MNIST digits with increasing latent space dimensions.\n\nText in figure: \"2-D latent space\", \"5-D latent space\", \"10-D latent space\", \"20-D latent space\""
+  }
+]

@@ -1,0 +1,83 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1: Our reparametrization. We only train A and B .",
+    "width": 230,
+    "height": 207,
+    "description": "This figure is a diagram illustrating the LoRA (Low-Rank Adaptation) method for large language models. It shows the process of adapting a pretrained model by training only two matrices, A and B, while keeping the original weights W fixed. The input x is processed through the pretrained weights W, and then combined with the product of matrices A and B. The matrices A and B are initialized with values from a normal distribution N(0,\u03c3^2). The figure highlights that only A and B are trained during the adaptation process.\n\nText in figure: \"Pretrained Weights\", \"W \u2208 \u211d^d\u00d7d\", \"B = 0\", \"r\", \"A = N(0,\u03c3^2)\", \"h\", \"x\", \"d\""
+  },
+  {
+    "file": "p001_f02.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "",
+    "width": 122,
+    "height": 206,
+    "description": "Section 1: Figure description\nThis figure depicts a diagram showing the process of applying pretrained weights to a function f(x). The pretrained weights, denoted as W, are represented as a matrix in the real number space (R^dxd). The input x is a vector, and the output d is a scalar.\n\nSection 2: Figure content\nText in figure: \"Pretrained Weights\", \"W \u2208 R^dxd\", \"f(x)\", \"x\", \"d\""
+  },
+  {
+    "file": "p008_f03.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 2: GPT-3 175B validation accuracy vs. number of trainable parameters of several adaptation methods on WikiSQL and MNLI-matched. LoRA exhibits better scalability and task performance. See Section F.2 for more details on the plotted data points.",
+    "width": 771,
+    "height": 245,
+    "description": "This figure is a line graph comparing the validation accuracy of various adaptation methods for large language models on two datasets: WikiSQL and MultiNLI-matched. The x-axis represents the log10 number of trainable parameters, ranging from 6 to 11. The y-axis shows validation accuracy. The highest accuracy is achieved by LoRA on the MultiNLI-matched dataset, peaking at around 0.92. The lowest accuracy is observed for PrefixLayer on WikiSQL, around 0.55. Other methods include Fine-Tune, PrefixEmbed, Adapter(H), and LoRA.\n\nText in figure: \"Validation Accuracy\", \"WikiSQL\", \"MultiNLI-matched\", \"Method\", \"Fine-Tune\", \"PrefixEmbed\", \"PrefixLayer\", \"Adapter(H)\", \"LoRA\", \"log10 # Trainable Parameters\", \"0.75\", \"0.70\", \"0.65\", \"0.60\", \"0.55\", \"0.92\", \"0.90\", \"0.88\", \"0.86\", \"0.84\"."
+  },
+  {
+    "file": "p011_f04.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 3: Subspace similarity between column vectors of A r =8 and A r =64 for both \u2206 W q and \u2206 W v . The third and the fourth figures zoom in on the lower-left triangle in the first two figures. The top directions in r = 8 are included in r = 64 , and vice versa.",
+    "width": 775,
+    "height": 245,
+    "description": "Figure Description: This figure displays four heatmaps comparing the subspace similarity between column vectors of two matrices, Ar=8 and Ar=64, for both \u2206Wq and \u2206Wv. The first two heatmaps show the full range of similarity, while the third and fourth heatmaps zoom in on the lower-left triangle. The color gradient indicates the degree of similarity, with darker colors representing higher similarity and lighter colors representing lower similarity.\n\nText in Figure: \u2206Wq, \u2206Wv, Ar=8, Ar=64, i, j, similarity, heatmap, lower-left triangle, color gradient, higher similarity, lower similarity."
+  },
+  {
+    "file": "p012_f05.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 4: Left and Middle: Normalized subspace similarity between the column vectors of A r =64 from two random seeds, for both \u2206 W q and \u2206 W v in the 48-th layer. Right: the same heat-map between the column vectors of two random Gaussian matrices. See Section H.1 for other layers.",
+    "width": 735,
+    "height": 256,
+    "description": "## Index Section 1\nFigure: Heat maps comparing subspace similarity. Left: \u2206 W q. Middle: \u2206 W v. Right: Random Gaussian matrices. Axes: i and j. Color scale: 0.0 to 0.5.\n\n## Index Section 2\nText: \u2206 W q, \u2206 W v, Random Gaussian, i, j, 0.0, 0.5. No values on axes. No series labels."
+  },
+  {
+    "file": "p017_f06.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "Figure 5: Percentage slow-down of inference latency compared to the no-adapter ( r = 0 ) baseline. The top row shows the result for Adapter H and the bottom row Adapter L . Larger batch size and sequence length help to mitigate the latency, but the slow-down can be as high as over 30% in an online, short-sequence-length scenario. We tweak the colormap for better visibility.",
+    "width": 719,
+    "height": 395,
+    "description": "Description: The figure shows a heatmap comparing the percentage slowdown of inference latency for two types of adapters, Adapter H and Adapter L, across different sequence lengths and batch sizes. The top row represents Adapter H, and the bottom row represents Adapter L. The slowdown is highest in short-sequence-length scenarios with smaller batch sizes, reaching up to 30%.\n\nText in figure: \"Seq Len = 128\", \"Seq Len = 256\", \"Seq Len = 512\", \"Adapter H\", \"Adapter L\", \"Batch Size\", \"1\", \"2\", \"4\", \"8\", \"16\", \"32\", \"0\", \"10\", \"100\", \"250\", \"0\", \"10\", \"100\", \"250\", \"35\", \"30\", \"25\", \"20\", \"15\", \"10\", \"5\", \"0\""
+  },
+  {
+    "file": "p025_f07.png",
+    "page": 25,
+    "kind": "picture",
+    "caption": "Figure 6: Normalized subspace similarity between the column vectors of A r =8 and A r =64 for both \u2206 W q and \u2206 W v from the 1st, 32nd, 64th, and 96th layers in a 96-layer Transformer.",
+    "width": 789,
+    "height": 725,
+    "description": "Description: The figure presents a series of heatmaps comparing the normalized subspace similarity between the column vectors of \\( A_r = 8 \\) and \\( A_r = 64 \\) for both \\( \\Delta W_q \\) and \\( \\Delta W_v \\) across different layers (1st, 32nd, 64th, and 96th) in a 96-layer Transformer model. Each heatmap shows varying degrees of similarity, with colors ranging from dark purple (low similarity) to bright orange (high similarity).\n\nText in figure: Layer 1, Layer 32, Layer 64, Layer 96, \\( \\Delta W_q \\), \\( \\Delta W_v \\), \\( \\Delta W_q \\), \\( \\Delta W_v \\), \\( \\Delta W_q \\), \\( \\Delta W_v \\), \\( \\Delta W_q \\), \\( \\Delta W_v \\), 1 2 3 4 5 6 7 8, 1 2 3 4 5 6 7 8, 1 2 3 4 5 6 7 8, 1 2 3 4 5 6 7 8, 1 6 12 18 22 25 33 40 45 48 55, 1 6 12 18 22 25 33 40 45 48 55, 1 6 12 18 22 25 33 40 45 48 55, 1 6 12 18 22 25 33 40 45 48 55, -1.0, -0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0."
+  },
+  {
+    "file": "p026_f08.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "Figure 7: Normalized subspace similarity between the column vectors of A r =64 from two randomly seeded runs, for both \u2206 W q and \u2206 W v from the 1st, 32nd, 64th, and 96th layers in a 96-layer Transformer.",
+    "width": 789,
+    "height": 354,
+    "description": "Figure type: Heatmap.\nDescription: The figure displays heatmaps of normalized subspace similarity between column vectors of A r =64 from two different runs for \u2206 W q and \u2206 W v across various layers of a 96-layer Transformer. The heatmaps show variations in similarity, with darker colors indicating higher similarity and lighter colors indicating lower similarity. The layers shown are the 1st, 32nd, 64th, and 96th layers.\n\nText in figure: Layer 1, Layer 32, Layer 64, Layer 96, \u2206 W q, \u2206 W v, \u2206 W g, \u2206 W l, \u2206 W q, \u2206 W v, \u2206 W g, \u2206 W l, \u2206 W q, \u2206 W v, \u2206 W g, \u2206 W l, \u2206 W q, \u2206 W v, \u2206 W g, \u2206 W l, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0.0."
+  },
+  {
+    "file": "p026_f09.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "Figure 8: Normalized subspace similarity between the singular directions of W q and those of \u2206 W q with varying r and a random baseline. \u2206 W q amplifies directions that are important but not emphasized in W . \u2206 W with a larger r tends to pick up more directions that are already emphasized in W .",
+    "width": 788,
+    "height": 272,
+    "description": "This figure displays four heatmaps representing the normalized subspace similarity between the singular directions of \\( W_q \\) and those of \\( \\Delta W_q \\) with varying rank \\( r \\) and a random baseline. The heatmaps show the similarity scores ranging from -0.200 to 0.100. The first heatmap corresponds to \\( \\phi(W_q, A_r=4, i, j) \\), the second to \\( \\phi(W_q, A_r=8, i, j) \\), the third to \\( \\phi(W_q, A_r=64, i, j) \\), and the fourth to \\( \\phi(W_q, A_{rand}, i, j) \\). The heatmaps show that as \\( r \\) increases, the similarity scores become more pronounced, indicating that \\( \\Delta W_q \\) amplifies important directions in \\( W_q \\).\n\nText in figure: \"\u2206Wq\", \"Random\", \"i\", \"j\", \"\u03c6(Wq, Ar=4, i, j)\", \"\u03c6(Wq, Ar=8, i, j)\", \"\u03c6(Wq, Ar=64, i, j)\", \"\u03c6(Wq, Arand, i, j)\", \"- 0.200\", \"- 0.175\", \"- 0.150\", \"- 0.125\", \"- 0.100\"."
+  }
+]

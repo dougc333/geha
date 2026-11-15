@@ -1,0 +1,74 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Fig. 1. SegNet predictions on road scenes and indoor scenes. To try our system yourself, please see our online web demo at http://mi.eng.cam.ac. uk/projects/segnet/.",
+    "width": 978,
+    "height": 584,
+    "description": "Figure Type: Image collage\nDescription: The figure displays a series of images showing the results of SegNet, a deep convolutional encoder-decoder architecture for image segmentation. It includes both road scenes and indoor scenes, with each scene presented in two versions: the original image and the segmented image produced by SegNet.\n\nText in Figure: No specific text is visible in the figure. The images are labeled by their content, showing the original and segmented versions of various scenes."
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Fig. 2. An illustration of the SegNet architecture. There are no fully connected layers and hence it is only convolutional. A decoder upsamples its input using the transferred pool indices from its encoder to produce a sparse feature map(s). It then performs convolution with a trainable filter bank to densify the feature map. The final decoder output feature maps are fed to a soft-max classifier for pixel-wise classification.",
+    "width": 973,
+    "height": 273,
+    "description": "## Description\nThis figure is a schematic representation of the SegNet architecture, a deep convolutional encoder-decoder for image segmentation. It shows the flow of data from an input RGB image through the encoder, which consists of convolutional layers, batch normalization, ReLU activation, and pooling. The decoder upsamples the feature maps using the pooling indices and applies convolution to densify them, followed by a softmax layer for pixel-wise classification.\n\n## Text in figure\nInput: RGB Image\nOutput: Segmentation\nConvolutional Encoder-Decoder\nConv + Batch Normalisation + ReLU\nPooling\nUpsampling\nSoftmax\nPooling Indices"
+  },
+  {
+    "file": "p006_f03.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "",
+    "width": 619,
+    "height": 266,
+    "description": "Figure type: Diagram\nDescription: The figure illustrates the process of upsampling in SegNet architecture. It shows the convolution with trainable decoder filters, max-pooling indices, deconvolution, and dimensionality reduction. The encoder feature map is combined with the FCN to produce the final output.\n\nText in figure: Convolution with trainable decoder filters, Deconvolution, Max-pooling for upsampling Indices, Dimensionality reduction, Encoder feature map, FCN, SegNet."
+  },
+  {
+    "file": "p009_f04.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Fig. 4. Results on CamVid day and dusk test samples. SegNet shows superior performance, particularly with its ability to delineate boundaries, as compared to some of the larger models when all are trained in a controlled setting. DeepLab-LargeFOV is the most efficient model and with CRF post-processing can produce competitive results although smaller classes are lost. FCN with learnt deconvolution is clearly better. DeconvNet is the largest model with the longest training time, but its predictions loose small classes. Note that these results correspond to the model corresponding to the highest mIoU accuracy in Table 3.",
+    "width": 830,
+    "height": 857,
+    "description": "Figure type: Image comparison\nDescription: The figure displays a comparison of segmentation results from different models on urban street scenes. It shows test samples, ground truth, and predictions from SegNet, DeepLab-LargeFOV, DeepLab-LargeFOV-denseCRF, FCN, FCN (learn deconv), and DeconvNet. Each model's predictions are visually compared to the ground truth.\n\nText in figure: Test samples, Ground Truth, SegNet, DeepLab-LargeFOV, DeepLab-LargeFOV-denseCRF, FCN, FCN (learn deconv), DeconvNet"
+  },
+  {
+    "file": "p012_f05.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Fig. 5. Qualitative assessment of SegNet predictions on RGB indoor test scenes from the recently released SUN RGB-D dataset [23]. In this hard challenge, SegNet predictions delineate inter class boundaries well for object classes in a variety of scenes and their view-points. Overall rhe segmentation quality is better when object classes are reasonably sized but is very noisy when the scene is more cluttered. Note that often parts of an image of a scene do not have ground truth labels and these are shown in black colour. These parts are not masked in the corresponding deep model predictions that are shown. Note that these results correspond to the model corresponding to the highest mIoU accuracy in Table 4.",
+    "width": 931,
+    "height": 842,
+    "description": "Figure: Qualitative assessment of SegNet predictions on RGB indoor test scenes from the SUN RGB-D dataset. It shows various test samples and their corresponding ground truth and model predictions.\n\nTest samples: Bedroom, Living room, Office, Classroom, Bathroom.\nGround Truth: Color-coded segmentation maps.\nSegNet: Color-coded segmentation maps.\nDeepLab-LargeFOV: Color-coded segmentation maps.\nDeepLab-LargeFOV-denseCRF: Color-coded segmentation maps.\nFCN (learned deconv): Color-coded segmentation maps.\nDeconvNet: Color-coded segmentation maps.\n\nText in figure: Test samples, Ground Truth, SegNet, DeepLab-LargeFOV, DeepLab-LargeFOV-denseCRF, FCN (learned deconv), DeconvNet."
+  },
+  {
+    "file": "p014_f06.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "",
+    "width": 136,
+    "height": 182,
+    "description": "### Search Index Section 1\nThis figure is a photograph of an individual wearing glasses and a white t-shirt. The person is smiling and appears to be posing for a picture. The background is dark, and the focus is on the person's face and upper body.\n\n### Search Index Section 2\nText in figure: None. The figure is a photograph and does not contain any text."
+  },
+  {
+    "file": "p014_f07.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "",
+    "width": 137,
+    "height": 182,
+    "description": "Section 1: Figure description\nThis figure is a portrait of a man with short, curly brown hair, smiling and looking directly at the camera. He is wearing a dark maroon sweater with a white collar. The background features a bookshelf filled with numerous books, suggesting an academic or intellectual setting.\n\nSection 2: Textual content\nText in figure: None."
+  },
+  {
+    "file": "p014_f08.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "",
+    "width": 137,
+    "height": 182,
+    "description": "Figure type: Portrait photograph of an individual.\nDescription: The image shows a portrait photograph of a man dressed in formal attire. He is wearing a dark suit, a white shirt, and a dark tie. He has short, dark hair and is wearing glasses. The man is smiling and looking directly at the camera. The background is blurred, with some greenery visible, suggesting an outdoor setting.\n\nText in figure: No text is visible in the image."
+  }
+]

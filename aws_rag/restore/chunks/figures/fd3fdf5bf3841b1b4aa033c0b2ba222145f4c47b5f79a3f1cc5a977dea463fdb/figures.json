@@ -1,0 +1,29 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Fig. 1: (a) UNet++ consists of an encoder and decoder that are connected through a series of nested dense convolutional blocks. The main idea behind UNet++ is to bridge the semantic gap between the feature maps of the encoder and decoder prior to fusion. For example, the semantic gap between (X 0 , 0 ,X 1 , 3 ) is bridged using a dense convolution block with three convolution layers. In the graphical abstract, black indicates the original U-Net, green and blue show dense convolution blocks on the skip pathways, and red indicates deep supervision. Red, green, and blue components distinguish UNet++ from U-Net. (b) Detailed analysis of the first skip pathway of UNet++. (c) UNet++ can be pruned at inference time, if trained with deep supervision.",
+    "width": 695,
+    "height": 412,
+    "description": "Figure type: Diagram\nDescription: The figure illustrates the UNet++ architecture, a nested U-Net design for medical image segmentation. It shows an encoder-decoder structure with dense convolutional blocks bridging the semantic gap between feature maps. The diagram highlights the connections and components of UNet++, including the original U-Net, dense convolution blocks, and deep supervision.\n\nText in figure: UNet++, encoder, decoder, nested dense convolutional blocks, skip pathways, deep supervision, U(x1,0), U(x1,1), U(x1,2), U(x1,3), H[x0,0, U(x1,0)], H[x0,0, x0,1, U(x1,1)], H[x0,0, x0,1, x0,2, U(x1,2)], H[x0,0, x0,1, x0,2, x0,3, U(x1,3)]"
+  },
+  {
+    "file": "p006_f02.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Fig. 2: Qualitative comparison between U-Net, wide U-Net, and UNet++, showing segmentation results for polyp, liver, and cell nuclei datasets (2D-only for a distinct visualization).",
+    "width": 662,
+    "height": 404,
+    "description": "## Figure Description\nThis figure displays a qualitative comparison of segmentation results for three different datasets: polyp, liver, and cell nuclei. Each dataset has a corresponding row, with columns showing the original image, ground truth, and segmentation results from U-Net, wide U-Net, and UNet++.\n\n## Text in Figure\n- **Polyp**: Image, Ground Truth, U-Net, wide U-Net, UNet++\n- **Liver**: Image, Ground Truth, U-Net, wide U-Net, UNet++\n- **Nuclei**: Image, Ground Truth, U-Net, wide U-Net, UNet++"
+  },
+  {
+    "file": "p007_f03.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Fig. 3: Complexity, speed, and accuracy of UNet++ after pruning on (a) cell nuclei, (b) colon polyp, (c) liver, and (d) lung nodule segmentation tasks respectively. The inference time is the time taken to process 10k test images using one NVIDIA TITAN X (Pascal) with 12 GB memory.",
+    "width": 695,
+    "height": 236,
+    "description": "This figure is a set of four plots showing the complexity, speed, and accuracy of UNet++ after pruning for different medical image segmentation tasks. Each plot corresponds to a different task: (a) cell nuclei, (b) colon polyp, (c) liver, and (d) lung nodule segmentation. The x-axis represents inference time in seconds, and the y-axis represents inference mIoU in percentage. Each plot contains four series, each with a different number of parameters (0.1M, 0.5M, 2.2M, 9.0M). The series with 0.1M parameters is the highest in all plots, followed by 0.5M, 2.2M, and 9.0M.\n\nLegend entries: Param = 0.1M, Param = 0.5M, Param = 2.2M, Param = 9.0M\nAxis titles: Inference Time (s), Inference mIoU (%)\n\n\nText in figure: \"UNet++ L1 Param = 0.1M\", \"UNet++ L2 Param = 0.5M\", \"UNet++ L3 Param = 2.2M\", \"UNet++ L4 Param = 9.0M\", \"Inference mIoU (%)\", \"Inference Time (s)\""
+  }
+]

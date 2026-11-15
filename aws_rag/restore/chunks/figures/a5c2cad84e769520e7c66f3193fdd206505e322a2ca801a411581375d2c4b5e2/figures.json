@@ -1,0 +1,65 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1: Neural machine translation - a stacking recurrent architecture for translating a source sequence A B C D into a target sequence X Y Z . Here, < eos > marks the end of a sentence.",
+    "width": 394,
+    "height": 235,
+    "description": "Section 1: Figure description\nThis figure is a diagram illustrating a stacking recurrent architecture for neural machine translation. It shows the translation of a source sequence (A, B, C, D) into a target sequence (X, Y, Z). The diagram consists of two layers: the first layer contains four blue blocks (A, B, C, D) representing the input sequence, and the second layer contains four red blocks (X, Y, Z) representing the output sequence. The <eos> symbol marks the end of a sentence.\n\nSection 2: Text in figure\nText in figure: A, B, C, D, X, Y, Z, <eos>"
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2: Global attentional model - at each time step t , the model infers a variable-length alignment weight vector a t based on the current target state h t and all source states \u00af h s . A global context vector c t is then computed as the weighted average, according to a t , over all the source states.",
+    "width": 410,
+    "height": 364,
+    "description": "Description: The figure illustrates a global attentional model in neural machine translation. It shows the process at each time step t, where alignment weights a_t are inferred based on the current target state h_t and all source states h_s. A context vector c_t is computed as a weighted average of the source states using a_t.\n\nText in figure: Attention Layer, Context vector, Global align weights, c_t, a_t, h_t, h_s"
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3: Local attention model - the model first predicts a single aligned position p t for the current target word. A window centered around the source position p t is then used to compute a context vector c t , a weighted average of the source hidden states in the window. The weights a t are inferred from the current target state h t and those source states \u00af h s in the window.",
+    "width": 410,
+    "height": 363,
+    "description": "This figure is a diagram illustrating the local attention model in neural machine translation. It shows the process of predicting an aligned position, computing a context vector, and inferring local weights. The diagram includes elements like the attention layer, context vector, aligned position, local weights, and hidden states.\n\nKey elements include:\n- Attention Layer\n- Context vector\n- Aligned position (pt)\n- Local weights (at)\n- Hidden states (hs, ht)\n\nThe diagram illustrates the flow from source hidden states to the target hidden state, highlighting the computation of the context vector and the alignment process."
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 4: Input-feeding approach - Attentional vectors \u02dc h t are fed as inputs to the next time steps to inform the model about past alignment decisions.",
+    "width": 349,
+    "height": 339,
+    "description": "## Description\nThis figure illustrates the input-feeding approach in attention-based neural machine translation. It shows how attentional vectors \\( \\tilde{h}_t \\) are fed as inputs to subsequent time steps. The diagram includes attention vectors \\( \\tilde{h}_t \\) at each time step, feeding into the next time step's attention layer. The attention vectors are represented by blue and red blocks, with blue blocks labeled A, B, C, D and red blocks labeled X, Y, Z, <eos>.\n\n## Text in figure\nAttention Layer, \\( \\tilde{h}_t \\), A, B, C, D, X, Y, Z, <eos>"
+  },
+  {
+    "file": "p007_f05.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 5: Learning curves - test cost ( ln perplexity) on newstest2014 for English-German NMTs as training progresses.",
+    "width": 409,
+    "height": 221,
+    "description": "Description: The figure is a line plot showing learning curves for various neural machine translation (NMT) models. The test cost (ln perplexity) on the newstest2014 dataset for English-German NMTs is plotted against mini-batches. The series with the highest initial cost is \"basic,\" while the lowest is \"basic+reverse+dropout+globalAttn+feedinput.\" The \"basic\" series starts at approximately 6, while \"basic+reverse+dropout+globalAttn+feedinput\" starts at around 2.5.\n\nText in figure: basic, basic+reverse, basic+reverse+dropout, basic+reverse+dropout+globalAttn, basic+reverse+dropout+globalAttn+feedinput, basic+reverse+dropout+localAttn+feedinput, Mini-batches, Test cost."
+  },
+  {
+    "file": "p008_f06.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 6: Length Analysis - translation qualities of different systems as sentences become longer.",
+    "width": 429,
+    "height": 231,
+    "description": "## Description\nThis figure is a line graph comparing the translation qualities of different systems as sentence lengths increase. The graph shows six series, each represented by a different marker and color. The series with the highest translation quality is \"ours, best system\" (blue line with triangle markers), which remains relatively stable across all sentence lengths. The series with the lowest translation quality is \"Jeans et al., 2015\" (black line with triangle markers), which shows a significant decline as sentence lengths increase. The other series include \"ours, no attn\" (red line with circle markers), \"ours, local-p-attn\" (purple line with square markers), \"WMT'14 best\" (green line with diamond markers), and \"ours, no attn (BLEU 13.9)\" (pink line with star markers).\n\n## Text in figure\n\"ours, no attn (BLEU 13.9)\"\n\"ours, local-p-attn (BLEU 20.9)\"\n\"ours, best system (BLEU 23.0)\"\n\"WMT'14 best (BLEU 20.7)\"\n\"Jeans et al., 2015 (BLEU 21.6)\"\n\"BLEU\"\n\"Sent Lengths\""
+  },
+  {
+    "file": "p011_f07.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 7: Alignment visualizations - shown are images of the attention weights learned by various models: (top left) global, (top right) local-m, and (bottom left) local-p. The gold alignments are displayed at the bottom right corner.",
+    "width": 712,
+    "height": 505,
+    "description": "Figure: Alignment visualizations of attention weights in neural machine translation models.\nShows attention weight images for three models: global, local-m, and local-p.\nGold alignments are displayed in the bottom right corner.\n\nText in figure: global, local-m, local-p, verstehen, nicht, warum, Europa, theoretisch, existiert, aber, nicht, in, Wirklichkeit, Sie, do, not, understand, why, Europe, exists, in, theory, but, not, in, reality, verstehen, nicht, warum, Europa, theoretisch, existiert, aber, nicht, in, Wirklichkeit."
+  }
+]

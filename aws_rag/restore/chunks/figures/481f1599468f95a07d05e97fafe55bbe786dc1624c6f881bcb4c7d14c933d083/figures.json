@@ -1,0 +1,245 @@
+[
+  {
+    "file": "p004_f01.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 1 Illustration of the overall architecture and training of Llama 3. Llama 3 is a Transformer language model trained to predict the next token of a textual sequence. See text for details.",
+    "width": 875,
+    "height": 141,
+    "description": "Section 1: Figure type and content\nThis is a diagram illustrating the architecture and training of the Llama 3 language model. It shows the flow of text tokens through token embeddings, self-attention, and feedforward networks, with multiple iterations of self-attention and feedforward processing.\n\nSection 2: Text in figure\nINPUT, Text tokens, Token embeddings, Self-attention, Feedforward network, Self-attention, Feedforward network,..., Self-attention, Feedforward network, OUTPUT, Text token, AUTOREGRESSIVE DECODING"
+  },
+  {
+    "file": "p008_f02.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 2 Scaling law IsoFLOPs curves between 6 \u00d7 10 18 and 10 22 FLOPs. The loss is the negative loglikelihood on a held-out validation set. We approximate measurements at each compute scale using a second degree polynomial.",
+    "width": 371,
+    "height": 275,
+    "description": "This figure is a line graph depicting the scaling law IsoFLOPs curves for various compute scales ranging from 6 \u00d7 10^18 to 10^22 FLOPs. It shows the negative loglikelihood on a held-out validation set. The series with the highest validation loss is 6e18, reaching approximately 0.95, while the lowest is 1e22, around 0.70. The series 3e21 has a notable marker at 10^11 training tokens.\n\nText in figure: \"Compute\", \"6e18\", \"1e19\", \"3e19\", \"6e19\", \"1e20\", \"3e20\", \"6e20\", \"1e21\", \"3e21\", \"1e22\", \"Validation Loss\", \"Training Tokens\""
+  },
+  {
+    "file": "p008_f03.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 3 Numberoftraining tokens in identified computeoptimal models as a function of pre-training compute budget. We include the fitted scaling-law prediction as well. The compute-optimal models correspond to the parabola minimums in Figure 2.",
+    "width": 374,
+    "height": 277,
+    "description": "Figure Description: This plot shows the number of training tokens in compute-optimal models as a function of pre-training compute budget. The fitted line represents the scaling-law prediction. The data points are plotted on a log-log scale, with compute budget on the x-axis and training tokens on the y-axis. The fitted line has a slope of 0.537 and an intercept of 0.299.\n\nText in Figure: Fitted Line, \u03b1 = 0.537, A = 0.299, Training Tokens, Compute (FLOPS)"
+  },
+  {
+    "file": "p009_f04.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 4 Scaling law forecast for ARC Challenge. Left: Normalized negative log-likelihood of the correct answer on the ARC Challenge benchmark as a function of pre-training FLOPs. Right: ARC Challenge benchmark accuracy as a function of the normalized negative log-likelihood of the correct answer. This analysis enables us to predict model performance on the ARC Challenge benchmark before pre-training commences. See text for details.",
+    "width": 651,
+    "height": 283,
+    "description": "## Index Section 1: Figure Description\nThis figure consists of two plots. The left plot shows the normalized negative log-likelihood (NLL) of the correct answer on the ARC Challenge benchmark as a function of pre-training FLOPs. The highest series is \"Scaling Law Models\" with values around 1.400 at 10^20 FLOPs, decreasing to around 1.200 at 10^25 FLOPs. The lowest series is \"Llama 3 405B\" with values starting at 1.200 at 10^20 FLOPs and increasing to around 1.400 at 10^25 FLOPs. The right plot shows ARC Challenge benchmark accuracy as a function of normalized NLL per character. The highest accuracy is around 1.0 at the lowest NLL, and the lowest accuracy is around 0.3 at the highest NLL.\n\n## Index Section 2: Figure Text\nText in figure: \"Normalized NLL per Char.\", \"Compute (FLOPs)\", \"Accuracy\", \"Scaling Law Models\", \"Llama 2 Models\", \"Scaling Law Prediction\", \"Llama 3 405B\", \"1.400\", \"1.375\", \"1.350\", \"1.325\", \"1.300\", \"1.275\", \"1.250\", \"1.225\", \"1.200\", \"1.0\", \"0.9\", \"0.8\", \"0.7\", \"0.6\", \"0.5\", \"0.4\", \"0.3\", \"1.40\", \"1.35\", \"1.30\", \"1.25\", \"1.20\"."
+  },
+  {
+    "file": "p011_f05.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 5 Illustration of 4D parallelism. GPUs are divided into parallelism groups in the order of [TP, CP, PP, DP], where DP stands for FSDP. In this example, 16 GPUs are configured with a group size of |TP|=2, |CP|=2, |PP|=2, and |DP|=2. A GPU's position in 4D parallelism is represented as a vector, [ D 1 , D 2 , D 3 , D 4 ], where D i is the index on the i -th parallelism dimension. In this example, GPU0[TP0, CP0, PP0, DP0] and GPU1[TP1, CP0, PP0, DP0] are in the same TP group, GPU0 and GPU2 are in the same CP group, GPU0 and GPU4 are in the same PP group, and GPU0 and GPU8 are in the same DP group.",
+    "width": 865,
+    "height": 389,
+    "description": "Figure type: Diagram\nDescription: The figure illustrates 4D parallelism in model training, showing how 16 GPUs are organized into groups based on tensor, chip, pipeline, and data parallelism. Each GPU is assigned a unique position in this 4D space, represented as a vector [D1, D2, D3, D4]. The figure demonstrates the grouping of GPUs into TP, CP, PP, and DP groups, with examples of GPU positions and their corresponding group memberships.\n\nText in figure: GPU numbers (0-15), parallelism dimensions (TP, CP, PP, DP), group sizes (|TP|=2, |CP|=2, |PP|=2, |DP|=2), GPU positions (e.g., GPU0[TP0, CP0, PP0, DP0])"
+  },
+  {
+    "file": "p012_f06.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 6 Illustration of pipeline parallelism in Llama 3. Pipeline parallelism partitions eight pipeline stages (0 to 7) across four pipeline ranks (PP ranks 0 to 3), where the GPUs with rank 0 run stages 0 and 4, the GPUs with P rank 1 run stages 1 and 5, etc . The colored blocks (0 to 9) represent a sequence of micro-batches, where M is the total number of micro-batches and N is the number of continuous micro-batches for the same stage's forward or backward. Our key insight is to make N tunable.",
+    "width": 895,
+    "height": 154,
+    "description": "Description: This figure illustrates the pipeline parallelism in the Llama 3 model, showing how eight pipeline stages are distributed across four pipeline ranks. Each rank handles specific stages, with rank 0 processing stages 0 and 4, rank 1 processing stages 1 and 5, and so on. The colored blocks represent micro-batches, with N indicating the number of continuous micro-batches for each stage's forward or backward process.\n\nText in figure: \"N (0,M]\", \"Time\", \"Stage 0-3 forward\", \"Stage 4-7 forward\", \"Stage 0-3 backward\", \"Stage 4-7 backward\", \"PP rank0\", \"PP rank1\", \"PP rank2\", \"PP rank3\", \"0\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"9\""
+  },
+  {
+    "file": "p015_f07.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 7 Illustration of the overall post-training approach for Llama 3. Our post-training strategy involves rejection sampling, supervised finetuning, and direct preference optimization. See text for details.",
+    "width": 887,
+    "height": 332,
+    "description": "## Description\nThis figure is a flowchart illustrating the post-training approach for the Llama 3 model. It shows the process starting with collected prompts, moving through K generations per prompt, and then through rejection sampling, SFT data, and DPO training. The flowchart highlights the use of the best models from previous rounds and the final DPO model. It also indicates the use of specialized per-capability binary preference data and specialized per-capability SFT data.\n\n## Text in figure\nCollected Prompts, K Generations per Prompt, Best models from previous rounds, Best model for next round, Reward Model, Rejection Sampling, SFT Data, SFT Model, DPO Training, Final DPO Model, Pairwise Annotated and Specialized Per-Capability Binary Preference Data, Specialized Per-capability SFT data, Model, Data, Reward model training, DPO Training"
+  },
+  {
+    "file": "p026_f08.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "Figure 10 Multi-step tool usage. Example of Llama 3 performing multi-step planning, reasoning, and tool calling to solve a task.",
+    "width": 942,
+    "height": 564,
+    "description": "Figure type: Diagram\nDescription: The figure shows an example of multi-step tool usage by the model. It demonstrates the model's ability to perform planning, reasoning, and tool calling to solve a task. The diagram illustrates the sequence of steps and interactions between different components.\n\nText in figure: Multi-step tool usage, Example of Llama 3 performing multi-step planning, reasoning, and tool calling to solve a task, Assistant tool call, Tool output, Assistant response, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call, Tool output, Assistant tool call"
+  },
+  {
+    "file": "p027_f09.png",
+    "page": 27,
+    "kind": "picture",
+    "caption": "Figure 11 Processing file uploads. Example of Llama 3 performing analysis and visualization of an uploaded file.",
+    "width": 943,
+    "height": 710,
+    "description": "Section 1: Figure 11 Processing file uploads. Example of Llama 3 performing analysis and visualization of an uploaded file.\n\nSection 2: Figure 11 shows a scatter plot with two series: 'Sugar Content' and 'Rating'. The 'Sugar Content' series is highest at the left side of the plot, while the 'Rating' series is lowest at the right side. The coefficient of determination (R^2) is 0.577, indicating that about 57.7% of the variation in the rating can be explained by the sugar content. The coefficient of sugar content is -2.400, indicating that for every unit increase in sugar content, the rating decreases by 2.400 units. The intercept is 59.284, indicating that when the sugar content is 0, the rating is 59.284."
+  },
+  {
+    "file": "p030_f10.png",
+    "page": 30,
+    "kind": "picture",
+    "caption": "Figure 12 Performance of pre-trained Llama 3 8B and 70B models on pre-training benchmarks. Results are aggregated by capability category by averaging accuracies across all benchmarks corresponding to that category.",
+    "width": 932,
+    "height": 374,
+    "description": "This figure is a bar chart comparing the performance of various models on pre-training benchmarks. The models include \"Llama 2 70B\", \"Llama 3 8B\", \"Llama 3 70B\", \"Mistral 7B\", and \"Mixtral 8x22B\". The performance is categorized into \"General\", \"Commonsense\", \"Knowledge\", \"Math and Reasoning\", \"Reading Comprehension\", and \"Code\". The \"Llama 3 70B\" model has the highest performance across most categories, while \"Mixtral 8x22B\" has the lowest performance in several categories.\n\nText in figure: Model, General, Commonsense, Knowledge, Math and Reasoning, Reading Comprehension, Code, Llama 2 70B, Llama 3 8B, Llama 3 70B, Mistral 7B, Mixtral 8x22B\n\nDescription: The \"Llama 3 70B\" model has the highest performance in most categories, with \"General\" and \"Commonsense\" being the highest at around 80. The \"Mixtral 8x22B\" model has the lowest performance in several categories, particularly in \"Math and Reasoning\" and \"Reading Comprehension\" at around 30."
+  },
+  {
+    "file": "p032_f11.png",
+    "page": 32,
+    "kind": "picture",
+    "caption": "Figure13 Robustnessofourpre-trainedlanguagemodelstodifferentdesignchoicesintheMMLUbenchmark. Left: Performance for different label variants. Right: Performance for different labels present in few-shot examples.",
+    "width": 804,
+    "height": 252,
+    "description": "This figure contains two bar charts from the paper \"The Llama 3 Herd of Models.\" The left chart shows micro accuracy for different label variants, with the highest being \"Llama 3 405B\" at around 90% and the lowest being \"Llama 3 8B\" at around 60%. The right chart displays micro accuracy for different labels in few-shot examples, with \"Llama 3 405B\" again at the highest around 90% and \"Llama 3 8B\" at the lowest around 60%.\n\nText in figure: Micro accuracy, [A, B, C, D], [A] [B] [C] [D], [1 2 3 4], [S & # @], [ce $ 3 u], Llama 3 8B, Llama 3 70B, Llama 3 405B, ABCDD, BBAA, AAA."
+  },
+  {
+    "file": "p032_f12.png",
+    "page": 32,
+    "kind": "picture",
+    "caption": "Figure14 Robustnessofourpre-trainedlanguagemodelstodifferentdesignchoicesintheMMLUbenchmark. Left: Performance for different answer orders. Right: Performance for different prompt formats.",
+    "width": 876,
+    "height": 360,
+    "description": "Figure: Two scatter plots showing the robustness of pre-trained language models to different design choices in the MMLU benchmark. Left plot: Micro accuracy for different answer orders. Series: 0, 2, 3, 4. Series 0 is the lowest, around 65. Series 4 is the highest, around 90. Right plot: Micro accuracy for different prompt formats. Series: 8. All values are around 80.\n\nText in figure: Permutation distance, Micro accuracy, 0, 2, 3, 4, 8, Llama 3 8B, Llama 3 70B, Llama 3 405B."
+  },
+  {
+    "file": "p033_f13.png",
+    "page": 33,
+    "kind": "picture",
+    "caption": "Figure 15 Adversarial versus non-adversarial performance for question answering, mathematical reasoning, and paraphrase detection benchmarks. Left: Results for pre-trained models. Right: Results for post-trained models.",
+    "width": 741,
+    "height": 370,
+    "description": "## Description\nThe figure shows two scatter plots comparing adversarial and non-adversarial performance for three benchmarks: question answering, mathematical reasoning, and paraphrase detection. Each plot displays results for pre-trained and post-trained models. The left plot shows pre-trained models, while the right plot shows post-trained models. The x-axis represents non-adversarial scores, and the y-axis represents adversarial scores. The plots include data points for 8B, 70B, and 405B models, with different markers for each benchmark.\n\n## Text in figure\nSize Category 8B Question answering 70B Paraphrase detection 405B Mathematical reasoning\nSize Category 8B Question answering 70B Paraphrase detection 405B Mathematical reasoning\nAdversarial score\nNon-adversarial score\nAdversarial score\nNon-adversarial score"
+  },
+  {
+    "file": "p040_f14.png",
+    "page": 40,
+    "kind": "picture",
+    "caption": "Figure 16 Humanevaluation results for Llama 3 405B vs. GPT-4o on code execution tasks including plotting and file uploads. Llama 3 405B outperforms GPT-4o on code execution (without plotting or file uploads) as well as plot generation, but lags behind in file upload use cases.",
+    "width": 627,
+    "height": 261,
+    "description": "## Description\n\nThis figure is a horizontal bar chart comparing the performance of two models, Llama 3 405B and GPT-4o, on three tasks: text-only code execution, plot generation, and file uploads. The chart shows the percentage of wins, ties, and losses for each model on each task. The series with the highest percentage is \"Win\" for both models on text-only code execution and plot generation, while the series with the lowest percentage is \"Loss\" for both models on file uploads.\n\n## Text in figure\n\nText-only Code Execution: Win 51.6%, Tie 14.1%, Loss 34.3%\nPlots Generation: Win 54.7%, Tie 14.2%, Loss 31.1%\nFile Uploads: Win 22.9%, Tie 12.9%, Loss 64.2%"
+  },
+  {
+    "file": "p041_f15.png",
+    "page": 41,
+    "kind": "picture",
+    "caption": "Figure 17 Humanevaluation results for the Llama 3 405B model. Left: Comparison with GPT-4. Middle: Comparison with GPT-4o. Right: Comparison with Claude 3.5 Sonnet. All results include 95% confidence intervals and exclude ties.",
+    "width": 915,
+    "height": 317,
+    "description": "## Description\n\nThis figure is a bar chart comparing the performance of the Llama 3 405B model against GPT-4, GPT-4o, and Claude 3.5 Sonnet. The chart shows win and loss percentages for different tasks, including English, Reasoning, Coding, and Multilingual. The highest win percentage is 28.0% for Coding against GPT-4, and the lowest is 15.4% for Multiturn English against GPT-4o. The figure includes 95% confidence intervals and excludes ties.\n\n## Text in figure\n\nEnglish: Win 24.1%, Loss 23.6%\nReasoning: Win 20.5%, Loss 26.0%\nCoding: Win 28.0%, Loss 24.2%\nMultilingual: Win 19.7%, Loss 31.1%\nMultiturn English: Win 18.0%, Loss 15.8%\nMultiturn Reasoning: Win 25.0%, Loss 18.0%\nMultiturn Coding: Win 30.4%, Loss 21.0%"
+  },
+  {
+    "file": "p043_f16.png",
+    "page": 43,
+    "kind": "picture",
+    "caption": "Figure 18 Influence of model size on safety mix design for balancing violation rate (VR) and false refusal rate (FRR). Each point of the scatterplot represents a different data mix balancing safety and helpfulness data. Different model sizes retain varying capacities for safety learning. Our experiments show that 8B models require a higher proportion of safety data relative to helpfulness data in the overall SFT mix to achieve comparable safety performance to 70B models. Larger models are more capable of discerning between adversarial and borderline context, resulting in a more favorable balance between VR and FRR.",
+    "width": 451,
+    "height": 268,
+    "description": "### Description\nThis figure is a scatterplot comparing the violation rate (VR) and false refusal rate (FRR) for two different model sizes: \"Llama 3 8B\" and \"Llama 3 70B\". The scatterplot shows that the \"Llama 3 8B\" model has a higher VR and FRR compared to the \"Llama 3 70B\" model. The \"Llama 3 8B\" model's highest point is around 60% VR and 20% FRR, while the \"Llama 3 70B\" model's highest point is around 20% VR and 10% FRR.\n\n### Text in Figure\n- Legend: \"Llama 3 8B\", \"Llama 3 70B\"\n- X-axis: False Refusal Rate (%)\n- Y-axis: Violation Rate (%)\n- Points: Various positions on the scatterplot representing different data mixes."
+  },
+  {
+    "file": "p044_f17.png",
+    "page": 44,
+    "kind": "picture",
+    "caption": "",
+    "width": 934,
+    "height": 399,
+    "description": "## Search Index Section 1\nFigure: Bar chart comparing violation and false refusal rates across different languages for three systems. The systems are labeled as \"Llama 3 405B + LG (System) Comp. 1\", \"Llama 3 405B + LG (System) Comp. 2\", and \"Model\". The languages include English, French, German, Hindi, Italian, Portuguese, Spanish, and Thai. The highest violation rate is observed in the \"Model\" system for French, while the lowest is in the \"Llama 3 405B + LG (System) Comp. 1\" for Hindi. The highest false refusal rate is in the \"Model\" system for Portuguese, and the lowest is in the \"Llama 3 405B + LG (System) Comp. 1\" for English.\n\n## Search Index Section 2\nText in figure: \"Llama 3 405B + LG (System) Comp. 1\", \"Llama 3 405B + LG (System) Comp. 2\", \"Model\", \"Violation Rate\", \"False Refusal Rate\", \"English\", \"French\", \"German\", \"Hindi\", \"Italian\", \"Portuguese\", \"Spanish\", \"Thai\"."
+  },
+  {
+    "file": "p044_f18.png",
+    "page": 44,
+    "kind": "picture",
+    "caption": "Figure 19 Violation rates (VR) and false refusal rates (FRR) on English and our core multilingual short context benchmarks , comparing Llama 3 405B-with and without Llama Guard (LG) system-level protections-to competitor models and systems. Languages not supported by Comp. 3 represented with an 'x.' Lower is better.",
+    "width": 933,
+    "height": 207,
+    "description": "## Description\n\nThis figure contains two bar charts comparing the performance of different models and systems on two tasks: Tool Usage (Search) and Long Context (Doc QA). The left chart shows Violation Rates (VR), and the right chart shows False Refusal Rates (FRR). The highest Violation Rate is observed in the Long Context (Doc QA) task for the [System] Comp. 1 model, while the lowest Violation Rate is in the Tool Usage (Search) task for the same model. The highest False Refusal Rate is in the Long Context (Doc QA) task for the [System] Comp. 2 model, and the lowest is in the Tool Usage (Search) task for the same model.\n\n## Text in figure\n\nSystem Model\nLlama 3 405B + LG\nLlama 3 405B\n[System] Comp. 1\n[System] Comp. 2\nViolation Rate\n0.14\n0.12\n0.10\n0.08\n0.06\n0.04\n0.02\n0.00\nTool Usage (Search)\nLong Context (Doc QA)\nLong Context (Many-shot)\nFalse Refusal Rate\n0.8\n0.7\n0.6\n0.5\n0.4\n0.3\n0.2\n0.1\n0.0\nTool Usage (Search)\nLong Context (Doc QA)"
+  },
+  {
+    "file": "p045_f19.png",
+    "page": 45,
+    "kind": "picture",
+    "caption": "Figure 21 Violation and false refusal rates across models and capabilities. Each point represents the overall false refusal and violation rate for an internal capability benchmark across all safety categories. Symbols indicate whether we are evaluating model or system level safety. As expected model level safety results indicate higher violation rates and lower refusal rates compared to system level safety results. Llama 3 aims to balance a low violation rate with a low false refusal rate, while some competitors are more skewed towards one or the other.",
+    "width": 655,
+    "height": 436,
+    "description": "## Description\nThis figure is a scatter plot comparing the violation and false refusal rates of various models and systems. The x-axis represents the false refusal rate, and the y-axis represents the violation rate. Each point on the plot corresponds to a different model or system, with symbols indicating whether the evaluation is at the model or system level. The highest violation rate is observed in the model level safety results, while the lowest is in the system level safety results. The plot shows that model level safety results have higher violation rates and lower refusal rates compared to system level safety results.\n\n## Text in figure\nSystem, Model, Violation Rate, False Refusal Rate, Llama 3 405B + LG, Llama 3 405B, Llama 3 70B + LG, Llama 3 70B, [System] Comp. 1, [Model] Comp. 3, [System] Comp. 2"
+  },
+  {
+    "file": "p047_f20.png",
+    "page": 47,
+    "kind": "picture",
+    "caption": "Figure22 Text-basedpromptinjectionsuccessratespermodelacrossprompt injection strategies. Llama 3 is on average more susceptible to prompt injection than GPT-4 Turbo and Gemini Pro but less susceptible than Mixtral models when evaluated using this benchmark.",
+    "width": 939,
+    "height": 233,
+    "description": "## Figure Description\nThis figure is a heatmap showing the text-based prompt injection success rates for different models across various prompt injection strategies. The models include Mixtral 8x22B, GPT-4 Turbo, Gemini Pro, and three versions of the Llama 3 model (3 70B, 3 405B, 3 8B). The success rates are represented by color intensity, with darker colors indicating higher success rates. The figure shows that the Llama 3 models are generally more susceptible to prompt injection than GPT-4 Turbo and Gemini Pro but less susceptible than Mixtral models.\n\n## Figure Details\n- Models: Mixtral 8x22B, GPT-4 Turbo, Gemini Pro, Llama 3 70B, Llama 3 405B, Llama 3 8B\n- Prompt Injection Strategies: Output formatting manipulation, Repeated token attack, Different user input language, Ignore previous reference, Indirect instructions, Virtualization, System mode, Many shot attack, Few shot attack, Mixed techniques, Persuasion, Overload with information, Payload splitting, Token smuggling, Hypothetical scenario\n- Success Rates: Represented by color intensity, with darker colors indicating higher success rates\n- Observations: Llama 3 models are more susceptible than GPT-4 Turbo and Gemini Pro but less susceptible than Mixtral models"
+  },
+  {
+    "file": "p052_f21.png",
+    "page": 52,
+    "kind": "picture",
+    "caption": "Figure 24 Effect of micro-batching on inference throughput and latency during the Left: pre-filling and Right: decoding stage. The numbers in the plot correspond to the (micro-)batch size.",
+    "width": 917,
+    "height": 285,
+    "description": "## Description\nThis figure contains two line plots showing the effect of micro-batching on inference throughput and latency during the pre-filling and decoding stages. The left plot shows prefill throughput and latency, while the right plot shows decode throughput and latency. The series with the highest throughput is TP8/PP2 (BF16) + Microbatching, and the lowest is TP8/PP2 (BF16). The numbers in the plot correspond to the (micro-)batch size.\n\n## Text in figure\nLeft plot: Prefill Throughput (tokens/sec), Prefill Latency (time-to-first-token, ms), TP8/PP2 (BF16), TP8/PP2 (BF16) + Microbatching, 1, 2, 4, 8, 8, 5000, 6000, 7000, 8000.\nRight plot: Decode Throughput (tokens/sec), Decode Latency (time-to-incremental-token, ms), TP8/PP2 (BF16), TP8/PP2 (BF16) + Microbatching, 1, 2, 4, 8, 128, 1500, 1000, 500, 0."
+  },
+  {
+    "file": "p053_f22.png",
+    "page": 53,
+    "kind": "picture",
+    "caption": "Figure 25 Illustration of tensor-wise and row-wise FP8 quantization. Right: Row-wise quantization enables the use of more granular activation factors than Left: tensor-wise quantization.",
+    "width": 943,
+    "height": 366,
+    "description": "Description: The figure illustrates the difference between tensor-wise and row-wise FP8 quantization. It shows two methods of quantization: tensor-wise and row-wise. Tensor-wise quantization applies a single scaling factor to the entire tensor, while row-wise quantization allows for more granular scaling factors for each row of the tensor. The figure demonstrates that row-wise quantization can utilize more precise activation factors compared to tensor-wise quantization.\n\nText in figure: BF16 Input, BF16 Weight, Quantize, FP8 Input, FP8 Weight, BF16 Output, FP8 Input, FP8 Weight, BF16 Output, x scaling_factor_input, x scaling_factor_weight, x scaling_factor_input, x scaling_factor_weight"
+  },
+  {
+    "file": "p053_f23.png",
+    "page": 53,
+    "kind": "picture",
+    "caption": "Figure 26 Reward score distribution for Llama 3 405B using BF16 and FP8 inference. Our FP8 quantization approach has negligible impact on the model's responses.",
+    "width": 607,
+    "height": 186,
+    "description": "Description: The figure is a histogram comparing the reward score distribution for the Llama 3 405B model using BF16 and FP8 inference. The BF16 series is highest, peaking around 0.8, while the FP8 series is slightly lower, with its peak also around 0.8. Both series show a similar distribution shape, indicating that the FP8 quantization approach has a negligible impact on the model's responses.\n\nText in figure: \"bf16\", \"fp8_rowwise\", \"0.0\", \"0.2\", \"0.4\", \"0.6\", \"0.8\", \"1.0\""
+  },
+  {
+    "file": "p054_f24.png",
+    "page": 54,
+    "kind": "picture",
+    "caption": "Figure 27 Throughput-latency trade-off in FP8 inference with Llama 3 405B compared with BF16 inference using different pipeline parallelization setups. Left: Results for pre-filling. Right: Results for decoding.",
+    "width": 914,
+    "height": 289,
+    "description": "This figure shows two plots comparing the throughput-latency trade-off in FP8 inference with the Llama 3 405B model against BF16 inference using different pipeline parallelization setups. The left plot shows pre-filling latency, with the TP8/PP2 (BF16) series having the lowest latency and the TP4/PP4 (BF16) + Microbatching series having the highest latency. The right plot shows decoding latency, with the TP8/PP2 (BF16) series again having the lowest latency and the TP4/PP4 (BF16) + Microbatching series having the highest latency. Markers and annotations are not present in the figure.\n\nText in figure: TP8/PP2 (BF16), TP8/PP2 (BF16) + Microbatching, TP4/PP4 (BF16) + Microbatching, TP8 (FP8)*, Prefill Latency, Decode Latency, Throughput-latency trade-off, FP8 inference, BF16 inference, pipeline parallelization setups, time-to-first-token, time-to-incremental-token."
+  },
+  {
+    "file": "p055_f25.png",
+    "page": 55,
+    "kind": "picture",
+    "caption": "Figure28 IllustrationofthecompositionalapproachtoaddingmultimodalcapabilitiestoLlama3thatwestudyinthispaper. This approach leads to a multimodal model that is trained in five stages: (1) language model pre-training, (2) multi-modal encoder pre-training, (3) vision adapter training, (4) model finetuning, and (5) speech adapter training.",
+    "width": 879,
+    "height": 442,
+    "description": "Figure type: Diagram\nDescription: The diagram illustrates a compositional approach to adding multimodal capabilities to the Llama 3 model. It shows five training stages: language model pre-training, multi-modal encoder pre-training, vision adapter training, model fine-tuning, and speech adapter training. The diagram includes components like image encoders, video aggregators, self-attention and cross-attention networks, and conformer blocks.\n\nText in figure: Input, Output, Image representation, Video representation, Token embeddings, Conformer block, Linear transform, Self-attention, Cross-attention, Feedforward network, Speech adapter, Speech encoder, Autoregressive decoding, Language model, Vision and speech encoder pre-training, Vision adapter pre-training, Language model pre-training, Model fine-tuning, Transformer block, Speech adapter training."
+  },
+  {
+    "file": "p063_f26.png",
+    "page": 63,
+    "kind": "picture",
+    "caption": "Figure 29 Architecture of our speech interface for Llama 3.",
+    "width": 887,
+    "height": 178,
+    "description": "Section 1: Figure type and content\nThis is a diagram showing the architecture of a speech interface for the model \"Llama 3\". It illustrates the flow of data from input audio to output audio, detailing the components involved in speech understanding, text normalization, and speech generation.\n\nSection 2: Figure details\nThe diagram includes the following components: Input audio, Speech adapter, Speech encoder, System prompt, Dialogue history, Speech understanding, Llama 3, Token & embeddings, Text normalization, Prosody model, Synthesizer, and Output audio. The process starts with input audio, goes through speech adaptation and encoding, then through speech understanding, text normalization, and speech generation, finally producing output audio."
+  },
+  {
+    "file": "p068_f27.png",
+    "page": 68,
+    "kind": "picture",
+    "caption": "Figure 30 Transcribed dialogue examples using the speech interface for Llama 3. The examples illustrate zero-shot multi-turn and code-switching capabilities.",
+    "width": 919,
+    "height": 417,
+    "description": "Figure type: Image\nDescription: The figure shows transcribed dialogue examples using the speech interface for the Llama 3 model. It demonstrates the model's zero-shot multi-turn and code-switching capabilities. The dialogues are in various languages, including English, Vietnamese, and Chinese, and cover topics such as movie titles, travel plans, and food recommendations.\n\nText in figure: \"Hey, do you know the movie 'Ein Fisch namens Wanda'? Sorry, I don't know the English title\", \"I think you can help me out! I believe the movie you're thinking of is called 'A Fish Called Wanda'. It's a 1988 British comedy film directed by Charles Crichton, written by John Cleese and Charles Crichton\", \"So, at some point, John Cleese says 'Le due coppie grandi della cattedrale di Milano.' Was helstn't das eigentlich?\", \"I think 'b\u00fan ch\u1ea3' is a popular Vietnamese dish, especially in Hanoi. It's a type of noodle dish made from rice noodles (bun) and grilled pork (ch\u1ea3). The dish is typically served with a sweet and savory sauce, herbs, and other toppings\", \"So I'm going to Vietnam for vacation. \u00d4 Vi\u1ec7t Nam ch\u1ecdn v\u00e0o \u01b0ng c\u1ea7u ph\u00e8 ngon nh\u00e0t?\", \"Vi\u1ec7t Nam l\u00e0 m\u1ed9t qu\u1ed1c gia v\u1edbi s\u1ef1 \u0111a d\u1ea1ng v\u00e0 phong ph\u00fa ho\u00e0 ca ph\u00e8 ph\u1ed5 bi\u1ebfn v\u00e0 \u0111a d\u1ea1ng. D\u01b0\u1edbi \u0111\u00e2y l\u00e0 m\u1ed9t s\u1ed1 \u0111i\u1ec3m n\u1ed5i ti\u1ebfng nh\u1ea5t \u1edf Vi\u1ec7t Nam\", \"Do you know what 'b\u00fan ch\u1ea3' is?\", \"C\u00e1 th\u1ec3 G\u00f2 V\u1ea5p (H\u1ed3 Chi Minh): \u0110\u00e2y l\u00e0 m\u1ed9t trong nh\u1eefng qu\u00e1n \u0103n ph\u00e8 n\u1ed5i ti\u1ebfng nh\u1ea5t \u1edf Vi\u1ec7t Nam [...]\""
+  }
+]

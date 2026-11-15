@@ -1,0 +1,98 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 1: The Transformer - model architecture.",
+    "width": 441,
+    "height": 642,
+    "description": "This figure is a diagram showing the architecture of the Transformer model. It illustrates the flow of data through various components, including positional encoding, input and output embeddings, multi-head attention, feed-forward layers, and softmax. The diagram highlights the connections between these components, showing how input data is transformed into output probabilities.\n\nText in figure: Output Probabilities, Softmax, Linear, Add & Norm, Feed Forward, Multi-Head Attention, Masked Multi-Head Attention, Add & Norm, Positional Encoding, Input Embedding, Output Embedding, Inputs, Outputs (shifted right), Nx.",
+    "pdf_text": "",
+    "bbox": [
+      195.7,
+      72.8,
+      416.2,
+      394.1
+    ]
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "",
+    "width": 131,
+    "height": 252,
+    "description": "This figure is a diagram showing a sequence of operations in a neural network architecture. It depicts the flow of data through various layers, including MatMul, SoftMax, Mask, and Scale. The operations are applied to inputs Q, K, and V, with MatMul being the first and last operation. SoftMax follows MatMul, and Mask is optional. Scale is applied after Mask. The diagram illustrates the processing steps in a neural network layer.\n\nText in figure: MatMul, SoftMax, Mask (opt.), Scale, Q, K, V",
+    "pdf_text": "",
+    "bbox": [
+      174.1,
+      93.7,
+      239.5,
+      219.4
+    ]
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 2: (left) Scaled Dot-Product Attention. (right) Multi-Head Attention consists of several attention layers running in parallel.",
+    "width": 241,
+    "height": 334,
+    "description": "## Section 1: Figure Description\nThis figure illustrates the architecture of Scaled Dot-Product Attention and Multi-Head Attention. The left side shows the Scaled Dot-Product Attention mechanism, which involves three inputs: V (values), K (keys), and Q (queries). These inputs are processed through linear transformations and then combined using a dot product, followed by scaling and a softmax function to produce attention scores. The right side depicts Multi-Head Attention, which consists of multiple Scaled Dot-Product Attention layers running in parallel, concatenated and then passed through another linear transformation.\n\n## Section 2: Text in Figure\nText in figure: \"Multi-Head Attention\", \"Linear\", \"Concat\", \"Scaled Dot-Product Attention\", \"h\", \"V\", \"K\", \"Q\".",
+    "pdf_text": "",
+    "bbox": [
+      346.6,
+      71.0,
+      466.9,
+      238.2
+    ]
+  },
+  {
+    "file": "p013_f04.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 3: An example of the attention mechanism following long-distance dependencies in the encoder self-attention in layer 5 of 6. Many of the attention heads attend to a distant dependency of the verb 'making', completing the phrase 'making...more difficult'. Attentions here shown only for the word 'making'. Different colors represent different heads. Best viewed in color.",
+    "width": 794,
+    "height": 476,
+    "description": "This figure is a visualization of the attention mechanism in the encoder self-attention of layer 5 of a neural network model. It shows how different attention heads focus on various parts of the input sentence to understand long-distance dependencies. The figure highlights the attention given to the verb 'making', which is part of the phrase 'making...more difficult'. Different colors represent different attention heads, and the figure is best viewed in color.\n\nText in figure: Attention Visualizations, It, is, in, this, spirit, that, a, majority, of, American, governments, have, passed, new, laws, since, 2009, making, the, registration, or, voting, process, more, difficult,., <EOS>, <pad>, <pad>, <pad>, <pad>, <pad>, <pad>, It, is, in, this, spirit, that, a, majority, of, American, governments, have, passed, new, laws, since, 2009, making, the, registration, or, voting, process, more, difficult,., <EOS>, <pad>, <pad>, <pad>, <pad>, <pad>, <pad>",
+    "pdf_text": "Attention Visualizations | It | is | in | this | spirit | that | a | majority | of | American | governments | have | passed | new | laws | since | 2009 | making | the | registration | or | voting | process | more | difficult | . | <EOS> | <pad> | <pad> | <pad> | <pad> | <pad> | <pad> | It | is | in | this | spirit | that | a | majority | of | American | governments | have | passed | new | laws | since | 2009 | making | the | registration | or | voting | process | more | difficult | . | <EOS> | <pad> | <pad> | <pad> | <pad> | <pad> | <pad>",
+    "bbox": [
+      106.3,
+      63.5,
+      503.7,
+      301.6
+    ]
+  },
+  {
+    "file": "p014_f05.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 4: Two attention heads, also in layer 5 of 6, apparently involved in anaphora resolution. Top: Full attentions for head 5. Bottom: Isolated attentions from just the word 'its' for attention heads 5 and 6. Note that the attentions are very sharp for this word.",
+    "width": 787,
+    "height": 868,
+    "description": "Figure type: Visualization of attention heads in a neural network.\n\nDescription: The figure shows attention heads in layer 5 of a neural network, focusing on anaphora resolution. It displays full attentions for head 5 and isolated attentions from the word 'its' for heads 5 and 6. The attentions are sharp for the word 'its'.\n\nText in figure: The, Law, will, never, be, perfect, but, its, application, should, be, just, this, is, what, we, are, missing, in, my, opinion, <EOS>, <pad>",
+    "pdf_text": "The | Law | will | never | be | perfect | , | but | its | application | should | be | just | - | this | is | what | we | are | missing | , | in | my | opinion | . | <EOS> | <pad> | The | Law | will | never | be | perfect | , | but | its | application | should | be | just | - | this | is | what | we | are | missing | , | in | my | opinion | . | <EOS> | <pad> | The | Law | will | never | be | perfect | , | but | its | application | should | be | just | - | this | is | what | we | are | missing | , | in | my | opinion | . | <EOS> | <pad> | The | Law | will | never | be | perfect | , | but | its | application | should | be | just | - | this | is | what | we | are | missing | , | in | my | opinion | . | <EOS> | <pad>",
+    "bbox": [
+      107.8,
+      170.2,
+      501.4,
+      604.0
+    ]
+  },
+  {
+    "file": "p015_f06.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 5: Many of the attention heads exhibit behaviour that seems related to the structure of the sentence. We give two such examples above, from two different heads from the encoder self-attention at layer 5 of 6. The heads clearly learned to perform different tasks.",
+    "width": 784,
+    "height": 810,
+    "description": "Figure type: Line plot\nDescription: The figure shows two line plots, each representing the attention heads of the encoder self-attention at layer 5 of 6. The plots illustrate the behavior of different attention heads in relation to the sentence structure. The x-axis represents the words in the sentence, and the y-axis represents the attention weights. The green plot shows the attention weights for one head, while the red plot shows the attention weights for another head.\n\nText in figure: The, Law, will, never, be, perfect, but, its, application, should, be, just, this, is, what, we, are, missing, in, my, opinion, <EOS>, <pad>",
+    "pdf_text": "The | Law | will | never | be | perfect | , | but | its | application | should | be | just | - | this | is | what | we | are | missing | , | in | my | opinion | . | <EOS> | <pad> | The | Law | will | never | be | perfect | , | but | its | application | should | be | just | - | this | is | what | we | are | missing | , | in | my | opinion | . | <EOS> | <pad> | The | Law | will | never | be | perfect | , | but | its | application | should | be | just | - | this | is | what | we | are | missing | , | in | my | opinion | . | <EOS> | <pad> | The | Law | will | never | be | perfect | , | but | its | application | should | be | just | - | this | is | what | we | are | missing | , | in | my | opinion | . | <EOS> | <pad>",
+    "bbox": [
+      106.2,
+      185.1,
+      498.0,
+      590.1
+    ]
+  }
+]

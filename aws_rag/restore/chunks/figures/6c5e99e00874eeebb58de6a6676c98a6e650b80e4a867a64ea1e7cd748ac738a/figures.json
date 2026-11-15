@@ -1,0 +1,65 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1: YOLO9000. YOLO9000 can detect a wide variety of object classes in real-time.",
+    "width": 467,
+    "height": 1017,
+    "description": "Figure description: The figure shows a collage of images with various objects detected by YOLO9000. Each image contains multiple objects with bounding boxes and labels indicating the detected classes. The objects include a whale, a dolphin, a woman, a man, a dog, a cat, a seal, a shark, a mushroom, and a hamburger. The bounding boxes are colored differently for each class, and the labels are positioned above or near the objects.\n\nText in figure: whale, dolphin, woman, man, dog, cat, seal, shark, mushroom, hamburger, YOLO9000, Correct, Loc."
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2: Clustering box dimensions on VOC and COCO. We run k-means clustering on the dimensions of bounding boxes to get good priors for our model. The left image shows the average IOU we get with various choices for k . We find that k = 5 gives a good tradeoff for recall vs. complexity of the model. The right image shows the relative centroids for VOC and COCO. Both sets of priors favor thinner, taller boxes while COCO has greater variation in size than VOC.",
+    "width": 475,
+    "height": 239,
+    "description": "Figure: A graph and a diagram showing clustering box dimensions on VOC and COCO datasets.\n\nDescription: The left graph shows the average IOU for different numbers of clusters (k). The VOC 2007 series is highest, reaching 0.75, while the COCO series is lowest, starting at 0. The graph peaks at k=5, indicating a good balance between recall and model complexity.\n\nDiagram: The right diagram shows the relative centroids for VOC and COCO. Both datasets favor thinner, taller boxes, with COCO having greater size variation.\n\nText in figure: \"Avg IOU\", \"# Clusters\", \"VOC 2007\", \"COCO\", \"k = 5\"."
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3: Bounding boxes with dimension priors and location prediction. We predict the width and height of the box as offsets from cluster centroids. We predict the center coordinates of the box relative to the location of filter application using a sigmoid function.",
+    "width": 474,
+    "height": 353,
+    "description": "Description: This figure illustrates the concept of bounding boxes with dimension priors and location prediction in the YOLO9000 model. It shows a grid with a bounding box highlighted in blue. The box's width and height are predicted as offsets from cluster centroids, represented by \\( b_w \\) and \\( b_h \\). The center coordinates of the box are predicted relative to the filter application location using a sigmoid function, represented by \\( \\sigma(t_x) \\) and \\( \\sigma(t_y) \\). The figure also includes equations for the predicted box dimensions and center coordinates.\n\nText in figure: \\( b_w \\), \\( b_h \\), \\( \\sigma(t_x) \\), \\( \\sigma(t_y) \\), \\( b_x = \\sigma(t_x) + c_x \\), \\( b_y = \\sigma(t_y) + c_y \\), \\( b_w = p_w e^{t_w} \\), \\( b_h = p_h e^{t_h} \\)"
+  },
+  {
+    "file": "p004_f04.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 4: Accuracy and speed on VOC 2007.",
+    "width": 458,
+    "height": 321,
+    "description": "## Description\nThis figure is a scatter plot comparing the mean average precision and frames per second (FPS) of various object detection models. The models include YOLOv2, SSD300, SSD512, Faster R-CNN, Fast R-CNN, and R-CNN. YOLOv2 is the highest in FPS and mean average precision, while R-CNN is the lowest in both metrics.\n\n## Text in figure\nYOLOv2, SSD300, SSD512, Faster R-CNN, Fast R-CNN, R-CNN, Mean Average Precision, Frames Per Second"
+  },
+  {
+    "file": "p005_f05.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "",
+    "width": 698,
+    "height": 281,
+    "description": "## Figure Description\nThis figure is a table comparing different versions of YOLO (You Only Look Once) object detection models. It lists various features and their presence (marked with a checkmark) across different YOLO versions and the final version YOLOv2. Features include batch normalization, high-resolution classifiers, convolutional layers, anchor boxes, new network architectures, dimension priors, location prediction, passthrough layers, multi-scale detection, and high-resolution detectors.\n\n## Table Content\nYOLO, YOLOv2, batch norm?, hi-res classifier?, convolutional?, anchor boxes?, new network?, dimension priors?, location prediction?, passthrough?, multi-scale?, hi-res detector?, VOC2007 mAP: 63.4, 65.8, 69.5, 69.2, 69.6, 74.4, 75.4, 76.8, 78.6."
+  },
+  {
+    "file": "p007_f06.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 5: Prediction on ImageNet vs WordTree. Most ImageNet models use one large softmax to predict a probability distribution. Using WordTree we perform multiple softmax operations over co-hyponyms.",
+    "width": 467,
+    "height": 389,
+    "description": "## Description\nThis figure compares two different prediction methods for ImageNet and WordTree datasets. The top part shows a single softmax operation for ImageNet, while the bottom part illustrates multiple softmax operations over co-hyponyms using WordTree.\n\n## Text in figure\nImageNet 1k, softmax, kit, English fox, Siberian setter, Australian husky, English terrier, grey springer, lesser whale, Egyptian panda, ibex, Persian cat, cougar, rubber cat, stole eraser, carbonara. WordTree1k, softmax, softmax, softmax, softmax, softmax, 1355, thing, matter, object, phenomenon, body, body part, head, of water, hair, vein, mouth, ocean, cloud, snow, wave."
+  },
+  {
+    "file": "p008_f07.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 6: Combining datasets using WordTree hierarchy. Using the WordNet concept graph we build a hierarchical tree of visual concepts. Then we can merge datasets together by mapping the classes in the dataset to synsets in the tree. This is a simplified view of WordTree for illustration purposes.",
+    "width": 479,
+    "height": 504,
+    "description": "This figure is a visual representation of the WordTree hierarchy used to combine datasets. It shows a simplified view of how different datasets, such as ImageNet and COCO, are mapped to synsets in the WordTree. The figure illustrates the hierarchical structure of visual concepts, with nodes representing different classes and edges indicating relationships between them.\n\nText in figure: \"COCO\", \"ImageNet\", \"WordTree\", \"physical object\", \"natural object\", \"phenomenon\", \"animal\", \"artifact\", \"plant\", \"vehicle\", \"biplane\", \"jet\", \"airbus\", \"fighter\", \"golden\", \"potato\", \"fern\", \"lavender\", \"twinflower\", \"Afghan\", \"African\", \"apple\", \"backpack\", \"banana\", \"bat\", \"bear\", \"bed\", \"bench\", \"bicycle\", \"bird\", \"zebra\", \"hound\", \"chameleon\", \"crocodile\", \"elephant\", \"grey\", \"hunting dog\", \"Airedale\", \"alligator\", \"black\", \"bear\", \"chameleon\", \"zucchini\", \"tabby\", \"Persian\", \"car\", \"houseplant\", \"vascular plant\", \"70\", \"22k\"."
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 1: A diagram of our text-to-text framework. Every task we consider-including translation, question answering, and classification-is cast as feeding our model text as input and training it to generate some target text. This allows us to use the same model, loss function, hyperparameters, etc. across our diverse set of tasks. It also provides a standard testbed for the methods included in our empirical survey. 'T5' refers to our model, which we dub the ' T extt oT ext T ransfer T ransformer'.",
+    "width": 858,
+    "height": 288,
+    "description": "Figure type: Diagram\nDescription: The figure is a diagram illustrating the text-to-text framework used in the paper. It shows how various tasks, including translation, question answering, and classification, are performed by feeding text into the model and training it to generate target text. The model, referred to as 'T5', is a Text-to-Text Transfer Transformer.\n\nText in figure: \"translate English to German: That is good.\", \"cola sentence: The course is jumping well.\", \"Das ist gut.\", \"not acceptable\", \"stsb sentence1: The rhino grazed on the grass. sentence2: A rhino is grazing in a field.\", \"3.8\", \"summarize: state authorities dispatched emergency crews tuesday to survey the damage after an onslaught of severe weather in mississippi.\", \"six people hospitalized after a storm in attala county.\""
+  },
+  {
+    "file": "p013_f02.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 2: Schematic of the objective we use in our baseline model. In this example, we process the sentence 'Thank you for inviting me to your party last week.' The words 'for', 'inviting' and 'last' (marked with an \u00d7 ) are randomly chosen for corruption. Each consecutive span of corrupted tokens is replaced by a sentinel token (shown as <X> and <Y> ) that is unique over the example. Since 'for' and 'inviting' occur consecutively, they are replaced by a single sentinel <X> . The output sequence then consists of the dropped-out spans, delimited by the sentinel tokens used to replace them in the input plus a final sentinel token <Z> .",
+    "width": 515,
+    "height": 186,
+    "description": "This figure is a schematic representation of a text processing model. It shows how the model handles corrupted input text by replacing consecutive spans of corrupted tokens with unique sentinel tokens. The original sentence is \"Thank you for inviting me to your party last week.\" The words \"for\", \"inviting\", and \"last\" are marked for corruption. The corrupted spans are replaced with sentinel tokens <X> and <Y>, while the final sentinel token is <Z>. The output sequence includes the dropped-out spans and the sentinel tokens used to replace them in the input.\n\nText in figure: \"Original text\", \"Inputs\", \"Targets\", \"Thank you\", \"<X>\", \"me to your party\", \"<Y>\", \"week.\", \"<X>\", \"for inviting\", \"<Y>\", \"last\", \"<Z>\""
+  },
+  {
+    "file": "p016_f03.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 3: Matrices representing different attention mask patterns. The input and output of the self-attention mechanism are denoted x and y respectively. A dark cell at row i and column j indicates that the self-attention mechanism is allowed to attend to input element j at output timestep i . A light cell indicates that the self-attention mechanism is not allowed to attend to the corresponding i and j combination. Left: A fully-visible mask allows the self-attention mechanism to attend to the full input at every output timestep. Middle: A causal mask prevents the i th output element from depending on any input elements from 'the future'. Right: Causal masking with a prefix allows the self-attention mechanism to use fully-visible masking on a portion of the input sequence.",
+    "width": 673,
+    "height": 250,
+    "description": "Figure: Three matrices representing different attention mask patterns in a self-attention mechanism. Each matrix shows the input (x) and output (y) elements, with dark cells indicating allowed attention and light cells indicating disallowed attention. Left: Fully-visible mask allows attention to the full input at every output timestep. Middle: Causal mask prevents output elements from depending on future input elements. Right: Causal masking with a prefix allows fully-visible masking on a portion of the input sequence.\n\nText in figure: Fully-visible, Causal, Causal with prefix, Input, Output, x1, x2, x3, x4, x5, y1, y2, y3, y4, y5."
+  },
+  {
+    "file": "p017_f04.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "Figure 4: Schematics of the Transformer architecture variants we consider. In this diagram, blocks represent elements of a sequence and lines represent attention visibility. Different colored groups of blocks indicate different Transformer layer stacks. Dark grey lines correspond to fully-visible masking and light grey lines correspond to causal masking. We use '.' to denote a special end-of-sequence token that represents the end of a prediction. The input and output sequences are represented as x and y respectively. Left: A standard encoder-decoder architecture uses fullyvisible masking in the encoder and the encoder-decoder attention, with causal masking in the decoder. Middle: A language model consists of a single Transformer layer stack and is fed the concatenation of the input and target, using a causal mask throughout. Right: Adding a prefix to a language model corresponds to allowing fully-visible masking over the input.",
+    "width": 680,
+    "height": 285,
+    "description": "Figure type: Schematic diagram\nDescription: The figure illustrates three variants of Transformer architecture: an encoder-decoder model, a language model, and a prefix language model. It shows the masking patterns and layer stacks used in each model. The left panel depicts a standard encoder-decoder architecture with fully-visible masking in the encoder and causal masking in the decoder. The middle panel shows a language model with a single layer stack and causal masking throughout. The right panel represents a prefix language model, which allows fully-visible masking over the input.\n\nText in figure: Encoder, Decoder, Language model, Prefix LM, X1, X2, X3, X4, Y1, Y2,."
+  },
+  {
+    "file": "p025_f05.png",
+    "page": 25,
+    "kind": "picture",
+    "caption": "Figure 5: A flow chart of our exploration of unsupervised objectives. We first consider a few disparate approaches in Section 3.3.1 and find that a BERT-style denoising objective performs best. Then, we consider various methods for simplifying the BERT objective so that it produces shorter target sequences in Section 3.3.2. Given that replacing dropped-out spans with sentinel tokens performs well and results in short target sequences, in Section 3.3.3 we experiment with different corruption rates. Finally, we evaluate an objective that intentionally corrupts contiguous spans of tokens in Section 3.3.4.",
+    "width": 510,
+    "height": 251,
+    "description": "Figure type: Flow chart\nContent: The figure is a flow chart showing the exploration of unsupervised objectives for a text-to-text transformer. It outlines different high-level approaches, corruption strategies, and their corresponding corruption rates and corrupted span lengths.\n\nKey elements:\n- High-level approaches: Language modeling, BERT-style, Deshu\uf001ffling\n- Corruption strategies: Mask, Replace spans, Drop\n- Corruption rates: 10%, 15%, 25%, 50%\n- Corrupted span lengths: 2, 3, 5, 10\n\nConnections:\n- Language modeling leads to Mask\n- BERT-style leads to Replace spans\n- Deshu\uf001ffling leads to Drop\n- Each corruption strategy connects to a specific corruption rate and span length\n\nAnnotations:\n- Mask: 10% corruption rate, 2 span length\n- Replace spans: 15% corruption rate, 3 span length\n- Drop: 25% corruption rate, 5 span length\n- Drop: 50% corruption rate, 10 span length"
+  },
+  {
+    "file": "p029_f06.png",
+    "page": 29,
+    "kind": "picture",
+    "caption": "Figure 6: Pre-training loss for our original C4 data set as well as 4 artificially truncated versions. The sizes listed refer to the number of tokens in each data set. The four sizes considered correspond to repeating the data set between 64 and 4 , 096 times over the course of pre-training. Using a smaller data set size results in smaller training loss values, which may suggest some memorization of the unlabeled data set.",
+    "width": 516,
+    "height": 292,
+    "description": "Description: The figure is a line graph showing the training loss of a model over time, measured in steps of 1,000. It compares the loss for the full dataset and four artificially truncated versions, labeled 2^23, 2^25, 2^27, and 2^29. The full dataset has the highest loss, while 2^23 has the lowest. The loss decreases as the dataset size decreases.\n\nText in figure: \"Training loss\", \"Dataset size\", \"Full dataset\", \"2^23\", \"2^25\", \"2^27\", \"2^29\", \"Step x 1,000\", \"1.0\", \"0.8\", \"0.6\", \"0.4\", \"0.2\", \"0.0\", \"0\", \"100\", \"200\", \"300\", \"400\", \"500\"."
+  }
+]

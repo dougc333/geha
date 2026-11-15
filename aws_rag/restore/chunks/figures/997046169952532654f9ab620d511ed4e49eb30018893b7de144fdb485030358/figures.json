@@ -1,0 +1,74 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Fig. 1: The error rate on the MNIST test set for a variety of neural network architectures trained with backpropagation using 50% dropout for all hidden layers. The lower set of lines also use 20% dropout for the input layer. The best previously published result for this task using backpropagation without pre-training or weight-sharing or enhancements of the training set is shown as a horizontal line.",
+    "width": 493,
+    "height": 440,
+    "description": "## Description\nThis plot shows the test error rate for various neural network architectures trained on the MNIST dataset using backpropagation with dropout. The architectures vary in the number of units and layers. The lowest error rate is achieved by the architecture with 2000 units and 2 layers, which is around 100 errors. The highest error rate is for the architecture with 160 units and 2 layers, which is around 220 errors.\n\n## Text in figure\nTest Error, Number of errors, Epochs, 800 units 2 layers, 1200 units 3 layers, 1200 units 2 layers, 2000 units 2 layers, 160, 50% dropout in hidden layers, 50% dropout in hidden layers + 20% in input layer"
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Fig. 2: The frame classification error rate on the core test set of the TIMIT benchmark. Comparison of standard and dropout finetuning for different network architectures. Dropout of 50% of the hidden units and 20% of the input units improves classification.",
+    "width": 429,
+    "height": 375,
+    "description": "## Description\nThis figure is a line graph comparing the test error rates of different neural network architectures during finetuning with and without dropout. The graph shows four series, each representing a different network architecture. The series with 15 frames, 3 layers, and 2000 units is the highest, followed by 15 frames, 3 layers, 4000 units, 31 frames, 3 layers, 4000 units, and 31 frames, 4 layers, 4000 units. The series with dropout shows a lower test error rate compared to the series without dropout.\n\n## Text in figure\nTest Error\n15 frames 3 layers 2000 units\n15 frames 3 layers 4000 units\n31 frames 3 layers 4000 units\n31 frames 4 layers 4000 units\nfinetuning without dropout\nfinetuning with dropout"
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Fig. 3: Ten examples of the class 'bird' from the CIFAR-10 test set illustrating the variety of types of bird, viewpoint, lighting and background. The neural net gets all but the last two examples correct.",
+    "width": 683,
+    "height": 70,
+    "description": "## Figure Description\nThis figure displays ten examples of the class 'bird' from the CIFAR-10 test set. It illustrates the variety of bird types, viewpoints, lighting, and backgrounds. The neural network correctly identifies all but the last two examples.\n\n## Text in Figure\n- Caption: \"Fig. 3: Ten examples of the class 'bird' from the CIFAR-10 test set illustrating the variety of types of bird, viewpoint, lighting and background. The neural net gets all but the last two examples correct.\""
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Fig. 4: Some Imagenet test cases with the probabilities of the best 5 labels underneath. Many of the top 5 labels are quite plausible.",
+    "width": 527,
+    "height": 212,
+    "description": "Figure Description: The image displays four distinct panels, each showing an object with five labels and their corresponding probabilities. The first panel features a cheetah with labels \"cheetah,\" \"leopard,\" \"snow leopard,\" and \"Egyptian cat.\" The second panel shows a bullet train with labels \"bullet train,\" \"passenger car,\" \"subway train,\" and \"electric locomotive.\" The third panel depicts a morel mushroom with labels \"morel,\" \"stinkhorn,\" \"bolete,\" and \"gyromitra.\" The fourth panel shows a hand glass with labels \"hand glass,\" \"scissors,\" \"hand glass,\" \"frying pan,\" and \"stethoscope.\"\n\nText in Figure: cheetah, leopard, snow leopard, Egyptian cat, bullet train, passenger car, subway train, electric locomotive, morel, stinkhorn, bolete, gyromitra, hand glass, scissors, hand glass, frying pan, stethoscope."
+  },
+  {
+    "file": "p010_f05.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Fig. 5: Visualization of features learned by first layer hidden units for (a) backprop and (b) dropout on the MNIST dataset.",
+    "width": 385,
+    "height": 441,
+    "description": "Description: The figure displays a grid of 30x30 images, each representing the learned features of the first layer hidden units in a neural network. The images are grayscale and show varying patterns, likely representing different features detected by the network. The figure is divided into two sections, labeled (a) and (b), corresponding to different training methods: backpropagation and dropout, respectively.\n\nText in figure: (a), (b)"
+  },
+  {
+    "file": "p010_f06.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "",
+    "width": 389,
+    "height": 447,
+    "description": "Figure: A grid of 25 images, each labeled with a number from 0 to 250, showing various patterns and shapes. The images are grayscale and appear to be generated by a neural network, displaying different levels of complexity and detail. The grid is organized in a 5x5 layout, with each row and column labeled with the corresponding number.\n\nText in figure: Numbers 0 to 250, each image labeled with its respective number."
+  },
+  {
+    "file": "p011_f07.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Fig. 6: Frame classification error and cross-entropy on the (a) Training and (b) Validation set as learning progresses. The training error is computed using the stochastic nets.",
+    "width": 761,
+    "height": 1030,
+    "description": "Figure Description: Two panels of plots showing training and validation metrics over epochs. Panel (a) displays training set error and cross-entropy. The highest error is for \"15 frames 3 layers 2000 units\" at the start, while the lowest is for \"31 frames 4 layers 4000 units\" throughout. Panel (b) shows validation set error and cross-entropy, with \"15 frames 3 layers 2000 units\" having the highest error and \"31 frames 4 layers 4000 units\" the lowest.\n\nText in figure: \"Training Set Error\", \"Training Set Cross Entropy\", \"Validation Set Error\", \"Validation Set Cross Entropy\", \"15 frames 3 layers 2000 units\", \"15 frames 3 layers 4000 units\", \"31 frames 3 layers 4000 units\", \"31 frames 4 layers 4000 units\", \"finetuning with dropout\", \"finetuning without dropout\"."
+  },
+  {
+    "file": "p013_f08.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Fig. 7: Classification error rate on the (a) training and (b) validation sets of the Reuters dataset as learning progresses. The training error is computed using the stochastic nets.",
+    "width": 871,
+    "height": 359,
+    "description": "Description: The figure contains two plots showing classification error rates on training and validation sets. In plot (a), the training error decreases over epochs, with the \"2000-1000-1000-50\" series starting higher and decreasing more sharply than the \"2000-2000-1000-50\" series. In plot (b), the validation error shows a similar trend, with the \"2000-1000-1000-50\" series having a higher initial error and a more pronounced decrease.\n\nText in figure: \"Training Set Error\", \"Test Set Error\", \"2000-1000-1000-50\", \"2000-2000-1000-50\", \"training with dropout\", \"training without dropout\", \"Classification Error %\", \"Epochs\"."
+  }
+]

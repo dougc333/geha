@@ -1,0 +1,83 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1. Overview of BLIP-2's framework. We pre-train a lightweight Querying Transformer following a two-stage strategy to bridge the modality gap. The first stage bootstraps visionlanguage representation learning from a frozen image encoder. The second stage bootstraps vision-to-language generative learning from a frozen LLM, which enables zero-shot instructed image-totext generation (see Figure 4 for more examples).",
+    "width": 470,
+    "height": 213,
+    "description": "Figure type: Diagram\nDescription: The figure is a diagram showing the BLIP-2 framework. It consists of two main stages. The first stage involves vision-and-language representation learning, where an image encoder is used to extract visual features from images. The second stage involves vision-to-language generative learning, where a large language model (LLM) is used to generate text based on the visual features.\n\nText in figure: Vision-and-Language Representation Learning, Image Encoder, Q-Former, Querying Transformer, Queries, Bootstrapping Pre-trained Image Models, Vision-to-Language Generative Learning, Large Language Model (LLM), Write a romantic message that goes along this photo, Love is like a sunset, it's hard to see it coming but when it does it's so beautiful, Bootstrapping Pre-trained Large Language Models (LLMs)"
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2. ( Left ) Model architecture of Q-Former and BLIP-2's first-stage vision-language representation learning objectives. We jointly optimize three objectives which enforce the queries (a set of learnable embeddings) to extract visual representation most relevant to the text. ( Right ) The self-attention masking strategy for each objective to control query-text interaction.",
+    "width": 975,
+    "height": 198,
+    "description": "Figure type: Diagram\nText in figure: Input Image, Image Encoder, Image-Text Matching, Image-Text Contrastive Learning, Image-Grounded Text Generation, Feed Forward, Cross Attention, Self Attention, Attention Masking, bidirectional, multimodal causal, uni-modal, Learned Queries, Input Text, a cat wearing sunglasses, Q: query token positions, T: text token positions, masked, unmasked, Bi-directional Self-Attention Mask, Multi-modal Causal Self-Attention Mask, Uni-modal Self-Attention Mask, Image-Text Matching, Image-Grounded Text Generation, Image-Text Contrastive Learning\n\nDescription: The figure shows the model architecture of Q-Former and BLIP-2's first-stage vision-language representation learning objectives. It consists of an Image Encoder, Q-Former, and three objectives: Image-Text Matching, Image-Text Contrastive Learning, and Image-Grounded Text Generation. The Q-Former includes Feed Forward, Cross Attention, Self Attention, and Attention Masking blocks. The self-attention masking strategy is shown for each objective to control query-text interaction."
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3. BLIP-2's second-stage vision-to-language generative pre-training, which bootstraps from frozen large language models (LLMs). ( Top ) Bootstrapping a decoder-based LLM (e.g. OPT). ( Bottom ) Bootstrapping an encoder-decoder-based LLM (e.g. FlanT5). The fully-connected layer adapts from the output dimension of the Q-Former to the input dimension of the chosen LLM.",
+    "width": 876,
+    "height": 260,
+    "description": "This figure is a diagram showing two methods of bootstrapping vision-to-language generative pre-training using large language models (LLMs). The top panel demonstrates bootstrapping from a decoder-based LLM (e.g., OPT), while the bottom panel shows bootstrapping from an encoder-decoder-based LLM (e.g., FlanT5). Both methods involve an image encoder, a Q-Former, and a fully-connected layer that adapts the output dimension of the Q-Former to the input dimension of the chosen LLM.\n\nText in figure: Bootstrapping from a Decoder-based Large Language Model (e.g., OPT), Bootstrapping from an Encoder-Decoder-based Large Language Model (e.g., FlanT5), Image Encoder, Q-Former, Fully Connected, Output Text, LLM Decoder, Input Image, Learned Queries, Suffix Text, LLM Encoder, LLM Decoder, Prefix Text."
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models",
+    "width": 969,
+    "height": 1216,
+    "description": "Section 1: Figure description\nThis figure is a collection of images and text, showcasing the capabilities of the BLIP-2 model in generating captions and answering questions based on images. The images depict various scenes, such as a car, a historical site, a flower, a house, a chicken, a pizza, a city, a sunset, and a wedding photo. Each image is accompanied by a question or statement, and the model's responses are shown in text form.\n\nSection 2: Figure content\nImages and questions:\n- Audi e-tron quattro concept car\n- Great Wall of China\n- Orchid flower\n- Upside-down house\n- Man and chicken\n- Pizza ingredients\n- Singapore city\n- Titanic sinking\n- Sunset\n- Wedding photo\n\nModel responses:\n- Advantages of the Audi e-tron quattro concept car\n- History of the Great Wall of China\n- Facts about the orchid flower\n- Explanation of the upside-down house\n- Man's feelings and reasons for being scared of the chicken\n- Pizza-making instructions\n- Identification of the Singapore city\n- Titanic sinking event\n- Romantic message for a sunset photo\n- Conversation between a cat and a dog"
+  },
+  {
+    "file": "p007_f05.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Table 3. Comparison with state-of-the-art image captioning methods on NoCaps and COCO Caption. All methods optimize the crossentropy loss during finetuning. C: CIDEr, S: SPICE, B@4: BLEU@4.",
+    "width": 460,
+    "height": 234,
+    "description": "Figure: Two line graphs comparing zero-shot VQAv2 accuracy of BLIP2 models with and without representation learning. The left graph shows BLIP2 with VIT-G OPT6.7B, and the right graph shows BLIP2 with VIT-G FlanT5-XL. Both graphs have two series: one with representation learning (red) and one without (blue). The red series is consistently higher than the blue series, indicating better performance with representation learning.\n\nText in figure: BLIP2 VIT-G OPT6.7B, BLIP2 VIT-G FlanT5-XL, w/ representation learning, w/o representation learning, zero-shot VQAv2 acc., iterations."
+  },
+  {
+    "file": "p012_f06.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "",
+    "width": 313,
+    "height": 264,
+    "description": "Section 1: Figure description\nThis figure is a screenshot of a chatbot interface displaying a quote from Albert Einstein. The quote reads, \"The world is a book, and those who do not travel read only one page.\"\n\nSection 2: Search index\n- Figure type: Screenshot\n- Content: Chatbot interface, Albert Einstein quote, \"The world is a book, and those who do not travel read only one page.\""
+  },
+  {
+    "file": "p012_f07.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "",
+    "width": 312,
+    "height": 264,
+    "description": "Section 1: Figure description\nThis figure is a screenshot of a text conversation between two individuals discussing clothing for a trip to Canada in December. The image shows a man wearing a white shirt and black shorts, with a question about the appropriateness of this outfit for the trip. The response suggests that while the outfit is nice, it is too casual for the destination.\n\nSection 2: Text in figure\n- Can I wear this for my trip to Canada in December?\n- yes, it's a nice shirt and shorts, but it's a little too casual for a trip to Canada."
+  },
+  {
+    "file": "p012_f08.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "",
+    "width": 314,
+    "height": 266,
+    "description": "Figure type: Image with text\nDescription: The image shows a smartphone, specifically an Apple iPhone 11, with a 128GB storage capacity in Space Gray color. The image is accompanied by a text bubble requesting the specifics of the product.\n\nText in figure: \"Please write the specifics of this product.\" \"apple iphone 11 128gb space gray\""
+  },
+  {
+    "file": "p013_f09.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 7. Model architecture for VQA finetuning, where the LLM receives Q-Former's output and the question as input, then predicts answers. We also provide the question as a condition to Q-Former, such that the extracted image features are more relevant to the question.",
+    "width": 467,
+    "height": 260,
+    "description": "## Figure Description\nThis figure illustrates the model architecture for Visual Question Answering (VQA) finetuning. It shows the process flow from an input image to the final answer. The image is encoded into features, which are then processed by a Q-Former to generate relevant image features. These features, along with the question, are input into a Large Language Model (LLM) to predict the answer.\n\n## Figure Text\nInput Image, Image Encoder, Q-Former, Queries, Question, What is the cat wearing?, Fully Connected, Question, What is the cat wearing?, LLM, Answer, sunglasses"
+  }
+]

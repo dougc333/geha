@@ -1,0 +1,65 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 1: Amount of data in GiB (log-scale) for the 88 languages that appear in both the Wiki-100 corpus used for mBERT and XLM-100, and the CC-100 used for XLM-R. CC-100 increases the amount of data by several orders of magnitude, in particular for low-resource languages.",
+    "width": 881,
+    "height": 211,
+    "description": "## Description\nThis figure is a bar chart comparing the dataset sizes in gigabytes (GB) for 88 languages across two datasets: Common Crawl and Wikipedia. The chart uses a logarithmic scale on the y-axis. The Common Crawl dataset shows significantly larger sizes, often several orders of magnitude higher than Wikipedia, especially for low-resource languages.\n\n## Text in figure\nText in figure: \"Dataset size (in GB)\", \"Common Crawl\", \"Wikipedia\", \"10^3\", \"10^2\", \"10^1\", \"10^0\", \"10^-1\", \"10^-2\", \"10^-3\", \"10^-4\", \"10^-5\", \"10^-6\", \"10^-7\", \"10^-8\", \"10^-9\", \"10^-10\", \"10^-11\", \"10^-12\", \"10^-13\", \"10^-14\", \"10^-15\", \"10^-16\", \"10^-17\", \"10^-18\", \"10^-19\", \"10^-20\", \"10^-21\", \"10^-22\", \"10^-23\", \"10^-24\", \"10^-25\", \"10^-26\", \"10^-27\", \"10^-28\", \"10^-29\", \"10^-30\", \"10^-31\", \"10^-32\", \"10^-33\", \"10^-34\", \"10^-35\", \"10^-36\", \"10^-37\", \"10^-38\", \"10^-39\", \"10^-40\", \"10^-41\", \"10^-42\", \"10^-43\", \"10^-44\", \"10^-45\", \"10^-46\", \"10^-47\", \"10^-48\", \"10^-49\", \"10^-50\", \"10^-51\", \"10^-52\", \"10^-53\", \"10^-54\", \"10^-55\", \"10^-56\", \"10^-57\", \"10^-58\", \"10^-59\", \"10^-60\", \"10^-61\", \"10^-62\", \"10^-63\", \"10^-64\", \"10^-65\", \"10^-66\", \"10^-67\", \"10^-68\", \"10^-69\", \"10^-70\", \""
+  },
+  {
+    "file": "p005_f02.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "",
+    "width": 253,
+    "height": 204,
+    "description": "Section 1: Bar chart showing accuracy of a model across different numbers of languages.\nThe chart displays three series: Low res., High res., and All. The High res. series is\nhighest across all numbers of languages, followed by All, and then Low res. The difference\nin accuracy between High res. and Low res. is approximately 10-15%.\n\nSection 2: Accuracy values for Low res., High res., and All series at different numbers\nof languages. At 7 languages, Low res. is around 60, High res. is around 80, and All is\naround 70. At 100 languages, Low res. is around 55, High res. is around 75, and All is\naround 70."
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 2: The transferinterference trade-off: Lowresource languages benefit from scaling to more languages, until dilution (interference) kicks in and degrades overall performance.",
+    "width": 255,
+    "height": 204,
+    "description": "This figure is a bar chart showing the accuracy of language models under different conditions. The x-axis represents the language sampling rate, and the y-axis represents the accuracy. The chart includes three series: Low res., High res., and All. The High res. series is the highest, followed by All, and then Low res. The High res. series peaks at around 75% accuracy at a language sampling rate of 0.3, while the Low res. series peaks at around 55% accuracy at the same rate. The All series shows a steady increase in accuracy with higher language sampling rates.\n\nText in figure: Accuracy, Language sampling, Low res., High res., All, 0.01, 0.3, 0.7, 1.0."
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 3: Wikipedia versus CommonCrawl: An XLM-7 obtains significantly better performance when trained on CC, in particular on low-resource languages.",
+    "width": 255,
+    "height": 203,
+    "description": "Figure: Bar chart comparing the accuracy of XLM-7 trained on Wikipedia and CommonCrawl for low-resource, high-resource, and all languages.\n\nDescription: The bar chart compares the accuracy of XLM-7 trained on Wikipedia and CommonCrawl for three language categories: low-resource, high-resource, and all languages. The highest accuracy is achieved by CommonCrawl for low-resource languages, with an approximate difference of 10 points over Wikipedia. For high-resource languages, both Wikipedia and CommonCrawl perform similarly, with a slight advantage for CommonCrawl. For all languages, CommonCrawl again shows a higher accuracy, approximately 5 points above Wikipedia.\n\nText in figure: Accuracy, Low res., High res., All, Wikipedia, CommonCrawl"
+  },
+  {
+    "file": "p005_f05.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 5: On the high-resource versus low-resource trade-off: impact of batch language sampling for XLM-100.",
+    "width": 254,
+    "height": 204,
+    "description": "## Description\nThis bar chart compares the accuracy of two models with different vocabulary sizes. The x-axis represents the vocabulary size, ranging from 32k to 512k. The y-axis represents the accuracy, ranging from 60 to 68. The blue bars represent the \"Fixed capacity\" model, while the orange bars represent the \"Increased capacity\" model. The \"Increased capacity\" model has higher accuracy across all vocabulary sizes, with the largest difference at 512k vocabulary size.\n\n## Text in figure\nVocabulary size: 32k, 64k, 128k, 256k, 512k\nAccuracy: 60, 62, 63, 64, 66, 67, 68\nFixed capacity: 62, 62, 63, 64, 66\nIncreased capacity: 68, 66, 64, 67, 68"
+  },
+  {
+    "file": "p005_f06.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 4: Adding more capacity to the model alleviates the curse of multilinguality, but remains an issue for models of moderate size.",
+    "width": 253,
+    "height": 203,
+    "description": "## Description\nThis bar chart compares the accuracy of models with fixed and increased capacity across three different numbers of languages: 7, 30, and 100. The blue bars represent models with fixed capacity, while the orange bars represent models with increased capacity. The highest accuracy is observed in the fixed capacity model with 7 languages, reaching approximately 72. The lowest accuracy is seen in the fixed capacity model with 100 languages, around 67. The increased capacity models show higher accuracy across all language counts, with the highest being around 72 for 30 languages.\n\n## Text in figure\nNumber of languages: 7, 30, 100\nFixed capacity: 72, 71, 67\nIncreased capacity: -, 72, 69"
+  },
+  {
+    "file": "p005_f07.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "",
+    "width": 252,
+    "height": 172,
+    "description": "This figure is a bar chart comparing the accuracy of different batch sizes and preprocessing methods. The x-axis represents the batch size and preprocessing method, with categories labeled as 2048, 4096, 8192, BPE, and SPM. The y-axis represents accuracy, ranging from 60 to 68. The highest accuracy is observed in the 8192 batch size, while the lowest accuracy is observed in the BPE preprocessing method. The accuracy values for each category are approximately 64, 65, 67, 64, and 64, respectively.\n\nSection 1: The figure is a bar chart comparing the accuracy of different batch sizes and preprocessing methods. The x-axis represents the batch size and preprocessing method, with categories labeled as 2048, 4096, 8192, BPE, and SPM. The y-axis represents accuracy, ranging from 60 to 68. The highest accuracy is observed in the 8192 batch size, while the lowest accuracy is observed in the BPE preprocessing method.\n\nSection 2: The accuracy values for each category are approximately 64, 65, 67, 64, and 64, respectively. The 8192 batch size has the highest accuracy, while the BPE preprocessing method has the lowest accuracy. The 4096 and SPM categories have similar accuracy values, while the 2048 category has the lowest accuracy among the batch sizes."
+  }
+]

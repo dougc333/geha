@@ -1,0 +1,29 @@
+[
+  {
+    "file": "p004_f01.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 1: Illustration of the computation of the recall metric R BERT. Given the reference x and candidate \u02c6 x , we compute BERT embeddings and pairwise cosine similarity. We highlight the greedy matching in red, and include the optional idf importance weighting.",
+    "width": 789,
+    "height": 188,
+    "description": "Figure type: Diagram\nDescription: The figure illustrates the computation of the recall metric R BERT using BERT embeddings and pairwise cosine similarity. It shows the process starting with the reference and candidate texts, followed by contextual embedding, pairwise cosine similarity calculation, and maximum similarity matching. The optional idf importance weighting is also highlighted.\n\nText in figure: Contextual Embedding, Pairwise Cosine Similarity, Maximum Similarity, Importance Weighting (Optional), Reference x, Candidate \u02c6 x, the, 0.713, 0.597, 0.428, 0.408, 1.27, weather, 0.462, 0.393, 0.515, 0.326, 7.94, is, 0.635, 0.858, 0.441, 0.441, 1.82, cold, 0.479, 0.454, 0.796, 0.343, 7.90, today, 0.347, 0.361, 0.307, 0.913, 8.88, it, is, freezing, today, idf weights, Candidate"
+  },
+  {
+    "file": "p016_f02.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 2: BERTSCORE visualization. The cosine similarity of each word matching in P BERT are color-coded.",
+    "width": 789,
+    "height": 146,
+    "description": "Figure type: Visualization of BERTScore.\nDescription: The figure shows a visualization of BERTScore, a metric for evaluating text generation. It displays two sentences, one labeled \"Reference\" and the other \"Candidate,\" with words connected by lines indicating their similarity. The lines are color-coded based on cosine similarity, ranging from most similar (red) to least similar (black).\n\nText in figure: \"Reference: people enjoy driving foreign cars.\", \"Candidate: imported cars are preferred by people.\", \"Reference: where did you live before you moved to prague?\", \"Candidate: before prague, where were you staying?\"."
+  },
+  {
+    "file": "p018_f03.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "Figure 3: Pearson correlation of F BERT computed with different models, across different layers, with segment-level human judgments on the WMT16 to-English machine translation task. The WMT17 English-Chinese data is used for the BERT Chinese model. Layer 0 corresponds to using BPE embeddings. Consistently, correlation drops significantly in the final layers.",
+    "width": 766,
+    "height": 781,
+    "description": "Description: The figure displays four line graphs showing Pearson correlation values for different models across various layers. The first graph compares BERT models, with BERT_base peaking at layer 12. The second graph shows RoBERTa models, with RoBERTa_large peaking at layer 10. The third graph compares XLNet models, with XLNet_base peaking at layer 10. The fourth graph shows XLM models, with XLM_en peaking at layer 10. The final graph compares BERT-Chinese models, with BERT_Chinese peaking at layer 12.\n\nText in figure: BERT models, RoBERTa models, XLNet models, XLM models, BERT-Chinese models, BERT_base, RoBERTa_base, XLNet_base, XLM_en, XLM_100, BERT_Chinese, BERT_multilingual, RoBERTa_large, RoBERTa_large-multi, Layer 0, Layer 1, Layer 2, Layer 3, Layer 4, Layer 5, Layer 6, Layer 7, Layer 8, Layer 9, Layer 10, Layer 11, Layer 12, Layer 13, Layer 14, Layer 15, Layer 16, Layer 17, Layer 18, Layer 19, Layer 20, Layer 21, Layer 22, Layer 23, Layer 24."
+  }
+]

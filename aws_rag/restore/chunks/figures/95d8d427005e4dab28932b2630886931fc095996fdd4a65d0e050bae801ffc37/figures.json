@@ -1,0 +1,83 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1: (a) LSTF can cover an extended period than the short sequence predictions, making vital distinction in policy-planning and investment-protecting. (b) The prediction capacity of existing methods limits LSTF's performance. E.g., starting from length=48, MSE rises unacceptably high, and the inference speed drops rapidly.",
+    "width": 467,
+    "height": 151,
+    "description": "Description: This figure contains two plots. Plot (a) shows sequence forecasting with two lines: \"Ground truth\" and \"Prediction\". The \"Prediction\" line follows the \"Ground truth\" line closely, with some deviations. Plot (b) shows the MSE score and inference speed as the predict sequence length increases. The MSE score increases with longer sequence lengths, while the inference speed decreases.\n\nText in figure: \"Sequence Forecasting\", \"Ground truth\", \"Prediction\", \"Run LSTM on sequences\", \"MSE score\", \"Inference speed\", \"The predict sequence length\", \"The predictions (in log scale)\""
+  },
+  {
+    "file": "p002_f02.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 2: Informer model overview. Left: The encoder receives massive long sequence inputs (green series). We replace canonical self-attention with the proposed ProbSparse self-attention. The blue trapezoid is the self-attention distilling operation to extract dominating attention, reducing the network size sharply. The layer stacking replicas increase robustness. Right: The decoder receives long sequence inputs, pads the target elements into zero, measures the weighted attention composition of the feature map, and instantly predicts output elements (orange series) in a generative style.",
+    "width": 453,
+    "height": 256,
+    "description": "Figure type: Diagram\nDescription: The diagram shows the Informer model architecture, which includes an encoder and a decoder. The encoder processes long sequence inputs using ProbSparse self-attention, while the decoder generates output sequences. The encoder's inputs are green, and the decoder's outputs are orange.\n\nText in figure: Encoder, Decoder, Inputs: X_en, Outputs, Fully Connected Layer, Multi-head ProbSparse Self-attention, Masked Multi-head ProbSparse Self-attention, Inputs: X_de={X_token, X_0}"
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3: The single stack in Informer's encoder. (1) The horizontal stack stands for an individual one of the encoder replicas in Fig.(2). (2) The presented one is the main stack receiving the whole input sequence. Then the second stack takes half slices of the input, and the subsequent stacks repeat. (3) The red layers are dot-product matrixes, and they get cascade decrease by applying self-attention distilling on each layer. (4) Concatenate all stacks' feature maps as the encoder's output.",
+    "width": 835,
+    "height": 321,
+    "description": "This figure is a schematic representation of the encoder architecture in the Informer model for time-series forecasting. It shows a single stack within the encoder, which consists of multiple attention blocks and convolutional layers. The input sequence is processed through several stacks, each handling a portion of the input. The red layers represent dot-product matrices that undergo self-attention distilling. The output of the encoder is the concatenation of feature maps from all stacks.\n\nText in figure: Scalar, Stamp, Embedding, Attention Block 1, Attention Block 2, Attention Block 3, MaxPooling, padding, L, k, d, L/4, L/2, L, n-heads, Feature Map."
+  },
+  {
+    "file": "p007_f04.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "",
+    "width": 988,
+    "height": 255,
+    "description": "Section 1: Figure description\nThis figure consists of three separate plots, each showing the Mean Squared Error (MSE) score against different input lengths. Plot (a) shows the MSE score for encoder input and decoder token with varying input lengths. Plot (b) displays the MSE score for different sampling factors. Plot (c) illustrates the MSE score for various stacking combinations.\n\nSection 2: Key details from the figure\nPlot (a): The highest MSE score is for the Decoder Token (horizon=168) at around 0.4, and the lowest is for the Encoder Input (horizon=48) at around 0.1. Plot (b): The highest MSE score is for the Informer, factor c=3 at around 0.35, and the lowest is for the Informer, factor c=10 at around 0.05. Plot (c): The highest MSE score is for the L/2-scale Dependency at around 0.25, and the lowest is for the Informer Dependency at around 0.05."
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Table 6: Ablation study of the generative style decoder.",
+    "width": 454,
+    "height": 218,
+    "description": "This figure contains two plots, each showing the performance of various models in terms of training time and inference time. The left plot compares training time against encoder input length, while the right plot compares inference time against decoder predict length. The highest training time is observed for the Reformer model, while the lowest is for the LSTM model. The highest inference time is for the LogTrans model, and the lowest is for the LSTM model.\n\nText in figure: \"Train time (day)\", \"Inference time (day)\", \"Encoder Input length (Lx)\", \"Decoder predict length (Ly)\", \"LSTM\", \"Informer\", \"Informer+\", \"Informer$\", \"LogTrans\", \"Reformer\"."
+  },
+  {
+    "file": "p010_f06.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 6: The input representation of Informer. The inputs's embedding consists of three separate parts, a scalar projection, the local time stamp (Position) and global time stamp embeddings (Minutes, Hours, Week, Month, Holiday etc.).",
+    "width": 389,
+    "height": 304,
+    "description": "Section 1: Figure 6 from the paper \"Informer: Beyond Efficient Transformer for Long Sequence Time-Series Forecasting\" illustrates the input representation used in the Informer model. It shows three components of the input's embedding: scalar projection, local time stamp (Position), and global time stamp embeddings (Week, Month, Holiday, etc.).\n\nSection 2: The figure displays the input representation of the Informer model, consisting of scalar projection, local time stamp embeddings (Position), and global time stamp embeddings (Week, Month, Holiday). Each component is visually separated and labeled, showing how they combine to form the input for the model."
+  },
+  {
+    "file": "p010_f07.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 7: The Softmax scores in the self-attention from a 4-layer canonical Transformer trained on ETTh 1 dataset.",
+    "width": 436,
+    "height": 154,
+    "description": "Description: The figure shows two plots of self-attention distribution in a Transformer model. Both plots display softmax scores across different samples. The left plot is for Head1 at Layer1, and the right plot is for Head7 at Layer7. Both plots show a high concentration of attention scores at the beginning, which gradually decreases.\n\nText in figure: Self-attention distribution at Head1/Layer1, Self-attention distribution at Head7/Layer7, The softmax score, Samples."
+  },
+  {
+    "file": "p012_f08.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 8: Probability Density verses S 1 - S 2 for the approximation of shifted lognormal distribution.",
+    "width": 339,
+    "height": 239,
+    "description": "Description: This plot shows the probability density of the difference between two variables, S1 and S2, for various shifted lognormal distributions. The highest peak is for S1=110, S2=100, \u03c31=0.25, \u03c32=0.15, with a peak around 0.017. The lowest peak is for S1=170, S2=130, \u03c31=0.25, \u03c32=0.15, with a peak around 0.012. The x-axis represents the difference S1 - S2, and the y-axis represents the probability density.\n\nText in figure: Probability, Difference: S1 - S2, S1=110, S2=100, \u03c31=0.25, \u03c32=0.15, S1=110, S2=70, \u03c31=0.25, \u03c32=0.15, S1=110, S2=70, \u03c31=0.3, \u03c32=0.2, S1=110, S2=70, \u03c31=0.3, \u03c32=0.15, S1=170, S2=130, \u03c31=0.25, \u03c32=0.15."
+  },
+  {
+    "file": "p013_f09.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 9: The predicts (len=336) of Informer, Informer \u2020 , LogTrans, Reformer, DeepAR, LSTMa, ARIMA and Prophet on the ETTm dataset. The red / blue curves stand for slices of the prediction / ground truth.",
+    "width": 1002,
+    "height": 291,
+    "description": "## Search Index Section 1\nThis figure displays a series of plots comparing the predictions of various time-series forecasting models on the ETTm dataset. Each plot shows the predictions (red) and ground truth (blue) over a sequence of 336 time steps. The models compared include Informer, LogTrans, Reformer, DeepAR, LSTMa, ARIMA, and Prophet. The Informer model's predictions are highest, followed by LogTrans, Reformer, DeepAR, LSTMa, ARIMA, and Prophet, which are the lowest.\n\n## Search Index Section 2\nText in figure: \"ETTm, GroundTruth\", \"Informer\", \"LogTrans\", \"Reformer\", \"DeepAR\", \"LSTMa\", \"ARIMA\", \"Prophet\". Legends: \"ETTm, GroundTruth\", \"Informer\", \"LogTrans\", \"Reformer\", \"DeepAR\", \"LSTMa\", \"ARIMA\", \"Prophet\"."
+  }
+]

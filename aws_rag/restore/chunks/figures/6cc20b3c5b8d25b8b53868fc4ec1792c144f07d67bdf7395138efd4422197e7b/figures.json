@@ -1,0 +1,65 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1 | Top1 accuracy of open-source models on the competition-level MATH benchmark (Hendrycks et al., 2021) without the use of external toolkits and voting techniques.",
+    "width": 616,
+    "height": 365,
+    "description": "Description: This figure is a line graph showing the Top1 accuracy of various open-source models on the MATH benchmark over time. The highest accuracy is achieved by DeepSeekMath-7B, reaching approximately 50% in January 2024. The lowest accuracy is shown by LLaMA1-65B, starting at around 10% in April 2023.\n\nText in figure: Gemini-Ultra, GPT-4 API, GPT-4 early version, DeepSeekMath-7B, Qwen-72B, Llemma-34B, Mistral-7B, Qwen-14B, WizardMath-70B, LLaMA1-65B, 2023-04, 2023-07, 2023-10, 2024-01, MATH Top1 Accuracy."
+  },
+  {
+    "file": "p005_f02.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 2 | An iterative pipeline that collects mathematical web pages from Common Crawl.",
+    "width": 892,
+    "height": 335,
+    "description": "This figure is a flowchart illustrating the iterative pipeline for collecting mathematical web pages from Common Crawl. It shows four main steps: 1) Training a FastText model, 2) Recalling math-related web pages from Common Crawl, 3) Discovering math-related domains, and 4) Annotating math-related URL paths from labelers. The process starts with a \"Math Seed\" and ends with a \"Math Corpus.\"\n\nSection 1:\nThe flowchart depicts an iterative pipeline for collecting mathematical web pages from Common Crawl. It begins with training a FastText model, followed by recalling math-related web pages. Next, it discovers math-related domains and annotates math-related URL paths. The process starts with a \"Math Seed\" and ends with a \"Math Corpus.\"\n\nSection 2:\nThe flowchart shows four main steps in the pipeline: 1) Training a FastText model, 2) Recalling math-related web pages from Common Crawl, 3) Discovering math-related domains, and 4) Annotating math-related URL paths. The process starts with a \"Math Seed\" and ends with a \"Math Corpus.\""
+  },
+  {
+    "file": "p007_f03.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 3 | Benchmark curves of DeepSeek-LLM 1.3B trained on different mathematical corpora.",
+    "width": 790,
+    "height": 743,
+    "description": "## Index Section 1: Figure Description\nThis figure displays benchmark curves for DeepSeek-LLM 1.3B trained on various mathematical corpora. It consists of four line graphs, each representing a different dataset: GSM8K, MATH, CMaTH, and BBH. The x-axis represents the number of tokens (B), and the y-axis shows the accuracy percentage (Acc %). The series are labeled as MathPile, OpenWebMath, Proof-Pile-2, and DeepSeekMath Corpus. The DeepSeekMath Corpus series consistently shows the highest accuracy across all datasets, followed by Proof-Pile-2, OpenWebMath, and MathPile.\n\n## Index Section 2: Figure Text\nText in figure: GSM8K, MATH, CMaTH, BBH, Tokens (B), Acc (%), MathPile, OpenWebMath, Proof-Pile-2, DeepSeekMath Corpus."
+  },
+  {
+    "file": "p013_f04.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 4 | Demonstration of PPO and our GRPO. GRPO foregoes the value model, instead estimating the baseline from group scores, significantly reducing training resources.",
+    "width": 847,
+    "height": 361,
+    "description": "## Description\nThis figure is a diagram comparing two reinforcement learning algorithms: PPO and GRPO. PPO uses a policy model, a reward model, a value model, and a GAE to compute an advantage. GRPO, on the other hand, uses a policy model, multiple reward models, and group computation to estimate the baseline, eliminating the need for a value model.\n\n## Text in figure\nPPO, GRPO, Reference Model, Reward Model, Value Model, Policy Model, GAE, Trained Models, Frozen Models, Group Computation, \u03b8, r, v, A, \u03b81, \u03b82,..., \u03b8G, r1, r2,..., rG, A1, A2,..., AG, KL"
+  },
+  {
+    "file": "p019_f05.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "Figure 5 | Performance of the DeepSeekMath-Instruct 1.3B model, which was further trained using various methods, on two benchmarks.",
+    "width": 800,
+    "height": 384,
+    "description": "## Description\nThe figure shows two line graphs comparing the performance of different training methods on two benchmarks, GSM8K and MATH. Each graph displays the accuracy percentage over steps. The highest performing method is GRPC+PS on GSM8K, reaching around 66% accuracy, while the lowest is RFT, around 60%. On MATH, GRPC+PS also leads, achieving about 30% accuracy, with RFT at the lowest, around 27%.\n\n## Text in figure\nGSM8K: RFT, Online RFT, GRPO+OS, GRPO+PS\nMATH: RFT, Online RFT, GRPO+OS, GRPO+PS\nAccuracy (%)\nSteps: 0, 2000, 4000, 6000, 8000"
+  },
+  {
+    "file": "p020_f06.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "Figure 6 | Performance of iterative reinforcement learning with DeepSeekMath-Instruct 7B on two benchmarks.",
+    "width": 800,
+    "height": 386,
+    "description": "## Index Section 1\nFigure 6 displays two line graphs comparing the performance of iterative reinforcement learning with DeepSeekMath-Instruct 7B on two benchmarks, GSM8K and MATH. Each graph has three series: Iteration-0, Iteration-1, and Iteration-2. In the GSM8K graph, Iteration-2 is the highest, reaching around 89% accuracy, while Iteration-0 is the lowest, starting at about 83% accuracy. In the MATH graph, Iteration-2 also leads, peaking at around 52% accuracy, with Iteration-0 starting at approximately 47% accuracy.\n\n## Index Section 2\nGSM8K: Iteration-0 (83%), Iteration-1 (87%), Iteration-2 (89%)\nMATH: Iteration-0 (47%), Iteration-1 (50%), Iteration-2 (52%)\nBenchmarks: GSM8K, MATH\nIterations: 0, 1, 2\nAccuracy: GSM8K (83-89%), MATH (47-52%)"
+  },
+  {
+    "file": "p021_f07.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "Figure 7 | The Maj@K and Pass@K of SFT and RL DeepSeekMath 7B on GSM8K and MATH (temperature 0.7). It was noted that RL enhances Maj@K but not Pass@K.",
+    "width": 845,
+    "height": 403,
+    "description": "## Figure Description\nThis figure contains two line graphs comparing the performance of supervised fine-tuning (SFT) and reinforcement learning (RL) on the DeepSeekMath 7B model for two datasets: GSM8K and MATH. Each graph shows Maj@K and Pass@K metrics. The highest series is Pass@K-RL on GSM8K, reaching nearly 98%, while the lowest is Maj@K-Instruct on MATH, starting at around 50%. The RL method consistently outperforms SFT in Maj@K but not in Pass@K.\n\n## Textual Content\nGSM8K\n- Maj@K-Instruct\n- Maj@K-RL\n- Pass@K-Instruct\n- Pass@K-RL\n\nMATH\n- Maj@K-Instruct\n- Maj@K-RL\n- Pass@K-Instruct\n- Pass@K-RL\n\nK: The number of candidates\nAcc (%)\n1, 4, 8, 16, 32, 64"
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1. The trade-off between Pixel 1 latency and top-1 ImageNet accuracy. All models use the input resolution 224. V3 large and V3 small use multipliers 0.75, 1 and 1.25 to show optimal frontier. All latencies were measured on a single large core of the same device using TFLite[1]. MobileNetV3-Small and Large are our proposed next-generation mobile models.",
+    "width": 464,
+    "height": 186,
+    "description": "This figure is a line graph showing the trade-off between Pixel 1 latency and top-1 ImageNet accuracy for various mobile models. The left panel displays small mobile models with 20-40ms CPU latency, while the right panel shows large mobile models with 40-100ms CPU latency. The MobileNetV3 small model has the highest accuracy at 70%, while the MobileNetV2 model has the lowest accuracy at 56%. The MobileNetV3 large model has the highest latency at 110ms, while the MobileNetV2 model has the lowest latency at 15ms.\n\nText in figure: MobileNetV3 small, MobileNetV3 large, MobileNetV2, MnasNet-small, MnasNet-A, Latency, pixel 1, ms, Accuracy, Top 1%, 70, 68, 66, 64, 62, 60, 58, 56, 15, 20, 25, 30, 35, 40, 50, 60, 70, 80, 90, 100, 110."
+  },
+  {
+    "file": "p001_f02.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 2. The trade-off between MAdds and top-1 accuracy. This allows to compare models that were targeted different hardware or software frameworks. All MobileNetV3 are for input resolution 224 and use multipliers 0.35, 0.5, 0.75, 1 and 1.25. See section 6 for other resolutions. Best viewed in color.",
+    "width": 464,
+    "height": 257,
+    "description": "Description: The figure is a scatter plot showing the trade-off between MAdds (multiply-adds) and top-1 accuracy for various models. The MobileNetV3 models are the highest, with MobileNetV3 at 1.25 multiplier being the highest. The lowest is MobileNetV3 at 0.35 multiplier. The plot shows a general trend of increasing accuracy with increasing MAdds.\n\nText in figure: Accuracy, MAdds, model size, InceptionV2, MnasNet-A, MnasNet-small, MobileNetV2, MobileNetV3, NasNet, ProxylessNAS, ResNet-50, ShuffleNetV2, Multiply Add, Millions, 10, 30, 100, 300, 1000, 3000."
+  },
+  {
+    "file": "p003_f03.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 3. MobileNetV2 [39] layer (Inverted Residual and Linear Bottleneck). Each block consists of narrow input and output (bottleneck), which don't have nonlinearity, followed by expansion to a much higher-dimensional space and projection to the output. The residual connects bottleneck (rather than expansion).",
+    "width": 460,
+    "height": 197,
+    "description": "## Description\nThis figure is a diagram illustrating the architecture of a MobileNetV2 layer, specifically the Inverted Residual and Linear Bottleneck. It shows a sequence of operations within a neural network block, highlighting the bottleneck, expansion, and projection stages. The diagram emphasizes the use of residual connections.\n\n## Text in figure\nMobilenet V2: bottleneck with residual\n3x3\nReLU6, Dwise\nReLU6, 1x1\n+"
+  },
+  {
+    "file": "p003_f04.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 4. MobileNetV2 + Squeeze-and-Excite [20]. In contrast with [20] we apply the squeeze and excite in the residual layer. We use different nonlinearity depending on the layer, see section 5.2 for details.",
+    "width": 462,
+    "height": 159,
+    "description": "This figure is a schematic representation of the MobileNetV3 block architecture. It shows the flow of data through various layers, including convolutional layers, pooling layers, and fully connected layers. The figure highlights the use of different nonlinearities and the application of squeeze-and-excite in the residual layer. Key components include 1x1, 3x3 convolutions, pooling, ReLU activation, and fully connected layers.\n\nText in figure: MobileNet V3 block, 1x1, NL, 3x3, Divide, NL, Pool, FC, FC, ReLU, hard-sigmoid."
+  },
+  {
+    "file": "p004_f05.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 5. Comparison of original last stage and efficient last stage. This more efficient last stage is able to drop three expensive layers at the end of the network at no loss of accuracy.",
+    "width": 472,
+    "height": 196,
+    "description": "## Description\nThis figure is a diagram comparing the original last stage and the efficient last stage of a neural network architecture. It shows the reduction in computational complexity by eliminating certain layers without compromising accuracy.\n\n## Text in figure\nOriginal Last Stage: 1x1 Conv, 3x3 DConv, 1x1 Conv, 1x1 Conv, Avg-Pool, 1x1 Conv\nEfficient Last Stage: 1x1 Conv, Avg-Pool, 1x1 Conv, 1x1 Conv\nValues: 160, 960, 960, 320, 1280, 1000, 1280, 1000"
+  },
+  {
+    "file": "p005_f06.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 6. Sigmoid and swish nonlinearities and ther 'hard' counterparts.",
+    "width": 463,
+    "height": 112,
+    "description": "This figure contains two plots comparing sigmoid and swish activation functions with their\n\"hard\" counterparts. The left plot shows the sigmoid and h-sigmoid functions, with h-sigmoid\nstarting higher and reaching 1 faster. The right plot compares swish and h-swish, with h-swish\nstarting higher and reaching 8 faster.\n\nText in figure: sigmoid vs h-sigmoid, swish vs h-swish, sigmoid, h-sigmoid, swish, h-swish."
+  },
+  {
+    "file": "p006_f07.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 7. Performance of MobileNetV3 as a function of different multipliers and resolutions. In our experiments we have used multipliers 0.35, 0.5, 0.75, 1.0 and 1.25, with a fixed resolution of 224, and resolutions 96, 128, 160, 192, 224 and 256 with a fixed depth multiplier of 1.0. Best viewed in color. Top-1 accuracy is on ImageNet and latency is in ms.",
+    "width": 464,
+    "height": 275,
+    "description": "Description: This figure is a line graph comparing the performance of MobileNetV3 and MobileNetV2 models under different conditions. The graph plots Top-1 accuracy against latency in milliseconds. MobileNetV3 large/multiplier has the highest accuracy, peaking at around 75%, while MobileNetV2/resolution has the lowest, around 50%. The MobileNetV3 small/multiplier and MobileNetV3 large/resolution lines are close in performance.\n\nText in figure: MobilenetV3, MobilenetV2, MobilenetV3 large/multiplier, MobilenetV3 small/multiplier, MobilenetV3 large/resolution, MobilenetV3 small/resolution, MobilenetV2/multiplier, MobilenetV2/resolution, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/224, 1/2"
+  },
+  {
+    "file": "p007_f08.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 8. Impact of h-swish vs ReLU on latency for optimized and non-optimized h-swish. The curve shows a frontier of using depth multiplier. Note that placing h-swish at all layers with 80 channels or more (V3) provides the best trade-offs for both optimized hswish and non-optimized h-swish. Top-1 accuracy is on ImageNet and latency is in ms.",
+    "width": 460,
+    "height": 242,
+    "description": "Description: This figure contains two line plots comparing the impact of h-swish and ReLU on latency for optimized and non-optimized h-swish. Both plots show a frontier of using depth multiplier. The left plot is for optimized h-swish, and the right plot is for non-optimized h-swish. The highest series is the optimized h-swish, and the lowest is the non-optimized h-swish. The optimized h-swish series is higher by approximately 0.5 to 1.0 ms across the latency range.\n\nText in figure: Optimized h-swish, H-swish without optimization, Accuracy, Top-1, Latency, Pixel 1, 76.5, 76.0, 75.5, 75.0, 74.5, 74.0, 45, 50, 55, 60, 65, 70, 75, 1.15 V3:76.3, 1.15 V3:76.3, h-swish@16:75.4, h-swish@16:75.4, V3:75.2, V3:75.2, h-swish@112:75.0, h-swish@112:75.0, ReLU:74.5, ReLU:74.5, 0.85 V3:74.3, 0.85 V3:74.3"
+  },
+  {
+    "file": "p007_f09.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 9. Impact of individual components in the development of MobileNetV3. Progress is measured by moving up and to the left.",
+    "width": 461,
+    "height": 217,
+    "description": "Description: This plot shows the progression of MobileNetV3 development, measured by imagenet accuracy and latency. The highest series is \"non-opt\" at 76.1, and the lowest is \"compact\" at 75.2. The series \"Netadapt\" and \"MnasNet\" are both at 75.2. The series \"SE/4\" is at 75.5.\n\nText in figure: Progression of V3 development, Imagenet Accuracy, Latency, ms, +compact:75.2, +Netadapt:75.2, +SE/4:75.5, +h-swish:76.1, non-opt:76.1, MnasNet:75.2"
+  },
+  {
+    "file": "p007_f10.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 10. Building on MobileNetV3, the proposed segmentation head, Lite R-ASPP, delivers fast semantic segmentation results while mixing features from multiple resolutions.",
+    "width": 471,
+    "height": 158,
+    "description": "Figure type: Diagram\nText in figure: MobileNetV3, Segmentation Head, Resolution, 1/4, 1/8, 1/16, 1/16, 1x1 Conv, ReLU, 128, 4x4 Avg-Pool, stride=2, ReLU, 1x1 Conv, 128, Signoid, 1x1 Conv, 128, ReLU, 1x1 Conv, 19, 1x1 Conv, 19, Dilated Upsample, 1x1 Conv, 19, 19, Semantic Segmentation\n\nDescription: The figure shows a diagram of a segmentation head built on MobileNetV3. It includes a 1x1 convolution layer, ReLU activation, 4x4 average pooling, another 1x1 convolution layer, ReLU activation, and a 1x1 convolution layer with a sigmoid activation. The diagram also shows the resolution of the input and output layers, with the input resolution being 1/4, 1/8, 1/16, and 1/16, and the output resolution being 128. The diagram also shows the number of channels in each layer, with the input layer having 128 channels, the first 1x1 convolution layer having 128 channels, the second 1x1 convolution layer having 128 channels, and the output layer having 19 channels."
+  }
+]

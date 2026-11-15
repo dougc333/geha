@@ -1,0 +1,546 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 1: Helpfulness human evaluation results for Llama 2-Chat compared to other open-source and closed-source models. Human raters compared model generations on ~4k prompts consisting of both single and multi-turn prompts. The 95% confidence intervals for this evaluation are between 1% and 2%. More details in Section 3.4.2. While reviewing these results, it is important to note that human evaluations can be noisy due to limitations of the prompt set, subjectivity of the review guidelines, subjectivity of individual raters, and the inherent difficulty of comparing generations.",
+    "width": 469,
+    "height": 295,
+    "description": "## Description\nThis figure is a bar chart comparing the win rates of different models in a human evaluation study. The chart shows the win rates for six models: Llama-2-70b-chat, Llama-2-34b-chat, and others. The highest win rate is for the model \"Llama-2-34b-chat vs. Falcon-40b-instruct\" at 76.3%, and the lowest is for \"Llama-2-70b-chat vs. MPT-7b-chat\" at 18.0%.\n\n## Text in figure\nLlama-2-70b-chat vs. ChatGTP-0301: 35.9%, 31.5%, 32.5%\nLlama-2-70b-chat vs. PaLM-Bison: 53.0%, 24.6%, 22.4%\nLlama-2-34b-chat vs. Falcon-40b-instruct: 76.3%, 14.6%, 9.1%\nLlama-2-34b-chat vs. Vicuna-33b-v1.3: 37.2%, 31.6%, 31.2%\nLlama-2-13b-chat vs. Vicuna-13b-v1.1: 45.4%, 29.8%, 24.9%\nLlama-2-7b-chat vs. MPT-7b-chat: 61.1%, 20.9%, 18.0%",
+    "pdf_text": "",
+    "bbox": [
+      85.1,
+      85.3,
+      319.5,
+      232.9
+    ]
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "",
+    "width": 314,
+    "height": 310,
+    "description": "This figure is a scatter plot comparing the safety and helpfulness win rates of different models against LLaMA 2. The x-axis represents the helpfulness win rate, and the y-axis represents the safety win rate. The models compared are Falcon-40b-instruct, PaLM-Bison, and Chat-GPT-0301. Falcon-40b-instruct has the highest safety win rate at around 20% and the lowest helpfulness win rate at around 10%. PaLM-Bison has a safety win rate of around 30% and a helpfulness win rate of around 20%. Chat-GPT-0301 has the highest helpfulness win rate at around 40% and a safety win rate of around 30%.\n\nText in figure: Falcon-40b-instruct vs. LLaMA 2 (70b), PaLM-Bison vs. LLaMA 2 (70b), Chat-GPT-0301 vs. LLaMA 2 (70b), LLaMA 2 is better, LLaMA 2 is worse, Helpfulness Win Rate, Safety Win Rate.",
+    "pdf_text": "",
+    "bbox": [
+      362.8,
+      86.7,
+      519.8,
+      241.7
+    ]
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3: Safety human evaluation results for Llama 2-Chat compared to other open-source and closedsource models. Human raters judged model generations for safety violations across ~2,000 adversarial prompts consisting of both single and multi-turn prompts. More details can be found in Section 4.4. It is important to caveat these safety results with the inherent bias of LLM evaluations due to limitations of the prompt set, subjectivity of the review guidelines, and subjectivity of individual raters. Additionally, these safety evaluations are performed using content standards that are likely to be biased towards the Llama 2-Chat models.",
+    "width": 785,
+    "height": 366,
+    "description": "Description: This bar chart compares the safety violation percentages of various language models, including Llama 2-Chat, Vicuna, Falcon, PaLM, and ChatGTP 0301. The highest safety violation percentage is observed in Vicuna 33b-v1.3 at approximately 38%, while the lowest is in Falcon 40b-instruct at around 8%. Other models show varying percentages, with Llama 2-Chat models ranging from 3% to 8%.\n\nText in figure: Llama-2 7b-chat, Llama-2 13b-chat, Llama-2 34b-chat, Llama-2 70b-chat, MPT 7b-chat, Vicuna 13b-v1.1, Vicuna 33b-v1.3, Falcon 40b-instruct, PaLM Bison, ChatGTP 0301, 3%, 4%, 8%, 5%, 21%, 26%, 38%, 8%, 29%, 7%",
+    "pdf_text": "",
+    "bbox": [
+      108.2,
+      84.8,
+      500.6,
+      267.9
+    ]
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 4: Training of Llama 2-Chat : This process begins with the pretraining of Llama 2 using publicly available online sources. Following this, we create an initial version of Llama 2-Chat through the application of supervised fine-tuning . Subsequently, the model is iteratively refined using Reinforcement Learning with Human Feedback (RLHF) methodologies, specifically through rejection sampling and Proximal Policy Optimization (PPO). Throughout the RLHF stage, the accumulation of iterative reward modeling data in parallel with model enhancements is crucial to ensure the reward models remain within distribution.",
+    "width": 917,
+    "height": 438,
+    "description": "## Figure Description\nThis figure illustrates the training process of the Llama 2-Chat model. It starts with pretraining using publicly available data, followed by supervised fine-tuning. The model is then refined through Reinforcement Learning with Human Feedback (RLHF), involving rejection sampling and Proximal Policy Optimization (PPO). Human feedback is integrated throughout the RLHF stage to improve the model.\n\n## Figure Text\n- Pretraining\n- Self-supervised learning\n- Lllama 2\n- Supervised fine-tuning\n- Lllama-2-chat\n- Human feedback\n- Safety Reward Model\n- Helpful Reward Model\n- Human preference data\n- RLHF\n- Rejection Sampling\n- Proximal Policy Optimization",
+    "pdf_text": "",
+    "bbox": [
+      76.4,
+      58.4,
+      534.9,
+      277.4
+    ]
+  },
+  {
+    "file": "p006_f05.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 5: Training Loss for Llama 2 models. We compare the training loss of the Llama 2 family of models. We observe that after pretraining on 2T Tokens, the models still did not show any sign of saturation.",
+    "width": 647,
+    "height": 434,
+    "description": "This figure is a line graph comparing the training loss of different sizes of the Llama 2 models. The x-axis represents the number of processed tokens in billions, ranging from 0 to 2000. The y-axis represents the training perplexity (Train PPL), ranging from 1.4 to 2.2. Four series are plotted, each corresponding to a different model size: 7B, 13B, 34B, and 70B. The 7B model has the highest training loss, starting at approximately 2.2 and decreasing to around 1.7. The 13B model follows closely, starting at about 2.1 and decreasing to around 1.6. The 34B model starts at around 2.0 and decreases to about 1.5. The 70B model has the lowest training loss, starting at approximately 1.9 and decreasing to around 1.5.\n\nText in figure: \"Train PPL\", \"Processed Tokens (Billions)\", \"Llama-2\", \"7B\", \"13B\", \"34B\", \"70B\", \"0\", \"250\", \"500\", \"750\", \"1000\", \"1250\", \"1500\", \"1750\", \"2000\", \"1.4\", \"1.5\", \"1.6\", \"1.7\", \"1.8\", \"1.9\", \"2.0\", \"2.1\", \"2.2\"",
+    "pdf_text": "0 | 250 | 500 | 750 | 1000 | 1250 | 1500 | 1750 | 2000 | Processed Tokens (Billions) | 1.4 | 1.5 | 1.6 | 1.7 | 1.8 | 1.9 | 2.0 | 2.1 | 2.2 | Train PPL | Llama-2 | 7B | 13B | 34B | 70B",
+    "bbox": [
+      131.8,
+      283.7,
+      455.7,
+      500.5
+    ]
+  },
+  {
+    "file": "p013_f06.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 6: Scaling trends for the reward model. More data and a larger-size model generally improve accuracy, and it appears that our models have not yet saturated from learning on the training data.",
+    "width": 772,
+    "height": 313,
+    "description": "Figure 6 displays two line graphs showing the accuracy of reward models as they scale with more data and larger model sizes. The left graph measures accuracy on all examples, while the right graph measures accuracy on examples labeled \"Significantly Better.\" The series with the highest accuracy is 70b, followed by 13b, 7b, GPT4, and OpenAssistant. The lowest accuracy is consistently observed in the OpenAssistant series. The 70b series shows the most significant improvement across both graphs, with the highest accuracy on the right graph reaching approximately 0.80.\n\nText in figure: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, Meta Helpfulness Data Batch Stage, 0.52, 0.54, 0.56, 0.58, 0.60, 0.62, 0.64, Accuracy On All Examples, 7b, 13b, 70b, GPT4, OpenAssistant, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, Meta Helpfulness Data Batch Stage, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, Accuracy On Examples With Label \"Significantly Better\", 7b, 13b, 70b, GPT4, OpenAssistant",
+    "pdf_text": "1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | Meta Helpfulness Data Batch Stage | 0.52 | 0.54 | 0.56 | 0.58 | 0.60 | 0.62 | 0.64 | Accuracy On All Examples | 7b | 13b | 70b | GPT4 | OpenAssistant | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | Meta Helpfulness Data Batch Stage | 0.50 | 0.55 | 0.60 | 0.65 | 0.70 | 0.75 | 0.80 | Accuracy On Examples With Label \"Significantly Better\" | 7b | 13b | 70b | GPT4 | OpenAssistant",
+    "bbox": [
+      107.7,
+      90.5,
+      493.5,
+      247.0
+    ]
+  },
+  {
+    "file": "p014_f07.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 7: Max and median reward among N samples , N \u2208 [1 , . . . , 100] averaged over our training set of prompts. The delta between max and median can be interpreted as potential gain with Rejection Sampling.",
+    "width": 441,
+    "height": 277,
+    "description": "Description: Line graph showing the maximum and median reward scores for N samples ranging from 1 to 100. The maximum reward score starts at 0.54 for 1 sample and increases to 0.66 for 100 samples. The median reward score starts at 0.54 for 1 sample and increases to 0.64 for 100 samples. The difference between the maximum and median reward scores represents the potential gain with Rejection Sampling.\n\nText in figure: 100, 101, N Samples, 0.54, 0.56, 0.58, 0.60, 0.62, 0.64, 0.66, Reward Score, Max of the rewards, Median of the rewards",
+    "pdf_text": "100 | 101 | N Samples | 0.54 | 0.56 | 0.58 | 0.60 | 0.62 | 0.64 | 0.66 | Reward Score | Max of the rewards | Median of the rewards",
+    "bbox": [
+      193.7,
+      79.1,
+      414.0,
+      217.7
+    ]
+  },
+  {
+    "file": "p014_f08.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 8: RLHF impact of the temperature when sampling N outputs and scoring them with a reward model.",
+    "width": 794,
+    "height": 290,
+    "description": "## Figure Description\nThe figure consists of two line graphs, each labeled with \"SFT\" and \"RLHF\" respectively. Both graphs plot \"Reward Score\" against \"Number Samples\" on a logarithmic scale. The \"SFT\" graph shows a range of reward scores from 0.1 to 0.6, while the \"RLHF\" graph ranges from 0.35 to 0.70. Each graph contains multiple lines representing different temperatures (T) used in the reward_max sampling process, ranging from T=0.6 to T=1.5. The lines are color-coded and labeled in the legend.\n\n## Visible Text\nText in figure: \"100\", \"101\", \"102\", \"Number Samples\", \"0.1\", \"0.2\", \"0.3\", \"0.4\", \"0.5\", \"0.6\", \"Reward Score\", \"SFT\", \"100\", \"101\", \"102\", \"Number Samples\", \"0.35\", \"0.40\", \"0.45\", \"0.50\", \"0.55\", \"0.60\", \"0.65\", \"0.70\", \"Reward Score\", \"RLHF\", \"reward_max (T=0.6)\", \"reward_max (T=0.8)\", \"reward_max (T=0.9)\", \"reward_max (T=1)\", \"reward_max (T=1.1)\", \"reward_max (T=1.2)\", \"reward_max (T=1.3)\", \"reward_max (T=1.4)\", \"reward_max (T=1.5)\"",
+    "pdf_text": "100 | 101 | 102 | Number Samples | 0.1 | 0.2 | 0.3 | 0.4 | 0.5 | 0.6 | Reward Score | SFT | 100 | 101 | 102 | Number Samples | 0.35 | 0.40 | 0.45 | 0.50 | 0.55 | 0.60 | 0.65 | 0.70 | Reward Score | RLHF | reward_max (T=0.6) | reward_max (T=0.8) | reward_max (T=0.9) | reward_max (T=1) | reward_max (T=1.1) | reward_max (T=1.2) | reward_max (T=1.3) | reward_max (T=1.4) | reward_max (T=1.5)",
+    "bbox": [
+      99.3,
+      452.3,
+      496.7,
+      597.4
+    ]
+  },
+  {
+    "file": "p016_f09.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 9: Issues with multi-turn memory (left) can be improved with GAtt (right) .",
+    "width": 805,
+    "height": 417,
+    "description": "Section 1: Figure type and content\nThis figure is a comparison of two chat models, showing the issues with multi-turn memory in the left panel and the improved performance with GAtt in the right panel.\n\nSection 2: Text in figure\nLeft panel: \"Who are you?\", \"How to go from Paris to NY?\", \"What caused the extinction of the dinosaurs?\", \"Italy?\"\nRight panel: \"Who are you?\", \"How to go from Paris to NY?\", \"What caused the extinction of the dinosaurs?\", \"Italy?\"",
+    "pdf_text": "",
+    "bbox": [
+      104.6,
+      71.9,
+      507.1,
+      280.6
+    ]
+  },
+  {
+    "file": "p017_f10.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "Figure 10: Attention visualization for a dialogue with and without GAtt . We considered the maximum activations across the network and we bin neighboring tokens together.",
+    "width": 739,
+    "height": 384,
+    "description": "Description: The figure displays two attention visualizations for a dialogue with and without GAtt. Both visualizations show the maximum activations across the network, with neighboring tokens binned together. The left panel is labeled \"Baseline before GAtt,\" and the right panel is labeled \"Baseline after GAtt.\" The words in the figure are from a dialogue where the speaker is acting as Oscar Wilde, answering questions about the best city to live in.\n\nText in figure: Act as Oscar, Wilde, Give short answers, Wh, ich is the, best city to, live in?, London, of course!, Why is that,? My dear, fellow, London, is the ep, itome of, sophistic, ation and culture,. It is, the city of, Shakespeare and Dick, ens, of, the great univers, ities, of, the museums, and galleries,. It is, the city of, the past, present, and, future, where, the old and, the new bl, end together in, a beautiful harm, ony, What is your, name?, My, name is Oscar, Baseline before GAtt, Baseline after GAtt",
+    "pdf_text": "Act as Oscar | Wilde | Give short | answers | Wh | ich is the | best city to | live in? | London, of | course! | Why is that | ? My dear | fellow, London | is the ep | itome of | sophistic | ation and culture | . It is | the city of | Shakespeare and Dick | ens, of | the great univers | ities, of | the museums | and galleries | . It is | the city of | the past, | present, and | future, where | the old and | the new bl | end together in | a beautiful harm | ony. | What is your | name? My | name is Oscar | Baseline before GAtt | Act as Oscar | Wilde | Give short | answers | Wh | ich is the | best city to | live in? | London, of | course! | Why is that | ? My dear | fellow, London | is the ep | itome of | sophistic | ation and culture | . It is | the city of | Shakespeare and Dick | ens, of | the great univers | ities, of | the museums | and galleries | . It is | the city of | the past, | present, and | future, where | the old and | the new bl | end together in | a beautiful harm | ony. | What is your | name? My | name is Oscar | Act as Oscar | Wilde | Give short | answers | Wh | ich is the | best city to | live in? | London, of | course! | Why is that | ? My dear | fellow, London | is the ep | itome of | sophistic | ation and culture | . It is | the city of | Shakespeare and Dick | ens, of | the great univers | ities, of | the museums | and galleries | . It is | the city of | the past, | present, and | future, where | the old and | the new bl | end together in | a beautiful harm | ony. | What is your | name? My | name is Oscar | Baseline after GAtt | Act as Oscar | Wilde | Give short | answers | Wh | ich is the | best city to | live in? | London, of | course! | Why is that | ? My dear | fellow, London | is the ep | itome of | sophistic | ation and culture | . It is | the city of | Shakespeare and Dick | ens, of | the great univers | ities, of | the museums | and galleries | . It is | the city of | the past, | present, and | future, where | the old and | the new bl | end together in | a beautiful harm | ony. | What is your | name? My | name is Oscar",
+    "bbox": [
+      120.8,
+      179.4,
+      490.5,
+      371.5
+    ]
+  },
+  {
+    "file": "p018_f11.png",
+    "page": 18,
+    "kind": "picture",
+    "caption": "Figure 11: Evolution of Llama 2-Chat . We show the evolution after multiple iterations fine-tuning for the win-rate % of Llama 2-Chat compared to ChatGPT. Left : the judge is our reward model, which may favor our model, and right , the judge is GPT-4, which should be more neutral.",
+    "width": 805,
+    "height": 352,
+    "description": "## Description\nThis figure displays two scatter plots comparing the helpfulness and harmlessness of various reward models. The left plot uses a meta reward model as the judge, while the right plot uses GPT-4. Each plot shows the performance of different versions of RLHF and SFT models, with markers indicating specific versions.\n\n## Text in figure\nRLHF-v5 (with PPO), RLHF-v5 (no PPO), RLHF-v4, RLHF-v3, RLHF-v2, RLHF-v1, SFT-v2, SFT-v1, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90%, Helpfulness, Harmlessness, Judge: Meta Reward Models, Judge: GPT-4",
+    "pdf_text": "RLHF-v5 | (with PPO) | RLHF-v5 | (no PPO) | RLHF-v4 | RLHF-v3 | RLHF-v2 | RLHF-v1 | SFT-v2 | SFT-v1 | 10% | 20% | 30% | 40% | 50% | 60% | 70% | 80% | 90% | 10% | 20% | 30% | 40% | 50% | 60% | 70% | 80% | Helpfulness | Judge: Meta Reward Models | Harmlessness | RLHF-v5 | (with PPO) | RLHF-v5 | (no PPO) | RLHF-v4 | RLHF-v3 | RLHF-v2 | RLHF-v1 | SFT-v2 | SFT-v1 | 10% | 20% | 30% | 40% | 50% | 60% | 70% | 80% | 90% | 10% | 20% | 30% | 40% | 50% | 60% | 70% | 80% | Helpfulness | Judge: GPT-4 | Harmlessness",
+    "bbox": [
+      93.8,
+      90.2,
+      496.4,
+      265.9
+    ]
+  },
+  {
+    "file": "p019_f12.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "Figure 12: Human evaluation results for Llama 2-Chat models compared to open- and closed-source models across ~4,000 helpfulness prompts with three raters per prompt.",
+    "width": 785,
+    "height": 370,
+    "description": "## Description\nThis bar chart compares the win rates of different versions of the Llama 2-Chat model against various other models. The highest win rate is observed in the \"Llama-2-34b-chat vs. Falcon-40b-instruct\" model, reaching approximately 80%. The lowest win rate is seen in the \"Llama-2-34b-chat vs. Vicuna-33b-v1.3\" model, with a win rate of around 30%. The win rates for the other models range between these two extremes.\n\n## Text in figure\nLlama-2-34b-chat vs. MPT-7b-chat\nLlama-2-34b-chat vs. Vicuna-13b-v1.1\nLlama-2-34b-chat vs. Vicuna-33b-v1.3\nLlama-2-34b-chat vs. Falcon-40b-instruct\nLlama-2-34b-chat vs. PaLM-Bison\nLlama-2-70b-chat vs. ChatGPT-0301\nSingle Turn\nMulti-Turn\nWin\nTie\nLoss",
+    "pdf_text": "",
+    "bbox": [
+      108.4,
+      87.1,
+      500.9,
+      271.8
+    ]
+  },
+  {
+    "file": "p021_f13.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "Figure 13: Pretraining data toxicity. To allow for better downstream generalization, we chose not to scrub toxic data from pretraining. The HateBERT classifier assigns a toxicity likelihood of 0.5 or higher to about 0.2% of documents in our pretraining corpus.",
+    "width": 459,
+    "height": 338,
+    "description": "Description: The figure is a bar chart showing the distribution of toxicity scores in the pretraining data for the model. The x-axis represents the toxicity score, ranging from 0.0 to 1.0, while the y-axis shows the fraction of documents. The highest fraction of documents is around 0.0, decreasing as the toxicity score increases. The chart indicates that about 0.2% of documents have a toxicity likelihood of 0.5 or higher.\n\nText in figure: \"Fraction of Documents\", \"Toxicity Score\", \"10^-1\", \"10^-2\", \"10^-3\", \"10^-4\", \"10^-5\", \"0.0\", \"0.1\", \"0.2\", \"0.3\", \"0.4\", \"0.5\", \"0.6\", \"0.7\", \"0.8\", \"0.9\", \"1.0\".",
+    "pdf_text": "",
+    "bbox": [
+      191.1,
+      359.3,
+      420.4,
+      528.4
+    ]
+  },
+  {
+    "file": "p025_f14.png",
+    "page": 25,
+    "kind": "picture",
+    "caption": "Figure 14: Impact of safety RLHF measured by reward model score distributions. Left : safety reward model scores of generations on the Meta Safety test set. The clustering of samples in the top left corner suggests the improvements of model safety. Right : helpfulness reward model scores of generations on the Meta Helpfulness test set.",
+    "width": 892,
+    "height": 432,
+    "description": "## Description\nThe figure consists of two scatter plots. The left plot shows the safety reward model scores before and after safety reinforcement learning from human feedback (RLHF). The right plot shows the helpfulness reward model scores before and after safety RLHF. Both plots have a red line indicating the line of equality, where the scores before and after RLHF are the same.\n\n## Text in figure\nSafety RM Score before Safety RLHF, Safety RM Score after Safety RLHF, Safety Improvement, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 0, 1000, Helpfulness RM Score before Safety RLHF, Helpfulness RM Score after Safety RLHF, 0, 1000",
+    "pdf_text": "0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Safety RM Score before Safety RLHF | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Safety RM Score after Safety RLHF | Safety | Improvement | 0 | 1000 | 0 | 1000 | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Helpfulness RM Score before Safety RLHF | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Helpfulness RM Score after Safety RLHF | 0 | 1000 | 0 | 1000",
+    "bbox": [
+      85.6,
+      98.6,
+      531.7,
+      314.4
+    ]
+  },
+  {
+    "file": "p026_f15.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "Figure 15: Safety data scaling trends. Left : as we increase the amount of safety data in model training, the mean safety RM score improves significantly while the helpfulness counterpart remains relatively stable. Right : the left tail of safety RM scores (i.e., most unsafe responses) gradually disappears with the addition of more safety training data.",
+    "width": 823,
+    "height": 413,
+    "description": "Description: The figure consists of two panels. The left panel is a line graph showing the mean reward model score for safety and helpfulness as the percentage of safety data in model training increases. The safety score increases significantly from 0.675 to 0.775, while the helpfulness score remains relatively stable around 0.58. The right panel is a series of histograms showing the distribution of safety reward model scores at different percentages of safety data. As the safety data percentage increases, the left tail of the distribution (indicating unsafe responses) gradually disappears.\n\nText in figure: Safety Data Pct. (%), Mean Reward Model Score, Safety, Helpfulness, Safety Data Pct. 0%, Safety Data Pct. 1%, Safety Data Pct. 10%, Safety Data Pct. 25%, Safety Data Pct. 50%, Safety Data Pct. 100%, Safety Reward Model Score, 0.575, 0.600, 0.625, 0.650, 0.675, 0.700, 0.725, 0.750, 0.775, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0",
+    "pdf_text": "0 | 25 | 50 | 75 | 100 | Safety Data Pct. (%) | 0.575 | 0.600 | 0.625 | 0.650 | 0.675 | 0.700 | 0.725 | 0.750 | 0.775 | Mean Reward Model Score | Safety | Helpfulness | Safety Data Pct. 0% | Safety Data Pct. 1% | Safety Data Pct. 10% | Safety Data Pct. 25% | Safety Data Pct. 50% | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Safety Reward Model Score | Safety Data Pct. 100%",
+    "bbox": [
+      88.7,
+      226.1,
+      499.8,
+      432.3
+    ]
+  },
+  {
+    "file": "p028_f16.png",
+    "page": 28,
+    "kind": "picture",
+    "caption": "",
+    "width": 853,
+    "height": 404,
+    "description": "## Figure Description\nThe figure consists of two plots. The left plot is a stacked bar chart showing the percentage of models across different safety RM scores. The right plot is a scatter plot showing the score increase with CD against the original safety RM score, with points colored by selection status.\n\n## Visible Text\nLeft plot:\n- Legend: Base, + Generic Preprompt, + Preprompt w/ Answer Template\n- X-axis: Safety RM Score\n- Y-axis: Percent\n- Values: 0, 0.2, 0.4, 0.6, 0.8, 1\n\nRight plot:\n- Legend: Selected, Rejected\n- X-axis: Original Safety RM Score\n- Y-axis: Score increase with CD\n- Values: 0, 0.2, 0.4, 0.6, 0.8, 1, -0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6, 0.8",
+    "pdf_text": "0 | 0.2 | 0.4 | 0.6 | 0.8 | 1 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | Model | Base | + Generic Preprompt | + Preprompt w/ Answer Template | Safety RM Score | Percent | 0 | 0.2 | 0.4 | 0.6 | 0.8 | 1 | \u22120.6 | \u22120.4 | \u22120.2 | 0 | 0.2 | 0.4 | 0.6 | 0.8 | Selected? | Selected | Rejected | Original Safety RM Score | Score increase with CD",
+    "bbox": [
+      83.4,
+      94.5,
+      509.9,
+      296.5
+    ]
+  },
+  {
+    "file": "p030_f17.png",
+    "page": 30,
+    "kind": "picture",
+    "caption": "",
+    "width": 448,
+    "height": 210,
+    "description": "## Index Section 1\nBar chart comparing violation percentages of various models. Series include: Llama-2 7b-chat, Llama-2 13b-chat, Llama-2 34b-chat, Llama-2 70b-chat, MPT 7b-chat, Vicuna 7b-v1.1, Vicuna 13b-v1.1, Vicuna 33b-v1.1, Falcon 40b-instruct, Palm, and CharGPT 8901. Falcon 40b-instruct has the highest violation percentage, approximately 40%, while Llama-2 7b-chat has the lowest, around 5%.\n\n## Index Section 2\nText in figure: Llama-2 7b-chat, Llama-2 13b-chat, Llama-2 34b-chat, Llama-2 70b-chat, MPT 7b-chat, Vicuna 7b-v1.1, Vicuna 13b-v1.1, Vicuna 33b-v1.1, Falcon 40b-instruct, Palm, CharGPT 8901.",
+    "pdf_text": "",
+    "bbox": [
+      78.7,
+      78.7,
+      302.3,
+      183.4
+    ]
+  },
+  {
+    "file": "p030_f18.png",
+    "page": 30,
+    "kind": "picture",
+    "caption": "",
+    "width": 446,
+    "height": 210,
+    "description": "## Section 1: Figure Description\nThis figure is a bar chart comparing the safety and helpfulness mean ratings of various models. The highest rating is for \"ChatGPT 7b-chat\" at approximately 4.5, while the lowest rating is for \"MPT 7b-chat\" at around 3.5. Other models include \"Llama 2 7b-chat\", \"MPT 13b-v1.1\", \"Vicuna 33b-v1.1\", \"Vicuna 40b-Instruct\", \"Falcon 40b-Instruct\", and \"PaLM 7b\".\n\n## Section 2: Figure Details\nLlama 2 7b-chat, Llama 2 13b-chat, Llama 2 34b-chat, Llama 2 70b-chat, MPT 7b-chat, Vicuna 13b-v1.1, Vicuna 33b-v1.1, Vicuna 40b-Instruct, Falcon 40b-Instruct, PaLM 7b, and ChatGP 7b-chat.",
+    "pdf_text": "",
+    "bbox": [
+      316.9,
+      79.2,
+      540.0,
+      183.8
+    ]
+  },
+  {
+    "file": "p030_f19.png",
+    "page": 30,
+    "kind": "picture",
+    "caption": "Figure 18: Single-turn and multi-turn violation percentage. Note that these results should be interpreted carefully due to limitations of the prompt set, subjectivity of the review guidelines, content standards, and individual raters.",
+    "width": 611,
+    "height": 281,
+    "description": "## Description\nThis figure is a bar chart comparing the violation percentages of different models in single-turn and multi-turn scenarios. The highest violation percentage is observed in the Falcon 40b-instruct model, reaching approximately 55%. The lowest violation percentage is seen in the Vicuna 33b-v1.3 model, with a value of around 5%. The chart includes models such as MPT 7b-chat, Vicuna 13b-v1.1, Vicuna 33b-v1.3, Falcon 40b-instruct, PaLM Bison, and ChatGTP 0301.\n\n## Text in figure\nLlama-2 7b-chat, Llama-2 13b-chat, Llama-2 34b-chat, Llama-2 70b-chat, MPT 7b-chat, Vicuna 13b-v1.1, Vicuna 33b-v1.3, Falcon 40b-instruct, PaLM Bison, ChatGTP 0301, Single Turn, Multi-Turn, Violation % (lower is safer)",
+    "pdf_text": "",
+    "bbox": [
+      152.1,
+      418.1,
+      457.6,
+      558.3
+    ]
+  },
+  {
+    "file": "p031_f20.png",
+    "page": 31,
+    "kind": "picture",
+    "caption": "Figure 19: Violation percentage per risk category. Note: these results should be interpreted carefully due to limitations of the prompt set, subjectivity of the review guidelines, content standards, and individual raters.",
+    "width": 656,
+    "height": 301,
+    "description": "## Description\nThis figure is a bar chart showing the violation percentages for three categories: \"Hateful and harmful,\" \"Illicit and criminal activity,\" and \"Unqualified advice.\" The \"Hateful and harmful\" category has the highest violation percentage, reaching up to 40%, while the \"Unqualified advice\" category has the lowest, with some bars not reaching 10%. The \"Illicit and criminal activity\" category shows a moderate violation percentage, with some bars reaching up to 30%.\n\n## Text in figure\nCategories: Hateful and harmful, Illicit and criminal activity, Unqualified advice\nViolation percentages: up to 40% (Hateful and harmful), up to 30% (Illicit and criminal activity), up to 10% (Unqualified advice)",
+    "pdf_text": "",
+    "bbox": [
+      140.7,
+      84.7,
+      468.3,
+      235.0
+    ]
+  },
+  {
+    "file": "p032_f21.png",
+    "page": 32,
+    "kind": "picture",
+    "caption": "Figure 20: Distribution shift for progressive versions of Llama 2-Chat , from SFT models towards RLHF.",
+    "width": 900,
+    "height": 200,
+    "description": "## Description\n\nThis figure is a line graph showing the distribution shift for different versions of the Llama 2-Chat model. The graph has four lines, each representing a different model version: SFT (Mix), SFT (Annotation), RLHF (V1), and RLHF (V2). The x-axis represents the Reward Model Score, ranging from 0.0 to 1.0. The y-axis is not labeled, but it represents some form of distribution shift metric. The RLHF (V2) model has the highest distribution shift, followed by RLHF (V1), SFT (Annotation), and SFT (Mix).\n\n## Text in figure\n\nSFT (Mix)  \nSFT (Annotation)  \nRLHF (V1)  \nRLHF (V2)  \n0.0  \n0.2  \n0.4  \n0.6  \n0.8  \n1.0  \nReward Model Score",
+    "pdf_text": "SFT (Mix) | SFT (Annotation) | RLHF (V1) | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Reward Model Score | RLHF (V2)",
+    "bbox": [
+      85.4,
+      217.0,
+      535.5,
+      317.2
+    ]
+  },
+  {
+    "file": "p033_f22.png",
+    "page": 33,
+    "kind": "picture",
+    "caption": "Figure 21: RLHF learns to adapt the temperature with regard to the type of prompt. Lower Self-BLEU corresponds to more diversity: RLHF eliminates diversity in responses to factual prompts but retains more diversity when generating responses to creative prompts. We prompt each model with a diverse set of 10 creative and 10 factual instructions and sample 25 responses. This is repeated for the temperatures T \u2208 { k/ 10 | k \u2208 N : 1 \u2264 k \u2264 15 } . For each of the 25 responses we compute the Self-BLEU metric and report the mean and standard deviation against the temperature.",
+    "width": 597,
+    "height": 329,
+    "description": "This figure contains two line graphs, each showing the Self-BLEU metric against temperature for different models. The left graph is for factual prompts, and the right is for creative prompts. In both graphs, RLHF v3 has the highest Self-BLEU, followed by RLHF v2, RLHF v1, and SFT, which has the lowest. The temperature range is from 0.4 to 1.4.\n\nText in figure: \"Self-BLEU\", \"Temperature\", \"Factual Prompts\", \"Creative Prompts\", \"RLHF v3\", \"RLHF v2\", \"RLHF v1\", \"SFT\", \"0.4\", \"0.6\", \"0.8\", \"1.0\", \"1.2\", \"1.4\", \"60\", \"65\", \"70\", \"75\", \"80\", \"85\", \"90\", \"95\", \"100\".\n\nSection 1: This figure shows two line graphs comparing the Self-BLEU metric for different models against temperature for factual and creative prompts. RLHF v3 consistently has the highest Self-BLEU, followed by RLHF v2, RLHF v1, and SFT, which has the lowest. The temperature range is from 0.4 to 1.4.\n\nSection 2: Text in figure: \"Self-BLEU\", \"Temperature\", \"Factual Prompts\", \"Creative Prompts\", \"RLHF v3\", \"RLHF v2\", \"RLHF v1\", \"SFT\", \"0.4\", \"0.6\", \"0.8\", \"1.0\", \"1.2\", \"1.4\", \"60\", \"65\", \"70\", \"75\", \"80\", \"85\", \"90\", \"95\", \"100\".",
+    "pdf_text": "0.4 | 0.6 | 0.8 | 1.0 | 1.2 | 1.4 | Temperature | 60 | 65 | 70 | 75 | 80 | 85 | 90 | 95 | 100 | Self-BLEU | Factual Prompts | 0.4 | 0.6 | 0.8 | 1.0 | 1.2 | 1.4 | Temperature | Creative Prompts | RLHF v3 | RLHF v2 | RLHF v1 | SFT",
+    "bbox": [
+      156.8,
+      77.7,
+      455.3,
+      241.9
+    ]
+  },
+  {
+    "file": "p033_f23.png",
+    "page": 33,
+    "kind": "picture",
+    "caption": "Figure 22: Time awareness -illustration of our model generalizing the notion of time, with 1,000 SFT time-focused data.",
+    "width": 859,
+    "height": 394,
+    "description": "Section 1: Figure description\nThis figure is a visual representation of the model's ability to generalize the notion of time. It shows the model's performance with 1,000 SFT time-focused data. The figure consists of two panels, each displaying a different aspect of the model's time awareness.\n\nSection 2: Text in figure\nPanel 1: Time awareness - illustration of our model generalizing the notion of time, with 1,000 SFT time-focused data.\nPanel 2: No specific text in the figure.",
+    "pdf_text": "",
+    "bbox": [
+      90.7,
+      335.0,
+      519.9,
+      531.9
+    ]
+  },
+  {
+    "file": "p034_f24.png",
+    "page": 34,
+    "kind": "picture",
+    "caption": "Figure 23: Tool use emergence. Llama 2-Chat is able to understand the tools's applications, and the API arguments, just through the semantics, despite never having been trained to use tools.",
+    "width": 753,
+    "height": 301,
+    "description": "Figure type: Text-based figure with a sequence of API calls.\nDescription: The figure shows a sequence of API calls to determine when sharks and trees first appeared on Earth. It includes three API calls: a search to find when sharks appeared, a search to find when trees appeared, and a calculator to find the difference in years between the two events.\nText in figure: \"When did sharks first appear on Earth?\", \"Sharks first appeared on Earth approximately 450 million years ago.\", \"When did trees first appear on Earth?\", \"Trees first appeared on Earth approximately 385 million years ago.\", \"450 million - 385 million\", \"65 million years.\"",
+    "pdf_text": "",
+    "bbox": [
+      117.4,
+      231.1,
+      493.9,
+      381.5
+    ]
+  },
+  {
+    "file": "p048_f25.png",
+    "page": 48,
+    "kind": "picture",
+    "caption": "Figure 24: Multi-query variants enable higher throughput with larger batch sizes, and show similar latency on smaller batches. Output length is fixed at 128 tokens. The first data point corresponds to batch size 1, and then we double it until the model runs out of memory. The MHA variant triggers an out-ofmemory error at a batch size of 1024 for a context of 256 tokens and at a batch size of 128 for 2k context, whereas MQA and GQA have successful runs in those settings.",
+    "width": 888,
+    "height": 326,
+    "description": "Description: The figure displays two line graphs comparing the throughput of different multi-query variants (MQA, GQA, MHA) against latency per token in milliseconds. Both graphs show throughput in QPS (Queries Per Second) on the y-axis and latency per token in ms on the x-axis. The MQA variant consistently shows the highest throughput, followed by GQA, with MHA having the lowest throughput. The context lengths are 256 and 2k tokens.\n\nText in figure: Context Length 256, Context length 2k, Throughput (QPS), Latency per token (ms), MQA, GQA, MHA, 50, 40, 30, 20, 10, 0, 4, 3, 2, 1, 0.",
+    "pdf_text": "",
+    "bbox": [
+      79.2,
+      178.4,
+      523.1,
+      341.6
+    ]
+  },
+  {
+    "file": "p053_f26.png",
+    "page": 53,
+    "kind": "picture",
+    "caption": "Figure 25: Distribution of human preference data rating over batches. Over time, the share of samples with an unsure or negligibly better rating become larger with better performing Llama 2-Chat trained and available for preference data annotation.",
+    "width": 616,
+    "height": 385,
+    "description": "## Description\nThis figure is a line graph showing the distribution of human preference data ratings over 14 batches. The graph has four series: \"Significantly Better,\" \"Slightly Better,\" \"Better,\" and \"Negligibly Better / Unsure.\" The \"Negligibly Better / Unsure\" series is the highest, peaking at around 40% in batch 12. The \"Significantly Better\" series is the lowest, starting at around 20% in batch 1 and decreasing to around 10% in batch 14.\n\n## Text in figure\nMeta Preference Data Batch Stage\n1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14\nPercentage (%)\n10, 15, 20, 25, 30, 35, 40\nSignificantly Better\nSlightly Better\nBetter\nNegligibly Better / Unsure",
+    "pdf_text": "1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | Meta Preference Data Batch Stage | 10 | 15 | 20 | 25 | 30 | 35 | 40 | Percentage (%) | Significantly Better | Better | Slightly Better | Negligibly Better / Unsure",
+    "bbox": [
+      149.9,
+      88.0,
+      458.2,
+      280.5
+    ]
+  },
+  {
+    "file": "p053_f27.png",
+    "page": 53,
+    "kind": "picture",
+    "caption": "Figure 26: Annotation curriculum. Evolution for each new batch of the maximum and median score given a reward model for prompts samples with a models trained on each of the batches. We can see that the score progressively decrease, suggesting that the prompts are on average harder in the most recent batches.",
+    "width": 451,
+    "height": 330,
+    "description": "Description: This line graph depicts the evolution of reward scores for different batches of prompts, as annotated by a reward model. The graph shows two series: \"Max wrt 20 samples\" and \"Med wrt 20 samples.\" The \"Max wrt 20 samples\" series starts at a high score of approximately 0.80 for Batch 1 and gradually decreases to around 0.65 for Batch 12. The \"Med wrt 20 samples\" series starts at a score of about 0.68 for Batch 1 and also decreases, ending at approximately 0.45 for Batch 12. The graph indicates that the prompts become progressively harder as the batches increase.\n\nText in figure: Batch 1, Batch 2, Batch 3, Batch 4, Batch 5, Batch 6, Batch 7, Batch 8, Batch 9, Batch 10, Batch 11, Batch 12, Reward Annotation Stage, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, Reward Score, Max wrt 20 samples, Med wrt 20 samples",
+    "pdf_text": "Batch 1 | Batch 2 | Batch 3 | Batch 4 | Batch 5 | Batch 6 | Batch 7 | Batch 8 | Batch 9 | Batch 10 | Batch 11 | Batch 12 | Reward Annotation Stage | 0.45 | 0.50 | 0.55 | 0.60 | 0.65 | 0.70 | 0.75 | 0.80 | Reward Score | Max wrt 20 samples | Med wrt 20 samples",
+    "bbox": [
+      191.6,
+      511.1,
+      417.1,
+      675.8
+    ]
+  },
+  {
+    "file": "p054_f28.png",
+    "page": 54,
+    "kind": "picture",
+    "caption": "Figure 27: Reward model score distribution shift caused by incorporating preference rating based margin in ranking loss. With the margin term, we observe a binary split pattern in reward distribution, especially with a larger margin.",
+    "width": 915,
+    "height": 292,
+    "description": "## Description\n\nThis figure presents three bar charts showing the distribution of reward model scores with different margin settings. The x-axis represents density, and the y-axis represents the reward model score. The three charts correspond to \"No Margin,\" \"Margin Small,\" and \"Margin Large.\" The \"Margin Large\" chart shows a binary split pattern, with scores concentrated around 0.0 and 1.0, indicating a significant shift in the reward model score distribution.\n\n## Text in figure\n\nReward Model Score: 0.0, 0.2, 0.4, 0.6, 0.8, 1.0\nDensity: 0.0%, 2.0%, 4.0%, 6.0%, 8.0%\nNo Margin\nMargin Small\nMargin Large",
+    "pdf_text": "0.0% | 2.0% | 4.0% | 6.0% | 8.0% | Density | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Reward Model Score | No Margin | 0.0% | 2.0% | 4.0% | 6.0% | 8.0% | Density | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Margin Small | 0.0% | 2.0% | 4.0% | 6.0% | 8.0% | Density | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Margin Large",
+    "bbox": [
+      76.2,
+      529.0,
+      533.4,
+      675.0
+    ]
+  },
+  {
+    "file": "p055_f29.png",
+    "page": 55,
+    "kind": "picture",
+    "caption": "Figure 28: GAtt zero-shot generalisation. Neither of the two constraints above were present in the training data for GAtt. Yet, they are perfectly fulfilled trough all the turns.",
+    "width": 804,
+    "height": 555,
+    "description": "Figure type: Text-based figure with a table layout.\nDescription: The figure shows a table with questions and responses in a conversational format. The questions are related to travel and dining in Paris and New York City, while the responses are provided in Haiku form. The table includes prompts for travel, dining, and activities in both cities, along with corresponding Haiku responses.\n\nText in figure: \"How to go from Paris to NY?\", \"Paris to New York, Fly across the Atlantic, Many airlines serve.\", \"What should I do there?\", \"In New York City, Endless options await, Explore with delight.\", \"What is the best season?\", \"Best season in NYC. Autumns hues and crisp air, Golden leaves fall slow.\", \"Who are you?\", \"AI assistant, Here to help with Haiku, Answering your queries.\", \"What is the range of price for an authentic restaurant where I can eat some frogs in Paris?\", \"For a genuine French dining experience that serves frog dishes, you can expect to pay between 30\u20ac to 60\u20ac per person at a traditional brasserie or bistro in Paris, with some higher-end restaurants potentially costing upwards of 100\u20ac per person.\", \"And besides eating frogs, what do you recommend me to do in this city?\", \"Sure, here are three things to do in Paris beyond eating frogs: 1. Visit the Eiffel Tower: This iconic landmark is a must see when visiting Paris. You can take the elevator to the top for breathtaking views of the city. 2. Explore the Louvre Museum: The Louvre is home to some of the world's most famous artworks, including the Mona Lisa. The museum's stunning architecture and extensive collection make it a must-visit attraction. 3. Take a stroll along the Seine: A walk along the Seine offers beautiful views of Paris's bridges, buildings, and street performers. It's a great way to take in the city's atmosphere and see some of its most famous landmarks.\"",
+    "pdf_text": "",
+    "bbox": [
+      104.6,
+      95.4,
+      506.5,
+      372.9
+    ]
+  },
+  {
+    "file": "p055_f30.png",
+    "page": 55,
+    "kind": "picture",
+    "caption": "Figure 29: Average reward model score vs model response quality rating (7-point Likert scale) from triple human review . The left and right plots are on helpfulness and safety test sets, respectively. The shaded areas represent \u00b1 1 standard deviation.",
+    "width": 769,
+    "height": 370,
+    "description": "## Description\nThe figure consists of two plots, each showing a relationship between the Median Response Quality Score and the Mean Reward Model Score. The left plot is labeled \"Helpfulness\" and the right plot is labeled \"Safety.\" Both plots use a 7-point Likert scale for the Median Response Quality Score. The shaded areas represent \u00b1 1 standard deviation.\n\n## Text in figure\nHelpfulness, Safety, Median Response Quality Score, Mean Reward Model Score, 1, 2, 3, 4, 5, 6, 7, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0",
+    "pdf_text": "1 | 2 | 3 | 4 | 5 | 6 | 7 | Median Response Quality Score | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Mean Reward Model Score | Helpfulness | 1 | 2 | 3 | 4 | 5 | 6 | 7 | Median Response Quality Score | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Mean Reward Model Score | Safety",
+    "bbox": [
+      113.2,
+      464.0,
+      497.3,
+      649.2
+    ]
+  },
+  {
+    "file": "p057_f31.png",
+    "page": 57,
+    "kind": "picture",
+    "caption": "Figure 30: Impact of system prompt on human evaluation results for ChatGPT ( Left ). Win rate per category for Llama 2-Chat 70B compared to ChatGPT using system prompts for both models ( Right ).",
+    "width": 430,
+    "height": 206,
+    "description": "## Description\nThis figure is a bar chart comparing the win rates of two models, \"Llama 2-70B-chat\" and \"ChatGPT,\" in human evaluation. The left bar shows the win rate of \"Llama 2-70B-chat\" without a system prompt, while the right bar shows the win rate with a system prompt. The win rate for \"Llama 2-70B-chat\" with a system prompt is higher than without a system prompt.\n\n## Text in figure\n- Win rate per category\n- \"Llama 2-70B-chat vs. Chat GPT (No System Prompt)\"\n- \"Llama 2-70B-chat vs. Chat GPT (With System Prompt)\"",
+    "pdf_text": "",
+    "bbox": [
+      82.0,
+      377.7,
+      297.1,
+      480.5
+    ]
+  },
+  {
+    "file": "p058_f32.png",
+    "page": 58,
+    "kind": "picture",
+    "caption": "Figure 31: Win rate of Llama 2-Chat versus ChatGPT analyzed by number of turns ( Left ) in the prompt and word count ( Right ) for the prompt and generation combined. For the word count plot, we report the win rate for each quintile. The maximum total word count (prompt and generation) is 2432. We do not see any trends in win rate with either word count or turn count.",
+    "width": 896,
+    "height": 204,
+    "description": "## Description\nThe figure is a set of two bar charts comparing the win rates of two models, labeled as \"Llama 2-Chat\" and \"ChatGPT,\" across different metrics. The left chart shows win rates based on the number of turns in the prompt, ranging from 1 to 17 turns. The right chart shows win rates based on word count quintiles, from 1 to 5. Both charts indicate no significant trends in win rates with either metric.\n\n## Text in figure\n- **Left Chart (Number of Turns)**\n  - Legend: Win, Tie, Loss\n  - X-axis: Number of Turns (1 to 17)\n  - Y-axis: Win Rate (%)\n  - Data points: Win rates for each turn count\n\n- **Right Chart (Word Count Quintile)**\n  - Legend: Win, Tie, Loss\n  - X-axis: Word Count Quintile (1 to 5)\n  - Y-axis: Win Rate (%)\n  - Data points: Win rates for each word count quintile",
+    "pdf_text": "",
+    "bbox": [
+      80.4,
+      111.1,
+      528.5,
+      212.8
+    ]
+  },
+  {
+    "file": "p064_f33.png",
+    "page": 64,
+    "kind": "picture",
+    "caption": "Figure 32: Safety and Helpfulness reward model scores on a set of safe (left) and unsafe (right) responses from the safety test set. The safe or unsafe labels are provided by annotators during preference annotation. Conflicts can be observed between the two aspects at the bottom right corner (i.e., high safety score but low helpfulness score) of the safe response plot and the top left corner (i.e., low safety score but high helpfulness score) of the unsafe response plot.",
+    "width": 859,
+    "height": 338,
+    "description": "## Description\nThe figure presents two scatter plots comparing Safety RM Score and Helpfulness RM Score for safe and unsafe responses. Each plot contains numerous data points with contour lines indicating density. The left plot shows safe responses, while the right plot shows unsafe responses. Conflicts between safety and helpfulness are visible in both plots.\n\n## Text in figure\nSafety RM Score, Helpfulness RM Score, Safe Responses, Unsafe Responses, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0",
+    "pdf_text": "0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Safety RM Score | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Helpfulness RM Score | Safe Responses | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Safety RM Score | 0.0 | 0.2 | 0.4 | 0.6 | 0.8 | 1.0 | Helpfulness RM Score | Unsafe Responses",
+    "bbox": [
+      90.7,
+      78.2,
+      519.8,
+      247.1
+    ]
+  },
+  {
+    "file": "p067_f34.png",
+    "page": 67,
+    "kind": "picture",
+    "caption": "Figure 33: The false model refusal rate increases with the percentage of safety data. Left : false refusal rate on the helpfulness dataset ranges from 0.006% (i.e., 1 occurrence) to 0.05% (i.e., 8 occurrences); Right : false refusal rate on the borderline dataset ranges from 15% to 27%.",
+    "width": 744,
+    "height": 368,
+    "description": "## Description\n\nThis figure contains two line plots, each showing the false refusal rate as a function of the percentage of safety data. The left plot shows the false refusal rate on the helpfulness dataset, ranging from 0.006% to 0.05%. The right plot shows the false refusal rate on the borderline dataset, ranging from 16% to 27%. The series \"Helpfulness\" is the lowest in both plots, while \"Borderline\" is the highest.\n\n## Text in figure\n\nHelpfulness, Borderline, 0.01, 0.02, 0.03, 0.04, 0.05, 16, 18, 20, 22, 24, 26, Safety Data Pct. (%), False Refusal Rate (%)",
+    "pdf_text": "0 | 20 | 40 | 60 | 80 | 100 | Safety Data Pct. (%) | 0.01 | 0.02 | 0.03 | 0.04 | 0.05 | False Refusal Rate (%) | Helpfulness | 0 | 20 | 40 | 60 | 80 | 100 | Safety Data Pct. (%) | 16 | 18 | 20 | 22 | 24 | 26 | False Refusal Rate (%) | Borderline",
+    "bbox": [
+      119.1,
+      93.8,
+      491.1,
+      278.0
+    ]
+  }
+]

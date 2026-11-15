@@ -1,0 +1,56 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 1: Two-stream architecture for video classification.",
+    "width": 715,
+    "height": 243,
+    "description": "Figure type: Diagram\nDescription: The figure illustrates a two-stream architecture for video classification. It consists of a spatial stream and a temporal stream, both using convolutional neural networks (ConvNets). The spatial stream processes single frames, while the temporal stream processes multi-frame optical flow. Both streams have similar structures with convolutional layers, pooling layers, and fully connected layers, ending with a softmax layer for classification.\n\nText in figure: Spatial stream ConvNet, Temporal stream ConvNet, conv1, conv2, conv3, conv4, conv5, full16, full17, softmax, 7x7x96, 5x5x256, 3x3x512, 3x3x512, 3x3x512, 4096, 2048, stride 2, stride 2, stride 1, stride 1, stride 1, pool 2x2, pool 2x2, pool 2x2, dropout, dropout, class score fusion, input video, single frame, multi-frame optical flow"
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2: Optical flow. (a),(b): a pair of consecutive video frames with the area around a moving hand outlined with a cyan rectangle. (c): a close-up of dense optical flow in the outlined area; (d): horizontal component d x of the displacement vector field (higher intensity corresponds to positive values, lower intensity to negative values). (e): vertical component d y . Note how (d) and (e) highlight the moving hand and bow. The input to a ConvNet contains multiple flows (Sect. 3.1).",
+    "width": 776,
+    "height": 135,
+    "description": "Figure: Optical flow visualization in video frames.\nDescription: The figure shows two consecutive video frames with a moving hand highlighted. It includes a close-up of dense optical flow, and separate images for the horizontal and vertical components of the flow.\n\nText in figure: (a), (b), (c), (d), (e)"
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3: ConvNet input derivation from the multi-frame optical flow. Left: optical flow stacking (1) samples the displacement vectors d at the same location in multiple frames. Right: trajectory stacking (2) samples the vectors along the trajectory. The frames and the corresponding displacement vectors are shown with the same colour.",
+    "width": 795,
+    "height": 204,
+    "description": "Section 1: Figure type and content description.\nThis is a conceptual diagram showing two methods for deriving input for a convolutional neural network (ConvNet) from multi-frame optical flow data. The left panel illustrates \"optical flow stacking\" which samples displacement vectors at the same location across multiple frames. The right panel shows \"trajectory stacking\" which samples vectors along a trajectory. Both methods use the same color scheme to represent frames and corresponding displacement vectors.\n\nSection 2: Figure details.\nText in figure: \"input volume channels\", \"d_\u03c4+2(p1)\", \"d_\u03c4+1(p1)\", \"d_\u03c4(p1)\", \"\u03c4+3\", \"\u03c4+2\", \"\u03c4+1\", \"\u03c4\", \"P1=(u,v)\", \"P2\", \"P3\". The left panel has arrows labeled \"d_\u03c4+2(p1)\", \"d_\u03c4+1(p1)\", and \"d_\u03c4(p1)\" pointing to vectors at point P1. The right panel has arrows labeled \"d_\u03c4+2(p3)\", \"d_\u03c4+1(p2)\", and \"d_\u03c4(p1)\" pointing to vectors at points P1 and P2."
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 4: First-layer convolutional filters learnt on 10 stacked optical flows. The visualisation is split into 96 columns and 20 rows: each column corresponds to a filter, each row - to an input channel.",
+    "width": 794,
+    "height": 217,
+    "description": "## Description\nThis figure is a visualization of convolutional filters from a two-stream convolutional network. It shows 96 columns, each representing a filter, and 20 rows, each corresponding to an input channel. The filters are applied to 10 stacked optical flows, with the top half focusing on horizontal flow components and the bottom half on vertical flow components.\n\n## Text in figure\n- \"flow 1\"\n- \"flow 10\"\n- \"conv. filters on horizontal flow components \\(d^x\\)\"\n- \"conv. filters on vertical flow components \\(d^y\\)\"\n- \"temporal derivative\"\n- \"spatial derivative\""
+  },
+  {
+    "file": "p009_f05.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 5: Confusion matrix of a two-stream model on the first split of UCF-101.",
+    "width": 638,
+    "height": 646,
+    "description": "Description: The figure is a confusion matrix showing the performance of a two-stream model on the first split of the UCF-101 dataset. The matrix displays the accuracy of action recognition for various activities. The highest accuracy is observed for activities like \"Apply Eye Makeup\" and \"Baby Crawling,\" while the lowest accuracy is seen for activities like \"Writing\" and \"YOLO.\"\n\nText in figure: Apply Eye Makeup, Baby Crawling, Baseball Batting, Band Marching, Basketball, Baseball Pitch, Bench Press, Billiards, Blow On Hair, Boxing, Body Weight Squats, Bozing Speedbag, Bowling, Boxing Glove, Bowling Ball, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove, Boxing Glove"
+  },
+  {
+    "file": "p010_f06.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 6: Per-class recall of a two-stream model on the first split of UCF-101.",
+    "width": 636,
+    "height": 432,
+    "description": "Description: This figure is a bar chart showing the per-class recall of a two-stream model on the first split of UCF-101. The x-axis represents different classes, and the y-axis represents recall values. The recall values range from approximately 0.3 to 1.0, with the highest recall around 1.0 and the lowest around 0.3.\n\nText in figure: BabyCrawling, BasketballDunk, BaseballPitch, BaseballSwing, Basketball, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBatSwing, BaseballPitching, BaseballBat"
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1: Overview of SELF-RAG. SELF-RAG learns to retrieve, critique, and generate text passages to enhance overall generation quality, factuality, and verifiability.",
+    "width": 794,
+    "height": 415,
+    "description": "Figure type: Diagram\nDescription: The figure is a diagram comparing two text generation methods: Retrieval-Augmented Generation (RAG) and Self-Reflective Retrieval-Augmented Generation (Self-RAG). It shows the steps involved in each method, highlighting how Self-RAG incorporates critique and selection of generated text segments to improve overall quality.\n\nText in figure: \"Retrieval-Augmented Generation (RAG)\", \"Self-Reflective Retrieval-Augmented Generation (Self-RAG)\", \"Prompt\", \"Retrieve K documents\", \"Generate segment in parallel\", \"Critique outputs and select best segment\", \"Prompt LM with K docs and generate\", \"Relevant\", \"Irrelevant\", \"Partially relevant\""
+  },
+  {
+    "file": "p005_f02.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 2: SELF-RAG training examples. The left example does not require retrieval while the right one requires retrieval; thus, passages are inserted. More examples are in Appendix Table 4.",
+    "width": 743,
+    "height": 167,
+    "description": "This figure is a visual representation of the SELF-RAG model's training examples. It shows two input-output pairs, one requiring retrieval and the other not. The left example is an essay about a summer vacation, while the right example is about the naming of US states. The model's augmented output includes relevant passages inserted for the right example, demonstrating its ability to retrieve, generate, and critique information."
+  },
+  {
+    "file": "p009_f03.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 3: Analysis on SELF-RAG: (a) Ablation studies for key components of SELF-RAG training and inference based on our 7B model. (b) Effects of soft weights on ASQA citation precision and Mauve (fluency). (c) Retrieval frequency and normalized accuracy on PubHealth and PopQA.",
+    "width": 788,
+    "height": 286,
+    "description": "This figure contains three panels of plots from the paper \"Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection\". Panel (a) shows ablation studies for key components of SELF-RAG training and inference, with metrics like PQA, Med, and AS. Panel (b) shows the effects of soft weights on ASQA citation precision and Mauve fluency. Panel (c) shows retrieval frequency and normalized accuracy on PubHealth and PopQA datasets.\n\nPanel (a): PQA highest with SELF-RAG (50k) at 45.5, lowest with No retrieval at 24.7. Med highest with SELF-RAG (50k) at 73.5, lowest with No critic at 67.8. AS highest with SELF-RAG (50k) at 32.1, lowest with No critic at 18.1.\n\nPanel (b): Precision highest with weight 1 at 70.5, lowest with weight 2 at 90. Mauve highest with weight 1 at 95, lowest with weight 2 at 90.\n\nPanel (c): PubHealth accuracy highest at retrieval threshold 0, PopQA accuracy highest at retrieval threshold 0. Retrieval frequency highest at retrieval threshold 0 for both datasets.\n\nText in figure: SELF-RAG, Training, Test, No retrieval, No critic, Retrieve top1, Remove IsSUP, PQA, Med, AS, Precision, Mauve, PubHealth, PopQA, Accuracy, Frequency, Weight for IsSupport, Retrieval Threshold."
+  },
+  {
+    "file": "p010_f04.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 4: Training scale and Human analysis: (a) (b) (c) Training scale analysis shows the effect of the training data scale on PopQA, PubHealth and ASQA (citation precision), respectively. (d) Human analysis on SELF-RAG outputs as well as reflection tokens.",
+    "width": 754,
+    "height": 163,
+    "description": "This figure is a collection of three line graphs (a, b, c) and a table (d). Graphs (a) to (c) show the performance of different models (PopQA, PubHealth, ASQA) as the number of training instances increases. The highest performance is observed in graph (a) PopQA, reaching approximately 55. The lowest performance is in graph (b) PubHealth, starting at around 71 and decreasing to about 45. Graph (c) ASQA shows a steady increase, starting at 40 and reaching about 60. Table (d) provides human evaluation scores for PopQA and Bio generation, with scores ranging from 90.0 to 95.0.\n\nText in figure: PopQA, PubHealth, ASQA, Pop, Bio, S & P, iSREL, iSUP, 92.5, 70.0, 95.0, 90.0, 90.0, 85.0."
+  }
+]

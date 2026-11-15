@@ -1,0 +1,155 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1. An example from the nuScenes dataset. We see 6 different camera views, lidar and radar data, as well as the human annotated semantic map. At the bottom we show the human written scene description.",
+    "width": 444,
+    "height": 315,
+    "description": "## Search Index Section 1: Figure Description\n\nThis figure is a composite image showcasing data from the nuScenes dataset, a multimodal dataset for autonomous driving. It displays six different camera views, lidar data, radar data, and a human-annotated semantic map. The bottom part of the figure includes a human-written scene description.\n\n## Search Index Section 2: Text in Figure\n\nText in figure:\n- nuScenes\n- Camera views\n- Lidar\n- Radar\n- Semantic map\n- Scene description\n- Radar\n- Lidar\n- Map"
+  },
+  {
+    "file": "p002_f02.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 2. Front camera images collected from clear weather (col 1), nighttime (col 2), rain (col 3) and construction zones (col 4).",
+    "width": 992,
+    "height": 280,
+    "description": "## Description\nThis figure is a collection of front camera images from the nuScenes dataset, showcasing various weather and environmental conditions. The images are organized into four columns, each representing different scenarios: clear weather, nighttime, rain, and construction zones. Each image displays a street scene with vehicles, pedestrians, and infrastructure, highlighting the dataset's diversity.\n\n## Text in figure\n- Clear weather\n- Nighttime\n- Rain\n- Construction zones\n- Front camera images\n- Vehicles\n- Pedestrians\n- Infrastructure"
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3. Semantic map of nuScenes with 11 semantic layers in different colors. To show the path of the ego vehicle we plot each keyframe ego pose from scene-0121 with black spheres.",
+    "width": 476,
+    "height": 178,
+    "description": "This figure is a semantic map from the nuScenes dataset, showing a multimodal representation of an urban environment. It displays 11 semantic layers in different colors, including road, sidewalk, crosswalk, and traffic light. The map is overlaid with the path of an ego vehicle, represented by black spheres, indicating the vehicle's keyframe poses.\n\nText in figure: \"nuScenes: A multimodal dataset for autonomous driving\", \"Figure 3. Semantic map of nuScenes with 11 semantic layers in different colors\", \"To show the path of the ego vehicle we plot each keyframe ego pose from scene-0121 with black spheres\", \"68 m\", \"184 m\", \"road_divider\", \"drivable_area\", \"road_segment\", \"road_block\", \"lane\", \"ped_crossing\", \"walkway\", \"stop_line\", \"carpark_area\", \"traffic_light\".\n\nSection 1:\nThis figure is a semantic map from the nuScenes dataset, showing 11 semantic layers in different colors. The map includes road, sidewalk, crosswalk, and traffic light layers. The path of an ego vehicle is overlaid, represented by black spheres indicating keyframe poses from scene-0121.\n\nSection 2:\nnuScenes, Figure 3, semantic map, 11 layers, road, sidewalk, crosswalk, traffic light, ego vehicle path, black spheres, keyframe poses, scene-0121, 68 m, 184 m, road_divider, drivable_area, road_segment, road_block, lane, ped_crossing, walkway, stop_line, carpark_area, traffic_light."
+  },
+  {
+    "file": "p004_f04.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 4. Sensor setup for our data collection platform.",
+    "width": 452,
+    "height": 232,
+    "description": "## Search Index Section 1: Figure Description\nThis figure is a diagram showing the sensor setup for a data collection platform used in autonomous driving. It depicts various sensors placed on a car, including cameras (CAM), radars, and LiDAR. The sensors are positioned on the front, back, and sides of the car, with specific labels indicating their locations, such as \"Front Right,\" \"Back Right,\" and \"Top.\" The diagram also includes arrows to show the direction of sensor orientation.\n\n## Search Index Section 2: Text in Figure\nText in figure: \"RADAR Front Right,\" \"CAM Back Right,\" \"CAM Front Right,\" \"CAM Front,\" \"LIDAR Top,\" \"IMU,\" \"CAM Back,\" \"CAM Front Left,\" \"CAM Back Left,\" \"RADAR Front Left,\" \"X-axis,\" \"Downward,\" \"Y-axis,\" \"Upward,\" \"Z-axis.\""
+  },
+  {
+    "file": "p005_f05.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 5. Spatial data coverage for two nuScenes locations. Colors indicate the number of keyframes with ego vehicle poses within a 100m radius across all scenes.",
+    "width": 475,
+    "height": 182,
+    "description": "Figure: Spatial data coverage for two nuScenes locations.\nShows: Boston-Seaport and Singapore-OneNorth.\nColors: Indicate the number of keyframes with ego vehicle poses within a 100m radius.\nHighest: Boston-Seaport, lowest: Singapore-OneNorth.\nText in figure: \"boston-seaport\", \"singapore-onenorth\", color scale values.\n\nDescription: Figure shows spatial data coverage for two nuScenes locations, Boston-Seaport and Singapore-OneNorth. Colors indicate the number of keyframes with ego vehicle poses within a 100m radius. Boston-Seaport has the highest number of keyframes, while Singapore-OneNorth has the lowest. The color scale values are not specified."
+  },
+  {
+    "file": "p007_f06.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 6. Amount of training data vs. mean Average Precision (mAP) on the val set of nuScenes. The dashed black line corresponds to the amount of training data in KITTI [32].",
+    "width": 413,
+    "height": 197,
+    "description": "Figure: Line graph showing the relationship between the amount of training data used and mean Average Precision (mAP) on the validation set of nuScenes. Three series are plotted: SSD+3D, PointPillars, and OFT. The SSD+3D series is highest, followed by PointPillars, and OFT is the lowest. The dashed black line represents the amount of training data in KITTI.\n\nText in figure: SSD+3D, PointPillars, OFT, mAP (%), % Training data used, KITTI."
+  },
+  {
+    "file": "p007_f07.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 7. Average precision vs. matching function. CD: Center distance. IOU: Intersection over union. We use IOU = 0 . 7 for car and IOU = 0 . 5 for pedestrian and bicycle following KITTI [32]. We use CD = 2 m for the TP metrics in Section 3.1.",
+    "width": 416,
+    "height": 229,
+    "description": "This figure is a bar chart comparing the average precision (AP) of different matching functions for three object types: car, pedestrian, and bicycle. The chart shows AP percentages for four matching functions: Megvii, PointPillars, MonoDIS, and OFT. For cars, Megvii has the highest AP at 80%, followed by PointPillars at 70%. For pedestrians, Megvii also leads with 80%, while for bicycles, Megvii has the lowest AP at 20%.\n\nText in figure: Car, Pedestrian, Bicycle, Megvii, PointPillars, MonoDIS, OFT, CD, IOU, AP (%), 80, 60, 40, 20, 0."
+  },
+  {
+    "file": "p013_f08.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 8. Top: Number of annotations per category. Bottom: Attributes distribution for selected categories. Cars and adults are the most frequent categories in our dataset, while ambulance is the least frequent. The attribute plot also shows some expected patterns: construction vehicles are rarely moving, pedestrians are rarely sitting while buses are commonly moving.",
+    "width": 478,
+    "height": 516,
+    "description": "This figure contains two bar charts. The top chart shows the number of annotations per category, with cars and adults being the most frequent categories and ambulance being the least frequent. The bottom chart shows the attribute distribution for selected categories, with construction vehicles rarely moving, pedestrians rarely sitting, and buses commonly moving.\n\nDescription: The top chart has parked cars as the highest series, followed by stopped cars, moving cars, and so on. The bottom chart shows various attributes for selected categories, with parked cars being the highest series and ambulance being the lowest.\n\nText in figure: parked, stopped, moving, with rider, without rider, standing, sitting, walking, car, adult, barrier, trafficcone, truck, trailer, construction vehicle, police car, motorcycle, bicycle, worker, decks, bicycle racks, child, bus, bendy, stroller, animal, police, wheelchair, mobility, ambulance."
+  },
+  {
+    "file": "p013_f09.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 9. Left: Bounding box size distributions for car . Right: Category count in each keyframe for car , pedestrian , and bicycle .",
+    "width": 464,
+    "height": 204,
+    "description": "Section 1: Figure type and content summary.\nThis figure contains two bar charts. The left chart shows the distribution of bounding box sizes for cars, categorized by width, length, and height. The right chart displays the count of annotations per keyframe for cars, pedestrians, and bicycles.\n\nSection 2: Figure details.\nLeft chart: The highest bar is for width, followed by length, and the lowest is for height. Right chart: The highest count is for cars, followed by pedestrians, and the lowest is for bicycles."
+  },
+  {
+    "file": "p013_f10.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "",
+    "width": 462,
+    "height": 270,
+    "description": "Figure: Two bar charts showing the percentage of annotations per class for different radial distances and orientations.\n\nRadial Distance Chart:\n- Car: Highest at 0m, lowest at 75m.\n- Pedestrian: Highest at 15m, lowest at 75m.\n- Bicycle: Highest at 15m, lowest at 75m.\n\nOrientation Chart:\n- Car: Highest at 0 degrees, lowest at -180 degrees.\n- Pedestrian: Highest at 0 degrees, lowest at -180 degrees.\n- Bicycle: Highest at 0 degrees, lowest at -180 degrees.\n\nText in figure: car, pedestrian, bicycle, % of annotations/class, Radial Distance [m], Orientation [degrees], -180, 0, 180."
+  },
+  {
+    "file": "p013_f11.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 10. Top: radial distance of objects from the ego vehicle. Bottom: orientation of boxes in box coordinate frame.",
+    "width": 462,
+    "height": 320,
+    "description": "Description: The figure contains three bar charts. The top chart shows the number of cars\nat different absolute velocities. The middle chart shows the number of pedestrians at\ndifferent absolute velocities. The bottom chart shows the number of bikes at different\nabsolute velocities. The highest series is the number of cars, followed by pedestrians,\nand then bikes. The lowest series is the number of bikes.\n\nText in figure: \"# of Cars\", \"# of Peds\", \"# of Bikes\", \"Absolute velocity [m/s]\".\n\nDescription: The figure shows the distribution of objects from the ego vehicle based on\ntheir absolute velocity. The top chart shows the number of cars, the middle chart shows\nthe number of pedestrians, and the bottom chart shows the number of bikes. The number\nof cars is the highest, followed by pedestrians, and then bikes. The number of bikes is\nthe lowest."
+  },
+  {
+    "file": "p014_f12.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 12. Polar log-scaled density map for box annotations where the radial axis is the distance from the ego-vehicle in meters and the polar axis is the yaw angle wrt to the ego-vehicle. The darker the bin is, the more box annotations in that area. Here, we only show the density up to 150m radial distance for all maps, but car would have annotations up to 200m.",
+    "width": 976,
+    "height": 325,
+    "description": "Figure: Polar log-scaled density map showing box annotations for cars, pedestrians, and bicycles. The radial axis represents distance from the ego-vehicle in meters, and the polar axis represents the yaw angle relative to the ego-vehicle. The density is shown up to 150 meters. The car map shows the highest density, followed by the pedestrian map, and the bicycle map shows the lowest density.\n\nText in figure: \"car\", \"pedestrian\", \"bicycle\", \"0\", \"45\", \"90\", \"135\", \"180\", \"225\", \"270\", \"315\", \"360\", \"50m\", \"100m\", \"150m\", \"200m\"."
+  },
+  {
+    "file": "p014_f13.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 13. Hexbin log-scaled density plots of the number of lidar points inside a box annotation stratified by categories ( car , pedestrian and bicycle .",
+    "width": 984,
+    "height": 223,
+    "description": "## Description\nThis figure shows three hexbin log-scaled density plots. Each plot represents the number of lidar points within a box annotation for different object categories: car, pedestrian, and bicycle. The plots are color-coded, with darker colors indicating higher densities of lidar points. The car plot has the highest density, followed by the pedestrian plot, and the bicycle plot has the lowest density.\n\n## Text in figure\ncar, pedestrian, bicycle, Lidar points in box, Radial Distance [m], 10^2, 10^1, 0"
+  },
+  {
+    "file": "p014_f14.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 14. Hexbin log-scaled density plots of the number of lidar and radar points inside a box annotation. The black line represents the mean number of points for a given distance wrt the ego-vehicle.",
+    "width": 452,
+    "height": 209,
+    "description": "## Search Index Description\n\nThis figure contains two hexbin log-scaled density plots. The left plot shows the number of lidar points in object annotations, while the right plot shows the number of radar points. The black line in each plot represents the mean number of points for a given distance from the ego-vehicle.\n\n## Search Index Text\n\nLeft plot: lidar points, mean number of points, radial distance.\nRight plot: radar points, mean number of points, radial distance.\nBlack line: mean number of points."
+  },
+  {
+    "file": "p014_f15.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 15. Sample scene reconstruction given lidar points and camera images. We project the lidar points in an image plane with colors assigned based on the pixel color from the camera data.",
+    "width": 476,
+    "height": 126,
+    "description": "## Search Index Description\n\nThis figure is a visual representation of a scene reconstruction using LiDAR points and camera images. It shows two panels: the left panel displays a 3D reconstruction of a scene with a bridge and surrounding environment, while the right panel shows a 2D projection of LiDAR points overlaid with color from the camera images. The reconstruction highlights the integration of LiDAR and camera data to create a detailed scene representation.\n\n## Text in Figure\n\n- Panel 1: 3D reconstruction of a scene with a bridge and surrounding environment.\n- Panel 2: 2D projection of LiDAR points with colors from camera images.\n- Labels: No specific labels are visible in the figure."
+  },
+  {
+    "file": "p016_f16.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 16. PointPillars [51] detection performance vs. semantic prior map location on the val set. For the best lidar network (10 lidar sweeps with ImageNet pretraining), the predictions and ground truth annotations were only included if within a given distance of the semantic prior map.",
+    "width": 413,
+    "height": 325,
+    "description": "Description: This plot shows the Average Precision (AP) of various object detections against the distance from the semantic prior map. The series with the highest AP is 'car', maintaining around 0.7, while 'construction_vehicle' has the lowest AP, starting around 0.1. The plot includes series for 'car', 'truck', 'bus', 'trailer', 'pedestrian', 'motorcycle', 'bicycle', 'traffic_cone', and 'barrier'.\n\nText in figure: car, truck, bus, trailer, construction_vehicle, pedestrian, motorcycle, bicycle, traffic_cone, barrier, AP, Distance (m) to semantic prior map."
+  },
+  {
+    "file": "p016_f17.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 17. Per class results for PointPillars on the nuScenes test set taken from the detection leaderboard.",
+    "width": 502,
+    "height": 857,
+    "description": "This figure is a collection of line graphs showing the recall versus precision and recall versus error for different object classes in the nuScenes dataset. Each graph represents a different object class, such as Car, Construction Vehicle, Pedestrian, Bicycle, and Barrier. The series in each graph are labeled with various detection methods and their performance metrics. The highest series in each graph is typically the one with the best performance, while the lowest series shows the worst performance. The figure provides a detailed comparison of the performance of different detection methods across various object classes.\n\nLegend entries include: Dist, Scale, Orient, Vel, Attn, and various metrics like AP, IoU, and IoU. Axis titles are \"Recall\" and \"Precision\" or \"Error\"."
+  }
+]

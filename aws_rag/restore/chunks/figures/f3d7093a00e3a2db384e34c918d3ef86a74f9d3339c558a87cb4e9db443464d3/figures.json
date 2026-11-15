@@ -1,0 +1,98 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Fig. 1. Slices from MRI volumes depicting prostate. This data is part of the PROMISE2012 challenge dataset [7].",
+    "width": 654,
+    "height": 206,
+    "description": "## Search Index\n\n### Figure Description\nThis figure is a set of three MRI slices depicting the prostate. The images are part of the PROMISE2012 challenge dataset. Each slice shows different anatomical details of the prostate, with varying levels of contrast and detail.\n\n### Text in Figure\n- No specific text or values are visible in the image. The images are purely visual representations of MRI slices.",
+    "pdf_text": "",
+    "bbox": [
+      143.9,
+      115.9,
+      471.1,
+      219.0
+    ]
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "",
+    "width": 699,
+    "height": 494,
+    "description": "This figure is a schematic representation of the V-Net architecture, a fully convolutional neural network designed for volumetric medical image segmentation. The architecture consists of a series of \"down\" convolutional layers that reduce the spatial dimensions of the input image while increasing the number of channels, followed by \"up\" convolutional layers that increase the spatial dimensions while decreasing the number of channels. The final layer is a softmax layer that outputs the segmentation prediction.\n\nText in figure: \"Down\" Conv., \"Up\" Conv., 1 Ch. (Input), 128x128x64, 16 Channels, 128x128x64, 32 Channels, 64x64x32, 64 Channels, 32x32x16, 128 Channels, 16x16x8, 256 Channels, 8x8x4, 256 Channels, 16x16x8, 128 Channels, 32x32x16, 64 Channels, 64x64x32, 32 Channels, 128x128x64, 2 Ch. (Prediction), Convolutional Layer, 2x2 filters, stride: 2, De-convolutional Layer, 2x2 filters, stride: 2, Fine-grained features forwarding, Convolution using a 5x5x5 filter, stride: 1, PReLu non-linearity, Element-wise sum, Softmax, 1x1x1 filter",
+    "pdf_text": "} | \u2026 | \u2026 | \u2026 | } | \u2026 | \u2026 | \u2026 | } | } | } | \u2026 | \u2026 | \u2026 | \u2026 | \u2026 | \u2026 | \u2026 | \u2026 | \u2026 | \u2026 | \u2026 | \u2026 | \u2026 | } | } | \u2026 | \u2026 | } | \u2026 | 16 Channels | 128 x 128 x 64 | 32 Channels | 64 x 64 x 32 | 64 Channels | 32 x 32 x 16 | 128 Channels | 16 x 16 x 8 | 256 Channels | 8 x 8 x 4 | 256 Channels | 16 x 16 x 8 | 128 Channels | 32 x 32 x 16 | 64 Channels | 64 x 64 x 32 | 32 Channels | 128 x 128 x 64 | \"Down\" Conv. | \"Down\" Conv. | \"Down\" Conv. | \"Down\" Conv. | \"Up\" Conv. | \"Up\" Conv. | \"Up\" Conv. | \"Up\" Conv. | 2 Ch. (Prediction) | 128x128x64 | 1 Ch. (Input) | 128x128x64 | \"Down\" Conv. | } | Convolutional Layer | 2x2 \ufb01lters, stride: 2 | \"Up\" Conv. | } | De-convolutional Layer | 2x2 \ufb01lters, stride: 2 | Fine-grained features | forwarding | Convolution using a | 5x5x5 \ufb01lter, stride: 1 | PReLu non-linearity | Element-wise sum | Softmax | 1x1x1 | \ufb01lter",
+    "bbox": [
+      127.2,
+      302.9,
+      476.4,
+      549.9
+    ]
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Fig. 3. Convolutions with appropriate stride can be used to reduce the size of the data. Conversely, de-convolutions increase the data size by projecting each input voxel to a bigger region through the kernel.",
+    "width": 680,
+    "height": 150,
+    "description": "This figure is a visual representation of the effects of convolution and de-convolution operations on volumetric data. It shows how a 2x2x2 convolution with stride 2 reduces the size of the data, while a 2x2x2 de-convolution with stride 2 increases the data size. The figure uses a series of 3D cubes to illustrate the process, with different colors representing different voxels and their transformations.\n\nText in figure: \"2x2x2 Convolution with stride 2\", \"2x2x2 De-convolution with stride 2\", \"=\", \"=\".",
+    "pdf_text": "2x2x2 Convolution | with stride 2 | 2x2x2 De-convolution | with stride 2 | = | =",
+    "bbox": [
+      137.5,
+      183.9,
+      477.4,
+      258.9
+    ]
+  },
+  {
+    "file": "p007_f04.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Fig. 4. Qualitative results on the PROMISE 2012 dataset [7].",
+    "width": 649,
+    "height": 367,
+    "description": "## Description:\nThe figure displays qualitative results from the PROMISE 2012 dataset, showing segmentations of medical images in three different views: axial, sagittal, and coronal. Each view contains three panels, labeled as Case00, Case23, and Case16, with corresponding segmentation results and accuracy percentages.\n\n## Text in figure:\nAxial | Sagittal Coronal\nE: Case00 (60%)\nB: Case00_result\nE: Case23 (40%)\nB: Case23\nE: Case16 (40%)\nB: Case16",
+    "pdf_text": "Axial | Sagittal Coronal",
+    "bbox": [
+      145.5,
+      384.2,
+      470.1,
+      567.3
+    ]
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Fig. 5. Distribution of volumes with respect to the Dice coefficient achieved during segmentation.",
+    "width": 674,
+    "height": 379,
+    "description": "This figure is a bar chart showing the distribution of volumes based on the Dice coefficient achieved during segmentation. The chart includes six series: Immorphics, ScrAutoProstate, V-Net, V-Net Dice loss, SBIA, and V-Net (weighted softmax with loss). The V-Net Dice loss series has the highest number of volumes, followed by V-Net and V-Net (weighted softmax with loss). The Immorphics series has the lowest number of volumes.\n\nKey text: \"Dice coefficient bins\", \"Number of test volumes\", \"Immorphics\", \"ScrAutoProstate\", \"V-Net\", \"V-Net Dice loss\", \"SBIA\", \"V-Net (weighted softmax with loss)\"",
+    "pdf_text": "cal settings. As previously stated we massively augmented this dataset through | random transformation performed in each training iteration, for each mini-batch | fed to the network. The mini-batches used in our implementation contained two | volumes each, mainly due to the high memory requirement of the model during | training. We used a momentum of 0.99 and a initial learning rate of 0.0001 which | decreases by one order of magnitude every 25K iterations. | Dice coef\ufb01cient bins | Number of test volumes",
+    "bbox": [
+      138.6,
+      133.6,
+      475.7,
+      322.8
+    ]
+  },
+  {
+    "file": "p009_f06.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Dice coefficient bins Number of test volumes Fig. 6. Qualitative comparison between the results obtained using the Dice coefficient based loss (green) and re-weighted soft-max with loss (yellow). Our implementation 5 was realised in python, using a custom version of the Caffe 6 [5] framework which was enabled to perform volumetric convolutions via CuDNN v3. All the trainings and experiments were ran on a standard workstation equipped with 64 GB of memory, an Intel(R) Core(TM) i7-5820K CPU working at 3.30GHz, and a NVidia GTX 1080 with 8 GB of video memory. We let our model train for 48 hours, or 30K iterations circa, and we were able to segment a previously unseen volume in circa 1 second. The datasets were first normalised using the N4 bias filed correction function of the ANTs framework [17] and then resampled to a common resolution of 1 \u00d7 1 \u00d7 1 . 5 mm. We applied random deformations to the scans used for training by varying the position of the control points with random quantities obtained from gaussian distribution with zero mean and 15 voxels standard deviation. Qualitative results can be seen in Fig. 4.",
+    "width": 690,
+    "height": 160,
+    "description": "Figure Description:\nThis figure displays a comparison of segmentation results using two different loss functions: Dice coefficient based loss (green) and re-weighted soft-max with loss (yellow). Each panel shows a cross-sectional MRI image of a patient's eye, with the segmented areas highlighted in the respective colors. The images are labeled with case numbers and percentages, indicating the performance of the segmentation methods.\n\nText in Figure:\n- Case24 (70%)\n- Case24_result\n- Case29 (70%)\n- Case29_result\n- Dice coefficient bins\n- Number of test volumes\n- Fig. 6\n- Qualitative comparison\n- Dice coefficient based loss (green)\n- re-weighted soft-max with loss (yellow)",
+    "pdf_text": "",
+    "bbox": [
+      135.2,
+      115.8,
+      480.2,
+      196.0
+    ]
+  }
+]

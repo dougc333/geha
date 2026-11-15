@@ -1,0 +1,47 @@
+[
+  {
+    "file": "p006_f01.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 2: The \u03b5 value as a function of epoch E for q = 0 . 01 , \u03c3 = 4 , \u03b4 = 10 - 5 , using the strong composition theorem and the moments accountant respectively.",
+    "width": 369,
+    "height": 274,
+    "description": "Description: This plot compares the \u03b5 value over epochs using two methods: strong composition theorem and moments accountant. The strong composition theorem shows a higher \u03b5 value, peaking at around 25 at epoch 400. The moments accountant shows a lower \u03b5 value, starting at 0 and increasing to about 5 by epoch 400.\n\nText in figure: \u03b5, epoch, strong composition, moments accountant, 0, 5, 10, 15, 20, 25, 50, 100, 150, 200, 250, 300, 350, 400"
+  },
+  {
+    "file": "p007_f02.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 3: Results on the accuracy for different noise levels on the MNIST dataset. In all the experiments, the network uses 60 dimension PCA projection, 1 , 000 hidden units, and is trained using lot size 600 and clipping threshold 4 . The noise levels ( \u03c3, \u03c3 p ) for training the neural network and for PCA projection are set at ( 8 , 16 ), ( 4 , 7 ), and ( 2 , 4 ), respectively, for the three experiments.",
+    "width": 993,
+    "height": 259,
+    "description": "This figure is a line graph showing the accuracy of a neural network trained with differential privacy on the MNIST dataset under different noise levels. It consists of three panels, each representing a different noise level: large, medium, and small. In each panel, there are two lines: one for training accuracy and one for testing accuracy. The x-axis represents the number of epochs, and the y-axis represents accuracy. The training accuracy line is consistently higher than the testing accuracy line in all panels.\n\nText in figure: Large noise, Medium noise, Small noise, training accuracy, testing accuracy, epoch, eps=0.50, eps=2.00, eps=8.00."
+  },
+  {
+    "file": "p007_f03.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 4: Accuracy of various ( \u03b5, \u03b4 ) privacy values on the MNIST dataset. Each curve corresponds to a different \u03b4 value.",
+    "width": 407,
+    "height": 304,
+    "description": "Description: This plot shows the accuracy of various (\u03b5, \u03b4) privacy values on the MNIST dataset. The x-axis represents \u03b5 values, ranging from 10^-1 to 10^1. The y-axis represents accuracy, ranging from 0.86 to 1.00. The highest accuracy is achieved by the delta=1e-02 series, followed by delta=1e-03, delta=1e-04, and delta=1e-05. The delta=1e-05 series has the lowest accuracy.\n\nText in figure: Accuracy, \u03b5, delta=1e-05, delta=1e-04, delta=1e-03, delta=1e-02."
+  },
+  {
+    "file": "p008_f04.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 5: MNIST accuracy when one parameter varies, and the others are fixed at reference values.",
+    "width": 997,
+    "height": 530,
+    "description": "Description: This figure contains six line plots, each showing the accuracy of a model on the MNIST dataset as one parameter is varied while others are fixed. The plots are labeled (1) to (6) and each shows the impact of varying projection dimensions, hidden units, lot size, learning rate, gradient clipping norm, and noise level, respectively. The training and testing accuracy are represented by blue and red lines. In each plot, the blue line is generally higher than the red line, indicating better performance on the training set compared to the testing set.\n\nText in figure: variable projection dimensions, variable hidden units, variable lot size, variable learning rate, variable gradient clipping norm, variable noise level, training accuracy, testing accuracy, no_pca, end_lr, 2, 3, 4, 5, 6, 7, 8, 9, 10, sigma, 50, 100, 150, 200, 200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000, 0.05, 0.1, 0.15, 0.88, 0.89, 0.9, 0.91, 0.92, 0.93, 0.94, 0.95, 0.96."
+  },
+  {
+    "file": "p009_f05.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 6: Results on accuracy for different noise levels on CIFAR-10. With \u03b4 set to 10 - 5 , we achieve accuracy 67% , 70% , and 73% , with \u03b5 being 2 , 4 , and 8 , respectively. The first graph uses a lot size of 2,000, (2) and (3) use a lot size of 4,000. In all cases, \u03c3 is set to 6 , and clipping is set to 3 .",
+    "width": 995,
+    "height": 260,
+    "description": "This figure contains three plots showing the accuracy of a model trained with differential privacy on the CIFAR-10 dataset. Each plot corresponds to a different \u03b5 value (2, 4, 8). The blue line represents training accuracy, and the red line represents testing accuracy. The highest accuracy is achieved with \u03b5=8, reaching approximately 73%. The lowest accuracy is with \u03b5=2, around 67%. The plots also show the delta value, which is the probability of violating privacy. The delta value increases with more epochs.\n\nText in figure: \u03b5=2, \u03b5=4, \u03b5=8, training accuracy, testing accuracy, delta, 67%, 70%, 73%, 10^-5, 2.00, 4.00, 8.00, 6, 3."
+  }
+]

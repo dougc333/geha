@@ -1,0 +1,128 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1. A simple modification of the global average pooling layer combined with our class activation mapping (CAM) technique allows the classification-trained CNN to both classify the image and localize class-specific image regions in a single forward-pass e.g., the toothbrush for brushing teeth and the chainsaw for cutting trees .",
+    "width": 460,
+    "height": 240,
+    "description": "This figure is a visual representation of the class activation mapping (CAM) technique applied to a convolutional neural network (CNN). It shows two sets of images: one depicting people brushing their teeth and the other showing individuals cutting trees. The figure demonstrates how the CNN, trained for classification, can also localize specific regions of interest within the images using CAM. The heatmaps overlaid on the images highlight the areas of focus for the CNN, such as the toothbrush and chainsaw, indicating the regions most relevant to the classification task.\n\nText in figure: Brushing teeth, Cutting trees, class activation mapping (CAM), convolutional neural network (CNN)."
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2. Class Activation Mapping: the predicted class score is mapped back to the previous convolutional layer to generate the class activation maps (CAMs). The CAM highlights the class-specific discriminative regions.",
+    "width": 986,
+    "height": 433,
+    "description": "## Description\nThis figure illustrates the process of Class Activation Mapping (CAM) in a deep learning model. It shows how the predicted class score is mapped back to a convolutional layer to generate class activation maps (CAMs). The CAM highlights the regions in the input image that are most relevant for the model's classification decision.\n\n## Text in figure\nText in figure: \"Class Activation Mapping\", \"CONV\", \"GAP\", \"W1\", \"W2\", \"Wn\", \"Australian terrier\", \"Class Activation Map (Australian terrier)\""
+  },
+  {
+    "file": "p003_f03.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 3. The CAMs of four classes from ILSVRC [20]. The maps highlight the discriminative image regions used for image classification e.g., the head of the animal for briard and hen , the plates in barbell , and the bell in bell cote .",
+    "width": 463,
+    "height": 302,
+    "description": "Figure: A collection of images with corresponding Class Activation Maps (CAMs) for four classes: briard, hen, barbell, and bell cote. Each image is paired with a CAM highlighting the regions most relevant for classification.\n\nText in figure: briard 0.983, 0.422, 0.997; hen 0.543, 0.843, 0.895; barbell 0.761, 0.447, 0.999; bell cote 0.579, 0.805, 0.671\n\nSection 1: Figure showing images with Class Activation Maps (CAMs) for four classes: briard, hen, barbell, and bell cote. Each image is paired with a CAM highlighting the regions most relevant for classification.\n\nSection 2: Text in figure includes class names and numerical values for each CAM: briard 0.983, 0.422, 0.997; hen 0.543, 0.843, 0.895; barbell 0.761, 0.447, 0.999; bell cote 0.579, 0.805, 0.671."
+  },
+  {
+    "file": "p004_f04.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 4. Examples of the CAMs generated from the top 5 predicted categories for the given image with ground-truth as dome. The predicted class and its score are shown above each class activation map. We observe that the highlighted regions vary across predicted classes e.g., dome activates the upper round part while palace activates the lower flat part of the compound.",
+    "width": 471,
+    "height": 319,
+    "description": "Figure: Heat maps of predicted categories for an image with ground-truth as dome.\nText in figure: dome 0.459, palace 0.195, dome 0.195, church 0.146, altar 0.091, monastery 0.051.\n\nDescription: The figure shows six heat maps generated from the top 5 predicted categories for an image. Each map highlights different regions of the image, corresponding to the predicted categories. The ground-truth category is dome, and the predicted categories are dome, palace, dome, church, altar, and monastery. The scores for each predicted category are also provided above each map."
+  },
+  {
+    "file": "p006_f05.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 5. Class activation maps from CNN-GAPs and the class-specific saliency map from the backpropagation methods.",
+    "width": 990,
+    "height": 267,
+    "description": "This figure displays class activation maps from various models, comparing their ability to localize objects in images. The top row shows maps for a French horn, with models like GoogleLeNet-GAP, VGG-GAP, and AlexNet-GAP. The bottom row shows maps for an agaric mushroom. Each map highlights areas of interest, with higher values indicating stronger activation. The figure demonstrates the effectiveness of different models in identifying specific objects within images.\n\nText in figure: French horn, agaric, GoogleLeNet-GAP, VGG-GAP, AlexNet-GAP, GoogleLeNet, NIN, Backprop AlexNet, Backprop GoogleLeNet, 0.775, 0.934, 0.060, 0.966, 0.334, 0.326, 0.966, 0.664, 0.911, 0.725, 0.840, 0.973, 0.636, 0.840."
+  },
+  {
+    "file": "p006_f06.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 6. a) Examples of localization from GoogleNet-GAP. b) Comparison of the localization from GooleNet-GAP (upper two) and the backpropagation using AlexNet (lower two). The ground-truth boxes are in green and the predicted bounding boxes from the class activation map are in red.",
+    "width": 981,
+    "height": 205,
+    "description": "Figure type: Image comparison\nDescription: The figure compares localization results from two different models: GoogleNet-GAP and backpropagation using AlexNet. It shows examples of localization from GoogleNet-GAP in the upper row and a comparison of localization from GoogleNet-GAP and backpropagation using AlexNet in the lower row. Each image displays the ground-truth boxes in green and the predicted bounding boxes from the class activation map in red.\n\nText in figure: American alligator, maze, snowmobile, Shetland sheepdog, grasshopper, apron, Jean"
+  },
+  {
+    "file": "p007_f07.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "",
+    "width": 985,
+    "height": 374,
+    "description": "Figure: Heatmaps of attention maps for various objects and scenes.\n\nSection 1: Heatmaps of attention maps for various objects and scenes.\n\nSection 2: Heatmaps of attention maps for various objects and scenes.\n\nText in figure: Cleaning the floor, Cooking, Fixing a car, Mushroom, Penguin, Teapot, Stanford Action40, Excavation, Playground, Polo, Rowing, Croquet, Banquet hall, Excavation, Playground, Polo, Rowing, Croquet, SUN207, UIUC Event8."
+  },
+  {
+    "file": "p007_f08.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 8. Generic discriminative localization using our GoogLeNet-GAP deep features (which have been trained to recognize objects). We show 2 images each from 3 classes for 4 datasets, and their class activation maps below them. We observe that the discriminative regions of the images are often highlighted e.g., in Stanford Action40, the mop is localized for cleaning the floor , while for cooking the pan and bowl are localized and similar observations can be made in other datasets. This demonstrates the generic localization ability of our deep features.",
+    "width": 464,
+    "height": 334,
+    "description": "### Description:\nThis figure displays a collection of images and their corresponding class activation maps (CAMs) for three different bird species: White Pelican, Scissor-tailed Flycatcher, and Sage Thrasher. Each species is represented by two images, with their respective CAMs shown below. The CAMs highlight the regions of the images that are most relevant for classification, demonstrating the model's ability to localize discriminative features.\n\n### Text in Figure:\n- White Pelican\n- Scissor-tailed Flycatcher\n- Sage Thrasher\n- Images of birds\n- Class activation maps (CAMs)\n- Highlighted regions indicating discriminative features"
+  },
+  {
+    "file": "p008_f09.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 9. Informative objects for two scene categories. For the dining room and bathroom categories, we show examples of original images (top), and list of the 6 most frequent objects in that scene category with the corresponding frequency of appearance. At the bottom: the CAMs and a list of the 6 objects that most frequently overlap with the high activation regions.",
+    "width": 472,
+    "height": 162,
+    "description": "Figure: A comparative analysis of object frequency and localization in dining rooms and bathrooms.\n\nDescription: The figure displays two sets of images and data for dining rooms and bathrooms. It includes original images, lists of frequent objects, and Class Activation Maps (CAMs) highlighting informative objects.\n\nText in figure: Dining room: wall (0.99), chair (0.98), floor (0.98), table (0.98), ceiling (0.75), window (0.73). Informative objects: table (0.96), chair (0.85), chandelier (0.80), plate (0.73), vase (0.69), flowers (0.63). Bathroom: wall (1), floor (0.85), sink (0.77), faucet (0.74), mirror (0.62), bathtub (0.56). Informative objects: sink (0.84), faucet (0.80), countertop (0.80), toilet (0.72), bathtub (0.70), towel (0.54)."
+  },
+  {
+    "file": "p008_f10.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 10. Informative regions for the concept learned from weakly labeled images. Despite being fairly abstract, the concepts are adequately localized by our GoogLeNet-GAP network.",
+    "width": 474,
+    "height": 158,
+    "description": "Description: The figure displays a series of images comparing original scenes with their corresponding heatmaps generated by a GoogLeNet-GAP network. The top row shows various outdoor scenes, while the bottom row presents the heatmaps highlighting regions of interest. The heatmaps use color gradients to indicate areas of higher and lower importance for the learned concepts.\n\nText in figure: The figure includes the following text: \"Learning Deep Features for Discriminative Localization\" and \"Figure 10. Informative regions for the concept learned from weakly labeled images. Despite being fairly abstract, the concepts are adequately localized by our GoogLeNet-GAP network.\""
+  },
+  {
+    "file": "p008_f11.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 11. Learning a weakly supervised text detector. The text is accurately detected on the image even though our network is not trained with text or any bounding box annotations.",
+    "width": 468,
+    "height": 156,
+    "description": "Section 1: Figure description\nThis figure is a collage of images showing the results of a weakly supervised text detector. It displays six pairs of images, each pair consisting of a regular photo and its corresponding heatmap visualization. The heatmaps highlight areas of interest, specifically text regions, in the images.\n\nSection 2: Text in figure\nText in figure: \"Learning Deep Features for Discriminative Localization\", \"Figure 11. Learning a weakly supervised text detector. The text is accurately detected on the image even though our network is not trained with text or any bounding box annotations.\""
+  },
+  {
+    "file": "p008_f12.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 12. Examples of highlighted image regions for the predicted answer class in the visual question answering.",
+    "width": 460,
+    "height": 189,
+    "description": "Figure type: Image collage with heatmaps\n\nDescription: The figure displays a series of images, each paired with a heatmap indicating the regions of interest for a visual question answering model. The heatmaps highlight areas where the model focuses to make predictions.\n\nText in figure: \"What is the color of the horse?\" \"Prediction: brown\", \"What are they doing?\" \"Prediction: texting\", \"What is the sport?\" \"Prediction: skateboarding\", \"Where are the cows?\" \"Prediction: on the grass\""
+  },
+  {
+    "file": "p009_f13.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "",
+    "width": 469,
+    "height": 179,
+    "description": "## Figure Description\nThe figure displays a comparative analysis of object detection models trained on ImageNet. It shows three sets of images, each representing a different object: a hen, a Lakeland terrier, and a mushroom. Each set contains multiple images with varying degrees of detection accuracy, as indicated by the highlighted regions.\n\n## Text in Figure\n- Objects: hen, Lakeland terrier, mushroom\n- Model: Trained on ImageNet\n- Images: Various detection results with highlighted regions indicating accuracy."
+  },
+  {
+    "file": "p009_f14.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "",
+    "width": 469,
+    "height": 186,
+    "description": "## Section 1: Figure Description\nThis figure displays a comparative analysis of deep learning models trained on the Places Dataset. It shows three categories: livingroom, classroom, and pagoda. Each category has a series of images demonstrating the model's ability to localize objects within different environments. The images are organized in a grid format, with each row representing a different model or training approach.\n\n## Section 2: Figure Content\nText in figure: livingroom, classroom, pagoda, Trained on Places Dataset. Images show various objects and scenes within the specified categories."
+  }
+]

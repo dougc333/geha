@@ -1,0 +1,47 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "",
+    "width": 447,
+    "height": 144,
+    "description": "## Index Section 1\nFigure type: Network visualization. Shows a complex network with nodes and edges. Nodes are colored differently, possibly representing different clusters or categories. Edges connect nodes, indicating relationships or interactions. No specific series mentioned.\n\n## Index Section 2\nText in figure: No specific text visible. The figure is a network visualization with nodes and edges, but no labels or values are provided."
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2: The power-law distribution of vertices appearing in short random walks (2a) follows a power-law, much like the distribution of words in natural language (2b).",
+    "width": 446,
+    "height": 184,
+    "description": "## Index Section 1: Figure Description\nThis figure consists of two plots, labeled (2a) and (2b). Plot (2a) shows the power-law distribution of vertex occurrence in short random walks on a YouTube Social Graph. Plot (2b) displays the power-law distribution of word occurrence in Wikipedia article text. Both plots exhibit a power-law distribution, with the highest frequency at the lower end of the x-axis and decreasing frequency as the x-axis value increases.\n\n## Index Section 2: Figure Content\nText in figure: \"Frequency of Vertex Occurrence in Short Random Walks\", \"Vertex visitation count\", \"Frequency of Word Occurrence in Wikipedia\", \"Word mention count\". Axis titles: \"Frequency\" and \"Count\" for both plots. Labels: \"YouTube Social Graph\" for plot (2a) and \"Wikipedia Article Text\" for plot (2b)."
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 3: Overview of DeepWalk . We slide a window of length 2 w + 1 over the random walk W v 4 , mapping the central vertex v 1 to its representation \u03a6( v 1 ). Hierarchical Softmax factors out Pr( v 3 | \u03a6( v 1 )) and Pr( v 5 | \u03a6( v 1 )) over sequences of probability distributions corresponding to the paths starting at the root and ending at v 3 and v 5 . The representation \u03a6 is updated to maximize the probability of v 1 co-occurring with its context { v 3 , v 5 } .",
+    "width": 1001,
+    "height": 308,
+    "description": "This figure is a visual representation of the DeepWalk algorithm, which is used for generating social representations from random walks on a graph. It consists of three parts: (a) Random walk generation, (b) Representation mapping, and (c) Hierarchical Softmax.\n\nIn part (a), a random walk is generated on a graph, with a window of length 2w + 1 sliding over the walk. In part (b), the central vertex v1 is mapped to its representation \u03a6(v1). In part (c), Hierarchical Softmax is used to factor out the probabilities of the vertices v3 and v5 given \u03a6(v1), and the representation \u03a6 is updated to maximize the probability of v1 co-occurring with its context {v3, v5}.\n\nText in figure: Random walk generation, Representation mapping, Hierarchical Softmax, Wv4, \u03a6(v1), \u03a6(v3), \u03a6(v5), v1, v3, v5, v7, v8, v2, v4, v6."
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 4: Effects of parallelizing DeepWalk",
+    "width": 454,
+    "height": 180,
+    "description": "This figure contains two plots showing the effects of parallelizing DeepWalk on running time and performance. The left plot (a) shows the relative running time, with the BlogCatalog series (red) starting higher and decreasing more steeply than the Flickr series (blue). The right plot (b) shows the relative change in performance, with both series remaining relatively stable across different numbers of workers.\n\nText in figure: Running Time, Performance, BlogCatalog, Flickr, # of Workers, Relative Time, Relative Change in Micro."
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 5: Parameter Sensitivity Study",
+    "width": 999,
+    "height": 414,
+    "description": "Section 1:\nThis figure presents a parameter sensitivity study for the DeepWalk algorithm, showing how different parameters affect the stability of learned representations. The study includes four plots, each focusing on different aspects of the algorithm's performance. The plots show the mean squared error (MSE) over various dimensions and number of walks, with different datasets and thresholds.\n\nSection 2:\nPlot (a) shows the stability over dimensions for the Flickr dataset, with a fixed number of walks (\u03b3 = 30). The highest MSE is observed at lower dimensions, while the lowest is at higher dimensions. Plot (b) focuses on the Flickr dataset with a threshold (TR = 0.05), showing similar trends. Plot (c) examines the stability over the number of walks for the BlogCatalog dataset, with a fixed dimension (d = 128). Plot (d) shows the stability over the number of walks for the BlogCatalog dataset with a threshold (TR = 0.5)."
+  }
+]

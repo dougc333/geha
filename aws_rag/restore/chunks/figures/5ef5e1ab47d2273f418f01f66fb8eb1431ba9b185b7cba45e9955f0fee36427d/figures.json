@@ -1,0 +1,56 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1: Overview of Contrastive Predictive Coding, the proposed representation learning approach. Although this figure shows audio as input, we use the same setup for images, text and reinforcement learning.",
+    "width": 718,
+    "height": 311,
+    "description": "Figure Description: This diagram illustrates the Contrastive Predictive Coding (CPC) approach for representation learning, applicable to various data types including audio, images, text, and reinforcement learning. The figure shows a sequence of input data (x_t) with corresponding predictions (z_t) and context (c_t). The input data is processed through a generative model (g_enc) to produce predictions, which are then used to update the context. The context influences the predictions for subsequent data points, creating a feedback loop.\n\nText in Figure: g_enc, x_t, z_t, c_t, Predictions, t, t+1, t+2, t+3, t+4, i_ar, i_enc"
+  },
+  {
+    "file": "p005_f02.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 2: t-SNE visualization of audio (speech) representations for a subset of 10 speakers (out of 251). Every color represents a different speaker.",
+    "width": 368,
+    "height": 191,
+    "description": "## Description\nThe figure is a t-SNE visualization of audio representations for a subset of 10 speakers. Each color represents a different speaker. The visualization shows clusters of data points, indicating the learned representations of the audio data.\n\n## Text in figure\nSpeaker 1, Speaker 2, Speaker 3, Speaker 4, Speaker 5, Speaker 6, Speaker 7, Speaker 8, Speaker 9, Speaker 10."
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 3: Average accuracy of predicting the positive sample in the contrastive loss for 1 to 20 latent steps in the future of a speech waveform. The model predicts up to 200ms in the future as every step consists of 10ms of audio.",
+    "width": 358,
+    "height": 220,
+    "description": "Figure 3 displays a line graph showing the average accuracy of predicting the positive sample in the contrastive loss for 1 to 20 latent steps in the future of a speech waveform. The x-axis represents the number of latent steps, ranging from 1 to 20, while the y-axis represents the average accuracy, ranging from 0 to 1. The graph shows a decreasing trend in accuracy as the number of latent steps increases. The highest point is at 1 latent step with an accuracy of approximately 1.0, and the lowest point is at 20 latent steps with an accuracy of approximately 0.0.\n\nText in figure: \"Average accuracy of predicting the positive sample in the contrastive loss for 1 to 20 latent steps in the future of a speech waveform. The model predicts up to 200ms in the future as every step consists of 10ms of audio.\""
+  },
+  {
+    "file": "p006_f04.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 4: Visualization of Contrastive Predictive Coding for images (2D adaptation of Figure 1).",
+    "width": 714,
+    "height": 341,
+    "description": "Figure type: Diagram showing a process flow.\nDescription: The figure illustrates the process of Contrastive Predictive Coding for images. It shows an input image being processed through a pipeline that includes a generator (genc-output) and a discriminator (gar-output). The input image is divided into overlapping patches, each processed to produce predictions. The process involves multiple time steps (zt-2 to zt+4), with predictions being made at each step.\n\nText in figure: \"input image\", \"64 px\", \"50% overlap\", \"256 px\", \"genc-output\", \"gar-output\", \"Predictions\", \"zt-2\", \"zt+3\", \"zt+4\", \"Ct\""
+  },
+  {
+    "file": "p007_f05.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 5: Every row shows image patches that activate a certain neuron in the CPC architecture.",
+    "width": 795,
+    "height": 461,
+    "description": "## Figure Description\n\nThis figure displays a collection of image patches organized in rows, each row representing the activations of a specific neuron in a Contrastive Predictive Coding (CPC) architecture. The patches vary in content, including human faces, animals, vehicles, landscapes, and objects. The figure aims to illustrate the diverse types of visual features that different neurons in the CPC model are tuned to detect.\n\n## Text in Figure\n\n- Neuron activations for various image patches.\n- Categories include: human faces, animals, vehicles, landscapes, and objects.\n- No specific values or labels are provided in the figure."
+  },
+  {
+    "file": "p009_f06.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 6: Reinforcement Learning results for 5 DeepMind Lab tasks used in [50]. Black: batched A2C baseline, Red: with auxiliary contrastive loss.",
+    "width": 788,
+    "height": 189,
+    "description": "## Index Section 1\nFigure: Line graph comparing reinforcement learning results for five DeepMind Lab tasks. Five panels, each showing two lines: black for batched A2C baseline and red for with auxiliary contrastive loss. Red line generally higher than black, indicating better performance with contrastive loss.\n\n## Index Section 2\nText in figure: \"rooms_watermaze\", \"explore_goal_locations_small\", \"see_avoid_arena_01\", \"lasertag_three_opponents_small\", \"rooms_keys_doors_puzzle\"; \"Return\"; \"Frame\"; \"250M\", \"500M\", \"750M\", \"1B\"."
+  }
+]

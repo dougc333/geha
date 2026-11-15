@@ -1,0 +1,29 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Fig. 1 . Long Short-term Memory Cell",
+    "width": 418,
+    "height": 310,
+    "description": "Section 1: Figure description\nThis figure is a diagram of a Long Short-Term Memory (LSTM) cell, a type of recurrent neural network (RNN) used for sequence modeling tasks like speech recognition. The diagram shows the internal structure of an LSTM cell, including the input gate, forget gate, cell state, and output gate. Arrows indicate the flow of information between these components.\n\nSection 2: Text in figure\nInput Gate, Output Gate, Cell, Forget Gate, Input xt, Output ot, Cell state ct, Hidden state ht, Input it, Forget gate ft"
+  },
+  {
+    "file": "p002_f02.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Fig. 2 . Bidirectional RNN",
+    "width": 371,
+    "height": 236,
+    "description": "## Section 1: Figure Description\nThis figure is a diagram illustrating a Bidirectional Recurrent Neural Network (RNN) architecture. It shows two layers: a Forward Layer and a Backward Layer. Each layer has nodes labeled as \\( \\hat{h}_{t-1} \\), \\( \\hat{h}_{t} \\), and \\( \\hat{h}_{t+1} \\). Arrows connect these nodes, indicating the flow of information. Inputs are labeled as \\( x_{t-1} \\), \\( x_{t} \\), and \\( x_{t+1} \\), while outputs are labeled as \\( y_{t-1} \\), \\( y_{t} \\), and \\( y_{t+1} \\).\n\n## Section 2: Figure Content\nText in figure: Outputs, Backward Layer, Forward Layer, Inputs, \\( y_{t-1} \\), \\( y_{t} \\), \\( y_{t+1} \\), \\( \\hat{h}_{t-1} \\), \\( \\hat{h}_{t} \\), \\( \\hat{h}_{t+1} \\), \\( x_{t-1} \\), \\( x_{t} \\), \\( x_{t+1} \\)."
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Fig. 3 . Input Sensitivity of a deep CTC RNN. The heatmap (top) shows the derivatives of the 'ah' and 'p' outputs printed in red with respect to the filterbank inputs (bottom). The TIMIT ground truth segmentation is shown below. Note that the sensitivity extends to surrounding segments; this may be because CTC (which lacks an explicit language model) attempts to learn linguistic dependencies from the acoustic data.",
+    "width": 492,
+    "height": 270,
+    "description": "Figure Description: The image displays a heatmap (top) and a spectrogram (bottom) related to speech recognition using a deep Connectionist Temporal Classification (CTC) Recurrent Neural Network (RNN). The heatmap shows the input sensitivity of the 'ah' and 'p' outputs, with red indicating higher sensitivity. The spectrogram below represents the filterbank inputs. The TIMIT ground truth segmentation is also shown.\n\nText in Figure: ah, p, h, q, ae, s, tcl, ch, pau, h, wax, z, bcb, ly, aa, mpcl, p, aa, l, ax, h/w, ae, s, ah, [k], ch, [pau], h, w, [ah], z, [bcb], ly, aa, [h], pcl, p, aa, l, ax."
+  }
+]

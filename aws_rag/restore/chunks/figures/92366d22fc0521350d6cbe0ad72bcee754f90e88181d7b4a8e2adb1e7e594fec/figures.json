@@ -1,0 +1,20 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 1: SBERT architecture with classification objective function, e.g., for fine-tuning on SNLI dataset. The two BERT networks have tied weights (siamese network structure).",
+    "width": 289,
+    "height": 322,
+    "description": "This figure is a diagram showing the architecture of Sentence-BERT (SBERT) with a classification objective function. It depicts two BERT networks with tied weights, forming a siamese network structure. The input sentences, A and B, are processed by separate BERT networks, followed by pooling layers. The pooled outputs are then combined and fed into a softmax classifier.\n\nText in figure: \"Softmax classifier\", \"(u, v, |u-v|)\", \"u\", \"pooling\", \"BERT\", \"Sentence A\", \"v\", \"pooling\", \"BERT\", \"Sentence B\".\n\nDescription: The architecture consists of two BERT networks processing sentences A and B, respectively. Each BERT network is followed by a pooling layer. The pooled outputs from both networks are combined and input into a softmax classifier."
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2: SBERT architecture at inference, for example, to compute similarity scores. This architecture is also used with the regression objective function.",
+    "width": 289,
+    "height": 306,
+    "description": "This figure is a diagram showing the architecture of Sentence-BERT (SBERT) for computing similarity scores between sentences. It illustrates the process of transforming two sentences, A and B, into embeddings using BERT, pooling these embeddings, and then calculating the cosine similarity between them. The diagram includes the following components: two input sentences, BERT embeddings, pooling layers, and a cosine similarity function. The output is a similarity score ranging from -1 to 1.\n\nText in figure: cosine-sim(u, v), u, pooling, BERT, Sentence A, v, pooling, BERT, Sentence B, -1...1"
+  }
+]

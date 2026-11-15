@@ -1,0 +1,29 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "",
+    "width": 280,
+    "height": 316,
+    "description": "Section 1: Figure description\nThis figure is a diagram illustrating the architecture of a neural machine translation model. It shows the components and their connections, including the attention mechanism and the encoder-decoder structure. The diagram includes various blocks and arrows representing the flow of information.\n\nSection 2: Figure details\nThe figure includes the following components: encoder (X1, X2, X3, Xt), decoder (Yt-1, Yt), attention mechanism (\u03b1t,1, \u03b1t,2, \u03b1t,3, \u03b1t,T), and hidden states (h1, h2, h3, hT). The encoder processes input sequences, and the decoder generates output sequences. The attention mechanism helps the model focus on relevant parts of the input sequence."
+  },
+  {
+    "file": "p005_f02.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 2: The BLEU scores of the generated translations on the test set with respect to the lengths of the sentences. The results are on the full test set which includes sentences having unknown words to the models.",
+    "width": 507,
+    "height": 281,
+    "description": "Figure: Line plot showing BLEU scores of translations on a test set, categorized by sentence length.\n\nDescription: The figure is a line plot displaying BLEU scores for generated translations on a test set, categorized by sentence length. Four series are plotted: RNNsearch-50, RNNsearch-30, RNNenc-50, and RNNenc-30. The RNNsearch-50 series has the highest BLEU scores, particularly at shorter sentence lengths, while the RNNenc-30 series has the lowest scores across all lengths. The scores generally decrease as sentence length increases.\n\nText in figure: BLEU score, Sentence length, RNNsearch-50, RNNsearch-30, RNNenc-50, RNNenc-30."
+  },
+  {
+    "file": "p006_f03.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 3: Four sample alignments found by RNNsearch-50. The x-axis and y-axis of each plot correspond to the words in the source sentence (English) and the generated translation (French), respectively. Each pixel shows the weight \u03b1 ij of the annotation of the j -th source word for the i -th target word (see Eq. (6)), in grayscale ( 0 : black, 1 : white). (a) an arbitrary sentence. (b-d) three randomly selected samples among the sentences without any unknown words and of length between 10 and 20 words from the test set.",
+    "width": 782,
+    "height": 868,
+    "description": "This figure displays four heatmaps, each representing the alignment weights between English source words and French target words in a neural machine translation model. The x-axis and y-axis correspond to the source and target words, respectively. The grayscale intensity of each pixel indicates the weight \u03b1 ij, ranging from 0 (black) to 1 (white). Panels (a) and (b) show alignments for arbitrary sentences, while panels (c) and (d) are randomly selected samples from the test set, focusing on sentences without unknown words and of length 10-20 words.\n\nText in figure: The words and printed values, grouped by panel or chart: (a) The agreement on the European Economic Areas, (b) It should be noted that the marine environment is the least known of environments, (c) La destruction de l'\u00e9quipement signifie que la Syrie ne peut plus produire de nouvelles armes chimiques, (d) Cela va changer mon avenir avec ma famille."
+  }
+]

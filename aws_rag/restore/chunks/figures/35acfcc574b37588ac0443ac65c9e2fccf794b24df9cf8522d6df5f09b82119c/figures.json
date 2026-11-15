@@ -1,0 +1,65 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1: An illustration of the proposed RNN Encoder-Decoder.",
+    "width": 353,
+    "height": 352,
+    "description": "Section 1: Figure type and content\nThis figure is a diagram illustrating the architecture of an RNN Encoder-Decoder model. It shows two main components: an encoder and a decoder. The encoder processes input sequences X1, X2, and XT, while the decoder generates output sequences Y1, Y2, and YT.\n\nSection 2: Figure details\nThe encoder consists of three nodes (X1, X2, XT) connected in sequence. The decoder has three nodes (Y1, Y2, YT) that receive input from the encoder. The final output node C is connected to all decoder nodes. Arrows indicate the flow of information from the encoder to the decoder."
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2: An illustration of the proposed hidden activation function. The update gate z selects whether the hidden state is to be updated with a new hidden state \u02dc h . The reset gate r decides whether the previous hidden state is ignored. See Eqs. (5)-(8) for the detailed equations of r , z , h and \u02dc h .",
+    "width": 309,
+    "height": 157,
+    "description": "Section 1: Figure type and content\nThis figure is a diagram illustrating the proposed hidden activation function in the context of a Recurrent Neural Network (RNN) Encoder-Decoder model for Statistical Machine Translation. It shows the update and reset gates, z and r, which control the flow of information in the hidden state h and its update h~.\n\nSection 2: Figure details\nText in figure: z, h, r, h~. Arrows indicate the flow of information between the gates and the hidden states. The update gate z decides whether to update the hidden state with a new hidden state h~, while the reset gate r determines whether to ignore the previous hidden state."
+  },
+  {
+    "file": "p006_f03.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 3: The visualization of phrase pairs according to their scores (log-probabilities) by the RNN Encoder-Decoder and the translation model.",
+    "width": 343,
+    "height": 271,
+    "description": "This figure is a scatter plot showing the relationship between TM Scores (log) and RNN Scores (log) for phrase pairs. The x-axis represents RNN Scores (log), and the y-axis represents TM Scores (log). The plot contains numerous data points, with the highest scores clustered around the top-left corner and the lowest scores around the bottom-right.\n\nSection 1:\nTM Scores (log) vs. RNN Scores (log) scatter plot. Highest scores at top-left, lowest at bottom-right. X-axis: RNN Scores (log). Y-axis: TM Scores (log). Data points densely clustered.\n\nSection 2:\nTM Scores (log), RNN Scores (log). X-axis: RNN Scores (log). Y-axis: TM Scores (log). Data points, highest scores top-left, lowest bottom-right."
+  },
+  {
+    "file": "p008_f04.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Table 3: Samples generated from the RNN Encoder-Decoder for each source phrase used in Table 2. We show the top-5 target phrases out of 50 samples. They are sorted by the RNN Encoder-Decoder scores.",
+    "width": 862,
+    "height": 307,
+    "description": "Figure description: The figure shows two distinct parts. The left part is a word cloud, displaying various words in different sizes and colors, representing their frequency or importance. The right part is a scatter plot with axes labeled \"federal\" and \"Isr.\" The plot contains labeled points representing different countries and regions, such as \"France,\" \"China,\" \"Russian,\" \"English,\" \"Germany,\" \"Ontario,\" \"Iraq,\" \"Japan,\" \"European Assembly,\" \"African,\" \"British,\" \"North,\" \"Canada,\" and \"South.\"\n\nFigure index:\n- Word cloud: Displays words in varying sizes and colors, indicating frequency or importance.\n- Scatter plot: Shows labeled points for countries and regions, including \"France,\" \"China,\" \"Russian,\" \"English,\" \"Germany,\" \"Ontario,\" \"Iraq,\" \"Japan,\" \"European Assembly,\" \"African,\" \"British,\" \"North,\" \"Canada,\" and \"South.\""
+  },
+  {
+    "file": "p009_f05.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 5: 2-D embedding of the learned phrase representation. The top left one shows the full representation space (5000 randomly selected points), while the other three figures show the zoomed-in view of specific regions (color-coded).",
+    "width": 907,
+    "height": 640,
+    "description": "Figure 5 shows a 2-D embedding of learned phrase representations using RNN Encoder-Decoder for statistical machine translation. The top left panel displays the full representation space with 5000 randomly selected points. The other three panels zoom in on specific regions, color-coded for clarity. The figure illustrates the distribution and clustering of phrase representations in a reduced 2-D space, highlighting the effectiveness of the RNN Encoder-Decoder model in capturing semantic similarities between phrases."
+  },
+  {
+    "file": "p014_f06.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 6: 2-D embedding of the learned word representation. The top left one shows the full embedding space, while the other three figures show the zoomed-in view of specific regions (color-coded).",
+    "width": 1326,
+    "height": 949,
+    "description": "Figure 6 displays a 2-D embedding of learned word representations from a machine translation model. The top left panel shows the full embedding space, while the other three panels zoom in on specific regions. The embeddings are color-coded, with different colors representing different word categories or clusters.\n\nKey text in figure: \"English\", \"French\", \"China\", \"Russian\", \"German\", \"Ontario\", \"Iraq\", \"Japan\", \"British\", \"North\", \"Canada\", \"South\", \"August\", \"April\", \"October\", \"September\", \"June\", \"March\", \"July\", \"January\", \"November\", \"February\", \"December\", \"second\", \"third\", \"100\", \"50\", \"40\", \"60\", \"14\", \"six\", \"29\", \"15\", \"48\", \"107\", \"112\", \"four\", \"7\", \"five\", \"28\", \"37\", \"36\", \"35\", \"34\", \"33\", \"32\", \"31\", \"30\", \"27\", \"26\", \"25\", \"24\", \"23\", \"22\", \"21\", \"20\", \"10\", \"9\", \"8\", \"1\", \"31.995\", \"31.995\", \"-32.005\", \"-32.01\", \"-32.025\", \"-32.025\", \"-32.03\", \"37.5\", \"37.48\", \"37.47\", \"37.46\", \"37.45\", \"37.44\", \"37.43\", \"37.43\", \"37.41\", \"37.4\""
+  },
+  {
+    "file": "p015_f07.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 7: 2-D embedding of the learned phrase representation. The top left one shows the full representation space (1000 randomly selected points), while the other three figures show the zoomed-in view of specific regions (color-coded).",
+    "width": 1368,
+    "height": 984,
+    "description": "Figure 7 shows a 2-D embedding of learned phrase representations using an RNN Encoder-Decoder for statistical machine translation. The top left plot displays 1000 randomly selected points in the full representation space. The other three plots zoom in on specific regions, color-coded for clarity. The figure illustrates the distribution and clustering of phrase representations in a reduced dimensional space.\n\nRelevant text: Figure 7: 2-D embedding of the learned phrase representation. The top left one shows the full representation space (1000 randomly selected points), while the other three figures show the zoomed-in view of specific regions (color-coded)."
+  }
+]

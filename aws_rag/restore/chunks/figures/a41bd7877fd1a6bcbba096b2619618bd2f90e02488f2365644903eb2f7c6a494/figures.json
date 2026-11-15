@@ -1,0 +1,209 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 1 Language modeling performance improves smoothly as we increase the model size, datasetset size, and amount of compute 2 used for training. For optimal performance all three factors must be scaled up in tandem. Empirical performance has a power-law relationship with each individual factor when not bottlenecked by the other two.",
+    "width": 864,
+    "height": 259,
+    "description": "Description: This figure contains three line plots showing the relationship between test loss and three factors: compute, dataset size, and parameters. The left plot shows test loss decreasing as compute increases, with the orange line representing the lowest loss. The middle plot shows test loss decreasing as dataset size increases, with the blue line representing the lowest loss. The right plot shows test loss decreasing as the number of parameters increases, with the blue line representing the lowest loss.\n\nText in figure: \"Test Loss\", \"Compute\", \"Dataset Size\", \"Parameters\", \"L = (C_min/2.3 * 10^8)^-0.050\", \"L = (D/5.4 * 10^13)^-0.095\", \"L = (N/8.8 * 10^13)^-0.076\""
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3 As more compute becomes available, we can choose how much to allocate towards training larger models, using larger batches, and training for more steps. We illustrate this for a billion-fold increase in compute. For optimally compute-efficient training, most of the increase should go towards increased model size. A relatively small increase in data is needed to avoid reuse. Of the increase in data, most can be used to increase parallelism through larger batch sizes, with only a very small increase in serial training time required.",
+    "width": 605,
+    "height": 274,
+    "description": "Description: This figure is a log-log plot showing the relationship between compute (PF-days) and multiplicative contribution. The plot has three series: Minimum serial steps, 10x Serial Steps, and 100x Batch Size. The Minimum serial steps series is the lowest, followed by 10x Serial Steps, and 100x Batch Size is the highest. The 100x Batch Size series is approximately 10^6 times higher than the Minimum serial steps series.\n\nText in figure: Minimum serial steps, 10x Serial Steps, 100x Batch Size, Data requirements grow relatively slowly, Optimal model size increases very quickly, Multiplicative Contribution, Compute (PF-days)"
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "",
+    "width": 826,
+    "height": 219,
+    "description": "## Section 1: Figure Description\n\nThis figure consists of two plots from the paper \"Scaling Laws for Neural Language Models.\" The left plot shows the loss versus the model and dataset size, with various model sizes indicated by different colors. The right plot displays the loss versus model size and training steps, with different colors representing different numbers of parameters. The highest loss is observed in the 393.2K model, while the lowest is in the 3M model. The color legend indicates the number of parameters, ranging from 708M to 3M.\n\n## Section 2: Figure Text\n\nTokens in Dataset: 10^7, 10^8, 10^9, 10^10\nLoss: 2.5, 3.0, 3.5, 4.0, 4.5\nParams: 708M, 302M, 85M, 3M, 25M, 393.2K\nEstimated S_min: 10^4, 10^5\nParameters (non-embed): 10^6, 10^7, 10^8"
+  },
+  {
+    "file": "p008_f04.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "",
+    "width": 859,
+    "height": 206,
+    "description": "This figure contains three line graphs, each showing different aspects of model performance. The first graph displays the loss increase with varying feed-forward ratios. The highest series is \"d_model/n_head = 64\" at 10^1, and the lowest is \"n_head = 8\" at 10^0. The second graph shows performance with different aspect ratios, where \"1.5B Params\" is the highest at 10^3, and \"50M Params\" is the lowest at 10^1. The third graph illustrates the impact of attention head dimension on loss increase, with \"d_model = 1024\" being the highest at 10^2 and \"d_model = 256\" the lowest at 10^1.\n\nLegend entries: \"n_head = 8\", \"d_model/n_head = 64\", \"50M Params\", \"274M Params\", \"1.5B Params\", \"d_model = 256\", \"d_model = 512\", \"d_model = 1024\"."
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 5 Performance depends very mildly on model shape when the total number of non-embedding parameters N is held fixed. The loss varies only a few percent over a wide range of shapes. Small differences in parameter counts are compensated for by using the fit to L ( N ) as a baseline. Aspect ratio in particular can vary by a factor of 40 while only slightly impacting performance; an ( n layer , d model ) = (6 , 4288) reaches a loss within 3% of the (48 , 1600) model used in [RWC + 19].",
+    "width": 774,
+    "height": 240,
+    "description": "## Description\n\nThis figure contains two plots showing test loss against the number of parameters. The left plot is labeled \"Parameters (with embedding)\" and the right plot is labeled \"Parameters (non-embedding).\" Each plot has lines representing different layer configurations: 0 Layer, 1 Layer, 2 Layers, 3 Layers, 6 Layers, and > 6 Layers. The 0 Layer line is the highest, followed by 1 Layer, 2 Layers, 3 Layers, 6 Layers, and > 6 Layers, which is the lowest. The difference in loss between the highest and lowest is about 4%.\n\n## Text in figure\n\nLeft plot:\n- Parameters (with embedding)\n- 0 Layer\n- 1 Layer\n- 2 Layers\n- 3 Layers\n- 6 Layers\n- > 6 Layers\n\nRight plot:\n- Parameters (non-embedding)\n- 1 Layer\n- 2 Layers\n- 3 Layers\n- 6 Layers\n- > 6 Layers"
+  },
+  {
+    "file": "p009_f06.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 7",
+    "width": 862,
+    "height": 276,
+    "description": "## Index entry 1 (for image identification and basic content)\n\nFigure type: Line graph\nContent: Two line graphs comparing the performance of LSTMs and Transformers in terms of test loss and per-token test loss. The left graph shows test loss against the number of parameters, with LSTMs plateauing and Transformers showing continuous improvement. The right graph shows per-token test loss against token index, with LSTMs plateauing after 100 tokens and Transformers improving throughout the context.\n\n## Index entry 2 (for detailed content)\n\nText in figure: \"Transformers asymptotically outperform LSTMs due to improved use of long contexts\", \"LSTM plateaus after <100 tokens\", \"Transformer improves through the whole context\", \"Parameters: 400K, 2M, 3M, 200M, 300M\", \"1 Layer, 2 Layers, 4 Layers\", \"Per-token Test Loss\", \"Test Loss\", \"Token Index in Context\", \"Parameters (non-embedding)\""
+  },
+  {
+    "file": "p010_f07.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 8 Left: Generalization performance to other data distributions improves smoothly with model size, with only a small and very slowly growing offset from the WebText2 training distribution. Right: Generalization performance depends only on training distribution performance, and not on the phase of training. We compare generalization of converged models (points) to that of a single large model (dashed curves) as it trains.",
+    "width": 851,
+    "height": 256,
+    "description": "Description: The figure contains two plots. The left plot shows test loss against the number of parameters. The \"WebText2 (Test)\" series is highest at the start, followed by \"Internet Books\", \"Books\", \"Wikipedia\", and \"Common Crawl\". The right plot shows loss on other distributions against test loss on the training distribution. The \"Books during training\" series is highest, followed by \"Wikipedia during training\", \"Books at convergence\", and \"Wikipedia at convergence\".\n\nText in figure: \"Test Loss\", \"Parameters (non-embedding)\", \"WebText2 (Test)\", \"Internet Books\", \"Books\", \"Wikipedia\", \"Common Crawl\", \"Loss on Other Distribution\", \"Books during training\", \"Wikipedia during training\", \"Books at convergence\", \"Wikipedia at convergence\", \"Test Loss on Training Distribution\"."
+  },
+  {
+    "file": "p011_f08.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 9 The early-stopped test loss L ( N,D ) depends predictably on the dataset size D and model size N according to Equation (1.5). Left : For large D , performance is a straight power law in N . For a smaller fixed D , performance stops improving as N increases and the model begins to overfit. (The reverse is also true, see Figure 4.) Right : The extent of overfitting depends predominantly on the ratio N \u03b1 N \u03b1 D /D , as predicted in equation (4.3). The line is our fit to that equation.",
+    "width": 851,
+    "height": 217,
+    "description": "This figure consists of two plots. The left plot shows the test loss L (N,D) as a function of the number of parameters (non-embedded) for various dataset sizes. The highest loss is observed for the smallest dataset size (21M), while the lowest loss is for the largest dataset size (22.0B). The right plot illustrates the extent of overfitting, which depends on the ratio N/D. The line in the plot represents the fit to the equation (4.3).\n\nText in figure: Data Size Bottleneck, Data Size, 21M, 43M, 86M, 172M, 344M, 688M, 1.4B, 22.0B, Params (non-embed), Overfitting, N/D, L(L(D)-1), Data Size, 21M, 43M, 86M, 172M, 344M, 688M, 1.4B, 22.0B."
+  },
+  {
+    "file": "p012_f09.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 10 The critical batch size B crit follows a power law in the loss as performance increase, and does not depend directly on the model size. We find that the critical batch size approximately doubles for every 13% decrease in loss. B crit is measured empirically from the data shown in Figure 18, but it is also roughly predicted by the gradient noise scale, as in [MKAT18].",
+    "width": 506,
+    "height": 317,
+    "description": "Description: This figure is a scatter plot showing the relationship between critical batch size and WebText2 train loss. The plot includes two empirical data series for critical batch size, one for N = 3M and another for N = 85M. The highest series is for N = 85M, peaking at around 10^6 tokens, while the lowest series is for N = 3M, peaking at around 10^5 tokens. The plot also includes a line representing the gradient noise scale.\n\nText in figure: Critical Batch Size vs. Performance, Critical Batch Size (Tokens), WebText2 Train Loss, Empirical B_crit, N = 3M, Empirical B_crit, N = 85M, B_crit = 2.1 x 10^8 tokens * L^-4.8, Noise Scale Measurement."
+  },
+  {
+    "file": "p014_f10.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 11 When we hold either total compute or number of training steps fixed, performance follows L ( N,S ) from Equation (5.6). Each value of compute budget has an associated optimal model size that maximizes performance. Mediocre fits at small S are unsurprising, as the power-law equation for the learning curves breaks down very early in training.",
+    "width": 851,
+    "height": 253,
+    "description": "Figure: Two plots showing performance versus compute budget and steps. Left plot: Test Loss vs. Parameters (non-embedding). Right plot: Test Loss vs. Steps. Both plots show a trend of decreasing test loss with increasing parameters and steps. The left plot has a color gradient indicating compute budget, with the highest compute budget (yellow) showing the lowest test loss. The right plot has a color gradient indicating the number of steps, with the highest number of steps (yellow) also showing the lowest test loss.\n\nText in figure: Performance vs Compute Budget, Performance vs Steps, Test Loss, Parameters (non-embedding), Steps, 10^0, 10^-1, 10^-2, 10^-3, 10^-4, 10^-5, 8, 7, 6, 5, 4, 3, 2, 10^4, 10^6, 10^8, 10^6, 10^7, 10^8, 10^9, 5.4, 4.8, 4.2, 3.6, 3.0, 2.4."
+  },
+  {
+    "file": "p015_f11.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 12 Left: Given a fixed compute budget, a particular model size is optimal, though somewhat larger or smaller models can be trained with minimal additional compute. Right: Models larger than the computeefficient size require fewer steps to train, allowing for potentially faster training if sufficient additional parallelism is possible. Note that this equation should not be trusted for very large models, as it is only valid in the power-law region of the learning curve, after initial transient effects.",
+    "width": 841,
+    "height": 260,
+    "description": "Figure 12: Two plots showing the relationship between model size and compute efficiency. Left plot: Excess Compute (C/C_efficient) vs. Deviation from Optimal Model (N/N_efficient). The curve peaks at the optimal model size, with a 20% larger compute budget allowing for training of models between 0.6x and 2.2x the optimal size. Right plot: Excess Steps (S/S_efficient) vs. Deviation from Optimal Model (N/N_efficient). The curve shows that larger models require fewer steps to train, with the framework not capturing early training dynamics.\n\nText in figure: \"Excess Compute (C/C_efficient)\", \"Deviation from Optimal Model (N/N_efficient)\", \"Models between 0.6x and 2.2x the optimal size can be trained with a 20% larger compute budget\", \"Smaller models require more steps to train, while larger models require fewer\", \"Our framework does not capture early training dynamics\", \"Excess Steps (S/S_efficient)\"."
+  },
+  {
+    "file": "p015_f12.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 13 When adjusting performance to simulate training far below the critical batch size, we find a somewhat altered power law for L ( C min ) when compared with the fully empirical results. The conspicuous lump at 10 - 5 PF-days marks the transition from 1-layer to 2-layer networks; we exclude 1-layer networks in the power-law fits. It is the L ( C min ) trend that we expect to provide a reliable extrapolation for larger compute.",
+    "width": 423,
+    "height": 269,
+    "description": "Description: This plot shows the test loss of neural language models as a function of compute (PF-days) and non-embedding parameters. The two series are labeled as L = (Cmin/2.3 10^8)^-0.050 and L = (C/2.0 10^7)^-0.057. The orange series is highest at the leftmost point, while the blue series is lowest at the rightmost point. The orange series decreases by about 5, while the blue series decreases by about 2.\n\nText in figure: L = (Cmin/2.3 10^8)^-0.050, L = (C/2.0 10^7)^-0.057, Test Loss, Compute (PF-days), non-embedding, 10^-8, 10^-6, 10^-4, 10^-2, 10^0."
+  },
+  {
+    "file": "p016_f13.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 14 Left: Each value of the compute budget C min has an associated optimal model size N . Optimal model size grows very rapidly with C min , increasing by 5x for each 10x increase in compute. The number of data examples processed makes up the remainder of the increase, growing relatively modestly by only 2x. Right: The batch-adjusted number of optimization steps also grows very slowly, if at all, meaning that most of the growth in data examples processed can be used for increased batch sizes.",
+    "width": 851,
+    "height": 257,
+    "description": "Description: The figure consists of two plots. The left plot shows the relationship between compute budget and optimal model size. The series \"N = (1.3 \u00b7 10^9) \u00b7 C_min^0.73\" is highest, while \"N = (1.6 \u00b7 10^9) \u00b7 C_min^0.88\" is lower. The right plot shows the number of optimization steps, with \"S_min (fixed-batch)\" being the highest and \"S_min (adjusted)\" the lowest.\n\nText in figure: \"N = (1.3 \u00b7 10^9) \u00b7 C_min^0.73\", \"N = (1.6 \u00b7 10^9) \u00b7 C_min^0.88\", \"S_min (adjusted)\", \"S_min = (5.4 \u00b7 10^3) \u00b7 C_min^0.03\", \"S (fixed-batch)\", \"Compute (PF-days), non-embedding\", \"Compute (PF-days), excluding embeddings\", \"Parameters (non-embedding)\", \"Steps\"."
+  },
+  {
+    "file": "p017_f14.png",
+    "page": 17,
+    "kind": "picture",
+    "caption": "Figure 15 Far beyond the model sizes we study empirically, we find a contradiction between our equations for L ( C min ) and L ( D ) due to the slow growth of data needed for compute-efficient training. The intersection marks the point before which we expect our predictions to break down. The location of this point is highly sensitive to the precise exponents from our power-law fits.",
+    "width": 691,
+    "height": 269,
+    "description": "Figure 15: A plot showing the relationship between compute (PF-days) and test loss for two functions, L(C_min) and L(D(C)). The yellow line (L(C_min)) starts higher and decreases, while the red line (L(D(C))) starts lower and increases. The intersection point of these two lines is sensitive to the precise power-law parameters.\n\nText in figure: \"Test Loss\", \"Compute (PF-days), non-embedding\", \"L(C_min)\", \"L(D(C))\", \"The intersection point is sensitive to the precise power-law parameters\".\n\nDescription: The plot shows the relationship between compute (PF-days) and test loss for two functions, L(C_min) and L(D(C)). The yellow line (L(C_min)) starts higher and decreases, while the red line (L(D(C))) starts lower and increases. The intersection point of these two lines is sensitive to the precise power-law parameters.\n\nText in figure: \"Test Loss\", \"Compute (PF-days), non-embedding\", \"L(C_min)\", \"L(D(C))\", \"The intersection point is sensitive to the precise power-law parameters\"."
+  },
+  {
+    "file": "p023_f15.png",
+    "page": 23,
+    "kind": "picture",
+    "caption": "Figure 16 Left: We characterize the step on which early stopping occurs, as a function of the extent of overfitting. The red line indicates a lower bound for early stopping that is derived in Section 5.3. Right: We display train and test loss for a series of 300M parameter models trained on different sized dataset subsamples. The test loss typically follows that of a run done with unrestricted data until diverging. Note that the degree of overfitting (as compared to the infinite data limit) is significantly overestimated by L test - L train (denoted by a black bar for each run).",
+    "width": 849,
+    "height": 256,
+    "description": "Figure 16: Two-panel figure from \"Scaling Laws for Neural Language Models.\" Left: Scatter plot showing early stopping steps versus overfitting extent, with a red line indicating a lower bound for early stopping. Right: Line graph displaying train and test loss for 300M parameter models trained on various dataset sizes, with a black bar showing the overfitting degree.\n\nText in figure: \"Early Stopping Step,\" \"Data Size,\" \"21M,\" \"43M,\" \"86M,\" \"172M,\" \"344M,\" \"688M,\" \"1.4B,\" \"Loss,\" \"Test Loss,\" \"Train Loss,\" \"Dataset Size (Tokens).\""
+  },
+  {
+    "file": "p024_f16.png",
+    "page": 24,
+    "kind": "picture",
+    "caption": "Figure 17 We compare recurrent Transformers [DGV + 18], which re-use parameters, to standard Transformers. Recurrent Transformers perform slightly better when comparing models with equal parameter count, but slightly worse when accounting for reuse and comparing per FLOP.",
+    "width": 851,
+    "height": 257,
+    "description": "Figure: Two line plots comparing test loss against the number of parameters for different model types. The left plot shows the test loss for 2x, 4x, 8x Reuse, and Non-recurrent Models. The right plot shows the same comparison but with a different legend. Both plots show a downward trend in test loss as the number of parameters increases. The 2x Reuse model has the highest test loss, while the Non-recurrent Models have the lowest.\n\nText in figure: Test Loss, Parameters (non-embedding), 2x Reuse, 4x Reuse, 8x Reuse, Non-recurrent Models."
+  },
+  {
+    "file": "p024_f17.png",
+    "page": 24,
+    "kind": "picture",
+    "caption": "Figure 18 These figures demonstrate fits to Equation (5.1) for a large number of values of the loss L , and for two different Transformer model sizes. These fits were used to measure B crit ( L ) for Figure 10.",
+    "width": 824,
+    "height": 258,
+    "description": "Description: The figure shows two plots, each representing a batch size scan for different Transformer model sizes. The left plot is for a 3M parameter model, and the right plot is for an 85M parameter model. Both plots display the relationship between the number of tokens processed and the test loss. The color gradient indicates the test loss, ranging from low (dark purple) to high (yellow). The highest test loss is observed at the lowest number of tokens processed, and it decreases as the number of tokens increases.\n\nText in figure: Batch Size Scan - 3M Params, Batch Size Scan - 85M Params, Tokens Processed, Test Loss, 10^11, 10^10, 10^9, 10^8, 10^7, 10^6, 10^5, 10^4, 10^3, 10^2, 10^1, 10, 8, 6, 4."
+  },
+  {
+    "file": "p024_f18.png",
+    "page": 24,
+    "kind": "picture",
+    "caption": "Figure 19 The number of minimum serial steps needed to reach any fixed value of the test loss decreases precipitously with model size. Sample efficiency (show here for training far below the critical batch size) improves greatly as well, improving by a factor of almost 100 when comparing the smallest possible model to a very large one.",
+    "width": 843,
+    "height": 225,
+    "description": "Description: The figure contains two plots, each showing a logarithmic scale on the x-axis (Parameters (non-embedding)) and a logarithmic scale on the y-axis. The left plot shows \"Minimum Steps (S_min)\" and the right plot shows \"Minimum Examples (E_min)\". Both plots display a decrease in values as the number of parameters increases. The left plot's series range from approximately 10^3 to 10^5, with the highest series starting at 10^5 and the lowest at 10^3. The right plot's series range from approximately 10^8 to 10^11, with the highest series starting at 10^11 and the lowest at 10^8.\n\nText in figure: \"Minimum Steps (S_min)\", \"Minimum Examples (E_min)\", \"Parameters (non-embedding)\", \"10^6\", \"10^7\", \"10^8\", \"10^3\", \"10^4\", \"10^5\", \"10^8\", \"10^9\", \"10^10\", \"10^11\", \"5.5\", \"5.0\", \"4.5\", \"4.0\", \"3.5\", \"3.0\", \"2.5\"."
+  },
+  {
+    "file": "p025_f19.png",
+    "page": 25,
+    "kind": "picture",
+    "caption": "Figure 20 This figure provides information about the performance per token as a function of model size and training time. Left: Loss per token as a function of its position T in the 1024-token context. Loss scales predictably as a power-law in T . Right: Test loss per token as a function of training step.",
+    "width": 840,
+    "height": 256,
+    "description": "## Description\n\nThe figure consists of two plots. The left plot shows per-token test loss as a function of the token index in a 1024-token context. The right plot shows test loss per token as a function of the training step. The left plot displays a power-law scaling of loss with token index. The right plot shows a decrease in test loss per token over training steps.\n\n## Text in figure\n\nLeft plot:\n- Legend: 4.0 + 3.2 - 0.47, 3.4 + 4.0 - 0.56, 2.9 + 4.5 - 0.56, 2.7 + 4.9 - 0.60, 2.4 + 5.1 - 0.63, 2.3 + 5.4 - 0.62\n- X-axis: Token Index\n- Y-axis: Per-Token Test Loss\n\nRight plot:\n- Legend: Model Parameters\n- X-axis: Step\n- Y-axis: Test Loss\n- Color bar: Model Parameters"
+  },
+  {
+    "file": "p025_f20.png",
+    "page": 25,
+    "kind": "picture",
+    "caption": "Figure 21 In addition to the averaged loss, individual tokens within the 1024-token context also improve smoothly as model size increases. Training runs with shorter context n ctx = 8 (dashed lines) perform better on early tokens, since they can allocate all of their capacity to them.",
+    "width": 456,
+    "height": 245,
+    "description": "Description: This plot shows the test loss for various tokens within a 1024-token context as the model size increases. The series with the highest test loss is Token 1/1024, and the lowest is Token 1024/1024. The dashed lines represent training runs with a shorter context of n ctx = 8.\n\nText in figure: Test Loss, Parameters (excl. embedding), Token 1/1024, Token 2/1024, Token 4/1024, Token 8/1024, Token 16/1024, Token 64/1024, Token 256/1024, Token 1024/1024, Token 1/8, Token 2/8, Token 4/8, Token 8/8."
+  },
+  {
+    "file": "p026_f21.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "Figure 22 We test a variety of learning rate schedules including cosine decay, linear decay, as well as other faster/slower decays schedules on a 3 million parameter model, shown on the left. For these experiments we do not decay to zero, since we find that this tends to give a fixed improvement close to the end of training. We find that, as long as the learning rate is not too small and does not decay too quickly, performance does not depend strongly on learning rate. Run-to-run variation is at the level of 0.05 in the loss, so averaging multiple runs is necessary to validate performance changes smaller than this level.",
+    "width": 795,
+    "height": 214,
+    "description": "Figure: Two plots showing learning rate schedules and loss over steps.\nLeft plot: Multiple lines representing different learning rate schedules.\nHighest line is at 0.0010, lowest at 0.0000.\nRight plot: Scatter plot of loss over learning rate summed over steps.\nHighest loss is around 3.90, lowest around 3.70.\n\nText in figure: Learning Rate, Step, Loss, LR Summed Over Steps."
+  },
+  {
+    "file": "p026_f22.png",
+    "page": 26,
+    "kind": "picture",
+    "caption": "Figure 23 The trend for performance as a function of parameter count, L ( N ) , is fit better by a power law than by other functions such as a logarithm at a qualitative level.",
+    "width": 337,
+    "height": 259,
+    "description": "Description: This graph depicts the test loss convergence as a function of the number of parameters (non-embedding) in neural language models. It shows two functions: a blue line representing L = (N/8.8 * 10^13)^-0.076 and an orange line representing L = -0.25log(N/7.1 * 10^12). The blue line starts higher and decreases more steeply than the orange line, which starts lower and decreases more gradually. Both lines converge towards the lower left of the graph.\n\nText in figure: \"Test Loss (at convergence)\", \"Parameters (non-embedding)\", \"L = (N/8.8 * 10^13)^-0.076\", \"L = -0.25log(N/7.1 * 10^12)\""
+  },
+  {
+    "file": "p027_f23.png",
+    "page": 27,
+    "kind": "picture",
+    "caption": "Figure 24 We show evaluations on a series of datasets for models with approximately 1.5 Billion parameters. We observe no effect of depth on generalization; generalization performance depends primarily on training distribution performance. The 12-layer model overfit the Internet Books dataset and we show the early-stopped performance; we have not seen this surprising result in other experiments.",
+    "width": 420,
+    "height": 267,
+    "description": "Description: This figure is a line graph comparing the test loss of neural language models across various datasets and model depths. The series with the highest test loss is \"Internet Books\" at the 1st depth, reaching approximately 2.8. The lowest test loss is observed in \"WebText2 (Test)\" at the 1st depth, around 2.3. The \"Wikipedia\" series starts highest at the 1st depth, around 2.8, and decreases to about 2.7 at the 100th depth.\n\nText in figure: \"Test Loss\", \"Depth\", \"Wikipedia\", \"Books\", \"Internet Books\", \"Common Crawl\", \"WebText2 (Train)\", \"WebText2 (Test)\"; \"10^1\", \"10^2\"; \"2.3\", \"2.4\", \"2.5\", \"2.6\", \"2.7\", \"2.8\""
+  }
+]

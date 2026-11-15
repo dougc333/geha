@@ -1,0 +1,38 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 1: An overview of our theoretical framework. Middle panel: rooted subtree structures (at the blue node) that the WL test uses to distinguish different graphs. Right panel: if a GNN's aggregation function captures the full multiset of node neighbors, the GNN can capture the rooted subtrees in a recursive manner and be as powerful as the WL test.",
+    "width": 707,
+    "height": 164,
+    "description": "## Description\nThis figure is a conceptual diagram illustrating the theoretical framework for analyzing the power of Graph Neural Networks (GNNs). It shows three main components: a graph, a rooted subtree, and GNN aggregation. The graph is represented by nodes and edges. The rooted subtree captures specific structures within the graph, highlighted by blue nodes. The GNN aggregation process is depicted on the right, showing how GNNs can capture these structures if their aggregation function is sufficiently powerful.\n\n## Text in figure\n- Graph\n- Rooted subtree\n- 2 WL test iterations\n- Captures structures\n- GNN aggregation\n- Multiset"
+  },
+  {
+    "file": "p006_f02.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 2: Ranking by expressive power for sum, mean and max aggregators over a multiset . Left panel shows the input multiset, i.e. , the network neighborhood to be aggregated. The next three panels illustrate the aspects of the multiset a given aggregator is able to capture: sum captures the full multiset, mean captures the proportion/distribution of elements of a given type, and the max aggregator ignores multiplicities (reduces the multiset to a simple set).",
+    "width": 666,
+    "height": 146,
+    "description": "## Description\n\nThis figure illustrates the expressive power of different aggregators (sum, mean, max) over a multiset. The input multiset is shown on the left, followed by three panels demonstrating what each aggregator captures: sum captures the full multiset, mean captures the proportion/distribution of elements, and max reduces the multiset to a set.\n\n## Text in figure\n\nInput: multiset\nsum - multiset: captures the full multiset\nmean - distribution: captures the proportion/distribution of elements\nmax - set: reduces the multiset to a set"
+  },
+  {
+    "file": "p006_f03.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 3: Examples of graph structures that mean and max aggregators fail to distinguish. Between the two graphs, nodes v and v \u2032 get the same embedding even though their corresponding graph structures differ. Figure 2 gives reasoning about how different aggregators 'compress' different multisets and thus fail to distinguish them.",
+    "width": 775,
+    "height": 156,
+    "description": "Figure: A comparison of graph structures where mean and max aggregators fail.\nSections:\n- Graph structures failing mean and max aggregators.\n- Max aggregator failure example.\n- Mean and max aggregators both failing.\nText in figure: \"Mean and Max both fail\", \"Max fails\", \"Mean and Max both fail\"."
+  },
+  {
+    "file": "p009_f04.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 4: Training set performance of GINs, less powerful GNN variants, and the WL subtree kernel.",
+    "width": 766,
+    "height": 315,
+    "description": "This figure displays line graphs comparing the training set performance of various graph neural network (GNN) variants and the Weisfeiler-Lehman (WL) subtree kernel. Each panel shows training accuracy over epochs for different datasets: PROTEINS, NCI1, PTC, IMDBBINARY, and REDDITBINARY. The series with the highest accuracy is the Sum -- MLP (GIN-0) in the REDDITBINARY panel, reaching nearly 1.0. The lowest accuracy is observed in the Mean -- 1-layer (GCN) series in the REDDITBINARY panel, starting at 0.4. The figure includes a legend identifying the series by their labels, such as \"Sum -- MLP (GIN-0)\" and \"Max -- 1-layer (GraphSAGE)\".\n\nText in figure: PROTEINS, NCI1, PTC, IMDBBINARY, REDDITBINARY, WL subtree kernel, Sum -- MLP (GIN-0), Sum -- MLP (GIN-eps), Sum -- 1-layer, Mean -- MLP, Mean -- 1-layer (GCN), Max -- MLP, Max -- 1-layer (GraphSAGE), Epoch, Training accuracy."
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 1: An MNIST digit classification example of a Caffe network, where blue boxes represent layers and yellow octagons represent data blobs produced by or fed into the layers.",
+    "width": 788,
+    "height": 139,
+    "description": "Figure type: Diagram\nText in figure: mnist-input, data, label, conv1, pool1, conv2, pool2, conv3, pool3, ip1, ip2, innerproduct, relu1, relu2, innerproduct, loss\n\nDescription: The figure is a diagram of a convolutional neural network architecture for digit classification using the MNIST dataset. It shows the flow of data through various layers, starting from the input layer, through convolutional layers, pooling layers, and fully connected layers, ending with the output layer. The diagram includes labels for each layer and data blobs, indicating the progression of data through the network.\n\nSection 1: Convolutional Neural Network Architecture for MNIST Digit Classification\nThis section describes the architecture of a convolutional neural network used for digit classification on the MNIST dataset. The network includes convolutional layers (conv1, conv2, conv3), pooling layers (pool1, pool2, pool3), and fully connected layers (ip1, ip2). The input data flows through these layers, with intermediate data blobs labeled as 'data', 'label', and 'innerproduct'. The final output is a loss value calculated using softmax loss.\n\nSection 2: Layer and Data Flow in the MNIST Digit Classification Network\nThis section details the flow of data through the network, starting from the mnist-input layer, through the convolutional layers (conv1, conv2, conv3), pooling layers (pool1, pool2, pool3), and fully connected layers (ip1, ip2). The data blobs are labeled as 'data', 'label', and 'innerproduct'. The network ends with the loss calculation using softmax loss."
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2: An example of the Caffe object classification demo. Try it out yourself online!",
+    "width": 379,
+    "height": 189,
+    "description": "### Description\n\nThis figure is a screenshot from an online object classification demo using the Caffe deep learning framework. It shows a photograph of a cat with various classification labels and their corresponding confidence scores. The labels include \"cat\" (1.80727), \"domestic cat\" (1.74727), \"feline\" (1.72787), \"tabby\" (0.89133), and \"domestic animal\" (0.78542). The highest score is for \"cat\" at 1.80727, followed by \"domestic cat\" at 1.74727.\n\n### Text in figure\n\n- cat: 1.80727\n- domestic cat: 1.74727\n- feline: 1.72787\n- tabby: 0.89133\n- domestic animal: 0.78542"
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3: Features extracted from a deep network, visualized in a 2-dimensional space. Note the clear separation between categories, indicative of a successful embedding.",
+    "width": 250,
+    "height": 243,
+    "description": "## Description\nThis figure is a scatter plot showing features extracted from a deep network, visualized in a 2-dimensional space. The plot shows clear separation between different categories, indicating successful embedding. The categories include \"dog\", \"bird\", \"invertebrate\", \"vehicle\", \"good\", \"covering\", and \"building\".\n\n## Text in figure\ndog, bird, invertebrate, vehicle, good, covering, building, commodity"
+  },
+  {
+    "file": "p004_f04.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 4: Top three most-confident positive predictions on the Flickr Style dataset, using a Caffetrained classifier.",
+    "width": 394,
+    "height": 189,
+    "description": "Figure: A grid of images showing different styles of photographs, categorized into four groups: Ethereal, HDR, Melancholy, and Minimal. Each category contains three images that best represent the style, as determined by a Caffe-trained classifier.\n\nText in figure: Ethereal, HDR, Melancholy, Minimal"
+  },
+  {
+    "file": "p004_f05.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 5: The R-CNN pipeline that uses Caffe for object detection.",
+    "width": 454,
+    "height": 131,
+    "description": "Figure type: Diagram\nDescription: The diagram illustrates the R-CNN pipeline for object detection using Caffe. It shows four main steps: 1) Input image, 2) Extract region proposals (~2k), 3) Compute CNN features, 4) Classify regions. The process involves extracting region proposals from the input image, computing CNN features for each warped region, and then classifying the regions using a CNN.\n\nText in figure: Input image, Extract region proposals (~2k), Compute CNN features, Classify regions, warped region, CNN, aeroplane? no., person? yes., tvmonitor? no."
+  }
+]

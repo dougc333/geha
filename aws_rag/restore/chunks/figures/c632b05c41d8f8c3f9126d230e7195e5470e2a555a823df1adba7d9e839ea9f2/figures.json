@@ -1,0 +1,110 @@
+[
+  {
+    "file": "p009_f01.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 1. FedProx results in significant convergence improvements relative to FedAvg in heterogeneous networks. We simulate different levels of systems heterogeneity by forcing 0%, 50%, and 90% devices to be the stragglers (dropped by FedAvg ). (1) Comparing FedAvg and FedProx ( \u00b5 = 0 ), we see that allowing for variable amounts of work to be performed can help convergence in the presence of systems heterogeneity. (2) Comparing FedProx ( \u00b5 = 0 ) with FedProx ( \u00b5 > 0 ), we show the benefits of our added proximal term. FedProx with \u00b5 > 0 leads to more stable convergence and enables otherwise divergent methods to converge, both in the presence of systems heterogeneity (50% and 90% stragglers) and without systems heterogeneity (0% stragglers). Note that FedProx with \u00b5 = 0 and without systems heterogeneity (no stragglers) corresponds to FedAvg . We also report testing accuracy in Figure 7, Appendix C.3.2, and show that FedProx improves the test accuracy on all datasets.",
+    "width": 959,
+    "height": 398,
+    "description": "This figure is a collection of line plots comparing the convergence of FedAvg and FedProx algorithms in heterogeneous networks. Each plot represents a different dataset (Synthetic, MNIST, FMNIST, Shakespeare, Sent140) and different levels of stragglers (0%, 50%, 90%). The plots show training loss over rounds. In the 0% stragglers plots, FedProx (\u00b5 = 0) and FedAvg perform similarly. In the 50% and 90% stragglers plots, FedProx (\u00b5 > 0) shows more stable convergence compared to FedAvg and FedProx (\u00b5 = 0).\n\nLegend: FedAvg, FedProx (\u00b5 = 0), FedProx (\u00b5 > 0)\n\nText in figure: Synthetic, MNIST, FMNIST, Shakespeare, Sent140, 0% stragglers, 50% stragglers, 90% stragglers, Training Loss, # Rounds, FedAvg, FedProx (\u00b5 = 0), FedProx (\u00b5 > 0)"
+  },
+  {
+    "file": "p010_f02.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 2. Effect of data heterogeneity on convergence. We remove the effects of systems heterogeneity by forcing each device to run the same amount of epochs. In this setting, FedProx with \u00b5 = 0 reduces to FedAvg . (1) Top row: We show training loss (see results on testing accuracy in Appendix C.3, Figure 6) on four synthetic datasets whose statistical heterogeneity increases from left to right. Note that the method with \u00b5 = 0 corresponds to FedAvg . Increasing heterogeneity leads to worse convergence, but setting \u00b5 > 0 can help to combat this. (2) Bottom row: We show the corresponding dissimilarity measurement (variance of gradients) of the four synthetic datasets. This metric captures statistical heterogeneity and is consistent with training loss - smaller dissimilarity indicates better convergence.",
+    "width": 861,
+    "height": 301,
+    "description": "## Description\nThis figure contains four panels, each showing two lines representing different methods over a number of rounds. The top row displays training loss, while the bottom row shows the variance of local gradients. The methods are FedAvg (FedProx, \u03bc=0) and FedProx (\u03bc>0). In the training loss plots, FedProx (\u03bc>0) consistently shows lower loss compared to FedAvg, especially as data heterogeneity increases. The variance of local gradients is lower for FedProx (\u03bc>0) across all datasets, indicating better convergence.\n\n## Text in figure\n**Synthetic-IID**\n- Training Loss: FedAvg (FedProx, \u03bc=0), FedProx (\u03bc>0)\n- Variance of Local Grad.: FedAvg (FedProx, \u03bc=0), FedProx (\u03bc>0)\n\n**Synthetic (0,0)**\n- Training Loss: FedAvg (FedProx, \u03bc=0), FedProx (\u03bc>0)\n- Variance of Local Grad.: FedAvg (FedProx, \u03bc=0), FedProx (\u03bc>0)\n\n**Synthetic (0.5,0.5)**\n- Training Loss: FedAvg (FedProx, \u03bc=0), FedProx (\u03bc>0)\n- Variance of Local Grad.: FedAvg (FedProx, \u03bc=0), FedProx (\u03bc>0)\n\n**Synthetic (1,1)**\n- Training Loss: FedAvg (FedProx, \u03bc=0), FedProx (\u03bc>0)\n- Variance of Local Grad.: FedAvg (FedProx, \u03bc=0), FedProx (\u03bc>0)"
+  },
+  {
+    "file": "p010_f03.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 3. Effectiveness of setting \u00b5 adaptively based on the current model performance. We increase \u00b5 by 0.1 whenever the loss increases and decreases it by 0.1 whenever the loss decreases for 5 consecutive rounds. We initialize \u00b5 to 1 for Synthetic IID (in order to be adversarial to our methods), and initialize \u00b5 to 0 for Synthetic (1,1). This simple heuristic works well empirically.",
+    "width": 392,
+    "height": 142,
+    "description": "Figure: Two line plots showing training loss over rounds for Synthetic-IID and Synthetic (1,1) datasets. Each plot has three series: FedAvg, FedProx with \u00b5=0, and FedProx with adaptive \u00b5. In Synthetic-IID, FedAvg has the highest loss, followed by FedProx with \u00b5=0, and FedProx with adaptive \u00b5 has the lowest loss. In Synthetic (1,1), FedAvg has the highest loss, followed by FedProx with adaptive \u00b5, and FedProx with \u00b5=0 has the lowest loss.\n\nText in figure: Synthetic-IID, Synthetic (1,1), FedAvg, FedProx, \u00b5=0, adaptive \u00b5, Training Loss, # Rounds."
+  },
+  {
+    "file": "p016_f04.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 4. DANE and AIDE (Shamir et al., 2014; Reddi et al., 2016) are methods proposed in the data center setting that use a similar proximal term as FedProx as well as an additional gradient correction term. We modify DANE to apply to federated settings by allowing for local updating and low participation of devices. We show the convergence of this modified method, which we call FedDane , on synthetic datasets. In the top figures, we subsample 10 devices out of 30 on all datasets for both FedProx and FedDane . While FedDane performs similarly as FedProx on the IID data, it suffers from poor convergence on the non-IID datasets. In the bottom figures, we show the results of FedDane when we increase the number of selected devices in order to narrow the gap between our estimated full gradient and the real full gradient (in the gradient correction term). Note that communicating with all (or most of the) devices is already unrealistic in practical settings. We observe that although sampling more devices per round might help to some extent, FedDane is still unstable and tends to diverge. This serves as additional motivation for the specific subproblem we propose in FedProx .",
+    "width": 957,
+    "height": 352,
+    "description": "Figure: Six line plots comparing FedProx and FedDane on synthetic datasets. Each plot shows training loss over rounds. Top plots: FedProx and FedDane with 10 devices. Bottom plots: FedDane with more devices. Labels: \u03bc=0, E=20, FedProx; \u03bc=0, E=20, FedDane; \u03bc=1, E=20, FedDane; \u03bc=0, E=20, c=10, FedDane; \u03bc=0, E=20, c=20, FedDane; \u03bc=0, E=20, c=30, FedDane.\n\nDescription: Six line plots comparing FedProx and FedDane on synthetic datasets. Top plots: FedProx highest, FedDane lowest on non-IID datasets. Bottom plots: FedDane with more devices shows slight improvement but remains unstable."
+  },
+  {
+    "file": "p019_f05.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "Figure 5. FedAvg is robust to device failure with IID data. In this case, whether incorporating partial solutions from the stragglers would not have much effect on convergence.",
+    "width": 940,
+    "height": 358,
+    "description": "Description: This figure contains four panels of line graphs, each showing the training loss and testing accuracy of two algorithms, FedAvg and FedProx, over 200 rounds. The panels vary by the percentage of stragglers in the synthetic IID data. In all panels, FedAvg starts with a higher training loss but converges faster to a lower loss than FedProx. FedProx's testing accuracy consistently surpasses FedAvg's, especially as the percentage of stragglers increases.\n\nText in figure: Synthetic IID (% stragglers), Synthetic IID (10% stragglers), Synthetic IID (50% stragglers), Synthetic IID (90% stragglers), Training Loss, Testing Accuracy, FedAvg, FedProx (\u03bc=0), # Rounds."
+  },
+  {
+    "file": "p019_f06.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "Figure 6. Training loss, test accuracy, and dissimilarity measurement for experiments described in Fig. 2.",
+    "width": 851,
+    "height": 478,
+    "description": "Description: This figure contains six line plots, each showing three series over rounds of training. The series are labeled as FedAvg (FedProx, \u03bc=0), FedProx (\u03bc=0), and FedProx (\u03bc>0). The plots show training loss, test accuracy, and dissimilarity measurement. The highest series is FedAvg (FedProx, \u03bc=0) in the first plot, and the lowest is FedProx (\u03bc>0) in the third plot.\n\nText in figure: Synthetic-IID, Synthetic (0.0), Synthetic (0.5,0.5), Synthetic (1,1), FedAvg (FedProx, \u03bc=0), FedProx (\u03bc=0), FedProx (\u03bc>0), Training loss, Test accuracy, Dissimilarity measurement, # Rounds."
+  },
+  {
+    "file": "p020_f07.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "Figure 7. The testing accuracy of the experiments in Figure 1. FedProx achieves on average 22% improvement in terms of testing accuracy in highly heterogeneous settings (90% stragglers).",
+    "width": 957,
+    "height": 391,
+    "description": "Description: The figure displays six line plots comparing the testing accuracy of different federated learning algorithms across various datasets. Each plot represents a different dataset (MNIST, FMNIST, Shakespeare, Sent140) and a varying percentage of stragglers (0%, 50%, 90%). The series are labeled as FedAvg, FedProx (u=0), and FedProx (u>0). In the 90% stragglers setting, FedProx (u>0) consistently shows the highest accuracy, followed by FedProx (u=0), with FedAvg having the lowest accuracy.\n\nText in figure: Synthetic, MNIST, FMNIST, Shakespeare, Sent140, 0% stragglers, 50% stragglers, 90% stragglers, FedAvg, FedProx (u=0), FedProx (u>0), # Rounds, Testing accuracy, k, 0, 50, 100, 150, 200, 0, 25, 50, 75, 100, 0, 50, 100, 150, 200, 0, 10, 20, 30, 40, 0, 200, 400, 600, 800."
+  },
+  {
+    "file": "p020_f08.png",
+    "page": 20,
+    "kind": "picture",
+    "caption": "Figure 8. The dissimilarity metric on five datasets in Figure 1. We remove systems heterogeneity by only considering the case when no participating devices drop out of the network. Our dissimilarity assumption captures the data heterogeneity and is consistent with practical performance (see training loss in Figure 1).",
+    "width": 952,
+    "height": 127,
+    "description": "Description: This figure displays five line plots, each representing the variance of local gradients over the number of rounds for different datasets: Synthetic, MNIST, FEMINIST, Shakespeare, and Sent140. The plots compare two methods: FedAvg (FedProx, \u03bc=0) and FedProx (\u03bc>0). The highest variance is observed in the Synthetic dataset, with FedProx (\u03bc>0) showing a peak around 150 rounds. The lowest variance is seen in the MNIST dataset, with both methods showing relatively stable variance throughout the rounds.\n\nText in figure: Synthetic, MNIST, FEMINIST, Shakespeare, Sent140, FedAvg (FedProx, \u03bc=0), FedProx (\u03bc>0), # Rounds, Variance of Local Grad."
+  },
+  {
+    "file": "p021_f09.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "Figure 9. The loss of FedAvg and FedProx under various systems heterogeneity settings when each device can run at most 1 epoch at each iteration ( E = 1 ). Since local updates will not deviate too much from the global model compared with the deviation under large E 's, it is less likely that the statistical heterogeneity will affect convergence negatively. Tolerating for partial solutions to be sent to the central server ( FedProx , \u00b5 = 0 ) still performs better than dropping the stragglers ( FedAvg ).",
+    "width": 958,
+    "height": 391,
+    "description": "## Description\nThis figure consists of six panels, each showing the loss of FedAvg and FedProx under various systems heterogeneity settings. The x-axis represents the number of rounds, and the y-axis represents the training loss. The series FedAvg is consistently lower than FedProx across all panels, indicating better performance. The highest series is FedProx (\u00b5=0) in the 0% stragglers panel, while the lowest is FedAvg in the 90% stragglers panel.\n\n## Text in figure\nLegend: FedAvg, FedProx (\u00b5=0), FedProx (\u00b5=1)\nPanels: Synthetic, MNIST, FEMINIST, Shakespeare, Sent140\nX-axis: # Rounds\nY-axis: Training loss\nStragglers: 0%, 50%, 90%"
+  },
+  {
+    "file": "p021_f10.png",
+    "page": 21,
+    "kind": "picture",
+    "caption": "Figure 10. The testing accuracy of the experiments shown in Figure 9.",
+    "width": 957,
+    "height": 390,
+    "description": "Description: This figure contains six line plots, each showing the testing accuracy of different models over a number of rounds. The plots are grouped in three rows, with two plots per row. Each plot has three series: FedAvg, FedProx (l=0), and FedProx (l=0.1). The series are represented by different colors: orange, pink, and blue, respectively. The highest series is FedProx (l=0.1) in the Synthetic and MNIST plots, and FedAvg in the Feminist plot. The lowest series is FedProx (l=0) in the Synthetic and MNIST plots, and FedAvg in the Feminist plot.\n\nText in figure: Synthetic, MNIST, Feminist, Shakespeare, Sent140, 0%, 50%, 90%, stragglers, Testing accuracy, FedAvg, FedProx (l=0), FedProx (l=0.1), # Rounds."
+  },
+  {
+    "file": "p022_f11.png",
+    "page": 22,
+    "kind": "picture",
+    "caption": "Figure 11. Full results of choosing \u00b5 adaptively on all the synthetic datasets. We increase \u00b5 by 0.1 whenever the loss increases and decreases it by 0.1 whenever the loss decreases for 5 consecutive rounds. We initialize \u00b5 to 1 for the IID data (Synthetic-IID) (in order to be adversarial to our methods), and initialize it to 0 for the other three non-IID datasets. We observe that this simple heuristic works well in practice.",
+    "width": 944,
+    "height": 158,
+    "description": "This figure is a set of four line graphs showing the training loss over rounds for different datasets and methods. Each graph represents a different synthetic dataset: Synthetic-IID, Synthetic (0,0), Synthetic (0.5,0.5), and Synthetic (1,1). The series in each graph are labeled as FedAvg (FedProx, \u03bc=0), FedProx, dynamic \u03bc, and FedProx, \u03bc>0. The highest series is FedAvg (FedProx, \u03bc=0) in the Synthetic-IID graph, with a peak around 3. The lowest series is FedProx, \u03bc>0 in the Synthetic (1,1) graph, with a minimum around 0.5.\n\nText in figure: Synthetic-IID, Synthetic (0,0), Synthetic (0.5,0.5), Synthetic (1,1), FedAvg (FedProx, \u03bc=0), FedProx, dynamic \u03bc, FedProx, \u03bc>0, Training Loss, # Rounds."
+  },
+  {
+    "file": "p022_f12.png",
+    "page": 22,
+    "kind": "picture",
+    "caption": "Figure 12. Differences between two sampling schemes in terms of training loss, testing accuracy, and dissimilarity measurement. Sampling devices with a probability proportional to the number of local data points and then simply averaging local models performs slightly better than uniformly sampling devices and averaging the local models with weights proportional to the number of local data points. Under either sampling scheme, the settings with \u00b5 = 1 demonstrate more stable performance than settings with \u00b5 = 0 .",
+    "width": 919,
+    "height": 554,
+    "description": "Description: The figure contains four panels, each showing three line plots for different synthetic datasets. Each panel represents a different sampling scheme. The plots show training loss, testing accuracy, and variance of local gradients over 200 rounds. The series with the highest training loss is the Synthetic-IID dataset with \u03bc=0, uniform sampling+weighted average. The lowest training loss is observed in the Synthetic (1,1) dataset with \u03bc=1, weighted sampling+simple average. The highest testing accuracy is in the Synthetic (1,1) dataset with \u03bc=1, weighted sampling+simple average. The lowest accuracy is in the Synthetic-IID dataset with \u03bc=0, uniform sampling+weighted average. The highest variance of local gradients is in the Synthetic (1,1) dataset with \u03bc=0, uniform sampling+weighted average. The lowest variance is in the Synthetic-IID dataset with \u03bc=1, weighted sampling+simple average.\n\nText in figure: Synthetic-IID, Synthetic (0,0), Synthetic (0.5,0.5), Synthetic (1,1), Training Loss, Testing Accuracy, Variance of Local Grad., \u03bc=0, E=20, uniform sampling+weighted average, \u03bc=0, E=20, weighted sampling+simple average, \u03bc=1, E=20, uniform sampling+weighted average, \u03bc=1, E=20, weighted sampling+simple average."
+  }
+]

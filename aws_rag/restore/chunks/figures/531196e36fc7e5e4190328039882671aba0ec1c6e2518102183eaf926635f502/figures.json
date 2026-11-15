@@ -1,0 +1,74 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1: Comparison of the proposed YOLOv4 and other state-of-the-art object detectors. YOLOv4 runs twice faster than EfficientDet with comparable performance. Improves YOLOv3's AP and FPS by 10% and 12%, respectively.",
+    "width": 474,
+    "height": 375,
+    "description": "Description: This figure is a line graph comparing the performance of various object detection models on the MS COCO dataset. The x-axis represents the frames per second (FPS), and the y-axis represents the average precision (AP). The highest AP is achieved by EfficientDet (D0-D4) at around 49, while the lowest is YOLOv3 at around 31. YOLOv4 (ours) is highlighted with a green line and a star marker, showing an AP of around 44 at 100 FPS.\n\nText in figure: MS COCO Object Detection, real-time, EfficientDet (D0-D4), YOLOv4 (ours), ASFF*, YOLOv4 (ours), YOLOv3 [63], EfficientDet [77], ATSS [94], ASFF* [48], CenterMask* [40], FPS (V100), AP."
+  },
+  {
+    "file": "p002_f02.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 2: Object detector.",
+    "width": 984,
+    "height": 277,
+    "description": "## Description\nThis figure is a diagram showing the architecture of a two-stage object detector. It consists of an input stage, a backbone network, a neck network, and two prediction stages: dense and sparse. The dense prediction stage provides detailed object detection, while the sparse prediction stage offers a more efficient, less detailed detection.\n\n## Text in figure\nInput, Backbone, Neck, Dense Prediction, Sparse Prediction"
+  },
+  {
+    "file": "p006_f03.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 3: Mosaic represents a new method of data augmentation.",
+    "width": 462,
+    "height": 276,
+    "description": "## Document Description\nThe figure displays a collage of various images, each representing a different scene or object. The images are arranged in a grid format, showcasing a diverse set of environments and subjects. Each image is labeled with a unique identifier, such as \"aug_1462167959_0_-1659205534.jpg\". The collage appears to be a method of data augmentation, likely used in machine learning to enhance the training dataset by presenting varied visual inputs.\n\n## Document Content\naug_319215802_0_-238783579.jpg\naug_127188501_0_-749611674.jpg\naug_1462167959_0_-1659205534.jpg\naug_1474492600_0_-45389312.jpg\naug_1715045541_0_603913529.jpg\naug_1779424844_0_-589696988.jpg"
+  },
+  {
+    "file": "p006_f04.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 4: Cross mini-Batch Normalization.",
+    "width": 470,
+    "height": 327,
+    "description": "## Description\nThis figure illustrates the process of Cross Mini-Batch Normalization (CmBN) in neural networks. It shows the sequence of operations performed over four iterations, including accumulation, normalization, and updates of weights and scale/shift parameters. The figure is divided into three sections: BN, CBN, and CmBN, each representing a different normalization technique.\n\n## Text in figure\nBN, CBN, CmBN, accumulate, calculate, normalize, update, W, ScaleShift, BN, Mean, variance, Weights, t-3, t-2, t-1, t, Bias, scale, Mean, variance, Weights, accumulate, normalize, update, W, ScaleShift, accumulate, normalize, update, W, ScaleShift, accumulate, normalize, update, W, ScaleShift, accumulate, normalize, update, W, ScaleShift"
+  },
+  {
+    "file": "p007_f05.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 5: Modified SAM.",
+    "width": 429,
+    "height": 282,
+    "description": "## Figure Description\nThis figure is a diagram comparing two models: the original SAM (Spatial Attention Module) and a modified version. The original SAM includes Max-Pooling, Average-Pooling, Convolution, and Sigmoid layers. The modified SAM simplifies this by only using Convolution and Sigmoid layers.\n\n## Textual Content\n- (a) SAM [85]\n- (b) Our modified SAM\n- Max-Pooling\n- Average-Pooling\n- Convolution\n- Sigmoid\n- X (cross symbol)"
+  },
+  {
+    "file": "p007_f06.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 6: Modified PAN.",
+    "width": 424,
+    "height": 204,
+    "description": "## Section 1: Figure Description\nThis figure is a diagram comparing two architectures: the original PAN (Path Aggregation Network) and a modified PAN. The original PAN uses an addition operation to combine feature maps, while the modified PAN uses a concatenation operation. Both diagrams show a sequence of layers, with the final output being a combination of the previous layers.\n\n## Section 2: Figure Details\nText in figure: \"PAN [49]\", \"Our modified PAN\", \"addition\", \"concatenation\". The original PAN diagram shows two layers being added together. The modified PAN diagram shows two layers being concatenated. Both diagrams result in a single output layer."
+  },
+  {
+    "file": "p008_f07.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 7: Various method of data augmentation.",
+    "width": 470,
+    "height": 273,
+    "description": "Figure: Various methods of data augmentation in image processing.\nDescription: The figure displays different techniques for augmenting images to improve the robustness and accuracy of object detection models. Techniques include cropping, rotation, flipping, hue adjustment, saturation adjustment, exposure adjustment, aspect ratio adjustment, mixing images, cutting and mixing, mosaic creation, and blurring.\n\nText in figure: Crop, Rotation, Flip, Hue, Saturation, Exposure, Aspect, MixUp, CutMix, Mosaic, Blur."
+  },
+  {
+    "file": "p010_f08.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 8: Comparison of the speed and accuracy of different object detectors. (Some articles stated the FPS of their detectors for only one of the GPUs: Maxwell/Pascal/Volta)",
+    "width": 793,
+    "height": 739,
+    "description": "Description: The figure contains six panels, each showing a comparison of object detection models based on speed (FPS) and accuracy (AP). Each panel plots FPS against AP, with different models represented by lines and markers. The highest FPS is achieved by YOLOv4 (ours) in the first panel, while the lowest FPS is achieved by EfficientDet in the fifth panel. The highest AP is achieved by YOLOv4 (ours) in the first panel, and the lowest AP is achieved by ATSS in the fifth panel.\n\nText in figure: MS COCO Object Detection, real-time, YOLOv4 (ours), YOLOv3, SSD, LRF, RefineDet, M2Det, PFPNet, RetinaNet, FSAF, CornerNet, TridentNet, CenterMask, GuidedAnchor, RPDet, Libra R-CNN, FreeAnchor, RetinaMask, Cascade R-CNN, CenterNet, EfficientDet, ASF*, HardNet, SMI-NAS, NAS-FPN, ATSS, RDSNet, FPS (Maxwell), FPS (Pascal), FPS (Volta), AP, FPS (Volta)"
+  }
+]

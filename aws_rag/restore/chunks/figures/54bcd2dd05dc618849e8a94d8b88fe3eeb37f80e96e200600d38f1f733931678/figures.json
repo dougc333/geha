@@ -1,0 +1,98 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1: The YOLO Detection System. Processing images with YOLO is simple and straightforward. Our system (1) resizes the input image to 448 \u00d7 448 , (2) runs a single convolutional network on the image, and (3) thresholds the resulting detections by the model's confidence.",
+    "width": 475,
+    "height": 98,
+    "description": "## Figure Description\nThis figure is a diagram illustrating the YOLO detection system. It shows a three-step process: (1) resizing the input image to 448x448, (2) running a convolutional network on the image, and (3) applying non-max suppression to the detections. The output image displays detected objects with bounding boxes and confidence scores: Person (0.64), Horse (0.28), and Dog (0.30).\n\n## Index Terms\n- YOLO detection system\n- Image resizing (448x448)\n- Convolutional network\n- Non-max suppression\n- Object detection\n- Confidence scores\n- Person detection (0.64)\n- Horse detection (0.28)\n- Dog detection (0.30)",
+    "pdf_text": "1. Resize image. | 2. Run convolutional network. | 3. Non-max suppression. | Dog: 0.30 | Person: 0.64 | Horse: 0.28",
+    "bbox": [
+      307.9,
+      195.4,
+      545.6,
+      244.3
+    ]
+  },
+  {
+    "file": "p002_f02.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 2: The Model. Our system models detection as a regression problem. It divides the image into an S \u00d7 S grid and for each grid cell predicts B bounding boxes, confidence for those boxes, and C class probabilities. These predictions are encoded as an S \u00d7 S \u00d7 ( B \u2217 5 + C ) tensor.",
+    "width": 475,
+    "height": 297,
+    "description": "Section 1: Figure Description\nThis figure illustrates the process of the YOLO object detection model. It shows how the model divides an input image into an S \u00d7 S grid, predicts bounding boxes and confidence scores for each grid cell, and assigns class probabilities. The final output includes the detected objects with bounding boxes.\n\nSection 2: Figure Text\nS \u00d7 S grid on input\nBounding boxes + confidence\nClass probability map\nFinal detections",
+    "pdf_text": "S \u00d7 S grid on input | Bounding boxes + confidence | Class probability map | Final detections",
+    "bbox": [
+      307.8,
+      202.5,
+      545.5,
+      351.0
+    ]
+  },
+  {
+    "file": "p003_f03.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 3: The Architecture. Our detection network has 24 convolutional layers followed by 2 fully connected layers. Alternating 1 \u00d7 1 convolutional layers reduce the features space from preceding layers. We pretrain the convolutional layers on the ImageNet classification task at half the resolution ( 224 \u00d7 224 input image) and then double the resolution for detection.",
+    "width": 792,
+    "height": 324,
+    "description": "This figure is a diagram of the architecture of the YOLO (You Only Look Once) object detection network. It shows a sequence of 24 convolutional layers followed by 2 fully connected layers. The diagram illustrates the dimensions and types of layers, including convolutional layers, maxpool layers, and fully connected layers. It also shows the reduction in feature space through 1x1 convolutional layers and the pretraining process on ImageNet classification.\n\nSection 1: Convolutional layers, maxpool layers, and fully connected layers. Dimensions and types of layers. Reduction in feature space through 1x1 convolutional layers. Pretraining process on ImageNet classification.\n\nSection 2: Convolutional layers: 7x7x64-s-2, 3x3x192, 1x1x128, 3x3x256, 1x1x256, 3x3x512, 1x1x512, 3x3x1024, 3x3x1024-s-2, 3x3x1024, 3x3x1024. Maxpool layers: 2x2-s-2, 2x2-s-2, 2x2-s-2, 2x2-s-2. Fully connected layers: 4096, 30.",
+    "pdf_text": "448 | 448 | 3 | 7 | 7 | Conv. Layer | 7x7x64-s-2 | Maxpool Layer | 2x2-s-2 | 3 | 3 | 112 | 112 | 192 | 3 | 3 | 56 | 56 | 256 | Conn. Layer | 4096 | Conn. Layer | Conv. Layer | 3x3x192 | Maxpool Layer | 2x2-s-2 | Conv. Layers | 1x1x128 | 3x3x256 | 1x1x256 | 3x3x512 | Maxpool Layer | 2x2-s-2 | 3 | 3 | 28 | 28 | 512 | Conv. Layers | 1x1x256 | 3x3x512 | 1x1x512 | 3x3x1024 | Maxpool Layer | 2x2-s-2 | 3 | 3 | 14 | 14 | 1024 | Conv. Layers | 1x1x512 | 3x3x1024 | 3x3x1024 | 3x3x1024-s-2 | 3 | 3 | 7 | 7 | 1024 | 7 | 7 | 1024 | 7 | 7 | 30 | } \u00d74 | } \u00d72 | Conv. Layers | 3x3x1024 | 3x3x1024",
+    "bbox": [
+      98.8,
+      70.5,
+      495.2,
+      232.5
+    ]
+  },
+  {
+    "file": "p006_f04.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 4: Error Analysis: Fast R-CNN vs. YOLO These charts show the percentage of localization and background errors in the top N detections for various categories (N = # objects in that category).",
+    "width": 468,
+    "height": 248,
+    "description": "**Figure Description:**\n\nThis figure is a comparison of error analysis between Fast R-CNN and YOLO object detection models. It consists of two pie charts, each representing the percentage of errors in the top N detections for various categories. The categories include Correct, Localization (Loc), Similar (Sim), Other, and Background errors. The left chart represents Fast R-CNN, and the right chart represents YOLO.\n\n**Text in Figure:**\n\n- **Fast R-CNN:**\n  - Correct: 71.6%\n  - Loc: 8.6%\n  - Sim: 4.3%\n  - Other: 1.9%\n  - Background: 13.6%\n\n- **YOLO:**\n  - Correct: 65.5%\n  - Loc: 19.0%\n  - Sim: 6.75%\n  - Other: 4.0%\n  - Background: 4.75%",
+    "pdf_text": "Correct: 71.6% | Correct: 65.5% | Loc: 8.6% | Sim: 4.3% | Other: 1.9% | Background: 13.6% | Loc: 19.0% | Sim: 6.75% | Other: 4.0% | Background: 4.75% | Fast R-CNN | YOLO",
+    "bbox": [
+      310.8,
+      73.4,
+      544.8,
+      197.6
+    ]
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 5: Generalization results on Picasso and People-Art datasets.",
+    "width": 990,
+    "height": 373,
+    "description": "Description: This figure shows precision-recall curves for the Picasso Dataset, comparing various object detection models. The YOLO model has the highest precision-recall curve, followed by R-CNN, DPM, Poselets, and D&T. The human performance is also shown for reference.\n\nText in figure: Picasso Dataset precision-recall curves, YOLO, R-CNN, DPM, Poselets, D&T, Humans, VOC 2007, Picasso, People-Art, AP, Best F1, AP, YOLO: 59.2, 53.3, 0.590, R-CNN: 54.2, 10.4, 0.226, DPM: 43.2, 37.8, 0.458, Poselets: 36.5, 17.8, 0.271, D&T: -, 1.9, 0.051.",
+    "pdf_text": "Poselets | RCNN | D&T | Humans | DPM | YOLO | (a) Picasso Dataset precision-recall curves. | VOC 2007 | Picasso | People-Art | AP | AP | Best F1 | AP | YOLO | 59.2 | 53.3 | 0.590 | 45 | R-CNN | 54.2 | 10.4 | 0.226 | 26 | DPM | 43.2 | 37.8 | 0.458 | 32 | Poselets [2] | 36.5 | 17.8 | 0.271 | D&T [4] | - | 1.9 | 0.051 | (b) Quantitative results on the VOC 2007, Picasso, and People-Art Datasets. | The Picasso Dataset evaluates on both AP and best F1 score.",
+    "bbox": [
+      49.0,
+      73.3,
+      543.8,
+      260.0
+    ]
+  },
+  {
+    "file": "p008_f06.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 6: Qualitative Results. YOLO running on sample artwork and natural images from the internet. It is mostly accurate although it does think one person is an airplane.",
+    "width": 980,
+    "height": 401,
+    "description": "## Figure Description\nThis figure displays qualitative results of the YOLO object detection model on various images, including artwork and natural scenes. Each image has bounding boxes drawn around detected objects, with labels such as \"person,\" \"dog,\" \"eagle,\" and \"airplane.\" The model's performance is mostly accurate, though it misidentifies a person as an airplane in one instance.\n\n## Text in Figure\nYOLO, artwork, natural images, qualitative results, person, dog, eagle, airplane, misidentification, artwork, natural scenes, bounding boxes, labels, mostly accurate, misidentifies, person, airplane.",
+    "pdf_text": "",
+    "bbox": [
+      52.4,
+      297.2,
+      542.3,
+      497.3
+    ]
+  }
+]

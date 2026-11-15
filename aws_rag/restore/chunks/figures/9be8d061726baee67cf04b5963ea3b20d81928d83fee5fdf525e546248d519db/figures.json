@@ -1,0 +1,29 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1. A framework for learning word vectors. Context of three words ('the,' 'cat,' and 'sat') is used to predict the fourth word ('on'). The input words are mapped to columns of the matrix W to predict the output word.",
+    "width": 375,
+    "height": 229,
+    "description": "Section 1: Figure description\nThis figure is a diagram illustrating a framework for learning word vectors. It shows a process where the context of three input words ('the,' 'cat,' and 'sat') is used to predict the fourth word ('on'). The input words are represented as columns in a matrix W, which is then used to predict the output word.\n\nSection 2: Figure details\nText in figure: Classifier, Average/Concatenate, Word Matrix, the, cat, sat, on\nThe diagram consists of three main components: the Word Matrix, the Average/Concatenate block, and the Classifier. The Word Matrix maps input words to columns, with 'the,' 'cat,' and 'sat' as examples. The Average/Concatenate block processes these columns to produce a single vector, which is then fed into the Classifier to predict the output word 'on'."
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 2. A framework for learning paragraph vector. This framework is similar to the framework presented in Figure 1; the only change is the additional paragraph token that is mapped to a vector via matrix D . In this model, the concatenation or average of this vector with a context of three words is used to predict the fourth word. The paragraph vector represents the missing information from the current context and can act as a memory of the topic of the paragraph.",
+    "width": 470,
+    "height": 248,
+    "description": "Figure type: Diagram\nDescription: The diagram illustrates a framework for learning paragraph vectors. It shows a paragraph matrix feeding into a matrix D, which maps a paragraph token to a vector. This vector is then either concatenated or averaged with a context of three words to predict the fourth word. The paragraph vector represents the missing information from the current context and can act as a memory of the paragraph's topic.\n\nText in figure: Paragraph Matrix, Paragraph id, D, W, W, W, the, cat, sat, Classifier, Average/Concatenate, on"
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3. Distributed Bag of Words version of paragraph vectors. In this version, the paragraph vector is trained to predict the words in a small window.",
+    "width": 377,
+    "height": 255,
+    "description": "This figure is a diagram illustrating the Distributed Bag of Words (DBOW) version of paragraph vectors. It shows how paragraph vectors are trained to predict words within a small window. The diagram includes a classifier with arrows pointing from words like \"the,\" \"cat,\" \"sat,\" and \"on\" to a central box labeled \"D.\" Below this, a \"Paragraph Matrix\" is connected to the \"D\" box, indicating the input data flow. The \"Paragraph id\" is also shown, suggesting the identification of paragraphs in the model.\n\nSection 1: The figure depicts a Distributed Bag of Words model for paragraph vectors. It shows a classifier with arrows from words to a central box labeled \"D.\" Below, a \"Paragraph Matrix\" connects to \"D,\" indicating input data flow. The \"Paragraph id\" is also shown, suggesting paragraph identification.\n\nSection 2: The diagram illustrates the DBOW model, where the classifier predicts words within a small window. Words like \"the,\" \"cat,\" \"sat,\" and \"on\" point to the \"D\" box. The \"Paragraph Matrix\" below \"D\" indicates input data. The \"Paragraph id\" suggests paragraph identification in the model."
+  }
+]

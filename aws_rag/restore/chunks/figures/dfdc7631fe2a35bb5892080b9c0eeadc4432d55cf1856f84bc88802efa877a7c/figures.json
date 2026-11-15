@@ -1,0 +1,66 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Figure 1. (a) The proposed Swin Transformer builds hierarchical feature maps by merging image patches (shown in gray) in deeper layers and has linear computation complexity to input image size due to computation of self-attention only within each local window (shown in red). It can thus serve as a general-purpose backbone for both image classification and dense recognition tasks. (b) In contrast, previous vision Transformers [20] produce feature maps of a single low resolution and have quadratic computation complexity to input image size due to computation of selfattention globally.",
+    "width": 468,
+    "height": 263,
+    "description": "Figure type: Diagram\nDescription: The figure is a diagram comparing two architectures: Swin Transformer and ViT. It shows how Swin Transformer builds hierarchical feature maps by merging image patches and has linear computation complexity, while ViT produces feature maps of a single low resolution with quadratic computation complexity.\n\nText in figure: \"Swin Transformer (ours)\", \"ViT\", \"segmentation\", \"detection\", \"classification\", \"16\u00d7\", \"8\u00d7\", \"4\u00d7\"",
+    "pdf_text": "",
+    "bbox": [
+      307.5,
+      231.4,
+      541.3,
+      363.1
+    ]
+  },
+  {
+    "file": "p002_f02.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 2. An illustration of the shifted window approach for computing self-attention in the proposed Swin Transformer architecture. In layer l (left), a regular window partitioning scheme is adopted, and self-attention is computed within each window. In the next layer l +1 (right), the window partitioning is shifted, resulting in new windows. The self-attention computation in the new windows crosses the boundaries of the previous windows in layer l , providing connections among them.",
+    "width": 470,
+    "height": 177,
+    "description": "This figure is an illustration showing the shifted window approach in the Swin Transformer architecture. It depicts two layers, labeled as Layer 1 and Layer l+1. In Layer 1, the image is divided into regular windows, and self-attention is computed within each window. In Layer l+1, the window partitioning is shifted, creating new windows that cross the boundaries of the previous windows in Layer 1. This shift allows for connections among the windows, enhancing the model's ability to capture global context.\n\nText in figure: Layer 1, Layer l+1, A local window to perform self-attention, A patch",
+    "pdf_text": "",
+    "bbox": [
+      307.3,
+      76.2,
+      542.3,
+      164.5
+    ]
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 3. (a) The architecture of a Swin Transformer (Swin-T); (b) two successive Swin Transformer Blocks (notation presented with Eq. (3)). W-MSA and SW-MSA are multi-head self attention modules with regular and shifted windowing configurations, respectively.",
+    "width": 1001,
+    "height": 287,
+    "description": "This figure illustrates the architecture of a Swin Transformer, a hierarchical vision transformer model that uses shifted windows for multi-head self-attention. Panel (a) shows the overall architecture of a Swin Transformer (Swin-T), divided into four stages. Each stage includes a Swin Transformer Block, which consists of a patch partition, linear embedding, Swin Transformer Block, and patch merging. Panel (b) zooms in on two successive Swin Transformer Blocks, detailing the components within each block, including multi-head self-attention modules with regular (W-MSA) and shifted windowing (SW-MSA) configurations, along with MLP and layer normalization (LN) layers.\n\nKey components:\n- Images\n- Swin Transformer Block\n- Patch Partition\n- Linear Embedding\n- Patch Merging\n- W-MSA (regular windowing)\n- SW-MSA (shifted windowing)\n- MLP\n- LN (layer normalization)",
+    "pdf_text": "(a) Architecture | MLP | LN | LN | W-MSA | (b) Two Successive Swin Transformer Blocks | MLP | LN | LN | SW-MSA | Images | Swin | Transformer | Block | Linear Embedding | Swin | Transformer | Block | Patch Merging | Swin | Transformer | Block | Patch Merging | Swin | Transformer | Block | Patch Merging | Stage 1 | Stage 2 | Stage 3 | Stage 4 | 2 | 2 | 6 | 2 | Patch Partition",
+    "bbox": [
+      48.7,
+      74.2,
+      548.8,
+      217.7
+    ]
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 4. Illustration of an efficient batch computation approach for self-attention in shifted window partitioning.",
+    "width": 467,
+    "height": 117,
+    "description": "This figure illustrates the process of efficient batch computation for self-attention in shifted window partitioning, as described in the paper \"Swin Transformer: Hierarchical Vision Transformer using Shifted Windows.\" It shows a window partition of a grid, followed by a cyclic shift, and then the application of masked multi-head self-attention (MSA). The process is then reversed with a reverse cyclic shift to return to the original window partition.\n\nKey elements in the figure include:\n- Window partition: A grid divided into windows.\n- Cyclic shift: A process that rearranges the windows.\n- Masked MSA: The application of self-attention with masking.\n- Reverse cyclic shift: The process that reverses the cyclic shift.\n\nThe figure demonstrates how the window partitioning and cyclic shifting enable efficient computation of self-attention in a hierarchical vision transformer.",
+    "pdf_text": "C | cyclic shift | A | A | C | B | window partition | reverse cyclic shift | A | A | C | B | C | ... | masked | MSA | A | B | A | B | masked | MSA",
+    "bbox": [
+      51.0,
+      71.0,
+      284.6,
+      129.4
+    ]
+  }
+]

@@ -1,0 +1,101 @@
+[
+  {
+    "file": "p004_f01.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 1: Transforming 2D image into 3D tensor",
+    "width": 281,
+    "height": 137,
+    "description": "Section 1: Figure showing transformation of 2D image into 3D tensor.\n\nDescription: The figure illustrates the conversion of a 2D image into a 3D tensor. It shows a 2D grid representing the image and a 3D cube representing the tensor. The highlighted area in the 2D image corresponds to a specific region in the 3D tensor.\n\nSection 2: Text in figure.\n\nText: 2D Image, 3D Tensor, P, P."
+  },
+  {
+    "file": "p004_f02.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Figure 2: Inner structure of ConvLSTM",
+    "width": 477,
+    "height": 120,
+    "description": "Section 1: Figure type and content\nThis figure is a diagram illustrating the inner structure of a Convolutional Long Short-Term Memory (ConvLSTM) network. It shows the connections between different layers and blocks within the ConvLSTM, including the input and output layers, as well as the hidden layers. The diagram highlights the flow of data and information through the network, emphasizing the convolutional and LSTM components.\n\nSection 2: Text in figure\nText in figure: Ht+1, Ct+1, Ht, Ct, Ht-1, Ct-1, Xt+1, Xt\nLayer names: Ht+1, Ht, Ht-1, Ct+1, Ct, Ct-1, Xt+1, Xt\nArrow labels: None\nExample inputs: None\nValues printed on bars or slices: None"
+  },
+  {
+    "file": "p005_f03.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 3: Encoding-forecasting ConvLSTM network for precipitation nowcasting",
+    "width": 788,
+    "height": 195,
+    "description": "Description: The figure is a schematic diagram of an encoding-forecasting ConvLSTM network for precipitation nowcasting. It shows an input layer, an encoding network with two ConvLSTM layers, a forecasting network with three ConvLSTM layers, and a prediction output. The encoding network processes the input data, and the forecasting network uses the encoded data to make predictions.\n\nText in figure: Encoding Network, ConvLSTMM2, ConvLSTMM1, Input, Copy, Copy, Forecasting Network, Prediction, ConvLSTMM4, ConvLSTMM3"
+  },
+  {
+    "file": "p006_f04.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "Figure 4: An example showing an 'out-of-domain' run. From left to right: input frames; ground truth; prediction by the 3-layer network.",
+    "width": 795,
+    "height": 229,
+    "description": "## Figure Description\nThis figure displays an example of an 'out-of-domain' run in precipitation nowcasting. It shows three panels: input frames, ground truth, and predictions by a 3-layer network. The input frames are the initial conditions, the ground truth represents the actual precipitation, and the predictions are the model's output.\n\n## Text in Figure\n- Input frames\n- Ground truth\n- Prediction by the 3-layer network\n- 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5, 6, 5,"
+  },
+  {
+    "file": "p008_f05.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 5: Comparison of different models based on four precipitation nowcasting metrics over time.",
+    "width": 325,
+    "height": 253,
+    "description": "Description: The figure shows four plots comparing different models based on four precipitation nowcasting metrics over time. Each plot has four series: ConvLSTM, ROVER1, ROVER2, and ROVER3. The top left plot shows correlation, with ConvLSTM highest at the start, followed by ROVER1, ROVER2, and ROVER3. The top right plot shows CSI, with ConvLSTM highest, followed by ROVER1, ROVER2, and ROVER3. The bottom left plot shows FAR, with ConvLSTM lowest, followed by ROVER1, ROVER2, and ROVER3. The bottom right plot shows POD, with ConvLSTM highest, followed by ROVER1, ROVER2, and ROVER3.\n\nText in figure: Correlation, CSI, FAR, POD, ConvLSTM, ROVER1, ROVER2, ROVER3, Time, 1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0, 5, 10, 15."
+  },
+  {
+    "file": "p008_f06.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 6: Two predicion examples for the precipitation nowcasting problem. All the predictions and ground truths are sampled with an interval of 3. From top to bottom: input frames; ground truth frames; prediction by ConvLSTM network; prediction by ROVER2.",
+    "width": 368,
+    "height": 146,
+    "description": "Description: The figure displays two examples of precipitation nowcasting predictions. Each example consists of three rows: input frames, ground truth frames, and predictions from two different models (ConvLSTM network and ROVER2). The input frames are the initial radar images, the ground truth frames show the actual precipitation at a later time, and the predictions from the two models are compared to the ground truth.\n\nText in figure: Input frames, Ground truth frames, Prediction by ConvLSTM network, Prediction by ROVER2."
+  },
+  {
+    "file": "p010_f07.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 7: ( Larger Version ) Comparison of different models based on four precipitation nowcasting metrics over time.",
+    "width": 635,
+    "height": 491,
+    "description": "Description: This figure contains four plots comparing different models based on four precipitation nowcasting metrics over time. The plots show the performance of ConvLSTM, ROVER1, ROVER2, ROVER3, and FC-LSTM models. The metrics are Correlation, CSI, FAR, and POD. The ConvLSTM model generally performs the best, followed by ROVER1, ROVER2, ROVER3, and FC-LSTM. The FC-LSTM model has the lowest performance across all metrics.\n\nText in figure: ConvLSTM, ROVER1, ROVER2, ROVER3, FC-LSTM, Correlation, CSI, FAR, POD, Time."
+  },
+  {
+    "file": "p010_f08.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 8: ( Larger Version ) Two prediction examples for the precipitation nowcasting problem. All the predictions and ground truths are sampled with an interval of 3. From top to bottom: input frames; ground truth; prediction by ConvLSTM network; prediction by ROVER2.",
+    "width": 747,
+    "height": 295,
+    "description": "Description: The figure displays two examples of precipitation nowcasting predictions. Each example includes input frames, ground truth, and predictions from two different models: ConvLSTM network and ROVER2. The predictions and ground truths are sampled at intervals of 3.\n\nText in figure: input frames, ground truth, prediction by ConvLSTM network, prediction by ROVER2."
+  },
+  {
+    "file": "p011_f09.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 9: An illustrative example showing the in-domain prediction results of different models. From top to bottom: input frames; ground truth; FC-LSTM; ConvLSTM-5X5-5X51-layer; ConvLSTM-5X5-5X5-2-layer; ConvLSTM-5X5-5X5-3-layer; ConvLSTM-9X9-1X1-2layer; ConvLSTM-9X9-1X1-3-layer.",
+    "width": 795,
+    "height": 610,
+    "description": "Description: The figure displays a comparison of precipitation nowcasting results from various models. It shows input frames, ground truth, and predictions from different models, including FC-LSTM and several ConvLSTM configurations. The models' predictions are visually compared to the ground truth to assess their accuracy.\n\nText in figure: input frames, ground truth, FC-LSTM, ConvLSTM-5X5-5X5-1-layer, ConvLSTM-5X5-5X5-2-layer, ConvLSTM-5X5-5X5-3-layer, ConvLSTM-9X9-1X1-2layer, ConvLSTM-9X9-1X1-3-layer."
+  },
+  {
+    "file": "p011_f10.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 10: ( Larger Version ) An illustrative example showing an out-domain run. From top to bottom: input frames; ground truth; predictions of the 3-layer network.",
+    "width": 795,
+    "height": 228,
+    "description": "## Description\nThis figure displays an illustrative example of an out-domain run in a precipitation nowcasting model. It shows input frames, ground truth, and predictions from a 3-layer network. The top row shows input frames, the middle row shows the ground truth, and the bottom row shows the network's predictions.\n\n## Text in figure\nInput frames, ground truth, predictions, 3-layer network."
+  },
+  {
+    "file": "p012_f11.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 11: Comparison of the 3-layer ConvLSTM and FC-LSTM in the online setting. In each iteration, we generate a new set of training samples and record the average cross entropy of that mini-batch. The x -axis is the number of data cases (starting from 25600) and the y -axis is the average cross entropy of the mini-batches. We can find that the loss of ConvLSTM decreases faster than FC-LSTM.",
+    "width": 637,
+    "height": 529,
+    "description": "Description: This plot compares the average cross entropy of two models, ConvLSTM and FC-LSTM, over multiple data cases. The ConvLSTM model shows a faster decrease in average cross entropy compared to FC-LSTM. The x-axis represents the number of data cases, and the y-axis represents the average cross entropy.\n\nText in figure: ConvLSTM FC-LSTM Data Cases Average Cross Entropy"
+  }
+]

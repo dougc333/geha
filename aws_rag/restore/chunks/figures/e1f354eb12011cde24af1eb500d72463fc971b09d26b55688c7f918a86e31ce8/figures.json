@@ -1,0 +1,29 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1: Visual illustration of the GraphSAGE sample and aggregate approach.",
+    "width": 773,
+    "height": 264,
+    "description": "## Description\nThis figure is a visual illustration of the GraphSAGE sample and aggregate approach. It consists of three panels showing the process of sampling a neighborhood, aggregating feature information, and predicting graph context and labels. The first panel shows a sample neighborhood with nodes and edges. The second panel demonstrates the aggregation of feature information from neighbors. The third panel shows the prediction of graph context and labels using the aggregated information.\n\n## Text in figure\n1. Sample neighborhood\n2. Aggregate feature information from neighbors\n3. Predict graph context and label using aggregated information\nk=1\nk=2\naggregator1\naggregator2\nlabel"
+  },
+  {
+    "file": "p007_f02.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 2: A : Timing experiments on Reddit data, with training batches of size 512 and inference on the full test set (79,534 nodes). B : Model performance with respect to the size of the sampled neighborhood, where the 'neighborhood sample size' refers to the number of neighbors sampled at each depth for K = 2 with S 1 = S 2 (on the citation data using GraphSAGE-mean).",
+    "width": 775,
+    "height": 226,
+    "description": "## Figure Description\nThis figure contains two plots. Plot A is a bar chart showing timing experiments on Reddit data. It compares training and inference times for different models. The highest training time is for GS-LSTM, and the lowest is for DW. The highest inference time is also for GS-LSTM, and the lowest is for GS-mean. Plot B is a line graph showing model performance with respect to neighborhood sample size. The Micro F1 score increases with sample size, while runtime also increases.\n\n## Text in Figure\nPlot A: GS-GCN, GS-mean, GS-pool, GS-LSTM, DW\nTraining time: GS-LSTM (highest), DW (lowest)\nInference time: GS-LSTM (highest), GS-mean (lowest)\nPlot B: Micro F1, Runtime\nNeighborhood sample size: 0, 25, 50, 75\nMicro F1: 0.77, 0.81, 0.83\nRuntime: 0.00, 0.02, 0.04, 0.06"
+  },
+  {
+    "file": "p019_f03.png",
+    "page": 19,
+    "kind": "picture",
+    "caption": "Figure 3: Accuracy (in F1-score) for different approaches on the citation data as the feature matrix is incrementally replaced with random Gaussian noise.",
+    "width": 681,
+    "height": 388,
+    "description": "Description: This plot shows the accuracy of three different approaches as the feature matrix is incrementally replaced with random Gaussian noise. The blue line (GS-pool) starts highest at 0.9 and decreases steadily to 0.6. The green dashed line (GS-GCN) starts at 0.8 and decreases to 0.3. The red dotted line (feat.) starts at 0.6 and decreases to 0.2.\n\nText in figure: GS-pool, GS-GCN, feat., Micro F1, Feature noise prop."
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "file": "p005_f01.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 1: SHAP (SHapley Additive exPlanation) values attribute to each feature the change in the expected model prediction when conditioning on that feature. They explain how to get from the base value E [ f ( z )] that would be predicted if we did not know any features to the current output f ( x ) . This diagram shows a single ordering. When the model is non-linear or the input features are not independent, however, the order in which features are added to the expectation matters, and the SHAP values arise from averaging the \u03c6 i values across all possible orderings.",
+    "width": 794,
+    "height": 113,
+    "description": "This figure is a diagram illustrating SHAP (SHapley Additive exPlanations) values, which attribute changes in model predictions to individual features. It shows a single ordering of features, starting from a base value E[f(z)] to the final output f(x). The diagram includes arrows labeled with \u03c60, \u03c61, \u03c62, \u03c63, and \u03c64, representing the SHAP values for each feature. The figure also includes conditional expectations E[f(z)|z1=x1], E[f(z)|z1,2=x1,2], and E[f(z)|z1,2,3=x1,2,3], indicating how the expected prediction changes with each additional feature.\n\nText in figure: E[f(z)], E[f(z)|z1=x1], E[f(z)|z1,2=x1,2], E[f(z)|z1,2,3=x1,2,3], f(x), \u03c60, \u03c61, \u03c62, \u03c63, \u03c64."
+  },
+  {
+    "file": "p007_f02.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 2: (A) The Shapley kernel weighting is symmetric when all possible z \u2032 vectors are ordered by cardinality there are 2 15 vectors in this example. This is distinctly different from previous heuristically chosen kernels. (B) Compositional models such as deep neural networks are comprised of many simple components. Given analytic solutions for the Shapley values of the components, fast approximations for the full model can be made using DeepLIFT's style of back-propagation.",
+    "width": 638,
+    "height": 207,
+    "description": "Description: This figure consists of two parts. Part (A) is a plot showing the sample weight of different kernels ordered by the cardinality of subsets. The Shapley kernel has the highest sample weight, followed by the LIME kernel (cosine distance), and the LIME kernel (L2 distance) has the lowest sample weight. Part (B) is a diagram illustrating the compositional model of deep neural networks, showing how components are connected and how the Shapley values of the components can be used to approximate the full model.\n\nText in figure: Shapley kernel, LIME kernel (cosine dist), LIME kernel (L2 dist), subsets ordered by cardinality, sample weight, f1, f2, f3, x1, x2, y1, y2, mx1f3, mx2f3."
+  },
+  {
+    "file": "p008_f03.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 3: Comparison of three additive feature attribution methods: Kernel SHAP (using a debiased lasso), Shapley sampling values, and LIME (using the open source implementation). Feature importance estimates are shown for one feature in two models as the number of evaluations of the original model function increases. The 10th and 90th percentiles are shown for 200 replicate estimates at each sample size. (A) A decision tree model using all 10 input features is explained for a single input. (B) A decision tree using only 3 of 100 input features is explained for a single input.",
+    "width": 637,
+    "height": 190,
+    "description": "## Description\nThis figure compares three feature attribution methods: Kernel SHAP, Shapley sampling, and LIME. It shows the feature importance estimates for a single feature in two different models as the number of function evaluations increases. The 10th and 90th percentiles are shown for 200 replicate estimates at each sample size. The SHAP series is highest, followed by Shapley sampling, and LIME is the lowest. The differences are most pronounced in the dense original model.\n\n## Text in figure\nPanel A: Dense original model\n- SHAP\n- Shapley sampling\n- LIME\n- True Shapley value\n\nPanel B: Sparse original model\n- SHAP\n- Shapley sampling\n- LIME\n- True Shapley value\n\nAxes:\n- x-axis: # of function evaluations\n- y-axis: Feature importance"
+  },
+  {
+    "file": "p009_f04.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 4: Human feature impact estimates are shown as the most common explanation given among 30 (A) and 52 (B) random individuals, respectively. (A) Feature attributions for a model output value (sickness score) of 2 . The model output is 2 when fever and cough are both present, 5 when only one of fever or cough is present, and 0 otherwise. (B) Attributions of profit among three men, given according to the maximum number of questions any man got right. The first man got 5 questions right, the second 4 questions, and the third got none right, so the profit is $5.",
+    "width": 710,
+    "height": 221,
+    "description": "### Search Index Section 1: Figure Description\n\nThis figure consists of two bar charts labeled (A) and (B). Chart (A) displays feature attribution values for three symptoms: fever, cough, and congestion. The highest value is for fever and cough, both at 1.0, while congestion has the lowest value at -1.5. Chart (B) shows feature attribution values for three men, labeled Man 1, Man 2, and Man 3. Man 1 has the highest value at 5, Man 2 has a value of 2, and Man 3 has the lowest value at -1.\n\n### Search Index Section 2: Figure Text\n\nText in figure: \"Human\", \"SHAP\", \"LIME\", \"Orig. DeepLIFT\", \"Fever\", \"Cough\", \"Congestion\", \"Man 1\", \"Man 2\", \"Man 3\", \"feature attribution value\", \"1.0\", \"0.5\", \"0.0\", \"-0.5\", \"-1.0\", \"-1.5\", \"5\", \"3\", \"2\", \"1\", \"0\", \"-1\"."
+  },
+  {
+    "file": "p009_f05.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 5: Explaining the output of a convolutional network trained on the MNIST digit dataset. Orig. DeepLIFT has no explicit Shapley approximations, while New DeepLIFT seeks to better approximate Shapley values. (A) Red areas increase the probability of that class, and blue areas decrease the probability. Masked removes pixels in order to go from 8 to 3. (B) The change in log odds when masking over 20 random images supports the use of better estimates of SHAP values.",
+    "width": 715,
+    "height": 229,
+    "description": "Figure Description: The figure consists of two panels, labeled (A) and (B). Panel (A) displays visual explanations of model predictions for the digit '8' using four different methods: Original DeepLIFT, New DeepLIFT, SHAP, and LIME. Each method shows the input image, the explanation for predicting '8', the explanation for predicting '3', and a masked image. Panel (B) is a boxplot showing the change in log-odds for different methods when masking over 20 random images.\n\nText in Figure: Panel (A): Input, Explain 8, Explain 3, Masked. Panel (B): Change in log-odds. Methods: Orig. DeepLIFT, New DeepLIFT, SHAP, LIME."
+  }
+]

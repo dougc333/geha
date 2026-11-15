@@ -1,0 +1,101 @@
+[
+  {
+    "file": "p003_f01.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Figure 1: ( Overview .) Structured SSMs independently map each channel (e.g. \ud835\udc37 = 5) of an input \ud835\udc65 to output \ud835\udc66 through a higher dimensional latent state \u210e (e.g. \ud835\udc41 = 4). Prior SSMs avoid materializing this large effective state ( \ud835\udc37\ud835\udc41 , times batch size \ud835\udc35 and sequence length \ud835\udc3f ) through clever alternate computation paths requiring time-invariance: the ( \u0394 , \ud835\udc68 , \ud835\udc69 , \ud835\udc6a ) parameters are constant across time. Our selection mechanism adds back input-dependent dynamics, which also requires a careful hardware-aware algorithm to only materialize the expanded states in more efficient levels of the GPU memory hierarchy.",
+    "width": 980,
+    "height": 295,
+    "description": "## Document Section 1\nThis figure is an overview diagram from the paper \"Mamba: Linear-Time Sequence Modeling with Selective State Spaces\". It shows how the model maps input channels to output channels through a higher dimensional latent state. The diagram illustrates the mapping of input x to output y via the latent state h. It highlights the use of a selection mechanism to add input-dependent dynamics, which requires efficient memory usage on the GPU.\n\n## Document Section 2\nText in figure: Overview, Structured SSMs, input x, output y, latent state h, D, N, \u0394, A, B, C, Project, Selection Mechanism, GPU SRAM, GPU HBM."
+  },
+  {
+    "file": "p006_f02.png",
+    "page": 6,
+    "kind": "picture",
+    "caption": "",
+    "width": 982,
+    "height": 217,
+    "description": "## Figure Description\nThis figure illustrates different sequence modeling techniques. It shows three methods: Copying, Selective Copying, and Induction Heads. The Copying method demonstrates a straightforward copying of input to output. The Selective Copying method shows selective copying of specific input elements to the output. The Induction Heads method uses attention mechanisms to selectively copy input elements to the output.\n\n## Figure Details\n- Copying: Input: [blue, orange, red, green], Output: [blue, orange, red, green]\n- Selective Copying: Input: [white, blue, white, orange, red, white, green, white, black, black, black, black], Output: [white, blue, white, orange, red, white, green, white, black, blue, orange, red, green]\n- Induction Heads: Input: [blue, orange, red, green, white, white, black, black, black, black], Output: [blue]"
+  },
+  {
+    "file": "p008_f03.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 3: ( Architecture .) Our simplified block design combines the H3 block, which is the basis of most SSM architectures, with the ubiquitous MLP block of modern neural networks. Instead of interleaving these two blocks, we simply repeat the Mamba block homogenously. Compared to the H3 block, Mamba replaces the first multiplicative gate with an activation function. Compared to the MLP block, Mamba adds an SSM to the main branch. For \ud835\udf0e we use the SiLU / Swish activation (Hendrycks and Gimpel 2016; Ramachandran, Zoph, and Quoc V Le 2017).",
+    "width": 881,
+    "height": 341,
+    "description": "Description: The figure is a diagram comparing three different neural network architectures: H3, Gated MLP, and Mamba. It shows how these architectures are structured and how they differ from each other. The H3 block is the basis of most SSM architectures, while the MLP block is common in modern neural networks. Mamba combines these two by repeating a homogeneous block that includes an SSM and an activation function.\n\nText in figure: H3, Gated MLP, Mamba, SSM, Conv, Linear projection, Sequence transformation, Nonlinearity (activation or multiplication), SiLU / Swish activation."
+  },
+  {
+    "file": "p011_f04.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Table 2: ( Induction Heads .) Models are trained on sequence length 2 8 = 256, and tested on increasing sequence lengths of 2 6 = 64 up to 2 20 = 1048576. Full numbers in Table 11.",
+    "width": 529,
+    "height": 240,
+    "description": "This figure is a line graph showing the accuracy of various models on test sequences of increasing lengths. The highest accuracy is observed for Mamba, which remains consistently at 1.0 across all sequence lengths. The lowest accuracy is for Random, which starts at 0.0 and remains there. Other models like MHA-Absolute, MHA-RoPE, MHA-xPos, H3, Hyena, and Train Length show varying degrees of accuracy, with most dropping significantly as sequence length increases.\n\nText in figure: Induction Heads Extrapolation, Accuracy, Test Sequence Length, MHA-Absolute, MHA-RoPE, MHA-xPos, H3, Hyena, Mamba, Random, Train Length."
+  },
+  {
+    "file": "p011_f05.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Figure 4: ( Scaling Laws .) Models of size \u2248 125 \ud835\udc40 to \u2248 1 . 3 \ud835\udc35 parameters, trained on the Pile. Mamba scales better than all other attention-free models and is the first to match the performance of a very strong 'Transformer++' recipe that has now become standard, particularly as the sequence length grows.",
+    "width": 958,
+    "height": 215,
+    "description": "Figure: Two plots showing scaling laws for various models on The Pile dataset with sequence lengths 2048 and 8192. Each plot displays the relationship between FLOPs (log scale) and Perplexity (log scale). Models include Hyena, RWKV, Transformer, RetNet, H3++, Transformer++, and Mamba. Hyena has the highest perplexity at the lowest FLOPs, while Mamba has the lowest perplexity at the highest FLOPs.\n\nText in figure: Scaling Laws on The Pile (Sequence Length 2048), Scaling Laws on The Pile (Sequence Length 8192), Hyena, RWKV, Transformer, RetNet, H3++, Transformer++, Mamba, Perplexity (log scale), FLOPs (log scale)"
+  },
+  {
+    "file": "p013_f06.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Figure 5: ( DNA Scaling Laws .) Pretraining on the HG38 (human genome) dataset. ( Left ) Fixing short context length 2 10 = 1024 and increasing size from \u2248 200 \ud835\udc3e to \u2248 40 \ud835\udc40 parameters, Mamba scales better than baselines. ( Right ) Fixing model size and increasing sequence lengths while keeping tokens/batch and total training tokens fixed. Unlike baselines, the selection mechanism of Mamba facilitates better performance with increasing context length.",
+    "width": 959,
+    "height": 212,
+    "description": "## Description\n\nThis figure contains two plots comparing the scaling laws of different models on the human genome dataset. The left plot shows the perplexity of models as the number of parameters increases, with Mamba having the lowest perplexity. The right plot shows the perplexity as the sequence length increases, with Mamba maintaining better performance compared to baselines.\n\n## Text in figure\n\nLeft plot:\n- Legend: HyenaDNA, Mamba, Transformer++\n- X-axis: Parameters (log scale)\n- Y-axis: Perplexity\n\nRight plot:\n- Legend: HyenaDNA 1.4M, Mamba 1.4M, Mamba 7M\n- X-axis: Sequence Length\n- Y-axis: Perplexity"
+  },
+  {
+    "file": "p014_f07.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 6: ( Great Apes DNA Classification .) Accuracy after finetuning on sequences of length 2 10 = 1024 up to 2 20 = 1048576 using pretrained models of the same context length. Numerical results in Table 13.",
+    "width": 472,
+    "height": 214,
+    "description": "Description: This plot shows the finetuning accuracy of species DNA classification models as sequence length increases. The highest accuracy is achieved by the Mamba 7M model, which starts at around 0.3 and reaches 0.8 by 10^6. The lowest accuracy is consistently shown by the Random model, which remains around 0.2. HyenaDNA 1.4M and Mamba 1.4M show intermediate performance, with Mamba 1.4M slightly outperforming HyenaDNA 1.4M.\n\nText in figure: Accuracy, Sequence Length, HyenaDNA 1.4M, Mamba 1.4M, Mamba 7M, Random, 10^3, 10^4, 10^5, 10^6."
+  },
+  {
+    "file": "p014_f08.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 7: ( Audio Pretraining .) Mamba improves performance over prior state-of-the-art (Sashimi) in autoregressive audio modeling, while improving up to minute-long context or million-length sequences (controlling for computation).",
+    "width": 473,
+    "height": 211,
+    "description": "Description: This plot compares the performance of two models, S4+FFN and Mamba, in autoregressive audio modeling. The blue line (S4+FFN) starts higher at 1.475 bits per byte for a sequence length of 10^4, while the orange line (Mamba) starts at 1.425 bits per byte. Both lines decrease as the sequence length increases, with S4+FFN remaining above Mamba throughout. At 10^6, S4+FFN is at 1.35 bits per byte, and Mamba is at 1.31 bits per byte.\n\nText in figure: Scaling Laws - Sequence Length (YouTubeMix), S4+FFN, Mamba, Bits Per Byte, Sequence Length, 10^4, 10^5, 10^6."
+  },
+  {
+    "file": "p015_f09.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 8: ( Efficiency Benchmarks .) ( Left ) Training: our efficient scan is 40 \u00d7 faster than a standard implementation. ( Right ) Inference: as a recurrent model, Mamba can achieve 5 \u00d7 higher throughput than Transformers.",
+    "width": 949,
+    "height": 205,
+    "description": "This figure contains two bar charts. The left chart compares the training time of different models, showing that the efficient scan is 40 times faster than a standard implementation. The right chart compares the inference throughput of Mamba and Transformers, indicating that Mamba achieves 5 times higher throughput.\n\nText in figure:\n- Left chart: FlashAttention-2, Convolution, Scan (PyTorch), Scan (ours), OOM\n- Right chart: Mamba 1.4B, Transformer 1.3B, Mamba 6.9B, Transformer 6.7B\n- Batch size: 1, 2, 4, 8, 16, 32, 64, 128\n- Throughput (tokens/s)"
+  },
+  {
+    "file": "p031_f10.png",
+    "page": 31,
+    "kind": "picture",
+    "caption": "Figure 9: ( Scaling laws: extra ablations .) ( Left ) Instead of ( Right ) Instead of",
+    "width": 958,
+    "height": 214,
+    "description": "Figure: Two log-log plots showing scaling laws for sequence modeling algorithms. Left plot: Mamba, Mamba-MLP, Mamba-MHA. Mamba is highest, Mamba-MLP is middle, Mamba-MHA is lowest. Right plot: Hyena, Hyena+, H3+, H3++. Hyena is highest, Hyena+ is middle, H3+ is lower, H3++ is lowest.\n\nText: Scaling Laws on The Pile (Sequence Length 2048), Perplexity (log scale), FLOPs (log scale), Mamba, Mamba-MLP, Mamba-MHA, Hyena, Hyena+, H3+, H3++"
+  },
+  {
+    "file": "p035_f11.png",
+    "page": 35,
+    "kind": "picture",
+    "caption": "Figure 10: ( Audio Pretraining (YouTubeMix) Ablations .) As a uniformly-sampled 'continuous' signal modality, audio waveforms actually benefit from LTI models which have matching inductive bias. ( Left ) Homogenous models (all blocks have the same parameterization) ( Right ) Only the center U-Net blocks are ablated; the outer blocks are Mamba-S4. Purple line is same as figure on left.",
+    "width": 967,
+    "height": 214,
+    "description": "## Description\nThis figure contains two line graphs comparing the performance of different models in terms of bits per byte for audio waveforms. The left graph shows homogenous models with all blocks having the same parameterization. The right graph shows models where only the center U-Net blocks are ablated, and the outer blocks are Mamba-S4. The highest series is S4+MLP, and the lowest is selective \u0394 (Mamba-S4). The series are labeled in the legend.\n\n## Text in figure\n**Left graph:**\n- Legend: S4+MLP, Mamba (S6), +complex, -selective B/C, -selective \u0394 (Mamba-S4)\n- X-axis: Sequence Length\n- Y-axis: Bits Per Byte\n\n**Right graph:**\n- Legend: Mamba (S6), +complex, -selective B/C, -selective \u0394 (Mamba-S4)\n- X-axis: Sequence Length\n- Y-axis: Bits Per Byte"
+  }
+]

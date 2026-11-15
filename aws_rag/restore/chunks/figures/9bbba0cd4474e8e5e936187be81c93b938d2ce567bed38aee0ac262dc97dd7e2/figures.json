@@ -1,0 +1,56 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1: Illustration of the proposed Deformable DETR object detector.",
+    "width": 670,
+    "height": 424,
+    "description": "This figure is a schematic diagram illustrating the architecture of the Deformable DETR object detector. It shows the flow of data from the input image through the encoder, to the multi-scale deformable self-attention and cross-attention mechanisms, and finally to the bounding box predictions. The diagram highlights the use of multi-scale feature maps, deformable self-attention in the encoder, and multi-scale deformable cross-attention in the decoder.\n\nKey elements in the figure include:\n- Image input\n- Image feature maps\n- Encoder with multi-scale deformable self-attention\n- Multi-scale feature maps\n- Decoder with multi-scale deformable cross-attention and self-attention\n- Transformer\n- Bounding box predictions\n- Object queries\n\nThe diagram emphasizes the multi-scale nature of the feature maps and attention mechanisms, as well as the use of deformable attention to better handle object deformations."
+  },
+  {
+    "file": "p005_f02.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 2: Illustration of the proposed deformable attention module.",
+    "width": 752,
+    "height": 412,
+    "description": "This figure is a diagram illustrating the proposed deformable attention module in the Deformable DETR model. It shows the process of generating deformable attention weights and aggregating sampled values. The diagram includes a query feature map, reference point, input feature map, linear layers, attention weights, and aggregated sampled values. The process starts with a linear layer for the query feature map and reference point, followed by sampling offsets and attention weights. The attention weights are then used to sample values from the input feature map, which are aggregated and passed through a linear layer to produce the output.\n\nText in figure: Query Feature, Reference Point, Input Feature Map, Linear, Sampling Offsets, Attention Weights, Aggregate, Aggregated Sampled Values, Output."
+  },
+  {
+    "file": "p008_f03.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Figure 3: Convergence curves of Deformable DETR and DETR-DC5 on COCO 2017 val set. For Deformable DETR, we explore different training schedules by varying the epochs at which the learning rate is reduced (where the AP score leaps).",
+    "width": 519,
+    "height": 272,
+    "description": "Figure: Line graph showing convergence curves of Deformable DETR and DETR-DC5 on COCO 2017 val set. Deformable DETR peaks at 45.5 AP, while DETR-DC5 peaks at 43.6 AP. Deformable DETR has higher AP scores throughout the epochs.\n\nText in figure: Deformable DETR, DETR-DC5, AP, Epochs, 45.5, 43.6, 44.9, 45.3, 43.8, 43.6."
+  },
+  {
+    "file": "p012_f04.png",
+    "page": 12,
+    "kind": "picture",
+    "caption": "Figure 4: Constructing mult-scale feature maps for Deformable DETR.",
+    "width": 626,
+    "height": 244,
+    "description": "## Section 1: Figure Description\nThis figure is a diagram illustrating the construction of multi-scale feature maps for Deformable DETR. It shows the process of transforming ResNet feature maps into input multi-scale feature maps through a series of convolutional layers. The diagram includes three layers (C3, C4, C5) with varying dimensions and the number of feature maps. Each layer undergoes convolution operations with specified kernel sizes and strides, resulting in different output dimensions.\n\n## Section 2: Figure Text\nText in figure: ResNet Feature Maps, Conv 3 x 3, stride 2, Conv 1 x 1, stride 1, Conv 1 x 1, stride 1, Conv 1 x 1, stride 1, H/32 x W/32 x 2048, H/16 x W/16 x 1024, H/8 x W/8 x 512, H/64 x W/64 x 256, H/32 x W/32 x 256, H/16 x W/16 x 256, H/8 x W/8 x 256, Input Multi-scale Feature Maps."
+  },
+  {
+    "file": "p014_f05.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 5: The gradient norm of each item (coordinate of object center ( x, y ) , width/height of object bounding box w/h , category score c of this object) in final detection result with respect to each pixel in input image I .",
+    "width": 735,
+    "height": 823,
+    "description": "This figure displays a series of images showing the gradient norm of various object detection parameters with respect to each pixel in the input image. The parameters include the center coordinates (x, y), width/height (w/h), and category score (c) of detected objects. Each row represents a different object, with the left column showing a cat, the middle column zebras, and the right column a bus. The gradient norms are visualized as heatmaps, with red indicating higher values and blue indicating lower values.\n\nText in figure: x, y, w/h, c, 0x/01, 0y/01, 0w/01, 0h/01, 0x/01, 0y/01, 0w/01, 0h/01, 0x/01, 0y/01, 0w/01, 0h/01, 0x/01, 0y/01, 0w/01, 0h/01, 0x/01, 0y/01, 0w/01, 0h/01, 0x/01, 0y/01, 0w/01, 0h/01, 0x/01, 0y/01, 0w/01, 0h/01, 0x/01, 0y/01, 0w/01, 0h/01, 0x/01, 0y/01, 0w/01, 0h/01, 0x/01, 0y/01, 0w/01, 0h/01, 0x/01, 0y/01, 0w/01, 0h/01, 0x/01, 0y/01, 0w/01, 0h/01, 0x/01, 0y/01, 0w/01, 0h/01, 0x/01, 0y/01, 0w/01, 0h/01, 0x/01, 0y/01, 0w/01, 0h/01, 0x/01, 0y/01, 0w/01, 0h/01, 0x/01, 0y/01, 0w/01, 0h/01, 0x/01"
+  },
+  {
+    "file": "p015_f06.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "(b) multi-scale deformable cross-attention in decoder",
+    "width": 771,
+    "height": 1122,
+    "description": "This figure displays a series of images illustrating the application of multi-scale deformable cross-attention in the decoder of a detection model. Each image shows a scene with various objects, overlaid with a heatmap indicating attention points. The heatmap uses a color gradient from blue (low attention) to red (high attention). The attention points are clustered around specific objects, suggesting the model's focus on these areas for detection.\n\nText in figure: multi-scale deformable self-attention in encoder, multi-scale deformable cross-attention in decoder, high, low."
+  }
+]

@@ -1,0 +1,155 @@
+[
+  {
+    "file": "p001_f01.png",
+    "page": 1,
+    "kind": "picture",
+    "caption": "Fig. 1: While previous object recognition datasets have focused on (a) image classification, (b) object bounding box localization or (c) semantic pixel-level segmentation, we focus on (d) segmenting individual object instances. We introduce a large, richly-annotated dataset comprised of images depicting complex everyday scenes of common objects in their natural context.",
+    "width": 514,
+    "height": 321,
+    "description": "Figure Type: Image comparison\nDescription: The figure compares four different types of image analysis: (a) Image classification, (b) Object localization, (c) Semantic segmentation, and (d) Instance segmentation. Each panel shows a different approach applied to the same image of a person herding sheep with a dog.\n\nText in Figure:\n(a) Image classification: person, sheep, dog\n(b) Object localization: person, sheep, dog\n(c) Semantic segmentation: person, sheep, dog\n(d) This work: person, sheep, dog"
+  },
+  {
+    "file": "p003_f02.png",
+    "page": 3,
+    "kind": "picture",
+    "caption": "Fig. 2: Example of (a) iconic object images, (b) iconic scene images, and (c) non-iconic images.",
+    "width": 1024,
+    "height": 304,
+    "description": "## Description\nThis figure is a collection of images categorized into three groups: iconic object images, iconic scene images, and non-iconic images. Each group contains multiple images showcasing different subjects and contexts.\n\n## Text in figure\n(a) Iconic object images\n- Dog\n- Nintendo Wii controller\n\n(b) Iconic scene images\n- Tree in a park\n- Living room\n- Outdoor scene with trees and people\n- People in a living room\n\n(c) Non-iconic images\n- Cow\n- Toothbrush\n- Alleyway\n- Bathroom sink\n- Cow in a street\n- Two men in a bathroom"
+  },
+  {
+    "file": "p004_f03.png",
+    "page": 4,
+    "kind": "picture",
+    "caption": "Fig. 3: Our annotation pipeline is split into 3 primary tasks: (a) labeling the categories present in the image ( \u00a7 4.1), (b) locating and marking all instances of the labeled categories ( \u00a7 4.2), and (c) segmenting each object instance ( \u00a7 4.3).",
+    "width": 1020,
+    "height": 307,
+    "description": "Figure type: Diagram\nDescription: The figure illustrates the annotation pipeline for image labeling, consisting of three primary tasks. It shows the progression from category labeling to instance spotting and finally to instance segmentation.\n\nText in figure:\n(a) Category labeling\n(b) Instance spotting\n(c) Instance segmentation"
+  },
+  {
+    "file": "p005_f04.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Fig. 4: Worker precision and recall for the category labeling task. (a) The union of multiple AMT workers (blue) has better recall than any expert (red). Ground truth was computed using majority vote of the experts. (b) Shows the number of workers (circle size) and average number of jobs per worker (circle color) for each precision/recall range. Most workers have high precision; such workers generally also complete more jobs. For this plot ground truth for each worker is the union of responses from all other AMT workers. See \u00a7 4.4 for details.",
+    "width": 1020,
+    "height": 338,
+    "description": "Figure 4a: Scatter plot showing precision and recall for experts and workers. Experts (red) have lower recall than workers (blue). Figure 4b: Scatter plot with worker precision and recall. Circle size indicates the number of workers, and color indicates the average number of jobs per worker. Most workers have high precision and complete more jobs.\n\nText in figure: Precision, Recall, Experts, Workers, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, A, B, C, D, E, F, G."
+  },
+  {
+    "file": "p007_f05.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Fig. 5: (a) Number of annotated instances per category for MS COCO and PASCAL VOC. (b,c) Number of annotated categories and annotated instances, respectively, per image for MS COCO, ImageNet Detection, PASCAL VOC and SUN (average number of categories and instances are shown in parentheses). (d) Number of categories vs. the number of instances per category for a number of popular object recognition datasets. (e) The distribution of instance sizes for the MS COCO, ImageNet Detection, PASCAL VOC and SUN datasets.",
+    "width": 1013,
+    "height": 945,
+    "description": "This figure is a collection of bar charts and line graphs comparing various object recognition datasets. Panel (a) shows the number of annotated instances per category for MS COCO and PASCAL VOC, with MS COCO having more instances across most categories. Panel (b) compares the number of categories per image across MS COCO, ImageNet Detection, PASCAL VOC, and SUN, with MS COCO having the highest average. Panel (c) shows the percentage of images with a certain number of instances, with MS COCO having the highest percentage of images with fewer instances. Panel (d) plots the number of categories against the number of instances per category, with Caltech Ped having the most instances per category. Panel (e) shows the distribution of instance sizes, with MS COCO having the highest percentage of small instances.\n\nText in figure: MS COCO, PASCAL VOC, ImageNet Detection, SUN, Caltech Ped, Caltech 256, Caltech 101, ImageNet Classification, Instances per category, Number of categories, Number of instances, Percent of instances, Percent of image size, 4%, 6%, 10%, 16%, 25%, 40%, 63%, 100%."
+  },
+  {
+    "file": "p008_f06.png",
+    "page": 8,
+    "kind": "picture",
+    "caption": "Fig. 6: Samples of annotated images in the MS COCO dataset.",
+    "width": 1012,
+    "height": 1065,
+    "description": "## Description\nThis figure is a collection of 36 images, each labeled with a category such as \"Person,\" \"Dog,\" \"Cow,\" \"Train,\" \"Car,\" \"Motorbike,\" \"Chair,\" and \"Bottle.\" Each image shows a real-world scene with objects from the respective category highlighted in various colors.\n\n## Text in figure\nPerson, Dog, Cow, Train, Car, Motorbike, Chair, Bottle"
+  },
+  {
+    "file": "p009_f07.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Fig. 7: We visualize our mixture-specific shape masks. We paste thresholded shape masks on each candidate detection to generate candidate segments.",
+    "width": 503,
+    "height": 134,
+    "description": "## Description\nThis figure displays a series of grayscale images representing shape masks for different objects. Each row corresponds to a specific object category: Person, Bike, and Horse. Each column within a row shows a different shape mask for that object, with the masks pasted on candidate detections to generate candidate segments.\n\n## Text in figure\nPerson\nBike\nHorse"
+  },
+  {
+    "file": "p009_f08.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Fig. 8: Evaluating instance detections with segmentation masks versus bounding boxes. Bounding boxes are a particularly crude approximation for articulated objects; in this case, the majority of the pixels in the ( blue ) tightfitting bounding-box do not lie on the object. Our ( green ) instance-level segmentation masks allows for a more accurate measure of object detection and localization.",
+    "width": 504,
+    "height": 190,
+    "description": "## Figure Description\nThis figure compares instance detections using segmentation masks and bounding boxes. The left panel shows a soccer player with a red flag and a soccer ball, illustrating the crudeness of bounding boxes for articulated objects. The right panel displays a green silhouette of the player, representing a more accurate instance-level segmentation mask.\n\n## Text in Figure\n- Bounding boxes\n- Instance-level segmentation masks\n- Blue tightfitting bounding-box\n- Green instance-level segmentation mask\n- More accurate measure of object detection and localization"
+  },
+  {
+    "file": "p010_f09.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Fig. 9: A predicted segmentation might not recover object detail even though detection and ground truth bounding boxes overlap well (left). Sampling from the person category illustrates that predicting segmentations from topdown projection of DPM part masks is difficult even for correct detections (center). Average segmentation overlap measured on MS COCO for the 20 PASCAL VOC categories demonstrates the difficulty of the problem (right).",
+    "width": 1009,
+    "height": 396,
+    "description": "## Description\nThis figure shows the challenges in predicting object segmentations. The left panel displays a predicted segmentation that does not recover object details despite good bounding box overlap. The center panel illustrates the difficulty of predicting segmentations from DPM part masks, even for correct detections. The right panel shows the average segmentation overlap for 20 PASCAL VOC categories, indicating the difficulty of the problem.\n\n## Text in figure\nGround truth, Predicted, Category: person, DPM Segmentation Performance Baseline, Segmentatiation Overlap, Bounding Box Overlap, Average Overlap of Correct Detections, aeroplane, bicycle, bird, boat, bottle, bus, car, chair, cow, dog, diningtable, horse, motorbike, person, pottedplant, sheep, sofa, train, tvmonitor."
+  },
+  {
+    "file": "p011_f10.png",
+    "page": 11,
+    "kind": "picture",
+    "caption": "Fig. 10: User interfaces for non-iconic image collection. (a) Interface for selecting non-iconic images containing pairs of objects. (b) Interface for selecting non-iconic images for categories that rarely co-occurred with others.",
+    "width": 511,
+    "height": 394,
+    "description": "This figure is a visual representation of user interfaces designed for selecting non-iconic images. Panel (a) shows an interface for selecting images containing pairs of objects, specifically a person and a bicycle. Panel (b) displays an interface for selecting images of categories that rarely co-occurred with others, focusing on images containing bears.\n\nText in figure:\n- Panel (a) instructions: \"select images that contain BOTH a person AND a bicycle\"\n- Panel (b) instructions: \"select images that contain a bear(s)\"\n- Panel (a) example: \"person + bicycle\"\n- Panel (b) example: \"bears\""
+  },
+  {
+    "file": "p013_f11.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Fig. 11: Icons of 91 categories in the MS COCO dataset grouped by 11 super-categories. We use these icons in our annotation pipeline to help workers quickly reference the indicated object category.",
+    "width": 1030,
+    "height": 234,
+    "description": "## Figure Description\nThis figure is a visual representation of the 91 categories in the MS COCO dataset, organized into 11 super-categories. Each category is depicted by an icon, aiding annotators in quickly identifying the object category during the annotation process.\n\n## Text in Figure\nIcons of 91 categories in the MS COCO dataset grouped by 11 super-categories. Categories include: person & accessory, animal, vehicle, outdoor object, sports, kitchenware, food, furniture, appliance, electronics, indoor objects."
+  },
+  {
+    "file": "p013_f12.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "",
+    "width": 1023,
+    "height": 439,
+    "description": "## Figure: Image annotation tasks\n\nThe figure shows three different image annotation tasks: category labeling, instance spotting, and instance segmentation. Each task is demonstrated with a sample image and instructions for the annotator.\n\n## Index\n\n### Tasks\n\n- Category labeling\n- Instance spotting\n- Instance segmentation\n\n### Instructions\n\n- Select objects in the image\n- Draw bounding boxes around objects\n- Move target to the small object\n- Please pay attention to trace boundary carefully\n- Won't be rejected if not follow the instruction"
+  },
+  {
+    "file": "p013_f13.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "",
+    "width": 494,
+    "height": 468,
+    "description": "Section 1: Figure type and content\nThis figure is a screenshot from a computer interface, showing a task related to selecting images with incorrect object contours for a toothbrush. It displays examples of correct and incorrect object contours, with visual cues and instructions for the user.\n\nSection 2: Text in figure\nTask: select images that have WRONG object contour for toothbrush.\nExamples: Right Object Contour, Wrong Object Contour.\nTips: use n and b keys to move between rows of image."
+  },
+  {
+    "file": "p013_f14.png",
+    "page": 13,
+    "kind": "picture",
+    "caption": "Fig. 12: User interfaces for collecting instance annotations, see text for details.",
+    "width": 502,
+    "height": 470,
+    "description": "## Description\nThis figure is a screenshot from the Microsoft COCO paper, showing a user interface for collecting instance annotations. It displays a photo of a parade with a fire truck and motorcycles, with instructions to label unlabeled persons. The interface includes tools for drawing, erasing, and zooming.\n\n## Text in figure\nDraw all unlabeled person(s) in the image. Find and draw on all person(s) that haven't been labeled. It's okay to overlap to labeled region. You need to label two images that contain unlabeled person(s) to complete. Work will be rejected if not carefully drawn or unlabeled person(s) remain. Submit No Unlabeled Person(s) Draw (D) Erase (E) Zoom In (I) Zoom Out (O) \u00a9 2006 John A. Marsh"
+  },
+  {
+    "file": "p014_f15.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "(a) PASCAL VOC. (b) MS COCO. Fig. 13: Random person instances from PASCAL VOC and MS COCO. At most one instance is sampled per image.",
+    "width": 1012,
+    "height": 828,
+    "description": "## Description\nThe figure is a comparative visual representation of person instances from two datasets: PASCAL VOC and MS COCO. It displays multiple images of people from each dataset, with each image containing at most one person instance. The images are arranged in a grid format, with PASCAL VOC images on the left and MS COCO images on the right.\n\n## Text in figure\nPASCAL VOC\nMS COCO\nFig. 13: Random person instances from PASCAL VOC and MS COCO. At most one instance is sampled per image."
+  },
+  {
+    "file": "p015_f16.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "",
+    "width": 1016,
+    "height": 775,
+    "description": "## Description\nThe figure displays two panels labeled (a) and (b), each containing a collage of multiple images. Panel (a) is titled \"PASCAL VOC\" and shows a collection of images featuring various objects, primarily chairs and furniture, in different settings and poses. Panel (b) is titled \"MS COCO\" and contains a more diverse set of images, including chairs, furniture, and other objects, with some images appearing distorted or fragmented.\n\n## Text in figure\n- Panel (a) label: PASCAL VOC\n- Panel (b) label: MS COCO\n- Images in both panels show various objects, including chairs, furniture, and other items."
+  },
+  {
+    "file": "p015_f17.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Fig. 14: Random chair instances from PASCAL VOC and MS COCO. At most one instance is sampled per image.",
+    "width": 1025,
+    "height": 324,
+    "description": "Figure type: Image collage\nDescription: The figure is a collage of images showing various instances of bicycles detected in different scenes. Each image contains a bicycle with a bounding box drawn around it, indicating the detection. The images are divided into two sections: \"passed\" and \"rejected,\" with the number of correct detections over total detections indicated in parentheses.\n\nText in figure: \"passed (4/5)\", \"rejected (3/5)\""
+  }
+]

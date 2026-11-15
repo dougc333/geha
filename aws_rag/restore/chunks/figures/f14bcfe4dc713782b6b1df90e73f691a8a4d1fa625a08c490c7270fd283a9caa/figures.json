@@ -1,0 +1,74 @@
+[
+  {
+    "file": "p002_f01.png",
+    "page": 2,
+    "kind": "picture",
+    "caption": "Figure 1: Alternative schedule schemes of learning rate \u03b7 t over batch index t : default schemes with \u03b7 0 = 0 . 1 (blue line) and \u03b7 0 = 0 . 05 (red line) as used by Zagoruyko & Komodakis (2016); warm restarts simulated every T 0 = 50 (green line), T 0 = 100 (black line) and T 0 = 200 (grey line) epochs with \u03b7 t decaying during i -th run from \u03b7 i max = 0 . 05 to \u03b7 i min = 0 according to eq. (5); warm restarts starting from epoch T 0 = 1 (dark green line) and T 0 = 10 (magenta line) with doubling ( T mult = 2 ) periods T i at every new warm restart.",
+    "width": 778,
+    "height": 342,
+    "description": "This figure is a line plot showing various learning rate schedules over epochs. The blue line represents the default scheme with \u03b70 = 0.1, while the red line represents the default scheme with \u03b70 = 0.05. The green, black, and grey lines represent warm restarts simulated every 50, 100, and 200 epochs, respectively. The dark green and magenta lines represent warm restarts starting from epoch 1 and 10, with doubling periods. The blue line is the highest, followed by the red, green, black, grey, dark green, and magenta lines. The legend labels are \"Default, \u03b70=0.1\", \"Default, \u03b70=0.05\", \"T0=50, T=1\", \"T0=100, T=1\", \"T0=200, T=1\", \"T0=1, Tmult=2\", and \"T0=10, Tmult=2\".\n\nText in figure: \"Learning rate schedule\", \"Learning rate\", \"Epochs\", \"Default, \u03b70=0.1\", \"Default, \u03b70=0.05\", \"T0=50, T=1\", \"T0=100, T=1\", \"T0=200, T=1\", \"T0=1, Tmult=2\", \"T0=10, Tmult=2\".\n\nSection 1: This figure is a line plot showing various learning rate schedules over epochs. The blue line represents the default scheme with \u03b70 = 0.1, while the red line represents the default scheme with \u03b70 = 0.05. The green, black, and grey lines represent warm restarts simulated every 50, 100, and 200 epochs, respectively. The dark green and magenta lines represent warm restarts starting from epoch 1 and 10, with doubling periods.\n\nSection 2: The blue line is the highest, followed by the red, green, black, grey, dark green, and magenta lines. The legend labels are \"Default, \u03b70=0.1\", \"Default, \u03b70=0.05\", \"T0=50, T=1\", \"T0=100, T=1\", \"T0=200, T=1\", \"T0=1, Tmult=2\", and \"T0=10, Tmult=2\". The text in the figure includes \"Learning rate schedule\", \"Learning rate\", \"Epochs\", and the legend labels."
+  },
+  {
+    "file": "p005_f02.png",
+    "page": 5,
+    "kind": "picture",
+    "caption": "Figure 2: Test errors on CIFAR-10 (left column) and CIFAR-100 (right column) datasets. Note that for SGDR we only plot the recommended solutions. The top and middle rows show the same results on WRN-28-10, with the middle row zooming into the good performance region of low test error. The bottom row shows performance with a wider network, WRN-28-20. The results of the default learning rate schedules of Zagoruyko & Komodakis (2016) with \u03b7 0 = 0 . 1 and \u03b7 0 = 0 . 05 are depicted by the blue and red lines, respectively. The schedules of \u03b7 t used in SGDR are shown with i) restarts every T 0 = 50 epochs (green line); ii) restarts every T 0 = 100 epochs (black line); iii) restarts every T 0 = 200 epochs (gray line); iv) restarts with doubling ( T mult = 2 ) periods of restarts starting from the first epoch ( T 0 = 1 , dark green line); and v) restarts with doubling ( T mult = 2 ) periods of restarts starting from the tenth epoch ( T 0 = 10 , magenta line).",
+    "width": 780,
+    "height": 922,
+    "description": "Description: The figure contains six plots comparing test errors on CIFAR-10 and CIFAR-100 datasets using different learning rate schedules. The top row shows WRN-28-10 on CIFAR-10 and CIFAR-100, with the middle row zooming into the low test error region. The bottom row shows WRN-28-20 on CIFAR-10 and CIFAR-100. The series with the highest test error is the default learning rate schedule with \u03b7 0 = 0.1 (blue line), while the lowest is the schedule with T 0 = 100 epochs (black line).\n\nText in figure: WRN-28-10 on CIFAR-10, WRN-28-10 on CIFAR-100, WRN-28-20 on CIFAR-10, WRN-28-20 on CIFAR-100, Default, \u03b7 0 = 0.1, \u03b7 0 = 0.05, T 0 = 50, T 0 = 100, T 0 = 200, T mult = 2, T 0 = 1, T 0 = 10, Test error (%), Epochs."
+  },
+  {
+    "file": "p007_f03.png",
+    "page": 7,
+    "kind": "picture",
+    "caption": "Figure 3: Test errors of ensemble models built from N runs of SGDR on WRN-28-10 with M model snapshots per run made at epochs 150, 70 and 30 (right before warm restarts of SGDR as suggested by Huang et al. (2016a)). When M =1 (respectively, M =2), we aggregate probabilities of softmax layers of snapshot models at epoch index 150 (respectively, at epoch indexes 150 and 70).",
+    "width": 795,
+    "height": 322,
+    "description": "Figure: A heatmap showing the number of snapshots per run for ensemble models built from N runs of SGDR on WRN-28-10. The x-axis represents the number of runs (N), and the y-axis represents the number of snapshots per run (M). The color intensity indicates the percentage of snapshots per run.\n\nText in figure: \"Number of snapshots per run (M)\", \"Number of runs (N)\", \"1\", \"2\", \"3\", \"4\", \"8\", \"16\", \"3.51%\", \"3.29%\", \"3.25%\", \"3.23%\", \"3.15%\", \"3.14%\", \"3.61%\", \"3.41%\", \"3.29%\", \"3.29%\", \"3.21%\", \"3.21%\", \"1.403%\", \"3.63%\", \"3.51%\", \"3.44%\", \"3.28%\", \"3.27%\", \"19.57%\", \"18.16%\", \"17.58%\", \"17.32%\", \"16.78%\", \"16.50%\", \"18.27%\", \"17.31%\", \"16.97%\", \"16.78%\", \"16.45%\", \"16.31%\", \"16.84%\", \"16.64%\", \"16.48%\", \"16.29%\", \"16.21%\", \"16.21%\", \"17.75%\", \"16.84%\", \"16.48%\", \"16.29%\", \"16.21%\", \"16.21%\", \"19.5\", \"18.5\", \"17.5\", \"16.5\", \"15.5\", \"14.5\", \"13.5\", \"12.5\", \"11.5\", \"10.5\", \"9.5\", \"8.5\", \"7.5\", \"6.5\", \"5.5\", \"4.5\", \"3.5\", \"2.5\", \"1.5\", \"0.5\", \"-0.5\", \"-1.5\", \"-2.5\", \"-3.5\", \"-4.5\", \"-5.5\", \"-6.5\", \"-7.5\", \"-8.5\", \"-9.5\", \"-10.5\", \"-11.5\", \"-12.5\", \"-13.5\", \"-14.5\", \"-15.5\", \"-"
+  },
+  {
+    "file": "p009_f04.png",
+    "page": 9,
+    "kind": "picture",
+    "caption": "Figure 4: ( Top ) Improvements obtained by the baseline learning rate schedule and SGDR w.r.t. the best known reference classification error on a dataset of electroencephalographic (EEG) recordings of brain activity for classification of actual right and left hand and foot movements of 14 subjects with roughly 1000 trials per subject. Both considered approaches were tested with the initial learning rate lr = 0 . 025 ( Top-Left ) and lr = 0 . 05 ( Top-Right ). Note that the baseline approach is considered with different settings of the total number of epochs: 30, 60, . . . , 480. ( Bottom ) SGDR with lr = 0 . 025 and lr = 0 . 05 without and with M model snapshots taken at the last M = nr/ 2 restarts, where nr is the total number of restarts.",
+    "width": 793,
+    "height": 706,
+    "description": "This figure is a set of four plots comparing the performance of a baseline learning rate schedule and Stochastic Gradient Descent with Warm Restarts (SGDR) on EEG data classification. The top plots show the test error percentage over epochs for different initial learning rates (lr=0.025 and lr=0.05). The baseline method is tested with varying numbers of epochs (30, 60, 120, 240, 480). The bottom plots compare SGDR with the same initial learning rates, with and without model snapshots taken at the last M=nr/2 restarts. The series with lr=0.05 and M=nr/2 shows the lowest test error percentage, followed by lr=0.025 with M=nr/2.\n\nLegend entries: baseline n_ep=30, baseline n_ep=60, baseline n_ep=120, baseline n_ep=240, baseline n_ep=480, SGDR. Axis titles: Epochs, Test Error - Reference Error (%)."
+  },
+  {
+    "file": "p010_f05.png",
+    "page": 10,
+    "kind": "picture",
+    "caption": "Figure 5: Top-1 and Top-5 test errors obtained by SGD with momentum with the default learning rate schedule, SGDR with T 0 = 1 , T mult = 2 and SGDR with T 0 = 10 , T mult = 2 on WRN-28-10 trained on a version of ImageNet, with all images from all 1000 classes downsampled to 32 \u00d7 32 pixels. The same baseline data augmentation as for the CIFAR datasets is used. Four settings of the initial learning rate are considered: 0.050, 0.025, 0.01 and 0.005.",
+    "width": 765,
+    "height": 300,
+    "description": "Description: The figure contains two line plots showing Top-1 and Top-5 test errors over epochs for different learning rate schedules on WRN-28-10 trained on downsampled ImageNet. The series with the highest error is the Default, followed by SGDR with T0 = 1, Tmult = 2, and the lowest is SGDR with T0 = 10, Tmult = 2.\n\nText in figure: WRN-28-10 on downsampled 32x32 ImageNet, Default, SGDR T0 = 1, Tmult = 2, SGDR T0 = 10, Tmult = 2, Top-1 test error (%), Top-5 test error (%), Epochs."
+  },
+  {
+    "file": "p014_f06.png",
+    "page": 14,
+    "kind": "picture",
+    "caption": "Figure 6: The median results of 5 runs for the best learning rate settings considered for WRN-28-1.",
+    "width": 352,
+    "height": 305,
+    "description": "Figure: Line graph showing test error percentage over epochs for two methods, Default and SGDR, on the CIFAR-10 dataset. The Default method starts with a high error rate, which decreases rapidly and stabilizes around 10%. The SGDR method shows a similar initial decrease but stabilizes at a lower error rate, around 5%. The SGDR method consistently outperforms the Default method throughout the epochs.\n\nText in figure: CIFAR-10, Test error (%), Epochs, Default, SGDR."
+  },
+  {
+    "file": "p015_f07.png",
+    "page": 15,
+    "kind": "picture",
+    "caption": "Figure 7: Training cross-entropy + regularization loss (top row), test loss (middle row) and test error (bottom row) on CIFAR-10 (left column) and CIFAR-100 (right column).",
+    "width": 788,
+    "height": 923,
+    "description": "This figure contains four plots, each showing the performance of a model on CIFAR-10 and CIFAR-100 datasets. The top row displays the training cross-entropy + regularization loss, the middle row shows the test loss, and the bottom row depicts the test error. The left column corresponds to CIFAR-10, while the right column corresponds to CIFAR-100. The plots include various series, such as \"Default,\" \"lr=0.1,\" and \"T_0 = 50, T = 1,\" with different markers and colors.\n\nText in figure: \"WRN-28-10 on CIFAR-10,\" \"WRN-28-10 on CIFAR-100,\" \"Training cross-entropy + regularization loss,\" \"Test loss,\" \"Test error (%)\""
+  },
+  {
+    "file": "p016_f08.png",
+    "page": 16,
+    "kind": "picture",
+    "caption": "Figure 8: Top-5 test errors obtained by SGD with momentum with the default learning rate schedule and SGDR with T 0 = 1 , T mult = 2 on WRN-28-10 trained on a version of ImageNet, with all images from all 1000 classes downsampled to 32 \u00d7 32 pixels. The same baseline data augmentation as for the CIFAR datasets is used. Three settings of the initial learning rate are considered: 0.050, 0.015 and 0.005. In contrast to the experiments described in the main paper, here, the dataset is permuted only within 10 subgroups each formed from 100 classes which makes good generalization much harder to achieve for both algorithms. An interpretation of SGDR results given here might be that while the initial learning rate seems to be very important, SGDR reduces the problem of improper selection of the latter by scanning / annealing from the initial learning rate to 0.",
+    "width": 540,
+    "height": 427,
+    "description": "## Description\nThis figure is a line graph showing the top-5 test error percentages over epochs for different learning rate schedules. The series with the highest error is \"SGDR, lr=0.005\" at around 90%, while the lowest is \"SGDR, lr=0.050\" at around 75%. The \"Default\" series with lr=0.050 is the highest among the default schedules, while \"SGDR, lr=0.005\" has the lowest error among the SGDR schedules.\n\n## Text in figure\n\"WRN-28-10 on downsampled 32x32 ImageNet\"\n\"Top-5 test error (%)\"\n\"Epochs\"\nLegend: Default, lr=0.050; Default, lr=0.015; Default, lr=0.005; SGDR, lr=0.050; SGDR, lr=0.015; SGDR, lr=0.005\nAnnotations: T0=1, Tmult=2"
+  }
+]
