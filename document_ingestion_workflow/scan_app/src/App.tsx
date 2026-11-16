@@ -1,10 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
-import type { CollectionScan, PdfScan, ScanState } from "./types";
+import type { CollectionScan, ExtractionStatus, PdfScan, ScanState } from "./types";
 
 const number = (value: number | null) => value ?? "—";
 
 function StatusPill({ status }: { status: PdfScan["status"] }) {
   return <span className={`status status--${status}`}>{status.replace("_", " ")}</span>;
+}
+
+function ExtractionPill({ status }: { status: ExtractionStatus }) {
+  return <span className={`status extraction extraction--${status}`}>{status.replace("_", " ")}</span>;
 }
 
 function Metric({ label, value }: { label: string; value: string | number }) {
@@ -16,24 +20,46 @@ function Metric({ label, value }: { label: string; value: string | number }) {
   );
 }
 
-function PdfRow({ pdf }: { pdf: PdfScan }) {
+function PdfRow({
+  pdf,
+  extractionBusy,
+  onExtract,
+}: {
+  pdf: PdfScan;
+  extractionBusy: boolean;
+  onExtract: (pdf: PdfScan) => Promise<void>;
+}) {
   const [open, setOpen] = useState(false);
+  const multipage = (pdf.pageCount ?? 2) > 1;
   return (
     <article className={`pdf ${open ? "pdf--open" : ""}`}>
-      <button className="pdf__summary" onClick={() => setOpen((value) => !value)}>
-        <span className="pdf__chevron">{open ? "−" : "+"}</span>
-        <span className="pdf__identity">
-          <strong>{pdf.name}</strong>
-          <small>{pdf.path}</small>
-        </span>
-        <StatusPill status={pdf.status} />
-        <span className="pdf__compact-metrics">
-          <span><b>{number(pdf.figureCount)}</b> figures</span>
-          <span><b>{number(pdf.chartCount)}</b> charts</span>
-          <span><b>{number(pdf.tableCount)}</b> tables</span>
-          <span><b>{number(pdf.formCount)}</b> forms</span>
-        </span>
-      </button>
+      <div className="pdf__top">
+        <button className="pdf__summary" onClick={() => setOpen((value) => !value)}>
+          <span className="pdf__chevron">{open ? "−" : "+"}</span>
+          <span className="pdf__identity">
+            <strong>{pdf.name}</strong>
+            <small>{pdf.path}</small>
+          </span>
+          <StatusPill status={pdf.status} />
+          <span className="pdf__compact-metrics">
+            <span><b>{number(pdf.figureCount)}</b> figures</span>
+            <span><b>{number(pdf.chartCount)}</b> charts</span>
+            <span><b>{number(pdf.tableCount)}</b> tables</span>
+            <span><b>{number(pdf.formCount)}</b> forms</span>
+          </span>
+        </button>
+        <div className="pdf__extract-action">
+          <ExtractionPill status={pdf.extractionStatus} />
+          <button
+            className="button button--extract"
+            disabled={!multipage || extractionBusy || pdf.extractionStatus === "extracting"}
+            onClick={() => void onExtract(pdf)}
+          >
+            {pdf.extractionStatus === "extracting" ? "Extracting…" :
+              pdf.extractionStatus === "completed" ? "Extract again" : "Extract + chunk"}
+          </button>
+        </div>
+      </div>
       {open && (
         <div className="pdf__detail">
           <div className="metric-grid">
@@ -60,14 +86,41 @@ function PdfRow({ pdf }: { pdf: PdfScan }) {
             <div><span>Recommendation</span><strong>{pdf.recommendation}</strong></div>
             <div><span>Workflow</span><strong>{pdf.recommendedWorkflow}</strong></div>
           </div>
+          <div className="extraction-output">
+            <div>
+              <span>Multipage Markdown</span>
+              <code>{pdf.markdownPath ?? `candidate/${pdf.name.replace(/\.pdf$/i, "")}.md`}</code>
+            </div>
+            <div>
+              <span>Hybrid chunks</span>
+              <code>{pdf.chunksPath ?? "candidate/chunks.jsonl"}</code>
+            </div>
+            <div>
+              <span>Page artifacts</span>
+              <strong>{pdf.pageHtmlCount} HTML · {pdf.figureSpecCount} specs · {pdf.logicalTableCount} logical tables</strong>
+            </div>
+            <div>
+              <span>Run directory</span>
+              <code>{pdf.extractionRunPath ?? "Created under this collection's runs directory"}</code>
+            </div>
+          </div>
           {pdf.error && <p className="error-message">{pdf.error}</p>}
+          {pdf.extractionError && <p className="error-message">Extraction: {pdf.extractionError}</p>}
         </div>
       )}
     </article>
   );
 }
 
-function CollectionCard({ collection }: { collection: CollectionScan }) {
+function CollectionCard({
+  collection,
+  extractionBusy,
+  onExtract,
+}: {
+  collection: CollectionScan;
+  extractionBusy: boolean;
+  onExtract: (pdf: PdfScan) => Promise<void>;
+}) {
   const [open, setOpen] = useState(true);
   const percent = collection.total ? Math.round((collection.completed / collection.total) * 100) : 0;
   const totals = useMemo(
@@ -106,7 +159,14 @@ function CollectionCard({ collection }: { collection: CollectionScan }) {
         <Metric label="Tables" value={totals.tables} />
         <Metric label="Form pages" value={totals.forms} />
       </div>
-      {open && <div className="pdf-list">{collection.pdfs.map((pdf) => <PdfRow key={pdf.id} pdf={pdf} />)}</div>}
+      {open && <div className="pdf-list">{collection.pdfs.map((pdf) => (
+        <PdfRow
+          key={pdf.id}
+          pdf={pdf}
+          extractionBusy={extractionBusy}
+          onExtract={onExtract}
+        />
+      ))}</div>}
     </section>
   );
 }
@@ -126,10 +186,10 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (!state?.running) return;
+    if (!state?.running && !state?.activeExtraction) return;
     const timer = window.setInterval(() => refresh().catch((error) => setMessage(String(error))), 1000);
     return () => window.clearInterval(timer);
-  }, [state?.running]);
+  }, [state?.running, state?.activeExtraction]);
 
   async function startScan(force: boolean) {
     setMessage("");
@@ -140,6 +200,18 @@ export default function App() {
       return;
     }
     setMessage(force ? "Full rescan started." : "Scan started; completed PDFs will be reused.");
+    await refresh();
+  }
+
+  async function startExtraction(pdf: PdfScan) {
+    setMessage("");
+    const response = await fetch(`/api/extract/${pdf.id}`, { method: "POST" });
+    const payload = await response.json();
+    if (!response.ok) {
+      setMessage(payload.error ?? "Could not start extraction");
+      return;
+    }
+    setMessage(`Docling extraction started for ${pdf.name}.`);
     await refresh();
   }
 
@@ -178,8 +250,31 @@ export default function App() {
         <strong>Detection method</strong>
         <span>Native PyMuPDF words · substantial raster/vector regions · numeric chart geometry · canonical ingestion table counts · form widgets and form-like pages</span>
       </section>
+      <section className="root-panel">
+        <div className="root-panel__heading">
+          <strong>Four configured run roots</strong>
+          <span>Each root is scanned independently; extraction creates a new immutable child run.</span>
+        </div>
+        <div className="root-grid">
+          {state.collections.map((collection) => (
+            <div className="root-card" key={collection.key}>
+              <span>{collection.key}</span>
+              <code>{collection.path}</code>
+              <strong>{collection.pdfs.length} PDFs</strong>
+              <ul>{collection.pdfs.map((pdf) => <li key={pdf.id}>{pdf.name}</li>)}</ul>
+            </div>
+          ))}
+        </div>
+      </section>
       <div className="collections">
-        {state.collections.map((collection) => <CollectionCard key={collection.key} collection={collection} />)}
+        {state.collections.map((collection) => (
+          <CollectionCard
+            key={collection.key}
+            collection={collection}
+            extractionBusy={state.running || Boolean(state.activeExtraction)}
+            onExtract={startExtraction}
+          />
+        ))}
       </div>
     </main>
   );

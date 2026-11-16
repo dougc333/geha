@@ -31,6 +31,45 @@ npm run dev
 Open <http://127.0.0.1:5174>. Vite proxies `/api` to port 8788.
 Press `Ctrl+C` to stop both processes.
 
+## Per-PDF extraction
+
+After a scan, every multipage PDF has an **Extract + chunk** button. The API
+starts one memory-intensive Docling job at a time and calls the canonical
+`crawl_dir.src.pipeline.runner.process_document` pipeline. Each click creates a
+new immutable run under the same collection:
+
+```text
+crawl_dir/runs/<collection>/<document-id>/scan-app-<timestamp>-<hash>/
+├── input/source.pdf
+├── pages/page-001/
+│   ├── source.pdf
+│   ├── page.md
+│   ├── page.html          # written when the page has a figure/chart or table
+│   ├── page.spec.json     # draft native evidence for figure/chart pages
+│   └── page-manifest.json
+├── candidate/
+│   ├── document.md        # canonical compatibility name
+│   ├── <pdf-stem>.md      # one document plus consolidated logical tables
+│   ├── chunks.jsonl       # full-document Docling HybridChunker output
+│   └── tables/
+│       ├── table-001.json
+│       └── table-001.html
+├── qc-report.json
+└── run-manifest.json
+```
+
+Docling converts and chunks the complete PDF, not individual page PDFs. Page
+provenance is retained on each chunk. Table fragments are associated with their
+source pages and verified continuation fragments are consolidated into one
+logical table, so a table spanning pages 6–8 remains one JSON/HTML table with
+`source_pages: [6, 7, 8]`. The named `<pdf-stem>.md` file appends these
+authoritative consolidated tables, while `document.md` preserves Docling's raw
+full-document export for compatibility. Figure and chart specs remain
+page-scoped because a
+visual region cannot cross a page boundary. Generated `page.spec.json` files
+contain native labels, values, geometry and a `needs_review` status; they are
+evidence drafts, not silently approved authored figure specifications.
+
 ## Count definitions
 
 - **Native labels:** extractable PDF words on detected figure/chart pages.
