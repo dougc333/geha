@@ -67,12 +67,19 @@ function App() {
   }, [active?.markdown, active?.markdownKey]);
 
   async function loadAws(selectFirst = true) {
-    setError("");
+    if (selectFirst) setError("");
     try {
       const response = await fetch("/api/documents");
       const result = await response.json();
       if (!response.ok) throw new Error(result.error ?? `AWS request failed: ${response.status}`);
-      setAwsPairs(result as Pair[]);
+      setAwsPairs((previous) => {
+        if (selectFirst) return result as Pair[];
+        const urls = new Map(previous.map((pair) => [pair.id, pair.pdfUrl]));
+        return (result as Pair[]).map((pair) => ({
+          ...pair,
+          pdfUrl: urls.get(pair.id) ?? pair.pdfUrl,
+        }));
+      });
       if (selectFirst && result.length) setSelected(result[0].id);
     } catch (reason) {
       setError(String(reason));
