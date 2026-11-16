@@ -8,7 +8,10 @@ import boto3
 
 
 ecs = boto3.client("ecs")
-s3 = boto3.client("s3")
+region = os.environ["AWS_REGION"]
+s3 = boto3.client(
+    "s3", region_name=region, endpoint_url=f"https://s3.{region}.amazonaws.com"
+)
 
 
 def handler(event, context):
@@ -57,5 +60,13 @@ def handler(event, context):
         )
         if result.get("failures") or not result.get("tasks"):
             raise RuntimeError(f"ECS rejected {key}: {result.get('failures')}")
-        launched.append({"source": key, "output": output_key, "task": result["tasks"][0]["taskArn"]})
+        task_arn = result["tasks"][0]["taskArn"]
+        job_key = "jobs/" + key[len("incoming/") : -4] + ".json"
+        s3.put_object(
+            Bucket=bucket,
+            Key=job_key,
+            Body=json.dumps({"source": key, "output": output_key, "task": task_arn}).encode(),
+            ContentType="application/json",
+        )
+        launched.append({"source": key, "output": output_key, "task": task_arn})
     return {"launched": launched}

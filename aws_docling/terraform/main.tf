@@ -121,7 +121,7 @@ resource "aws_iam_role_policy" "lambda_s3" {
     Version = "2012-10-17"
     Statement = [
       { Effect = "Allow", Action = ["s3:GetObject"], Resource = "${aws_s3_bucket.documents.arn}/incoming/*" },
-      { Effect = "Allow", Action = ["s3:PutObject"], Resource = "${aws_s3_bucket.documents.arn}/extracted/*" }
+      { Effect = "Allow", Action = ["s3:PutObject"], Resource = ["${aws_s3_bucket.documents.arn}/extracted/*", "${aws_s3_bucket.documents.arn}/jobs/*"] }
     ]
   })
 }
