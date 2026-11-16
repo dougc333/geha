@@ -26,7 +26,6 @@ Docling is installed in /Users/dc/geha/.venv (not the Lambda).
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import re
 import sys
@@ -34,7 +33,9 @@ import time
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE.parents[1]))
 sys.path.insert(0, str(HERE.parent / "query"))
+from geha_processing.io import sha256_file, write_jsonl  # noqa: E402
 from rag_core import chunk_text  # noqa: E402
 
 # Only running headers/footers are noise. Captions (figures too) and footnotes stay
@@ -205,7 +206,7 @@ def main() -> None:
                 print(f"skip {arxiv_id} ({document.page_count} pages)")
                 continue
         metadata = json.loads(pdf.with_suffix(".json").read_text())
-        doc_id = hashlib.sha256(pdf.read_bytes()).hexdigest()
+        doc_id = sha256_file(pdf)
         figure_dir = None
         if args.figures:
             figure_dir = out_dir / "figures" / doc_id
@@ -217,17 +218,21 @@ def main() -> None:
             if figure_index.exists():
                 carry_descriptions(json.loads(figure_index.read_text()), figures)
             figure_index.write_text(json.dumps(figures, indent=2))
-        lines = []
+        records = []
+        kind_counts = {"text": 0, "table": 0}
         for index, (page, kind, text) in enumerate(chunks):
+            kind_counts[kind] = kind_counts.get(kind, 0) + 1
             line = {"document_id": doc_id, "source": f"docling:{pdf.name}", "title": metadata["title"],
                     "chunk_index": index, "page_number": page, "content": text.replace("\x00", ""),
                     "kind": kind}
+            if kind == "table":
+                line["citation_metadata"] = {"table_id": f"table-{kind_counts[kind]:03d}"}
             if index == 0:
                 line["metadata"] = {k: v for k, v in metadata.items()
                                     if k not in {"citation_count", "rank", "semantic_scholar_id"}}
-            lines.append(json.dumps(line))
+            records.append(line)
         path = out_dir / f"{doc_id}.jsonl"
-        path.write_text("\n".join(lines) + "\n")
+        write_jsonl(path, records)
         n_tables = sum(1 for _, kind, _ in chunks if kind == "table")
         print(f"{arxiv_id}: {len(chunks)} chunks ({n_tables} table, {len(figures)} figures) "
               f"in {seconds:.0f}s  {metadata['title'][:50]}", flush=True)

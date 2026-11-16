@@ -13,6 +13,8 @@ import re
 from pathlib import Path
 from typing import Any
 
+from geha_processing.tables import choose_replacement_headers
+
 from .visual_processing import table_headers_are_default
 
 
@@ -155,21 +157,12 @@ def postprocess_document(document_dir: Path) -> dict[str, Any]:
         provenance = metadata.get("provenance") or []
         page = int(provenance[0].get("page_no")) if provenance else None
         if table_headers_are_default(headers):
-            if (
-                previous_visual_headers is not None
-                and len(previous_visual_headers) == len(headers)
-                and page is not None
-                and previous_visual_page is not None
-                and page == previous_visual_page + 1
-            ):
-                normalized_headers = previous_visual_headers
-                method = "inherited_previous_page"
-            elif len(headers) == 2:
-                normalized_headers = ["Field", "Details"]
-                method = "two_column_key_value_schema"
-            else:
-                normalized_headers = None
-                method = None
+            normalized_headers, method = choose_replacement_headers(
+                headers,
+                previous_headers=previous_visual_headers,
+                page=page,
+                previous_page=previous_visual_page,
+            )
             finding: dict[str, Any] = {
                 "artifact": str(csv_path.relative_to(document_dir)),
                 "page": page,

@@ -18,6 +18,8 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 from urllib.parse import urlparse
 
+from geha_processing.io import sha256_file
+
 
 USER_AGENT = "geha-corpus-downloader/1.0 (+local research corpus)"
 ALLOWED_HOSTS = {"geha.com", "www.geha.com"}
@@ -43,14 +45,6 @@ class Result:
     sha256: str
     expected_sha256: str
     error: str | None = None
-
-
-def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for block in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def validated_destination(output_dir: Path, relative_path: str) -> Path:

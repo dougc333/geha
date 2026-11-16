@@ -14,14 +14,21 @@ import unicodedata
 from pathlib import Path
 from typing import Any
 
-from docling.datamodel.base_models import InputFormat
-from docling.datamodel.pipeline_options import PdfPipelineOptions
-from docling.document_converter import DocumentConverter, PdfFormatOption
+from geha_processing.pdf import ocr_table_converter as _shared_ocr_table_converter
+from geha_processing.tables import (
+    inherit_continuation_header as _shared_inherit_continuation_header,
+    normalized as _shared_normalized,
+    promote_embedded_header as _shared_promote_embedded_header,
+)
 
 try:  # Support package imports and direct script execution.
-    from .pdf_conversion import native_text_converter, require_embedded_text
+    from .pdf_conversion import native_text_converter as _native_text_converter
+    from .pdf_conversion import require_embedded_text
 except ImportError:  # pragma: no cover - direct script execution
-    from pdf_conversion import native_text_converter, require_embedded_text
+    from pdf_conversion import native_text_converter as _native_text_converter
+    from pdf_conversion import require_embedded_text
+
+native_text_converter = _native_text_converter
 
 
 HEADING_LABELS = {"caption", "section_header", "title"}
@@ -30,23 +37,6 @@ GENERIC_HEADINGS = {
     "for internal use only",
     "g.e.h.a",
     "geha",
-}
-KNOWN_COLUMN_HEADERS = {
-    "preference",
-    "requirespriorauth",
-    "drugname",
-    "hcpcscode",
-    "cpthcpcscode",
-    "cpthcpcscodes",
-    "description",
-    "date",
-    "update",
-    "updates",
-    "ndc",
-    "ndccode",
-    "productname",
-    "brandname",
-    "genericname",
 }
 MONTHS = (
     "january|february|march|april|may|june|july|august|september|"
@@ -64,110 +54,11 @@ CHANGE_RE = re.compile(
 )
 
 
-def normalized(value: Any) -> str:
-    """Normalize a value for structural comparisons."""
-    return re.sub(r"[^a-z0-9]+", "", str(value).casefold())
-
-
 def slugify(value: str, *, limit: int = 90) -> str:
     """Create a stable browser- and Git-friendly filename component."""
     ascii_value = unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode()
     slug = re.sub(r"[^a-z0-9]+", "-", ascii_value.casefold()).strip("-")
     return (slug[:limit].rstrip("-") or "table")
-
-
-def promote_embedded_header(frame: Any) -> tuple[Any, bool]:
-    """Promote a recognizable first row when Docling supplies 0, 1, 2 columns.
-
-    Numeric column names alone are insufficient: the candidate header must be
-    nonempty, unique, and contain multiple known policy-table column labels.
-    Return a new frame so the raw Docling output remains available for review.
-    """
-    column_count = frame.shape[1]
-    if frame.shape[0] < 2 or column_count < 2:
-        return frame, False
-    if [str(column).strip() for column in frame.columns] != [
-        str(index) for index in range(column_count)
-    ]:
-        return frame, False
-
-    candidate = [str(value).strip() for value in frame.iloc[0].fillna("")]
-    keys = [normalized(value) for value in candidate]
-    if not all(candidate) or len(set(keys)) != column_count:
-        return frame, False
-    recognized = sum(key in KNOWN_COLUMN_HEADERS for key in keys)
-    if recognized < max(2, (column_count + 1) // 2):
-        return frame, False
-
-    repaired = frame.iloc[1:].copy().reset_index(drop=True)
-    repaired.columns = candidate
-    return repaired, True
-
-
-def inherit_continuation_header(
-    frame: Any,
-    previous_frame: Any | None,
-    *,
-    heading: str,
-    previous_heading: str | None,
-    page_number: int | None,
-    previous_page: int | None,
-) -> tuple[Any, bool]:
-    """Carry a prior table's schema to an unlabeled next-page fragment.
-
-    A numeric or data-valued DataFrame header alone is not evidence of a
-    continuation. Require adjacent pages, the same non-generic section heading,
-    matching column count, and recognizable named columns on the prior table.
-    If Docling used the first billing data row as column names, restore that row.
-    """
-    if previous_frame is None or previous_frame.empty or frame.shape[1] == 0:
-        return frame, False
-    if (
-        not isinstance(page_number, int)
-        or not isinstance(previous_page, int)
-        or page_number != previous_page + 1
-        or not heading
-        or normalized(heading) in {"table", "extractedtable"}
-        or normalized(heading) != normalized(previous_heading)
-        or frame.shape[1] != previous_frame.shape[1]
-    ):
-        return frame, False
-    prior_labels = [str(column).strip() for column in previous_frame.columns]
-    prior_keys = [normalized(label) for label in prior_labels]
-    if (
-        not all(prior_labels)
-        or len(set(prior_keys)) != len(prior_keys)
-        or sum(key in KNOWN_COLUMN_HEADERS for key in prior_keys) < 2
-    ):
-        return frame, False
-    current_labels = [str(column).strip() for column in frame.columns]
-    numeric_labels = current_labels == [str(index) for index in range(frame.shape[1])]
-    if numeric_labels:
-        if frame.empty:
-            return frame, False
-        first_row_keys = [normalized(value) for value in frame.iloc[0].fillna("")]
-        if sum(key in KNOWN_COLUMN_HEADERS for key in first_row_keys) >= 2:
-            return frame, False
-        inherited = frame.copy()
-        inherited.columns = previous_frame.columns.copy()
-        return inherited, True
-
-    # A headerless billing fragment may be parsed with its first *data* row as
-    # column names. Require a code in the prior code column before restoring it.
-    code_positions = [
-        index for index, key in enumerate(prior_keys)
-        if key in {"hcpcscode", "cpthcpcscode", "cpthcpcscodes"}
-    ]
-    if not code_positions or not all(current_labels):
-        return frame, False
-    if sum(normalized(label) in KNOWN_COLUMN_HEADERS for label in current_labels) >= 2:
-        return frame, False
-    if not any(re.fullmatch(r"[A-Z]\d{4}", current_labels[index], re.IGNORECASE)
-               for index in code_positions):
-        return frame, False
-    restored_rows = [current_labels, *frame.itertuples(index=False, name=None)]
-    inherited = frame.__class__(restored_rows, columns=prior_labels)
-    return inherited, True
 
 
 def infer_heading(frame: Any) -> str:
@@ -180,16 +71,12 @@ def infer_heading(frame: Any) -> str:
     return "Extracted table"
 
 
-def ocr_table_converter() -> DocumentConverter:
-    """Build the targeted fallback used only when a detected table is empty."""
-    options = PdfPipelineOptions()
-    options.do_ocr = True
-    options.do_table_structure = True
-    return DocumentConverter(
-        format_options={
-            InputFormat.PDF: PdfFormatOption(pipeline_options=options),
-        }
-    )
+# Compatibility exports.  The implementation is centralized in
+# ``geha_processing`` while existing callers keep their historical imports.
+normalized = _shared_normalized
+promote_embedded_header = _shared_promote_embedded_header
+inherit_continuation_header = _shared_inherit_continuation_header
+ocr_table_converter = _shared_ocr_table_converter
 
 
 def heading_map(document: Any, pdf_path: Path) -> dict[str, str]:

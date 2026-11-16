@@ -14,7 +14,8 @@ from rag_core import reciprocal_rank_fusion, tokenize
 CANDIDATES_PER_RETRIEVER = 25
 KEYWORD_SEARCH = os.getenv("KEYWORD_SEARCH", "bm25")
 
-_CHUNK_SELECT = """SELECT c.id, c.chunk_index, c.page_number, c.content, d.id, d.title
+_CHUNK_SELECT = """SELECT c.id, c.chunk_index, c.page_number, c.content, d.id, d.title,
+                          c.image, c.content_type, c.citation_metadata
                    FROM rag_chunks c JOIN rag_documents d ON d.id = c.document_id"""
 
 
@@ -27,6 +28,9 @@ def _rows(cursor) -> list[dict]:
             "content": row[3],
             "document_id": row[4],
             "title": row[5],
+            "image": row[6],
+            "content_type": row[7],
+            "citation_metadata": row[8] or {},
         }
         for row in cursor.fetchall()
     ]
@@ -74,7 +78,8 @@ WITH q AS (
     ORDER BY score DESC
     LIMIT %(limit)s
 )
-SELECT c.id, c.chunk_index, c.page_number, c.content, d.id, d.title
+SELECT c.id, c.chunk_index, c.page_number, c.content, d.id, d.title,
+       c.image, c.content_type, c.citation_metadata
 FROM scored JOIN rag_chunks c ON c.id = scored.chunk_id JOIN rag_documents d ON d.id = c.document_id
 ORDER BY scored.score DESC
 """

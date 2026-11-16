@@ -7,8 +7,22 @@ import re
 from typing import Any
 
 
+# Curated aliases are intentionally narrow. They correct verified extraction/name variants without
+# applying stemming or fuzzy matching to exact drug names and HCPCS codes.
+DRUG_NAME_ALIASES = {
+    "berahyaluronidas e alfa-pmph": "berahyaluronidase alfa-pmph",
+}
+
+
+def canonicalize_drug_names(text: str) -> str:
+    canonical = text.casefold()
+    for alias, drug_name in sorted(DRUG_NAME_ALIASES.items(), key=lambda item: -len(item[0])):
+        canonical = canonical.replace(alias, drug_name)
+    return canonical
+
+
 def normalized(text: str) -> str:
-    return " ".join(re.findall(r"[a-z0-9]+", text.casefold()))
+    return " ".join(re.findall(r"[a-z0-9]+", canonicalize_drug_names(text)))
 
 
 def expected_values(case: dict[str, Any] | None) -> list[str]:

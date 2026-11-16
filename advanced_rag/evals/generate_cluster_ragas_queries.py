@@ -7,7 +7,6 @@ JSONL with cluster and document provenance labels.
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import logging
 import os
@@ -20,6 +19,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from pathlib import PurePosixPath
 from typing import Any, Iterable
+
+from geha_processing.io import atomic_jsonl, read_jsonl as _read_jsonl, sha256_file
 
 
 LOGGER = logging.getLogger("cluster_ragas")
@@ -85,7 +86,7 @@ def sample_pdf(source_root: Path, entry: dict[str, str]) -> SourceSample:
     path = source_root / relative
     if not path.is_file():
         raise FileNotFoundError(path)
-    digest = hashlib.sha256(path.read_bytes()).hexdigest()
+    digest = sha256_file(path)
     reader = PdfReader(path)
     contexts: list[dict[str, Any]] = []
     remaining = MAX_DOCUMENT_CHARACTERS
@@ -286,22 +287,11 @@ def make_record(
 
 
 def write_jsonl(path: Path, records: Iterable[dict[str, Any]]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_suffix(path.suffix + ".tmp")
-    with temporary.open("w", encoding="utf-8") as stream:
-        for record in records:
-            stream.write(json.dumps(record, ensure_ascii=False, sort_keys=True) + "\n")
-    temporary.replace(path)
+    atomic_jsonl(path, records, sort_keys=True)
 
 
 def read_jsonl(path: Path) -> list[dict[str, Any]]:
-    if not path.is_file():
-        return []
-    return [
-        json.loads(line)
-        for line in path.read_text(encoding="utf-8").splitlines()
-        if line.strip()
-    ]
+    return _read_jsonl(path)
 
 
 def per_document_output_path(root: Path, source_path: str) -> Path:

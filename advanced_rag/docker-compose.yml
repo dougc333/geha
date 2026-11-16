@@ -1,8 +1,8 @@
 services:
   advanced-rag:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: advanced_rag/Dockerfile
     container_name: advanced-rag
     ports:
       - "8000:8000"

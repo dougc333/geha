@@ -17,6 +17,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable, Sequence
 
+from geha_processing.io import write_jsonl as _write_jsonl
+
 
 DEFAULT_INPUT = Path(
     "/Users/dc/geha/crawl_dir/runs/dental/"
@@ -236,10 +238,7 @@ def compact_qa_record(record: dict[str, Any]) -> dict[str, Any]:
 
 
 def write_jsonl(path: Path, records: Iterable[dict[str, Any]]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as handle:
-        for record in records:
-            handle.write(json.dumps(_json_safe(record), ensure_ascii=False) + "\n")
+    _write_jsonl(path, (_json_safe(record) for record in records))
 
 
 def generate(args: argparse.Namespace) -> tuple[Path, Path]:

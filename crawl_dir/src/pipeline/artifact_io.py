@@ -2,37 +2,23 @@
 
 from __future__ import annotations
 
-import hashlib
-import json
-import os
-import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+
+from geha_processing.io import atomic_json as _atomic_json
+from geha_processing.io import sha256_file as _sha256_file
 
 
-FAMILIES = {"coverage-policies", "medical", "dental", "forms", "research"}
+atomic_json = _atomic_json
+sha256_file = _sha256_file
 
 
-def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for block in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
-
-
-def atomic_json(path: Path, value: Any) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
-    try:
-        with os.fdopen(descriptor, "w", encoding="utf-8") as stream:
-            json.dump(value, stream, indent=2, ensure_ascii=False)
-            stream.write("\n")
-        os.replace(temporary, path)
-    except BaseException:
-        Path(temporary).unlink(missing_ok=True)
-        raise
+FAMILIES = {
+    "coverage-policies", "medical", "dental", "forms", "research",
+    # Retrieval clusters from advanced_rag/evals/cluster_manifest.json
+    # ("research" above doubles as the research cluster).
+    "policy", "clinical_guidance", "population_health", "benefits_research", "forms_directory",
+}
 
 
 def run_id(now: datetime | None = None) -> str:

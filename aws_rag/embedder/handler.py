@@ -14,6 +14,7 @@ from concurrent.futures import ThreadPoolExecutor
 import boto3
 import psycopg
 from pgvector.psycopg import register_vector
+from psycopg.types.json import Jsonb
 
 s3 = boto3.client("s3")
 bedrock = boto3.client("bedrock-runtime")
@@ -124,10 +125,12 @@ def process(bucket, key):
             cursor.execute("DELETE FROM rag_chunks WHERE document_id = %s", (document_id,))
             cursor.executemany(
                 """INSERT INTO rag_chunks
-                   (document_id, chunk_index, page_number, content, embedding, image)
-                   VALUES (%s, %s, %s, %s, %s, %s)""",
+                   (document_id, chunk_index, page_number, content, embedding, image,
+                    content_type, citation_metadata)
+                   VALUES (%s, %s, %s, %s, %s, %s, %s, %s)""",
                 [
-                    (document_id, c["chunk_index"], c["page_number"], c["content"], e, c.get("image"))
+                    (document_id, c["chunk_index"], c["page_number"], c["content"], e,
+                     c.get("image"), c.get("kind", "text"), Jsonb(c.get("citation_metadata") or {}))
                     for c, e in zip(chunks, embeddings)
                 ],
             )

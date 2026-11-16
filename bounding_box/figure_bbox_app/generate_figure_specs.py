@@ -11,7 +11,6 @@ import html
 import json
 import os
 import re
-import tempfile
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -20,6 +19,7 @@ from typing import Any, Callable
 import pymupdf
 
 from crawl_dir.src.pipeline.figure_specs import verify_figure
+from geha_processing.io import atomic_json as _atomic_json
 
 SUPPORTED_TYPES = ("pie", "hbar", "vbar", "heatmap", "stats", "harvey", "cycle", "quotes", "steps")
 
@@ -29,18 +29,7 @@ def utc_now() -> str:
 
 
 def atomic_json(path: Path, payload: Any) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    fd, name = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=path.parent)
-    temporary = Path(name)
-    try:
-        with os.fdopen(fd, "w", encoding="utf-8") as handle:
-            json.dump(payload, handle, indent=2, ensure_ascii=False)
-            handle.write("\n")
-            handle.flush()
-            os.fsync(handle.fileno())
-        temporary.replace(path)
-    finally:
-        temporary.unlink(missing_ok=True)
+    _atomic_json(path, payload)
 
 
 def parse_pages(value: str | None, available: list[int]) -> list[int]:
