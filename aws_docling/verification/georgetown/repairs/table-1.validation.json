@@ -1,0 +1,37 @@
+{
+  "table": 1,
+  "iterations": 2,
+  "status": "verified",
+  "checked_values": 16,
+  "unresolved_issues": [],
+  "source_pdf_pages": [
+    7
+  ],
+  "source_markdown_lines": [
+    71,
+    97
+  ],
+  "corrected_markdown": "table-1.corrected.md",
+  "changes": [
+    "Added a real Markdown header; the PDF has no header row, and Docling promoted the first data row to a header."
+  ],
+  "iteration_history": [
+    {
+      "iteration": 1,
+      "action": "Compare table labels and numeric values with the source PDF."
+    },
+    {
+      "iteration": 2,
+      "action": "Insert a Markdown header; recheck original data rows and values."
+    }
+  ],
+  "numeric_checks": [
+    {
+      "pdf_page": 7,
+      "pdf_only_numeric_token": "1",
+      "table_numeric_tokens_match": true,
+      "data_numeric_tokens": 22
+    }
+  ],
+  "evidence": "Numeric tokens in PDF table region match Markdown table after excluding printed table/page number. Row labels and column positions visually checked."
+}

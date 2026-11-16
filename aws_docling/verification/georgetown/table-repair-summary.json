@@ -1,0 +1,3784 @@
+{
+  "source_markdown": "aws-worker-rev2.md",
+  "corrected_markdown": "document-corrected-tables.md",
+  "image_embedded_markdown": "document-corrected-tables-with-images.md",
+  "max_iterations_per_table": 4,
+  "table_results": {
+    "1": {
+      "table": 1,
+      "iterations": 2,
+      "status": "verified",
+      "checked_values": 16,
+      "unresolved_issues": [],
+      "source_pdf_pages": [
+        7
+      ],
+      "source_markdown_lines": [
+        71,
+        97
+      ],
+      "changes": [
+        "Added a real Markdown header; the PDF has no header row, and Docling promoted the first data row to a header."
+      ],
+      "iteration_history": [
+        {
+          "iteration": 1,
+          "action": "Compare table labels and numeric values with the source PDF."
+        },
+        {
+          "iteration": 2,
+          "action": "Insert a Markdown header; recheck original data rows and values."
+        }
+      ],
+      "numeric_checks": [
+        {
+          "pdf_page": 7,
+          "pdf_only_numeric_token": "1",
+          "table_numeric_tokens_match": true,
+          "data_numeric_tokens": 22
+        }
+      ],
+      "evidence": "Numeric tokens in PDF table region match Markdown table after excluding printed table/page number. Row labels and column positions visually checked.",
+      "corrected_markdown": "repairs/table-1.corrected.md",
+      "applied": true
+    },
+    "2": {
+      "table": 2,
+      "iterations": 2,
+      "status": "verified",
+      "checked_values": 10,
+      "unresolved_issues": [],
+      "source_pdf_pages": [
+        8
+      ],
+      "source_markdown_lines": [
+        101,
+        115
+      ],
+      "changes": [
+        "Added a real Markdown header; the PDF has no header row, and Docling promoted the first data row to a header."
+      ],
+      "iteration_history": [
+        {
+          "iteration": 1,
+          "action": "Compare table labels and numeric values with the source PDF."
+        },
+        {
+          "iteration": 2,
+          "action": "Insert a Markdown header; recheck original data rows and values."
+        }
+      ],
+      "numeric_checks": [
+        {
+          "pdf_page": 8,
+          "pdf_only_numeric_token": "2",
+          "table_numeric_tokens_match": true,
+          "data_numeric_tokens": 10
+        }
+      ],
+      "evidence": "Numeric tokens in PDF table region match Markdown table after excluding printed table/page number. Row labels and column positions visually checked.",
+      "corrected_markdown": "repairs/table-2.corrected.md",
+      "applied": true
+    },
+    "3": {
+      "table": 3,
+      "iterations": 1,
+      "status": "verified",
+      "checked_values": 21,
+      "unresolved_issues": [],
+      "source_pdf_pages": [
+        8,
+        9
+      ],
+      "source_markdown_lines": [
+        119,
+        130
+      ],
+      "changes": [
+        "No content-cell changes; values and row assignments match the PDF."
+      ],
+      "iteration_history": [
+        {
+          "iteration": 1,
+          "action": "Compare table labels and numeric values with the source PDF."
+        }
+      ],
+      "numeric_checks": [
+        {
+          "pdf_page": 9,
+          "pdf_only_numeric_token": "9",
+          "table_numeric_tokens_match": true,
+          "data_numeric_tokens": 21
+        }
+      ],
+      "evidence": "Numeric tokens in PDF table region match Markdown table after excluding printed table/page number. Row labels and column positions visually checked.",
+      "corrected_markdown": "repairs/table-3.corrected.md",
+      "applied": true
+    },
+    "4": {
+      "table": 4,
+      "pdf": "/Users/dc/geha/crawl_dir/raw/benefits_research/cri.georgetown.edu/wp-content/uploads/2025/12/CRI_WP_Rao_Burke_EmpBen_Dec2025.pdf",
+      "pdf_pages": [
+        19,
+        20
+      ],
+      "iterations": 1,
+      "iteration_history": [
+        {
+          "iteration": 1,
+          "proposal": "Rebuilt both table parts from PDF text-layer word coordinates.",
+          "checks": [
+            "Each expected row label matches source words at its Y coordinate.",
+            "Every coefficient, standard error, Y flag, observation count, and R-squared value is assigned by source X coordinate.",
+            "All nonempty PDF model cells have matching reconstructed cells; no off-column values were accepted.",
+            "Headers and notes were checked against the source text layer."
+          ],
+          "result": "passed; no second proposal needed"
+        }
+      ],
+      "checked_values": 72,
+      "checked_value_evidence": [
+        {
+          "page": 19,
+          "row": "Paid Vacation or Sick Leave",
+          "model": 1,
+          "value": "0.015",
+          "bbox": [
+            221.66,
+            129.13,
+            248.66,
+            142.41
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Paid Vacation or Sick Leave",
+          "model": 1,
+          "standard_error": "(0.011)",
+          "bbox": [
+            221.66,
+            142.93,
+            256.62,
+            156.21
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Health insurance",
+          "model": 2,
+          "value": "0.007",
+          "bbox": [
+            315.29,
+            156.73,
+            342.29,
+            170.01
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Health insurance",
+          "model": 2,
+          "standard_error": "(0.011)",
+          "bbox": [
+            315.29,
+            170.53,
+            350.25,
+            183.81
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Retirement plans",
+          "model": 3,
+          "value": "0.012",
+          "bbox": [
+            408.89,
+            184.36,
+            435.89,
+            197.64
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Retirement plans",
+          "model": 3,
+          "standard_error": "(0.010)",
+          "bbox": [
+            408.89,
+            198.16,
+            443.85,
+            211.44
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Life insurance",
+          "model": 4,
+          "value": "0.033***",
+          "bbox": [
+            502.51,
+            211.96,
+            547.51,
+            225.24
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Life insurance",
+          "model": 4,
+          "standard_error": "(0.010)",
+          "bbox": [
+            502.51,
+            225.76,
+            537.47,
+            239.04
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Disability insurance",
+          "model": 5,
+          "value": "0.023**",
+          "bbox": [
+            596.11,
+            239.56,
+            635.11,
+            252.84
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Disability insurance",
+          "model": 5,
+          "standard_error": "(0.010)",
+          "bbox": [
+            596.11,
+            253.36,
+            631.07,
+            266.64
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Ability to Work from Home",
+          "model": 6,
+          "value": "0.025**",
+          "bbox": [
+            689.74,
+            267.16,
+            728.74,
+            280.44
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Ability to Work from Home",
+          "model": 6,
+          "standard_error": "(0.011)",
+          "bbox": [
+            689.74,
+            280.96,
+            724.7,
+            294.24
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Constant",
+          "model": 1,
+          "value": "0.269***",
+          "bbox": [
+            221.66,
+            294.76,
+            266.66,
+            308.04
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Constant",
+          "model": 1,
+          "standard_error": "(0.037)",
+          "bbox": [
+            221.66,
+            308.56,
+            256.62,
+            321.84
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Constant",
+          "model": 2,
+          "value": "0.273***",
+          "bbox": [
+            315.29,
+            294.76,
+            360.29,
+            308.04
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Constant",
+          "model": 2,
+          "standard_error": "(0.037)",
+          "bbox": [
+            315.29,
+            308.56,
+            350.25,
+            321.84
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Constant",
+          "model": 3,
+          "value": "0.272***",
+          "bbox": [
+            408.89,
+            294.76,
+            453.89,
+            308.04
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Constant",
+          "model": 3,
+          "standard_error": "(0.037)",
+          "bbox": [
+            408.89,
+            308.56,
+            443.85,
+            321.84
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Constant",
+          "model": 4,
+          "value": "0.271***",
+          "bbox": [
+            502.51,
+            294.76,
+            547.51,
+            308.04
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Constant",
+          "model": 4,
+          "standard_error": "(0.037)",
+          "bbox": [
+            502.51,
+            308.56,
+            537.47,
+            321.84
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Constant",
+          "model": 5,
+          "value": "0.273***",
+          "bbox": [
+            596.11,
+            294.76,
+            641.11,
+            308.04
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Constant",
+          "model": 5,
+          "standard_error": "(0.037)",
+          "bbox": [
+            596.11,
+            308.56,
+            631.07,
+            321.84
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Constant",
+          "model": 6,
+          "value": "0.273***",
+          "bbox": [
+            689.74,
+            294.76,
+            734.74,
+            308.04
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Constant",
+          "model": 6,
+          "standard_error": "(0.037)",
+          "bbox": [
+            689.74,
+            308.56,
+            724.7,
+            321.84
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Includes Covariates?",
+          "model": 1,
+          "value": "Y",
+          "bbox": [
+            221.66,
+            336.18,
+            230.32,
+            349.46
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Includes Covariates?",
+          "model": 2,
+          "value": "Y",
+          "bbox": [
+            315.29,
+            336.18,
+            323.95,
+            349.46
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Includes Covariates?",
+          "model": 3,
+          "value": "Y",
+          "bbox": [
+            408.89,
+            336.18,
+            417.55,
+            349.46
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Includes Covariates?",
+          "model": 4,
+          "value": "Y",
+          "bbox": [
+            502.51,
+            336.18,
+            511.17,
+            349.46
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Includes Covariates?",
+          "model": 5,
+          "value": "Y",
+          "bbox": [
+            596.11,
+            336.18,
+            604.77,
+            349.46
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Includes Covariates?",
+          "model": 6,
+          "value": "Y",
+          "bbox": [
+            689.74,
+            336.18,
+            698.4,
+            349.46
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Includes Year FEs?",
+          "model": 1,
+          "value": "Y",
+          "bbox": [
+            221.66,
+            349.98,
+            230.32,
+            363.26
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Includes Year FEs?",
+          "model": 2,
+          "value": "Y",
+          "bbox": [
+            315.29,
+            349.98,
+            323.95,
+            363.26
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Includes Year FEs?",
+          "model": 3,
+          "value": "Y",
+          "bbox": [
+            408.89,
+            349.98,
+            417.55,
+            363.26
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Includes Year FEs?",
+          "model": 4,
+          "value": "Y",
+          "bbox": [
+            502.51,
+            349.98,
+            511.17,
+            363.26
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Includes Year FEs?",
+          "model": 5,
+          "value": "Y",
+          "bbox": [
+            596.11,
+            349.98,
+            604.77,
+            363.26
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Includes Year FEs?",
+          "model": 6,
+          "value": "Y",
+          "bbox": [
+            689.74,
+            349.98,
+            698.4,
+            363.26
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Observations",
+          "model": 1,
+          "value": "11,494",
+          "bbox": [
+            221.66,
+            363.78,
+            254.66,
+            377.06
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Observations",
+          "model": 2,
+          "value": "11,494",
+          "bbox": [
+            315.29,
+            363.78,
+            348.29,
+            377.06
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Observations",
+          "model": 3,
+          "value": "11,494",
+          "bbox": [
+            408.89,
+            363.78,
+            441.89,
+            377.06
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Observations",
+          "model": 4,
+          "value": "11,494",
+          "bbox": [
+            502.51,
+            363.78,
+            535.51,
+            377.06
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Observations",
+          "model": 5,
+          "value": "11,494",
+          "bbox": [
+            596.11,
+            363.78,
+            629.11,
+            377.06
+          ]
+        },
+        {
+          "page": 19,
+          "row": "Observations",
+          "model": 6,
+          "value": "11,494",
+          "bbox": [
+            689.74,
+            363.78,
+            722.74,
+            377.06
+          ]
+        },
+        {
+          "page": 19,
+          "row": "R-squared",
+          "model": 1,
+          "value": "0.134",
+          "bbox": [
+            221.66,
+            377.58,
+            248.66,
+            390.86
+          ]
+        },
+        {
+          "page": 19,
+          "row": "R-squared",
+          "model": 2,
+          "value": "0.134",
+          "bbox": [
+            315.29,
+            377.58,
+            342.29,
+            390.86
+          ]
+        },
+        {
+          "page": 19,
+          "row": "R-squared",
+          "model": 3,
+          "value": "0.134",
+          "bbox": [
+            408.89,
+            377.58,
+            435.89,
+            390.86
+          ]
+        },
+        {
+          "page": 19,
+          "row": "R-squared",
+          "model": 4,
+          "value": "0.135",
+          "bbox": [
+            502.51,
+            377.58,
+            529.51,
+            390.86
+          ]
+        },
+        {
+          "page": 19,
+          "row": "R-squared",
+          "model": 5,
+          "value": "0.134",
+          "bbox": [
+            596.11,
+            377.58,
+            623.11,
+            390.86
+          ]
+        },
+        {
+          "page": 19,
+          "row": "R-squared",
+          "model": 6,
+          "value": "0.134",
+          "bbox": [
+            689.74,
+            377.58,
+            716.74,
+            390.86
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Student Loan Repayment",
+          "model": 1,
+          "value": "0.029",
+          "bbox": [
+            354.89,
+            129.13,
+            381.89,
+            142.41
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Student Loan Repayment",
+          "model": 1,
+          "standard_error": "(0.019)",
+          "bbox": [
+            354.89,
+            142.93,
+            389.85,
+            156.21
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Emergency Savings Account",
+          "model": 2,
+          "value": "0.002",
+          "bbox": [
+            448.51,
+            156.73,
+            475.51,
+            170.01
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Emergency Savings Account",
+          "model": 2,
+          "standard_error": "(0.027)",
+          "bbox": [
+            448.51,
+            170.53,
+            483.47,
+            183.81
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Childcare",
+          "model": 3,
+          "value": "0.021",
+          "bbox": [
+            542.11,
+            184.36,
+            569.11,
+            197.64
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Childcare",
+          "model": 3,
+          "standard_error": "(0.025)",
+          "bbox": [
+            542.11,
+            198.16,
+            577.07,
+            211.44
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Constant",
+          "model": 1,
+          "value": "0.273***",
+          "bbox": [
+            354.89,
+            211.96,
+            399.89,
+            225.24
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Constant",
+          "model": 1,
+          "standard_error": "(0.037)",
+          "bbox": [
+            354.89,
+            225.76,
+            389.85,
+            239.04
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Constant",
+          "model": 2,
+          "value": "0.147***",
+          "bbox": [
+            448.51,
+            211.96,
+            493.51,
+            225.24
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Constant",
+          "model": 2,
+          "standard_error": "(0.041)",
+          "bbox": [
+            448.51,
+            225.76,
+            483.47,
+            239.04
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Constant",
+          "model": 3,
+          "value": "0.274***",
+          "bbox": [
+            542.11,
+            211.96,
+            587.11,
+            225.24
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Constant",
+          "model": 3,
+          "standard_error": "(0.037)",
+          "bbox": [
+            542.11,
+            225.76,
+            577.07,
+            239.04
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Includes Covariates?",
+          "model": 1,
+          "value": "Y",
+          "bbox": [
+            354.89,
+            253.36,
+            363.55,
+            266.64
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Includes Covariates?",
+          "model": 2,
+          "value": "Y",
+          "bbox": [
+            448.51,
+            253.36,
+            457.17,
+            266.64
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Includes Covariates?",
+          "model": 3,
+          "value": "Y",
+          "bbox": [
+            542.11,
+            253.36,
+            550.77,
+            266.64
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Includes Year FEs?",
+          "model": 1,
+          "value": "Y",
+          "bbox": [
+            354.89,
+            267.16,
+            363.55,
+            280.44
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Includes Year FEs?",
+          "model": 2,
+          "value": "Y",
+          "bbox": [
+            448.51,
+            267.16,
+            457.17,
+            280.44
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Includes Year FEs?",
+          "model": 3,
+          "value": "Y",
+          "bbox": [
+            542.11,
+            267.16,
+            550.77,
+            280.44
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Observations",
+          "model": 1,
+          "value": "11,494",
+          "bbox": [
+            354.89,
+            280.96,
+            387.89,
+            294.24
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Observations",
+          "model": 2,
+          "value": "8,003",
+          "bbox": [
+            448.51,
+            280.96,
+            475.51,
+            294.24
+          ]
+        },
+        {
+          "page": 20,
+          "row": "Observations",
+          "model": 3,
+          "value": "11,494",
+          "bbox": [
+            542.11,
+            280.96,
+            575.11,
+            294.24
+          ]
+        },
+        {
+          "page": 20,
+          "row": "R-squared",
+          "model": 1,
+          "value": "0.134",
+          "bbox": [
+            354.89,
+            294.76,
+            381.89,
+            308.04
+          ]
+        },
+        {
+          "page": 20,
+          "row": "R-squared",
+          "model": 2,
+          "value": "0.125",
+          "bbox": [
+            448.51,
+            294.76,
+            475.51,
+            308.04
+          ]
+        },
+        {
+          "page": 20,
+          "row": "R-squared",
+          "model": 3,
+          "value": "0.134",
+          "bbox": [
+            542.11,
+            294.76,
+            569.11,
+            308.04
+          ]
+        }
+      ],
+      "status": "verified",
+      "unresolved_issues": [],
+      "source_rows": [
+        {
+          "part": 1,
+          "pdf_page": 19,
+          "label": "Paid Vacation or Sick Leave",
+          "label_bbox": [
+            16.32,
+            129.13,
+            153.48,
+            142.41
+          ],
+          "cells": [
+            {
+              "model": 1,
+              "value": "0.015",
+              "standard_error": "(0.011)",
+              "value_bbox": [
+                221.66,
+                129.13,
+                248.66,
+                142.41
+              ],
+              "standard_error_bbox": [
+                221.66,
+                142.93,
+                256.62,
+                156.21
+              ]
+            },
+            {
+              "model": 2,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 3,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 4,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 5,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 6,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            }
+          ]
+        },
+        {
+          "part": 1,
+          "pdf_page": 19,
+          "label": "Health insurance",
+          "label_bbox": [
+            16.32,
+            156.73,
+            97.21,
+            170.01
+          ],
+          "cells": [
+            {
+              "model": 1,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 2,
+              "value": "0.007",
+              "standard_error": "(0.011)",
+              "value_bbox": [
+                315.29,
+                156.73,
+                342.29,
+                170.01
+              ],
+              "standard_error_bbox": [
+                315.29,
+                170.53,
+                350.25,
+                183.81
+              ]
+            },
+            {
+              "model": 3,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 4,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 5,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 6,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            }
+          ]
+        },
+        {
+          "part": 1,
+          "pdf_page": 19,
+          "label": "Retirement plans",
+          "label_bbox": [
+            16.32,
+            184.36,
+            97.91,
+            197.64
+          ],
+          "cells": [
+            {
+              "model": 1,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 2,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 3,
+              "value": "0.012",
+              "standard_error": "(0.010)",
+              "value_bbox": [
+                408.89,
+                184.36,
+                435.89,
+                197.64
+              ],
+              "standard_error_bbox": [
+                408.89,
+                198.16,
+                443.85,
+                211.44
+              ]
+            },
+            {
+              "model": 4,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 5,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 6,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            }
+          ]
+        },
+        {
+          "part": 1,
+          "pdf_page": 19,
+          "label": "Life insurance",
+          "label_bbox": [
+            16.32,
+            211.96,
+            85.24,
+            225.24
+          ],
+          "cells": [
+            {
+              "model": 1,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 2,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 3,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 4,
+              "value": "0.033***",
+              "standard_error": "(0.010)",
+              "value_bbox": [
+                502.51,
+                211.96,
+                547.51,
+                225.24
+              ],
+              "standard_error_bbox": [
+                502.51,
+                225.76,
+                537.47,
+                239.04
+              ]
+            },
+            {
+              "model": 5,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 6,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            }
+          ]
+        },
+        {
+          "part": 1,
+          "pdf_page": 19,
+          "label": "Disability insurance",
+          "label_bbox": [
+            16.32,
+            239.56,
+            112.57,
+            252.84
+          ],
+          "cells": [
+            {
+              "model": 1,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 2,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 3,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 4,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 5,
+              "value": "0.023**",
+              "standard_error": "(0.010)",
+              "value_bbox": [
+                596.11,
+                239.56,
+                635.11,
+                252.84
+              ],
+              "standard_error_bbox": [
+                596.11,
+                253.36,
+                631.07,
+                266.64
+              ]
+            },
+            {
+              "model": 6,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            }
+          ]
+        },
+        {
+          "part": 1,
+          "pdf_page": 19,
+          "label": "Ability to Work from Home",
+          "label_bbox": [
+            16.32,
+            267.16,
+            151.6,
+            280.44
+          ],
+          "cells": [
+            {
+              "model": 1,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 2,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 3,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 4,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 5,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 6,
+              "value": "0.025**",
+              "standard_error": "(0.011)",
+              "value_bbox": [
+                689.74,
+                267.16,
+                728.74,
+                280.44
+              ],
+              "standard_error_bbox": [
+                689.74,
+                280.96,
+                724.7,
+                294.24
+              ]
+            }
+          ]
+        },
+        {
+          "part": 1,
+          "pdf_page": 19,
+          "label": "Constant",
+          "label_bbox": [
+            16.32,
+            294.76,
+            58.99,
+            308.04
+          ],
+          "cells": [
+            {
+              "model": 1,
+              "value": "0.269***",
+              "standard_error": "(0.037)",
+              "value_bbox": [
+                221.66,
+                294.76,
+                266.66,
+                308.04
+              ],
+              "standard_error_bbox": [
+                221.66,
+                308.56,
+                256.62,
+                321.84
+              ]
+            },
+            {
+              "model": 2,
+              "value": "0.273***",
+              "standard_error": "(0.037)",
+              "value_bbox": [
+                315.29,
+                294.76,
+                360.29,
+                308.04
+              ],
+              "standard_error_bbox": [
+                315.29,
+                308.56,
+                350.25,
+                321.84
+              ]
+            },
+            {
+              "model": 3,
+              "value": "0.272***",
+              "standard_error": "(0.037)",
+              "value_bbox": [
+                408.89,
+                294.76,
+                453.89,
+                308.04
+              ],
+              "standard_error_bbox": [
+                408.89,
+                308.56,
+                443.85,
+                321.84
+              ]
+            },
+            {
+              "model": 4,
+              "value": "0.271***",
+              "standard_error": "(0.037)",
+              "value_bbox": [
+                502.51,
+                294.76,
+                547.51,
+                308.04
+              ],
+              "standard_error_bbox": [
+                502.51,
+                308.56,
+                537.47,
+                321.84
+              ]
+            },
+            {
+              "model": 5,
+              "value": "0.273***",
+              "standard_error": "(0.037)",
+              "value_bbox": [
+                596.11,
+                294.76,
+                641.11,
+                308.04
+              ],
+              "standard_error_bbox": [
+                596.11,
+                308.56,
+                631.07,
+                321.84
+              ]
+            },
+            {
+              "model": 6,
+              "value": "0.273***",
+              "standard_error": "(0.037)",
+              "value_bbox": [
+                689.74,
+                294.76,
+                734.74,
+                308.04
+              ],
+              "standard_error_bbox": [
+                689.74,
+                308.56,
+                724.7,
+                321.84
+              ]
+            }
+          ]
+        },
+        {
+          "part": 1,
+          "pdf_page": 19,
+          "label": "Includes Covariates?",
+          "label_bbox": [
+            16.32,
+            336.18,
+            116.53,
+            349.46
+          ],
+          "cells": [
+            {
+              "model": 1,
+              "value": "Y",
+              "standard_error": "",
+              "value_bbox": [
+                221.66,
+                336.18,
+                230.32,
+                349.46
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 2,
+              "value": "Y",
+              "standard_error": "",
+              "value_bbox": [
+                315.29,
+                336.18,
+                323.95,
+                349.46
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 3,
+              "value": "Y",
+              "standard_error": "",
+              "value_bbox": [
+                408.89,
+                336.18,
+                417.55,
+                349.46
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 4,
+              "value": "Y",
+              "standard_error": "",
+              "value_bbox": [
+                502.51,
+                336.18,
+                511.17,
+                349.46
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 5,
+              "value": "Y",
+              "standard_error": "",
+              "value_bbox": [
+                596.11,
+                336.18,
+                604.77,
+                349.46
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 6,
+              "value": "Y",
+              "standard_error": "",
+              "value_bbox": [
+                689.74,
+                336.18,
+                698.4,
+                349.46
+              ],
+              "standard_error_bbox": null
+            }
+          ]
+        },
+        {
+          "part": 1,
+          "pdf_page": 19,
+          "label": "Includes Year FEs?",
+          "label_bbox": [
+            16.32,
+            349.98,
+            110.23,
+            363.26
+          ],
+          "cells": [
+            {
+              "model": 1,
+              "value": "Y",
+              "standard_error": "",
+              "value_bbox": [
+                221.66,
+                349.98,
+                230.32,
+                363.26
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 2,
+              "value": "Y",
+              "standard_error": "",
+              "value_bbox": [
+                315.29,
+                349.98,
+                323.95,
+                363.26
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 3,
+              "value": "Y",
+              "standard_error": "",
+              "value_bbox": [
+                408.89,
+                349.98,
+                417.55,
+                363.26
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 4,
+              "value": "Y",
+              "standard_error": "",
+              "value_bbox": [
+                502.51,
+                349.98,
+                511.17,
+                363.26
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 5,
+              "value": "Y",
+              "standard_error": "",
+              "value_bbox": [
+                596.11,
+                349.98,
+                604.77,
+                363.26
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 6,
+              "value": "Y",
+              "standard_error": "",
+              "value_bbox": [
+                689.74,
+                349.98,
+                698.4,
+                363.26
+              ],
+              "standard_error_bbox": null
+            }
+          ]
+        },
+        {
+          "part": 1,
+          "pdf_page": 19,
+          "label": "Observations",
+          "label_bbox": [
+            16.32,
+            363.78,
+            79.54,
+            377.06
+          ],
+          "cells": [
+            {
+              "model": 1,
+              "value": "11,494",
+              "standard_error": "",
+              "value_bbox": [
+                221.66,
+                363.78,
+                254.66,
+                377.06
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 2,
+              "value": "11,494",
+              "standard_error": "",
+              "value_bbox": [
+                315.29,
+                363.78,
+                348.29,
+                377.06
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 3,
+              "value": "11,494",
+              "standard_error": "",
+              "value_bbox": [
+                408.89,
+                363.78,
+                441.89,
+                377.06
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 4,
+              "value": "11,494",
+              "standard_error": "",
+              "value_bbox": [
+                502.51,
+                363.78,
+                535.51,
+                377.06
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 5,
+              "value": "11,494",
+              "standard_error": "",
+              "value_bbox": [
+                596.11,
+                363.78,
+                629.11,
+                377.06
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 6,
+              "value": "11,494",
+              "standard_error": "",
+              "value_bbox": [
+                689.74,
+                363.78,
+                722.74,
+                377.06
+              ],
+              "standard_error_bbox": null
+            }
+          ]
+        },
+        {
+          "part": 1,
+          "pdf_page": 19,
+          "label": "R-squared",
+          "label_bbox": [
+            16.32,
+            377.58,
+            65.52,
+            390.86
+          ],
+          "cells": [
+            {
+              "model": 1,
+              "value": "0.134",
+              "standard_error": "",
+              "value_bbox": [
+                221.66,
+                377.58,
+                248.66,
+                390.86
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 2,
+              "value": "0.134",
+              "standard_error": "",
+              "value_bbox": [
+                315.29,
+                377.58,
+                342.29,
+                390.86
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 3,
+              "value": "0.134",
+              "standard_error": "",
+              "value_bbox": [
+                408.89,
+                377.58,
+                435.89,
+                390.86
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 4,
+              "value": "0.135",
+              "standard_error": "",
+              "value_bbox": [
+                502.51,
+                377.58,
+                529.51,
+                390.86
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 5,
+              "value": "0.134",
+              "standard_error": "",
+              "value_bbox": [
+                596.11,
+                377.58,
+                623.11,
+                390.86
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 6,
+              "value": "0.134",
+              "standard_error": "",
+              "value_bbox": [
+                689.74,
+                377.58,
+                716.74,
+                390.86
+              ],
+              "standard_error_bbox": null
+            }
+          ]
+        },
+        {
+          "part": 2,
+          "pdf_page": 20,
+          "label": "Student Loan Repayment",
+          "label_bbox": [
+            163.94,
+            129.13,
+            285.84,
+            142.41
+          ],
+          "cells": [
+            {
+              "model": 1,
+              "value": "0.029",
+              "standard_error": "(0.019)",
+              "value_bbox": [
+                354.89,
+                129.13,
+                381.89,
+                142.41
+              ],
+              "standard_error_bbox": [
+                354.89,
+                142.93,
+                389.85,
+                156.21
+              ]
+            },
+            {
+              "model": 2,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 3,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            }
+          ]
+        },
+        {
+          "part": 2,
+          "pdf_page": 20,
+          "label": "Emergency Savings Account",
+          "label_bbox": [
+            163.94,
+            156.73,
+            303.19,
+            170.01
+          ],
+          "cells": [
+            {
+              "model": 1,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 2,
+              "value": "0.002",
+              "standard_error": "(0.027)",
+              "value_bbox": [
+                448.51,
+                156.73,
+                475.51,
+                170.01
+              ],
+              "standard_error_bbox": [
+                448.51,
+                170.53,
+                483.47,
+                183.81
+              ]
+            },
+            {
+              "model": 3,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            }
+          ]
+        },
+        {
+          "part": 2,
+          "pdf_page": 20,
+          "label": "Childcare",
+          "label_bbox": [
+            163.94,
+            184.36,
+            210.56,
+            197.64
+          ],
+          "cells": [
+            {
+              "model": 1,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 2,
+              "value": "",
+              "standard_error": "",
+              "value_bbox": null,
+              "standard_error_bbox": null
+            },
+            {
+              "model": 3,
+              "value": "0.021",
+              "standard_error": "(0.025)",
+              "value_bbox": [
+                542.11,
+                184.36,
+                569.11,
+                197.64
+              ],
+              "standard_error_bbox": [
+                542.11,
+                198.16,
+                577.07,
+                211.44
+              ]
+            }
+          ]
+        },
+        {
+          "part": 2,
+          "pdf_page": 20,
+          "label": "Constant",
+          "label_bbox": [
+            163.94,
+            211.96,
+            206.61,
+            225.24
+          ],
+          "cells": [
+            {
+              "model": 1,
+              "value": "0.273***",
+              "standard_error": "(0.037)",
+              "value_bbox": [
+                354.89,
+                211.96,
+                399.89,
+                225.24
+              ],
+              "standard_error_bbox": [
+                354.89,
+                225.76,
+                389.85,
+                239.04
+              ]
+            },
+            {
+              "model": 2,
+              "value": "0.147***",
+              "standard_error": "(0.041)",
+              "value_bbox": [
+                448.51,
+                211.96,
+                493.51,
+                225.24
+              ],
+              "standard_error_bbox": [
+                448.51,
+                225.76,
+                483.47,
+                239.04
+              ]
+            },
+            {
+              "model": 3,
+              "value": "0.274***",
+              "standard_error": "(0.037)",
+              "value_bbox": [
+                542.11,
+                211.96,
+                587.11,
+                225.24
+              ],
+              "standard_error_bbox": [
+                542.11,
+                225.76,
+                577.07,
+                239.04
+              ]
+            }
+          ]
+        },
+        {
+          "part": 2,
+          "pdf_page": 20,
+          "label": "Includes Covariates?",
+          "label_bbox": [
+            163.94,
+            253.36,
+            264.15,
+            266.64
+          ],
+          "cells": [
+            {
+              "model": 1,
+              "value": "Y",
+              "standard_error": "",
+              "value_bbox": [
+                354.89,
+                253.36,
+                363.55,
+                266.64
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 2,
+              "value": "Y",
+              "standard_error": "",
+              "value_bbox": [
+                448.51,
+                253.36,
+                457.17,
+                266.64
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 3,
+              "value": "Y",
+              "standard_error": "",
+              "value_bbox": [
+                542.11,
+                253.36,
+                550.77,
+                266.64
+              ],
+              "standard_error_bbox": null
+            }
+          ]
+        },
+        {
+          "part": 2,
+          "pdf_page": 20,
+          "label": "Includes Year FEs?",
+          "label_bbox": [
+            163.94,
+            267.16,
+            257.79,
+            280.44
+          ],
+          "cells": [
+            {
+              "model": 1,
+              "value": "Y",
+              "standard_error": "",
+              "value_bbox": [
+                354.89,
+                267.16,
+                363.55,
+                280.44
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 2,
+              "value": "Y",
+              "standard_error": "",
+              "value_bbox": [
+                448.51,
+                267.16,
+                457.17,
+                280.44
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 3,
+              "value": "Y",
+              "standard_error": "",
+              "value_bbox": [
+                542.11,
+                267.16,
+                550.77,
+                280.44
+              ],
+              "standard_error_bbox": null
+            }
+          ]
+        },
+        {
+          "part": 2,
+          "pdf_page": 20,
+          "label": "Observations",
+          "label_bbox": [
+            163.94,
+            280.96,
+            227.16,
+            294.24
+          ],
+          "cells": [
+            {
+              "model": 1,
+              "value": "11,494",
+              "standard_error": "",
+              "value_bbox": [
+                354.89,
+                280.96,
+                387.89,
+                294.24
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 2,
+              "value": "8,003",
+              "standard_error": "",
+              "value_bbox": [
+                448.51,
+                280.96,
+                475.51,
+                294.24
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 3,
+              "value": "11,494",
+              "standard_error": "",
+              "value_bbox": [
+                542.11,
+                280.96,
+                575.11,
+                294.24
+              ],
+              "standard_error_bbox": null
+            }
+          ]
+        },
+        {
+          "part": 2,
+          "pdf_page": 20,
+          "label": "R-squared",
+          "label_bbox": [
+            163.94,
+            294.76,
+            213.14,
+            308.04
+          ],
+          "cells": [
+            {
+              "model": 1,
+              "value": "0.134",
+              "standard_error": "",
+              "value_bbox": [
+                354.89,
+                294.76,
+                381.89,
+                308.04
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 2,
+              "value": "0.125",
+              "standard_error": "",
+              "value_bbox": [
+                448.51,
+                294.76,
+                475.51,
+                308.04
+              ],
+              "standard_error_bbox": null
+            },
+            {
+              "model": 3,
+              "value": "0.134",
+              "standard_error": "",
+              "value_bbox": [
+                542.11,
+                294.76,
+                569.11,
+                308.04
+              ],
+              "standard_error_bbox": null
+            }
+          ]
+        }
+      ],
+      "caveat": "This verifies native PDF text and geometric cell assignment; it does not independently verify visual glyph recognition or study statistics.",
+      "corrected_markdown": "repairs/table-4.corrected.md",
+      "applied": true
+    },
+    "5": {
+      "table": 5,
+      "iterations": 2,
+      "status": "verified",
+      "checked_values": 54,
+      "unresolved_issues": [],
+      "source_pdf": "/Users/dc/geha/crawl_dir/raw/benefits_research/cri.georgetown.edu/wp-content/uploads/2025/12/CRI_WP_Rao_Burke_EmpBen_Dec2025.pdf",
+      "source_pages": [
+        21,
+        22
+      ],
+      "checks": "Numeric coefficient, standard error, constant, constant SE, observations, and R-squared verified at expected model column and row coordinates in source PDF native text. Notes and headings retained from AWS Markdown.",
+      "history": [
+        {
+          "iteration": 1,
+          "action": "Audit AWS Markdown against source PDF",
+          "findings": [
+            "Merged Observations and R-squared in continuation table",
+            "Constant standard errors detached into an unlabeled row"
+          ]
+        },
+        {
+          "iteration": 2,
+          "action": "Reconstruct continuation rows and validate each numeric cell against source word coordinates",
+          "checked_values": 54,
+          "unresolved_issues": 0
+        }
+      ],
+      "evidence": [
+        {
+          "part": 1,
+          "page": 21,
+          "model": 1,
+          "field": "coefficient",
+          "bbox": [
+            221.66000366210938,
+            129.1280059814453,
+            270.6199951171875,
+            142.41200256347656
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 1,
+          "field": "standard_error",
+          "bbox": [
+            221.66000366210938,
+            142.92799377441406,
+            256.6159973144531,
+            156.2119903564453
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 1,
+          "field": "constant",
+          "bbox": [
+            221.66000366210938,
+            294.7580261230469,
+            266.6600036621094,
+            308.0420227050781
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 1,
+          "field": "constant_standard_error",
+          "bbox": [
+            221.66000366210938,
+            308.5580139160156,
+            256.6159973144531,
+            321.8420104980469
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 1,
+          "field": "observations",
+          "bbox": [
+            221.66000366210938,
+            363.77801513671875,
+            254.66000366210938,
+            377.06201171875
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 1,
+          "field": "r_squared",
+          "bbox": [
+            221.66000366210938,
+            377.5780334472656,
+            248.66000366210938,
+            390.8620300292969
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 2,
+          "field": "coefficient",
+          "bbox": [
+            315.2900085449219,
+            156.72801208496094,
+            358.25,
+            170.0120086669922
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 2,
+          "field": "standard_error",
+          "bbox": [
+            315.2900085449219,
+            170.5279998779297,
+            350.2460021972656,
+            183.81199645996094
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 2,
+          "field": "constant",
+          "bbox": [
+            315.2900085449219,
+            294.7580261230469,
+            360.2900085449219,
+            308.0420227050781
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 2,
+          "field": "constant_standard_error",
+          "bbox": [
+            315.2900085449219,
+            308.5580139160156,
+            350.2460021972656,
+            321.8420104980469
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 2,
+          "field": "observations",
+          "bbox": [
+            315.2900085449219,
+            363.77801513671875,
+            348.2900085449219,
+            377.06201171875
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 2,
+          "field": "r_squared",
+          "bbox": [
+            315.2900085449219,
+            377.5780334472656,
+            342.2900085449219,
+            390.8620300292969
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 3,
+          "field": "coefficient",
+          "bbox": [
+            408.8900146484375,
+            184.3579864501953,
+            457.8500061035156,
+            197.64198303222656
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 3,
+          "field": "standard_error",
+          "bbox": [
+            408.8900146484375,
+            198.1580047607422,
+            443.84600830078125,
+            211.44200134277344
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 3,
+          "field": "constant",
+          "bbox": [
+            408.8900146484375,
+            294.7580261230469,
+            453.8900146484375,
+            308.0420227050781
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 3,
+          "field": "constant_standard_error",
+          "bbox": [
+            408.8900146484375,
+            308.5580139160156,
+            443.84600830078125,
+            321.8420104980469
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 3,
+          "field": "observations",
+          "bbox": [
+            408.8900146484375,
+            363.77801513671875,
+            441.8900146484375,
+            377.06201171875
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 3,
+          "field": "r_squared",
+          "bbox": [
+            408.8900146484375,
+            377.5780334472656,
+            435.8900146484375,
+            390.8620300292969
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 4,
+          "field": "coefficient",
+          "bbox": [
+            502.510009765625,
+            211.95799255371094,
+            551.469970703125,
+            225.2419891357422
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 4,
+          "field": "standard_error",
+          "bbox": [
+            502.510009765625,
+            225.7580108642578,
+            537.4659423828125,
+            239.04200744628906
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 4,
+          "field": "constant",
+          "bbox": [
+            502.510009765625,
+            294.7580261230469,
+            547.510009765625,
+            308.0420227050781
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 4,
+          "field": "constant_standard_error",
+          "bbox": [
+            502.510009765625,
+            308.5580139160156,
+            537.4659423828125,
+            321.8420104980469
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 4,
+          "field": "observations",
+          "bbox": [
+            502.510009765625,
+            363.77801513671875,
+            535.510009765625,
+            377.06201171875
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 4,
+          "field": "r_squared",
+          "bbox": [
+            502.510009765625,
+            377.5780334472656,
+            529.510009765625,
+            390.8620300292969
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 5,
+          "field": "coefficient",
+          "bbox": [
+            596.1099853515625,
+            239.55799865722656,
+            645.0700073242188,
+            252.8419952392578
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 5,
+          "field": "standard_error",
+          "bbox": [
+            596.1099853515625,
+            253.3579864501953,
+            631.06591796875,
+            266.6419982910156
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 5,
+          "field": "constant",
+          "bbox": [
+            596.1099853515625,
+            294.7580261230469,
+            641.1099853515625,
+            308.0420227050781
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 5,
+          "field": "constant_standard_error",
+          "bbox": [
+            596.1099853515625,
+            308.5580139160156,
+            631.06591796875,
+            321.8420104980469
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 5,
+          "field": "observations",
+          "bbox": [
+            596.1099853515625,
+            363.77801513671875,
+            629.1099853515625,
+            377.06201171875
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 5,
+          "field": "r_squared",
+          "bbox": [
+            596.1099853515625,
+            377.5780334472656,
+            623.1099853515625,
+            390.8620300292969
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 6,
+          "field": "coefficient",
+          "bbox": [
+            689.739990234375,
+            267.15802001953125,
+            720.7000122070312,
+            280.4420166015625
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 6,
+          "field": "standard_error",
+          "bbox": [
+            689.739990234375,
+            280.9580078125,
+            724.6959228515625,
+            294.24200439453125
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 6,
+          "field": "constant",
+          "bbox": [
+            689.739990234375,
+            294.7580261230469,
+            734.739990234375,
+            308.0420227050781
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 6,
+          "field": "constant_standard_error",
+          "bbox": [
+            689.739990234375,
+            308.5580139160156,
+            724.6959228515625,
+            321.8420104980469
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 6,
+          "field": "observations",
+          "bbox": [
+            689.739990234375,
+            363.77801513671875,
+            722.739990234375,
+            377.06201171875
+          ]
+        },
+        {
+          "part": 1,
+          "page": 21,
+          "model": 6,
+          "field": "r_squared",
+          "bbox": [
+            689.739990234375,
+            377.5780334472656,
+            716.739990234375,
+            390.8620300292969
+          ]
+        },
+        {
+          "part": 2,
+          "page": 22,
+          "model": 1,
+          "field": "coefficient",
+          "bbox": [
+            354.8900146484375,
+            129.1280059814453,
+            385.8500061035156,
+            142.41200256347656
+          ]
+        },
+        {
+          "part": 2,
+          "page": 22,
+          "model": 1,
+          "field": "standard_error",
+          "bbox": [
+            354.8900146484375,
+            142.92799377441406,
+            389.84600830078125,
+            156.2119903564453
+          ]
+        },
+        {
+          "part": 2,
+          "page": 22,
+          "model": 1,
+          "field": "constant",
+          "bbox": [
+            354.8900146484375,
+            211.95799255371094,
+            399.8900146484375,
+            225.2419891357422
+          ]
+        },
+        {
+          "part": 2,
+          "page": 22,
+          "model": 1,
+          "field": "constant_standard_error",
+          "bbox": [
+            354.8900146484375,
+            225.7580108642578,
+            389.84600830078125,
+            239.04200744628906
+          ]
+        },
+        {
+          "part": 2,
+          "page": 22,
+          "model": 1,
+          "field": "observations",
+          "bbox": [
+            354.8900146484375,
+            253.3579864501953,
+            387.8900146484375,
+            266.6419982910156
+          ]
+        },
+        {
+          "part": 2,
+          "page": 22,
+          "model": 1,
+          "field": "r_squared",
+          "bbox": [
+            354.8900146484375,
+            267.15802001953125,
+            381.8900146484375,
+            280.4420166015625
+          ]
+        },
+        {
+          "part": 2,
+          "page": 22,
+          "model": 2,
+          "field": "coefficient",
+          "bbox": [
+            448.510009765625,
+            156.72801208496094,
+            479.4700012207031,
+            170.0120086669922
+          ]
+        },
+        {
+          "part": 2,
+          "page": 22,
+          "model": 2,
+          "field": "standard_error",
+          "bbox": [
+            448.510009765625,
+            170.5279998779297,
+            483.46600341796875,
+            183.81199645996094
+          ]
+        },
+        {
+          "part": 2,
+          "page": 22,
+          "model": 2,
+          "field": "constant",
+          "bbox": [
+            448.510009765625,
+            211.95799255371094,
+            493.510009765625,
+            225.2419891357422
+          ]
+        },
+        {
+          "part": 2,
+          "page": 22,
+          "model": 2,
+          "field": "constant_standard_error",
+          "bbox": [
+            448.510009765625,
+            225.7580108642578,
+            483.46600341796875,
+            239.04200744628906
+          ]
+        },
+        {
+          "part": 2,
+          "page": 22,
+          "model": 2,
+          "field": "observations",
+          "bbox": [
+            448.510009765625,
+            253.3579864501953,
+            475.510009765625,
+            266.6419982910156
+          ]
+        },
+        {
+          "part": 2,
+          "page": 22,
+          "model": 2,
+          "field": "r_squared",
+          "bbox": [
+            448.510009765625,
+            267.15802001953125,
+            475.510009765625,
+            280.4420166015625
+          ]
+        },
+        {
+          "part": 2,
+          "page": 22,
+          "model": 3,
+          "field": "coefficient",
+          "bbox": [
+            542.1099853515625,
+            184.3579864501953,
+            573.0700073242188,
+            197.64198303222656
+          ]
+        },
+        {
+          "part": 2,
+          "page": 22,
+          "model": 3,
+          "field": "standard_error",
+          "bbox": [
+            542.1099853515625,
+            198.1580047607422,
+            577.06591796875,
+            211.44200134277344
+          ]
+        },
+        {
+          "part": 2,
+          "page": 22,
+          "model": 3,
+          "field": "constant",
+          "bbox": [
+            542.1099853515625,
+            211.95799255371094,
+            587.1099853515625,
+            225.2419891357422
+          ]
+        },
+        {
+          "part": 2,
+          "page": 22,
+          "model": 3,
+          "field": "constant_standard_error",
+          "bbox": [
+            542.1099853515625,
+            225.7580108642578,
+            577.06591796875,
+            239.04200744628906
+          ]
+        },
+        {
+          "part": 2,
+          "page": 22,
+          "model": 3,
+          "field": "observations",
+          "bbox": [
+            542.1099853515625,
+            253.3579864501953,
+            575.1099853515625,
+            266.6419982910156
+          ]
+        },
+        {
+          "part": 2,
+          "page": 22,
+          "model": 3,
+          "field": "r_squared",
+          "bbox": [
+            542.1099853515625,
+            267.15802001953125,
+            569.1099853515625,
+            280.4420166015625
+          ]
+        }
+      ],
+      "corrected_markdown": "repairs/table-5.corrected.md",
+      "applied": true
+    },
+    "6": {
+      "table": 6,
+      "iterations": 1,
+      "status": "verified",
+      "checked_values": 36,
+      "unresolved_issues": [],
+      "source_pdf_pages": [
+        23,
+        24
+      ],
+      "source_markdown_lines": [
+        258,
+        285
+      ],
+      "changes": [
+        "No content-cell changes; values and row assignments match the PDF."
+      ],
+      "iteration_history": [
+        {
+          "iteration": 1,
+          "action": "Compare table labels and numeric values with the source PDF."
+        }
+      ],
+      "numeric_checks": [
+        {
+          "pdf_page": 23,
+          "pdf_only_numeric_token": "6",
+          "table_numeric_tokens_match": true,
+          "data_numeric_tokens": 42
+        },
+        {
+          "pdf_page": 24,
+          "pdf_only_numeric_token": "6",
+          "table_numeric_tokens_match": true,
+          "data_numeric_tokens": 21
+        }
+      ],
+      "evidence": "Numeric tokens in PDF table region match Markdown table after excluding printed table/page number. Row labels and column positions visually checked.",
+      "corrected_markdown": "repairs/table-6.corrected.md",
+      "applied": true
+    },
+    "7": {
+      "table": 7,
+      "iterations": 2,
+      "status": "verified",
+      "checked_values": 54,
+      "unresolved_issues": [],
+      "source_pdf": "/Users/dc/geha/crawl_dir/raw/benefits_research/cri.georgetown.edu/wp-content/uploads/2025/12/CRI_WP_Rao_Burke_EmpBen_Dec2025.pdf",
+      "source_pages": [
+        26,
+        27
+      ],
+      "checks": "Numeric coefficient, standard error, constant, constant SE, observations, and R-squared verified at expected model column and row coordinates in source PDF native text. Notes and headings retained from AWS Markdown.",
+      "history": [
+        {
+          "iteration": 1,
+          "action": "Audit AWS Markdown against source PDF",
+          "findings": [
+            "Merged Observations and R-squared in continuation table"
+          ]
+        },
+        {
+          "iteration": 2,
+          "action": "Reconstruct continuation rows and validate each numeric cell against source word coordinates",
+          "checked_values": 54,
+          "unresolved_issues": 0
+        }
+      ],
+      "evidence": [
+        {
+          "part": 1,
+          "page": 26,
+          "model": 1,
+          "field": "coefficient",
+          "bbox": [
+            304.489990234375,
+            139.32798767089844,
+            347.45001220703125,
+            152.6119842529297
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 1,
+          "field": "standard_error",
+          "bbox": [
+            304.489990234375,
+            153.1280059814453,
+            339.44598388671875,
+            166.41200256347656
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 1,
+          "field": "constant",
+          "bbox": [
+            304.489990234375,
+            304.9580078125,
+            349.489990234375,
+            318.24200439453125
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 1,
+          "field": "constant_standard_error",
+          "bbox": [
+            304.489990234375,
+            318.77801513671875,
+            339.44598388671875,
+            332.06201171875
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 1,
+          "field": "observations",
+          "bbox": [
+            304.489990234375,
+            346.3780212402344,
+            331.489990234375,
+            359.6620178222656
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 1,
+          "field": "r_squared",
+          "bbox": [
+            304.489990234375,
+            360.1780090332031,
+            331.489990234375,
+            373.4620056152344
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 2,
+          "field": "coefficient",
+          "bbox": [
+            369.2900085449219,
+            166.92799377441406,
+            400.25,
+            180.2119903564453
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 2,
+          "field": "standard_error",
+          "bbox": [
+            369.2900085449219,
+            180.72801208496094,
+            404.2460021972656,
+            194.0120086669922
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 2,
+          "field": "constant",
+          "bbox": [
+            369.2900085449219,
+            304.9580078125,
+            414.2900085449219,
+            318.24200439453125
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 2,
+          "field": "constant_standard_error",
+          "bbox": [
+            369.2900085449219,
+            318.77801513671875,
+            404.2460021972656,
+            332.06201171875
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 2,
+          "field": "observations",
+          "bbox": [
+            369.2900085449219,
+            346.3780212402344,
+            396.2900085449219,
+            359.6620178222656
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 2,
+          "field": "r_squared",
+          "bbox": [
+            369.2900085449219,
+            360.1780090332031,
+            396.2900085449219,
+            373.4620056152344
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 3,
+          "field": "coefficient",
+          "bbox": [
+            434.1099853515625,
+            194.55799865722656,
+            465.07000732421875,
+            207.8419952392578
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 3,
+          "field": "standard_error",
+          "bbox": [
+            434.1099853515625,
+            208.3579864501953,
+            469.06597900390625,
+            221.64198303222656
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 3,
+          "field": "constant",
+          "bbox": [
+            434.1099853515625,
+            304.9580078125,
+            479.1099853515625,
+            318.24200439453125
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 3,
+          "field": "constant_standard_error",
+          "bbox": [
+            434.1099853515625,
+            318.77801513671875,
+            469.06597900390625,
+            332.06201171875
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 3,
+          "field": "observations",
+          "bbox": [
+            434.1099853515625,
+            346.3780212402344,
+            461.1099853515625,
+            359.6620178222656
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 3,
+          "field": "r_squared",
+          "bbox": [
+            434.1099853515625,
+            360.1780090332031,
+            461.1099853515625,
+            373.4620056152344
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 4,
+          "field": "coefficient",
+          "bbox": [
+            498.9100036621094,
+            222.1580047607422,
+            529.8699951171875,
+            235.44200134277344
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 4,
+          "field": "standard_error",
+          "bbox": [
+            498.9100036621094,
+            235.95799255371094,
+            533.865966796875,
+            249.2419891357422
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 4,
+          "field": "constant",
+          "bbox": [
+            498.9100036621094,
+            304.9580078125,
+            543.9100341796875,
+            318.24200439453125
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 4,
+          "field": "constant_standard_error",
+          "bbox": [
+            498.9100036621094,
+            318.77801513671875,
+            533.865966796875,
+            332.06201171875
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 4,
+          "field": "observations",
+          "bbox": [
+            498.9100036621094,
+            346.3780212402344,
+            525.9100341796875,
+            359.6620178222656
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 4,
+          "field": "r_squared",
+          "bbox": [
+            498.9100036621094,
+            360.1780090332031,
+            525.9100341796875,
+            373.4620056152344
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 5,
+          "field": "coefficient",
+          "bbox": [
+            563.7100219726562,
+            249.7580108642578,
+            594.6699829101562,
+            263.0420227050781
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 5,
+          "field": "standard_error",
+          "bbox": [
+            563.7100219726562,
+            263.5580139160156,
+            598.6659545898438,
+            276.8420104980469
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 5,
+          "field": "constant",
+          "bbox": [
+            563.7100219726562,
+            304.9580078125,
+            608.7100219726562,
+            318.24200439453125
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 5,
+          "field": "constant_standard_error",
+          "bbox": [
+            563.7100219726562,
+            318.77801513671875,
+            598.6659545898438,
+            332.06201171875
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 5,
+          "field": "observations",
+          "bbox": [
+            563.7100219726562,
+            346.3780212402344,
+            590.7100219726562,
+            359.6620178222656
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 5,
+          "field": "r_squared",
+          "bbox": [
+            563.7100219726562,
+            360.1780090332031,
+            590.7100219726562,
+            373.4620056152344
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 6,
+          "field": "coefficient",
+          "bbox": [
+            628.5399780273438,
+            277.3580017089844,
+            677.5,
+            290.6419982910156
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 6,
+          "field": "standard_error",
+          "bbox": [
+            628.5399780273438,
+            291.15802001953125,
+            663.4959106445312,
+            304.4420166015625
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 6,
+          "field": "constant",
+          "bbox": [
+            628.5399780273438,
+            304.9580078125,
+            673.5399780273438,
+            318.24200439453125
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 6,
+          "field": "constant_standard_error",
+          "bbox": [
+            628.5399780273438,
+            318.77801513671875,
+            663.4959106445312,
+            332.06201171875
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 6,
+          "field": "observations",
+          "bbox": [
+            628.5399780273438,
+            346.3780212402344,
+            655.5399780273438,
+            359.6620178222656
+          ]
+        },
+        {
+          "part": 1,
+          "page": 26,
+          "model": 6,
+          "field": "r_squared",
+          "bbox": [
+            628.5399780273438,
+            360.1780090332031,
+            655.5399780273438,
+            373.4620056152344
+          ]
+        },
+        {
+          "part": 2,
+          "page": 27,
+          "model": 1,
+          "field": "coefficient",
+          "bbox": [
+            398.0899963378906,
+            139.32798767089844,
+            429.04998779296875,
+            152.6119842529297
+          ]
+        },
+        {
+          "part": 2,
+          "page": 27,
+          "model": 1,
+          "field": "standard_error",
+          "bbox": [
+            398.0899963378906,
+            153.1280059814453,
+            433.0459899902344,
+            166.41200256347656
+          ]
+        },
+        {
+          "part": 2,
+          "page": 27,
+          "model": 1,
+          "field": "constant",
+          "bbox": [
+            398.0899963378906,
+            222.1580047607422,
+            443.0899963378906,
+            235.44200134277344
+          ]
+        },
+        {
+          "part": 2,
+          "page": 27,
+          "model": 1,
+          "field": "constant_standard_error",
+          "bbox": [
+            398.0899963378906,
+            235.95799255371094,
+            433.0459899902344,
+            249.2419891357422
+          ]
+        },
+        {
+          "part": 2,
+          "page": 27,
+          "model": 1,
+          "field": "observations",
+          "bbox": [
+            398.0899963378906,
+            263.5580139160156,
+            425.0899963378906,
+            276.8420104980469
+          ]
+        },
+        {
+          "part": 2,
+          "page": 27,
+          "model": 1,
+          "field": "r_squared",
+          "bbox": [
+            398.0899963378906,
+            277.3580017089844,
+            425.0899963378906,
+            290.6419982910156
+          ]
+        },
+        {
+          "part": 2,
+          "page": 27,
+          "model": 2,
+          "field": "coefficient",
+          "bbox": [
+            462.9100036621094,
+            166.92799377441406,
+            489.9100036621094,
+            180.2119903564453
+          ]
+        },
+        {
+          "part": 2,
+          "page": 27,
+          "model": 2,
+          "field": "standard_error",
+          "bbox": [
+            462.9100036621094,
+            180.72801208496094,
+            497.8659973144531,
+            194.0120086669922
+          ]
+        },
+        {
+          "part": 2,
+          "page": 27,
+          "model": 2,
+          "field": "constant",
+          "bbox": [
+            462.9100036621094,
+            222.1580047607422,
+            495.9100036621094,
+            235.44200134277344
+          ]
+        },
+        {
+          "part": 2,
+          "page": 27,
+          "model": 2,
+          "field": "constant_standard_error",
+          "bbox": [
+            462.9100036621094,
+            235.95799255371094,
+            497.8659973144531,
+            249.2419891357422
+          ]
+        },
+        {
+          "part": 2,
+          "page": 27,
+          "model": 2,
+          "field": "observations",
+          "bbox": [
+            462.9100036621094,
+            263.5580139160156,
+            489.9100036621094,
+            276.8420104980469
+          ]
+        },
+        {
+          "part": 2,
+          "page": 27,
+          "model": 2,
+          "field": "r_squared",
+          "bbox": [
+            462.9100036621094,
+            277.3580017089844,
+            489.9100036621094,
+            290.6419982910156
+          ]
+        },
+        {
+          "part": 2,
+          "page": 27,
+          "model": 3,
+          "field": "coefficient",
+          "bbox": [
+            527.7100219726562,
+            194.55799865722656,
+            558.6699829101562,
+            207.8419952392578
+          ]
+        },
+        {
+          "part": 2,
+          "page": 27,
+          "model": 3,
+          "field": "standard_error",
+          "bbox": [
+            527.7100219726562,
+            208.3579864501953,
+            562.6659545898438,
+            221.64198303222656
+          ]
+        },
+        {
+          "part": 2,
+          "page": 27,
+          "model": 3,
+          "field": "constant",
+          "bbox": [
+            527.7100219726562,
+            222.1580047607422,
+            572.7100219726562,
+            235.44200134277344
+          ]
+        },
+        {
+          "part": 2,
+          "page": 27,
+          "model": 3,
+          "field": "constant_standard_error",
+          "bbox": [
+            527.7100219726562,
+            235.95799255371094,
+            562.6659545898438,
+            249.2419891357422
+          ]
+        },
+        {
+          "part": 2,
+          "page": 27,
+          "model": 3,
+          "field": "observations",
+          "bbox": [
+            527.7100219726562,
+            263.5580139160156,
+            554.7100219726562,
+            276.8420104980469
+          ]
+        },
+        {
+          "part": 2,
+          "page": 27,
+          "model": 3,
+          "field": "r_squared",
+          "bbox": [
+            527.7100219726562,
+            277.3580017089844,
+            554.7100219726562,
+            290.6419982910156
+          ]
+        }
+      ],
+      "corrected_markdown": "repairs/table-7.corrected.md",
+      "applied": true
+    }
+  },
+  "table_exports": {
+    "1": {
+      "file": "tables-corrected/table-1.csv",
+      "parts": 1,
+      "values": 16,
+      "review_status": "source_verified"
+    },
+    "2": {
+      "file": "tables-corrected/table-2.csv",
+      "parts": 1,
+      "values": 10,
+      "review_status": "source_verified"
+    },
+    "3": {
+      "file": "tables-corrected/table-3.csv",
+      "parts": 1,
+      "values": 21,
+      "review_status": "source_verified"
+    },
+    "4": {
+      "file": "tables-corrected/table-4.csv",
+      "parts": 2,
+      "values": 54,
+      "review_status": "source_verified"
+    },
+    "5": {
+      "file": "tables-corrected/table-5.csv",
+      "parts": 2,
+      "values": 48,
+      "review_status": "source_verified"
+    },
+    "6": {
+      "file": "tables-corrected/table-6.csv",
+      "parts": 2,
+      "values": 36,
+      "review_status": "source_verified"
+    },
+    "7": {
+      "file": "tables-corrected/table-7.csv",
+      "parts": 2,
+      "values": 36,
+      "review_status": "source_verified"
+    }
+  },
+  "known_table_issues_before": [
+    {
+      "code": "merged_table_variable_rows",
+      "severity": "high",
+      "pdf_pages": [
+        19,
+        20
+      ],
+      "markdown_lines": [
+        202
+      ],
+      "detail": "Table 4 combines 4 PDF variable rows into one Markdown row; values and columns are no longer reliable.",
+      "evidence": "Paid Vacation or Sick Leave Health insurance Retirement plans Life insurance"
+    },
+    {
+      "code": "merged_table_variable_rows",
+      "severity": "high",
+      "pdf_pages": [
+        19,
+        20
+      ],
+      "markdown_lines": [
+        203
+      ],
+      "detail": "Table 4 combines 2 PDF variable rows into one Markdown row; values and columns are no longer reliable.",
+      "evidence": "Disability insurance Ability to Work from Home Constant"
+    },
+    {
+      "code": "unlabeled_table_value_row",
+      "severity": "high",
+      "pdf_pages": [
+        19,
+        20
+      ],
+      "markdown_lines": [
+        207
+      ],
+      "detail": "Table 4 has numeric values with no row label.",
+      "evidence": " | 0.134 | 0.134 | 0.134 | 0.135 | 0.134 | 11,494"
+    },
+    {
+      "code": "missing_table_variable_rows",
+      "severity": "high",
+      "pdf_pages": [
+        19
+      ],
+      "markdown_lines": [
+        198
+      ],
+      "detail": "Table 4 PDF rows are absent as separate Markdown rows: Paid Vacation or Sick Leave, Health insurance, Retirement plans, Life insurance, Disability insurance, Ability to Work from Home, Constant",
+      "evidence": "PDF page 19 lists each variable and statistic on its own line."
+    },
+    {
+      "code": "merged_table_statistic_rows",
+      "severity": "high",
+      "pdf_pages": [
+        21,
+        22
+      ],
+      "markdown_lines": [
+        254
+      ],
+      "detail": "Table 5 combines the separate Observations and R-squared rows.",
+      "evidence": "Observations R-squared | 11,494 0.084 | 8,003 0.082 | 11,494 0.084"
+    },
+    {
+      "code": "merged_table_statistic_rows",
+      "severity": "high",
+      "pdf_pages": [
+        26,
+        27
+      ],
+      "markdown_lines": [
+        317
+      ],
+      "detail": "Table 7 combines the separate Observations and R-squared rows.",
+      "evidence": "Observations R-squared | 5,384 0.022 | 2,713 0.031 | 5,384 0.022"
+    }
+  ],
+  "remaining_table_issues": [],
+  "remaining_table_issues_image_variant": [],
+  "remaining_non_table_issue_codes_image_variant": [
+    "undecoded_equation",
+    "out_of_order_conclusion_text"
+  ],
+  "scope": "Only numbered table bodies were replaced. The AWS variant retains its figure placeholders; the image variant retains its six embedded figure crops. Equation, prose, and references remain as in each source Markdown."
+}

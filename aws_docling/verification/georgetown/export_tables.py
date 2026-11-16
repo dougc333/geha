@@ -28,7 +28,8 @@ def main() -> None:
         path = args.output / f"table-{number}.csv"
         with path.open("w", newline="", encoding="utf-8") as file:
             writer = csv.DictWriter(file, fieldnames=["part", "pdf_page", "markdown_line",
-                                                    "variable", "column", "value", "review_status"])
+                                                    "variable", "column", "value", "review_status"],
+                                    lineterminator="\n")
             writer.writeheader()
             count = 0
             for part_no, section in enumerate(parts, 1):

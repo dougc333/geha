@@ -29,6 +29,17 @@ It also matches each figure PNG against a rendered source PDF page at the record
 
 The table exporter writes `tables/table-1.csv` through `tables/table-7.csv` in long form. Each row retains the PDF page, Markdown line, section number, variable, column, and extracted value. `summary.json` marks Tables 4, 5, and 7 for review because their Markdown contains merged rows. These CSVs preserve the extraction; they do not correct those cells.
 
+## Source-checked table repair
+
+The original extraction and `summary.json` remain available as the baseline. Three agents checked disjoint sets of Tables 1–7 against the PDF in parallel. Each table has a `repairs/table-N.corrected.md` proposal and `repairs/table-N.validation.json` with one or two propose/check iterations (maximum four), source evidence, and unresolved issues. The fan-in script applies only proposals marked verified with no unresolved cells:
+
+```bash
+cd /Users/dc/geha
+.venv/bin/python aws_docling/verification/georgetown/assemble_table_repairs.py
+```
+
+The resulting `document-corrected-tables.md` preserves the AWS worker's non-table text and image placeholders. `document-corrected-tables-with-images.md` applies the same table repairs to the local embedded-image document. `tables-corrected/table-1.csv` through `table-7.csv` contain the repaired cells, and `table-repair-summary.json` records the 263 source-checked values, iteration counts, applied repairs, and re-audit results. The re-audit has zero table-structure findings in either output. Equation 1 and the conclusion ordering still need separate text repair; the AWS variant still has image placeholders.
+
 ## Local Docling Serve container test
 
 The pinned AWS image was also run locally as an HTTP server. `server-local.md` is its full 30-page Markdown response with six embedded PNGs; `server-test.json` records the request and comparison. With the images normalized to placeholders, this server response matches the existing AWS Markdown line for line. It retains the same malformed table rows and Equation 1 placeholder.

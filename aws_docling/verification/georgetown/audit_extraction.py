@@ -14,7 +14,7 @@ import numpy as np
 import pymupdf
 
 
-TABLE_PAGES = {1: [7], 2: [8], 3: [8], 4: [19, 20], 5: [21, 22],
+TABLE_PAGES = {1: [7], 2: [8], 3: [9], 4: [19, 20], 5: [21, 22],
                6: [23, 24], 7: [26, 27]}
 FIGURE_PAGES = {1: 10, 2: 11, 3: 12, 4: 13, 5: 13, 6: 14}
 BENEFIT_ROWS = (
@@ -151,7 +151,7 @@ def audit(pdf_path: Path, markdown_path: Path) -> dict:
 
     return {
         "source_pdf": str(pdf_path),
-        "markdown": str(markdown_path),
+        "markdown": markdown_path.name,
         "pdf_page_count": len(pdf),
         "markdown_line_count": len(lines),
         "numbered_tables": sorted({s["number"] for s in sections}),
@@ -159,7 +159,7 @@ def audit(pdf_path: Path, markdown_path: Path) -> dict:
         "table_sections": [{"table": s["number"], "pdf_pages": TABLE_PAGES[s["number"]],
                             "markdown_line": s["line"], "heading": s["heading"]}
                            for s in sections],
-        "linked_markdown": str(linked_markdown_path),
+        "linked_markdown": linked_markdown_path.name,
         "figure_verification": figure_verification,
         "issues": issues,
         "issue_count": len(issues),

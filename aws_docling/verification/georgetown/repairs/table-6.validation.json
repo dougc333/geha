@@ -1,0 +1,40 @@
+{
+  "table": 6,
+  "iterations": 1,
+  "status": "verified",
+  "checked_values": 36,
+  "unresolved_issues": [],
+  "source_pdf_pages": [
+    23,
+    24
+  ],
+  "source_markdown_lines": [
+    258,
+    285
+  ],
+  "corrected_markdown": "table-6.corrected.md",
+  "changes": [
+    "No content-cell changes; values and row assignments match the PDF."
+  ],
+  "iteration_history": [
+    {
+      "iteration": 1,
+      "action": "Compare table labels and numeric values with the source PDF."
+    }
+  ],
+  "numeric_checks": [
+    {
+      "pdf_page": 23,
+      "pdf_only_numeric_token": "6",
+      "table_numeric_tokens_match": true,
+      "data_numeric_tokens": 42
+    },
+    {
+      "pdf_page": 24,
+      "pdf_only_numeric_token": "6",
+      "table_numeric_tokens_match": true,
+      "data_numeric_tokens": 21
+    }
+  ],
+  "evidence": "Numeric tokens in PDF table region match Markdown table after excluding printed table/page number. Row labels and column positions visually checked."
+}
