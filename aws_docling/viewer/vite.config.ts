@@ -3,7 +3,7 @@ import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react";
 import { DescribeTasksCommand, ECSClient, ListTasksCommand } from "@aws-sdk/client-ecs";
 import { CloudWatchLogsClient, GetLogEventsCommand } from "@aws-sdk/client-cloudwatch-logs";
-import { GetObjectCommand, PutObjectCommand, paginateListObjectsV2, S3Client } from "@aws-sdk/client-s3";
+import { GetObjectCommand, HeadObjectCommand, PutObjectCommand, paginateListObjectsV2, S3Client } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 function awsDocuments(): Plugin {
@@ -152,6 +152,13 @@ function awsDocuments(): Plugin {
               } catch (error) {
                 if ((error as { name?: string }).name !== "ResourceNotFoundException") throw error;
               }
+            }
+            try {
+              await s3.send(new HeadObjectCommand({ Bucket: bucket, Key: `extracted/${name}.md` }));
+              status = "complete";
+              detail = "Markdown is available in S3.";
+            } catch (error) {
+              if ((error as { $metadata?: { httpStatusCode?: number } }).$metadata?.httpStatusCode !== 404) throw error;
             }
             res.setHeader("Content-Type", "application/json");
             res.end(JSON.stringify({ status, detail, taskId, heartbeatAgeSeconds, messages }));
