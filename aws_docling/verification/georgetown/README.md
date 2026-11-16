@@ -2,6 +2,8 @@
 
 Source: `/Users/dc/geha/crawl_dir/raw/benefits_research/cri.georgetown.edu/wp-content/uploads/2025/12/CRI_WP_Rao_Burke_EmpBen_Dec2025.pdf` (30 pages).
 
+`aws-worker-rev2.md` is the exact Markdown downloaded from `s3://aws-docling-669059827483-us-west-2/extracted/retry-regional-CRI_WP_Rao_Burke_EmpBen_Dec2025.md`. It was produced by the deployed ECS task definition revision 2 and contains six image placeholders. The other Markdown files here are local conversions or image-linked variants.
+
 Run locally with the repository virtual environment:
 
 ```bash
