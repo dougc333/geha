@@ -119,6 +119,7 @@ function awsDocuments(): Plugin {
             let status = "queued";
             let taskId: string | undefined;
             let messages: Array<{ time: string; message: string }> = [];
+            let heartbeatAgeSeconds: number | undefined;
             let detail = "Waiting for the S3 event to start a task.";
             if (taskArn) {
               taskId = taskArn.split("/").pop();
@@ -146,12 +147,14 @@ function awsDocuments(): Plugin {
                   time: event.timestamp ? new Date(event.timestamp).toLocaleTimeString() : "",
                   message: event.message ?? "",
                 }));
+                const heartbeat = [...(events.events ?? [])].reverse().find((event) => event.message?.startsWith("heartbeat "));
+                if (heartbeat?.timestamp) heartbeatAgeSeconds = Math.max(0, Math.floor((Date.now() - heartbeat.timestamp) / 1000));
               } catch (error) {
                 if ((error as { name?: string }).name !== "ResourceNotFoundException") throw error;
               }
             }
             res.setHeader("Content-Type", "application/json");
-            res.end(JSON.stringify({ status, detail, taskId, messages }));
+            res.end(JSON.stringify({ status, detail, taskId, heartbeatAgeSeconds, messages }));
           } else if (url.pathname === "/api/markdown") {
             const key = url.searchParams.get("key") ?? "";
             if (!key.startsWith("extracted/") || !key.endsWith(".md") || key.includes("..")) {

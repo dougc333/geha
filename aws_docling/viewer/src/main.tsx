@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import "./style.css";
 
 type Pair = { id: string; name: string; pdf?: File; markdown?: File; pdfUrl?: string; markdownKey?: string; status?: string };
-type TaskStatus = { status: string; detail: string; taskId?: string; messages: Array<{ time: string; message: string }> };
+type TaskStatus = { status: string; detail: string; taskId?: string; heartbeatAgeSeconds?: number; messages: Array<{ time: string; message: string }> };
 
 function baseName(file: File): string {
   return file.name.replace(/\.(pdf|md)$/i, "").toLowerCase();
@@ -35,6 +35,12 @@ function App() {
     return [...byName.values()].concat(awsPairs).sort((a, b) => a.name.localeCompare(b.name));
   }, [files, awsPairs]);
   const active = pairs.find((pair) => pair.id === selected) ?? pairs[0];
+  const taskMessages = taskStatus?.messages ?? [];
+  const taskStep = taskStatus?.status === "complete" ? 4
+    : taskMessages.some((line) => line.message.startsWith("uploading Markdown")) ? 3
+    : taskStatus?.status === "converting" || taskMessages.some((line) => line.message.includes("Loading weights")) ? 2
+    : taskStatus?.status === "starting" ? 1 : 0;
+  const taskStage = ["Queued", "Starting container", "Converting PDF", "Uploading Markdown", "Complete"][taskStep];
 
   useEffect(() => {
     if (!active?.pdf) {
@@ -160,6 +166,9 @@ function App() {
         <div className="task-heading"><strong>Docling container: {taskStatus?.status ?? "checking"}</strong>
           <span>{taskStatus?.taskId ? `ECS task ${taskStatus.taskId}` : "Waiting for task ID"}</span></div>
         <div>{taskStatus?.detail ?? "Checking AWS task status…"}</div>
+        {taskStatus?.heartbeatAgeSeconds !== undefined && <div>Last worker heartbeat: {taskStatus.heartbeatAgeSeconds}s ago</div>}
+        <div className="task-progress-label">{taskStatus?.status === "failed" ? "Failed during " : "Stage "}{taskStep} of 4: {taskStage}</div>
+        <progress className="task-progress" max={4} value={taskStep} aria-label="Docling task stage progress" />
         <pre className="task-log">{taskStatus?.messages.length
           ? taskStatus.messages.map((line) => `${line.time} ${line.message}`).join("\n")
           : "No container logs yet."}</pre>

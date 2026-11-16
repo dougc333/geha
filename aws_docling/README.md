@@ -30,7 +30,7 @@ AWS_PROFILE=geha-terraform AWS_REGION=us-west-2 \
   npm run dev
 ```
 
-Open the local URL Vite prints. Click **Upload PDF and process** and select a PDF under 25 MB. The viewer gives it a unique S3 name, shows *processing*, and polls every five seconds for the matching Markdown. The status panel shows ECS startup, conversion, failure, and recent CloudWatch container logs. When conversion finishes, the viewer shows the Markdown beside the PDF.
+Open the local URL Vite prints. Click **Upload PDF and process** and select a PDF under 25 MB. The viewer gives it a unique S3 name, shows *processing*, and polls every five seconds for the matching Markdown. The status panel shows a four-stage completion bar, ECS startup, conversion, failure, the most recent worker heartbeat, and recent CloudWatch container logs. The bar tracks stages rather than pages or elapsed time. The worker emits a heartbeat every 15 seconds while processing; ECS `RUNNING` alone only confirms the container started. When conversion finishes, the viewer shows the Markdown beside the PDF.
 
 ### 3. Verify the result or diagnose a failure
 
