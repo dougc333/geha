@@ -1,0 +1,231 @@
+{
+  "source_pdf": "/Users/dc/geha/crawl_dir/raw/benefits_research/cri.georgetown.edu/wp-content/uploads/2025/12/CRI_WP_Rao_Burke_EmpBen_Dec2025.pdf",
+  "markdown": "/private/tmp/geha-aws-docling-status-pr/aws_docling/verification/georgetown/document-with-images.md",
+  "pdf_page_count": 30,
+  "markdown_line_count": 341,
+  "numbered_tables": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "numbered_figures": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "table_sections": [
+    {
+      "table": 1,
+      "pdf_pages": [
+        7
+      ],
+      "markdown_line": 71,
+      "heading": "Table 1: Worker Characteristics (Person-Year)"
+    },
+    {
+      "table": 2,
+      "pdf_pages": [
+        8
+      ],
+      "markdown_line": 101,
+      "heading": "Table 2: Employer-Sponsored Benefits Access"
+    },
+    {
+      "table": 3,
+      "pdf_pages": [
+        8
+      ],
+      "markdown_line": 119,
+      "heading": "Table 3: Employer-Sponsored Benefit Access Correlation Matrix"
+    },
+    {
+      "table": 4,
+      "pdf_pages": [
+        19,
+        20
+      ],
+      "markdown_line": 198,
+      "heading": "Table 4: Employer Benefits and Financial Satisfaction"
+    },
+    {
+      "table": 4,
+      "pdf_pages": [
+        19,
+        20
+      ],
+      "markdown_line": 212,
+      "heading": "Table 4 (cont'd): Employer Benefits and Financial Satisfaction"
+    },
+    {
+      "table": 5,
+      "pdf_pages": [
+        21,
+        22
+      ],
+      "markdown_line": 227,
+      "heading": "Table 5: Employer Benefits and Financial Stress"
+    },
+    {
+      "table": 5,
+      "pdf_pages": [
+        21,
+        22
+      ],
+      "markdown_line": 245,
+      "heading": "Table 5 (Cont'd): Employer Benefits and Financial Stress"
+    },
+    {
+      "table": 6,
+      "pdf_pages": [
+        23,
+        24
+      ],
+      "markdown_line": 258,
+      "heading": "Table 6: Employer Benefits and Emergency Savings"
+    },
+    {
+      "table": 7,
+      "pdf_pages": [
+        26,
+        27
+      ],
+      "markdown_line": 293,
+      "heading": "Table 7: Employer Benefits and Employee Turnover"
+    },
+    {
+      "table": 7,
+      "pdf_pages": [
+        26,
+        27
+      ],
+      "markdown_line": 309,
+      "heading": "Table 7 (Cont'd): Employer Benefits and Employee Turnover"
+    }
+  ],
+  "issues": [
+    {
+      "code": "merged_table_variable_rows",
+      "severity": "high",
+      "pdf_pages": [
+        19,
+        20
+      ],
+      "markdown_lines": [
+        202
+      ],
+      "detail": "Table 4 combines 4 PDF variable rows into one Markdown row; values and columns are no longer reliable.",
+      "evidence": "Paid Vacation or Sick Leave Health insurance Retirement plans Life insurance"
+    },
+    {
+      "code": "merged_table_variable_rows",
+      "severity": "high",
+      "pdf_pages": [
+        19,
+        20
+      ],
+      "markdown_lines": [
+        203
+      ],
+      "detail": "Table 4 combines 2 PDF variable rows into one Markdown row; values and columns are no longer reliable.",
+      "evidence": "Disability insurance Ability to Work from Home Constant"
+    },
+    {
+      "code": "unlabeled_table_value_row",
+      "severity": "high",
+      "pdf_pages": [
+        19,
+        20
+      ],
+      "markdown_lines": [
+        207
+      ],
+      "detail": "Table 4 has numeric values with no row label.",
+      "evidence": " | 0.134 | 0.134 | 0.134 | 0.135 | 0.134 | 11,494"
+    },
+    {
+      "code": "missing_table_variable_rows",
+      "severity": "high",
+      "pdf_pages": [
+        19
+      ],
+      "markdown_lines": [
+        198
+      ],
+      "detail": "Table 4 PDF rows are absent as separate Markdown rows: Paid Vacation or Sick Leave, Health insurance, Retirement plans, Life insurance, Disability insurance, Ability to Work from Home, Constant",
+      "evidence": "PDF page 19 lists each variable and statistic on its own line."
+    },
+    {
+      "code": "merged_table_statistic_rows",
+      "severity": "high",
+      "pdf_pages": [
+        21,
+        22
+      ],
+      "markdown_lines": [
+        254
+      ],
+      "detail": "Table 5 combines the separate Observations and R-squared rows.",
+      "evidence": "Observations R-squared | 11,494 0.084 | 8,003 0.082 | 11,494 0.084"
+    },
+    {
+      "code": "merged_table_statistic_rows",
+      "severity": "high",
+      "pdf_pages": [
+        26,
+        27
+      ],
+      "markdown_lines": [
+        317
+      ],
+      "detail": "Table 7 combines the separate Observations and R-squared rows.",
+      "evidence": "Observations R-squared | 5,384 0.022 | 2,713 0.031 | 5,384 0.022"
+    },
+    {
+      "code": "undecoded_equation",
+      "severity": "high",
+      "pdf_pages": [
+        16
+      ],
+      "markdown_lines": [
+        186
+      ],
+      "detail": "Equation 1 is present in the PDF but the Markdown contains a placeholder.",
+      "evidence": "<!-- formula-not-decoded -->"
+    },
+    {
+      "code": "broken_table_heading",
+      "severity": "medium",
+      "pdf_pages": [
+        23,
+        24
+      ],
+      "markdown_lines": [
+        274
+      ],
+      "detail": "The Table 6 heading is split as 'Tab le' in the Markdown.",
+      "evidence": "Tab le 6 (Cont'd): Employer Benefits and Emergency Savings"
+    },
+    {
+      "code": "out_of_order_conclusion_text",
+      "severity": "high",
+      "pdf_pages": [
+        28
+      ],
+      "markdown_lines": [
+        323,
+        327
+      ],
+      "detail": "The first PDF conclusion paragraph is split and part of it appears after the next paragraph.",
+      "evidence": "PDF: 'financial emergencies. There are gains'; Markdown separates 'financial' from 'emergencies.'"
+    }
+  ],
+  "issue_count": 9,
+  "scope": "Full Markdown scanned for numbered tables, figures, formula placeholders, and a confirmed conclusion ordering error. Table findings are structural; cells and prose have not been exhaustively checked for transcription accuracy."
+}
