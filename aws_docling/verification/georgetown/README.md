@@ -27,6 +27,25 @@ It also matches each figure PNG against a rendered source PDF page at the record
 
 The table exporter writes `tables/table-1.csv` through `tables/table-7.csv` in long form. Each row retains the PDF page, Markdown line, section number, variable, column, and extracted value. `summary.json` marks Tables 4, 5, and 7 for review because their Markdown contains merged rows. These CSVs preserve the extraction; they do not correct those cells.
 
+## Local Docling Serve container test
+
+The pinned AWS image was also run locally as an HTTP server. `server-local.md` is its full 30-page Markdown response with six embedded PNGs; `server-test.json` records the request and comparison. With the images normalized to placeholders, this server response matches the existing AWS Markdown line for line. It retains the same malformed table rows and Equation 1 placeholder.
+
+To repeat the test without starting an AWS task, run the container on an unused local port and send the source PDF:
+
+```bash
+docker run -d --rm --name aws-docling-local-serve \
+  -p 127.0.0.1:5011:5001 \
+  ghcr.io/docling-project/docling-serve-cpu:v1.38.2
+curl http://127.0.0.1:5011/health
+curl -sS --max-time 600 \
+  -F 'files=@/Users/dc/geha/crawl_dir/raw/benefits_research/cri.georgetown.edu/wp-content/uploads/2025/12/CRI_WP_Rao_Burke_EmpBen_Dec2025.pdf;type=application/pdf' \
+  -F 'to_formats=md' -F 'image_export_mode=embedded' -F 'include_images=true' \
+  http://127.0.0.1:5011/v1/convert/file \
+  > /private/tmp/docling-server-georgetown.json
+docker stop aws-docling-local-serve
+```
+
 Docling's `do_chart_extraction=True` extracts values from chart images. The project's `transformers==5.17.0` failed in Granite Vision with `TypeError: create_causal_mask() got an unexpected keyword argument 'cache_position'`. An isolated test using `transformers==4.57.3`, `tokenizers==0.22.2`, and `huggingface-hub==0.36.0` succeeded on page 11. Its chart values are in `chart-page-011-01.csv` and `chart-page-011.md`; they match the visible bars in `figure-002.png`. Chart extraction remains disabled in the AWS worker until the container runtime is checked.
 
 To repeat the chart test without changing the project virtual environment:

@@ -1,0 +1,61 @@
+{
+  "image": "ghcr.io/docling-project/docling-serve-cpu:v1.38.2",
+  "endpoint": "POST http://127.0.0.1:5011/v1/convert/file",
+  "source_pdf": "CRI_WP_Rao_Burke_EmpBen_Dec2025.pdf",
+  "request_options": {
+    "to_formats": "md",
+    "image_export_mode": "embedded",
+    "include_images": true
+  },
+  "status": "success",
+  "errors": [],
+  "server_processing_seconds": 61.53052223706618,
+  "markdown_bytes": 409933,
+  "markdown_sha256": "81400689c7d74e2dd843f3d4af83d1b90df73004b3213ac62ac580d121a82f7a",
+  "aws_markdown_equal_after_replacing_images": true,
+  "numbered_tables": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "numbered_figures": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "figure_png_dimensions": [
+    [
+      843,
+      470
+    ],
+    [
+      883,
+      445
+    ],
+    [
+      827,
+      473
+    ],
+    [
+      846,
+      473
+    ],
+    [
+      817,
+      441
+    ],
+    [
+      842,
+      474
+    ]
+  ],
+  "formula_placeholders": 1,
+  "note": "Image crops are embedded at API default 2x scale. This test does not correct malformed tables or transcribe chart values."
+}
