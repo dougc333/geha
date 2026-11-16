@@ -2,6 +2,8 @@
 
 S3 receives PDFs at `incoming/`. An S3 event invokes a short Lambda, which starts one Fargate task per PDF. The task runs Docling, writes Markdown to `extracted/`, and exits. The React viewer can upload a PDF, show processing status, and compare the source PDF with Markdown. There is no always-on Docling service, load balancer, NAT gateway, or VPC endpoint.
 
+The worker now enables page and picture images. Its Markdown embeds the figure crops at their original positions, and it writes a separate `extracted/<name>.figures.zip` with PNGs and a page/box manifest. It also writes `extracted/<name>.models.json` with the Hugging Face model directories found in that task's container cache. The `do_chart_extraction` option remains off by default; it needs a compatible Granite Vision runtime and its numeric output must be checked against the PDF before enabling it in AWS. See [the Georgetown local verification](verification/georgetown/README.md).
+
 ## Start and verify
 
 Terraform creates a VPC and two public subnets in `us-west-2`. Fargate gets a public IP for outbound image pulls and S3 access. Its security group has no inbound rules. **Nothing is deployed until you apply Terraform.** Applying creates AWS resources, and each upload incurs Fargate and public IPv4 usage. The Docling CPU image is large, so the first image pull may take time.
@@ -57,7 +59,7 @@ The worker uses the pinned Docling Serve CPU image but runs one Python conversio
 
 ## React viewer
 
-Open the URL printed by Vite and click **Load AWS outputs** or **Upload PDF and process**. The local Vite server uses the AWS SDK and your profile to list `extracted/*.md`; it pairs each file with `incoming/*.pdf`, serves Markdown through a localhost endpoint, and provides a 15-minute presigned PDF URL for the browser's PDF viewer. The IAM identity used by the local profile also needs access to list and describe ECS tasks and read the Docling CloudWatch log stream for the status panel. Reload AWS outputs if a PDF URL expires. This local development server binds to `127.0.0.1`; the static production build does not provide an AWS backend.
+Open the URL printed by Vite and click **Load AWS outputs** or **Upload PDF and process**. The local Vite server uses the AWS SDK and your profile to list `extracted/*.md`; it pairs each file with `incoming/*.pdf`, serves Markdown through a localhost endpoint, and provides a 15-minute presigned PDF URL for the browser's PDF viewer. **S3 bucket files** lists the bucket by prefix and previews PDFs, Markdown, JSON, CSV, and images. **Docling models** lists the Mac's downloaded Hugging Face models separately from any per-run Fargate model inventory. Existing runs predate that inventory and show no run models. The IAM identity used by the local profile also needs access to list and describe ECS tasks and read the Docling CloudWatch log stream for the status panel. Reload AWS outputs if a PDF URL expires. This local development server binds to `127.0.0.1`; the static production build does not provide an AWS backend.
 
 You can also use **Add PDFs and Markdown** for a local pair, or **Open run folder** for several local pairs. The viewer matches `report.pdf` with `report.md` by basename, shows the entire multipage PDF in the left pane, and renders Markdown tables and text in the right pane. Local files stay in browser memory. Duplicate basenames from different local folders should be renamed before loading.
 
