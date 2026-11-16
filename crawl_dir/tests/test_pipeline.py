@@ -138,6 +138,18 @@ class ContextualRetrievalTests(unittest.TestCase):
 
 
 class SafetyTests(unittest.TestCase):
+    def test_scanner_collection_families_are_canonical_run_families(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for family in ("forms_directory", "policy", "population_health"):
+                document = root / "raw" / family / "sample.pdf"
+                document.parent.mkdir(parents=True)
+                document.write_bytes(b"pdf fixture")
+                self.assertEqual(
+                    resolve_raw_document(root, family, "sample.pdf"),
+                    document.resolve(),
+                )
+
     def test_raw_path_cannot_escape_family(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

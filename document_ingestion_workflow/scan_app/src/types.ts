@@ -1,4 +1,5 @@
 export type ScanStatus = "not_scanned" | "queued" | "scanning" | "completed" | "error";
+export type ExtractionStatus = "not_started" | "extracting" | "completed" | "error";
 
 export interface PdfScan {
   id: string;
@@ -26,6 +27,16 @@ export interface PdfScan {
   figureDescription: string;
   recommendation: string;
   recommendedWorkflow: string;
+  extractionStatus: ExtractionStatus;
+  extractionStartedAt: string | null;
+  extractionCompletedAt: string | null;
+  extractionError: string | null;
+  extractionRunPath: string | null;
+  markdownPath: string | null;
+  chunksPath: string | null;
+  pageHtmlCount: number;
+  figureSpecCount: number;
+  logicalTableCount: number;
 }
 
 export interface CollectionScan {
@@ -45,5 +56,6 @@ export interface ScanState {
   startedAt: string | null;
   completedAt: string | null;
   activePdf: string | null;
+  activeExtraction: string | null;
   collections: CollectionScan[];
 }

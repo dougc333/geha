@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import asyncio
+import html
 import hashlib
 import json
 import re
+import sys
 import threading
 import time
 from copy import deepcopy
@@ -19,6 +21,7 @@ from aiohttp import web
 
 APP_ROOT = Path(__file__).resolve().parent
 CRAWL_ROOT = Path("/Users/dc/geha/crawl_dir")
+REPO_ROOT = APP_ROOT.parents[1]
 STATE_PATH = APP_ROOT / "data" / "scan_state.json"
 UI_DIST = APP_ROOT / "dist"
 
@@ -111,6 +114,7 @@ CALIBRATION: dict[str, tuple[str, str, str]] = {
 
 STATE_LOCK = threading.RLock()
 SCAN_THREAD: threading.Thread | None = None
+EXTRACTION_THREAD: threading.Thread | None = None
 
 
 def utc_now() -> str:
@@ -205,6 +209,16 @@ def empty_pdf(record: dict[str, Any]) -> dict[str, Any]:
         "formPages": [],
         "formFieldCount": None,
         "scanSeconds": None,
+        "extractionStatus": "not_started",
+        "extractionStartedAt": None,
+        "extractionCompletedAt": None,
+        "extractionError": None,
+        "extractionRunPath": None,
+        "markdownPath": None,
+        "chunksPath": None,
+        "pageHtmlCount": 0,
+        "figureSpecCount": 0,
+        "logicalTableCount": 0,
     }
 
 
@@ -234,13 +248,17 @@ def load_state() -> dict[str, Any]:
                 "recommendation": record["recommendation"],
                 "recommendedWorkflow": record["recommendedWorkflow"],
             })
+            if current["extractionStatus"] == "extracting":
+                current["extractionStatus"] = "error"
+                current["extractionError"] = "Extraction was interrupted by an API restart."
         groups[record["family"]].append(current)
     return {
-        "version": 1,
+        "version": 2,
         "running": False,
         "startedAt": None,
         "completedAt": None,
         "activePdf": None,
+        "activeExtraction": None,
         "collections": [
             {
                 "key": family,
@@ -425,6 +443,288 @@ def scan_pdf(pdf: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def find_pdf(pdf_id: str) -> dict[str, Any] | None:
+    for collection in STATE["collections"]:
+        for pdf in collection["pdfs"]:
+            if pdf["id"] == pdf_id:
+                return pdf
+    return None
+
+
+def relative_document_path(pdf: dict[str, Any]) -> str:
+    family_root = (CRAWL_ROOT / "raw" / pdf["family"]).resolve()
+    return str(Path(pdf["path"]).resolve().relative_to(family_root))
+
+
+def detected_figure_regions(page: pymupdf.Page) -> list[dict[str, Any]]:
+    """Return native PDF evidence for likely chart/figure regions on one page."""
+    page_area = page.rect.get_area()
+    candidates: list[tuple[pymupdf.Rect, str]] = []
+    try:
+        clusters = page.cluster_drawings()
+    except Exception:
+        clusters = []
+    for rect in clusters:
+        ratio = rect.get_area() / page_area if page_area else 0
+        if 0.025 <= ratio <= 0.9 and rect.width >= 100 and rect.height >= 55:
+            clipped = page.get_text("text", clip=rect) or ""
+            numbers = len(re.findall(r"(?<!\w)[+-]?\d+(?:\.\d+)?\s*(?:%|x)?", clipped))
+            labels = len(re.findall(r"[A-Za-z]{3,}", clipped))
+            if numbers >= 3 and labels >= 2:
+                candidates.append((rect, "vector_geometry"))
+    for rect in significant_images(page):
+        candidates.append((rect, "embedded_image"))
+
+    regions: list[dict[str, Any]] = []
+    for rect, detection in candidates:
+        if any(rect.intersects(existing["rect"]) and
+               rect.get_area() <= existing["rect"].get_area() * 1.15
+               for existing in regions):
+            continue
+        native_text = re.sub(r"\s+", " ", page.get_text("text", clip=rect) or "").strip()
+        regions.append({"rect": rect, "detection": detection, "native_text": native_text})
+    if not regions:
+        regions.append({
+            "rect": page.rect,
+            "detection": "whole_page_fallback",
+            "native_text": re.sub(r"\s+", " ", page.get_text("text") or "").strip(),
+        })
+    return regions
+
+
+def page_html_document(
+    *,
+    pdf_name: str,
+    page_number: int,
+    markdown: str,
+    table_ids: list[str],
+    figure_spec: dict[str, Any] | None,
+) -> str:
+    figure_html = ""
+    if figure_spec:
+        cards = []
+        for region in figure_spec["regions"]:
+            values = ", ".join(region["numeric_tokens"]) or "No numeric labels detected"
+            cards.append(
+                "<figure>"
+                f"<figcaption>{html.escape(region['id'])} · {html.escape(region['detection'])}</figcaption>"
+                f"<p>{html.escape(region['native_text'])}</p>"
+                f"<small>Values: {html.escape(values)}</small>"
+                "</figure>"
+            )
+        figure_html = "<section><h2>Figure evidence</h2>" + "".join(cards) + "</section>"
+    table_html = ""
+    if table_ids:
+        links = "".join(
+            f'<li><a href="../../candidate/tables/{html.escape(table_id)}.html">'
+            f"{html.escape(table_id)}</a></li>" for table_id in table_ids
+        )
+        table_html = f"<section><h2>Logical tables on this page</h2><ul>{links}</ul></section>"
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{html.escape(pdf_name)} · page {page_number}</title>
+  <style>
+    body {{ max-width: 960px; margin: 40px auto; padding: 0 24px; color: #172c3a; font: 16px/1.55 system-ui, sans-serif; }}
+    pre {{ white-space: pre-wrap; background: #f3f6f5; padding: 20px; border: 1px solid #d8e1df; }}
+    figure {{ margin: 16px 0; padding: 16px; border-left: 4px solid #2f8b78; background: #f5f9f8; }}
+    figcaption {{ font-weight: 700; }} small {{ color: #587078; }}
+  </style>
+</head>
+<body>
+  <header><h1>{html.escape(pdf_name)}</h1><p>Page {page_number}</p></header>
+  <main>
+    <section><h2>Extracted page Markdown</h2><pre>{html.escape(markdown)}</pre></section>
+    {figure_html}
+    {table_html}
+  </main>
+</body>
+</html>
+"""
+
+
+def markdown_cell(value: Any) -> str:
+    cleaned = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]", "", str(value))
+    return cleaned.replace("|", r"\|").replace("\n", "<br>").strip()
+
+
+def write_named_document_markdown(candidate_dir: Path, source_stem: str) -> Path:
+    """Write one full-document Markdown file with consolidated logical tables."""
+    base = (candidate_dir / "document.md").read_text(encoding="utf-8").rstrip()
+    table_paths = sorted((candidate_dir / "tables").glob("table-*.json"))
+    sections = [base]
+    if table_paths:
+        sections.append(
+            "# Canonical logical tables\n\n"
+            "These tables supersede any page-fragment table renderings above. "
+            "Continuation fragments were consolidated before this section was written."
+        )
+    for table_path in table_paths:
+        record = json.loads(table_path.read_text(encoding="utf-8"))
+        headers = [str(value) for value in record.get("headers", [])]
+        rows = record.get("rows", [])
+        pages = ", ".join(str(value) for value in record.get("source_pages", [])) or "unknown"
+        section = markdown_cell(record.get("section") or record["table_id"])
+        lines = [
+            f"## {section}",
+            "",
+            f"Source pages: {pages} · Table ID: `{record['table_id']}`",
+            "",
+        ]
+        if headers:
+            lines.extend([
+                "| " + " | ".join(markdown_cell(header) for header in headers) + " |",
+                "| " + " | ".join("---" for _ in headers) + " |",
+            ])
+            for row in rows:
+                lines.append(
+                    "| " + " | ".join(markdown_cell(row.get(header, "")) for header in headers) + " |"
+                )
+        else:
+            lines.append("_No table columns were extracted._")
+        sections.append("\n".join(lines))
+    destination = candidate_dir / f"{source_stem}.md"
+    destination.write_text("\n\n---\n\n".join(sections).rstrip() + "\n", encoding="utf-8")
+    return destination
+
+
+def write_page_artifacts(run_dir: Path, pdf: dict[str, Any]) -> tuple[int, int, int]:
+    """Add page HTML and draft native-evidence specs to a canonical run."""
+    from crawl_dir.src.pipeline.artifact_io import atomic_json
+
+    figure_pages = set(pdf.get("figurePages") or []) | set(pdf.get("chartPages") or [])
+    page_html_count = 0
+    figure_spec_count = 0
+    logical_table_ids: set[str] = set()
+    with pymupdf.open(pdf["path"]) as document:
+        for page_number in range(1, document.page_count + 1):
+            page_dir = run_dir / "pages" / f"page-{page_number:03d}"
+            manifest_path = page_dir / "page-manifest.json"
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            table_ids = [str(value) for value in manifest.get("table_ids", [])]
+            logical_table_ids.update(table_ids)
+            figure_spec: dict[str, Any] | None = None
+            if page_number in figure_pages:
+                page = document[page_number - 1]
+                regions = detected_figure_regions(page)
+                page_native_text = re.sub(
+                    r"\s+", " ", page.get_text("text") or ""
+                ).strip()
+                figure_spec = {
+                    "schema_version": 1,
+                    "artifact_type": "draft_native_figure_evidence",
+                    "status": "needs_review",
+                    "source_pdf": pdf["name"],
+                    "page": page_number,
+                    "page_size_pt": [round(page.rect.width, 3), round(page.rect.height, 3)],
+                    "page_native_text": page_native_text,
+                    "page_numeric_tokens": re.findall(
+                        r"[+-]?\d+(?:\.\d+)?\s*(?:%|x)?", page_native_text
+                    ),
+                    "regions": [
+                        {
+                            "id": f"figure-{index:02d}",
+                            "box_pt": [round(value, 3) for value in region["rect"]],
+                            "detection": region["detection"],
+                            "native_text": region["native_text"],
+                            "numeric_tokens": re.findall(
+                                r"[+-]?\d+(?:\.\d+)?\s*(?:%|x)?", region["native_text"]
+                            ),
+                        }
+                        for index, region in enumerate(regions, 1)
+                    ],
+                }
+                atomic_json(page_dir / "page.spec.json", figure_spec)
+                manifest["figure_spec"] = "page.spec.json"
+                figure_spec_count += 1
+            else:
+                manifest["figure_spec"] = None
+
+            if figure_spec or table_ids:
+                markdown_path = page_dir / "page.md"
+                markdown = markdown_path.read_text(encoding="utf-8") if markdown_path.exists() else ""
+                (page_dir / "page.html").write_text(
+                    page_html_document(
+                        pdf_name=pdf["name"],
+                        page_number=page_number,
+                        markdown=markdown,
+                        table_ids=table_ids,
+                        figure_spec=figure_spec,
+                    ),
+                    encoding="utf-8",
+                )
+                manifest["html"] = "page.html"
+                page_html_count += 1
+            atomic_json(manifest_path, manifest)
+    return page_html_count, figure_spec_count, len(logical_table_ids)
+
+
+def run_extraction(pdf_id: str) -> None:
+    global EXTRACTION_THREAD
+    try:
+        with STATE_LOCK:
+            pdf = find_pdf(pdf_id)
+            if pdf is None:
+                return
+        if pdf.get("status") != "completed":
+            scan_result = scan_pdf(pdf)
+            with STATE_LOCK:
+                pdf.update(scan_result)
+                persist_state()
+
+        if str(REPO_ROOT) not in sys.path:
+            sys.path.insert(0, str(REPO_ROOT))
+        from crawl_dir.src.pipeline.artifact_io import sha256_file
+        from crawl_dir.src.pipeline.runner import process_document
+
+        source = Path(pdf["path"])
+        source_hash = sha256_file(source)
+        identifier = (
+            f"scan-app-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}-"
+            f"{source_hash[:6]}"
+        )
+        run_dir = process_document(
+            root=CRAWL_ROOT,
+            family=pdf["family"],
+            document=relative_document_path(pdf),
+            document_version=source_hash[:12],
+            requested_run_id=identifier,
+        )
+        candidate_dir = run_dir / "candidate"
+        named_markdown = write_named_document_markdown(candidate_dir, source.stem)
+        page_html_count, figure_spec_count, logical_table_count = write_page_artifacts(
+            run_dir, pdf
+        )
+        with STATE_LOCK:
+            pdf.update({
+                "extractionStatus": "completed",
+                "extractionCompletedAt": utc_now(),
+                "extractionError": None,
+                "extractionRunPath": str(run_dir),
+                "markdownPath": str(named_markdown),
+                "chunksPath": str(candidate_dir / "chunks.jsonl"),
+                "pageHtmlCount": page_html_count,
+                "figureSpecCount": figure_spec_count,
+                "logicalTableCount": logical_table_count,
+            })
+    except Exception as exc:
+        with STATE_LOCK:
+            pdf = find_pdf(pdf_id)
+            if pdf is not None:
+                pdf.update({
+                    "extractionStatus": "error",
+                    "extractionCompletedAt": utc_now(),
+                    "extractionError": f"{type(exc).__name__}: {exc}",
+                })
+    finally:
+        with STATE_LOCK:
+            STATE["activeExtraction"] = None
+            EXTRACTION_THREAD = None
+            persist_state()
+
+
 def run_scan(force: bool) -> None:
     global SCAN_THREAD
     try:
@@ -466,6 +766,10 @@ async def start_scan(request: web.Request) -> web.Response:
     with STATE_LOCK:
         if STATE["running"]:
             return web.json_response({"error": "A scan is already running."}, status=409)
+        if EXTRACTION_THREAD is not None:
+            return web.json_response({
+                "error": "A Docling extraction is running; wait for it to finish before scanning."
+            }, status=409)
         STATE["running"] = True
         STATE["startedAt"] = utc_now()
         STATE["completedAt"] = None
@@ -477,6 +781,40 @@ async def start_scan(request: web.Request) -> web.Response:
         SCAN_THREAD = threading.Thread(target=run_scan, args=(force,), daemon=True, name="pdf-collection-scan")
         SCAN_THREAD.start()
     return web.json_response({"started": True, "force": force}, status=202)
+
+
+async def start_extraction(request: web.Request) -> web.Response:
+    global EXTRACTION_THREAD
+    pdf_id = request.match_info["pdf_id"]
+    with STATE_LOCK:
+        pdf = find_pdf(pdf_id)
+        if pdf is None:
+            return web.json_response({"error": "Unknown PDF."}, status=404)
+        if STATE["running"]:
+            return web.json_response({
+                "error": "The collection scan is running; wait for it to finish before extracting."
+            }, status=409)
+        if EXTRACTION_THREAD is not None:
+            return web.json_response({
+                "error": "Another Docling extraction is already running.",
+                "activeExtraction": STATE.get("activeExtraction"),
+            }, status=409)
+        pdf.update({
+            "extractionStatus": "extracting",
+            "extractionStartedAt": utc_now(),
+            "extractionCompletedAt": None,
+            "extractionError": None,
+        })
+        STATE["activeExtraction"] = pdf["path"]
+        persist_state()
+        EXTRACTION_THREAD = threading.Thread(
+            target=run_extraction,
+            args=(pdf_id,),
+            daemon=True,
+            name=f"docling-extract-{pdf_id}",
+        )
+        EXTRACTION_THREAD.start()
+    return web.json_response({"started": True, "pdfId": pdf_id}, status=202)
 
 
 async def index(_: web.Request) -> web.StreamResponse:
@@ -494,6 +832,7 @@ def make_app() -> web.Application:
     app = web.Application()
     app.router.add_get("/api/state", get_state)
     app.router.add_post("/api/scan", start_scan)
+    app.router.add_post("/api/extract/{pdf_id}", start_extraction)
     if UI_DIST.exists():
         app.router.add_static("/assets", UI_DIST / "assets")
     app.router.add_get("/{tail:.*}", index)
