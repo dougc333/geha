@@ -30,7 +30,7 @@ AWS_PROFILE=geha-terraform AWS_REGION=us-west-2 \
   npm run dev
 ```
 
-Open the local URL Vite prints. Click **Upload PDF and process** and select a PDF under 25 MB. The viewer gives it a unique S3 name, shows *processing*, and polls every five seconds for the matching Markdown. When conversion finishes, it shows the Markdown beside the PDF.
+Open the local URL Vite prints. Click **Upload PDF and process** and select a PDF under 25 MB. The viewer gives it a unique S3 name, shows *processing*, and polls every five seconds for the matching Markdown. The status panel shows ECS startup, conversion, failure, and recent CloudWatch container logs. When conversion finishes, the viewer shows the Markdown beside the PDF.
 
 ### 3. Verify the result or diagnose a failure
 
@@ -44,7 +44,7 @@ AWS_PROFILE=geha-terraform aws s3 ls \
   "s3://$(terraform output -raw bucket_name)/extracted/" --recursive
 ```
 
-A matching `.md` under `extracted/` confirms output was written. If the task fails, the viewer currently leaves the PDF marked *processing*; inspect the ECS task status and CloudWatch logs. S3 can deliver an event more than once, so duplicate tasks are possible. Presigned S3 URLs expire after six hours. The local AWS profile needs `s3:ListBucket`, `s3:GetObject`, and `s3:PutObject` permissions on the bucket.
+A matching `.md` under `extracted/` confirms output was written. If the task fails, the status panel shows *failed* and the container traceback; the document selector may still say *processing* because no Markdown was written. S3 can deliver an event more than once, so duplicate tasks are possible. Presigned S3 URLs expire after six hours. The local AWS profile needs S3 list/get/put, ECS list/describe, and CloudWatch Logs read permissions.
 
 For command-line upload, run this from the Terraform directory:
 
@@ -57,7 +57,7 @@ The worker uses the pinned Docling Serve CPU image but runs one Python conversio
 
 ## React viewer
 
-Open the URL printed by Vite and click **Load AWS outputs** or **Upload PDF and process**. The local Vite server uses the AWS SDK and your profile to list `extracted/*.md`; it pairs each file with `incoming/*.pdf`, serves Markdown through a localhost endpoint, and provides a 15-minute presigned PDF URL for the browser's PDF viewer. The IAM identity used by the local profile needs `s3:ListBucket`, `s3:GetObject`, and `s3:PutObject` on the bucket and relevant prefixes. Reload AWS outputs if a PDF URL expires. This local development server binds to `127.0.0.1`; the static production build does not provide an AWS backend.
+Open the URL printed by Vite and click **Load AWS outputs** or **Upload PDF and process**. The local Vite server uses the AWS SDK and your profile to list `extracted/*.md`; it pairs each file with `incoming/*.pdf`, serves Markdown through a localhost endpoint, and provides a 15-minute presigned PDF URL for the browser's PDF viewer. The IAM identity used by the local profile also needs access to list and describe ECS tasks and read the Docling CloudWatch log stream for the status panel. Reload AWS outputs if a PDF URL expires. This local development server binds to `127.0.0.1`; the static production build does not provide an AWS backend.
 
 You can also use **Add PDFs and Markdown** for a local pair, or **Open run folder** for several local pairs. The viewer matches `report.pdf` with `report.md` by basename, shows the entire multipage PDF in the left pane, and renders Markdown tables and text in the right pane. Local files stay in browser memory. Duplicate basenames from different local folders should be renamed before loading.
 

@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import "./style.css";
 
 type Pair = { id: string; name: string; pdf?: File; markdown?: File; pdfUrl?: string; markdownKey?: string; status?: string };
+type TaskStatus = { status: string; detail: string; taskId?: string; messages: Array<{ time: string; message: string }> };
 
 function baseName(file: File): string {
   return file.name.replace(/\.(pdf|md)$/i, "").toLowerCase();
@@ -19,6 +20,7 @@ function App() {
   const [pdfUrl, setPdfUrl] = useState("");
   const [error, setError] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [taskStatus, setTaskStatus] = useState<TaskStatus | null>(null);
 
   const pairs = useMemo(() => {
     const byName = new Map<string, Pair>();
@@ -92,6 +94,26 @@ function App() {
     return () => window.clearInterval(timer);
   }, [awsPairs]);
 
+  useEffect(() => {
+    if (!active?.id.startsWith("aws:")) { setTaskStatus(null); return; }
+    let current = true;
+    const name = active.id.slice(4);
+    async function refreshStatus() {
+      try {
+        const response = await fetch(`/api/status?name=${encodeURIComponent(name)}`);
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error ?? `Status request failed: ${response.status}`);
+        if (current) setTaskStatus(result as TaskStatus);
+      } catch (reason) {
+        if (current) setTaskStatus({ status: "unavailable", detail: String(reason), messages: [] });
+      }
+    }
+    setTaskStatus(null);
+    void refreshStatus();
+    const timer = window.setInterval(() => { void refreshStatus(); }, 5000);
+    return () => { current = false; window.clearInterval(timer); };
+  }, [active?.id]);
+
   async function uploadPdf(file: File | undefined) {
     if (!file) return;
     setUploading(true);
@@ -134,12 +156,20 @@ function App() {
         </select></label>
         <span>{pairs.length} document{pairs.length === 1 ? "" : "s"}</span>
       </div>
+      {active?.id.startsWith("aws:") && <section className="task-status" aria-live="polite">
+        <div className="task-heading"><strong>Docling container: {taskStatus?.status ?? "checking"}</strong>
+          <span>{taskStatus?.taskId ? `ECS task ${taskStatus.taskId}` : "Waiting for task ID"}</span></div>
+        <div>{taskStatus?.detail ?? "Checking AWS task status…"}</div>
+        <pre className="task-log">{taskStatus?.messages.length
+          ? taskStatus.messages.map((line) => `${line.time} ${line.message}`).join("\n")
+          : "No container logs yet."}</pre>
+      </section>}
       <main>
         <section className="pane"><div className="panehead"><h2>Source PDF</h2><span>{active?.pdf?.name ?? (active?.pdfUrl ? `${active.name}.pdf` : "No PDF selected")}</span></div>
           {pdfUrl ? <iframe title="Multipage source PDF" src={pdfUrl} /> : <div className="empty">Select a PDF to view its pages.</div>}
         </section>
         <section className="pane"><div className="panehead"><h2>Extracted Markdown</h2><span>{active?.markdown?.name ?? active?.markdownKey ?? "No Markdown selected"}</span></div>
-          <div className="markdown">{error ? <div className="error">{error}</div> : text ? <ReactMarkdown remarkPlugins={[remarkGfm]}>{text}</ReactMarkdown> : <div className="empty">{active?.status === "processing" ? "Processing on AWS; waiting for Markdown…" : "Select the matching .md file to inspect the extraction."}</div>}</div>
+          <div className="markdown">{error ? <div className="error">{error}</div> : text ? <ReactMarkdown remarkPlugins={[remarkGfm]}>{text}</ReactMarkdown> : <div className="empty">{taskStatus?.status === "failed" ? "Conversion failed; see the container log above." : active?.status === "processing" ? "Processing on AWS; waiting for Markdown…" : "Select the matching .md file to inspect the extraction."}</div>}</div>
         </section>
       </main>
       <footer>Upload starts a temporary AWS task and incurs usage charges. AWS access uses your local profile through the Vite server.</footer>
