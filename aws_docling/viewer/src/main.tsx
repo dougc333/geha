@@ -182,7 +182,7 @@ function App() {
   }
 
   useEffect(() => {
-    if (!selectedObject || !/\.(md|json|csv|txt)$/i.test(selectedObject)) { setObjectText(""); return; }
+    if (!selectedObject || !/\.(md|json|csv|txt|log)$/i.test(selectedObject)) { setObjectText(""); return; }
     let current = true;
     fetch(`/api/object?key=${encodeURIComponent(selectedObject)}`).then(async (response) => {
       if (!response.ok) throw new Error(`Object request failed: ${response.status}`);
@@ -266,7 +266,7 @@ function App() {
           <div className="bucket-preview-head"><strong>{selectedObject || "Select a file"}</strong>{selectedObject && <a href={objectUrl} target="_blank" rel="noreferrer">Open file</a>}</div>
           {/\.pdf$/i.test(selectedObject) ? <iframe title="S3 PDF preview" src={objectUrl} />
             : /\.(png|jpe?g)$/i.test(selectedObject) ? <img src={objectUrl} alt={selectedObject} />
-            : /\.(md|json|csv|txt)$/i.test(selectedObject) ? <pre>{objectText || "Loading…"}</pre>
+            : /\.(md|json|csv|txt|log)$/i.test(selectedObject) ? <pre>{objectText || "Loading…"}</pre>
             : <div className="empty">Select a PDF, image, Markdown, CSV, JSON, or text file to preview it.</div>}
         </div></div>
       </section>}

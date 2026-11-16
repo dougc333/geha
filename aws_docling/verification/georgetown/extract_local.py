@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 from docling.datamodel.base_models import InputFormat
@@ -32,12 +33,14 @@ def main() -> None:
 
     markdown = result.document.export_to_markdown(image_mode=ImageRefMode.EMBEDDED)
     (args.output / "document-with-images.md").write_text(markdown, encoding="utf-8")
+    figure_dir = args.output / "figures"
+    figure_dir.mkdir(exist_ok=True)
     figures = []
     for index, picture in enumerate(result.document.pictures, 1):
         image = picture.get_image(result.document)
         if image is None:
             continue
-        name = f"figure-{index:03}.png"
+        name = f"figures/figure-{index:03}.png"
         image.save(args.output / name)
         figures.append({
             "index": index,
@@ -48,6 +51,12 @@ def main() -> None:
     (args.output / "figures.json").write_text(
         json.dumps({"figures": figures}, indent=2) + "\n", encoding="utf-8"
     )
+    embedded = re.compile(r"!\[Image\]\(data:image/png;base64,[A-Za-z0-9+/=]+\)")
+    if len(embedded.findall(markdown)) != len(figures):
+        raise RuntimeError("Embedded image count does not match saved figure count")
+    links = iter(figure["file"] for figure in figures)
+    linked_markdown = embedded.sub(lambda _: f"![Figure]({next(links)})", markdown)
+    (args.output / "document-with-figure-links.md").write_text(linked_markdown, encoding="utf-8")
     print(f"Extracted {len(figures)} figures into {args.output}")
 
 

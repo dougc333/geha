@@ -9,6 +9,8 @@ import json
 import re
 from pathlib import Path
 
+import cv2
+import numpy as np
 import pymupdf
 
 
@@ -24,7 +26,7 @@ BENEFIT_ROWS = (
 def table_sections(lines: list[str]) -> list[dict]:
     sections = []
     for i, line in enumerate(lines):
-        match = re.match(r"^Table ([1-7])(?: \([^)]*\))?:", line)
+        match = re.match(r"^Tab\s*le ([1-7])(?: \([^)]*\))?:", line)
         if not match:
             continue
         rows = []
@@ -45,6 +47,7 @@ def audit(pdf_path: Path, markdown_path: Path) -> dict:
     pdf = pymupdf.open(pdf_path)
     sections = table_sections(lines)
     issues = []
+    figure_verification = []
 
     def add(code: str, severity: str, pages: list[int], md_lines: list[int],
             detail: str, evidence: str) -> None:
@@ -105,6 +108,38 @@ def audit(pdf_path: Path, markdown_path: Path) -> dict:
             add("missing_figure_image", "high", [FIGURE_PAGES[number]], [line_no],
                 f"Figure {number} has no embedded image in the Markdown.", lines[line_no - 1])
 
+    figure_manifest = json.loads(markdown_path.with_name("figures.json").read_text())
+    linked_markdown_path = markdown_path.with_name("document-with-figure-links.md")
+    linked_markdown = linked_markdown_path.read_text(encoding="utf-8")
+    for figure in figure_manifest["figures"]:
+        number, page_no = figure["index"], figure["page"]
+        image_path = markdown_path.parent / figure["file"]
+        image = cv2.imread(str(image_path), cv2.IMREAD_GRAYSCALE)
+        page = pdf[page_no - 1]
+        pix = page.get_pixmap(colorspace=pymupdf.csGRAY, alpha=False)
+        page_image = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.height, pix.width)
+        if image is None or image.shape[0] > pix.height or image.shape[1] > pix.width:
+            add("unreadable_figure_png", "high", [page_no], [],
+                f"Figure {number} PNG is missing or invalid.", figure["file"])
+            continue
+        _, score, _, location = cv2.minMaxLoc(
+            cv2.matchTemplate(page_image, image, cv2.TM_CCOEFF_NORMED)
+        )
+        x0, _, _, y1 = figure["bbox"]
+        expected = (round(x0), round(page.rect.height - y1))
+        linked = f"![Figure]({figure['file']})" in linked_markdown
+        passed = score >= 0.98 and all(abs(a - b) <= 2 for a, b in zip(location, expected)) and linked
+        figure_verification.append({
+            "figure": number, "pdf_page": page_no, "png": figure["file"],
+            "markdown_link_found": linked, "template_match_score": round(score, 6),
+            "render_match_top_left": list(location), "expected_top_left": list(expected),
+            "crop_matches_source_pdf": passed,
+        })
+        if not passed:
+            add("figure_verification_failed", "high", [page_no], [],
+                f"Figure {number} PNG or Markdown link did not match the recorded PDF location.",
+                figure["file"])
+
     conclusion = next((i for i, line in enumerate(lines) if line.startswith("## VII. Conclusion")), None)
     if conclusion is not None:
         first = next((i for i in range(conclusion + 1, len(lines)) if lines[i].startswith("Employers are uniquely")), None)
@@ -124,6 +159,8 @@ def audit(pdf_path: Path, markdown_path: Path) -> dict:
         "table_sections": [{"table": s["number"], "pdf_pages": TABLE_PAGES[s["number"]],
                             "markdown_line": s["line"], "heading": s["heading"]}
                            for s in sections],
+        "linked_markdown": str(linked_markdown_path),
+        "figure_verification": figure_verification,
         "issues": issues,
         "issue_count": len(issues),
         "scope": "Full Markdown scanned for numbered tables, figures, formula placeholders, and a confirmed conclusion ordering error. Table findings are structural; cells and prose have not been exhaustively checked for transcription accuracy."

@@ -48,6 +48,8 @@ AWS_PROFILE=geha-terraform aws s3 ls \
 
 A matching `.md` under `extracted/` confirms output was written. If the task fails, the status panel shows *failed* and the container traceback; the document selector may still say *processing* because no Markdown was written. S3 can deliver an event more than once, so duplicate tasks are possible. Presigned S3 URLs expire after six hours. The local AWS profile needs S3 list/get/put, ECS list/describe, and CloudWatch Logs read permissions.
 
+After `terraform apply`, an EventBridge rule invokes `aws-docling-archive-logs` when a Docling ECS task stops. It copies that task's `/ecs/aws-docling` CloudWatch stream and stop metadata to `s3://<bucket>/jobs/logs/<task-id>.log`, including failed tasks. The live status panel continues reading CloudWatch; the S3 copy is a per-run record. This rule and Lambda are triggered only when a task stops, and existing runs are not backfilled. Check an archived log with `aws s3 ls "s3://$(cd terraform && terraform output -raw bucket_name)/jobs/logs/" --profile geha-user`.
+
 For command-line upload, run this from the Terraform directory:
 
 ```bash

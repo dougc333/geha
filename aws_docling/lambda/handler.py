@@ -76,11 +76,12 @@ def handler(event, context):
         if result.get("failures") or not result.get("tasks"):
             raise RuntimeError(f"ECS rejected {key}: {result.get('failures')}")
         task_arn = result["tasks"][0]["taskArn"]
+        log_key = f"jobs/logs/{task_arn.rsplit('/', 1)[-1]}.log"
         job_key = "jobs/" + key[len("incoming/") : -4] + ".json"
         s3.put_object(
             Bucket=bucket,
             Key=job_key,
-            Body=json.dumps({"source": key, "output": output_key, "figures": figures_key, "models": models_key, "task": task_arn}).encode(),
+            Body=json.dumps({"source": key, "output": output_key, "figures": figures_key, "models": models_key, "task": task_arn, "log": log_key}).encode(),
             ContentType="application/json",
         )
         launched.append({"source": key, "output": output_key, "task": task_arn})
