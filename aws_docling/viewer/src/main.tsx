@@ -214,8 +214,8 @@ function App() {
         <div><span className="eyebrow">DOCUMENT REVIEW</span><h1>PDF and extraction</h1></div>
         <div className="actions">
           <button onClick={() => { void loadAws(); }}>Load AWS outputs</button>
-          <button onClick={() => { setBucketOpen((old) => !old); if (!bucketOpen && !bucketListing) void loadBucket(); }}>S3 bucket files</button>
-          <button onClick={() => setModelsOpen((old) => !old)}>Docling models</button>
+          <button aria-expanded={bucketOpen} aria-controls="bucket-browser" onClick={() => { setBucketOpen((old) => !old); setModelsOpen(false); if (!bucketOpen && !bucketListing) void loadBucket(); }}>{bucketOpen ? "Close S3 files" : "S3 bucket files"}</button>
+          <button aria-expanded={modelsOpen} aria-controls="model-panel" onClick={() => { setModelsOpen((old) => !old); setBucketOpen(false); }}>{modelsOpen ? "Close models" : "Docling models"}</button>
           <label className="upload">{uploading ? "Uploading…" : "Upload PDF and process"}<input type="file" accept=".pdf" disabled={uploading} onChange={(event) => { void uploadPdf(event.target.files?.[0]); event.target.value = ""; }} /></label>
           <label className="upload">Add PDFs and Markdown<input type="file" accept=".pdf,.md" multiple onChange={(event) => addFiles(event.target.files)} /></label>
           <label className="upload secondary">Open run folder<input type="file" multiple {...{ webkitdirectory: "" }} onChange={(event) => addFiles(event.target.files)} /></label>
@@ -247,9 +247,9 @@ function App() {
           <div className="markdown">{error ? <div className="error">{error}</div> : text ? <ReactMarkdown remarkPlugins={[remarkGfm]} urlTransform={markdownUrl}>{text}</ReactMarkdown> : <div className="empty">{taskStatus?.status === "failed" ? "Conversion failed; see the container log above." : active?.status === "processing" ? "Processing on AWS; waiting for Markdown…" : "Select the matching .md file to inspect the extraction."}</div>}</div>
         </section>
       </main>
-      {bucketOpen && <section className="bucket-browser">
+      {bucketOpen && <section className="bucket-browser" id="bucket-browser" role="dialog" aria-label="S3 bucket files" aria-modal="true">
         <div className="bucket-heading"><div><h2>S3 bucket files</h2><span>{bucketListing?.bucket ?? "Loading bucket…"}</span></div>
-          <button onClick={() => { void loadBucket(bucketListing?.prefix ?? ""); }} disabled={bucketLoading}>Refresh</button></div>
+          <div className="panel-actions"><button onClick={() => { void loadBucket(bucketListing?.prefix ?? ""); }} disabled={bucketLoading}>Refresh</button><button onClick={() => setBucketOpen(false)}>Close</button></div></div>
         <nav className="bucket-path" aria-label="S3 folder path">
           <button onClick={() => { void loadBucket(); }}>Bucket root</button>
           {prefixParts.map((part, index) => <React.Fragment key={`${part}-${index}`}><span>/</span><button onClick={() => { void loadBucket(`${prefixParts.slice(0, index + 1).join("/")}/`); }}>{part}</button></React.Fragment>)}
@@ -270,8 +270,8 @@ function App() {
             : <div className="empty">Select a PDF, image, Markdown, CSV, JSON, or text file to preview it.</div>}
         </div></div>
       </section>}
-      {modelsOpen && <section className="model-panel">
-        <h2>Docling model downloads</h2>
+      {modelsOpen && <section className="model-panel" id="model-panel" role="dialog" aria-label="Docling models" aria-modal="true">
+        <div className="panel-actions model-heading"><h2>Docling model downloads</h2><button onClick={() => setModelsOpen(false)}>Close</button></div>
         {modelError && <div className="error">{modelError}</div>}
         <div className="model-columns"><div><h3>Local Mac Hugging Face cache (shared)</h3><p>{modelInfo?.localCacheRoot ?? "Checking…"}</p>
           {modelInfo?.localModels.length ? <ul>{modelInfo.localModels.map((name) => <li key={name}>{name}</li>)}</ul> : <p>No Hugging Face model directories found.</p>}
