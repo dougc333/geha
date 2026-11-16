@@ -1,0 +1,16 @@
+services:
+  docling:
+    image: ghcr.io/docling-project/docling-serve-cpu:v1.38.2@sha256:7a480a1604fa3b42efeddc7db9527690d9f9bc903226136013e2bfe6b1a4dfb0
+    ports:
+      - "127.0.0.1:5011:5001"
+    restart: "no"
+    healthcheck:
+      test:
+        - CMD
+        - /opt/app-root/bin/python
+        - -c
+        - "from urllib.request import urlopen; urlopen('http://127.0.0.1:5001/health', timeout=3)"
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s

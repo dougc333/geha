@@ -4,6 +4,8 @@ S3 receives PDFs at `incoming/`. An S3 event invokes a short Lambda, which start
 
 The worker now enables page and picture images. Its Markdown embeds the figure crops at their original positions, and it writes a separate `extracted/<name>.figures.zip` with PNGs and a page/box manifest. It also writes `extracted/<name>.models.json` with the Hugging Face model directories found in that task's container cache. The `do_chart_extraction` option remains off by default; it needs a compatible Granite Vision runtime and its numeric output must be checked against the PDF before enabling it in AWS. See [the Georgetown local verification](verification/georgetown/README.md).
 
+For a no-AWS server test, use the pinned image and client in [docker/](docker/README.md). The 30-page Georgetown paper completed locally in 64 seconds (about 28 pages/minute for that one CPU run); the server's Markdown matched the deployed AWS Markdown after replacing embedded images with placeholders. This is one measured document, not a throughput guarantee.
+
 ## Start and verify
 
 Terraform creates a VPC and two public subnets in `us-west-2`. Fargate gets a public IP for outbound image pulls and S3 access. Its security group has no inbound rules. **Nothing is deployed until you apply Terraform.** Applying creates AWS resources, and each upload incurs Fargate and public IPv4 usage. The Docling CPU image is large, so the first image pull may take time.
