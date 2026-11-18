@@ -1,0 +1,74 @@
+# Georgetown PDF local verification
+
+Source: `/Users/dc/geha/crawl_dir/raw/benefits_research/cri.georgetown.edu/wp-content/uploads/2025/12/CRI_WP_Rao_Burke_EmpBen_Dec2025.pdf` (30 pages).
+
+`aws-worker-rev2.md` is the exact Markdown downloaded from `s3://aws-docling-669059827483-us-west-2/extracted/retry-regional-CRI_WP_Rao_Burke_EmpBen_Dec2025.md`. It was produced by the deployed ECS task definition revision 2 and contains six image placeholders. The other Markdown files here are local conversions or image-linked variants.
+
+Run locally with the repository virtual environment:
+
+```bash
+cd /Users/dc/geha
+.venv/bin/python aws_docling/verification/georgetown/extract_local.py \
+  crawl_dir/raw/benefits_research/cri.georgetown.edu/wp-content/uploads/2025/12/CRI_WP_Rao_Burke_EmpBen_Dec2025.pdf
+```
+
+The saved `document-with-images.md` is the complete Docling Markdown output with six base64 PNG images placed where the six figure placeholders were. `figures/figure-001.png` through `figures/figure-006.png` are the separate crops. `document-with-figure-links.md` links to those PNGs using relative image paths, so GitHub and Markdown viewers that resolve local assets can display them without base64 data. `figures.json` records their PDF page numbers and boxes. Docling 2.126.0 produced these artifacts locally with `generate_page_images=True`, `generate_picture_images=True`, and `ImageRefMode.EMBEDDED`.
+
+To review it in the React viewer, use **Add PDFs and Markdown** and select this `document-with-images.md` together with a copy of the source PDF renamed `document-with-images.pdf`, so the local filename pairing matches. The image crops render inline in the Markdown pane.
+
+These images are readable, but the extraction is not fully verified: Table 4 still merges rows and columns, the equation is not decoded, and some conclusion paragraphs are out of order. Trying `table_structure_options.do_cell_matching=False` on pages 19–20 did not repair Table 4.
+
+Run `audit_extraction.py` against the source PDF to regenerate `summary.json`. The audit scans the complete saved Markdown for structural errors and records source pages, Markdown lines, and evidence. It identifies errors for post-processing, but does not rewrite table cells or claim a complete transcription audit.
+It also matches each figure PNG against a rendered source PDF page at the recorded bounding box. This verifies the crops' provenance and placement, not the numerical values depicted by the charts.
+
+```bash
+.venv/bin/python aws_docling/verification/georgetown/audit_extraction.py \
+  crawl_dir/raw/benefits_research/cri.georgetown.edu/wp-content/uploads/2025/12/CRI_WP_Rao_Burke_EmpBen_Dec2025.pdf
+.venv/bin/python aws_docling/verification/georgetown/export_tables.py
+```
+
+The table exporter writes `tables/table-1.csv` through `tables/table-7.csv` in long form. Each row retains the PDF page, Markdown line, section number, variable, column, and extracted value. `summary.json` marks Tables 4, 5, and 7 for review because their Markdown contains merged rows. These CSVs preserve the extraction; they do not correct those cells.
+
+## Source-checked table repair
+
+The original extraction and `summary.json` remain available as the baseline. Three agents checked disjoint sets of Tables 1–7 against the PDF in parallel. Each table has a `repairs/table-N.corrected.md` proposal and `repairs/table-N.validation.json` with one or two propose/check iterations (maximum four), source evidence, and unresolved issues. The fan-in script applies only proposals marked verified with no unresolved cells:
+
+```bash
+cd /Users/dc/geha
+.venv/bin/python aws_docling/verification/georgetown/assemble_table_repairs.py
+```
+
+The resulting `document-corrected-tables.md` preserves the AWS worker's non-table text and image placeholders. `document-corrected-tables-with-images.md` applies the same table repairs to the local embedded-image document. `tables-corrected/table-1.csv` through `table-7.csv` contain the repaired cells, and `table-repair-summary.json` records the 263 source-checked values, iteration counts, applied repairs, and re-audit results. The re-audit has zero table-structure findings in either output. Equation 1 and the conclusion ordering still need separate text repair; the AWS variant still has image placeholders.
+
+## Local Docling Serve container test
+
+The pinned AWS image was also run locally as an HTTP server. `server-local.md` is its full 30-page Markdown response with six embedded PNGs; `server-test.json` records the request and comparison. With the images normalized to placeholders, this server response matches the existing AWS Markdown line for line. It retains the same malformed table rows and Equation 1 placeholder.
+
+To repeat the test without starting an AWS task, run the container on an unused local port and send the source PDF:
+
+```bash
+docker run -d --rm --name aws-docling-local-serve \
+  -p 127.0.0.1:5011:5001 \
+  ghcr.io/docling-project/docling-serve-cpu:v1.38.2
+curl http://127.0.0.1:5011/health
+curl -sS --max-time 600 \
+  -F 'files=@/Users/dc/geha/crawl_dir/raw/benefits_research/cri.georgetown.edu/wp-content/uploads/2025/12/CRI_WP_Rao_Burke_EmpBen_Dec2025.pdf;type=application/pdf' \
+  -F 'to_formats=md' -F 'image_export_mode=embedded' -F 'include_images=true' \
+  http://127.0.0.1:5011/v1/convert/file \
+  > /private/tmp/docling-server-georgetown.json
+docker stop aws-docling-local-serve
+```
+
+Docling's `do_chart_extraction=True` extracts values from chart images. The project's `transformers==5.17.0` failed in Granite Vision with `TypeError: create_causal_mask() got an unexpected keyword argument 'cache_position'`. An isolated test using `transformers==4.57.3`, `tokenizers==0.22.2`, and `huggingface-hub==0.36.0` succeeded on page 11. Its chart values are in `chart-page-011-01.csv` and `chart-page-011.md`; they match the visible bars in `figure-002.png`. Chart extraction remains disabled in the AWS worker until the container runtime is checked.
+
+To repeat the chart test without changing the project virtual environment:
+
+```bash
+uv venv --system-site-packages /private/tmp/docling-chart-venv
+uv pip install --python /private/tmp/docling-chart-venv/bin/python --no-deps \
+  'transformers==4.57.3' 'tokenizers==0.22.2' 'huggingface-hub==0.36.0'
+cd /Users/dc/geha
+.venv/bin/python aws_docling/verification/georgetown/extract_chart_local.py \
+  crawl_dir/raw/benefits_research/cri.georgetown.edu/wp-content/uploads/2025/12/CRI_WP_Rao_Burke_EmpBen_Dec2025.pdf \
+  --compat-site-packages /private/tmp/docling-chart-venv/lib/python3.12/site-packages
+```

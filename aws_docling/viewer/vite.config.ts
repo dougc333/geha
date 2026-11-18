@@ -1,7 +1,12 @@
 import { randomUUID } from "node:crypto";
+import { readdir } from "node:fs/promises";
+import { homedir } from "node:os";
+import { join } from "node:path";
 import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react";
-import { GetObjectCommand, PutObjectCommand, paginateListObjectsV2, S3Client } from "@aws-sdk/client-s3";
+import { DescribeTasksCommand, ECSClient, ListTasksCommand } from "@aws-sdk/client-ecs";
+import { CloudWatchLogsClient, GetLogEventsCommand } from "@aws-sdk/client-cloudwatch-logs";
+import { GetObjectCommand, HeadObjectCommand, ListObjectsV2Command, PutObjectCommand, paginateListObjectsV2, S3Client } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 function awsDocuments(): Plugin {
@@ -9,9 +14,13 @@ function awsDocuments(): Plugin {
     name: "local-aws-documents",
     configureServer(server) {
       const bucket = process.env.AWS_DOCLING_BUCKET;
-      const s3 = new S3Client({ region: process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION });
+      const region = process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION;
+      const cluster = process.env.AWS_DOCLING_CLUSTER || "aws-docling";
+      const s3 = new S3Client({ region });
+      const ecs = new ECSClient({ region });
+      const logs = new CloudWatchLogsClient({ region });
       server.middlewares.use(async (req, res, next) => {
-        if (!req.url?.startsWith("/api/documents") && !req.url?.startsWith("/api/markdown") && !req.url?.startsWith("/api/upload")) return next();
+        if (!req.url?.startsWith("/api/documents") && !req.url?.startsWith("/api/markdown") && !req.url?.startsWith("/api/upload") && !req.url?.startsWith("/api/status") && !req.url?.startsWith("/api/bucket") && !req.url?.startsWith("/api/object") && !req.url?.startsWith("/api/models")) return next();
         res.setHeader("Cache-Control", "no-store");
         if (!bucket) {
           res.statusCode = 503;
@@ -20,7 +29,77 @@ function awsDocuments(): Plugin {
         }
         try {
           const url = new URL(req.url, "http://localhost");
-          if (url.pathname === "/api/documents") {
+          if (url.pathname === "/api/models") {
+            const name = url.searchParams.get("name") ?? "";
+            if (name && !/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(name)) {
+              res.statusCode = 400;
+              res.end(JSON.stringify({ error: "Invalid document name" }));
+              return;
+            }
+            const localCacheRoot = process.env.HF_HUB_CACHE || join(process.env.HF_HOME || join(homedir(), ".cache", "huggingface"), "hub");
+            let localModels: string[] = [];
+            try {
+              localModels = (await readdir(localCacheRoot, { withFileTypes: true }))
+                .filter((entry) => entry.isDirectory() && entry.name.startsWith("models--"))
+                .map((entry) => entry.name.slice(8).replaceAll("--", "/")).sort();
+            } catch (error) {
+              if ((error as { code?: string }).code !== "ENOENT") throw error;
+            }
+            let runInventory: unknown = null;
+            if (name) {
+              try {
+                const object = await s3.send(new GetObjectCommand({ Bucket: bucket, Key: `extracted/${name}.models.json` }));
+                runInventory = JSON.parse(await object.Body?.transformToString() ?? "{}");
+              } catch (error) {
+                if ((error as { $metadata?: { httpStatusCode?: number } }).$metadata?.httpStatusCode !== 404) throw error;
+              }
+            }
+            res.setHeader("Content-Type", "application/json");
+            res.end(JSON.stringify({ localCacheRoot, localModels, runInventory }));
+          } else if (url.pathname === "/api/bucket") {
+            const prefix = url.searchParams.get("prefix") ?? "";
+            const continuationToken = url.searchParams.get("cursor") ?? undefined;
+            if (prefix.includes("..") || prefix.startsWith("/") || (prefix && !prefix.endsWith("/"))) {
+              res.statusCode = 400;
+              res.end(JSON.stringify({ error: "Invalid prefix" }));
+              return;
+            }
+            const listing = await s3.send(new ListObjectsV2Command({
+              Bucket: bucket, Prefix: prefix, Delimiter: "/", MaxKeys: 100, ContinuationToken: continuationToken,
+            }));
+            res.setHeader("Content-Type", "application/json");
+            res.end(JSON.stringify({
+              bucket,
+              prefix,
+              folders: (listing.CommonPrefixes ?? []).map((item) => item.Prefix).filter(Boolean),
+              objects: (listing.Contents ?? []).filter((item) => item.Key && item.Key !== prefix).map((item) => ({
+                key: item.Key, size: item.Size ?? 0, modified: item.LastModified?.toISOString() ?? "",
+              })),
+              nextCursor: listing.NextContinuationToken,
+            }));
+          } else if (url.pathname === "/api/object") {
+            const key = url.searchParams.get("key") ?? "";
+            if (!key || key.startsWith("/") || key.includes("..")) {
+              res.statusCode = 400;
+              res.end(JSON.stringify({ error: "Invalid object key" }));
+              return;
+            }
+            const object = await s3.send(new GetObjectCommand({ Bucket: bucket, Key: key }));
+            if ((object.ContentLength ?? 0) > 25_000_000) {
+              res.statusCode = 413;
+              res.end("Object exceeds 25 MB viewer limit");
+              return;
+            }
+            const contentType = key.toLowerCase().endsWith(".pdf") ? "application/pdf"
+              : key.toLowerCase().endsWith(".png") ? "image/png"
+              : key.toLowerCase().endsWith(".jpg") || key.toLowerCase().endsWith(".jpeg") ? "image/jpeg"
+              : key.toLowerCase().endsWith(".json") ? "application/json; charset=utf-8"
+              : key.toLowerCase().endsWith(".md") || key.toLowerCase().endsWith(".csv") || key.toLowerCase().endsWith(".txt") ? "text/plain; charset=utf-8"
+              : "application/octet-stream";
+            res.setHeader("Content-Type", contentType);
+            res.setHeader("Content-Disposition", "inline");
+            res.end(Buffer.from(await object.Body?.transformToByteArray() ?? []));
+          } else if (url.pathname === "/api/documents") {
             const documents = new Map<string, { id: string; name: string; markdownKey?: string; pdfUrl: string; status: string }>();
             for await (const page of paginateListObjectsV2({ client: s3 }, { Bucket: bucket, Prefix: "incoming/" })) {
               for (const object of page.Contents ?? []) {
@@ -79,6 +158,83 @@ function awsDocuments(): Plugin {
             await s3.send(new PutObjectCommand({ Bucket: bucket, Key: `incoming/${storedName}`, Body: body, ContentType: "application/pdf" }));
             res.setHeader("Content-Type", "application/json");
             res.end(JSON.stringify({ name: storedName, status: "processing" }));
+          } else if (url.pathname === "/api/status") {
+            const name = url.searchParams.get("name") ?? "";
+            if (!/^[A-Za-z0-9][A-Za-z0-9._-]*$/.test(name)) {
+              res.statusCode = 400;
+              res.end(JSON.stringify({ error: "Invalid document name" }));
+              return;
+            }
+            let taskArn: string | undefined;
+            try {
+              const object = await s3.send(new GetObjectCommand({ Bucket: bucket, Key: `jobs/${name}.json` }));
+              const job = JSON.parse(await object.Body?.transformToString() ?? "{}");
+              taskArn = job.task;
+            } catch (error) {
+              if ((error as { $metadata?: { httpStatusCode?: number } }).$metadata?.httpStatusCode !== 404) throw error;
+            }
+            // Existing uploads predate job markers; find their task by its source URL.
+            if (!taskArn) {
+              for (const desiredStatus of ["RUNNING", "STOPPED"] as const) {
+                const listed = await ecs.send(new ListTasksCommand({ cluster, desiredStatus, maxResults: 100 }));
+                if (!listed.taskArns?.length) continue;
+                const described = await ecs.send(new DescribeTasksCommand({ cluster, tasks: listed.taskArns }));
+                const found = described.tasks?.find((task) => {
+                  const source = task.overrides?.containerOverrides?.flatMap((item) => item.environment ?? [])
+                    .find((item) => item.name === "SOURCE_URL")?.value;
+                  if (!source) return false;
+                  try { return decodeURIComponent(new URL(source).pathname).endsWith(`/incoming/${name}.pdf`); }
+                  catch { return false; }
+                });
+                if (found?.taskArn) { taskArn = found.taskArn; break; }
+              }
+            }
+            let status = "queued";
+            let taskId: string | undefined;
+            let messages: Array<{ time: string; message: string }> = [];
+            let heartbeatAgeSeconds: number | undefined;
+            let detail = "Waiting for the S3 event to start a task.";
+            if (taskArn) {
+              taskId = taskArn.split("/").pop();
+              const described = await ecs.send(new DescribeTasksCommand({ cluster, tasks: [taskArn] }));
+              const task = described.tasks?.[0];
+              const container = task?.containers?.find((item) => item.name === "docling-worker");
+              if (task?.lastStatus === "STOPPED") {
+                status = container?.exitCode === 0 ? "complete" : "failed";
+                detail = container?.reason || task.stoppedReason || `Container exit code ${container?.exitCode ?? "unknown"}`;
+              } else if (task?.lastStatus === "RUNNING") {
+                status = "converting";
+                detail = "Docling is converting the PDF.";
+              } else {
+                status = "starting";
+                detail = `ECS task ${task?.lastStatus?.toLowerCase() ?? "pending"}; image pull may take time.`;
+              }
+              try {
+                const events = await logs.send(new GetLogEventsCommand({
+                  logGroupName: `/ecs/${cluster}`,
+                  logStreamName: `worker/docling-worker/${taskId}`,
+                  limit: 80,
+                  startFromHead: false,
+                }));
+                messages = (events.events ?? []).map((event) => ({
+                  time: event.timestamp ? new Date(event.timestamp).toLocaleTimeString() : "",
+                  message: event.message ?? "",
+                }));
+                const heartbeat = [...(events.events ?? [])].reverse().find((event) => event.message?.startsWith("heartbeat "));
+                if (heartbeat?.timestamp) heartbeatAgeSeconds = Math.max(0, Math.floor((Date.now() - heartbeat.timestamp) / 1000));
+              } catch (error) {
+                if ((error as { name?: string }).name !== "ResourceNotFoundException") throw error;
+              }
+            }
+            try {
+              await s3.send(new HeadObjectCommand({ Bucket: bucket, Key: `extracted/${name}.md` }));
+              status = "complete";
+              detail = "Markdown is available in S3.";
+            } catch (error) {
+              if ((error as { $metadata?: { httpStatusCode?: number } }).$metadata?.httpStatusCode !== 404) throw error;
+            }
+            res.setHeader("Content-Type", "application/json");
+            res.end(JSON.stringify({ status, detail, taskId, heartbeatAgeSeconds, messages }));
           } else if (url.pathname === "/api/markdown") {
             const key = url.searchParams.get("key") ?? "";
             if (!key.startsWith("extracted/") || !key.endsWith(".md") || key.includes("..")) {
