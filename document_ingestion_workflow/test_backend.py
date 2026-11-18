@@ -8,7 +8,7 @@ from tempfile import TemporaryDirectory
 
 from PIL import Image
 
-from .backend import DEFAULT_DOCUMENT, DemoRun, LayoutToolRouter, documents
+from .backend import DEFAULT_DOCUMENT, DEMO_DOCUMENTS, ROOT, DemoRun, LayoutToolRouter, documents
 from crawl_dir.src.pipeline.figure_segmentation import segment_charts_and_figures
 from .bill_of_lading_workflow import (
     GRAPH_PROGRAM,
@@ -120,6 +120,19 @@ class DemoBackendTests(unittest.TestCase):
         spec_tool = next(tool for tool in run.events[0]["tools"]
                          if tool["id"] == "authored_figure_spec_html")
         self.assertTrue(spec_tool["available"])
+
+    def test_ey_figure_specs_resolve_to_authored_directory(self):
+        config = DEMO_DOCUMENTS["research/ey-limra-workforce-benefits-study-final-2025.pdf"]
+        specs = (ROOT / config["figure_specs"]).resolve()
+        self.assertEqual(
+            specs,
+            ROOT.parent / "bounding_box" / "annotations" / "research"
+            / "ey-limra-workforce-benefits-study-final-2025" / "figure-specs",
+        )
+        router = LayoutToolRouter(DemoRun("test-ey-spec-path"), "hybrid_figure_report", None, specs)
+        router.choose()
+        self.assertEqual(router.selected, "authored_figure_spec_html")
+        self.assertIn(24, router.spec_pages)
 
     def test_bill_of_lading_schema_creates_eight_named_blocks(self):
         with TemporaryDirectory() as temporary:

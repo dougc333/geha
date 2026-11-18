@@ -1,6 +1,7 @@
 export type RunStatus = 'checking' | 'idle' | 'starting' | 'running' | 'complete' | 'error'
 export type ViewMode = 'before' | 'after'
 export type RunView = 'current' | 'previous'
+export type VisionProvider = 'anthropic' | 'nous'
 
 export interface AgentEvent {
   type: string
@@ -37,7 +38,12 @@ export interface DemoDocument {
 
 export interface DemoState {
   serverInstanceId?: string
+  buildRevision?: string
   ready: boolean
+  anthropicReady: boolean
+  openaiReady: boolean
+  nousReady: boolean
+  provider: VisionProvider
   model: string
   documents: DemoDocument[]
   selectedDocument: string

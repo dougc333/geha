@@ -1,9 +1,10 @@
 import React, { createContext } from 'react'
 import { RunClient } from './RunClient'
-import type { AgentEvent, ComparisonArtifact, DemoState, RunView, ViewMode } from './types'
+import type { AgentEvent, ComparisonArtifact, DemoState, RunView, ViewMode, VisionProvider } from './types'
 
 interface DemoContextValue extends DemoState {
-  startRun: () => Promise<void>
+  startRun: (document?: string, provider?: VisionProvider) => Promise<void>
+  selectModel: (provider: VisionProvider) => void
   selectDocument: (document: string) => void
   selectView: (view: ViewMode) => void
   selectRunView: (view: RunView) => void
@@ -13,7 +14,11 @@ interface DemoContextValue extends DemoState {
 
 const initialState: DemoState = {
   ready: false,
-  model: 'gpt-4.1-mini',
+  anthropicReady: false,
+  openaiReady: false,
+  nousReady: false,
+  provider: 'anthropic',
+  model: 'claude-sonnet-5-5',
   documents: [],
   selectedDocument: 'coverage-policies/geha-coverage-policy-datroway.pdf',
   status: 'checking',
@@ -28,6 +33,7 @@ const initialState: DemoState = {
 export const DemoContext = createContext<DemoContextValue>({
   ...initialState,
   startRun: async () => undefined,
+  selectModel: () => undefined,
   selectDocument: () => undefined,
   selectView: () => undefined,
   selectRunView: () => undefined,
@@ -40,6 +46,7 @@ export class DemoProvider extends React.Component<React.PropsWithChildren, DemoS
   private readonly client = new RunClient()
   private countdownTimer?: number
   private serverTimer?: number
+  private runRequestPending = false
 
   componentDidMount(): void {
     void this.loadHealth()
@@ -60,7 +67,11 @@ export class DemoProvider extends React.Component<React.PropsWithChildren, DemoS
       ])
       this.setState({
         serverInstanceId: health.server_instance_id,
+        buildRevision: health.build_revision,
         ready: health.ready,
+        anthropicReady: health.ready,
+        openaiReady: health.openai_ready,
+        nousReady: health.nous_ready,
         model: health.model,
         documents: catalog.documents,
         selectedDocument: catalog.default,
@@ -82,8 +93,12 @@ export class DemoProvider extends React.Component<React.PropsWithChildren, DemoS
       window.clearInterval(this.countdownTimer)
       this.setState({
         serverInstanceId: health.server_instance_id,
-        ready: health.ready,
-        model: health.model,
+        buildRevision: health.build_revision,
+        ready: this.state.provider === 'nous' ? health.nous_ready : health.ready,
+        anthropicReady: health.ready,
+        openaiReady: health.openai_ready,
+        nousReady: health.nous_ready,
+        model: this.state.provider === 'nous' ? health.nous_model : health.model,
         status: 'idle',
         runId: undefined,
         events: [],
@@ -102,29 +117,36 @@ export class DemoProvider extends React.Component<React.PropsWithChildren, DemoS
     }
   }
 
-  startRun = async (): Promise<void> => {
+  startRun = async (document = this.state.selectedDocument, provider = this.state.provider): Promise<void> => {
+    if (this.runRequestPending || this.state.status === 'starting' || this.state.status === 'running') return
+    this.runRequestPending = true
     this.client.close()
     window.clearInterval(this.countdownTimer)
+    this.setState({
+      selectedDocument: document,
+      provider,
+      model: provider === 'nous' ? 'qwen/qwen3-vl-235b-a22b-instruct' : 'claude-sonnet-5-5',
+      ready: provider === 'nous' ? this.state.nousReady : this.state.anthropicReady,
+      status: 'starting', events: [], pageComparisons: {},
+      previousPageComparisons: {}, previousRunId: undefined,
+      runView: 'current',
+      selectedComparisonPage: undefined, before: undefined, after: undefined,
+      activeView: 'before', countdown: 0, error: undefined, runId: undefined,
+    })
     let previous: Awaited<ReturnType<RunClient['previous']>> = {
       available: false,
       pages: {},
     }
     try {
-      previous = await this.client.previous(this.state.selectedDocument)
+      previous = await this.client.previous(document)
     } catch {
       // A missing previous run must not block a new live run.
     }
-    this.setState({
-      status: 'starting', events: [], pageComparisons: {},
-      previousPageComparisons: previous.pages,
-      previousRunId: previous.run_id,
-      runView: 'current',
-      selectedComparisonPage: undefined, before: undefined, after: undefined,
-      activeView: 'before', countdown: 0, error: undefined, runId: undefined,
-    })
+    this.setState({ previousPageComparisons: previous.pages, previousRunId: previous.run_id })
     try {
-      const run = await this.client.start(this.state.selectedDocument)
+      const run = await this.client.start(document, provider)
       this.setState({ status: 'running', runId: run.run_id })
+      this.runRequestPending = false
       this.client.stream(
         run.events,
         this.receiveEvent,
@@ -134,6 +156,7 @@ export class DemoProvider extends React.Component<React.PropsWithChildren, DemoS
         (error) => this.setState({ status: 'error', error: error.message }),
       )
     } catch (error) {
+      this.runRequestPending = false
       this.setState({ status: 'error', error: (error as Error).message })
     }
   }
@@ -287,12 +310,21 @@ export class DemoProvider extends React.Component<React.PropsWithChildren, DemoS
     })
     void this.loadPreviousRun(selectedDocument)
   }
+  selectModel = (provider: VisionProvider): void => {
+    if (this.state.status === 'starting' || this.state.status === 'running') return
+    this.setState({
+      provider,
+      model: provider === 'nous' ? 'qwen/qwen3-vl-235b-a22b-instruct' : 'claude-sonnet-5-5',
+      ready: provider === 'nous' ? this.state.nousReady : this.state.anthropicReady,
+    })
+  }
   artifactUrl = (path?: string): string => this.client.artifact(path)
 
   render(): React.ReactNode {
     const value: DemoContextValue = {
       ...this.state,
       startRun: this.startRun,
+      selectModel: this.selectModel,
       selectDocument: this.selectDocument,
       selectView: this.selectView,
       selectRunView: this.selectRunView,

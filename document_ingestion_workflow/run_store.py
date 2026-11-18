@@ -177,6 +177,9 @@ class DurableRun:
         if event.get("type") == "agent_error":
             self._failed = True
             self._error = event
+        if event.get("type") == "agent_finished" and (event.get("qc") or {}).get("status") == "failed":
+            self._failed = True
+            self._error = {"message": "Document QC failed", "qc": event["qc"]}
         self.store.append_event(self.run_id, event)
 
     def finish(self) -> None:

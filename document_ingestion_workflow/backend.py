@@ -12,9 +12,10 @@ import shutil
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Protocol
 
 from aiohttp import web
+from botocore.exceptions import BotoCoreError, ClientError
 
 from crawl_dir.src.ingestion_mcp import ROOT, download_public_pdf
 from crawl_dir.src.pipeline.scanned_ingestion import (
@@ -27,6 +28,7 @@ from crawl_dir.src.pipeline.scanned_ingestion import (
     review_chart_html_with_claude,
 )
 from crawl_dir.src.pipeline.claude_client import CLAUDE_MODEL, claude_credentials_available
+from crawl_dir.src.pipeline.model_client import use_model_provider
 from crawl_dir.src.pipeline.figure_specs import (
     TOOL_ID as FIGURE_SPEC_TOOL_ID,
     make_spec_generator,
@@ -39,16 +41,23 @@ from crawl_dir.src.pipeline.figure_segmentation import (
     segment_charts_and_figures,
 )
 from document_ingestion_workflow.bill_of_lading_workflow import (
+    BILL_OF_LADING_OCR_EFFORT,
+    BILL_OF_LADING_OCR_MODEL,
     GRAPH_PROGRAM as BILL_OF_LADING_GRAPH_PROGRAM,
     correct_bill_of_lading_cells,
     generate_bill_of_lading_html_from_schema,
     review_bill_of_lading,
     segment_bill_of_lading_with_schema,
+    verify_bill_of_lading_fields,
 )
+from document_ingestion_workflow.job_queue import ElasticJobQueue
+from document_ingestion_workflow.run_store import RunStore
 
 DEFAULT_DOCUMENT = "coverage-policies/geha-coverage-policy-datroway.pdf"
-# Only the bill-of-lading cell extraction/correction graph still calls OpenAI.
+# Bill-of-lading segment text review still calls OpenAI.
 OPENAI_MODEL = "gpt-4.1-mini"
+NOUS_VISION_MODEL = "qwen/qwen3-vl-235b-a22b-instruct"
+VISION_MODELS = {"anthropic": CLAUDE_MODEL, "nous": NOUS_VISION_MODEL}
 DEMO_DOCUMENTS = {
     DEFAULT_DOCUMENT: {
         "title": "Datroway",
@@ -92,7 +101,7 @@ DEMO_DOCUMENTS = {
         "layout_kind": "hybrid_figure_report",
         "local_fixture": True,
         "source_status": "Local public research report",
-        "figure_specs": "annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs",
+        "figure_specs": "../bounding_box/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs",
     },
 }
 UI_DIST = Path(__file__).parent / "ui" / "dist"
@@ -124,29 +133,12 @@ class DemoRun:
             return self.events[offset:], self.complete
 
 
-class DemoRunRegistry:
-    """Thread-safe owner of in-memory live-run state."""
+class RunEventSink(Protocol):
+    run_id: str
 
-    def __init__(self) -> None:
-        self._runs: dict[str, DemoRun] = {}
-        self._lock = threading.Lock()
+    def emit(self, event: dict[str, Any]) -> None: ...
 
-    def create(self) -> DemoRun:
-        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-        run = DemoRun(f"agent-demo-{stamp}-{uuid.uuid4().hex[:6]}")
-        with self._lock:
-            self._runs[run.run_id] = run
-        return run
-
-    def get(self, run_id: str) -> DemoRun:
-        with self._lock:
-            run = self._runs.get(run_id)
-        if run is None:
-            raise web.HTTPNotFound(text="Unknown demo run")
-        return run
-
-
-RUNS = DemoRunRegistry()
+    def finish(self) -> None: ...
 
 
 class ScreenshotToolRouter:
@@ -169,7 +161,7 @@ class ScreenshotToolRouter:
         },
     ]
 
-    def __init__(self, run: DemoRun) -> None:
+    def __init__(self, run: RunEventSink) -> None:
         self.run = run
 
     def choose(self) -> tuple[str, Any]:
@@ -209,7 +201,7 @@ class LayoutToolRouter:
             "estimated_latency": "HTML generation + bounded visual correction loop",
             "incremental_cost": "vision generation/review/correction calls",
             "strength": "Preserves complete page composition, charts, tables, and reading order",
-            "runs": f"scanned_ingestion.py: generate/review/correct with {CLAUDE_MODEL}",
+            "runs": "scanned_ingestion.py: generate/review/correct with the selected vision model",
         },
         {
             "id": "chart_figure_crop_html_correction",
@@ -217,7 +209,7 @@ class LayoutToolRouter:
             "estimated_latency": "bounding boxes + up to 6 correction passes per visual",
             "incremental_cost": "vision segmentation, generation, review, and correction calls",
             "strength": "Auditable crop PNGs and per-figure attempts/errors before page assembly",
-            "runs": (f"figure_segmentation.py: {CLAUDE_MODEL} finds figure boxes, writes HTML, "
+            "runs": ("figure_segmentation.py: the selected vision model finds figure boxes, writes HTML, "
                      "reviews and corrects it; fallback when a figure report has no specs"),
         },
         {
@@ -227,7 +219,9 @@ class LayoutToolRouter:
             "incremental_cost": "8 vision OCR calls; no layout-generation call",
             "strength": "Literal named-cell records drive deterministic HTML assembly",
             "program": str(BILL_OF_LADING_GRAPH_PROGRAM),
-            "runs": f"bill_of_lading_workflow.py: cell OCR with {OPENAI_MODEL}",
+            "runs": ("bill_of_lading_workflow.py: named-cell OCR with "
+                     f"{BILL_OF_LADING_OCR_MODEL}, effort={BILL_OF_LADING_OCR_EFFORT}; "
+                     f"segment text review with {OPENAI_MODEL}"),
         },
         {
             "id": FIGURE_SPEC_TOOL_ID,
@@ -239,7 +233,7 @@ class LayoutToolRouter:
         },
     ]
 
-    def __init__(self, run: DemoRun, layout_kind: str, workflow: str | None = None,
+    def __init__(self, run: RunEventSink, layout_kind: str, workflow: str | None = None,
                  specs_dir: Path | None = None) -> None:
         self.run = run
         self.layout_kind = layout_kind
@@ -327,16 +321,22 @@ class LayoutToolRouter:
 class IngestionDemoAgent:
     """Runs the real downloader and scanned-page correction workflow."""
 
-    def __init__(self, run: DemoRun, document: str, delay_seconds: float = 5) -> None:
+    def __init__(self, run: RunEventSink, document: str, delay_seconds: float = 5,
+                 provider: str = "anthropic") -> None:
         self.run = run
         self.document = document
         self.config = DEMO_DOCUMENTS[document]
         self.delay_seconds = delay_seconds
+        if provider not in VISION_MODELS:
+            raise ValueError(f"Unknown vision provider: {provider}")
+        self.provider = provider
+        self.vision_model = VISION_MODELS[provider]
 
     def execute(self) -> None:
         try:
             self.run.emit({"type": "agent_started", "document": self.document,
-                           "title": self.config["title"]})
+                           "title": self.config["title"], "provider": self.provider,
+                           "vision_model": self.vision_model})
             if self.config.get("local_fixture"):
                 source = ROOT / "raw" / self.document
                 if not source.is_file():
@@ -351,7 +351,7 @@ class IngestionDemoAgent:
                 self.run.emit({"type": "download_complete", **download})
             native_figure_report = self.config["layout_kind"] == "hybrid_figure_report"
             native_text_report = self.config["layout_kind"] == "native_text_report"
-            specs_dir = (ROOT / self.config["figure_specs"]
+            specs_dir = ((ROOT / self.config["figure_specs"]).resolve()
                          if self.config.get("figure_specs") else None)
             self.run.emit({
                 "type": "tool_selected",
@@ -385,30 +385,34 @@ class IngestionDemoAgent:
                 self.run.emit({"type": "visual_pages_selected", "pages": visual_pages,
                                "count": len(visual_pages),
                                "method": "all pages in designed EY report"})
-            output = process_scanned_document(
-                root=ROOT,
-                family=self.config["family"],
-                document=self.config["filename"],
-                document_version=self.config["document_version"],
-                # Bill-of-lading cell extraction/correction still run on OpenAI.
-                model=(OPENAI_MODEL if is_bill_of_lading else
-                       FIGURE_SPEC_TOOL_ID if authored_specs else CLAUDE_MODEL),
-                max_corrections=(3 if is_bill_of_lading else 0 if authored_specs else 6),
-                corrector=(correct_bill_of_lading_cells if is_bill_of_lading else None),
-                reviewer=(review_bill_of_lading if is_bill_of_lading else
-                          spec_reviewer if authored_specs else
-                          review_chart_html_with_claude if native_figure_report else None),
-                source_renderer=renderer,
-                source_renderer_name=renderer_name,
-                source_renderer_cost_usd=0.0,
-                page_segmenter=page_segmenter,
-                segmented_generator=segmented_generator,
-                segmentation_layout_hint=self.config.get("layout_hint", ""),
-                additional_visual_pages=visual_pages,
-                requested_run_id=self.run.run_id,
-                event_sink=self.run.emit,
-                demo_delay_seconds=self.delay_seconds,
-            )
+            with use_model_provider(self.provider):
+                output = process_scanned_document(
+                    root=ROOT,
+                    family=self.config["family"],
+                    document=self.config["filename"],
+                    document_version=self.config["document_version"],
+                    # Segment text review still runs on OpenAI; cell OCR uses Claude Opus.
+                    model=(OPENAI_MODEL if is_bill_of_lading else
+                           FIGURE_SPEC_TOOL_ID if authored_specs else self.vision_model),
+                    max_corrections=(3 if is_bill_of_lading else 0 if authored_specs else 6),
+                    corrector=(correct_bill_of_lading_cells if is_bill_of_lading else None),
+                    reviewer=(review_bill_of_lading if is_bill_of_lading else
+                              spec_reviewer if authored_specs else
+                              review_chart_html_with_claude if native_figure_report else None),
+                    source_renderer=renderer,
+                    source_renderer_name=renderer_name,
+                    source_renderer_cost_usd=0.0,
+                    page_segmenter=page_segmenter,
+                    segmented_generator=segmented_generator,
+                    segmentation_layout_hint=self.config.get("layout_hint", ""),
+                    additional_visual_pages=visual_pages,
+                    requested_run_id=self.run.run_id,
+                    event_sink=self.run.emit,
+                    demo_delay_seconds=self.delay_seconds,
+                )
+            if is_bill_of_lading:
+                verification = verify_bill_of_lading_fields(output)
+                self.run.emit({"type": "field_verification", **verification})
             qc = json.loads((output / "qc-report.json").read_text(encoding="utf-8"))
             self.run.emit({"type": "agent_finished", "run": str(output), "qc": qc})
         except Exception as exc:  # Keep the UI trace useful when an external call fails.
@@ -425,12 +429,17 @@ class IngestionDemoAgent:
 async def health(_: web.Request) -> web.Response:
     return web.json_response({
         "ready": claude_credentials_available(),
+        "nous_ready": bool(os.getenv("NOUS_API_KEY")),
         "openai_ready": bool(os.getenv("OPENAI_API_KEY")),
+        "build_revision": os.getenv("APP_BUILD_REVISION", "development"),
         "server_instance_id": SERVER_INSTANCE_ID,
         "document": DEFAULT_DOCUMENT,
         "delay_seconds": 5,
         "model": CLAUDE_MODEL,
-        "bill_of_lading_model": OPENAI_MODEL,
+        "nous_model": NOUS_VISION_MODEL,
+        "bill_of_lading_model": BILL_OF_LADING_OCR_MODEL,
+        "bill_of_lading_ocr_effort": BILL_OF_LADING_OCR_EFFORT,
+        "bill_of_lading_html_model": OPENAI_MODEL,
     })
 
 
@@ -531,13 +540,24 @@ async def previous_run(request: web.Request) -> web.Response:
 
 
 async def start_run(request: web.Request) -> web.Response:
-    if not claude_credentials_available():
+    body = await request.json() if request.can_read_body else {}
+    provider = str(body.get("provider", "anthropic"))
+    if provider not in VISION_MODELS:
+        raise web.HTTPBadRequest(
+            text=json.dumps({"error": "provider must be anthropic or nous"}),
+            content_type="application/json",
+        )
+    if provider == "anthropic" and not claude_credentials_available():
         raise web.HTTPConflict(
             text=json.dumps({"error": "No Anthropic credentials: set ANTHROPIC_API_KEY or run "
                                       "`ant auth login` in the backend environment."}),
             content_type="application/json",
         )
-    body = await request.json() if request.can_read_body else {}
+    if provider == "nous" and not os.getenv("NOUS_API_KEY"):
+        raise web.HTTPConflict(
+            text=json.dumps({"error": "NOUS_API_KEY is not set in the backend environment."}),
+            content_type="application/json",
+        )
     delay = float(body.get("delay_seconds", 5))
     if delay < 0 or delay > 15:
         raise web.HTTPBadRequest(text="delay_seconds must be between 0 and 15")
@@ -550,22 +570,42 @@ async def start_run(request: web.Request) -> web.Response:
     if (DEMO_DOCUMENTS[document].get("workflow") == "bill_of_lading_schema_graph"
             and not os.getenv("OPENAI_API_KEY")):
         raise web.HTTPConflict(
-            text=json.dumps({"error": "OPENAI_API_KEY is not set; the bill-of-lading workflow "
-                                      "still uses OpenAI."}),
+            text=json.dumps({"error": "OPENAI_API_KEY is not set; the bill-of-lading "
+                                      "segment text review still uses OpenAI."}),
             content_type="application/json",
         )
-    run = RUNS.create()
-    thread = threading.Thread(
-        target=IngestionDemoAgent(run, document, delay).execute,
-        name=run.run_id,
-        daemon=True,
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    run_id = f"agent-demo-{stamp}-{uuid.uuid4().hex[:6]}"
+    store: RunStore = request.app["run_store"]
+    store.create(run_id, document)
+    try:
+        await asyncio.to_thread(
+            request.app["job_queue"].send,
+            {"run_id": run_id, "document": document, "delay_seconds": delay,
+             "provider": provider},
+        )
+    except (BotoCoreError, ClientError, OSError) as exc:
+        error = {"message": str(exc), "exception": type(exc).__name__}
+        store.finish(run_id, "failed", error)
+        raise web.HTTPServiceUnavailable(
+            text=json.dumps({"error": "The ingestion queue is unavailable", "run_id": run_id}),
+            content_type="application/json",
+        ) from exc
+    return web.json_response(
+        {"run_id": run_id, "status": "queued", "events": f"/api/runs/{run_id}/events"},
+        status=202,
     )
-    thread.start()
-    return web.json_response({"run_id": run.run_id, "events": f"/api/runs/{run.run_id}/events"})
 
 
 async def stream_events(request: web.Request) -> web.StreamResponse:
-    run = RUNS.get(request.match_info["run_id"])
+    run_id = request.match_info["run_id"]
+    store: RunStore = request.app["run_store"]
+    if await asyncio.to_thread(store.get, run_id) is None:
+        raise web.HTTPNotFound(text="Unknown demo run")
+    try:
+        offset = int(request.headers.get("Last-Event-ID", request.query.get("after", "0")))
+    except ValueError as exc:
+        raise web.HTTPBadRequest(text="Last-Event-ID and after must be integers") from exc
     response = web.StreamResponse(headers={
         "Content-Type": "text/event-stream",
         "Cache-Control": "no-cache",
@@ -573,13 +613,14 @@ async def stream_events(request: web.Request) -> web.StreamResponse:
         "X-Accel-Buffering": "no",
     })
     await response.prepare(request)
-    offset = 0
     try:
         while True:
-            events, complete = run.snapshot(offset)
+            events, complete = await asyncio.to_thread(store.snapshot, run_id, offset)
             for event in events:
-                await response.write(f"data: {json.dumps(event)}\n\n".encode())
-                offset += 1
+                offset = int(event["seq"])
+                await response.write(
+                    f"id: {offset}\ndata: {json.dumps(event)}\n\n".encode()
+                )
             if complete and not events:
                 await response.write(b"event: end\ndata: {}\n\n")
                 break
@@ -617,6 +658,8 @@ async def index(_: web.Request) -> web.FileResponse:
 
 def create_app() -> web.Application:
     app = web.Application(client_max_size=1024 * 1024)
+    app["run_store"] = RunStore()
+    app["job_queue"] = ElasticJobQueue()
     app.router.add_get("/api/health", health)
     app.router.add_get("/api/documents", documents)
     app.router.add_get("/api/previous-run", previous_run)

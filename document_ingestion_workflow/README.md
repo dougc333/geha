@@ -77,7 +77,7 @@ workflow step whenever a selected route performs visual review.
 | Datroway coverage policy | Mixed policy | Whole-page semantic HTML | Claude generation/review |
 | Elrexfio coverage policy | Mixed policy | Whole-page semantic HTML | Claude generation/review |
 | Bendamustine coverage policy | Native-text report | Native PDF text and structure | None |
-| Synthetic Bill of Lading | Dense form | Versioned schema plus named-cell OCR | OpenAI for cell OCR/correction |
+| Synthetic Bill of Lading | Dense form | Versioned schema plus named-cell OCR | Claude Opus 5.5 (medium effort) for cell OCR/correction; OpenAI for segment text review; Claude Sonnet 5.5 for page review |
 | 2025 EY/LIMRA Workforce Benefits Study | Hybrid figure report | Native pages plus authored figure specifications | None during the saved spec route |
 
 The backend definitions live in `backend.py` under `DEMO_DOCUMENTS` and
@@ -104,7 +104,7 @@ losing the relationships among series, categories, colors, and annotations. The
 EY/LIMRA route therefore uses versioned figure specifications stored under:
 
 ```text
-crawl_dir/annotations/research/
+bounding_box/annotations/research/
   ey-limra-workforce-benefits-study-final-2025/
     figure-specs/page-NNN.json
 ```
@@ -199,6 +199,15 @@ A typical run contains:
 Files vary by route. Native pages may not have iteration artifacts; visually corrected
 pages and segments preserve every HTML/render/review attempt for auditing.
 
+For the bill of lading, the worker also parses corrected `structured-ocr.json` into
+`candidate/bill_of_lading_fields.json` and writes
+`candidate/bill_of_lading_verification.json`. The verification checks the five cargo
+headers, each parsed value against its source OCR column and output HTML/Markdown,
+package totals, template anchors, and malformed characters. Its result appears in `qc-report.json` and the
+React trace. A structural pass leaves the run at `needs_visual_review`; the page
+visual review remains the check against the PDF. These checks cannot prove that
+positional associations between columns are correct on a different cargo layout.
+
 ## Quick start with Docker
 
 Docker is the recommended way to run the complete demo because the image includes the
@@ -209,20 +218,37 @@ compiled React UI, Python dependencies, and Playwright Chromium.
 - Docker Desktop with Compose support.
 - `ANTHROPIC_API_KEY` exported in the shell. The backend currently requires Anthropic
   credentials before starting any new run.
-- `OPENAI_API_KEY` exported only when running the Bill of Lading workflow.
+- `OPENAI_API_KEY` exported when running the Bill of Lading workflow's segment text review.
 
 ```bash
 cd /Users/dc/geha/document_ingestion_workflow
 export ANTHROPIC_API_KEY="..."
-export OPENAI_API_KEY="..."   # Bill of Lading only
-./docker-up.sh --build
+export NOUS_API_KEY="..."        # Qwen3-VL through Nous Portal
+export OPENAI_API_KEY="..."   # Bill of Lading segment text review
+./docker-up.sh
 ```
 
 Open <http://127.0.0.1:8510>.
 
-`docker-up.sh` runs Compose in detached mode, waits for the container health check, and
-prints the browser URL. Generated artifacts survive container replacement because
+`docker-up.sh` rebuilds the application image using Docker's layer cache, runs Compose
+in detached mode, waits for the container health check, and prints the browser URL and
+source revision. The same revision is returned by `/api/health` and shown in the UI as
+**Docker build**, so stale containers are visible immediately. Generated artifacts survive container replacement because
 Compose mounts `../crawl_dir/runs` into the container.
+
+The local stack also runs a persistent ElasticMQ queue and a separate ingestion worker.
+The API writes run metadata and ordered SSE events to SQLite in the shared
+`ingestion-state` volume before publishing work to ElasticMQ. ElasticMQ persists queue
+definitions and messages in its `elasticmq-data` volume. Consequently, API and worker
+containers may restart without losing queued jobs, run status, or event history.
+
+```text
+API -> SQLite run/event state -> ElasticMQ -> ingestion worker -> mounted run artifacts
+```
+
+The local queue uses the SQS API at `http://127.0.0.1:9324`; application containers use
+`http://elasticmq:9324`. In AWS, remove `SQS_ENDPOINT_URL` and the same `boto3` adapter
+will use SQS through the task role.
 
 Use a different host port when 8510 is occupied:
 
@@ -258,7 +284,7 @@ Then run the backend from the repository root so package imports resolve correct
 cd /Users/dc/geha
 source .venv/bin/activate
 export ANTHROPIC_API_KEY="..."
-export OPENAI_API_KEY="..."   # Bill of Lading only
+export OPENAI_API_KEY="..."   # Bill of Lading segment text review
 python -m document_ingestion_workflow.backend
 ```
 
@@ -282,7 +308,8 @@ assets from the Python process.
 | `PORT` | `8510` | Backend/container port |
 | `INGESTION_PORT` | `8510` | Docker host port |
 | `ANTHROPIC_API_KEY` | unset | Claude generation and visual review |
-| `OPENAI_API_KEY` | unset | Bill of Lading named-cell OCR/correction |
+| `NOUS_API_KEY` | unset | Qwen3-VL generation and visual review via Nous Portal |
+| `OPENAI_API_KEY` | unset | Bill of Lading segment text review |
 
 Local Anthropic CLI credentials from `ant auth login` are supported by the Python
 pipeline when available in the backend environment. Docker Compose passes API keys from

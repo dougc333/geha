@@ -1,9 +1,9 @@
-import type { AgentEvent, DemoDocument, PageComparison } from './types'
+import type { AgentEvent, DemoDocument, PageComparison, VisionProvider } from './types'
 
 export class RunClient {
   private source?: EventSource
 
-  async health(): Promise<{ ready: boolean; model: string; server_instance_id: string }> {
+  async health(): Promise<{ ready: boolean; nous_ready: boolean; openai_ready: boolean; model: string; nous_model: string; server_instance_id: string; build_revision: string }> {
     const response = await fetch('/api/health')
     if (!response.ok) throw new Error(`Health check failed (${response.status})`)
     return response.json()
@@ -15,11 +15,11 @@ export class RunClient {
     return response.json()
   }
 
-  async start(document: string): Promise<{ run_id: string; events: string }> {
+  async start(document: string, provider: VisionProvider): Promise<{ run_id: string; events: string }> {
     const response = await fetch('/api/runs', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ delay_seconds: 5, document }),
+      body: JSON.stringify({ delay_seconds: 5, document, provider }),
     })
     const payload = await response.json().catch(() => ({}))
     if (!response.ok) throw new Error(payload.error ?? `Could not start run (${response.status})`)

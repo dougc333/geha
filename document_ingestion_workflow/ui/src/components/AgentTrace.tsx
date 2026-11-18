@@ -31,6 +31,7 @@ const titles: Record<string, string> = {
   review: 'Vision review returned',
   after_ready: 'Corrected HTML ready',
   ingestion_complete: 'Candidate assembled',
+  field_verification: 'Cargo fields verified',
   agent_finished: 'Run complete',
   agent_error: 'Run failed',
 }
@@ -97,14 +98,16 @@ class TraceEvent extends DemoComponent<{ event: AgentEvent }> {
     if (event.type === 'page_segmented') return `Page ${event.page} · ${event.region_count} regions · ${event.latency_ms} ms · ${event.reason}`
     if (event.type === 'before_ready') return `Page ${event.page} · raw extraction captured`
     if (event.type === 'after_ready') return `Page ${event.page} · ${event.iterations} reviews · ${event.markdown_chars} Markdown chars`
+    if (event.type === 'field_verification') return `${event.status} · ${event.row_count} cargo rows · ${(event.failures as unknown[]).length} structural failures`
     if (event.type === 'agent_error') return String(event.message)
     return event.type.replaceAll('_', ' ')
   }
 
   render() {
     const { event } = this.props
-    const failed = event.type === 'agent_error' || event.verdict === 'mismatch'
-    const passed = event.type === 'agent_finished' || event.verdict === 'match'
+    const qc = event.qc as Record<string, unknown> | undefined
+    const failed = event.type === 'agent_error' || event.verdict === 'mismatch' || (event.type === 'field_verification' && event.status === 'failed') || (event.type === 'agent_finished' && qc?.status === 'failed')
+    const passed = (event.type === 'agent_finished' && qc?.status !== 'failed') || event.verdict === 'match' || (event.type === 'field_verification' && event.status === 'passed')
     return (
       <li className="relative rounded-xl border border-white/10 bg-slate-950/60 p-3.5 pl-4">
         <span className={`absolute -left-1 top-4 size-2 rounded-full ${failed ? 'bg-amber-300' : passed ? 'bg-emerald-400' : 'bg-cyan-300'}`} />

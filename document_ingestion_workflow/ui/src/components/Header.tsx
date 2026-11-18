@@ -28,6 +28,14 @@ export class Header extends DemoComponent {
             {running ? 'Pipeline running…' : status === 'complete' ? 'Run again' : 'Start live run'}
             <span className="ml-2 inline-block transition group-hover:translate-x-0.5">→</span>
           </button>
+          <a
+            href="http://127.0.0.1:5178"
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-xl border border-cyan-300/25 bg-cyan-300/10 px-4 py-3 text-sm font-semibold text-cyan-100 transition hover:border-cyan-200/60 hover:bg-cyan-300/20"
+          >
+            Collections ↗
+          </a>
         </div>
       </header>
     )

@@ -2,8 +2,9 @@ import { DemoComponent } from '../DemoContext'
 
 export class DocumentSelector extends DemoComponent {
   render() {
-    const { documents, selectedDocument, selectDocument, status } = this.context
+    const { documents, selectedDocument, selectDocument, startRun, anthropicReady, openaiReady, status } = this.context
     const running = status === 'starting' || status === 'running'
+    const billOfLading = 'forms/bill-of-lading.pdf'
     return (
       <section className="mx-auto max-w-[1600px] px-6 pt-6 lg:px-10">
         <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-5">
@@ -12,7 +13,18 @@ export class DocumentSelector extends DemoComponent {
               <div className="text-[10px] font-bold uppercase tracking-[.2em] text-cyan-300">Source document</div>
               <h2 className="mt-1 text-lg font-semibold text-white">Choose a source document</h2>
             </div>
-            <span className="text-xs text-slate-500">Manifest-pinned public PDFs</span>
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="text-xs text-slate-500">Manifest-pinned public PDFs</span>
+              <button
+                type="button"
+                disabled={running || !anthropicReady || !openaiReady || !documents.some((item) => item.document === billOfLading)}
+                onClick={() => void startRun(billOfLading, 'anthropic')}
+                className="rounded-lg border border-emerald-300/40 bg-emerald-300/10 px-3 py-2 text-xs font-semibold text-emerald-100 transition hover:bg-emerald-300/20 disabled:cursor-not-allowed disabled:opacity-50"
+                title="Start a new bill-of-lading OCR run and verify its cargo rows"
+              >
+                Run bill of lading + verify
+              </button>
+            </div>
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
             {documents.map((item) => {

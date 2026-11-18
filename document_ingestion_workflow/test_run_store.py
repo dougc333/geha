@@ -42,6 +42,17 @@ class RunStoreTests(unittest.TestCase):
             self.assertEqual(record["status"], "failed")
             self.assertIn("failed", record["error"])
 
+    def test_failed_field_verification_marks_run_failed(self):
+        with TemporaryDirectory() as temporary:
+            store = RunStore(Path(temporary) / "state.sqlite3")
+            store.create("run-3", "forms/bill-of-lading.pdf")
+            run = DurableRun(store, "run-3")
+            run.emit({"type": "agent_started"})
+            run.emit({"type": "field_verification", "status": "failed", "failures": ["package mismatch"]})
+            run.emit({"type": "agent_finished", "qc": {"status": "failed"}})
+            run.finish()
+            self.assertEqual(store.get("run-3")["status"], "failed")
+
 
 if __name__ == "__main__":
     unittest.main()
