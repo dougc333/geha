@@ -82,6 +82,8 @@ def ask_claude(
     schema: dict[str, Any] | None = None,
     max_tokens: int = 64_000,
     timeout: float = 600,
+    effort: str | None = None,
+    allow_fallback: bool = True,
 ) -> str:
     """Send one user turn and return the response text (JSON text when ``schema`` is set)."""
     import anthropic
@@ -91,12 +93,16 @@ def ask_claude(
         "max_tokens": max_tokens,
         "system": system,
         "messages": [{"role": "user", "content": content}],
-        "betas": [FALLBACK_BETA],
-        "fallbacks": "default",
     }
+    if allow_fallback:
+        params["betas"] = [FALLBACK_BETA]
+        params["fallbacks"] = "default"
+    if effort is not None:
+        params["output_config"] = {"effort": effort}
     if schema is not None:
-        params["output_config"] = {"format": {"type": "json_schema",
-                                              "schema": claude_schema(schema)}}
+        params.setdefault("output_config", {})["format"] = {
+            "type": "json_schema", "schema": claude_schema(schema),
+        }
     client = anthropic.Anthropic(max_retries=2, timeout=timeout)
     # Streaming avoids HTTP timeouts on long HTML outputs.
     with client.beta.messages.stream(**params) as stream:

@@ -39,6 +39,7 @@ def main() -> None:
         run_id = str(job.payload.get("run_id", ""))
         document = str(job.payload.get("document", ""))
         delay = float(job.payload.get("delay_seconds", 0))
+        provider = str(job.payload.get("provider", "anthropic"))
         run_record = store.get(run_id)
 
         if run_record is None:
@@ -64,7 +65,7 @@ def main() -> None:
         heartbeat.start()
         try:
             LOGGER.info("Starting run %s for %s", run_id, document)
-            IngestionDemoAgent(DurableRun(store, run_id), document, delay).execute()
+            IngestionDemoAgent(DurableRun(store, run_id), document, delay, provider).execute()
             queue.acknowledge(job)
             LOGGER.info("Finished run %s", run_id)
         except Exception as exc:

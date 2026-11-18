@@ -21,7 +21,9 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 COPY document_ingestion_workflow/requirements.txt /tmp/requirements.txt
-RUN pip install --no-cache-dir \
+RUN apt-get update \
+    && apt-get install --yes --no-install-recommends libatomic1 \
+    && pip install --no-cache-dir \
         --index-url https://download.pytorch.org/whl/cpu \
         "torch==2.14.1+cpu" \
         "torchvision==0.29.1+cpu" \
@@ -32,11 +34,16 @@ RUN pip install --no-cache-dir \
 COPY document_ingestion_workflow /app/document_ingestion_workflow
 COPY --from=ui-builder /build/ui/dist /app/document_ingestion_workflow/ui/dist
 COPY crawl_dir/src /app/crawl_dir/src
+COPY geha_processing /app/geha_processing
 COPY crawl_dir/raw/coverage-policies /app/crawl_dir/raw/coverage-policies
 COPY crawl_dir/raw/forms /app/crawl_dir/raw/forms
 COPY crawl_dir/raw/research/ey-limra-workforce-benefits-study-final-2025.pdf /app/crawl_dir/raw/research/ey-limra-workforce-benefits-study-final-2025.pdf
-COPY crawl_dir/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs /app/crawl_dir/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs
+COPY bounding_box/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs /app/bounding_box/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs
 COPY PDF_processing/bill_lading /app/PDF_processing/bill_lading
+
+ARG APP_BUILD_REVISION=unknown
+ENV APP_BUILD_REVISION=$APP_BUILD_REVISION
+LABEL org.opencontainers.image.revision=$APP_BUILD_REVISION
 
 RUN mkdir -p /app/crawl_dir/runs \
     && useradd --create-home --uid 10001 ingestion \

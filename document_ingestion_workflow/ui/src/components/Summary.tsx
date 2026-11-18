@@ -9,15 +9,17 @@ export class Summary extends DemoComponent {
     const matches = reviews.filter((event) => event.verdict === 'match').length
     const finished = events.find((event) => event.type === 'agent_finished') as AgentEvent | undefined
     const qc = finished?.qc as Record<string, unknown> | undefined
+    const fields = qc?.field_verification as Record<string, unknown> | undefined
     if (!split) return null
     return (
       <section className="mx-auto max-w-[1600px] px-6 pb-12 lg:px-10">
-        <div className="grid gap-4 rounded-2xl border border-white/10 bg-gradient-to-r from-cyan-300/10 via-slate-900 to-emerald-300/10 p-5 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-4 rounded-2xl border border-white/10 bg-gradient-to-r from-cyan-300/10 via-slate-900 to-emerald-300/10 p-5 sm:grid-cols-2 lg:grid-cols-6">
           <SummaryMetric label="Pages" value={String(split.page_count)} />
           <SummaryMetric label="Scanned pages" value={String((split.image_only_pages as number[]).length)} />
           <SummaryMetric label="Vision reviews" value={String(reviews.length)} />
           <SummaryMetric label="Verified pages" value={String(matches)} />
-          <SummaryMetric label="Outcome" value={status === 'complete' ? String(qc?.status ?? 'candidate created') : after ? 'Correction visible' : 'In progress'} success={status === 'complete'} />
+          <SummaryMetric label="Cargo fields" value={fields ? `${fields.row_count} rows · ${fields.status}` : 'N/A'} success={fields?.status === 'passed'} />
+          <SummaryMetric label="Outcome" value={status === 'complete' ? String(qc?.status ?? 'candidate created') : after ? 'Correction visible' : 'In progress'} success={status === 'complete' && qc?.status !== 'failed'} />
         </div>
       </section>
     )
