@@ -19,13 +19,13 @@ from openai import OpenAI
 
 
 DEFAULT_BLOCK_DIR = Path(
-    "/Users/dc/geha/bill_lading/"
+    "/Users/dc/geha/PDF_processing/bill_lading/"
     "block8_ocr_run_20260927T182357Z/blocks"
 )
 DEFAULT_GOLD = Path(
-    "/Users/dc/geha/bill_lading/bill_of_lading_ground_truth.json"
+    "/Users/dc/geha/PDF_processing/bill_lading/bill_of_lading_ground_truth.json"
 )
-DEFAULT_OUTPUT_ROOT = Path("/Users/dc/geha/bill_lading")
+DEFAULT_OUTPUT_ROOT = Path("/Users/dc/geha/PDF_processing/bill_lading")
 DEFAULT_FIREWORKS_DEPLOYMENT = (
     "accounts/dougchang25-0sh9syiq/deployments/ohotr710"
 )
