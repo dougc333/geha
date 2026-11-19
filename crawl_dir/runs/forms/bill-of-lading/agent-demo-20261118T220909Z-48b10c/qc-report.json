@@ -1,0 +1,58 @@
+{
+  "status": "failed",
+  "source_sha256": "bb69da6f9072e0c2c16a675bc38e535adff1cbdc2c33c2042eb2d1d7021f16ef",
+  "page_count": 1,
+  "chunk_count": 8,
+  "table_count": 0,
+  "structural_errors": [
+    {
+      "page": 1,
+      "issue": "visual_verification_failed",
+      "verdict": "mismatch",
+      "errors": [
+        {
+          "category": "table_structure",
+          "source_evidence": "Cargo table lists two container rows, with weights 18,500 KGS and 19,200 KGS aligned to separate rows. Each container's 20 pkgs, goods and measurements sit in their own row, and 'FREIGHT COLLECT' is a separate banner.",
+          "html_evidence": "All containers, package counts, descriptions, weights and measurements are flattened into single pre blocks per column. The rows no longer align, and 'FREIGHT COLLECT' is appended as a plain line in the description column.",
+          "correction": "Build the cargo table with one row per container or cargo line, so each container's package count, description, gross weight and measurement are aligned. Show 'FREIGHT COLLECT' as a separate banner row."
+        },
+        {
+          "category": "wrong_text",
+          "source_evidence": "Freight & Charges lists 'OCEAN FREIGHT' on the left and 'COLLECT' as a separate right-aligned value, with 'THC' below.",
+          "html_evidence": "'OCEAN FREIGHT COLLECT' is a single combined line.",
+          "correction": "Show 'OCEAN FREIGHT' and 'COLLECT' as separate label and value elements."
+        },
+        {
+          "category": "layout",
+          "source_evidence": "The header has a large bold 'MERIDIAN SHIPPING' title with a smaller tagline, and a boxed 'BILL OF LADING' panel at the top right. The panel contains a rule and the B/L NO. and SCAC labels, with their values right-aligned.",
+          "html_evidence": "The title and tagline use the same size, and the bill of lading box is a full-width cell that spans a large empty area. B/L NO. and SCAC values are inline, not right-aligned. The panel layout and typographic hierarchy are lost.",
+          "correction": "Restore the header hierarchy: a larger title with a smaller tagline, and a right-aligned boxed Bill of Lading panel. Place the label/value pairs for B/L NO. and SCAC on separate lines with values right-aligned."
+        },
+        {
+          "category": "layout",
+          "source_evidence": "The source uses visual hierarchy: small uppercase labels with larger, bolder values (e.g., booking ref, vessel/voyage, '40' total packages). The 'Authorized Signature' is large, and the ocean vessel and port row has a shaded background.",
+          "html_evidence": "All labels and values use the same bold weight and size. The total packages '40' is not emphasized and 'Authorized Signature' is small. The shaded vessel/ports row and header rows are not shaded.",
+          "correction": "Apply label/value styling, larger values for key items, and background shading as in the source."
+        },
+        {
+          "category": "layout",
+          "source_evidence": "The particulars notice 'PARTICULARS FURNISHED BY SHIPPER - CARRIER NOT RESPONSIBLE' is centered in its row. The 'NUMBER OF ORIGINAL B/L'S: THREE (3)' line is separated from the legal text by a rule and is centered.",
+          "html_evidence": "The notice is left-aligned. 'NUMBER OF ORIGINAL B/L'S' is merged into the legal paragraph text with no rule and is left-aligned.",
+          "correction": "Center the notice and place the original B/L count in a separate, centered line below a rule."
+        }
+      ]
+    }
+  ],
+  "structural_warnings": [],
+  "visual_verification": {
+    "status": "failed",
+    "required": true,
+    "passed_pages": 0,
+    "total_pages": 1
+  },
+  "field_verification": {
+    "status": "passed",
+    "row_count": 2,
+    "report": "candidate/bill_of_lading_verification.json"
+  }
+}

@@ -1,0 +1,33 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "The logo is a boxed \"M\" graphic, and the company name reads \"MERIDIAN SHIPPING\" with no separate \"M\" line.",
+        "html_evidence": "The carrier header <pre> contains \"M\" on its own line, then \"MERIDIAN SHIPPING\", in addition to the logo span that also contains \"M\".",
+        "correction": "Remove the duplicate \"M\" text line from the header <pre> and keep only the logo."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The \"FREIGHT COLLECT\" banner sits inside the description-of-goods column, below both goods entries, between horizontal rules, within the cargo table area.",
+        "html_evidence": "The banner is a separate full-width block below the cargo table, spanning all columns.",
+        "correction": "Place \"FREIGHT COLLECT\" inside the description column of the cargo table, after the pears entry."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The header is a left-aligned logo and company name, with a separate shaded \"BILL OF LADING\" box at the right containing the title, a rule, and B/L NO. and SCAC as labeled left/right values.",
+        "html_evidence": "The header is rendered as plain stacked text in large cells. \"B/L NO. BL232472785\" and \"SCAC MRDN\" are merged into single lines, and the right box is much taller with empty space. The rule is positioned incorrectly, under SCAC.",
+        "correction": "Reproduce the header with label/value pairs in the bordered box and a rule under the title."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The total packages value \"40\" is large, bold and centered below the label. The place of issue, date and other values appear in larger emphasized text beneath their labels. The shaded rows for vessel/ports and the table header use a gray background.",
+        "html_evidence": "All values use uniform small bold text directly under labels. Key values such as \"40\" are not emphasized, and the label/value hierarchy is lost.",
+        "correction": "Restore the value styling, with larger emphasized values such as 40 and the signature, and the correct shaded backgrounds."
+      }
+    ],
+    "discarded_non_errors": 2
+  }
+]

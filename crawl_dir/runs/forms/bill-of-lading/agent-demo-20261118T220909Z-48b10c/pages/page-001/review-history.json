@@ -1,0 +1,150 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "The logo is a square containing the letter M; the only text beside it is \"MERIDIAN SHIPPING\" and \"GLOBAL SHIPPING & LOGISTICS\".",
+        "html_evidence": "The carrier header has a standalone text line \"M\" in the pre block, in addition to the logo span containing \"M\".",
+        "correction": "Remove the duplicate \"M\" text line. Keep the logo M only in the logo element."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "FREIGHT COLLECT appears as a large, bold, centered line between horizontal rules at the bottom of the description column. In the Freight & Charges area, OCEAN FREIGHT is left-aligned and COLLECT is right-aligned, with THC below.",
+        "html_evidence": "FREIGHT COLLECT is plain text in the description list with no rules or emphasis. OCEAN FREIGHT COLLECT is merged into one phrase.",
+        "correction": "Render FREIGHT COLLECT as a distinct centered line with rules. Show OCEAN FREIGHT and COLLECT as separate, aligned items."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Fields are labeled in small caps with larger or bolder values (e.g. BKG5917532, MERIDIAN LABREA / 124N, 40 and the date). The signature appears as a large \"Authorized Signature\" right-aligned in a shaded cell. The legal text is small, followed by a rule and a centered \"NUMBER OF ORIGINAL B/L'S: THREE (3)\".",
+        "html_evidence": "All text is bold at a uniform size, so labels and values are indistinguishable. The signature text is small and left-aligned, and the originals line is part of the legal paragraph with no rule or centering.",
+        "correction": "Apply the label/value typographic hierarchy, right-align and enlarge the signature, and separate and center the originals line below a rule."
+      },
+      {
+        "category": "table_structure",
+        "source_evidence": "The cargo section is a real table with column headers, row alignment and cells for the particulars.",
+        "html_evidence": "The table is built from absolutely positioned div cells rather than a semantic table, so structure is only visual.",
+        "correction": "Use a semantic <table> with <th> and <td> for the cargo table."
+      }
+    ],
+    "discarded_non_errors": 2
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "The logo is a boxed 'M' graphic, followed by the heading 'MERIDIAN SHIPPING'. The 'M' is not a separate text line.",
+        "html_evidence": "<pre>M\nMERIDIAN SHIPPING\nGLOBAL SHIPPING & LOGISTICS</pre> The HTML adds a stray 'M' text line in addition to the logo span.",
+        "correction": "Keep the logo as an image or aria-labelled graphic, and remove the duplicate 'M' from the text. The text should read 'MERIDIAN SHIPPING' and 'GLOBAL SHIPPING & LOGISTICS'."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The title block 'BILL OF LADING' is a bordered box in the top-right with a rule beneath the title. B/L NO. and SCAC are label/value pairs, with the values right-aligned.",
+        "html_evidence": "The 'BILL OF LADING', 'B/L NO. BL232472785' and 'SCAC MRDN' lines are stacked in a large cell. The rule sits below SCAC, not under the title.",
+        "correction": "Put the rule under the title 'BILL OF LADING'. Show B/L NO. and SCAC as separate label/value pairs."
+      },
+      {
+        "category": "table_structure",
+        "source_evidence": "The cargo table has two container rows. Each row pairs a container/seal/marks entry with its own package count, description, gross weight and measurement. For example, MRDN4455667 has 20 packages, apples, 18,500 KGS and 28.00 CBM.",
+        "html_evidence": "Each column is one <pre> block of lines. The containers, packages, descriptions, weights and measurements are not aligned per row.",
+        "correction": "Build the cargo table as real rows, with the two containers, goods descriptions, weights and CBM values side by side in their own rows."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "'FREIGHT COLLECT' is a distinct, centred, large banner between rules at the bottom of the description column.",
+        "html_evidence": "'FREIGHT COLLECT' is the last plain line in the description <pre>, with no emphasis and no rules.",
+        "correction": "Render it as its own centred, emphasised element with rules above and below."
+      },
+      {
+        "category": "table_structure",
+        "source_evidence": "The charges table has 'OCEAN FREIGHT' and 'COLLECT' in separate columns, with 'THC' on the next line.",
+        "html_evidence": "<pre>OCEAN FREIGHT COLLECT\nTHC</pre> merges the charge and its payment term into one phrase.",
+        "correction": "Put 'OCEAN FREIGHT' and 'COLLECT' in separate cells of a table row, and put 'THC' on the next row."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "'TOTAL NUMBER OF PACKAGES' is a label, and a large bold '40' sits centred below it.",
+        "html_evidence": "'40' is plain text immediately under the label, with no emphasis.",
+        "correction": "Render '40' as a large, centred value."
+      }
+    ],
+    "discarded_non_errors": 0
+  },
+  {
+    "iteration": 2,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "wrong_text",
+        "source_evidence": "FREIGHT & CHARGES section shows \"OCEAN FREIGHT\" / \"THC\" and \"COLLECT\" as rendered table content",
+        "html_evidence": "<table><tr><td>OCEAN FREIGHT</td><td>COLLECT</td></tr><tr><td>THC</td><td></td></tr></table> appears as literal escaped text",
+        "correction": "Render a real table (or equivalent semantic markup) with OCEAN FREIGHT | COLLECT and THC | (empty) instead of showing raw HTML tags as text."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "TOTAL NUMBER OF PACKAGES shows a large, centered \"40\"",
+        "html_evidence": "<div style=\"text-align:center;font-size:2em;font-weight:bold\">40</div> appears as literal visible text",
+        "correction": "Render the value as a real element showing only \"40\", large, bold, and centered, without the escaped markup."
+      },
+      {
+        "category": "table_structure",
+        "source_evidence": "Cargo particulars use aligned rows: container 1 with 20 pkgs, apples, 18,500 KGS, 28.00 CBM; container 2 with 20 pkgs, pears, 19,200 KGS, 28.00 CBM, with vertical alignment between columns",
+        "html_evidence": "Each column is a separate preformatted block with lines stacked; packages, weights and measurements are all at the top and do not align with the matching container/goods entries (e.g., both 20s adjacent, pears weight next to apples lines)",
+        "correction": "Structure the cargo area as rows pairing each container/seal/marks with its package count, description, gross weight and measurement."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Emphasized and styled content: labels small/spaced caps, values larger bold (e.g., BKG5917532, MERIDIAN LABREA / 124N), FRESH APPLES/PEARS and stowage lines large monospace, SET TEMP lines blue, FREIGHT COLLECT large with rules above and below, Authorized Signature large at right",
+        "html_evidence": "All text uses the same uniform bold Arial; no size hierarchy, no blue set-temp, no FREIGHT COLLECT rules, signature small at left",
+        "correction": "Restore typographic hierarchy, colors and the FREIGHT COLLECT rules, and right-align the signature text."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Legal text is small with a rule above 'NUMBER OF ORIGINAL B/L'S: THREE (3)', which is centered; legal text is regular weight",
+        "html_evidence": "Legal text is bold and NUMBER OF ORIGINAL B/L'S is left-aligned without a rule",
+        "correction": "Render legal text in regular weight, add the rule and center the originals line."
+      }
+    ],
+    "discarded_non_errors": 1
+  },
+  {
+    "iteration": 3,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "table_structure",
+        "source_evidence": "Cargo table lists two container rows, with weights 18,500 KGS and 19,200 KGS aligned to separate rows. Each container's 20 pkgs, goods and measurements sit in their own row, and 'FREIGHT COLLECT' is a separate banner.",
+        "html_evidence": "All containers, package counts, descriptions, weights and measurements are flattened into single pre blocks per column. The rows no longer align, and 'FREIGHT COLLECT' is appended as a plain line in the description column.",
+        "correction": "Build the cargo table with one row per container or cargo line, so each container's package count, description, gross weight and measurement are aligned. Show 'FREIGHT COLLECT' as a separate banner row."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Freight & Charges lists 'OCEAN FREIGHT' on the left and 'COLLECT' as a separate right-aligned value, with 'THC' below.",
+        "html_evidence": "'OCEAN FREIGHT COLLECT' is a single combined line.",
+        "correction": "Show 'OCEAN FREIGHT' and 'COLLECT' as separate label and value elements."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The header has a large bold 'MERIDIAN SHIPPING' title with a smaller tagline, and a boxed 'BILL OF LADING' panel at the top right. The panel contains a rule and the B/L NO. and SCAC labels, with their values right-aligned.",
+        "html_evidence": "The title and tagline use the same size, and the bill of lading box is a full-width cell that spans a large empty area. B/L NO. and SCAC values are inline, not right-aligned. The panel layout and typographic hierarchy are lost.",
+        "correction": "Restore the header hierarchy: a larger title with a smaller tagline, and a right-aligned boxed Bill of Lading panel. Place the label/value pairs for B/L NO. and SCAC on separate lines with values right-aligned."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The source uses visual hierarchy: small uppercase labels with larger, bolder values (e.g., booking ref, vessel/voyage, '40' total packages). The 'Authorized Signature' is large, and the ocean vessel and port row has a shaded background.",
+        "html_evidence": "All labels and values use the same bold weight and size. The total packages '40' is not emphasized and 'Authorized Signature' is small. The shaded vessel/ports row and header rows are not shaded.",
+        "correction": "Apply label/value styling, larger values for key items, and background shading as in the source."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The particulars notice 'PARTICULARS FURNISHED BY SHIPPER - CARRIER NOT RESPONSIBLE' is centered in its row. The 'NUMBER OF ORIGINAL B/L'S: THREE (3)' line is separated from the legal text by a rule and is centered.",
+        "html_evidence": "The notice is left-aligned. 'NUMBER OF ORIGINAL B/L'S' is merged into the legal paragraph text with no rule and is left-aligned.",
+        "correction": "Center the notice and place the original B/L count in a separate, centered line below a rule."
+      }
+    ],
+    "discarded_non_errors": 0
+  }
+]

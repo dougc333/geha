@@ -1,0 +1,403 @@
+{
+  "schema_version": 1,
+  "workflow": "bill_of_lading_segment_html_visual_correction",
+  "workflow_program": "/app/PDF_processing/bill_lading/bill_of_lading_html_graph.py",
+  "model": "gpt-4.1-mini",
+  "created_at": "2026-11-18T22:09:45.885298+00:00",
+  "max_iterations_per_segment": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every segment",
+  "verification_scope": "text fidelity only; CSS, typography, borders, spacing, alignment, colors, dimensions, wrapping, and decorative elements are ignored",
+  "status": "passed",
+  "segments": [
+    {
+      "segment": 1,
+      "section": "Carrier header and bill of lading identifiers",
+      "source_png": "region-01-schema-block-1.png",
+      "output_directory": "segment-01",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-01/iteration-01.html",
+          "rendered_png": "segment-01/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 0,
+          "ignored_css_errors": [],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 663.4,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-01/final.html",
+      "final_rendered_png": "segment-01/iteration-01.png"
+    },
+    {
+      "segment": 2,
+      "section": "Shipment parties and references",
+      "source_png": "region-02-schema-block-2.png",
+      "output_directory": "segment-02",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-02/iteration-01.html",
+          "rendered_png": "segment-02/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 4,
+          "ignored_css_errors": [
+            "Text 'SHIPPER's REF.' in source compared to 'SHIPPER'S REF.' in rendered has a case mismatch in 'SHIPPER's' and 'SHIPPER'S'.",
+            "Text 'DELIVERY AGENT' block text in source contains some text in bold which is not bold in rendered ('LogiTrans Global', '88 Harbor Road, Rotterdam, 3011 AA', 'Tel: +31 10 123 4567 | dispatch@logitrans.com' are all bold in source but normal in rendered).",
+            "Text 'NOTIFY PARTY (NO RESPONSIBILITY FOR FAILURE TO NOTIFY)' is uppercase in source but sentence case in rendered.",
+            "Heading texts such as 'SHIPPER', 'CONSIGNEE (NEGOTIABLE ONLY IF CONSIGNED \"TO ORDER\")', 'NOTIFY PARTY (NO RESPONSIBILITY FOR FAILURE TO NOTIFY)', 'BOOKING REF.', 'SHIPPER'S REF.', 'PRE-CARRIAGE BY', 'PLACE OF RECEIPT', 'DELIVERY AGENT' are uppercase and bold in source but only uppercase or mixed case and no bold in rendered."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 393.0,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-02/final.html",
+      "final_rendered_png": "segment-02/iteration-01.png"
+    },
+    {
+      "segment": 3,
+      "section": "Vessel voyage and ports",
+      "source_png": "region-03-schema-block-3.png",
+      "output_directory": "segment-03",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-03/iteration-01.html",
+          "rendered_png": "segment-03/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 6,
+          "ignored_css_errors": [
+            "Text 'OCEAN VESSEL / VOYAGE' in source is bold but not bold in rendered HTML.",
+            "Text 'MERIDIAN LABREA / 124N' in source is bold but not bold in rendered HTML.",
+            "Text 'PORT OF LOADING' in source is bold but not bold in rendered HTML.",
+            "Text 'BUENOS AIRES, ARGENTINA' in source is bold but not bold in rendered HTML.",
+            "Text 'PORT OF DISCHARGE' in source is bold but not bold in rendered HTML.",
+            "Text 'ROTTERDAM, NETHERLANDS' in source is bold but not bold in rendered HTML."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 324.8,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-03/final.html",
+      "final_rendered_png": "segment-03/iteration-01.png"
+    },
+    {
+      "segment": 4,
+      "section": "Carrier particulars notice",
+      "source_png": "region-04-schema-block-4.png",
+      "output_directory": "segment-04",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-04/iteration-01.html",
+          "rendered_png": "segment-04/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 0,
+          "ignored_css_errors": [],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 324.7,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-04/final.html",
+      "final_rendered_png": "segment-04/iteration-01.png"
+    },
+    {
+      "segment": 5,
+      "section": "Cargo table headers",
+      "source_png": "region-05-schema-block-5.png",
+      "output_directory": "segment-05",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-05/iteration-01.html",
+          "rendered_png": "segment-05/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 3,
+          "ignored_css_errors": [
+            "Text 'CONTAINER NO. / SEAL NO.' is bold in the source but not in the rendered HTML block.",
+            "Text 'NO. PKGS' is bold in the source but not in the rendered HTML block.",
+            "Text 'GROSS WT.' is bold in the source but not in the rendered HTML block."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 338.2,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-05/final.html",
+      "final_rendered_png": "segment-05/iteration-01.png"
+    },
+    {
+      "segment": 6,
+      "section": "Cargo particulars",
+      "source_png": "region-06-schema-block-6.png",
+      "output_directory": "segment-06",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-06/iteration-01.html",
+          "rendered_png": "segment-06/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            "Middle-left column merged text without separation or line breaks: In source, '20' and '20' appear twice each in their own lines but in rendered HTML the two '20' are combined without clear separation on one line."
+          ],
+          "ignored_css_error_count": 5,
+          "ignored_css_errors": [
+            "Text in wrong reading order in multiple cells: The leftmost column in source has 'MRDN4455667' then 'SEAL: MSK112233' then 'MARKS: PALLETIZED' then 'MRDN7788990' then 'SEAL: MSK445566' then 'MARKS: PALLETIZED', whereas rendered HTML stacks them all without line breaks between items except some line breaks; the order matches but the text is not separated as in source.",
+            "Middle-center column missing bold and italic formatting, leading to loss of emphasis: 'FRESH APPLES' and 'STOWAGE AT +2.0 DEGREES CELSIUS' and 'Packaging: PALLETS' are not formatted distinctively.",
+            "Middle-center column text merged without line breaks where present in source: Multiple separate lines in source (e.g. '20 PALLETS STC:', 'FRESH FRUIT', 'FRESH APPLES', etc.) are concatenated without line breaks in rendered HTML.",
+            "Middle-center column 'SET TEMP: +2°C' is lowercase 'Set Temp' and in blue in source but rendered without styling and lowercase 'SET TEMP: +2°C'.",
+            "Right 2 columns missing numeric and unit spacing and alignment: Source units align with numeric values distinctly, rendered HTML aligns values and units but line breaks may differ."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 375.5,
+            "cost_usd": 0.0
+          },
+          "repair_strategy": "named_cell_text_ocr",
+          "corrected_cells": [
+            "container_column",
+            "description_column",
+            "gross_weight_column",
+            "measurement_column",
+            "packages_column"
+          ]
+        },
+        {
+          "iteration": 2,
+          "html": "segment-06/iteration-02.html",
+          "rendered_png": "segment-06/iteration-02.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            "The source block uses uppercase for nearly all text, the rendered block uses standard capitalization which differs from the source."
+          ],
+          "ignored_css_error_count": 4,
+          "ignored_css_errors": [
+            "Text in wrong reading order in the middle column: the source block separates two sets of '20 PALLETS STC:' sections with detailed line breaks and bold/italic stylings, whereas the rendered block merges them all into a continuous list without breaks or emphasis.",
+            "Missing bold styling and italics in the rendered block for key terms like 'MRDN4455667', 'MRDN7788990', 'SEAL:', 'MARKS:', 'PALLETS STC:', 'FRESH APPLES', 'STOWAGE AT +2.0 DEGREES CELSIUS', 'FRESH PEARS', 'STOWAGE AT +1.0 DEGREES CELSIUS', 'FREIGHT COLLECT'.",
+            "'FREIGHT COLLECT' is rendered but missing the horizontal lines above and below it as in source.",
+            "The line breaks for lines such as 'FRESH FRUIT', 'HS CODE:', and 'SET TEMP:' are lost in the rendered block; all lines run consecutively without spacing."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 387.7,
+            "cost_usd": 0.0
+          },
+          "repair_strategy": "named_cell_text_ocr",
+          "corrected_cells": [
+            "container_column",
+            "description_column",
+            "gross_weight_column",
+            "measurement_column",
+            "packages_column"
+          ]
+        },
+        {
+          "iteration": 3,
+          "html": "segment-06/iteration-03.html",
+          "rendered_png": "segment-06/iteration-03.png",
+          "verdict": "mismatch",
+          "error_count": 2,
+          "errors": [
+            "The first '20' in the second column is duplicated in the HTML block; source block shows them once each for two entries.",
+            "The structure and reading order in the third column of HTML block is continuous text, not separated blocks as in the source."
+          ],
+          "ignored_css_error_count": 8,
+          "ignored_css_errors": [
+            "'MRDN4455667' and 'MRDN7788990' are missing bold formatting in HTML block.",
+            "In the third column, the text 'FRESH APPLES' and 'STOWAGE AT +2.0 DEGREES CELSIUS' is not bold in the HTML block.",
+            "'Packaging: PALLETS' is italicized in the source but plain text in the HTML block.",
+            "'HS CODE: 08081080' and 'SET TEMP: +2°C' are not separated by a new line before them in the HTML block as in the source.",
+            "In the third column, 'FRESH PEARS' and 'STOWAGE AT +1.0 DEGREES CELSIUS' are not bold in the HTML block.",
+            "'Packaging: PALLETS' is italicized in the source but not in HTML block for the pears section.",
+            "'HS CODE: 08083090' and 'SET TEMP: +1°C' are not separated by a new line before them in the HTML block as in the source.",
+            "The text 'FREIGHT COLLECT' is not bold and centered with horizontal lines as in the source, rather plain and inline in HTML block."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 379.3,
+            "cost_usd": 0.0
+          },
+          "repair_strategy": "named_cell_text_ocr",
+          "corrected_cells": [
+            "container_column",
+            "description_column",
+            "gross_weight_column",
+            "measurement_column",
+            "packages_column"
+          ]
+        },
+        {
+          "iteration": 4,
+          "html": "segment-06/iteration-04.html",
+          "rendered_png": "segment-06/iteration-04.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 9,
+          "ignored_css_errors": [
+            "In the source, the text 'MRDN4455667' and 'MRDN7788990' are bold, in the HTML none of the text is bold but this is not an error since styling is ignored",
+            "Source has '20' and '20' vertically aligned on the left side of the middle block but in HTML they are aligned at the top left without two separate lines - this is acceptable difference in presentation",
+            "In source, the first middle block section is: '20 PALLETS STC:\\nFRESH FRUIT\\n\\nFRESH APPLES\\nSTOWAGE AT +2.0 DEGREES CELSIUS\\nPackaging: PALLETS\\n\\nHS CODE: 08081080\\nSET TEMP: +2°C' with 'FRESH APPLES' and 'STOWAGE...' bold, 'Packaging:' italic, 'SET TEMP: +2°C' in blue color. In HTML block, these are all plain text with no bold or italic or color, but styling differences are not counted as errors, so no error here.",
+            "In source, after the first block is a blank line before the second block starts. In HTML, no blank lines are rendered, all text is continuous. This is style difference and is ignored.",
+            "In source second block text is:\\n'20 PALLETS STC:\\nFRESH FRUIT\\n\\nFRESH PEARS\\nSTOWAGE AT +1.0 DEGREES CELSIUS\\nPackaging: PALLETS\\n\\nHS CODE: 08083090\\nSET TEMP: +1°C' with 'FRESH PEARS' and 'STOWAGE...' bold, 'Packaging' italic, in HTML all plain text but this is styling difference only and ignored.",
+            "In source last section is:\\n'FREIGHT COLLECT' with bold and horizontal lines above and below. In HTML it is plain text 'FREIGHT COLLECT' with no lines and no bold. Lines and bold are presentation so ignored. The text matches.",
+            "On the left block with seals and marks, source has:\\n'MRDN4455667\\nSEAL: MSK112233\\n\\nMARKS:\\nPALLETIZED\\n\\nMRDN7788990\\nSEAL: MSK445566\\n\\nMARKS:\\nPALLETIZED'\\nIn HTML it is same text but all together without vertical spacing lines. This line spacing difference is style and not error.",
+            "In the rightmost two columns, source has:\\n'18,500 28.00\\nKGS CBM\\n19,200 28.00\\nKGS CBM' with two lines each in each cell, whereas HTML each of these is split as plain lines: '18,500\\nKGS\\n19,200\\nKGS' and '28.00\\nCBM\\n28.00\\nCBM'. There is a reading order issue because in source for the first measure line the weight and volume are side by side, but in HTML they appear vertically stacked with all weights first then volumes, so the order and layout semantically differ though texts match.",
+            "Overall the main error is the merging of separate lines into fewer separate lines changes the implied reading order and layout. Also potentially the grouping of weight and volume as two lines per entry is lost in HTML, which can cause misinterpretation if read literally line by line."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 407.9,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-06/final.html",
+      "final_rendered_png": "segment-06/iteration-04.png"
+    },
+    {
+      "segment": 7,
+      "section": "Freight charges and package totals",
+      "source_png": "region-07-schema-block-7.png",
+      "output_directory": "segment-07",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-07/iteration-01.html",
+          "rendered_png": "segment-07/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 3,
+          "ignored_css_errors": [
+            "In the source, 'OCEAN FREIGHT' and 'COLLECT' are separate, but in the rendered HTML, it is combined as 'OCEAN FREIGHT COLLECT'.",
+            "The source block shows 'COLLECT' right-aligned on the same line as 'OCEAN FREIGHT', but in the rendered HTML it appears immediately after 'OCEAN FREIGHT' as part of the same line without separation or alignment.",
+            "The number '40' is bold in the source but appears normal weight in the rendered HTML. However, font weight is ignored as per instructions, so this is not an error."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 337.1,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-07/final.html",
+      "final_rendered_png": "segment-07/iteration-01.png"
+    },
+    {
+      "segment": 8,
+      "section": "Legal terms issue details and signature",
+      "source_png": "region-08-schema-block-8.png",
+      "output_directory": "segment-08",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-08/iteration-01.html",
+          "rendered_png": "segment-08/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            "Total Number of Packages"
+          ],
+          "ignored_css_error_count": 5,
+          "ignored_css_errors": [
+            "The source text includes 'the total number or quantity of Containers or other packages or units indicated in the box entitled \"Total Number of Packages\" for carriage subject to all the terms and conditions hereof from the Place of Receipt or Port of Loading to the Port of Discharge or Place of Delivery, whichever is applicable.' The rendered text splits this sentence across multiple lines and changes the phrasing after 'the total number or' to 'quantity of Containers or other packages or units indicated in the box entitled \"Total Number of Packages\" for carriage subject to all the terms and conditions hereof from the Place of Receipt or Port of Loading to the Port of Discharge or Place of Delivery, whichever is applicable.' The rendered text breaks lines in the middle, which is not strictly a text error but count as mismatch since the phrase 'quantity of Containers or other packages or units indicated in the box entitled ",
+            "  for carriage subject to all the terms and conditions hereof from the Place of Receipt or Port of Loading to the Port of Discharge or Place of Delivery, whichever is applicable.' is not contiguous in the source.",
+            "The source has a line 'NUMBER OF ORIGINAL B/L'S: THREE (3)' which is missing entirely in the rendered HTML block.",
+            "The source text 'SIGNED FOR THE CARRIER' is fully capitalized and followed by a large font 'Authorized Signature'. The rendered block has 'SIGNED FOR THE CARRIER' in uppercase but 'Authorized Signature' in normal case and on a separate line as normal text, losing the emphasis and layout difference, which may count as text difference depending on strictness.",
+            "The line in the source: 'IN ACCEPTING THIS BILL OF LADING THE MERCHANT EXPRESSLY ACCEPTS AND AGREES TO ALL THE TERMS AND CONDITIONS, WHETHER PRINTED, STAMPED OR OTHERWISE INCORPORATED...' is split and partially missing in the rendered text; the rendered ends at 'TO ALL THE TERMS AND' and then a new line 'CONDITIONS, WHETHER PRINTED, STAMPED OR OTHERWISE INCORPORATED ON THIS SIDE AND ON THE REVERSE SIDE OF THIS BILL OF LADING AND THE TERMS AND CONDITIONS OF THE CARRIER'S APPLICABLE TARIFF AS IF THEY WERE ALL SIGNED BY THE MERCHANT.' is missing from the rendered text."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 348.2,
+            "cost_usd": 0.0
+          },
+          "repair_strategy": "named_cell_text_ocr",
+          "corrected_cells": [
+            "carrier_signature",
+            "date_issue",
+            "legal_and_originals",
+            "place_issue"
+          ]
+        },
+        {
+          "iteration": 2,
+          "html": "segment-08/iteration-02.html",
+          "rendered_png": "segment-08/iteration-02.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 5,
+          "ignored_css_errors": [
+            "In the source text, the phrase 'quantity of Containers or other packages or units indicated in the box entitled \"Total Number of Packages\" for carriage subject to all the terms and conditions hereof from the Place of Receipt or Port of Loading to the Port of Discharge or Place of Delivery, whichever is applicable.' is on one line, but in the rendered text it is split into multiple lines.",
+            "The source text has the sentence 'IN ACCEPTING THIS BILL OF LADING THE MERCHANT EXPRESSLY ACCEPTS AND AGREES TO ALL THE TERMS AND CONDITIONS, WHETHER PRINTED, STAMPED OR OTHERWISE INCORPORATED ON THIS SIDE AND ON THE REVERSE SIDE OF THIS BILL OF LADING AND THE TERMS AND CONDITIONS OF THE CARRIER'S APPLICABLE TARIFF AS IF THEY WERE ALL SIGNED BY THE MERCHANT.' but the rendered text truncates this sentence after 'TO ALL THE TERMS AND CONDITIONS, WHETHER PRINTED, STAMPED OR OTHERWISE INCORPORATED ON THIS' and does not complete it.",
+            "The source text includes the line 'NUMBER OF ORIGINAL B/L'S: THREE (3)' under a dividing line at the bottom left portion, which is missing entirely in the rendered HTML block.",
+            "In the source, 'PLACE OF ISSUE', 'Antwerp', 'DATE OF ISSUE', and '2026-03-13' are in distinct columns with bold headers; in the rendered text, the content appears correct but without the bold styling, which is not an error since styles are ignored.",
+            "'SIGNED FOR THE CARRIER' and 'Authorized Signature' appear on one line in source but appear on separate lines in rendered block; this is acceptable as style differences are ignored."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 354.2,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-08/final.html",
+      "final_rendered_png": "segment-08/iteration-02.png"
+    }
+  ],
+  "summary": {
+    "segment_count": 8,
+    "passed": 8,
+    "failed": 0,
+    "total_iterations": 12,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-11-18T22:10:49.394604+00:00"
+}

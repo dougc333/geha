@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "row_count": 2,
+  "checks": [
+    "template anchors",
+    "column headers",
+    "column values",
+    "package totals",
+    "cross-field rules",
+    "control characters",
+    "rendered HTML and Markdown"
+  ],
+  "failures": [],
+  "warnings": [
+    "containers[0].container_no MRDN4455667: category letter 'N' is not U/J/Z (not a registered ISO 6346 number) (warning)",
+    "containers[1].container_no MRDN7788990: category letter 'N' is not U/J/Z (not a registered ISO 6346 number) (warning)"
+  ],
+  "source_ocr": "pages/page-001/segments/structured-ocr.json",
+  "parsed_fields": "candidate/bill_of_lading_fields.json",
+  "scope": "structural OCR consistency; page visual review checks the source PDF"
+}
