@@ -1,0 +1,941 @@
+{
+  "page": "/Users/dc/geha/PDF_processing/blocking_demo/interactive/bill-of-lading-source.png",
+  "threshold": 0.95,
+  "form_edges": [
+    67,
+    2066
+  ],
+  "rules_y": [
+    362,
+    960,
+    1262,
+    1410,
+    1482,
+    1560,
+    2744,
+    3000,
+    3341
+  ],
+  "header": {
+    "logo": [
+      75,
+      75,
+      229,
+      229
+    ],
+    "bill_box": [
+      1386,
+      69,
+      2065,
+      337
+    ],
+    "text_right": 1023,
+    "split_x": 1204,
+    "checks": {
+      "logo box inside carrier_header": true,
+      "BILL OF LADING box inside bill_of_lading_box": true
+    }
+  },
+  "blocks": [
+    {
+      "name": "1",
+      "expected": [
+        67,
+        0,
+        2066,
+        363
+      ],
+      "detected": [
+        67,
+        0,
+        2066,
+        362
+      ],
+      "iou": 0.9972,
+      "delta": [
+        0,
+        0,
+        0,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "2",
+      "expected": [
+        67,
+        363,
+        2066,
+        1262
+      ],
+      "detected": [
+        67,
+        362,
+        2066,
+        1262
+      ],
+      "iou": 0.9989,
+      "delta": [
+        0,
+        -1,
+        0,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "name": "3",
+      "expected": [
+        67,
+        1262,
+        2066,
+        1411
+      ],
+      "detected": [
+        67,
+        1262,
+        2066,
+        1410
+      ],
+      "iou": 0.9933,
+      "delta": [
+        0,
+        0,
+        0,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "4",
+      "expected": [
+        67,
+        1411,
+        2066,
+        1482
+      ],
+      "detected": [
+        67,
+        1410,
+        2066,
+        1482
+      ],
+      "iou": 0.9861,
+      "delta": [
+        0,
+        -1,
+        0,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "name": "5",
+      "expected": [
+        67,
+        1482,
+        2066,
+        1559
+      ],
+      "detected": [
+        67,
+        1482,
+        2066,
+        1560
+      ],
+      "iou": 0.9872,
+      "delta": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "pass": true
+    },
+    {
+      "name": "6",
+      "expected": [
+        67,
+        1559,
+        2066,
+        2744
+      ],
+      "detected": [
+        67,
+        1560,
+        2066,
+        2744
+      ],
+      "iou": 0.9992,
+      "delta": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "name": "7",
+      "expected": [
+        67,
+        2744,
+        2066,
+        3000
+      ],
+      "detected": [
+        67,
+        2744,
+        2066,
+        3000
+      ],
+      "iou": 1.0,
+      "delta": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "name": "8",
+      "expected": [
+        67,
+        3000,
+        2066,
+        3341
+      ],
+      "detected": [
+        67,
+        3000,
+        2066,
+        3341
+      ],
+      "iou": 1.0,
+      "delta": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "pass": true
+    }
+  ],
+  "cells": [
+    {
+      "name": "1.carrier_header",
+      "expected": [
+        67,
+        0,
+        1167,
+        363
+      ],
+      "detected": [
+        67,
+        0,
+        1204,
+        362
+      ],
+      "iou": 0.9649,
+      "delta": [
+        0,
+        0,
+        37,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "1.bill_of_lading_box",
+      "expected": [
+        1167,
+        0,
+        2066,
+        363
+      ],
+      "detected": [
+        1204,
+        0,
+        2066,
+        362
+      ],
+      "iou": 0.9562,
+      "delta": [
+        37,
+        0,
+        0,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "2.shipper",
+      "expected": [
+        67,
+        363,
+        1066,
+        661
+      ],
+      "detected": [
+        69,
+        363,
+        1065,
+        660
+      ],
+      "iou": 0.9937,
+      "delta": [
+        2,
+        0,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "2.consignee",
+      "expected": [
+        67,
+        661,
+        1066,
+        960
+      ],
+      "detected": [
+        69,
+        662,
+        1065,
+        959
+      ],
+      "iou": 0.9903,
+      "delta": [
+        2,
+        1,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "2.notify_party",
+      "expected": [
+        67,
+        960,
+        1066,
+        1262
+      ],
+      "detected": [
+        69,
+        960,
+        1065,
+        1261
+      ],
+      "iou": 0.9937,
+      "delta": [
+        2,
+        0,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "2.booking_ref",
+      "expected": [
+        1066,
+        363,
+        1564,
+        533
+      ],
+      "detected": [
+        1066,
+        363,
+        1563,
+        532
+      ],
+      "iou": 0.9921,
+      "delta": [
+        0,
+        0,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "2.shipper_ref",
+      "expected": [
+        1564,
+        363,
+        2066,
+        533
+      ],
+      "detected": [
+        1565,
+        363,
+        2065,
+        532
+      ],
+      "iou": 0.9902,
+      "delta": [
+        1,
+        0,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "2.pre_carriage",
+      "expected": [
+        1066,
+        533,
+        2066,
+        747
+      ],
+      "detected": [
+        1066,
+        534,
+        2065,
+        746
+      ],
+      "iou": 0.9897,
+      "delta": [
+        0,
+        1,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "2.place_of_receipt",
+      "expected": [
+        1066,
+        747,
+        2066,
+        960
+      ],
+      "detected": [
+        1066,
+        747,
+        2065,
+        959
+      ],
+      "iou": 0.9943,
+      "delta": [
+        0,
+        0,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "2.delivery_agent",
+      "expected": [
+        1066,
+        960,
+        2066,
+        1262
+      ],
+      "detected": [
+        1066,
+        960,
+        2065,
+        1261
+      ],
+      "iou": 0.9957,
+      "delta": [
+        0,
+        0,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "3.vessel_voyage",
+      "expected": [
+        67,
+        1262,
+        733,
+        1411
+      ],
+      "detected": [
+        69,
+        1262,
+        732,
+        1410
+      ],
+      "iou": 0.9888,
+      "delta": [
+        2,
+        0,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "3.port_loading",
+      "expected": [
+        733,
+        1262,
+        1398,
+        1411
+      ],
+      "detected": [
+        734,
+        1262,
+        1397,
+        1410
+      ],
+      "iou": 0.9903,
+      "delta": [
+        1,
+        0,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "3.port_discharge",
+      "expected": [
+        1398,
+        1262,
+        2066,
+        1411
+      ],
+      "detected": [
+        1398,
+        1262,
+        2065,
+        1410
+      ],
+      "iou": 0.9918,
+      "delta": [
+        0,
+        0,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "4.particulars_notice",
+      "expected": [
+        67,
+        1411,
+        2066,
+        1482
+      ],
+      "detected": [
+        69,
+        1411,
+        2065,
+        1481
+      ],
+      "iou": 0.9844,
+      "delta": [
+        2,
+        0,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "5.container_header",
+      "expected": [
+        67,
+        1482,
+        567,
+        1559
+      ],
+      "detected": [
+        69,
+        1482,
+        566,
+        1559
+      ],
+      "iou": 0.994,
+      "delta": [
+        2,
+        0,
+        -1,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "name": "5.packages_header",
+      "expected": [
+        567,
+        1482,
+        767,
+        1559
+      ],
+      "detected": [
+        567,
+        1482,
+        766,
+        1559
+      ],
+      "iou": 0.995,
+      "delta": [
+        0,
+        0,
+        -1,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "name": "5.description_header",
+      "expected": [
+        767,
+        1482,
+        1664,
+        1559
+      ],
+      "detected": [
+        767,
+        1482,
+        1663,
+        1559
+      ],
+      "iou": 0.9989,
+      "delta": [
+        0,
+        0,
+        -1,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "name": "5.gross_weight_header",
+      "expected": [
+        1664,
+        1482,
+        1863,
+        1559
+      ],
+      "detected": [
+        1665,
+        1482,
+        1863,
+        1559
+      ],
+      "iou": 0.995,
+      "delta": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "name": "5.measurement_header",
+      "expected": [
+        1863,
+        1482,
+        2066,
+        1559
+      ],
+      "detected": [
+        1864,
+        1482,
+        2065,
+        1559
+      ],
+      "iou": 0.9901,
+      "delta": [
+        1,
+        0,
+        -1,
+        0
+      ],
+      "pass": true
+    },
+    {
+      "name": "6.container_column",
+      "expected": [
+        67,
+        1559,
+        567,
+        2744
+      ],
+      "detected": [
+        69,
+        1560,
+        566,
+        2743
+      ],
+      "iou": 0.9923,
+      "delta": [
+        2,
+        1,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "6.packages_column",
+      "expected": [
+        567,
+        1559,
+        767,
+        2744
+      ],
+      "detected": [
+        567,
+        1560,
+        766,
+        2743
+      ],
+      "iou": 0.9933,
+      "delta": [
+        0,
+        1,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "6.description_column",
+      "expected": [
+        767,
+        1559,
+        1664,
+        2744
+      ],
+      "detected": [
+        767,
+        1560,
+        1663,
+        2743
+      ],
+      "iou": 0.9972,
+      "delta": [
+        0,
+        1,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "6.gross_weight_column",
+      "expected": [
+        1664,
+        1559,
+        1863,
+        2744
+      ],
+      "detected": [
+        1665,
+        1560,
+        1863,
+        2743
+      ],
+      "iou": 0.9933,
+      "delta": [
+        1,
+        1,
+        0,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "6.measurement_column",
+      "expected": [
+        1863,
+        1559,
+        2066,
+        2744
+      ],
+      "detected": [
+        1864,
+        1560,
+        2065,
+        2743
+      ],
+      "iou": 0.9885,
+      "delta": [
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "7.charges_header",
+      "expected": [
+        67,
+        2744,
+        1265,
+        2822
+      ],
+      "detected": [
+        69,
+        2744,
+        1264,
+        2821
+      ],
+      "iou": 0.9847,
+      "delta": [
+        2,
+        0,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "7.charges_values",
+      "expected": [
+        67,
+        2822,
+        1265,
+        3000
+      ],
+      "detected": [
+        69,
+        2822,
+        1264,
+        2999
+      ],
+      "iou": 0.9919,
+      "delta": [
+        2,
+        0,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "7.total_packages",
+      "expected": [
+        1265,
+        2744,
+        2066,
+        3000
+      ],
+      "detected": [
+        1265,
+        2744,
+        2065,
+        2999
+      ],
+      "iou": 0.9949,
+      "delta": [
+        0,
+        0,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "8.legal_and_originals",
+      "expected": [
+        67,
+        3000,
+        1066,
+        3341
+      ],
+      "detected": [
+        69,
+        3001,
+        1065,
+        3340
+      ],
+      "iou": 0.9911,
+      "delta": [
+        2,
+        1,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "8.place_issue",
+      "expected": [
+        1066,
+        3000,
+        1564,
+        3169
+      ],
+      "detected": [
+        1066,
+        3001,
+        1563,
+        3168
+      ],
+      "iou": 0.9862,
+      "delta": [
+        0,
+        1,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "8.date_issue",
+      "expected": [
+        1564,
+        3000,
+        2066,
+        3169
+      ],
+      "detected": [
+        1565,
+        3001,
+        2065,
+        3168
+      ],
+      "iou": 0.9842,
+      "delta": [
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "pass": true
+    },
+    {
+      "name": "8.carrier_signature",
+      "expected": [
+        1066,
+        3169,
+        2066,
+        3341
+      ],
+      "detected": [
+        1066,
+        3169,
+        2065,
+        3341
+      ],
+      "iou": 0.999,
+      "delta": [
+        0,
+        0,
+        -1,
+        0
+      ],
+      "pass": true
+    }
+  ],
+  "unmatched_regions": []
+}
