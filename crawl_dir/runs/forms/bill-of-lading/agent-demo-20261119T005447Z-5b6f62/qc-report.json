@@ -1,0 +1,52 @@
+{
+  "status": "failed",
+  "source_sha256": "bb69da6f9072e0c2c16a675bc38e535adff1cbdc2c33c2042eb2d1d7021f16ef",
+  "page_count": 1,
+  "chunk_count": 7,
+  "table_count": 1,
+  "structural_errors": [
+    {
+      "page": 1,
+      "issue": "visual_verification_failed",
+      "verdict": "mismatch",
+      "errors": [
+        {
+          "category": "extra_text",
+          "source_evidence": "The logo is a boxed \"M\" graphic, and the company name reads \"MERIDIAN SHIPPING\" with no separate \"M\" line.",
+          "html_evidence": "The carrier header <pre> contains \"M\" on its own line, then \"MERIDIAN SHIPPING\", in addition to the logo span that also contains \"M\".",
+          "correction": "Remove the duplicate \"M\" text line from the header <pre> and keep only the logo."
+        },
+        {
+          "category": "layout",
+          "source_evidence": "The \"FREIGHT COLLECT\" banner sits inside the description-of-goods column, below both goods entries, between horizontal rules, within the cargo table area.",
+          "html_evidence": "The banner is a separate full-width block below the cargo table, spanning all columns.",
+          "correction": "Place \"FREIGHT COLLECT\" inside the description column of the cargo table, after the pears entry."
+        },
+        {
+          "category": "layout",
+          "source_evidence": "The header is a left-aligned logo and company name, with a separate shaded \"BILL OF LADING\" box at the right containing the title, a rule, and B/L NO. and SCAC as labeled left/right values.",
+          "html_evidence": "The header is rendered as plain stacked text in large cells. \"B/L NO. BL232472785\" and \"SCAC MRDN\" are merged into single lines, and the right box is much taller with empty space. The rule is positioned incorrectly, under SCAC.",
+          "correction": "Reproduce the header with label/value pairs in the bordered box and a rule under the title."
+        },
+        {
+          "category": "layout",
+          "source_evidence": "The total packages value \"40\" is large, bold and centered below the label. The place of issue, date and other values appear in larger emphasized text beneath their labels. The shaded rows for vessel/ports and the table header use a gray background.",
+          "html_evidence": "All values use uniform small bold text directly under labels. Key values such as \"40\" are not emphasized, and the label/value hierarchy is lost.",
+          "correction": "Restore the value styling, with larger emphasized values such as 40 and the signature, and the correct shaded backgrounds."
+        }
+      ]
+    }
+  ],
+  "structural_warnings": [],
+  "visual_verification": {
+    "status": "failed",
+    "required": true,
+    "passed_pages": 0,
+    "total_pages": 1
+  },
+  "field_verification": {
+    "status": "passed",
+    "row_count": 2,
+    "report": "candidate/bill_of_lading_verification.json"
+  }
+}

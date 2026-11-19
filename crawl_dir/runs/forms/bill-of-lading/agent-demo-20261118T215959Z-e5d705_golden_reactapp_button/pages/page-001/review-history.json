@@ -1,0 +1,39 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "The logo is a boxed 'M' graphic; the company name 'MERIDIAN SHIPPING' follows it. No separate letter 'M' text appears beside the name.",
+        "html_evidence": "<pre>M\nMERIDIAN SHIPPING\nGLOBAL SHIPPING & LOGISTICS</pre> (rendered 'M' line above 'MERIDIAN SHIPPING')",
+        "correction": "Remove the stray 'M' text line. The logo should be the only 'M' element, and it should carry no duplicate text."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The bill of lading box is a compact bordered box at the top right with a title, a rule, and B/L NO. and SCAC as label/value pairs, with the value right-aligned. The carrier header has no border or box.",
+        "html_evidence": "The header is split into two full-height bordered cells (363px tall), with the B/L text stacked as 'B/L NO. BL232472785' and 'SCAC MRDN' as plain lines. The rule is positioned below the text.",
+        "correction": "Render the carrier header without a border. Render BILL OF LADING as a compact box with the title, the rule beneath it, and then B/L NO./SCAC labels with right-aligned values."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "In the cargo section, each container's number, seal and marks sit next to its own package count, weight and measurement, and next to the matching goods description. The description has its own sub-blocks, and FREIGHT COLLECT is a prominent centered line between rules. The package counts are '20' and '20', aligned with each container.",
+        "html_evidence": "The cargo content is flattened into a single <pre> per column. The lines are tightly stacked, so rows do not align across columns. FREIGHT COLLECT is just another plain line after SET TEMP: +1°C.",
+        "correction": "Use semantic table rows so that each container, its package count, its description, its weight and its measurement align. Show FREIGHT COLLECT as a distinct centered, ruled line."
+      },
+      {
+        "category": "table_structure",
+        "source_evidence": "The 'Freight & Charges' section lists 'OCEAN FREIGHT' on the left and 'COLLECT' in a separate right-hand position, followed by 'THC' below. The total packages value '40' is large and centered.",
+        "html_evidence": "<pre>OCEAN FREIGHT COLLECT\nTHC</pre> merges the two items into one phrase. '40' appears directly under the heading as a small left-aligned line.",
+        "correction": "Separate 'OCEAN FREIGHT' from 'COLLECT' as distinct label/value cells. Display 40 as a prominent value."
+      }
+    ],
+    "discarded_non_errors": 0
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": [],
+    "discarded_non_errors": 0
+  }
+]

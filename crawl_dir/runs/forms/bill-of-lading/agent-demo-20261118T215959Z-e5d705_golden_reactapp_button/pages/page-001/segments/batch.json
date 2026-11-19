@@ -1,0 +1,367 @@
+{
+  "schema_version": 1,
+  "workflow": "bill_of_lading_segment_html_visual_correction",
+  "workflow_program": "/app/PDF_processing/bill_lading/bill_of_lading_html_graph.py",
+  "model": "gpt-4.1-mini",
+  "created_at": "2026-11-18T22:00:35.117844+00:00",
+  "max_iterations_per_segment": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every segment",
+  "verification_scope": "text fidelity only; CSS, typography, borders, spacing, alignment, colors, dimensions, wrapping, and decorative elements are ignored",
+  "status": "passed",
+  "segments": [
+    {
+      "segment": 1,
+      "section": "Carrier header and bill of lading identifiers",
+      "source_png": "region-01-schema-block-1.png",
+      "output_directory": "segment-01",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-01/iteration-01.html",
+          "rendered_png": "segment-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            "Source has 'M' inside a square box, HTML just has 'M'."
+          ],
+          "ignored_css_error_count": 4,
+          "ignored_css_errors": [
+            "Source has bold and larger font styling on 'MERIDIAN SHIPPING' and 'BILL OF LADING' but HTML has plain text.",
+            "Source separates 'B/L NO.' and 'BL232472785' onto two sides, HTML combines them as 'B/L NO. BL232472785'.",
+            "Source separates 'SCAC' and 'MRDN' onto two sides, HTML combines them as 'SCAC MRDN'.",
+            "Source has a horizontal line under 'BILL OF LADING' which is not present in HTML."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 373.0,
+            "cost_usd": 0.0
+          },
+          "repair_strategy": "named_cell_text_ocr",
+          "corrected_cells": [
+            "bill_of_lading_box",
+            "carrier_header"
+          ]
+        },
+        {
+          "iteration": 2,
+          "html": "segment-01/iteration-02.html",
+          "rendered_png": "segment-01/iteration-02.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            "Source text 'M' is shown as 'M' but source shows it inside a square box."
+          ],
+          "ignored_css_error_count": 5,
+          "ignored_css_errors": [
+            "Source text 'MERIDIAN SHIPPING' is bold and uppercase in source, plain uppercase in rendered.",
+            "Source text 'GLOBAL SHIPPING & LOGISTICS' is bold in source, plain in rendered.",
+            "Source text 'BILL OF LADING' is bold and uppercase with underline in source, plain uppercase and no underline in rendered.",
+            "In source, 'B/L NO.' and 'BL232472785' are on separate lines and mirrored in two columns; in rendered 'B/L NO. BL232472785' is on one line.",
+            "In source, 'SCAC' and 'MRDN' are in separate columns; in rendered they are on one line 'SCAC MRDN'."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 346.7,
+            "cost_usd": 0.0
+          },
+          "repair_strategy": "named_cell_text_ocr",
+          "corrected_cells": [
+            "bill_of_lading_box",
+            "carrier_header"
+          ]
+        },
+        {
+          "iteration": 3,
+          "html": "segment-01/iteration-03.html",
+          "rendered_png": "segment-01/iteration-03.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 0,
+          "ignored_css_errors": [],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 331.9,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-01/final.html",
+      "final_rendered_png": "segment-01/iteration-03.png"
+    },
+    {
+      "segment": 2,
+      "section": "Shipment parties and references",
+      "source_png": "region-02-schema-block-2.png",
+      "output_directory": "segment-02",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-02/iteration-01.html",
+          "rendered_png": "segment-02/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 18,
+          "ignored_css_errors": [
+            "Text 'SHIPPER' is not bold in rendered HTML block.",
+            "Text 'FRUTAS DEL SOL S.A.' is not bold in rendered HTML block.",
+            "Text 'BOOKING REF.' is not bold in rendered HTML block.",
+            "Text 'BKG5917532' is not bold in rendered HTML block.",
+            "Text 'SHIPPER'S REF.' is not bold in rendered HTML block.",
+            "Text 'EXP-35782' is not bold in rendered HTML block.",
+            "Text 'PRE-CARRIAGE BY' is not bold in rendered HTML block.",
+            "Text 'Oceanic Meridian Lines' is not bold in rendered HTML block.",
+            "Text 'PLACE OF RECEIPT' is not bold in rendered HTML block.",
+            "Text 'BUENOS AIRES, ARGENTINA' is not bold in rendered HTML block.",
+            "Text 'CONSIGNEE (NEGOTIABLE ONLY IF CONSIGNED \"TO ORDER\")' is not bold in rendered HTML block.",
+            "Text 'FRESH FRUIT IMPORTERS B.V.' in consignee block is not bold in rendered HTML block.",
+            "Text 'NOTIFY PARTY (NO RESPONSIBILITY FOR FAILURE TO NOTIFY)' is not bold in rendered HTML block.",
+            "Text 'FRESH FRUIT IMPORTERS B.V.' in notify party block is not bold in rendered HTML block.",
+            "Text 'DELIVERY AGENT' is not bold in rendered HTML block.",
+            "Text 'LogiTrans Global' is not bold in rendered HTML block.",
+            "Text '88 Harbor Road, Rotterdam, 3011 AA' is not bold in rendered HTML block.",
+            "Text 'Tel: +31 10 123 4567 | dispatch@logitrans.com' is not bold in rendered HTML block."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 361.0,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-02/final.html",
+      "final_rendered_png": "segment-02/iteration-01.png"
+    },
+    {
+      "segment": 3,
+      "section": "Vessel voyage and ports",
+      "source_png": "region-03-schema-block-3.png",
+      "output_directory": "segment-03",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-03/iteration-01.html",
+          "rendered_png": "segment-03/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 4,
+          "ignored_css_errors": [
+            "Text 'OCEAN VESSEL / VOYAGE' in source is uppercase and bold but is lowercase and not bold in rendered HTML.",
+            "Text 'MERIDIAN LABREA / 124N' in source is uppercase and bold but is lowercase and not bold in rendered HTML.",
+            "Text 'PORT OF LOADING' in source is uppercase and bold but is lowercase and not bold in rendered HTML.",
+            "Text 'PORT OF DISCHARGE' in source is uppercase and bold but is lowercase and not bold in rendered HTML."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 322.2,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-03/final.html",
+      "final_rendered_png": "segment-03/iteration-01.png"
+    },
+    {
+      "segment": 4,
+      "section": "Carrier particulars notice",
+      "source_png": "region-04-schema-block-4.png",
+      "output_directory": "segment-04",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-04/iteration-01.html",
+          "rendered_png": "segment-04/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 0,
+          "ignored_css_errors": [],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 327.1,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-04/final.html",
+      "final_rendered_png": "segment-04/iteration-01.png"
+    },
+    {
+      "segment": 5,
+      "section": "Cargo table headers",
+      "source_png": "region-05-schema-block-5.png",
+      "output_directory": "segment-05",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-05/iteration-01.html",
+          "rendered_png": "segment-05/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            "Missing text 'SEAL NO.' is present but partially obscured in the source; it appears fully in the rendered block."
+          ],
+          "ignored_css_error_count": 1,
+          "ignored_css_errors": [
+            "The rendered block is missing the rightmost text segment after 'MEASUREMENT', which is present in the source as a text cell after 'MEASUREMENT'."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 336.9,
+            "cost_usd": 0.0
+          },
+          "repair_strategy": "named_cell_text_ocr",
+          "corrected_cells": [
+            "container_header",
+            "description_header",
+            "gross_weight_header",
+            "measurement_header",
+            "packages_header"
+          ]
+        },
+        {
+          "iteration": 2,
+          "html": "segment-05/iteration-02.html",
+          "rendered_png": "segment-05/iteration-02.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 2,
+          "ignored_css_errors": [
+            "Text 'MEASUREMENT' is incomplete in rendered block; it is cut off and not fully visible.",
+            "All text in source block is uppercase and bold, while rendered block text is not bold and 'CONTAINER NO. / SEAL NO.' and 'NO. PKGS' are in mixed case."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 313.8,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-05/final.html",
+      "final_rendered_png": "segment-05/iteration-02.png"
+    },
+    {
+      "segment": 6,
+      "section": "Cargo particulars",
+      "source_png": "region-06-schema-block-6.png",
+      "output_directory": "segment-06",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-06/iteration-01.html",
+          "rendered_png": "segment-06/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 8,
+          "ignored_css_errors": [
+            "In the first column, the rendered block merges lines without bold formatting and misses the bold on IDs and labels compared to the source.",
+            "The second column in the rendered block has all text in a single uninterrupted block without the bold and italic formatting or spacing as in the source.",
+            "In the second column, the rendered block outputs 'STOWAGE AT +2.0 DEGREES CELSIUS' and 'STOWAGE AT +1.0 DEGREES CELSIUS' before 'FRESH APPLES' and 'FRESH PEARS' respectively, whereas the source lists 'FRESH APPLES' and 'FRESH PEARS' before the stowage line.",
+            "The rendered block lacks italic formatting on 'Packaging: PALLETS'.",
+            "The rendered block is missing the empty lines separating sections and the bold capitalization of 'FREIGHT COLLECT' at the bottom; it also does not have horizontal lines above and below 'FREIGHT COLLECT'.",
+            "In the rendered block, 'SET TEMP: +2°C' and 'SET TEMP: +1°C' lines appear in black text but in the source they are in blue text (color difference is ignored but formatting like presence is noted).",
+            "The quantities and units (KGS, CBM) in the final two columns are correct but are not bold in the rendered block as in the source which is not an error though.",
+            "Overall, the rendered block loses all the formatting emphasis, including bold, italic, color, and spacing, and merges blocks that are distinctly separated in the source block."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 354.2,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-06/final.html",
+      "final_rendered_png": "segment-06/iteration-01.png"
+    },
+    {
+      "segment": 7,
+      "section": "Freight charges and package totals",
+      "source_png": "region-07-schema-block-7.png",
+      "output_directory": "segment-07",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-07/iteration-01.html",
+          "rendered_png": "segment-07/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 3,
+          "ignored_css_errors": [
+            "'OCEAN FREIGHT' and 'COLLECT' are rendered together as 'OCEAN FREIGHT COLLECT' instead of being separate in two columns.",
+            "The source block capitalizes 'TOTAL NUMBER OF PACKAGES' and 'FREIGHT & CHARGES', but the rendered HTML block shows them in normal case.",
+            "The number '40' in the source block is bold and larger, but in the rendered block it is normal text."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 338.4,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-07/final.html",
+      "final_rendered_png": "segment-07/iteration-01.png"
+    },
+    {
+      "segment": 8,
+      "section": "Legal terms issue details and signature",
+      "source_png": "region-08-schema-block-8.png",
+      "output_directory": "segment-08",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-08/iteration-01.html",
+          "rendered_png": "segment-08/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 4,
+          "ignored_css_errors": [
+            "In the rendered text, the sentence 'RECEIVED by the Carrier in apparent good order and condition (unless otherwise stated herein) the total number or quantity of Containers or other packages or units indicated in the box entitled \"Total Number of Packages\" for carriage subject to all the terms and conditions hereof from the Place of Receipt or Port of Loading to the Port of Discharge or Place of Delivery, whichever is applicable.' is split into multiple lines incorrectly breaking 'number or quantity' and other segments, causing awkward text flow.",
+            "The phrase 'IN ACCEPTING THIS BILL OF LADING THE MERCHANT EXPRESSLY ACCEPTS AND AGREES TO ALL THE TERMS AND CONDITIONS, WHETHER PRINTED, STAMPED OR OTHERWISE INCORPORATED ON THIS SIDE AND ON THE REVERSE SIDE OF THIS BILL OF LADING AND THE TERMS AND CONDITIONS OF THE CARRIER'S APPLICABLE TARIFF AS IF THEY WERE ALL SIGNED BY THE MERCHANT.' is partially included in the rendered version with missing parts ('TO ALL THE TERMS AND CONDITIONS' is cut off and 'ON THIS SIDE AND ON THE REVERSE SIDE...' is missing).",
+            "Missing text at the bottom of the source block: 'NUMBER OF ORIGINAL B/L'S: THREE (3)'. This line does not appear in the rendered HTML block.",
+            "In the rendered block, 'Authorized Signature' appears below 'SIGNED FOR THE CARRIER' in normal casing, whereas in the source it is uppercase and larger next to the signature line area. Case difference is not an error but formatting is different; however 'Authorized Signature' text is present so not an error here."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 336.4,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-08/final.html",
+      "final_rendered_png": "segment-08/iteration-01.png"
+    }
+  ],
+  "summary": {
+    "segment_count": 8,
+    "passed": 8,
+    "failed": 0,
+    "total_iterations": 11,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-11-18T22:01:19.807195+00:00"
+}
