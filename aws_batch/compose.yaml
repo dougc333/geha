@@ -1,0 +1,12 @@
+services:
+  batch-app:
+    build: .
+    image: geha-aws-batch:local
+    ports:
+      - "${BATCH_PORT:-8520}:8520"
+    environment:
+      BATCH_WORKERS: "${BATCH_WORKERS:-2}"
+    volumes:
+      - ./crawl_dir/raw:/app/crawl_dir/raw:ro
+      - ./runs:/app/runs
+    restart: unless-stopped

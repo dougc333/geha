@@ -1,0 +1,70 @@
+import { DemoComponent } from '../DemoContext'
+
+export class DocumentSelector extends DemoComponent {
+  render() {
+    const { documents, selectedDocument, selectDocument, startRun, anthropicReady, openaiReady, status } = this.context
+    const running = status === 'starting' || status === 'running'
+    const billOfLading = 'forms/bill-of-lading.pdf'
+    const billOfLadingAlt2 = 'forms/bill_of_lading_alt_2.pdf'
+    return (
+      <section className="mx-auto max-w-[1600px] px-6 pt-6 lg:px-10">
+        <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-5">
+          <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <div className="text-[10px] font-bold uppercase tracking-[.2em] text-cyan-300">Source document</div>
+              <h2 className="mt-1 text-lg font-semibold text-white">Choose a source document</h2>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="text-xs text-slate-500">Manifest-pinned public PDFs</span>
+              <button
+                type="button"
+                disabled={running || !anthropicReady || !openaiReady || !documents.some((item) => item.document === billOfLading)}
+                onClick={() => void startRun(billOfLading, 'anthropic')}
+                className="rounded-lg border border-emerald-300/40 bg-emerald-300/10 px-3 py-2 text-xs font-semibold text-emerald-100 transition hover:bg-emerald-300/20 disabled:cursor-not-allowed disabled:opacity-50"
+                title="Start a new bill-of-lading OCR run and verify its cargo rows"
+              >
+                Run bill of lading + verify
+              </button>
+              <button
+                type="button"
+                disabled={running || !anthropicReady || !openaiReady || !documents.some((item) => item.document === billOfLadingAlt2)}
+                onClick={() => void startRun(billOfLadingAlt2, 'anthropic')}
+                className="rounded-lg border border-emerald-300/40 bg-emerald-300/10 px-3 py-2 text-xs font-semibold text-emerald-100 transition hover:bg-emerald-300/20 disabled:cursor-not-allowed disabled:opacity-50"
+                title="Start alt 2 named-cell OCR and field verification"
+              >
+                Run alt 2 + verify
+              </button>
+            </div>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+            {documents.map((item) => {
+              const selected = item.document === selectedDocument
+              return (
+                <button
+                  key={item.document}
+                  type="button"
+                  disabled={running}
+                  onClick={() => selectDocument(item.document)}
+                  className={`min-w-0 rounded-xl border p-4 text-left transition ${selected ? 'border-cyan-300/70 bg-cyan-300/10 shadow-[0_0_24px_rgba(103,232,249,.08)]' : 'border-white/10 bg-slate-950/60 hover:border-white/25'} disabled:cursor-not-allowed ${running ? 'disabled:opacity-60' : ''}`}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="min-w-0">
+                      <div className={`font-semibold ${selected ? 'text-cyan-100' : 'text-slate-200'}`}>{item.title}</div>
+                      <div className="mt-1 break-words font-mono text-[10px] leading-4 text-slate-500">{item.filename}</div>
+                    </div>
+                    <span className={`mt-1 size-3 shrink-0 rounded-full border ${selected ? 'border-cyan-200 bg-cyan-300' : 'border-slate-600'}`} />
+                  </div>
+                  <div className="mt-4 flex flex-wrap gap-2 text-[11px] text-slate-400">
+                    <span className="rounded-md bg-white/5 px-2 py-1">{item.page_count} pages</span>
+                    <span className="rounded-md bg-white/5 px-2 py-1">image-only: {item.image_only_pages.length ? item.image_only_pages.join(', ') : 'none'}</span>
+                    {!!item.visual_reconstruction_pages?.length && <span className="rounded-md bg-cyan-300/10 px-2 py-1 text-cyan-200">figure HTML: {item.visual_reconstruction_pages.length} pages</span>}
+                  </div>
+                </button>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+    )
+  }
+}

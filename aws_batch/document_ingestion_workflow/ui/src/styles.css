@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Avenir Next", Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, monospace;
+}
+
+:root { color-scheme: dark; }
+body { margin: 0; min-width: 320px; min-height: 100vh; background: #020617; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; }
+
+@keyframes scan {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(200%); }
+  100% { transform: translateX(400%); }
+}
+
+* { scrollbar-width: thin; scrollbar-color: #334155 transparent; }
+
+.comparison-divider { display: none; }
+@media (min-width: 1024px) {
+  .comparison-split { display: grid; grid-template-columns: minmax(0, var(--pdf-pane-width)) 18px minmax(0, 1fr); }
+  .comparison-divider {
+    display: block;
+    position: relative;
+    cursor: col-resize;
+    touch-action: none;
+    background: #1e293b;
+  }
+  .comparison-divider::after {
+    content: "";
+    position: absolute;
+    top: 50%; left: 6px;
+    width: 6px; height: 60px;
+    transform: translateY(-50%);
+    border-radius: 4px;
+    background: #67e8f9;
+  }
+  .comparison-divider:hover, .comparison-divider:focus-visible { background: #155e75; outline: none; }
+}
