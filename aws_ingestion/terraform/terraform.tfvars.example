@@ -1,0 +1,6 @@
+aws_region    = "us-west-2"
+image_tag     = "2026-11-20-1"
+allowed_cidrs = ["203.0.113.10/32"] # Replace with your current public IP.
+model_secrets_enabled = true # Set false to remove the three managed Secrets Manager records.
+model_secret_arns = {} # Optional existing secret ARNs; these are not managed by Terraform.
+runtime_enabled = true # Set false to remove the ALB and ECS services while retaining data.

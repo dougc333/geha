@@ -1,0 +1,99 @@
+services:
+  elasticmq:
+    image: softwaremill/elasticmq-native:1.7.1
+    ports:
+      - "9325:9324"
+    volumes:
+      - ./elasticmq.conf:/opt/elasticmq.conf:ro
+      - elasticmq-data:/data
+    restart: unless-stopped
+
+  ingestion-state-init:
+    image: aws-ingestion-workflow:local
+    user: root
+    command: ["sh", "-c", "chown -R 10001:10001 /app/crawl_dir/state"]
+    volumes:
+      - ingestion-state:/app/crawl_dir/state
+    restart: "no"
+
+  ingestion-workflow:
+    image: aws-ingestion-workflow:local
+    build:
+      context: .
+      dockerfile: document_ingestion_workflow/Dockerfile
+      args:
+        APP_BUILD_REVISION: "${APP_BUILD_REVISION:-unknown}"
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "8510"
+      BROWSER_PORT: "${INGESTION_PORT:-8513}"
+      ANTHROPIC_API_KEY: "${ANTHROPIC_API_KEY:-}"
+      NOUS_API_KEY: "${NOUS_API_KEY:-}"
+      OPENAI_API_KEY: "${OPENAI_API_KEY:-}"
+      AWS_REGION: "us-west-2"
+      SQS_ENDPOINT_URL: "http://elasticmq:9324"
+      INGESTION_QUEUE_NAME: "document-ingestion"
+      INGESTION_STATE_DB: "/app/crawl_dir/state/ingestion.sqlite3"
+    command:
+      - sh
+      - -c
+      - |
+        python -m document_ingestion_workflow.backend &
+        backend_pid=$$!
+        trap 'kill -TERM "$$backend_pid" 2>/dev/null || true' INT TERM
+        until python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8510/api/health', timeout=1)" >/dev/null 2>&1; do
+          if ! kill -0 "$$backend_pid" 2>/dev/null; then
+            wait "$$backend_pid"
+            exit $$?
+          fi
+          sleep 0.25
+        done
+        echo
+        echo "Document ingestion workflow is ready:"
+        echo "  http://127.0.0.1:$${BROWSER_PORT}"
+        echo
+        wait "$$backend_pid"
+    ports:
+      - "${INGESTION_PORT:-8513}:8510"
+    volumes:
+      - ./crawl_dir/runs:/app/crawl_dir/runs
+      - ingestion-state:/app/crawl_dir/state
+    depends_on:
+      elasticmq:
+        condition: service_started
+      ingestion-state-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  ingestion-worker:
+    image: aws-ingestion-workflow:local
+    build:
+      context: .
+      dockerfile: document_ingestion_workflow/Dockerfile
+      args:
+        APP_BUILD_REVISION: "${APP_BUILD_REVISION:-unknown}"
+    environment:
+      ANTHROPIC_API_KEY: "${ANTHROPIC_API_KEY:-}"
+      NOUS_API_KEY: "${NOUS_API_KEY:-}"
+      OPENAI_API_KEY: "${OPENAI_API_KEY:-}"
+      AWS_REGION: "us-west-2"
+      SQS_ENDPOINT_URL: "http://elasticmq:9324"
+      INGESTION_QUEUE_NAME: "document-ingestion"
+      INGESTION_STATE_DB: "/app/crawl_dir/state/ingestion.sqlite3"
+      SQS_VISIBILITY_TIMEOUT: "900"
+    command: ["python", "-m", "document_ingestion_workflow.worker"]
+    healthcheck:
+      disable: true
+    volumes:
+      - ./crawl_dir/runs:/app/crawl_dir/runs
+      - ingestion-state:/app/crawl_dir/state
+    depends_on:
+      elasticmq:
+        condition: service_started
+      ingestion-state-init:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+volumes:
+  elasticmq-data:
+  ingestion-state:
