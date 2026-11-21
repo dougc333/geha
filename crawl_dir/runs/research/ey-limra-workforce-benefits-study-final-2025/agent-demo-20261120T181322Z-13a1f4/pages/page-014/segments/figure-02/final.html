@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Figure 9</title>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; color: #1a1a24; margin: 24px; }
+  h1 { font-size: 26px; line-height: 1.2; margin: 6px 0 12px; }
+  p { margin: 0 0 12px; font-size: 15px; }
+  .chart { display: flex; margin: 24px 0 24px; width: 760px; }
+  .labels { width: 250px; display: flex; flex-direction: column; }
+  .labels div { height: 100px; display: flex; align-items: center; justify-content: flex-end; padding-right: 22px; font-size: 20px; box-sizing: border-box; text-align: right; }
+  .plot { position: relative; border-left: 1px solid #1a1a24; width: 500px; display: flex; flex-direction: column; }
+  .row { height: 100px; box-sizing: border-box; padding: 22px 0; display: flex; flex-direction: column; }
+  .line { height: 28px; display: flex; align-items: center; }
+  .bar { height: 28px; }
+  .y { background: #FFE600; }
+  .g { background: #C4C4CD; }
+  .val { margin-left: 8px; font-size: 20px; }
+  .legend { position: absolute; right: 10px; bottom: 112px; width: 220px; height: 70px; border: 1px solid #c4c4cd; background: #fff; display: flex; align-items: center; justify-content: center; gap: 22px; font-size: 20px; box-sizing: border-box; }
+  .legend span.item { display: flex; align-items: center; gap: 8px; }
+  .sw { display: inline-block; width: 20px; height: 20px; }
+  table { border-collapse: collapse; font-size: 14px; margin-top: 8px; }
+  caption { text-align: left; font-weight: bold; padding-bottom: 4px; }
+  th, td { border: 1px solid #c4c4cd; padding: 3px 10px; text-align: left; }
+</style>
+</head>
+<body>
+<main>
+<figure>
+<p><strong>Figure 9</strong></p>
+<h1>Employer opinions are mixed about primary responsibility for education and awareness that employees need to make confident enrollment decisions.</h1>
+<p><strong>QUESTION:</strong> Who do you think should be primarily accountable for providing the education and awareness needed for employees to make confident enrollment decisions?</p>
+
+<div class="chart" aria-hidden="true">
+  <div class="labels">
+    <div>My company</div>
+    <div>Insurance carrier(s)</div>
+    <div>Broker/benefits advisor</div>
+    <div>Benefits technology platform</div>
+    <div>No preference</div>
+  </div>
+  <div class="plot">
+    <div class="row">
+      <div class="line"><div class="bar y" style="width:396px"></div><span class="val">33%</span></div>
+      <div class="line"><div class="bar g" style="width:288px"></div><span class="val">24%</span></div>
+    </div>
+    <div class="row">
+      <div class="line"><div class="bar y" style="width:312px"></div><span class="val">26%</span></div>
+      <div class="line"><div class="bar g" style="width:312px"></div><span class="val">26%</span></div>
+    </div>
+    <div class="row">
+      <div class="line"><div class="bar y" style="width:276px"></div><span class="val">23%</span></div>
+      <div class="line"><div class="bar g" style="width:396px"></div><span class="val">33%</span></div>
+    </div>
+    <div class="row">
+      <div class="line"><div class="bar y" style="width:168px"></div><span class="val">14%</span></div>
+      <div class="line"><div class="bar g" style="width:144px"></div><span class="val">12%</span></div>
+    </div>
+    <div class="row">
+      <div class="line"><div class="bar y" style="width:48px"></div><span class="val">4%</span></div>
+      <div class="line"><div class="bar g" style="width:72px"></div><span class="val">6%</span></div>
+    </div>
+    <div class="legend">
+      <span class="item"><span class="sw y"></span>2025</span>
+      <span class="item"><span class="sw g"></span>2023</span>
+    </div>
+  </div>
+</div>
+
+<table>
+<caption>Figure 9 data: primary accountability for education and awareness</caption>
+<thead>
+<tr><th scope="col">Category</th><th scope="col">2025</th><th scope="col">2023</th></tr>
+</thead>
+<tbody>
+<tr><th scope="row">My company</th><td>33%</td><td>24%</td></tr>
+<tr><th scope="row">Insurance carrier(s)</th><td>26%</td><td>26%</td></tr>
+<tr><th scope="row">Broker/benefits advisor</th><td>23%</td><td>33%</td></tr>
+<tr><th scope="row">Benefits technology platform</th><td>14%</td><td>12%</td></tr>
+<tr><th scope="row">No preference</th><td>4%</td><td>6%</td></tr>
+</tbody>
+</table>
+</figure>
+</main>
+</body>
+</html>

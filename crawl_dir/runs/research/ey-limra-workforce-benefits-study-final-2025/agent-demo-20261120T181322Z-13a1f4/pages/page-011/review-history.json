@@ -1,0 +1,31 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "text_overlap",
+        "source_evidence": "Source wheel labels (Professional, Financial, Physical, Mental, Societal) sit inside their segments, clear of the yellow arrow ring.",
+        "html_evidence": "In the render, \"Professional\" and \"Financial\" extend past the segment edges and across the yellow ring. The \"P\" of Professional and the \"l\" of Financial are drawn through the yellow arrow. \"Physical\" and \"Mental\" also crowd the segment borders and the arrowheads.",
+        "correction": "Reduce the label font size, or reposition the labels so each stays fully inside its wedge and clear of the yellow ring. For example, use a font size of about 22-24 in the SVG and place the labels closer to the center."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Source wheel is large (about 575px wide), with five segments that each fill a quarter-to-fifth of the circle. The arrows form a continuous clockwise ring around the segments, with a gap between each arc.",
+        "html_evidence": "The rendered wheel is much smaller (about 340px). The labels are oversized relative to it, and the arcs and arrowheads are fragmented and look different from the source's single sweeping arrows.",
+        "correction": "Enlarge the wheel SVG to match the source proportions, and redraw the arrow arcs so they surround the segments cleanly with arrowheads at the gaps."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Source hero image is a photograph of a smiling woman in an olive top using a tablet in a glass-walled office.",
+        "html_evidence": "The render replaces the photo with a crude abstract vector placeholder (blocks, an ellipse and a polygon). The woman's face and tablet are not recognizable.",
+        "correction": "Use the actual photograph, or a faithful representation of it, in the banner."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

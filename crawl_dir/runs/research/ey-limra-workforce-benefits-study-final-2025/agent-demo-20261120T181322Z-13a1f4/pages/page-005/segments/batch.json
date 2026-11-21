@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "claude-sonnet-5-5",
+  "created_at": "2026-11-20T18:18:37.850940+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "fig2",
+      "kind": "chart",
+      "title": "Worker participation in the gig economy is trending downward.",
+      "source_png": "figure-01-fig2.png",
+      "bounding_box": [
+        122,
+        1045,
+        773,
+        1782
+      ],
+      "output_directory": "figure-01",
+      "native_evidence": "figure-01/native-evidence.json",
+      "native_evidence_word_count": 66,
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "chart_data",
+              "source_evidence": "The source figure is a stacked bar chart with two bars (2023 and 2025). Gray segments show 66% and 77%; yellow segments show 34% and 23%, with a connector line between the bars.",
+              "html_evidence": "The rendered HTML has only a text description, a legend list, and a table. There is no visual chart: no bars, no segment value labels, no axis category labels (2023/2025) attached to bars, and no connector line.",
+              "correction": "Render the stacked bar chart visually. Draw two bars labeled 2023 and 2025. Stack gray 66%/77% above yellow 34%/23%, with each value label inside its segment, a baseline, a legend with color swatches, and the connector line. Keep the data table beside it."
+            }
+          ],
+          "render_latency_ms": 401.3,
+          "candidate_sha256": "b80f9705046ccbc71fb8d99f5c574ad887e1da60792dde92dd1c57286df4a8db"
+        },
+        {
+          "iteration": 2,
+          "html": "figure-01/iteration-02.html",
+          "rendered_png": "figure-01/iteration-02.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 505.1,
+          "candidate_sha256": "0bddc14c095557f7c73f7b0934452ab9ec7b6d54c702e3fc3346aecb0743090f"
+        }
+      ],
+      "selected_iteration": 2,
+      "selected_error_count": 0,
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-02.png"
+    },
+    {
+      "figure": 2,
+      "id": "fig3",
+      "kind": "chart",
+      "title": "Employers expect to use more freelance workers in the future.",
+      "source_png": "figure-02-fig3.png",
+      "bounding_box": [
+        777,
+        1045,
+        1423,
+        1826
+      ],
+      "output_directory": "figure-02",
+      "native_evidence": "figure-02/native-evidence.json",
+      "native_evidence_word_count": 66,
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-02/iteration-01.html",
+          "rendered_png": "figure-02/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 2,
+          "errors": [
+            {
+              "category": "chart_relationship",
+              "source_evidence": "The source shows two stacked bars (Today, In five years). The bars use color-coded segments for 50% or more, 25% to 49%, 10% to 24%, Less than 10% and None, with the percentage labels inside the segments.",
+              "html_evidence": "The render has no visual chart. It shows only a bullet list of legend names with no color swatches, two prose lines and a table. The section labeled 'Stacked bar chart' draws no bars.",
+              "correction": "Render the stacked bar chart visually. Draw two 100% stacked columns, Today and In five years, with segments in the correct order and color. Use a color-keyed legend and place each value label on its segment. Keep the data table alongside the chart."
+            },
+            {
+              "category": "chart_relationship",
+              "source_evidence": "The bracket on the Today bar spans the top four segments (4+8+16+37) and is labeled 65%. The bracket on the In five years bar spans the top four segments and is labeled 77%. The 4% label sits outside its segment, joined by a leader line.",
+              "html_evidence": "The 65% and 77% values appear only as a 'Bracket annotation' table row and in text. They are not tied to the segments they cover.",
+              "correction": "Show the brackets beside their bars. Label 65% (Today) and 77% (In five years) as spanning the segments from 50% or more down to Less than 10%, or state that scope in the table or caption. Keep the 4% label connected to its top segment."
+            }
+          ],
+          "render_latency_ms": 424.3,
+          "candidate_sha256": "3451bcf96066b0361947c0af89e37a4b3fc06e9fa2004e05beb83abb508de085"
+        },
+        {
+          "iteration": 2,
+          "html": "figure-02/iteration-02.html",
+          "rendered_png": "figure-02/iteration-02.png",
+          "verdict": "mismatch",
+          "error_count": 2,
+          "errors": [
+            {
+              "category": "layout",
+              "source_evidence": "The legend is a boxed panel at the top right of the figure, beside the question text, with the stacked bars below it.",
+              "html_evidence": "The legend is a boxed panel below the question text and left-aligned. The flex-wrap layout pushes it down, leaving a large empty area on the right of the page.",
+              "correction": "Place the legend at the top right beside the question, as in the source. Widen the figure container or stop the top block from wrapping."
+            },
+            {
+              "category": "layout",
+              "source_evidence": "The source labels the right bar \"In five years\". The 77% bracket starts at the top of the bar and ends at the top of the 'None' segment (the bottom of the Less than 10% segment). The 65% bracket ends at the same boundary on the Today bar.",
+              "html_evidence": "The 65% bracket and 77% bracket heights are set as a percentage of the bar. The Today bracket height is 65% and the five-years bracket is 77.5%, but the bar's rendered x-label reads \"In five years\" while the rendered screenshot text shows \"In five years\" wrapped inconsistently with the source. The 4% leader line is detached from the Today bar's orange segment and sits beyond the bracket gap, rather than touching the segment as in the source.",
+              "correction": "Position the 4% leader so it connects directly to the orange segment's right edge, and keep the bracket aligned with the bar's top edge and the 'Less than 10%' boundary on both bars."
+            }
+          ],
+          "render_latency_ms": 444.0,
+          "candidate_sha256": "ff57d4e9bda7936f5111c85a3c822d8ecc4fa924e8985c04f518145ef34eb4f8"
+        },
+        {
+          "iteration": 3,
+          "html": "figure-02/iteration-03.html",
+          "rendered_png": "figure-02/iteration-03.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 450.0,
+          "candidate_sha256": "0865271794caaad82b3ccf3990af1688bedef46fa8b4580a12010ae4a7866680"
+        }
+      ],
+      "selected_iteration": 3,
+      "selected_error_count": 0,
+      "final_html": "figure-02/final.html",
+      "final_rendered_png": "figure-02/iteration-03.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 2,
+    "passed": 2,
+    "failed": 0,
+    "total_iterations": 5,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-11-20T18:20:17.602747+00:00"
+}

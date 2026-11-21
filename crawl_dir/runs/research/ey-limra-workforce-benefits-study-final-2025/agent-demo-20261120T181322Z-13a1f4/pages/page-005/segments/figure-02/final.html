@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Figure 3: Employers expect to use more freelance workers in the future.</title>
+<style>
+body { font-family: Arial, Helvetica, sans-serif; color: #2e2e38; margin: 24px; }
+figure { margin: 0; max-width: 700px; }
+.fignum { font-weight: bold; margin: 0 0 4px; }
+h1 { font-size: 28px; line-height: 1.2; margin: 0 0 16px; }
+.question { font-size: 16px; line-height: 1.4; margin: 0 0 20px; }
+.top { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: nowrap; }
+.top .text { flex: 1 1 auto; min-width: 0; max-width: 440px; }
+.legend { flex: 0 0 auto; border: 1px solid #ccc; padding: 10px 14px; list-style: none; margin: 40px 0 0; font-size: 13px; }
+.legend li { display: flex; align-items: center; gap: 6px; margin: 4px 0; white-space: nowrap; }
+.sw { display: inline-block; width: 8px; height: 8px; }
+.c1 { background: #ff8a00; }
+.c2 { background: #ff5a5a; }
+.c3 { background: #35a0e8; }
+.c4 { background: #40c8c0; }
+.c5 { background: #35c864; }
+.chart { display: flex; gap: 40px; align-items: flex-start; margin: 24px 0 0 0; }
+.group { display: flex; align-items: flex-start; }
+.barcol { width: 150px; text-align: center; }
+.bar { height: 340px; display: flex; flex-direction: column; border-bottom: 2px solid #555; }
+.seg { display: flex; align-items: center; justify-content: center; color: #fff; font-size: 17px; overflow: visible; }
+.xlabel { margin-top: 8px; font-size: 16px; text-align: center; white-space: nowrap; }
+.bracket-wrap { position: relative; width: 70px; height: 340px; }
+.bracket { position: absolute; top: 0; border: 2px solid #666; width: 10px; box-sizing: border-box; }
+.bracket.left { right: 0; border-right: none; }
+.bracket.right { left: 0; border-left: none; }
+.blabel { position: absolute; font-size: 17px; transform: translateY(-50%); }
+.blabel.left { right: 16px; }
+.blabel.right { left: 16px; }
+.lead { position: relative; width: 56px; height: 340px; }
+.lead .line { position: absolute; top: 2%; left: 0; width: 18px; border-top: 1px solid #666; }
+.lead .txt { position: absolute; top: 2%; left: 22px; transform: translateY(-50%); font-size: 17px; }
+table { border-collapse: collapse; margin-top: 24px; font-size: 14px; }
+caption { text-align: left; font-weight: bold; margin-bottom: 6px; }
+th, td { border: 1px solid #ccc; padding: 4px 10px; text-align: left; }
+.note { font-size: 13px; margin: 8px 0 0; }
+</style>
+</head>
+<body>
+<main>
+<figure>
+<div class="top">
+<div class="text">
+<p class="fignum">Figure 3</p>
+<h1>Employers expect to use more freelance workers in the future.</h1>
+<p class="question"><strong>QUESTION:</strong> Approximately what percent of your company’s workers are currently contract/freelance workers? In five years, what percent of your company’s workers will be contract/freelance workers?</p>
+</div>
+<ul class="legend" aria-label="Legend">
+<li><span class="sw c1"></span>50% or more</li>
+<li><span class="sw c2"></span>25% to 49%</li>
+<li><span class="sw c3"></span>10% to 24%</li>
+<li><span class="sw c4"></span>Less than 10%</li>
+<li><span class="sw c5"></span>None</li>
+</ul>
+</div>
+
+<section aria-label="Stacked bar chart">
+<div class="chart" aria-hidden="true">
+<div class="group">
+<div class="bracket-wrap">
+<div class="bracket left" style="height:65%"></div>
+<div class="blabel left" style="top:32.5%">65%</div>
+</div>
+<div class="barcol">
+<div class="bar">
+<div class="seg c1" style="flex:4"></div>
+<div class="seg c2" style="flex:8">8%</div>
+<div class="seg c3" style="flex:16">16%</div>
+<div class="seg c4" style="flex:37">37%</div>
+<div class="seg c5" style="flex:35">35%</div>
+</div>
+<div class="xlabel">Today</div>
+</div>
+<div class="lead">
+<div class="line"></div>
+<div class="txt">4%</div>
+</div>
+</div>
+
+<div class="group">
+<div class="barcol">
+<div class="bar">
+<div class="seg c1" style="flex:6">6%</div>
+<div class="seg c2" style="flex:11">11%</div>
+<div class="seg c3" style="flex:23">23%</div>
+<div class="seg c4" style="flex:39">39%</div>
+<div class="seg c5" style="flex:23">23%</div>
+</div>
+<div class="xlabel">In five years</div>
+</div>
+<div class="bracket-wrap">
+<div class="bracket right" style="height:77.45%"></div>
+<div class="blabel right" style="top:38.7%">77%</div>
+</div>
+</div>
+</div>
+<p class="note">Brackets span the top four segments of each bar (50% or more down to Less than 10%): 65% for Today and 77% for In five years. The 4% label for Today sits outside its segment, joined by a leader line.</p>
+</section>
+
+<table>
+<caption>Percent of workers who are contract/freelance, today and in five years</caption>
+<thead>
+<tr><th scope="col">Category</th><th scope="col">Today</th><th scope="col">In five years</th></tr>
+</thead>
+<tbody>
+<tr><th scope="row">50% or more</th><td>4%</td><td>6%</td></tr>
+<tr><th scope="row">25% to 49%</th><td>8%</td><td>11%</td></tr>
+<tr><th scope="row">10% to 24%</th><td>16%</td><td>23%</td></tr>
+<tr><th scope="row">Less than 10%</th><td>37%</td><td>39%</td></tr>
+<tr><th scope="row">None</th><td>35%</td><td>23%</td></tr>
+</tbody>
+<tfoot>
+<tr><th scope="row">Bracket annotation (spans 50% or more through Less than 10%)</th><td>65%</td><td>77%</td></tr>
+</tfoot>
+</table>
+</figure>
+</main>
+</body>
+</html>

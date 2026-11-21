@@ -1,0 +1,31 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "Source is a full-page cover (portrait) with a full-bleed photo of a woman with a laptop. The title sits inside a gradient yellow-to-blue bracket frame that is closed on the right and bottom and has dotted accents.",
+        "html_evidence": "Rendered page is a landscape-like canvas with a flat green gradient on the left and a solid dark green block on the right. The frame is only a blue top line and a yellow left line, with no right or bottom edges and no dotted accents.",
+        "correction": "Rebuild the cover as a single portrait page with the full-bleed photo background. Draw the complete gradient frame (yellow to blue, open at the bottom left with three dots). Remove the dark green right-hand block."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The tagline, LIMRA logo with 'Navigate With Confidence' and EY logo with 'Shape the future with confidence' sit along the bottom edge as a cleanly spaced footer. The tagline has a three-dot accent above it.",
+        "html_evidence": "The footer is cramped. The tagline wraps ('answer.' on its own line). The EY text wraps into one word per line ('Shape the / future / with / confidence') and extends above the other footer items. The three-dot accent is missing.",
+        "correction": "Give the footer enough width so the tagline wraps as in the source. Keep 'Shape the future' and 'with confidence' on two lines. Align the LIMRA and EY blocks along the bottom, and add the dot accent above the tagline."
+      },
+      {
+        "category": "other",
+        "source_evidence": "The cover photo and the stylised LIMRA and EY logos (EY with a yellow swoosh) are visual elements of the page.",
+        "html_evidence": "The photo and logos are absent. The logos are rendered as plain text 'LIMRA' and 'EY', and the page has no image or alt text.",
+        "correction": "Include the cover image, with alt text describing a woman seated outdoors using a laptop surrounded by greenery. Render the LIMRA and EY logos as images or SVG with alt text."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "claude-sonnet-5-5",
+  "created_at": "2026-11-20T18:16:41.972309+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "figure-1",
+      "kind": "chart",
+      "title": "Companies plan to offer more benefits in five years.",
+      "source_png": "figure-01-figure-1.png",
+      "bounding_box": [
+        75,
+        988,
+        742,
+        1796
+      ],
+      "output_directory": "figure-01",
+      "native_evidence": "figure-01/native-evidence.json",
+      "native_evidence_word_count": 72,
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "layout",
+              "source_evidence": "The source page shows a stacked bar chart with three vertical 100% bars (Small, Midsize, Large). Each bar is divided into Fewer benefits (light gray), About the same (dark gray) and More benefits (yellow). Segment labels sit inside the bars, the +7%/+6%/+5% change callouts sit beside the bars, and a legend sits at the bottom.",
+              "html_evidence": "The rendered HTML has no visual chart. It shows only a text legend line (\"Legend: Fewer benefits; About the same; More benefits\"), a bulleted list of change values, and a table. There are no bars, no stacked segments, and no colored legend swatches. The change callouts are detached from any bar.",
+              "correction": "Add a rendered stacked bar chart (SVG or CSS). It should have three bars labeled Small (10–99 employees), Midsize (100–999 employees) and Large (1,000 or more employees). Stack Fewer benefits (3%, 1%, 3%), About the same (40%, 35%, 30%) and More benefits (57%, 64%, 67%) in that order. Put the segment labels on the segments, place the +7%, +6% and +5% \"change from 2023\" callouts beside their bars, and add a legend with color swatches. Keep the data table beside the chart."
+            }
+          ],
+          "render_latency_ms": 398.2,
+          "candidate_sha256": "fbec265b2227f5e49fa9a9d12ad70d57cea6757aa490d9d94eb413a1507107c0"
+        },
+        {
+          "iteration": 2,
+          "html": "figure-01/iteration-02.html",
+          "rendered_png": "figure-01/iteration-02.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "layout",
+              "source_evidence": "In the source, the thin baseline sits directly under the bottoms of the three stacked bars. The category labels (Small, Midsize, Large and their employee ranges) sit below that line.",
+              "html_evidence": "In the render, the baseline (the .chart border-bottom) is drawn below the category labels, at about y=560. The bars end about 40px higher, at about y=521. The line therefore underlines the labels and almost touches the second label line (for example \"(10–99 employees)\"). The bars float above the axis.",
+              "correction": "Put the baseline directly under the bar bottoms, at the base of the .plot area, and place the category labels below it with clear spacing. Remove the border-bottom from the .chart container so the line no longer crowds or underlines the category text."
+            }
+          ],
+          "render_latency_ms": 407.3,
+          "candidate_sha256": "da012867ebd008e14994cc155a18230404929dc771a4181c368351785bb2c41c"
+        },
+        {
+          "iteration": 3,
+          "html": "figure-01/iteration-03.html",
+          "rendered_png": "figure-01/iteration-03.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 410.4,
+          "candidate_sha256": "2e6be54b2324fad253685fd2cda8b74792e6431452905738afd30299e1dbfc5f"
+        }
+      ],
+      "selected_iteration": 3,
+      "selected_error_count": 0,
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-03.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 1,
+    "failed": 0,
+    "total_iterations": 3,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-11-20T18:17:33.225374+00:00"
+}

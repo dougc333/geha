@@ -1,0 +1,19 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "The yellow-bordered callout box ends at about x=1443 on a 1530px-wide page, leaving a clear right margin of about 87px. It is aligned with the right margin of the content.",
+        "html_evidence": "The callout box is 1365px wide with a 4px left margin, starting at 79px inside a 75px-padded band. Its right border is pushed to the very right edge of the rendered page (about x=1443 of 1444). It has no right margin and is not aligned with the 75px content margin used by the headings and text. The box overflows the content column and risks clipping.",
+        "correction": "Constrain the blockquote to the content width (e.g. width:calc(100% - 79px) or max-width:100% with box-sizing:border-box). Keep its right edge inside the page with the same right margin as the source, and make sure the right border is fully visible."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

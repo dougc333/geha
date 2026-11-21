@@ -1,0 +1,31 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "Step 2 (Distribution) column sits within the page margins at roughly x=1068–1403, with text ending near x≈1423 inside the page.",
+        "html_evidence": "The Distribution column is shifted right, with its rule extending to the page edge (~1430 of 1440) and the bullet text (e.g. 'purpose-built benefits programs') running to the right edge with no margin.",
+        "correction": "Reduce the s2 margin-left/width so the Distribution column stays within the page margins and matches the source column positions (approx. x 1068–1403)."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Top row: the title block occupies the left ~480px. Steps 1 and 2 are centered at about x=765 and x=1233. In the lower row, steps 3, 4 and 5 are centered at about x=295, x=760 and x=1235, aligned with the steps above.",
+        "html_evidence": "Step 1 is centered near x=840, step 2 near x=1250; step 3 near x=273, step 4 near x=692 and step 5 near x=1120, so the lower row is not aligned with the upper columns, and step 5 does not line up under step 2.",
+        "correction": "Adjust the grid column and margin values so steps 1/4 and 2/5 share the same x-centers as in the source (about 765 and 1235) and step 3 sits at about 295."
+      },
+      {
+        "category": "other",
+        "source_evidence": "Source numbered bullets use small yellow square markers, and the footer sits over a photograph of a building with foliage.",
+        "html_evidence": "HTML uses round bullet markers, and the footer image is a plain blurred color gradient instead of the photograph.",
+        "correction": "Use square yellow bullet markers and replace the gradient with the building/foliage photograph."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

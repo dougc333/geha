@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "claude-sonnet-5-5",
+  "created_at": "2026-11-20T18:24:56.596196+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "figure6",
+      "kind": "chart",
+      "title": "Employee interest in benefits varies across generations.",
+      "source_png": "figure-01-figure6.png",
+      "bounding_box": [
+        75,
+        469,
+        1457,
+        1824
+      ],
+      "output_directory": "figure-01",
+      "native_evidence": "figure-01/native-evidence.json",
+      "native_evidence_word_count": 250,
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 2,
+          "errors": [
+            {
+              "category": "layout",
+              "source_evidence": "The source is a heat-map table. Each cell is shaded on a red-to-white-to-green scale, and a legend swatch sits next to the labels 'Least interest' and 'Most interest'.",
+              "html_evidence": "The rendered HTML shows a plain unshaded table with no cell coloring. The heat-map legend is reduced to a sentence and a bullet list, with no gradient swatch.",
+              "correction": "Shade each table cell with the heat-map color for its value, running from red (lowest) through white to green (highest). Add a visible gradient legend swatch with 'Least interest' at the left end and 'Most interest' at the right end, in place of the bullet list."
+            },
+            {
+              "category": "layout",
+              "source_evidence": "The source columns are evenly spaced, with the percentages centered under the headers Gen Z, Millennials, Gen X and Baby boomers.",
+              "html_evidence": "In the rendered HTML the header labels crowd together ('Gen Z Millennials Gen X Baby boomers'). The values are left-aligned and do not sit under their headers. The row labels are center-aligned and the caption is wrapped awkwardly.",
+              "correction": "Add cell padding and a fixed column layout. Center the values under their column headers and left-align the row labels. Keep the table width consistent."
+            }
+          ],
+          "render_latency_ms": 408.7,
+          "candidate_sha256": "9741aac16521430affb2df786b0309102e6e5de7ea17a3f155b9a7817ee8ca01"
+        },
+        {
+          "iteration": 2,
+          "html": "figure-01/iteration-02.html",
+          "rendered_png": "figure-01/iteration-02.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 434.1,
+          "candidate_sha256": "99804936c97a7de63c2f9fea3acdb52abdcdadb36293092b1fd67884da1f74f4"
+        }
+      ],
+      "selected_iteration": 2,
+      "selected_error_count": 0,
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-02.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 1,
+    "failed": 0,
+    "total_iterations": 2,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-11-20T18:25:48.313474+00:00"
+}

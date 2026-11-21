@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "claude-sonnet-5-5",
+  "created_at": "2026-11-20T18:23:33.612622+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "figure-5",
+      "kind": "chart",
+      "title": "Employees value a range of benefit offerings.",
+      "source_png": "figure-01-figure-5.png",
+      "bounding_box": [
+        73,
+        77,
+        1443,
+        1036
+      ],
+      "output_directory": "figure-01",
+      "native_evidence": "figure-01/native-evidence.json",
+      "native_evidence_word_count": 172,
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 2,
+          "errors": [
+            {
+              "category": "layout",
+              "source_evidence": "The source page is a horizontal bar chart. Each benefit has a bar scaled to its percentage, with a data label at the bar end. Bars are colored green, gray or red, and a boxed legend explains the colors.",
+              "html_evidence": "The rendered HTML has no visual chart. It shows only a text description, a bulleted legend and a table, so there are no bars, no data labels at bar ends, no axis and no color swatches.",
+              "correction": "Render an actual horizontal bar chart (for example inline SVG or CSS bars) with a bar for each of the 26 benefits. Scale bar lengths to the percentages, place each value label at the bar end, color bars green, gray or red as in the source, and show the boxed color legend. Keep the data table alongside the chart."
+            },
+            {
+              "category": "chart_relationship",
+              "source_evidence": "The legend is a boxed key with green and red color swatches labeled 'Up 5 percentage points or more vs. 2023 study' and 'Down 5 percentage points or more vs. 2023 study'. Gray bars have no legend entry.",
+              "html_evidence": "The legend is a plain bulleted list with no color swatches. The gray category appears only in the figcaption and table text.",
+              "correction": "Render the legend as a boxed key with green and red color swatches and the same two labels, positioned next to the chart."
+            }
+          ],
+          "render_latency_ms": 411.3,
+          "candidate_sha256": "be4ccbafb85db9c34905bcb47c638386c7ce56ed252ae1dbd9cecd2be31d38c9"
+        },
+        {
+          "iteration": 2,
+          "html": "figure-01/iteration-02.html",
+          "rendered_png": "figure-01/iteration-02.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 449.5,
+          "candidate_sha256": "8f257f71a6b297be02a14bb598b8aa8606fd4bbae86b02b92744a4e2f77b1be5"
+        }
+      ],
+      "selected_iteration": 2,
+      "selected_error_count": 0,
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-02.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 1,
+    "failed": 0,
+    "total_iterations": 2,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-11-20T18:24:23.128062+00:00"
+}

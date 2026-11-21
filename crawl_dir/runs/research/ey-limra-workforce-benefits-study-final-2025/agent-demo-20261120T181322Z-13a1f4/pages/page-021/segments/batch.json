@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "claude-sonnet-5-5",
+  "created_at": "2026-11-20T18:37:19.817242+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "fig13",
+      "kind": "chart",
+      "title": "Figure 13: How does the digital experience with administering your company's insurance benefits compare to your experience with other companies?",
+      "source_png": "figure-01-fig13.png",
+      "bounding_box": [
+        76,
+        1253,
+        745,
+        1855
+      ],
+      "output_directory": "figure-01",
+      "native_evidence": "figure-01/native-evidence.json",
+      "native_evidence_word_count": 27,
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "chart_relationship",
+              "source_evidence": "The source page shows a drawn pie chart with three colored slices (Worse 6% light gray, About the same 28% yellow, Better 66% dark gray). The slice data labels sit on the slices, and the legend is a boxed row of color swatches.",
+              "html_evidence": "The rendered HTML has no visual pie chart. It has only a bulleted legend with color names in text, a one-sentence text summary, and a table. The colored swatches, slices and on-slice data labels are all absent.",
+              "correction": "Render an actual pie chart (inline SVG or equivalent) with Worse 6% light gray, About the same 28% yellow, Better 66% dark gray, with the percentage labels on the slices and a legend with color swatches. Keep the semantic data table alongside it."
+            }
+          ],
+          "render_latency_ms": 581.5,
+          "candidate_sha256": "4903ff095ca1e2f2beb016c6d6b32cfb783ede2932f664af137a111338ef5f8b"
+        },
+        {
+          "iteration": 2,
+          "html": "figure-01/iteration-02.html",
+          "rendered_png": "figure-01/iteration-02.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 400.8,
+          "candidate_sha256": "d2da29252aff306f3a70ad220f9eff2c126dc6f227c2d8d8d1f6f993e8a4d553"
+        }
+      ],
+      "selected_iteration": 2,
+      "selected_error_count": 0,
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-02.png"
+    },
+    {
+      "figure": 2,
+      "id": "fig14",
+      "kind": "chart",
+      "title": "Figure 14: How important is it for the digital experience you have with administering your company's insurance benefits to match your experience with other companies?",
+      "source_png": "figure-02-fig14.png",
+      "bounding_box": [
+        785,
+        1253,
+        1455,
+        1855
+      ],
+      "output_directory": "figure-02",
+      "native_evidence": "figure-02/native-evidence.json",
+      "native_evidence_word_count": 36,
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-02/iteration-01.html",
+          "rendered_png": "figure-02/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 2,
+          "errors": [
+            {
+              "category": "layout",
+              "source_evidence": "The source shows a pie chart with a boxed legend of gray, yellow and dark gray swatches. The slice labels 3%, 39% and 58% sit on their respective slices.",
+              "html_evidence": "The rendered HTML has no pie chart. The legend is a plain bulleted list with no color swatches. The values 3%, 39% and 58% are detached paragraphs, not attached to any slice or category.",
+              "correction": "Render the pie chart visually (for example with inline SVG): a gray 3% slice, a yellow 39% slice and a dark gray 58% slice. Add a legend with color swatches. Place each value label on or next to its slice, and keep the data table alongside."
+            },
+            {
+              "category": "chart_relationship",
+              "source_evidence": "Each percentage is tied to a slice and legend category: 3% is Not at all/not very important, 39% is Slightly/somewhat/moderately important, 58% is Very/extremely important.",
+              "html_evidence": "The standalone paragraphs 3%, 39% and 58% have no category association outside the table. The legend carries no color mapping.",
+              "correction": "Show each percentage on or beside its colored slice, and link each legend swatch to its category and value."
+            }
+          ],
+          "render_latency_ms": 376.8,
+          "candidate_sha256": "f071c840b98851b0d3b49dc47d6423f074273dcb5f70d8780153d65d8a005b14"
+        },
+        {
+          "iteration": 2,
+          "html": "figure-02/iteration-02.html",
+          "rendered_png": "figure-02/iteration-02.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 413.0,
+          "candidate_sha256": "9b5672fb3ab44a42ad7b105a629bd4860b866181ba63c12f75b3b50bc7ba1584"
+        }
+      ],
+      "selected_iteration": 2,
+      "selected_error_count": 0,
+      "final_html": "figure-02/final.html",
+      "final_rendered_png": "figure-02/iteration-02.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 2,
+    "passed": 2,
+    "failed": 0,
+    "total_iterations": 4,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-11-20T18:38:18.117823+00:00"
+}
