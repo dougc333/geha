@@ -205,6 +205,32 @@ PYTHONPATH=src python src/evaluate_policy_qa.py --live
 
 Useful options are `--cases`, `--pdf`, `--top-k`, and `--output`. Without `--output`, reports are saved under `runs/policy-qa-eval-<timestamp>/results.json`.
 
+### Policy eval suite (137 cases)
+
+`data/policy_qa_eval_cases_v2.json` holds 137 cases built from the two 2026 source PDFs: 121
+answerable questions across 16 categories (costs, premiums and rate codes, CDT codes, frequency
+limits, orthodontics, exclusions, claims and appeals, coordination of benefits, international,
+eligibility, comparisons), 5 questions that should be answered with a clarifying question (plan,
+network or ZIP missing), and 11 that should be refused or redirected (provider lookup, claim
+status, PHI, treatment advice, prompt injection, payment guarantees). Every answerable case names
+its document and page, and every required fact was checked against that page's extracted text.
+
+```bash
+PYTHONPATH=src python src/evaluate_policy_suite.py              # retrieval, each document separately
+PYTHONPATH=src python src/evaluate_policy_suite.py --combined   # retrieval over both documents at once
+PYTHONPATH=src python src/evaluate_policy_suite.py --live       # live answers through the guarded pipeline
+PYTHONPATH=src python src/evaluate_policy_suite.py --live --category exclusions claims -v
+```
+
+Each run writes `results.json` and a readable `report.md` (per-category scores and every failure)
+under `runs/policy-suite-<timestamp>/`. Retrieval failures are split into "page not retrieved"
+and "right page, wrong chunk". Clarify and refuse cases are scored with keywords, so read those
+answers in the report before trusting a result.
+
+Baseline (BM25, top 4, Nov 3, 2026): retrieval 105/121 with each document searched separately,
+96/121 when both share one index. All guide questions pass; the misses are in the 56-page brochure
+(orthodontics, exclusions, claims, out-of-network costs).
+
 ### Enrollment personas
 
 Run the scripted member simulator:
