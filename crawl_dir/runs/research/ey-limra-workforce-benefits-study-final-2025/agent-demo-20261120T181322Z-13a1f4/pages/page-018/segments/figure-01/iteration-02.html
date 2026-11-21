@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Figure 11</title>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; color: #1a1a24; margin: 24px; }
+  figure { margin: 0; max-width: 1100px; }
+  .fig-label { font-weight: bold; font-size: 14px; margin: 0 0 4px; }
+  h1 { font-size: 26px; line-height: 1.25; margin: 0 0 14px; }
+  .question { font-size: 16px; margin: 0 0 28px; line-height: 1.35; }
+  .legend { list-style: none; margin: 0 0 36px 90px; padding: 14px 18px; border: 1px solid #ccc; font-size: 15px; }
+  .legend li { display: flex; align-items: center; margin: 8px 0; }
+  .swatch { display: inline-block; width: 20px; height: 20px; margin-right: 12px; flex: none; }
+  .swatch.gray { background: #747480; }
+  .swatch.yellow { background: #ffe600; }
+  .chart { display: flex; margin: 0 0 0 100px; max-width: 930px; }
+  .col { flex: 1; display: flex; flex-direction: column; align-items: center; }
+  .axis { width: 100%; height: 280px; display: flex; justify-content: center; border-bottom: 1px solid #333; }
+  .bar { width: 124px; height: 100%; display: flex; flex-direction: column; }
+  .seg { display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .seg.y { background: #ffe600; color: #1a1a24; }
+  .seg.g { background: #747480; color: #fff; }
+  .cat { margin-top: 12px; text-align: center; font-size: 17px; line-height: 1.3; max-width: 200px; }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+</style>
+</head>
+<body>
+<figure>
+<p class="fig-label">Figure 11</p>
+<h1>In choosing carriers, employers value integrated absence management experiences more than affordability.</h1>
+<p class="question"><strong>QUESTION:</strong> Imagine your company was selecting a carrier for a new disability insurance benefit. Which of the following would you choose?</p>
+
+<ul class="legend" aria-label="Legend">
+<li><span class="swatch gray" aria-hidden="true"></span><span>A carrier that provides <strong>an integrated</strong> absence management program along with its disability product — <strong>for a higher price</strong></span></li>
+<li><span class="swatch yellow" aria-hidden="true"></span><span>A carrier with the best-value disability product even <strong>without an integrated</strong>, real-time absence management service</span></li>
+</ul>
+
+<div class="chart" aria-hidden="true">
+  <div class="col">
+    <div class="axis">
+      <div class="bar">
+        <div class="seg y" style="height:50%">50%</div>
+        <div class="seg g" style="height:50%">50%</div>
+      </div>
+    </div>
+    <div class="cat">Small (10–99 employees)</div>
+  </div>
+  <div class="col">
+    <div class="axis">
+      <div class="bar">
+        <div class="seg y" style="height:29%">29%</div>
+        <div class="seg g" style="height:71%">71%</div>
+      </div>
+    </div>
+    <div class="cat">Midsize (100–999 employees)</div>
+  </div>
+  <div class="col">
+    <div class="axis">
+      <div class="bar">
+        <div class="seg y" style="height:36%">36%</div>
+        <div class="seg g" style="height:64%">64%</div>
+      </div>
+    </div>
+    <div class="cat">Large (1,000 or more employees)</div>
+  </div>
+</div>
+
+<table class="visually-hidden">
+<caption>Carrier choice by employer size (percent)</caption>
+<thead>
+<tr>
+<th scope="col">Employer size</th>
+<th scope="col">A carrier that provides an integrated absence management program along with its disability product — for a higher price (gray)</th>
+<th scope="col">A carrier with the best-value disability product even without an integrated, real-time absence management service (yellow)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row">Small (10–99 employees)</th>
+<td>50%</td>
+<td>50%</td>
+</tr>
+<tr>
+<th scope="row">Midsize (100–999 employees)</th>
+<td>71%</td>
+<td>29%</td>
+</tr>
+<tr>
+<th scope="row">Large (1,000 or more employees)</th>
+<td>64%</td>
+<td>36%</td>
+</tr>
+</tbody>
+</table>
+</figure>
+</body>
+</html>

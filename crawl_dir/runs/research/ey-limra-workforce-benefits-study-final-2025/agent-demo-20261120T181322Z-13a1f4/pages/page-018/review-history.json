@@ -1,0 +1,31 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "The source page is a full-width page. The green callout and photo span the page width, and the chart sits centered under a full-width legend box.",
+        "html_evidence": "The rendered page is squeezed into the left half of the canvas, with a large empty white area on the right. The content is cut off at the right edge, and the photo and legend box end at the page edge.",
+        "correction": "Make the page layout fill the viewport. Center the content or scale it to the full page width, and remove the large empty right-hand area."
+      },
+      {
+        "category": "other",
+        "source_evidence": "The source photo shows a real photograph of a woman giving a laughing child a piggyback ride.",
+        "html_evidence": "The photo is replaced by an abstract SVG of colored circles and polygons that does not depict the people.",
+        "correction": "Use an image that is faithful to the source photo, not an abstract placeholder graphic."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "In the source, the legend entries each fit on one line inside a wide legend box.",
+        "html_evidence": "In the render, legend entries wrap to two lines (\"higher price\" and \"service\") because the box is narrower.",
+        "correction": "Widen the legend box so each legend entry fits on one line as in the source."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

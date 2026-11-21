@@ -1,0 +1,31 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "A large photograph of a smiling woman at a table with plants fills the lower half of the page (about y=1080–1845), below the Bottom Line callout.",
+        "html_evidence": "The photograph is missing from the render. Only a small text caption (\"Photograph: a smiling woman with glasses...\") appears in its place, leaving a large blank area.",
+        "correction": "Include the actual photograph as an img element at full content width below the callout, with the descriptive text as alt text or a figcaption, not as a substitute for the image."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The hero banner has a photographic background of a green plant wall and office. The quote text sits on it, and the banner has a thin vertical divider between each pair of quotes.",
+        "html_evidence": "The hero is a flat dark green block with no background image. There are no vertical dividers between the quotes.",
+        "correction": "Add the plant-wall background image to the hero with a dark overlay, and add thin vertical divider lines between the three quotes."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The \"THE BOTTOM LINE\" heading has a yellow bracket-style border tab connected to the callout box, and a yellow-to-teal gradient bar runs down the left page edge.",
+        "html_evidence": "The heading is plain text. The callout is a fully closed yellow rectangle, and there is no left-edge gradient bar.",
+        "correction": "Reproduce the yellow tab outline joined to the callout, which extends to the right page edge, and add the vertical gradient strip on the left edge."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

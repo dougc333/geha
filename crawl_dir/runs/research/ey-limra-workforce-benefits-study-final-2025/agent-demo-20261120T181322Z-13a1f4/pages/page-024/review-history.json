@@ -1,0 +1,31 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "clipped_content",
+        "source_evidence": "The \"4%\" label in the Online enrollment bar is fully readable inside its orange segment.",
+        "html_evidence": "The orange segment is about 4% of a 465px bar, roughly 18px wide. Its 14px \"4%\" label has overflow:hidden, so it is cramped against the segment edges and clipped.",
+        "correction": "Give narrow segments enough room for the label, for example with a smaller font, padding or overflow:visible. The \"4%\" must be fully legible inside the segment without touching its neighbors."
+      },
+      {
+        "category": "text_overlap",
+        "source_evidence": "In Online billing and payment, the \"5%\" and \"4%\" labels sit in adjacent segments and are distinct and readable.",
+        "html_evidence": "The \"5%\" and \"4%\" labels run together as \"5%4%\" and are clipped at the segment boundaries. E-signature capabilities has the same problem, where the \"5%\" label fills its whole segment and touches the neighboring \"9%\".",
+        "correction": "Fit or reposition the narrow-segment labels so adjacent labels do not collide or clip and each remains separately readable."
+      },
+      {
+        "category": "table_structure",
+        "source_evidence": "The chart draws unlabeled segments for \"Do not have and do not want\" and \"Don't know\" in every bar. Their sizes are visible but their values are not printed.",
+        "html_evidence": "The semantic table gives \"not labeled\" for those two series in every row, while the visual bars draw them at specific widths such as 5%, 4% and 10%.",
+        "correction": "Make the table relationship to the drawn segments explicit, for example by noting approximate values read from the segment lengths. Alternatively, state clearly that no values are printed in the source."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

@@ -1,0 +1,25 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "chart_relationship",
+        "source_evidence": "Figure 10 is a horizontal 100% stacked bar chart with 11 leave types. Each bar has dark gray (Currently offer), yellow (Plan to add/considering), and light gray (No plans to offer) segments, with percentage labels drawn on the segments.",
+        "html_evidence": "The rendered HTML has the legend box, a one-sentence description, and a plain table. No bars are drawn, so the legend swatches point to nothing and the chart's visual relationships are lost.",
+        "correction": "Render the horizontal stacked bar chart, e.g. as inline SVG or CSS bars, with one row per leave type. Use the legend colors and draw each segment to its percentage width. Put the data labels on the segments, and keep the semantic table as the accessible companion."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The legend sits directly above the bar chart, and the chart sits between the question and the following body text.",
+        "html_evidence": "The legend is followed by a descriptive paragraph and a table, so the legend is detached from any visual encoding. A table does not replace the missing visual chart.",
+        "correction": "Place the legend directly above the rendered bars, matching the source layout, and keep the table as the data equivalent."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

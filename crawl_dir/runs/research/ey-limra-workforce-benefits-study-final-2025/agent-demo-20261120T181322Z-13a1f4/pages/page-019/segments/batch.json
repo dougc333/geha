@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "claude-sonnet-5-5",
+  "created_at": "2026-11-20T18:35:14.303282+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "figure-12",
+      "kind": "chart",
+      "title": "Plans to outsource span the full spectrum of absence offerings.",
+      "source_png": "figure-01-figure-12.png",
+      "bounding_box": [
+        72,
+        1043,
+        1464,
+        1909
+      ],
+      "output_directory": "figure-01",
+      "native_evidence": "figure-01/native-evidence.json",
+      "native_evidence_word_count": 149,
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 419.5,
+          "candidate_sha256": "a538421933c7237a81d30a5c381820a28105dc303d1aef9e3e647c5a62f440a9"
+        }
+      ],
+      "selected_iteration": 1,
+      "selected_error_count": 0,
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-01.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 1,
+    "failed": 0,
+    "total_iterations": 1,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-11-20T18:35:25.948301+00:00"
+}

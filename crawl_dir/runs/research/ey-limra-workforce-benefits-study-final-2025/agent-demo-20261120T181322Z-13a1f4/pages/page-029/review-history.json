@@ -1,0 +1,25 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "text_overlap",
+        "source_evidence": "\"About LIMRA\" is set at the same size as the body text, directly above \"Serving the industry since 1916...\" with clear separation.",
+        "html_evidence": "\"About LIMRA\" renders as a very large h1 (default ~32px+, visibly larger than the 28px body). Its baseline crowds and nearly touches the first line of body text \"Serving the industry since 1916...\", and its descenders and line box collide with that line.",
+        "correction": "Style the h1 to match the body text (28px, line-height 36px, normal weight) so it does not overlap or crowd the paragraph below."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The left paragraph breaks as \"industry knowledge, insights, connections,\" / \"and solutions to help more than 700 member\". The right column starts at x≈782 with wider text blocks.",
+        "html_evidence": "Column positions and wrapping differ: the right column starts at x≈744 and the left lines wrap differently (\"connections, and\"). The overall page proportions are also altered.",
+        "correction": "Adjust column widths and gap so the right column starts near 51% of the page width, and match the source line breaks and font sizes."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

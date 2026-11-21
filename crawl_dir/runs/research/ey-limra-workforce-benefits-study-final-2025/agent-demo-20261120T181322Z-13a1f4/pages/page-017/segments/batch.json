@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "claude-sonnet-5-5",
+  "created_at": "2026-11-20T18:32:32.247979+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "figure_10",
+      "kind": "chart",
+      "title": "The number and types of leave benefits are expanding.",
+      "source_png": "figure-01-figure_10.png",
+      "bounding_box": [
+        73,
+        701,
+        1423,
+        1441
+      ],
+      "output_directory": "figure-01",
+      "native_evidence": "figure-01/native-evidence.json",
+      "native_evidence_word_count": 111,
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 434.3,
+          "candidate_sha256": "082fe95643c038523cf1915ed0a4cf5db58f51fb1984967e113f8e55ed80c55e"
+        }
+      ],
+      "selected_iteration": 1,
+      "selected_error_count": 0,
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-01.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 1,
+    "failed": 0,
+    "total_iterations": 1,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-11-20T18:32:44.511789+00:00"
+}

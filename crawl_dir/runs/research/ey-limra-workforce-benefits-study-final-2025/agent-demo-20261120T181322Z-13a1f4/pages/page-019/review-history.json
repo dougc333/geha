@@ -1,0 +1,31 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "text_overlap",
+        "source_evidence": "The row label \"Paid parental, maternity or paternity leave (company-sponsored)\" is on a single line, with clear spacing from the next row \"Military service/family military leave\".",
+        "html_evidence": "In the rendered HTML the label wraps onto two lines. The second line, \"sponsored)\", overlaps the \"Military service/family military leave\" label below it, so both are partly illegible.",
+        "correction": "Widen the row-label column or reduce its font size or padding so the label fits on one line, as in the source. Alternatively, increase the row height so the wrapped label does not collide with the next row. Keep the bar column aligned."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The legend is a single horizontal row with three items: Currently outsource, Do not outsource but plan to outsource in the next 3-5 years, and No plans to outsource.",
+        "html_evidence": "The legend wraps. \"No plans to outsource\" drops to a second line, and the legend box is taller than in the source.",
+        "correction": "Make the legend a single row, for example with a smaller gap, smaller font, and nowrap, so all three items sit on one line as in the source."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The question text sits on one line: \"QUESTION: Does your company currently outsource ... any of the following leaves?\"",
+        "html_evidence": "The question wraps, and the word \"leaves?\" falls alone on a second line.",
+        "correction": "Reduce the question font size or the margins so the question fits on one line, as in the source."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

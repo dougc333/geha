@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "claude-sonnet-5-5",
+  "created_at": "2026-11-20T18:39:21.036285+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "fig15",
+      "kind": "chart",
+      "title": "Employees want claims and enrollment processes to be further digitized.",
+      "source_png": "figure-01-fig15.png",
+      "bounding_box": [
+        73,
+        297,
+        1461,
+        990
+      ],
+      "output_directory": "figure-01",
+      "native_evidence": "figure-01/native-evidence.json",
+      "native_evidence_word_count": 113,
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 2,
+          "errors": [
+            {
+              "category": "layout",
+              "source_evidence": "The source page shows a horizontal grouped bar chart with yellow 2023 bars, gray 2025 bars, a legend, and percentage data labels at the bar ends.",
+              "html_evidence": "The rendered HTML has no visual chart. It shows only a text legend line, a bullet list, and a table. There are no bars, no axis, and no colored legend swatches.",
+              "correction": "Render the grouped horizontal bar chart (for example as inline SVG or CSS bars). It needs yellow 2023 and gray 2025 bars with their data labels, a legend with color swatches, and each bar's length proportional to its value. Keep the semantic table beside it."
+            },
+            {
+              "category": "layout",
+              "source_evidence": "The category labels sit beside their bars in the chart, and the table is a secondary reference.",
+              "html_evidence": "In the rendered table, the row header cells are centered and bold, and the table is cramped and misaligned with the headings. The row headers are visually detached from the 2023 and 2025 values, so the value columns sit far from the labels.",
+              "correction": "Left-align the row headers and set column widths so each capability label sits next to its 2023 and 2025 values. Do not center the long labels."
+            }
+          ],
+          "render_latency_ms": 425.1,
+          "candidate_sha256": "3264a975594756c78f2179b868fb53ce08243c714ad66675aa11a82d67b974ad"
+        },
+        {
+          "iteration": 2,
+          "html": "figure-01/iteration-02.html",
+          "rendered_png": "figure-01/iteration-02.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 418.4,
+          "candidate_sha256": "9e748a93fd1e582ba5ad533fb481c9be9dad2830dd476ded2582f1e3e6ea436a"
+        }
+      ],
+      "selected_iteration": 2,
+      "selected_error_count": 0,
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-02.png"
+    },
+    {
+      "figure": 2,
+      "id": "fig16",
+      "kind": "chart",
+      "title": "Third-party vendors are best positioned to provide benefits technology.",
+      "source_png": "figure-02-fig16.png",
+      "bounding_box": [
+        73,
+        1263,
+        1461,
+        1851
+      ],
+      "output_directory": "figure-02",
+      "native_evidence": "figure-02/native-evidence.json",
+      "native_evidence_word_count": 66,
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-02/iteration-01.html",
+          "rendered_png": "figure-02/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "layout",
+              "source_evidence": "The source page shows a rendered stacked bar chart with three vertical bars, segment value labels (4%, 24%, 31%, 41%, etc.), a boxed color-keyed legend, and category labels under each bar.",
+              "html_evidence": "The rendered HTML has no visual chart. It has only a sentence describing a stacked bar chart, a plain bulleted legend with no color swatches, and a table. The rest of the page is blank.",
+              "correction": "Render the stacked bar chart, for example as inline SVG or CSS bars. Include three bars stacked bottom to top as Third-party vendor, Insurance carrier(s), Broker/benefits advisor, Platform built-house. Put the data labels on the segments, use a color-keyed legend, and put the category labels under each bar. Keep the data table alongside the chart."
+            }
+          ],
+          "render_latency_ms": 400.1,
+          "candidate_sha256": "153c70ad0f02267cb0774be83dacc4f8a48bfba4e937197afb55b6676adb4920"
+        },
+        {
+          "iteration": 2,
+          "html": "figure-02/iteration-02.html",
+          "rendered_png": "figure-02/iteration-02.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 407.2,
+          "candidate_sha256": "ba8acb1d3dd1b27f39a3634020b5f371fd310af7d845175fd532744aa446f0c4"
+        }
+      ],
+      "selected_iteration": 2,
+      "selected_error_count": 0,
+      "final_html": "figure-02/final.html",
+      "final_rendered_png": "figure-02/iteration-02.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 2,
+    "passed": 2,
+    "failed": 0,
+    "total_iterations": 4,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-11-20T18:40:39.028730+00:00"
+}

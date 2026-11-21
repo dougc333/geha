@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "claude-sonnet-5-5",
+  "created_at": "2026-11-20T18:30:16.274478+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "figure-8",
+      "kind": "chart",
+      "title": "Employers choose brokers based on quality service, enhanced strategies and access to benefits.",
+      "source_png": "figure-01-figure-8.png",
+      "bounding_box": [
+        73,
+        178,
+        1454,
+        865
+      ],
+      "output_directory": "figure-01",
+      "native_evidence": "figure-01/native-evidence.json",
+      "native_evidence_word_count": 121,
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 420.9,
+          "candidate_sha256": "32ede709be27ce6536a0601e9544919dc30729410c7ed1cf9719df79520147be"
+        }
+      ],
+      "selected_iteration": 1,
+      "selected_error_count": 0,
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-01.png"
+    },
+    {
+      "figure": 2,
+      "id": "figure-9",
+      "kind": "chart",
+      "title": "Employer opinions are mixed about primary responsibility for education and awareness that employees need to make confident enrollment decisions.",
+      "source_png": "figure-02-figure-9.png",
+      "bounding_box": [
+        73,
+        1154,
+        1423,
+        1875
+      ],
+      "output_directory": "figure-02",
+      "native_evidence": "figure-02/native-evidence.json",
+      "native_evidence_word_count": 67,
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-02/iteration-01.html",
+          "rendered_png": "figure-02/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "layout",
+              "source_evidence": "The source page shows a horizontal clustered bar chart. Each category has a yellow 2025 bar and a gray 2023 bar, with data labels at the bar ends and a boxed legend containing 2025 and 2023.",
+              "html_evidence": "The rendered HTML has no bar chart. It shows only a text legend line, a bulleted list, and a table. The bars, axis, and legend swatches are not drawn.",
+              "correction": "Render the visual chart as a horizontal clustered bar chart. Draw yellow 2025 bars and gray 2023 bars with data labels, a legend with color swatches, and category labels aligned to each pair of bars. Keep the semantic data table that matches the chart values."
+            }
+          ],
+          "render_latency_ms": 392.0,
+          "candidate_sha256": "daf977542ec5579275c1bbb6fbd99544fbee2e4faa0ee940a8e2a67d836ee832"
+        },
+        {
+          "iteration": 2,
+          "html": "figure-02/iteration-02.html",
+          "rendered_png": "figure-02/iteration-02.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 403.5,
+          "candidate_sha256": "32f679db6bfec4978a5ed51014c6a4f6b0ad2b9f5eaff695fcfe96a10de20f34"
+        }
+      ],
+      "selected_iteration": 2,
+      "selected_error_count": 0,
+      "final_html": "figure-02/final.html",
+      "final_rendered_png": "figure-02/iteration-02.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 2,
+    "passed": 2,
+    "failed": 0,
+    "total_iterations": 3,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-11-20T18:30:57.720989+00:00"
+}

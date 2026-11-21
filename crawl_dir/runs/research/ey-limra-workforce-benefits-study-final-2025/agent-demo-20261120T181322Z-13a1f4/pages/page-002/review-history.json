@@ -1,0 +1,61 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "missing_text",
+        "source_evidence": "The top of the source page has a large photograph of five colleagues in a meeting in front of a green plant wall, placed above the heading.",
+        "html_evidence": "The rendered HTML shows no image. The figure element is empty and has only an aria-label, so the photograph is not visible.",
+        "correction": "Render the photograph visibly above the heading, for example with an img element and alt text, or remove the empty figure and describe the decorative image in a way that does not leave a blank placeholder."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The source body text is set in two columns. The first column runs through 'workforce are' and the second column starts with 'significant constraints.' Each paragraph has clear spacing.",
+        "html_evidence": "The rendered HTML shows the paragraphs as full-width single-column text with very long lines. The page footer sits directly beneath the body text instead of at the bottom of the page.",
+        "correction": "Lay the body out in two columns that match the source, with the page footer pinned to the bottom of the page. Keep the reading order the same as the source: left column first, then right column."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "other",
+        "source_evidence": "The top of the source page has a photograph of five colleagues in a meeting in front of a green plant wall. A standing man and a standing woman hold papers.",
+        "html_evidence": "The top banner is a CSS gradient of green and white with a pale circle. It does not show the photograph or any people.",
+        "correction": "Replace the gradient with the actual photograph, or a faithful image of the meeting scene, so the visual content matches the source."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The source page has a vertical yellow-to-teal gradient strip along the left edge. The photo runs full width from the top and is about 620px of a 1980px page, roughly 31% of the height.",
+        "html_evidence": "The left edge is a solid yellow-green border only. The banner is about 300px of 1000px, roughly 30%, but it is a flat gradient.",
+        "correction": "Render the left strip as a yellow-to-teal vertical gradient and make the hero image proportions match the source."
+      }
+    ]
+  },
+  {
+    "iteration": 2,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "The top of the source page is a full-width photograph of five colleagues in a meeting in front of a plant wall, with realistic people, plants and furniture.",
+        "html_evidence": "The photo is rebuilt from CSS blocks. It shows crude colored rectangles and ellipses for people, with a flat green background and no plants. The man's head is cut off at the top edge and the cup floats on the table strip.",
+        "correction": "Embed the actual photograph as an img element, cropped to the same full-width area. Do not approximate it with CSS shapes. Keep the figure's alt text."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The source photo takes up about 31% of the page height, ending near y=620 of 1980. The title, rule, text columns and footer follow with proportional spacing.",
+        "html_evidence": "The photo ends at about y=313 of 1000 and the title sits at about y=372. The proportions are close, but the footer is placed well above the page bottom and the page text is sized differently. Line breaks and column fill differ from the source.",
+        "correction": "Match the source layout. Use the same font size and line wrapping, with the footer at the bottom margin and both columns starting at the same height as in the source."
+      }
+    ]
+  },
+  {
+    "iteration": 3,
+    "verdict": "match",
+    "errors": []
+  }
+]

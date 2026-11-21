@@ -1,0 +1,37 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "text_overlap",
+        "source_evidence": "The '+7%/+6%/+5% change from 2023' callouts sit to the right of each bar in clear white space, and every word is fully legible.",
+        "html_evidence": "In the rendered chart, the callout text overlaps the next bar. '+7%' and 'change' run under the Midsize bar, '+6%' and 'change' run under the Large bar, and the '+5%' callout is cut off by the photo. The words show as '+7%', 'change', and so on, partly hidden.",
+        "correction": "Narrow the bars or widen the columns so each callout fits between its own bar and the next one. Keep every callout fully visible, with no overlap on adjacent bars or the photo and no clipping of 'change' or '+5%'."
+      },
+      {
+        "category": "clipped_content",
+        "source_evidence": "The '+5% change from 2023' callout is fully visible beside the Large bar, with the photo starting well to the right.",
+        "html_evidence": "The '+5%' and 'change' text of the Large callout runs into the photo and is cut off at its edge.",
+        "correction": "Give the chart enough width, or reduce the callout offset, so the Large callout ends before the photo begins."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The '3%', '1%' and '3%' labels sit directly beside the small Fewer-benefits segments and are tied to them with leader lines.",
+        "html_evidence": "The small labels sit at a fixed offset far right of the bars. The Small '3%' falls under the Midsize bar's region, and the '1%' and '3%' labels are detached from their segments with no leader lines.",
+        "correction": "Place each Fewer-benefits label immediately next to its own bar segment, with a leader line as in the source, so it clearly belongs to that bar."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The category labels sit centered beneath their bars.",
+        "html_evidence": "The category labels are centered in the column, but the bars are offset to the left within each column. The labels are therefore misaligned with their bars, and the Large label wraps onto three lines.",
+        "correction": "Center each bar over its category label and keep the labels aligned beneath their bars."
+      }
+    ]
+  },
+  {
+    "iteration": 1,
+    "verdict": "match",
+    "errors": []
+  }
+]

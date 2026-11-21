@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "claude-sonnet-5-5",
+  "created_at": "2026-11-20T18:41:19.789904+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "figure-17",
+      "kind": "chart",
+      "title": "Employers prefer carriers that effectively integrate over low-cost products.",
+      "source_png": "figure-01-figure-17.png",
+      "bounding_box": [
+        75,
+        333,
+        1417,
+        1061
+      ],
+      "output_directory": "figure-01",
+      "native_evidence": "figure-01/native-evidence.json",
+      "native_evidence_word_count": 59,
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 2,
+          "errors": [
+            {
+              "category": "chart_data",
+              "source_evidence": "Source shows two rendered pie charts, 2021 (66% gray, 34% yellow) and 2025 (74% gray, 26% yellow), with the slices and percentage labels drawn inside them.",
+              "html_evidence": "The rendered candidate has no visual pie charts. Under the 2021 and 2025 headings there is only a sentence beginning \"Pie chart: 66% gray ...\" and \"Pie chart: 74% gray ...\".",
+              "correction": "Render an actual pie chart (for example inline SVG) under each year heading, with slices at 66/34 for 2021 and 74/26 for 2025, gray and yellow fills, and percentage labels placed inside the slices. Keep the data table as well."
+            },
+            {
+              "category": "chart_relationship",
+              "source_evidence": "The legend uses gray and yellow square swatches that identify the pie slices.",
+              "html_evidence": "The legend renders as black \"■\" bullets with \"(gray)\" and \"(yellow)\" text. No colored swatches appear, and there are no colored slices for them to map to.",
+              "correction": "Render the legend swatches in gray (#777783) and yellow (#FFE600) and link them to the correspondingly colored pie slices."
+            }
+          ],
+          "render_latency_ms": 383.5,
+          "candidate_sha256": "2f914fcda67ad627a7d9840ece4e4f16d22c19811a6dd8cf4e6d48e80410c695"
+        },
+        {
+          "iteration": 2,
+          "html": "figure-01/iteration-02.html",
+          "rendered_png": "figure-01/iteration-02.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 405.6,
+          "candidate_sha256": "d5a91d0ffd649ea5b87b6a86f1356415258173ff67e859e969802cce79646557"
+        }
+      ],
+      "selected_iteration": 2,
+      "selected_error_count": 0,
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-02.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 1,
+    "failed": 0,
+    "total_iterations": 2,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-11-20T18:42:00.862006+00:00"
+}

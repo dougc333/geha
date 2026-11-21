@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "workflow": "chart_figure_crop_semantic_html_correction",
+  "model": "claude-sonnet-5-5",
+  "created_at": "2026-11-20T18:33:38.493226+00:00",
+  "max_iterations_per_figure": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every figure",
+  "status": "passed",
+  "figures": [
+    {
+      "figure": 1,
+      "id": "fig11",
+      "kind": "chart",
+      "title": "In choosing carriers, employers value integrated absence management experiences more than affordability.",
+      "source_png": "figure-01-fig11.png",
+      "bounding_box": [
+        75,
+        1144,
+        1377,
+        1885
+      ],
+      "output_directory": "figure-01",
+      "native_evidence": "figure-01/native-evidence.json",
+      "native_evidence_word_count": 69,
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "figure-01/iteration-01.html",
+          "rendered_png": "figure-01/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            {
+              "category": "chart_data",
+              "source_evidence": "The source page has a visual stacked bar chart with three bars (Small, Midsize, Large). Gray segments are 50%, 71% and 64%, and yellow segments are 50%, 29% and 36%, with data labels inside the segments.",
+              "html_evidence": "The rendered HTML has no visual chart. It has only a sentence reading 'Stacked bar chart categories: ...' and a data table, and the rendered page below the table is blank.",
+              "correction": "Render the stacked bar chart, either as inline SVG or as CSS bars, alongside the semantic table. It needs three bars, each totaling 100%, with the gray segment at the bottom and the yellow on top. Put the segment labels (50%/50%, 71%/29%, 64%/36%) inside the segments, with the category labels beneath each bar and the legend above. The table values are correct and can stay as the accessible data table."
+            }
+          ],
+          "render_latency_ms": 407.8,
+          "candidate_sha256": "a9153870e9961fb5118e8d0ca46e74145f02ba984f91ab06ba1af424dabf0013"
+        },
+        {
+          "iteration": 2,
+          "html": "figure-01/iteration-02.html",
+          "rendered_png": "figure-01/iteration-02.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "render_latency_ms": 423.5,
+          "candidate_sha256": "b68a428f948160dad8ec012b235a55e85c0404fbf2ba8b7304c90ca0b69a1642"
+        }
+      ],
+      "selected_iteration": 2,
+      "selected_error_count": 0,
+      "final_html": "figure-01/final.html",
+      "final_rendered_png": "figure-01/iteration-02.png"
+    }
+  ],
+  "summary": {
+    "figure_count": 1,
+    "passed": 1,
+    "failed": 0,
+    "total_iterations": 2,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-11-20T18:34:07.224921+00:00"
+}
