@@ -1,0 +1,101 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "Header shows the M logo box beside \"MERIDIAN SHIPPING\"; the letter M is only a graphic inside the logo",
+        "html_evidence": "<pre>M\nMERIDIAN SHIPPING\nGLOBAL SHIPPING & LOGISTICS</pre> plus the separate logo span, so \"M\" appears twice",
+        "correction": "Remove the duplicate \"M\" text line from the header pre; keep only the logo and the company name/tagline."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The bill of lading box has a title, a rule below it, then B/L NO. and SCAC as label/value rows with values right-aligned, all inside a bordered, shaded box",
+        "html_evidence": "The rule is positioned at top:112px, which falls under the 'SCAC MRDN' line instead of between the title and the identifiers. B/L NO. and SCAC are merged into single lines with no label/value separation or right alignment.",
+        "correction": "Place the rule under the \"BILL OF LADING\" title, and lay out B/L NO. / BL232472785 and SCAC / MRDN as separate label and value pairs."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The TOTAL NUMBER OF PACKAGES value \"40\" is large and centered in the box, below the label",
+        "html_evidence": "40 is plain small text directly under the label, left-aligned",
+        "correction": "Render 40 large and centered, as in the source."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The footer note \"NUMBER OF ORIGINAL B/L'S: THREE (3)\" sits below a rule and is centered. The signature text \"Authorized Signature\" is large, and the signature area is shaded.",
+        "html_evidence": "NUMBER OF ORIGINAL B/L'S is inline in the legal text with no rule. \"Authorized Signature\" is small, left-aligned text under the label with no shading.",
+        "correction": "Separate the originals line with a rule, center it, and enlarge and right-align the signature text."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Source labels are small, uppercase and letter-spaced, with the values in larger or different weights (e.g., BKG5917532 large, the shipper name bold with the address in regular weight, the Packaging line italic). Several headers are shaded, and the vessel and port row is shaded.",
+        "html_evidence": "All text is bold, in a uniform size, with no italic and no shading on those areas",
+        "correction": "Apply the source typographic hierarchy: label/value size and weight differences, the italic Packaging line, and the shaded areas."
+      }
+    ],
+    "discarded_non_errors": 1
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "Source shows the FREIGHT COLLECT banner inside the Description of Goods column, below both cargo items, with the table columns continuing alongside it.",
+        "html_evidence": "The candidate renders FREIGHT COLLECT as a full-width banner below the cargo table, outside the Description column.",
+        "correction": "Place FREIGHT COLLECT within the description column, below the pears item, with the other columns extending alongside."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Source labels are small caps-style headings with distinct, larger bold values (e.g., BKG5917532, MERIDIAN LABREA / 124N, 40). The header rows of the cargo table are in light gray. The total packages value 40 is large and centered.",
+        "html_evidence": "The candidate renders labels and values with uniform text styling. The 40 sits directly under the label in small text, and the freight charges list uses small non-bold text.",
+        "correction": "Apply the source's hierarchy: distinct label and value styles, large centered 40, bold OCEAN FREIGHT/COLLECT."
+      }
+    ],
+    "discarded_non_errors": 3
+  },
+  {
+    "iteration": 2,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "Source cargo table is one continuous grid. The container, package, description, weight and measurement columns span both cargo entries, and the two entries are not split into separate rows. The FREIGHT COLLECT banner sits inside the description column, framed by rules.",
+        "html_evidence": "Cargo is split into two separate table rows with a horizontal border between them. FREIGHT COLLECT is a full-width banner row below the table.",
+        "correction": "Reproduce the single continuous cargo grid, with FREIGHT COLLECT inside the description column."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Bill of lading box has a larger title, a rule under the title, and B/L NO. and SCAC labels at left with their values right-aligned. Overall header uses a styled box with a gray background.",
+        "html_evidence": "Title, B/L NO. and SCAC are stacked as plain left-aligned lines. The rule sits under SCAC in a tall empty box.",
+        "correction": "Place the rule under the BILL OF LADING title and lay out label/value pairs as in the source."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Only labels are small caps/bold. Values such as company names and addresses use different sizes and weights (e.g., bold names with regular addresses and smaller contact lines). Key values like BKG5917532, MERIDIAN LABREA / 124N, 40 and Authorized Signature are shown large.",
+        "html_evidence": "Every field is rendered as uniform bold text of the same size, with no visual hierarchy. Values such as BKG5917532, 40 and Authorized Signature are small.",
+        "correction": "Restore the typographic hierarchy: label vs. value styling, and emphasis on key values."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Total number of packages \"40\" is large and centered in its box. NUMBER OF ORIGINAL B/L'S sits below a rule, centered.",
+        "html_evidence": "\"40\" is small text directly below the label. NUMBER OF ORIGINAL B/L'S is left-aligned inline with the paragraph text and has no rule.",
+        "correction": "Center the large 40 and place the originals line centered below a rule."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Freight charges: OCEAN FREIGHT/THC at left and COLLECT beside OCEAN FREIGHT in bold. Legal text is small and regular weight.",
+        "html_evidence": "Charges are in small regular text with COLLECT right-aligned at the edge. Legal text is bold.",
+        "correction": "Make charges bold and legal text regular weight, with COLLECT positioned as in the source."
+      }
+    ],
+    "discarded_non_errors": 1
+  },
+  {
+    "iteration": 3,
+    "verdict": "match",
+    "errors": [],
+    "discarded_non_errors": 0
+  }
+]

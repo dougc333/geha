@@ -1,0 +1,113 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "The page is a 1623px-wide form. Each section sits in its own box, laid out top to bottom: header, shipper/consignee/notify, vessel/ports, cargo table, charges, signature, footer.",
+        "html_evidence": "The render collapses every block into the top ~680px. Cells overlap each other and the text is stacked and unreadable, even though the CSS gives absolute positions for a 2136px-wide page. A stray extra `}` in the stylesheet (`color:#111}}`) breaks the following rules, including `.block{position:absolute}`.",
+        "correction": "Fix the CSS syntax error (the extra brace). Make the block and cell positions work so each section lies in its own area without overlapping."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "The footer at the bottom of the page reads 'MRS RAJWINDER HOTHI & MR MANISH BHATT • +44 1246 854987 • removals@simpsons.co.uk'.",
+        "html_evidence": "The HTML has no footer text.",
+        "correction": "Add the footer line with the names, phone number and email."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "The header block shows 'HEMISPHERE LOGISTICS' above the address lines, and the B/L box title is 'BILL OF LADING No.'. The signature area shows 'Hemisphere Logistics' on a dark redaction bar, followed by the large 'Agent Signature' text.",
+        "html_evidence": "All of this text is present, but it is merged into a few lines. The signature cell has no separate placement for the redaction bars or the large signature text.",
+        "correction": "Position the signature area separately from the surrounding cells, with the redaction bars and the large 'Agent Signature' text kept distinct."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The legal text box 'RECEIVED by the Carrier...' is small print contained in its own cell on the right of the charges table, next to the Freight & Charges grid, with a different cell width and font size from the surrounding text.",
+        "html_evidence": "The legal text renders in bold, oversized type (the block-7 rule makes all its text bold) and spills over the neighbouring cells. In the source it is small, regular-weight text.",
+        "correction": "Apply the bold style to the charge headers only, not to the legal text. Reduce the font size and keep the text inside its own cell."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The 'Total: 2,500 kgs.' and '25.000 cu. m.' values sit at the bottom of the weight and measurement columns, under a rule line.",
+        "html_evidence": "The totals appear in cells that are shown far from the cargo table because the layout is broken.",
+        "correction": "Place the totals at the bottom of the weight and measurement columns, in line with the cargo description."
+      }
+    ],
+    "discarded_non_errors": 0
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "table_structure",
+        "source_evidence": "The cargo table has column headers (Container Numbers, Description, Gross Cargo Weight, Measurement) with the data rows beneath, and the freight charges table has columns FREIGHT & CHARGES / BASIS / RATE / PREPAID / COLLECT above an empty body.",
+        "html_evidence": "The tables are built from absolute-positioned divs, not semantic table markup, and the rendered cells overlap (the charge headers sit on top of the cargo data).",
+        "correction": "Use semantic <table> elements with correct rows and columns, or at least non-overlapping grid layout."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The bold and emphasized names (e.g. shipper name, consignee name, notify name, vessel name, BuildMat Solutions) are bold, and the B/L number block is large and bold in a bordered box.",
+        "html_evidence": "The HTML renders almost all text in a single plain style; bold is applied incorrectly to the cargo headers and the legal terms (block-7 whole legal text bold) instead of the proper elements.",
+        "correction": "Apply bold only where the source does, and make the legal terms small, regular text."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "Source signature area shows 'Hemisphere Logistics' in a highlighted/redacted bar plus a large 'Agent Signature', and a footer line 'MRS RAJWINDER HOTHI & MR MANISH BHATT • +44 1246 854987 • removals@simpsons.co.uk'.",
+        "html_evidence": "The footer text is absent from the HTML entirely.",
+        "correction": "Add the footer: 'MRS RAJWINDER HOTHI & MR MANISH BHATT • +44 1246 854987 • removals@simpsons.co.uk'."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "Legal text reads 'subject to all the terms and conditions hereof' and 'Carrier s Receipt'; 'HOTHI, HARYANA' appears in Marks and Numbers; the source 'BRITAIN' wraps in the place of receipt.",
+        "html_evidence": "Overlapping rendering garbles the text, making it unreadable, e.g. 'HOTHI, HARYANA' overlaps other content and 'BRITAIN' collides with 'PLACE OF DELIVERY'.",
+        "correction": "Fix the layout so each text string renders intact and legibly."
+      }
+    ],
+    "discarded_non_errors": 2
+  },
+  {
+    "iteration": 2,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "layout",
+        "source_evidence": "The page is a 2136px-wide form with clearly separated boxes: header, shipper/consignee, vessel/ports, cargo table, charges, and signature, all laid out in order down the page.",
+        "html_evidence": "The rendered output stacks and overlaps text on top of itself in the top ~900px, leaving the rest of the page blank. Absolute-positioned cells in the render are collapsed and overlapping, and the CSS has a stray extra '}' after .page.",
+        "correction": "Fix the CSS syntax error and positioning so each block renders in its own region, with no overlapping text."
+      },
+      {
+        "category": "reading_order",
+        "source_evidence": "Reading order runs top to bottom: header, shipper and endorsements, consignee, notify parties, vessel/ports, cargo, charges, signature.",
+        "html_evidence": "The rendered text from different sections is overprinted, e.g. the shipper, booking ref, cargo and charge headers all appear at the same y-position. Consignee and notify party blocks appear mid-page, out of order.",
+        "correction": "Render the sections sequentially in their correct vertical positions."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "The page footer reads 'MRS RAJWINDER HOTHI & MR MANISH BHATT • +44 1246 854987 • removals@simpsons.co.uk'.",
+        "html_evidence": "No footer text appears anywhere in the HTML.",
+        "correction": "Add the footer line with the shipper name, phone number and email."
+      },
+      {
+        "category": "missing_text",
+        "source_evidence": "The signature area shows a redacted/filled band after 'SIGNED on behalf of the' with 'Hemisphere Logistics', and the bold 'Agent Signature' in a larger font on the right.",
+        "html_evidence": "The text is flattened into plain 'SIGNED on behalf of the Hemisphere Logistics' and 'Agent Signature', so the layout, the signature styling and the redaction bars are lost.",
+        "correction": "Preserve the signature block's layout and styling, including the name field and the right-aligned 'Agent Signature'."
+      },
+      {
+        "category": "wrong_text",
+        "source_evidence": "In the source, emphasized fields (shipper names, vessel, cargo description, container numbers, etc.) are bold, while labels are in regular weight. The charges section's headers, legal text and cargo headers have specific weights.",
+        "html_evidence": "The CSS makes the whole block-5 and block-7 bold, so the legal terms and the charge caption are bold when they should be small regular text. Names and values are not bolded elsewhere.",
+        "correction": "Apply bold only to headings and key values, and render the legal terms in small regular text."
+      },
+      {
+        "category": "other",
+        "source_evidence": "The source has black vertical marks at the right of the endorsements/discharge agent area and a bold 'NO. & SEQUENCE OF ORIGINAL B/L's' header box with its line separator.",
+        "html_evidence": "These marks and the header box/separator line are not represented.",
+        "correction": "Represent the header box border and separator, and note the marks if intended."
+      }
+    ],
+    "discarded_non_errors": 0
+  }
+]
