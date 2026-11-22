@@ -1,0 +1,170 @@
+{
+  "status": "passed_local_checks",
+  "candidate": "/Users/dc/geha/PDF_processing/bill_lading/spec_candidate_with_reference/candidate_spec.json",
+  "page_png": "/Users/dc/geha/PDF_processing/bill_lading/spec_candidate_with_reference/source.png",
+  "structural_errors": [],
+  "geometry": {
+    "status": "passed",
+    "reference": "/Users/dc/geha/PDF_processing/bill_lading/vision_layout_run_detector/refined_layout.py",
+    "reference_sha256": "50b103aa3187829381ec11efaf932f27f29052bd87760122e2768d3e9a9bcaf5",
+    "max_coordinate_delta_px": 20,
+    "blocks": [
+      {
+        "block": 1,
+        "candidate": [
+          67,
+          0,
+          1999,
+          363
+        ],
+        "reference": [
+          67,
+          0,
+          1999,
+          363
+        ],
+        "max_coordinate_delta": 0,
+        "passed": true
+      },
+      {
+        "block": 2,
+        "candidate": [
+          67,
+          363,
+          1999,
+          899
+        ],
+        "reference": [
+          67,
+          363,
+          1999,
+          899
+        ],
+        "max_coordinate_delta": 0,
+        "passed": true
+      },
+      {
+        "block": 3,
+        "candidate": [
+          67,
+          1262,
+          1999,
+          149
+        ],
+        "reference": [
+          67,
+          1262,
+          1999,
+          149
+        ],
+        "max_coordinate_delta": 0,
+        "passed": true
+      },
+      {
+        "block": 4,
+        "candidate": [
+          67,
+          1411,
+          1999,
+          71
+        ],
+        "reference": [
+          67,
+          1411,
+          1999,
+          71
+        ],
+        "max_coordinate_delta": 0,
+        "passed": true
+      },
+      {
+        "block": 5,
+        "candidate": [
+          67,
+          1482,
+          1999,
+          77
+        ],
+        "reference": [
+          67,
+          1482,
+          1999,
+          77
+        ],
+        "max_coordinate_delta": 0,
+        "passed": true
+      },
+      {
+        "block": 6,
+        "candidate": [
+          67,
+          1559,
+          1999,
+          1185
+        ],
+        "reference": [
+          67,
+          1559,
+          1999,
+          1185
+        ],
+        "max_coordinate_delta": 0,
+        "passed": true
+      },
+      {
+        "block": 7,
+        "candidate": [
+          67,
+          2744,
+          1999,
+          256
+        ],
+        "reference": [
+          67,
+          2744,
+          1999,
+          256
+        ],
+        "max_coordinate_delta": 0,
+        "passed": true
+      },
+      {
+        "block": 8,
+        "candidate": [
+          67,
+          3000,
+          1999,
+          341
+        ],
+        "reference": [
+          67,
+          3000,
+          1999,
+          341
+        ],
+        "max_coordinate_delta": 0,
+        "passed": true
+      }
+    ],
+    "scope": "Block coordinate comparison, not independent image alignment proof."
+  },
+  "parsing": {
+    "status": "passed",
+    "parsed_valid": true,
+    "row_count": 2,
+    "gold_correct": 48,
+    "gold_total": 48,
+    "parse_errors": [
+      "containers[0].container_no MRDN4455667: category letter 'N' is not U/J/Z (not a registered ISO 6346 number) (warning)",
+      "containers[1].container_no MRDN7788990: category letter 'N' is not U/J/Z (not a registered ISO 6346 number) (warning)"
+    ],
+    "silent_errors": [],
+    "scope": "Saved OCR from approved crops; parser compatibility only."
+  },
+  "saved_ocr": {
+    "path": "/Users/dc/geha/PDF_processing/bill_lading/refined_ocr_test_20261118/gpt4o_only_run_20261119T001933Z/gpt4o_only_results.json",
+    "layout_provenance_match": true,
+    "scope": "Saved OCR from the refined layout; no new model call."
+  },
+  "remaining_check": "Fresh crop/OCR with candidate boxes and visual row association review."
+}

@@ -1,0 +1,47 @@
+{
+  "baseline_result": "/Users/dc/geha/PDF_processing/bill_lading/gpt4o_only_run_20261118T234851Z/gpt4o_only_results.json",
+  "refined_result": "/Users/dc/geha/PDF_processing/bill_lading/refined_ocr_test_20261118/gpt4o_only_run_20261119T001933Z/gpt4o_only_results.json",
+  "baseline_summary": {
+    "accuracy_pct": 100.0,
+    "matched_items": 79,
+    "expected_items": 79,
+    "perfect_blocks": 8
+  },
+  "refined_summary": {
+    "accuracy_pct": 100.0,
+    "matched_items": 79,
+    "expected_items": 79,
+    "perfect_blocks": 8
+  },
+  "total_cells": 31,
+  "exactly_equal_cells": 26,
+  "normalized_equal_cells": 31,
+  "changed_cells": [
+    {
+      "block": 1,
+      "cell": "bill_of_lading_box",
+      "normalized_equal": true
+    },
+    {
+      "block": 6,
+      "cell": "packages_column",
+      "normalized_equal": true
+    },
+    {
+      "block": 6,
+      "cell": "description_column",
+      "normalized_equal": true
+    },
+    {
+      "block": 6,
+      "cell": "measurement_column",
+      "normalized_equal": true
+    },
+    {
+      "block": 7,
+      "cell": "charges_header",
+      "normalized_equal": true
+    }
+  ],
+  "note": "Expected-string scores cover 79 configured checks, not every visible character or row association."
+}

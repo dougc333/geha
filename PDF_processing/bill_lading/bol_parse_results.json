@@ -114,10 +114,11 @@
       "valid": true
     },
     "score": {
-      "correct": 46,
-      "total": 46,
+      "correct": 48,
+      "total": 48,
       "wrong": 0,
       "missing": 0,
+      "unscored_extracted_fields": [],
       "flagged_by_spec": 0,
       "silent_errors": [],
       "rows": [
@@ -258,6 +259,20 @@
           "field": "delivery_agent.address",
           "expected": "88 Harbor Road, Rotterdam, 3011 AA",
           "got": "88 Harbor Road, Rotterdam, 3011 AA",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "delivery_agent.phone",
+          "expected": "+31 10 123 4567",
+          "got": "+31 10 123 4567",
+          "status": "correct",
+          "flagged": false
+        },
+        {
+          "field": "delivery_agent.email",
+          "expected": "dispatch@logitrans.com",
+          "got": "dispatch@logitrans.com",
           "status": "correct",
           "flagged": false
         },
@@ -570,10 +585,11 @@
       "valid": false
     },
     "score": {
-      "correct": 13,
-      "total": 46,
-      "wrong": 7,
+      "correct": 14,
+      "total": 48,
+      "wrong": 8,
       "missing": 26,
+      "unscored_extracted_fields": [],
       "flagged_by_spec": 27,
       "silent_errors": [
         {
@@ -608,6 +624,13 @@
           "field": "delivery_agent.address",
           "expected": "88 Harbor Road, Rotterdam, 3011 AA",
           "got": "Handelsweg 12, 2988 DB Ridderkerk, Netherlands 88 Harbor Road, Rotterdam, 3011 AA",
+          "status": "wrong",
+          "flagged": false
+        },
+        {
+          "field": "delivery_agent.phone",
+          "expected": "+31 10 123 4567",
+          "got": "+3110 123 4567",
           "status": "wrong",
           "flagged": false
         },
@@ -758,6 +781,20 @@
           "expected": "88 Harbor Road, Rotterdam, 3011 AA",
           "got": "Handelsweg 12, 2988 DB Ridderkerk, Netherlands 88 Harbor Road, Rotterdam, 3011 AA",
           "status": "wrong",
+          "flagged": false
+        },
+        {
+          "field": "delivery_agent.phone",
+          "expected": "+31 10 123 4567",
+          "got": "+3110 123 4567",
+          "status": "wrong",
+          "flagged": false
+        },
+        {
+          "field": "delivery_agent.email",
+          "expected": "dispatch@logitrans.com",
+          "got": "dispatch@logitrans.com",
+          "status": "correct",
           "flagged": false
         },
         {

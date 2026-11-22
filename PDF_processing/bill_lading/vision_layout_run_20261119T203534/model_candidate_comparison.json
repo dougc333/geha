@@ -1,0 +1,179 @@
+{
+  "reference": "schema",
+  "status": "needs_review",
+  "max_cell_pixel_delta": 625,
+  "blocks": [
+    {
+      "number": 1,
+      "block_max_pixel_delta": 2,
+      "cells": [
+        {
+          "name": "carrier_header",
+          "max_pixel_delta": 266
+        },
+        {
+          "name": "bill_of_lading_box",
+          "max_pixel_delta": 266
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "block_max_pixel_delta": 2,
+      "cells": [
+        {
+          "name": "shipper",
+          "max_pixel_delta": 127
+        },
+        {
+          "name": "consignee",
+          "max_pixel_delta": 127
+        },
+        {
+          "name": "notify_party",
+          "max_pixel_delta": 127
+        },
+        {
+          "name": "booking_ref",
+          "max_pixel_delta": 502
+        },
+        {
+          "name": "shipper_ref",
+          "max_pixel_delta": 625
+        },
+        {
+          "name": "pre_carriage",
+          "max_pixel_delta": 128
+        },
+        {
+          "name": "place_of_receipt",
+          "max_pixel_delta": 127
+        },
+        {
+          "name": "delivery_agent",
+          "max_pixel_delta": 127
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "block_max_pixel_delta": 2,
+      "cells": [
+        {
+          "name": "vessel_voyage",
+          "max_pixel_delta": 206
+        },
+        {
+          "name": "port_loading",
+          "max_pixel_delta": 206
+        },
+        {
+          "name": "port_discharge",
+          "max_pixel_delta": 104
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "block_max_pixel_delta": 2,
+      "cells": [
+        {
+          "name": "particulars_notice",
+          "max_pixel_delta": 2
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "block_max_pixel_delta": 2,
+      "cells": [
+        {
+          "name": "container_header",
+          "max_pixel_delta": 2
+        },
+        {
+          "name": "packages_header",
+          "max_pixel_delta": 108
+        },
+        {
+          "name": "description_header",
+          "max_pixel_delta": 124
+        },
+        {
+          "name": "gross_weight_header",
+          "max_pixel_delta": 124
+        },
+        {
+          "name": "measurement_header",
+          "max_pixel_delta": 44
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "block_max_pixel_delta": 1,
+      "cells": [
+        {
+          "name": "container_column",
+          "max_pixel_delta": 1
+        },
+        {
+          "name": "packages_column",
+          "max_pixel_delta": 108
+        },
+        {
+          "name": "description_column",
+          "max_pixel_delta": 124
+        },
+        {
+          "name": "gross_weight_column",
+          "max_pixel_delta": 124
+        },
+        {
+          "name": "measurement_column",
+          "max_pixel_delta": 44
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "block_max_pixel_delta": 1,
+      "cells": [
+        {
+          "name": "charges_header",
+          "max_pixel_delta": 326
+        },
+        {
+          "name": "charges_values",
+          "max_pixel_delta": 326
+        },
+        {
+          "name": "total_packages",
+          "max_pixel_delta": 326
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "block_max_pixel_delta": 1,
+      "cells": [
+        {
+          "name": "legal_and_originals",
+          "max_pixel_delta": 372
+        },
+        {
+          "name": "place_issue",
+          "max_pixel_delta": 372
+        },
+        {
+          "name": "date_issue",
+          "max_pixel_delta": 163
+        },
+        {
+          "name": "carrier_signature",
+          "max_pixel_delta": 372
+        }
+      ]
+    }
+  ]
+}

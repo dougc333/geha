@@ -1,0 +1,105 @@
+{
+  "status": "needs_human_review",
+  "model": "gpt-4o",
+  "ocr_results": "/Users/dc/geha/PDF_processing/bill_lading/refined_ocr_test_20261118/gpt4o_only_run_20261119T001933Z/gpt4o_only_results.json",
+  "schema": "schema.json",
+  "reconstructed_html": "bill_of_lading_reconstructed.html",
+  "data_iterations": 2,
+  "visual_iterations": 4,
+  "data_error_count": 0,
+  "visual_error_count": 1,
+  "text_fidelity_passed": true,
+  "visual_fidelity_passed": false,
+  "iterations": [
+    {
+      "stage": "data",
+      "iteration": 1,
+      "num_errors": 1,
+      "issues": [
+        {
+          "block": 1,
+          "cell": "bill_of_lading_box",
+          "kind": "mismatch",
+          "description": "B/L NO. given as B/L NO.; SCAC given as SCAC",
+          "corrected_text": "BILL OF LADING\n\nB/L NO.  BL232472785\nSCAC    MRDN"
+        }
+      ]
+    },
+    {
+      "stage": "data",
+      "iteration": 2,
+      "num_errors": 0,
+      "issues": []
+    },
+    {
+      "stage": "visual",
+      "iteration": 1,
+      "num_errors": 2,
+      "issues": [
+        {
+          "block": 7,
+          "cell": "",
+          "kind": "mismatch",
+          "description": "'COLLECT' is in the wrong position in the rendered HTML block.",
+          "corrected_text": ""
+        },
+        {
+          "block": 8,
+          "cell": "",
+          "kind": "mismatch",
+          "description": "\"NUMBER OF ORIGINAL B/L'S: THREE (3)\" is missing in the rendered HTML block.",
+          "corrected_text": ""
+        }
+      ]
+    },
+    {
+      "stage": "visual",
+      "iteration": 2,
+      "num_errors": 2,
+      "issues": [
+        {
+          "block": 7,
+          "cell": "",
+          "kind": "mismatch",
+          "description": "Text is in the wrong order: 'COLLECT' should follow 'OCEAN FREIGHT' on the same line.",
+          "corrected_text": ""
+        },
+        {
+          "block": 8,
+          "cell": "",
+          "kind": "mismatch",
+          "description": "Text 'NUMBER OF ORIGINAL B/L'S: THREE (3)' is missing in the rendered HTML block.",
+          "corrected_text": ""
+        }
+      ]
+    },
+    {
+      "stage": "visual",
+      "iteration": 3,
+      "num_errors": 1,
+      "issues": [
+        {
+          "block": 8,
+          "cell": "",
+          "kind": "mismatch",
+          "description": "Missing text: 'NUMBER OF ORIGINAL B/L'S: THREE (3)'; Text 'Authorized Signature' is placed under the wrong section in the rendered HTML.",
+          "corrected_text": ""
+        }
+      ]
+    },
+    {
+      "stage": "visual",
+      "iteration": 4,
+      "num_errors": 1,
+      "issues": [
+        {
+          "block": 8,
+          "cell": "",
+          "kind": "mismatch",
+          "description": "Missing text in rendered HTML: 'NUMBER OF ORIGINAL B/L'S: THREE (3)'",
+          "corrected_text": ""
+        }
+      ]
+    }
+  ]
+}

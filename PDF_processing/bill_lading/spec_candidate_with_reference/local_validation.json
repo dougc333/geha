@@ -1,0 +1,164 @@
+{
+  "status": "passed_local_checks",
+  "candidate": "/private/tmp/bol_spec_candidate_reference_20261119/candidate_spec.json",
+  "page_png": "/private/tmp/bol_spec_candidate_reference_20261119/source.png",
+  "structural_errors": [],
+  "geometry": {
+    "status": "passed",
+    "reference": "gpt4o_only_8block_ocr.py BLOCKS",
+    "max_coordinate_delta_px": 20,
+    "blocks": [
+      {
+        "block": 1,
+        "candidate": [
+          67,
+          0,
+          1999,
+          363
+        ],
+        "reference": [
+          67,
+          0,
+          1999,
+          363
+        ],
+        "max_coordinate_delta": 0,
+        "passed": true
+      },
+      {
+        "block": 2,
+        "candidate": [
+          67,
+          363,
+          1999,
+          899
+        ],
+        "reference": [
+          67,
+          363,
+          1999,
+          899
+        ],
+        "max_coordinate_delta": 0,
+        "passed": true
+      },
+      {
+        "block": 3,
+        "candidate": [
+          67,
+          1262,
+          1999,
+          149
+        ],
+        "reference": [
+          67,
+          1262,
+          1999,
+          149
+        ],
+        "max_coordinate_delta": 0,
+        "passed": true
+      },
+      {
+        "block": 4,
+        "candidate": [
+          67,
+          1411,
+          1999,
+          71
+        ],
+        "reference": [
+          67,
+          1411,
+          1999,
+          71
+        ],
+        "max_coordinate_delta": 0,
+        "passed": true
+      },
+      {
+        "block": 5,
+        "candidate": [
+          67,
+          1482,
+          1999,
+          77
+        ],
+        "reference": [
+          67,
+          1482,
+          1999,
+          77
+        ],
+        "max_coordinate_delta": 0,
+        "passed": true
+      },
+      {
+        "block": 6,
+        "candidate": [
+          67,
+          1559,
+          1999,
+          1185
+        ],
+        "reference": [
+          67,
+          1559,
+          1999,
+          1185
+        ],
+        "max_coordinate_delta": 0,
+        "passed": true
+      },
+      {
+        "block": 7,
+        "candidate": [
+          67,
+          2744,
+          1999,
+          256
+        ],
+        "reference": [
+          67,
+          2744,
+          1999,
+          256
+        ],
+        "max_coordinate_delta": 0,
+        "passed": true
+      },
+      {
+        "block": 8,
+        "candidate": [
+          67,
+          3000,
+          1999,
+          341
+        ],
+        "reference": [
+          67,
+          3000,
+          1999,
+          341
+        ],
+        "max_coordinate_delta": 0,
+        "passed": true
+      }
+    ],
+    "scope": "Block coordinate comparison, not independent image alignment proof."
+  },
+  "parsing": {
+    "status": "passed",
+    "parsed_valid": true,
+    "row_count": 2,
+    "gold_correct": 46,
+    "gold_total": 46,
+    "parse_errors": [
+      "containers[0].container_no MRDN4455667: category letter 'N' is not U/J/Z (not a registered ISO 6346 number) (warning)",
+      "containers[1].container_no MRDN7788990: category letter 'N' is not U/J/Z (not a registered ISO 6346 number) (warning)"
+    ],
+    "silent_errors": [],
+    "scope": "Saved OCR from approved crops; parser compatibility only."
+  },
+  "remaining_check": "Fresh crop/OCR with candidate boxes and visual row association review."
+}

@@ -1,0 +1,179 @@
+{
+  "model": "gpt-4o",
+  "response_id": "resp_04ea6415d9071fcc016afe439408b487d096739fc875e91307",
+  "header_image": "/Users/dc/geha/PDF_processing/bill_lading/refined_ocr_test_20261118/visual_comparison/header_comparison.png",
+  "old_layout": "/Users/dc/geha/PDF_processing/bill_lading/gpt4o_only_8block_ocr.py",
+  "refined_layout": "/Users/dc/geha/PDF_processing/bill_lading/vision_layout_run_retry_20261118/refined_layout.py",
+  "prompt": "Inspect this side-by-side header image of the same bill-of-lading page.\nThe left panel uses the original OCR layout; the right panel uses the refined layout.\nRed outlines mark blocks and blue outlines mark cells.\n\nMeasured coordinate facts (do not infer other differences):\n- All 8 red block boxes have exactly the same coordinates.\n- 29 of 31 cells differ by at most 2 pixels.\n- The material difference is the vertical blue split between carrier_header and\n  bill_of_lading_box: original page x=1167, refined page x=1387.\n\nUsing the image, identify which blue split lies closer to the printed black left\nborder of the BILL OF LADING box. State whether either blue split crosses the\nwords MERIDIAN SHIPPING or BILL OF LADING. Restrict your answer to the header;\nthe supplied image cannot establish extraction accuracy or cargo-row correctness.\nReturn JSON with keys preferred_split (original/refined/tie/unclear),\nprinted_border_alignment, text_crossing, and uncertainty.",
+  "coordinate_facts": {
+    "block_count": 8,
+    "blocks_equal": true,
+    "cell_count": 31,
+    "near_equal_cells": 29,
+    "original_header_split_x": 1167,
+    "refined_header_split_x": 1387,
+    "cell_differences": [
+      {
+        "block": 1,
+        "cell": "carrier_header",
+        "max_pixel_delta": 220
+      },
+      {
+        "block": 1,
+        "cell": "bill_of_lading_box",
+        "max_pixel_delta": 220
+      },
+      {
+        "block": 2,
+        "cell": "shipper",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 2,
+        "cell": "consignee",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 2,
+        "cell": "notify_party",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 2,
+        "cell": "booking_ref",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 2,
+        "cell": "shipper_ref",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 2,
+        "cell": "pre_carriage",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 2,
+        "cell": "place_of_receipt",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 2,
+        "cell": "delivery_agent",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 3,
+        "cell": "vessel_voyage",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 3,
+        "cell": "port_loading",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 3,
+        "cell": "port_discharge",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 4,
+        "cell": "particulars_notice",
+        "max_pixel_delta": 0
+      },
+      {
+        "block": 5,
+        "cell": "container_header",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 5,
+        "cell": "packages_header",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 5,
+        "cell": "description_header",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 5,
+        "cell": "gross_weight_header",
+        "max_pixel_delta": 2
+      },
+      {
+        "block": 5,
+        "cell": "measurement_header",
+        "max_pixel_delta": 2
+      },
+      {
+        "block": 6,
+        "cell": "container_column",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 6,
+        "cell": "packages_column",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 6,
+        "cell": "description_column",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 6,
+        "cell": "gross_weight_column",
+        "max_pixel_delta": 2
+      },
+      {
+        "block": 6,
+        "cell": "measurement_column",
+        "max_pixel_delta": 2
+      },
+      {
+        "block": 7,
+        "cell": "charges_header",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 7,
+        "cell": "charges_values",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 7,
+        "cell": "total_packages",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 8,
+        "cell": "legal_and_originals",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 8,
+        "cell": "place_issue",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 8,
+        "cell": "date_issue",
+        "max_pixel_delta": 1
+      },
+      {
+        "block": 8,
+        "cell": "carrier_signature",
+        "max_pixel_delta": 1
+      }
+    ]
+  },
+  "vision_review": {
+    "preferred_split": "refined",
+    "printed_border_alignment": "The refined split is closer to the printed black left border of the BILL OF LADING box.",
+    "text_crossing": "Neither blue split crosses the words MERIDIAN SHIPPING or BILL OF LADING.",
+    "uncertainty": "None"
+  }
+}

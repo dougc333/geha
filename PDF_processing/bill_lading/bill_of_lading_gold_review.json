@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "review_id": "bill_of_lading_alt_1_cargo_rows",
+  "status": "human_review_reported",
+  "reviewer": "project user (self-reported in Codex chat)",
+  "recorded_at_utc": "2026-11-20T00:53:42.938040+00:00",
+  "reviewed_at_utc": null,
+  "review_scope": "Two cargo rows in containers[]: association of each container with its seal, marks, package count, goods, HS code, temperature, weight, and measurement.",
+  "review_method": "User reported having reviewed the two rows; original review procedure and date were not recorded.",
+  "source_pdf": {
+    "path": "../blocking_demo/bill_of_lading_alt_1.pdf",
+    "page": 1,
+    "sha256": "bb69da6f9072e0c2c16a675bc38e535adff1cbdc2c33c2042eb2d1d7021f16ef"
+  },
+  "answer_key": {
+    "path": "bill_of_lading_gold_fields.json",
+    "sha256": "830e1ed69bef9f26e48f2e735e4673a3fde840b933296786957f2daa1d417ad7"
+  },
+  "row_count": 2,
+  "approved_rows_sha256": "bba66435cdbddacf14708519485446e6294b5b4a0ab041bbb975b6c4616c249c",
+  "approved_rows": [
+    {
+      "container_no": "MRDN4455667",
+      "seal_no": "MSK112233",
+      "marks": "PALLETIZED",
+      "packages": 20,
+      "commodity": "FRESH APPLES",
+      "hs_code": "08081080",
+      "set_temp": "+2°C",
+      "gross_weight_kg": "18,500",
+      "measurement_cbm": "28.00"
+    },
+    {
+      "container_no": "MRDN7788990",
+      "seal_no": "MSK445566",
+      "marks": "PALLETIZED",
+      "packages": 20,
+      "commodity": "FRESH PEARS",
+      "hs_code": "08083090",
+      "set_temp": "+1°C",
+      "gross_weight_kg": "19,200",
+      "measurement_cbm": "28.00"
+    }
+  ],
+  "limitations": [
+    "This records a user-reported human review, not a signed audit trail.",
+    "Other answer-key fields are outside this review scope.",
+    "Hashes detect later changes; they do not independently prove visual correctness."
+  ],
+  "amendments": [
+    {
+      "recorded_at_utc": "2026-11-20T02:04:26.503949+00:00",
+      "change": "Added delivery_agent.phone and delivery_agent.email to gold answer key.",
+      "evidence": "PDF_processing/bill_lading/gpt4o_only_run_20261118T234851Z/cells/block_2__delivery_agent.png",
+      "review_scope": "Codex visually checked the source crop; the user-reported human review remains limited to the two cargo rows."
+    }
+  ]
+}

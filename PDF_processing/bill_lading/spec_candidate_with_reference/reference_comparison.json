@@ -1,0 +1,33 @@
+{
+  "reference": "bill_of_lading_spec.json",
+  "exact_match": false,
+  "difference_count": 5,
+  "differences": [
+    {
+      "path": "root.blocks[1].fields[2].required",
+      "approved": "<missing>",
+      "candidate": false
+    },
+    {
+      "path": "root.blocks[1].fields[3].required",
+      "approved": "<missing>",
+      "candidate": false
+    },
+    {
+      "path": "root.blocks[1].fields[5].required",
+      "approved": "<missing>",
+      "candidate": false
+    },
+    {
+      "path": "root.blocks[1].fields[6].required",
+      "approved": "<missing>",
+      "candidate": false
+    },
+    {
+      "path": "root.blocks[1].fields[7].required",
+      "approved": "<missing>",
+      "candidate": false
+    }
+  ],
+  "note": "All differences are explicit required:false where the approved spec omits required; bol_parser treats both as optional. The candidate is reference-assisted, so matching is not independent discovery."
+}

@@ -122,10 +122,12 @@ fields** using a layout spec. A misread is flagged instead of passing through si
 
 | File | What it is |
 |---|---|
-| `bill_of_lading_spec.json` | The **layout spec** for this template (`meridian_shipping_bl_v1`): 8 blocks with pixel boxes, 18 fields (label used as an anchor, value pattern, type, required), the per-container cargo group, and 3 cross-field rules. **Structure and rules only, with no values from any document.** |
+| `spec_candidate_with_reference/candidate_spec.json` | The **active layout spec** for this template (`meridian_shipping_bl_v1`): 8 blocks with pixel boxes, field anchors, value patterns, the per-container cargo group, and cross-field rules. |
+| `bill_of_lading_spec.json` | Earlier reference spec, retained for comparison. It is no longer the parser or workflow default. |
 | `bol_parser.py` | One generic interpreter: `parse` (a Claude cell dir or a plain-text dir) and `evaluate` (all saved engines vs gold) |
-| `bill_of_lading_gold_fields.json` | Field-level answer key for `bill_of_lading_alt_1`, used only for scoring (verbatim from the ground truth; per-container values checked against `blocks/block_6.png`) |
-| `test_bol_parser.py` | 6 tests: label splitting, misread rejection, rules, ISO 6346, saved runs |
+| `bill_of_lading_gold_fields.json` | Field-level answer key for `bill_of_lading_alt_1`, used only for scoring. The two cargo rows have user-reported human review; delivery-agent contact values were later checked against its source crop. |
+| `bill_of_lading_gold_review.json` | Provenance record for the two reviewed cargo rows and the later delivery-agent contact amendment. |
+| `test_bol_parser.py` | 7 tests: label splitting, misread rejection, rules, ISO 6346, gold-answer coverage, saved runs |
 | `bol_parse_results.json`, `bol_parsed_claude.json` | Evaluation output and an example parsed B/L |
 
 How a field is extracted:
@@ -141,16 +143,16 @@ Container numbers get an ISO 6346 check as a warning only (this sample's `MRDN�
 
 ### Results on the saved runs (no new model calls)
 
-| Engine | Fields correct | Wrong | Missing | Bad fields flagged by spec | Silent errors | Valid B/L? |
-|---|---:|---:|---:|---:|---:|---|
-| Claude Opus 5.5 | **46/46** | 0 | 0 | — | 0 | **yes** (all 3 rules pass) |
-| Tesseract 5.5.1 | 13/46 | 7 | 26 | **27/33** | 6 | **no** (rejected for review) |
+| Engine | Fields correct | Wrong | Missing | Unscored extracted fields | Bad fields flagged by spec | Silent errors | Valid B/L? |
+|---|---:|---:|---:|---:|---:|---:|---|
+| Claude Opus 5.5 | **48/48** | 0 | 0 | 0 | — | 0 | **yes** (all 3 rules pass) |
+| Tesseract 5.5.1 | 14/48 | 8 | 26 | 0 | **27/34** | 7 | **no** (rejected for review) |
 
 - **Claude:** every field, both containers and all rules correct.
 - **Tesseract is rejected, which is the point of the spec.** It caught the misread B/L number
   (`31232472785`), the broken date (`2026-03-1 3`), and a column misalignment that gave container 1
   container 2's commodity, HS code and temperature.
-- **6 errors were silent,** all in **free-text fields with no strict pattern** (party phone and email,
+- **7 errors were silent,** all in **free-text fields with no strict pattern** (party phone and email,
   place of receipt, delivery agent, port of discharge). Tesseract reads across columns row by row and
   merges neighbouring boxes, for example port of discharge `N BUENOS AIRES, ARGENTINA ROTTERDAM`. Catching
   these needs block coordinates (word boxes) or a tighter vocabulary (a UN/LOCODE port list), not a

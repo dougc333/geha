@@ -9,7 +9,7 @@ import json
 import unittest
 from pathlib import Path
 
-from bol_parser import DEFAULT_GOLD, DEFAULT_SPEC, evaluate, iso6346_ok, parse
+from bol_parser import DEFAULT_GOLD, DEFAULT_SPEC, evaluate, iso6346_ok, parse, score
 
 SPEC = json.loads(Path(DEFAULT_SPEC).read_text())
 GOLD = json.loads(Path(DEFAULT_GOLD).read_text())
@@ -36,6 +36,16 @@ class LabelSplittingTests(unittest.TestCase):
 
 
 class ValidationTests(unittest.TestCase):
+    def test_extracted_value_missing_from_gold_is_reported(self):
+        result = {"fields": {"delivery_agent": {
+            "name": "LogiTrans Global", "phone": "+31 10 123 4567",
+        }}, "containers": [], "errors": []}
+        gold = {"fields": {"delivery_agent": {"name": "LogiTrans Global"}},
+                "containers": []}
+        comparison = score(result, gold)
+        self.assertEqual(comparison["correct"], 1)
+        self.assertEqual(comparison["unscored_extracted_fields"], ["delivery_agent.phone"])
+
     def test_misread_bl_number_is_flagged_not_passed_through(self):
         # Tesseract read "BL232472785" as "31232472785"; the spec's pattern must reject it.
         result = parse({1: "MERIDIAN SHIPPING BILL OF LADING\nB/LNO. 31232472785\nSCAC MRDN"}, SPEC)
