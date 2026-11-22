@@ -1,10 +1,11 @@
 import React, { createContext } from 'react'
 import { RunClient } from './RunClient'
-import type { AgentEvent, ComparisonArtifact, DemoState, RunView, ViewMode, VisionProvider } from './types'
+import type { AgentEvent, BillOfLadingLayout, ComparisonArtifact, DemoState, RunView, ViewMode, VisionProvider } from './types'
 
 interface DemoContextValue extends DemoState {
   startRun: (document?: string, provider?: VisionProvider) => Promise<void>
   selectModel: (provider: VisionProvider) => void
+  selectLayout: (layout: BillOfLadingLayout) => void
   selectDocument: (document: string) => void
   selectView: (view: ViewMode) => void
   selectRunView: (view: RunView) => void
@@ -18,13 +19,14 @@ const initialState: DemoState = {
   openaiReady: false,
   nousReady: false,
   provider: 'anthropic',
+  layout: 'gpt4o_only_8block_ocr.py',
   model: 'claude-sonnet-5-5',
   documents: [],
   selectedDocument: 'coverage-policies/geha-coverage-policy-datroway.pdf',
   status: 'checking',
   events: [],
   pageComparisons: {},
-  previousPageComparisons: {},
+  savedRuns: [],
   runView: 'current',
   activeView: 'before',
   countdown: 0,
@@ -34,6 +36,7 @@ export const DemoContext = createContext<DemoContextValue>({
   ...initialState,
   startRun: async () => undefined,
   selectModel: () => undefined,
+  selectLayout: () => undefined,
   selectDocument: () => undefined,
   selectView: () => undefined,
   selectRunView: () => undefined,
@@ -103,6 +106,7 @@ export class DemoProvider extends React.Component<React.PropsWithChildren, DemoS
         runId: undefined,
         events: [],
         pageComparisons: {},
+        savedRuns: [],
         runView: 'current',
         selectedComparisonPage: undefined,
         before: undefined,
@@ -128,7 +132,7 @@ export class DemoProvider extends React.Component<React.PropsWithChildren, DemoS
       model: provider === 'nous' ? 'qwen/qwen3-vl-235b-a22b-instruct' : 'claude-sonnet-5-5',
       ready: provider === 'nous' ? this.state.nousReady : this.state.anthropicReady,
       status: 'starting', events: [], pageComparisons: {},
-      previousPageComparisons: {}, previousRunId: undefined,
+      savedRuns: [],
       runView: 'current',
       selectedComparisonPage: undefined, before: undefined, after: undefined,
       activeView: 'before', countdown: 0, error: undefined, runId: undefined,
@@ -136,15 +140,16 @@ export class DemoProvider extends React.Component<React.PropsWithChildren, DemoS
     let previous: Awaited<ReturnType<RunClient['previous']>> = {
       available: false,
       pages: {},
+      runs: [],
     }
     try {
       previous = await this.client.previous(document)
     } catch {
       // A missing previous run must not block a new live run.
     }
-    this.setState({ previousPageComparisons: previous.pages, previousRunId: previous.run_id })
+    this.setState({ savedRuns: previous.runs })
     try {
-      const run = await this.client.start(document, provider)
+      const run = await this.client.start(document, provider, this.state.layout)
       this.setState({ status: 'running', runId: run.run_id })
       this.runRequestPending = false
       this.client.stream(
@@ -176,7 +181,7 @@ export class DemoProvider extends React.Component<React.PropsWithChildren, DemoS
       this.beginCountdown(Number(event.seconds ?? 5))
     } else if (event.type === 'agent_finished') {
       this.setState((state) => {
-        if (state.runView === 'previous') {
+        if (state.runView !== 'current') {
           return { ...state, status: 'complete' as const, countdown: 0 }
         }
         const pages = Object.keys(state.pageComparisons).map(Number).sort((a, b) => a - b)
@@ -239,12 +244,11 @@ export class DemoProvider extends React.Component<React.PropsWithChildren, DemoS
       const previous = await this.client.previous(document)
       if (this.state.selectedDocument !== document) return
       this.setState({
-        previousPageComparisons: previous.pages,
-        previousRunId: previous.run_id,
+        savedRuns: previous.runs,
       })
     } catch {
       if (this.state.selectedDocument === document) {
-        this.setState({ previousPageComparisons: {}, previousRunId: undefined })
+        this.setState({ savedRuns: [] })
       }
     }
   }
@@ -266,9 +270,9 @@ export class DemoProvider extends React.Component<React.PropsWithChildren, DemoS
   selectView = (activeView: ViewMode): void => this.setState({ activeView })
   selectRunView = (runView: RunView): void => {
     this.setState((state) => {
-      const comparisons = runView === 'previous'
-        ? state.previousPageComparisons
-        : state.pageComparisons
+      const comparisons = runView === 'current'
+        ? state.pageComparisons
+        : state.savedRuns.find((run) => run.run_id === runView)?.pages ?? {}
       const pages = Object.keys(comparisons).map(Number).sort((a, b) => a - b)
       const selectedComparisonPage = pages[0]
       const comparison = selectedComparisonPage
@@ -285,9 +289,9 @@ export class DemoProvider extends React.Component<React.PropsWithChildren, DemoS
   }
   selectComparisonPage = (selectedComparisonPage: number): void => {
     this.setState((state) => {
-      const comparisons = state.runView === 'previous'
-        ? state.previousPageComparisons
-        : state.pageComparisons
+      const comparisons = state.runView === 'current'
+        ? state.pageComparisons
+        : state.savedRuns.find((run) => run.run_id === state.runView)?.pages ?? {}
       const comparison = comparisons[selectedComparisonPage]
       if (!comparison) return null
       return {
@@ -301,8 +305,7 @@ export class DemoProvider extends React.Component<React.PropsWithChildren, DemoS
   selectDocument = (selectedDocument: string): void => {
     this.setState({
       selectedDocument,
-      previousPageComparisons: {},
-      previousRunId: undefined,
+      savedRuns: [],
       runView: 'current',
       selectedComparisonPage: undefined,
       before: undefined,
@@ -318,6 +321,10 @@ export class DemoProvider extends React.Component<React.PropsWithChildren, DemoS
       ready: provider === 'nous' ? this.state.nousReady : this.state.anthropicReady,
     })
   }
+  selectLayout = (layout: BillOfLadingLayout): void => {
+    if (this.state.status === 'starting' || this.state.status === 'running') return
+    this.setState({ layout })
+  }
   artifactUrl = (path?: string): string => this.client.artifact(path)
 
   render(): React.ReactNode {
@@ -325,6 +332,7 @@ export class DemoProvider extends React.Component<React.PropsWithChildren, DemoS
       ...this.state,
       startRun: this.startRun,
       selectModel: this.selectModel,
+      selectLayout: this.selectLayout,
       selectDocument: this.selectDocument,
       selectView: this.selectView,
       selectRunView: this.selectRunView,

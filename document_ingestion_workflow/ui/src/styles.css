@@ -18,3 +18,25 @@ button:disabled { cursor: not-allowed; }
 }
 
 * { scrollbar-width: thin; scrollbar-color: #334155 transparent; }
+
+.comparison-divider { display: none; }
+@media (min-width: 1024px) {
+  .comparison-split { display: grid; grid-template-columns: minmax(0, var(--pdf-pane-width)) 18px minmax(0, 1fr); }
+  .comparison-divider {
+    display: block;
+    position: relative;
+    cursor: col-resize;
+    touch-action: none;
+    background: #1e293b;
+  }
+  .comparison-divider::after {
+    content: "";
+    position: absolute;
+    top: 50%; left: 6px;
+    width: 6px; height: 60px;
+    transform: translateY(-50%);
+    border-radius: 4px;
+    background: #67e8f9;
+  }
+  .comparison-divider:hover, .comparison-divider:focus-visible { background: #155e75; outline: none; }
+}

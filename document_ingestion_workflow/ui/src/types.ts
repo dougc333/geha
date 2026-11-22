@@ -1,7 +1,8 @@
 export type RunStatus = 'checking' | 'idle' | 'starting' | 'running' | 'complete' | 'error'
 export type ViewMode = 'before' | 'after'
-export type RunView = 'current' | 'previous'
+export type RunView = string
 export type VisionProvider = 'anthropic' | 'nous'
+export type BillOfLadingLayout = 'gpt4o_only_8block_ocr.py' | 'refined_layout.py' | 'alt_2/layout.json'
 
 export interface AgentEvent {
   type: string
@@ -27,6 +28,11 @@ export interface PageComparison {
   after?: ComparisonArtifact
 }
 
+export interface SavedRun {
+  run_id: string
+  pages: Record<number, PageComparison>
+}
+
 export interface DemoDocument {
   document: string
   title: string
@@ -44,6 +50,7 @@ export interface DemoState {
   openaiReady: boolean
   nousReady: boolean
   provider: VisionProvider
+  layout: BillOfLadingLayout
   model: string
   documents: DemoDocument[]
   selectedDocument: string
@@ -51,8 +58,7 @@ export interface DemoState {
   runId?: string
   events: AgentEvent[]
   pageComparisons: Record<number, PageComparison>
-  previousPageComparisons: Record<number, PageComparison>
-  previousRunId?: string
+  savedRuns: SavedRun[]
   runView: RunView
   selectedComparisonPage?: number
   before?: ComparisonArtifact

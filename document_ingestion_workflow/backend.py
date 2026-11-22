@@ -49,7 +49,10 @@ from document_ingestion_workflow.bill_of_lading_workflow import (
     review_bill_of_lading,
     segment_bill_of_lading_with_schema,
     verify_bill_of_lading_fields,
+    BILL_OF_LADING_LAYOUTS,
+    use_bill_of_lading_layout,
 )
+from PDF_processing.bill_lading.alt_2 import react_workflow as alt2_workflow
 from document_ingestion_workflow.job_queue import ElasticJobQueue
 from document_ingestion_workflow.run_store import RunStore
 
@@ -92,6 +95,16 @@ DEMO_DOCUMENTS = {
             "Bill of lading with header, shipper/consignee fields, routing fields, "
             "container/cargo grid, freight charges, totals, terms, and signature areas."
         ),
+    },
+    "forms/bill_of_lading_alt_2.pdf": {
+        "title": "Bill of lading alt 2",
+        "family": "forms",
+        "filename": "bill_of_lading_alt_2.pdf",
+        "document_version": "synthetic-alt-2-2026-11-20",
+        "layout_kind": "dense_form",
+        "workflow": "bill_of_lading_alt_2",
+        "local_fixture": True,
+        "layout_hint": "Hemisphere bill of lading; one four-column cargo row and blank freight charges.",
     },
     "research/ey-limra-workforce-benefits-study-final-2025.pdf": {
         "title": "EY workforce benefits",
@@ -295,6 +308,13 @@ class LayoutToolRouter:
                 "table extraction without a vision-generation call."
             )
             callbacks = None, None
+        elif self.workflow == "bill_of_lading_alt_2":
+            selected = "bill_of_lading_named_cell_ocr"
+            reason = "Alt 2 uses its reviewed named-cell geometry and Claude OCR."
+            def generate_alt2_with_trace(source_png, segmentation, segment_dir, model):
+                return alt2_workflow.generate(source_png, segmentation, segment_dir, model,
+                                              event_sink=self.run.emit)
+            callbacks = alt2_workflow.segment, generate_alt2_with_trace
         elif self.workflow == "bill_of_lading_schema_graph":
             selected = "bill_of_lading_named_cell_ocr"
             reason = (
@@ -322,7 +342,8 @@ class IngestionDemoAgent:
     """Runs the real downloader and scanned-page correction workflow."""
 
     def __init__(self, run: RunEventSink, document: str, delay_seconds: float = 5,
-                 provider: str = "anthropic") -> None:
+                 provider: str = "anthropic",
+                 layout: str = "gpt4o_only_8block_ocr.py") -> None:
         self.run = run
         self.document = document
         self.config = DEMO_DOCUMENTS[document]
@@ -330,13 +351,18 @@ class IngestionDemoAgent:
         if provider not in VISION_MODELS:
             raise ValueError(f"Unknown vision provider: {provider}")
         self.provider = provider
+        if layout not in BILL_OF_LADING_LAYOUTS:
+            raise ValueError(f"Unknown bill-of-lading layout: {layout}")
+        self.layout = (BILL_OF_LADING_LAYOUTS[2] if self.config.get("workflow") == "bill_of_lading_alt_2"
+                       else layout)
         self.vision_model = VISION_MODELS[provider]
 
     def execute(self) -> None:
         try:
             self.run.emit({"type": "agent_started", "document": self.document,
                            "title": self.config["title"], "provider": self.provider,
-                           "vision_model": self.vision_model})
+                           "vision_model": self.vision_model,
+                           "layout": self.layout if self.config.get("workflow") in {"bill_of_lading_schema_graph", "bill_of_lading_alt_2"} else None})
             if self.config.get("local_fixture"):
                 source = ROOT / "raw" / self.document
                 if not source.is_file():
@@ -372,10 +398,17 @@ class IngestionDemoAgent:
                 self.run, self.config["layout_kind"], self.config.get("workflow"), specs_dir
             )
             page_segmenter, segmented_generator = router.choose()
-            is_bill_of_lading = self.config.get("workflow") == "bill_of_lading_schema_graph"
+            is_bill_of_lading = self.config.get("workflow") in {"bill_of_lading_schema_graph", "bill_of_lading_alt_2"}
             authored_specs = router.selected == FIGURE_SPEC_TOOL_ID
             visual_pages: list[int] = []
-            if authored_specs:
+            if is_bill_of_lading:
+                # Named-cell OCR requires page pixels even when PDF metadata or a
+                # stray text object makes image_only_pages() return false.
+                visual_pages = list(range(1, pdf_page_count(source) + 1))
+                self.run.emit({"type": "visual_pages_selected", "pages": visual_pages,
+                               "count": len(visual_pages),
+                               "method": "all pages in named-cell bill-of-lading workflow"})
+            elif authored_specs:
                 visual_pages = router.spec_pages
                 self.run.emit({"type": "visual_pages_selected", "pages": visual_pages,
                                "count": len(visual_pages),
@@ -385,7 +418,7 @@ class IngestionDemoAgent:
                 self.run.emit({"type": "visual_pages_selected", "pages": visual_pages,
                                "count": len(visual_pages),
                                "method": "all pages in designed EY report"})
-            with use_model_provider(self.provider):
+            with use_model_provider(self.provider), use_bill_of_lading_layout(self.layout):
                 output = process_scanned_document(
                     root=ROOT,
                     family=self.config["family"],
@@ -395,7 +428,8 @@ class IngestionDemoAgent:
                     model=(OPENAI_MODEL if is_bill_of_lading else
                            FIGURE_SPEC_TOOL_ID if authored_specs else self.vision_model),
                     max_corrections=(3 if is_bill_of_lading else 0 if authored_specs else 6),
-                    corrector=(correct_bill_of_lading_cells if is_bill_of_lading else None),
+                    corrector=(alt2_workflow.correct if self.config.get("workflow") == "bill_of_lading_alt_2"
+                               else correct_bill_of_lading_cells if is_bill_of_lading else None),
                     reviewer=(review_bill_of_lading if is_bill_of_lading else
                               spec_reviewer if authored_specs else
                               review_chart_html_with_claude if native_figure_report else None),
@@ -411,7 +445,8 @@ class IngestionDemoAgent:
                     demo_delay_seconds=self.delay_seconds,
                 )
             if is_bill_of_lading:
-                verification = verify_bill_of_lading_fields(output)
+                verification = (alt2_workflow.verify(output) if self.config.get("workflow") == "bill_of_lading_alt_2"
+                                else verify_bill_of_lading_fields(output))
                 self.run.emit({"type": "field_verification", **verification})
             qc = json.loads((output / "qc-report.json").read_text(encoding="utf-8"))
             self.run.emit({"type": "agent_finished", "run": str(output), "qc": qc})
@@ -514,7 +549,7 @@ def _page_comparisons_for_run(run_dir: Path) -> dict[str, dict[str, Any]]:
 
 
 async def previous_run(request: web.Request) -> web.Response:
-    """Return only the most recent saved run for one curated document."""
+    """Return the five most recent saved runs for one curated document."""
     document = request.query.get("document", DEFAULT_DOCUMENT)
     if document not in DEMO_DOCUMENTS:
         raise web.HTTPBadRequest(text="Unknown demo document")
@@ -525,18 +560,22 @@ async def previous_run(request: web.Request) -> web.Response:
     candidates = sorted(
         (path for path in runs_dir.iterdir()
          if path.is_dir() and path.name != excluded and (path / "qc-report.json").is_file()),
-        key=lambda path: path.stat().st_mtime,
+        key=lambda path: path.name,
         reverse=True,
     ) if runs_dir.is_dir() else []
+    runs = []
     for run_dir in candidates:
         comparisons = _page_comparisons_for_run(run_dir)
         if comparisons:
-            return web.json_response({
-                "available": True,
-                "run_id": run_dir.name,
-                "pages": comparisons,
-            })
-    return web.json_response({"available": False, "pages": {}})
+            runs.append({"run_id": run_dir.name, "pages": comparisons})
+            if len(runs) == 5:
+                break
+    return web.json_response({
+        "available": bool(runs),
+        "run_id": runs[0]["run_id"] if runs else None,
+        "pages": runs[0]["pages"] if runs else {},
+        "runs": runs,
+    })
 
 
 async def start_run(request: web.Request) -> web.Response:
@@ -558,6 +597,12 @@ async def start_run(request: web.Request) -> web.Response:
             text=json.dumps({"error": "NOUS_API_KEY is not set in the backend environment."}),
             content_type="application/json",
         )
+    layout = str(body.get("layout", BILL_OF_LADING_LAYOUTS[0]))
+    if layout not in BILL_OF_LADING_LAYOUTS:
+        raise web.HTTPBadRequest(
+            text=json.dumps({"error": "Unknown bill-of-lading layout", "allowed": BILL_OF_LADING_LAYOUTS}),
+            content_type="application/json",
+        )
     delay = float(body.get("delay_seconds", 5))
     if delay < 0 or delay > 15:
         raise web.HTTPBadRequest(text="delay_seconds must be between 0 and 15")
@@ -567,13 +612,15 @@ async def start_run(request: web.Request) -> web.Response:
             "error": "document must be one of the curated demo documents",
             "allowed": sorted(DEMO_DOCUMENTS),
         }), content_type="application/json")
-    if (DEMO_DOCUMENTS[document].get("workflow") == "bill_of_lading_schema_graph"
+    if (DEMO_DOCUMENTS[document].get("workflow") in {"bill_of_lading_schema_graph", "bill_of_lading_alt_2"}
             and not os.getenv("OPENAI_API_KEY")):
         raise web.HTTPConflict(
             text=json.dumps({"error": "OPENAI_API_KEY is not set; the bill-of-lading "
                                       "segment text review still uses OpenAI."}),
             content_type="application/json",
         )
+    if DEMO_DOCUMENTS[document].get("workflow") == "bill_of_lading_alt_2":
+        layout = BILL_OF_LADING_LAYOUTS[2]
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     run_id = f"agent-demo-{stamp}-{uuid.uuid4().hex[:6]}"
     store: RunStore = request.app["run_store"]
@@ -582,7 +629,7 @@ async def start_run(request: web.Request) -> web.Response:
         await asyncio.to_thread(
             request.app["job_queue"].send,
             {"run_id": run_id, "document": document, "delay_seconds": delay,
-             "provider": provider},
+             "provider": provider, "layout": layout},
         )
     except (BotoCoreError, ClientError, OSError) as exc:
         error = {"message": str(exc), "exception": type(exc).__name__}
@@ -592,7 +639,8 @@ async def start_run(request: web.Request) -> web.Response:
             content_type="application/json",
         ) from exc
     return web.json_response(
-        {"run_id": run_id, "status": "queued", "events": f"/api/runs/{run_id}/events"},
+        {"run_id": run_id, "status": "queued", "layout": layout,
+         "events": f"/api/runs/{run_id}/events"},
         status=202,
     )
 
