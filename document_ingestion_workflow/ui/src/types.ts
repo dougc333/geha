@@ -9,6 +9,27 @@ export interface AgentEvent {
   [key: string]: unknown
 }
 
+export interface PdfImageStructure {
+  xref?: number
+  format: string
+  width_px?: number
+  height_px?: number
+  bbox_points: number[]
+  coverage_percent: number
+  full_page: boolean
+}
+
+export interface PdfPageStructure {
+  classification: 'image_only' | 'text_layer_over_page_image' | 'text_with_embedded_images' | 'text_only'
+  page_width_points: number
+  page_height_points: number
+  extractable_text_chars: number
+  font_count: number
+  image_count: number
+  full_page_image_count: number
+  images: PdfImageStructure[]
+}
+
 export interface ComparisonArtifact {
   page: number
   mode?: 'native' | 'vision'
@@ -19,6 +40,10 @@ export interface ComparisonArtifact {
   html_png?: string
   iterations?: number
   markdown_chars?: number
+  verification_status?: 'passed' | 'failed'
+  correction_changed?: boolean
+  page_structure?: PdfPageStructure
+  page_structure_source?: 'saved_json' | 'saved_source_pdf'
 }
 
 export interface PageComparison {

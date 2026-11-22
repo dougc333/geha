@@ -4,11 +4,19 @@ services:
     build:
       context: ..
       dockerfile: dspy_dental_chatbot/Dockerfile
-    env_file:
-      - .env
     environment:
       PORT: "8506"
       DENTAL_WARM_RETRIEVER: "1"
+      DSPY_MODEL: "${DSPY_MODEL:-openai/gpt-4o-mini}"
+      DSPY_API_BASE: "${DSPY_API_BASE:-}"
+      DSPY_API_KEY: "${DSPY_API_KEY:-}"
+      OPENAI_API_KEY: "${OPENAI_API_KEY:-}"
+      OPENROUTER_API_KEY: "${OPENROUTER_API_KEY:-}"
+      NOUS_KEY: "${NOUS_KEY:-}"
+      TYPESAFE_API_KEY: "${TYPESAFE_API_KEY:-}"
+      DSPY_GUARD_MODEL: "${DSPY_GUARD_MODEL:-}"
+      DENTAL_TRACING: "${DENTAL_TRACING:-0}"
+      TRACE_TAGS: "${TRACE_TAGS:-dspy,dental-enrollment}"
     ports:
       - "${DENTAL_PORT:-8506}:8506"
     restart: unless-stopped

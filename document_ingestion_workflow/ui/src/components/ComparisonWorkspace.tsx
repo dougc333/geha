@@ -1,4 +1,5 @@
 import { DemoComponent } from '../DemoContext'
+import type { PdfPageStructure } from '../types'
 
 export class ComparisonWorkspace extends DemoComponent {
   render() {
@@ -10,6 +11,9 @@ export class ComparisonWorkspace extends DemoComponent {
     const artifact = activeView === 'before' ? before : after
     const native = artifact?.mode === 'native'
     const waiting = !artifact
+    const candidateLabel = artifact?.verification_status === 'failed'
+      ? artifact.correction_changed ? 'Unverified candidate' : 'Correction failed · unchanged'
+      : 'Verified candidate'
     const comparisons = runView === 'previous' ? previousPageComparisons : pageComparisons
     const pages = Object.entries(comparisons)
       .filter(([, comparison]) => comparison.before && comparison.after)
@@ -65,10 +69,11 @@ export class ComparisonWorkspace extends DemoComponent {
             </button>
           </div> : null}
         </div>
+        {artifact?.page_structure && <PageStructure structure={artifact.page_structure} />}
         {waiting ? <EmptyWorkspace collected={pages.length} running={status === 'running' || status === 'starting'} /> : (
           <div className="grid min-h-[640px] lg:grid-cols-2">
             <ArtifactPanel label="Authoritative source" kind="PDF page" url={artifactUrl(artifact.source_pdf)} />
-            <ArtifactPanel label={native ? 'Native semantic extraction' : activeView === 'before' ? 'Initial vision reconstruction' : 'Verified candidate'} kind="Semantic HTML" toolId={artifact.tool_id} url={artifactUrl(artifact.html)} html />
+            <ArtifactPanel label={native ? 'Native semantic extraction' : activeView === 'before' ? 'Initial vision reconstruction' : candidateLabel} kind="Semantic HTML" toolId={artifact.tool_id} url={artifactUrl(artifact.html)} html />
           </div>
         )}
         {countdown > 0 && artifact && (
@@ -80,6 +85,53 @@ export class ComparisonWorkspace extends DemoComponent {
       </section>
     )
   }
+}
+
+function PageStructure({ structure }: { structure: PdfPageStructure }) {
+  const labels: Record<PdfPageStructure['classification'], string> = {
+    image_only: 'No extractable text',
+    text_layer_over_page_image: 'Text layer over page image',
+    text_with_embedded_images: 'Text with embedded images',
+    text_only: 'Native text only',
+  }
+  return (
+    <div className="border-b border-white/10 bg-slate-950/60 px-5 py-3">
+      <div className="flex flex-wrap items-center gap-2 text-[10px]">
+        <span className="mr-1 font-bold uppercase tracking-[.16em] text-slate-500">PDF structure</span>
+        <span className="rounded-md bg-cyan-300/10 px-2 py-1 font-semibold text-cyan-200">
+          {labels[structure.classification]}
+        </span>
+        <span className="rounded-md bg-white/5 px-2 py-1 text-slate-300">
+          {structure.extractable_text_chars.toLocaleString()} text characters
+        </span>
+        <span className="rounded-md bg-white/5 px-2 py-1 text-slate-300">
+          {structure.font_count} fonts
+        </span>
+        <span className="rounded-md bg-white/5 px-2 py-1 text-slate-300">
+          {structure.image_count} embedded image{structure.image_count === 1 ? '' : 's'}
+        </span>
+        {structure.full_page_image_count > 0 && (
+          <span className="rounded-md bg-amber-300/10 px-2 py-1 font-semibold text-amber-200">
+            {structure.full_page_image_count} full-page image{structure.full_page_image_count === 1 ? '' : 's'}
+          </span>
+        )}
+        <span className="rounded-md bg-white/5 px-2 py-1 font-mono text-slate-400">
+          {structure.page_width_points} × {structure.page_height_points} pt
+        </span>
+      </div>
+      {structure.images.length > 0 && (
+        <div className="mt-2 flex flex-wrap gap-2">
+          {structure.images.map((image, index) => (
+            <span key={`${image.xref ?? index}-${index}`}
+              title={`bbox: ${image.bbox_points.join(', ')} pt`}
+              className="rounded border border-white/10 px-2 py-1 font-mono text-[9px] text-slate-400">
+              image {index + 1}: {image.format.toUpperCase()} {image.width_px}×{image.height_px}px · {image.coverage_percent}% page{image.full_page ? ' · full-page' : ''}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  )
 }
 
 class ArtifactPanel extends DemoComponent<{ label: string; kind: string; url: string; html?: boolean; toolId?: string }> {

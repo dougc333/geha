@@ -20,6 +20,7 @@ from crawl_dir.src.ingestion_mcp import ROOT, download_public_pdf
 from crawl_dir.src.pipeline.scanned_ingestion import (
     image_only_pages,
     detect_visual_figure_pages,
+    pdf_page_structure,
     pdf_page_count,
     process_scanned_document,
     render_pdf_page_with_pymupdf,
@@ -467,12 +468,15 @@ def _page_comparisons_for_run(run_dir: Path) -> dict[str, dict[str, Any]]:
         mode = "vision" if initial_html.is_file() else "native"
         tool_id = "native_pdf_text_structure"
         manifest_tool_id: str | None = None
+        verification_status: str | None = None
         manifest_path = page_dir / "page-manifest.json"
         if manifest_path.is_file():
             try:
-                manifest_tool_id = json.loads(
+                manifest = json.loads(
                     manifest_path.read_text(encoding="utf-8")
-                ).get("tool_id")
+                )
+                manifest_tool_id = manifest.get("tool_id")
+                verification_status = manifest.get("status")
             except (json.JSONDecodeError, OSError):
                 pass
         regions_path = page_dir / "segments" / "regions.json"
@@ -492,11 +496,29 @@ def _page_comparisons_for_run(run_dir: Path) -> dict[str, dict[str, Any]]:
                 if family == "research"
                 else "whole_page_semantic_html"
             )
+        structure_path = page_dir / "page-structure.json"
+        try:
+            page_structure = (
+                json.loads(structure_path.read_text(encoding="utf-8"))
+                if structure_path.is_file()
+                else pdf_page_structure(source_pdf)
+            )
+        except (json.JSONDecodeError, OSError, RuntimeError, ValueError):
+            page_structure = pdf_page_structure(source_pdf)
         base = {
             "page": page,
             "mode": mode,
             "tool_id": tool_id,
             "source_pdf": str(source_pdf),
+            "page_structure": page_structure,
+            "page_structure_source": (
+                "saved_json" if structure_path.is_file() else "saved_source_pdf"
+            ),
+            "verification_status": verification_status,
+            "correction_changed": (
+                initial_html.read_bytes() != final_html.read_bytes()
+                if initial_html.is_file() else False
+            ),
         }
         before = {**base, "html": str(initial_html if mode == "vision" else final_html)}
         after = {**base, "html": str(final_html)}

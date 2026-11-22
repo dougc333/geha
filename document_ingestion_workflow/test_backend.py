@@ -8,7 +8,13 @@ from tempfile import TemporaryDirectory
 
 from PIL import Image
 
-from .backend import DEFAULT_DOCUMENT, DemoRun, LayoutToolRouter, documents
+from .backend import (
+    DEFAULT_DOCUMENT,
+    DemoRun,
+    LayoutToolRouter,
+    _page_comparisons_for_run,
+    documents,
+)
 from crawl_dir.src.pipeline.figure_segmentation import segment_charts_and_figures
 from .bill_of_lading_workflow import (
     GRAPH_PROGRAM,
@@ -23,6 +29,31 @@ from .bill_of_lading_workflow import (
 
 
 class DemoBackendTests(unittest.TestCase):
+    def test_saved_run_prefers_persisted_page_structure_json(self):
+        with TemporaryDirectory() as temporary:
+            run = Path(temporary)
+            page = run / "pages" / "page-001"
+            page.mkdir(parents=True)
+            (page / "source.pdf").write_bytes(b"saved source")
+            (page / "final.html").write_text("<html><body>Saved</body></html>")
+            structure = {
+                "classification": "image_only",
+                "page_width_points": 612.0,
+                "page_height_points": 792.0,
+                "extractable_text_chars": 0,
+                "font_count": 0,
+                "image_count": 2,
+                "full_page_image_count": 0,
+                "images": [],
+            }
+            (page / "page-structure.json").write_text(json.dumps(structure))
+
+            comparisons = _page_comparisons_for_run(run)
+
+        artifact = comparisons["1"]["after"]
+        self.assertEqual(artifact["page_structure"], structure)
+        self.assertEqual(artifact["page_structure_source"], "saved_json")
+
     def test_css_findings_are_ignored_deterministically(self):
         text, ignored = _discard_css_findings([
             "The heading is not bold and has the wrong border.",

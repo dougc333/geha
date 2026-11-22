@@ -20,11 +20,11 @@
 !crawl_dir/runs/dental/
 !crawl_dir/runs/dental/**
 
-# The consumer path resolver needs the run/QC manifests, chunks marker, and
-# page Markdown. Extraction intermediates and per-page PDF copies are not used.
+# The consumer path resolver needs the run/QC manifests, chunks marker, page
+# Markdown, and canonical candidate tables used by the rate-code lookup.
+# Extraction intermediates and per-page PDF copies are not used.
 crawl_dir/runs/dental/**/input/
 crawl_dir/runs/dental/**/iterations/
-crawl_dir/runs/dental/**/candidate/tables/
 crawl_dir/runs/dental/**/pages/**/source.pdf
 crawl_dir/runs/dental/**/pages/**/*.png
 crawl_dir/runs/dental/**/pages/**/*.jpg

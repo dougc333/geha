@@ -9,16 +9,21 @@ from types import SimpleNamespace
 from unittest.mock import patch
 
 import pymupdf
+from bs4 import BeautifulSoup
 from PIL import Image
 
 from .pipeline.scanned_ingestion import (
     ExternalResourceHtmlError,
+    apply_review_literal_corrections,
+    enforce_visual_style_gate,
+    embed_source_brand_images,
     detect_visual_figure_pages,
     _raw_chunks,
     _sanitize_external_resources,
     generate_initial_html_with_claude,
     html_to_markdown,
     image_only_pages,
+    pdf_page_structure,
     process_scanned_document,
 )
 from .pipeline.artifact_io import resolve_raw_document
@@ -60,6 +65,115 @@ def _fake_anthropic(text: str, calls: list[dict]) -> SimpleNamespace:
 
 
 class ScannedIngestionTests(unittest.TestCase):
+    def test_pdf_page_structure_reports_text_images_and_full_page_coverage(self):
+        directory = Path(tempfile.mkdtemp())
+        source_pdf = directory / "source.pdf"
+        page_image = directory / "page.png"
+        Image.new("RGB", (612, 792), "white").save(page_image)
+        document = pymupdf.open()
+        page = document.new_page(width=612, height=792)
+        page.insert_image(page.rect, filename=str(page_image))
+        page.insert_text((72, 72), "Searchable policy text")
+        document.save(source_pdf)
+        document.close()
+
+        structure = pdf_page_structure(source_pdf)
+
+        self.assertEqual(structure["classification"], "text_layer_over_page_image")
+        self.assertGreater(structure["extractable_text_chars"], 0)
+        self.assertGreaterEqual(structure["font_count"], 1)
+        self.assertEqual(structure["image_count"], 1)
+        self.assertEqual(structure["full_page_image_count"], 1)
+        self.assertTrue(structure["images"][0]["full_page"])
+        self.assertEqual(structure["images"][0]["coverage_percent"], 100.0)
+
+    def test_pdf_brand_images_replace_model_logo_approximations(self):
+        directory = Path(tempfile.mkdtemp())
+        source_pdf = directory / "source.pdf"
+        first = directory / "geha.png"
+        second = directory / "onco.png"
+        Image.new("RGB", (120, 30), "navy").save(first)
+        Image.new("RGB", (140, 30), "orange").save(second)
+        document = pymupdf.open()
+        page = document.new_page(width=612, height=792)
+        page.insert_image(pymupdf.Rect(40, 30, 160, 60), filename=str(first))
+        page.insert_image(pymupdf.Rect(400, 30, 540, 60), filename=str(second))
+        document.save(source_pdf)
+        document.close()
+        candidate = (
+            '<html><head><style>.geha .txt{color:navy}'
+            '.page{position:relative;width:1530px;height:1980px}</style></head><body>'
+            '<main class="page"><header><div class="logo-geha">'
+            '<div class="gstar">*</div><div class="gbar"></div>'
+            '<div class="gtxt"><span>G.E.H.A</span></div></div>'
+            '<div class="logo-onco"><span class="osq"></span>'
+            '<div class="otxt"><span>OncoHealth</span></div></div>'
+            '</header><p>Policy content</p></main></body></html>'
+        )
+
+        corrected, embedded = embed_source_brand_images(candidate, source_pdf)
+        corrected_again, embedded_again = embed_source_brand_images(
+            corrected, source_pdf
+        )
+
+        self.assertEqual(embedded, ["G.E.H.A", "OncoHealth"])
+        self.assertEqual(embedded_again, ["G.E.H.A", "OncoHealth"])
+        self.assertEqual(corrected.count("data:image/png;base64,"), 2)
+        self.assertEqual(corrected_again.count("data:image/png;base64,"), 2)
+        self.assertEqual(corrected.count('class="source-brand-overlay"'), 2)
+        self.assertEqual(corrected_again.count('class="source-brand-overlay"'), 2)
+        self.assertIn('alt="G.E.H.A"', corrected)
+        self.assertIn(".geha .txt{color:navy}", corrected)
+        parsed = BeautifulSoup(corrected, "lxml")
+        page_node = parsed.select_one(".page")
+        self.assertIsNotNone(page_node)
+        self.assertEqual(
+            len(page_node.find_all("img", class_="source-brand-overlay", recursive=False)),
+            2,
+        )
+        self.assertNotIn('class="gstar"', corrected)
+        self.assertNotIn('class="gbar"', corrected)
+        self.assertNotIn('class="osq"', corrected)
+        self.assertNotIn('class="logo-geha"', corrected)
+        self.assertNotIn('class="logo-onco"', corrected)
+        self.assertIn("left:100.00px", corrected)
+        self.assertNotIn("<span>OncoHealth</span>", corrected)
+
+    def test_unstyled_candidate_cannot_pass_visual_review(self):
+        candidate = "<html><body><h1>Policy</h1><table><tr><td>A</td></tr></table></body></html>"
+
+        review = enforce_visual_style_gate(
+            candidate, {"verdict": "match", "errors": []}
+        )
+
+        self.assertEqual(review["verdict"], "mismatch")
+        self.assertEqual(review["errors"][0]["category"], "layout")
+        self.assertIn("no CSS", review["errors"][0]["html_evidence"])
+
+    def test_styled_candidate_can_retain_visual_match(self):
+        candidate = "<html><head><style>body{margin:2rem}</style></head><body>Policy</body></html>"
+        expected = {"verdict": "match", "errors": []}
+
+        self.assertEqual(enforce_visual_style_gate(candidate, expected), expected)
+
+    def test_explicit_wrong_text_review_repairs_visible_text_only(self):
+        candidate = (
+            "<html><head><style>.S7681{color:red}</style></head>"
+            "<body><p>exon 20 insertion, S7681, or G719X</p></body></html>"
+        )
+        errors = [{
+            "category": "wrong_text",
+            "source_evidence": "exon 20 insertion, S768I, or G719X",
+            "html_evidence": "exon 20 insertion, S7681, or G719X",
+            "correction": 'Change the mutation "S7681" to "S768I".',
+        }]
+
+        corrected, replacements = apply_review_literal_corrections(candidate, errors)
+
+        self.assertIn("S768I, or G719X", corrected)
+        self.assertIn(".S7681{color:red}", corrected)
+        self.assertEqual(replacements, [{"old": "S7681", "new": "S768I"}])
+
     def test_native_figure_evidence_clips_pdf_words_and_preserves_signs(self):
         root = Path(tempfile.mkdtemp())
         source_pdf = root / "source.pdf"
@@ -546,6 +660,15 @@ class ScannedIngestionTests(unittest.TestCase):
         self.assertIn("Embedded policy", native_calls[0]["text"])
         self.assertEqual(native_calls[0]["source_page_map"], {1: 2})
         self.assertTrue((run / "pages" / "page-002" / "final.html").is_file())
+        scanned_structure = json.loads(
+            (run / "pages" / "page-001" / "page-structure.json").read_text()
+        )
+        native_structure = json.loads(
+            (run / "pages" / "page-002" / "page-structure.json").read_text()
+        )
+        self.assertEqual(scanned_structure["classification"], "image_only")
+        self.assertEqual(native_structure["classification"], "text_only")
+        self.assertGreater(native_structure["extractable_text_chars"], 0)
         findings = json.loads(
             (run / "iterations" / "iteration-001" / "findings.json").read_text()
         )

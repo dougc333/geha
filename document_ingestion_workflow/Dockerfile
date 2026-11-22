@@ -21,7 +21,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 COPY document_ingestion_workflow/requirements.txt /tmp/requirements.txt
-RUN pip install --no-cache-dir \
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends fonts-crosextra-carlito \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip install --no-cache-dir \
         --index-url https://download.pytorch.org/whl/cpu \
         "torch==2.14.1+cpu" \
         "torchvision==0.29.1+cpu" \
@@ -35,7 +38,7 @@ COPY crawl_dir/src /app/crawl_dir/src
 COPY crawl_dir/raw/coverage-policies /app/crawl_dir/raw/coverage-policies
 COPY crawl_dir/raw/forms /app/crawl_dir/raw/forms
 COPY crawl_dir/raw/research/ey-limra-workforce-benefits-study-final-2025.pdf /app/crawl_dir/raw/research/ey-limra-workforce-benefits-study-final-2025.pdf
-COPY crawl_dir/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs /app/crawl_dir/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs
+COPY bounding_box/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs /app/crawl_dir/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs
 COPY PDF_processing/bill_lading /app/PDF_processing/bill_lading
 
 RUN mkdir -p /app/crawl_dir/runs \
