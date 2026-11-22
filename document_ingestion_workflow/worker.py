@@ -40,6 +40,7 @@ def main() -> None:
         document = str(job.payload.get("document", ""))
         delay = float(job.payload.get("delay_seconds", 0))
         provider = str(job.payload.get("provider", "anthropic"))
+        layout = str(job.payload.get("layout", "gpt4o_only_8block_ocr.py"))
         run_record = store.get(run_id)
 
         if run_record is None:
@@ -65,7 +66,7 @@ def main() -> None:
         heartbeat.start()
         try:
             LOGGER.info("Starting run %s for %s", run_id, document)
-            IngestionDemoAgent(DurableRun(store, run_id), document, delay, provider).execute()
+            IngestionDemoAgent(DurableRun(store, run_id), document, delay, provider, layout).execute()
             queue.acknowledge(job)
             LOGGER.info("Finished run %s", run_id)
         except Exception as exc:

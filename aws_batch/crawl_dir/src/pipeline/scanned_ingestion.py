@@ -137,7 +137,7 @@ def render_pdf_viewer_with_playwright_chromium(
 _render_pdf = render_pdf_page_with_pymupdf
 
 
-def _render_html(source: Path, output: Path) -> Path:
+def _render_html(source: Path, output: Path, *, viewport: tuple[int, int] | None = None) -> Path:
     """Render the complete HTML page; never compare a square Quick Look crop."""
     try:
         from playwright.sync_api import sync_playwright
@@ -146,8 +146,9 @@ def _render_html(source: Path, output: Path) -> Path:
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=True)
         try:
+            width, height = viewport or (1440, 1000)
             page = browser.new_page(
-                viewport={"width": 1440, "height": 1000}, device_scale_factor=1
+                viewport={"width": width, "height": height}, device_scale_factor=1
             )
             page.set_content(source.read_text(encoding="utf-8"), wait_until="load")
             page.screenshot(path=str(output), full_page=True, animations="disabled")

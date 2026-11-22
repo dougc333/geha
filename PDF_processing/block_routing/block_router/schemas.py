@@ -4,7 +4,7 @@ Invoices are split into five blocks (header, parties, line_items, totals, extras
 labels in the ocr-mini-bench invoice ground truth (sender_name, receiver_vat, items[].unit_price, ...), so a
 merged result has the same shape as that ground truth and can be scored with it.
 
-The Bill of Lading blocks come from the existing versioned spec (`bill_lading/bill_of_lading_spec.json`).
+The Bill of Lading blocks come from the active candidate spec (`bill_lading/spec_candidate_with_reference/candidate_spec.json`).
 Every schema is strict (`additionalProperties: false`) so it can be used with structured-output APIs.
 """
 from __future__ import annotations
@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any
 
 HERE = Path(__file__).resolve().parent
-BOL_SPEC = HERE.parents[1] / "bill_lading" / "bill_of_lading_spec.json"
+BOL_SPEC = HERE.parents[1] / "bill_lading" / "spec_candidate_with_reference" / "candidate_spec.json"
 
 STR = {"type": ["string", "null"]}
 NUM = {"type": ["number", "null"]}

@@ -314,7 +314,9 @@ def generate_page_html_with_corrected_figures(
             png_path = output / f"iteration-{iteration:02d}.png"
             html_path.write_text(candidate, encoding="utf-8")
             started = time.perf_counter()
-            _render_html(html_path, png_path)
+            with Image.open(crop) as source_image:
+                crop_size = source_image.size
+            _render_html(html_path, png_path, viewport=crop_size)
             latency_ms = round((time.perf_counter() - started) * 1000, 1)
             candidate_hash = _candidate_hash(candidate)
             seen_hashes[candidate_hash] = iteration
@@ -323,6 +325,16 @@ def generate_page_html_with_corrected_figures(
             )
             errors = review["errors"]
             verdict = review["verdict"]
+            with Image.open(png_path) as rendered_image:
+                rendered_size = rendered_image.size
+            if rendered_size != crop_size:
+                errors = [*errors, {
+                    "category": "layout",
+                    "source_evidence": f"Authoritative crop is {crop_size[0]}x{crop_size[1]} pixels",
+                    "html_evidence": f"Rendered HTML is {rendered_size[0]}x{rendered_size[1]} pixels",
+                    "correction": "Fit the semantic HTML to the exact crop canvas without overflow or clipping.",
+                }]
+                verdict = "mismatch"
             attempt = {
                 "iteration": iteration,
                 "html": f"{output.name}/{html_path.name}",

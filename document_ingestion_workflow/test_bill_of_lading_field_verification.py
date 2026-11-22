@@ -6,6 +6,7 @@ from tempfile import TemporaryDirectory
 
 from document_ingestion_workflow.bill_of_lading_workflow import (
     ROOT,
+    _cargo_table_html,
     verify_bill_of_lading_fields,
 )
 
@@ -52,6 +53,21 @@ def test_verified_cargo_rows() -> None:
         assert [row["set_temp"] for row in rows] == ["+2°C", "+1°C"]
         assert qc["field_verification"]["row_count"] == 2
         assert qc["status"] == "needs_visual_review"
+
+
+def test_cargo_renderer_keeps_two_shipments_in_separate_rows() -> None:
+    with TemporaryDirectory() as directory:
+        ocr_path = _fixture(Path(directory))
+        record = json.loads(ocr_path.read_text(encoding="utf-8"))
+        extracted = {int(block["block"]): block["cells"] for block in record["blocks"]}
+        rendered = _cargo_table_html(extracted)
+
+        assert rendered is not None
+        assert rendered.count('class="cargo-row"') == 2
+        assert rendered.count('data-cell="container_column"') == 2
+        assert rendered.index("MRDN4455667") < rendered.index("MRDN7788990")
+        assert rendered.index("18,500") < rendered.index("19,200")
+        assert '<div class="cargo-banner"><span>FREIGHT COLLECT</span></div>' in rendered
 
 
 def test_package_column_disagreement_fails_qc() -> None:
