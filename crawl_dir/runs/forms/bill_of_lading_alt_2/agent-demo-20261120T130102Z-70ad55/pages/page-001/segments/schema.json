@@ -1,0 +1,513 @@
+{
+  "template_id": "hemisphere_bill_of_lading_alt_2_draft",
+  "coordinate_system": "top-left half-open pixels",
+  "source_canvas": {
+    "width": 2136,
+    "height": 3016
+  },
+  "blocks": [
+    {
+      "block": 1,
+      "name": "header",
+      "box": {
+        "x": 68,
+        "y": 60,
+        "width": 1999,
+        "height": 340
+      },
+      "cells": [
+        {
+          "id": "carrier_header",
+          "reading_order": 1,
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 1318,
+            "height": 340
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "bill_of_lading_number",
+          "reading_order": 2,
+          "box": {
+            "x": 1318,
+            "y": 0,
+            "width": 681,
+            "height": 340
+          },
+          "origin": "extracted"
+        }
+      ]
+    },
+    {
+      "block": 2,
+      "name": "parties",
+      "box": {
+        "x": 68,
+        "y": 400,
+        "width": 1999,
+        "height": 899
+      },
+      "cells": [
+        {
+          "id": "shipper",
+          "reading_order": 1,
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 997,
+            "height": 298
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "carrier_agent_endorsements",
+          "reading_order": 2,
+          "box": {
+            "x": 997,
+            "y": 0,
+            "width": 1002,
+            "height": 298
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "consignee",
+          "reading_order": 3,
+          "box": {
+            "x": 0,
+            "y": 298,
+            "width": 997,
+            "height": 299
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "discharge_agent",
+          "reading_order": 4,
+          "box": {
+            "x": 997,
+            "y": 298,
+            "width": 1002,
+            "height": 601
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "notify_parties",
+          "reading_order": 5,
+          "box": {
+            "x": 0,
+            "y": 597,
+            "width": 997,
+            "height": 302
+          },
+          "origin": "extracted"
+        }
+      ]
+    },
+    {
+      "block": 3,
+      "name": "routing",
+      "box": {
+        "x": 68,
+        "y": 1299,
+        "width": 1999,
+        "height": 213
+      },
+      "cells": [
+        {
+          "id": "vessel_and_voyage",
+          "reading_order": 1,
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 665,
+            "height": 107
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "port_of_loading",
+          "reading_order": 2,
+          "box": {
+            "x": 665,
+            "y": 0,
+            "width": 665,
+            "height": 107
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "place_of_receipt",
+          "reading_order": 3,
+          "box": {
+            "x": 1330,
+            "y": 0,
+            "width": 669,
+            "height": 107
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "booking_and_shipper_reference",
+          "reading_order": 4,
+          "box": {
+            "x": 0,
+            "y": 107,
+            "width": 665,
+            "height": 106
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "port_of_discharge",
+          "reading_order": 5,
+          "box": {
+            "x": 665,
+            "y": 107,
+            "width": 665,
+            "height": 106
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "place_of_delivery",
+          "reading_order": 6,
+          "box": {
+            "x": 1330,
+            "y": 107,
+            "width": 669,
+            "height": 106
+          },
+          "origin": "extracted"
+        }
+      ]
+    },
+    {
+      "block": 4,
+      "name": "particulars_notice",
+      "box": {
+        "x": 68,
+        "y": 1512,
+        "width": 1999,
+        "height": 46
+      },
+      "cells": [
+        {
+          "id": "particulars_notice",
+          "reading_order": 1,
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 1999,
+            "height": 46
+          },
+          "origin": "extracted"
+        }
+      ]
+    },
+    {
+      "block": 5,
+      "name": "cargo_headers",
+      "box": {
+        "x": 68,
+        "y": 1558,
+        "width": 1999,
+        "height": 88
+      },
+      "cells": [
+        {
+          "id": "cargo_header_1",
+          "reading_order": 1,
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 499,
+            "height": 88
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "cargo_header_2",
+          "reading_order": 2,
+          "box": {
+            "x": 499,
+            "y": 0,
+            "width": 997,
+            "height": 88
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "cargo_header_3",
+          "reading_order": 3,
+          "box": {
+            "x": 1496,
+            "y": 0,
+            "width": 249,
+            "height": 88
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "cargo_header_4",
+          "reading_order": 4,
+          "box": {
+            "x": 1745,
+            "y": 0,
+            "width": 253,
+            "height": 88
+          },
+          "origin": "extracted"
+        }
+      ]
+    },
+    {
+      "block": 6,
+      "name": "cargo_body_and_totals",
+      "box": {
+        "x": 68,
+        "y": 1646,
+        "width": 1999,
+        "height": 510
+      },
+      "cells": [
+        {
+          "id": "cargo_cell_1",
+          "reading_order": 1,
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 499,
+            "height": 510
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "cargo_cell_2",
+          "reading_order": 2,
+          "box": {
+            "x": 499,
+            "y": 0,
+            "width": 997,
+            "height": 510
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "cargo_cell_3",
+          "reading_order": 3,
+          "box": {
+            "x": 1496,
+            "y": 0,
+            "width": 249,
+            "height": 373
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "cargo_cell_4",
+          "reading_order": 4,
+          "box": {
+            "x": 1745,
+            "y": 0,
+            "width": 253,
+            "height": 373
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "weight_total",
+          "reading_order": 5,
+          "box": {
+            "x": 1496,
+            "y": 373,
+            "width": 249,
+            "height": 137
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "measurement_total",
+          "reading_order": 6,
+          "box": {
+            "x": 1745,
+            "y": 373,
+            "width": 253,
+            "height": 137
+          },
+          "origin": "extracted"
+        }
+      ]
+    },
+    {
+      "block": 7,
+      "name": "charges_and_legal",
+      "box": {
+        "x": 68,
+        "y": 2156,
+        "width": 1999,
+        "height": 340
+      },
+      "cells": [
+        {
+          "id": "charges_caption",
+          "reading_order": 1,
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 1198,
+            "height": 52
+          },
+          "origin": "derived_from_table_rules"
+        },
+        {
+          "id": "charge_header_1",
+          "reading_order": 2,
+          "box": {
+            "x": 0,
+            "y": 52,
+            "width": 358,
+            "height": 52
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "charge_header_2",
+          "reading_order": 3,
+          "box": {
+            "x": 358,
+            "y": 52,
+            "width": 239,
+            "height": 52
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "charge_header_3",
+          "reading_order": 4,
+          "box": {
+            "x": 597,
+            "y": 52,
+            "width": 239,
+            "height": 52
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "charge_header_4",
+          "reading_order": 5,
+          "box": {
+            "x": 836,
+            "y": 52,
+            "width": 179,
+            "height": 52
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "charge_header_5",
+          "reading_order": 6,
+          "box": {
+            "x": 1015,
+            "y": 52,
+            "width": 182,
+            "height": 52
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "charges_body",
+          "reading_order": 7,
+          "box": {
+            "x": 0,
+            "y": 104,
+            "width": 1198,
+            "height": 236
+          },
+          "origin": "derived_blank_area"
+        },
+        {
+          "id": "legal_terms",
+          "reading_order": 8,
+          "box": {
+            "x": 1198,
+            "y": 0,
+            "width": 801,
+            "height": 340
+          },
+          "origin": "derived_adjacent_area"
+        }
+      ]
+    },
+    {
+      "block": 8,
+      "name": "issue_and_signature",
+      "box": {
+        "x": 68,
+        "y": 2496,
+        "width": 1999,
+        "height": 278
+      },
+      "cells": [
+        {
+          "id": "declared_value",
+          "reading_order": 1,
+          "box": {
+            "x": 0,
+            "y": 0,
+            "width": 599,
+            "height": 172
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "carrier_receipt",
+          "reading_order": 2,
+          "box": {
+            "x": 599,
+            "y": 0,
+            "width": 598,
+            "height": 172
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "signature",
+          "reading_order": 3,
+          "box": {
+            "x": 1197,
+            "y": 0,
+            "width": 802,
+            "height": 172
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "place_and_date_of_issue",
+          "reading_order": 4,
+          "box": {
+            "x": 0,
+            "y": 172,
+            "width": 599,
+            "height": 106
+          },
+          "origin": "extracted"
+        },
+        {
+          "id": "shipped_on_board_date",
+          "reading_order": 5,
+          "box": {
+            "x": 599,
+            "y": 172,
+            "width": 1400,
+            "height": 106
+          },
+          "origin": "extracted"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "status": "failed",
+  "source_sha256": "583531c29e7d97d6754dbe6b8c2debfcf7382ca6a2965a4a9c2d1aaff7ddd2d8",
+  "page_count": 1,
+  "chunk_count": 3,
+  "table_count": 0,
+  "structural_errors": [
+    {
+      "page": 1,
+      "issue": "visual_verification_failed",
+      "verdict": "mismatch",
+      "errors": [
+        {
+          "category": "layout",
+          "source_evidence": "The page is a 2136px-wide form with clearly separated boxes: header, shipper/consignee, vessel/ports, cargo table, charges, and signature, all laid out in order down the page.",
+          "html_evidence": "The rendered output stacks and overlaps text on top of itself in the top ~900px, leaving the rest of the page blank. Absolute-positioned cells in the render are collapsed and overlapping, and the CSS has a stray extra '}' after .page.",
+          "correction": "Fix the CSS syntax error and positioning so each block renders in its own region, with no overlapping text."
+        },
+        {
+          "category": "reading_order",
+          "source_evidence": "Reading order runs top to bottom: header, shipper and endorsements, consignee, notify parties, vessel/ports, cargo, charges, signature.",
+          "html_evidence": "The rendered text from different sections is overprinted, e.g. the shipper, booking ref, cargo and charge headers all appear at the same y-position. Consignee and notify party blocks appear mid-page, out of order.",
+          "correction": "Render the sections sequentially in their correct vertical positions."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "The page footer reads 'MRS RAJWINDER HOTHI & MR MANISH BHATT • +44 1246 854987 • removals@simpsons.co.uk'.",
+          "html_evidence": "No footer text appears anywhere in the HTML.",
+          "correction": "Add the footer line with the shipper name, phone number and email."
+        },
+        {
+          "category": "missing_text",
+          "source_evidence": "The signature area shows a redacted/filled band after 'SIGNED on behalf of the' with 'Hemisphere Logistics', and the bold 'Agent Signature' in a larger font on the right.",
+          "html_evidence": "The text is flattened into plain 'SIGNED on behalf of the Hemisphere Logistics' and 'Agent Signature', so the layout, the signature styling and the redaction bars are lost.",
+          "correction": "Preserve the signature block's layout and styling, including the name field and the right-aligned 'Agent Signature'."
+        },
+        {
+          "category": "wrong_text",
+          "source_evidence": "In the source, emphasized fields (shipper names, vessel, cargo description, container numbers, etc.) are bold, while labels are in regular weight. The charges section's headers, legal text and cargo headers have specific weights.",
+          "html_evidence": "The CSS makes the whole block-5 and block-7 bold, so the legal terms and the charge caption are bold when they should be small regular text. Names and values are not bolded elsewhere.",
+          "correction": "Apply bold only to headings and key values, and render the legal terms in small regular text."
+        },
+        {
+          "category": "other",
+          "source_evidence": "The source has black vertical marks at the right of the endorsements/discharge agent area and a bold 'NO. & SEQUENCE OF ORIGINAL B/L's' header box with its line separator.",
+          "html_evidence": "These marks and the header box/separator line are not represented.",
+          "correction": "Represent the header box border and separator, and note the marks if intended."
+        }
+      ]
+    }
+  ],
+  "structural_warnings": [],
+  "visual_verification": {
+    "status": "failed",
+    "required": true,
+    "passed_pages": 0,
+    "total_pages": 1
+  },
+  "field_verification": {
+    "status": "passed",
+    "row_count": 1,
+    "report": "candidate/bill_of_lading_verification.json"
+  }
+}

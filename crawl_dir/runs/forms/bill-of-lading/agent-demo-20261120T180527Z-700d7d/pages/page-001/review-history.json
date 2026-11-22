@@ -1,0 +1,70 @@
+[
+  {
+    "iteration": 0,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "The logo is a boxed \"M\" graphic followed by the title \"MERIDIAN SHIPPING\"; no separate letter M appears as text.",
+        "html_evidence": "The carrier header pre contains a standalone \"M\" line before \"MERIDIAN SHIPPING\", in addition to the logo span.",
+        "correction": "Remove the duplicate \"M\" text line. Keep only the logo graphic and \"MERIDIAN SHIPPING\"."
+      },
+      {
+        "category": "extra_text",
+        "source_evidence": "In the description column, \"FREIGHT COLLECT\" appears once, as a banner at the bottom of the cargo area, with no \"---\" markers.",
+        "html_evidence": "The second cargo row's description contains \"---\nFREIGHT COLLECT\n---\", and a separate cargo-banner also repeats \"FREIGHT COLLECT\".",
+        "correction": "Remove the \"---\nFREIGHT COLLECT\n---\" text from the second row. Keep a single FREIGHT COLLECT banner."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The BILL OF LADING box is a bordered panel at the top right, with the title, a rule, and B/L NO. and SCAC labels on the left and their values (BL232472785, MRDN) right-aligned. The header cell has no border dividing it from the logo area.",
+        "html_evidence": "The header is split into two bordered cells. The bill of lading identifiers are stacked as plain text lines, e.g. \"B/L NO. BL232472785\".",
+        "correction": "Restore the header layout: a bordered right-hand panel with label/value pairs aligned left and right."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "Emphasis differs by field: titles and values such as BKG5917532, MERIDIAN LABREA / 124N, and 40 are visibly larger or bolder. Labels such as SHIPPER are small, letter-spaced caps. The TOTAL NUMBER OF PACKAGES value is large and centered. SET TEMP lines are blue.",
+        "html_evidence": "All text is uniform bold at about the same size, the SET TEMP lines are not blue, and the 40 total is not enlarged or centered.",
+        "correction": "Restore the visual hierarchy: larger values, small label styling, blue SET TEMP lines, and a large centered package total."
+      }
+    ],
+    "discarded_non_errors": 2
+  },
+  {
+    "iteration": 1,
+    "verdict": "mismatch",
+    "errors": [
+      {
+        "category": "extra_text",
+        "source_evidence": "The logo is a boxed \"M\" graphic and the company name MERIDIAN SHIPPING appears only once, with no separate letter M.",
+        "html_evidence": "<pre>M\nMERIDIAN SHIPPING\nGLOBAL SHIPPING & LOGISTICS</pre> The candidate adds a stray text line \"M\" beside the logo.",
+        "correction": "Keep the logo as an image or labeled graphic only. Remove the duplicate \"M\" text line from the header text."
+      },
+      {
+        "category": "table_structure",
+        "source_evidence": "The source has one cargo table. Both containers sit in shared columns, with the container, package, weight and measurement entries aligned in single cells. \"FREIGHT COLLECT\" appears inside the description column of the same table.",
+        "html_evidence": "The candidate splits the cargo into two separate rows, each with its own description cell. The \"FREIGHT COLLECT\" banner is moved outside the table into a full-width div below it.",
+        "correction": "Restore the original cargo table structure, with \"FREIGHT COLLECT\" in the description column below the pears entry."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The bill of lading box is a compact bordered box with B/L NO. and SCAC labels on the left and their values (BL232472785, MRDN) right-aligned. The carrier header is a short band.",
+        "html_evidence": "The header is a tall 363px band split into two large boxes. The B/L NO. and SCAC values run inline with their labels, and the rule appears just below the text rather than under the title.",
+        "correction": "Rebuild the header as a compact band, with the bill of lading as a smaller bordered box and the identifier values right-aligned."
+      },
+      {
+        "category": "layout",
+        "source_evidence": "The \"TOTAL NUMBER OF PACKAGES\" value 40 is large, bold and centered in its cell. Authorized Signature is displayed in large type, right-aligned. Field values such as the vessel name and booking reference are emphasized in larger type than their labels.",
+        "html_evidence": "All field values use the same small bold font as their labels, so the visual hierarchy is lost. 40 and Authorized Signature are small and left-aligned.",
+        "correction": "Restore the label/value hierarchy, with larger values, a centered 40 and a right-aligned Authorized Signature."
+      }
+    ],
+    "discarded_non_errors": 0
+  },
+  {
+    "iteration": 2,
+    "verdict": "match",
+    "errors": [],
+    "discarded_non_errors": 0
+  }
+]

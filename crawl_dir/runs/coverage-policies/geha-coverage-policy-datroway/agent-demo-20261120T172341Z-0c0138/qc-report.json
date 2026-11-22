@@ -1,0 +1,47 @@
+{
+  "status": "failed",
+  "source_sha256": "2fada993e5d40fa441ba6fa952befa658705cdba0d1756aec4d2734b0c6e6458",
+  "page_count": 4,
+  "chunk_count": 13,
+  "table_count": 2,
+  "structural_errors": [
+    {
+      "page": 2,
+      "issue": "visual_verification_failed",
+      "verdict": "mismatch",
+      "errors": [
+        {
+          "category": "wrong_text",
+          "source_evidence": "exon 20 insertion, S768I, or G719X (rendered in the page as \"S7681\")",
+          "html_evidence": "S7681",
+          "correction": "The page's text reads \"S7681\". The HTML matches this as visible text, so it is not an error against the source. Keep \"S7681\" as is."
+        }
+      ]
+    }
+  ],
+  "structural_warnings": [
+    {
+      "chunk_id": "geha-coverage-policy-datroway-chunk-0001",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "geha-coverage-policy-datroway-chunk-0004",
+      "issue": "context_too_short"
+    },
+    {
+      "chunk_id": "geha-coverage-policy-datroway-chunk-0012",
+      "issue": "context_too_short"
+    },
+    {
+      "page": 4,
+      "issue": "extracted_text_needs_review",
+      "report": "pages/page-004/review-flags.json"
+    }
+  ],
+  "visual_verification": {
+    "status": "failed",
+    "required": true,
+    "passed_pages": 2,
+    "total_pages": 3
+  }
+}

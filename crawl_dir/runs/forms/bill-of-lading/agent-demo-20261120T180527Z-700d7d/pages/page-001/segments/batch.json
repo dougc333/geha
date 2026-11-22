@@ -1,0 +1,335 @@
+{
+  "schema_version": 1,
+  "workflow": "bill_of_lading_segment_html_visual_correction",
+  "workflow_program": "/app/PDF_processing/bill_lading/bill_of_lading_html_graph.py",
+  "model": "gpt-4.1-mini",
+  "created_at": "2026-11-20T18:06:02.095229+00:00",
+  "max_iterations_per_segment": 6,
+  "completion_requirement": "verdict=match and error_count=0 for every segment",
+  "verification_scope": "text fidelity only; CSS, typography, borders, spacing, alignment, colors, dimensions, wrapping, and decorative elements are ignored",
+  "status": "passed",
+  "segments": [
+    {
+      "segment": 1,
+      "section": "Carrier header and bill of lading identifiers",
+      "source_png": "region-01-schema-block-1.png",
+      "output_directory": "segment-01",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-01/iteration-01.html",
+          "rendered_png": "segment-01/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 0,
+          "ignored_css_errors": [],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 396.3,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-01/final.html",
+      "final_rendered_png": "segment-01/iteration-01.png"
+    },
+    {
+      "segment": 2,
+      "section": "Shipment parties and references",
+      "source_png": "region-02-schema-block-2.png",
+      "output_directory": "segment-02",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-02/iteration-01.html",
+          "rendered_png": "segment-02/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 1,
+          "ignored_css_errors": [
+            "Missing bold formatting in the rendered HTML block for several text parts: 'SHIPPER', 'FRUTAS DEL SOL S.A.', 'TEL:', 'EMAIL:', 'BOOKING REF.', 'BKG5917532', 'SHIPPER'S REF.', 'EXP-35782', 'PRE-CARRIAGE BY', 'Oceanic Meridian Lines', 'PLACE OF RECEIPT', 'BUENOS AIRES, ARGENTINA', 'CONSIGNEE (NEGOTIABLE ONLY IF CONSIGNED \"TO ORDER\")', 'FRESH FRUIT IMPORTERS B.V.', 'TEL:', 'EMAIL:', 'NOTIFY PARTY (NO RESPONSIBILITY FOR FAILURE TO NOTIFY)', 'FRESH FRUIT IMPORTERS B.V.', 'TEL:', 'EMAIL:', 'DELIVERY AGENT', 'LogiTrans Global', '88 Harbor Road, Rotterdam, 3011 AA', 'Tel:', '+31 10 123 4567 | dispatch@logitrans.com'."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 386.5,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-02/final.html",
+      "final_rendered_png": "segment-02/iteration-01.png"
+    },
+    {
+      "segment": 3,
+      "section": "Vessel voyage and ports",
+      "source_png": "region-03-schema-block-3.png",
+      "output_directory": "segment-03",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-03/iteration-01.html",
+          "rendered_png": "segment-03/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 4,
+          "ignored_css_errors": [
+            "Text 'OCEAN VESSEL / VOYAGE' is bold in source but not in rendered HTML.",
+            "Text 'MERIDIAN LABREA / 124N' is bold in source but not in rendered HTML.",
+            "Text 'PORT OF LOADING' is bold in source but not in rendered HTML.",
+            "Text 'PORT OF DISCHARGE' is bold in source but not in rendered HTML."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 350.4,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-03/final.html",
+      "final_rendered_png": "segment-03/iteration-01.png"
+    },
+    {
+      "segment": 4,
+      "section": "Carrier particulars notice",
+      "source_png": "region-04-schema-block-4.png",
+      "output_directory": "segment-04",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-04/iteration-01.html",
+          "rendered_png": "segment-04/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 0,
+          "ignored_css_errors": [],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 338.9,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-04/final.html",
+      "final_rendered_png": "segment-04/iteration-01.png"
+    },
+    {
+      "segment": 5,
+      "section": "Cargo table headers",
+      "source_png": "region-05-schema-block-5.png",
+      "output_directory": "segment-05",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-05/iteration-01.html",
+          "rendered_png": "segment-05/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 1,
+          "ignored_css_errors": [
+            "The source text contains 'NO. PKGS' in bold, but the rendered HTML does not have any bold text anywhere (missing bold styling in the header)."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 364.8,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-05/final.html",
+      "final_rendered_png": "segment-05/iteration-01.png"
+    },
+    {
+      "segment": 6,
+      "section": "Cargo particulars",
+      "source_png": "region-06-schema-block-6.png",
+      "output_directory": "segment-06",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-06/iteration-01.html",
+          "rendered_png": "segment-06/iteration-01.png",
+          "verdict": "mismatch",
+          "error_count": 2,
+          "errors": [
+            "Missing blank lines and extra line breaks inside item descriptions in rendered block.",
+            "Text order and lines are flattened and not exactly matching source block arrangement."
+          ],
+          "ignored_css_error_count": 4,
+          "ignored_css_errors": [
+            "Missing bold formatting on 'MRDN4455667' and 'MRDN7788990' and seal numbers in rendered block.",
+            "Missing bold formatting on quantity '20' in rendered block.",
+            "'FREIGHT COLLECT' is in all caps in source but mixed case in rendered block.",
+            "Line 'SET TEMP: +2°C' and 'SET TEMP: +1°C' are in blue color in source but black in rendered block (color differences ignored)."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 402.2,
+            "cost_usd": 0.0
+          },
+          "repair_strategy": "named_cell_text_ocr",
+          "corrected_cells": [
+            "container_column",
+            "description_column",
+            "gross_weight_column",
+            "measurement_column",
+            "packages_column"
+          ]
+        },
+        {
+          "iteration": 2,
+          "html": "segment-06/iteration-02.html",
+          "rendered_png": "segment-06/iteration-02.png",
+          "verdict": "mismatch",
+          "error_count": 1,
+          "errors": [
+            "Text order and presence is consistent between source and rendered except that the separators lines in source are missing in rendered."
+          ],
+          "ignored_css_error_count": 6,
+          "ignored_css_errors": [
+            "Text 'MRDN4455667' in source is 'MRDN4455667' but in rendered is 'MRDN4455667' (matches but case difference ignored)",
+            "Text 'MRDN7788990' is in source but not in rendered exactly at the same place. Rendered matches but case difference ignored.",
+            "Text '20' and '20' (quantities) appear correctly but in rendered appear without bold style. Styling differences are ignored, so no error here.",
+            "The section with 'FRESH APPLES', 'STOWAGE AT +2.0 DEGREES CELSIUS', 'Packaging: PALLETS', HS CODE, SET TEMP, appears in both but in source some text is bold or italic and some in blue which is missing in rendered. Coloring and styling ignored, so no error.",
+            "The source contains a horizontal line above and below 'FREIGHT COLLECT' which is missing in the rendered block.",
+            "The 'FREIGHT COLLECT' text is bold and centered in source but plain and left aligned in rendered - styling ignored, so no error."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 421.9,
+            "cost_usd": 0.0
+          },
+          "repair_strategy": "named_cell_text_ocr",
+          "corrected_cells": [
+            "container_column",
+            "description_column",
+            "gross_weight_column",
+            "measurement_column",
+            "packages_column"
+          ]
+        },
+        {
+          "iteration": 3,
+          "html": "segment-06/iteration-03.html",
+          "rendered_png": "segment-06/iteration-03.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 9,
+          "ignored_css_errors": [
+            "Missing bold formatting in MRDN4455667, MRDN7788990, markings, and seal labels in rendered block.",
+            "Missing bold formatting for '20' quantities in rendered block.",
+            "Missing bold formatting for '20 PALLETS STC:', 'FRESH FRUIT', 'FRESH APPLES', 'STOWAGE AT +2.0 DEGREES CELSIUS', 'Packaging: PALLETS', 'HS CODE: 08081080', 'SET TEMP: +2°C'.",
+            "Missing bold formatting for '20 PALLETS STC:', 'FRESH FRUIT', 'FRESH PEARS', 'STOWAGE AT +1.0 DEGREES CELSIUS', 'Packaging: PALLETS', 'HS CODE: 08083090', 'SET TEMP: +1°C'.",
+            "In rendered text, degree symbol used in 'SET TEMP:' fields instead of 'SET TEMP:' label plus value in blue; color difference ignored but formatting difference noted.",
+            "Rendered block misses italic formatting for 'Packaging: PALLETS'.",
+            "Rendered block shows '---' lines before and after 'FREIGHT COLLECT'; source block has lines but no dashes and 'FREIGHT COLLECT' is bold and centered.",
+            "Missing bold formatting for weights and volumes in rendered block.",
+            "Rendered block's reading order in middle column is correct but lacks all source markdown styling including bold, italics, and colored text."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 397.4,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-06/final.html",
+      "final_rendered_png": "segment-06/iteration-03.png"
+    },
+    {
+      "segment": 7,
+      "section": "Freight charges and package totals",
+      "source_png": "region-07-schema-block-7.png",
+      "output_directory": "segment-07",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-07/iteration-01.html",
+          "rendered_png": "segment-07/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 3,
+          "ignored_css_errors": [
+            "'COLLECT' is on the same line as 'OCEAN FREIGHT' in rendered HTML, but on a separate right-aligned position in source.",
+            "'TOTAL NUMBER OF PACKAGES' heading text is present but not bold in rendered HTML, unlike the source.",
+            "The number '40' is bold and larger in source but normal weight in rendered HTML."
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 359.3,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-07/final.html",
+      "final_rendered_png": "segment-07/iteration-01.png"
+    },
+    {
+      "segment": 8,
+      "section": "Legal terms issue details and signature",
+      "source_png": "region-08-schema-block-8.png",
+      "output_directory": "segment-08",
+      "status": "passed",
+      "iterations": [
+        {
+          "iteration": 1,
+          "html": "segment-08/iteration-01.html",
+          "rendered_png": "segment-08/iteration-01.png",
+          "verdict": "match",
+          "error_count": 0,
+          "errors": [],
+          "ignored_css_error_count": 9,
+          "ignored_css_errors": [
+            "Missing text in rendered: 'NUMBER OF ORIGINAL B/L'S: THREE (3)'",
+            "Text formatting difference: 'PLACE OF ISSUE' and 'DATE OF ISSUE' are bold in source but not in rendered, but formatting differences are ignored",
+            "Text formatting difference: 'Antwerp' and '2026-03-13' are bold in source but not in rendered, but formatting differences are ignored",
+            "Text formatting difference: 'SIGNED FOR THE CARRIER' is bold in source but not in rendered, but formatting differences are ignored",
+            "Text formatting difference: 'Authorized Signature' is very large font in source but normal in rendered, but formatting differences are ignored",
+            "Rendered text 'RECEIVED by the Carrier in apparent good order and condition (unless otherwise stated herein) the total number or' is split incorrectly into two lines, but line wrapping differences are ignored",
+            "Rendered text 'quantity of Containers or other packages or units indicated in the box entitled \"Total Number of Packages\" for' is split incorrectly into two lines, but line wrapping differences are ignored",
+            "Rendered text 'carriage subject to all the terms and conditions hereof from the Place of Receipt or Port of Loading to the Port of' is split incorrectly into two lines, but line wrapping differences are ignored",
+            "Rendered text 'Discharge or Place of Delivery, whichever is applicable.' is on a new line but unchanged, which is acceptable"
+          ],
+          "render_tool": {
+            "id": "render_html_with_playwright",
+            "browser": "Playwright Chromium",
+            "latency_ms": 364.0,
+            "cost_usd": 0.0
+          }
+        }
+      ],
+      "final_html": "segment-08/final.html",
+      "final_rendered_png": "segment-08/iteration-01.png"
+    }
+  ],
+  "summary": {
+    "segment_count": 8,
+    "passed": 8,
+    "failed": 0,
+    "total_iterations": 10,
+    "remaining_errors": 0
+  },
+  "completed_at": "2026-11-20T18:06:51.882710+00:00"
+}
