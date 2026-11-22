@@ -225,13 +225,13 @@ async def ingest_native_pdf_with_visual_figures(
 
 
 def _figure_spec_dir(family: str, document: str) -> Path:
-    return ROOT / "annotations" / family / Path(document).stem / "figure-specs"
+    return ROOT.parent / "bounding_box" / "annotations" / family / Path(document).stem / "figure-specs"
 
 
 @server.tool(
     name="ingest_pdf_with_figure_specs",
     description=("Demo-only: ingest one public PDF under crawl_dir/raw using authored figure "
-                 "specs (annotations/<family>/<document>/figure-specs/page-NNN.json) for its "
+                 "specs (bounding_box/annotations/<family>/<document>/figure-specs/page-NNN.json) for its "
                  "charts. Every printed value and label in each spec is checked against the "
                  "native PDF text inside the figure box, and semantic HTML is rendered without "
                  "a model; pages without specs use local native-text extraction. No model or "

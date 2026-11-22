@@ -379,6 +379,8 @@ class IngestionDemoAgent:
             native_text_report = self.config["layout_kind"] == "native_text_report"
             specs_dir = ((ROOT / self.config["figure_specs"]).resolve()
                          if self.config.get("figure_specs") else None)
+            if specs_dir is not None and not spec_pages(specs_dir):
+                raise RuntimeError(f"Required authored figure specs are missing: {specs_dir}")
             self.run.emit({
                 "type": "tool_selected",
                 "tool": ("ingest_native_pdf_with_visual_figures"
@@ -482,7 +484,10 @@ async def documents(_: web.Request) -> web.Response:
     results = []
     for document, config in DEMO_DOCUMENTS.items():
         source = ROOT / "raw" / document
-        visual_pages = (list(range(1, pdf_page_count(source) + 1))
+        specs_dir = ((ROOT / config["figure_specs"]).resolve()
+                     if config.get("figure_specs") else None)
+        visual_pages = (spec_pages(specs_dir) if specs_dir else
+                        list(range(1, pdf_page_count(source) + 1))
                         if config["layout_kind"] == "hybrid_figure_report" else [])
         results.append({
             "document": document,
