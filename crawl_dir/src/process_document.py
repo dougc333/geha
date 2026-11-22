@@ -17,6 +17,10 @@ def main() -> None:
     parser.add_argument("--plan-year", type=int)
     parser.add_argument("--run-id")
     parser.add_argument(
+        "--require-jev", action="store_true",
+        help="Fail instead of falling back when TypeSafe JEV is unavailable",
+    )
+    parser.add_argument(
         "--root", type=Path, default=Path(__file__).resolve().parents[1]
     )
     args = parser.parse_args()
@@ -27,6 +31,7 @@ def main() -> None:
         document_version=args.document_version,
         plan_year=args.plan_year,
         requested_run_id=args.run_id,
+        require_jev=args.require_jev,
     )
     print(output)
 

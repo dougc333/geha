@@ -152,7 +152,15 @@ The command splits the source into page PDFs, performs Docling extraction with
 a 380-token body budget plus a hard 512-token final-input check,
 repairs recognizable numeric table headers, consolidates verified next-page
 table continuations, writes provenance-rich `chunks.jsonl`, and produces a
-structural `qc-report.json`. It never promotes a candidate automatically.
+structural `qc-report.json`. It also classifies every page as narrative, table,
+figure, mixed, or scanned with TypeSafe JEV using non-content layout features
+derived from structured-table provenance and local PDF inspection. Literal page
+text, table values, coordinates, and source files are not sent to JEV. The
+detailed result is `candidate/page-content.json`; page lists
+are copied into `qc-report.json` and the resumable batch report. Detection flags
+pages for later visual review but does not auto-promote a candidate. When JEV is
+unavailable the run records a deterministic fallback; use `--require-jev` to
+fail instead. Set `TYPESAFE_API_KEY` to enable JEV.
 
 Process or resume the complete corpus with:
 
@@ -167,13 +175,39 @@ uv run python -m crawl_dir.src.process_all \
 The batch writes `runs/<batch-id>.json` after every document, so an interrupted
 run can be safely resumed with the same arguments.
 
+Derive a new immutable run that applies chart/figure segmentation and bounded
+visual HTML correction only to selected pages of an existing run:
+
+```bash
+cd /Users/dc/geha
+uv run python -m crawl_dir.src.process_visual_pages \
+  --base-run /Users/dc/geha/crawl_dir/runs/research/acewebcontent.azureedge.net--August2018--ACE_PickleballStudy/batch-20261022-clusters \
+  --page 2 \
+  --page 3 \
+  --output-run batch-20261022-clusters-visual
+```
+
+The parent run remains unchanged. The derived run re-extracts tables from the
+verified page HTML, rebuilds Markdown and chunks, regenerates page-content
+classification with the new table IDs, and records the parent manifest hash.
+This public-document workflow sends the selected page renders and candidate HTML
+to Claude; provide `ANTHROPIC_API_KEY` or a supported local Anthropic profile.
+The default is `--provider anthropic --model claude-sonnet-5-5`. A multimodal
+OpenAI-compatible endpoint can instead be selected with `--provider
+openai-compatible --model <model-id> --base-url <url> --api-key-env <ENV_VAR>`.
+Nous Portal API keys can use `--provider nous --model <provider/model-id>`;
+this defaults to `https://inference-api.nousresearch.com/v1` and
+`NOUS_API_KEY`.
+The selected model must accept image inputs; text-only models cannot perform the
+segmentation and rendered-page comparison stages.
+
 ### Authored figure specs
 
 Specs exist because charts are where a model invents things: wrong numbers,
 made-up category labels, bars in the wrong order. Plain text and forms have
 their own extraction paths that work.
 
-A spec (`annotations/<family>/<document>/figure-specs/page-NNN.json`) records
+A spec (`bounding_box/annotations/<family>/<document>/figure-specs/page-NNN.json`) records
 each figure's labels, values, colours and PDF box. `src/pipeline/figure_specs.py`
 checks every printed percentage and label against the native PDF text inside the
 box, then renders semantic HTML without a model. Only chart-heavy documents need

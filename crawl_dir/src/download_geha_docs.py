@@ -22,11 +22,13 @@ from geha_processing.io import sha256_file
 
 
 USER_AGENT = "geha-corpus-downloader/1.0 (+local research corpus)"
-ALLOWED_HOSTS = {"geha.com", "www.geha.com"}
+ALLOWED_HOSTS = {"geha.com", "www.geha.com", "mygeha.com", "www.mygeha.com"}
 
 # These documents were retained separately in the reference corpus because
 # their native text layer was not consistent with the source PDF rendering.
 PATH_OVERRIDES = {
+    "2025-geha-dental-plan-brochure.pdf": "dental/fedvip/2025-geha-dental-plan-brochure.pdf",
+    "2027-geha-dental-plan-brochure.pdf": "dental/fedvip/2027-geha-dental-plan-brochure.pdf",
     "geha-coverage-policy-infertility-services.pdf":
         "coverage-policies/aa_source_not_consistent/geha-coverage-policy-infertility-services.pdf",
     "geha-coverage-policy-intraosseous-radiofrequency-ablation-of-the-basivertebral-nerve.pdf":
