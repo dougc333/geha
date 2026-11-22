@@ -53,7 +53,7 @@ class DemoBackendTests(unittest.TestCase):
         self.assertEqual(by_title["EY workforce benefits"]["image_only_pages"], [])
         self.assertEqual(
             by_title["EY workforce benefits"]["visual_reconstruction_pages"],
-            list(range(1, 30)),
+            [3, 4, 5, 7, 8, 9, 10, 11, 13, 14, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26],
         )
 
     def test_router_selects_named_cell_ocr_skill(self):

@@ -331,13 +331,16 @@ class ScannedIngestionTests(unittest.TestCase):
         self.assertNotIn("\u25a0", cleaned)
 
     def test_figure_spec_tool_previews_spec_pages_and_rejects_documents_without_specs(self):
-        from .ingestion_mcp import ingest_pdf_with_figure_specs
+        from .ingestion_mcp import _figure_spec_dir, ingest_pdf_with_figure_specs
 
         args = {"family": "research", "document_version": "2025",
                 "data_classification": "public"}
+        specs_dir = _figure_spec_dir("research", "ey-limra-workforce-benefits-study-final-2025.pdf")
+        self.assertTrue((specs_dir / "page-024.json").is_file())
         preview = asyncio.run(ingest_pdf_with_figure_specs(
             document="ey-limra-workforce-benefits-study-final-2025.pdf", **args))
         self.assertEqual(preview["status"], "approval_required")
+        self.assertEqual(Path(preview["specs_dir"]), specs_dir)
         self.assertIn(24, preview["spec_pages"])
         self.assertIsNone(preview["model"])
         with patch("crawl_dir.src.ingestion_mcp.resolve_raw_document",
