@@ -3,9 +3,12 @@ from __future__ import annotations
 import json
 import tempfile
 import unittest
+from io import BytesIO
 from pathlib import Path
 
 import pandas as pd
+import pymupdf
+from PIL import Image
 
 from crawl_dir.src.pipeline.artifact_io import resolve_raw_document
 from crawl_dir.src.pipeline.chunks import (
@@ -19,6 +22,7 @@ from crawl_dir.src.pipeline.contextual_retrieval import (
     contextualize_candidate,
 )
 from crawl_dir.src.pipeline.promotion import promote_run
+from crawl_dir.src.pipeline.page_content import classify_pdf_pages
 from crawl_dir.src.pipeline.tables import merge_table_fragments
 
 
@@ -38,6 +42,58 @@ class TableConsolidationTests(unittest.TestCase):
         self.assertEqual(len(merged), 1)
         self.assertEqual(merged[0]["source_pages"], [2, 3])
         self.assertEqual(merged[0]["frame"]["HCPCS"].tolist(), ["J9033", "J9034"])
+
+
+class PageContentDetectionTests(unittest.TestCase):
+    def test_detects_figure_table_mixed_and_scanned_pages(self):
+        class StubJev:
+            def __init__(self):
+                self.features = []
+
+            def classify_many(self, features):
+                self.features = features
+                choices = {1: "narrative", 2: "figure", 3: "narrative", 4: "figure"}
+                return {
+                    item["page"]: {
+                        "choice": choices[item["page"]], "confidence": 0.9,
+                        "probabilities": {choices[item["page"]]: 0.9}, "model": "test-jev",
+                    }
+                    for item in features
+                }
+
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "sample.pdf"
+            document = pymupdf.open()
+            narrative = document.new_page(width=612, height=792)
+            narrative.insert_text((72, 72), "Ordinary narrative page with embedded text.")
+            figure = document.new_page(width=612, height=792)
+            figure.insert_text((72, 72), "Figure 2. Outcomes by year")
+            table = document.new_page(width=612, height=792)
+            table.insert_text((72, 72), "Benefits and values")
+            scanned = document.new_page(width=612, height=792)
+            image = Image.new("RGB", (612, 792), "white")
+            encoded = BytesIO()
+            image.save(encoded, format="PNG")
+            scanned.insert_image(scanned.rect, stream=encoded.getvalue())
+            document.save(source)
+            document.close()
+
+            classifier = StubJev()
+            report = classify_pdf_pages(source, [{
+                "table_id": "table-001", "source_pages": [2, 3],
+            }], classifier=classifier)
+
+            self.assertEqual(
+                [item["page_type"] for item in report["pages"]],
+                ["narrative", "mixed", "table", "scanned"],
+            )
+            self.assertEqual(report["summary"]["figure_pages"], [2])
+            self.assertEqual(report["summary"]["table_pages"], [2, 3])
+            self.assertEqual(report["summary"]["visual_review_pages"], [2, 4])
+            self.assertEqual(report["classifier"]["mode"], "jev")
+            self.assertNotIn("text", classifier.features[0])
+            self.assertNotIn("table_ids", classifier.features[0])
+            self.assertNotIn("substantial_image_regions", classifier.features[0])
 
 
 class ChunkContractTests(unittest.TestCase):

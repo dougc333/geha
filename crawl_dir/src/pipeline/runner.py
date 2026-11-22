@@ -16,6 +16,7 @@ from .chunks import (
     validate_embedding_token_lengths,
     write_jsonl,
 )
+from .page_content import classify_pdf_pages
 from .tables import extract_logical_tables
 
 
@@ -146,6 +147,7 @@ def process_document(
     document_version: str,
     plan_year: int | None = None,
     requested_run_id: str | None = None,
+    require_jev: bool = False,
 ) -> Path:
     """Create an immutable run and a candidate; never auto-promote it."""
     root = root.resolve()
@@ -197,6 +199,13 @@ def process_document(
         document_version=document_version,
         plan_year=plan_year,
     )
+    page_content = classify_pdf_pages(
+        snapshot, table_records, require_jev=require_jev,
+    )
+    atomic_json(candidate_dir / "page-content.json", page_content)
+    page_content_by_number = {
+        int(item["page"]): item for item in page_content["pages"]
+    }
     chunks = build_chunk_records(
         raw_chunks,
         document_id=document_id,
@@ -229,6 +238,16 @@ def process_document(
             table["table_id"] for table in table_records
             if page_number in table["source_pages"]
         ]
+        classification = page_content_by_number[page_number]
+        page.update({
+            "page_type": classification["page_type"],
+            "content_types": classification["content_types"],
+            "table_detected": classification["table_detected"],
+            "figure_detected": classification["figure_detected"],
+            "scanned_page": classification["scanned_page"],
+            "visual_review_recommended": classification["visual_review_recommended"],
+            "detection_signals": classification["signals"],
+        })
         atomic_json(page_dir / "page-manifest.json", page)
 
     page_count = len(page_records)
@@ -241,6 +260,7 @@ def process_document(
         })
     atomic_json(iteration_dir / "findings.json", {
         "table_extraction": extraction,
+        "page_content": page_content["summary"],
         "chunk_errors": chunk_errors,
         "chunk_warnings": chunk_warnings,
     })
@@ -251,6 +271,7 @@ def process_document(
         "page_count": page_count,
         "chunk_count": len(chunks),
         "table_count": len(table_records),
+        "page_content": page_content["summary"],
         "structural_errors": structural_errors,
         "structural_warnings": chunk_warnings,
         "visual_verification": {
@@ -271,6 +292,7 @@ def process_document(
         "source_sha256": source_hash,
         "source": str(source.relative_to(root)),
         "candidate": "candidate",
+        "page_content": "candidate/page-content.json",
         "qc_report": "qc-report.json",
         "promotion_status": "not_promoted",
     })

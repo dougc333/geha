@@ -12,6 +12,17 @@ from .pipeline.artifact_io import FAMILIES, atomic_json, run_id, sha256_file
 from .pipeline.runner import process_document
 
 
+def _page_content_fields(qc: dict[str, Any]) -> dict[str, Any]:
+    summary = qc.get("page_content") or {}
+    return {
+        key: list(summary.get(key) or [])
+        for key in (
+            "figure_pages", "table_pages", "mixed_pages", "scanned_pages",
+            "visual_review_pages",
+        )
+    }
+
+
 def _existing_run_is_complete(run_dir: Path, source: Path) -> bool:
     required = (
         run_dir / "run-manifest.json",
@@ -39,6 +50,7 @@ def process_all(
     *, root: Path, batch_id: str, document_version: str, plan_year: int | None,
     families: list[str] | None = None,
     documents: list[str] | None = None,
+    require_jev: bool = False,
     event_sink: Callable[[dict[str, Any]], None] | None = None,
 ) -> Path:
     root = root.resolve()
@@ -101,7 +113,11 @@ def process_all(
                 "document_id": document_id,
             })
         if _existing_run_is_complete(target, source):
-            item = {"source": source_key, "status": "reused", "run": str(target)}
+            qc = json.loads((target / "qc-report.json").read_text())
+            item = {
+                "source": source_key, "status": "reused", "run": str(target),
+                **_page_content_fields(qc),
+            }
         else:
             try:
                 requested_id = batch_id
@@ -117,6 +133,7 @@ def process_all(
                     document_version=document_version,
                     plan_year=plan_year,
                     requested_run_id=requested_id,
+                    require_jev=require_jev,
                 )
                 qc = json.loads((output / "qc-report.json").read_text())
                 item = {
@@ -127,6 +144,7 @@ def process_all(
                     "pages": qc["page_count"],
                     "chunks": qc["chunk_count"],
                     "tables": qc["table_count"],
+                    **_page_content_fields(qc),
                 }
             except Exception as exc:  # keep the batch resumable
                 item = {
@@ -168,6 +186,10 @@ def main() -> None:
     parser.add_argument("--batch-id", default=f"batch-{run_id()}")
     parser.add_argument("--document-version", required=True)
     parser.add_argument("--plan-year", type=int)
+    parser.add_argument(
+        "--require-jev", action="store_true",
+        help="Fail instead of falling back when TypeSafe JEV is unavailable",
+    )
     parser.add_argument("--family", action="append", choices=sorted(FAMILIES))
     parser.add_argument(
         "--document", action="append",
@@ -180,6 +202,7 @@ def main() -> None:
         batch_id=args.batch_id,
         document_version=args.document_version,
         plan_year=args.plan_year,
+        require_jev=args.require_jev,
         families=args.family,
         documents=args.document,
     ))

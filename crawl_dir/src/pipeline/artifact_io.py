@@ -18,6 +18,7 @@ FAMILIES = {
     # Retrieval clusters from advanced_rag/evals/cluster_manifest.json
     # ("research" above doubles as the research cluster).
     "policy", "clinical_guidance", "population_health", "benefits_research", "forms_directory",
+    "appeals", "claims", "prescriptions", "vision",
 }
 
 

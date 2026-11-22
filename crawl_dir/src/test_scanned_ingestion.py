@@ -13,6 +13,8 @@ from PIL import Image
 
 from .pipeline.scanned_ingestion import (
     ExternalResourceHtmlError,
+    _remove_header_logo_text,
+    _has_text_column_overflow,
     detect_visual_figure_pages,
     _raw_chunks,
     _sanitize_external_resources,
@@ -60,6 +62,47 @@ def _fake_anthropic(text: str, calls: list[dict]) -> SimpleNamespace:
 
 
 class ScannedIngestionTests(unittest.TestCase):
+    def test_grid_column_overflow_is_detected(self):
+        base = "<style>.page{display:grid;grid-template-columns:1fr 1fr;width:600px}" \
+               ".col{min-width:0;font-size:24px;white-space:nowrap}</style>" \
+               "<main class=page><section class=col>" \
+               "A sentence too long to fit in this narrow left column" \
+               "</section><section class=col>Right column</section></main>"
+        self.assertTrue(_has_text_column_overflow(base))
+        self.assertFalse(_has_text_column_overflow(base.replace(
+            "font-size:24px;white-space:nowrap", "font-size:12px;white-space:normal"
+        )))
+
+    def test_native_export_drops_logo_glyphs_but_keeps_page_content(self):
+        def box(left, bottom, right, top):
+            return SimpleNamespace(l=left, b=bottom, r=right, t=top)
+
+        logo = SimpleNamespace(prov=[SimpleNamespace(
+            page_no=1, bbox=box(70, 730, 225, 758)
+        )])
+        logo_text = SimpleNamespace(text="t .. 'i= G.E.H.A", prov=[SimpleNamespace(
+            page_no=1, bbox=box(72, 724, 232, 757)
+        )])
+        heading = SimpleNamespace(text="For Internal Use ONLY", prov=[SimpleNamespace(
+            page_no=1, bbox=box(73, 696, 264, 714)
+        )])
+        table = SimpleNamespace(text="Date Updates", prov=[SimpleNamespace(
+            page_no=1, bbox=box(77, 620, 336, 681)
+        )])
+
+        class Document:
+            pages = {1: SimpleNamespace(size=SimpleNamespace(width=612, height=792))}
+            pictures = [logo]
+            texts = [logo_text, heading, table]
+
+            def delete_items(self, *, node_items):
+                self.texts = [item for item in self.texts if item not in node_items]
+
+        document = Document()
+        _remove_header_logo_text(document)
+        self.assertEqual([item.text for item in document.texts],
+                         ["For Internal Use ONLY", "Date Updates"])
+
     def test_native_figure_evidence_clips_pdf_words_and_preserves_signs(self):
         root = Path(tempfile.mkdtemp())
         source_pdf = root / "source.pdf"
