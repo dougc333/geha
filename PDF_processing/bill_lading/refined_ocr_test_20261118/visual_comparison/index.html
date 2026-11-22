@@ -1,0 +1,79 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bill-of-lading layout comparison</title>
+<style>body{font:16px system-ui,sans-serif;color:#152238;background:#f3f6fa;margin:0;padding:24px}
+h1,h2{margin:0 0 16px}p{line-height:1.5}.panels{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+figure{margin:0;background:#fff;padding:12px;border:1px solid #ccd6e4;border-radius:8px}
+figure img{width:100%;height:auto}figcaption{font-weight:700;margin:0 0 10px}
+table{border-collapse:collapse;width:100%;background:white}td,th{border:1px solid #ccd6e4;padding:10px;text-align:left;vertical-align:top}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;margin:0;font:13px/1.4 ui-monospace,monospace}
+.key{color:#355275}@media(max-width:1000px){.panels{grid-template-columns:1fr}}</style></head><body>
+<h1>Bill-of-lading layout comparison</h1>
+<p class="key">Red: block boundaries. Blue: cell boundaries. The same source page appears in both panels.</p>
+<p>Original: 79/79 expected strings.
+Refined: 79/79.
+Cell text: 26/31 exactly equal; 31/31 equal after normalization.</p>
+<div class="panels"><figure><figcaption>Original OCR coordinates</figcaption><img src="original_overlay.png" alt="Original crop boundaries"></figure>
+<figure><figcaption>Refined coordinates</figcaption><img src="refined_overlay.png" alt="Refined crop boundaries"></figure></div>
+<h2>Cells with different OCR formatting or text</h2>
+<table><thead><tr><th>Cell</th><th>Difference</th><th>Original OCR</th><th>Refined OCR</th></tr></thead><tbody><tr><td>1.bill_of_lading_box</td><td>Formatting only</td><td><pre>BILL OF LADING
+____________________
+B/L NO.       BL232472785
+SCAC            MRDN</pre></td><td><pre>BILL OF LADING
+
+B/L NO.         BL232472785
+SCAC              MRDN</pre></td></tr><tr><td>6.packages_column</td><td>Formatting only</td><td><pre>20
+20</pre></td><td><pre>20
+
+20</pre></td></tr><tr><td>6.description_column</td><td>Formatting only</td><td><pre>20 PALLETS STC:
+FRESH FRUIT
+
+FRESH APPLES
+STOWAGE AT +2.0 DEGREES CELSIUS
+Packaging: PALLETS
+
+HS CODE: 08081080
+SET TEMP: +2°C
+
+20 PALLETS STC:
+FRESH FRUIT
+
+FRESH PEARS
+STOWAGE AT +1.0 DEGREES CELSIUS
+Packaging: PALLETS
+
+HS CODE: 08083090
+SET TEMP: +1°C
+
+_________________________
+
+FREIGHT COLLECT</pre></td><td><pre>20 PALLETS STC:
+FRESH FRUIT
+
+FRESH APPLES
+STOWAGE AT +2.0 DEGREES CELSIUS
+Packaging: PALLETS
+
+HS CODE: 08081080
+SET TEMP: +2°C
+
+20 PALLETS STC:
+FRESH FRUIT
+
+FRESH PEARS
+STOWAGE AT +1.0 DEGREES CELSIUS
+Packaging: PALLETS
+
+HS CODE: 08083090
+SET TEMP: +1°C
+
+FREIGHT COLLECT</pre></td></tr><tr><td>6.measurement_column</td><td>Formatting only</td><td><pre>28.00
+CBM
+28.00
+CBM</pre></td><td><pre>28.00
+CBM
+
+28.00
+CBM</pre></td></tr><tr><td>7.charges_header</td><td>Formatting only</td><td><pre>FREIGHT &amp; CHARGES </pre></td><td><pre>FREIGHT &amp; CHARGES</pre></td></tr></tbody></table>
+<p>The expected-string score checks configured values; it is not a character-by-character ground-truth evaluation.</p>
+</body></html>

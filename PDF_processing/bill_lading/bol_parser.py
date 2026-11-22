@@ -1,6 +1,6 @@
 """Spec-driven bill-of-lading parser: one generic interpreter, one JSON spec per layout.
 
-The spec (bill_of_lading_spec.json) describes a layout - blocks, field labels used as anchors,
+The active spec (spec_candidate_with_reference/candidate_spec.json) describes a layout - blocks, field labels used as anchors,
 value patterns, repeated cargo groups and cross-field rules - and never any one document's
 values. This module reads OCR text per block (from any engine), extracts typed fields, and
 validates them, so a misread is flagged instead of passed through.
@@ -28,7 +28,7 @@ from pathlib import Path
 from typing import Any
 
 HERE = Path(__file__).resolve().parent
-DEFAULT_SPEC = HERE / "bill_of_lading_spec.json"
+DEFAULT_SPEC = HERE / "spec_candidate_with_reference" / "candidate_spec.json"
 DEFAULT_GOLD = HERE / "bill_of_lading_gold_fields.json"
 WORDS = {"ONE": 1, "TWO": 2, "THREE": 3, "FOUR": 4, "FIVE": 5, "SIX": 6}
 EMAIL_RE = re.compile(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+")
@@ -282,6 +282,9 @@ def score(result: dict, gold: dict) -> dict[str, Any]:
         "total": len(rows),
         "wrong": sum(r["status"] == "wrong" for r in rows),
         "missing": sum(r["status"] == "missing" for r in rows),
+        "unscored_extracted_fields": sorted(
+            key for key, value in got.items() if key not in want and value is not None
+        ),
         "flagged_by_spec": sum(r["flagged"] for r in bad),
         "silent_errors": [r for r in bad if not r["flagged"]],
         "rows": rows,
@@ -304,13 +307,14 @@ def evaluate(spec: dict, gold: dict) -> dict[str, Any]:
 
 
 def markdown(report: dict) -> str:
-    lines = ["| Engine | Fields correct | Wrong | Missing | Bad fields flagged by spec | Silent errors | Spec rules | Valid B/L? |",
-             "|---|---:|---:|---:|---:|---:|---|---|"]
+    lines = ["| Engine | Fields correct | Wrong | Missing | Unscored extracted fields | Bad fields flagged by spec | Silent errors | Spec rules | Valid B/L? |",
+             "|---|---:|---:|---:|---:|---:|---:|---|---|"]
     for name, entry in report.items():
         s, r = entry["score"], entry["result"]
         bad = s["wrong"] + s["missing"]
         rules = ", ".join(f"{x['rule']} {'✓' if x['passed'] else ('✗' if x['passed'] is False else '–')}" for x in r["rules"])
         lines.append(f"| {name} | {s['correct']}/{s['total']} | {s['wrong']} | {s['missing']} | "
+                     f"{', '.join(s['unscored_extracted_fields']) or 'None'} | "
                      f"{s['flagged_by_spec']}/{bad} | {len(s['silent_errors'])} | {rules} | {'yes' if r['valid'] else 'no'} |")
     return "\n".join(lines)
 
