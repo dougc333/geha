@@ -41,7 +41,8 @@ USAGE = {"calls": 0, "input_tokens": 0, "output_tokens": 0}
 SYSTEM = """You are a document-layout annotator operating a bounding-box web app.
 You see one rendered PDF page. Draw a box around every region that is not plain
 running text: charts and graphs, tables (including bordered key/value panels),
-logos, photos and other images, diagrams, stamps, signatures, barcodes and QR codes.
+logos, photos and other images, diagrams, form field grids, shaded multi-column
+callouts, stamps, signatures, barcodes and QR codes.
 Do not box headings, paragraphs, addresses or footers on their own.
 
 Coordinates are pixels in the most recent screenshot, origin top-left. Make each box
@@ -132,12 +133,16 @@ class PageView:
 
 
 def annotate_page(client: anthropic.Anthropic, model: str, view: PageView, page_number: int,
-                  max_turns: int) -> str:
+                  max_turns: int, *, audit: bool = False) -> str:
     image, (width, height) = view.screenshot()
     messages: list[dict[str, Any]] = [{"role": "user", "content": [
         image,
         {"type": "text", "text": f"Page {page_number}. Screenshot is {width}x{height} px. "
-                                 f"{view.box_count()} boxes already drawn. Box every figure-like region."},
+                                 f"{view.box_count()} boxes already drawn. "
+                                 + ("Independently audit the numbered boxes. Add missed tables, "
+                                    "form field grids, shaded multi-column panels, and figures; "
+                                    "delete incorrect or duplicate boxes. Do not duplicate correct boxes."
+                                    if audit else "Box every figure-like region.")},
     ]}]
     for _ in range(max_turns):
         response = client.messages.create(model=model, max_tokens=4096, system=SYSTEM, tools=TOOLS,
@@ -220,6 +225,7 @@ def main() -> None:
     parser.add_argument("--model", default="claude-opus-5-5")
     parser.add_argument("--port", type=int, default=8512)
     parser.add_argument("--max-turns", type=int, default=15)
+    parser.add_argument("--skip-audit", action="store_true", help="skip independent second visual pass")
     parser.add_argument("--headed", action="store_true", help="show the browser window")
     args = parser.parse_args()
 
@@ -248,7 +254,11 @@ def main() -> None:
             for number in pages:
                 page.locator("nav select").select_option(str(number))
                 print(f"page {number}/{page_count}")
-                summaries[number] = annotate_page(client, args.model, view, number, args.max_turns)
+                first = annotate_page(client, args.model, view, number, args.max_turns)
+                audit = "skipped" if args.skip_audit else annotate_page(
+                    client, args.model, view, number, args.max_turns, audit=True,
+                )
+                summaries[number] = f"initial: {first}; audit: {audit}"
             page.get_by_text("All changes saved").wait_for(timeout=10_000)
             browser.close()
     finally:

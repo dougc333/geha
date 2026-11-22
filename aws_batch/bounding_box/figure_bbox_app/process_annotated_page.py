@@ -19,13 +19,7 @@ from crawl_dir.src.pipeline.figure_segmentation import (
 )
 from crawl_dir.src.pipeline.scanned_ingestion import render_pdf_page_with_pymupdf
 
-from .backend import (
-    ANNOTATION_PATH,
-    CRAWL_DIR,
-    DOCUMENT_ID,
-    SOURCE_PDF,
-    load_annotations,
-)
+from . import backend as bbox_backend
 
 
 def utc_stamp() -> str:
@@ -37,7 +31,7 @@ def safe_name(value: str) -> str:
 
 
 def annotation_sha256() -> str:
-    return hashlib.sha256(ANNOTATION_PATH.read_bytes()).hexdigest()
+    return hashlib.sha256(bbox_backend.ANNOTATION_PATH.read_bytes()).hexdigest()
 
 
 def screenshot_crop_with_playwright(
@@ -90,11 +84,15 @@ def prepare_page_artifacts(
     run_dir: Path,
     *,
     dpi: int = 180,
+    limit_regions: int | None = None,
 ) -> tuple[Path, dict[str, Any], Path]:
     if not 144 <= dpi <= 600:
         raise ValueError("dpi must be between 144 and 600")
-    annotations = load_annotations()
+    annotations = bbox_backend.load_annotations()
     boxes = annotations.get("pages", {}).get(str(page_number), [])
+    boxes = [box for box in boxes if box.get("kind") != "image"]
+    if limit_regions is not None:
+        boxes = boxes[:limit_regions]
     if not boxes:
         raise ValueError(f"Page {page_number} has no saved bounding boxes")
 
@@ -102,7 +100,7 @@ def prepare_page_artifacts(
     segment_dir = page_dir / "segments"
     segment_dir.mkdir(parents=True, exist_ok=True)
     page_pdf = page_dir / "source.pdf"
-    with pymupdf.open(SOURCE_PDF) as source:
+    with pymupdf.open(bbox_backend.SOURCE_PDF) as source:
         if not 1 <= page_number <= source.page_count:
             raise ValueError(f"Page must be in 1..{source.page_count}")
         target = pymupdf.open()
@@ -143,7 +141,7 @@ def prepare_page_artifacts(
         )
         regions.append({
             "id": safe_name(box["id"]),
-            "kind": "chart" if box.get("kind") == "chart" else "figure",
+            "kind": box.get("kind") or "figure",
             "title": title,
             "reading_order": index,
             "x1": round(float(box["x1"])),
@@ -160,13 +158,13 @@ def prepare_page_artifacts(
     segmentation = {
         "schema_version": 1,
         "page_type": "manual_figure_regions",
-        "reason": "Authoritative regions supplied by manual bounding-box annotation",
+        "reason": "Authoritative regions supplied by saved bounding-box annotation",
         "regions": regions,
         "coordinate_system": "normalized_0_1000",
         "source_image": str(source_png),
         "overlay": "figures-overlay.png",
         "tool_id": "manual_figure_bbox_html_correction",
-        "annotation_source": str(ANNOTATION_PATH),
+        "annotation_source": str(bbox_backend.ANNOTATION_PATH),
         "render_dpi": dpi,
         "source_pixel_dimensions": [width, height],
         "crop_screenshot_tool": "playwright_chromium",
@@ -216,24 +214,26 @@ def process_page(
     run_id: str | None,
     *,
     dpi: int = 180,
+    output_root: Path | None = None,
+    limit_regions: int | None = None,
 ) -> Path:
     if not 1 <= max_iterations <= MAX_FIGURE_ITERATIONS:
         raise ValueError(f"max_iterations must be in 1..{MAX_FIGURE_ITERATIONS}")
     run_name = run_id or f"manual-figure-{utc_stamp()}"
-    run_dir = CRAWL_DIR / "runs" / "research" / DOCUMENT_ID / run_name
+    run_dir = (output_root or bbox_backend.CRAWL_DIR / "runs" / "research" / bbox_backend.DOCUMENT_ID) / run_name
     if run_dir.exists():
         raise FileExistsError(f"Run already exists: {run_dir}")
     source_png, segmentation, segment_dir = prepare_page_artifacts(
-        page_number, run_dir, dpi=dpi
+        page_number, run_dir, dpi=dpi, limit_regions=limit_regions
     )
     events: list[dict[str, Any]] = []
     manifest = {
         "schema_version": 1,
         "run_id": run_name,
         "workflow": "manual_figure_bbox_html_correction",
-        "document_id": DOCUMENT_ID,
-        "source_pdf": str(SOURCE_PDF),
-        "annotation_file": str(ANNOTATION_PATH),
+        "document_id": bbox_backend.DOCUMENT_ID,
+        "source_pdf": str(bbox_backend.SOURCE_PDF),
+        "annotation_file": str(bbox_backend.ANNOTATION_PATH),
         "annotation_sha256": annotation_sha256(),
         "pages_requested": [page_number],
         "max_iterations": max_iterations,
@@ -254,10 +254,42 @@ def process_page(
             event_sink=events.append,
         )
         batch = json.loads((segment_dir / "batch.json").read_text(encoding="utf-8"))
+        specs_dir = run_dir / "figure-specs"
+        specs_dir.mkdir(parents=True, exist_ok=True)
+        region_by_id = {region["id"]: region for region in segmentation["regions"]}
+        with pymupdf.open(bbox_backend.SOURCE_PDF) as source:
+            page_rect = source[page_number - 1].rect
+        specs = []
+        for record in batch["figures"]:
+            region = region_by_id[record["id"]]
+            x1, y1, x2, y2 = (region[key] for key in ("x1", "y1", "x2", "y2"))
+            specs.append({
+                "region_id": record["id"], "kind": record["kind"], "title": record["title"],
+                "box_normalized_0_1000": [x1, y1, x2, y2],
+                "box_pdf_pt": [round(x1 * page_rect.width / 1000, 2),
+                               round(y1 * page_rect.height / 1000, 2),
+                               round(x2 * page_rect.width / 1000, 2),
+                               round(y2 * page_rect.height / 1000, 2)],
+                "source_crop_png": str(segment_dir / record["source_png"]),
+                "native_evidence_json": str(segment_dir / record["native_evidence"]),
+                "semantic_html": str(segment_dir / record["final_html"]),
+                "rendered_png": str(segment_dir / record["final_rendered_png"]),
+                "review_trace_json": str(segment_dir / "batch.json"),
+                "automated_review_status": record["status"],
+                "human_review_status": "pending",
+                "selected_iteration": record["selected_iteration"],
+                "selected_error_count": record["selected_error_count"],
+            })
+        spec_path = specs_dir / f"page-{page_number:03d}.json"
+        atomic_json(spec_path, {"schema_version": 1, "spec_type": "semantic_html_figure",
+                                "document_id": bbox_backend.DOCUMENT_ID,
+                                "page": page_number, "source_pdf": str(bbox_backend.SOURCE_PDF),
+                                "regions": specs})
         manifest["status"] = batch["status"]
         manifest["completed_at"] = datetime.now(timezone.utc).isoformat()
         manifest["batch"] = str(segment_dir / "batch.json")
         manifest["report"] = str(create_result_report(page_number, segment_dir, batch))
+        manifest["spec"] = str(spec_path)
     except Exception as exc:
         manifest["status"] = "failed"
         manifest["completed_at"] = datetime.now(timezone.utc).isoformat()
@@ -270,15 +302,22 @@ def process_page(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Process one manually annotated figure page")
+    parser = argparse.ArgumentParser(description="Process one annotated figure page")
+    parser.add_argument("--pdf", type=Path)
+    parser.add_argument("--out-dir", type=Path)
+    parser.add_argument("--output-root", type=Path)
+    parser.add_argument("--limit-regions", type=int)
     parser.add_argument("--page", type=int, required=True)
     parser.add_argument("--model", default="gpt-4.1-mini")
     parser.add_argument("--max-iterations", type=int, default=6)
     parser.add_argument("--dpi", type=int, default=180)
     parser.add_argument("--run-id")
     args = parser.parse_args()
+    if args.pdf:
+        bbox_backend.configure(args.pdf, args.out_dir)
     output = process_page(
-        args.page, args.model, args.max_iterations, args.run_id, dpi=args.dpi
+        args.page, args.model, args.max_iterations, args.run_id, dpi=args.dpi,
+        output_root=args.output_root, limit_regions=args.limit_regions,
     )
     print(output)
 
