@@ -40,6 +40,7 @@ COPY crawl_dir/raw/forms /app/crawl_dir/raw/forms
 COPY crawl_dir/raw/research/ey-limra-workforce-benefits-study-final-2025.pdf /app/crawl_dir/raw/research/ey-limra-workforce-benefits-study-final-2025.pdf
 COPY bounding_box/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs /app/bounding_box/annotations/research/ey-limra-workforce-benefits-study-final-2025/figure-specs
 COPY PDF_processing/bill_lading /app/PDF_processing/bill_lading
+COPY aws_forms /app/aws_forms
 
 ARG APP_BUILD_REVISION=unknown
 ENV APP_BUILD_REVISION=$APP_BUILD_REVISION

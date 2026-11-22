@@ -1,0 +1,1 @@
+"""Fargate worker entry point."""

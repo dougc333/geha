@@ -1,4 +1,4 @@
-import type { AgentEvent, DemoDocument, PageComparison, VisionProvider } from './types'
+import type { AgentEvent, BillOfLadingLayout, DemoDocument, PageComparison, SavedRun, VisionProvider } from './types'
 
 export class RunClient {
   private source?: EventSource
@@ -15,11 +15,11 @@ export class RunClient {
     return response.json()
   }
 
-  async start(document: string, provider: VisionProvider): Promise<{ run_id: string; events: string }> {
+  async start(document: string, provider: VisionProvider, layout: BillOfLadingLayout): Promise<{ run_id: string; events: string; layout: BillOfLadingLayout }> {
     const response = await fetch('/api/runs', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ delay_seconds: 5, document, provider }),
+      body: JSON.stringify({ delay_seconds: 5, document, provider, layout }),
     })
     const payload = await response.json().catch(() => ({}))
     if (!response.ok) throw new Error(payload.error ?? `Could not start run (${response.status})`)
@@ -30,6 +30,7 @@ export class RunClient {
     available: boolean
     run_id?: string
     pages: Record<number, PageComparison>
+    runs: SavedRun[]
   }> {
     const response = await fetch(`/api/previous-run?document=${encodeURIComponent(document)}`)
     if (!response.ok) throw new Error(`Could not load previous run (${response.status})`)

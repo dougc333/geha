@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import importlib.util
+from contextlib import contextmanager
+from contextvars import ContextVar
 import html
 import json
 import re
@@ -16,11 +18,25 @@ from typing import Any
 from PIL import Image, ImageDraw, ImageFont
 
 from crawl_dir.src.pipeline.artifact_io import atomic_json
-from PDF_processing.bill_lading.bol_parser import parse as parse_bill_of_lading
+from PDF_processing.bill_lading.bol_parser import DEFAULT_SPEC as BILL_OF_LADING_SPEC_PATH, parse as parse_bill_of_lading
 
 
 ROOT = Path(__file__).resolve().parents[1]  # repository root
 GRAPH_PROGRAM = ROOT / "PDF_processing" / "bill_lading" / "bill_of_lading_html_graph.py"
+REFINED_LAYOUT_PROGRAM = ROOT / "PDF_processing" / "bill_lading" / "vision_layout_run_retry_20261118" / "refined_layout.py"
+BILL_OF_LADING_LAYOUTS = ("gpt4o_only_8block_ocr.py", "refined_layout.py", "alt_2/layout.json")
+_active_layout: ContextVar[str] = ContextVar("bill_of_lading_layout", default=BILL_OF_LADING_LAYOUTS[0])
+
+@contextmanager
+def use_bill_of_lading_layout(layout: str):
+    if layout not in BILL_OF_LADING_LAYOUTS:
+        raise ValueError(f"Unknown bill-of-lading layout: {layout}")
+    token = _active_layout.set(layout)
+    try:
+        yield
+    finally:
+        _active_layout.reset(token)
+
 BILL_OF_LADING_OCR_MODEL = "claude-opus-5-5"
 BILL_OF_LADING_OCR_EFFORT = "medium"
 SEGMENT_MAX_ITERATIONS = 6
@@ -82,10 +98,28 @@ def _graph_module() -> Any:
     return module
 
 
-@lru_cache(maxsize=1)
-def _schema_manifest() -> dict[str, Any]:
-    """Load the schema from the real LangGraph program without copying its geometry."""
-    return _graph_module().schema_manifest()
+@lru_cache(maxsize=3)
+def _schema_manifest(layout: str) -> dict[str, Any]:
+    """Use the existing graph schema builder with the selected coordinate source."""
+    graph = _graph_module()
+    if layout == BILL_OF_LADING_LAYOUTS[0]:
+        return graph.schema_manifest()
+    if layout == BILL_OF_LADING_LAYOUTS[2]:
+        path = ROOT / "PDF_processing" / "bill_lading" / "alt_2" / "layout.json"
+        return json.loads(path.read_text(encoding="utf-8"))
+    if layout != BILL_OF_LADING_LAYOUTS[1]:
+        raise ValueError(f"Unknown bill-of-lading layout: {layout}")
+    spec = importlib.util.spec_from_file_location("geha_refined_bol_layout", REFINED_LAYOUT_PROGRAM)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Cannot load refined layout: {REFINED_LAYOUT_PROGRAM}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    original_blocks, original_cells = graph.BLOCKS, graph.CELLS
+    try:
+        graph.BLOCKS, graph.CELLS = module.BLOCKS, module.CELLS
+        return graph.schema_manifest()
+    finally:
+        graph.BLOCKS, graph.CELLS = original_blocks, original_cells
 
 
 def segment_bill_of_lading_with_schema(
@@ -96,7 +130,8 @@ def segment_bill_of_lading_with_schema(
 ) -> dict[str, Any]:
     """Crop the eight known form blocks using the LangGraph's versioned schema."""
     del model, layout_hint  # This routing step is deterministic and makes no model call.
-    manifest = _schema_manifest()
+    layout = _active_layout.get()
+    manifest = _schema_manifest(layout)
     blocks = manifest["blocks"]
     canvas = manifest["source_canvas"]
     canvas_width, canvas_height = canvas["width"], canvas["height"]
@@ -174,6 +209,7 @@ def segment_bill_of_lading_with_schema(
         "tool_id": "bill_of_lading_named_cell_ocr",
         "workflow_program": str(GRAPH_PROGRAM),
         "schema": manifest,
+        "layout": layout,
     }
     atomic_json(output_dir / "regions.json", result)
     (output_dir / "schema.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
@@ -206,12 +242,18 @@ def _extract_block_cells(
             "The visual reviewer found these problems in the previous transcription. "
             "Correct only from visible source pixels:\n" + json.dumps(feedback, ensure_ascii=False)
         ))
-    if block["reading_order"] == 6:
+    if block["reading_order"] == 6 and _active_layout.get() != BILL_OF_LADING_LAYOUTS[2]:
         content.append(text_block(
             "These are five full-height vertical columns, not five sequential rows. "
             "Read left to right: container/seal/marks; package counts; both complete "
             "cargo descriptions plus freight terms; all gross weights; all measurements. "
             "Scan each column from its top edge to its bottom edge."
+        ))
+    if _active_layout.get() == BILL_OF_LADING_LAYOUTS[2] and block["reading_order"] == 3:
+        content.append(text_block(
+            "For this reviewed template, GREAT BRITAIN completes place_of_receipt even "
+            "though its print crosses the divider; place_of_delivery is the separate "
+            "destination field. Transcribe both from the full block and cell crops."
         ))
     for cell in selected_cells:
         content.extend([
@@ -243,6 +285,69 @@ def _extract_block_cells(
     return {key: str(result[key]) for key in required}
 
 
+def _cargo_table_html(extracted: dict[int, dict[str, str]]) -> str | None:
+    """Align validated cargo records while retaining each source OCR fragment."""
+    cargo = extracted.get(6, {})
+    if not cargo:
+        return None
+    spec = json.loads(
+        BILL_OF_LADING_SPEC_PATH.read_text(encoding="utf-8")
+    )
+    parsed = parse_bill_of_lading(
+        {number: "\n\n".join(cells.values()) for number, cells in extracted.items()}, spec
+    )
+    rows = parsed["containers"]
+    if not parsed["valid"] or not rows:
+        return None
+    containers = [part.strip() for part in re.split(
+        r"(?=^[A-Z]{4}\d{7}\b)", cargo.get("container_column", ""), flags=re.M
+    ) if part.strip()]
+    descriptions = [part.strip() for part in re.split(
+        r"(?=^\d+\s+PALLETS?\s+STC\s*:)", cargo.get("description_column", ""),
+        flags=re.M | re.I,
+    ) if part.strip()]
+    freight = str(parsed["fields"].get("freight_terms") or "")
+    if freight and descriptions:
+        descriptions[-1] = re.sub(
+            rf"\s*{re.escape(freight)}\s*$", "", descriptions[-1], flags=re.I
+        ).strip()
+    packages = [line.strip() for line in cargo.get("packages_column", "").splitlines()
+                if line.strip()]
+    weights = re.findall(r"[\d,]+\s*KGS\b", cargo.get("gross_weight_column", ""), re.I)
+    measurements = re.findall(r"[\d.]+\s*CBM\b", cargo.get("measurement_column", ""), re.I)
+    columns = (containers, packages, descriptions, weights, measurements)
+    if any(len(values) != len(rows) for values in columns):
+        return None
+    if any(row["container_no"] not in containers[index]
+           or row["commodity"] not in descriptions[index]
+           or str(row["packages"]) != packages[index]
+           for index, row in enumerate(rows)):
+        return None
+    headers = extracted.get(5, {})
+    widths = (500, 200, 897, 199, 203)
+    cell_ids = ("container_header", "packages_header", "description_header",
+                "gross_weight_header", "measurement_header")
+    head = "".join(
+        f'<th scope="col" style="width:{width}px">{html.escape(headers.get(cell_id, CELL_LABELS[cell_id]))}</th>'
+        for cell_id, width in zip(cell_ids, widths)
+    )
+    body = "".join(
+        '<tr class="cargo-row">' + "".join(
+            f'<td data-cell="{cell_id}">{html.escape(value)}</td>'
+            for cell_id, value in zip(
+                ("container_column", "packages_column", "description_column",
+                 "gross_weight_column", "measurement_column"),
+                (containers[index], packages[index], descriptions[index],
+                 weights[index], measurements[index]),
+            )
+        ) + "</tr>"
+        for index in range(len(rows))
+    )
+    banner = (f'<div class="cargo-banner"><span>{html.escape(freight)}</span></div>'
+              if freight else "")
+    return f'<table class="cargo-table"><thead><tr>{head}</tr></thead><tbody>{body}</tbody></table>{banner}'
+
+
 def _deterministic_page_html(
     segmentation: dict[str, Any], extracted: dict[int, dict[str, str]],
 ) -> str:
@@ -252,9 +357,21 @@ def _deterministic_page_html(
     canvas = manifest["source_canvas"]
     width, height = canvas["width"], canvas["height"]
     sections: list[str] = []
+    cargo = _cargo_table_html(extracted)
     for block in blocks:
         number = int(block["block"])
         box = block["box"]
+        if cargo and number == 5:
+            continue
+        if cargo and number == 6:
+            header_box = blocks[4]["box"]
+            sections.append(
+                f'<section class="block block-6 cargo-block" data-section="Cargo particulars" '
+                f'aria-label="Cargo particulars" style="left:{header_box["x"]}px;'
+                f'top:{header_box["y"]}px;width:{header_box["width"]}px;'
+                f'height:{header_box["height"] + box["height"]}px">{cargo}</section>'
+            )
+            continue
         cells: list[str] = []
         for cell in block["cells"]:
             cell_box = cell["box"]
@@ -263,15 +380,26 @@ def _deterministic_page_html(
             if label and _normalize(label) not in _normalize(raw_value):
                 raw_value = f"{label}\n{raw_value}"
             value = html.escape(raw_value)
+            if cargo and cell["id"] == "charges_values":
+                lines = [line.strip() for line in raw_value.splitlines() if line.strip()]
+                if lines and lines[0].upper().endswith(" COLLECT"):
+                    label_text = lines[0][:-len(" COLLECT")]
+                    value = '<div class="charges-list">' + ''.join(
+                        f'<span>{html.escape(item)}</span><span>{html.escape(term)}</span>'
+                        for item, term in [(label_text, "COLLECT"),
+                                           *((line, "") for line in lines[1:])]
+                    ) + '</div>'
             decoration = (
                 '<span class="carrier-logo" aria-label="M logo">M</span>'
                 if cell["id"] == "carrier_header" else ""
             )
+            content = (value if cell["id"] == "charges_values" and cargo
+                       and value.startswith("<div") else f"<pre>{value}</pre>")
             cells.append(
                 f'<div class="cell" data-cell="{html.escape(cell["id"])}" '
                 f'style="left:{cell_box["x"]}px;top:{cell_box["y"]}px;'
                 f'width:{cell_box["width"]}px;height:{cell_box["height"]}px">'
-                f'{decoration}<pre>{value}</pre></div>'
+                f'{decoration}{content}</div>'
             )
         sections.append(
             f'<section class="block block-{number}" data-section="{html.escape(BLOCK_LABELS[number])}" '
@@ -288,6 +416,13 @@ def _deterministic_page_html(
 .cell pre{{margin:0;white-space:pre-wrap;font:700 20px/1.25 Arial,Helvetica,sans-serif}}
 .block-1 .cell pre{{font-size:26px}}.block-4 .cell pre,.block-5 .cell pre{{font-size:18px}}
 .block-6 .cell pre,.block-8 .cell pre{{font-size:17px;line-height:1.2}}
+.cargo-table{{width:100%;height:90%;border-collapse:collapse;table-layout:fixed;font:700 20px/1.25 Arial,sans-serif}}
+.cargo-table th,.cargo-table td{{border:1px solid #1f2937;padding:10px 12px;vertical-align:top;white-space:pre-line}}
+.cargo-table th{{height:77px;text-align:left;background:#e8edf5;font-size:18px}}
+.cargo-table .cargo-row{{height:50%}}
+.cargo-banner{{height:10%;border:1px solid #1f2937;display:grid;place-items:center;font:700 30px/1.2 Arial,sans-serif;letter-spacing:2px}}
+.cargo-banner span{{display:inline-block;border-top:2px solid;border-bottom:2px solid;padding:8px 24px}}
+.charges-list{{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:start}}
 .cell[data-cell="carrier_header"]{{padding-left:190px}}
 .carrier-logo{{position:absolute;left:24px;top:45px;width:130px;height:130px;border:5px solid #071a33;display:grid;place-items:center;font:700 82px/1 Georgia,serif}}
 .cell[data-cell="bill_of_lading_box"]::after{{content:"";position:absolute;left:18px;right:18px;top:112px;border-top:3px solid #1f2937}}
@@ -714,7 +849,7 @@ def verify_bill_of_lading_fields(run_dir: Path) -> dict[str, Any]:
     ocr_path = run_dir / "pages/page-001/segments/structured-ocr.json"
     record = json.loads(ocr_path.read_text(encoding="utf-8"))
     blocks = {int(block["block"]): block["cells"] for block in record["blocks"]}
-    spec = json.loads((ROOT / "PDF_processing/bill_lading/bill_of_lading_spec.json").read_text(encoding="utf-8"))
+    spec = json.loads(BILL_OF_LADING_SPEC_PATH.read_text(encoding="utf-8"))
     parsed = parse_bill_of_lading(
         {number: "\n\n".join(str(value) for value in cells.values()) for number, cells in blocks.items()},
         spec,
